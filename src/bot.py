@@ -29,9 +29,6 @@ ccxt_ex = exchange_class({
     'secret': exchange_id1_secret,
 })
 
-//ccxt_ex = ccxt.exchange_id
-//ccxt_ex.apiKey = exchange_id1_api
-//ccxt_ex.secret = exchange_id1_secret
 
 exchange = CryptoExchange(ccxt_ex)
 trade_executor = TradeExecutor(exchange)
