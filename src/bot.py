@@ -1,24 +1,19 @@
-from flask import Flask
-from redis import Redis, RedisError
-import os
-import socket
+import logging
+from telegram import Update
+from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
 
-# Connect to Redis
-redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
 
-app = Flask(__name__)
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a bot, please talk to me!")
 
-@app.route("/")
-def hello():
-    try:
-        visits = redis.incr("counter")
-    except RedisError:
-        visits = "<i>cannot connect to Redis, counter disabled</i>"
-
-    html = "<h3>Hello {name}!</h3>" \
-           "<b>Hostname:</b> {hostname}<br/>" \
-           "<b>Visits:</b> {visits}"
-    return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)
+if __name__ == '__main__':
+    application = ApplicationBuilder().token('TOKEN').build()
+    
+    start_handler = CommandHandler('start', start)
+    application.add_handler(start_handler)
+    
+    application.run_polling()
