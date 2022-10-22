@@ -15,7 +15,10 @@ COPY ./src .
 
 # set the token for the telegram bot
 ENV TOKEN=""
-ENV ALLOWED_USER_ID="" #from @RawDataBot
+##from @RawDataBot
+ENV ALLOWED_USER_ID="" 
+
+##from EXCHANGE to CONNECT
 ENV EXCHANGE1="BINANCE"
 ENV EXCHANGE1YOUR_API_KEY="YOURAPI"
 ENV EXCHANGE1YOUR_SECRET=""
