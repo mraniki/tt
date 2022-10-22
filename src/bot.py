@@ -32,3 +32,4 @@ trade_executor = TradeExecutor(exchange)
 telegram_bot = TelegramBot(telegram_tkn, user_id, trade_executor)
 
 telegram_bot.start_bot()
+print(exchange.fetch_balance())
