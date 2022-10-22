@@ -9,3 +9,7 @@ ENV Variables:
     EXCHANGE1= "" //CCXT supported exchange
     EXCHANGE1YOUR_API_KEY= "" //API KEY
     EXCHANGE1YOUR_SECRET= "" // API SECRET
+
+Install
+
+    docker pull ghcr.io/mraniki/tt:latest
