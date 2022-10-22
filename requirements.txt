@@ -1,2 +1,2 @@
 ccxt
-python-telegram-bot
+python-telegram-bot>=20
