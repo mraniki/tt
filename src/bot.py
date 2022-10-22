@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 telegram_tkn = getenv("TOKEN")
 ALLOWED_USER_ID = getenv("ALLOWED_USER_ID")
 parser = argparse.ArgumentParser(description="INT Transformation")
-parser.add_argument("--user-id", required=True, type=int, default=ALLOWED_USER_ID)
+parser.add_argument("--user-id", required=False, type=int, default=ALLOWED_USER_ID)
 args = parser.parse_args()
 user_id = args.user_id
 
