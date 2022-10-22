@@ -43,8 +43,8 @@ ccxt_ex = exchange_class({
 
 
 exchange = CryptoExchange(ccxt_ex)
-print(exchange.fetch_balance())
-print(exchange.free_balance)
+#print(exchange.fetch_balance())
+#print(exchange.free_balance)
 
 
 trade_executor = TradeExecutor(exchange)
