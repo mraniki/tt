@@ -3,7 +3,7 @@
 
 ENV Variables:
 
-    TOKEN="" // TElegram bot token
+    TOKEN="" // Telegram bot token
     ALLOWED_USER_ID="" //TG user for bot control
     
     EXCHANGE1= "" //CCXT supported exchange
