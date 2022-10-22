@@ -18,14 +18,20 @@ logger = logging.getLogger(__name__)
 
 telegram_tkn = getenv("TOKEN")
 user_id = getenv("ALLOWED_USER_ID")
-exchange_id1 = getenv("EXCHANGE1")
+exchange_id = getenv("EXCHANGE1")
 exchange_id1_api = getenv("EXCHANGE1YOUR_API_KEY")  
 exchange_id1_secret = getenv("EXCHANGE1YOUR_SECRET") 
 
-        
-ccxt_ex = ccxt.exchange_id1
-ccxt_ex.apiKey = exchange_id1_api
-ccxt_ex.secret = exchange_id1_secret
+
+exchange_class = getattr(ccxt, exchange_id)
+ccxt_ex = exchange_class({
+    'apiKey': exchange_id1_api,
+    'secret': exchange_id1_secret,
+})
+
+//ccxt_ex = ccxt.exchange_id
+//ccxt_ex.apiKey = exchange_id1_api
+//ccxt_ex.secret = exchange_id1_secret
 
 exchange = CryptoExchange(ccxt_ex)
 trade_executor = TradeExecutor(exchange)
