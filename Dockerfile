@@ -16,8 +16,7 @@ WORKDIR /app
 
 # copy the current directory contents into the container at /app
 COPY src/* /app
-COPY requirements.txt /
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r /app/requirements.txt
 
 # run app.py when the container launches
 CMD ["python", "bot.py"]
