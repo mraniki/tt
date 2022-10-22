@@ -17,4 +17,4 @@ COPY /src /app
 RUN pip3 install --no-cache-dir -r /app/requirements.txt
 
 # run app.py when the container launches
-CMD ["python", "bot.py"]
+CMD ["python bot.py"]
