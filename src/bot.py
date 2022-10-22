@@ -1,6 +1,7 @@
 import logging
 import os
 import ccxt
+import argparse
 
 from core.exchange import CryptoExchange
 from core.telegrambot import TelegramBot
@@ -18,7 +19,11 @@ logger = logging.getLogger(__name__)
 
 # VAR
 telegram_tkn = getenv("TOKEN")
-user_id = getenv("ALLOWED_USER_ID")
+user_id_env = getenv("ALLOWED_USER_ID")
+parser.add_argument("--ALLOWED_USER_ID", required=True, type=int, Default=ALLOWED_USER_ID)
+args = parser.parse_args()
+user_id = args.user_id_env
+
 exchange_id = getenv("EXCHANGE1")
 exchange_id1_api = getenv("EXCHANGE1YOUR_API_KEY")  
 exchange_id1_secret = getenv("EXCHANGE1YOUR_SECRET") 
