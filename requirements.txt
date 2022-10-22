@@ -1,4 +1,2 @@
-Telethon
 ccxt
-pandas
 python-telegram-bot
