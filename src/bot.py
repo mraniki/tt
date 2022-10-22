@@ -21,9 +21,9 @@ if __name__ == '__main__':
 
    telegram_tkn = getenv("TOKEN")
    user_id = getenv("ALLOWED_USER_ID")
+   exchange_env = getenv("EXCHANGE")  
         
-        
-    ccxt_ex = ccxt.binance()
+    ccxt_ex = ccxt.exchange_env()
     ccxt_ex.apiKey = api_key
     ccxt_ex.secret = secret
 
