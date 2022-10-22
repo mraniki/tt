@@ -13,8 +13,8 @@ WORKDIR /app
 
 
 # copy the current directory contents into the container at /app
-COPY /scr /app
-COPY requirements.txt
+COPY src/* /app
+COPY requirements.txt /
 RUN pip3 install -r requirements.txt
 
 # run app.py when the container launches
