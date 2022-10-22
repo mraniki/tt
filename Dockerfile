@@ -8,12 +8,11 @@ ENV TELEGRAM_USERNAME ${TELEGRAM_USERNAME}
 ENV TELEGRAM_ID ${TELEGRAM_ID}
 ENV TELEGRAM_HASH ${TELEGRAM_HASH}
 
-
 # set the working directory to /app
 WORKDIR /app
 
 # copy the current directory contents into the container at /app
-COPY . /app
+COPY /scr /app
 COPY requirements.txt
 RUN pip3 install -r requirements.txt
 
