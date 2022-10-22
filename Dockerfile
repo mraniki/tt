@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk update && apk upgrade apt-get install -y python3 python3-pip
+RUN apk update && apk upgrade && apk add python3 python3-pip
 
 # Env vars
 ENV LANGUAGE="en"
