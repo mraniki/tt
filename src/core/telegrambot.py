@@ -27,7 +27,6 @@ CONFIRM = "confirm"
 CANCEL = "cancel"
 END_CONVERSATION = ConversationHandler.END
 
-
 class TelegramBot:
     class PrivateUserFiler(BaseFilter):
         def __init__(self, user_id):
