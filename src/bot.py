@@ -4,7 +4,7 @@ import ccxt
 
 from core.exchange import CryptoExchange
 from core.telegrambot import TelegramBot
-from core.tradeexcutor import TradeExecutor
+from core.tradeexecutor import TradeExecutor
 
 from os import getenv
 
