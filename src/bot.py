@@ -16,13 +16,14 @@ print(message)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# VAR
 telegram_tkn = getenv("TOKEN")
 user_id = getenv("ALLOWED_USER_ID")
 exchange_id = getenv("EXCHANGE1")
 exchange_id1_api = getenv("EXCHANGE1YOUR_API_KEY")  
 exchange_id1_secret = getenv("EXCHANGE1YOUR_SECRET") 
 
-
+#EXCHANGE
 exchange_class = getattr(ccxt, exchange_id)
 ccxt_ex = exchange_class({
     'apiKey': exchange_id1_api,
@@ -34,5 +35,6 @@ exchange = CryptoExchange(ccxt_ex)
 trade_executor = TradeExecutor(exchange)
 telegram_bot = TelegramBot(telegram_tkn, user_id, trade_executor)
 
+#BOT
 telegram_bot.start_bot()
 print(exchange.fetch_balance())
