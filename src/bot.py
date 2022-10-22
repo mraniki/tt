@@ -20,8 +20,7 @@ logger = logging.getLogger(__name__)
 # VAR
 telegram_tkn = getenv("TOKEN")
 ALLOWED_USER_ID = getenv("ALLOWED_USER_ID")
-parser = argparse.ArgumentParser(
-    description="Script to download files from Telegram Channel.")
+parser = argparse.ArgumentParser(description="INT Transformation")
 parser.add_argument("--user-id", required=True, type=int, Default=ALLOWED_USER_ID)
 args = parser.parse_args()
 user_id = args.user_id
