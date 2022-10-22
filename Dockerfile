@@ -15,8 +15,10 @@ COPY ./src .
 
 # set the token for the telegram bot
 ENV TOKEN=""
-ENV ALLOWED_USER_ID=""
-ENV EXCHANGE="BINANCE"
+ENV ALLOWED_USER_ID="" #from @RawDataBot
+ENV EXCHANGE1="BINANCE"
+ENV EXCHANGE1YOUR_API_KEY="YOURAPI"
+ENV EXCHANGE1YOUR_SECRET=""
 
 # command to run on container start
 CMD [ "python", "./bot.py" ]
