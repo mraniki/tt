@@ -24,6 +24,11 @@ parser.add_argument("--ALLOWED_USER_ID", required=True, type=int, Default=ALLOWE
 args = parser.parse_args()
 user_id = args.user_id_env
 
+if not user_id:
+    logger.warning('user_id not set, you will not be able to control the bot')
+
+
+
 exchange_id = getenv("EXCHANGE1")
 exchange_id1_api = getenv("EXCHANGE1YOUR_API_KEY")  
 exchange_id1_secret = getenv("EXCHANGE1YOUR_SECRET") 
