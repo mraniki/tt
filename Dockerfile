@@ -1,14 +1,20 @@
-FROM python:3
+# set base image (host OS)
+FROM python:latest
 
-RUN apt update && apt install -
+# set the working directory in the container
+WORKDIR /code
 
-# Env vars
-ENV TELEGRAM_USERNAME ${TELEGRAM_USERNAME}
-ENV TELEGRAM_CHAT_ID ${TELEGRAM_CHAT_ID}
-ENV TELEGRAM_TOKEN ${TELEGRAM_TOKEN}
+# copy the dependencies file to the working directory
+COPY requirements.txt .
 
-COPY /src /
-RUN pip3 install --no-cache-dir -r requirements.txt
+# install dependencies
+RUN pip install -r requirements.txt
 
-# run app.py when the container launches
-CMD ["python bot.py"]
+# copy the content of the local src directory to the working directory
+COPY ./src .
+
+# set the token for the telegram bot
+ENV TOKEN=""
+
+# command to run on container start
+CMD [ "python", "./bot.py" ]
