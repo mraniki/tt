@@ -43,9 +43,14 @@ ccxt_ex = exchange_class({
 
 
 exchange = CryptoExchange(ccxt_ex)
+print(exchange.fetch_balance())
+print(exchange.free_balance)
+
+
 trade_executor = TradeExecutor(exchange)
-telegram_bot = TelegramBot(telegram_tkn, user_id, trade_executor)
+
 
 #BOT
+telegram_bot = TelegramBot(telegram_tkn, user_id, trade_executor)
 telegram_bot.start_bot()
-print(exchange.fetch_balance())
+
