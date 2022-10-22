@@ -1,6 +1,10 @@
 FROM alpine:latest
 
-RUN apk update && apk upgrade && apk add python3 python3-pip
+RUN apk update && apk upgrade 
+RUN apk add --no-cache python3 py3-pip \
+		&& pip3 install --upgrade pip \
+		&& pip3 install --no-cache-dir -r requirements.txt
+
 
 # Env vars
 ENV LANGUAGE="en"
@@ -14,8 +18,8 @@ WORKDIR /app
 
 # copy the current directory contents into the container at /app
 COPY src/* /app
-COPY requirements.txt /
-RUN pip install -r requirements.txt
+##COPY requirements.txt /
+##RUN pip install -r requirements.txt
 
 # run app.py when the container launches
 CMD ["python", "bot.py"]
