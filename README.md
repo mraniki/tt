@@ -1,5 +1,7 @@
-# Telegram Trader via docker
+# Telegram Trader
 
+Deploy it via docker. 
+Built based with v20 of python telegram bot.
 
 ENV Variables:
 
