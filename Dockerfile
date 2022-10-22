@@ -11,6 +11,7 @@ ENV TELEGRAM_HASH ${TELEGRAM_HASH}
 # set the working directory to /app
 WORKDIR /app
 
+
 # copy the current directory contents into the container at /app
 COPY /scr /app
 COPY requirements.txt
