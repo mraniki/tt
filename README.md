@@ -1,10 +1,11 @@
-# TeleGram Trader via docker
+# Telegram Trader via docker
 
 
 ENV Variables:
 
-    TOKEN=
-    ALLOWED_USER_ID=
-    EXCHANGE1=
-    EXCHANGE1YOUR_API_KEY=
-    EXCHANGE1YOUR_SECRET=
+    TOKEN="" // TElegram bot token
+    ALLOWED_USER_ID="" //TG user for bot control
+    
+    EXCHANGE1= "" //CCXT supported exchange
+    EXCHANGE1YOUR_API_KEY= "" //API KEY
+    EXCHANGE1YOUR_SECRET= "" // API SECRET
