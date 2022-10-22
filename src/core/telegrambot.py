@@ -187,7 +187,8 @@ class TelegramBot:
             )
             return conversation_handler
 
-        self.dispatcher.add_handler(CommandHandler('start', filters=self.private_filter, callback=show_help))
+        #self.dispatcher.add_handler(CommandHandler('start', filters=self.private_filter, callback=show_help))
+        self.dispatcher.add_handler(CommandHandler('start', callback=show_help))
         self.dispatcher.add_handler(build_conversation_handler())
         self.dispatcher.add_error_handler(handle_error)
 
