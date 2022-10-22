@@ -14,12 +14,7 @@ WORKDIR /app
 
 # copy the current directory contents into the container at /app
 COPY . /app
-
-
-RUN git clone https://github.com/mraniki/tt /app
-COPY /src /src
-
-COPY requirements.txt .
+COPY requirements.txt
 RUN pip3 install -r requirements.txt
 
 # run app.py when the container launches
