@@ -1,8 +1,6 @@
-FROM alpine:latest
+FROM python:3
 
-RUN apk update && apk upgrade 
-RUN apk add --no-cache python3 py3-pip \
-		&& pip3 install --upgrade pip 
+RUN apt update && apt install -
 
 # Env vars
 ENV TELEGRAM_USERNAME ${TELEGRAM_USERNAME}
