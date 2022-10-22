@@ -16,7 +16,7 @@ COPY ./src .
 # set the token for the telegram bot
 ENV TOKEN=""
 ENV ALLOWED_USER_ID=""
-
+ENV EXCHANGE="BINANCE"
 
 # command to run on container start
 CMD [ "python", "./bot.py" ]
