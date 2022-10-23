@@ -167,7 +167,7 @@ class TelegramBot:
         # def handle_error(bot, update, error):
         #     logging.warning('Update "%s" caused error "%s"', update, error)
         #     update.message.reply_text(f'Unexpected error:\n{error}')
-        def error_handler(update: Update, context: CallbackContext):
+        def error_handler(update, CallbackContext):
             try:
                 raise context.error
             except TelegramError as e:
