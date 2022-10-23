@@ -51,7 +51,7 @@ class TelegramBot:
         def show_help(bot, update):
             update.effective_message.reply_text('Type /trade to show options')
 
-        def show_options(bot, update):
+        def show_options(bo ou t, update):
             button_list = [
                 [InlineKeyboardButton("Short trade", callback_data=SHORT_TRADE),
                  InlineKeyboardButton("Long trade", callback_data=LONG_TRADE), ],
@@ -170,7 +170,7 @@ class TelegramBot:
 
         # configure our handlers
         def build_conversation_handler():
-            entry_handler = CommandHandler('trade', filters=self.private_filter, callback=show_options)
+            entry_handler = CommandHandler('trade', callback=show_options)
             conversation_handler = ConversationHandler(
                 entry_points=[entry_handler],
                 fallbacks=[entry_handler],
@@ -187,7 +187,7 @@ class TelegramBot:
             )
             return conversation_handler
 
-        self.dispatcher.add_handler(CommandHandler('start', filters=self.private_filter, callback=show_help))
+        self.dispatcher.add_handler(CommandHandler('start', callback=show_help))
         self.dispatcher.add_handler(build_conversation_handler())
         self.dispatcher.add_error_handler(handle_error)
 
