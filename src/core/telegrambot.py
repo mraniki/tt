@@ -29,13 +29,13 @@ END_CONVERSATION = ConversationHandler.END
 
 class TelegramBot:
     class PrivateUserFiler(BaseFilter):
-       def __init__(self, user_id):
-           self.user_id = int(user_id)
+        def __init__(self, user_id):
+            self.user_id = int(user_id)
 
-       def filter(self, message):
-           return message.from_user.id == self.user_id
+        def filter(self, message):
+            return message.from_user.id == self.user_id
 
-    def __init__(self, token: str, trade_executor: TradeExecutor):
+    def __init__(self, token: str, allowed_user_id, trade_executor: TradeExecutor):
         self.updater = Updater(token=token)
         self.dispatcher = self.updater.dispatcher
         self.trade_executor = trade_executor

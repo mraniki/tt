@@ -64,7 +64,7 @@ def main() -> None:
     trade_executor = TradeExecutor(exchange1)
 
     #bot setup
-    application = TelegramBot(telegram_tkn,trade_executor)
+    application = TelegramBot(telegram_tkn,user_id,trade_executor)
 
     # Run the bot
     application.start_bot()
