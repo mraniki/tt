@@ -37,7 +37,7 @@ print('python', sys.version)
 print('CCXT Version:', ccxt.__version__)
 print('Please wait while the program is loading...')
 
-if not tguser_id:
+if not user_id:
     logger.warning('user_id not set, you will not be able to control the bot')
 
 exchange_id1 = getenv("EXCHANGE1")
