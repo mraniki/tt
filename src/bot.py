@@ -51,18 +51,19 @@ ccxt_ex_1 = exchange_class({
     'apiKey': exchange_id1_api,
     'secret': exchange_id1_secret,
 })
-exchange1 = CryptoExchange(ccxt_ex_1)
-
-balance1 = exchange1.free_balance
-print (balance1)
 
 
 #BOT
 def main() -> None:
     #"Start the bot."
-    # Create the Application and pass it your bot's token.
-    application = TelegramBot(telegram_tkn)
+    
+    exchange1 = CryptoExchange(ccxt_ex_1)
+    balance1 = exchange1.free_balance
+    print (balance1)
 
+    trade_executor = TradeExecutor(exchange1)
+    # Create the Application and pass it your bot's token.
+    application = TelegramBot(telegram_tkn,trade_executor)
     # Run the bot until the user presses Ctrl-C
     application.start_bot()
 
