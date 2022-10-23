@@ -9,6 +9,7 @@ from pathlib import Path
 
 from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
+#from core.telegrambot import TelegramBot
 
 import ccxt
 from core.exchange import CryptoExchange
@@ -84,10 +85,25 @@ async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 def main() -> None:
     """Start the bot."""
     # Create the Application and pass it your bot's token.
-    application = Application.builder().token(telegram_tkn).build()
-    #application.send_message(ALLOWED_USER_ID, " Starting Bot ")
+ 
+    telegram_bot = Application.builder().token(telegram_tkn).build()
+    telegram_bot.start_bot()
 
-    #application.updater.message.reply_text("Bot started")
+
+    #EXCHANGE
+    # from variable id
+    exchange_id = exchange_id1
+    exchange_class = getattr(ccxt, exchange_id)
+    ccxt_ex_1 = exchange_class({
+        'apiKey': exchange_id1_api,
+        'secret': exchange_id1_secret,
+    })
+    exchange1 = CryptoExchange(ccxt_ex_1)
+
+    balance1 = exchange1.free_balance
+    print (balance1)
+    balancee1 = exchange1.balance
+    print (balancee1)
 
     #update.message.reply_text("Bot started")
 
@@ -102,20 +118,6 @@ def main() -> None:
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling()
-
-
-#EXCHANGE
-# from variable id
-exchange_id = exchange_id1
-exchange_class = getattr(ccxt, exchange_id)
-ccxt_ex_1 = exchange_class({
-    'apiKey': exchange_id1_api,
-    'secret': exchange_id1_secret,
-})
-
-exchange1 = CryptoExchange(ccxt_ex_1)
-balance1 = exchange1.free_balance
-balancee1 = exchange1.balance
 
 
 if __name__ == "__main__":
