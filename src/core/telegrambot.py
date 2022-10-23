@@ -30,8 +30,8 @@ END_CONVERSATION = ConversationHandler.END
 
 class TelegramBot:
     class PrivateUserFiler(BaseFilter):
-        def __init__(self, user_id):
-            self.user_id = int(user_id)
+        def __init__(self, tguser_id):
+            self.user_id = int(tguser_id)
 
         def filter(self, message):
             return message.from_user.id == self.user_id
