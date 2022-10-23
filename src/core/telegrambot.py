@@ -27,6 +27,9 @@ CONFIRM = "confirm"
 CANCEL = "cancel"
 END_CONVERSATION = ConversationHandler.END
 
+# Enable logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class TelegramBot:
     class PrivateUserFiler(BaseFilter):
