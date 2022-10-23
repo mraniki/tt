@@ -34,6 +34,13 @@ class TelegramBot:
     def __init__(self, token: str):
         Application.builder().token(token).build()
         self._prepare()
+        # on different commands - answer in Telegram
+        self.add_handler(CommandHandler("start", start))
+        self.add_handler(CommandHandler("bal", bal_command))
+        self.add_handler(CommandHandler("help", help_command))
+
+        # on non command i.e message - echo the message on Telegram
+        self.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
     def _prepare(self):
 
@@ -65,7 +72,6 @@ class TelegramBot:
             #msg = f"Your available balance:\n{formatter.format_balance(balance)}"
             msg = f"Your available balance:\n{(balance)}"
             await update.message.reply_text(msg)
-
 
     def start_bot(self):
         self.run_polling()
