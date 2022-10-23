@@ -11,6 +11,7 @@ from core.telegrambot import TelegramBot
 
 import ccxt
 from core.exchange import CryptoExchange
+from core.tradeexecutor import TradeExecutor
 
 # Enable logging
 logging.basicConfig(
