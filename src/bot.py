@@ -76,8 +76,35 @@ def main() -> None:
     #print (balancee1)
 
 
+    # Define a few command handlers. These usually take the two arguments update and
+    # context.
+    async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+        """Send a message when the command /start is issued."""
+        user = update.effective_user
+        await update.message.reply_html(
+            rf"Hi {user.mention_html()}!",
+            reply_markup=ForceReply(selective=True),
+        )
 
-    #update.message.reply_text("Bot started")
+    async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+        """Send a message when the command /help is issued."""
+        await update.message.reply_text("Help!")
+
+    async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+        """Echo the user message."""
+        await update.message.reply_text(update.message.text)
+
+    async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+        """Send a message when the command /bal is issued."""
+        await update.message.reply_text(balance1)
+
+    async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+        """Send a message when the command /position is issued."""
+        await update.message.reply_text(balancee1)
+
+    async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+        await update.message.reply_text("Hello I'm online")
+        #update.message.reply_text("Bot started")
 
     # on different commands - answer in Telegram
     application.add_handler(CommandHandler("start", start))
@@ -99,31 +126,3 @@ if __name__ == "__main__":
 
 
 
-# Define a few command handlers. These usually take the two arguments update and
-# context.
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /start is issued."""
-    user = update.effective_user
-    await update.message.reply_html(
-        rf"Hi {user.mention_html()}!",
-        reply_markup=ForceReply(selective=True),
-    )
-
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
-    await update.message.reply_text("Help!")
-
-async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Echo the user message."""
-    await update.message.reply_text(update.message.text)
-
-async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /bal is issued."""
-    await update.message.reply_text(balance1)
-
-async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /position is issued."""
-    await update.message.reply_text(balancee1)
-
-async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text("Hello I'm online")
