@@ -78,7 +78,8 @@ async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     """Send a message when the command /position is issued."""
     await update.message.reply_text(balancee1)
 
-
+async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text(f'Hello {update.effective_user.first_name}')
 
 
 
@@ -87,7 +88,7 @@ def main() -> None:
     # Create the Application and pass it your bot's token.
  
     telegram_bot = Application.builder().token(telegram_tkn).build()
-    telegram_bot.start_bot()
+    #telegram_bot.start_bot()
 
 
     #EXCHANGE
@@ -118,6 +119,7 @@ def main() -> None:
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling()
+
 
 
 if __name__ == "__main__":
