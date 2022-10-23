@@ -51,7 +51,7 @@ class TelegramBot:
         def show_help(bot, update):
             update.effective_message.reply_text('Type /trade to show options')
 
-        def show_options(bo ou t, update):
+        def show_options(bot, update):
             button_list = [
                 [InlineKeyboardButton("Short trade", callback_data=SHORT_TRADE),
                  InlineKeyboardButton("Long trade", callback_data=LONG_TRADE), ],
