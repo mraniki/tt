@@ -44,12 +44,10 @@ class TelegramBot:
         self._prepare()
 
     def _prepare(self):
-
         # Create our handlers
-
         def show_help(bot, update):
-            update.message.reply_text('Type /trade to show options')
-       
+            update.effective_message.reply_text('Type /trade to show options')
+            
         def show_options(bot, update):
             button_list = [
                 [InlineKeyboardButton("Short trade", callback_data=SHORT_TRADE),
@@ -188,7 +186,7 @@ class TelegramBot:
             return conversation_handler
 
         #self.dispatcher.add_handler(CommandHandler('start', filters=self.private_filter, callback=show_help))
-        self.dispatcher.add_handler(CommandHandler('start', callback=show_help))
+        self.dispatcher.add_handler(CommandHandler('start', filters=self.private_filter, callback=show_help))
         self.dispatcher.add_handler(build_conversation_handler())
         self.dispatcher.add_error_handler(handle_error)
 

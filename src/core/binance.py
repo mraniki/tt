@@ -13,7 +13,7 @@ pd.options.mode.chained_assignment = None
 
 class Binance:
 
-    SYMBOL = "ETH/BTC" # default symbol
+    SYMBOL = "BTC/BUSD" # default symbol
 
     def __init__(self, symbol=SYMBOL, apiKey=None, secret=None, logger=None):
         self._exchange = ccxt.binance({"apiKey": apiKey, "secret": secret})

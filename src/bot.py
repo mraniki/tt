@@ -61,13 +61,14 @@ def main() -> None:
     exchange1 = CryptoExchange(ccxt_ex_1)
     balance1 = exchange1.free_balance
     print (balance1)
+    print ("ex1 setup done")
     trade_executor = TradeExecutor(exchange1)
 
     #bot setup
-    application = TelegramBot(telegram_tkn,user_id,trade_executor)
+    telegram_bot = TelegramBot(telegram_tkn, user_id, trade_executor)
 
     # Run the bot
-    application.start_bot()
+    telegram_bot.start_bot()
 
 
 if __name__ == "__main__":
