@@ -66,7 +66,9 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text(balance)
+    if len(balance) > 4096:
+    for x in range(0, len(balance), 4096):
+    await update.message.reply_text(balance[x:x+4096])
 
 async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
