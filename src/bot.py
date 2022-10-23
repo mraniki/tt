@@ -85,7 +85,7 @@ def main() -> None:
     """Start the bot."""
     # Create the Application and pass it your bot's token.
     application = Application.builder().token(telegram_tkn).build()
-    application.send_message(ALLOWED_USER_ID, " Starting Bot ")
+    #application.send_message(ALLOWED_USER_ID, " Starting Bot ")
 
     #update.message.reply_text("Bot started")
 
