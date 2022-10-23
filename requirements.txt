@@ -1,5 +1,3 @@
-ccxt>=2.0.50
-python-telegram-bot>=20.0a0
-argparse
-python-dotenv
-pathlib
+ccxt==2.0.58
+python-dotenv==0.21.0
+telegram==0.0.1
