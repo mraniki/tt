@@ -123,8 +123,8 @@ exchange1.verbose = True
 currency = exchange1.currency('USDT')
 balance = exchange1.fetch_balance({'currency': currency['id']})
 print(balance)
-print(len([coin for coin, balance in exchange1.fetch_balance()
-       ['total'].items() if balance > 0]))
+#print(len([coin for coin, balance in exchange1.fetch_balance()
+#       ['total'].items() if balance > 0]))
 
 
 if __name__ == "__main__":
