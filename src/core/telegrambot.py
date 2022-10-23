@@ -35,17 +35,16 @@ class TelegramBot:
         Application.builder().token(token).build()
         self._prepare()
         # on different commands - answer in Telegram
+
+
+    def _prepare(self):
+        # Create our handlers
         self.add_handler(CommandHandler("start", start))
         self.add_handler(CommandHandler("bal", bal_command))
         self.add_handler(CommandHandler("help", help_command))
 
         # on non command i.e message - echo the message on Telegram
         self.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
-
-    def _prepare(self):
-
-        # Create our handlers
-
        # def show_help(bot, update):
         #    update.effective_message.reply_text('Type /trade to show options')
         

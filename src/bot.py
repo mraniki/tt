@@ -59,7 +59,6 @@ balance1 = exchange1.free_balance
 print (balance1)
 
 
-
 #BOT
 def main() -> None:
     #"Start the bot."
