@@ -14,4 +14,4 @@ ENV Variables:
 
 Install
 
-    docker pull ghcr.io/mraniki/tt:latest
+    docker pull ghcr.io/mraniki/tt:main
