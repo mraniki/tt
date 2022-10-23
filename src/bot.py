@@ -11,6 +11,7 @@ from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
 import ccxt
+import core.exchange
 
 # Enable logging
 logging.basicConfig(
@@ -70,7 +71,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /bal is issued."""
-    update.message.reply_text(balance)
+    update.message.reply_text(exchange1.free_balance())
 
 async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /position is issued."""
@@ -98,33 +99,18 @@ def main() -> None:
 
 
 
-
-
 #EXCHANGE
-
-
+# from variable id
 exchange_id = exchange_id1
 exchange_class = getattr(ccxt, exchange_id)
-exchange1 = exchange_class({
+ccxt_ex_1 = exchange_class({
     'apiKey': exchange_id1_api,
     'secret': exchange_id1_secret,
 })
 
-# exchange = ccxt.kucoinfutures(
-#     {
-#         'apiKey': API_KEY,
-#         'secret': API_SECRET,
-#         'password': API_PHRASE
-#     }
-# )
 
-exchange1.verbose = True
-
-currency = exchange1.currency('USDT')
-balance = exchange1.fetch_balance({'currency': currency['id']})
-print(balance)
-#print(len([coin for coin, balance in exchange1.fetch_balance()
-#       ['total'].items() if balance > 0]))
+exchange1 = CryptoExchange(ccxt_ex_1)
+balance = exchange1.free_balance()
 
 
 if __name__ == "__main__":
