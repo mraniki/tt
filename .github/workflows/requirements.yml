@@ -1,4 +1,4 @@
-name: Integration Test
+name: requirements
 on: [push]
 jobs:
   build:
