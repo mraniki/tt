@@ -106,7 +106,7 @@ def main() -> None:
     balancee1 = exchange1.balance
     print (balancee1)
 
-    app.add_handler(CommandHandler("hello", hello))
+    application.add_handler(CommandHandler("hello", hello))
 
     #update.message.reply_text("Bot started")
 
