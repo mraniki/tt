@@ -83,7 +83,7 @@ def main() -> None:
     # Create the Application and pass it your bot's token.
     application = Application.builder().token(telegram_tkn).build()
 
-    update.message.reply_text("Bot started")
+    #update.message.reply_text("Bot started")
 
     # on different commands - answer in Telegram
     application.add_handler(CommandHandler("start", start))
