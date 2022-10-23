@@ -68,6 +68,10 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     """Send a message when the command /help is issued."""
     await update.message.reply_text(balance)
 
+async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Send a message when the command /help is issued."""
+    await update.message.reply_text(position)
+
 def main() -> None:
     """Start the bot."""
     # Create the Application and pass it your bot's token.
@@ -76,6 +80,7 @@ def main() -> None:
     # on different commands - answer in Telegram
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("bal", bal_command))
+    application.add_handler(CommandHandler("position", position_command))
     application.add_handler(CommandHandler("help", help_command))
 
     # on non command i.e message - echo the message on Telegram
@@ -97,8 +102,8 @@ exchange = exchange_class({
     'apiKey': exchange_id1_api,
     'secret': exchange_id1_secret,
 })
-balance = exchange.fetch_free_balance()
-
+balance = exchange.fetch_balance()
+position = exchange.fapiPrivate_get_positionrisk()
 
 
 if __name__ == "__main__":
