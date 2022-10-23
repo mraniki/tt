@@ -110,7 +110,7 @@ ccxt_ex_1 = exchange_class({
 
 
 exchange1 = CryptoExchange(ccxt_ex_1)
-balance = exchange1.free_balance()
+balance = exchange1.free_balance
 
 
 if __name__ == "__main__":
