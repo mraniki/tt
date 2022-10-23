@@ -11,24 +11,24 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 # from core.tradeexecutor import TradeExecutor
 # from util import formatter
 
-TRADE_SELECT = "trade_select"
-SHORT_TRADE = "short_trade"
-LONG_TRADE = "long_trade"
-OPEN_ORDERS = "open_orders"
-FREE_BALANCE = "free_balance"
+# TRADE_SELECT = "trade_select"
+# SHORT_TRADE = "short_trade"
+# LONG_TRADE = "long_trade"
+# OPEN_ORDERS = "open_orders"
+# FREE_BALANCE = "free_balance"
 
-CANCEL_ORD = "cancel_order"
-PROCESS_ORD_CANCEL = "process_ord_cancel"
+# CANCEL_ORD = "cancel_order"
+# PROCESS_ORD_CANCEL = "process_ord_cancel"
 
-COIN_NAME = "coin_name"
-PERCENT_CHANGE = "percent_select"
-AMOUNT = "amount"
-PRICE = "price"
-PROCESS_TRADE = "process_trade"
+# COIN_NAME = "coin_name"
+# PERCENT_CHANGE = "percent_select"
+# AMOUNT = "amount"
+# PRICE = "price"
+# PROCESS_TRADE = "process_trade"
 
-CONFIRM = "confirm"
-CANCEL = "cancel"
-END_CONVERSATION = ConversationHandler.END
+# CONFIRM = "confirm"
+# CANCEL = "cancel"
+# END_CONVERSATION = ConversationHandler.END
 
 class TelegramBot:
     def __init__(self, token: str):
