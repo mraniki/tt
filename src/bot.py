@@ -30,8 +30,8 @@ ALLOWED_USER_ID = getenv("ALLOWED_USER_ID")
 parser = argparse.ArgumentParser(description="INT Transformation")
 parser.add_argument("--user-id", required=False, type=int, default=ALLOWED_USER_ID)
 args = parser.parse_args()
-tguser_id = args.user_id
-print(tguser_id)
+user_id = args.user_id
+print(user_id)
 
 print('python', sys.version)
 print('CCXT Version:', ccxt.__version__)
@@ -66,7 +66,7 @@ if __name__ == "__main__":
     trade_executor = TradeExecutor(exchange1)
 
     #bot setup
-    telegram_bot = TelegramBot(telegram_tkn, tguser_id, trade_executor)
+    telegram_bot = TelegramBot(telegram_tkn, user_id, trade_executor)
 
     # Run the bot
     telegram_bot.start_bot()

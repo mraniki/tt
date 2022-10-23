@@ -1,11 +1,11 @@
 import asyncio
 import logging
-from telegram.error import TelegramError
+
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, \
     ConversationHandler, MessageHandler, BaseFilter, run_async, Filters
 
-from core.tradeexecutor import TradeExecutor
+from core.tradeexcutor import TradeExecutor
 from util import formatter
 
 TRADE_SELECT = "trade_select"
@@ -27,14 +27,11 @@ CONFIRM = "confirm"
 CANCEL = "cancel"
 END_CONVERSATION = ConversationHandler.END
 
-# Enable logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 class TelegramBot:
     class PrivateUserFiler(BaseFilter):
-        def __init__(self, tguser_id):
-            self.user_id = int(tguser_id)
+        def __init__(self, user_id):
+            self.user_id = int(user_id)
 
         def filter(self, message):
             return message.from_user.id == self.user_id
@@ -44,7 +41,7 @@ class TelegramBot:
         self.dispatcher = self.updater.dispatcher
         self.trade_executor = trade_executor
         self.exchange = self.trade_executor.exchange
-        self.private_filter = allowed_user_id
+        self.private_filter = self.PrivateUserFiler(allowed_user_id)
         self._prepare()
 
     def _prepare(self):
@@ -167,23 +164,13 @@ class TelegramBot:
 
             return END_CONVERSATION
 
-        # def handle_error(bot, update, error):
-        #     logging.warning('Update "%s" caused error "%s"', update, error)
-        #     update.message.reply_text(f'Unexpected error:\n{error}')
-        def error_handler(update,  context: CallbackContext):
-            try:
-                raise context.error
-            except TelegramError as e:
-                update.message.reply_text(str(e))
-                logger.exception(e)
-            except Exception as e:
-                update.message.reply_text(str(e))
-                logger.exception(e)
+        def handle_error(bot, update, error):
+            logging.warning('Update "%s" caused error "%s"', update, error)
+            update.message.reply_text(f'Unexpected error:\n{error}')
 
         # configure our handlers
         def build_conversation_handler():
-            entry_handler = CommandHandler('trade', callback=show_options)
-            #entry_handler = CommandHandler('trade', filters=self.private_filter, callback=show_options)
+            entry_handler = CommandHandler('trade', filters=self.private_filter, callback=show_options)
             conversation_handler = ConversationHandler(
                 entry_points=[entry_handler],
                 fallbacks=[entry_handler],
@@ -200,14 +187,10 @@ class TelegramBot:
             )
             return conversation_handler
 
-        #self.dispatcher.add_handler(CommandHandler('start', filters=self.private_filter, callback=show_help))
-        self.dispatcher.add_handler(CommandHandler('start', callback=show_help))
+        self.dispatcher.add_handler(CommandHandler('start', filters=self.private_filter, callback=show_help))
         self.dispatcher.add_handler(build_conversation_handler())
-        #self.dispatcher.add_error_handler(handle_error)
-        self.dispatcher.add_error_handler(error_handler)
+        self.dispatcher.add_error_handler(handle_error)
 
-
-    
     def start_bot(self):
         self.updater.start_polling()
 
