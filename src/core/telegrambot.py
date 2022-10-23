@@ -5,7 +5,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, \
     ConversationHandler, MessageHandler, BaseFilter, run_async, Filters
 
-from core.tradeexecutor import TradeExecutor
+from core.tradeexcutor import TradeExecutor
 from util import formatter
 
 TRADE_SELECT = "trade_select"
@@ -27,6 +27,7 @@ CONFIRM = "confirm"
 CANCEL = "cancel"
 END_CONVERSATION = ConversationHandler.END
 
+
 class TelegramBot:
     class PrivateUserFiler(BaseFilter):
         def __init__(self, user_id):
@@ -40,14 +41,16 @@ class TelegramBot:
         self.dispatcher = self.updater.dispatcher
         self.trade_executor = trade_executor
         self.exchange = self.trade_executor.exchange
-        #self.private_filter = self.PrivateUserFiler(allowed_user_id)
+        self.private_filter = self.PrivateUserFiler(allowed_user_id)
         self._prepare()
 
     def _prepare(self):
+
         # Create our handlers
+
         def show_help(bot, update):
             update.effective_message.reply_text('Type /trade to show options')
-            
+
         def show_options(bot, update):
             button_list = [
                 [InlineKeyboardButton("Short trade", callback_data=SHORT_TRADE),
@@ -167,8 +170,7 @@ class TelegramBot:
 
         # configure our handlers
         def build_conversation_handler():
-           # entry_handler = CommandHandler('trade', filters=self.private_filter, callback=show_options)
-            entry_handler = CommandHandler('trade',  callback=show_options)
+            entry_handler = CommandHandler('trade', filters=self.private_filter, callback=show_options)
             conversation_handler = ConversationHandler(
                 entry_points=[entry_handler],
                 fallbacks=[entry_handler],
@@ -185,7 +187,6 @@ class TelegramBot:
             )
             return conversation_handler
 
-        #self.dispatcher.add_handler(CommandHandler('start', filters=self.private_filter, callback=show_help))
         self.dispatcher.add_handler(CommandHandler('start', filters=self.private_filter, callback=show_help))
         self.dispatcher.add_handler(build_conversation_handler())
         self.dispatcher.add_error_handler(handle_error)
