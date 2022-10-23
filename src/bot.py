@@ -100,12 +100,18 @@ import ccxt
 
 exchange_id = exchange_id1
 exchange_class = getattr(ccxt, exchange_id)
-exchange = exchange_class({
+exchange1 = exchange_class({
     'apiKey': exchange_id1_api,
     'secret': exchange_id1_secret,
 })
-balance = exchange.fetch_balance()
-position = exchange.fapiPrivate_get_positionrisk()
+
+currency = exchange1.currency('USDT')
+balance = exchange1.fetch_balance({'currency': currency['id']})
+print(balance)
+
+#balance = exchange1.fetch_balance()
+print(exchange1.fetch_balance())
+position = exchange1.fapiPrivate_get_positionrisk()
 
 
 if __name__ == "__main__":
