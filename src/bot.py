@@ -71,7 +71,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /bal is issued."""
-    update.message.reply_text(exchange1.free_balance())
+    update.message.reply_text(balance)
 
 async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /position is issued."""
