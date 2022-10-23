@@ -41,7 +41,7 @@ class TelegramBot:
         self.dispatcher = self.updater.dispatcher
         self.trade_executor = trade_executor
         self.exchange = self.trade_executor.exchange
-        self.private_filter = self.PrivateUserFiler(allowed_user_id)
+        self.private_filter = allowed_user_id
         self._prepare()
 
     def _prepare(self):
