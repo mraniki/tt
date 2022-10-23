@@ -24,7 +24,6 @@ load_dotenv(dotenv_path=dotenv_path)
 
 print('python', sys.version)
 print('CCXT Version:', ccxt.__version__)
-print('Telegram Version:', telegram.__version__)
 print('Please wait while the program is loading...')
 
 
