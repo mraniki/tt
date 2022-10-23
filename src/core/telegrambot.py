@@ -172,7 +172,7 @@ class TelegramBot:
         def build_conversation_handler():
             entry_handler = CommandHandler('trade', callback=show_options)
             #entry_handler = CommandHandler('trade', filters=self.private_filter, callback=show_options)
-           conversation_handler = ConversationHandler(
+            conversation_handler = ConversationHandler(
                 entry_points=[entry_handler],
                 fallbacks=[entry_handler],
                 states={
