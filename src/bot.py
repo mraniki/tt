@@ -65,20 +65,21 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(update.message.text)
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
-    if len(balance) > 4096:
-        for x in range(0, len(balance), 4096):
-             update.message.reply_text(balance[x:x+4096])
+    """Send a message when the command /bal is issued."""
+    update.message.reply_text(balance)
 
 async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
+    """Send a message when the command /position is issued."""
     await update.message.reply_text(position)
+
 
 def main() -> None:
     """Start the bot."""
     # Create the Application and pass it your bot's token.
     application = Application.builder().token(telegram_tkn).build()
 
+    update.message.reply_text("Bot started")
+    
     # on different commands - answer in Telegram
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("bal", bal_command))
