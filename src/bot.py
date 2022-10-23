@@ -11,7 +11,7 @@ from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
 import ccxt
-import core.exchange
+from core.exchange import CryptoExchange
 
 # Enable logging
 logging.basicConfig(
