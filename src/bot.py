@@ -87,7 +87,8 @@ def main() -> None:
     application = Application.builder().token(telegram_tkn).build()
     #application.send_message(ALLOWED_USER_ID, " Starting Bot ")
 
-    application.update.message.reply_text
+    #application.updater.message.reply_text("Bot started")
+
     #update.message.reply_text("Bot started")
 
     # on different commands - answer in Telegram
