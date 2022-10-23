@@ -1,4 +1,5 @@
 # Telegram Trader
+WIP 🚧
 
 Deploy it via docker. 
 Built with v20 of python telegram bot.
