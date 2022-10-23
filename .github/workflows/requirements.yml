@@ -8,7 +8,7 @@ jobs:
       - name: Self test
         id: selftest
 
-        uses: ryan-rozario/pipreqs-action-cpy@main
+        uses: ryan-rozario/pipreqs-action-cpy@master
 
         # Put an example of mandatory inputs here
         with:
