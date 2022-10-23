@@ -164,9 +164,12 @@ class TelegramBot:
 
             return END_CONVERSATION
 
-        def handle_error(bot, update, error):
-            logging.warning('Update "%s" caused error "%s"', update, error)
-            update.message.reply_text(f'Unexpected error:\n{error}')
+        # def handle_error(bot, update, error):
+        #     logging.warning('Update "%s" caused error "%s"', update, error)
+        #     update.message.reply_text(f'Unexpected error:\n{error}')
+        def handle_error(bot, update):
+            logging.warning('Update "%s" caused error "%s"', update)
+            update.message.reply_text('Unexpected error:\n')
 
         # configure our handlers
         def build_conversation_handler():
