@@ -79,17 +79,16 @@ async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     await update.message.reply_text(balancee1)
 
 async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(f'Hello {update.effective_user.first_name}')
+    await update.message.reply_text("Hello I'm online")
 
 
 
 def main() -> None:
-    """Start the bot."""
+    #"Start the bot."
     # Create the Application and pass it your bot's token.
  
-    telegram_bot = Application.builder().token(telegram_tkn).build()
+    application = Application.builder().token(telegram_tkn).build()
     #telegram_bot.start_bot()
-
 
     #EXCHANGE
     # from variable id
@@ -111,17 +110,17 @@ def main() -> None:
     #update.message.reply_text("Bot started")
 
     # on different commands - answer in Telegram
-    telegram_bot.add_handler(CommandHandler("start", start))
-    telegram_bot.add_handler(CommandHandler("bal", bal_command))
-    telegram_bot.add_handler(CommandHandler("position", position_command))
-    telegram_bot.add_handler(CommandHandler("help", help_command))
-    telegram_bot.add_handler(CommandHandler("hello", hello))
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("bal", bal_command))
+    application.add_handler(CommandHandler("position", position_command))
+    application.add_handler(CommandHandler("help", help_command))
+    application.add_handler(CommandHandler("hello", hello))
 
     # on non command i.e message - echo the message on Telegram
-    telegram_bot.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
     # Run the bot until the user presses Ctrl-C
-    telegram_bot.run_polling()
+    application.run_polling()
 
 
 
