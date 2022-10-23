@@ -1,6 +1,5 @@
 ccxt>=2.0.50
 python-telegram-bot>=20.0a0
-os
 argparse
 dotenv
 pathlib
