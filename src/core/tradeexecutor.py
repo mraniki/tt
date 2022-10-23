@@ -55,7 +55,7 @@ class TradeExecutor:
 
     async def _wait_order_complete(self, order_id):
         status = 'open'
-        while status is 'open':
+        while status == 'open':
             await asyncio.sleep(self.check_timeout)
             order = self.exchange.fetch_order(order_id)
             status = order['status']

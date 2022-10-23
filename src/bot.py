@@ -69,6 +69,7 @@ def main() -> None:
     # Run the bot
     application.start_bot()
 
+
 if __name__ == "__main__":
  main()
 
