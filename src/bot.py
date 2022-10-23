@@ -71,11 +71,11 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /bal is issued."""
-    update.message.reply_text(balance)
+    await update.message.reply_text(balance)
 
 async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /position is issued."""
-    await update.message.reply_text(position)
+    await update.message.reply_text(balancee1)
 
 
 
@@ -87,6 +87,7 @@ def main() -> None:
     application = Application.builder().token(telegram_tkn).build()
     #application.send_message(ALLOWED_USER_ID, " Starting Bot ")
 
+    application.update.message.reply_text
     #update.message.reply_text("Bot started")
 
     # on different commands - answer in Telegram
@@ -114,9 +115,23 @@ ccxt_ex_1 = exchange_class({
 
 
 exchange1 = CryptoExchange(ccxt_ex_1)
-balance = exchange1.free_balance
+balance1 = exchange1.free_balance
+balancee1 = ccxt_ex_1.balance
+
 
 
 if __name__ == "__main__":
  main()
 
+def balance(self):
+
+    balance = None
+
+    try:
+        balance = self._exchange.fetch_balance()
+        self._logger.debug("- balance={}".format(_balance))
+    except Exception as e:
+        self._logger.error("- balance: exception={}".format(e))
+        _balance = self.__get_error(e)
+
+    return _balance
