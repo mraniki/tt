@@ -1,6 +1,17 @@
 import logging
 import sys
 
+import os
+import argparse
+from dotenv import load_dotenv
+from os import getenv
+from pathlib import Path
+
+from telegram import ForceReply, Update
+from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
+
+import ccxt
+
 # Enable logging
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
@@ -8,20 +19,13 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-
-import os
-import argparse
-from dotenv import load_dotenv
-from os import getenv
-from pathlib import Path
-
 dotenv_path = Path('.env')
 load_dotenv(dotenv_path=dotenv_path)
 
 print('python', sys.version)
 print('CCXT Version:', ccxt.__version__)
-message = 'Please wait while the program is loading...'
-print(message)
+print('Telegram Version:', telegram.__version__)
+print('Please wait while the program is loading...')
 
 
 # VAR
@@ -43,8 +47,7 @@ exchange_id1_secret = getenv("EXCHANGE1YOUR_SECRET")
 
 
 #BOT
-from telegram import ForceReply, Update
-from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
+
 
 
 # Define a few command handlers. These usually take the two arguments update and
@@ -99,7 +102,7 @@ def main() -> None:
 
 
 #EXCHANGE
-import ccxt
+
 
 exchange_id = exchange_id1
 exchange_class = getattr(ccxt, exchange_id)
