@@ -103,24 +103,25 @@ def main() -> None:
 
     balance1 = exchange1.free_balance
     print (balance1)
-    balancee1 = exchange1.balance
-    print (balancee1)
+    #balancee1 = exchange1.balance
+    #print (balancee1)
 
-    application.add_handler(CommandHandler("hello", hello))
+
 
     #update.message.reply_text("Bot started")
 
     # on different commands - answer in Telegram
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(CommandHandler("bal", bal_command))
-    application.add_handler(CommandHandler("position", position_command))
-    application.add_handler(CommandHandler("help", help_command))
+    telegram_bot.add_handler(CommandHandler("start", start))
+    telegram_bot.add_handler(CommandHandler("bal", bal_command))
+    telegram_bot.add_handler(CommandHandler("position", position_command))
+    telegram_bot.add_handler(CommandHandler("help", help_command))
+    telegram_bot.add_handler(CommandHandler("hello", hello))
 
     # on non command i.e message - echo the message on Telegram
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
+    telegram_bot.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
     # Run the bot until the user presses Ctrl-C
-    application.run_polling()
+    telegram_bot.run_polling()
 
 
 
