@@ -31,3 +31,16 @@ class CryptoExchange:
 
     def create_buy_order(self, symbol: str, amount: float, price: float):
         return self.exchange.create_order(symbol=symbol, type="limit", side="buy", amount=amount, price=price)
+
+    def balance(self):
+
+        balance = None
+
+        try:
+            balance = self._exchange.fetch_balance()
+            self._logger.debug("- balance={}".format(_balance))
+        except Exception as e:
+            self._logger.error("- balance: exception={}".format(e))
+            _balance = self.__get_error(e)
+
+        return _balance

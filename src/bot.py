@@ -71,7 +71,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /bal is issued."""
-    await update.message.reply_text(balance)
+    await update.message.reply_text(balance1)
 
 async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /position is issued."""
@@ -104,7 +104,6 @@ def main() -> None:
     application.run_polling()
 
 
-
 #EXCHANGE
 # from variable id
 exchange_id = exchange_id1
@@ -114,25 +113,10 @@ ccxt_ex_1 = exchange_class({
     'secret': exchange_id1_secret,
 })
 
-
 exchange1 = CryptoExchange(ccxt_ex_1)
 balance1 = exchange1.free_balance
-balancee1 = ccxt_ex_1.balance
-
+balancee1 = exchange1.balance
 
 
 if __name__ == "__main__":
  main()
-
-def balance(self):
-
-    balance = None
-
-    try:
-        balance = self._exchange.fetch_balance()
-        self._logger.debug("- balance={}".format(_balance))
-    except Exception as e:
-        self._logger.error("- balance: exception={}".format(e))
-        _balance = self.__get_error(e)
-
-    return _balance
