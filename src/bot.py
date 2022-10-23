@@ -79,7 +79,7 @@ def main() -> None:
     application = Application.builder().token(telegram_tkn).build()
 
     update.message.reply_text("Bot started")
-    
+
     # on different commands - answer in Telegram
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("bal", bal_command))
@@ -106,13 +106,19 @@ exchange1 = exchange_class({
     'secret': exchange_id1_secret,
 })
 
+# exchange = ccxt.kucoinfutures(
+#     {
+#         'apiKey': API_KEY,
+#         'secret': API_SECRET,
+#         'password': API_PHRASE
+#     }
+# )
+
+exchange.verbose = True
+
 currency = exchange1.currency('USDT')
 balance = exchange1.fetch_balance({'currency': currency['id']})
 print(balance)
-
-#balance = exchange1.fetch_balance()
-print(exchange1.fetch_balance())
-position = exchange1.fapiPrivate_get_positionrisk()
 
 
 if __name__ == "__main__":
