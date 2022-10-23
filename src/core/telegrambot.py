@@ -167,9 +167,15 @@ class TelegramBot:
         # def handle_error(bot, update, error):
         #     logging.warning('Update "%s" caused error "%s"', update, error)
         #     update.message.reply_text(f'Unexpected error:\n{error}')
-        def handle_error(bot, update):
-            logging.warning('Update "%s" caused error "%s"', update)
-            update.message.reply_text('Unexpected error:\n')
+        def error_handler(update: Update, context: CallbackContext):
+            try:
+                raise context.error
+            except TelegramError as e:
+                update.message.reply_text(str(e))
+                logger.exception(e)
+            except Exception as e:
+                update.message.reply_text(str(e))
+                logger.exception(e)
 
         # configure our handlers
         def build_conversation_handler():
@@ -194,8 +200,11 @@ class TelegramBot:
         #self.dispatcher.add_handler(CommandHandler('start', filters=self.private_filter, callback=show_help))
         self.dispatcher.add_handler(CommandHandler('start', callback=show_help))
         self.dispatcher.add_handler(build_conversation_handler())
-        self.dispatcher.add_error_handler(handle_error)
+        #self.dispatcher.add_error_handler(handle_error)
+        self.dispatcher.add_error_handler(error_handler)
 
+
+    
     def start_bot(self):
         self.updater.start_polling()
 
