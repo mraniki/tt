@@ -1,6 +1,6 @@
 import asyncio
 import logging
-
+from telegram.error import TelegramError
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, \
     ConversationHandler, MessageHandler, BaseFilter, run_async, Filters
