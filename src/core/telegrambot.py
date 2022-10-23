@@ -5,7 +5,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, \
     ConversationHandler, MessageHandler, BaseFilter, run_async, Filters
 
-from core.tradeexcutor import TradeExecutor
+from core.tradeexecutor import TradeExecutor
 from util import formatter
 
 TRADE_SELECT = "trade_select"
