@@ -37,7 +37,7 @@ class TelegramBot:
       #      return message.from_user.id == self.user_id
 
     def __init__(self, token: str, allowed_user_id, trade_executor: TradeExecutor):
-        self.updater = Updater(token=token)
+        self.updater = Updater(token=token, use_context=True))
         self.dispatcher = self.updater.dispatcher
         self.trade_executor = trade_executor
         self.exchange = self.trade_executor.exchange
@@ -164,9 +164,19 @@ class TelegramBot:
 
             return END_CONVERSATION
 
-        def handle_error(bot, update, error):
-            logging.warning('Update "%s" caused error "%s"', update, error)
-            update.message.reply_text(f'Unexpected error:\n{error}')
+        # def handle_error(bot, update, error):
+        #     logging.warning('Update "%s" caused error "%s"', update, error)
+        #     update.message.reply_text(f'Unexpected error:\n{error}')
+
+        def error_handler(update: Update, context: CallbackContext):
+            try:
+                raise context.error
+            except TelegramError as e:
+                update.message.reply_text(str(e))
+                logger.exception(e)
+            except Exception as e:
+                update.message.reply_text(str(e))
+                logger.exception(e)
 
         # configure our handlers
         def build_conversation_handler():
@@ -189,7 +199,7 @@ class TelegramBot:
 
         self.dispatcher.add_handler(CommandHandler('start', callback=show_help))
         self.dispatcher.add_handler(build_conversation_handler())
-        self.dispatcher.add_error_handler(handle_error)
+        self.dispatcher.add_error_handler(error_handler)
 
     def start_bot(self):
         self.updater.start_polling()
