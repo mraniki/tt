@@ -3,7 +3,7 @@ import logging
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, \
-    ConversationHandler, MessageHandler, BaseFilter, run_async, Filters
+    ConversationHandler, MessageHandler, BaseFilter, run_async, Filters, CallbackContext
 
 from core.tradeexecutor import TradeExecutor
 from util import formatter
