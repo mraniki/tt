@@ -49,7 +49,7 @@ class TelegramBot:
         # Create our handlers
 
         def show_help(bot, update):
-            update.effective_message.reply_text('Type /trade to show options')
+            update.message.reply_text('Type /trade to show options')
 
         def show_options(bot, update):
             button_list = [
