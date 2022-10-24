@@ -37,7 +37,7 @@ class TelegramBot:
       #      return message.from_user.id == self.user_id
 
     def __init__(self, token: str, allowed_user_id, trade_executor: TradeExecutor):
-        self.updater = Updater(token=token, use_context=True))
+        self.updater = Updater(token=token, use_context=True)
         self.dispatcher = self.updater.dispatcher
         self.trade_executor = trade_executor
         self.exchange = self.trade_executor.exchange
