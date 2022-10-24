@@ -1,7 +1,7 @@
 # Telegram Trader
 WIP 🚧
 
-Based on puthon telegram bot v20
+Based on python telegram bot v20
 Deploy it via docker. 
 
 ENV Variables:
