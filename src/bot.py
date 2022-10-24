@@ -55,8 +55,8 @@ ccxt_ex_1 = exchange_class({
 
 
 #BOT
-if __name__ == "__main__":
-    #"Start the bot."
+def main():
+    """Start the bot."""
     
     #ex1 setup
     exchange1 = CryptoExchange(ccxt_ex_1)
@@ -73,6 +73,7 @@ if __name__ == "__main__":
 
 
 
-
+if __name__ == '__main__':
+    main()
 
 
