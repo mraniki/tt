@@ -66,15 +66,53 @@ ccxt_ex_1 = exchange_class({
 #         rf"Hi {user.mention_html()}!",
 #         reply_markup=ForceReply(selective=True),
 #     )
-def new_member(update, context):
-    for member in update.message.new_chat_members:
-        if member.username == 'tg2market_bot':
-            update.message.reply_text('Welcome')
 
 
-async def startup(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
-    await update.message.reply_text("startup")
+# def restart_handler(update, context):
+#     username = update.message.from_user.username
+#     cmd = context.args
+
+#     print(f'[magenta]{ctime()}[/magenta] [bold cyan]{username}[/bold cyan]: [color(231)]/restart {" ".join(cmd)}[/color(231)]')
+
+#     if username not in admins and username not in owners:
+#         auto_retry(lambda: update.message.reply_text("<b>⚠️ Only bot admins are allowed to do that.</b>", parse_mode="html"))
+#         print(f"[bold cyan]{username}[/bold cyan]: [yellow]⚠️ WARNING: [color(231)]/update[/color(231)] is not allowed.[/yellow]")
+#         return
+
+#     auto_retry(lambda: update.message.reply_text("Restarting...", parse_mode="html"))
+
+#     git_output = subprocess.run(["git", "pull"],
+#         capture_output=True,
+#         encoding="utf-8"
+#     ).stdout.strip()
+
+#     poetry_output = subprocess.run(
+#         ["/home/pcroland/.local/bin/poetry", "install", "--no-dev", "--remove-untracked"],
+#         capture_output=True,
+#         encoding="utf-8"
+#     ).stdout.strip()
+
+#     if str(update.message.chat_id) == config["main_chat_id"]:
+#         update_message = f'{git_output}\n\n{poetry_output}'
+#         update_message = f"<pre>{html.escape(update_message)}</pre>"
+#         if len(update_message) > 1024:
+#             update_message = f"{update_message[:1015]}...</pre>"
+#         auto_retry(lambda: update.message.reply_text(update_message, parse_mode="html"))
+
+#     with open("restart_id.txt", "w", encoding="utf-8") as fl:
+#         fl.write(str(update.message.chat_id))
+
+#     os.execv(sys.argv[0], sys.argv)
+
+#     if os.path.exists(restart_id_path):
+#         with open("restart_id.txt", "r", encoding="utf-8") as fl:
+#             restart_id = fl.read()
+#     else:
+#         restart_id = config["main_chat_id"]
+
+
+async def post_init(application: Application):
+    await application.bot.send_message(user_id, "Bot is online")
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
@@ -82,15 +120,25 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Echo the user message."""
-    if update.message.text=="BUY":
-      await update.message.reply_text("THIS IS A BUY ORDER TO PROCESS")
-    elif update.message.text=="SELL":
-      await update.message.reply_text("THIS IS A SELL ORDER TO PROCESS")
+    txt = update.message.text
+    txt.capitalize()
+    target1 = "BUY"
+    target2 = "SELL"
+
+    if txt.__contains__(target1) or txt.__contains__(target2):
+      await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
+      print ("processing order")
+    # elif update.message.text.__contains__(target2):
+    #   await update.message.reply_text("THIS IS A SELL ORDER TO PROCESS")
     else: help_command
+
+
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Echo the user message."""
     await update.message.reply_text(update.message.text)
+
+
 
 #BOT
 def main():
@@ -104,12 +152,15 @@ def main():
 
     """Start the bot."""
     # Create the Application and pass it your bot's token.
-    application = Application.builder().token(telegram_tkn).build()
+    application = Application.builder().token(telegram_tkn).post_init(post_init).build()
     application.add_handler(CommandHandler(["start","help"], help_command))
     # application.add_handler(MessageHandler(filters.CHAT, monitor))
     application.add_handler(MessageHandler(filters.ALL, monitor))
 
+
+
     # Run the bot until the user presses Ctrl-C
+    
     application.run_polling()
 
 
