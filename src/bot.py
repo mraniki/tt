@@ -56,8 +56,6 @@ ccxt_ex_1 = exchange_class({
     'secret': exchange_id1_secret,
 })
 
-# Define a few command handlers. These usually take the two arguments update and
-# context.
 
 # async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 #     """Send a message when the command /start is issued."""
@@ -121,11 +119,11 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Echo the user message."""
     txt = update.message.text
-    txt.capitalize()
+    check=txt.upper()
     target1 = "BUY"
     target2 = "SELL"
 
-    if txt.__contains__(target1) or txt.__contains__(target2):
+    if check.__contains__(target1) or check.__contains__(target2):
       await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
       print ("processing order")
     # elif update.message.text.__contains__(target2):
@@ -134,9 +132,9 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 
-async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Echo the user message."""
-    await update.message.reply_text(update.message.text)
+# async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+#     """Echo the user message."""
+#     await update.message.reply_text(update.message.text)
 
 
 
@@ -144,23 +142,23 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 def main():
     """Start the bot."""
     #ex1 setup
-    exchange1 = CryptoExchange(ccxt_ex_1)
-    balance1 = exchange1.free_balance
-    print (balance1)
-    print ("ex1 setup done")
-    trade_executor = TradeExecutor(exchange1)
+    # exchange1 = CryptoExchange(ccxt_ex_1)
+    # balance1 = exchange1.free_balance
+    # print (balance1)
+    # print ("ex1 setup done")
+    # trade_executor = TradeExecutor(exchange1)
 
     """Start the bot."""
     # Create the Application and pass it your bot's token.
     application = Application.builder().token(telegram_tkn).post_init(post_init).build()
+
+    # Menus
     application.add_handler(CommandHandler(["start","help"], help_command))
-    # application.add_handler(MessageHandler(filters.CHAT, monitor))
+
+    # Message monitoring for order
     application.add_handler(MessageHandler(filters.ALL, monitor))
 
-
-
     # Run the bot until the user presses Ctrl-C
-    
     application.run_polling()
 
 
