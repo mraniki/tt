@@ -49,8 +49,12 @@ class TelegramBot:
 
         # Create our handlers
 
-        def show_help(bot, update):
+        def show_help(bot, update, context: CallbackContext):
             update.message.reply_text('Type /trade to show options')
+
+        # def help_command(update: Update, context: CallbackContext) -> None:
+        #     """Send a message when the command /help is issued."""
+        #     update.message.reply_text('Help!')
 
         def show_options(bot, update):
             button_list = [
