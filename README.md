@@ -35,4 +35,5 @@
 - formating/handling of response from exchange (bal, opened order, new order)
 - formating/handling of error from bot and from exchange api
 - handle 2/multi exchanges
+- Merge with MQL4 version integrating with MT4 exchanges (reach out if you are interested)
 
