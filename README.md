@@ -6,8 +6,11 @@
 ## Install
 1) Create a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
 2) Create your API Keys supported by CCXT https://github.com/ccxt/ccxt
-3) Update bot token / API in the ENV variable via docker (docker pull ghcr.io/mraniki/tt:main) or git clone and use .env file (git clone https://github.com/mraniki/tt)
-4) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
+3) Deploy :
+- via docker (docker pull ghcr.io/mraniki/tt:main) 
+- or git clone  (git clone https://github.com/mraniki/tt)
+4) Update bot token / API in the ENV variable and use .env file at the root
+5) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. sell BTCUSDT sl=6000 tp=4500 q=10%) 
  
 
