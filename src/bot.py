@@ -159,7 +159,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          #exchange1.create_buy_order()
          #exchange1.create_sell_order()
          print ("processing order")
-         exchange1.create_marketorder(m_dir, m_symbol, m_q)
+         exchange1.market_order(m_dir, m_symbol, m_q)
+         await update.message.reply_text(f"Use /{order}")
     else: help_command
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

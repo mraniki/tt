@@ -1,11 +1,15 @@
 from ccxt import Exchange, OrderNotFound
-
+from datetime import datetime
+import time
+import logging
 
 class CryptoExchange:
 
-    def __init__(self, exchange: Exchange):
+    def __init__(self, exchange: Exchange,logger=None):
         self.exchange = exchange
         self.exchange.load_markets()
+        self._logger = logger if logger is not None else logging.getLogger(__name__)
+        self._logger.info("class CryptoExchange initialized")
 
     @property
     def free_balance(self):
@@ -25,6 +29,9 @@ class CryptoExchange:
         except OrderNotFound:
             # treat as success
             pass
+    def __get_error(self, e):
+        ret = {"error": {"message": "{}".format(e), "name": "Binance.__get_error"}}
+        return ret
 
     def create_sell_order(self, symbol: str, amount: float, price: float):
         return self.exchange.create_order(symbol=symbol, type="limit", side="sell", amount=amount, price=price)
@@ -35,16 +42,33 @@ class CryptoExchange:
     def create_marketorder(self, side: str, symbol: str, amount: float):
         return self.exchange.create_order(symbol=symbol, type="market", side=side, amount=amount)
 
+    def market_order(self, side, symbol, amount):
+
+        order = None
+
+        try:
+            order = self.exchange.create_order(
+                symbol=symbol,
+                type="market",
+                side=side,
+                amount=amount,
+            )
+            self._logger.debug("- market order={}".format(order))
+        except Exception as e:
+            self._logger.error("- market order: exception={}".format(e))
+            order = self.__get_error(e)
+
+        return order
 
     def balance(self):
 
         balance = None
 
         try:
-            balance = self._exchange.fetch_balance()
+            balance = self.exchange.fetch_balance()
             self._logger.debug("- balance={}".format(_balance))
         except Exception as e:
             self._logger.error("- balance: exception={}".format(e))
-            _balance = self.__get_error(e)
+            balance = self.__get_error(e)
 
-        return _balance
+        return balance
