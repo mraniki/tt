@@ -9,7 +9,7 @@ Deploy it via docker.
 
 ## ENV Variables:
 
-    #Telegram bot token via [@BotFather ](https://core.telegram.org/bots/tutorial)
+    #Telegram bot token 
     TOKEN="" 
     #TG user for bot control
     ALLOWED_USER_ID=""
