@@ -47,6 +47,8 @@ exchange_id1_api = getenv("EXCHANGE1YOUR_API_KEY")
 exchange_id1_secret = getenv("EXCHANGE1YOUR_SECRET") 
 
 
+
+
 #EXCHANGE1 from variable id
 exchange_id = exchange_id1
 exchange_class = getattr(ccxt, exchange_id)
@@ -107,6 +109,19 @@ ccxt_ex_1 = exchange_class({
 #     else:
 #         restart_id = config["main_chat_id"]
 
+def Convert(string):
+    li = list(string.split(" "))
+    return li
+
+
+
+#ex1 setup
+exchange1 = CryptoExchange(ccxt_ex_1)
+balance1 = exchange1.free_balance
+openorder1 = exchange1.fetch_open_orders("BTC/USDT")
+print (balance1)
+print ("ex1 setup done")
+
 ##list of commands
 command1=['start', 'help']
 command2=['bal','info']
@@ -129,18 +144,30 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     messagetxt_upper =messagetxt.upper()
     filter_lst = ['BUY', 'SELL', 'TEST']
     if [ele for ele in filter_lst if(ele in messagetxt_upper)]:
-      await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
-      print ("processing order")
+      if (trading==False):
+         await update.message.reply_text("TRADING IS DISABLED")
+      else:
+         order = Convert(messagetxt_upper)
+         # sell BTCUSDT sl=6000 tp=4500 q=1%
+         m_dir= order[0]
+         m_symbol=order[1]
+         m_sl=order[2][3:6]
+         m_tp=order[3][3:6]
+         m_q=order[4][2:-1]
+         print (m_dir,m_symbol,m_sl,m_tp,m_q)
+         await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
+         #exchange1.create_buy_order()
+         #exchange1.create_sell_order()
+         print ("processing order")
     else: help_command
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text(f"balance")
+    await update.message.reply_text(f"balance {balance1}")
 
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text(f" list of orders ")    
-
+    await update.message.reply_text(f" list of orders {openorder1}")    
 
 async def trading_activation(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
@@ -152,15 +179,13 @@ async def trading_activation(update: Update, context: ContextTypes.DEFAULT_TYPE)
       trading=False
       await update.message.reply_text(f"Trading is {trading}")
 
+
+
 #BOT
 def main():
 
-    """Start the bot."""
-    #ex1 setup
-    # exchange1 = CryptoExchange(ccxt_ex_1)
-    # balance1 = exchange1.free_balance
-    # print (balance1)
-    # print ("ex1 setup done")
+
+
     # trade_executor = TradeExecutor(exchange1)
 
     """Start the bot."""
