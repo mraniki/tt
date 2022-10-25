@@ -14,7 +14,6 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 
 import ccxt
 from core.exchange import CryptoExchange
-from core.tradeexecutor import TradeExecutor
 
 # Enable logging and version check
 logging.basicConfig(
