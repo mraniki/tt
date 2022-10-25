@@ -2,11 +2,11 @@
 Based on python telegram bot v20
 Deploy it via docker. 
 
-Install
+## Install
 
     docker pull ghcr.io/mraniki/tt:main
 
-ENV Variables:
+## ENV Variables:
 
     TOKEN="" // Telegram bot token
     ALLOWED_USER_ID="" //TG user for bot control
@@ -15,9 +15,9 @@ ENV Variables:
     EXCHANGE1YOUR_API_KEY= "" //API KEY
     EXCHANGE1YOUR_SECRET= "" // API SECRET
 
-Use
-    1) Create a bot
-    2) Update bot token / API in the ENV variable via docker 
-    3) submit order to the bot as per the following format: sell BTCUSDT sl=6000 tp=4500 q=10%
+## Use
+1) Create a bot
+2) Update bot token / API in the ENV variable via docker 
+3) Submit order to the bot as per the following format: sell BTCUSDT sl=6000 tp=4500 q=10%
         
   
