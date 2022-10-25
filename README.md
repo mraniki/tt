@@ -28,6 +28,7 @@
     #APISECRET
     EXCHANGE1YOUR_SECRET= "" 
         
+        
  ## Use Case
  - Push your signal manually or from system like  trading view to submit order to your exchange
  - Disable or Enable trading process via /trading command
