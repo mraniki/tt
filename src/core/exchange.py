@@ -3,13 +3,19 @@ from datetime import datetime
 import time
 import logging
 
+
+
 class CryptoExchange:
+
+
+
+
 
     def __init__(self, exchange: Exchange,logger=None):
         self.exchange = exchange
         self.exchange.load_markets()
-        self._logger = logger if logger is not None else logging.getLogger(__name__)
-        self._logger.info("class CryptoExchange initialized")
+        self.logger = logger if logger is not None else logging.getLogger(__name__)
+        self.logger.info("class CryptoExchange initialized")
 
     @property
     def free_balance(self):
@@ -53,9 +59,9 @@ class CryptoExchange:
                 side=side,
                 amount=amount,
             )
-            self._logger.debug("- market order={}".format(order))
+            self.logger.debug("- market order={}".format(order))
         except Exception as e:
-            self._logger.error("- market order: exception={}".format(e))
+            self.logger.error("- market order: exception={}".format(e))
             order = self.__get_error(e)
 
         return order
@@ -66,9 +72,9 @@ class CryptoExchange:
 
         try:
             balance = self.exchange.fetch_balance()
-            self._logger.debug("- balance={}".format(_balance))
+            self.logger.debug("- balance={}".format(_balance))
         except Exception as e:
-            self._logger.error("- balance: exception={}".format(e))
+            self.logger.error("- balance: exception={}".format(e))
             balance = self.__get_error(e)
 
         return balance

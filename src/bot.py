@@ -110,9 +110,11 @@ ccxt_ex_1 = exchange_class({
 #         restart_id = config["main_chat_id"]
 
 def Convert(string):
-    li = list(string.split(" "))
-    return li
+   li = list(string.split(" "))
+   return li
 
+def log(severity, msg):
+   logger.log(severity, msg)
 
 
 #ex1 setup
@@ -147,21 +149,23 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
       if (trading==False):
          await update.message.reply_text("TRADING IS DISABLED")
       else:
-         order = Convert(messagetxt_upper)
+         order_m = Convert(messagetxt_upper)
          # sell BTCUSDT sl=6000 tp=4500 q=1%
-         m_dir= order[0]
-         m_symbol=order[1]
-         m_sl=order[2][3:6]
-         m_tp=order[3][3:6]
-         m_q=order[4][2:-1]
+         m_dir= order_m[0]
+         m_symbol=order_m[1]
+         m_sl=order_m[2][3:6]
+         m_tp=order_m[3][3:6]
+         m_q=order_m[4][2:-1]
          print (m_dir,m_symbol,m_sl,m_tp,m_q)
          await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
-         #exchange1.create_buy_order()
-         #exchange1.create_sell_order()
          print ("processing order")
-         exchange1.market_order(m_dir, m_symbol, m_q)
-         await update.message.reply_text(f"Use /{order}")
-    else: help_command
+         res = exchange1.market_order(m_dir, m_symbol, m_q)
+         if res["error"]:
+            await update.message.reply_text(f"{res}")
+         else: 
+            await update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res}")
+            return res
+    else: error_handler
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
@@ -181,12 +185,13 @@ async def trading_activation(update: Update, context: ContextTypes.DEFAULT_TYPE)
       trading=False
       await update.message.reply_text(f"Trading is {trading}")
 
-
+def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Log Errors caused by Updates."""
+    logger.warning('Update "%s" caused error "%s"', update, context.error)
+    
 
 #BOT
 def main():
-
-
 
     # trade_executor = TradeExecutor(exchange1)
 
@@ -201,6 +206,7 @@ def main():
     application.add_handler(CommandHandler(command4, trading_activation))
     # Message monitoring for order
     application.add_handler(MessageHandler(filters.ALL, monitor))
+    application.add_error_handler(error_handler)
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling()
