@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - "main"
+    label:
+      - "pre-release"
 
 jobs:
   pre-release:
@@ -12,14 +14,17 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-      # ...
-      - name: "Build & test"
-        run: |
-          echo "done!"
-
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "alpha"
           prerelease: true
           title: "TelegramTrader"
+
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --label my-image-name:$(date +%s)
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
