@@ -25,3 +25,5 @@
         
  ## Use Case
  - Push your signal manually or from system like  trading view to submit order to your exchange
+ 
+<img width="393" alt="Screenshot 2022-10-25 at 14 44 41" src="https://user-images.githubusercontent.com/8766259/197776314-10219d7f-693f-44df-8efe-a5794bbafe98.png">
