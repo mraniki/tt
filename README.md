@@ -8,13 +8,18 @@ Deploy it via docker.
 
 ## ENV Variables:
 
-    TOKEN="" // Telegram bot token
-    ALLOWED_USER_ID="" //TG user for bot control
+    #Telegram bot token
+    TOKEN="" 
+    #TG user for bot control
+    ALLOWED_USER_ID=""
     
-    EXCHANGE1= "" //CCXT supported exchange
-    EXCHANGE1YOUR_API_KEY= "" //API KEY
-    EXCHANGE1YOUR_SECRET= "" // API SECRET
-
+    #CCXT supported exchange
+    EXCHANGE1= ""
+    #API KEY
+    EXCHANGE1YOUR_API_KEY= ""
+    # APISECRET
+    EXCHANGE1YOUR_SECRET= "" 
+ 
 ## Use
 1) Create a bot
 2) Update bot token / API in the ENV variable via docker 
