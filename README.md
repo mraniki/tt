@@ -10,6 +10,7 @@
 4) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. sell BTCUSDT sl=6000 tp=4500 q=10%) 
  
+
 ## ENV Variables:
 
     #Telegram bot token 
