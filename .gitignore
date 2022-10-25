@@ -15,3 +15,13 @@ src/archive/telegrambot_example.py
 src/archive/telegrambot_OLD.py
 src/core/telegrambot_example.py
 src/core/telegrambot_v20.py
+src/archive/util/formatter.py
+src/archive/util/__pycache__/formatter.cpython-310.pyc
+src/archive/tradeexecutor.py
+src/archive/telegrambot.py
+src/archive/model/trade.py
+src/archive/model/shorttrade.py
+src/archive/model/longtrade.py
+src/archive/model/__pycache__/trade.cpython-310.pyc
+src/archive/model/__pycache__/shorttrade.cpython-310.pyc
+src/archive/model/__pycache__/longtrade.cpython-310.pyc
