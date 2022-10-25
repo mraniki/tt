@@ -24,4 +24,4 @@ Deploy it via docker.
     EXCHANGE1YOUR_SECRET= "" 
         
  ## Use Case
- - Push your signal from trading view or other system channel to your exchange
+ - Push your signal manually or from system like  trading view to submit order to your exchange
