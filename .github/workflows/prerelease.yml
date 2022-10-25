@@ -21,10 +21,3 @@ jobs:
           prerelease: true
           title: "TelegramTrader"
 
-      - uses: actions/checkout@v3
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --label my-image-name:$(date +%s)
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
