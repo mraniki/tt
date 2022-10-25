@@ -6,7 +6,7 @@ import argparse
 from dotenv import load_dotenv
 from os import getenv
 from pathlib import Path
-
+import itertools
 
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
@@ -16,18 +16,24 @@ import ccxt
 from core.exchange import CryptoExchange
 from core.tradeexecutor import TradeExecutor
 
-# Enable logging
+# Enable logging and version check
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
 logger = logging.getLogger(__name__)
+TTVersion=0.1
+
+print('TT', TTVersion)
+print('python', sys.version)
+print('CCXT Version:', ccxt.__version__)
+print('Please wait while the program is loading...')
 
 
-#IMPORT ENV FILE 
+#IMPORT ENV FILE (if you are using .env file)
 dotenv_path = Path('.env')
 load_dotenv(dotenv_path=dotenv_path)
 
-# ENV VAR
+# ENV VAR (from file or docker variable)
 telegram_tkn = os.getenv("TOKEN")
 ALLOWED_USER_ID = getenv("ALLOWED_USER_ID")
 parser = argparse.ArgumentParser(description="INT Transformation")
@@ -35,13 +41,6 @@ parser.add_argument("--user-id", required=False, type=int, default=ALLOWED_USER_
 args = parser.parse_args()
 user_id = args.user_id
 print(user_id)
-
-print('python', sys.version)
-print('CCXT Version:', ccxt.__version__)
-print('Please wait while the program is loading...')
-
-if not user_id:
-    logger.warning('user_id not set, you will not be able to control the bot')
 
 exchange_id1 = getenv("EXCHANGE1")
 exchange_id1_api = getenv("EXCHANGE1YOUR_API_KEY")  
@@ -108,38 +107,54 @@ ccxt_ex_1 = exchange_class({
 #     else:
 #         restart_id = config["main_chat_id"]
 
+##list of commands
+command1=['start', 'help']
+command2=['bal','info']
+command3=['order']
+command4=['trading']
+listofcommand = list(itertools.chain(command1, command2, command3, command4))
+commandlist= ' /'.join([str(elem) for elem in listofcommand])
+trading=True 
 
 async def post_init(application: Application):
-    await application.bot.send_message(user_id, "Bot is online")
+    await application.bot.send_message(user_id, f"Bot is online Version {TTVersion} \n /{commandlist} ")
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text("Help!")
+    await update.message.reply_text(f"Use /{commandlist}")
 
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Echo the user message."""
-    txt = update.message.text
-    check=txt.upper()
-    target1 = "BUY"
-    target2 = "SELL"
-
-    if check.__contains__(target1) or check.__contains__(target2):
+    messagetxt = update.message.text
+    messagetxt_upper =messagetxt.upper()
+    filter_lst = ['BUY', 'SELL', 'TEST']
+    if [ele for ele in filter_lst if(ele in messagetxt_upper)]:
       await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
       print ("processing order")
-    # elif update.message.text.__contains__(target2):
-    #   await update.message.reply_text("THIS IS A SELL ORDER TO PROCESS")
     else: help_command
 
+async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Send a message when the command /help is issued."""
+    await update.message.reply_text(f"balance")
+
+async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Send a message when the command /help is issued."""
+    await update.message.reply_text(f" list of orders ")    
 
 
-# async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-#     """Echo the user message."""
-#     await update.message.reply_text(update.message.text)
-
-
+async def trading_activation(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Send a message when the command /help is issued."""
+    global trading
+    if (trading==False):
+      trading=True
+      await update.message.reply_text(f"Trading is {trading}")
+    else:
+      trading=False
+      await update.message.reply_text(f"Trading is {trading}")
 
 #BOT
 def main():
+
     """Start the bot."""
     #ex1 setup
     # exchange1 = CryptoExchange(ccxt_ex_1)
@@ -153,14 +168,15 @@ def main():
     application = Application.builder().token(telegram_tkn).post_init(post_init).build()
 
     # Menus
-    application.add_handler(CommandHandler(["start","help"], help_command))
-
+    application.add_handler(CommandHandler(command1, help_command))
+    application.add_handler(CommandHandler(command2, bal_command))
+    application.add_handler(CommandHandler(command3, orderlist_command))
+    application.add_handler(CommandHandler(command4, trading_activation))
     # Message monitoring for order
     application.add_handler(MessageHandler(filters.ALL, monitor))
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling()
-
 
 
 if __name__ == '__main__':
