@@ -1,5 +1,5 @@
 # Telegram Trader
- Based on python telegram bot v20. 
+ CCXGT and Telegram integration. Based on python telegram bot v20. 
  Deploy it via docker. 
  
 ## Install
