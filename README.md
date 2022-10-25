@@ -8,16 +8,16 @@ Deploy it via docker.
 
 ## ENV Variables:
 
-    #Telegram bot token
+    #Telegram bot token via [@BotFather ](https://core.telegram.org/bots/tutorial)
     TOKEN="" 
     #TG user for bot control
     ALLOWED_USER_ID=""
     
-    #CCXT supported exchange
+    #CCXT supported exchange via https://github.com/ccxt/ccxt
     EXCHANGE1= ""
-    #API KEY
+    #APIKEY
     EXCHANGE1YOUR_API_KEY= ""
-    # APISECRET
+    #APISECRET
     EXCHANGE1YOUR_SECRET= "" 
  
 ## Use
