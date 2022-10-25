@@ -2,6 +2,7 @@
 Based on python telegram bot v20
 Deploy it via docker. 
 
+
 ## Install
 
     docker pull ghcr.io/mraniki/tt:main
@@ -23,6 +24,6 @@ Deploy it via docker.
 ## Use
 1) Create a bot
 2) Update bot token / API in the ENV variable via docker 
-3) Submit order to the bot as per the following format: sell BTCUSDT sl=6000 tp=4500 q=10%
+3) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY (e.g. sell BTCUSDT sl=6000 tp=4500 q=10%)
         
   
