@@ -32,6 +32,10 @@ class CryptoExchange:
     def create_buy_order(self, symbol: str, amount: float, price: float):
         return self.exchange.create_order(symbol=symbol, type="limit", side="buy", amount=amount, price=price)
 
+    def create_marketorder(self, side: str, symbol: str, amount: float):
+        return self.exchange.create_order(symbol=symbol, type="market", side=side, amount=amount)
+
+
     def balance(self):
 
         balance = None
