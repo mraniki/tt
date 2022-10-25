@@ -38,3 +38,4 @@
 - handle 2/multi exchanges
 - Merge with MQL4 version which integrate with MT4 exchanges (reach out if you are interested)
 
+
