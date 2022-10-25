@@ -36,6 +36,39 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Preprare
+        run: |
+          DOCKER_IMAGE=${GITHUB_REPOSITORY/docker-/}
+          if [[ $GITHUB_REF == refs/heads/* ]]; then
+             if [[ $GITHUB_REF == refs/heads/*/* ]] ; then
+               BRANCH="${DOCKER_IMAGE}:$(echo $GITHUB_REF | sed "s|refs/heads/||g" | sed "s|/|-|g")"
+             else
+               BRANCH=${GITHUB_REF#refs/heads/}
+             fi
+            case ${BRANCH} in
+              "main" | "master" )
+                  ## Irrelevant
+                  BRANCHTAG="${DOCKER_IMAGE}:${DISTRO}-${DISTRO_VARIANT}-php${PHP_VERSION}-kc${KC_VERSION},${DOCKER_IMAGE}:kc${KC_VERSION}-php${PHP_VERSION}-${DISTRO}_${DISTRO_VARIANT}"
+                ;;
+              "develop" )
+                  ## Irrelevant
+                  BRANCHTAG="${DOCKER_IMAGE}:develop"
+                ;;
+              * )
+                  BRANCHTAG="${DOCKER_IMAGE}:kc${KC_VERSION}-php${PHP_VERSION}-${DISTRO}_${DISTRO_VARIANT}"
+                ;;
+            esac
+          fi
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+               GITTAG="${DOCKER_IMAGE}:kc${KC_VERSION}-php${PHP_VERSION}-${DISTRO}_${DISTRO_VARIANT}-$(echo $GITHUB_REF | sed 's|refs/tags/||g')"
+          fi
+          if [ -n "${BRANCHTAG}" ] && [ -n "${GITTAG}" ]; then
+            TAGS="${BRANCHTAG},${GITTAG}"
+          else
+            TAGS="${BRANCHTAG}${GITTAG}"
+          fi
+          echo ::set-output name=tags::${TAGS}
+          echo ::set-output name=docker_image::${DOCKER_IMAGE}
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
