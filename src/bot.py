@@ -87,7 +87,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     await update.message.reply_text(f"Use /{commandlist}")
 
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Echo the user message."""
+    """Send a message when an order is identified """
     messagetxt = update.message.text
     messagetxt_upper =messagetxt.upper()
     filter_lst = ['BUY', 'SELL', 'TEST']
@@ -114,19 +114,20 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     else: error_handler
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
-    balance1 = exchange1.free_balance
-    print (balance1)
-    balancetodisplay=json.dumps(balance1, sort_keys=True, indent=4)
-    await update.message.reply_text(f"balance {balance1} OR {balancetodisplay}")
+    """Send a message when the command /bal is issued."""
+    balancerawjson = exchange1.free_balance
+    print (balancerawjson)
+    balancetodisplay=json.dumps(balancerawjson, sort_keys=True, indent=4)
+    print (balancetodisplay)
+    await update.message.reply_text(f"balance {balancerawjson} OR {balancetodisplay}")
 
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
+    """Send a message when the command /order is issued."""
     openorder1 = exchange1.fetch_open_orders("BTC/USDT")
     await update.message.reply_text(f" list of orders {openorder1}")    
 
 async def trading_activation(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
+    """Send a message when the command /trading is issued."""
     global trading
     if (trading==False):
       trading=True
