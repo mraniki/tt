@@ -14,6 +14,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 
 import ccxt
 from core.exchange import CryptoExchange
+import json
 
 # Enable logging and version check
 logging.basicConfig(
@@ -116,7 +117,8 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     """Send a message when the command /help is issued."""
     balance1 = exchange1.free_balance
     print (balance1)
-    await update.message.reply_text(f"balance {balance1}")
+    balancetodisplay=json.dumps(balance1, sort_keys=True, indent=4)
+    await update.message.reply_text(f"balance {balance1} OR {balancetodisplay}")
 
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
