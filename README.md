@@ -2,6 +2,8 @@
  CCXT and Telegram integration. Based on python telegram bot v20. 
  Deploy it via docker. 
  
+ [![Build and Test](https://github.com/mraniki/tt/actions/workflows/tagged-release.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/tagged-release.yml)
+ [![Docker Image Version (latest semver)](https://github.com/mraniki/tt/actions/workflows/docker-image.yml/badge.svg)](https://github.com/users/mraniki/packages/container/tt/47403882?tag=main)
  
 ## Install
 1) Create a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
