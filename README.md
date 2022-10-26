@@ -3,7 +3,7 @@
  Deploy it via docker. 
  
 [![Docker](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml)
-[![Docker Nightly](https://github.com/mraniki/tt/actions/workflows/devimage.yml/badge.svg?branch=dev)](https://github.com/mraniki/tt/actions/workflows/devimage.yml)
+[![DockerNightly](https://github.com/mraniki/tt/actions/workflows/%20docker-image-dev.yml/badge.svg?branch=dev)](https://github.com/mraniki/tt/actions/workflows/%20docker-image-dev.yml)
  
 ## Install
 1) Create a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
