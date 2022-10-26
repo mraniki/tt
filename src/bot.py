@@ -20,7 +20,7 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
 logger = logging.getLogger(__name__)
-TTVersion=0.5
+TTVersion=0.6
 
 print('TT', TTVersion)
 print('python', sys.version)
@@ -57,57 +57,6 @@ ccxt_ex_1 = exchange_class({
 })
 
 
-# async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-#     """Send a message when the command /start is issued."""
-#     user = update.effective_user
-#     await update.message.reply_html(
-#         rf"Hi {user.mention_html()}!",
-#         reply_markup=ForceReply(selective=True),
-#     )
-
-
-# def restart_handler(update, context):
-#     username = update.message.from_user.username
-#     cmd = context.args
-
-#     print(f'[magenta]{ctime()}[/magenta] [bold cyan]{username}[/bold cyan]: [color(231)]/restart {" ".join(cmd)}[/color(231)]')
-
-#     if username not in admins and username not in owners:
-#         auto_retry(lambda: update.message.reply_text("<b>⚠️ Only bot admins are allowed to do that.</b>", parse_mode="html"))
-#         print(f"[bold cyan]{username}[/bold cyan]: [yellow]⚠️ WARNING: [color(231)]/update[/color(231)] is not allowed.[/yellow]")
-#         return
-
-#     auto_retry(lambda: update.message.reply_text("Restarting...", parse_mode="html"))
-
-#     git_output = subprocess.run(["git", "pull"],
-#         capture_output=True,
-#         encoding="utf-8"
-#     ).stdout.strip()
-
-#     poetry_output = subprocess.run(
-#         ["/home/pcroland/.local/bin/poetry", "install", "--no-dev", "--remove-untracked"],
-#         capture_output=True,
-#         encoding="utf-8"
-#     ).stdout.strip()
-
-#     if str(update.message.chat_id) == config["main_chat_id"]:
-#         update_message = f'{git_output}\n\n{poetry_output}'
-#         update_message = f"<pre>{html.escape(update_message)}</pre>"
-#         if len(update_message) > 1024:
-#             update_message = f"{update_message[:1015]}...</pre>"
-#         auto_retry(lambda: update.message.reply_text(update_message, parse_mode="html"))
-
-#     with open("restart_id.txt", "w", encoding="utf-8") as fl:
-#         fl.write(str(update.message.chat_id))
-
-#     os.execv(sys.argv[0], sys.argv)
-
-#     if os.path.exists(restart_id_path):
-#         with open("restart_id.txt", "r", encoding="utf-8") as fl:
-#             restart_id = fl.read()
-#     else:
-#         restart_id = config["main_chat_id"]
-
 def Convert(string):
    li = list(string.split(" "))
    return li
@@ -118,14 +67,11 @@ def log(severity, msg):
 
 #ex1 setup
 exchange1 = CryptoExchange(ccxt_ex_1)
-balance1 = exchange1.free_balance
-openorder1 = exchange1.fetch_open_orders("BTC/USDT")
-print (balance1)
 print ("ex1 setup done")
 
-##list of commands
-command1=['start', 'help']
-command2=['bal','info']
+##list of commands 
+command1=['help']
+command2=['bal']
 command3=['order']
 command4=['trading']
 listofcommand = list(itertools.chain(command1, command2, command3, command4))
@@ -168,10 +114,13 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
+    balance1 = exchange1.free_balance
+    print (balance1)
     await update.message.reply_text(f"balance {balance1}")
 
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
+    openorder1 = exchange1.fetch_open_orders("BTC/USDT")
     await update.message.reply_text(f" list of orders {openorder1}")    
 
 async def trading_activation(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
