@@ -22,7 +22,7 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
 logger = logging.getLogger(__name__)
-TTVersion="0.6.2"
+TTVersion="0.6.3"
 
 print('TT', TTVersion)
 print('python', sys.version)
