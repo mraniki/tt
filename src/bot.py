@@ -15,6 +15,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 import ccxt
 from core.exchange import CryptoExchange
 import json
+import pandas as pd
 
 # Enable logging and version check
 logging.basicConfig(
@@ -119,7 +120,11 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     print (balancerawjson)
     balancetodisplay=json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
-    await update.message.reply_text(f"🪙 balance {balancerawjson} OR {balancetodisplay}")
+    with balancetodisplay as f:
+        d = json.load(f)
+        df = pd.DataFrame.from_dict(d)
+        print(df)
+    await update.message.reply_text(f"🪙 balance {balancerawjson} OR {df}")
 
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /order is issued."""
