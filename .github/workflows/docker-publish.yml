@@ -50,13 +50,6 @@ jobs:
                   ## Irrelevant
                   BRANCHTAG="${DOCKER_IMAGE}:${DISTRO}-${DISTRO_VARIANT}-php${PHP_VERSION}-kc${KC_VERSION},${DOCKER_IMAGE}:kc${KC_VERSION}-php${PHP_VERSION}-${DISTRO}_${DISTRO_VARIANT}"
                 ;;
-              "dev" )
-                  ## Irrelevant
-                  BRANCHTAG="${DOCKER_IMAGE}:develop"
-                ;;
-              * )
-                  BRANCHTAG="${DOCKER_IMAGE}:kc${KC_VERSION}-php${PHP_VERSION}-${DISTRO}_${DISTRO_VARIANT}"
-                ;;
             esac
           fi
           if [[ $GITHUB_REF == refs/tags/* ]]; then
