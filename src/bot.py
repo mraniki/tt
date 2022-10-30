@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="0.6.6"
+TTVersion="0.6.7"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -147,9 +147,9 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             await update.message.reply_text(f"{res}")
          else: 
             await 
-            orderid=orderid.info.res
+            orderid=res['info']['orderId']
             update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res} and order is {orderid}")
-            return res
+            return orderid
     else: error_handler
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -163,9 +163,6 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     print (balancerawjson)
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
-    #d = json.load(balancetodisplay)
-    #df = pd.DataFrame.from_dict(d)
-    #print(df)
     await update.message.reply_text(f" balance {balancetodisplay}")
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
