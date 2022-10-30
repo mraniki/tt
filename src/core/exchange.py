@@ -4,12 +4,7 @@ import time
 import logging
 
 
-
 class CryptoExchange:
-
-
-
-
 
     def __init__(self, exchange: Exchange,logger=None):
         self.exchange = exchange
@@ -31,12 +26,6 @@ class CryptoExchange:
     def fetch_order(self, order_id: int):
         return self.exchange.fetch_order(order_id)
 
-    def cancel_order(self, order_id: int):
-        try:
-            self.exchange.cancel_order(order_id)
-        except OrderNotFound:
-            # treat as success
-            pass
     def __get_error(self, e):
         ret = {"error": {"message": "{}".format(e), "name": "Binance.__get_error"}}
         return ret

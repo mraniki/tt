@@ -50,7 +50,6 @@ def Convert(string):
    li = list(string.split(" "))
    return li
 
-
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -87,7 +86,6 @@ ccxt_ex_1 = exchange_class({
 exchange1 = CryptoExchange(ccxt_ex_1)
 print ("ex1 setup done")
 
-
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=== telegram bot / commands   =======
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -101,7 +99,6 @@ command4=['trading']
 listofcommand = list(itertools.chain(command1, command2, command3, command4))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
 trading=True 
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
@@ -146,9 +143,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          if "error" in res:
             await update.message.reply_text(f"{res}")
          else: 
-            await 
             orderid=res['info']['orderId']
-            update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res} and order is {orderid}")
+            await update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res} and order is {orderid}")
             return orderid
     else: error_handler
 
@@ -156,20 +152,19 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 ##========== view balance  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #     
-
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /bal is issued."""
     balancerawjson = exchange1.free_balance
     print (balancerawjson)
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
-    await update.message.reply_text(f" balance {balancetodisplay}")
+    balance2=exhange1.balance
+    await update.message.reply_text(f" balance {balancetodisplay} or  {balance2}")
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##=========== view orders  =============
+##=========== view open orders  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #     
-
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /order is issued."""
     openorder1 = exchange1.fetch_open_orders("BTC/USDT")
@@ -188,7 +183,6 @@ async def trading_activation(update: Update, context: ContextTypes.DEFAULT_TYPE)
     else:
       trading=False
       await update.message.reply_text(f"Trading is {trading}")
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot error handling ========
