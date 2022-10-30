@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.10"
+TTVersion="🪙TT 0.6.11"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -144,12 +144,12 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          if "error" in res:
             await update.message.reply_text(f"{res}")
          else: 
-          orderid=res['info']['orderId']
-          timestamp=res['info']['datetime']
-          symbol=res['info']['symbol']
-          side=res['info']['side']
-          amount=res['info']['amount']
-          price=res['info']['price']
+          orderid=res['id']
+          timestamp=res['datetime']
+          symbol=res['symbol']
+          side=res['side']
+          amount=res['amount']
+          price=res['price']
           orderdetails=orderid + timestamp + symbol + side +amount + price
           await update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res} \n {orderdetails}")
           return orderid
@@ -165,10 +165,8 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     print (balancerawjson)
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
-    balance2=exchange1.balance
-    await update.message.reply_text(f" balance {balancetodisplay} or  {balance2}")
+    await update.message.reply_text(f" balance {balancetodisplay}")
     
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view open orders  ========
@@ -187,7 +185,7 @@ async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 # 
 async def closedorderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     symbolClosed = 'ETH/USDT'
-    now = exchange.milliseconds()
+    now = exchange1.milliseconds()
     day = 24 * 3600 * 1000
     week = 7 * day
     since = now - 7 * day  # start 1 week
@@ -197,13 +195,13 @@ async def closedorderlist_command(update: Update, context: ContextTypes.DEFAULT_
 
         end = min(since + week, now)
         params = {'endAt': end}
-        closedorders = exchange.fetch_closed_orders(symbolClosed, since, limit, params)
-        print(exchange.iso8601(since), '-', exchange.iso8601(end), len(orders), 'orders')
+        closedorders = exchange1.fetch_closed_orders(symbolClosed, since, limit, params)
+        print(exchange1.iso8601(since), '-', exchange1.iso8601(end), len(orders), 'orders')
         if len(closedorders) == limit:
             since = orders[-1]['timestamp']
         else:
             since += week
-        await update.message.reply_text(f"{exchange.iso8601(since)} '-' {exchange.iso8601(end)} '-' {len(orders)} 'orders'")  
+        await update.message.reply_text(f"{exchange1.iso8601(since)} '-' {exchange1.iso8601(end)} '-' {len(orders)} 'orders'")  
 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
