@@ -161,10 +161,10 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     print (balancerawjson)
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
-    d = json.load(balancetodisplay)
-    df = pd.DataFrame.from_dict(d)
-    print(df)
-    await update.message.reply_text(f" balance {balancerawjson}")
+    #d = json.load(balancetodisplay)
+    #df = pd.DataFrame.from_dict(d)
+    #print(df)
+    await update.message.reply_text(f" balance {balancetodisplay}")
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view orders  =============
