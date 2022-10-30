@@ -3,13 +3,14 @@
  Deploy it via docker. 
  
 [![Docker](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml)
-[![DockerNightly](https://github.com/mraniki/tt/actions/workflows/%20docker-image-dev.yml/badge.svg?branch=dev)](https://github.com/mraniki/tt/actions/workflows/%20docker-image-dev.yml)
+
+[![DockerNightly](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml)
  
 ## Install
 1) Create a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
 2) Create your API Keys supported by CCXT https://github.com/ccxt/ccxt
 3) Deploy :
-- via docker (docker pull ghcr.io/mraniki/tt:main) 
+- via docker (docker pull ghcr.io/mraniki/tt:main for latest stable or  docker pull ghcr.io/mraniki/tt:dev for nightly
 - or git clone  (git clone https://github.com/mraniki/tt)
 4) Update bot token / API in the ENV variable and use .env file at the root
 5) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
