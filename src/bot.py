@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="0.6.6"
+TTVersion="🪙TT 0.6.12"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 def log(severity, msg):
    logger.log(severity, msg)
 
-print('TT', TTVersion)
+print(TTVersion)
 print('python', sys.version)
 print('CCXT Version:', ccxt.__version__)
 print('Please wait while the program is loading...')
@@ -49,7 +49,6 @@ print('Please wait while the program is loading...')
 def Convert(string):
    li = list(string.split(" "))
    return li
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
@@ -87,7 +86,6 @@ ccxt_ex_1 = exchange_class({
 exchange1 = CryptoExchange(ccxt_ex_1)
 print ("ex1 setup done")
 
-
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=== telegram bot / commands   =======
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -98,10 +96,10 @@ command1=['help']
 command2=['bal']
 command3=['order']
 command4=['trading']
+#command5=['pastorders']
 listofcommand = list(itertools.chain(command1, command2, command3, command4))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
-trading=True 
-
+trading=True #trading switch command
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
@@ -109,14 +107,14 @@ trading=True
 #     
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text(f"🪙TT  {TTVersion} \n /{commandlist} ")
+    await update.message.reply_text(f" {TTVersion} \n /{commandlist} ")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## ========== startup message   ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 async def post_init(application: Application):
-    await application.bot.send_message(user_id, f"Bot is online \n 🪙TT  {TTVersion} \n /{commandlist}")
+    await application.bot.send_message(user_id, f"Bot is online \n {TTVersion} \n /{commandlist}")
    
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
@@ -146,36 +144,66 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          if "error" in res:
             await update.message.reply_text(f"{res}")
          else: 
-            await update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res}")
-            return res
+          orderid=res['id']
+          timestamp=res['datetime']
+          symbol=res['symbol']
+          side=res['side']
+          amount=res['amount']
+          price=res['price']
+          #orderdetails=orderid + timestamp + symbol + side +amount + price
+          await update.message.reply_text(f"ORDER PLACED SUCCESSFULLY \n {orderid} \n {timestamp} \n {symbol} \n {side} \n {amount} \n {price} ")
+          return orderid
     else: error_handler
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##========== view balance  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #     
-
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /bal is issued."""
     balancerawjson = exchange1.free_balance
     print (balancerawjson)
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
-    #d = json.load(balancetodisplay)
-    #df = pd.DataFrame.from_dict(d)
-    #print(df)
     await update.message.reply_text(f" balance {balancetodisplay}")
     
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##=========== view orders  =============
+##=========== view open orders  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #     
-
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /order is issued."""
     openorder1 = exchange1.fetch_open_orders("BTC/USDT")
+   #lastclosedorder
     await update.message.reply_text(f" list of orders {openorder1}")    
-    
+
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=========== view closed orders  =======
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+# 
+# async def closedorderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+#     symbolClosed = 'ETH/USDT'
+#     now = exchange1.milliseconds()
+#     day = 24 * 3600 * 1000
+#     week = 7 * day
+#     since = now - 7 * day  # start 1 week
+#     limit = 20
+
+#     while since < now:
+
+#         end = min(since + week, now)
+#         params = {'endAt': end}
+#         closedorders = exchange1.fetch_closed_orders(symbolClosed, since, limit, params)
+#         print(exchange1.iso8601(since), '-', exchange1.iso8601(end), len(orders), 'orders')
+#         if len(closedorders) == limit:
+#             since = orders[-1]['timestamp']
+#         else:
+#             since += week
+#         await update.message.reply_text(f"{exchange1.iso8601(since)} '-' {exchange1.iso8601(end)} '-' {len(orders)} 'orders'")  
+
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== trading switch  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -189,7 +217,6 @@ async def trading_activation(update: Update, context: ContextTypes.DEFAULT_TYPE)
     else:
       trading=False
       await update.message.reply_text(f"Trading is {trading}")
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot error handling ========
@@ -214,6 +241,7 @@ def main():
     application.add_handler(CommandHandler(command1, help_command))
     application.add_handler(CommandHandler(command2, bal_command))
     application.add_handler(CommandHandler(command3, orderlist_command))
+    #application.add_handler(CommandHandler(command5, closedorderlist_command))
     application.add_handler(CommandHandler(command4, trading_activation))
     # Message monitoring for order
     application.add_handler(MessageHandler(filters.ALL, monitor))
