@@ -141,7 +141,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
          print ("processing order")
          res = exchange1.market_order(m_dir, m_symbol, m_q)
-         if res["error"]:
+         if "error" in res:
             await update.message.reply_text(f"{res}")
          else: 
             await update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res}")
