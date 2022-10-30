@@ -144,7 +144,13 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             await update.message.reply_text(f"{res}")
          else: 
           orderid=res['info']['orderId']
-          await update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res} and order is {orderid}")
+          timestamp=res['info']['datetime']
+          symbol=res['info']['symbol']
+          side=res['info']['side']
+          amount=res['info']['amount']
+          price=res['info']['price']
+          orderdetails=orderid + timestamp + symbol + side +amount + price
+          await update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res} \n {orderdetails}")
           return orderid
     else: error_handler
 
