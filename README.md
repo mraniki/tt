@@ -8,7 +8,7 @@
  
 ## Install
 1) Create a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
-2) Create your API Keys supported by CCXT https://github.com/ccxt/ccxt
+2) Create your API Keys supported by CCXT https://github.com/ccxt/ccxt. Use testnet account for testing this tool.
 3) Deploy :
 - via docker (docker pull ghcr.io/mraniki/tt:main for latest stable or  docker pull ghcr.io/mraniki/tt:dev for nightly
 - or git clone  (git clone https://github.com/mraniki/tt)
@@ -41,7 +41,9 @@
 <img width="393" alt="Screenshot 2022-10-25 at 14 44 41" src="https://user-images.githubusercontent.com/8766259/197776314-10219d7f-693f-44df-8efe-a5794bbafe98.png">
 
  ## toDo
-- formating/handling of response from exchange (bal, opened order, new order)
+- formating/handling of response from exchange (bal, opened order, last closed order)
+- support % of balance for order
+- support testnet via variable 
 - formating/handling of error from bot and from exchange api
 - handle 2/multi exchanges
 - Merge with MQL4 version which integrate with MT4 exchanges (reach out if you are interested)
