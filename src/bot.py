@@ -146,7 +146,9 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          if "error" in res:
             await update.message.reply_text(f"{res}")
          else: 
-            await update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res}")
+            await 
+            orderid=orderid.info.res
+            update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res} and order is {orderid}")
             return res
     else: error_handler
 

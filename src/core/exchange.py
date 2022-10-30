@@ -41,12 +41,6 @@ class CryptoExchange:
         ret = {"error": {"message": "{}".format(e), "name": "Binance.__get_error"}}
         return ret
 
-    def create_sell_order(self, symbol: str, amount: float, price: float):
-        return self.exchange.create_order(symbol=symbol, type="limit", side="sell", amount=amount, price=price)
-
-    def create_buy_order(self, symbol: str, amount: float, price: float):
-        return self.exchange.create_order(symbol=symbol, type="limit", side="buy", amount=amount, price=price)
-
     def create_marketorder(self, side: str, symbol: str, amount: float):
         return self.exchange.create_order(symbol=symbol, type="market", side=side, amount=amount)
 
