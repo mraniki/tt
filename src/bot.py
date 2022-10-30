@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="0.6.8"
+TTVersion="0.6.9"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -96,7 +96,8 @@ command1=['help']
 command2=['bal']
 command3=['order']
 command4=['trading']
-listofcommand = list(itertools.chain(command1, command2, command3, command4))
+command5=['pastorders']
+listofcommand = list(itertools.chain(command1, command2, command3, command4, command5))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
 trading=True #trading switch command
 
@@ -167,6 +168,8 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     balance2=exhange1.balance
     await update.message.reply_text(f" balance {balancetodisplay} or  {balance2}")
     
+
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view open orders  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -176,7 +179,33 @@ async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     openorder1 = exchange1.fetch_open_orders("BTC/USDT")
    #lastclosedorder
     await update.message.reply_text(f" list of orders {openorder1}")    
-    
+
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=========== view closed orders  =======
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+# 
+async def closedorderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    symbolClosed = 'ETH/USDT'
+    now = exchange.milliseconds()
+    day = 24 * 3600 * 1000
+    week = 7 * day
+    since = now - 7 * day  # start 1 week
+    limit = 20
+
+    while since < now:
+
+        end = min(since + week, now)
+        params = {'endAt': end}
+        closedorders = exchange.fetch_closed_orders(symbolClosed, since, limit, params)
+        print(exchange.iso8601(since), '-', exchange.iso8601(end), len(orders), 'orders')
+        if len(closedorders) == limit:
+            since = orders[-1]['timestamp']
+        else:
+            since += week
+        await update.message.reply_text(f"{exchange.iso8601(since)} '-' {exchange.iso8601(end)} '-' {len(orders)} 'orders'")  
+
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== trading switch  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -214,6 +243,7 @@ def main():
     application.add_handler(CommandHandler(command1, help_command))
     application.add_handler(CommandHandler(command2, bal_command))
     application.add_handler(CommandHandler(command3, orderlist_command))
+    application.add_handler(CommandHandler(command5, closedorderlist_command))
     application.add_handler(CommandHandler(command4, trading_activation))
     # Message monitoring for order
     application.add_handler(MessageHandler(filters.ALL, monitor))
