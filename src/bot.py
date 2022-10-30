@@ -1,4 +1,13 @@
-## IMPORT 
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=============== VERSION  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+TTVersion="0.6.4"
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=============== import  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
 import logging
 import sys
 import os
@@ -11,24 +20,40 @@ import itertools
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
-
 import ccxt
 from core.exchange import CryptoExchange
 import json
+import pandas as pd
 
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=============== Logging  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # Enable logging and version check
+
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
 logger = logging.getLogger(__name__)
-TTVersion=0.6
+def log(severity, msg):
+   logger.log(severity, msg)
 
 print('TT', TTVersion)
 print('python', sys.version)
 print('CCXT Version:', ccxt.__version__)
 print('Please wait while the program is loading...')
 
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##====== common functions  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+def Convert(string):
+   li = list(string.split(" "))
+   return li
+
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##============= variables  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #IMPORT ENV FILE (if you are using .env file)
 dotenv_path = Path('.env')
 load_dotenv(dotenv_path=dotenv_path)
@@ -46,9 +71,10 @@ exchange_id1 = getenv("EXCHANGE1")
 exchange_id1_api = getenv("EXCHANGE1YOUR_API_KEY")  
 exchange_id1_secret = getenv("EXCHANGE1YOUR_SECRET") 
 
-
-
-
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##======== exchange setup  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+# Enable logging and version check
 #EXCHANGE1 from variable id
 exchange_id = exchange_id1
 exchange_class = getattr(ccxt, exchange_id)
@@ -57,18 +83,15 @@ ccxt_ex_1 = exchange_class({
     'secret': exchange_id1_secret,
 })
 
-
-def Convert(string):
-   li = list(string.split(" "))
-   return li
-
-def log(severity, msg):
-   logger.log(severity, msg)
-
-
 #ex1 setup
 exchange1 = CryptoExchange(ccxt_ex_1)
 print ("ex1 setup done")
+
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=== telegram bot / commands   =======
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+# Enable logging and version check
 
 ##list of commands 
 command1=['help']
@@ -79,15 +102,27 @@ listofcommand = list(itertools.chain(command1, command2, command3, command4))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
 trading=True 
 
-async def post_init(application: Application):
-    await application.bot.send_message(user_id, f"Bot is online Version {TTVersion} \n /{commandlist} ")
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+## ========== startup message   ========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+async def post_init(application: Application):
+    await application.bot.send_message(user_id, f"Bot is online \n {help_command} ")
+     ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=============== help  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+#     
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text(f"Use /{commandlist}")
+    await update.message.reply_text(f"🪙TT  {TTVersion} \n /{commandlist} ")
+    
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##===== order parsing and placing  =====
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+#     
 
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Echo the user message."""
+    """Send a message when an order is identified """
     messagetxt = update.message.text
     messagetxt_upper =messagetxt.upper()
     filter_lst = ['BUY', 'SELL', 'TEST']
@@ -113,20 +148,38 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             return res
     else: error_handler
 
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##========== view balance  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+#     
+
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
-    balance1 = exchange1.free_balance
-    print (balance1)
-    balancetodisplay=json.dumps(balance1, sort_keys=True, indent=4)
-    await update.message.reply_text(f"balance {balance1} OR {balancetodisplay}")
+    """Send a message when the command /bal is issued."""
+    balancerawjson = exchange1.free_balance
+    print (balancerawjson)
+    balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
+    print (balancetodisplay)
+    d = json.load(balancetodisplay)
+    df = pd.DataFrame.from_dict(d)
+    print(df)
+    await update.message.reply_text(f" balance {balancerawjson} OR {df}")
+    
+     ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=========== view orders  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+#     
 
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
+    """Send a message when the command /order is issued."""
     openorder1 = exchange1.fetch_open_orders("BTC/USDT")
     await update.message.reply_text(f" list of orders {openorder1}")    
-
+    
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##======== trading switch  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+#     
 async def trading_activation(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
+    """Send a message when the command /trading is issued."""
     global trading
     if (trading==False):
       trading=True
@@ -135,15 +188,22 @@ async def trading_activation(update: Update, context: ContextTypes.DEFAULT_TYPE)
       trading=False
       await update.message.reply_text(f"Trading is {trading}")
 
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=========  bot error handling ========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+#     
 def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
     
+    
+    
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=============== BOT  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-#BOT
 def main():
-
-    # trade_executor = TradeExecutor(exchange1)
 
     """Start the bot."""
     # Create the Application and pass it your bot's token.
@@ -160,7 +220,6 @@ def main():
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling()
-
 
 if __name__ == '__main__':
     main()
