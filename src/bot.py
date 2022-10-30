@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="0.6.9"
+TTVersion="🪙TT 0.6.10"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 def log(severity, msg):
    logger.log(severity, msg)
 
-print('TT', TTVersion)
+print(TTVersion)
 print('python', sys.version)
 print('CCXT Version:', ccxt.__version__)
 print('Please wait while the program is loading...')
@@ -107,14 +107,14 @@ trading=True #trading switch command
 #     
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text(f"🪙TT  {TTVersion} \n /{commandlist} ")
+    await update.message.reply_text(f" {TTVersion} \n /{commandlist} ")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## ========== startup message   ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 async def post_init(application: Application):
-    await application.bot.send_message(user_id, f"Bot is online \n 🪙TT  {TTVersion} \n /{commandlist}")
+    await application.bot.send_message(user_id, f"Bot is online \n {TTVersion} \n /{commandlist}")
    
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
@@ -165,7 +165,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     print (balancerawjson)
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
-    balance2=exhange1.balance
+    balance2=exchange1.balance
     await update.message.reply_text(f" balance {balancetodisplay} or  {balance2}")
     
 
