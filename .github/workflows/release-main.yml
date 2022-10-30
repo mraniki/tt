@@ -3,8 +3,10 @@ name: "tagged-release"
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - "main"
+    label:
+      - "latest"
 
 jobs:
   tagged-release:
