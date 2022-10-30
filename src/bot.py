@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="0.6.5"
+TTVersion="0.6.6"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -102,13 +102,7 @@ listofcommand = list(itertools.chain(command1, command2, command3, command4))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
 trading=True 
 
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-## ========== startup message   ========
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-async def post_init(application: Application):
-    await application.bot.send_message(user_id, f"Bot is online \n {help_command} ")
-    
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -116,7 +110,14 @@ async def post_init(application: Application):
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
     await update.message.reply_text(f"🪙TT  {TTVersion} \n /{commandlist} ")
-    
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+## ========== startup message   ========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+async def post_init(application: Application):
+    await application.bot.send_message(user_id, f"Bot is online \n 🪙TT  {TTVersion} \n /{commandlist}")
+   
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -142,7 +143,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
          print ("processing order")
          res = exchange1.market_order(m_dir, m_symbol, m_q)
-         if res["error"]:
+         if "error" in res:
             await update.message.reply_text(f"{res}")
          else: 
             await update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res}")
@@ -160,10 +161,10 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     print (balancerawjson)
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
-    d = json.load(balancetodisplay)
-    df = pd.DataFrame.from_dict(d)
-    print(df)
-    await update.message.reply_text(f" balance {df}")
+    #d = json.load(balancetodisplay)
+    #df = pd.DataFrame.from_dict(d)
+    #print(df)
+    await update.message.reply_text(f" balance {balancetodisplay}")
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view orders  =============
