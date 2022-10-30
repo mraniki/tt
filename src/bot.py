@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.11"
+TTVersion="🪙TT 0.6.12"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -96,8 +96,8 @@ command1=['help']
 command2=['bal']
 command3=['order']
 command4=['trading']
-command5=['pastorders']
-listofcommand = list(itertools.chain(command1, command2, command3, command4, command5))
+#command5=['pastorders']
+listofcommand = list(itertools.chain(command1, command2, command3, command4))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
 trading=True #trading switch command
 
@@ -150,8 +150,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
           side=res['side']
           amount=res['amount']
           price=res['price']
-          orderdetails=orderid + timestamp + symbol + side +amount + price
-          await update.message.reply_text(f"ORDER PLACED SUCCESSFULLY {res} \n {orderdetails}")
+          #orderdetails=orderid + timestamp + symbol + side +amount + price
+          await update.message.reply_text(f"ORDER PLACED SUCCESSFULLY \n {orderid} \n {timestamp} \n {symbol} \n {side} \n {amount} \n {price} ")
           return orderid
     else: error_handler
 
@@ -183,25 +183,25 @@ async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 ##=========== view closed orders  =======
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # 
-async def closedorderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    symbolClosed = 'ETH/USDT'
-    now = exchange1.milliseconds()
-    day = 24 * 3600 * 1000
-    week = 7 * day
-    since = now - 7 * day  # start 1 week
-    limit = 20
+# async def closedorderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+#     symbolClosed = 'ETH/USDT'
+#     now = exchange1.milliseconds()
+#     day = 24 * 3600 * 1000
+#     week = 7 * day
+#     since = now - 7 * day  # start 1 week
+#     limit = 20
 
-    while since < now:
+#     while since < now:
 
-        end = min(since + week, now)
-        params = {'endAt': end}
-        closedorders = exchange1.fetch_closed_orders(symbolClosed, since, limit, params)
-        print(exchange1.iso8601(since), '-', exchange1.iso8601(end), len(orders), 'orders')
-        if len(closedorders) == limit:
-            since = orders[-1]['timestamp']
-        else:
-            since += week
-        await update.message.reply_text(f"{exchange1.iso8601(since)} '-' {exchange1.iso8601(end)} '-' {len(orders)} 'orders'")  
+#         end = min(since + week, now)
+#         params = {'endAt': end}
+#         closedorders = exchange1.fetch_closed_orders(symbolClosed, since, limit, params)
+#         print(exchange1.iso8601(since), '-', exchange1.iso8601(end), len(orders), 'orders')
+#         if len(closedorders) == limit:
+#             since = orders[-1]['timestamp']
+#         else:
+#             since += week
+#         await update.message.reply_text(f"{exchange1.iso8601(since)} '-' {exchange1.iso8601(end)} '-' {len(orders)} 'orders'")  
 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -241,7 +241,7 @@ def main():
     application.add_handler(CommandHandler(command1, help_command))
     application.add_handler(CommandHandler(command2, bal_command))
     application.add_handler(CommandHandler(command3, orderlist_command))
-    application.add_handler(CommandHandler(command5, closedorderlist_command))
+    #application.add_handler(CommandHandler(command5, closedorderlist_command))
     application.add_handler(CommandHandler(command4, trading_activation))
     # Message monitoring for order
     application.add_handler(MessageHandler(filters.ALL, monitor))
