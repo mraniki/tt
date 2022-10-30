@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="0.6.7"
+TTVersion="0.6.8"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -98,7 +98,7 @@ command3=['order']
 command4=['trading']
 listofcommand = list(itertools.chain(command1, command2, command3, command4))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
-trading=True 
+trading=True #trading switch command
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
@@ -174,6 +174,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /order is issued."""
     openorder1 = exchange1.fetch_open_orders("BTC/USDT")
+   #lastclosedorder
     await update.message.reply_text(f" list of orders {openorder1}")    
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
