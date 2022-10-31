@@ -178,8 +178,8 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     print (balancerawjson)
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
-    dump(green(ccxt_ex_1.name), 'balance', balancetodisplay)
-    await update.message.reply_text(f" balance {balancetodisplay}")
+    test=dump(green(ccxt_ex_1.name), 'balance', balancetodisplay)
+    await update.message.reply_text(f" balance {balancetodisplay} or \n {test}")
     
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
