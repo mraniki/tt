@@ -9,7 +9,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/mraniki/tt?style=plastic)](https://hub.docker.com/r/mraniki/tt)
 
 
- 
+
 ## Install
 1) Create a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
 2) Create your API Keys supported by CCXT https://github.com/ccxt/ccxt. Use testnet account for testing this tool.
