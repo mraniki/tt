@@ -1,13 +1,18 @@
 # Telegram Trader
  CCXT and Telegram integration. Based on python telegram bot v20. 
  Deploy it via docker. 
- 
-[![Docker](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml)
 
+
+[![github](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=GitHub%20Pages&logoColor=white)](https://github.com/mraniki/tt)
+
+[![github](https://badgen.net/github/status/mraniki/tt/latest)](https://github.com/mraniki/tt)
+[![Docker Pulls](https://img.shields.io/docker/pulls/mraniki/tt?style=plastic)](https://hub.docker.com/r/mraniki/tt)
+
+[![Docker](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml)
 [![DockerNightly](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml)
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/mraniki/tt?style=plastic)](https://hub.docker.com/r/mraniki/tt)
- 
+![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)
+
 ## Install
 1) Create a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
 2) Create your API Keys supported by CCXT https://github.com/ccxt/ccxt. Use testnet account for testing this tool.
@@ -38,8 +43,13 @@
  - Push your signal manually or from system like  trading view to submit order to your exchange
  - Disable or Enable trading process via /trading command
  - Query balance via /bal command
- - View opened orders via /order command
+
  
+ 
+ 
+ ![BF9C1A12-0058-4C30-B0BE-30DA7B300AEE](https://user-images.githubusercontent.com/8766259/199304735-6f3eb428-30e0-46b9-9930-9a29fbcec565.jpeg)
+
+ ![33146B2F-0BD6-4ECD-9B3B-05CEE8958634](https://user-images.githubusercontent.com/8766259/199287828-64d9b780-a5f5-47b3-96ac-a066ea53a18c.jpeg)
 <img width="393" alt="Screenshot 2022-10-25 at 14 44 41" src="https://user-images.githubusercontent.com/8766259/197776314-10219d7f-693f-44df-8efe-a5794bbafe98.png">
 
  ## toDo
@@ -47,6 +57,7 @@
 - support % of balance for order
 - support testnet via variable 
 - formating/handling of error from bot and from exchange api
+- view opened orders/position via /order command 
 - handle 2/multi exchanges
 - Merge with MQL4 version which integrate with MT4 exchanges (reach out if you are interested)
 

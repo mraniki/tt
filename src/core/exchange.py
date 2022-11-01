@@ -9,7 +9,7 @@ class CryptoExchange:
     def __init__(self, exchange: Exchange,logger=None):
         self.exchange = exchange
         self.exchange.set_sandbox_mode(True)  # comment if you're not using the testnet
-        self.exchange.verbose = True  # debug output
+        self.exchange.verbose = False  # debug output
         self.exchange.load_markets()
         self.logger = logger if logger is not None else logging.getLogger(__name__)
         self.logger.info("class CryptoExchange initialized")
