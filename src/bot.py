@@ -110,14 +110,14 @@ trading=True #trading switch command
 #     
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text(f" {TTVersion} \n /{commandlist} ")
+    await update.message.reply_text(f" {TTVersion} \n /{commandlist}  \n exchange configured: {ccxt_ex_1.name} \n ")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## ========== startup message   ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 async def post_init(application: Application):
-    await application.bot.send_message(user_id, f"Bot is online \n {TTVersion} \n /{commandlist} \n exchange configured: {ccxt_ex_1.name}")
+    await application.bot.send_message(user_id, f"Bot is online \n {help_command} \n")
    
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
@@ -154,7 +154,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
           amount=res['amount']
           price=res['price']
           #orderdetails=orderid + timestamp + symbol + side +amount + price
-          await update.message.reply_text(f"🟢 ORDER PLACED SUCCESSFULLY \n id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}")
+          await update.message.reply_text(f"🟢 ORDER PLACED \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}")
           return orderid
     else: error_handler
 
@@ -184,7 +184,6 @@ async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     openorder1 = exchange1.fetch_open_orders("BTC/USDT")
    #lastclosedorder
     await update.message.reply_text(f" list of orders {openorder1}")    
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view closed orders  =======
