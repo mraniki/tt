@@ -97,7 +97,7 @@ ccxt_ex_1 = exchange_class({
 })
 
 #ex1 setup
-exchange1 = CryptoExchange(ccxt_ex_1, exchange_id1_sandbox)
+exchange1 = CryptoExchange(ccxt_ex_1)
 print ("ex1 setup done")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
