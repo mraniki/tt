@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.13"
+TTVersion="🪙TT 0.6.15"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -79,6 +79,7 @@ args = parser.parse_args()
 user_id = args.user_id
 print(user_id)
 
+exchange_id1_sandbox = getenv("SANDBOX_MODE")
 exchange_id1 = getenv("EXCHANGE1")
 exchange_id1_api = getenv("EXCHANGE1YOUR_API_KEY")  
 exchange_id1_secret = getenv("EXCHANGE1YOUR_SECRET") 
@@ -96,7 +97,7 @@ ccxt_ex_1 = exchange_class({
 })
 
 #ex1 setup
-exchange1 = CryptoExchange(ccxt_ex_1)
+exchange1 = CryptoExchange(ccxt_ex_1, exchange_id1_sandbox)
 print ("ex1 setup done")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -179,11 +180,12 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
     balanceloaded = json.loads(balancetodisplay)
+    prettybal=""
     for iterator in balanceloaded:
      print(iterator, ":", balanceloaded[iterator])
-     test="tdb"
+     prettybal += (f"{iterator} : {balanceloaded[iterator]} \n")
      #test+=(f iterator ":" loaded[iterator] "\n")
-    await update.message.reply_text(f" balance {balancetodisplay} or \n {test}")
+    await update.message.reply_text(f"🏦 Balance \n{prettybal}")
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view open orders  ========
