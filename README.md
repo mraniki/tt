@@ -40,6 +40,8 @@
  - Query balance via /bal command
  - View opened orders via /order command
  
+ 
+ ![33146B2F-0BD6-4ECD-9B3B-05CEE8958634](https://user-images.githubusercontent.com/8766259/199287828-64d9b780-a5f5-47b3-96ac-a066ea53a18c.jpeg)
 <img width="393" alt="Screenshot 2022-10-25 at 14 44 41" src="https://user-images.githubusercontent.com/8766259/197776314-10219d7f-693f-44df-8efe-a5794bbafe98.png">
 
  ## toDo
