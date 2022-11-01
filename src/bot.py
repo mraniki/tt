@@ -180,7 +180,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     print (balancetodisplay)
     balanceloaded = json.loads(balancetodisplay)
     for iterator in balanceloaded:
-     print(iterator, ":", loaded[iterator])
+     print(iterator, ":", balanceloaded[iterator])
      test="tdb"
      #test+=(f iterator ":" loaded[iterator] "\n")
     await update.message.reply_text(f" balance {balancetodisplay} or \n {test}")
