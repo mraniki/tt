@@ -40,7 +40,7 @@
  - Push your signal manually or from system like  trading view to submit order to your exchange
  - Disable or Enable trading process via /trading command
  - Query balance via /bal command
- - View opened orders via /order command
+
  
  
  
@@ -54,6 +54,7 @@
 - support % of balance for order
 - support testnet via variable 
 - formating/handling of error from bot and from exchange api
+- view opened orders/position via /order command 
 - handle 2/multi exchanges
 - Merge with MQL4 version which integrate with MT4 exchanges (reach out if you are interested)
 
