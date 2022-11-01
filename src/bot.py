@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.12"
+TTVersion="🪙TT 0.6.13"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -178,7 +178,10 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     print (balancerawjson)
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
-    test=dump(green(ccxt_ex_1.name), 'balance', balancetodisplay)
+    balanceloaded = json.loads(balancetodisplay)
+        for iterator in balanceloaded:
+        print(iterator, ":", loaded[iterator])
+        test+=(f iterator ":" loaded[iterator] \n)
     await update.message.reply_text(f" balance {balancetodisplay} or \n {test}")
     
 
