@@ -118,8 +118,8 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 async def post_init(application: Application):
-    await application.bot.send_message(user_id, f"Bot is online \n")
-    help_command()
+    await application.bot.send_message(user_id, f"Bot is online \n /{commandlist}")
+    #help_command()
    
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
