@@ -1,13 +1,12 @@
 # Telegram Trader
  CCXT and Telegram integration. Based on python telegram bot v20. 
  Deploy it via docker. 
- 
-[![Docker](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml)
 
-[![DockerNightly](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml)
-
+[![github](https://badgen.net/github/status/mraniki/tt/latest)](https://github.com/mraniki/tt)
 [![Docker Pulls](https://img.shields.io/docker/pulls/mraniki/tt?style=plastic)](https://hub.docker.com/r/mraniki/tt)
 
+[![Docker](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml)
+[![DockerNightly](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml)
 
 
 ## Install
