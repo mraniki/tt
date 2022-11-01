@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.12"
+TTVersion="🪙TT 0.6.13"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -50,6 +50,19 @@ def Convert(string):
    li = list(string.split(" "))
    return li
 
+def style(s, style):
+    return style + s + '\033[0m'
+
+
+def green(s):
+    return style(s, '\033[92m')
+    
+def dump(*args):
+    print(' '.join([str(arg) for arg in args]))
+    
+   
+   
+   
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -165,9 +178,13 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     print (balancerawjson)
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
-    await update.message.reply_text(f" balance {balancetodisplay}")
+    balanceloaded = json.loads(balancetodisplay)
+    for iterator in balanceloaded:
+     print(iterator, ":", balanceloaded[iterator])
+     test="tdb"
+     #test+=(f iterator ":" loaded[iterator] "\n")
+    await update.message.reply_text(f" balance {balancetodisplay} or \n {test}")
     
-
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view open orders  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
