@@ -11,13 +11,17 @@
 [![Docker](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml)
 [![DockerNightly](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml)
 
-![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)
+
+[![telegrambot](https://img.shields.io/badge/Telegram-Channel-blue.svg?logo=telegram)](https://t.me/pythontelegrambotchannel)
+[![Twitter Follow](https://img.shields.io/twitter/follow/ccxt_official.svg?style=social&label=CCXT)](https://twitter.com/ccxt_official)
 
 ## Install
 1) Create a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
 2) Create your API Keys supported by CCXT https://github.com/ccxt/ccxt. Use testnet account for testing this tool.
 3) Deploy :
-- via docker (docker pull ghcr.io/mraniki/tt:main for latest stable or  docker pull ghcr.io/mraniki/tt:dev for nightly
+- via docker 
+  - dockerhub docker push mraniki/tt:latest or nightly,
+  - or github docker pull ghcr.io/mraniki/tt:main for latest stable or  docker pull ghcr.io/mraniki/tt:dev for nightly
 - or git clone  (git clone https://github.com/mraniki/tt)
 4) Update bot token / API in the ENV variable and use .env file at the root
 5) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
