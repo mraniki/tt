@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.17"
+TTVersion="🪙TT 0.6.18"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -21,7 +21,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
 import ccxt
-from core.exchange import CryptoExchange
+#from core.exchange import CryptoExchange
 import json
 import pandas as pd
 
@@ -118,7 +118,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 async def post_init(application: Application):
-    await application.bot.send_message(user_id, f"Bot is online \n /{commandlist}")
+    await application.bot.send_message(user_id, f"Bot is online {TTVersion} \n /{commandlist}")
     #help_command()
    
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -146,7 +146,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
          print ("processing order")
          #res = exchange1.market_order(m_dir, m_symbol, m_q)
-         res = ccxt_ex_1.create_order(m_symbol, type, m_dir, m_amount)
+         res = ccxt_ex_1.create_order(m_symbol, type, m_dir, m_q)
          
          if "error" in res:
             await update.message.reply_text(f"{res}")
