@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.15"
+TTVersion="🪙TT 0.6.16"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -50,18 +50,6 @@ def Convert(string):
    li = list(string.split(" "))
    return li
 
-def style(s, style):
-    return style + s + '\033[0m'
-
-
-def green(s):
-    return style(s, '\033[92m')
-    
-def dump(*args):
-    print(' '.join([str(arg) for arg in args]))
-    
-   
-   
    
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
@@ -98,6 +86,7 @@ ccxt_ex_1 = exchange_class({
 
 #ex1 setup
 exchange1 = CryptoExchange(ccxt_ex_1)
+ccxt_ex_1.set_sandbox_mode(exchange_id1_sandbox)
 print ("ex1 setup done")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -227,7 +216,7 @@ async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 ##======== trading switch  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #     
-async def trading_activation(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /trading is issued."""
     global trading
     if (trading==False):
@@ -261,7 +250,7 @@ def main():
     application.add_handler(CommandHandler(command2, bal_command))
     application.add_handler(CommandHandler(command3, orderlist_command))
     #application.add_handler(CommandHandler(command5, closedorderlist_command))
-    application.add_handler(CommandHandler(command4, trading_activation))
+    application.add_handler(CommandHandler(command4, trading_switch))
     # Message monitoring for order
     application.add_handler(MessageHandler(filters.ALL, monitor))
     application.add_error_handler(error_handler)
