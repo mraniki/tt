@@ -85,7 +85,7 @@ ccxt_ex_1 = exchange_class({
 })
 
 #ex1 setup
-exchange1 = CryptoExchange(ccxt_ex_1)
+#exchange1 = CryptoExchange(ccxt_ex_1)
 ccxt_ex_1.set_sandbox_mode(exchange_id1_sandbox)
 print ("ex1 setup done")
 
@@ -103,6 +103,7 @@ command4=['trading']
 listofcommand = list(itertools.chain(command1, command2, command3, command4))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
 trading=True #trading switch command
+type="market" #limit
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
@@ -110,7 +111,7 @@ trading=True #trading switch command
 #     
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text(f" {TTVersion} \n /{commandlist}  \n exchange configured: {ccxt_ex_1.name} \n ")
+    await update.message.reply_text(f" {TTVersion} \n /{commandlist}  \n exchange configured: {ccxt_ex_1.name} spot: {ccxt_ex_1.spot} future: {ccxt_ex_1.future}  \n ")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## ========== startup message   ========
@@ -144,7 +145,9 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          print (m_dir,m_symbol,m_sl,m_tp,m_q)
          await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
          print ("processing order")
-         res = exchange1.market_order(m_dir, m_symbol, m_q)
+         #res = exchange1.market_order(m_dir, m_symbol, m_q)
+         res = ccxt_ex_1.create_order(m_symbol, type, m_dir, m_amount)
+         
          if "error" in res:
             await update.message.reply_text(f"{res}")
          else: 
@@ -165,7 +168,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 #     
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /bal is issued."""
-    balancerawjson = exchange1.free_balance
+    balancerawjson = ccxt_ex_1.fetch_free_balance()
     print (balancerawjson)
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
@@ -182,9 +185,11 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 #     
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /order is issued."""
-    openorder1 = exchange1.fetch_open_orders("BTC/USDT")
+    balance = ccxt_ex_1.fetch_balance()
+    positions = balance['info']['positions']
+    pprint(positions)
    #lastclosedorder
-    await update.message.reply_text(f" list of orders {openorder1}")    
+    await update.message.reply_text(f" list of positions {positions}")    
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view closed orders  =======
