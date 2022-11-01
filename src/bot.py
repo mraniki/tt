@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.18"
+TTVersion="🪙TT 0.6.19"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -21,7 +21,6 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
 import ccxt
-#from core.exchange import CryptoExchange
 import json
 import pandas as pd
 
@@ -84,8 +83,6 @@ ccxt_ex_1 = exchange_class({
     'secret': exchange_id1_secret,
 })
 
-#ex1 setup
-#exchange1 = CryptoExchange(ccxt_ex_1)
 ccxt_ex_1.set_sandbox_mode(exchange_id1_sandbox)
 print ("ex1 setup done")
 
