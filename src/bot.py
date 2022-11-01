@@ -111,7 +111,7 @@ type="market" #limit
 #     
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text(f" {TTVersion} \n /{commandlist}  \n exchange configured: {ccxt_ex_1.name} spot: {ccxt_ex_1.spot} future: {ccxt_ex_1.future}  \n ")
+    await update.message.reply_text(f" {TTVersion} \n /{commandlist}  \n exchange configured: {ccxt_ex_1.name}  \n ")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## ========== startup message   ========
