@@ -110,7 +110,7 @@ commandlist= ' /'.join([str(elem) for elem in listofcommand])
 
 ####messages
 
-exchangeinfo= ccxt_ex_1.name +' '+ccxt_ex_1.version
+exchangeinfo= f'{ccxt_ex_1.name}  {ccxt_ex_1.version}'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
