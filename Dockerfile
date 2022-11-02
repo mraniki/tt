@@ -33,7 +33,5 @@ ENV EXCHANGE1_YOUR_API_KEY= ""
 ENV EXCHANGE1_YOUR_SECRET=""
 ENV EXCHANGE1_ORDERTYPE="market" 
 
-
-
 # command to run on container start
 CMD [ "python", "./bot.py" ]
