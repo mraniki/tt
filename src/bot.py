@@ -61,21 +61,29 @@ dotenv_path = Path('.env')
 load_dotenv(dotenv_path=dotenv_path)
 
 # ENV VAR (from file or docker variable)
-telegram_tkn = os.getenv("TOKEN")
-ALLOWED_USER_ID = getenv("ALLOWED_USER_ID")
+TELEGRAM_TOKEN = getenv("TELEGRAM_TOKEN")
+TELEGRAM_ALLOWED_USER_ID = getenv("TELEGRAM_ALLOWED_USER_ID")
+
 parser = argparse.ArgumentParser(description="INT Transformation")
-parser.add_argument("--user-id", required=False, type=int, default=ALLOWED_USER_ID)
+parser.add_argument("--user-id", required=False, type=int, default=TELEGRAM_ALLOWED_USER_ID)
 args = parser.parse_args()
 user_id = args.user_id
 print(user_id)
 
-exchange_id1_sandbox = getenv("SANDBOX_MODE")
-exchange_id1 = getenv("EXCHANGE1")
-exchange_id1_api = getenv("EXCHANGE1YOUR_API_KEY")  
-exchange_id1_secret = getenv("EXCHANGE1YOUR_SECRET") 
+CCXT_id1_name = getenv("EXCHANGE1_NAME")
+CCXT_id1_api = getenv("EXCHANGE1_YOUR_API_KEY")  
+CCXT_id1_secret = getenv("EXCHANGE1_YOUR_SECRET") 
+CCXT_id1_password = getenv("EXCHANGE1_YOUR_PASSWORD") 
+CCXT_id1_ordertype = getenv("EXCHANGE1_ORDERTYPE") 
+
+#CCXT SANDBOX details
+CCXT_test_mode = getenv("TEST_SANDBOX_MODE")
+CCXT_test_name = getenv("TEST_SANDBOX_EXCHANGE_NAME")  
+CCXT_test_api = getenv("TEST_SANDBOX_YOUR_API_KEY") 
+CCXT_test_secret = getenv("TEST_SANDBOX_YOUR_SECRET") 
+CCXT_test_ordertype = getenv("TEST_SANDBOX_ORDERTYPE") 
 
 trading=True #trading switch command
-type="market" # update to limit for limit order
 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -83,15 +91,29 @@ type="market" # update to limit for limit order
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # Enable logging and version check
 #EXCHANGE1 from variable id
-exchange_id = exchange_id1
-exchange_class = getattr(ccxt, exchange_id)
-ccxt_ex_1 = exchange_class({
-    'apiKey': exchange_id1_api,
-    'secret': exchange_id1_secret,
-})
 
-#ccxt_ex_1.set_sandbox_mode(exchange_id1_sandbox)
-print ("ex1 setup done")
+if CCXT_test_mode == True:
+    CCXT_ex = f'{CCXT_test_name}'
+    exchange_class = getattr(ccxt, CCXT_ex)
+    exchange = exchange_class({
+        'apiKey': CCXT_test_api,
+        'secret': CCXT_test_secret,
+    })
+    type=CCXT_test_ordertype  # update to limit for limit order
+    exchange.set_sandbox_mode(CCXT_test_mode)
+    exchange.load_markets()
+else:
+    CCXT_ex = 'binance'
+    exchange_class = getattr(ccxt, CCXT_ex)
+    exchange = exchange_class({
+        'apiKey': CCXT_id1_api,
+        'secret': CCXT_id1_secret,
+        'password': CCXT_id1_password
+    })
+    type=CCXT_id1_ordertype  # update to limit for limit order
+    exchange.load_markets()
+
+print (f"exchange setup done for {exchange.name}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##= telegram bot commands and messages==
@@ -109,7 +131,7 @@ commandlist= ' /'.join([str(elem) for elem in listofcommand])
 
 ####messages
 
-exchangeinfo= f'{ccxt_ex_1.name}  {ccxt_ex_1.version}'
+exchangeinfo= f'{exchange.name}  {exchange.version}'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
@@ -152,7 +174,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
          print ("processing order")
          #res = exchange1.market_order(m_dir, m_symbol, m_q)
-         res = ccxt_ex_1.create_order(m_symbol, type, m_dir, m_q)
+         res = exchange.create_order(m_symbol, type, m_dir, m_q)
          
          if "error" in res:
             await update.message.reply_text(f"{res}")
@@ -174,9 +196,10 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 #     
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /bal is issued."""
-    balancerawjson = ccxt_ex_1.fetch_balance()
-    print (balancerawjson)
-    balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
+    balancerawjson = exchange.fetch_free_balance()
+    balancenonzerobal = {k: v for k, v in balancerawjson.items() if v > 0}
+    print (balancenonzerobal)
+    balancetodisplay = json.dumps(balancenonzerobal, sort_keys=True, indent=4)
     print (balancetodisplay)
     balanceloaded = json.loads(balancetodisplay)
     prettybal=""
@@ -258,7 +281,7 @@ def main():
 
     """Start the bot."""
     # Create the Application and pass it your bot's token.
-    application = Application.builder().token(telegram_tkn).post_init(post_init).build()
+    application = Application.builder().token(TELEGRAM_TOKEN).post_init(post_init).build()
 
     # Menus
     application.add_handler(CommandHandler(command1, help_command))

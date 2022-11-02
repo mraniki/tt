@@ -25,3 +25,4 @@ src/archive/model/longtrade.py
 src/archive/model/__pycache__/trade.cpython-310.pyc
 src/archive/model/__pycache__/shorttrade.cpython-310.pyc
 src/archive/model/__pycache__/longtrade.cpython-310.pyc
+.env
