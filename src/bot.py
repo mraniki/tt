@@ -30,7 +30,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 
 #ccxt
 import ccxt
-from ccxt import fetch_free_balance, create_order
+from ccxt import Exchange
 import json
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -58,10 +58,10 @@ def Convert(string):
    li = list(string.split(" "))
    return li
 
-def free_balance(self):
-    balance = self.fetch_free_balance()
-    # surprisingly there are balances with 0, so we need to filter these out
-    return {k: v for k, v in balance.items() if v > 0}
+# def free_balance(self):
+#     balance = self.fetch_free_balance()
+#     # surprisingly there are balances with 0, so we need to filter these out
+#     return {k: v for k, v in balance.items() if v > 0}
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
