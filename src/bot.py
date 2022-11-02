@@ -97,7 +97,7 @@ trading=True #trading switch command
 
 if CCXT_test_mode == True:
     try:
-     CCXT_ex = f'{CCXT_test_name}'
+     CCXT_ex = CCXT_test_name
      exchange_class = getattr(ccxt, CCXT_ex)
      exchange = exchange_class({
         'apiKey': CCXT_test_api,
@@ -112,7 +112,7 @@ if CCXT_test_mode == True:
      
 else:
     try:
-     CCXT_ex = f'{CCXT_id1_name}'
+     CCXT_ex = CCXT_id1_name
      exchange_class = getattr(ccxt, CCXT_ex)
      exchange = exchange_class({
         'apiKey': CCXT_id1_api,
