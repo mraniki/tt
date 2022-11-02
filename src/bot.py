@@ -93,8 +93,7 @@ CCXT_test_secret = os.getenv("TEST_SANDBOX_YOUR_SECRET")
 CCXT_test_ordertype = os.getenv("TEST_SANDBOX_ORDERTYPE") 
 
 trading=True #trading switch command
-print(CCXT_test_mode)
-print(CCXT_test_api)
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== exchange setup  =============
@@ -104,7 +103,7 @@ print(CCXT_test_api)
 
 if CCXT_test_mode == True:
     try:
-     CCXT_ex = f'{CCXT_test_name}'
+     CCXT_ex = 'binance'
      exchange_class = getattr(ccxt, CCXT_ex)
      exchange = exchange_class({
         'apiKey': CCXT_test_api,
@@ -112,17 +111,19 @@ if CCXT_test_mode == True:
         })
      type=CCXT_test_ordertype
      exchange.set_sandbox_mode(CCXT_test_mode)
+     exchange.load_markets()
      print (f"exchange setup done for {exchange.name}")
     except NameError:
      error_handler()
      
 else:
     try:
-     CCXT_ex = f'{CCXT_id1_name}'
+     CCXT_ex = 'binance'
      exchange_class = getattr(ccxt, CCXT_ex)
      exchange = exchange_class({
         'apiKey': CCXT_id1_api,
         'secret': CCXT_id1_secret})
+     exchange.load_markets()
      type=CCXT_id1_ordertype 
      print (f"exchange setup done for {exchange.name}")
     except NameError:
@@ -266,10 +267,9 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 #     
 def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Log Errors caused by Updates."""
-    logger.error(msg="Exception while handling an update:", exc_info=context.error)
-    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
-    tb_string = "".join(tb_list)
-    update.message.reply_text(f"Error encountered {tb_string}")
+    print ("----- ERROR -----")
+    logger.warning('Update "%s" caused error "%s"', update, context.error)
+    update.message.reply_text(f"Error encountered {context.error}")
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== BOT  =============
