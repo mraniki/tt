@@ -12,16 +12,18 @@ jobs:
   tagged-release:
     name: "Tagged Release"
     runs-on: "ubuntu-latest"
-
+  
+    name: Generate build number
+    id: buildnumber
+    uses: einaregilsson/build-number@v3 
+    with:
+      token: ${{ secrets.github_token }}
+      prefix: TT
+      
     steps:
-      # ...
-      - name: "TelegramTrader_Stable"
-        run: |
-          echo "done!"
-
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           automatic_release_tag: "latest"
-          title: "TelegramTrader"
+          title: "TelegramTrader" ${{ steps.buildnumber.outputs.build_number }}
