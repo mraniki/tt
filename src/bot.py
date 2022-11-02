@@ -65,8 +65,13 @@ def free_balance(self):
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #IMPORT ENV FILE (if you are using .env file)
-env_file = find_dotenv(".env")
-load_dotenv(env_file)
+#env_file = find_dotenv(".env")
+#load_dotenv(env_file)
+
+dotenv_path = Path('/config/.env')
+load_dotenv(dotenv_path=dotenv_path)
+print(json.dumps({**{}, **os.environ}, indent=2))
+  
 #variables=dotenv_values(".env")
 
 # ENV VAR (from file or docker variable)
@@ -113,6 +118,7 @@ if CCXT_test_mode == True:
 else:
     try:
      CCXT_ex = 'binance'
+      
      exchange_class = getattr(ccxt, CCXT_ex)
      exchange = exchange_class({
         'apiKey': CCXT_id1_api,
