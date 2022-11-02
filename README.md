@@ -4,6 +4,9 @@
 
 
 [![github](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=GitHub%20Pages&logoColor=white)](https://github.com/mraniki/tt)
+[![donate](https://img.shields.io/badge/donate-crypto-orange)](https://nowpayments.io/donation?api_key=EHNQHPW-VAX4D99-HJ383AD-4GD0M83)
+
+    
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/mraniki/tt?style=plastic)](https://hub.docker.com/r/mraniki/tt)
 
