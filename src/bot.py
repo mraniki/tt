@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.22"
+TTVersion="🪙TT 0.6.23"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -64,11 +64,7 @@ load_dotenv(dotenv_path=dotenv_path)
 TELEGRAM_TOKEN = getenv("TELEGRAM_TOKEN")
 TELEGRAM_ALLOWED_USER_ID = getenv("TELEGRAM_ALLOWED_USER_ID")
 
-parser = argparse.ArgumentParser(description="INT Transformation")
-parser.add_argument("--user-id", required=False, type=int, default=TELEGRAM_ALLOWED_USER_ID)
-args = parser.parse_args()
-user_id = args.user_id
-print(user_id)
+
 
 CCXT_id1_name = getenv("EXCHANGE1_NAME")
 CCXT_id1_api = getenv("EXCHANGE1_YOUR_API_KEY")  
@@ -118,8 +114,9 @@ print (f"exchange setup done for {exchange.name}")
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##= telegram bot commands and messages==
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-# Enable logging and version check
 
+
+user_id = TELEGRAM_ALLOWED_USER_ID
 ##list of commands 
 command1=['help']
 command2=['bal']
