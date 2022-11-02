@@ -24,7 +24,7 @@
 4) Update bot token / API in the ENV variable or use .env file at the root
 5) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) 
- 
+  
 ## ENV Variables:
 
      #Telegram bot token 
