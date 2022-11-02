@@ -208,7 +208,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     """Send a message when the command /bal is issued."""
     # balancerawjson = await free_balance(exchange)
     # print (balancerawjson)
-    balance = exchange.fetch_free_balance()
+    balance = exchange.fetch_balance()
     print(balance)
     # balancefiltered= {k: v for k, v in balance.items() if v > 0}
     # print(balancefiltered)
