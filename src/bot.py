@@ -90,7 +90,7 @@ ccxt_ex_1 = exchange_class({
     'secret': exchange_id1_secret,
 })
 
-ccxt_ex_1.set_sandbox_mode(exchange_id1_sandbox)
+#ccxt_ex_1.set_sandbox_mode(exchange_id1_sandbox)
 print ("ex1 setup done")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
