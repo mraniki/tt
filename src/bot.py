@@ -107,7 +107,7 @@ if CCXT_test_mode == True:
      exchange.set_sandbox_mode(CCXT_test_mode)
      exchange.load_markets()
      print (f"exchange setup done for {exchange.name}")
-    except BaseError:
+    except NameError:
      error_handler()
      
 else:
@@ -120,7 +120,7 @@ else:
      exchange.load_markets()
      type=CCXT_id1_ordertype 
      print (f"exchange setup done for {exchange.name}")
-    except BaseError:
+    except NameError:
      error_handler()
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
