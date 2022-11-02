@@ -22,7 +22,6 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 
 import ccxt
 import json
-import pandas as pd
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== Logging  =============
