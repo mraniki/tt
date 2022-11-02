@@ -264,7 +264,7 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##=========  bot error handling ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #     
-def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Log Errors caused by Updates."""
     logger.error(msg="Exception while handling an update:", exc_info=context.error)
     tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
