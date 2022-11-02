@@ -175,7 +175,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 #     
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /bal is issued."""
-    balancerawjson = ccxt_ex_1.fetch_free_balance()
+    balancerawjson = ccxt_ex_1.fetch_balance()
     print (balancerawjson)
     balancetodisplay = json.dumps(balancerawjson, sort_keys=True, indent=4)
     print (balancetodisplay)
@@ -276,3 +276,24 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+    
+# def get_balances_from_api() -> dict:
+#     load_dotenv()
+#     exchange = ccxt.exchangeid({
+#         'apiKey': os.getenv('API_KEY'),
+#         'secret': os.getenv('SECRET'),
+#         'password': os.getenv('PASSWORD')
+#     })
+#     balances_ = exchange.fetch_balance()
+#     columns_ = ['id', 'currency', 'account_type', 'balance', 'available', 'holds']
+#     data_ = []
+#     for data in balances_['info']['data']:
+#         data_.append([
+#             data['id'], data['currency'], data['type'],
+#             data['balance'], data['available'], data['holds']
+#         ])
+#     df_ = pd.DataFrame(data=data_, columns=columns_)
+#     df_.set_index('id', drop=True, inplace=True)
+#     return df_.to_dict()
+  
