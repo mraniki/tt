@@ -3,18 +3,9 @@
  Deploy it via docker. 
 
 
-[![donate](https://img.shields.io/badge/donate-kofi-orange)](https://imgur.com/a/WQiZcW0)
+[![donate](https://img.shields.io/badge/donate-kofi-orange)](https://imgur.com/a/WQiZcW0) [![github](https://img.shields.io/badge/github-pages-lightgrey)](https://github.com/mraniki/tt)   
 
-
-
-[![github](https://img.shields.io/badge/github-pages-lightgrey)](https://github.com/mraniki/tt)   [![Docker Pulls](https://img.shields.io/docker/pulls/mraniki/tt?style=plastic)](https://hub.docker.com/r/mraniki/tt)
-
-[![Docker](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml)
-[![DockerNightly](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml)
-
-
-
-
+[![Docker Pulls](https://img.shields.io/docker/pulls/mraniki/tt?style=plastic)](https://hub.docker.com/r/mraniki/tt).  [![Docker](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml). [![DockerNightly](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml)
 
 
 [![telegrambot](https://img.shields.io/badge/Telegram-Channel-blue.svg?logo=telegram)](https://t.me/pythontelegrambotchannel)

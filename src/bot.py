@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.20"
+TTVersion="🪙TT 0.6.21"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -74,6 +74,11 @@ exchange_id1 = getenv("EXCHANGE1")
 exchange_id1_api = getenv("EXCHANGE1YOUR_API_KEY")  
 exchange_id1_secret = getenv("EXCHANGE1YOUR_SECRET") 
 
+trading=True #trading switch command
+type="market" # update to limit for limit order
+
+
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== exchange setup  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -90,7 +95,7 @@ ccxt_ex_1.set_sandbox_mode(exchange_id1_sandbox)
 print ("ex1 setup done")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##=== telegram bot / commands   =======
+##= telegram bot commands and messages==
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # Enable logging and version check
 
@@ -102,8 +107,11 @@ command4=['trading']
 #command5=['pastorders']
 listofcommand = list(itertools.chain(command1, command2, command3, command4))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
-trading=True #trading switch command
-type="market" #limit
+
+####messages
+
+exchangeinfo= ({ccxt_ex_1.name}+' '+ {ccxt_ex_1.version})
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
@@ -111,7 +119,7 @@ type="market" #limit
 #     
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text(f" {TTVersion} \n /{commandlist}  \n exchange configured: {ccxt_ex_1.name}  \n ")
+    await update.message.reply_text(f" {TTVersion} \n /{commandlist}  \n exchange configured: {exchangeinfo}  \n ")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## ========== startup message   ========
@@ -192,7 +200,7 @@ async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     await update.message.reply_text(f" list of positions {positions}")    
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##=========== view closed orders  ======
+##======= view last closed orders  =====
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # 
 # async def closedorderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
