@@ -3,8 +3,8 @@
  Deploy it via docker. 
 
 
-[![donate](https://img.shields.io/badge/donate-crypto-orange)](https://nowpayments.io/donation?api_key=EHNQHPW-VAX4D99-HJ383AD-4GD0M83)
-[![donate](https://img.shields.io/badge/donate-kofi-black)](https://ko-fi.com/K3K4G32CC)
+[![donate](https://img.shields.io/badge/donate-kofi-orange)](https://imgur.com/a/WQiZcW0)
+
 
 
 [![github](https://img.shields.io/badge/github-pages-lightgrey)](https://github.com/mraniki/tt)   [![Docker Pulls](https://img.shields.io/docker/pulls/mraniki/tt?style=plastic)](https://hub.docker.com/r/mraniki/tt)
