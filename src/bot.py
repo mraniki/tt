@@ -140,7 +140,9 @@ commandlist= ' /'.join([str(elem) for elem in listofcommand])
 
 ####messages
 
-exchangeinfo= f'{exchange.name}  Sandbox: {CCXT_test_mode}'
+exchangeinfo= f'ℹ️exchange configured: {exchange.name}  Sandbox: {CCXT_test_mode}'
+
+menu=f'{TTVersion} \n /{commandlist} \n'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
@@ -148,14 +150,14 @@ exchangeinfo= f'{exchange.name}  Sandbox: {CCXT_test_mode}'
 #     
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text(f" {TTVersion} \n /{commandlist}  \n exchange configured: {exchangeinfo}  \n ")
+    await update.message.reply_text(f"{menu} \n {exchangeinfo} ")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## ========== startup message   ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 async def post_init(application: Application):
-    await application.bot.send_message(user_id, f"Bot is online {TTVersion} \n /{commandlist}")
+    await application.bot.send_message(user_id, f"Bot is online ")
     #help_command()
    
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
