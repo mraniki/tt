@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.25"
+TTVersion="🪙TT 0.6.26"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -17,6 +17,7 @@ import os
 import argparse
 from dotenv import load_dotenv
 from dotenv import find_dotenv
+from dotenv import dotenv_values
 
 from os import getenv
 from pathlib import Path
@@ -66,9 +67,10 @@ def free_balance(self):
 #IMPORT ENV FILE (if you are using .env file)
 env_file = find_dotenv(".env")
 load_dotenv(env_file)
+#variables=dotenv_values(".env")
 
 # ENV VAR (from file or docker variable)
-TG_TOKEN = os.environ.get("TG_TOKEN")
+TG_TOKEN = os.getenv("TG_TOKEN")
 TG_USER_ID = os.getenv("TG_USER_ID")
 
 CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
@@ -94,28 +96,32 @@ trading=True #trading switch command
 #EXCHANGE1 from variable id
 
 if CCXT_test_mode == True:
-    CCXT_ex = f'{CCXT_test_name}'
-    exchange_class = getattr(ccxt, CCXT_ex)
-    exchange = exchange_class({
+    try:
+     CCXT_ex = f'{CCXT_test_name}'
+     exchange_class = getattr(ccxt, CCXT_ex)
+     exchange = exchange_class({
         'apiKey': CCXT_test_api,
-        'secret': CCXT_test_secret,
-    })
-    type=CCXT_test_ordertype  # update to limit for limit order
-    exchange.set_sandbox_mode(CCXT_test_mode)
-    #exchange.load_markets()
+        'secret': CCXT_test_secret
+        })
+     type=CCXT_test_ordertype
+     exchange.set_sandbox_mode(CCXT_test_mode)
+     exchange.load_markets()
+     print (f"exchange setup done for {exchange.name}")
+    except BaseError:
+     error_handler()
+     
 else:
-    CCXT_ex = f'{CCXT_id1_name}'
-    exchange_class = getattr(ccxt, CCXT_ex)
-    exchange = exchange_class({
+    try:
+     CCXT_ex = f'{CCXT_id1_name}'
+     exchange_class = getattr(ccxt, CCXT_ex)
+     exchange = exchange_class({
         'apiKey': CCXT_id1_api,
-        'secret': CCXT_id1_secret,
-        'password': CCXT_id1_password
-    })
-    #exchange.load_markets()
-    type=CCXT_id1_ordertype  # update to limit for limit order
-
-
-print (f"exchange setup done for {exchange.name}")
+        'secret': CCXT_id1_secret})
+     exchange.load_markets()
+     type=CCXT_id1_ordertype 
+     print (f"exchange setup done for {exchange.name}")
+    except BaseError:
+     error_handler()
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##= telegram bot commands and messages==
@@ -155,7 +161,6 @@ async def post_init(application: Application):
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-#     
 
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when an order is identified """
@@ -220,35 +225,13 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 #     
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /order is issued."""
-   #  balance = ccxt_ex_1.fetch_balance()
-   #  positions = balance['info']['positions']
-   #  pprint(positions)
-   # #lastclosedorder
-   #  await update.message.reply_text(f" list of positions {positions}")    
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======= view last closed orders  =====
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # 
-# async def closedorderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-#     symbolClosed = 'ETH/USDT'
-#     now = exchange1.milliseconds()
-#     day = 24 * 3600 * 1000
-#     week = 7 * day
-#     since = now - 7 * day  # start 1 week
-#     limit = 20
 
-#     while since < now:
-
-#         end = min(since + week, now)
-#         params = {'endAt': end}
-#         closedorders = exchange1.fetch_closed_orders(symbolClosed, since, limit, params)
-#         print(exchange1.iso8601(since), '-', exchange1.iso8601(end), len(orders), 'orders')
-#         if len(closedorders) == limit:
-#             since = orders[-1]['timestamp']
-#         else:
-#             since += week
-#         await update.message.reply_text(f"{exchange1.iso8601(since)} '-' {exchange1.iso8601(end)} '-' {len(orders)} 'orders'")  
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view today's pnl =========
@@ -276,6 +259,7 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 #     
 def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Log Errors caused by Updates."""
+    print ("----- ERROR -----")
     logger.warning('Update "%s" caused error "%s"', update, context.error)
     update.message.reply_text(f"Error encountered {context.error}")
     
