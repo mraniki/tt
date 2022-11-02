@@ -192,11 +192,11 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 #     
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /order is issued."""
-    balance = ccxt_ex_1.fetch_balance()
-    positions = balance['info']['positions']
-    pprint(positions)
-   #lastclosedorder
-    await update.message.reply_text(f" list of positions {positions}")    
+   #  balance = ccxt_ex_1.fetch_balance()
+   #  positions = balance['info']['positions']
+   #  pprint(positions)
+   # #lastclosedorder
+   #  await update.message.reply_text(f" list of positions {positions}")    
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======= view last closed orders  =====
