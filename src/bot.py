@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.24"
+TTVersion="🪙TT 0.6.25"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -16,6 +16,8 @@ import sys
 import os
 import argparse
 from dotenv import load_dotenv
+from dotenv import find_dotenv
+
 from os import getenv
 from pathlib import Path
 import itertools
@@ -53,19 +55,21 @@ def Convert(string):
    li = list(string.split(" "))
    return li
 
+def free_balance(self):
+    balance = self.fetch_free_balance()
+    # surprisingly there are balances with 0, so we need to filter these out
+    return {k: v for k, v in balance.items() if v > 0}
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #IMPORT ENV FILE (if you are using .env file)
-
-path = sys.path[1]+'/config/.env'  #try .path[0] if 1 doesn't work
-load_dotenv(path)
+env_file = find_dotenv(".env")
+load_dotenv(env_file)
 
 # ENV VAR (from file or docker variable)
-TG_TOKEN = os.getenv('TG_TOKEN')
+TG_TOKEN = os.environ.get("TG_TOKEN")
 TG_USER_ID = os.getenv("TG_USER_ID")
-print (TG_TOKEN)
-print (TG_USER_ID)
 
 CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
 CCXT_id1_api = os.getenv("EXCHANGE1_YOUR_API_KEY")  
@@ -98,17 +102,18 @@ if CCXT_test_mode == True:
     })
     type=CCXT_test_ordertype  # update to limit for limit order
     exchange.set_sandbox_mode(CCXT_test_mode)
-    exchange.load_markets()
+    #exchange.load_markets()
 else:
-    CCXT_ex = 'binance'
+    CCXT_ex = f'{CCXT_id1_name}'
     exchange_class = getattr(ccxt, CCXT_ex)
     exchange = exchange_class({
         'apiKey': CCXT_id1_api,
         'secret': CCXT_id1_secret,
         'password': CCXT_id1_password
     })
+    #exchange.load_markets()
     type=CCXT_id1_ordertype  # update to limit for limit order
-    exchange.load_markets()
+
 
 print (f"exchange setup done for {exchange.name}")
 
@@ -129,7 +134,7 @@ commandlist= ' /'.join([str(elem) for elem in listofcommand])
 
 ####messages
 
-exchangeinfo= f'{exchange.name}  {exchange.version}'
+exchangeinfo= f'{exchange.name}  Sandbox: {CCXT_test_mode}'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
@@ -194,10 +199,13 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 #     
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /bal is issued."""
-    balancerawjson = exchange.fetch_free_balance()
-    balancenonzerobal = {k: v for k, v in balancerawjson.items() if v > 0}
-    print (balancenonzerobal)
-    balancetodisplay = json.dumps(balancenonzerobal, sort_keys=True, indent=4)
+    # balancerawjson = await free_balance(exchange)
+    # print (balancerawjson)
+    balance = exchange.fetch_free_balance()
+    print(balance)
+    balancefiltered= {k: v for k, v in balance.items() if v > 0}
+    print(balancefiltered)
+    balancetodisplay = json.dumps(balancefiltered, sort_keys=True, indent=4)
     print (balancetodisplay)
     balanceloaded = json.loads(balancetodisplay)
     prettybal=""
@@ -297,23 +305,5 @@ def main():
 if __name__ == '__main__':
     main()
 
-    
-# def get_balances_from_api() -> dict:
-#     load_dotenv()
-#     exchange = ccxt.exchangeid({
-#         'apiKey': os.getenv('API_KEY'),
-#         'secret': os.getenv('SECRET'),
-#         'password': os.getenv('PASSWORD')
-#     })
-#     balances_ = exchange.fetch_balance()
-#     columns_ = ['id', 'currency', 'account_type', 'balance', 'available', 'holds']
-#     data_ = []
-#     for data in balances_['info']['data']:
-#         data_.append([
-#             data['id'], data['currency'], data['type'],
-#             data['balance'], data['available'], data['holds']
-#         ])
-#     df_ = pd.DataFrame(data=data_, columns=columns_)
-#     df_.set_index('id', drop=True, inplace=True)
-#     return df_.to_dict()
+
   
