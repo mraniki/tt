@@ -121,7 +121,8 @@ else:
      exchange_class = getattr(ccxt, CCXT_ex)
      exchange = exchange_class({
         'apiKey': CCXT_id1_api,
-        'secret': CCXT_id1_secret})
+        'secret': CCXT_id1_secret
+        })
      type=CCXT_id1_ordertype 
      print (f"exchange setup done for {exchange.name}")
     except NameError:
@@ -269,7 +270,7 @@ def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
     tb_string = "".join(tb_list)
     tb_trim = tb_string[:4096]
-    update.message.reply_text(f"Error encountered {tb_trim}")
+    await update.message.reply_text(f"Error encountered {tb_trim}")
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== BOT  =============
