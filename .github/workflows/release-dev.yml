@@ -13,11 +13,18 @@ jobs:
     name: "Pre Release"
     runs-on: "ubuntu-latest"
 
+    name: Generate build number
+    id: buildnumber
+    uses: einaregilsson/build-number@v3 
+    with:
+      token: ${{ secrets.github_token }}
+      prefix: client
+
     steps:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "alpha"
           prerelease: true
-          title: "TelegramTrader"
+          title: "TelegramTrader" ${{ steps.buildnumber.outputs.build_number }}
 
