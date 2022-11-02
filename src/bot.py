@@ -8,8 +8,11 @@ TTVersion="🪙TT 0.6.20"
 ##=============== import  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+##log
 import logging
 import sys
+
+##env
 import os
 import argparse
 from dotenv import load_dotenv
@@ -17,9 +20,11 @@ from os import getenv
 from pathlib import Path
 import itertools
 
+#telegram
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
+#ccxt
 import ccxt
 import json
 
