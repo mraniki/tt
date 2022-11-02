@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.26"
+TTVersion="🪙TT 0.6.27"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -30,6 +30,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 
 #ccxt
 import ccxt
+from ccxt import fetch_free_balance, create_order
 import json
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -47,7 +48,7 @@ def log(severity, msg):
 print(TTVersion)
 print('python', sys.version)
 print('CCXT Version:', ccxt.__version__)
-print('Please wait while the program is loading...')
+print('Please wait, loading...')
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##====== common functions  =============
@@ -65,15 +66,11 @@ def free_balance(self):
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-#IMPORT ENV FILE (if you are using .env file)
-#env_file = find_dotenv(".env")
-#load_dotenv(env_file)
+#IMPORT ENV  
 
 dotenv_path = Path('/config/.env')
 load_dotenv(dotenv_path=dotenv_path)
-print(json.dumps({**{}, **os.environ}, indent=2))
-  
-#variables=dotenv_values(".env")
+#print(json.dumps({**{}, **os.environ}, indent=2))
 
 # ENV VAR (from file or docker variable)
 TG_TOKEN = os.getenv("TG_TOKEN")
@@ -93,7 +90,6 @@ CCXT_test_secret = os.getenv("TEST_SANDBOX_YOUR_SECRET")
 CCXT_test_ordertype = os.getenv("TEST_SANDBOX_ORDERTYPE") 
 
 trading=True #trading switch command
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== exchange setup  =============
@@ -145,7 +141,7 @@ commandlist= ' /'.join([str(elem) for elem in listofcommand])
 
 ####messages
 
-exchangeinfo= f'ℹ️exchange configured: {exchange.name}  Sandbox: {CCXT_test_mode}'
+exchangeinfo= f'ℹ️exchange: {exchange.name}  Sandbox: {CCXT_test_mode}'
 
 menu=f'{TTVersion} \n /{commandlist} \n'
 
@@ -163,8 +159,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 async def post_init(application: Application):
     await application.bot.send_message(user_id, f"Bot is online\n{menu}\n {exchangeinfo} ")
-    #help_command()
-   
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -215,16 +210,16 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     # print (balancerawjson)
     balance = exchange.fetch_free_balance()
     print(balance)
-    balancefiltered= {k: v for k, v in balance.items() if v > 0}
-    print(balancefiltered)
-    balancetodisplay = json.dumps(balancefiltered, sort_keys=True, indent=4)
-    print (balancetodisplay)
-    balanceloaded = json.loads(balancetodisplay)
-    prettybal=""
-    for iterator in balanceloaded:
-     print(iterator, ":", balanceloaded[iterator])
-     prettybal += (f"{iterator} : {balanceloaded[iterator]} \n")
-    await update.message.reply_text(f"🏦 Balance \n{prettybal}")
+    # balancefiltered= {k: v for k, v in balance.items() if v > 0}
+    # print(balancefiltered)
+    # balancetodisplay = json.dumps(balancefiltered, sort_keys=True, indent=4)
+    # print (balancetodisplay)
+    # balanceloaded = json.loads(balancetodisplay)
+    # prettybal=""
+    # for iterator in balanceloaded:
+    #  print(iterator, ":", balanceloaded[iterator])
+    #  prettybal += (f"{iterator} : {balanceloaded[iterator]} \n")
+    #await update.message.reply_text(f"🏦 Balance \n{prettybal}")
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view positions  ========
@@ -269,7 +264,7 @@ async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.error(msg="Exception while handling an update:", exc_info=context.error)
     tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
     tb_string = "".join(tb_list)
-    tb_trim = tb_string[:4096]
+    tb_trim = tb_string[:4000]
     await update.message.reply_text(f"Error encountered {tb_trim}")
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
