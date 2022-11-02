@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Preprare
+      - name: Prepare
         run: |
           DOCKER_IMAGE=${GITHUB_REPOSITORY/docker-/}
           if [[ $GITHUB_REF == refs/heads/* ]]; then
