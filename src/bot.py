@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.23"
+TTVersion="🪙TT 0.6.24"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -57,26 +57,28 @@ def Convert(string):
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #IMPORT ENV FILE (if you are using .env file)
-dotenv_path = Path('.env')
-load_dotenv(dotenv_path=dotenv_path)
+
+path = sys.path[1]+'/config/.env'  #try .path[0] if 1 doesn't work
+load_dotenv(path)
 
 # ENV VAR (from file or docker variable)
-TELEGRAM_TOKEN = getenv("TELEGRAM_TOKEN")
-TELEGRAM_ALLOWED_USER_ID = getenv("TELEGRAM_ALLOWED_USER_ID")
+TG_TOKEN = os.getenv('TG_TOKEN')
+TG_USER_ID = os.getenv("TG_USER_ID")
+print (TG_TOKEN)
+print (TG_USER_ID)
 
-
-CCXT_id1_name = getenv("EXCHANGE1_NAME")
-CCXT_id1_api = getenv("EXCHANGE1_YOUR_API_KEY")  
-CCXT_id1_secret = getenv("EXCHANGE1_YOUR_SECRET") 
-CCXT_id1_password = getenv("EXCHANGE1_YOUR_PASSWORD") 
-CCXT_id1_ordertype = getenv("EXCHANGE1_ORDERTYPE") 
+CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
+CCXT_id1_api = os.getenv("EXCHANGE1_YOUR_API_KEY")  
+CCXT_id1_secret = os.getenv("EXCHANGE1_YOUR_SECRET") 
+CCXT_id1_password = os.getenv("EXCHANGE1_YOUR_PASSWORD") 
+CCXT_id1_ordertype = os.getenv("EXCHANGE1_ORDERTYPE") 
 
 #CCXT SANDBOX details
-CCXT_test_mode = getenv("TEST_SANDBOX_MODE")
-CCXT_test_name = getenv("TEST_SANDBOX_EXCHANGE_NAME")  
-CCXT_test_api = getenv("TEST_SANDBOX_YOUR_API_KEY") 
-CCXT_test_secret = getenv("TEST_SANDBOX_YOUR_SECRET") 
-CCXT_test_ordertype = getenv("TEST_SANDBOX_ORDERTYPE") 
+CCXT_test_mode = os.getenv("TEST_SANDBOX_MODE")
+CCXT_test_name = os.getenv("TEST_SANDBOX_EXCHANGE_NAME")  
+CCXT_test_api = os.getenv("TEST_SANDBOX_YOUR_API_KEY") 
+CCXT_test_secret = os.getenv("TEST_SANDBOX_YOUR_SECRET") 
+CCXT_test_ordertype = os.getenv("TEST_SANDBOX_ORDERTYPE") 
 
 trading=True #trading switch command
 
@@ -115,7 +117,7 @@ print (f"exchange setup done for {exchange.name}")
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 
-user_id = TELEGRAM_ALLOWED_USER_ID
+user_id = TG_USER_ID
 ##list of commands 
 command1=['help']
 command2=['bal']
@@ -277,7 +279,7 @@ def main():
 
     """Start the bot."""
     # Create the Application and pass it your bot's token.
-    application = Application.builder().token(TELEGRAM_TOKEN).post_init(post_init).build()
+    application = Application.builder().token(TG_TOKEN).post_init(post_init).build()
 
     # Menus
     application.add_handler(CommandHandler(command1, help_command))
