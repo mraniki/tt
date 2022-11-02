@@ -3,12 +3,9 @@
  Deploy it via docker. 
 
 
-[![github](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=GitHub%20Pages&logoColor=white)](https://github.com/mraniki/tt)
+[![donate](https://img.shields.io/badge/donate-kofi-orange)](https://imgur.com/a/WQiZcW0) [![github](https://img.shields.io/badge/github-pages-lightgrey)](https://github.com/mraniki/tt)   
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/mraniki/tt?style=plastic)](https://hub.docker.com/r/mraniki/tt)
-
-[![Docker](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml)
-[![DockerNightly](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml)
+[![Docker Pulls](https://img.shields.io/docker/pulls/mraniki/tt?style=plastic)](https://hub.docker.com/r/mraniki/tt).  [![Docker](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-publish.yml). [![DockerNightly](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/docker-image-dev.yml)
 
 
 [![telegrambot](https://img.shields.io/badge/Telegram-Channel-blue.svg?logo=telegram)](https://t.me/pythontelegrambotchannel)
@@ -21,7 +18,7 @@
 - via docker 
   - dockerhub `docker push mraniki/tt:latest` or nightly,
   - or github `docker pull ghcr.io/mraniki/tt:main` for latest stable or `docker pull ghcr.io/mraniki/tt:dev` for nightly
-- or `git clone https://github.com/mraniki/tt)`
+- or `git clone https://github.com/mraniki/tt`
 4) Update bot token / API in the ENV variable or use .env file at the root
 5) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) 
@@ -47,11 +44,8 @@
  - Disable or Enable trading process via /trading command
  - Query balance via /bal command
 
- 
- ![BF9C1A12-0058-4C30-B0BE-30DA7B300AEE](https://user-images.githubusercontent.com/8766259/199304735-6f3eb428-30e0-46b9-9930-9a29fbcec565.jpeg)
+![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
- ![33146B2F-0BD6-4ECD-9B3B-05CEE8958634](https://user-images.githubusercontent.com/8766259/199287828-64d9b780-a5f5-47b3-96ac-a066ea53a18c.jpeg)
-<img width="393" alt="Screenshot 2022-10-25 at 14 44 41" src="https://user-images.githubusercontent.com/8766259/197776314-10219d7f-693f-44df-8efe-a5794bbafe98.png">
 
  ## toDo
 - formating/handling of response from exchange (bal, opened position, last closed order)
