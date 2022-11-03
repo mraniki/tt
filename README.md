@@ -27,28 +27,24 @@
 6) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) 
   
-## ENV Variables:
+        ##ENV Variables:
+        TG_TOKEN=""
+        TG_USER_ID=""
 
-     #Telegram bot token 
-     ENV TELEGRAM_TOKEN="" 
-     #TG user for bot control
-     ENV TELEGRAM_ALLOWED_USER_ID=""
+        #CCXTsupported exchange details
+        #CCXTSANDBOX details
+        TEST_SANDBOX_MODE="True"
+        TEST_SANDBOX_EXCHANGE_NAME="binance"
+        TEST_SANDBOX_YOUR_API_KEY=""
+        TEST_SANDBOX_YOUR_SECRET=""
+        TEST_SANDBOX_ORDERTYPE="MARKET" 
 
-     #CCXT supported exchange details
+        #PROD APIKEY Exchange1
+        EXCHANGE1_NAME="binance"
+        EXCHANGE1_YOUR_API_KEY=""
+        EXCHANGE1_YOUR_SECRET=""
+        EXCHANGE1_ORDERTYPE="MARKET" 
 
-     #CCXT SANDBOX details
-     ENV TEST_SANDBOX_MODE="True"
-     ENV TEST_SANDBOX_EXCHANGE_NAME="binance"
-     ENV TEST_SANDBOX_YOUR_API_KEY="" 
-     ENV TEST_SANDBOX_YOUR_SECRET=""
-     ENV TEST_SANDBOX_ORDERTYPE="MARKET"
-
-     #PROD APIKEY Exchange1
-     ENV EXCHANGE1_NAME="binance"
-     ENV EXCHANGE1_YOUR_API_KEY=""
-     ENV EXCHANGE1_YOUR_SECRET=""
-     ENV EXCHANGE1_ORDERTYPE="MARKET" 
-        
         
  ## Use Case
  - Enable bot in pythontelegram v20 and support exchange raw error via telegram
