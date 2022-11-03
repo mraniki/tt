@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.23"
+TTVersion="🪙TT 0.6.27"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -11,11 +11,15 @@ TTVersion="🪙TT 0.6.23"
 ##log
 import logging
 import sys
+import traceback
 
 ##env
 import os
 import argparse
 from dotenv import load_dotenv
+from dotenv import find_dotenv
+from dotenv import dotenv_values
+
 from os import getenv
 from pathlib import Path
 import itertools
@@ -43,7 +47,7 @@ def log(severity, msg):
 print(TTVersion)
 print('python', sys.version)
 print('CCXT Version:', ccxt.__version__)
-print('Please wait while the program is loading...')
+print('Please wait, loading...')
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##====== common functions  =============
@@ -56,30 +60,30 @@ def Convert(string):
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-#IMPORT ENV FILE (if you are using .env file)
-dotenv_path = Path('.env')
+#IMPORT ENV  
+dotenv_path = Path('config/.env')
 load_dotenv(dotenv_path=dotenv_path)
+#for env debug
+#print(json.dumps({**{}, **os.environ}, indent=2)) 
 
 # ENV VAR (from file or docker variable)
-TELEGRAM_TOKEN = getenv("TELEGRAM_TOKEN")
-TELEGRAM_ALLOWED_USER_ID = getenv("TELEGRAM_ALLOWED_USER_ID")
+TG_TOKEN = os.getenv("TG_TOKEN")
+TG_USER_ID = os.getenv("TG_USER_ID")
 
-
-CCXT_id1_name = getenv("EXCHANGE1_NAME")
-CCXT_id1_api = getenv("EXCHANGE1_YOUR_API_KEY")  
-CCXT_id1_secret = getenv("EXCHANGE1_YOUR_SECRET") 
-CCXT_id1_password = getenv("EXCHANGE1_YOUR_PASSWORD") 
-CCXT_id1_ordertype = getenv("EXCHANGE1_ORDERTYPE") 
+CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
+CCXT_id1_api = os.getenv("EXCHANGE1_YOUR_API_KEY")  
+CCXT_id1_secret = os.getenv("EXCHANGE1_YOUR_SECRET") 
+CCXT_id1_password = os.getenv("EXCHANGE1_YOUR_PASSWORD") 
+CCXT_id1_ordertype = os.getenv("EXCHANGE1_ORDERTYPE") 
 
 #CCXT SANDBOX details
-CCXT_test_mode = getenv("TEST_SANDBOX_MODE")
-CCXT_test_name = getenv("TEST_SANDBOX_EXCHANGE_NAME")  
-CCXT_test_api = getenv("TEST_SANDBOX_YOUR_API_KEY") 
-CCXT_test_secret = getenv("TEST_SANDBOX_YOUR_SECRET") 
-CCXT_test_ordertype = getenv("TEST_SANDBOX_ORDERTYPE") 
+CCXT_test_mode = os.getenv("TEST_SANDBOX_MODE")
+CCXT_test_name = os.getenv("TEST_SANDBOX_EXCHANGE_NAME")  
+CCXT_test_api = os.getenv("TEST_SANDBOX_YOUR_API_KEY") 
+CCXT_test_secret = os.getenv("TEST_SANDBOX_YOUR_SECRET") 
+CCXT_test_ordertype = os.getenv("TEST_SANDBOX_ORDERTYPE") 
 
 trading=True #trading switch command
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== exchange setup  =============
@@ -87,35 +91,40 @@ trading=True #trading switch command
 # Enable logging and version check
 #EXCHANGE1 from variable id
 
-if CCXT_test_mode == True:
-    CCXT_ex = f'{CCXT_test_name}'
-    exchange_class = getattr(ccxt, CCXT_ex)
-    exchange = exchange_class({
+if (CCXT_test_mode=="True"):
+    print ("sandbox activated")
+    try:
+     CCXT_ex = f'{CCXT_test_name}'
+     exchange_class = getattr(ccxt, CCXT_ex)
+     exchange = exchange_class({
         'apiKey': CCXT_test_api,
-        'secret': CCXT_test_secret,
-    })
-    type=CCXT_test_ordertype  # update to limit for limit order
-    exchange.set_sandbox_mode(CCXT_test_mode)
-    exchange.load_markets()
+        'secret': CCXT_test_secret
+        })
+     m_ordertype = CCXT_test_ordertype.upper()
+     exchange.set_sandbox_mode(CCXT_test_mode)
+     print (f"exchange setup done for {exchange.name} sandbox")
+    except NameError:
+     error_handler()
+     
 else:
-    CCXT_ex = 'binance'
-    exchange_class = getattr(ccxt, CCXT_ex)
-    exchange = exchange_class({
+    try:
+     CCXT_ex = f'{CCXT_id1_name}'
+     exchange_class = getattr(ccxt, CCXT_ex)
+     exchange = exchange_class({
         'apiKey': CCXT_id1_api,
-        'secret': CCXT_id1_secret,
-        'password': CCXT_id1_password
-    })
-    type=CCXT_id1_ordertype  # update to limit for limit order
-    exchange.load_markets()
-
-print (f"exchange setup done for {exchange.name}")
+        'secret': CCXT_id1_secret
+        })
+     m_ordertype = CCXT_test_ordertype.upper()
+     print (f"exchange setup done for {exchange.name}")
+    except NameError:
+     error_handler()
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##= telegram bot commands and messages==
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 
-user_id = TELEGRAM_ALLOWED_USER_ID
+user_id = TG_USER_ID
 ##list of commands 
 command1=['help']
 command2=['bal']
@@ -127,7 +136,9 @@ commandlist= ' /'.join([str(elem) for elem in listofcommand])
 
 ####messages
 
-exchangeinfo= f'{exchange.name}  {exchange.version}'
+exchangeinfo= f'ℹ️exchange: {exchange.name}  Sandbox: {CCXT_test_mode}'
+
+menu=f'{TTVersion} \n /{commandlist} \n'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
@@ -135,25 +146,25 @@ exchangeinfo= f'{exchange.name}  {exchange.version}'
 #     
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
-    await update.message.reply_text(f" {TTVersion} \n /{commandlist}  \n exchange configured: {exchangeinfo}  \n ")
+    await update.message.reply_text(f"{menu} \n {exchangeinfo} ")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## ========== startup message   ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 async def post_init(application: Application):
-    await application.bot.send_message(user_id, f"Bot is online {TTVersion} \n /{commandlist}")
-    #help_command()
-   
+    await application.bot.send_message(user_id, f"Bot is online\n{menu}\n {exchangeinfo} ")
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-#     
 
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when an order is identified """
     messagetxt = update.message.text
+    print(messagetxt)
     messagetxt_upper =messagetxt.upper()
+    print(messagetxt_upper)
     filter_lst = ['BUY', 'SELL', 'TEST']
     if [ele for ele in filter_lst if(ele in messagetxt_upper)]:
       if (trading==False):
@@ -166,11 +177,11 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          m_sl=order_m[2][3:6]
          m_tp=order_m[3][3:6]
          m_q=order_m[4][2:-1]
-         print (m_dir,m_symbol,m_sl,m_tp,m_q)
+         print (m_symbol,m_ordertype,m_dir,m_sl,m_tp,m_q)
          await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
          print ("processing order")
          #res = exchange1.market_order(m_dir, m_symbol, m_q)
-         res = exchange.create_order(m_symbol, type, m_dir, m_q)
+         res = exchange.create_order(m_symbol, m_ordertype, m_dir, m_q)
          
          if "error" in res:
             await update.message.reply_text(f"{res}")
@@ -192,16 +203,12 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 #     
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /bal is issued."""
-    balancerawjson = exchange.fetch_free_balance()
-    balancenonzerobal = {k: v for k, v in balancerawjson.items() if v > 0}
-    print (balancenonzerobal)
-    balancetodisplay = json.dumps(balancenonzerobal, sort_keys=True, indent=4)
-    print (balancetodisplay)
-    balanceloaded = json.loads(balancetodisplay)
+    balance = exchange.fetch_free_balance()
+    print(balance)
     prettybal=""
-    for iterator in balanceloaded:
-     print(iterator, ":", balanceloaded[iterator])
-     prettybal += (f"{iterator} : {balanceloaded[iterator]} \n")
+    for iterator in balance:
+     print(iterator, ":", balance[iterator])
+     prettybal += (f"{iterator} : {balance[iterator]} \n")
     await update.message.reply_text(f"🏦 Balance \n{prettybal}")
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -210,35 +217,13 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 #     
 async def orderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /order is issued."""
-   #  balance = ccxt_ex_1.fetch_balance()
-   #  positions = balance['info']['positions']
-   #  pprint(positions)
-   # #lastclosedorder
-   #  await update.message.reply_text(f" list of positions {positions}")    
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======= view last closed orders  =====
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # 
-# async def closedorderlist_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-#     symbolClosed = 'ETH/USDT'
-#     now = exchange1.milliseconds()
-#     day = 24 * 3600 * 1000
-#     week = 7 * day
-#     since = now - 7 * day  # start 1 week
-#     limit = 20
 
-#     while since < now:
-
-#         end = min(since + week, now)
-#         params = {'endAt': end}
-#         closedorders = exchange1.fetch_closed_orders(symbolClosed, since, limit, params)
-#         print(exchange1.iso8601(since), '-', exchange1.iso8601(end), len(orders), 'orders')
-#         if len(closedorders) == limit:
-#             since = orders[-1]['timestamp']
-#         else:
-#             since += week
-#         await update.message.reply_text(f"{exchange1.iso8601(since)} '-' {exchange1.iso8601(end)} '-' {len(orders)} 'orders'")  
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view today's pnl =========
@@ -264,10 +249,13 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##=========  bot error handling ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #     
-def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', update, context.error)
-    update.message.reply_text(f"Error encountered {context.error}")
+    logger.error(msg="Exception while handling an update:", exc_info=context.error)
+    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
+    tb_string = "".join(tb_list)
+    tb_trim = tb_string[:4000]
+    await update.message.reply_text(f"Error encountered {tb_trim}")
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== BOT  =============
@@ -277,7 +265,7 @@ def main():
 
     """Start the bot."""
     # Create the Application and pass it your bot's token.
-    application = Application.builder().token(TELEGRAM_TOKEN).post_init(post_init).build()
+    application = Application.builder().token(TG_TOKEN).post_init(post_init).build()
 
     # Menus
     application.add_handler(CommandHandler(command1, help_command))
@@ -295,23 +283,5 @@ def main():
 if __name__ == '__main__':
     main()
 
-    
-# def get_balances_from_api() -> dict:
-#     load_dotenv()
-#     exchange = ccxt.exchangeid({
-#         'apiKey': os.getenv('API_KEY'),
-#         'secret': os.getenv('SECRET'),
-#         'password': os.getenv('PASSWORD')
-#     })
-#     balances_ = exchange.fetch_balance()
-#     columns_ = ['id', 'currency', 'account_type', 'balance', 'available', 'holds']
-#     data_ = []
-#     for data in balances_['info']['data']:
-#         data_.append([
-#             data['id'], data['currency'], data['type'],
-#             data['balance'], data['available'], data['holds']
-#         ])
-#     df_ = pd.DataFrame(data=data_, columns=columns_)
-#     df_.set_index('id', drop=True, inplace=True)
-#     return df_.to_dict()
+
   

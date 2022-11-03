@@ -1,0 +1,29 @@
+name: "Nightly Release"
+
+on:
+  push:
+    branches:
+      - "dev"
+    label:
+      - "nightly"
+
+jobs:
+  tagged-release:
+    name: "Nightly Release"
+    runs-on: "ubuntu-latest"
+
+    steps:
+
+      - name: Generate build number
+        id: buildnumber
+        uses: einaregilsson/build-number@v3 
+        with:
+          token: ${{secrets.github_token}}
+          prefix: TT
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: true
+          automatic_release_tag: "nightly"
+          title: ${{ steps.buildnumber.outputs}}
