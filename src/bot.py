@@ -62,12 +62,13 @@ def Convert(string):
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #IMPORT ENV  
 
-dotenv_path = 'config/.env'
+dotenv_path = './config/.env'
 if os.path.exists(dotenv_path):
     print("env file found")
     load_dotenv(dotenv_path)
 else:
     print("no env file available check the path for config")
+    sys.exit()
 
 #for env debug
 print(json.dumps({**{}, **os.environ}, indent=2)) 
