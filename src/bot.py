@@ -82,7 +82,9 @@ CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
 CCXT_id1_api = os.getenv("EXCHANGE1_YOUR_API_KEY")  
 CCXT_id1_secret = os.getenv("EXCHANGE1_YOUR_SECRET") 
 CCXT_id1_password = os.getenv("EXCHANGE1_YOUR_PASSWORD") 
-CCXT_id1_ordertype = os.getenv("EXCHANGE1_ORDERTYPE") 
+CCXT_id1_ordertype = os.getenv("EXCHANGE1_ORDERTYPE")
+CCXT_id1_defaulttype = os.getenv("EXCHANGE1_DEFAULTTYPE")
+#'defaultType': 'future'
 
 #CCXT SANDBOX details
 CCXT_test_mode = os.getenv("TEST_SANDBOX_MODE")
@@ -121,7 +123,10 @@ else:
      exchange = exchange_class({
         'apiKey': CCXT_id1_api,
         'secret': CCXT_id1_secret
-        })
+        'options': {
+        'defaultType': CCXT_id1_defaulttype,
+        },
+     })
      m_ordertype = CCXT_test_ordertype.upper()
      print (f"exchange setup done for {exchange.name}")
     except NameError:
@@ -186,8 +191,10 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          print (m_symbol,m_ordertype,m_dir,m_sl,m_tp,m_q)
          await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
          print ("processing order")
-         #res = exchange1.market_order(m_dir, m_symbol, m_q)
-         res = exchange.create_order(m_symbol, m_ordertype, m_dir, m_q)
+         
+         #calculate percentage 
+         amountpercent=(exchange.fetch_free_balance('USDT')*(m_q/100))
+         res = exchange.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
          
          if "error" in res:
             await update.message.reply_text(f"{res}")
