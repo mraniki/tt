@@ -3,15 +3,16 @@
  Deploy it via docker. 
 
 
-[![donate](https://img.shields.io/badge/donate-kofi-orange)](https://imgur.com/a/WQiZcW0) [![github](https://img.shields.io/badge/github-pages-lightgrey)](https://github.com/mraniki/tt)   
+[![donate](https://img.shields.io/badge/donate-kofi-orange)](https://imgur.com/a/WQiZcW0) 
+[![donate](https://badgen.net/badge/github/pages/grey?icon=github)](https://github.com/mraniki/tt)   
 
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/mraniki/tt?style=plastic)](https://hub.docker.com/r/mraniki/tt).  [![Docker](https://github.com/mraniki/tt/actions/workflows/DockerHub.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/DockerHub.yml). [![DockerNightly](https://github.com/mraniki/tt/actions/workflows/DockerHub_Dev.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/DockerHub_Dev.yml)
 
 
 
-[![telegrambot](https://img.shields.io/badge/Telegram-Channel-blue.svg?logo=telegram)](https://t.me/pythontelegrambotchannel)
-[![Twitter Follow](https://img.shields.io/twitter/follow/ccxt_official.svg?style=social&label=CCXT)](https://twitter.com/ccxt_official)
+[![telegrambot](https://badgen.net/badge/telegrambot/pages/grey?icon=telegram)](https://t.me/pythontelegrambotchannel)
+[![ccxt](https://badgen.net/badge/ccxt/pages/grey?icon=bitcoin)](https://github.com/ccxt/ccxt)
 
 ## Install
 1) Create a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
@@ -19,10 +20,11 @@
 3) Deploy :
 - via docker 
   - dockerhub `docker push mraniki/tt:latest` or nightly,
-  - or github `docker pull ghcr.io/mraniki/tt:main` for latest stable or `docker pull ghcr.io/mraniki/tt:dev` for nightly
-- or `git clone https://github.com/mraniki/tt`
-4) Update bot token / API in the ENV variable or use .env file at the root
-5) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
+  - or github `docker pull ghcr.io/mraniki/tt:main` or nightly
+- or `git clone https://github.com/mraniki/tt:main`
+4) Update bot token / API in the .env file in config (container volume /code/config)
+5) Start your container
+6) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) 
   
 ## ENV Variables:

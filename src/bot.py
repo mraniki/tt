@@ -61,10 +61,17 @@ def Convert(string):
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #IMPORT ENV  
-dotenv_path = Path('config/.env')
-load_dotenv(dotenv_path=dotenv_path)
+
+dotenv_path = './config/.env'
+if os.path.exists(dotenv_path):
+    print("env file found")
+    load_dotenv(dotenv_path)
+else:
+    print("no env file available check the path for config")
+    sys.exit()
+
 #for env debug
-#print(json.dumps({**{}, **os.environ}, indent=2)) 
+print(json.dumps({**{}, **os.environ}, indent=2)) 
 
 # ENV VAR (from file or docker variable)
 TG_TOKEN = os.getenv("TG_TOKEN")
