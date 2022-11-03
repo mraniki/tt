@@ -70,5 +70,5 @@ Made with
 
  ## Disclaimer
 ⚠️ This is a tool and should not be considered professional financial investment system nor financial advice.
-Use a testnet account with this tool or **USE AT YOUR OWN RISK**
+Use a testnet account or **USE AT YOUR OWN RISK**
 
