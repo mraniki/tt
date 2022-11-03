@@ -27,3 +27,4 @@ jobs:
           prerelease: true
           automatic_release_tag: "nightly"
           title: ${{github.label}}${{ steps.buildnumber.outputs.build_number }}
+        
