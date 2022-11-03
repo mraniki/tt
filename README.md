@@ -52,12 +52,13 @@
  - Disable or Enable trading process via /trading command
  - Query balance via /bal command and view it in formatted way
  - Support testnet and prod exchange via variable 
+ - Support % of balance for order
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## toDo
 - formating/handling of response from exchange (opened position, last closed order)
-- support % of balance for order
+- support futures and margin
 - formating/handling of error from bot and from exchange api
 - view opened orders/position via /order command 
 - handle 2/multi exchanges
