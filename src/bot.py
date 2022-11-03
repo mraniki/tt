@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.7.0"
+TTVersion="🪙TT 0.7.1"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -31,6 +31,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 #ccxt
 import ccxt
 import json
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== Logging  =============
@@ -73,8 +74,6 @@ else:
     sys.exit()
 
 
-
-
 # ENV VAR (from file or docker variable)
 TG_TOKEN = os.getenv("TG_TOKEN")
 TG_USER_ID = os.getenv("TG_USER_ID")
@@ -83,7 +82,9 @@ CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
 CCXT_id1_api = os.getenv("EXCHANGE1_YOUR_API_KEY")  
 CCXT_id1_secret = os.getenv("EXCHANGE1_YOUR_SECRET") 
 CCXT_id1_password = os.getenv("EXCHANGE1_YOUR_PASSWORD") 
-CCXT_id1_ordertype = os.getenv("EXCHANGE1_ORDERTYPE") 
+CCXT_id1_ordertype = os.getenv("EXCHANGE1_ORDERTYPE")
+CCXT_id1_defaulttype = os.getenv("EXCHANGE1_DEFAULTTYPE")
+#'defaultType': 'future'
 
 #CCXT SANDBOX details
 CCXT_test_mode = os.getenv("TEST_SANDBOX_MODE")
@@ -121,8 +122,11 @@ else:
      exchange_class = getattr(ccxt, CCXT_ex)
      exchange = exchange_class({
         'apiKey': CCXT_id1_api,
-        'secret': CCXT_id1_secret
-        })
+        'secret': CCXT_id1_secret,
+        'options': {
+        'defaultType': CCXT_id1_defaulttype,
+        },
+     })
      m_ordertype = CCXT_test_ordertype.upper()
      print (f"exchange setup done for {exchange.name}")
     except NameError:
@@ -181,14 +185,18 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          # sell BTCUSDT sl=6000 tp=4500 q=1%
          m_dir= order_m[0]
          m_symbol=order_m[1]
-         m_sl=order_m[2][3:6]
-         m_tp=order_m[3][3:6]
+         m_sl=order_m[2][3:7]
+         m_tp=order_m[3][3:7]
          m_q=order_m[4][2:-1]
          print (m_symbol,m_ordertype,m_dir,m_sl,m_tp,m_q)
          await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
          print ("processing order")
-         #res = exchange1.market_order(m_dir, m_symbol, m_q)
-         res = exchange.create_order(m_symbol, m_ordertype, m_dir, m_q)
+         
+         #calculate percentage 
+         m_price = float(exchange.fetchTicker(f'{m_symbol}').get('last'))
+         totalusdtbal = exchange.fetchBalance()['USDT']['free']
+         amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
+         res = exchange.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
          
          if "error" in res:
             await update.message.reply_text(f"{res}")
