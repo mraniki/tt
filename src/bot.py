@@ -32,6 +32,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 import ccxt
 import json
 
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== Logging  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -71,8 +72,6 @@ else:
     print("no env file available check the path for config")
 #for env debug    print(json.dumps({**{}, **os.environ}, indent=2)) 
     sys.exit()
-
-
 
 
 # ENV VAR (from file or docker variable)
@@ -181,8 +180,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          # sell BTCUSDT sl=6000 tp=4500 q=1%
          m_dir= order_m[0]
          m_symbol=order_m[1]
-         m_sl=order_m[2][3:6]
-         m_tp=order_m[3][3:6]
+         m_sl=order_m[2][3:7]
+         m_tp=order_m[3][3:7]
          m_q=order_m[4][2:-1]
          print (m_symbol,m_ordertype,m_dir,m_sl,m_tp,m_q)
          await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
