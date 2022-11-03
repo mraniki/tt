@@ -21,8 +21,9 @@
   - dockerhub `docker push mraniki/tt:latest` or nightly,
   - or github `docker pull ghcr.io/mraniki/tt:main` for latest stable or `docker pull ghcr.io/mraniki/tt:dev` for nightly
 - or `git clone https://github.com/mraniki/tt`
-4) Update bot token / API in the ENV variable or use .env file at the root
-5) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
+4) Update bot token / API in the .env file in /config
+5) Start your container
+6) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) 
  
 ## ENV Variables:
