@@ -122,7 +122,7 @@ else:
      exchange_class = getattr(ccxt, CCXT_ex)
      exchange = exchange_class({
         'apiKey': CCXT_id1_api,
-        'secret': CCXT_id1_secret
+        'secret': CCXT_id1_secret,
         'options': {
         'defaultType': CCXT_id1_defaulttype,
         },
