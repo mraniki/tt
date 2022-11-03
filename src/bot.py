@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.7.0"
+TTVersion="🪙TT 0.7.1"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -193,9 +193,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          print ("processing order")
          
          #calculate percentage 
-        totalusdtbal=exchange.fetchBalance({"currency": "usdt"})
-         
-         
+         totalusdtbal = exchange.fetchBalance({"currency":"usdt"})
         amountpercent=((totalusdtbal)*(m_q/100))
          res = exchange.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
          
