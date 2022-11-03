@@ -57,19 +57,14 @@ def Convert(string):
    li = list(string.split(" "))
    return li
 
-# def free_balance(self):
-#     balance = self.fetch_free_balance()
-#     # surprisingly there are balances with 0, so we need to filter these out
-#     return {k: v for k, v in balance.items() if v > 0}
-
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #IMPORT ENV  
-
 dotenv_path = Path('config/.env')
 load_dotenv(dotenv_path=dotenv_path)
-print(json.dumps({**{}, **os.environ}, indent=2))
+#for env debug
+#print(json.dumps({**{}, **os.environ}, indent=2)) 
 
 # ENV VAR (from file or docker variable)
 TG_TOKEN = os.getenv("TG_TOKEN")
@@ -105,7 +100,7 @@ if (CCXT_test_mode=="True"):
         'apiKey': CCXT_test_api,
         'secret': CCXT_test_secret
         })
-     m_ordertype=CCXT_test_ordertype
+     m_ordertype = CCXT_test_ordertype.upper()
      exchange.set_sandbox_mode(CCXT_test_mode)
      print (f"exchange setup done for {exchange.name} sandbox")
     except NameError:
@@ -119,7 +114,7 @@ else:
         'apiKey': CCXT_id1_api,
         'secret': CCXT_id1_secret
         })
-     m_ordertype=CCXT_test_ordertype
+     m_ordertype = CCXT_test_ordertype.upper()
      print (f"exchange setup done for {exchange.name}")
     except NameError:
      error_handler()
@@ -182,7 +177,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          m_sl=order_m[2][3:6]
          m_tp=order_m[3][3:6]
          m_q=order_m[4][2:-1]
-         print (m_dir,m_symbol,m_sl,m_tp,m_q)
+         print (m_symbol,m_ordertype,m_dir,m_sl,m_tp,m_q)
          await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
          print ("processing order")
          #res = exchange1.market_order(m_dir, m_symbol, m_q)
