@@ -61,8 +61,8 @@ def Convert(string):
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #IMPORT ENV  
-dotenv_path = Path('config/.env')
-load_dotenv(dotenv_path=dotenv_path)
+dotenv_path = sys.path[0]+'/config/.env' 
+load_dotenv(dotenv_path)
 #for env debug
 #print(json.dumps({**{}, **os.environ}, indent=2)) 
 
