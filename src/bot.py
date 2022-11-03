@@ -194,8 +194,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          
          #calculate percentage 
          
-         currency = client.currency('USDT')
-         totalusdtbal=client.fetchBalance({
+         currency = exchange.currency('USDT')
+         totalusdtbal=exchange.fetchBalance({
              'coin': currency['id'],
          })
          amountpercent=((totalusdtbal)*(m_q/100))
