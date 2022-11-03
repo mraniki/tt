@@ -26,5 +26,5 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: true
           automatic_release_tag: "nightly"
-          title: ${{github.label}}${{ steps.buildnumber.outputs.build_number }}
+          title: ${{steps.buildnumber.outputs.prefix}}${{ steps.buildnumber.outputs.build_number }}
         
