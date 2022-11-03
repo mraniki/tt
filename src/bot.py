@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.6.27"
+TTVersion="🪙TT 0.7.0"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -66,12 +66,14 @@ dotenv_path = './config/.env'
 if os.path.exists(dotenv_path):
     print("env file found")
     load_dotenv(dotenv_path)
+#for env debug    print(json.dumps({**{}, **os.environ}, indent=2)) 
 else:
     print("no env file available check the path for config")
+#for env debug    print(json.dumps({**{}, **os.environ}, indent=2)) 
     sys.exit()
 
-#for env debug
-print(json.dumps({**{}, **os.environ}, indent=2)) 
+
+
 
 # ENV VAR (from file or docker variable)
 TG_TOKEN = os.getenv("TG_TOKEN")
@@ -142,10 +144,8 @@ listofcommand = list(itertools.chain(command1, command2, command3, command4))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
 
 ####messages
-
-exchangeinfo= f'ℹ️exchange: {exchange.name}  Sandbox: {CCXT_test_mode}'
-
-menu=f'{TTVersion} \n /{commandlist} \n'
+menu=f'{TTVersion} \n /{commandlist}'
+exchangeinfo= f'Exchange: {exchange.name}  Sandbox: {CCXT_test_mode}'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
