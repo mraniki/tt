@@ -89,18 +89,14 @@ CCXT_test_secret = os.getenv("TEST_SANDBOX_YOUR_SECRET")
 CCXT_test_ordertype = os.getenv("TEST_SANDBOX_ORDERTYPE") 
 
 trading=True #trading switch command
-test_mode=True  #testmode
-print(CCXT_test_mode)
-test_mode=CCXT_test_mode
-print(test_mode)
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== exchange setup  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # Enable logging and version check
 #EXCHANGE1 from variable id
-print(test_mode)
 
-if (test_mode==True):
+if (CCXT_test_mode=="True"):
     print ("sandbox activated")
     try:
      CCXT_ex = f'{CCXT_test_name}'
@@ -109,7 +105,7 @@ if (test_mode==True):
         'apiKey': CCXT_test_api,
         'secret': CCXT_test_secret
         })
-     type=CCXT_test_ordertype
+     m_ordertype=CCXT_test_ordertype
      exchange.set_sandbox_mode(CCXT_test_mode)
      print (f"exchange setup done for {exchange.name} sandbox")
     except NameError:
@@ -123,7 +119,7 @@ else:
         'apiKey': CCXT_id1_api,
         'secret': CCXT_id1_secret
         })
-     type=CCXT_id1_ordertype 
+     m_ordertype=CCXT_test_ordertype
      print (f"exchange setup done for {exchange.name}")
     except NameError:
      error_handler()
@@ -171,7 +167,9 @@ async def post_init(application: Application):
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when an order is identified """
     messagetxt = update.message.text
+    print(messagetxt)
     messagetxt_upper =messagetxt.upper()
+    print(messagetxt_upper)
     filter_lst = ['BUY', 'SELL', 'TEST']
     if [ele for ele in filter_lst if(ele in messagetxt_upper)]:
       if (trading==False):
@@ -188,7 +186,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
          print ("processing order")
          #res = exchange1.market_order(m_dir, m_symbol, m_q)
-         res = exchange.create_order(m_symbol, type, m_dir, m_q)
+         res = exchange.create_order(m_symbol, m_ordertype, m_dir, m_q)
          
          if "error" in res:
             await update.message.reply_text(f"{res}")
