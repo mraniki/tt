@@ -30,7 +30,6 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 
 #ccxt
 import ccxt
-from ccxt import Exchange
 import json
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -68,9 +67,9 @@ def Convert(string):
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #IMPORT ENV  
 
-dotenv_path = Path('/config/.env')
+dotenv_path = Path('config/.env')
 load_dotenv(dotenv_path=dotenv_path)
-#print(json.dumps({**{}, **os.environ}, indent=2))
+print(json.dumps({**{}, **os.environ}, indent=2))
 
 # ENV VAR (from file or docker variable)
 TG_TOKEN = os.getenv("TG_TOKEN")
@@ -90,14 +89,19 @@ CCXT_test_secret = os.getenv("TEST_SANDBOX_YOUR_SECRET")
 CCXT_test_ordertype = os.getenv("TEST_SANDBOX_ORDERTYPE") 
 
 trading=True #trading switch command
-
+test_mode=True  #testmode
+print(CCXT_test_mode)
+test_mode=CCXT_test_mode
+print(test_mode)
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== exchange setup  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # Enable logging and version check
 #EXCHANGE1 from variable id
+print(test_mode)
 
-if CCXT_test_mode == True:
+if (test_mode==True):
+    print ("sandbox activated")
     try:
      CCXT_ex = f'{CCXT_test_name}'
      exchange_class = getattr(ccxt, CCXT_ex)
@@ -107,7 +111,7 @@ if CCXT_test_mode == True:
         })
      type=CCXT_test_ordertype
      exchange.set_sandbox_mode(CCXT_test_mode)
-     print (f"exchange setup done for {exchange.name}")
+     print (f"exchange setup done for {exchange.name} sandbox")
     except NameError:
      error_handler()
      
@@ -206,20 +210,13 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 #     
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /bal is issued."""
-    # balancerawjson = await free_balance(exchange)
-    # print (balancerawjson)
-    balance = exchange.fetch_balance()
+    balance = exchange.fetch_free_balance()
     print(balance)
-    # balancefiltered= {k: v for k, v in balance.items() if v > 0}
-    # print(balancefiltered)
-    # balancetodisplay = json.dumps(balancefiltered, sort_keys=True, indent=4)
-    # print (balancetodisplay)
-    # balanceloaded = json.loads(balancetodisplay)
-    # prettybal=""
-    # for iterator in balanceloaded:
-    #  print(iterator, ":", balanceloaded[iterator])
-    #  prettybal += (f"{iterator} : {balanceloaded[iterator]} \n")
-    #await update.message.reply_text(f"🏦 Balance \n{prettybal}")
+    prettybal=""
+    for iterator in balance:
+     print(iterator, ":", balance[iterator])
+     prettybal += (f"{iterator} : {balance[iterator]} \n")
+    await update.message.reply_text(f"🏦 Balance \n{prettybal}")
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view positions  ========
