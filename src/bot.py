@@ -193,7 +193,12 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
          print ("processing order")
          
          #calculate percentage 
-         amountpercent=(exchange.fetch_free_balance('USDT')*(m_q/100))
+         
+         currency = client.currency('USDT')
+         totalusdtbal=client.fetchBalance({
+             'coin': currency['id'],
+         })
+         amountpercent=((totalusdtbal)*(m_q/100))
          res = exchange.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
          
          if "error" in res:
