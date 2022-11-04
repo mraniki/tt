@@ -202,13 +202,13 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         else:  # order format identified "sell BTCUSDT sl=6000 tp=4500 q=1%""
             try:
                 #await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
-                logger.info(msg=f"Processing order: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
                 order_m = Convert(messagetxt_upper) 
                 m_dir= order_m[0]
                 m_symbol=order_m[1]
                 m_sl=order_m[2][3:7]
                 m_tp=order_m[3][3:7]
                 m_q=order_m[4][2:-1]
+                logger.info(msg=f"Processing order: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
                 #calculate percentage 
                 m_price = float(exchange.fetchTicker(f'{m_symbol}').get('last'))
                 totalusdtbal = exchange.fetchBalance()['USDT']['free']
