@@ -176,13 +176,25 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #Send a message when the command /bal is issued.
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    balance = exchange.fetch_free_balance()
-    logger.info(msg=f"{balance}")
-    prettybal=""
-    for iterator in balance:
-        logger.info(msg=f"{iterator}: {balance[iterator]}")
-        prettybal += (f"{iterator} : {balance[iterator]} \n")
-    await update.message.reply_text(f"🏦 Balance \n{prettybal}")
+    
+    try:
+        balance = exchange.fetch_free_balance()
+        logger.info(msg=f"{balance}")
+        prettybal=""
+        for iterator in balance:
+            logger.info(msg=f"{iterator}: {balance[iterator]}")
+            prettybal += (f"{iterator} : {balance[iterator]} \n")
+        await update.message.reply_text(f"🏦 Balance \n{prettybal}")
+    except ccxt.NetworkError as e:
+        logger.error(msg=f"Failed due to a network error {e}")
+        await update.message.reply_text(f"⚠️{e}")
+    except ccxt.ExchangeError as e:
+        logger.error(msg=f"Failed due to a exchange error: {e}")
+        await update.message.reply_text(f"⚠️{e}")
+    except Exception as e:
+        logger.error(msg=f"Failed due to a CCXT error: {e}")
+        await update.message.reply_text(f"⚠️{e}") 
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
