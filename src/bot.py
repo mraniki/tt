@@ -179,17 +179,17 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     
     try:
         balance = exchange.fetch_free_balance()
-        for key, value in balance(d.items()):
+        for key, value in balance.items():
             if value is None:
-                del d[key]
+                del balance[key]
             elif isinstance(value, dict):
                 del_none(value)
-        return d  # For convenience
+         # For convenience
         logger.info(msg=f"{balance}")
         prettybal=""
-        for iterator in nonzero:
-            logger.info(msg=f"{iterator}: {nonzero[iterator]}")
-            prettybal += (f"{iterator} : {nonzero[iterator]} \n")
+        for iterator in balance:
+            logger.info(msg=f"{iterator}: {balance[iterator]}")
+            prettybal += (f"{iterator} : {balance[iterator]} \n")
         await update.message.reply_text(f"🏦 Balance \n{prettybal}")
     except ccxt.NetworkError as e:
         logger.error(msg=f"Failed due to a network error {e}")
