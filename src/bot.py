@@ -180,7 +180,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     try:
         balance = exchange.fetch_free_balance()
         for key, value in balance.items():
-            if value < 0:
+            if value == "0.0":
                 del balance[key]
             elif isinstance(value, dict):
                 del_none(value)
