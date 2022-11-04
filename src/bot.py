@@ -178,7 +178,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     
     try:
-        balance = exchange.free_balance()
+        balance = exchange.fetch_free_balance()
         for key, value in balance(d.items()):
             if value is None:
                 del d[key]
