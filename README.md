@@ -3,9 +3,7 @@
  Deploy it via docker. 
 
 [![](https://badgen.net/badge/icon/TT/E2B13C?icon=bitcoin&label)](https://github.com/mraniki/tt)
-[![donate](https://badgen.net/badge/icon/buymeacoffee/6F4E37?icon=buymeacoffee&label)](https://imgur.com/a/WQiZcW0) 
-
-[![github](https://badgen.net/badge/icon/github/grey?icon=github&label)](https://github.com/mraniki/tt) 
+[![donate](https://badgen.net/badge/icon/coindrop/6F4E37?icon=buymeacoffee&label)](https://coindrop.to/mraniki) 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)
 
 
@@ -42,29 +40,30 @@ Made with
         TEST_SANDBOX_EXCHANGE_NAME="binance"
         TEST_SANDBOX_YOUR_API_KEY=""
         TEST_SANDBOX_YOUR_SECRET=""
-        TEST_SANDBOX_ORDERTYPE="MARKET" 
+        TEST_SANDBOX_ORDERTYPE="MARKET"
+        TEST_SANDBOX_DEFAULTTYPE=""
 
         #PROD APIKEY Exchange1
         EXCHANGE1_NAME="binance"
         EXCHANGE1_YOUR_API_KEY=""
         EXCHANGE1_YOUR_SECRET=""
-        EXCHANGE1_ORDERTYPE="MARKET" 
+        EXCHANGE1_ORDERTYPE="MARKET"
+        EXCHANGE1_DEFAULTTYPE=""
 
         
  ## Use Case
- - Enable bot in pythontelegram v20 and support exchange raw error via telegram
+ - Enable bot in pythontelegram v20 and support exchange formatted error via telegram
  - Push your signal manually or from system like trading view webhook to submit order to your ccxt exchange and receive confirmation
  - Disable or Enable trading process via /trading command
  - Query balance via /bal command and view it in formatted way
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
  - Support testnet and prod exchange via environment variable file
- - Support % of balance for order
+ - Support % of USDT balance for order
  
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 ToDo
 - formating/handling of response from exchange (opened position, last closed order)
-- formatting/handling of error from bot and from exchange api
 - add config folder in the dockerfile to automatically create the volume folder
 - support futures and margin options
 - view last closed orders via /order command 
