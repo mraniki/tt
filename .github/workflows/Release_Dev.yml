@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - "dev"
-    label:
+    tags:
       - "nightly"
 
 jobs:
@@ -13,18 +13,11 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-
-      - name: Generate build number
-        id: buildnumber
-        uses: einaregilsson/build-number@v3 
-        with:
-          token: ${{secrets.github_token}}
-          prefix: TT
-
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: true
           automatic_release_tag: "nightly"
-          title: ${{steps.buildnumber.outputs.prefix}}${{ steps.buildnumber.outputs.build_number }}
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
         
