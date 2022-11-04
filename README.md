@@ -50,19 +50,18 @@ Made with
 
         
  ## Use Case
- - Enable bot in pythontelegram v20 and support exchange raw error via telegram
+ - Enable bot in pythontelegram v20 and support exchange formatted error via telegram
  - Push your signal manually or from system like trading view webhook to submit order to your ccxt exchange and receive confirmation
  - Disable or Enable trading process via /trading command
  - Query balance via /bal command and view it in formatted way
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
  - Support testnet and prod exchange via environment variable file
- - Support % of balance for order
+ - Support % of USDT balance for order
  
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 ToDo
 - formating/handling of response from exchange (opened position, last closed order)
-- formatting/handling of error from bot and from exchange api
 - add config folder in the dockerfile to automatically create the volume folder
 - support futures and margin options
 - view last closed orders via /order command 
