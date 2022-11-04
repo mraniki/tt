@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.7.2"
+TTVersion="🪙TT 0.7.3"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -180,7 +180,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     try:
         balance = exchange.fetch_free_balance()
         for key, value in balance.items():
-            if value is None:
+            if value < 0:
                 del balance[key]
             elif isinstance(value, dict):
                 del_none(value)
@@ -251,21 +251,19 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 await update.message.reply_text(f"⚠️{e}") 
     else: error_handler()
 
-
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======= view last closed orders  =====
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## Send a message when the command /order is issued.
 async def lastorder_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    echo("orderlist_command")
+    print("orderlist_command")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view positions  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## Send a message when the command /position is issued.
 async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    echo("orderlist_command")
-
+    print("orderlist_command")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view today's pnl =========
