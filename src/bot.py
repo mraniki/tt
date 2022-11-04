@@ -178,13 +178,18 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     
     try:
-        balance = exchange.fetch_free_balance()
+        balance = exchange.free_balance()
+        for key, value in balance(d.items()):
+            if value is None:
+                del d[key]
+            elif isinstance(value, dict):
+                del_none(value)
+        return d  # For convenience
         logger.info(msg=f"{balance}")
-        non_zero_balance = [(i,j) for i,j in balance.items() if j != 0.0 ]
         prettybal=""
-        for iterator in non_zero_balance:
-            logger.info(msg=f"{iterator}: {non_zero_balance[iterator]}")
-            prettybal += (f"{iterator} : {non_zero_balance[iterator]} \n")
+        for iterator in nonzero:
+            logger.info(msg=f"{iterator}: {nonzero[iterator]}")
+            prettybal += (f"{iterator} : {nonzero[iterator]} \n")
         await update.message.reply_text(f"🏦 Balance \n{prettybal}")
     except ccxt.NetworkError as e:
         logger.error(msg=f"Failed due to a network error {e}")
