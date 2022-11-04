@@ -3,7 +3,7 @@
  Deploy it via docker. 
 
 [![](https://badgen.net/badge/icon/TT/E2B13C?icon=bitcoin&label)](https://github.com/mraniki/tt)
-[![donate](https://badgen.net/badge/icon/buymeacoffee/6F4E37?icon=buymeacoffee&label)](https://coindrop.to/mraniki) 
+[![donate](https://badgen.net/badge/icon/buymeacoffee/6F4E37?icon=coindrop&label)](https://coindrop.to/mraniki) 
 
 [![github](https://badgen.net/badge/icon/github/grey?icon=github&label)](https://github.com/mraniki/tt) 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)
