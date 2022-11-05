@@ -180,10 +180,10 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     try:
         balance = exchange.fetch_free_balance()
         for key, value in balance.items():
-            if value < 0:
-                del balance[key]
-            elif isinstance(value, dict):
+            if value > 0:
                 del_none(value)
+            else:
+                del balance[key]
          # For convenience
         logger.info(msg=f"{balance}")
         prettybal=""
