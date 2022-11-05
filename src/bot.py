@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.7.3"
+TTVersion="🪙TT 0.8"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -23,7 +23,7 @@ from pathlib import Path
 import itertools
 
 #telegram
-from telegram import Update
+from telegram import Update    
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
 #ccxt
@@ -51,7 +51,7 @@ logger.info(msg=f"Please wait, loading...")
 def Convert(string):
    li = list(string.split(" "))
    return li
-
+        
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -148,7 +148,8 @@ command2=['bal']
 command3=['trading']
 command4=['lastorder']
 command5=['position']
-listofcommand = list(itertools.chain(command1, command2, command3, command4, command5))
+command6=['restart']
+listofcommand = list(itertools.chain(command1, command2, command3, command4, command5, command6))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
 
 ####messages
@@ -180,9 +181,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     try:
         balance = exchange.fetch_free_balance()
         for key, value in balance.items():
-            if value > 0:
-                del_none(value)
-            else:
+            if value <= 0:
                 del balance[key]
          # For convenience
         logger.info(msg=f"{balance}")
@@ -263,7 +262,7 @@ async def lastorder_command(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## Send a message when the command /position is issued.
 async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    print("orderlist_command")
+    print("position_command")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view today's pnl =========
@@ -296,7 +295,16 @@ async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     tb_trim = tb_string[:4000]
     await update.message.reply_text(f"⚠️ Error encountered {tb_trim}")
 
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=========  bot restart  ========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
+    
+async def restart(update: Update, context: ContextTypes.DEFAULT_TYPE):
+        await update.message.reply_text('Bot is restarting...')
+        #await self.__polling_task.cancel()
+        #os.execl(sys.executable, sys.executable, *sys.argv)
+        
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== BOT  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -313,6 +321,7 @@ def main():
     application.add_handler(CommandHandler(command3, trading_switch))
     application.add_handler(CommandHandler(command4, lastorder_command))
     application.add_handler(CommandHandler(command5, position_command))
+    application.add_handler(CommandHandler(command6, restart))
     # Message monitoring for order
     application.add_handler(MessageHandler(filters.ALL, monitor))
     application.add_error_handler(error_handler)
