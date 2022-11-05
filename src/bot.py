@@ -155,6 +155,7 @@ commandlist= ' /'.join([str(elem) for elem in listofcommand])
 ####messages
 menu=f'{TTVersion} \n /{commandlist}'
 exchangeinfo= f'Exchange: {exchange.name}  Sandbox: {CCXT_test_mode}'
+unknown_command=f" {commandlist}"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## ========== startup message   ========
@@ -180,9 +181,10 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     
     try:
         balance = exchange.fetch_free_balance()
-        for key, value in balance.items():
-            if value <= 0:
-                del balance[key]
+        balance = {k: v for k, v in balance.items() if v>=0}
+        # for key, value in balance.items():
+        #     if value <= 0:
+        #         del balance[key]
          # For convenience
         logger.info(msg=f"{balance}")
         prettybal=""
@@ -269,6 +271,8 @@ async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## Send a message when the command /profit or add the output to /bal
 
+async def pnl_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+ print("pnl_command")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== trading switch  =============
@@ -282,7 +286,17 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     else:
         trading=False
         await update.message.reply_text(f"Trading is {trading}")
+        
+        
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=========  bot restart  ========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+""" Restart_all : Restarts all system services """
 
+async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    print("restart_command")
+    logger.info(msg=f"bot is restarting")
+    
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot error handling ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -295,40 +309,39 @@ async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     tb_trim = tb_string[:4000]
     await update.message.reply_text(f"⚠️ Error encountered {tb_trim}")
 
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##=========  bot restart  ========
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
     
-async def restart(update: Update, context: ContextTypes.DEFAULT_TYPE):
-        await update.message.reply_text('Bot is restarting...')
-        #await self.__polling_task.cancel()
-        #os.execl(sys.executable, sys.executable, *sys.argv)
-        
+ 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== BOT  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 def main():
-
     """Start the bot."""
     # Create the Application and pass it your bot's token.
-    application = Application.builder().token(TG_TOKEN).post_init(post_init).build()
+    try:
+     application = Application.builder().token(TG_TOKEN).post_init(post_init).build()
 
     # Menus
-    application.add_handler(CommandHandler(command1, help_command))
-    application.add_handler(CommandHandler(command2, bal_command))
-    application.add_handler(CommandHandler(command3, trading_switch))
-    application.add_handler(CommandHandler(command4, lastorder_command))
-    application.add_handler(CommandHandler(command5, position_command))
-    application.add_handler(CommandHandler(command6, restart))
-    # Message monitoring for order
-    application.add_handler(MessageHandler(filters.ALL, monitor))
-    application.add_error_handler(error_handler)
+     application.add_handler(CommandHandler(command1, help_command))
+     application.add_handler(CommandHandler(command2, bal_command))
+     application.add_handler(CommandHandler(command3, trading_switch))
+     application.add_handler(CommandHandler(command4, lastorder_command))
+     application.add_handler(CommandHandler(command5, position_command))
+     application.add_handler(CommandHandler(command6, restart_command))
+     
+     
+# Message monitoring for order
+     application.add_handler(MessageHandler(filters.ALL, monitor))
+     application.add_error_handler(error_handler)
 
-    # Run the bot until the user presses Ctrl-C
-    application.run_polling()
+#Run the bot until the user presses Ctrl-C
+     application.run_polling()
 
+    except Exception as error:
+     logger.fatal("Bot failed to start. Error: " + str(error))
+        
+     
+     
 if __name__ == '__main__':
     main()
 
