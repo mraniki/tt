@@ -12,6 +12,8 @@ TTVersion="🪙TT 0.8"
 import logging
 import sys
 import traceback
+from threading import Thread
+import time
 
 ##env
 import os
@@ -149,7 +151,7 @@ command3=['trading']
 command4=['lastorder']
 command5=['position']
 command6=['restart']
-listofcommand = list(itertools.chain(command1, command2, command3, command4, command5, command6))
+listofcommand = list(itertools.chain(command1, command2, command3))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
 
 ####messages
@@ -181,16 +183,16 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     
     try:
         balance = exchange.fetch_free_balance()
-        balance = {k: v for k, v in balance.items() if v>=0}
+        balance2 = {k: v for k, v in balance.items() if v>=0}
         # for key, value in balance.items():
         #     if value <= 0:
         #         del balance[key]
          # For convenience
-        logger.info(msg=f"{balance}")
+        logger.info(msg=f"{balance2}")
         prettybal=""
-        for iterator in balance:
-            logger.info(msg=f"{iterator}: {balance[iterator]}")
-            prettybal += (f"{iterator} : {balance[iterator]} \n")
+        for iterator in balance2:
+            logger.info(msg=f"{iterator}: {balance2[iterator]}")
+            prettybal += (f"{iterator} : {balance2[iterator]} \n")
         await update.message.reply_text(f"🏦 Balance \n{prettybal}")
     except ccxt.NetworkError as e:
         logger.error(msg=f"Failed due to a network error {e}")
@@ -257,7 +259,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## Send a message when the command /order is issued.
 async def lastorder_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    print("orderlist_command")
+    print("lastorder_command")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view positions  ========
@@ -291,11 +293,17 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot restart  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-""" Restart_all : Restarts all system services """
 
 async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    print("restart_command")
     logger.info(msg=f"bot is restarting")
+    #args = sys.argv[:]
+    #args.insert(0, sys.executable)
+    #os.chdir(os.getcwd())
+    #update.message.reply_text(f'Restarting..')
+    #os.execv(sys.executable, args)
+    #time.sleep(10)
+    #sys.stdout.flush()
+    
     
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot error handling ========
@@ -309,7 +317,7 @@ async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     tb_trim = tb_string[:4000]
     await update.message.reply_text(f"⚠️ Error encountered {tb_trim}")
 
-    
+
  
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== BOT  =============
@@ -327,6 +335,7 @@ def main():
      application.add_handler(CommandHandler(command3, trading_switch))
      application.add_handler(CommandHandler(command4, lastorder_command))
      application.add_handler(CommandHandler(command5, position_command))
+     
      application.add_handler(CommandHandler(command6, restart_command))
      
      
