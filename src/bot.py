@@ -151,7 +151,7 @@ command3=['trading']
 command4=['lastorder']
 command5=['position']
 command6=['restart']
-listofcommand = list(itertools.chain(command1, command2, command3, command4, command5, command6))
+listofcommand = list(itertools.chain(command1, command2, command3))
 commandlist= ' /'.join([str(elem) for elem in listofcommand])
 
 ####messages
