@@ -183,7 +183,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     
     try:
         balance = exchange.fetch_free_balance()
-        balance2 = {k: v for k, v in balance.items() if v>=0}
+        balance2 = {k: v for k, v in balance.items() if v>0}
         # for key, value in balance.items():
         #     if value <= 0:
         #         del balance[key]
