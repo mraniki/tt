@@ -117,7 +117,7 @@ if (CCXT_test_mode=="True"):
      m_ordertype = CCXT_test_ordertype.upper()
      exchange.set_sandbox_mode(CCXT_test_mode)
      logger.info(msg=f"exchange setup done for {exchange.name} sandbox")
-    except NameError:
+    except Exception:
         error_handler()
 
 else:
@@ -134,7 +134,7 @@ else:
                     })
         m_ordertype = CCXT_test_ordertype.upper()
         print (f"exchange setup done for {exchange.name}")
-    except NameError:
+    except Exception:
         error_handler()
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -173,7 +173,7 @@ async def post_init(application: Application):
 ##Send a message when the command /help is issued."""  
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
-    await update.message.reply_text(f"{menu} \n {exchangeinfo} ")
+    await update.effective_chat.send_message(f"{menu} \n {exchangeinfo} ")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##========== view balance  =============
@@ -193,16 +193,16 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         for iterator in balance2:
             logger.info(msg=f"{iterator}: {balance2[iterator]}")
             prettybal += (f"{iterator} : {balance2[iterator]} \n")
-        await update.message.reply_text(f"🏦 Balance \n{prettybal}")
+        await update.effective_chat.send_message(f"🏦 Balance \n{prettybal}")
     except ccxt.NetworkError as e:
         logger.error(msg=f"Failed due to a network error {e}")
-        await update.message.reply_text(f"⚠️{e}")
+        await update.effective_chat.send_message(f"⚠️{e}")
     except ccxt.ExchangeError as e:
         logger.error(msg=f"Failed due to a exchange error: {e}")
-        await update.message.reply_text(f"⚠️{e}")
+        await update.effective_chat.send_message(f"⚠️{e}")
     except Exception as e:
         logger.error(msg=f"Failed due to a CCXT error: {e}")
-        await update.message.reply_text(f"⚠️{e}") 
+        await update.effective_chat.send_message(f"⚠️{e}") 
 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -212,14 +212,14 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 ## is identified
 
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    messagetxt = update.message.text
-    print(messagetxt)
+    messagetxt = update.effective_message.text
+    logger.info(msg=f"{messagetxt}")
     messagetxt_upper =messagetxt.upper()
-    print(messagetxt_upper)
+    logger.info(msg=f"{messagetxt_upper}")
     filter_lst = ['BUY', 'SELL']
     if [ele for ele in filter_lst if(ele in messagetxt_upper)]:
         if (trading==False):
-            await update.message.reply_text("TRADING IS DISABLED")
+            await update.effective_chat.send_message("TRADING IS DISABLED")
         else:  # order format identified "sell BTCUSDT sl=6000 tp=4500 q=1%""
             try:
                 #await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
@@ -241,17 +241,17 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 side=res['side']
                 amount=res['amount']
                 price=res['price']
-                await update.message.reply_text(f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}")
+                await update.effective_chat.send_message(f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}")
                 return orderid
             except ccxt.NetworkError as e:
                 logger.error(msg=f"Failed due to a network error {e}")
-                await update.message.reply_text(f"⚠️{e}")
+                await update.effective_chat.send_message(f"⚠️{e}")
             except ccxt.ExchangeError as e:
                 logger.error(msg=f"Failed due to a exchange error: {e}")
-                await update.message.reply_text(f"⚠️{e}")
+                await update.effective_chat.send_message(f"⚠️{e}")
             except Exception as e:
                 logger.error(msg=f"Failed due to a CCXT error: {e}")
-                await update.message.reply_text(f"⚠️{e}") 
+                await update.effective_chat.send_message(f"⚠️{e}") 
     else: error_handler()
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -284,10 +284,10 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     global trading
     if (trading==False):
         trading=True
-        await update.message.reply_text(f"Trading is {trading}")
+        await update.effective_chat.send_message(f"Trading is {trading}")
     else:
         trading=False
-        await update.message.reply_text(f"Trading is {trading}")
+        await update.effective_chat.send_message(f"Trading is {trading}")
         
         
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -310,12 +310,12 @@ async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## Log Errors caused by Updates
 
-async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
     tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
     tb_string = "".join(tb_list)
     tb_trim = tb_string[:4000]
-    await update.message.reply_text(f"⚠️ Error encountered {tb_trim}")
+    #await update.effective_chat.send_message(f"⚠️ Error encountered {tb_trim}")
 
 
  
@@ -330,7 +330,7 @@ def main():
      application = Application.builder().token(TG_TOKEN).post_init(post_init).build()
 
     # Menus
-     application.add_handler(CommandHandler(command1, help_command))
+     application.add_handler(MessageHandler(filters.COMMAND, command1, help_command))
      application.add_handler(CommandHandler(command2, bal_command))
      application.add_handler(CommandHandler(command3, trading_switch))
      application.add_handler(CommandHandler(command4, lastorder_command))
@@ -340,7 +340,7 @@ def main():
      
      
 # Message monitoring for order
-     application.add_handler(MessageHandler(filters.ALL, monitor))
+     #application.add_handler(MessageHandler(filters.ALL, monitor))
      application.add_error_handler(error_handler)
 
 #Run the bot until the user presses Ctrl-C
