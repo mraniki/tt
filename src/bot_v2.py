@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.8.5"
+TTVersion="🪙TT 0.9"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -25,8 +25,16 @@ from pathlib import Path
 import itertools
 
 #telegram
+import asyncio
 from telegram import Update    
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
+
+#webhook
+import uvicorn
+from starlette.applications import Starlette
+from starlette.requests import Request
+from starlette.responses import PlainTextResponse, Response
+from starlette.routing import Route
 
 #ccxt
 import ccxt
@@ -74,6 +82,8 @@ else:
 # ENV VAR (from file or docker variable)
 TG_TOKEN = os.getenv("TG_TOKEN")
 TG_USER_ID = os.getenv("TG_USER_ID")
+WBHKURL= os.getenv("WBHKURL")
+URL=WBHKURL+TG_TOKEN
 
 CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
 CCXT_id1_api = os.getenv("EXCHANGE1_YOUR_API_KEY")  
@@ -89,6 +99,8 @@ CCXT_test_api = os.getenv("TEST_SANDBOX_YOUR_API_KEY")
 CCXT_test_secret = os.getenv("TEST_SANDBOX_YOUR_SECRET") 
 CCXT_test_ordertype = os.getenv("TEST_SANDBOX_ORDERTYPE")
 CCXT_test_defaulttype = os.getenv("TEST_SANDBOX_DEFAULTTYPE")
+PORT = int(os.environ.get('PORT', '8443'))
+
 
 if (TG_TOKEN==""):
     logger.info(msg=f"missing telegram token, Read the install instruction")
@@ -296,14 +308,7 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
 async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"bot is restarting")
-    #args = sys.argv[:]
-    #args.insert(0, sys.executable)
-    #os.chdir(os.getcwd())
-    #update.message.reply_text(f'Restarting..')
-    #os.execv(sys.executable, args)
-    #time.sleep(10)
-    #sys.stdout.flush()
-    
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=======  bot unknow command  ========
@@ -353,15 +358,39 @@ def main():
      application.add_error_handler(error_handler)
 
 #Run the bot until the user presses Ctrl-C
-     application.run_polling()
+     #application.run_polling()
+
+# add handlers
+     await application.bot.set_webhook(url=f"{URL}/telegram")
+
+     # Set up webserver
+
+     async def telegram(request: Request) -> Response:
+     """Handle incoming Telegram updates by putting them into the `update_queue`"""
+      await application.update_queue.put(
+      Update.de_json(data=await request.json(), bot=application.bot)
+     )
+     return Response()
+
+     # application.run_webhook(
+     #    listen="0.0.0.0", 
+     #    port=PORT, 
+     #    url_path=TG_TOKEN,
+     #    webhook_url=URL)
+     async with application:
+         await application.start()
+         await webserver.serve()
+         await application.stop()
 
     except Exception as error:
      logger.fatal("Bot failed to start. Error: " + str(error))
         
-     
+    # Run application and webserver together
+
+
      
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
 
 
 
