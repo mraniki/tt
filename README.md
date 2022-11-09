@@ -59,6 +59,7 @@ Made with
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
  - Support testnet and prod exchange via environment variable file
  - Support % of USDT balance for order
+ - Support bot in private channel
  
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
