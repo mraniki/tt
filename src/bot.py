@@ -26,7 +26,7 @@ import itertools
 
 #telegram
 from telegram import Update    
-from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
+from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
 
 #ccxt
 import ccxt
@@ -117,7 +117,7 @@ if (CCXT_test_mode=="True"):
      m_ordertype = CCXT_test_ordertype.upper()
      exchange.set_sandbox_mode(CCXT_test_mode)
      logger.info(msg=f"exchange setup done for {exchange.name} sandbox")
-    except Exception:
+    except:
         error_handler()
 
 else:
@@ -134,7 +134,7 @@ else:
                     })
         m_ordertype = CCXT_test_ordertype.upper()
         print (f"exchange setup done for {exchange.name}")
-    except Exception:
+    except:
         error_handler()
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -304,7 +304,14 @@ async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     #time.sleep(10)
     #sys.stdout.flush()
     
-    
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=======  bot unknow command  ========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+async def unknown_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    log.error(update, 'unknown_command')
+
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot error handling ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -315,8 +322,10 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
     tb_string = "".join(tb_list)
     tb_trim = tb_string[:4000]
-    #await update.effective_chat.send_message(f"⚠️ Error encountered {tb_trim}")
-
+    errormessage=f"⚠️ Error encountered {tb_trim}"
+    logger.error(msg=f"{errormessage}")
+    #await context.bot.send_message(chat_id=, text=errormessage, parse_mode=ParseMode.HTML)
+    await update.effective_chat.send_message(f"⚠️ Error encountered {tb_trim}")
 
  
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -330,15 +339,15 @@ def main():
      application = Application.builder().token(TG_TOKEN).post_init(post_init).build()
 
     # Menus
-     application.add_handler(MessageHandler(filters.COMMAND, command1, help_command))
-     application.add_handler(CommandHandler(command2, bal_command))
-     application.add_handler(CommandHandler(command3, trading_switch))
-     application.add_handler(CommandHandler(command4, lastorder_command))
-     application.add_handler(CommandHandler(command5, position_command))
-     
-     application.add_handler(CommandHandler(command6, restart_command))
-     
-     
+     application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
+     application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
+     application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch))
+     application.add_handler(MessageHandler(filters.Regex('/lastorder'), lastorder_command))
+     application.add_handler(MessageHandler(filters.Regex('/position'), position_command))
+     application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
+     application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
+
+
 # Message monitoring for order
      #application.add_handler(MessageHandler(filters.ALL, monitor))
      application.add_error_handler(error_handler)
