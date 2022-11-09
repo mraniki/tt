@@ -71,7 +71,7 @@ Made with
 - view opened future position via /pos command 
 - view daiky pnl via /profit or /bal command
 - handle 2/multi exchanges at the same time
-- Test across multiple key exchanges (Binance, Coinbase, FTX, Kraken, Kucoin and Huobi)
+- Test across multiple key exchanges (Binance, Coinbase, ~~FTX~~, Kraken, Kucoin and Huobi)
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges
 
  ## ⚠️ Disclaimer
