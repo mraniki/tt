@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.8.5"
+TTVersion="🪙TT 0.8.6"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -31,6 +31,11 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 #ccxt
 import ccxt
 import json
+
+#db
+from tinydb import TinyDB, Query
+from tinydb.storages import JSONStorage
+from tinydb.middlewares import CachingMiddleware
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== Logging  =============
@@ -73,7 +78,7 @@ else:
 
 # ENV VAR (from file or docker variable)
 TG_TOKEN = os.getenv("TG_TOKEN")
-TG_USER_ID = os.getenv("TG_USER_ID")
+TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
 
 CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
 CCXT_id1_api = os.getenv("EXCHANGE1_YOUR_API_KEY")  
@@ -98,6 +103,12 @@ elif (CCXT_id1_name==""):
     sys.exit()
 elif (CCXT_id1_name==""):
     logger.info(msg=f"no sandbox setup")
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=========== DB SETUP =================
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+db = TinyDB('./config/db.json',storage=CachingMiddleware(JSONStorage))
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== exchange setup  =============
@@ -137,13 +148,15 @@ else:
     except:
         error_handler()
 
+
+
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##= telegram bot commands and messages==
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 trading=True #trading switch command
 
-user_id = TG_USER_ID
 ##list of commands 
 command1=['help']
 command2=['bal']
@@ -165,7 +178,7 @@ unknown_command=f" {commandlist}"
 
 async def post_init(application: Application):
     logger.info(msg=f"bot is online")
-    await application.bot.send_message(user_id, f"Bot is online\n{menu}\n {exchangeinfo} ")
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\n{menu}\n {exchangeinfo} ")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
