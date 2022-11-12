@@ -309,21 +309,12 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
 async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"bot is restarting")
-    #args = sys.argv[:]
-    #args.insert(0, sys.executable)
-    #os.chdir(os.getcwd())
-    #update.message.reply_text(f'Restarting..')
-    #os.execv(sys.executable, args)
-    #time.sleep(10)
-    #sys.stdout.flush()
-    
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=======  bot unknow command  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 async def unknown_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     log.error(update, 'unknown_command')
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot error handling ========
