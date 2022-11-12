@@ -162,8 +162,6 @@ else:
         error_handler()
 
 
-
-
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##= telegram bot commands and messages==
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -210,10 +208,6 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     try:
         balance = exchange.fetch_free_balance()
         balance2 = {k: v for k, v in balance.items() if v>0}
-        # for key, value in balance.items():
-        #     if value <= 0:
-        #         del balance[key]
-         # For convenience
         logger.info(msg=f"{balance2}")
         prettybal=""
         for iterator in balance2:
@@ -229,7 +223,6 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     except Exception as e:
         logger.error(msg=f"Failed due to a CCXT error: {e}")
         await update.effective_chat.send_message(f"⚠️{e}") 
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
@@ -314,19 +307,18 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     else:
         trading=False
         await update.effective_chat.send_message(f"Trading is {trading}")
-        
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##=========  drop DB ========
+##=========== DB COMMAND ===============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+##=========  drop DB ========
 
 async def dropDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"db table dropped")
     db.drop_tables()
 
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  show DB ========
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"display db")
     return TinyDB('db.json')
