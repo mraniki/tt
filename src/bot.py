@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.8.6"
+TTVersion="🪙TT 0.8.7"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -313,7 +313,7 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
  rows = db.all()
   if not rows:
-    response = 'No reactions saved yet.'
+    response = 'No data.'
   else:
     response = 'Stored Exchanges:'
     for row in rows:
