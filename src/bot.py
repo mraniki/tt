@@ -118,8 +118,7 @@ db.insert({
     "secret": CCXT_id1_secret,
     "password": CCXT_id1_password
     })
-
-#print (db.search(Query().name.matches('[aZ]*')))
+ 
 print (db.get(Query().id=='0'))
 
 
@@ -321,7 +320,8 @@ async def dropDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##=========  show DB ========
 async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"display db")
-    return TinyDB('db.json')
+    await update.effective_chat.send_message(f" db extract: \n {db.table('exchange').all()}")
+    #return TinyDB('db.json')
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot restart  ========
