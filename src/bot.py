@@ -111,8 +111,6 @@ db = TinyDB('./config/db.json')
 db.default_table_name = 'exchange'
 
 db.insert({
-    "id": "0",
-    "type": "CEX",
     "name": CCXT_id1_name,
     "api": CCXT_id1_api,
     "secret": CCXT_id1_secret,
@@ -120,7 +118,6 @@ db.insert({
     })
  
 print (db.get(Query().id=='0'))
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== exchange setup  =============
@@ -144,7 +141,7 @@ if (CCXT_test_mode=="True"):
         error_handler()
 
 else:
-    logger.info(msg=f"no sandbox, setting up production exchange")
+    logger.info(msg=f"no sandbox, setting up prod exchange")
     try:
         CCXT_ex = f'{CCXT_id1_name}'
         exchange_class = getattr(ccxt, CCXT_ex)
@@ -159,7 +156,6 @@ else:
         print (f"exchange setup done for {exchange.name}")
     except:
         error_handler()
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##= telegram bot commands and messages==
@@ -193,7 +189,7 @@ async def post_init(application: Application):
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##Send a message when the command /help is issued."""  
+##Send a message when /help is used.  
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     await update.effective_chat.send_message(f"{menu} \n {exchangeinfo} ")
@@ -201,7 +197,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##========== view balance  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-#Send a message when the command /bal is issued.
+#Send a message when /bal is used.
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     
     try:
@@ -275,21 +271,21 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======= view last closed orders  =====
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-## Send a message when the command /order is issued.
+## Send a message when /order is used.
 async def lastorder_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     print("lastorder_command")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view positions  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-## Send a message when the command /position is issued.
+## Send a message when the /pos is used.
 async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     print("position_command")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view today's pnl =========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-## Send a message when the command /profit or add the output to /bal
+## Send a message when /profit or add the output to /bal
 
 async def pnl_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
  print("pnl_command")
@@ -297,7 +293,7 @@ async def pnl_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== trading switch  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##Send a message when the command /trading is issued
+##Send a message when /trading is used
 async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global trading
     if (trading==False):
