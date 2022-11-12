@@ -317,7 +317,7 @@ async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
   else:
    response = 'Stored Exchanges:'
    for row in rows:
-    response += '\n' + row['name'] + '\t' 
+    response += row['name']
   await update.effective_chat.send_message(f" new active exchange is {response}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
