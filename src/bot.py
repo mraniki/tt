@@ -294,6 +294,7 @@ async def pnl_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 ##======== trading switch  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##Send a message when /trading is used
+
 async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global trading
     if (trading==False):
@@ -303,11 +304,11 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         trading=False
         await update.effective_chat.send_message(f"Trading is {trading}")
         
-        
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============ cex switch  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##Send a message when /trading is used
+##Send a message when /switch is used
 
 async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
  ex1={db.table('exchange').name(1)}
@@ -379,7 +380,7 @@ def main():
      application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
      application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
      application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
-
+     application.add_handler(MessageHandler(filters.Regex('/switch'), cex_switch))
 
 # Message monitoring for order
      #application.add_handler(MessageHandler(filters.ALL, monitor))
