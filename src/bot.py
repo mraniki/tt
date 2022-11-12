@@ -107,7 +107,20 @@ elif (CCXT_id1_name==""):
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== DB SETUP =================
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-db = TinyDB('./config/db.json',storage=CachingMiddleware(JSONStorage))
+db = TinyDB('./config/db.json')
+db.default_table_name = 'exchange'
+
+db.insert({
+    "id": "0",
+    "type": "CEX",
+    "name": CCXT_id1_name,
+    "api": CCXT_id1_api,
+    "secret": CCXT_id1_secret,
+    "password": CCXT_id1_password
+    })
+
+#print (db.search(Query().name.matches('[aZ]*')))
+print (db.get(Query().id=='0'))
 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -302,7 +315,22 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         trading=False
         await update.effective_chat.send_message(f"Trading is {trading}")
         
-        
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=========  drop DB ========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+async def dropDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.info(msg=f"db table dropped")
+    db.drop_tables()
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=========  show DB ========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.info(msg=f"display db")
+    return TinyDB('db.json')
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot restart  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -350,6 +378,8 @@ def main():
      application.add_handler(MessageHandler(filters.Regex('/position'), position_command))
      application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
      application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
+     application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
+     application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
 
 
 # Message monitoring for order
