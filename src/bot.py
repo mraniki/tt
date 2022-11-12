@@ -302,6 +302,17 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     else:
         trading=False
         await update.effective_chat.send_message(f"Trading is {trading}")
+        
+        
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##============ cex switch  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##Send a message when /trading is used
+
+async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+ ex1={db.table('exchange').name(1)}
+ await update.effective_chat.send_message(f" new active exchange is {ex1}")
+        
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== DB COMMAND ===============
