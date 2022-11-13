@@ -319,7 +319,8 @@ async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
    #response = 'Stored Exchanges:'
    for row in rows:
     response = row['name']
-  await update.effective_chat.send_message(f" new active exchange is {response}")
+  print(f"{response})
+  #await update.effective_chat.send_message(f" new active exchange is {response}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== DB COMMAND ===============
@@ -365,14 +366,13 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     #await context.bot.send_message(chat_id=, text=errormessage, parse_mode=ParseMode.HTML)
     await update.effective_chat.send_message(f"⚠️ Error encountered {tb_trim}")
 
- 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== BOT  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 def main():
     """Start the bot."""
-    # Create the Application and pass it your bot's token.
+    # Create the Application
     try:
      application = Application.builder().token(TG_TOKEN).post_init(post_init).build()
 
@@ -392,14 +392,13 @@ def main():
      #application.add_handler(MessageHandler(filters.ALL, monitor))
      application.add_error_handler(error_handler)
 
-#Run the bot until the user presses Ctrl-C
+#Run the bot
      application.run_polling()
 
     except Exception as error:
      logger.fatal("Bot failed to start. Error: " + str(error))
         
-     
-     
+
 if __name__ == '__main__':
     main()
 
