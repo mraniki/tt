@@ -86,62 +86,44 @@ CCXT_id1_secret = os.getenv("EXCHANGE1_YOUR_SECRET")
 CCXT_id1_password = os.getenv("EXCHANGE1_YOUR_PASSWORD") 
 CCXT_id1_ordertype = os.getenv("EXCHANGE1_ORDERTYPE")
 CCXT_id1_defaulttype = os.getenv("EXCHANGE1_DEFAULTTYPE")
-
-#CCXT SANDBOX details
-CCXT_test_mode = os.getenv("TEST_SANDBOX_MODE")
-CCXT_test_name = os.getenv("TEST_SANDBOX_EXCHANGE_NAME")  
-CCXT_test_api = os.getenv("TEST_SANDBOX_YOUR_API_KEY") 
-CCXT_test_secret = os.getenv("TEST_SANDBOX_YOUR_SECRET") 
-CCXT_test_ordertype = os.getenv("TEST_SANDBOX_ORDERTYPE")
-CCXT_test_defaulttype = os.getenv("TEST_SANDBOX_DEFAULTTYPE")
+CCXT_test_mode = os.getenv("EXCHANGE1_SANDBOX_MODE")
 
 if (TG_TOKEN==""):
-    logger.info(msg=f"missing telegram token, Read the install instruction")
+    logger.info(msg=f"missing telegram token")
     sys.exit()
 elif (CCXT_id1_name==""):
-    logger.info(msg=f"missing main exchangeinfo, Read the install instruction")
+    logger.info(msg=f"missing main exchangeinfo")
     sys.exit()
 elif (CCXT_id1_name==""):
     logger.info(msg=f"no sandbox setup")
 
+
+    
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== DB SETUP =================
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 db = TinyDB('./config/db.json')
-db.default_table_name = 'exchange'
 
-db.insert({
+exchangeDB = db.table('exchange')
+#channelDb = db.table('channel')
+#tradesDb = db.table('trades')
+q = Query()
+
+exchangeDB.insert({
     "name": CCXT_id1_name,
     "api": CCXT_id1_api,
     "secret": CCXT_id1_secret,
     "password": CCXT_id1_password
     })
- 
-print (db.get(Query().id=='0'))
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== exchange setup  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-# Enable logging and version check
-#EXCHANGE1 from variable id
+# EXCHANGE setup from variable id
 
-if (CCXT_test_mode=="True"):
-    logger.info(msg=f"sandbox activated")
-    try:
-     CCXT_ex = f'{CCXT_test_name}'
-     exchange_class = getattr(ccxt, CCXT_ex)
-     exchange = exchange_class({
-        'apiKey': CCXT_test_api,
-        'secret': CCXT_test_secret
-        })
-     m_ordertype = CCXT_test_ordertype.upper()
-     exchange.set_sandbox_mode(CCXT_test_mode)
-     logger.info(msg=f"exchange setup done for {exchange.name} sandbox")
-    except:
-        error_handler()
-
+if (not CCXT_id1_name):
+    logger.info(msg=f"exchange is setup")
 else:
-    logger.info(msg=f"no sandbox, setting up prod exchange")
     try:
         CCXT_ex = f'{CCXT_id1_name}'
         exchange_class = getattr(ccxt, CCXT_ex)
@@ -152,11 +134,16 @@ else:
                 'defaultType': CCXT_id1_defaulttype,
                         },
                     })
-        m_ordertype = CCXT_test_ordertype.upper()
-        print (f"exchange setup done for {exchange.name}")
+        m_ordertype = CCXT_id1_ordertype.upper()
+        print (f"setup done for {exchange.name}")
+        if (CCXT_test_mode=="True"):
+         logger.info(msg=f"sandbox activated")
+    
+        else:
+         logger.info(msg=f"no sandbox, setting up prod exchange")
     except:
         error_handler()
-
+ 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##= telegram bot commands and messages==
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -164,17 +151,10 @@ else:
 trading=True #trading switch command
 
 ##list of commands 
-command1=['help']
-command2=['bal']
-command3=['trading']
-command4=['lastorder']
-command5=['position']
-command6=['restart']
-listofcommand = list(itertools.chain(command1, command2, command3))
-commandlist= ' /'.join([str(elem) for elem in listofcommand])
+commandlist= '/help /bal /trading'
 
 ####messages
-menu=f'{TTVersion} \n /{commandlist}'
+menu=f'{TTVersion} \n {commandlist}'
 exchangeinfo= f'Exchange: {exchange.name}  Sandbox: {CCXT_test_mode}'
 unknown_command=f" {commandlist}"
 
@@ -222,8 +202,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-## Send a message when an order 
-## is identified
+## process buy or sell order 
 
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     messagetxt = update.effective_message.text
@@ -311,16 +290,17 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##Send a message when /switch is used
 
 async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+  newexchange  = update.effective_message.text
   rows = db.all()
   if not rows:
    response = 'No data.'
   else:
-   logger.info(msg=f" {rows}")
+   #logger.info(msg=f" {rows}")
    #response = 'Stored Exchanges:'
    for row in rows:
     response = row['name']
-  print(f"{response})
-  #await update.effective_chat.send_message(f" new active exchange is {response}")
+  #print(f"{response}")
+  await update.effective_chat.send_message(f" new active exchange is {newexchange}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== DB COMMAND ===============
