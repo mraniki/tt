@@ -52,69 +52,95 @@ logger.info(msg=f"CCXT Version: {ccxt.__version__}")
 logger.info(msg=f"Please wait, loading...")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=============== CONFIG  =============
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+dotenv_path = './config/.env'
+db = TinyDB('./config/db.json')
+exchangeDB = db.table('exchange')
+telegramDB = db.table('telegram')
+q = Query()
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##====== common functions  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 def Convert(string):
    li = list(string.split(" "))
    return li
-        
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #IMPORT ENV  
 
-dotenv_path = './config/.env'
-if os.path.exists(dotenv_path):
-    logger.info(msg=f"env file found")
+if os.path.exists('./config/db.json'):
+    logger.info(msg=f"Existing DB found")
     load_dotenv(dotenv_path)
-    #environementinfo={json.dumps({**{}, **os.environ}, indent=2)}
-    #logger.info(msg=f"{environementinfo}")  
+    TG_TOKEN = os.getenv("TG_TOKEN")
+    TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
+    ex=exchangeDB.all()
+    CCXT_id1_name = ex[0]['name']
+    CCXT_id1_api = ex[0]['api']  
+    CCXT_id1_secret = ex[0]['secret'] 
+    CCXT_id1_password = ex[0]['password'] 
+    CCXT_test_mode = ex[0]['testmode']
+    CCXT_id1_ordertype = ex[0]['ordertype']
+    CCXT_id1_defaulttype = ex[0]['defaultType']
+
 else:
-    logger.info(msg=f"no env file available check the path for config")
-    environementinfo={json.dumps({**{}, **os.environ}, indent=2)}
-    logger.info(msg=f"{environementinfo}") 
-    sys.exit()
+    logger.info(msg=f"no DB, using env file")
+    if os.path.exists(dotenv_path):
+        logger.info(msg=f"env file found")
+        load_dotenv(dotenv_path)
+        #environementinfo={json.dumps({**{}, **os.environ}, indent=2)}
+        #logger.info(msg=f"{environementinfo}")  
+    else:
+        logger.info(msg=f"no env file available check the path for config")
+        environementinfo={json.dumps({**{}, **os.environ}, indent=2)}
+        logger.info(msg=f"{environementinfo}") 
+        sys.exit()
 
-# ENV VAR (from file or docker variable)
-TG_TOKEN = os.getenv("TG_TOKEN")
-TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
+    # ENV VAR (from file or docker variable)
+    #TG_TOKEN = os.getenv("TG_TOKEN")
+    #TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
 
-CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
-CCXT_id1_api = os.getenv("EXCHANGE1_YOUR_API_KEY")  
-CCXT_id1_secret = os.getenv("EXCHANGE1_YOUR_SECRET") 
-CCXT_id1_password = os.getenv("EXCHANGE1_YOUR_PASSWORD") 
-CCXT_id1_ordertype = os.getenv("EXCHANGE1_ORDERTYPE")
-CCXT_id1_defaulttype = os.getenv("EXCHANGE1_DEFAULTTYPE")
-CCXT_test_mode = os.getenv("EXCHANGE1_SANDBOX_MODE")
+    CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
+    CCXT_id1_api = os.getenv("EXCHANGE1_YOUR_API_KEY")  
+    CCXT_id1_secret = os.getenv("EXCHANGE1_YOUR_SECRET") 
+    CCXT_id1_password = os.getenv("EXCHANGE1_YOUR_PASSWORD") 
+    CCXT_id1_ordertype = os.getenv("EXCHANGE1_ORDERTYPE")
+    CCXT_id1_defaulttype = os.getenv("EXCHANGE1_DEFAULTTYPE")
+    CCXT_test_mode = os.getenv("EXCHANGE1_SANDBOX_MODE")
 
-if (TG_TOKEN==""):
-    logger.info(msg=f"missing telegram token")
-    sys.exit()
-elif (CCXT_id1_name==""):
-    logger.info(msg=f"missing main exchangeinfo")
-    sys.exit()
-elif (CCXT_id1_name==""):
-    logger.info(msg=f"no sandbox setup")
+    if (TG_TOKEN==""):
+        logger.info(msg=f"missing telegram token")
+        sys.exit()
+    elif (CCXT_id1_name==""):
+        logger.info(msg=f"missing main exchangeinfo")
+        sys.exit()
+    elif (CCXT_id1_name==""):
+        logger.info(msg=f"no sandbox setup")
 
-
-    
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== DB SETUP =================
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-db = TinyDB('./config/db.json')
+
 
 exchangeDB = db.table('exchange')
-#channelDb = db.table('channel')
-#tradesDb = db.table('trades')
 q = Query()
-
-exchangeDB.insert({
-    "name": CCXT_id1_name,
-    "api": CCXT_id1_api,
-    "secret": CCXT_id1_secret,
-    "password": CCXT_id1_password
-    })
+exinsert=exchangeDB.search(q.name==CCXT_id1_name)
+if len(exinsert):
+    logger.info(msg=f"exchange is already setup")
+else:
+    exchangeDB.insert({
+        "name": CCXT_id1_name,
+        "api": CCXT_id1_api,
+        "secret": CCXT_id1_secret,
+        "password": CCXT_id1_password,
+        "testmode": CCXT_test_mode,
+        "ordertype": CCXT_id1_ordertype,
+        "defaultType": CCXT_id1_defaulttype
+        })
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== exchange setup  =============
@@ -290,17 +316,34 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##Send a message when /switch is used
 
 async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-  newexchange  = update.effective_message.text
-  rows = db.all()
-  if not rows:
-   response = 'No data.'
+  msg_ex  = update.effective_message.text
+  newexchangemsg = Convert(msg_ex) 
+  newexchange=newexchangemsg[1]
+  newex=exchangeDB.search(q.name==newexchange)
+  logger.info(msg=f"check: {newex}")
+  if len(newex):
+    logger.info(msg=f"exchange setup starting for {newex[0]['name']}")
+    CCXT_id1_name = newex[0]['name']
+    CCXT_id1_api = newex[0]['api']  
+    CCXT_id1_secret = newex[0]['secret'] 
+    CCXT_id1_password = newex[0]['password'] 
+    CCXT_test_mode = newex[0]['testmode'] 
+
+    response = f" new active exchange is {CCXT_id1_name} \n "
+    CCXT_ex = f'{CCXT_id1_name}'
+    exchange_class = getattr(ccxt, CCXT_ex)
+    exchange = exchange_class({
+        'apiKey': CCXT_id1_api,
+        'secret': CCXT_id1_secret
+        # 'options':  {
+        #      'defaultType': CCXT_id1_defaulttype,
+        #             },
+            })
+        # m_ordertype = CCXT_id1_ordertype.upper()
+        # print (f"setup done for {exchange.name}")
   else:
-   #logger.info(msg=f" {rows}")
-   #response = 'Stored Exchanges:'
-   for row in rows:
-    response = row['name']
-  #print(f"{response}")
-  await update.effective_chat.send_message(f" new active exchange is {newexchange}")
+    response = 'Exchange not setup'    
+  await update.effective_chat.send_message(f" {response}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== DB COMMAND ===============
