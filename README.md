@@ -11,6 +11,7 @@
 Made with
 [![telegrambot](https://badgen.net/badge/icon/telegrambot?icon=telegram&label)](https://t.me/pythontelegrambotchannel)
 [![ccxt](https://badgen.net/badge/icon/ccxt/black?icon=libraries&label)](https://github.com/ccxt/ccxt)
+[![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py)
 [![sublime](https://badgen.net/badge/icon/sublime/F96854?icon=terminal&label)](https://www.sublimetext.com/)
 [![workingcopy](https://badgen.net/badge/icon/workingcopy/16DCCD?icon=github&label)](https://workingcopy.app/)
 
@@ -114,18 +115,18 @@ Environment file or docker variable are loaded in db at the startup.
  - Support testnet and prod exchange via environment variable file
  - Support % of USDT balance for order
  - Support bot in private channel (or private chat)
- - Handle Multi CEFI config (verified with Binance, Binance Testnet and Kraken)
+ - Handle Multi CEFI config (verified with Binance, Binance Testnet and ~~FTX~~ Kraken)
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 ToDo
 - formating/handling of response from exchange (opened position, last closed order)
 - add config folder in the dockerfile to automatically create the volume folder
-- support futures and margin options
+- Integrate DEFI DEX (like pancakeswap or uniswap)
+- support futures and margin options (to be checked)
 - view last closed orders via /order command 
 - view opened future position via /pos command 
 - view daily pnl via /profit or /bal command
-- Integrate DEFI DEX (like pancake)
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges
 
  ## ⚠️ Disclaimer
