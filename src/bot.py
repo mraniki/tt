@@ -354,8 +354,8 @@ async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
       balancedex=web3.eth.get_balance(address)
       balancedexreadeable = web3.fromWei(balancedex,'ether')
       logger.info(msg=f"{web3.isConnected()} ")
-      response = f"DEX WIP \n {name} status: {web3.isConnected()} \n BNB balance: {balancedexreadeable}"
-  await update.effective_chat.send_message(f" {response}")
+      response = f"DEX WiP \n {name} status: {web3.isConnected()} \n BNB balance: {balancedexreadeable}"
+  await update.effective_chat.send_message(f"{response}")
 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
