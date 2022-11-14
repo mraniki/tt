@@ -31,7 +31,7 @@ Made with
 
 ## Config
 Either use .env file, docker variable or json db as per below structure.
-Enviroment file or docker variable are loaded in db at the startup.
+Environment file or docker variable are loaded in db at the startup.
 
 ### Env
 
@@ -114,7 +114,7 @@ Enviroment file or docker variable are loaded in db at the startup.
 - view last closed orders via /order command 
 - view opened future position via /pos command 
 - view daily pnl via /profit or /bal command
-- Integrate DEX (like pancake)
+- Integrate DEFI DEX (like pancake)
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges
 
  ## ⚠️ Disclaimer
