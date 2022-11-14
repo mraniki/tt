@@ -49,7 +49,7 @@ Environment file or docker variable are loaded in db at the startup.
 
 ### DB Structure
     {
-      "exchange": {
+      "cex": {
         "1": {
           "name": "kraken",
           "api": "yourapi",
