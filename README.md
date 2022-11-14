@@ -18,21 +18,20 @@ Made with
 [![Docker](https://github.com/mraniki/tt/actions/workflows/DockerHub.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/DockerHub.yml) [![DockerNightly](https://github.com/mraniki/tt/actions/workflows/DockerHub_Dev.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/DockerHub_Dev.yml)
 
 ## Install
-1) Create a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
-2) Create your API Keys supported by [CCXT](https://github.com/ccxt/ccxt). 
-3) Deploy :
+1) Create a private channel and a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
+2) Get your API Keys supported by [CCXT](https://github.com/ccxt/ccxt). 
+3) Update the config (as per below), bot token, API in the .env file in config (and point your env file to container volume /code/config)
+4) Deploy :
 - via docker 
   - dockerhub `docker push mraniki/tt:latest` or `docker push mraniki/tt:nightly`,
-  - or github `docker pull ghcr.io/mraniki/tt:main` or `docker pull ghcr.io/mraniki/tt:nightly`
-- or `git clone https://github.com/mraniki/tt:main`
-4) Update bot token, API in the .env file in config (and point your env file to container volume /code/config)
-5) Start your container
-6) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
+- or `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt`
+6) Start your container
+7) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) 
 
 ## Config
 Either use .env file, docker variable or json db as per below structure.
-Enviroment file or docker variable are loaded in db at the startup.
+Environment file or docker variable are loaded in db at the startup.
 
 ### Env
 
@@ -92,6 +91,17 @@ Enviroment file or docker variable are loaded in db at the startup.
           "token": "yourbottoken",
           "channel": "yourchannelid"
         }
+      },
+      "dex": {
+        "1": {
+          "name": "pancake",
+          "address": "",
+          "privatekey": "",
+          "version":"v2",
+          "networkprovider":"https://bsc-dataseed.binance.org/",
+          "router": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+          "testmode":""
+        }
       }
     }
 
@@ -103,8 +113,9 @@ Enviroment file or docker variable are loaded in db at the startup.
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
  - Support testnet and prod exchange via environment variable file
  - Support % of USDT balance for order
- - Support bot in private channel or private chat
- 
+ - Support bot in private channel (or private chat)
+ - Handle Multi CEFI config (verified with Binance, Binance Testnet and Kraken)
+
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 ToDo
@@ -113,10 +124,8 @@ Enviroment file or docker variable are loaded in db at the startup.
 - support futures and margin options
 - view last closed orders via /order command 
 - view opened future position via /pos command 
-- view daiky pnl via /profit or /bal command
-- handle 2/multi exchanges at the same time
-- Test across multiple CEX (Binance, Kraken, Kucoin, Coinbase Huobi)
-- Integrate DEX (like pancake)
+- view daily pnl via /profit or /bal command
+- Integrate DEFI DEX (like pancake)
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges
 
  ## ⚠️ Disclaimer

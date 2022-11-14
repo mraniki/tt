@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.9"
+TTVersion="🪙TT 0.9.1"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -17,12 +17,8 @@ import time
 
 ##env
 import os
-import argparse
-from dotenv import load_dotenv
-
 from os import getenv
-from pathlib import Path
-import itertools
+from dotenv import load_dotenv
 
 #telegram
 from telegram import Update    
@@ -30,8 +26,10 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 
 #ccxt
 import ccxt
-from ccxt import Exchange
 import json
+
+#dex
+from web3 import Web3
 
 #db
 from tinydb import TinyDB, Query
@@ -56,8 +54,10 @@ logger.info(msg=f"Please wait, loading...")
 dotenv_path = './config/.env'
 db_path= './config/db.json'
 db = TinyDB(db_path)
-exchangeDB = db.table('exchange')
+cexDB = db.table('cex')
 telegramDB = db.table('telegram')
+dexDB = db.table('dex')
+
 q = Query()
 
 ##== var==
@@ -65,13 +65,13 @@ global exchangeid
 exchanges = {}
 active_ex = {}
 trading=True 
-testmode=True
+testmode=False
 #trading switch command
 
 ##= telegram bot commands and messages
 commandlist= '/help /bal /trading /test /dbdisplay'
 menu=f'{TTVersion} \n {commandlist}\n'
-helpinfo=f'Use "/switch ccxtname" to change the active exchange'
+helpinfo=f'Use "/cex ccxtname" to change the active exchange'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##====== common functions  =============
@@ -86,52 +86,37 @@ def loadExchange(exchangeid, api, secret, mode):
     logger.info(msg=f"cefi setup for {exchangeid}")
     exchange = getattr(ccxt, exchangeid)
     exchanges[exchangeid] = exchange()
-    if testmode:
-        try:
-            exchanges[exchangeid] = exchange({
-                 'apiKey': api,
-                 'secret': secret
-                  })
-            logger.info(msg=f"{exchanges[exchangeid]} setup")
-            active_ex=exchanges[exchangeid]
+    try:
+        exchanges[exchangeid] = exchange({
+            'apiKey': api,
+            'secret': secret
+            })
+        logger.info(msg=f"{exchanges[exchangeid]} setup")
+        active_ex=exchanges[exchangeid]
+        if testmode:
             logger.info(msg=f"Sandbox exchange is {active_ex}")
-            return active_ex
             exchange.set_sandbox_mode(mode)
-        except ccxt.NetworkError as e:
-            logger.error(msg=f"{e}")
-        except ccxt.ExchangeError as e:
-            logger.error(msg=f"{e}")
-        except Exception as e:
-            logger.error(msg=f"{e}")
-    else:
-        try:
-            exchanges[exchangeid] = exchange({
-                 'apiKey': api,
-                 'secret': secret
-                  })
-            logger.info(msg=f"{exchanges[exchangeid]} setup")
-            active_ex=exchanges[exchangeid]
-            logger.info(msg=f"active exchange is {active_ex}")
-            return active_ex
-        except ccxt.NetworkError as e:
-           logger.error(msg=f"{e}")
-        except ccxt.ExchangeError as e:
-           logger.error(msg=f"{e}")
-        except Exception as e:
-           logger.error(msg=f"{e}")
-
+        else:
+            logger.info(msg=f"Active cex is {active_ex}")
+        return active_ex
+    except ccxt.NetworkError as e:
+        logger.error(msg=f"{e}")
+    except ccxt.ExchangeError as e:
+        logger.error(msg=f"{e}")
+    except Exception as e:
+        logger.error(msg=f"{e}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-#IMPORT ENV  
+#IMPORT VAR from DB or from ENV
 
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB found")
     tg=telegramDB.all()
     TG_TOKEN = tg[0]['token']
     TG_CHANNEL_ID = tg[0]['channel']
-    ex=exchangeDB.all()
+    ex=cexDB.all()
     CCXT_id1_name = ex[0]['name']
     CCXT_id1_api = ex[0]['api']  
     CCXT_id1_secret = ex[0]['secret'] 
@@ -164,11 +149,11 @@ else:
     CCXT_test_mode = os.getenv("EXCHANGE1_SANDBOX_MODE")
     
 ##=========== DB SETUP =================
-    exinsert=exchangeDB.search(q.api==CCXT_id1_api)
+    exinsert=cexDB.search(q.api==CCXT_id1_api)
     if len(exinsert):
-         logger.info(msg=f"exchange exist in db")
+         logger.info(msg=f"exchange already exist in db")
     else:
-         exchangeDB.insert({
+         cexDB.insert({
          "name": CCXT_id1_name,
          "api": CCXT_id1_api,
          "secret": CCXT_id1_secret,
@@ -179,7 +164,7 @@ else:
         })
     tginsert=telegramDB.search(q.token==TG_TOKEN)
     if len(tginsert):
-      logger.info(msg=f"bot is setup")
+      logger.info(msg=f"bot is already setup")
     else:
       telegramDB.insert({
         "token": TG_TOKEN,
@@ -187,13 +172,13 @@ else:
          })
  
     if (TG_TOKEN==""):
-        logger.info(msg=f"missing telegram token")
+        logger.error(msg=f"missing telegram token")
         sys.exit()
     elif (CCXT_id1_name==""):
-        logger.info(msg=f"missing main exchangeinfo")
+        logger.error(msg=f"missing main exchangeinfo")
         sys.exit()
     elif (CCXT_id1_name==""):
-        logger.info(msg=f"no sandbox setup")
+        logger.error(msg=f"no sandbox setup")
         
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== INITIAL exchange setup  =====
@@ -334,29 +319,44 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
 async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
+
   msg_ex  = update.effective_message.text
-  if testmode:
-      newexchangemsg = Convert(msg_ex) 
-      newexchange=newexchangemsg[1]
-      newex=exchangeDB.search((q.name==newexchange)&(q.testmode=="True"))
+  newexchangemsg = Convert(msg_ex) 
+  newexchange=newexchangemsg[1]
+  extype=newexchangemsg[0]
+  if extype=="/cex":
+      if testmode:
+          newex=cexDB.search((q.name==newexchange)&(q.testmode=="True"))
+      else:
+          newex=cexDB.search((q.name==newexchange)&(q.testmode!="True"))
+          logger.info(msg=f"New CEX: {newex}")
+      if len(newex):
+        logger.info(msg=f"CEX setup starting for {newex[0]['name']}")
+        CCXT_name = newex[0]['name']
+        CCXT_api = newex[0]['api']  
+        CCXT_secret = newex[0]['secret'] 
+        CCXT_password = newex[0]['password'] 
+        CCXT_test_mode = newex[0]['testmode'] 
+        res = loadExchange(CCXT_name,CCXT_api,CCXT_secret,CCXT_test_mode)
+        response = f" new active CEX is {res} \n "
+      else:
+        response = 'CEX not setup'
   else:
-      newexchangemsg = Convert(msg_ex) 
-      newexchange=newexchangemsg[1]
-      newex=exchangeDB.search((q.name==newexchange)&(q.testmode!="True"))
-      logger.info(msg=f"newexchange: {newex}")
-  if len(newex):
-    logger.info(msg=f"exchange setup starting for {newex[0]['name']}")
-    CCXT_name = newex[0]['name']
-    CCXT_api = newex[0]['api']  
-    CCXT_secret = newex[0]['secret'] 
-    CCXT_password = newex[0]['password'] 
-    CCXT_test_mode = newex[0]['testmode'] 
-    res = loadExchange(CCXT_name,CCXT_api,CCXT_secret,CCXT_test_mode)
-    response = f" new active exchange is {res} \n "
-  else:
-    response = 'Exchange not setup'    
-  await update.effective_chat.send_message(f" {response}")
-  
+      newex=dexDB.search((q.name==newexchange)&(q.testmode!="True"))
+      logger.info(msg=f"New CEX: {newex}")
+      name= newex[0]['name']
+      address= newex[0]['address']
+      privatekey= newex[0]['privatekey']
+      version= newex[0]['version']
+      networkprovider= newex[0]['networkprovider']
+      logger.info(msg=f"{networkprovider}")
+      web3 = Web3(Web3.HTTPProvider(networkprovider))
+      balancedex=web3.eth.get_balance(address)
+      balancedexreadeable = web3.fromWei(balancedex,'ether')
+      logger.info(msg=f"{web3.isConnected()} ")
+      response = f"DEX WiP \n {name} status: {web3.isConnected()} \n BNB balance: {balancedexreadeable}"
+  await update.effective_chat.send_message(f"{response}")
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== Test mode switch  ===========
@@ -431,7 +431,8 @@ def main():
      application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
      application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch))
      application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
-     application.add_handler(MessageHandler(filters.Regex('/switch'), cex_switch))
+     application.add_handler(MessageHandler(filters.Regex('/cex'), cex_switch))
+     application.add_handler(MessageHandler(filters.Regex('/dex'), cex_switch))
      application.add_handler(MessageHandler(filters.Regex('/lastorder'), lastorder_command))
      application.add_handler(MessageHandler(filters.Regex('/position'), position_command))
      application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
