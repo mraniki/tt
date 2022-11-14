@@ -1,5 +1,5 @@
 # Telegram Trader
- CCXT and Telegram integration. Based on python telegram bot v20. 
+ CEX, DEX and Telegram integration. Based on python telegram bot v20. 
  Deploy it via docker. 
 
 [![](https://badgen.net/badge/icon/TT/E2B13C?icon=bitcoin&label)](https://github.com/mraniki/tt)
