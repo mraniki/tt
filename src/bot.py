@@ -30,6 +30,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 
 #ccxt
 import ccxt
+from ccxt import Exchange
 import json
 
 #db
@@ -55,11 +56,13 @@ logger.info(msg=f"Please wait, loading...")
 ##=============== CONFIG  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 dotenv_path = './config/.env'
-db = TinyDB('./config/db.json')
+db_path= './config/db.json'
+db = TinyDB(db_path)
 exchangeDB = db.table('exchange')
 telegramDB = db.table('telegram')
 q = Query()
-
+global exchange
+trading=True #trading switch command
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##====== common functions  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -67,17 +70,56 @@ q = Query()
 def Convert(string):
    li = list(string.split(" "))
    return li
+  
+def loadExchange(exchange, api, secret, mode):
+    logger.info(msg=f"cefi setup")
+    #exchange =""
+    
+    exchanges = {}  # a placeholder for your instances
+    for id in ccxt.exchanges:
+        exchange = getattr(ccxt, id)
+        exchanges[id] = exchange()
+        print(exchanges[id])
+    try:
+        ex = exchanges[id]
+        # markets = ex.fetch_markets()
+        # print(markets)
+    except:
+     continue
+    
+    exchange_class = getattr(ccxt, exchange)
+    try:
+        exchange = exchange_class({
+              'apiKey': api,
+              'secret': secret
+              #'pass': password,
+              })
+              #m_ordertype = CCXT_id1_ordertype
+        #exchange.load_markets()
+        #exchange.verbose = True
+        logger.info(msg=f"{exchange.name} setup")
+        exchange.set_sandbox_mode(mode)
+        #exchangeinfo= f'Exchange: {exchange.name}  Sandbox: {mode}'
+        #logger.info(msg=f"{exchangeinfo}")
+        #balance = exchange.fetch_free_balance()
+        return exchange
+    except ccxt.NetworkError as e:
+       logger.error(msg=f"{e}")
+    except ccxt.ExchangeError as e:
+       logger.error(msg=f"{e}")
+    except Exception as e:
+       logger.error(msg=f"{e}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 #IMPORT ENV  
 
-if os.path.exists('./config/db.json'):
+if os.path.exists(db_path):
     logger.info(msg=f"Existing DB found")
-    load_dotenv(dotenv_path)
-    TG_TOKEN = os.getenv("TG_TOKEN")
-    TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
+    tg=telegramDB.all()
+    TG_TOKEN = tg[0]['token']
+    TG_CHANNEL_ID = tg[0]['channel']
     ex=exchangeDB.all()
     CCXT_id1_name = ex[0]['name']
     CCXT_id1_api = ex[0]['api']  
@@ -88,7 +130,7 @@ if os.path.exists('./config/db.json'):
     CCXT_id1_defaulttype = ex[0]['defaultType']
 
 else:
-    logger.info(msg=f"no DB, using env file")
+    logger.info(msg=f"no DB, env file")
     if os.path.exists(dotenv_path):
         logger.info(msg=f"env file found")
         load_dotenv(dotenv_path)
@@ -101,8 +143,8 @@ else:
         sys.exit()
 
     # ENV VAR (from file or docker variable)
-    #TG_TOKEN = os.getenv("TG_TOKEN")
-    #TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
+    TG_TOKEN = os.getenv("TG_TOKEN")
+    TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
 
     CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
     CCXT_id1_api = os.getenv("EXCHANGE1_YOUR_API_KEY")  
@@ -111,7 +153,30 @@ else:
     CCXT_id1_ordertype = os.getenv("EXCHANGE1_ORDERTYPE")
     CCXT_id1_defaulttype = os.getenv("EXCHANGE1_DEFAULTTYPE")
     CCXT_test_mode = os.getenv("EXCHANGE1_SANDBOX_MODE")
-
+    
+##=========== DB SETUP =================
+    exinsert=exchangeDB.search(q.api==CCXT_id1_api)
+    if len(exinsert):
+         logger.info(msg=f"exchange exist in db")
+    else:
+         exchangeDB.insert({
+         "name": CCXT_id1_name,
+         "api": CCXT_id1_api,
+         "secret": CCXT_id1_secret,
+         "password": CCXT_id1_password,
+         "testmode": CCXT_test_mode,
+         "ordertype": CCXT_id1_ordertype,
+         "defaultType": CCXT_id1_defaulttype
+        })
+    tginsert=telegramDB.search(q.token==TG_TOKEN)
+    if len(tginsert):
+      logger.info(msg=f"bot is setup")
+    else:
+      telegramDB.insert({
+        "token": TG_TOKEN,
+        "channel": TG_CHANNEL_ID
+         })
+ 
     if (TG_TOKEN==""):
         logger.info(msg=f"missing telegram token")
         sys.exit()
@@ -120,69 +185,25 @@ else:
         sys.exit()
     elif (CCXT_id1_name==""):
         logger.info(msg=f"no sandbox setup")
-
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##=========== DB SETUP =================
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-
-exchangeDB = db.table('exchange')
-q = Query()
-exinsert=exchangeDB.search(q.name==CCXT_id1_name)
-if len(exinsert):
-    logger.info(msg=f"exchange is already setup")
-else:
-    exchangeDB.insert({
-        "name": CCXT_id1_name,
-        "api": CCXT_id1_api,
-        "secret": CCXT_id1_secret,
-        "password": CCXT_id1_password,
-        "testmode": CCXT_test_mode,
-        "ordertype": CCXT_id1_ordertype,
-        "defaultType": CCXT_id1_defaulttype
-        })
-
+        
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== exchange setup  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # EXCHANGE setup from variable id
 
-if (not CCXT_id1_name):
-    logger.info(msg=f"exchange is setup")
-else:
-    try:
-        CCXT_ex = f'{CCXT_id1_name}'
-        exchange_class = getattr(ccxt, CCXT_ex)
-        exchange = exchange_class({
-            'apiKey': CCXT_id1_api,
-            'secret': CCXT_id1_secret,
-            'options':  {
-                'defaultType': CCXT_id1_defaulttype,
-                        },
-                    })
-        m_ordertype = CCXT_id1_ordertype.upper()
-        print (f"setup done for {exchange.name}")
-        if (CCXT_test_mode=="True"):
-         logger.info(msg=f"sandbox activated")
-    
-        else:
-         logger.info(msg=f"no sandbox, setting up prod exchange")
-    except:
-        error_handler()
+logger.info(msg=f"exchange setup")
+exchange= loadExchange(CCXT_id1_name,CCXT_id1_api,CCXT_id1_secret,CCXT_test_mode)
+logger.info(msg=f"{exchange.name} enabled")
  
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##= telegram bot commands and messages==
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-trading=True #trading switch command
-
 ##list of commands 
-commandlist= '/help /bal /trading'
+commandlist= '/help /bal /trading /dbdisplay'
 
 ####messages
 menu=f'{TTVersion} \n {commandlist}'
-exchangeinfo= f'Exchange: {exchange.name}  Sandbox: {CCXT_test_mode}'
-unknown_command=f" {commandlist}"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## ========== startup message   ========
@@ -190,6 +211,7 @@ unknown_command=f" {commandlist}"
 
 async def post_init(application: Application):
     logger.info(msg=f"bot is online")
+    exchangeinfo= f'Exchange: {exchange.name}  Sandbox: {CCXT_test_mode}'
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\n{menu}\n {exchangeinfo} ")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -197,8 +219,7 @@ async def post_init(application: Application):
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##Send a message when /help is used.  
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-
-    await update.effective_chat.send_message(f"{menu} \n {exchangeinfo} ")
+    await update.effective_chat.send_message(f"{menu} \n {exchange.name} ")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##========== view balance  =============
@@ -315,35 +336,29 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##Send a message when /switch is used
 
-async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
+  exchange.close()
   msg_ex  = update.effective_message.text
   newexchangemsg = Convert(msg_ex) 
   newexchange=newexchangemsg[1]
   newex=exchangeDB.search(q.name==newexchange)
-  logger.info(msg=f"check: {newex}")
+  logger.info(msg=f"newexchange: {newex}")
   if len(newex):
     logger.info(msg=f"exchange setup starting for {newex[0]['name']}")
-    CCXT_id1_name = newex[0]['name']
-    CCXT_id1_api = newex[0]['api']  
-    CCXT_id1_secret = newex[0]['secret'] 
-    CCXT_id1_password = newex[0]['password'] 
+    CCXT_name = newex[0]['name']
+    CCXT_api = newex[0]['api']  
+    CCXT_secret = newex[0]['secret'] 
+    CCXT_password = newex[0]['password'] 
     CCXT_test_mode = newex[0]['testmode'] 
-
-    response = f" new active exchange is {CCXT_id1_name} \n "
-    CCXT_ex = f'{CCXT_id1_name}'
-    exchange_class = getattr(ccxt, CCXT_ex)
-    exchange = exchange_class({
-        'apiKey': CCXT_id1_api,
-        'secret': CCXT_id1_secret
-        # 'options':  {
-        #      'defaultType': CCXT_id1_defaulttype,
-        #             },
-            })
-        # m_ordertype = CCXT_id1_ordertype.upper()
-        # print (f"setup done for {exchange.name}")
+    exchange=loadExchange(CCXT_name,CCXT_api,CCXT_secret,CCXT_test_mode)
+    response = f" new active exchange is {CCXT_name} or {exchange.name} \n "
+    
   else:
     response = 'Exchange not setup'    
   await update.effective_chat.send_message(f" {response}")
+  return exchange
+  
+  
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== DB COMMAND ===============
