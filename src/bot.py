@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.8.7"
+TTVersion="🪙TT 0.9"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -35,8 +35,6 @@ import json
 
 #db
 from tinydb import TinyDB, Query
-from tinydb.storages import JSONStorage
-from tinydb.middlewares import CachingMiddleware
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== Logging  =============
@@ -61,8 +59,20 @@ db = TinyDB(db_path)
 exchangeDB = db.table('exchange')
 telegramDB = db.table('telegram')
 q = Query()
-global exchange
-trading=True #trading switch command
+
+##== var==
+global exchangeid
+exchanges = {}
+active_ex = {}
+trading=True 
+testmode=True
+#trading switch command
+
+##= telegram bot commands and messages
+commandlist= '/help /bal /trading /test /dbdisplay'
+menu=f'{TTVersion} \n {commandlist}\n'
+helpinfo=f'Use "/switch ccxtname" to change the active exchange'
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##====== common functions  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -71,44 +81,45 @@ def Convert(string):
    li = list(string.split(" "))
    return li
   
-def loadExchange(exchange, api, secret, mode):
-    logger.info(msg=f"cefi setup")
-    #exchange =""
-    
-    exchanges = {}  # a placeholder for your instances
-    for id in ccxt.exchanges:
-        exchange = getattr(ccxt, id)
-        exchanges[id] = exchange()
-        print(exchanges[id])
-    try:
-        ex = exchanges[id]
-        # markets = ex.fetch_markets()
-        # print(markets)
-    except:
-     continue
-    
-    exchange_class = getattr(ccxt, exchange)
-    try:
-        exchange = exchange_class({
-              'apiKey': api,
-              'secret': secret
-              #'pass': password,
-              })
-              #m_ordertype = CCXT_id1_ordertype
-        #exchange.load_markets()
-        #exchange.verbose = True
-        logger.info(msg=f"{exchange.name} setup")
-        exchange.set_sandbox_mode(mode)
-        #exchangeinfo= f'Exchange: {exchange.name}  Sandbox: {mode}'
-        #logger.info(msg=f"{exchangeinfo}")
-        #balance = exchange.fetch_free_balance()
-        return exchange
-    except ccxt.NetworkError as e:
-       logger.error(msg=f"{e}")
-    except ccxt.ExchangeError as e:
-       logger.error(msg=f"{e}")
-    except Exception as e:
-       logger.error(msg=f"{e}")
+def loadExchange(exchangeid, api, secret, mode):
+    global active_ex
+    logger.info(msg=f"cefi setup for {exchangeid}")
+    exchange = getattr(ccxt, exchangeid)
+    exchanges[exchangeid] = exchange()
+    if testmode:
+        try:
+            exchanges[exchangeid] = exchange({
+                 'apiKey': api,
+                 'secret': secret
+                  })
+            logger.info(msg=f"{exchanges[exchangeid]} setup")
+            active_ex=exchanges[exchangeid]
+            logger.info(msg=f"Sandbox exchange is {active_ex}")
+            return active_ex
+            exchange.set_sandbox_mode(mode)
+        except ccxt.NetworkError as e:
+            logger.error(msg=f"{e}")
+        except ccxt.ExchangeError as e:
+            logger.error(msg=f"{e}")
+        except Exception as e:
+            logger.error(msg=f"{e}")
+    else:
+        try:
+            exchanges[exchangeid] = exchange({
+                 'apiKey': api,
+                 'secret': secret
+                  })
+            logger.info(msg=f"{exchanges[exchangeid]} setup")
+            active_ex=exchanges[exchangeid]
+            logger.info(msg=f"active exchange is {active_ex}")
+            return active_ex
+        except ccxt.NetworkError as e:
+           logger.error(msg=f"{e}")
+        except ccxt.ExchangeError as e:
+           logger.error(msg=f"{e}")
+        except Exception as e:
+           logger.error(msg=f"{e}")
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
@@ -134,18 +145,16 @@ else:
     if os.path.exists(dotenv_path):
         logger.info(msg=f"env file found")
         load_dotenv(dotenv_path)
-        #environementinfo={json.dumps({**{}, **os.environ}, indent=2)}
-        #logger.info(msg=f"{environementinfo}")  
     else:
         logger.info(msg=f"no env file available check the path for config")
         environementinfo={json.dumps({**{}, **os.environ}, indent=2)}
         logger.info(msg=f"{environementinfo}") 
         sys.exit()
 
+##=========== ENV SETUP =================
     # ENV VAR (from file or docker variable)
     TG_TOKEN = os.getenv("TG_TOKEN")
     TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
-
     CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
     CCXT_id1_api = os.getenv("EXCHANGE1_YOUR_API_KEY")  
     CCXT_id1_secret = os.getenv("EXCHANGE1_YOUR_SECRET") 
@@ -187,23 +196,10 @@ else:
         logger.info(msg=f"no sandbox setup")
         
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##======== exchange setup  =============
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-# EXCHANGE setup from variable id
-
-logger.info(msg=f"exchange setup")
-exchange= loadExchange(CCXT_id1_name,CCXT_id1_api,CCXT_id1_secret,CCXT_test_mode)
-logger.info(msg=f"{exchange.name} enabled")
- 
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##= telegram bot commands and messages==
+##======== INITIAL exchange setup  =====
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-##list of commands 
-commandlist= '/help /bal /trading /dbdisplay'
-
-####messages
-menu=f'{TTVersion} \n {commandlist}'
+loadExchange(CCXT_id1_name,CCXT_id1_api,CCXT_id1_secret,CCXT_test_mode)
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## ========== startup message   ========
@@ -211,15 +207,14 @@ menu=f'{TTVersion} \n {commandlist}'
 
 async def post_init(application: Application):
     logger.info(msg=f"bot is online")
-    exchangeinfo= f'Exchange: {exchange.name}  Sandbox: {CCXT_test_mode}'
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\n{menu}\n {exchangeinfo} ")
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\n{menu}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##Send a message when /help is used.  
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.effective_chat.send_message(f"{menu} \n {exchange.name} ")
+    await update.effective_chat.send_message(f"{menu} \n {active_ex} \n {helpinfo}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##========== view balance  =============
@@ -228,7 +223,8 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     
     try:
-        balance = exchange.fetch_free_balance()
+        logger.info(msg=f" active exchange is {active_ex}")
+        balance = active_ex.fetch_free_balance()
         balance2 = {k: v for k, v in balance.items() if v>0}
         logger.info(msg=f"{balance2}")
         prettybal=""
@@ -271,10 +267,10 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 m_q=order_m[4][2:-1]
                 logger.info(msg=f"Processing order: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
                 #calculate percentage 
-                m_price = float(exchange.fetchTicker(f'{m_symbol}').get('last'))
-                totalusdtbal = exchange.fetchBalance()['USDT']['free']
+                m_price = float(active_ex.fetchTicker(f'{m_symbol}').get('last'))
+                totalusdtbal = active_ex.fetchBalance()['USDT']['free']
                 amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price) 
-                res = exchange.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
+                res = active_ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
                 orderid=res['id']
                 timestamp=res['datetime']
                 symbol=res['symbol']
@@ -329,7 +325,7 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     else:
         trading=False
         await update.effective_chat.send_message(f"Trading is {trading}")
-        
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============ cex switch  =============
@@ -337,12 +333,17 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##Send a message when /switch is used
 
 async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
-  exchange.close()
+
   msg_ex  = update.effective_message.text
-  newexchangemsg = Convert(msg_ex) 
-  newexchange=newexchangemsg[1]
-  newex=exchangeDB.search(q.name==newexchange)
-  logger.info(msg=f"newexchange: {newex}")
+  if testmode:
+      newexchangemsg = Convert(msg_ex) 
+      newexchange=newexchangemsg[1]
+      newex=exchangeDB.search((q.name==newexchange)&(q.testmode=="True"))
+  else:
+      newexchangemsg = Convert(msg_ex) 
+      newexchange=newexchangemsg[1]
+      newex=exchangeDB.search((q.name==newexchange)&(q.testmode!="True"))
+      logger.info(msg=f"newexchange: {newex}")
   if len(newex):
     logger.info(msg=f"exchange setup starting for {newex[0]['name']}")
     CCXT_name = newex[0]['name']
@@ -350,15 +351,26 @@ async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
     CCXT_secret = newex[0]['secret'] 
     CCXT_password = newex[0]['password'] 
     CCXT_test_mode = newex[0]['testmode'] 
-    exchange=loadExchange(CCXT_name,CCXT_api,CCXT_secret,CCXT_test_mode)
-    response = f" new active exchange is {CCXT_name} or {exchange.name} \n "
-    
+    res = loadExchange(CCXT_name,CCXT_api,CCXT_secret,CCXT_test_mode)
+    response = f" new active exchange is {res} \n "
   else:
     response = 'Exchange not setup'    
   await update.effective_chat.send_message(f" {response}")
-  return exchange
   
-  
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##======== Test mode switch  ===========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##Send a message when /test is used
+
+async def testmode_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    global testmode
+    if (testmode==False):
+        testmode=True
+        await update.effective_chat.send_message(f"Sandbox is {testmode}")
+    else:
+        testmode=False
+        await update.effective_chat.send_message(f"Sandbox is {testmode}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== DB COMMAND ===============
@@ -418,13 +430,14 @@ def main():
      application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
      application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
      application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch))
+     application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
+     application.add_handler(MessageHandler(filters.Regex('/switch'), cex_switch))
      application.add_handler(MessageHandler(filters.Regex('/lastorder'), lastorder_command))
      application.add_handler(MessageHandler(filters.Regex('/position'), position_command))
-     application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
      application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
-     application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
      application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
-     application.add_handler(MessageHandler(filters.Regex('/switch'), cex_switch))
+     application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
+     application.add_handler(MessageHandler(filters.Regex('/test'), testmode_switch))
 
 # Message monitoring for order
      #application.add_handler(MessageHandler(filters.ALL, monitor))
@@ -439,6 +452,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
