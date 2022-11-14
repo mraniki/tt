@@ -3,4 +3,3 @@ python-telegram-bot>=20.0a4
 tinydb
 ccxt
 web3
-json
