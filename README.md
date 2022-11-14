@@ -24,7 +24,7 @@ Made with
 4) Deploy :
 - via docker 
   - dockerhub `docker push mraniki/tt:latest` or `docker push mraniki/tt:nightly`,
-- or `git clone https://github.com/mraniki/tt:main`
+- or `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt`
 6) Start your container
 7) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) 
@@ -90,6 +90,17 @@ Environment file or docker variable are loaded in db at the startup.
         "1": {
           "token": "yourbottoken",
           "channel": "yourchannelid"
+        }
+      },
+      "dex": {
+        "1": {
+          "name": "pancake",
+          "address": "",
+          "privatekey": "",
+          "version":"v2",
+          "networkprovider":"https://bsc-dataseed.binance.org/",
+          "router": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+          "testmode":""
         }
       }
     }

@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.9"
+TTVersion="🪙TT 0.9.1"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -29,7 +29,6 @@ import ccxt
 import json
 
 #dex
-from uniswap import Uniswap
 from web3 import Web3
 
 #db
@@ -344,17 +343,20 @@ async def cex_switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
         response = 'CEX not setup'
   else:
       newex=dexDB.search((q.name==newexchange)&(q.testmode!="True"))
-      #name= newex[0]['name']
-      #address= newex[0]['wallet']
-      #privatekey= newex[0]['privatekey']
-      #version= newex[0]['version']
-      #networkprovider= newex[0]['networkprovider']
-      dex = Uniswap(address=address, private_key=privatekey, version=version, provider=networkprovider)
-      balancedex = dex.get_token_balance(address)
-      logger.info(msg=f"CEX balance: {balancedex}")
-      response = 'DEX Process WIP'
+      logger.info(msg=f"New CEX: {newex}")
+      name= newex[0]['name']
+      address= newex[0]['address']
+      privatekey= newex[0]['privatekey']
+      version= newex[0]['version']
+      networkprovider= newex[0]['networkprovider']
+      logger.info(msg=f"{networkprovider}")
+      web3 = Web3(Web3.HTTPProvider(networkprovider))
+      balancedex=web3.eth.get_balance(address)
+      balancedexreadeable = web3.fromWei(balancedex,'ether')
+      logger.info(msg=f"{web3.isConnected()} ")
+      response = f"DEX WIP \n {name} status: {web3.isConnected()} \n BNB balance: {balancedexreadeable}"
   await update.effective_chat.send_message(f" {response}")
-  
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== Test mode switch  ===========
