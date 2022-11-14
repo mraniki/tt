@@ -27,3 +27,5 @@ src/archive/model/__pycache__/shorttrade.cpython-310.pyc
 src/archive/model/__pycache__/longtrade.cpython-310.pyc
 .env
 config/.env
+src/config/db.json
+/src/db.json

@@ -29,28 +29,72 @@ Made with
 5) Start your container
 6) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) 
-  
+
+## Config
+Either use .env file, docker variable or json db as per below structure.
+Enviroment file or docker variable are loaded in db at the startup.
+
+### Env
+
         ##ENV Variables:
         TG_TOKEN=""
-        TG_USER_ID=""
-
+        TG_CHANNEL_ID=""
         #CCXTsupported exchange details
-        #CCXTSANDBOX details
-        TEST_SANDBOX_MODE="True"
-        TEST_SANDBOX_EXCHANGE_NAME="binance"
-        TEST_SANDBOX_YOUR_API_KEY=""
-        TEST_SANDBOX_YOUR_SECRET=""
-        TEST_SANDBOX_ORDERTYPE="MARKET"
-        TEST_SANDBOX_DEFAULTTYPE=""
-
-        #PROD APIKEY Exchange1
+        #Exchange1
         EXCHANGE1_NAME="binance"
         EXCHANGE1_YOUR_API_KEY=""
         EXCHANGE1_YOUR_SECRET=""
         EXCHANGE1_ORDERTYPE="MARKET"
         EXCHANGE1_DEFAULTTYPE=""
 
-        
+### DB Structure
+    {
+      "exchange": {
+        "1": {
+          "name": "kraken",
+          "api": "yourapi",
+          "secret": "yoursecret",
+          "password": null,
+          "testmode": null,
+          "defaultType": null,
+          "ordertype": "MARKET"
+        },
+        "2": {
+          "name": "binance",
+          "api": "yourapi",
+          "secret": "yoursecret",
+          "password": null,
+          "testmode": "True",
+          "defaultType": Spot,
+          "ordertype": "MARKET"
+        },
+        "3": {
+          "name": "binance",
+          "api": "yourapi",
+          "secret": "yoursecret",
+          "password": null,
+          "testmode": null,
+          "defaultType": Spot,
+          "ordertype": "MARKET"
+        },
+        "4": {
+          "name": "binancecoinm",
+          "api": "yourapi",
+          "secret": "yoursecret",
+          "password": null,
+          "testmode": "True",
+          "defaultType": Spot,
+          "ordertype": "MARKET"
+        }
+      },
+      "telegram": {
+        "1": {
+          "token": "yourbottoken",
+          "channel": "yourchannelid"
+        }
+      }
+    }
+
  ## Use Case
  - Enable bot in pythontelegram v20 and support exchange formatted error via telegram
  - Push your signal manually or from system like trading view webhook to submit order to your ccxt exchange and receive confirmation
@@ -71,7 +115,8 @@ Made with
 - view opened future position via /pos command 
 - view daiky pnl via /profit or /bal command
 - handle 2/multi exchanges at the same time
-- Test across multiple key exchanges (Binance, Coinbase, ~~FTX~~, Kraken, Kucoin and Huobi)
+- Test across multiple CEX (Binance, Kraken, Kucoin, Coinbase Huobi)
+- Integrate DEX (like pancake)
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges
 
  ## ⚠️ Disclaimer
