@@ -12,8 +12,6 @@ TTVersion="🪙TT 0.9.1"
 import logging
 import sys
 import traceback
-from threading import Thread
-import time
 
 ##env
 import os
