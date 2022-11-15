@@ -29,3 +29,4 @@ src/archive/model/__pycache__/longtrade.cpython-310.pyc
 config/.env
 src/config/db.json
 /src/db.json
+

@@ -216,7 +216,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 #Send a message when /bal is used.
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
- if cexDB.search(q.name==active_ex,flags=re.IGNORECASE):
+ if cexDB.search(q.name==active_ex,re.IGNORECASE):
     try:
         logger.info(msg=f" active exchange is {active_ex}")
         balance = active_ex.fetch_free_balance()
