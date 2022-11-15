@@ -48,6 +48,8 @@ Environment file or docker variable are loaded in db at the startup.
         EXCHANGE1_DEFAULTTYPE=""
 
 ### DB Structure
+[DB sample](config/db.json.sample)
+
     {
       "cex": {
         "1": {
@@ -96,8 +98,8 @@ Environment file or docker variable are loaded in db at the startup.
       "dex": {
         "1": {
           "name": "pancake",
-          "address": "",
-          "privatekey": "",
+          "address": "yourwalletaddress",
+          "privatekey": "yourwalletprivatekeyifyoutrade",
           "version":"v2",
           "networkprovider":"https://bsc-dataseed.binance.org/",
           "router": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
@@ -105,6 +107,7 @@ Environment file or docker variable are loaded in db at the startup.
         }
       }
     }
+
 
  ## Use Case
  - Enable bot in pythontelegram v20 and support exchange formatted error via telegram
@@ -116,12 +119,12 @@ Environment file or docker variable are loaded in db at the startup.
  - Support % of USDT balance for order
  - Support bot in private channel (or private chat)
  - Handle Multi CEFI config (verified with Binance, Binance Testnet and ~~FTX~~ Kraken)
+ - Add config folder and config file in the dockerfile to automatically create the volume folder and its config
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 ToDo
 - formating/handling of response from exchange (opened position, last closed order)
-- add config folder in the dockerfile to automatically create the volume folder
 - Integrate DEFI DEX (like pancakeswap or uniswap)
 - support futures and margin options (to be checked)
 - view last closed orders via /order command 
