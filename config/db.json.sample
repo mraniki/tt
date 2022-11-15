@@ -1,0 +1,162 @@
+{
+    "global":
+    {
+        "1":
+        {
+            "env": "PRD"
+        }
+    },
+    "telegram":
+    {
+        "1":
+        {
+            "token": "",
+            "channel": "",
+            "platform": "POC"
+        },
+        "2":
+        {
+            "token": "",
+            "channel": "",
+            "platform": "DEV"
+        },
+        "3":
+        {
+            "token": "",
+            "channel": "",
+            "platform": "SIT"
+        },
+        "4":
+        {
+            "token": "",
+            "channel": "",
+            "platform": "PRD"
+        }
+    },
+    "cex":
+    {
+        "1":
+        {
+            "name": "kraken",
+            "api": "",
+            "secret": "",
+            "password": null,
+            "testmode": null,
+            "defaultType": null,
+            "ordertype": "MARKET"
+        },
+        "2":
+        {
+            "name": "binance",
+            "api": "",
+            "secret": "",
+            "password": null,
+            "testmode": "True",
+            "defaultType": null,
+            "ordertype": "MARKET"
+        },
+        "3":
+        {
+            "name": "binance",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "4":
+        {
+            "name": "binancecoinm",
+            "api": "",
+            "secret": "",
+            "password": null,
+            "testmode": "True",
+            "defaultType": null,
+            "ordertype": "MARKET"
+        },
+        "5":
+        {
+            "name": "binanceusdm",
+            "api": "",
+            "secret": "",
+            "password": null,
+            "testmode": "True",
+            "defaultType": null,
+            "ordertype": "MARKET"
+        },
+        "6":
+        {
+            "name": "huobi",
+            "api": "",
+            "secret": "",
+            "password": null,
+            "testmode": null,
+            "defaultType": null,
+            "ordertype": "MARKET"
+        },
+        "7":
+        {
+            "name": "coinbase",
+            "api": "",
+            "secret": "",
+            "password": null,
+            "testmode": null,
+            "defaultType": null,
+            "ordertype": "MARKET"
+        },
+        "8":
+        {
+            "name": "gate",
+            "api": "",
+            "secret": "",
+            "password": null,
+            "testmode": null,
+            "defaultType": null,
+            "ordertype": "MARKET"
+        },
+        "9":
+        {
+            "name": "kucoin",
+            "api": "",
+            "secret": "",
+            "password": "queryandtrading",
+            "testmode": null,
+            "defaultType": null,
+            "ordertype": "MARKET"
+        },
+        "10":
+        {
+            "name": "bybit",
+            "api": "",
+            "secret": "",
+            "password": null,
+            "testmode": null,
+            "defaultType": null,
+            "ordertype": "MARKET"
+        }
+    },
+    "dex":
+    {
+        "1":
+        {
+            "name": "pancake",
+            "address": "",
+            "privatekey": "",
+            "version": "v2",
+            "networkprovider": "https://bsc-dataseed.binance.org/",
+            "router": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+            "testmode": ""
+        },
+        "2":
+        {
+            "name": "uniswap",
+            "address": "",
+            "privatekey": "",
+            "version": "v3",
+            "networkprovider": "",
+            "router": "",
+            "testmode": ""
+        }
+    }
+}
