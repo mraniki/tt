@@ -17,7 +17,7 @@ import traceback
 import os
 from os import getenv
 from dotenv import load_dotenv
-#import json
+import json
 
 #telegram
 from telegram import Update    
@@ -53,7 +53,8 @@ db_path= './config/db.json'
 db = TinyDB(db_path)
 q = Query()
 globalDB = db.table('global') 
-env = globalDB[0]['env']
+env = globalDB.all()[0]['env']
+logger.info(msg=f"Environment is {env}")
 telegramDB = db.table('telegram') 
 cexDB = db.table('cex')
 dexDB = db.table('dex')
@@ -107,10 +108,9 @@ def loadExchange(exchangeid, api, secret, mode):
 
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB found")
-    tg=telegramDB.search(q.env==env)
+    tg=telegramDB.search(q.platform=="PRD")
     TG_TOKEN = tg[0]['token']
     TG_CHANNEL_ID = tg[0]['channel']
-    exinsert=telegramDB.search(q.env==CCXT_id1_api)
     ex=cexDB.all()
     CCXT_id1_name = ex[0]['name']
     CCXT_id1_api = ex[0]['api']  
@@ -165,7 +165,8 @@ else:
     else:
       telegramDB.insert({
         "token": TG_TOKEN,
-        "channel": TG_CHANNEL_ID
+        "channel": TG_CHANNEL_ID,
+        "platform": "PRD"
          })
  
     if (TG_TOKEN==""):

@@ -37,10 +37,10 @@ Environment file or docker variable are loaded in db at the startup.
 ### Env
 
         ##ENV Variables:
+        #TG
         TG_TOKEN=""
         TG_CHANNEL_ID=""
         #CCXTsupported exchange details
-        #Exchange1
         EXCHANGE1_NAME="binance"
         EXCHANGE1_YOUR_API_KEY=""
         EXCHANGE1_YOUR_SECRET=""
@@ -49,64 +49,6 @@ Environment file or docker variable are loaded in db at the startup.
 
 ### DB Structure
 [DB sample](config/db.json.sample)
-
-    {
-      "cex": {
-        "1": {
-          "name": "kraken",
-          "api": "yourapi",
-          "secret": "yoursecret",
-          "password": null,
-          "testmode": null,
-          "defaultType": null,
-          "ordertype": "MARKET"
-        },
-        "2": {
-          "name": "binance",
-          "api": "yourapi",
-          "secret": "yoursecret",
-          "password": null,
-          "testmode": "True",
-          "defaultType": Spot,
-          "ordertype": "MARKET"
-        },
-        "3": {
-          "name": "binance",
-          "api": "yourapi",
-          "secret": "yoursecret",
-          "password": null,
-          "testmode": null,
-          "defaultType": Spot,
-          "ordertype": "MARKET"
-        },
-        "4": {
-          "name": "binancecoinm",
-          "api": "yourapi",
-          "secret": "yoursecret",
-          "password": null,
-          "testmode": "True",
-          "defaultType": Spot,
-          "ordertype": "MARKET"
-        }
-      },
-      "telegram": {
-        "1": {
-          "token": "yourbottoken",
-          "channel": "yourchannelid"
-        }
-      },
-      "dex": {
-        "1": {
-          "name": "pancake",
-          "address": "yourwalletaddress",
-          "privatekey": "yourwalletprivatekeyifyoutrade",
-          "version":"v2",
-          "networkprovider":"https://bsc-dataseed.binance.org/",
-          "router": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
-          "testmode":""
-        }
-      }
-    }
 
 
  ## Use Case
