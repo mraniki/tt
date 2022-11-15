@@ -24,17 +24,18 @@ Built with
 3) Update the config (as per below), bot token, API in the .env file in config (and point your env file to container volume /code/config)
 4) Deploy :
 - via docker 
-  - dockerhub `docker push mraniki/tt:latest` or `docker push mraniki/tt:nightly`,
+  - dockerhub (or ghcr.io) `docker push mraniki/tt:latest` or `docker push mraniki/tt:nightly`,
 - or `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt`
 6) Start your container
 7) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) 
 
 ## Config
-Either use .env file, docker variable or json db as per below structure.
+Either use .env file, environment docker compose variable or json db as per below structure.
 Environment file or docker variable are loaded in db at the startup.
 
 ### Env
+[env sample](config/env.sample)
 
         ##ENV Variables:
         #TG
@@ -50,17 +51,17 @@ Environment file or docker variable are loaded in db at the startup.
 ### DB Structure
 [DB sample](config/db.json.sample)
 
-
  ## Use Case
  - Enable bot in pythontelegram v20 and support exchange formatted error via telegram
  - Push your signal manually or from system like trading view webhook to submit order to your ccxt exchange and receive confirmation
  - Disable or Enable trading process via /trading command
  - Query balance via /bal command and view it in formatted way
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
- - Support testnet and prod exchange via environment variable file
+ - Support mutiple enviroment, testnet and production exchange via environment variable file
  - Support % of USDT balance for order
- - Support bot in private channel (or private chat)
- - Handle Multi CEFI config (verified with Binance, Binance Testnet and ~~FTX~~ Kraken)
+ - Support bot in private channel (or private chat) and multiple channel per enviroment
+ - Handle Multi CEFI config (verified with Binance, Binance Testnet and ~~FTX~~ Kraken) and DEFI (test with Pancake)
+ - Switch between CEFI using `/cex binance` or `/cex kraken` or DEFI `/dex pancake`
  - Add config folder and config file in the dockerfile to automatically create the volume folder and its config
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
@@ -69,12 +70,12 @@ Environment file or docker variable are loaded in db at the startup.
 - formating/handling of response from exchange (opened position, last closed order)
 - Integrate DEFI DEX (like pancakeswap or uniswap)
 - support futures and margin options (to be checked)
+- Setup send message overall function
 - view last closed orders via /order command 
 - view opened future position via /pos command 
 - view daily pnl via /profit or /bal command
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges
 
  ## ⚠️ Disclaimer
- This is a tool and should not be considered professional financial investment system nor financial advice.
-Use a testnet account or **USE AT YOUR OWN RISK**
+ This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK**
 
