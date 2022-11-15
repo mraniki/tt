@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.9.1"
+TTVersion="🪙TT 0.9.2"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -20,11 +20,12 @@ from dotenv import load_dotenv
 import json
 
 #telegram
-from telegram import Update    
+from telegram import Update, constants
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
 
 #db
 from tinydb import TinyDB, Query
+import re
 
 #ccxt
 import ccxt
@@ -67,9 +68,26 @@ trading=True
 testmode=False
 
 ##== telegram bot commands and messages
-commandlist= '/help /bal /trading /test /dbdisplay'
+commandlist= """<code>/help</code>
+<code>/bal</code> view your active exchange balance
+<code>/trading</code> Disable/Enable Trading
+<code>/test</code> Switch to Sandbox Mode
+<code>/dbdisplay</code>  View the DB
+====================================
+Use <code>/cex</code> or <code>/dex</code> to change the active exchange setup in your config:
+<code>/cex binance</code>
+<code>/cex coinbase</code>
+<code>/cex kraken</code>
+<code>/cex kucoin</code>
+<code>/cex binancecoinm</code>
+<code>/cex binanceusdm</code>
+<code>/cex huobi</code>
+<code>/cex gate</code>
+<code>/cex bybit</code>
+<s>/cex ftx</s>
+<code>/dex pancake</code> 
+<code>/dex uniswap</code> """
 menu=f'{TTVersion} \n {commandlist}\n'
-helpinfo=f'Use "/cex ccxtname" to change the active exchange'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##====== common functions  =============
@@ -108,7 +126,7 @@ def loadExchange(exchangeid, api, secret, mode):
 
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB found")
-    tg=telegramDB.search(q.platform=="PRD")
+    tg=telegramDB.search(q.platform==env)
     TG_TOKEN = tg[0]['token']
     TG_CHANNEL_ID = tg[0]['channel']
     ex=cexDB.all()
@@ -130,10 +148,7 @@ else:
         #environementinfo={json.dumps({**{}, **os.environ}, indent=2)}
         #logger.info(msg=f"{environementinfo}") 
         sys.exit()
-
-##=========== ENV SETUP =================
-# ENV VAR (from file or docker variable)
-
+    # ENV VAR (from file or docker variable)
     TG_TOKEN = os.getenv("TG_TOKEN")
     TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
     CCXT_id1_name = os.getenv("EXCHANGE1_NAME")
@@ -145,7 +160,6 @@ else:
     CCXT_test_mode = os.getenv("EXCHANGE1_SANDBOX_MODE")
 
 ##=========== DB SETUP =================
-
     exinsert=cexDB.search(q.api==CCXT_id1_api)
     if len(exinsert):
          logger.info(msg=f"exchange already exist in db")
@@ -188,20 +202,21 @@ loadExchange(CCXT_id1_name,CCXT_id1_api,CCXT_id1_secret,CCXT_test_mode)
 
 async def post_init(application: Application):
     logger.info(msg=f"bot is online")
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\n{menu}")
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\n {env} {active_ex} Sandbox:{testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== help  ================
 ##Send a message when /help is used.
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.effective_chat.send_message(f"{menu} \n {active_ex} \n {helpinfo}")
+    await update.effective_chat.send_message(f"{env} {active_ex} Sandbox:{testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##========== view balance  =============
 #Send a message when /bal is used.
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+ if cexDB.search(q.name==active_ex):
     try:
         logger.info(msg=f" active exchange is {active_ex}")
         balance = active_ex.fetch_free_balance()
@@ -220,6 +235,15 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         await update.effective_chat.send_message(f"⚠️{e}")
     except Exception as e:
         logger.error(msg=f"Failed due to a CCXT error: {e}")
+        await update.effective_chat.send_message(f"⚠️{e}") 
+ else:
+    try:
+        balancedex=web3.eth.get_balance(address)
+        balancedexreadeable = web3.fromWei(balancedex,'ether')
+        logger.info(msg=f"{web3.isConnected()} ")
+        response = f"DEX balance: {balancedexreadeable}"
+    except Exception as e:
+        logger.error(msg=f"Failed due to a web3 error: {e}")
         await update.effective_chat.send_message(f"⚠️{e}") 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -301,8 +325,8 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         await update.effective_chat.send_message(f"Trading is {trading}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##============ DEX DEX switch  =========
-##Send a message when /switch is used
+##============ CEX DEX switch  =========
+#Send a message when /cex or /dex is used
 
 async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
@@ -337,10 +361,8 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
       networkprovider= newex[0]['networkprovider']
       logger.info(msg=f"{networkprovider}")
       web3 = Web3(Web3.HTTPProvider(networkprovider))
-      balancedex=web3.eth.get_balance(address)
-      balancedexreadeable = web3.fromWei(balancedex,'ether')
       logger.info(msg=f"{web3.isConnected()} ")
-      response = f"DEX WiP \n {name} status: {web3.isConnected()} \n BNB balance: {balancedexreadeable}"
+      response = f"DEX WiP \n {name} status: {web3.isConnected()}"
   await update.effective_chat.send_message(f"{response}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
