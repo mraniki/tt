@@ -336,9 +336,9 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
   extype=newexchangemsg[0]
   if extype=="/cex":
       if testmode:
-          newex=cexDB.search((q.name==newexchange)&(q.testmode=="True"))
+          newex=cexDB.search((q.name==newexchange)&(q.testmode=="True"),re.IGNORECASE)
       else:
-          newex=cexDB.search((q.name==newexchange)&(q.testmode!="True"))
+          newex=cexDB.search((q.name==newexchange)&(q.testmode!="True"),re.IGNORECASE)
           logger.info(msg=f"New CEX: {newex}")
       if len(newex):
         logger.info(msg=f"CEX setup starting for {newex[0]['name']}")
@@ -352,7 +352,7 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
       else:
         response = 'CEX not setup'
   else:
-      newex=dexDB.search((q.name==newexchange)&(q.testmode!="True"))
+      newex=dexDB.search((q.name==newexchange)&(q.testmode!="True"),re.IGNORECASE)
       logger.info(msg=f"New CEX: {newex}")
       name= newex[0]['name']
       address= newex[0]['address']
