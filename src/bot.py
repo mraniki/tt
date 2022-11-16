@@ -46,7 +46,6 @@ logger = logging.getLogger(__name__)
 logger.info(msg=f"{TTVersion}")
 logger.info(msg=f"python {sys.version}")
 logger.info(msg=f"CCXT Version: {ccxt.__version__}")
-logger.info(msg=f"Please wait, loading...")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== CONFIG  =============
@@ -63,12 +62,11 @@ logger.info(msg=f"Environment is {env}")
 telegramDB = db.table('telegram') 
 cexDB = db.table('cex')
 dexDB = db.table('dex')
-
 ##== var ==
 global exchangeid
 global web3
 exchanges = {}
-active_ex = {}
+global active_ex
 trading=True 
 testmode=False
 
@@ -89,9 +87,9 @@ Use <code>/cex</code> or <code>/dex</code> to change active exchange setup in yo
 <code>/cex huobi</code>
 <code>/cex gate</code>
 <code>/cex bybit</code>
-<s>/cex ftx</s>
 <code>/dex pancake</code> 
-<code>/dex uniswap</code> """
+<code>/dex uniswap</code> 
+<code>/dex quickswap</code>"""
 menu=f'{TTVersion} \n {commandlist}\n'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -136,7 +134,6 @@ def loadExchangeDEX(exchangeid):
     global active_ex
     global web3
     ex_check2=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
-    print(ex_check2)
     if ex_check2:
         try:
             logger.info(msg=f"defi setup for {exchangeid}")
@@ -147,7 +144,6 @@ def loadExchangeDEX(exchangeid):
             privatekey= newex[0]['privatekey']
             version= newex[0]['version']
             networkprovider= newex[0]['networkprovider']
-            logger.info(msg=f"{networkprovider}")
             web3 = Web3(Web3.HTTPProvider(networkprovider))
             logger.info(msg=f"{web3.isConnected()}")
             #response = f"Active DEX is {name} status: {web3.isConnected()}"
@@ -259,7 +255,6 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     check1=cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE))
-    print(check1)
     if cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE)):
         try:
             logger.info(msg=f" active exchange is {active_ex}")
@@ -348,7 +343,7 @@ async def lastorder_command(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 ##=========== view positions  ========
 ## Send a message when the /pos is used.
 async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info(msg=f"TBDposition_command")
+ logger.info(msg=f"TBDposition_command")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view today's pnl =========
@@ -433,13 +428,13 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##=========  bot restart  ========
 
 async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info(msg=f"TBD bot is restarting")
+    logger.info(msg=f"TBDrestarting")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=======  bot unknow command  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 async def unknown_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    log.error(update, 'TBD unknown_command')
+    log.error(update, 'TBD unknown')
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot error handling ========
