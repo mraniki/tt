@@ -36,21 +36,10 @@ Environment file or docker variable are loaded in db at the startup.
 ### Env
 [env sample](config/env.sample)
 
-        ##ENV Variables:
-        #TG
-        TG_TOKEN=""
-        TG_CHANNEL_ID=""
-        #CCXTsupported exchange details
-        EXCHANGE1_NAME="binance"
-        EXCHANGE1_YOUR_API_KEY=""
-        EXCHANGE1_YOUR_SECRET=""
-        EXCHANGE1_ORDERTYPE="MARKET"
-        EXCHANGE1_DEFAULTTYPE=""
-
 ### DB Structure
 [DB sample](config/db.json.sample)
 
- ## Use Case
+ ## Features
  - Enable bot in pythontelegram v20 and support exchange formatted error via telegram
  - Push your signal manually or from system like trading view webhook to submit order to your ccxt exchange and receive confirmation
  - Disable or Enable trading process via /trading command
@@ -61,15 +50,16 @@ Environment file or docker variable are loaded in db at the startup.
  - Support bot in private channel (or private chat) and multiple channel per enviroment
  - Handle Multi CEFI config (verified with Binance, Binance Testnet and ~~FTX~~ Kraken) and DEFI (test with Pancake)
  - Switch between CEFI using `/cex binance` or `/cex kraken` or DEFI `/dex pancake`
- - Add config folder and config file in the dockerfile to automatically create the volume folder and its config
+ - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 ToDo
-- formating/handling of response from exchange (opened position, last closed order)
 - Integrate DEFI DEX (like pancakeswap or uniswap)
 - support futures and margin options (to be checked)
 - Setup send message overall function
+- clean up and refactorize the code structure for clean v1
+- formating/handling of response from exchange (opened position, last closed order)
 - view last closed orders via /order command 
 - view opened future position via /pos command 
 - view daily pnl via /profit or /bal command

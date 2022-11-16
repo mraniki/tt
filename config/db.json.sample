@@ -18,7 +18,7 @@
         {
             "token": "",
             "channel": "",
-            "platform": "DEV"
+            "platform": ""
         },
         "3":
         {
@@ -40,9 +40,9 @@
             "name": "kraken",
             "api": "",
             "secret": "",
-            "password": null,
-            "testmode": null,
-            "defaultType": null,
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
             "ordertype": "MARKET"
         },
         "2":
@@ -50,9 +50,9 @@
             "name": "binance",
             "api": "",
             "secret": "",
-            "password": null,
+            "password": "",
             "testmode": "True",
-            "defaultType": null,
+            "defaultType": "FUTURE",
             "ordertype": "MARKET"
         },
         "3":
@@ -70,9 +70,9 @@
             "name": "binancecoinm",
             "api": "",
             "secret": "",
-            "password": null,
+            "password": "",
             "testmode": "True",
-            "defaultType": null,
+            "defaultType": "FUTURE",
             "ordertype": "MARKET"
         },
         "5":
@@ -80,9 +80,9 @@
             "name": "binanceusdm",
             "api": "",
             "secret": "",
-            "password": null,
+            "password": "",
             "testmode": "True",
-            "defaultType": null,
+            "defaultType": "FUTURE",
             "ordertype": "MARKET"
         },
         "6":
@@ -90,9 +90,9 @@
             "name": "huobi",
             "api": "",
             "secret": "",
-            "password": null,
-            "testmode": null,
-            "defaultType": null,
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
             "ordertype": "MARKET"
         },
         "7":
@@ -100,9 +100,9 @@
             "name": "coinbase",
             "api": "",
             "secret": "",
-            "password": null,
-            "testmode": null,
-            "defaultType": null,
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
             "ordertype": "MARKET"
         },
         "8":
@@ -110,9 +110,9 @@
             "name": "gate",
             "api": "",
             "secret": "",
-            "password": null,
-            "testmode": null,
-            "defaultType": null,
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
             "ordertype": "MARKET"
         },
         "9":
@@ -120,9 +120,9 @@
             "name": "kucoin",
             "api": "",
             "secret": "",
-            "password": "queryandtrading",
-            "testmode": null,
-            "defaultType": null,
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
             "ordertype": "MARKET"
         },
         "10":
@@ -130,9 +130,49 @@
             "name": "bybit",
             "api": "",
             "secret": "",
-            "password": null,
-            "testmode": null,
-            "defaultType": null,
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "11":
+        {
+            "name": "okx",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "12":
+        {
+            "name": "bitfinex",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "13":
+        {
+            "name": "poloniex",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "14":
+        {
+            "name": "ftx",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
             "ordertype": "MARKET"
         }
     },
@@ -151,6 +191,26 @@
         "2":
         {
             "name": "uniswap",
+            "address": "",
+            "privatekey": "",
+            "version": "v3",
+            "networkprovider": "",
+            "router": "",
+            "testmode": ""
+        },
+        "3":
+        {
+            "name": "quickswap",
+            "address": "",
+            "privatekey": "",
+            "version": "v3",
+            "networkprovider": "",
+            "router": "",
+            "testmode": ""
+        },
+        "4":
+        {
+            "name": "curve",
             "address": "",
             "privatekey": "",
             "version": "v3",
