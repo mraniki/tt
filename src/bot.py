@@ -66,6 +66,7 @@ dexDB = db.table('dex')
 
 ##== var ==
 global exchangeid
+global web3
 exchanges = {}
 active_ex = {}
 trading=True 
@@ -105,7 +106,7 @@ def loadExchange(exchangeid, api, secret, mode):
     ex_check=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))
     print(ex_check)
     if ex_check:
-        logger.info(msg=f"cefi setup for {exchangeid}")
+        logger.info(msg=f"CEFI setup for {exchangeid}")
         exchange = getattr(ccxt, exchangeid)
         exchanges[exchangeid] = exchange()
         try:
@@ -119,7 +120,7 @@ def loadExchange(exchangeid, api, secret, mode):
                 logger.info(msg=f"Sandbox exchange is {active_ex}")
                 active_ex.set_sandbox_mode('enabled')
             else:
-                logger.info(msg=f"Active cex is {active_ex}")
+                logger.info(msg=f"Active CEX is {active_ex}")
             return active_ex
         except ccxt.NetworkError as e:
             logger.error(msg=f"{e}")
@@ -128,19 +129,39 @@ def loadExchange(exchangeid, api, secret, mode):
         except Exception as e:
             logger.error(msg=f"{e}")
     else: 
-      ex_check2=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
-      logger.info(msg=f"New DEX: {ex_check2}")
-      name= newex[0]['name']
-      address= newex[0]['address']
-      privatekey= newex[0]['privatekey']
-      version= newex[0]['version']
-      networkprovider= newex[0]['networkprovider']
-      logger.info(msg=f"{networkprovider}")
-      web3 = Web3(Web3.HTTPProvider(networkprovider))
-      logger.info(msg=f"{web3.isConnected()} ")
-      response = f"DEX WiP \n {name} status: {web3.isConnected()}"
-      active_ex=name
-      return active_ex
+        l
+
+
+def loadExchangeDEX(exchangeid):
+    global active_ex
+    global web3
+    ex_check2=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
+    print(ex_check2)
+    if ex_check2:
+        try:
+            logger.info(msg=f"defi setup for {exchangeid}")
+            ex_check2=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
+            logger.info(msg=f"New DEX: {ex_check2}")
+            name= newex[0]['name']
+            address= newex[0]['address']
+            privatekey= newex[0]['privatekey']
+            version= newex[0]['version']
+            networkprovider= newex[0]['networkprovider']
+            logger.info(msg=f"{networkprovider}")
+            web3 = Web3(Web3.HTTPProvider(networkprovider))
+            logger.info(msg=f"{web3.isConnected()}")
+            #response = f"Active DEX is {name} status: {web3.isConnected()}"
+            active_ex=name
+            #return response
+        except Exception as e:
+            logger.error(msg=f"Failed due to a web3 error: {e}")
+            #response=f"Failed due to a web3 error: {e}"
+            #return response
+            #await update.effective_chat.send_message(f"⚠️{e}") 
+    else:
+        logger.error(msg=f"No exchange available for setup")
+
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
@@ -303,17 +324,18 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 side=res['side']
                 amount=res['amount']
                 price=res['price']
-                await update.effective_chat.send_message(f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}")
-                return orderid
+                response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                #return orderid
             except ccxt.NetworkError as e:
                 logger.error(msg=f"Failed due to a network error {e}")
-                await update.effective_chat.send_message(f"⚠️{e}")
+                response=f"⚠️Failed due to a network error {e}"
             except ccxt.ExchangeError as e:
                 logger.error(msg=f"Failed due to a exchange error: {e}")
-                await update.effective_chat.send_message(f"⚠️{e}")
+                response=f"⚠️Failed due to a exchange error: {e}"
             except Exception as e:
                 logger.error(msg=f"Failed due to a CCXT error: {e}")
-                await update.effective_chat.send_message(f"⚠️{e}") 
+                response=f"⚠️Failed due to a CCXT error: {e}"
+            await update.effective_chat.send_message(f"{response}")
     else: error_handler()
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -342,10 +364,9 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     global trading
     if (trading==False):
         trading=True
-        await update.effective_chat.send_message(f"Trading is {trading}")
     else:
         trading=False
-        await update.effective_chat.send_message(f"Trading is {trading}")
+    await update.effective_chat.send_message(f"Trading is {trading}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============ CEX DEX switch  =========
@@ -372,22 +393,15 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
         CCXT_password = newex[0]['password'] 
         CCXT_test_mode = newex[0]['testmode'] 
         res = loadExchange(CCXT_name,CCXT_api,CCXT_secret,CCXT_test_mode)
-        response = f" new active CEX is {res} \n "
+        response = f"Active CEX is {res} \n "
       else:
         response = 'CEX not setup'
   else:
       newex=dexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE))&(q.testmode!="True"))
       logger.info(msg=f"New CEX: {newex}")
       name= newex[0]['name']
-      address= newex[0]['address']
-      privatekey= newex[0]['privatekey']
-      version= newex[0]['version']
-      networkprovider= newex[0]['networkprovider']
-      logger.info(msg=f"{networkprovider}")
-      web3 = Web3(Web3.HTTPProvider(networkprovider))
-      logger.info(msg=f"{web3.isConnected()} ")
-      active_ex = name
-      response = f"DEX WiP \n {name} status: {web3.isConnected()}"
+      res = loadExchangeDEX(name)
+      response = f"Active DEX is {res} status: {web3.isConnected()}"
   await update.effective_chat.send_message(f"{response}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -398,10 +412,9 @@ async def testmode_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     global testmode
     if (testmode==False):
         testmode=True
-        await update.effective_chat.send_message(f"Sandbox is {testmode}")
     else:
         testmode=False
-        await update.effective_chat.send_message(f"Sandbox is {testmode}")
+    await update.effective_chat.send_message(f"Sandbox is {testmode}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== DB COMMAND ===============
@@ -440,7 +453,6 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     tb_trim = tb_string[:4000]
     errormessage=f"⚠️ Error encountered {tb_trim}"
     logger.error(msg=f"{errormessage}")
-    #await context.bot.send_message(chat_id=, text=errormessage, parse_mode=ParseMode.HTML)
     await update.effective_chat.send_message(f"⚠️ Error encountered {tb_trim}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
