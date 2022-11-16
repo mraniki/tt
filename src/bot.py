@@ -102,20 +102,23 @@ def Convert(string):
   
 def loadExchange(exchangeid, api, secret, testmode):
     global active_ex
-    logger.info(msg=f"cefi setup for {exchangeid}")
-    exchange = getattr(ccxt, exchangeid)
-    exchanges[exchangeid] = exchange()
-    try:
-        exchanges[exchangeid] = exchange({
-            'apiKey': api,
-            'secret': secret
-            })
-        logger.info(msg=f"{exchanges[exchangeid]} setup")
-        active_ex=exchanges[exchangeid]
-        if testmode:
-            logger.info(msg=f"Sandbox exchange is {active_ex}")
-            exchange.set_sandbox_mode('enabled')
-        else:
+    check1=cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE))
+    print(check1)
+    if cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE)):
+        logger.info(msg=f"cefi setup for {exchangeid}")
+        exchange = getattr(ccxt, exchangeid)
+        exchanges[exchangeid] = exchange()
+        try:
+            exchanges[exchangeid] = exchange({
+                'apiKey': api,
+               'secret': secret
+               })
+           logger.info(msg=f"{exchanges[exchangeid]} setup")
+           active_ex=exchanges[exchangeid]
+            if testmode:
+              logger.info(msg=f"Sandbox exchange is {active_ex}")
+             exchange.set_sandbox_mode('enabled')
+            else:
             logger.info(msg=f"Active cex is {active_ex}")
         return active_ex
     except ccxt.NetworkError as e:
