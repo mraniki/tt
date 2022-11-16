@@ -34,8 +34,8 @@ import ccxt
 from web3 import Web3
 
 #matrix
-import asyncio
-from nio import AsyncClient, MatrixRoom, RoomMessageText
+#import asyncio
+#from nio import AsyncClient, MatrixRoom, RoomMessageText
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== Logging  =============
@@ -100,33 +100,47 @@ def Convert(string):
    li = list(string.split(" "))
    return li
   
-def loadExchange(exchangeid, api, secret, testmode):
+def loadExchange(exchangeid, api, secret, mode):
     global active_ex
-    check1=cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE))
-    print(check1)
-    if cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE)):
+    ex_check=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))
+    print(ex_check)
+    if ex_check:
         logger.info(msg=f"cefi setup for {exchangeid}")
         exchange = getattr(ccxt, exchangeid)
         exchanges[exchangeid] = exchange()
         try:
             exchanges[exchangeid] = exchange({
                 'apiKey': api,
-               'secret': secret
-               })
-           logger.info(msg=f"{exchanges[exchangeid]} setup")
-           active_ex=exchanges[exchangeid]
+                'secret': secret
+                })
+            logger.info(msg=f"{exchanges[exchangeid]} setup")
+            active_ex=exchanges[exchangeid]
             if testmode:
-              logger.info(msg=f"Sandbox exchange is {active_ex}")
-             exchange.set_sandbox_mode('enabled')
+                logger.info(msg=f"Sandbox exchange is {active_ex}")
+                active_ex.set_sandbox_mode('enabled')
             else:
-            logger.info(msg=f"Active cex is {active_ex}")
-        return active_ex
-    except ccxt.NetworkError as e:
-        logger.error(msg=f"{e}")
-    except ccxt.ExchangeError as e:
-        logger.error(msg=f"{e}")
-    except Exception as e:
-        logger.error(msg=f"{e}")
+                logger.info(msg=f"Active cex is {active_ex}")
+            return active_ex
+        except ccxt.NetworkError as e:
+            logger.error(msg=f"{e}")
+        except ccxt.ExchangeError as e:
+            logger.error(msg=f"{e}")
+        except Exception as e:
+            logger.error(msg=f"{e}")
+    else: 
+      ex_check2=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
+      logger.info(msg=f"New DEX: {ex_check2}")
+      name= newex[0]['name']
+      address= newex[0]['address']
+      privatekey= newex[0]['privatekey']
+      version= newex[0]['version']
+      networkprovider= newex[0]['networkprovider']
+      logger.info(msg=f"{networkprovider}")
+      web3 = Web3(Web3.HTTPProvider(networkprovider))
+      logger.info(msg=f"{web3.isConnected()} ")
+      response = f"DEX WiP \n {name} status: {web3.isConnected()}"
+      active_ex=name
+      return active_ex
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
