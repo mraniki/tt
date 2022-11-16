@@ -23,8 +23,7 @@ Built with
 2) Get your API Keys supported by [CCXT](https://github.com/ccxt/ccxt). 
 3) Update the config (as per below), bot token, API in the .env file in config (and point your env file to container volume /code/config)
 4) Deploy :
-- via docker 
-  - dockerhub (or ghcr.io) `docker push mraniki/tt:latest` or `docker push mraniki/tt:nightly`,
+- via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` or `docker push mraniki/tt:nightly`
 - or `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt`
 6) Start your container
 7) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
