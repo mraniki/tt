@@ -216,7 +216,9 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 #Send a message when /bal is used.
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
- if cexDB.search(q.name==active_ex,re.IGNORECASE):
+ if
+# db.search(User.name.matches('John', flags=re.IGNORECASE))
+ cexDB.search(q.name.matches(active_ex,flags=.IGNORECASE)):
     try:
         logger.info(msg=f" active exchange is {active_ex}")
         balance = active_ex.fetch_free_balance()
@@ -336,9 +338,9 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
   extype=newexchangemsg[0]
   if extype=="/cex":
       if testmode:
-          newex=cexDB.search((q.name==newexchange)&(q.testmode=="True"),re.IGNORECASE)
+          newex=cexDB.search((q.name.matches(newexchange,flags=re.IGNORECASE)&(q.testmode=="True"))
       else:
-          newex=cexDB.search((q.name==newexchange)&(q.testmode!="True"),re.IGNORECASE)
+          newex=cexDB.search((q.name.matches(newexchange,flags=re.IGNORECASE)&(q.testmode!="True"))
           logger.info(msg=f"New CEX: {newex}")
       if len(newex):
         logger.info(msg=f"CEX setup starting for {newex[0]['name']}")
@@ -352,7 +354,7 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
       else:
         response = 'CEX not setup'
   else:
-      newex=dexDB.search((q.name==newexchange)&(q.testmode!="True"),re.IGNORECASE)
+      newex=dexDB.search((q.name.matches(newexchange,flags=re.IGNORECASE))&(q.testmode!="True"))
       logger.info(msg=f"New CEX: {newex}")
       name= newex[0]['name']
       address= newex[0]['address']
