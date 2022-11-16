@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.9.2"
+TTVersion="🪙TT 0.9.3"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -216,37 +216,37 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 #Send a message when /bal is used.
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
- if
-# db.search(User.name.matches('John', flags=re.IGNORECASE))
- cexDB.search(q.name.matches(active_ex,flags=.IGNORECASE)):
-    try:
-        logger.info(msg=f" active exchange is {active_ex}")
-        balance = active_ex.fetch_free_balance()
-        balance2 = {k: v for k, v in balance.items() if v>0}
-        logger.info(msg=f"{balance2}")
-        prettybal=""
-        for iterator in balance2:
-            logger.info(msg=f"{iterator}: {balance2[iterator]}")
-            prettybal += (f"{iterator} : {balance2[iterator]} \n")
-        await update.effective_chat.send_message(f"🏦 Balance \n{prettybal}")
-    except ccxt.NetworkError as e:
-        logger.error(msg=f"Failed due to a network error {e}")
-        await update.effective_chat.send_message(f"⚠️{e}")
-    except ccxt.ExchangeError as e:
-        logger.error(msg=f"Failed due to a exchange error: {e}")
-        await update.effective_chat.send_message(f"⚠️{e}")
-    except Exception as e:
-        logger.error(msg=f"Failed due to a CCXT error: {e}")
-        await update.effective_chat.send_message(f"⚠️{e}") 
- else:
-    try:
-        balancedex=web3.eth.get_balance(address)
-        balancedexreadeable = web3.fromWei(balancedex,'ether')
-        logger.info(msg=f"{web3.isConnected()} ")
-        response = f"DEX balance: {balancedexreadeable}"
-    except Exception as e:
-        logger.error(msg=f"Failed due to a web3 error: {e}")
-        await update.effective_chat.send_message(f"⚠️{e}") 
+    check1=cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE))
+    print(check1)
+    if cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE)):
+        try:
+            logger.info(msg=f" active exchange is {active_ex}")
+            balance = active_ex.fetch_free_balance()
+            balance2 = {k: v for k, v in balance.items() if v>0}
+            logger.info(msg=f"{balance2}")
+            prettybal=""
+            for iterator in balance2:
+                logger.info(msg=f"{iterator}: {balance2[iterator]}")
+                prettybal += (f"{iterator} : {balance2[iterator]} \n")
+            await update.effective_chat.send_message(f"🏦 Balance \n{prettybal}")
+        except ccxt.NetworkError as e:
+            logger.error(msg=f"Failed due to a network error {e}")
+            await update.effective_chat.send_message(f"⚠️{e}")
+        except ccxt.ExchangeError as e:
+            logger.error(msg=f"Failed due to a exchange error: {e}")
+            await update.effective_chat.send_message(f"⚠️{e}")
+        except Exception as e:
+            logger.error(msg=f"Failed due to a CCXT error: {e}")
+            await update.effective_chat.send_message(f"⚠️{e}") 
+    else:
+        try:
+            balancedex=web3.eth.get_balance(address)
+            balancedexreadeable = web3.fromWei(balancedex,'ether')
+            logger.info(msg=f"{web3.isConnected()} ")
+            response = f"DEX balance: {balancedexreadeable}"
+        except Exception as e:
+            logger.error(msg=f"Failed due to a web3 error: {e}")
+            await update.effective_chat.send_message(f"⚠️{e}") 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
@@ -338,9 +338,9 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
   extype=newexchangemsg[0]
   if extype=="/cex":
       if testmode:
-          newex=cexDB.search((q.name.matches(newexchange,flags=re.IGNORECASE)&(q.testmode=="True"))
+          newex=cexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE)&(q.testmode=="True")))
       else:
-          newex=cexDB.search((q.name.matches(newexchange,flags=re.IGNORECASE)&(q.testmode!="True"))
+          newex=cexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE)&(q.testmode!="True")))
           logger.info(msg=f"New CEX: {newex}")
       if len(newex):
         logger.info(msg=f"CEX setup starting for {newex[0]['name']}")
@@ -354,7 +354,7 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
       else:
         response = 'CEX not setup'
   else:
-      newex=dexDB.search((q.name.matches(newexchange,flags=re.IGNORECASE))&(q.testmode!="True"))
+      newex=dexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE))&(q.testmode!="True"))
       logger.info(msg=f"New CEX: {newex}")
       name= newex[0]['name']
       address= newex[0]['address']
