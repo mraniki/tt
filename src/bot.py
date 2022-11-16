@@ -96,7 +96,7 @@ def Convert(string):
    li = list(string.split(" "))
    return li
   
-def loadExchange(exchangeid, api, secret, mode):
+def loadExchange(exchangeid, api, secret, testmode):
     global active_ex
     logger.info(msg=f"cefi setup for {exchangeid}")
     exchange = getattr(ccxt, exchangeid)
@@ -110,7 +110,7 @@ def loadExchange(exchangeid, api, secret, mode):
         active_ex=exchanges[exchangeid]
         if testmode:
             logger.info(msg=f"Sandbox exchange is {active_ex}")
-            exchange.set_sandbox_mode(mode)
+            exchange.set_sandbox_mode('enabled')
         else:
             logger.info(msg=f"Active cex is {active_ex}")
         return active_ex
