@@ -65,6 +65,7 @@ v2
 - Integrate with Matrix to be messaging platform agnostic [![matrix](https://badgen.net/badge/icon/nio/black?icon=libraries&label)](https://github.com/poljar/matrix-nio)
 - view last closed orders via /order command 
 - view daily pnl and free margin in /bal response
+- Support bot in webhook instead of getupdate
 v3
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/)
 
