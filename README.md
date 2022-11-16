@@ -45,7 +45,7 @@ Environment file or docker variable are loaded in db at the startup.
  - Disable or Enable trading process via /trading command
  - Query balance via /bal command and view it in formatted way
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
- - Support mutiple enviroment, testnet and production exchange via environment variable file
+ - Support multiple enviroment, testnet and production exchange via environment variable file
  - Support % of USDT balance for order
  - Support bot in private channel (or private chat) and multiple channel per enviroment
  - Handle Multi CEFI config (verified with Binance, Binance Testnet and ~~FTX~~ Kraken) and DEFI (test with Pancake)
@@ -54,16 +54,19 @@ Environment file or docker variable are loaded in db at the startup.
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
- ## 🚧 ToDo
+ ## 🚧 Roadmap
+v1
 - Integrate DEFI DEX (like pancakeswap or uniswap)
-- support futures and margin options (to be checked)
+- support futures and margin 
 - Setup send message overall function
 - clean up and refactorize the code structure for clean v1
-- formating/handling of response from exchange (opened position, last closed order)
-- view last closed orders via /order command 
 - view opened future position via /pos command 
-- view daily pnl via /profit or /bal command
-- Merge with Telegram MQL4 version which integrate with MT4 exchanges
+v2
+- Integrate with Matrix to be messaging platform agnostic [![matrix](https://badgen.net/badge/icon/matrix/black?icon=matrix&label)](https://matrix.org/)
+- view last closed orders via /order command 
+- view daily pnl and free margin in /bal response
+v3
+- Merge with Telegram MQL4 version which integrate with MT4 exchanges [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/)
 
  ## ⚠️ Disclaimer
  This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK**
