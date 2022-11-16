@@ -1,5 +1,7 @@
 python-dotenv>=0.20.0
 python-telegram-bot>=20.0a4
+asyncio
+nio
 tinydb
 ccxt
 web3

@@ -62,7 +62,7 @@ v1
 - clean up and refactorize the code structure for clean v1
 - view opened future position via /pos command 
 v2
-- Integrate with Matrix to be messaging platform agnostic [![matrix](https://badgen.net/badge/icon/matrix/black?icon=matrix&label)](https://matrix.org/)
+- Integrate with Matrix to be messaging platform agnostic [![matrix](https://badgen.net/badge/icon/nio/black?icon=libraries&label)](https://github.com/poljar/matrix-nio)
 - view last closed orders via /order command 
 - view daily pnl and free margin in /bal response
 v3
