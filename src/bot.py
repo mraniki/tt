@@ -357,6 +357,7 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
   newexchangemsg = Convert(msg_ex) 
   newexchange=newexchangemsg[1]
   extype=newexchangemsg[0]
+  global active_ex
   if extype=="/cex":
       if testmode:
           newex=cexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE)&(q.testmode=="True")))
@@ -385,6 +386,7 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
       logger.info(msg=f"{networkprovider}")
       web3 = Web3(Web3.HTTPProvider(networkprovider))
       logger.info(msg=f"{web3.isConnected()} ")
+      active_ex = name
       response = f"DEX WiP \n {name} status: {web3.isConnected()}"
   await update.effective_chat.send_message(f"{response}")
 
