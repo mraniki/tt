@@ -69,12 +69,12 @@ testmode=False
 
 ##== telegram bot commands and messages
 commandlist= """<code>/help</code>
-<code>/bal</code> view your active exchange balance
+<code>/bal</code> view active exchange bal
 <code>/trading</code> Disable/Enable Trading
 <code>/test</code> Switch to Sandbox Mode
-<code>/dbdisplay</code>  View the DB
-====================================
-Use <code>/cex</code> or <code>/dex</code> to change the active exchange setup in your config:
+<code>/dbdisplay</code> View the DB
+=============================
+Use <code>/cex</code> or <code>/dex</code> to change active exchange setup in your config:
 <code>/cex binance</code>
 <code>/cex coinbase</code>
 <code>/cex kraken</code>
