@@ -57,16 +57,16 @@ Environment file or docker variable are loaded in db at the startup.
  ## 🚧 Roadmap
 v1
 - Integrate DEFI DEX (like pancakeswap or uniswap)
-- support futures and margin 
+- support futures and margin for CEX
 - Setup send message overall function
 - clean up and refactorize the code structure for clean v1
 - view opened future position via /pos command 
 v2
-- Integrate with Matrix to be messaging platform agnostic [![matrix](https://badgen.net/badge/icon/nio/black?icon=libraries&label)](https://github.com/poljar/matrix-nio)
 - view last closed orders via /order command 
 - view daily pnl and free margin in /bal response
 - Support bot in webhook instead of getupdate
 v3
+- Integrate with messaging platform agnostic like matrix [![matrix](https://badgen.net/badge/icon/nio/black?icon=libraries&label)](https://github.com/poljar/matrix-nio)
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/)
 
  ## ⚠️ Disclaimer
