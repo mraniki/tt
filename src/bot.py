@@ -1,12 +1,10 @@
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== VERSION  =============
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 TTVersion="🪙TT 0.9.5"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 ##log
 import logging
@@ -31,7 +29,6 @@ import ccxt
 
 #dex
 from web3 import Web3
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== Logging  =============
@@ -90,6 +87,8 @@ menu=f'{TTVersion} \n {commandlist}\n'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##====== common functions  =============
+async def sendmessage (response)
+    await update.effective_chat.send_message(f"{response}", parse_mode=constants.ParseMode.HTML)
 
 def Convert(string):
    li = list(string.split(" "))
@@ -123,7 +122,7 @@ def loadExchange(exchangeid, api, secret, mode):
         except Exception as e:
             logger.error(msg=f"{e}")
     else: 
-        l
+        loadExchangeDEX(exchangeid)
 
 
 def loadExchangeDEX(exchangeid):
@@ -142,18 +141,10 @@ def loadExchangeDEX(exchangeid):
             networkprovider= newex[0]['networkprovider']
             active_ex = Web3(Web3.HTTPProvider(networkprovider))
             logger.info(msg=f"{web3.isConnected()}")
-            #response = f"Active DEX is {name} status: {web3.isConnected()}"
-           # active_ex=name
-            #return response
         except Exception as e:
             logger.error(msg=f"Failed due to a web3 error: {e}")
-            #response=f"Failed due to a web3 error: {e}"
-            #return response
-            #await update.effective_chat.send_message(f"⚠️{e}") 
     else:
         logger.error(msg=f"No exchange available for setup")
-
-
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
