@@ -58,8 +58,8 @@ dexDB = db.table('dex')
 ##== var ==
 global exchangeid
 global web3
-exchanges = {}
 global active_ex
+exchanges = {}
 trading=True 
 testmode=False
 
