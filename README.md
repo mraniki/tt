@@ -21,7 +21,7 @@ Built with
 ## Install
 1) Create a private channel and a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
 2) Get your API Keys supported by [CCXT](https://github.com/ccxt/ccxt). 
-3) Update the config (as per below), bot token, API in the .env file in config (and point your env file to container volume /code/config)
+3) Update the config (as per below), bot token, API in the .env file or in db config (and point your env file to container volume /code/config)
 4) Deploy :
 - via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` or `docker push mraniki/tt:nightly`
 - or `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt`
@@ -30,8 +30,8 @@ Built with
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) 
 
 ## Config
-Either use .env file, environment docker compose variable or json db as per below structure.
-Environment file or docker variable are loaded in db at the startup.
+Either use .env file or json db as per below structure.
+Environment file is loaded in db at the startup.
 
 ### Env
 [env sample](config/env.sample)
@@ -68,7 +68,7 @@ v2
 v3
 - Integrate with messaging platform agnostic like matrix [![matrix](https://badgen.net/badge/icon/nio/black?icon=libraries&label)](https://github.com/poljar/matrix-nio)
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/)
-
+- create / modify db via bot command
  ## ⚠️ Disclaimer
  This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK**
 

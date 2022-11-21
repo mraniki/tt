@@ -2,7 +2,7 @@
 ##=============== VERSION  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.9.4"
+TTVersion="🪙TT 0.9.5"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -25,7 +25,6 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 
 #db
 from tinydb import TinyDB, Query
-import re
 
 #ccxt
 import ccxt
@@ -33,9 +32,6 @@ import ccxt
 #dex
 from web3 import Web3
 
-#matrix
-#import asyncio
-#from nio import AsyncClient, MatrixRoom, RoomMessageText
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== Logging  =============
@@ -144,10 +140,10 @@ def loadExchangeDEX(exchangeid):
             privatekey= newex[0]['privatekey']
             version= newex[0]['version']
             networkprovider= newex[0]['networkprovider']
-            web3 = Web3(Web3.HTTPProvider(networkprovider))
+            active_ex = Web3(Web3.HTTPProvider(networkprovider))
             logger.info(msg=f"{web3.isConnected()}")
             #response = f"Active DEX is {name} status: {web3.isConnected()}"
-            active_ex=name
+           # active_ex=name
             #return response
         except Exception as e:
             logger.error(msg=f"Failed due to a web3 error: {e}")
