@@ -67,7 +67,7 @@ v2
 - view daily pnl and free margin in /bal response
 - Support bot in webhook instead of getupdate
 v3
-- Integrate with messaging platform agnostic like matrix [![matrix](https://badgen.net/badge/icon/nio/black?icon=libraries&label)](https://github.com/poljar/matrix-nio)
+- Integrate with messaging platform agnostic like [![apprise]([https://badgen.net/badge/icon/nio/black?icon=libraries&label)](https://github.com/poljar/matrix-ni](https://github.com/caronc/apprise)
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/)
 - create / modify db via bot command
  ## ⚠️ Disclaimer
