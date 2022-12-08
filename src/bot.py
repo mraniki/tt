@@ -437,8 +437,15 @@ async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=======  bot unknow command  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-async def unknown_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    log.error(update, 'TBD unknown')
+async def notify_command:
+     apobj = apprise.Apprise()
+     config = apprise.AppriseConfig()
+     config.add('./config/apprise.yml')
+     apobj.add(config)
+     apobj.notify(
+    body='what a great notification service!',
+    title='my notification title',
+    )
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot error handling ========
@@ -454,6 +461,13 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     logger.error(msg=f"{errormessage}")
     await update.effective_chat.send_message(f"⚠️ Error encountered {tb_trim}")
 
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=======  bot unknow command  ========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+async def unknown_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    log.error(update, 'TBD unknown')
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== BOT  =============
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -462,15 +476,6 @@ def main():
 
     # Create the Application
     try:
-
-     apobj = apprise.Apprise()
-     config = apprise.AppriseConfig()
-     config.add('./config/apprise.yml')
-     apobj.add(config)
-     apobj.notify(
-    body='what a great notification service!',
-    title='my notification title',
-    )
 
      application = Application.builder().token(TG_TOKEN).post_init(post_init).build()
 
@@ -486,6 +491,8 @@ def main():
      application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
      application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
      application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
+     application.add_handler(MessageHandler(filters.Regex('/notify'), notify_command)
+
 
      #error handling 
      application.add_error_handler(error_handler)
