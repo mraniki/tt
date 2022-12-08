@@ -462,6 +462,16 @@ def main():
 
     # Create the Application
     try:
+
+     apobj = apprise.Apprise()
+     config = apprise.AppriseConfig()
+     config.add('./config/apprise.yml')
+     apobj.add(config)
+     apobj.notify(
+    body='what a great notification service!',
+    title='my notification title',
+    )
+
      application = Application.builder().token(TG_TOKEN).post_init(post_init).build()
 
     # Menus
@@ -482,7 +492,7 @@ def main():
 
      #Run the bot
      application.run_polling()
-     apprise -vv -t 'Test' -b 'my notification body Test'
+
 
     except Exception as error:
      logger.fatal("Bot failed to start. Error: " + str(error))
