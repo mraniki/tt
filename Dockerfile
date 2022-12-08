@@ -15,8 +15,9 @@ RUN pip install -r requirements.txt
 COPY ./src .
 
 #RUN mkdir ./config
-#ADD ./config/db.json.sample ./config/db.json.sample
-#ADD ./config/env.sample ./config/env.sample
+RUN mkdir -p /config
+#ADD ./config/db.json.sample /config/db.json.sample
+#ADD ./config/env.sample /config/env.sample
 
 # command to run on container start
 CMD [ "python", "./bot.py" ]
