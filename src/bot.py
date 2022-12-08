@@ -481,6 +481,7 @@ def main():
 
      #Run the bot
      application.run_polling()
+     apprise -vv -t 'Test' -b 'my notification body Test'
 
     except Exception as error:
      logger.fatal("Bot failed to start. Error: " + str(error))
