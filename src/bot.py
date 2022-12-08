@@ -29,10 +29,10 @@ import apprise
 #  ~/.apprise.yml
 #  ~/.config/apprise
 #  ~/.config/apprise.yml
-#apprise -vv -t 'my title' -b 'my notification body'
+apprise -vv -t 'my title' -b 'my notification body'
 # Assuming our {bot_token} is 123456789:abcdefg_hijklmnop
 # Assuming the {chat_id} belonging to lead2gold is 12315544
-apprise -vv -t "Test Message Title" -b "Test Message Body" \
+#apprise -vv -t "Test Message Title" -b "Test Message Body" \
 #   tgram://123456789:abcdefg_hijklmnop/12315544/
 
 #db
