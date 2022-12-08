@@ -101,8 +101,8 @@ menu=f'{TTVersion} \n {commandlist}\n'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##====== common functions  =============
-def sendmessage (string)
-    await update.effective_chat.send_message(f"{string}", parse_mode=constants.ParseMode.HTML)
+# def sendmessage (string)
+#     await update.effective_chat.send_message(f"{string}", parse_mode=constants.ParseMode.HTML)
 
 def Convert(string):
    li = list(string.split(" "))
