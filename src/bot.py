@@ -10,7 +10,7 @@ TTVersion="🪙TT 0.9.6"
 import logging
 import sys
 import traceback
-import re
+
 
 ##env
 import os
@@ -38,6 +38,7 @@ import apprise
 
 #db
 from tinydb import TinyDB, Query
+import re
 
 #ccxt
 import ccxt
