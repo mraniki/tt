@@ -1,7 +1,7 @@
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== VERSION  =============
 
-TTVersion="🪙TT 0.9.6"
+TTVersion="🪙TT 0.9.7"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -65,7 +65,7 @@ logger.info(msg=f"CCXT Version: {ccxt.__version__}")
 
 dotenv_path = './config/.env'
 db_path= './config/db.json'
-
+tokenlist='https://tokens.pancakeswap.finance/pancakeswap-extended.json'
 ##== db ==
 db = TinyDB(db_path)
 q = Query()
@@ -170,9 +170,8 @@ def loadExchangeDEX(exchangeid):
     else:
         logger.error(msg=f"No exchange available for setup")
 
-
 def DexContractLookup(symbol):
- url = requests.get("https://tokens.pancakeswap.finance/pancakeswap-extended.json")
+ url = requests.get(tokenlist)
  text = url.text
  token_list = json.loads(text)['tokens']
  target_token = [token for token in token_list if token['symbol'].lower() == symbol.lower()]
