@@ -414,7 +414,7 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
         logger.info(msg=f"New CEX: {newex}")
         name= newex[0]['name']
         res = loadExchangeDEX(name)
-        response = f"Active DEX is {res} status: {web3.isConnected()}"
+        response = f"Active DEX is {name}"
     await update.effective_chat.send_message(f"{response}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
