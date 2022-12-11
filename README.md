@@ -62,10 +62,12 @@ v1
 - Setup send message overall function
 - clean up and refactorize the code structure for clean v1
 - view opened future position via /pos command 
+
 v2
 - view last closed orders via /order command 
 - view daily pnl and free margin in /bal response
 - Support bot in webhook instead of getupdate
+
 v3
 - Integrate with messaging platform agnostic like [![apprise]([https://badgen.net/badge/icon/nio/black?icon=libraries&label)](https://github.com/poljar/matrix-ni](https://github.com/caronc/apprise)
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/)
