@@ -104,8 +104,6 @@ menu=f'{TTVersion} \n {commandlist}\n'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##====== common functions  =============
-async def sendmessage (messaging):
-     await update.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
 
 def Convert(string):
    li = list(string.split(" "))
@@ -452,7 +450,7 @@ async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     logger.info(msg=f"TBDrestarting")
     )
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##=======  bot unknow command  ========
+##=======   notify command      ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 async def notify_command()-> None:
     logger.info(msg=f"apprise test")
@@ -462,8 +460,15 @@ async def notify_command()-> None:
     apobj.add(config)
     apobj.notify(
      body='what a great notification service!',
-     title='my notification title',)
+     title='my notification title')
 
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=======   sendmessage command  =======
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+async def sendmessage (messaging):
+    await update.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=======  bot unknow command  ========
