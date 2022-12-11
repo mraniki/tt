@@ -290,6 +290,21 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             await update.effective_chat.send_message(f"⚠️{e}") 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=========  bot error handling ========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+## Log Errors caused by Updates
+
+async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.error(msg="Exception:", exc_info=context.error)
+    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
+    tb_string = "".join(tb_list)
+    tb_trim = tb_string[:4000]
+    errormessage=f"⚠️ Error encountered {tb_trim}"
+    logger.error(msg=f"{errormessage}")
+    await update.effective_chat.send_message(f"⚠️ Error encountered {tb_trim}")
+
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
 ## process buy or sell order 
 
@@ -311,11 +326,13 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 m_sl=order_m[2][3:7]
                 m_tp=order_m[3][3:7]
                 m_q=order_m[4][2:-1]
+                m_ordertype=CCXT_id1_ordertype
                 logger.info(msg=f"Processing order: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
                 #calculate percentage 
                 m_price = float(active_ex.fetchTicker(f'{m_symbol}').get('last'))
                 totalusdtbal = active_ex.fetchBalance()['USDT']['free']
                 amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price) 
+                ##need to create a common order send function across cdex and dex
                 res = active_ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
                 orderid=res['id']
                 timestamp=res['datetime']
@@ -372,36 +389,35 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 #Send a message when /cex or /dex is used
 
 async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
-
-  msg_ex  = update.effective_message.text
-  newexchangemsg = Convert(msg_ex) 
-  newexchange=newexchangemsg[1]
-  extype=newexchangemsg[0]
-  global active_ex
-  if extype=="/cex":
-      if testmode:
-          newex=cexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE)&(q.testmode=="True")))
-      else:
-          newex=cexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE)&(q.testmode!="True")))
-          logger.info(msg=f"New CEX: {newex}")
-      if len(newex):
-        logger.info(msg=f"CEX setup starting for {newex[0]['name']}")
-        CCXT_name = newex[0]['name']
-        CCXT_api = newex[0]['api']  
-        CCXT_secret = newex[0]['secret'] 
-        CCXT_password = newex[0]['password'] 
-        CCXT_test_mode = newex[0]['testmode'] 
-        res = loadExchange(CCXT_name,CCXT_api,CCXT_secret,CCXT_test_mode)
-        response = f"Active CEX is {res} \n "
-      else:
-        response = 'CEX not setup'
-  else:
-      newex=dexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE))&(q.testmode!="True"))
-      logger.info(msg=f"New CEX: {newex}")
-      name= newex[0]['name']
-      res = loadExchangeDEX(name)
-      response = f"Active DEX is {res} status: {web3.isConnected()}"
-  await update.effective_chat.send_message(f"{response}")
+    msg_ex  = update.effective_message.text
+    newexchangemsg = Convert(msg_ex) 
+    newexchange=newexchangemsg[1]
+    extype=newexchangemsg[0]
+    global active_ex
+    if extype=="/cex":
+        if testmode:
+            newex=cexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE)&(q.testmode=="True")))
+        else:
+            newex=cexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE)&(q.testmode!="True")))
+            logger.info(msg=f"New CEX: {newex}")
+        if len(newex):
+            logger.info(msg=f"CEX setup starting for {newex[0]['name']}")
+            CCXT_name = newex[0]['name']
+            CCXT_api = newex[0]['api']  
+            CCXT_secret = newex[0]['secret'] 
+            CCXT_password = newex[0]['password'] 
+            CCXT_test_mode = newex[0]['testmode'] 
+            res = loadExchange(CCXT_name,CCXT_api,CCXT_secret,CCXT_test_mode)
+            response = f"Active CEX is {res} \n "
+        else:
+            response = 'CEX not setup'
+    else:
+        newex=dexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE))&(q.testmode!="True"))
+        logger.info(msg=f"New CEX: {newex}")
+        name= newex[0]['name']
+        res = loadExchangeDEX(name)
+        response = f"Active DEX is {res} status: {web3.isConnected()}"
+    await update.effective_chat.send_message(f"{response}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== Test mode switch  ===========
@@ -432,34 +448,21 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##=========  bot restart  ========
 
 async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    (
     logger.info(msg=f"TBDrestarting")
-
+    )
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=======  bot unknow command  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-async def notify_command:
-     apobj = apprise.Apprise()
-     config = apprise.AppriseConfig()
-     config.add('./config/apprise.yml')
-     apobj.add(config)
-     apobj.notify(
-    body='what a great notification service!',
-    title='my notification title',
-    )
-
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##=========  bot error handling ========
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-## Log Errors caused by Updates
-
-async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.error(msg="Exception:", exc_info=context.error)
-    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
-    tb_string = "".join(tb_list)
-    tb_trim = tb_string[:4000]
-    errormessage=f"⚠️ Error encountered {tb_trim}"
-    logger.error(msg=f"{errormessage}")
-    await update.effective_chat.send_message(f"⚠️ Error encountered {tb_trim}")
+async def notify_command()-> None:
+    logger.info(msg=f"apprise test")
+    #  apobj = apprise.Apprise()
+    config = apprise.AppriseConfig()
+    config.add('./config/apprise.yml')
+    apobj.add(config)
+    apobj.notify(
+     body='what a great notification service!',
+     title='my notification title',)
 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -476,10 +479,9 @@ def main():
 
     # Create the Application
     try:
-
+     apobj = apprise.Apprise()   
      application = Application.builder().token(TG_TOKEN).post_init(post_init).build()
-
-    # Menus
+        # Menus
      application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
      application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
      application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch))
@@ -491,16 +493,12 @@ def main():
      application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
      application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
      application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
-     application.add_handler(MessageHandler(filters.Regex('/notify'), notify_command)
+     application.add_handler(MessageHandler(filters.Regex('/notify'), notify_command))
 
-
-     #error handling 
+        #error handling 
      application.add_error_handler(error_handler)
-
-     #Run the bot
+        #Run the bot
      application.run_polling()
-
-
     except Exception as error:
      logger.fatal("Bot failed to start. Error: " + str(error))
 
