@@ -44,7 +44,11 @@ import re
 import ccxt
 
 #dex
+#from collections.abc import Iterable
 from web3 import Web3
+#from ens.auto import ns
+#import ens
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== Logging  =============
@@ -76,6 +80,8 @@ global exchangeid
 global web3
 global active_ex
 global messaging
+global address
+
 exchanges = {}
 trading=True 
 testmode=False
@@ -137,25 +143,31 @@ def loadExchange(exchangeid, api, secret, mode):
         except Exception as e:
             logger.error(msg=f"{e}")
     else: 
-        loadExchangeDEX(exchangeid)
+        active_ex=loadExchangeDEX(exchangeid)
 
 
 def loadExchangeDEX(exchangeid):
     global active_ex
-    global web3
+    global address
+    #global web3
     ex_check2=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
     if ex_check2:
         try:
             logger.info(msg=f"defi setup for {exchangeid}")
-            ex_check2=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
-            logger.info(msg=f"New DEX: {ex_check2}")
+            newex=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
+            logger.info(msg=f"New DEX: {newex}")
             name= newex[0]['name']
             address= newex[0]['address']
             privatekey= newex[0]['privatekey']
             version= newex[0]['version']
             networkprovider= newex[0]['networkprovider']
             active_ex = Web3(Web3.HTTPProvider(networkprovider))
-            logger.info(msg=f"{web3.isConnected()}")
+            #logger.info(msg=f"{active_ex}")
+            #ns1 = ns.reverse(networkprovider)
+            #logger.info(msg=f"{ns1}")
+            if active_ex.net.listening:
+             logger.info(msg=f"{active_ex.net.listening}")
+             return name
         except Exception as e:
             logger.error(msg=f"Failed due to a web3 error: {e}")
     else:
@@ -256,10 +268,10 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 #Send a message when /bal is used.
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.info(msg=f" active exchange is {active_ex}")
     check1=cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE))
     if cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE)):
         try:
-            logger.info(msg=f" active exchange is {active_ex}")
             balance = active_ex.fetch_free_balance()
             balance2 = {k: v for k, v in balance.items() if v>0}
             logger.info(msg=f"{balance2}")
@@ -279,10 +291,11 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             await update.effective_chat.send_message(f"⚠️{e}") 
     else:
         try:
-            balancedex=web3.eth.get_balance(address)
-            balancedexreadeable = web3.fromWei(balancedex,'ether')
-            logger.info(msg=f"{web3.isConnected()} ")
-            response = f"DEX balance: {balancedexreadeable}"
+            balancedex=active_ex.eth.get_balance(address)
+            logger.info(msg=f"balance: {balancedex}")
+            balancedexreadeable = active_ex.from_wei(balancedex,'ether')
+            response = f"🏦 Balance: {balancedexreadeable}"
+            await update.effective_chat.send_message(f"{response}")
         except Exception as e:
             logger.error(msg=f"Failed due to a web3 error: {e}")
             await update.effective_chat.send_message(f"⚠️{e}") 
@@ -411,9 +424,11 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
             response = 'CEX not setup'
     else:
         newex=dexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE))&(q.testmode!="True"))
-        logger.info(msg=f"New CEX: {newex}")
         name= newex[0]['name']
+        logger.info(msg=f"dex loop: {name}")
+        
         res = loadExchangeDEX(name)
+        logger.info(msg=f"res: {res}")
         response = f"Active DEX is {name}"
     await update.effective_chat.send_message(f"{response}")
 

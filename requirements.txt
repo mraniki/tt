@@ -2,5 +2,5 @@ python-dotenv>=0.20.0
 python-telegram-bot>=20.0a4
 tinydb
 ccxt
-web3
+web3>=v6.0.0-beta.8
 apprise
