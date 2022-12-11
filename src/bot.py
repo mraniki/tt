@@ -16,7 +16,7 @@ import traceback
 import os
 from os import getenv
 from dotenv import load_dotenv
-import json
+import json, requests
 
 #telegram
 from telegram import Update, constants
@@ -145,7 +145,6 @@ def loadExchange(exchangeid, api, secret, mode):
     else: 
         active_ex=loadExchangeDEX(exchangeid)
 
-
 def loadExchangeDEX(exchangeid):
     global active_ex
     global address
@@ -161,10 +160,8 @@ def loadExchangeDEX(exchangeid):
             privatekey= newex[0]['privatekey']
             version= newex[0]['version']
             networkprovider= newex[0]['networkprovider']
+            router= newex[0]['router']
             active_ex = Web3(Web3.HTTPProvider(networkprovider))
-            #logger.info(msg=f"{active_ex}")
-            #ns1 = ns.reverse(networkprovider)
-            #logger.info(msg=f"{ns1}")
             if active_ex.net.listening:
              logger.info(msg=f"{active_ex.net.listening}")
              return name
@@ -173,6 +170,15 @@ def loadExchangeDEX(exchangeid):
     else:
         logger.error(msg=f"No exchange available for setup")
 
+
+def DexContractLookup(symbol):
+ url = requests.get("https://tokens.pancakeswap.finance/pancakeswap-extended.json")
+ text = url.text
+ token_list = json.loads(text)['tokens']
+ target_token = [token for token in token_list if token['symbol'].lower() == symbol.lower()]
+ print("Token Contract Address: ", target_token[0]['address'])
+ return target_token[0]['address'] if len(target_token)  >  0 else None
+    
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
 
@@ -261,7 +267,8 @@ async def post_init(application: Application):
 ##Send a message when /help is used.
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.effective_chat.send_message(f"{env} {active_ex} Sandbox:{testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
+ message= f"{env} {active_ex} Sandbox:{testmode}\n {menu}"
+ await send(update,message)
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##========== view balance  =============
@@ -279,7 +286,8 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             for iterator in balance2:
                 logger.info(msg=f"{iterator}: {balance2[iterator]}")
                 prettybal += (f"{iterator} : {balance2[iterator]} \n")
-            await update.effective_chat.send_message(f"🏦 Balance \n{prettybal}")
+            message=f"🏦 Balance \n{prettybal}"
+            await send(update,message)
         except ccxt.NetworkError as e:
             logger.error(msg=f"Failed due to a network error {e}")
             await update.effective_chat.send_message(f"⚠️{e}")
@@ -294,11 +302,14 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             balancedex=active_ex.eth.get_balance(address)
             logger.info(msg=f"balance: {balancedex}")
             balancedexreadeable = active_ex.from_wei(balancedex,'ether')
-            response = f"🏦 Balance: {balancedexreadeable}"
-            await update.effective_chat.send_message(f"{response}")
+            message = f"🏦 Balance: {balancedexreadeable}"
+            #await update.effective_chat.send_message(f"{response}")
+            await send(update,message)
         except Exception as e:
-            logger.error(msg=f"Failed due to a web3 error: {e}")
-            await update.effective_chat.send_message(f"⚠️{e}") 
+            logger.error(msg=f"{e}")
+            message=f"Failed due to a web3 error: {e}"
+            await send(update,message)
+            #await update.effective_chat.send_message(f"⚠️{e}") 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot error handling ========
@@ -310,10 +321,10 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
     tb_string = "".join(tb_list)
     tb_trim = tb_string[:4000]
-    errormessage=f"⚠️ Error encountered {tb_trim}"
-    logger.error(msg=f"{errormessage}")
-    await update.effective_chat.send_message(f"⚠️ Error encountered {tb_trim}")
-
+    e=f"⚠️ Error encountered {tb_trim}"
+    logger.error(msg=f"{e}")
+    message=f"{e}"
+    await send(update,message)
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
@@ -327,10 +338,12 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     filter_lst = ['BUY', 'SELL']
     if [ele for ele in filter_lst if(ele in messagetxt_upper)]:
         if (trading==False):
-            await update.effective_chat.send_message("TRADING IS DISABLED")
-        else:  # order format identified "sell BTCUSDT sl=6000 tp=4500 q=1%""
-            try:
-                #await update.message.reply_text("THIS IS AN ORDER TO PROCESS")
+            message="TRADING IS DISABLED"
+            await send(update,message)
+        else:  # order format identified "sell BTCUSDT sl=6000 tp=4500 q=1%"" 
+         check1=cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE))
+         if cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE)):
+             try:
                 order_m = Convert(messagetxt_upper) 
                 m_dir= order_m[0]
                 m_symbol=order_m[1]
@@ -353,16 +366,36 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 price=res['price']
                 response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
                 #return orderid
-            except ccxt.NetworkError as e:
+             except ccxt.NetworkError as e:
                 logger.error(msg=f"Failed due to a network error {e}")
                 response=f"⚠️Failed due to a network error {e}"
-            except ccxt.ExchangeError as e:
+             except ccxt.ExchangeError as e:
                 logger.error(msg=f"Failed due to a exchange error: {e}")
                 response=f"⚠️Failed due to a exchange error: {e}"
-            except Exception as e:
+             except Exception as e:
                 logger.error(msg=f"Failed due to a CCXT error: {e}")
                 response=f"⚠️Failed due to a CCXT error: {e}"
-            await update.effective_chat.send_message(f"{response}")
+             #await update.effective_chat.send_message(f"{response}")
+             await send(update,response)
+         else:
+          spend = active_ex.toChecksumAddress("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")  #wbnb contract
+          tokenToBuy = active_ex.toChecksumAddress('0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c')
+          DexContractLookup('cake')
+          input_quantity_wei=1
+          minimum_input_quantity_wei=1
+          #Setup the PancakeSwap contract
+          contract = active_ex.eth.contract(address=router, abi=abi_def)
+          res = contract.functions.swapExactTokensForTokens(
+          input_quantity_wei,
+          minimum_input_quantity_wei,
+          swap_path,
+          account_address, deadline)
+          signed_txn = active_ex.eth.account.sign_transaction(res, private_key=privatekey)
+          tx_token = active_ex.eth.send_raw_transaction(signed_txn.rawTransaction)
+          print(active_ex.toHex(tx_token))
+          response=f"DEX processing {tx_token}"
+         #await update.effective_chat.send_message(f"{response}")
+         await send(update,response)
     else: error_handler()
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -393,7 +426,9 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         trading=True
     else:
         trading=False
-    await update.effective_chat.send_message(f"Trading is {trading}")
+    #await update.effective_chat.send_message(f"Trading is {trading}")
+    message=f"Trading is {trading}"
+    await send(update,message)
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============ CEX DEX switch  =========
@@ -425,12 +460,11 @@ async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         newex=dexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE))&(q.testmode!="True"))
         name= newex[0]['name']
-        logger.info(msg=f"dex loop: {name}")
-        
+        logger.info(msg=f"dex setup for: {name}")
         res = loadExchangeDEX(name)
         logger.info(msg=f"res: {res}")
         response = f"Active DEX is {name}"
-    await update.effective_chat.send_message(f"{response}")
+    await send(update,response)
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== Test mode switch  ===========
@@ -442,7 +476,8 @@ async def testmode_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         testmode=True
     else:
         testmode=False
-    await update.effective_chat.send_message(f"Sandbox is {testmode}")
+    message=f"Sandbox is {testmode}"
+    await send(update,message)
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== DB COMMAND ===============
@@ -455,7 +490,9 @@ async def dropDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##=========  show DB ========
 async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"display db")
-    await update.effective_chat.send_message(f" db extract: \n {db.all()}")
+    message=f" db extract: \n {db.all()}"
+    await send(update,message)
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot restart  ========
@@ -482,8 +519,8 @@ async def notify_command()-> None:
 ##=======   sendmessage command  =======
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-async def sendmessage (messaging):
-    await update.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
+async def send (self, messaging):
+ await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=======  bot unknow command  ========
