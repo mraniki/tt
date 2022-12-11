@@ -1,17 +1,16 @@
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== VERSION  =============
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-TTVersion="🪙TT 0.9.3"
+TTVersion="🪙TT 0.9.6"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 ##log
 import logging
 import sys
 import traceback
+
 
 ##env
 import os
@@ -23,6 +22,20 @@ import json
 from telegram import Update, constants
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
 
+#notification
+import apprise
+# By default if no url or configuration is specified apprise will attempt to load
+# configuration files (if present) from:
+#  ~/.apprise
+#  ~/.apprise.yml
+#  ~/.config/apprise
+#  ~/.config/apprise.yml
+#apprise -vv -t 'my title' -b 'my notification body'
+# Assuming our {bot_token} is 123456789:abcdefg_hijklmnop
+# Assuming the {chat_id} belonging to lead2gold is 12315544
+#apprise -vv -t "Test Message Title" -b "Test Message Body" \
+#   tgram://123456789:abcdefg_hijklmnop/12315544/
+
 #db
 from tinydb import TinyDB, Query
 import re
@@ -31,7 +44,11 @@ import re
 import ccxt
 
 #dex
+#from collections.abc import Iterable
 from web3 import Web3
+#from ens.auto import ns
+#import ens
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== Logging  =============
@@ -42,7 +59,6 @@ logger = logging.getLogger(__name__)
 logger.info(msg=f"{TTVersion}")
 logger.info(msg=f"python {sys.version}")
 logger.info(msg=f"CCXT Version: {ccxt.__version__}")
-logger.info(msg=f"Please wait, loading...")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== CONFIG  =============
@@ -59,22 +75,25 @@ logger.info(msg=f"Environment is {env}")
 telegramDB = db.table('telegram') 
 cexDB = db.table('cex')
 dexDB = db.table('dex')
-
 ##== var ==
 global exchangeid
+global web3
+global active_ex
+global messaging
+global address
+
 exchanges = {}
-active_ex = {}
 trading=True 
 testmode=False
 
 ##== telegram bot commands and messages
 commandlist= """<code>/help</code>
-<code>/bal</code> view your active exchange balance
+<code>/bal</code> view active exchange bal
 <code>/trading</code> Disable/Enable Trading
 <code>/test</code> Switch to Sandbox Mode
-<code>/dbdisplay</code>  View the DB
-====================================
-Use <code>/cex</code> or <code>/dex</code> to change the active exchange setup in your config:
+<code>/dbdisplay</code> View the DB
+=============================
+Use <code>/cex</code> or <code>/dex</code> to change active exchange setup in your config:
 <code>/cex binance</code>
 <code>/cex coinbase</code>
 <code>/cex kraken</code>
@@ -84,9 +103,9 @@ Use <code>/cex</code> or <code>/dex</code> to change the active exchange setup i
 <code>/cex huobi</code>
 <code>/cex gate</code>
 <code>/cex bybit</code>
-<s>/cex ftx</s>
 <code>/dex pancake</code> 
-<code>/dex uniswap</code> """
+<code>/dex uniswap</code> 
+<code>/dex quickswap</code>"""
 menu=f'{TTVersion} \n {commandlist}\n'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -98,28 +117,61 @@ def Convert(string):
   
 def loadExchange(exchangeid, api, secret, mode):
     global active_ex
-    logger.info(msg=f"cefi setup for {exchangeid}")
-    exchange = getattr(ccxt, exchangeid)
-    exchanges[exchangeid] = exchange()
-    try:
-        exchanges[exchangeid] = exchange({
-            'apiKey': api,
-            'secret': secret
-            })
-        logger.info(msg=f"{exchanges[exchangeid]} setup")
-        active_ex=exchanges[exchangeid]
-        if testmode:
-            logger.info(msg=f"Sandbox exchange is {active_ex}")
-            exchange.set_sandbox_mode(mode)
-        else:
-            logger.info(msg=f"Active cex is {active_ex}")
-        return active_ex
-    except ccxt.NetworkError as e:
-        logger.error(msg=f"{e}")
-    except ccxt.ExchangeError as e:
-        logger.error(msg=f"{e}")
-    except Exception as e:
-        logger.error(msg=f"{e}")
+    ex_check=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))
+    print(ex_check)
+    if ex_check:
+        logger.info(msg=f"CEFI setup for {exchangeid}")
+        exchange = getattr(ccxt, exchangeid)
+        exchanges[exchangeid] = exchange()
+        try:
+            exchanges[exchangeid] = exchange({
+                'apiKey': api,
+                'secret': secret
+                })
+            logger.info(msg=f"{exchanges[exchangeid]} setup")
+            active_ex=exchanges[exchangeid]
+            if testmode:
+                logger.info(msg=f"Sandbox exchange is {active_ex}")
+                active_ex.set_sandbox_mode('enabled')
+            else:
+                logger.info(msg=f"Active CEX is {active_ex}")
+            return active_ex
+        except ccxt.NetworkError as e:
+            logger.error(msg=f"{e}")
+        except ccxt.ExchangeError as e:
+            logger.error(msg=f"{e}")
+        except Exception as e:
+            logger.error(msg=f"{e}")
+    else: 
+        active_ex=loadExchangeDEX(exchangeid)
+
+
+def loadExchangeDEX(exchangeid):
+    global active_ex
+    global address
+    #global web3
+    ex_check2=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
+    if ex_check2:
+        try:
+            logger.info(msg=f"defi setup for {exchangeid}")
+            newex=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
+            logger.info(msg=f"New DEX: {newex}")
+            name= newex[0]['name']
+            address= newex[0]['address']
+            privatekey= newex[0]['privatekey']
+            version= newex[0]['version']
+            networkprovider= newex[0]['networkprovider']
+            active_ex = Web3(Web3.HTTPProvider(networkprovider))
+            #logger.info(msg=f"{active_ex}")
+            #ns1 = ns.reverse(networkprovider)
+            #logger.info(msg=f"{ns1}")
+            if active_ex.net.listening:
+             logger.info(msg=f"{active_ex.net.listening}")
+             return name
+        except Exception as e:
+            logger.error(msg=f"Failed due to a web3 error: {e}")
+    else:
+        logger.error(msg=f"No exchange available for setup")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
@@ -216,11 +268,10 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 #Send a message when /bal is used.
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.info(msg=f" active exchange is {active_ex}")
     check1=cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE))
-    print(check1)
     if cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE)):
         try:
-            logger.info(msg=f" active exchange is {active_ex}")
             balance = active_ex.fetch_free_balance()
             balance2 = {k: v for k, v in balance.items() if v>0}
             logger.info(msg=f"{balance2}")
@@ -240,13 +291,29 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             await update.effective_chat.send_message(f"⚠️{e}") 
     else:
         try:
-            balancedex=web3.eth.get_balance(address)
-            balancedexreadeable = web3.fromWei(balancedex,'ether')
-            logger.info(msg=f"{web3.isConnected()} ")
-            response = f"DEX balance: {balancedexreadeable}"
+            balancedex=active_ex.eth.get_balance(address)
+            logger.info(msg=f"balance: {balancedex}")
+            balancedexreadeable = active_ex.from_wei(balancedex,'ether')
+            response = f"🏦 Balance: {balancedexreadeable}"
+            await update.effective_chat.send_message(f"{response}")
         except Exception as e:
             logger.error(msg=f"Failed due to a web3 error: {e}")
             await update.effective_chat.send_message(f"⚠️{e}") 
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=========  bot error handling ========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+## Log Errors caused by Updates
+
+async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.error(msg="Exception:", exc_info=context.error)
+    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
+    tb_string = "".join(tb_list)
+    tb_trim = tb_string[:4000]
+    errormessage=f"⚠️ Error encountered {tb_trim}"
+    logger.error(msg=f"{errormessage}")
+    await update.effective_chat.send_message(f"⚠️ Error encountered {tb_trim}")
+
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##===== order parsing and placing  =====
@@ -270,11 +337,13 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 m_sl=order_m[2][3:7]
                 m_tp=order_m[3][3:7]
                 m_q=order_m[4][2:-1]
+                m_ordertype=CCXT_id1_ordertype
                 logger.info(msg=f"Processing order: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
                 #calculate percentage 
                 m_price = float(active_ex.fetchTicker(f'{m_symbol}').get('last'))
                 totalusdtbal = active_ex.fetchBalance()['USDT']['free']
                 amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price) 
+                ##need to create a common order send function across cdex and dex
                 res = active_ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
                 orderid=res['id']
                 timestamp=res['datetime']
@@ -282,17 +351,18 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 side=res['side']
                 amount=res['amount']
                 price=res['price']
-                await update.effective_chat.send_message(f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}")
-                return orderid
+                response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                #return orderid
             except ccxt.NetworkError as e:
                 logger.error(msg=f"Failed due to a network error {e}")
-                await update.effective_chat.send_message(f"⚠️{e}")
+                response=f"⚠️Failed due to a network error {e}"
             except ccxt.ExchangeError as e:
                 logger.error(msg=f"Failed due to a exchange error: {e}")
-                await update.effective_chat.send_message(f"⚠️{e}")
+                response=f"⚠️Failed due to a exchange error: {e}"
             except Exception as e:
                 logger.error(msg=f"Failed due to a CCXT error: {e}")
-                await update.effective_chat.send_message(f"⚠️{e}") 
+                response=f"⚠️Failed due to a CCXT error: {e}"
+            await update.effective_chat.send_message(f"{response}")
     else: error_handler()
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -305,7 +375,7 @@ async def lastorder_command(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 ##=========== view positions  ========
 ## Send a message when the /pos is used.
 async def position_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info(msg=f"TBDposition_command")
+ logger.info(msg=f"TBDposition_command")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== view today's pnl =========
@@ -321,51 +391,46 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     global trading
     if (trading==False):
         trading=True
-        await update.effective_chat.send_message(f"Trading is {trading}")
     else:
         trading=False
-        await update.effective_chat.send_message(f"Trading is {trading}")
+    await update.effective_chat.send_message(f"Trading is {trading}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============ CEX DEX switch  =========
 #Send a message when /cex or /dex is used
 
 async def switch(update: Update, context: ContextTypes.DEFAULT_TYPE):
-
-  msg_ex  = update.effective_message.text
-  newexchangemsg = Convert(msg_ex) 
-  newexchange=newexchangemsg[1]
-  extype=newexchangemsg[0]
-  if extype=="/cex":
-      if testmode:
-          newex=cexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE)&(q.testmode=="True")))
-      else:
-          newex=cexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE)&(q.testmode!="True")))
-          logger.info(msg=f"New CEX: {newex}")
-      if len(newex):
-        logger.info(msg=f"CEX setup starting for {newex[0]['name']}")
-        CCXT_name = newex[0]['name']
-        CCXT_api = newex[0]['api']  
-        CCXT_secret = newex[0]['secret'] 
-        CCXT_password = newex[0]['password'] 
-        CCXT_test_mode = newex[0]['testmode'] 
-        res = loadExchange(CCXT_name,CCXT_api,CCXT_secret,CCXT_test_mode)
-        response = f" new active CEX is {res} \n "
-      else:
-        response = 'CEX not setup'
-  else:
-      newex=dexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE))&(q.testmode!="True"))
-      logger.info(msg=f"New CEX: {newex}")
-      name= newex[0]['name']
-      address= newex[0]['address']
-      privatekey= newex[0]['privatekey']
-      version= newex[0]['version']
-      networkprovider= newex[0]['networkprovider']
-      logger.info(msg=f"{networkprovider}")
-      web3 = Web3(Web3.HTTPProvider(networkprovider))
-      logger.info(msg=f"{web3.isConnected()} ")
-      response = f"DEX WiP \n {name} status: {web3.isConnected()}"
-  await update.effective_chat.send_message(f"{response}")
+    msg_ex  = update.effective_message.text
+    newexchangemsg = Convert(msg_ex) 
+    newexchange=newexchangemsg[1]
+    extype=newexchangemsg[0]
+    global active_ex
+    if extype=="/cex":
+        if testmode:
+            newex=cexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE)&(q.testmode=="True")))
+        else:
+            newex=cexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE)&(q.testmode!="True")))
+            logger.info(msg=f"New CEX: {newex}")
+        if len(newex):
+            logger.info(msg=f"CEX setup starting for {newex[0]['name']}")
+            CCXT_name = newex[0]['name']
+            CCXT_api = newex[0]['api']  
+            CCXT_secret = newex[0]['secret'] 
+            CCXT_password = newex[0]['password'] 
+            CCXT_test_mode = newex[0]['testmode'] 
+            res = loadExchange(CCXT_name,CCXT_api,CCXT_secret,CCXT_test_mode)
+            response = f"Active CEX is {res} \n "
+        else:
+            response = 'CEX not setup'
+    else:
+        newex=dexDB.search((q.name.matches(f'{newexchange}',flags=re.IGNORECASE))&(q.testmode!="True"))
+        name= newex[0]['name']
+        logger.info(msg=f"dex loop: {name}")
+        
+        res = loadExchangeDEX(name)
+        logger.info(msg=f"res: {res}")
+        response = f"Active DEX is {name}"
+    await update.effective_chat.send_message(f"{response}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== Test mode switch  ===========
@@ -375,10 +440,9 @@ async def testmode_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     global testmode
     if (testmode==False):
         testmode=True
-        await update.effective_chat.send_message(f"Sandbox is {testmode}")
     else:
         testmode=False
-        await update.effective_chat.send_message(f"Sandbox is {testmode}")
+    await update.effective_chat.send_message(f"Sandbox is {testmode}")
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========== DB COMMAND ===============
@@ -397,28 +461,35 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##=========  bot restart  ========
 
 async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info(msg=f"TBD bot is restarting")
+    (
+    logger.info(msg=f"TBDrestarting")
+    )
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=======   notify command      ========
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+async def notify_command()-> None:
+    logger.info(msg=f"apprise test")
+    #  apobj = apprise.Apprise()
+    config = apprise.AppriseConfig()
+    config.add('./config/apprise.yml')
+    apobj.add(config)
+    apobj.notify(
+     body='what a great notification service!',
+     title='my notification title')
+
+
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+##=======   sendmessage command  =======
+##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+async def sendmessage (messaging):
+    await update.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=======  bot unknow command  ========
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 async def unknown_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    log.error(update, 'TBD unknown_command')
-
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-##=========  bot error handling ========
-##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-## Log Errors caused by Updates
-
-async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.error(msg="Exception:", exc_info=context.error)
-    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
-    tb_string = "".join(tb_list)
-    tb_trim = tb_string[:4000]
-    errormessage=f"⚠️ Error encountered {tb_trim}"
-    logger.error(msg=f"{errormessage}")
-    #await context.bot.send_message(chat_id=, text=errormessage, parse_mode=ParseMode.HTML)
-    await update.effective_chat.send_message(f"⚠️ Error encountered {tb_trim}")
+    log.error(update, 'TBD unknown')
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== BOT  =============
@@ -428,9 +499,9 @@ def main():
 
     # Create the Application
     try:
+     apobj = apprise.Apprise()   
      application = Application.builder().token(TG_TOKEN).post_init(post_init).build()
-
-    # Menus
+        # Menus
      application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
      application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
      application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch))
@@ -442,19 +513,16 @@ def main():
      application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
      application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
      application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
+     application.add_handler(MessageHandler(filters.Regex('/notify'), notify_command))
 
-     #error handling 
+        #error handling 
      application.add_error_handler(error_handler)
-
-     #Run the bot
+        #Run the bot
      application.run_polling()
-
     except Exception as error:
      logger.fatal("Bot failed to start. Error: " + str(error))
 
 if __name__ == '__main__':
     main()
-
-
 
 

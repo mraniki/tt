@@ -10,6 +10,7 @@
 
 Built with
 [![telegrambot](https://badgen.net/badge/icon/telegrambot?icon=telegram&label)](https://t.me/pythontelegrambotchannel)
+[![apprise](https://badgen.net/badge/icon/apprise/black?icon=libraries&label)](https://github.com/caronc/apprise)
 [![ccxt](https://badgen.net/badge/icon/ccxt/black?icon=libraries&label)](https://github.com/ccxt/ccxt)
 [![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py)
 [![sublime](https://badgen.net/badge/icon/sublime/F96854?icon=terminal&label)](https://www.sublimetext.com/)
@@ -21,7 +22,7 @@ Built with
 ## Install
 1) Create a private channel and a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
 2) Get your API Keys supported by [CCXT](https://github.com/ccxt/ccxt). 
-3) Update the config (as per below), bot token, API in the .env file in config (and point your env file to container volume /code/config)
+3) Update the config (as per below), bot token, API in the .env file or in db config (and point your env file to container volume /code/config)
 4) Deploy :
 - via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` or `docker push mraniki/tt:nightly`
 - or `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt`
@@ -30,51 +31,47 @@ Built with
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) 
 
 ## Config
-Either use .env file, environment docker compose variable or json db as per below structure.
-Environment file or docker variable are loaded in db at the startup.
+Either use .env file or json db as per below structure.
+Environment file is loaded in db at the startup.
 
 ### Env
 [env sample](config/env.sample)
 
-        ##ENV Variables:
-        #TG
-        TG_TOKEN=""
-        TG_CHANNEL_ID=""
-        #CCXTsupported exchange details
-        EXCHANGE1_NAME="binance"
-        EXCHANGE1_YOUR_API_KEY=""
-        EXCHANGE1_YOUR_SECRET=""
-        EXCHANGE1_ORDERTYPE="MARKET"
-        EXCHANGE1_DEFAULTTYPE=""
-
 ### DB Structure
 [DB sample](config/db.json.sample)
 
- ## Use Case
+ ## Features
  - Enable bot in pythontelegram v20 and support exchange formatted error via telegram
  - Push your signal manually or from system like trading view webhook to submit order to your ccxt exchange and receive confirmation
  - Disable or Enable trading process via /trading command
  - Query balance via /bal command and view it in formatted way
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
- - Support mutiple enviroment, testnet and production exchange via environment variable file
+ - Support multiple enviroment, testnet and production exchange via environment variable file
  - Support % of USDT balance for order
  - Support bot in private channel (or private chat) and multiple channel per enviroment
  - Handle Multi CEFI config (verified with Binance, Binance Testnet and ~~FTX~~ Kraken) and DEFI (test with Pancake)
  - Switch between CEFI using `/cex binance` or `/cex kraken` or DEFI `/dex pancake`
- - Add config folder and config file in the dockerfile to automatically create the volume folder and its config
+ - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
- ## 🚧 ToDo
-- formating/handling of response from exchange (opened position, last closed order)
+ ## 🚧 Roadmap
+v1
 - Integrate DEFI DEX (like pancakeswap or uniswap)
-- support futures and margin options (to be checked)
+- support futures and margin for CEX
 - Setup send message overall function
-- view last closed orders via /order command 
+- clean up and refactorize the code structure for clean v1
 - view opened future position via /pos command 
-- view daily pnl via /profit or /bal command
-- Merge with Telegram MQL4 version which integrate with MT4 exchanges
 
+v2
+- view last closed orders via /order command 
+- view daily pnl and free margin in /bal response
+- Support bot in webhook instead of getupdate
+
+v3
+- Integrate with messaging platform agnostic like [![apprise]([https://badgen.net/badge/icon/nio/black?icon=libraries&label)](https://github.com/poljar/matrix-ni](https://github.com/caronc/apprise)
+- Merge with Telegram MQL4 version which integrate with MT4 exchanges [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/)
+- create / modify db via bot command
  ## ⚠️ Disclaimer
  This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK**
 

@@ -1,0 +1,26 @@
+#
+# Minimal Configuration Example
+#
+
+# Define your URLs
+#
+# Minimal Configuration Example
+#
+
+# Define your URLs
+urls:
+  # Either on-line each entry like this:
+  - json://localhost
+  - xml://localhost
+   # 'tag' is a special keyword that allows you to associate tags with your
+   # services:
+  - tag: admin
+
+
+
+# # Perhaps this is your default configuration that is always read
+# # stored in ~/.config/apprise.yml (or ~/.apprise.yml)
+# include:
+#   # The following could import all of the configuration located on your
+#   # Apprise API:
+#   - http://localhost:8080/get/apprise
