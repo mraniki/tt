@@ -65,7 +65,7 @@ logger.info(msg=f"CCXT Version: {ccxt.__version__}")
 
 dotenv_path = './config/.env'
 db_path= './config/db.json'
-tokenlist='https://tokens.pancakeswap.finance/pancakeswap-extended.json'
+tokenlist='https://tokens.pancakeswap.finance/pancakeswap-extended.json' #tobeadded to the db 
 ##== db ==
 db = TinyDB(db_path)
 q = Query()
