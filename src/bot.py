@@ -44,10 +44,7 @@ import re
 import ccxt
 
 #dex
-#from collections.abc import Iterable
 from web3 import Web3
-#from ens.auto import ns
-#import ens
 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -117,9 +114,8 @@ def Convert(string):
   
 def loadExchange(exchangeid, api, secret, mode):
     global active_ex
-    ex_check=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))
-    print(ex_check)
-    if ex_check:
+    Ex_CEFI=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))
+    if Ex_CEFI:
         logger.info(msg=f"CEFI setup for {exchangeid}")
         exchange = getattr(ccxt, exchangeid)
         exchanges[exchangeid] = exchange()
@@ -134,7 +130,7 @@ def loadExchange(exchangeid, api, secret, mode):
                 logger.info(msg=f"Sandbox exchange is {active_ex}")
                 active_ex.set_sandbox_mode('enabled')
             else:
-                logger.info(msg=f"Active CEX is {active_ex}")
+                logger.info(msg=f"EX is {active_ex}")
             return active_ex
         except ccxt.NetworkError as e:
             logger.error(msg=f"{e}")
@@ -333,8 +329,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             message="TRADING IS DISABLED"
             await send(update,message)
         else:  # order format identified "sell BTCUSDT sl=6000 tp=4500 q=1%"" 
-         check1=cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE))
-         if cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE)):
+         Ex_CEFI=cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE))
+         if (Ex_CEFI):
              try:
                 order_m = Convert(messagetxt_upper) 
                 m_dir= order_m[0]
@@ -370,22 +366,24 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
              #await update.effective_chat.send_message(f"{response}")
              await send(update,response)
          else:
-          spend = active_ex.toChecksumAddress("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")  #wbnb contract
-          tokenToBuy = active_ex.toChecksumAddress('0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c')
-          DexContractLookup('cake')
-          input_quantity_wei=1
+          order_m = Convert(messagetxt_upper) 
+          m_dir= order_m[0]
+          m_symbol_tobuy=DexContractLookup(order_m[1])
+          m_symbol_spend=active_ex.toChecksumAddress("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")  #wbnb contract
+          m_q=order_m[2][2:-1]
+
           minimum_input_quantity_wei=1
           #Setup the PancakeSwap contract
           contract = active_ex.eth.contract(address=router, abi=abi_def)
           res = contract.functions.swapExactTokensForTokens(
-          input_quantity_wei,
+          m_q,
           minimum_input_quantity_wei,
           swap_path,
           account_address, deadline)
           signed_txn = active_ex.eth.account.sign_transaction(res, private_key=privatekey)
           tx_token = active_ex.eth.send_raw_transaction(signed_txn.rawTransaction)
           print(active_ex.toHex(tx_token))
-          response=f"DEX processing {tx_token}"
+          response=f"DEX transaction {tx_token}"
          #await update.effective_chat.send_message(f"{response}")
          await send(update,response)
     else: error_handler()
