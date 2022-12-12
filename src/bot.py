@@ -65,8 +65,6 @@ logger.info(msg=f"CCXT Version: {ccxt.__version__}")
 
 dotenv_path = './config/.env'
 db_path= './config/db.json'
-tokenlist='https://tokens.pancakeswap.finance/pancakeswap-extended.json' #tobeadded to the db 
-bscScanAPIKey='5XE9QACZCT3KXG2WWIAH7X1C5RKF1872TM' #tobeadded to the db 
 ##== db ==
 db = TinyDB(db_path)
 q = Query()
@@ -150,6 +148,9 @@ def loadExchangeDEX(exchangeid):
     global address
     global router
     global privatekey
+    global tokenlist
+    global abiurl
+    global abiurltoken
     Ex_DEFI=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
     if Ex_DEFI:
         try:
@@ -161,6 +162,9 @@ def loadExchangeDEX(exchangeid):
             version= Ex_DEFI[0]['version']
             networkprovider= Ex_DEFI[0]['networkprovider']
             router= Ex_DEFI[0]['router']
+            tokenlist=Ex_DEFI[0]['tokenlist']
+            abiurl=Ex_DEFI[0]['abiurl']
+            abiurltoken=Ex_DEFI[0]['abiurltoken']
             active_ex = Web3(Web3.HTTPProvider(networkprovider))
             if active_ex.net.listening:
              logger.info(msg=f"{active_ex.net.listening}")
@@ -180,12 +184,12 @@ def DexContractLookup(symbol):
 
 # fetch contract abi_
 def fetch_abi(address: str):
-   url = "https://api.bscscan.com/api"
+   url = abiurl
    params = {
    "module": "contract",
    "action": "getabi",
    "address": address,
-   "apikey": bscScanAPIKey }
+   "apikey": abiurltoken }
    resp = requests.get(url, params=params).json()
    abi = resp["result"]
    return abi
@@ -237,7 +241,7 @@ def DEX_Buy(tokenAddress, amountToBuy):
         # TOKEN IS BOUGHT
 
             checkTransactionSuccessURL = "https://api.bscscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=" + \
-                txHash + "&apikey=" + bscScanAPIKey
+                txHash + "&apikey=" + abiurltoken
             checkTransactionRequest = requests.get(
                 url=checkTransactionSuccessURL)
             txResult = checkTransactionRequest.json()['status']
