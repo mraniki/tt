@@ -194,7 +194,6 @@ def fetch_abi(address: str):
    abi = resp["result"]
    return abi
 
-
 def DEX_Buy(tokenAddress, amountToBuy):
  global address
  global active_ex
@@ -252,7 +251,6 @@ def DEX_Buy(tokenAddress, amountToBuy):
 
             else:
                 print(" [BUY] Transaction failed: likely not enough gas.")
-
 
  except Exception as e:
   logger.error(msg=f"Failed due to  error: {e}")

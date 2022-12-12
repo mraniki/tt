@@ -53,21 +53,24 @@ Environment file is loaded in db at the startup.
  - Switch between CEFI using `/cex binance` or `/cex kraken` or DEFI `/dex pancake`
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
  - Setup send message overall function for further improvement
+ - Integrate initial DEFI DEX (tested with BSC & pancakeswap) for balance query and order placing
  
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 Roadmap
 v1
-- Integrate DEFI DEX (like pancakeswap or uniswap)
 - support futures and margin for CEX (to be tested)
 - clean up and refactorize the code structure for clean v1
-- view opened future position via /pos command 
+- view opened future position via /pos command
+- more testing of the different dex/cex
+- simplify the commands /c /d /t
 
 v2
 - view last closed orders via /order command 
 - view daily pnl and free margin in /bal response
 - Support bot in webhook instead of getupdate
+- Integrate DEFI DEX (uniswap/quickswap)
 
 v3
 - Integrate with messaging platform agnostic like [![apprise]([https://badgen.net/badge/icon/nio/black?icon=libraries&label)](https://github.com/poljar/matrix-ni](https://github.com/caronc/apprise)
