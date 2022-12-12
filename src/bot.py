@@ -148,19 +148,17 @@ def loadExchange(exchangeid, api, secret, mode):
 def loadExchangeDEX(exchangeid):
     global active_ex
     global address
-    #global web3
-    ex_check2=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
-    if ex_check2:
+    Ex_DEFI=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
+    if Ex_DEFI:
         try:
             logger.info(msg=f"defi setup for {exchangeid}")
-            newex=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
-            logger.info(msg=f"New DEX: {newex}")
-            name= newex[0]['name']
-            address= newex[0]['address']
-            privatekey= newex[0]['privatekey']
-            version= newex[0]['version']
-            networkprovider= newex[0]['networkprovider']
-            router= newex[0]['router']
+            logger.info(msg=f"New DEX: {Ex_DEFI}")
+            name= Ex_DEFI[0]['name']
+            address= Ex_DEFI[0]['address']
+            privatekey= Ex_DEFI[0]['privatekey']
+            version= Ex_DEFI[0]['version']
+            networkprovider= Ex_DEFI[0]['networkprovider']
+            router= Ex_DEFI[0]['router']
             active_ex = Web3(Web3.HTTPProvider(networkprovider))
             if active_ex.net.listening:
              logger.info(msg=f"{active_ex.net.listening}")
@@ -168,7 +166,7 @@ def loadExchangeDEX(exchangeid):
         except Exception as e:
             logger.error(msg=f"Failed due to a web3 error: {e}")
     else:
-        logger.error(msg=f"No exchange available for setup")
+        logger.error(msg=f"existing DEX setup")
 
 def DexContractLookup(symbol):
  url = requests.get(tokenlist)
@@ -275,40 +273,36 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f" active exchange is {active_ex}")
-    check1=cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE))
-    if cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE)):
+    Ex_CEFI=cexDB.search(q.name.matches(f'{active_ex}',flags=re.IGNORECASE))
+    if (Ex_CEFI):
         try:
             balance = active_ex.fetch_free_balance()
-            balance2 = {k: v for k, v in balance.items() if v>0}
-            logger.info(msg=f"{balance2}")
+            logger.info(msg=f" active exchange is {balance}")
+            balance = {k: v for k, v in balance.items() if v>0}
+            logger.info(msg=f"{balance}")
             prettybal=""
-            for iterator in balance2:
-                logger.info(msg=f"{iterator}: {balance2[iterator]}")
-                prettybal += (f"{iterator} : {balance2[iterator]} \n")
+            for iterator in balance:
+                logger.info(msg=f"{iterator}: {balance[iterator]}")
+                prettybal += (f"{iterator} : {balance[iterator]} \n")
             message=f"🏦 Balance \n{prettybal}"
-            await send(update,message)
         except ccxt.NetworkError as e:
             logger.error(msg=f"Failed due to a network error {e}")
-            await update.effective_chat.send_message(f"⚠️{e}")
+            message=f"⚠️{e}"
         except ccxt.ExchangeError as e:
             logger.error(msg=f"Failed due to a exchange error: {e}")
-            await update.effective_chat.send_message(f"⚠️{e}")
+            message=f"⚠️{e}"
         except Exception as e:
             logger.error(msg=f"Failed due to a CCXT error: {e}")
-            await update.effective_chat.send_message(f"⚠️{e}") 
+            message=f"⚠️{e}"
     else:
         try:
-            balancedex=active_ex.eth.get_balance(address)
-            logger.info(msg=f"balance: {balancedex}")
-            balancedexreadeable = active_ex.from_wei(balancedex,'ether')
-            message = f"🏦 Balance: {balancedexreadeable}"
-            #await update.effective_chat.send_message(f"{response}")
-            await send(update,message)
+            balance = active_ex.eth.get_balance(address)
+            balance = active_ex.fromWei(balance_defi,'ether')
+            message = f"🏦 Balance: {balance}"
         except Exception as e:
             logger.error(msg=f"{e}")
-            message=f"Failed due to a web3 error: {e}"
-            await send(update,message)
-            #await update.effective_chat.send_message(f"⚠️{e}") 
+            message=f"⚠️Failed due to a web3 error: {e}"
+    await send(update,message)
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=========  bot error handling ========

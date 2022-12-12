@@ -52,14 +52,15 @@ Environment file is loaded in db at the startup.
  - Handle Multi CEFI config (verified with Binance, Binance Testnet and ~~FTX~~ Kraken) and DEFI (test with Pancake)
  - Switch between CEFI using `/cex binance` or `/cex kraken` or DEFI `/dex pancake`
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
+ - Setup send message overall function for further improvement
+ 
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 Roadmap
 v1
 - Integrate DEFI DEX (like pancakeswap or uniswap)
-- support futures and margin for CEX
-- Setup send message overall function
+- support futures and margin for CEX (to be tested)
 - clean up and refactorize the code structure for clean v1
 - view opened future position via /pos command 
 
