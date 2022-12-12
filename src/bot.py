@@ -278,11 +278,10 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         try:
             balance = active_ex.fetch_free_balance()
             logger.info(msg=f" active exchange is {balance}")
-            balance = {k: v for k, v in balance.items() if v>0}
+            balance = {k: v for k, v in balance.items() if v is not None and v>0}
             logger.info(msg=f"{balance}")
             prettybal=""
             for iterator in balance:
-                logger.info(msg=f"{iterator}: {balance[iterator]}")
                 prettybal += (f"{iterator} : {balance[iterator]} \n")
             message=f"🏦 Balance \n{prettybal}"
         except ccxt.NetworkError as e:
@@ -297,7 +296,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     else:
         try:
             balance = active_ex.eth.get_balance(address)
-            balance = active_ex.fromWei(balance_defi,'ether')
+            balance = active_ex.fromWei(balance,'ether')
             message = f"🏦 Balance: {balance}"
         except Exception as e:
             logger.error(msg=f"{e}")
