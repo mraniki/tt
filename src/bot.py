@@ -1,7 +1,7 @@
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== VERSION  =============
 
-TTVersion="🪙TT 0.9.7"
+TTVersion="🪙TT 0.9.8"
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##=============== import  =============
@@ -45,6 +45,10 @@ import ccxt
 
 #dex
 from web3 import Web3
+from web3.contract import Contract
+from typing import Dict, List
+from decimal import Decimal
+import time
 
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -63,6 +67,7 @@ logger.info(msg=f"CCXT Version: {ccxt.__version__}")
 dotenv_path = './config/.env'
 db_path= './config/db.json'
 tokenlist='https://tokens.pancakeswap.finance/pancakeswap-extended.json' #tobeadded to the db 
+bscScanAPIKey='5XE9QACZCT3KXG2WWIAH7X1C5RKF1872TM'
 ##== db ==
 db = TinyDB(db_path)
 q = Query()
@@ -107,7 +112,11 @@ menu=f'{TTVersion} \n {commandlist}\n'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##====== common functions  =============
-
+class Contract:
+    symbol: str
+    address: str
+    decimals: int
+    
 def Convert(string):
    li = list(string.split(" "))
    return li
@@ -144,6 +153,8 @@ def loadExchange(exchangeid, api, secret, mode):
 def loadExchangeDEX(exchangeid):
     global active_ex
     global address
+    global router
+    global privatekey
     Ex_DEFI=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
     if Ex_DEFI:
         try:
@@ -171,7 +182,99 @@ def DexContractLookup(symbol):
  target_token = [token for token in token_list if token['symbol'].lower() == symbol.lower()]
  print("Token Contract Address: ", target_token[0]['address'])
  return target_token[0]['address'] if len(target_token)  >  0 else None
-    
+
+
+# fetch contract abi_
+def fetch_abi(address: str):
+   url = "https://api.bscscan.com/api"
+   params = {
+   "module": "contract",
+   "action": "getabi",
+   "address": address,
+   "apikey": bscScanAPIKey }
+   resp = requests.get(url, params=params).json()
+   abi = resp["result"]
+   return abi
+   
+def get_contract(self, contract: Contract):
+ abi_contract = self.fetch_abi(contract.address)
+ return self.client.eth.contract(address=contract.address, abi=abi_contract)
+
+# query the price of token pair
+def query_price(self, token_path:
+ List[Contract]) -> Decimal:
+ contract = self.get_contract(router)
+ path = [item.address for item in token_path]
+ amount = contract.functions.getAmountsOut(1 * 10 ** token_path[0].decimals, path).call()
+ amount_in = Decimal(amount[0]) / (10 ** token_path[0].decimals)
+ amount_out = Decimal(amount[1]) / (10 ** token_path[-1].decimals)
+ return amount_in / amount_out
+ 
+def DEX_Buy(tokenAddress, amountToBuy):
+ global address
+ global active_ex
+ global privatekey
+ web3=active_ex
+ transactionRevertTime = 30
+ gasAmount = 100
+ gasPrice = 5
+ try:
+        if(tokenAddress != None):
+            tokenToBuy = web3.toChecksumAddress(tokenAddress)
+            spend = web3.toChecksumAddress(
+                "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")  # wbnb contract address
+            contract = web3.eth.contract(
+                address=router, abi=fetch_abi(router))
+            nonce = web3.eth.get_transaction_count(address)
+            start = time.time()
+            pancakeswap2_txn = contract.functions.swapExactETHForTokens(
+                0,  # Set to 0 or specify min number of tokens - setting to 0 just buys X amount of tokens for whatever BNB specified
+                [spend, tokenToBuy],
+                address,
+                (int(time.time()) + transactionRevertTime)
+            ).buildTransaction({
+                'from': address,
+                # This is the Token(BNB) amount you want to Swap from
+                'value': web3.toWei(float(amountToBuy), 'ether'),
+                'gas': gasAmount,
+                'gasPrice': web3.toWei(gasPrice, 'gwei'),
+                'nonce': nonce,
+            })
+
+            try:
+                signed_txn = web3.eth.account.sign_transaction(
+                    pancakeswap2_txn, privatekey)
+                tx_token = web3.eth.send_raw_transaction(
+                    signed_txn.rawTransaction)  # BUY THE TOKEN
+            except Exception as e:
+             logger.error(msg=f"Failed due to  error: {e}")
+             return e
+           
+
+            txHash = str(web3.toHex(tx_token))
+
+        # TOKEN IS BOUGHT
+
+            checkTransactionSuccessURL = "https://api.bscscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=" + \
+                txHash + "&apikey=" + bscScanAPIKey
+            checkTransactionRequest = requests.get(
+                url=checkTransactionSuccessURL)
+            txResult = checkTransactionRequest.json()['status']
+
+            if(txResult == "1"):
+             print(txHash)
+             return txHash
+
+            else:
+                print(" [BUY] Transaction failed: likely not enough gas.")
+
+
+ except Exception as e:
+  logger.error(msg=f"Failed due to  error: {e}")
+  return e
+
+       
+
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##============= variables  =============
 
@@ -246,7 +349,9 @@ else:
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##======== INITIAL exchange setup  =====
 #tobereviewed to be added to main function
+
 loadExchange(CCXT_id1_name,CCXT_id1_api,CCXT_id1_secret,CCXT_test_mode)
+#loadExchangeDEX('pancake') need to enable dex at the start
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ## ========== startup message   ========
@@ -363,28 +468,16 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
              except Exception as e:
                 logger.error(msg=f"Failed due to a CCXT error: {e}")
                 response=f"⚠️Failed due to a CCXT error: {e}"
-             #await update.effective_chat.send_message(f"{response}")
              await send(update,response)
          else:
           order_m = Convert(messagetxt_upper) 
           m_dir= order_m[0]
           m_symbol_tobuy=DexContractLookup(order_m[1])
-          m_symbol_spend=active_ex.toChecksumAddress("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")  #wbnb contract
-          m_q=order_m[2][2:-1]
-
-          minimum_input_quantity_wei=1
-          #Setup the PancakeSwap contract
-          contract = active_ex.eth.contract(address=router, abi=abi_def)
-          res = contract.functions.swapExactTokensForTokens(
-          m_q,
-          minimum_input_quantity_wei,
-          swap_path,
-          account_address, deadline)
-          signed_txn = active_ex.eth.account.sign_transaction(res, private_key=privatekey)
-          tx_token = active_ex.eth.send_raw_transaction(signed_txn.rawTransaction)
-          print(active_ex.toHex(tx_token))
-          response=f"DEX transaction {tx_token}"
-         #await update.effective_chat.send_message(f"{response}")
+          m_symbol_tosell=active_ex.toChecksumAddress("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")#wbnb contract
+          #m_q=order_m[2][2:-1]
+          m_q=1
+          res=DEX_Buy(m_symbol_tobuy,m_q)
+          response=f"DEX {res}"
          await send(update,response)
     else: error_handler()
 
@@ -416,7 +509,6 @@ async def trading_switch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         trading=True
     else:
         trading=False
-    #await update.effective_chat.send_message(f"Trading is {trading}")
     message=f"Trading is {trading}"
     await send(update,message)
 
