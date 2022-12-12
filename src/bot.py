@@ -11,7 +11,6 @@ import logging
 import sys
 import traceback
 
-
 ##env
 import os
 from os import getenv
@@ -67,7 +66,7 @@ logger.info(msg=f"CCXT Version: {ccxt.__version__}")
 dotenv_path = './config/.env'
 db_path= './config/db.json'
 tokenlist='https://tokens.pancakeswap.finance/pancakeswap-extended.json' #tobeadded to the db 
-bscScanAPIKey='5XE9QACZCT3KXG2WWIAH7X1C5RKF1872TM'
+bscScanAPIKey='5XE9QACZCT3KXG2WWIAH7X1C5RKF1872TM' #tobeadded to the db 
 ##== db ==
 db = TinyDB(db_path)
 q = Query()
@@ -112,11 +111,7 @@ menu=f'{TTVersion} \n {commandlist}\n'
 
 ##▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 ##====== common functions  =============
-class Contract:
-    symbol: str
-    address: str
-    decimals: int
-    
+
 def Convert(string):
    li = list(string.split(" "))
    return li
@@ -196,20 +191,7 @@ def fetch_abi(address: str):
    abi = resp["result"]
    return abi
    
-def get_contract(self, contract: Contract):
- abi_contract = self.fetch_abi(contract.address)
- return self.client.eth.contract(address=contract.address, abi=abi_contract)
 
-# query the price of token pair
-def query_price(self, token_path:
- List[Contract]) -> Decimal:
- contract = self.get_contract(router)
- path = [item.address for item in token_path]
- amount = contract.functions.getAmountsOut(1 * 10 ** token_path[0].decimals, path).call()
- amount_in = Decimal(amount[0]) / (10 ** token_path[0].decimals)
- amount_out = Decimal(amount[1]) / (10 ** token_path[-1].decimals)
- return amount_in / amount_out
- 
 def DEX_Buy(tokenAddress, amountToBuy):
  global address
  global active_ex
