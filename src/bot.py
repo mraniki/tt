@@ -178,7 +178,6 @@ def DexContractLookup(symbol):
  print("Token Contract Address: ", target_token[0]['address'])
  return target_token[0]['address'] if len(target_token)  >  0 else None
 
-
 # fetch contract abi_
 def fetch_abi(address: str):
    url = "https://api.bscscan.com/api"
@@ -190,7 +189,7 @@ def fetch_abi(address: str):
    resp = requests.get(url, params=params).json()
    abi = resp["result"]
    return abi
-   
+
 
 def DEX_Buy(tokenAddress, amountToBuy):
  global address
