@@ -174,6 +174,7 @@ def DEXBuy(tokenAddress, amountToBuy):
     try:
         if(tokenAddress != None):
             tokenToBuy = web3.is_checksum_address(tokenAddress)
+            logger.info(msg=f"{tokenAddress}")
             spend = web3.is_checksum_address("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")# wbnb contract
             contract = web3.eth.contract(address=router, abi=DEXFetchAbi(router))
             #logger.info(msg=f"{contract}")
