@@ -10,9 +10,9 @@
 
 Built with
 [![telegrambot](https://badgen.net/badge/icon/telegrambot?icon=telegram&label)](https://t.me/pythontelegrambotchannel)
-[![apprise](https://badgen.net/badge/icon/apprise/black?icon=libraries&label)](https://github.com/caronc/apprise)
 [![ccxt](https://badgen.net/badge/icon/ccxt/black?icon=libraries&label)](https://github.com/ccxt/ccxt)
 [![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py)
+[![apprise](https://badgen.net/badge/icon/apprise/black?icon=libraries&label)](https://github.com/caronc/apprise)
 [![sublime](https://badgen.net/badge/icon/sublime/F96854?icon=terminal&label)](https://www.sublimetext.com/)
 [![workingcopy](https://badgen.net/badge/icon/workingcopy/16DCCD?icon=github&label)](https://workingcopy.app/)
 
@@ -54,6 +54,7 @@ Environment file is loaded in db at the startup.
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
  - Setup send message overall function for further improvement
  - Integrate initial DEFI DEX (tested with BSC & pancakeswap) for balance query and order placing
+ - Integrate with apprise library to support more notification delivery
  
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
@@ -73,7 +74,7 @@ v2
 - Integrate DEFI DEX (uniswap/quickswap)
 
 v3
-- Integrate with messaging platform agnostic like [![apprise]([https://badgen.net/badge/icon/nio/black?icon=libraries&label)](https://github.com/poljar/matrix-ni](https://github.com/caronc/apprise)
+- Integrate with messaging platform agnostic like Matrix (https://github.com/poljar/matrix-ni)
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/)
 - create / modify db via bot command
  ## ⚠️ Disclaimer
