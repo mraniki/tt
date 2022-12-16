@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 import json, requests
 
 #telegram
+import telegram
 from telegram import Update, constants
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
 
@@ -44,10 +45,10 @@ db_path= './config/db.json'
 #===================
 db = TinyDB(db_path)
 q = Query()
-globalDB = db.table('global') 
+globalDB = db.table('global')
 env = globalDB.all()[0]['env']
 logger.info(msg=f"Environment is {env}")
-telegramDB = db.table('telegram') 
+telegramDB = db.table('telegram')
 cexDB = db.table('cex')
 dexDB = db.table('dex')
 #===================
@@ -57,7 +58,7 @@ global ex
 global messaging
 global address
 exchanges = {}
-trading=True 
+trading=True
 testmode=False
 #===================
 commandlist= """
@@ -65,7 +66,7 @@ commandlist= """
 <code>/cex binance</code>
 <code>/cex kraken</code>
 <code>/cec binancecoinm</code>
-<code>/dex pancake</code> 
+<code>/dex pancake</code>
 <code>/trading</code>
 <code>/testmode</code>"""
 menu=f'{TTVersion} \n {commandlist}\n'
@@ -101,7 +102,7 @@ def LoadExchange(exchangeid, mode):
                 logger.error(msg=f"exchange error {e}")
             except Exception as e:
                 logger.error(msg=f"{e}")
-    else: 
+    else:
         ex=DEXLoadExchange(exchangeid, mode)
 
 def DEXLoadExchange(exchangeid,mode):
@@ -123,7 +124,6 @@ def DEXLoadExchange(exchangeid,mode):
                 name= newex[0]['name']
                 address= newex[0]['address']
                 privatekey= newex[0]['privatekey']
-                version= newex[0]['version']
                 networkprovider= newex[0]['networkprovider']
                 router= newex[0]['router']
                 testmode=newex[0]['testmode']
@@ -216,9 +216,9 @@ if os.path.exists(db_path):
     TG_CHANNEL_ID = tg[0]['channel']
     ex=cexDB.all()
     CEX_name = ex[0]['name']
-    CEX_api = ex[0]['api']  
+    CEX_api = ex[0]['api']
     CEX_secret = ex[0]['secret']
-    CEX_password = ex[0]['password'] 
+    CEX_password = ex[0]['password']
     CEX_test_mode = ex[0]['testmode']
     CEX_ordertype = ex[0]['ordertype']
     CEX_defaulttype = ex[0]['defaultType']
@@ -261,7 +261,7 @@ else:
         telegramDB.insert({
             "token": TG_TK,
             "channel": TG_CHANNEL_ID,
-            "platform": "PRD" 
+            "platform": "PRD"
             })
     if (TG_TK==""):
         logger.error(msg=f"no TG TK")
@@ -272,10 +272,10 @@ else:
     elif (CEX_name==""):
         logger.error(msg=f"no sandbox")
 
-##======== INITIAL Setup ===============
+##======== APPRISE Setup ===============
 apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
-
+##============ CEX Setup ===============
 LoadExchange(CEX_name,CEX_test_mode)
 ##========== startup message ===========
 async def post_init(application: Application):
@@ -319,17 +319,6 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             msg=f"⚠️ {e}"
     await send(update,msg)
 
-#=========  bot error handling ========
-async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.error(msg="Exception:", exc_info=context.error)
-    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
-    tb_string = "".join(tb_list)
-    tb_trim = tb_string[:4000]
-    e=f"⚠️ {tb_trim}"
-    logger.error(msg=f"{e}")
-    message=f"{e}"
-    await send(update,message)
-
 #===== order parsing and placing ======
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msgtxt = update.effective_message.text
@@ -344,7 +333,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             Ex_CEX=cexDB.search((q.name=={ex}))
             if (Ex_CEX):
                 try:
-                    order_m = Convert(msgtxt_upper) 
+                    order_m = Convert(msgtxt_upper)
                     m_dir= order_m[0]
                     m_symbol=order_m[1]
                     m_sl=order_m[2][3:7]
@@ -375,7 +364,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     response=f"⚠️ CCXT error: {e}"
                 ##await send(update,response)
             else:
-                order_m = Convert(msgtxt_upper) 
+                order_m = Convert(msgtxt_upper)
                 m_dir= order_m[0]
                 logger.info(msg=f"{order_m[1]}")
                 m_symbol=DEXContractLookup(order_m[1])
@@ -402,20 +391,23 @@ async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 ##=========== CEX DEX switch ============
 async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg_ex  = update.effective_message.text
-    newexmsg = Convert(msg_ex) 
+    newexmsg = Convert(msg_ex)
     newex=newexmsg[1]
     extype=newexmsg[0]
     global ex
     global CEX_test_mode
+    logger.info(msg=f"{newex}")
     if extype=="/cex":
         if testmode:
             newex=cexDB.search((q.name=={newex})&(q.testmode=="True"))
+            logger.info(msg=f"{newex}")
         else:
             newex=cexDB.search((q.name=={newex})&(q.testmode!="True"))
+            logger.info(msg=f"{newex}")
         if len(newex):
             logger.info(msg=f"CEX for {newex}")
             CEX_name = newex[0]['name']
-            CEX_test_mode = newex[0]['testmode'] 
+            CEX_test_mode = newex[0]['testmode']
             res = LoadExchange(CEX_name,CEX_test_mode)
             response = f"CEX is {res} \n "
         else:
@@ -451,7 +443,7 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##=========== notify command ============
 async def notify_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"apprise testing")
-    try: 
+    try:
         msg="This is a apprise notification test"
         await notify(msg)
     except Exception as e:
@@ -461,9 +453,11 @@ async def notify_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 async def send (self, messaging):
     try:
         await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
-    except Exception as e:
+    except telegram.error as e:
         logger.error(msg=f"telegram error: {e}")
-#=========== sendmessage command ========
+    except Exception as e:
+        logger.error(msg=f"error: {e}")
+#=========== notification command ========
 async def notify(messaging):
     try:
         apobj.notify(
@@ -471,7 +465,16 @@ async def notify(messaging):
         )
     except Exception as e:
         logger.error(msg=f"apprise error: {e}")
-
+#=========  bot error handling ========
+async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.error(msg="Exception:", exc_info=context.error)
+    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
+    tb_string = "".join(tb_list)
+    tb_trim = tb_string[:1000]
+    e=f"⚠️ {tb_trim}"
+    logger.error(msg=f"{e}")
+    message=f"{e}"
+    await send(update,message)
 #================== BOT =================
 def main():
     try:
