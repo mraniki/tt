@@ -70,8 +70,8 @@ commandlist= """
 menu=f'{TTVersion} \n {commandlist}\n'
 #=============== functions ===============
 def Convert(string):
-   li = list(string.split(" "))
-   return li
+    li = list(string.split(" "))
+    return li
 
 def LoadExchange(exchangeid, mode):
     global ex
@@ -85,7 +85,7 @@ def LoadExchange(exchangeid, mode):
             if testmode:
                 ex.set_sandbox_mode('enabled')
             else:
-             return ex
+                return ex
         except ccxt.NetworkError as e:
             logger.error(msg=f"network error {e}")
         except ccxt.ExchangeError as e:
@@ -117,46 +117,44 @@ def DEXLoadExchange(exchangeid):
             abiurltoken=Ex_DEX[0]['abiurltoken']
             ex = Web3(Web3.HTTPProvider(networkprovider))
             if ex.net.listening:
-             logger.info(msg=f"{ex.net.listening}")
-             return name
+                logger.info(msg=f"{ex.net.listening}")
+                return name
         except Exception as e:
             logger.error(msg=f"web3 error: {e}")
             return {e}
 
 def DEXContractLookup(symbol):
- url = requests.get(tokenlist)
- text = url.text
- token_list = json.loads(text)['tokens']
- target_token = [token for token in token_list if token['symbol'].lower() == symbol.lower()]
- return target_token[0]['address'] if len(target_token)  >  0 else None
+    url = requests.get(tokenlist)
+    text = url.text
+    token_list = json.loads(text)['tokens']
+    target_token = [token for token in token_list if token['symbol'].lower() == symbol.lower()]
+    return target_token[0]['address'] if len(target_token)  >  0 else None
 
 def DEXFetchAbi(address):
-   url = abiurl
-   params = {
-   "module": "contract",
-   "action": "getabi",
-   "address": address,
-   "apikey": abiurltoken }
-   resp = requests.get(url, params=params).json()
-   abi = resp["result"]
-   return abi
+    url = abiurl
+    params = {
+        "module": "contract",
+        "action": "getabi",
+        "address": address,
+        "apikey": abiurltoken }
+    resp = requests.get(url, params=params).json()
+    abi = resp["result"]
+    return abi
 
 def DEXBuy(tokenAddress, amountToBuy):
- global address
- global ex
- global privatekey
- global abiurltoken
- 
- web3=ex
- transactionRevertTime = 30
- gasAmount = 100
- gasPrice = 5
- try:
+    global address
+    global ex
+    global privatekey
+    global abiurltoken
+    web3=ex
+    transactionRevertTime = 30
+    gasAmount = 100
+    gasPrice = 5
+    try:
         if(tokenAddress != None):
             tokenToBuy = web3.toChecksumAddress(tokenAddress)
             spend = web3.toChecksumAddress("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")# wbnb contract
-            contract = web3.eth.contract(
-                address=router, abi=DEXFetchAbi(router))
+            contract = web3.eth.contract(address=router, abi=DEXFetchAbi(router))
             nonce = web3.eth.get_transaction_count(address)
            # start = time.time()
             pancakeswap2_txn = contract.functions.swapExactETHForTokens(0,[spend, tokenToBuy],address,(int(time.time()) + transactionRevertTime)
@@ -171,8 +169,8 @@ def DEXBuy(tokenAddress, amountToBuy):
                 tx_token = web3.eth.send_raw_transaction(
                     signed_txn.rawTransaction)  # BUY THE TK
             except Exception as e:
-             logger.error(msg=f" {e}")
-             return e
+                logger.error(msg=f" {e}")
+                return e
             txHash = str(web3.toHex(tx_token))
         # TOKEN BOUGHT
             checkTransactionSuccessURL = "https://api.bscscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=" + \
@@ -186,10 +184,9 @@ def DEXBuy(tokenAddress, amountToBuy):
              return txHash
             else:
              logger.error(msg=f"transaction failed")
-
- except Exception as e:
-  logger.error(msg=f"Error: {e}")
-  return e
+    except Exception as e:
+        logger.error(msg=f"Error: {e}")
+        return e
 
 ##============= variables ================
 if os.path.exists(db_path):
@@ -200,7 +197,7 @@ if os.path.exists(db_path):
     ex=cexDB.all()
     CEX_name = ex[0]['name']
     CEX_api = ex[0]['api']  
-    CEX_secret = ex[0]['secret'] 
+    CEX_secret = ex[0]['secret']
     CEX_password = ex[0]['password'] 
     CEX_test_mode = ex[0]['testmode']
     CEX_ordertype = ex[0]['ordertype']
@@ -227,16 +224,16 @@ else:
 ##=========== DB SETUP =============
     extodb=cexDB.search(q.api==CEX_api)
     if len(extodb):
-         logger.info(msg=f"EX exists")
+        logger.info(msg=f"EX exists")
     else:
-         cexDB.insert({
-         "name": CEX_name,
-         "api": CEX_api,
-         "secret": CEX_secret,
-         "password": CEX_password,
-         "testmode": CEX_test_mode,
-         "ordertype": CEX_ordertype,
-         "defaultType": CEX_defaulttype})
+        cexDB.insert({
+        "name": CEX_name,
+        "api": CEX_api,
+        "secret": CEX_secret,
+        "password": CEX_password,
+        "testmode": CEX_test_mode,
+        "ordertype": CEX_ordertype,
+        "defaultType": CEX_defaulttype})
     tgtodb=telegramDB.search(q.token==TG_TK)
     if len(tgtodb):
       logger.info(msg=f"bot is setup")
@@ -268,9 +265,9 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    
- global ex
- Ex_CEX=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE))
+    global ex
+    Ex_CEX=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE))
+
     if (Ex_CEX):
         try:
             bal = ex.fetch_free_balance()
