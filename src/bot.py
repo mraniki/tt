@@ -266,6 +266,9 @@ else:
         logger.error(msg=f"no sandbox")
 
 ##======== INITIAL exchange setup =======
+apobj = apprise.Apprise()
+apobj.add(f"tgram://" + {TG_TK} + "/" + {TG_CHANNEL_ID})
+
 LoadExchange(CEX_name,CEX_test_mode)
 ##========== startup message ===========
 async def post_init(application: Application):
@@ -437,41 +440,47 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 async def notify_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"apprise testing")
     try: 
-        # Create an Apprise instance
-        apobj = apprise.Apprise()
-        apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
-        # Then notify these services any time you desire. The below would
-        # notify all of the services loaded into our Apprise object.
+        msg="This is a test"
+        apobj.send2(msg)
+    except Exception as e:
+        logger.error(msg=f"error: {e}")
+
+#=========== sendmessage command ========
+async def send (self, messaging):
+    try:
+        await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
+    except Exception as e:
+        logger.error(msg=f"telegram error: {e}")
+#=========== sendmessage command ========
+async def send2 (self, messaging):
+    try:
         apobj.notify(
-            body="Notification test",
-            title="title test",
+            body=messaging,
+            title="notification",
         )
     except Exception as e:
         logger.error(msg=f"apprise error: {e}")
 
-#=========== sendmessage command ========
-async def send (self, messaging):
- await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
 #================== BOT =================
 def main():
     try:
-     #apobj = apprise.Apprise()
-     application = Application.builder().token(TG_TK).post_init(post_init).build()
+        application = Application.builder().token(TG_TK).post_init(post_init).build()
+
 #Menus
-     application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
-     application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
-     application.add_handler(MessageHandler(filters.Regex('/trading'), TradingSwitch))
-     application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
-     application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), SwitchEx))
-     application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
-     application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
-     application.add_handler(MessageHandler(filters.Regex('/notify'), notify_command))
-     application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
-     application.add_error_handler(error_handler)
-     #Run the bot
-     application.run_polling()
+        application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
+        application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
+        application.add_handler(MessageHandler(filters.Regex('/trading'), TradingSwitch))
+        application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
+        application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), SwitchEx))
+        application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
+        application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
+        application.add_handler(MessageHandler(filters.Regex('/notify'), notify_command))
+        application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
+        application.add_error_handler(error_handler)
+        #Run the bot
+        application.run_polling()
     except Exception as e:
-     logger.fatal("Bot failed to start. Error: " + str(e))
+        logger.fatal("Bot failed to start. Error: " + str(e))
 
 if __name__ == '__main__':
     main()
