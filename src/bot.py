@@ -291,6 +291,8 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             trimmedbal=""
             for iterator in bal:
                 trimmedbal += (f"{iterator} : {bal[iterator]} \n")
+            if(trimmedbal==""):
+                trimmedbal="No Balance"
             msg=f"🏦 Balance \n{trimmedbal}"
         except ccxt.NetworkError as e:
             logger.error(msg=f"{e}")
@@ -401,7 +403,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if testmode:
             newex=cexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE)&(q.testmode=="True")))
         else:
-            newex=cexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE)&(q.testmode!="True")))
+            newex=cexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE)&(q.testmode=="")))
         if len(newex):
             logger.info(msg=f"CEX for {newex[0]['api']}")
             CEX_name = newex[0]['name']
@@ -411,7 +413,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             response = 'CEX not setup'
     else:
-        newex=dexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE))&(q.testmode!="True"))
+        newex=dexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE))&(q.testmode==""))
         name= newex[0]['name']
         mode= newex[0]['testmode']
         res = DEXLoadExchange(name,mode)
