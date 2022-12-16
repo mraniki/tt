@@ -197,7 +197,7 @@ def DEXBuy(tokenAddress, amountToBuy):
                 logger.info(msg=f"{txHash}")
                 return txHash
             else:
-             logger.error(msg=f"transaction failed")
+                logger.error(msg=f"transaction failed")
     except Exception as e:
         logger.error(msg=f"Error: {e}")
         return e
@@ -250,12 +250,13 @@ else:
         "defaultType": CEX_defaulttype})
     tgtodb=telegramDB.search(q.token==TG_TK)
     if len(tgtodb):
-      logger.info(msg=f"bot is setup")
+        logger.info(msg=f"bot is setup")
     else:
-      telegramDB.insert({
-        "token": TG_TK,
-        "channel": TG_CHANNEL_ID,
-        "platform": "PRD" })
+        telegramDB.insert({
+            "token": TG_TK,
+            "channel": TG_CHANNEL_ID,
+            "platform": "PRD" 
+            })
     if (TG_TK==""):
         logger.error(msg=f"no TG TK")
         sys.exit()
@@ -276,8 +277,8 @@ async def post_init(application: Application):
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\n {env} Sandbox:{testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
 ##=============== help  ================
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
- msg= f"{env} {ex} Sandbox:{testmode}\n {menu}"
- await send(update,msg)
+    msg= f"{env} {ex} Sandbox:{testmode}\n {menu}"
+    await send(update,msg)
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global ex
@@ -440,8 +441,8 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 async def notify_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"apprise testing")
     try: 
-        msg="This is a test"
-        await send2(msg)
+        msg="This is a apprise notification test"
+        await notify(msg)
     except Exception as e:
         logger.error(msg=f"error: {e}")
 
@@ -452,11 +453,10 @@ async def send (self, messaging):
     except Exception as e:
         logger.error(msg=f"telegram error: {e}")
 #=========== sendmessage command ========
-async def send2 (messaging):
+async def notify(messaging):
     try:
         apobj.notify(
-            body=messaging,
-            title="notification",
+            body=messaging
         )
     except Exception as e:
         logger.error(msg=f"apprise error: {e}")
