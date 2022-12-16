@@ -292,7 +292,9 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global ex
+    logger.info(msg=f"{ex}")
     Ex_CEX=cexDB.search(q.name==f'{ex}')
+    logger.info(msg=f"{Ex_CEX=}")
     if (Ex_CEX):
         try:
             bal = ex.fetch_free_balance()
