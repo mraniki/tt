@@ -286,7 +286,7 @@ async def post_init(application: Application):
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\n {env} Sandbox:{testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
 ##=============== help  ================
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    msg= f"{env} {ex} Sandbox:{testmode}\n {menu}"
+    msg= f"{env} {exchangeid} Sandbox:{testmode}\n {menu}"
     await send(update,msg)
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
