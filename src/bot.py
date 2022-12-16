@@ -77,7 +77,7 @@ def Convert(string):
 def LoadExchange(exchangeid, mode):
     global ex
     Ex_CEX=cexDB.search(q.name=={exchangeid})
-    logger.info(msg=f"{Ex_CEX}")
+    logger.info(msg=f"ExceX: {Ex_CEX}")
     if Ex_CEX:
         if mode:
             newex=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE)&(q.testmode=="True"))
