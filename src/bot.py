@@ -118,24 +118,24 @@ def DEXLoadExchange(exchangeid,mode):
         else:
             newex=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode!="True"))
         if len(newex):
-        try:
-            name= newex[0]['name']
-            address= newex[0]['address']
-            privatekey= newex[0]['privatekey']
-            version= newex[0]['version']
-            networkprovider= newex[0]['networkprovider']
-            router= newex[0]['router']
-            testmode=newex[0]['testmode']
-            tokenlist=newex[0]['tokenlist']
-            abiurl=newex[0]['abiurl']
-            abiurltoken=newex[0]['abiurltoken']
-            ex = Web3(Web3.HTTPProvider(networkprovider))
-            if ex.net.listening:
-                logger.info(msg=f"{ex.net.listening}")
-                return name
-        except Exception as e:
-            logger.error(msg=f"web3 error: {e}")
-            return {e}
+            try:
+                name= newex[0]['name']
+                address= newex[0]['address']
+                privatekey= newex[0]['privatekey']
+                version= newex[0]['version']
+                networkprovider= newex[0]['networkprovider']
+                router= newex[0]['router']
+                testmode=newex[0]['testmode']
+                tokenlist=newex[0]['tokenlist']
+                abiurl=newex[0]['abiurl']
+                abiurltoken=newex[0]['abiurltoken']
+                ex = Web3(Web3.HTTPProvider(networkprovider))
+                if ex.net.listening:
+                    logger.info(msg=f"{ex.net.listening}")
+                    return name
+            except Exception as e:
+                logger.error(msg=f"web3 error: {e}")
+                return {e}
 
 def DEXContractLookup(symbol):
     url = requests.get(tokenlist)
@@ -329,49 +329,51 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             message="TRADING DISABLED"
             await send(update,message)
         else:
-         Ex_CEX=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE))
-         if (Ex_CEX):
-            try:
+            Ex_CEX=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE))
+            if (Ex_CEX):
+                try:
+                    order_m = Convert(msgtxt_upper) 
+                    m_dir= order_m[0]
+                    m_symbol=order_m[1]
+                    m_sl=order_m[2][3:7]
+                    m_tp=order_m[3][3:7]
+                    m_q=order_m[4][2:-1]
+                    m_ordertype=CEX_ordertype
+                    logger.info(msg=f"Processing: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
+                    #% of bal
+                    m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
+                    totalusdtbal = ex.fetchBalance()['USDT']['free']
+                    amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
+                    res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
+                    orderid=res['id']
+                    timestamp=res['datetime']
+                    symbol=res['symbol']
+                    side=res['side']
+                    amount=res['amount']
+                    price=res['price']
+                    response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                except ccxt.NetworkError as e:
+                    logger.error(msg=f"Network error {e}")
+                    response=f"⚠️ Network error {e}"
+                except ccxt.ExchangeError as e:
+                    logger.error(msg=f"Exchange error: {e}")
+                    response=f"⚠️ Exchange error: {e}"
+                except Exception as e:
+                    logger.error(msg=f"CCXT error: {e}")
+                    response=f"⚠️ CCXT error: {e}"
+                ##await send(update,response)
+            else:
                 order_m = Convert(msgtxt_upper) 
                 m_dir= order_m[0]
-                m_symbol=order_m[1]
-                m_sl=order_m[2][3:7]
-                m_tp=order_m[3][3:7]
-                m_q=order_m[4][2:-1]
-                m_ordertype=CEX_ordertype
-                logger.info(msg=f"Processing: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
-                #% of bal
-                m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
-                totalusdtbal = ex.fetchBalance()['USDT']['free']
-                amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
-                res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
-                orderid=res['id']
-                timestamp=res['datetime']
-                symbol=res['symbol']
-                side=res['side']
-                amount=res['amount']
-                price=res['price']
-                response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
-             except ccxt.NetworkError as e:
-                logger.error(msg=f"Network error {e}")
-                response=f"⚠️ Network error {e}"
-             except ccxt.ExchangeError as e:
-                logger.error(msg=f"Exchange error: {e}")
-                response=f"⚠️ Exchange error: {e}"
-             except Exception as e:
-                logger.error(msg=f"CCXT error: {e}")
-                response=f"⚠️ CCXT error: {e}"
-             await send(update,response)
-         else:
-          order_m = Convert(msgtxt_upper) 
-          m_dir= order_m[0]
-          m_symbol=DEXContractLookup(order_m[1])
-          #m_q=order_m[2][2:-1]
-          m_q=1
-          res=DEXBuy(m_symbol,m_q)
-          response=f"{res}"
-         await send(update,response)
+                m_symbol=DEXContractLookup(order_m[1])
+                #m_q=order_m[2][2:-1]
+                m_q=1
+                res=DEXBuy(m_symbol,m_q)
+                response=f"{res}"
+        await send(update,response)
+
     else: error_handler()
+
 
 ##======== trading switch  =============
 async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -434,8 +436,18 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##=========== notify command ============
 async def notify_command()-> None:
     logger.info(msg=f"apprise testing")
-    apprise -vv -t "titletest" -b "test" \
-        tgram://TG_TK/TG_CHANNEL_ID/
+    try: 
+        # Create an Apprise instance
+        apobj = apprise.Apprise()
+        apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
+        # Then notify these services any time you desire. The below would
+        # notify all of the services loaded into our Apprise object.
+        apobj.notify(
+            body="Notification test",
+            title="title test",
+        )
+    except Exception as e:
+        logger.error(msg=f"apprise error: {e}")
 
 #=========== sendmessage command ========
 async def send (self, messaging):
@@ -443,7 +455,7 @@ async def send (self, messaging):
 #================== BOT =================
 def main():
     try:
-     apobj = apprise.Apprise()
+     #apobj = apprise.Apprise()
      application = Application.builder().token(TG_TK).post_init(post_init).build()
 #Menus
      application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
