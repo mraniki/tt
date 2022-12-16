@@ -82,9 +82,9 @@ def LoadExchange(exchangeid, mode):
     #logger.info(msg=f"ExceX: {Ex_CEX}")
     if Ex_CEX:
         if mode:
-            newex=cexDB.search(q.name==(f'{exchangeid}')&(q.testmode=="True"))
+            newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode=="True"))
         else:
-            newex=cexDB.search(q.name==(f'{exchangeid}')&(q.testmode!="True"))
+            newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode!="True"))
         if len(newex):
             exchange = getattr(ccxt, exchangeid)
             exchanges[exchangeid] = exchange()
@@ -118,9 +118,9 @@ def DEXLoadExchange(exchangeid,mode):
     Ex_DEX=dexDB.search(q.name==f'{exchangeid}')
     if Ex_DEX:
         if mode:
-            newex=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode=="True"))
+            newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode=="True"))
         else:
-            newex=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode!="True"))
+            newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode!="True"))
         if len(newex):
             try:
                 name= newex[0]['name']
