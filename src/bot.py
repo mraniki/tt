@@ -399,10 +399,10 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(msg=f"{newex}")
     if extype=="/cex":
         if testmode:
-            newex=cexDB.search((q.name=={newex})&(q.testmode=="True"))
+            newex=cexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode=="True"))
             logger.info(msg=f"{newex}")
         else:
-            newex=cexDB.search((q.name=={newex})&(q.testmode!="True"))
+            newex=cexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode!="True"))
             logger.info(msg=f"{newex}")
         if len(newex):
             logger.info(msg=f"CEX for {newex}")
