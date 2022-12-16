@@ -413,7 +413,8 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         newex=dexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE))&(q.testmode!="True"))
         name= newex[0]['name']
-        res = DEXLoadExchange(name)
+        mode= newex[0]['testmode']
+        res = DEXLoadExchange(name,mode)
         response = f"DEX is {name}"
     await send(update,response)
 
