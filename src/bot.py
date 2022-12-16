@@ -115,7 +115,7 @@ def DEXLoadExchange(exchangeid,mode):
     global tokenlist
     global abiurl
     global abiurltoken
-    Ex_DEX=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
+    Ex_DEX=dexDB.search(q.name==f'{exchangeid}')
     if Ex_DEX:
         if mode:
             newex=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode=="True"))
@@ -403,10 +403,10 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(msg=f"{newex}")
     if extype=="/cex":
         if testmode:
-            newex=cexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE))&(q.testmode=="True"))
+            newex=cexDB.search((q.name==f'{newex}')&(q.testmode=="True"))
             logger.info(msg=f"{newex}")
         else:
-            newex=cexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE))&(q.testmode!="True"))
+            newex=cexDB.search((q.name==f'{newex}')&(q.testmode!="True"))
             logger.info(msg=f"{newex}")
         if len(newex):
             logger.info(msg=f"CEX for {newex}")
