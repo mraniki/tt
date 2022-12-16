@@ -52,11 +52,10 @@ telegramDB = db.table('telegram')
 cexDB = db.table('cex')
 dexDB = db.table('dex')
 #===================
-global exchangeid
-global web3
-global ex
-global messaging
-global address
+exchangeid
+ex
+messaging
+address
 exchanges = {}
 trading=True
 testmode=False
