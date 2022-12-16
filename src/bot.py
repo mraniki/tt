@@ -64,7 +64,7 @@ commandlist= """
 <code>/bal</code>
 <code>/cex binance</code>
 <code>/cex kraken</code>
-<code>/cec binancecoinm</code>
+<code>/cex binancecoinm</code>
 <code>/dex pancake</code>
 <code>/trading</code>
 <code>/testmode</code>"""
@@ -76,7 +76,7 @@ def Convert(string):
 
 def LoadExchange(exchangeid, mode):
     global ex
-    Ex_CEX=cexDB.search(q.name=={exchangeid})
+    Ex_CEX=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE))
     logger.info(msg=f"ExceX: {Ex_CEX}")
     if Ex_CEX:
         if mode:
