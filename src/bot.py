@@ -441,7 +441,7 @@ async def notify_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     logger.info(msg=f"apprise testing")
     try: 
         msg="This is a test"
-        apobj.send2(msg)
+        send2(msg)
     except Exception as e:
         logger.error(msg=f"error: {e}")
 
@@ -452,7 +452,7 @@ async def send (self, messaging):
     except Exception as e:
         logger.error(msg=f"telegram error: {e}")
 #=========== sendmessage command ========
-async def send2 (self, messaging):
+async def send2 (messaging):
     try:
         apobj.notify(
             body=messaging,
