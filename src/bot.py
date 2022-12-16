@@ -118,24 +118,24 @@ def DEXLoadExchange(exchangeid,mode):
         else:
             newex=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode!="True"))
         if len(newex):
-        try:
-            name= newex[0]['name']
-            address= newex[0]['address']
-            privatekey= newex[0]['privatekey']
-            version= newex[0]['version']
-            networkprovider= newex[0]['networkprovider']
-            router= newex[0]['router']
-            testmode=newex[0]['testmode']
-            tokenlist=newex[0]['tokenlist']
-            abiurl=newex[0]['abiurl']
-            abiurltoken=newex[0]['abiurltoken']
-            ex = Web3(Web3.HTTPProvider(networkprovider))
-            if ex.net.listening:
-                logger.info(msg=f"{ex.net.listening}")
-                return name
-        except Exception as e:
-            logger.error(msg=f"web3 error: {e}")
-            return {e}
+            try:
+                name= newex[0]['name']
+                address= newex[0]['address']
+                privatekey= newex[0]['privatekey']
+                version= newex[0]['version']
+                networkprovider= newex[0]['networkprovider']
+                router= newex[0]['router']
+                testmode=newex[0]['testmode']
+                tokenlist=newex[0]['tokenlist']
+                abiurl=newex[0]['abiurl']
+                abiurltoken=newex[0]['abiurltoken']
+                ex = Web3(Web3.HTTPProvider(networkprovider))
+                if ex.net.listening:
+                    logger.info(msg=f"{ex.net.listening}")
+                    return name
+            except Exception as e:
+                logger.error(msg=f"web3 error: {e}")
+                return {e}
 
 def DEXContractLookup(symbol):
     url = requests.get(tokenlist)
@@ -329,8 +329,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             message="TRADING DISABLED"
             await send(update,message)
         else:
-         Ex_CEX=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE))
-         if (Ex_CEX):
+            Ex_CEX=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE))
+            if (Ex_CEX):
             try:
                 order_m = Convert(msgtxt_upper) 
                 m_dir= order_m[0]
@@ -352,17 +352,17 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 amount=res['amount']
                 price=res['price']
                 response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
-             except ccxt.NetworkError as e:
+            except ccxt.NetworkError as e:
                 logger.error(msg=f"Network error {e}")
                 response=f"⚠️ Network error {e}"
-             except ccxt.ExchangeError as e:
+            except ccxt.ExchangeError as e:
                 logger.error(msg=f"Exchange error: {e}")
                 response=f"⚠️ Exchange error: {e}"
-             except Exception as e:
+            except Exception as e:
                 logger.error(msg=f"CCXT error: {e}")
                 response=f"⚠️ CCXT error: {e}"
-             await send(update,response)
-         else:
+            ##await send(update,response)
+        else:
           order_m = Convert(msgtxt_upper) 
           m_dir= order_m[0]
           m_symbol=DEXContractLookup(order_m[1])
@@ -370,8 +370,11 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
           m_q=1
           res=DEXBuy(m_symbol,m_q)
           response=f"{res}"
-         await send(update,response)
+          
+        await send(update,response)
+
     else: error_handler()
+
 
 ##======== trading switch  =============
 async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
