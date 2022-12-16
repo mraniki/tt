@@ -164,6 +164,9 @@ def DEXBuy(tokenAddress, amountToBuy):
     transactionRevertTime = 30
     gasAmount = 100
     gasPrice = 5
+    logger.info(msg=f"{web3}")
+    logger.info(msg=f"{tokenAddress}")
+    logger.info(msg=f"{amountToBuy}")
     try:
         if(tokenAddress != None):
             tokenToBuy = web3.toChecksumAddress(tokenAddress)
