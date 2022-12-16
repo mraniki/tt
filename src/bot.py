@@ -267,7 +267,7 @@ else:
 
 ##======== INITIAL exchange setup =======
 apobj = apprise.Apprise()
-apobj.add(f"tgram://" + {TG_TK} + "/" + {TG_CHANNEL_ID})
+apobj.add(f"tgram://" + str({TG_TK}) + "/" + str({TG_CHANNEL_ID}))
 
 LoadExchange(CEX_name,CEX_test_mode)
 ##========== startup message ===========
