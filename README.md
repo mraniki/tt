@@ -28,7 +28,7 @@ Built with
 - or `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt`
 6) Start your container
 7) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
-  (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) 
+  (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) or for DEFI `BUY BTCB`
 
 ## Config
 Either use .env file or json db as per below structure.
