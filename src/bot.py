@@ -77,11 +77,12 @@ def Convert(string):
 def LoadExchange(exchangeid, mode):
     global ex
     Ex_CEX=cexDB.search(q.name=={exchangeid})
+    logger.info(msg=f"{Ex_CEX}")
     if Ex_CEX:
         if mode:
-            newex=cexDB.search((q.name=={exchangeid})&(q.testmode=="True"))
+            newex=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE)&(q.testmode=="True"))
         else:
-            newex=cexDB.search((q.name=={exchangeid})&(q.testmode!="True"))
+            newex=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE)&(q.testmode!="True"))
         if len(newex):
             exchange = getattr(ccxt, exchangeid)
             exchanges[exchangeid] = exchange()
