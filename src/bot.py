@@ -154,6 +154,7 @@ def DEXFetchAbi(address):
         "apikey": abiurltoken }
     resp = requests.get(url, params=params).json()
     abi = resp["result"]
+    logger.info(msg=f"{abi}")
     return abi
 
 def DEXBuy(tokenAddress, amountToBuy):
