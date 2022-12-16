@@ -277,8 +277,8 @@ else:
 ##======== APPRISE Setup ===============
 apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
-##============ CEX Setup ===============
-logger.info(msg=f"setting up exchange {CEX_name}")
+##============ EX Setup ===============
+logger.info(msg=f"Setting up exchange {CEX_name}")
 LoadExchange(CEX_name,CEX_test_mode)
 ##========== startup message ===========
 async def post_init(application: Application):
