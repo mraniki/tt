@@ -118,9 +118,9 @@ def DEXLoadExchange(exchangeid,mode):
     Ex_DEX=dexDB.search(q.name==f'{exchangeid}')
     if Ex_DEX:
         if mode:
-            newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode=="True"))
+            newex=dexDB.search((q.name==f'{exchangeid}')&(q.testmode=="True"))
         else:
-            newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode!="True"))
+            newex=dexDB.search((q.name==f'{exchangeid}')&(q.testmode!="True"))
         if len(newex):
             try:
                 name= newex[0]['name']
