@@ -403,10 +403,10 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(msg=f"{newex}")
     if extype=="/cex":
         if testmode:
-            newex=cexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode=="True"))
+            newex=cexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE))&(q.testmode=="True"))
             logger.info(msg=f"{newex}")
         else:
-            newex=cexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode!="True"))
+            newex=cexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE))&(q.testmode!="True"))
             logger.info(msg=f"{newex}")
         if len(newex):
             logger.info(msg=f"CEX for {newex}")
@@ -417,7 +417,9 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             response = 'CEX not setup'
     else:
-        newex=dexDB.search((q.name=={newex})&(q.testmode!="True"))
+        newex=dexDB.search(q.name=={newex})
+        newex2=dexDB.search(q['name']=={newex})
+        logger.info(msg=f"DEX2 for {newex2}")
         name= newex[0]['name']
         mode= newex[0]['testmode']
         res = DEXLoadExchange(name,mode)
