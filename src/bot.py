@@ -28,6 +28,7 @@ import re
 import ccxt
 
 #DEX
+import web3 
 from web3 import Web3
 #from web3.contract import Contract
 from typing import List #Dict, List
@@ -38,7 +39,8 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 logger.info(msg=f"{TTVersion}")
 logger.info(msg=f"python {sys.version}")
-logger.info(msg=f"{ccxt.__version__}")
+logger.info(msg=f"CCXT {ccxt.__version__}")
+logger.info(msg=f"Web3 {web3.__version__}")
 ##=============== CONFIG ===============
 dotenv_path = './config/.env'
 db_path= './config/db.json'
@@ -76,13 +78,13 @@ def Convert(string):
 
 def LoadExchange(exchangeid, mode):
     global ex
-    Ex_CEX=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE))
+    Ex_CEX=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))
     logger.info(msg=f"ExceX: {Ex_CEX}")
     if Ex_CEX:
         if mode:
-            newex=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE)&(q.testmode=="True"))
+            newex=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)&(q.testmode=="True"))
         else:
-            newex=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE)&(q.testmode!="True"))
+            newex=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)&(q.testmode!="True"))
         if len(newex):
             exchange = getattr(ccxt, exchangeid)
             exchanges[exchangeid] = exchange()
@@ -276,7 +278,7 @@ else:
 apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 ##============ CEX Setup ===============
-logger.info(msg=f"setting up exchange{CEX_name}")
+logger.info(msg=f"setting up exchange {CEX_name}")
 LoadExchange(CEX_name,CEX_test_mode)
 ##========== startup message ===========
 async def post_init(application: Application):
