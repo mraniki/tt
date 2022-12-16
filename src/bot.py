@@ -291,7 +291,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     else:
         try:
             bal = ex.eth.get_balance(address)
-            bal = ex.fromWei(bal,'ether')
+            bal = ex.from_wei(bal,'ether')
             msg = f"🏦 Balance: {bal}"
         except Exception as e:
             logger.error(msg=f"{e}")
