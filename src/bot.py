@@ -82,9 +82,9 @@ def LoadExchange(exchangeid, mode):
     #logger.info(msg=f"ExceX: {Ex_CEX}")
     if Ex_CEX:
         if mode:
-            newex=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)&(q.testmode=="True"))
+            newex=cexDB.search(q.name==(f'{exchangeid}')&(q.testmode=="True"))
         else:
-            newex=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)&(q.testmode!="True"))
+            newex=cexDB.search(q.name==(f'{exchangeid}')&(q.testmode!="True"))
         if len(newex):
             exchange = getattr(ccxt, exchangeid)
             exchanges[exchangeid] = exchange()
@@ -413,6 +413,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
             CEX_test_mode = newex[0]['testmode']
             res = LoadExchange(CEX_name,CEX_test_mode)
             response = f"CEX is {res} \n "
+            logger.info(msg=f"ex is {ex}")
         else:
             response = 'CEX not setup'
     else:
