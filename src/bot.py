@@ -66,7 +66,8 @@ commandlist= """
 <code>/cex kraken</code>
 <code>/cec binancecoinm</code>
 <code>/dex pancake</code> 
-<code>/dex quickswap</code>"""
+<code>/trading</code>
+<code>/testmode</code>"""
 menu=f'{TTVersion} \n {commandlist}\n'
 #=============== functions ===============
 def Convert(string):
