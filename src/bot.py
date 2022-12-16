@@ -176,7 +176,7 @@ def DEXBuy(tokenAddress, amountToBuy):
             tokenToBuy = web3.is_checksum_address(tokenAddress)
             spend = web3.is_checksum_address("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")# wbnb contract
             contract = web3.eth.contract(address=router, abi=DEXFetchAbi(router))
-            logger.info(msg=f"{contract}")
+            #logger.info(msg=f"{contract}")
             nonce = web3.eth.get_transaction_count(address)
            # start = time.time()
             DEXtxn = contract.functions.swapExactETHForTokens(0,[spend, tokenToBuy],address,(int(time.time()) + transactionRevertTime)
