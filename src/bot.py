@@ -405,7 +405,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             newex=cexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE)&(q.testmode=="")))
         if len(newex):
-            logger.info(msg=f"CEX for {newex[0]['api']}")
+            logger.info(msg=f"CEX for {newex}")
             CEX_name = newex[0]['name']
             CEX_test_mode = newex[0]['testmode'] 
             res = LoadExchange(CEX_name,CEX_test_mode)
