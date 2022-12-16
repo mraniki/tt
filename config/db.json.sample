@@ -201,7 +201,10 @@
             "version": "v3",
             "networkprovider": "",
             "router": "",
-            "testmode": ""
+            "testmode": "",
+            "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
+            "abiurl":"https://api.bscscan.com/api",
+            "abiurltoken":""
         },
         "3":
         {
@@ -210,8 +213,11 @@
             "privatekey": "",
             "version": "v3",
             "networkprovider": "",
-            "router": "",
-            "testmode": ""
+            "router": "https://polygonscan.com",
+            "testmode": "",
+            "tokenlist":"https://raw.githubusercontent.com/sameepsi/quickswap-default-token-list/master/src/tokens/mainnet.json",
+            "abiurl":"https://api.bscscan.com/api",
+            "abiurltoken":""
         },
         "4":
         {
@@ -221,7 +227,10 @@
             "version": "v3",
             "networkprovider": "",
             "router": "",
-            "testmode": ""
+            "testmode": "",
+            "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
+            "abiurl":"https://api.bscscan.com/api",
+            "abiurltoken":""
         }
     }
 }
