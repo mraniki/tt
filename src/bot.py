@@ -77,25 +77,33 @@ def LoadExchange(exchangeid, mode):
     global ex
     Ex_CEX=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))
     if Ex_CEX:
-        exchange = getattr(ccxt, exchangeid)
-        exchanges[exchangeid] = exchange()
-        try:
-            exchanges[exchangeid] = exchange({'apiKey': Ex_CEX[0]['api'],'secret': Ex_CEX[0]['secret']})
-            ex=exchanges[exchangeid]
-            if testmode:
-                ex.set_sandbox_mode('enabled')
-            else:
-                return ex
-        except ccxt.NetworkError as e:
-            logger.error(msg=f"network error {e}")
-        except ccxt.ExchangeError as e:
-            logger.error(msg=f"exchange error {e}")
-        except Exception as e:
-            logger.error(msg=f"{e}")
+        if mode:
+            newex=cexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)&(q.testmode=="True")))
+        else:
+            newex=cexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)&(q.testmode!="True")))
+        if len(newex):
+            exchange = getattr(ccxt, exchangeid)
+            exchanges[exchangeid] = exchange()
+            try:
+                exchanges[exchangeid] = exchange({
+                    'apiKey': newex[0]['api'],
+                    'secret': newex[0]['secret']
+                    })
+                ex=exchanges[exchangeid]
+                if testmode:
+                    ex.set_sandbox_mode('enabled')
+                else:
+                    return ex
+            except ccxt.NetworkError as e:
+                logger.error(msg=f"network error {e}")
+            except ccxt.ExchangeError as e:
+                logger.error(msg=f"exchange error {e}")
+            except Exception as e:
+                logger.error(msg=f"{e}")
     else: 
-        ex=DEXLoadExchange(exchangeid)
+        ex=DEXLoadExchange(exchangeid, mode)
 
-def DEXLoadExchange(exchangeid):
+def DEXLoadExchange(exchangeid,mode):
     global ex
     global address
     global router
@@ -105,16 +113,22 @@ def DEXLoadExchange(exchangeid):
     global abiurltoken
     Ex_DEX=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
     if Ex_DEX:
+        if mode:
+            newex=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode=="True"))
+        else:
+            newex=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode!="True"))
+        if len(newex):
         try:
-            name= Ex_DEX[0]['name']
-            address= Ex_DEX[0]['address']
-            privatekey= Ex_DEX[0]['privatekey']
-            version= Ex_DEX[0]['version']
-            networkprovider= Ex_DEX[0]['networkprovider']
-            router= Ex_DEX[0]['router']
-            tokenlist=Ex_DEX[0]['tokenlist']
-            abiurl=Ex_DEX[0]['abiurl']
-            abiurltoken=Ex_DEX[0]['abiurltoken']
+            name= newex[0]['name']
+            address= newex[0]['address']
+            privatekey= newex[0]['privatekey']
+            version= newex[0]['version']
+            networkprovider= newex[0]['networkprovider']
+            router= newex[0]['router']
+            testmode=newex[0]['testmode']
+            tokenlist=newex[0]['tokenlist']
+            abiurl=newex[0]['abiurl']
+            abiurltoken=newex[0]['abiurltoken']
             ex = Web3(Web3.HTTPProvider(networkprovider))
             if ex.net.listening:
                 logger.info(msg=f"{ex.net.listening}")
@@ -257,12 +271,10 @@ LoadExchange(CEX_name,CEX_test_mode)
 async def post_init(application: Application):
     logger.info(msg=f"bot is online")
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\n {env} Sandbox:{testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
-
 ##=============== help  ================
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
  msg= f"{env} {ex} Sandbox:{testmode}\n {menu}"
  await send(update,msg)
-
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global ex
@@ -319,7 +331,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         else:
          Ex_CEX=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE))
          if (Ex_CEX):
-             try:
+            try:
                 order_m = Convert(msgtxt_upper) 
                 m_dir= order_m[0]
                 m_symbol=order_m[1]
@@ -378,13 +390,14 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     newex=newexmsg[1]
     extype=newexmsg[0]
     global ex
+    global CEX_test_mode
     if extype=="/cex":
         if testmode:
             newex=cexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE)&(q.testmode=="True")))
         else:
             newex=cexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE)&(q.testmode!="True")))
         if len(newex):
-            logger.info(msg=f"CEX for {newex[0]['name']}")
+            logger.info(msg=f"CEX for {newex[0]['api']}")
             CEX_name = newex[0]['name']
             CEX_test_mode = newex[0]['testmode'] 
             res = LoadExchange(CEX_name,CEX_test_mode)
@@ -420,19 +433,13 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
 ##=========== notify command ============
 async def notify_command()-> None:
-    logger.info(msg=f"apprise test")
-    apobj = apprise.Apprise()
-    config = apprise.AppriseConfig()
-    config.add('./config/apprise.yml')
-    apobj.add(config)
-    apobj.notify(
-     body='what a great notification service!',
-     title='my notification title')
+    logger.info(msg=f"apprise testing")
+    apprise -vv -t "titletest" -b "test" \
+        tgram://TG_TK/TG_CHANNEL_ID/
 
 #=========== sendmessage command ========
 async def send (self, messaging):
  await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
-
 #================== BOT =================
 def main():
     try:
