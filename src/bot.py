@@ -417,9 +417,8 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             response = 'CEX not setup'
     else:
-        newex=dexDB.search(q.name=={newex})
-        newex2=dexDB.search(q['name']=={newex})
-        logger.info(msg=f"DEX2 for {newex2}")
+        newex=dexDB.search(q.name==f'{newex}')
+        logger.info(msg=f"DEX for {newex}")
         name= newex[0]['name']
         mode= newex[0]['testmode']
         res = DEXLoadExchange(name,mode)
