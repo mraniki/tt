@@ -178,9 +178,8 @@ def DEXBuy(tokenAddress, amountToBuy):
             contract = web3.eth.contract(address=router, abi=DEXFetchAbi(router))
             #logger.info(msg=f"{contract}")
             nonce = web3.eth.get_transaction_count(address)
-           # start = time.time()
-            DEXtxn = contract.functions.swapExactETHForTokens(0,[spend, tokenToBuy],address,(int(time.time()) + transactionRevertTime)
-            ).buildTransaction({
+            start = time.time()
+            DEXtxn = contract.functions.swapExactETHForTokens(0,[spend, tokenToBuy],address,(int(start) + transactionRevertTime)).buildTransaction({
                 'from': address,# based Token(BNB)
                 'value': web3.to_wei(float(amountToBuy), 'ether'),
                 'gas': gasAmount,
