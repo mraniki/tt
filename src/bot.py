@@ -217,6 +217,7 @@ if os.path.exists(db_path):
     TG_TK = tg[0]['token']
     TG_CHANNEL_ID = tg[0]['channel']
     ex=cexDB.all()
+    logger.info(msg=f"{ex}")
     CEX_name = ex[0]['name']
     CEX_api = ex[0]['api']
     CEX_secret = ex[0]['secret']
