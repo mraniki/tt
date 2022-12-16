@@ -177,9 +177,9 @@ def DEXBuy(tokenAddress, amountToBuy):
             pancakeswap2_txn = contract.functions.swapExactETHForTokens(0,[spend, tokenToBuy],address,(int(time.time()) + transactionRevertTime)
             ).buildTransaction({
                 'from': address,# based Token(BNB)
-                'value': web3.toWei(float(amountToBuy), 'ether'),
+                'value': web3.to_wei(float(amountToBuy), 'ether'),
                 'gas': gasAmount,
-                'gasPrice': web3.toWei(gasPrice, 'gwei'),
+                'gasPrice': web3.to_wei(gasPrice, 'gwei'),
                 'nonce': nonce,})
             try:
                 signed_txn = web3.eth.account.sign_transaction(pancakeswap2_txn, privatekey)
@@ -188,7 +188,7 @@ def DEXBuy(tokenAddress, amountToBuy):
             except Exception as e:
                 logger.error(msg=f" {e}")
                 return e
-            txHash = str(web3.toHex(tx_token))
+            txHash = str(web3.to_hex(tx_token))
         # TOKEN BOUGHT
             checkTransactionSuccessURL = "https://api.bscscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=" + \
                 txHash + "&apikey=" + abiurltoken
