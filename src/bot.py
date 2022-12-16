@@ -76,14 +76,12 @@ def Convert(string):
 
 def LoadExchange(exchangeid, mode):
     global ex
-    Ex_CEX=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))
-    Ex_CEX1=cexDB.search(q.name=={exchangeid})
-    logger.info(msg=f"{Ex_CEX1}")
+    Ex_CEX=cexDB.search(q.name=={exchangeid})
     if Ex_CEX:
         if mode:
-            newex=cexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)&(q.testmode=="True")))
+            newex=cexDB.search((q.name=={exchangeid})&(q.testmode=="True"))
         else:
-            newex=cexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)&(q.testmode!="True")))
+            newex=cexDB.search((q.name=={exchangeid})&(q.testmode!="True"))
         if len(newex):
             exchange = getattr(ccxt, exchangeid)
             exchanges[exchangeid] = exchange()
@@ -342,7 +340,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             message="TRADING DISABLED"
             await send(update,message)
         else:
-            Ex_CEX=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE))
+            Ex_CEX=cexDB.search((q.name=={ex}))
             if (Ex_CEX):
                 try:
                     order_m = Convert(msgtxt_upper) 
@@ -410,9 +408,9 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     global CEX_test_mode
     if extype=="/cex":
         if testmode:
-            newex=cexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE)&(q.testmode=="True")))
+            newex=cexDB.search((q.name=={newex})&(q.testmode=="True"))
         else:
-            newex=cexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE)&(q.testmode=="")))
+            newex=cexDB.search((q.name=={newex})&(q.testmode!="True"))
         if len(newex):
             logger.info(msg=f"CEX for {newex}")
             CEX_name = newex[0]['name']
@@ -422,7 +420,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             response = 'CEX not setup'
     else:
-        newex=dexDB.search((q.name.matches(f'{newex}',flags=re.IGNORECASE))&(q.testmode==""))
+        newex=dexDB.search((q.name=={newex})&(q.testmode!="True"))
         name= newex[0]['name']
         mode= newex[0]['testmode']
         res = DEXLoadExchange(name,mode)
