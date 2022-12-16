@@ -374,9 +374,11 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             else:
                 order_m = Convert(msgtxt_upper) 
                 m_dir= order_m[0]
+                logger.info(msg=f"{order_m[1]}")
                 m_symbol=DEXContractLookup(order_m[1])
                 #m_q=order_m[2][2:-1]
                 m_q=1
+                logger.info(msg=f"{m_symbol}")
                 res=DEXBuy(m_symbol,m_q)
                 response=f"{res}"
         await send(update,response)
