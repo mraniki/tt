@@ -265,9 +265,9 @@ else:
     elif (CEX_name==""):
         logger.error(msg=f"no sandbox")
 
-##======== INITIAL exchange setup =======
+##======== INITIAL Setup ===============
 apobj = apprise.Apprise()
-apobj.add(f"tgram://" + {TG_TK} + "/" + {TG_CHANNEL_ID})
+apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 
 LoadExchange(CEX_name,CEX_test_mode)
 ##========== startup message ===========
