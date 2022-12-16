@@ -175,9 +175,10 @@ def DEXBuy(tokenAddress, amountToBuy):
             tokenToBuy = web3.is_checksum_address(tokenAddress)
             spend = web3.is_checksum_address("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")# wbnb contract
             contract = web3.eth.contract(address=router, abi=DEXFetchAbi(router))
+            logger.info(msg=f"{contract}")
             nonce = web3.eth.get_transaction_count(address)
            # start = time.time()
-            pancakeswap2_txn = contract.functions.swapExactETHForTokens(0,[spend, tokenToBuy],address,(int(time.time()) + transactionRevertTime)
+            DEXtxn = contract.functions.swapExactETHForTokens(0,[spend, tokenToBuy],address,(int(time.time()) + transactionRevertTime)
             ).buildTransaction({
                 'from': address,# based Token(BNB)
                 'value': web3.to_wei(float(amountToBuy), 'ether'),
@@ -185,7 +186,7 @@ def DEXBuy(tokenAddress, amountToBuy):
                 'gasPrice': web3.to_wei(gasPrice, 'gwei'),
                 'nonce': nonce,})
             try:
-                signed_txn = web3.eth.account.sign_transaction(pancakeswap2_txn, privatekey)
+                signed_txn = web3.eth.account.sign_transaction(DEXtxn, privatekey)
                 tx_token = web3.eth.send_raw_transaction(
                     signed_txn.rawTransaction)  # BUY THE TK
             except Exception as e:
