@@ -194,8 +194,8 @@ def DEXBuy(tokenAddress, amountToBuy):
             txResult = checkTransactionRequest.json()['status']
 
             if(txResult == "1"):
-             logger.info(msg=f"{txHash}")
-             return txHash
+                logger.info(msg=f"{txHash}")
+                return txHash
             else:
              logger.error(msg=f"transaction failed")
     except Exception as e:
@@ -441,7 +441,7 @@ async def notify_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     logger.info(msg=f"apprise testing")
     try: 
         msg="This is a test"
-        send2(msg)
+        await send2(msg)
     except Exception as e:
         logger.error(msg=f"error: {e}")
 
