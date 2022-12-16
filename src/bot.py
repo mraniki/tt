@@ -434,7 +434,7 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     await send(update,message)
 
 ##=========== notify command ============
-async def notify_command()-> None:
+async def notify_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"apprise testing")
     try: 
         # Create an Apprise instance
