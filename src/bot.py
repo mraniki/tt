@@ -30,7 +30,7 @@ import ccxt
 #DEX
 import web3 
 from web3 import Web3
-#from web3.contract import Contract
+from web3.contract import Contract
 from typing import List #Dict, List
 import time
 
@@ -81,6 +81,8 @@ def LoadExchange(exchangeid, mode):
     logger.info(msg=f"exchangeid: {exchangeid}")
     Ex_CEX=cexDB.search(q.name==f'{exchangeid}')
     logger.info(msg=f"ExceX: {Ex_CEX}")
+    Ex_CEX2=cexDB.search((q.name == f'{exchangeid}') & (q.testmode =="True"))
+    logger.info(msg=f"ExceX2: {Ex_CEX2}")
     if Ex_CEX:
         if mode:
             newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode=="True"))
