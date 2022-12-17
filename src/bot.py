@@ -500,7 +500,8 @@ async def notify(messaging):
 #=========  overall error handling ========
 async def HandleExceptions(e) -> None:
     try:
-        raise e
+        e==""
+        logger.error(msg=f"{e}")
     except ccxt.base.errors:
         logger.error(msg=f"CCXT error {e}")
         e=f" CCXT error {e}"
