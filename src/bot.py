@@ -81,14 +81,9 @@ def LoadExchange(exchangeid, mode):
     logger.info(msg=f"exchangeid: {exchangeid}")
     Ex_CEX=cexDB.search(q.name==f'{exchangeid}')
     logger.info(msg=f"ExceX: {Ex_CEX}")
-    Ex_CEX2=cexDB.search((q.name == f'{exchangeid}') & (q.testmode =="True"))
-    logger.info(msg=f"ExceX2: {Ex_CEX2}")
     if Ex_CEX:
         if mode:
             newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode=="True"))
-        else:
-            newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode!="True"))
-        if len(newex):
             exchange = getattr(ccxt, exchangeid)
             exchanges[exchangeid] = exchange()
             try:
@@ -97,10 +92,25 @@ def LoadExchange(exchangeid, mode):
                     'secret': newex[0]['secret']
                     })
                 ex=exchanges[exchangeid]
-                if testmode:
-                    ex.set_sandbox_mode('enabled')
-                else:
-                    return ex
+                ex.set_sandbox_mode('enabled')
+                return ex
+            except ccxt.NetworkError as e:
+                logger.error(msg=f"network error {e}")
+            except ccxt.ExchangeError as e:
+                logger.error(msg=f"exchange error {e}")
+            except Exception as e:
+                logger.error(msg=f"{e}")
+        else:
+            newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode!="True"))
+            exchange = getattr(ccxt, exchangeid)
+            exchanges[exchangeid] = exchange()
+            try:
+                exchanges[exchangeid] = exchange({
+                    'apiKey': newex[0]['api'],
+                    'secret': newex[0]['secret']
+                    })
+                ex=exchanges[exchangeid]
+                return ex
             except ccxt.NetworkError as e:
                 logger.error(msg=f"network error {e}")
             except ccxt.ExchangeError as e:
