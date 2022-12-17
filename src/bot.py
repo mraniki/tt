@@ -84,14 +84,14 @@ def SearchCEX(string1,string2):
     if type(string1) is str:
         query1 = ((q.name==string1)&(q['testmode'] == string2))
         CEXSearch = cexDB.search(query1)
-        logger.info(msg=f"CEXSearch1: {CEXSearch}")
+        #logger.info(msg=f"CEXSearch1: {CEXSearch}")
         if (len(CEXSearch)==1):
             return CEXSearch
     elif type(string1) is not str:
         try:
             query1 = ((q.name==string1.name.lower())&(q['testmode'] == string2))
             CEXSearch = cexDB.search(query1)
-            logger.info(msg=f"CEXSearch2: {CEXSearch}")
+            #logger.info(msg=f"CEXSearch2: {CEXSearch}")
             if (len(CEXSearch)==1):
                 return CEXSearch
             else:
@@ -107,7 +107,7 @@ def SearchDEX(string1,string2):
     print(type(string1))
     query = ((q.name==string1)&(q['testmode'] == string2))
     DEXSearch = dexDB.search(query)
-    logger.info(msg=f"DEXSearch: {DEXSearch}")
+    #logger.info(msg=f"DEXSearch: {DEXSearch}")
     if (len(DEXSearch)==1):
         return DEXSearch
     else:
@@ -142,9 +142,15 @@ def LoadExchange(exchangeid, mode):
                 ex=exchanges[exchangeid]
                 if (mode==True):
                     ex.set_sandbox_mode('enabled')
+                    markets=ex.loadMarkets() 
+                    #ex.verbose = True
+                    #logger.info(msg=f"markets: {markets}")
                     return ex
                 else:
                     logger.info(msg=f"ccxt ex: {ex}")
+                    markets=ex.loadMarkets ()
+                    #ex.verbose = True
+                    #logger.info(msg=f"markets: {markets}")
                     return ex
             except ccxt.NetworkError as e:
                 logger.error(msg=f"network error {e}")
@@ -374,8 +380,10 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             message="TRADING DISABLED"
             await send(update,message)
         else:
-            SearchCEXResults= SearchCEX(ex.name.lower(),testmode)
+            SearchCEXResults= SearchCEX(ex,testmode)
+            SearchDEXResults= SearchDEX(ex,testmode)
             logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
+            logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
             if SearchCEXResults:
                 try:
                     order_m = Convert(msgtxt_upper)
@@ -386,18 +394,28 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     m_q=order_m[4][2:-1]
                     m_ordertype=CEX_ordertype
                     logger.info(msg=f"Processing: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
-                    #% of bal
-                    m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
-                    totalusdtbal = ex.fetchBalance()['USDT']['free']
-                    amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
-                    res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
-                    orderid=res['id']
-                    timestamp=res['datetime']
-                    symbol=res['symbol']
-                    side=res['side']
-                    amount=res['amount']
-                    price=res['price']
-                    response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                    #Check Balance
+                    bal = ex.fetch_free_balance()
+                    bal = {k: v for k, v in bal.items() if v is not None and v>0}
+                    logger.info(msg=f"bal: {bal}")
+                    if (len(bal)):
+                        ########% of bal
+                        m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
+                        logger.info(msg=f"m_price: {m_price}")
+                        totalusdtbal = ex.fetchBalance()['USDT']['free']
+                        logger.info(msg=f"totalusdtbal: {totalusdtbal}")
+                        amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
+                        ######## ORDER 
+                        res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
+                        logger.info(msg=f"res: {res}")
+                        orderid=res['id']
+                        timestamp=res['datetime']
+                        symbol=res['symbol']
+                        side=res['side']
+                        amount=res['amount']
+                        price=res['price']
+                        response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                    else: response=f"⚠️ not enough money"
                 except ccxt.NetworkError as e:
                     logger.error(msg=f"Network error {e}")
                     response=f"⚠️ Network error {e}"
