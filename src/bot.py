@@ -400,11 +400,11 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg_ex  = update.effective_message.text
     newexmsg = Convert(msg_ex)
     newex=newexmsg[1]
+    logger.info(msg=f"switch newex {newex}")
     extype=newexmsg[0]
     global ex
     logger.info(msg=f"switch ex: {ex}")
-    global CEX_test_mode
-    logger.info(msg=f"{newex}")
+    global testmode
     if extype=="/cex":
         if testmode:
             newex=cexDB.search((q.name==f'{newex}')&(q.testmode=="True"))
@@ -417,7 +417,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
             CEX_name = newex[0]['name']
             CEX_test_mode = newex[0]['testmode']
             res = LoadExchange(CEX_name,CEX_test_mode)
-            response = f"CEX is {res} \n "
+            response = f"CEX is {res}"
             logger.info(msg=f"ex is {ex}")
         else:
             response = 'CEX not setup'
