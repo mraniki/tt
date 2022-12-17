@@ -211,13 +211,13 @@
             "name": "quickswap",
             "address": "",
             "privatekey": "",
-            "version": "v3",
+            "version": "v2",
             "networkprovider": "",
             "router": "https://polygonscan.com",
             "testmode": "",
             "tokenlist":"https://raw.githubusercontent.com/sameepsi/quickswap-default-token-list/master/src/tokens/mainnet.json",
-            "abiurl":"https://api.bscscan.com/api",
-            "abiurltoken":""
+            "abiurl":"https://api.polygonscan.com/",
+            "abiurltoken":"FYBIZHS3N9TSBV39KIG1962EY2ZNMYYE8V"
         },
         "4":
         {
