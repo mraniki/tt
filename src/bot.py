@@ -39,6 +39,7 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 logger.info(msg=f"{TTVersion}")
 logger.info(msg=f"python {sys.version}")
+logger.info(msg=f"TinyDB {TinyDB.__version__}")
 logger.info(msg=f"CCXT {ccxt.__version__}")
 logger.info(msg=f"Web3 {web3.__version__}")
 ##=============== CONFIG ===============
@@ -76,14 +77,44 @@ def Convert(string):
     li = list(string.split(" "))
     return li
 
+def SearchEx(string1,string2):
+    query = ((q.name.search(string1))&(q.testmode == string2))
+    CEXResult = cexDB.search(query=query)
+    DEXSearch = dexDB.search(query=query)
+    if (len(CEXSearch)==1):
+        return CEXResult
+    elif (len(DEXSearch)==1):
+        return DEXSearch
+    else:
+        logger.error(msg=f"Error with DB search {string1}{string2}")
+        return
+
+def SearchCEX(string1,string2):
+    query = ((q.name.search(string1))&(q.testmode == string2))
+    CEXSearch = cexDB.search(query=query)
+    if (len(CEXSearch)==1):
+        return CEXSearch
+    else:
+        logger.error(msg=f"Error with DB search {string1}{string2}")
+        return
+
+def SearchDEX(string1,string2):
+    query = ((q.name.search(string1))&(q.testmode == string2))
+    DEXSearch = dexDB.search(query=query)
+    if (len(DEXSearch)==1):
+        return DEXSearch
+    else:
+        logger.error(msg=f"Error with DB search {string1}{string2}")
+        return
+
+
 def LoadExchange(exchangeid, mode):
     global ex
     logger.info(msg=f"exchangeid: {exchangeid}")
-    Ex_CEX=cexDB.search(q.name==f'{exchangeid}')
-    logger.info(msg=f"ExceX: {Ex_CEX}")
-    if Ex_CEX:
-        if mode:
-            newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode=="True"))
+    SearchCEXResults= SearchCEX(exchangeid,mode)
+    logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
+    if SearchCEXResults:
+            newex=SearchCEXResults
             logger.info(msg=f"newex: {newex}")
             exchange = getattr(ccxt, exchangeid)
             exchanges[exchangeid] = exchange()
@@ -101,25 +132,9 @@ def LoadExchange(exchangeid, mode):
                 logger.error(msg=f"exchange error {e}")
             except Exception as e:
                 logger.error(msg=f"{e}")
-        else:
-            newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode!="True"))
-            logger.info(msg=f"newex: {newex}")
-            exchange = getattr(ccxt, exchangeid)
-            exchanges[exchangeid] = exchange()
-            try:
-                exchanges[exchangeid] = exchange({
-                    'apiKey': newex[0]['api'],
-                    'secret': newex[0]['secret']
-                    })
-                ex=exchanges[exchangeid]
-                return ex
-            except ccxt.NetworkError as e:
-                logger.error(msg=f"network error {e}")
-            except ccxt.ExchangeError as e:
-                logger.error(msg=f"exchange error {e}")
-            except Exception as e:
-                logger.error(msg=f"{e}")
     else:
+        SearchDEXResults= SearchDEX(exchangeid,mode)
+        logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
         ex=DEXLoadExchange(exchangeid, mode)
 
 def DEXLoadExchange(exchangeid,mode):
@@ -258,7 +273,6 @@ else:
     CEX_ordertype = os.getenv("EX_ORDERTYPE")
     CEX_defaulttype = os.getenv("EX_DEFAULTTYPE")
     CEX_test_mode = os.getenv("EX_SANDBOXMODE")
-
 ##=========== DB SETUP =============
     extodb=cexDB.search(q.api==CEX_api)
     if len(extodb):
@@ -289,7 +303,6 @@ else:
         sys.exit()
     elif (CEX_name==""):
         logger.error(msg=f"no sandbox")
-
 ##======== APPRISE Setup ===============
 apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
@@ -340,7 +353,6 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             logger.error(msg=f"{e}")
             msg=f"⚠️ {e}"
     await send(update,msg)
-
 #===== order parsing and placing ======
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msgtxt = update.effective_message.text
@@ -397,10 +409,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 res=DEXBuy(m_symbol,m_q)
                 response=f"{res}"
         await send(update,response)
-
     else: error_handler()
-
-
 ##======== trading switch  =============
 async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global trading
@@ -410,7 +419,6 @@ async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         trading=False
     message=f"Trading is {trading}"
     await send(update,message)
-
 ##=========== CEX DEX switch ============
 async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg_ex  = update.effective_message.text
@@ -455,7 +463,6 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         testmode=False
     message=f"Sandbox is {testmode}"
     await send(update,message)
-
 ##============ DB COMMAND ===============
 async def dropDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"db table dropped")
@@ -465,16 +472,14 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     logger.info(msg=f"display db")
     message=f" db extract: \n {db.all()}"
     await send(update,message)
-
 ##=========== notify command ============
 async def notify_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"apprise testing")
     try:
-        msg="This is a apprise notification test"
+        msg="This is an apprise notification test"
         await notify(msg)
     except Exception as e:
         logger.error(msg=f"error: {e}")
-
 #=========== sendmessage command ========
 async def send (self, messaging):
     try:
