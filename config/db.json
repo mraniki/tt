@@ -16,7 +16,7 @@
         },
         "2":
         {
-            "token": "5665220472:AAFVgQF4HdG33RuUITY77305LK_m4ox-2r0",
+            "token": "5665220472:AAHZ-06-6CQKZasw5JHSHC8mI5dV0w6kb40",
             "channel": "-1001519942422",
             "platform": "DEV"
         },
@@ -38,10 +38,10 @@
         "1":
         {
             "name": "kraken",
-            "api": "",
-            "secret": "",
+            "api": "PzmZsOwD/AJmy3yZ4tX6i5J61mbSGthbwcBdETJR8uhhCYLe3wNV4an3",
+            "secret": "wY4goo0XsnUd6tO/jJLD/CcvDdkIFgYsspnSkqTFSpAVop3y6ZJhPAQ81bruHEjJ2rOllVq4rmIrzWYmv2F1Cw==",
             "password": "",
-            "testmode": "",
+            "testmode": "False",
             "defaultType": "SPOT",
             "ordertype": "MARKET"
         },
@@ -181,17 +181,15 @@
         "1":
         {
             "name": "pancake",
-            "address": "",
-            "privatekey": "",
+            "address": "0x8dCF2F97C931ECc01afC7d41c8fF1a15037f06Bb",
+            "privatekey": "2866251e015660056dbefeed6cece7268c778ed7417e2372b015503ccba65f72",
             "version": "v2",
             "networkprovider": "https://bsc-dataseed.binance.org/",
             "router": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
-            "testmode": "",
+            "testmode": "False",
             "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
             "abiurl":"https://api.bscscan.com/api",
-            "abiurltoken":""
-            
-            
+            "abiurltoken":"5XE9QACZCT3KXG2WWIAH7X1C5RKF1872TM"
         },
         "2":
         {
