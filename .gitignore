@@ -30,3 +30,7 @@ config/.env
 src/config/db.json
 /src/db.json
 
+config/db.json
+config/db.json
+config/db.json
+config/db.json

@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTVersion="🪙TT 0.9.9"
+TTVersion="🪙TT Beta 1.00"
 ##=============== import  =============
 ##log
 import logging
@@ -21,6 +21,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 import apprise
 
 #db
+import tinydb
 from tinydb import TinyDB, Query
 import re
 
@@ -28,8 +29,9 @@ import re
 import ccxt
 
 #DEX
+import web3 
 from web3 import Web3
-#from web3.contract import Contract
+from web3.contract import Contract
 from typing import List #Dict, List
 import time
 
@@ -38,7 +40,10 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 logger.info(msg=f"{TTVersion}")
 logger.info(msg=f"python {sys.version}")
-logger.info(msg=f"{ccxt.__version__}")
+logger.info(msg=f"TinyDB {tinydb.__version__}")
+logger.info(msg=f"TPB {telegram.__version__}")
+logger.info(msg=f"CCXT {ccxt.__version__}")
+logger.info(msg=f"Web3 {web3.__version__}")
 ##=============== CONFIG ===============
 dotenv_path = './config/.env'
 db_path= './config/db.json'
@@ -58,32 +63,75 @@ global messaging
 global address
 exchanges = {}
 trading=True
-testmode=False
+testmode="False"
 #===================
 commandlist= """
 <code>/bal</code>
 <code>/cex binance</code>
 <code>/cex kraken</code>
-<code>/cec binancecoinm</code>
+<code>/cex binancecoinm</code>
 <code>/dex pancake</code>
+<code>/dex quickswap</code>
 <code>/trading</code>
 <code>/testmode</code>"""
 menu=f'{TTVersion} \n {commandlist}\n'
-#=============== functions ===============
+#=============== Functions ===============
 def Convert(string):
     li = list(string.split(" "))
     return li
 
+def SearchCEX(string1,string2):
+    if type(string1) is str:
+        query1 = ((q.name==string1)&(q['testmode'] == string2))
+        CEXSearch = cexDB.search(query1)
+        #logger.info(msg=f"CEXSearch1: {CEXSearch}")
+        if (len(CEXSearch)==1):
+            return CEXSearch
+    elif type(string1) is not str:
+        try:
+            query1 = ((q.name==string1.name.lower())&(q['testmode'] == string2))
+            CEXSearch = cexDB.search(query1)
+            #logger.info(msg=f"CEXSearch2: {CEXSearch}")
+            if (len(CEXSearch)==1):
+                return CEXSearch
+            else:
+                logger.error(msg=f"NO CEX {CEXSearch}")
+                return 0
+        except Exception as e:
+            return 0
+    else:
+        logger.error(msg=f"NO CEX {CEXSearch}")
+        return 0
+
+def SearchDEX(string1,string2):
+    print(type(string1))
+    query = ((q.name==string1)&(q['testmode'] == string2))
+    DEXSearch = dexDB.search(query)
+    #logger.info(msg=f"DEXSearch: {DEXSearch}")
+    if (len(DEXSearch)==1):
+        return DEXSearch
+    else:
+        logger.error(msg=f"DEX search error {DEXSearch}")
+        return 0
+
+def SearchEx(string1,string2):
+    CEXCheck=SearchCEX(string1,string2)
+    DEXCheck=SearchDEX(string1,string2)
+    if (len(CEXCheck)==1):
+        return CEXCheck
+    elif (len(DEXCheck)==1):
+        return DEXCheck
+    else:
+        logger.error(msg=f"Error with DB search {string1} {string2}")
+        return
+
 def LoadExchange(exchangeid, mode):
     global ex
-    Ex_CEX=cexDB.search(q.name=={exchangeid})
-    logger.info(msg=f"{Ex_CEX}")
-    if Ex_CEX:
-        if mode:
-            newex=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE)&(q.testmode=="True"))
-        else:
-            newex=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE)&(q.testmode!="True"))
-        if len(newex):
+    logger.info(msg=f"exchangeid: {exchangeid}")
+    SearchCEXResults= SearchCEX(exchangeid,mode)
+    logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
+    if SearchCEXResults:
+            newex=SearchCEXResults
             exchange = getattr(ccxt, exchangeid)
             exchanges[exchangeid] = exchange()
             try:
@@ -92,9 +140,17 @@ def LoadExchange(exchangeid, mode):
                     'secret': newex[0]['secret']
                     })
                 ex=exchanges[exchangeid]
-                if testmode:
+                if (mode==True):
                     ex.set_sandbox_mode('enabled')
+                    markets=ex.loadMarkets() 
+                    #ex.verbose = True
+                    #logger.info(msg=f"markets: {markets}")
+                    return ex
                 else:
+                    logger.info(msg=f"ccxt ex: {ex}")
+                    markets=ex.loadMarkets ()
+                    #ex.verbose = True
+                    #logger.info(msg=f"markets: {markets}")
                     return ex
             except ccxt.NetworkError as e:
                 logger.error(msg=f"network error {e}")
@@ -103,6 +159,8 @@ def LoadExchange(exchangeid, mode):
             except Exception as e:
                 logger.error(msg=f"{e}")
     else:
+        SearchDEXResults= SearchDEX(exchangeid,mode)
+        logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
         ex=DEXLoadExchange(exchangeid, mode)
 
 def DEXLoadExchange(exchangeid,mode):
@@ -113,30 +171,22 @@ def DEXLoadExchange(exchangeid,mode):
     global tokenlist
     global abiurl
     global abiurltoken
-    Ex_DEX=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE)))
-    if Ex_DEX:
-        if mode:
-            newex=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode=="True"))
-        else:
-            newex=dexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode!="True"))
-        if len(newex):
-            try:
-                name= newex[0]['name']
-                address= newex[0]['address']
-                privatekey= newex[0]['privatekey']
-                networkprovider= newex[0]['networkprovider']
-                router= newex[0]['router']
-                testmode=newex[0]['testmode']
-                tokenlist=newex[0]['tokenlist']
-                abiurl=newex[0]['abiurl']
-                abiurltoken=newex[0]['abiurltoken']
-                ex = Web3(Web3.HTTPProvider(networkprovider))
-                if ex.net.listening:
-                    logger.info(msg=f"{ex.net.listening}")
-                    return name
-            except Exception as e:
-                logger.error(msg=f"web3 error: {e}")
-                return {e}
+    SearchDEXResults= SearchDEX(exchangeid,mode)
+    logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
+    if SearchDEXResults:
+        name= SearchDEXResults[0]['name']
+        address= SearchDEXResults[0]['address']
+        privatekey= SearchDEXResults[0]['privatekey']
+        networkprovider= SearchDEXResults[0]['networkprovider']
+        router= SearchDEXResults[0]['router']
+        mode=SearchDEXResults[0]['testmode']
+        tokenlist=SearchDEXResults[0]['tokenlist']
+        abiurl=SearchDEXResults[0]['abiurl']
+        abiurltoken=SearchDEXResults[0]['abiurltoken']
+        ex = Web3(Web3.HTTPProvider(networkprovider))
+        if ex.net.listening:
+            logger.info(msg=f"{ex.net.listening}")
+            return name
 
 def DEXContractLookup(symbol):
     url = requests.get(tokenlist)
@@ -172,13 +222,13 @@ def DEXBuy(tokenAddress, amountToBuy):
     try:
         if(tokenAddress != None):
             tokenToBuy = web3.is_checksum_address(tokenAddress)
+            logger.info(msg=f"{tokenAddress}")
             spend = web3.is_checksum_address("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")# wbnb contract
             contract = web3.eth.contract(address=router, abi=DEXFetchAbi(router))
-            logger.info(msg=f"{contract}")
+            #logger.info(msg=f"{contract}")
             nonce = web3.eth.get_transaction_count(address)
-           # start = time.time()
-            DEXtxn = contract.functions.swapExactETHForTokens(0,[spend, tokenToBuy],address,(int(time.time()) + transactionRevertTime)
-            ).buildTransaction({
+            start = time.time()
+            DEXtxn = contract.functions.swapExactETHForTokens(0,[spend, tokenToBuy],address,(int(start) + transactionRevertTime)).buildTransaction({
                 'from': address,# based Token(BNB)
                 'value': web3.to_wei(float(amountToBuy), 'ether'),
                 'gas': gasAmount,
@@ -193,7 +243,7 @@ def DEXBuy(tokenAddress, amountToBuy):
                 return e
             txHash = str(web3.to_hex(tx_token))
         # TOKEN BOUGHT
-            checkTransactionSuccessURL = "https://api.bscscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=" + \
+            checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + \
                 txHash + "&apikey=" + abiurltoken
             checkTransactionRequest = requests.get(
                 url=checkTransactionSuccessURL)
@@ -214,14 +264,17 @@ if os.path.exists(db_path):
     tg=telegramDB.search(q.platform==env)
     TG_TK = tg[0]['token']
     TG_CHANNEL_ID = tg[0]['channel']
-    ex=cexDB.all()
-    CEX_name = ex[0]['name']
-    CEX_api = ex[0]['api']
-    CEX_secret = ex[0]['secret']
-    CEX_password = ex[0]['password']
-    CEX_test_mode = ex[0]['testmode']
-    CEX_ordertype = ex[0]['ordertype']
-    CEX_defaulttype = ex[0]['defaultType']
+    cexdb=cexDB.all()
+    dexdb=dexDB.all()
+    #logger.info(msg=f"{cexdb}")
+    #logger.info(msg=f"{dexdb}")
+    CEX_name = cexdb[0]['name']
+    CEX_api = cexdb[0]['api']
+    CEX_secret = cexdb[0]['secret']
+    CEX_password = cexdb[0]['password']
+    CEX_test_mode = cexdb[0]['testmode']
+    CEX_ordertype = cexdb[0]['ordertype']
+    CEX_defaulttype = cexdb[0]['defaultType']
 
 else:
     logger.warning(msg=f"no DB, env file")
@@ -240,11 +293,10 @@ else:
     CEX_ordertype = os.getenv("EX_ORDERTYPE")
     CEX_defaulttype = os.getenv("EX_DEFAULTTYPE")
     CEX_test_mode = os.getenv("EX_SANDBOXMODE")
-
 ##=========== DB SETUP =============
     extodb=cexDB.search(q.api==CEX_api)
     if len(extodb):
-        logger.info(msg=f"EX exists")
+        logger.info(msg=f"EX exists in DB")
     else:
         cexDB.insert({
         "name": CEX_name,
@@ -271,12 +323,11 @@ else:
         sys.exit()
     elif (CEX_name==""):
         logger.error(msg=f"no sandbox")
-
 ##======== APPRISE Setup ===============
 apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
-##============ CEX Setup ===============
-logger.info(msg=f"setting up exchange{CEX_name}")
+##============ EX Setup ===============
+logger.info(msg=f"Setting up exchange {CEX_name}")
 LoadExchange(CEX_name,CEX_test_mode)
 ##========== startup message ===========
 async def post_init(application: Application):
@@ -284,14 +335,12 @@ async def post_init(application: Application):
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\n {env} Sandbox:{testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
 ##=============== help  ================
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    msg= f"{env} {ex} Sandbox:{testmode}\n {menu}"
+    msg= f"{env} {exchangeid} Sandbox:{testmode}\n {menu}"
     await send(update,msg)
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    global ex
-    Ex_CEX=cexDB.search(q.name.matches(f'{ex}',flags=re.IGNORECASE))
-
-    if (Ex_CEX):
+    SearchCEXResults= SearchCEX(ex,testmode)
+    if SearchCEXResults:
         try:
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
@@ -319,20 +368,23 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             logger.error(msg=f"{e}")
             msg=f"⚠️ {e}"
     await send(update,msg)
-
 #===== order parsing and placing ======
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msgtxt = update.effective_message.text
     msgtxt_upper =msgtxt.upper()
     filter_lst = ['BUY', 'SELL']
+    logger.info(msg=f"ex: {ex}")
     msg=""
     if [ele for ele in filter_lst if(ele in msgtxt_upper)]:
         if (trading==False):
             message="TRADING DISABLED"
             await send(update,message)
         else:
-            Ex_CEX=cexDB.search((q.name=={ex}))
-            if (Ex_CEX):
+            SearchCEXResults= SearchCEX(ex,testmode)
+            SearchDEXResults= SearchDEX(ex,testmode)
+            logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
+            logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
+            if SearchCEXResults:
                 try:
                     order_m = Convert(msgtxt_upper)
                     m_dir= order_m[0]
@@ -342,18 +394,28 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     m_q=order_m[4][2:-1]
                     m_ordertype=CEX_ordertype
                     logger.info(msg=f"Processing: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
-                    #% of bal
-                    m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
-                    totalusdtbal = ex.fetchBalance()['USDT']['free']
-                    amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
-                    res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
-                    orderid=res['id']
-                    timestamp=res['datetime']
-                    symbol=res['symbol']
-                    side=res['side']
-                    amount=res['amount']
-                    price=res['price']
-                    response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                    #Check Balance
+                    bal = ex.fetch_free_balance()
+                    bal = {k: v for k, v in bal.items() if v is not None and v>0}
+                    logger.info(msg=f"bal: {bal}")
+                    if (len(bal)):
+                        ########% of bal
+                        m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
+                        logger.info(msg=f"m_price: {m_price}")
+                        totalusdtbal = ex.fetchBalance()['USDT']['free']
+                        logger.info(msg=f"totalusdtbal: {totalusdtbal}")
+                        amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
+                        ######## ORDER 
+                        res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
+                        logger.info(msg=f"res: {res}")
+                        orderid=res['id']
+                        timestamp=res['datetime']
+                        symbol=res['symbol']
+                        side=res['side']
+                        amount=res['amount']
+                        price=res['price']
+                        response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                    else: response=f"⚠️ not enough money"
                 except ccxt.NetworkError as e:
                     logger.error(msg=f"Network error {e}")
                     response=f"⚠️ Network error {e}"
@@ -375,10 +437,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 res=DEXBuy(m_symbol,m_q)
                 response=f"{res}"
         await send(update,response)
-
     else: error_handler()
-
-
 ##======== trading switch  =============
 async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global trading
@@ -388,49 +447,44 @@ async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         trading=False
     message=f"Trading is {trading}"
     await send(update,message)
-
 ##=========== CEX DEX switch ============
 async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg_ex  = update.effective_message.text
     newexmsg = Convert(msg_ex)
     newex=newexmsg[1]
-    extype=newexmsg[0]
     global ex
-    global CEX_test_mode
-    logger.info(msg=f"{newex}")
-    if extype=="/cex":
-        if testmode:
-            newex=cexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode=="True"))
-            logger.info(msg=f"{newex}")
-        else:
-            newex=cexDB.search((q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))&(q.testmode!="True"))
-            logger.info(msg=f"{newex}")
-        if len(newex):
-            logger.info(msg=f"CEX for {newex}")
-            CEX_name = newex[0]['name']
-            CEX_test_mode = newex[0]['testmode']
-            res = LoadExchange(CEX_name,CEX_test_mode)
-            response = f"CEX is {res} \n "
-        else:
-            response = 'CEX not setup'
-    else:
-        newex=dexDB.search((q.name=={newex})&(q.testmode!="True"))
-        name= newex[0]['name']
-        mode= newex[0]['testmode']
-        res = DEXLoadExchange(name,mode)
-        response = f"DEX is {name}"
+    global testmode
+    SearchCEXResults= SearchCEX(newex,testmode)
+    SearchDEXResults= SearchDEX(newex,testmode)
+    logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
+    logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
+    if SearchCEXResults:
+        CEX_name = SearchCEXResults[0]['name']
+        CEX_test_mode = SearchCEXResults[0]['testmode']
+        logger.info(msg=f"CEX for {CEX_name} testmode: {CEX_test_mode}")
+        res = LoadExchange(CEX_name,CEX_test_mode)
+        response = f"CEX is {res}"
+        logger.info(msg=f"ex is {ex}")
+    elif SearchDEXResults:
+        DEX_name= SearchDEXResults[0]['name']
+        DEX_test_mode= SearchDEXResults[0]['testmode']
+        logger.info(msg=f"DEX for {DEX_name} testmode: {DEX_test_mode}")
+        res = DEXLoadExchange(DEX_name,DEX_test_mode)
+        logger.info(msg=f"DEX res {res}")
+        response = f"DEX is {DEX_name}"
+    else:  
+        response = f"Error. Exchange is {ex}"
     await send(update,response)
 
 ##========== Test mode switch ===========
 async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global testmode
-    if (testmode==False):
-        testmode=True
+    if (testmode=="False"):
+        testmode="True"
     else:
-        testmode=False
+        testmode="False"
     message=f"Sandbox is {testmode}"
     await send(update,message)
-
 ##============ DB COMMAND ===============
 async def dropDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"db table dropped")
@@ -440,22 +494,18 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     logger.info(msg=f"display db")
     message=f" db extract: \n {db.all()}"
     await send(update,message)
-
 ##=========== notify command ============
 async def notify_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"apprise testing")
     try:
-        msg="This is a apprise notification test"
+        msg="This is an apprise notification test"
         await notify(msg)
     except Exception as e:
         logger.error(msg=f"error: {e}")
-
 #=========== sendmessage command ========
 async def send (self, messaging):
     try:
         await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
-    except telegram.error as e:
-        logger.error(msg=f"telegram error: {e}")
     except Exception as e:
         logger.error(msg=f"error: {e}")
 #=========== notification command ========
