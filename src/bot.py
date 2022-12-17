@@ -204,7 +204,7 @@ def DEXFetchAbi(address):
         "apikey": abiurltoken }
     resp = requests.get(url, params=params).json()
     abi = resp["result"]
-    logger.info(msg=f"{abi}")
+    #logger.info(msg=f"{abi}")
     return abi
 
 def DEXBuy(tokenAddress, amountToBuy):
@@ -213,22 +213,24 @@ def DEXBuy(tokenAddress, amountToBuy):
     global privatekey
     global abiurltoken
     web3=ex
-    transactionRevertTime = 30
+    transactionRevertTime = 10000
     gasAmount = 100
     gasPrice = 5
+    SymboltoSell = 'WBNB'
+    txntime = (int(time.time()) + transactionRevertTime)
     logger.info(msg=f"{web3}")
     logger.info(msg=f"{tokenAddress}")
     logger.info(msg=f"{amountToBuy}")
     try:
         if(tokenAddress != None):
-            tokenToBuy = web3.is_checksum_address(tokenAddress)
-            logger.info(msg=f"{tokenAddress}")
-            spend = web3.is_checksum_address("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")# wbnb contract
+            tokenToBuy = tokenAddress
+            tokenToSell=DEXContractLookup(SymboltoSell)
             contract = web3.eth.contract(address=router, abi=DEXFetchAbi(router))
             #logger.info(msg=f"{contract}")
             nonce = web3.eth.get_transaction_count(address)
-            start = time.time()
-            DEXtxn = contract.functions.swapExactETHForTokens(0,[spend, tokenToBuy],address,(int(start) + transactionRevertTime)).buildTransaction({
+
+            path=[tokenToSell, tokenToBuy]
+            DEXtxn = contract.functions.swapExactETHForTokens(0,path,address,txntime).buildTransaction({
                 'from': address,# based Token(BNB)
                 'value': web3.to_wei(float(amountToBuy), 'ether'),
                 'gas': gasAmount,
@@ -425,7 +427,6 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 except Exception as e:
                     logger.error(msg=f"CCXT error: {e}")
                     response=f"⚠️ CCXT error: {e}"
-                ##await send(update,response)
             else:
                 order_m = Convert(msgtxt_upper)
                 m_dir= order_m[0]
