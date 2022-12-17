@@ -217,7 +217,7 @@
             "testmode": "",
             "tokenlist":"https://raw.githubusercontent.com/sameepsi/quickswap-default-token-list/master/src/tokens/mainnet.json",
             "abiurl":"https://api.polygonscan.com/",
-            "abiurltoken":"FYBIZHS3N9TSBV39KIG1962EY2ZNMYYE8V"
+            "abiurltoken":""
         },
         "4":
         {
