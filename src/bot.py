@@ -230,12 +230,12 @@ def DEXBuy(tokenAddress, amountToBuy):
             nonce = web3.eth.get_transaction_count(address)
 
             path=[tokenToSell, tokenToBuy]
-            DEXtxn = contract.functions.swapExactETHForTokens(0,path,address,txntime).buildTransaction({
+            DEXtxn = contract.functions.swapExactETHForTokens(0,path,address,txntime).build_transaction({
                 'from': address,# based Token(BNB)
                 'value': web3.to_wei(float(amountToBuy), 'ether'),
                 'gas': gasAmount,
                 'gasPrice': web3.to_wei(gasPrice, 'gwei'),
-                'nonce': nonce,})
+                'nonce': nonce})
             try:
                 signed_txn = web3.eth.account.sign_transaction(DEXtxn, privatekey)
                 tx_token = web3.eth.send_raw_transaction(
