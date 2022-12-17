@@ -197,7 +197,7 @@ def DEXBuy(tokenAddress, amountToBuy):
                 return e
             txHash = str(web3.to_hex(tx_token))
         # TOKEN BOUGHT
-            checkTransactionSuccessURL = "https://api.bscscan.com/api?module=transaction&action=gettxreceiptstatus&txhash=" + \
+            checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + \
                 txHash + "&apikey=" + abiurltoken
             checkTransactionRequest = requests.get(
                 url=checkTransactionSuccessURL)
