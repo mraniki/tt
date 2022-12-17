@@ -44,6 +44,7 @@ logger.info(msg=f"TinyDB {tinydb.__version__}")
 logger.info(msg=f"TPB {telegram.__version__}")
 logger.info(msg=f"CCXT {ccxt.__version__}")
 logger.info(msg=f"Web3 {web3.__version__}")
+logger.info(msg=f"apprise {apprise.__version__}")
 ##=============== CONFIG ===============
 dotenv_path = './config/.env'
 db_path= './config/db.json'
@@ -104,32 +105,34 @@ def SearchCEX(string1,string2):
         return 0
 
 def SearchDEX(string1,string2):
-    print(type(string1))
-    query = ((q.name==string1)&(q['testmode'] == string2))
-    DEXSearch = dexDB.search(query)
-    #logger.info(msg=f"DEXSearch: {DEXSearch}")
-    if (len(DEXSearch)==1):
-        return DEXSearch
-    else:
-        logger.error(msg=f"DEX search error {DEXSearch}")
+    try:
+        query = ((q.name==string1)&(q['testmode'] == string2))
+        DEXSearch = dexDB.search(query)
+        #logger.info(msg=f"DEXSearch: {DEXSearch}")
+        if (len(DEXSearch)==1):
+            return DEXSearch
+        else:
+            return 0
+    except Exception as e:
         return 0
+             
 
 def SearchEx(string1,string2):
     CEXCheck=SearchCEX(string1,string2)
     DEXCheck=SearchDEX(string1,string2)
     if (len(CEXCheck)==1):
-        return CEXCheck
+        return CEXCheck[0]['name']
     elif (len(DEXCheck)==1):
-        return DEXCheck
+        return DEXCheck[0]['name']
     else:
         logger.error(msg=f"Error with DB search {string1} {string2}")
         return
 
 def LoadExchange(exchangeid, mode):
     global ex
-    logger.info(msg=f"exchangeid: {exchangeid}")
+    #logger.info(msg=f"exchangeid: {exchangeid}")
     SearchCEXResults= SearchCEX(exchangeid,mode)
-    logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
+    #logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
     if SearchCEXResults:
             newex=SearchCEXResults
             exchange = getattr(ccxt, exchangeid)
@@ -147,7 +150,6 @@ def LoadExchange(exchangeid, mode):
                     #logger.info(msg=f"markets: {markets}")
                     return ex
                 else:
-                    logger.info(msg=f"ccxt ex: {ex}")
                     markets=ex.loadMarkets ()
                     #ex.verbose = True
                     #logger.info(msg=f"markets: {markets}")
@@ -160,7 +162,7 @@ def LoadExchange(exchangeid, mode):
                 logger.error(msg=f"{e}")
     else:
         SearchDEXResults= SearchDEX(exchangeid,mode)
-        logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
+        #logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
         ex=DEXLoadExchange(exchangeid, mode)
 
 def DEXLoadExchange(exchangeid,mode):
@@ -172,7 +174,7 @@ def DEXLoadExchange(exchangeid,mode):
     global abiurl
     global abiurltoken
     SearchDEXResults= SearchDEX(exchangeid,mode)
-    logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
+    #logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
     if SearchDEXResults:
         name= SearchDEXResults[0]['name']
         address= SearchDEXResults[0]['address']
@@ -218,9 +220,9 @@ def DEXBuy(tokenAddress, amountToBuy):
     gasPrice = 5
     SymboltoSell = 'WBNB'
     txntime = (int(time.time()) + transactionRevertTime)
-    logger.info(msg=f"{web3}")
-    logger.info(msg=f"{tokenAddress}")
-    logger.info(msg=f"{amountToBuy}")
+    #logger.info(msg=f"{web3}")
+    #logger.info(msg=f"{tokenAddress}")
+    #logger.info(msg=f"{amountToBuy}")
     try:
         if(tokenAddress != None):
             tokenToBuy = tokenAddress
@@ -331,14 +333,15 @@ apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 ##============ EX Setup ===============
 logger.info(msg=f"Setting up exchange {CEX_name}")
 LoadExchange(CEX_name,CEX_test_mode)
+##=============== help  ================
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    msg= f"Environment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}"
+    await send(update,msg)
 ##========== startup message ===========
 async def post_init(application: Application):
     logger.info(msg=f"bot is online")
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\n {env} Sandbox:{testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
-##=============== help  ================
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    msg= f"{env} {exchangeid} Sandbox:{testmode}\n {menu}"
-    await send(update,msg)
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
+
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     SearchCEXResults= SearchCEX(ex,testmode)
@@ -375,7 +378,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msgtxt = update.effective_message.text
     msgtxt_upper =msgtxt.upper()
     filter_lst = ['BUY', 'SELL']
-    logger.info(msg=f"ex: {ex}")
+    #logger.info(msg=f"ex: {ex}")
     msg=""
     if [ele for ele in filter_lst if(ele in msgtxt_upper)]:
         if (trading==False):
@@ -384,8 +387,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         else:
             SearchCEXResults= SearchCEX(ex,testmode)
             SearchDEXResults= SearchDEX(ex,testmode)
-            logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
-            logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
+            #logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
+            #logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
             if SearchCEXResults:
                 try:
                     order_m = Convert(msgtxt_upper)
@@ -403,13 +406,13 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     if (len(bal)):
                         ########% of bal
                         m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
-                        logger.info(msg=f"m_price: {m_price}")
+                        #logger.info(msg=f"m_price: {m_price}")
                         totalusdtbal = ex.fetchBalance()['USDT']['free']
-                        logger.info(msg=f"totalusdtbal: {totalusdtbal}")
+                        #logger.info(msg=f"totalusdtbal: {totalusdtbal}")
                         amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
                         ######## ORDER 
                         res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
-                        logger.info(msg=f"res: {res}")
+                        #logger.info(msg=f"res: {res}")
                         orderid=res['id']
                         timestamp=res['datetime']
                         symbol=res['symbol']
@@ -426,11 +429,11 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     response=f"⚠️ Exchange error: {e}"
                 except Exception as e:
                     logger.error(msg=f"CCXT error: {e}")
-                    response=f"⚠️ CCXT error: {e}"
+                    response=f"⚠️ error: {e}"
             else:
                 order_m = Convert(msgtxt_upper)
                 m_dir= order_m[0]
-                logger.info(msg=f"{order_m[1]}")
+                #logger.info(msg=f"{order_m[1]}")
                 m_symbol=DEXContractLookup(order_m[1])
                 #m_q=order_m[2][2:-1]
                 m_q=1
@@ -457,8 +460,6 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     global testmode
     SearchCEXResults= SearchCEX(newex,testmode)
     SearchDEXResults= SearchDEX(newex,testmode)
-    logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
-    logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
     if SearchCEXResults:
         CEX_name = SearchCEXResults[0]['name']
         CEX_test_mode = SearchCEXResults[0]['testmode']
