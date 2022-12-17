@@ -402,7 +402,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     newex=newexmsg[1]
     extype=newexmsg[0]
     global ex
-    logger.info(msg=f"ex: {ex}")
+    logger.info(msg=f"switch ex: {ex}")
     global CEX_test_mode
     logger.info(msg=f"{newex}")
     if extype=="/cex":
