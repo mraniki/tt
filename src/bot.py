@@ -154,12 +154,9 @@ def LoadExchange(exchangeid, mode):
                     #ex.verbose = True
                     #logger.info(msg=f"markets: {markets}")
                     return ex
-            except ccxt.NetworkError as e:
-                logger.error(msg=f"network error {e}")
-            except ccxt.ExchangeError as e:
-                logger.error(msg=f"exchange error {e}")
             except Exception as e:
                 logger.error(msg=f"{e}")
+                error_handler()
     else:
         SearchDEXResults= SearchDEX(exchangeid,mode)
         #logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
@@ -463,16 +460,16 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if SearchCEXResults:
         CEX_name = SearchCEXResults[0]['name']
         CEX_test_mode = SearchCEXResults[0]['testmode']
-        logger.info(msg=f"CEX for {CEX_name} testmode: {CEX_test_mode}")
+        #logger.info(msg=f"CEX for {CEX_name} testmode: {CEX_test_mode}")
         res = LoadExchange(CEX_name,CEX_test_mode)
         response = f"CEX is {res}"
-        logger.info(msg=f"ex is {ex}")
+        #logger.info(msg=f"ex is {ex}")
     elif SearchDEXResults:
         DEX_name= SearchDEXResults[0]['name']
         DEX_test_mode= SearchDEXResults[0]['testmode']
-        logger.info(msg=f"DEX for {DEX_name} testmode: {DEX_test_mode}")
+        #logger.info(msg=f"DEX for {DEX_name} testmode: {DEX_test_mode}")
         res = DEXLoadExchange(DEX_name,DEX_test_mode)
-        logger.info(msg=f"DEX res {res}")
+        #logger.info(msg=f"DEX res {res}")
         response = f"DEX is {DEX_name}"
     else:  
         response = f"Error. Exchange is {ex}"
@@ -520,13 +517,24 @@ async def notify(messaging):
         logger.error(msg=f"apprise error: {e}")
 #=========  bot error handling ========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.error(msg="Exception:", exc_info=context.error)
-    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
-    tb_string = "".join(tb_list)
-    tb_trim = tb_string[:1000]
-    e=f"⚠️ {tb_trim}"
-    logger.error(msg=f"{e}")
-    message=f"{e}"
+    try:
+        logger.error(msg=f"{e}")
+    except telegram.error as e:
+        logger.error(msg=f"telegram error {e}")
+        e=f"telegram error {e}"
+    except ccxt.NetworkError as e:
+        logger.error(msg=f"network error {e}")
+        e=f"network error {e}"
+    except ccxt.ExchangeError as e:
+        logger.error(msg=f"exchange error {e}")
+        e=f"exchange error {e}"
+    except Exception as e:
+        logger.error(msg="Exception:", exc_info=context.error)
+        tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
+        tb_string = "".join(tb_list)
+        tb_trim = tb_string[:1000]
+        e=f"⚠️ {tb_trim}"
+    message=f"⚠️ {e}"
     await send(update,message)
 #================== BOT =================
 def main():
