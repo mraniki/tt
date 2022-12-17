@@ -78,7 +78,9 @@ def Convert(string):
 
 def LoadExchange(exchangeid, mode):
     global ex
-    Ex_CEX=cexDB.search(q.name.matches(f'{exchangeid}',flags=re.IGNORECASE))
+    logger.info(msg=f"ex: {ex}")
+    logger.info(msg=f"ex: {exchangeid}")
+    Ex_CEX=cexDB.search(q.name==f'{exchangeid}')
     #logger.info(msg=f"ExceX: {Ex_CEX}")
     if Ex_CEX:
         if mode:
@@ -292,9 +294,9 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global ex
-    logger.info(msg=f"{ex}")
+    logger.info(msg=f"ex: {ex}")
     Ex_CEX=cexDB.search(q.name==f'{ex}')
-    logger.info(msg=f"{Ex_CEX=}")
+    logger.info(msg=f"Ex_CEX: {Ex_CEX}")
     if (Ex_CEX):
         try:
             bal = ex.fetch_free_balance()
@@ -329,6 +331,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msgtxt = update.effective_message.text
     msgtxt_upper =msgtxt.upper()
     filter_lst = ['BUY', 'SELL']
+    logger.info(msg=f"ex: {ex}")
     msg=""
     if [ele for ele in filter_lst if(ele in msgtxt_upper)]:
         if (trading==False):
@@ -400,6 +403,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     newex=newexmsg[1]
     extype=newexmsg[0]
     global ex
+    logger.info(msg=f"ex: {ex}")
     global CEX_test_mode
     logger.info(msg=f"{newex}")
     if extype=="/cex":

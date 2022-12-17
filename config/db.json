@@ -1,0 +1,236 @@
+{
+    "global":
+    {
+        "1":
+        {
+            "env": "DEV"
+        }
+    },
+    "telegram":
+    {
+        "1":
+        {
+            "token": "",
+            "channel": "",
+            "platform": "POC"
+        },
+        "2":
+        {
+            "token": "",
+            "channel": "",
+            "platform": "DEV"
+        },
+        "3":
+        {
+            "token": "",
+            "channel": "",
+            "platform": "SIT"
+        },
+        "4":
+        {
+            "token": "",
+            "channel": "",
+            "platform": "PRD"
+        }
+    },
+    "cex":
+    {
+        "1":
+        {
+            "name": "kraken",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "2":
+        {
+            "name": "binance",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "True",
+            "defaultType": "FUTURE",
+            "ordertype": "MARKET"
+        },
+        "3":
+        {
+            "name": "binance",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "4":
+        {
+            "name": "binancecoinm",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "True",
+            "defaultType": "FUTURE",
+            "ordertype": "MARKET"
+        },
+        "5":
+        {
+            "name": "binanceusdm",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "True",
+            "defaultType": "FUTURE",
+            "ordertype": "MARKET"
+        },
+        "6":
+        {
+            "name": "huobi",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "7":
+        {
+            "name": "coinbase",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "8":
+        {
+            "name": "gate",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "9":
+        {
+            "name": "kucoin",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "10":
+        {
+            "name": "bybit",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "11":
+        {
+            "name": "okx",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "12":
+        {
+            "name": "bitfinex",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "13":
+        {
+            "name": "poloniex",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        },
+        "14":
+        {
+            "name": "ftx",
+            "api": "",
+            "secret": "",
+            "password": "",
+            "testmode": "",
+            "defaultType": "SPOT",
+            "ordertype": "MARKET"
+        }
+    },
+    "dex":
+    {
+        "1":
+        {
+            "name": "pancake",
+            "address": "",
+            "privatekey": "",
+            "version": "v2",
+            "networkprovider": "https://bsc-dataseed.binance.org/",
+            "router": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+            "testmode": "",
+            "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
+            "abiurl":"https://api.bscscan.com/api",
+            "abiurltoken":""
+            
+            
+        },
+        "2":
+        {
+            "name": "uniswap",
+            "address": "",
+            "privatekey": "",
+            "version": "v3",
+            "networkprovider": "",
+            "router": "",
+            "testmode": "",
+            "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
+            "abiurl":"https://api.bscscan.com/api",
+            "abiurltoken":""
+        },
+        "3":
+        {
+            "name": "quickswap",
+            "address": "",
+            "privatekey": "",
+            "version": "v3",
+            "networkprovider": "",
+            "router": "https://polygonscan.com",
+            "testmode": "",
+            "tokenlist":"https://raw.githubusercontent.com/sameepsi/quickswap-default-token-list/master/src/tokens/mainnet.json",
+            "abiurl":"https://api.bscscan.com/api",
+            "abiurltoken":""
+        },
+        "4":
+        {
+            "name": "curve",
+            "address": "",
+            "privatekey": "",
+            "version": "v3",
+            "networkprovider": "",
+            "router": "",
+            "testmode": "",
+            "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
+            "abiurl":"https://api.bscscan.com/api",
+            "abiurltoken":""
+        }
+    }
+}
