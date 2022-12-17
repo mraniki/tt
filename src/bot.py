@@ -70,6 +70,7 @@ commandlist= """
 <code>/cex kraken</code>
 <code>/cex binancecoinm</code>
 <code>/dex pancake</code>
+<code>/dex quickswap</code>
 <code>/trading</code>
 <code>/testmode</code>"""
 menu=f'{TTVersion} \n {commandlist}\n'

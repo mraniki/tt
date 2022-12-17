@@ -16,8 +16,8 @@
         },
         "2":
         {
-            "token": "",
-            "channel": "",
+            "token": "5665220472:AAFVgQF4HdG33RuUITY77305LK_m4ox-2r0",
+            "channel": "-1001519942422",
             "platform": "DEV"
         },
         "3":
@@ -217,7 +217,7 @@
             "testmode": "",
             "tokenlist":"https://raw.githubusercontent.com/sameepsi/quickswap-default-token-list/master/src/tokens/mainnet.json",
             "abiurl":"https://api.polygonscan.com/",
-            "abiurltoken":""
+            "abiurltoken":"FYBIZHS3N9TSBV39KIG1962EY2ZNMYYE8V"
         },
         "4":
         {
