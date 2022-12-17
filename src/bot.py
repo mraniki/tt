@@ -96,12 +96,12 @@ def SearchCEX(string1,string2):
             if (len(CEXSearch)==1):
                 return CEXSearch
             else:
-                logger.error(msg=f"NO CEX {CEXSearch}")
+                #logger.warning(msg=f"NO CEX {CEXSearch}")
                 return 0
         except Exception as e:
             return 0
     else:
-        logger.error(msg=f"NO CEX {CEXSearch}")
+        #logger.warning(msg=f"NO CEX {CEXSearch}")
         return 0
 
 def SearchDEX(string1,string2):
@@ -128,7 +128,7 @@ def SearchEx(string1,string2):
         logger.error(msg=f"Error with DB search {string1} {string2}")
         return
 
-def LoadExchange(exchangeid, mode):
+async def LoadExchange(exchangeid, mode):
     global ex
     #logger.info(msg=f"exchangeid: {exchangeid}")
     SearchCEXResults= SearchCEX(exchangeid,mode)
@@ -155,8 +155,7 @@ def LoadExchange(exchangeid, mode):
                     #logger.info(msg=f"markets: {markets}")
                     return ex
             except Exception as e:
-                logger.error(msg=f"{e}")
-                error_handler()
+                await HandleExceptions(e)
     else:
         SearchDEXResults= SearchDEX(exchangeid,mode)
         #logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
@@ -206,7 +205,7 @@ def DEXFetchAbi(address):
     #logger.info(msg=f"{abi}")
     return abi
 
-def DEXBuy(tokenAddress, amountToBuy):
+async def DEXBuy(tokenAddress, amountToBuy):
     global address
     global ex
     global privatekey
@@ -240,8 +239,7 @@ def DEXBuy(tokenAddress, amountToBuy):
                 tx_token = web3.eth.send_raw_transaction(
                     signed_txn.rawTransaction)  # BUY THE TK
             except Exception as e:
-                logger.error(msg=f" {e}")
-                return e
+                await HandleExceptions(e)
             txHash = str(web3.to_hex(tx_token))
         # TOKEN BOUGHT
             checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + \
@@ -256,8 +254,7 @@ def DEXBuy(tokenAddress, amountToBuy):
             else:
                 logger.error(msg=f"transaction failed")
     except Exception as e:
-        logger.error(msg=f"Error: {e}")
-        return e
+        await HandleExceptions(e)
 
 ##============= variables ================
 if os.path.exists(db_path):
@@ -327,15 +324,16 @@ else:
 ##======== APPRISE Setup ===============
 apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
-##============ EX Setup ===============
-logger.info(msg=f"Setting up exchange {CEX_name}")
-LoadExchange(CEX_name,CEX_test_mode)
+
 ##=============== help  ================
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg= f"Environment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}"
     await send(update,msg)
 ##========== startup message ===========
 async def post_init(application: Application):
+    ##============ EX Setup ===============
+    logger.info(msg=f"Setting up exchange {CEX_name}")
+    await LoadExchange(CEX_name,CEX_test_mode)
     logger.info(msg=f"bot is online")
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
 
@@ -352,23 +350,15 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             if(trimmedbal==""):
                 trimmedbal="No Balance"
             msg=f"🏦 Balance \n{trimmedbal}"
-        except ccxt.NetworkError as e:
-            logger.error(msg=f"{e}")
-            msg=f"⚠️{e}"
-        except ccxt.ExchangeError as e:
-            logger.error(msg=f"{e}")
-            msg=f"⚠️{e}"
         except Exception as e:
-            logger.error(msg=f"CCXT error: {e}")
-            msg=f"⚠️{e}"
+            await HandleExceptions(e)
     else:
         try:
             bal = ex.eth.get_balance(address)
             bal = ex.from_wei(bal,'ether')
             msg = f"🏦 Balance: {bal}"
         except Exception as e:
-            logger.error(msg=f"{e}")
-            msg=f"⚠️ {e}"
+            await HandleExceptions(e)
     await send(update,msg)
 #===== order parsing and placing ======
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -418,15 +408,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                         price=res['price']
                         response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
                     else: response=f"⚠️ not enough money"
-                except ccxt.NetworkError as e:
-                    logger.error(msg=f"Network error {e}")
-                    response=f"⚠️ Network error {e}"
-                except ccxt.ExchangeError as e:
-                    logger.error(msg=f"Exchange error: {e}")
-                    response=f"⚠️ Exchange error: {e}"
                 except Exception as e:
-                    logger.error(msg=f"CCXT error: {e}")
-                    response=f"⚠️ error: {e}"
+                   await HandleExceptions(e)
             else:
                 order_m = Convert(msgtxt_upper)
                 m_dir= order_m[0]
@@ -438,7 +421,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 res=DEXBuy(m_symbol,m_q)
                 response=f"{res}"
         await send(update,response)
-    else: error_handler()
+
 ##======== trading switch  =============
 async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global trading
@@ -461,7 +444,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
         CEX_name = SearchCEXResults[0]['name']
         CEX_test_mode = SearchCEXResults[0]['testmode']
         #logger.info(msg=f"CEX for {CEX_name} testmode: {CEX_test_mode}")
-        res = LoadExchange(CEX_name,CEX_test_mode)
+        res = await LoadExchange(CEX_name,CEX_test_mode)
         response = f"CEX is {res}"
         #logger.info(msg=f"ex is {ex}")
     elif SearchDEXResults:
@@ -510,32 +493,45 @@ async def send (self, messaging):
 #=========== notification command ========
 async def notify(messaging):
     try:
-        apobj.notify(
-            body=messaging
-        )
+        apobj.notify(body=messaging)
     except Exception as e:
-        logger.error(msg=f"apprise error: {e}")
-#=========  bot error handling ========
-async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
+        await HandleExceptions(e)
+
+#=========  overall error handling ========
+async def HandleExceptions(e) -> None:
     try:
-        logger.error(msg=f"{e}")
-    except telegram.error as e:
-        logger.error(msg=f"telegram error {e}")
-        e=f"telegram error {e}"
-    except ccxt.NetworkError as e:
-        logger.error(msg=f"network error {e}")
-        e=f"network error {e}"
-    except ccxt.ExchangeError as e:
-        logger.error(msg=f"exchange error {e}")
-        e=f"exchange error {e}"
-    except Exception as e:
+        raise e
+    except ccxt.base.errors:
+        logger.error(msg=f"CCXT error {e}")
+        e=f" CCXT error {e}"
+    except ccxt.NetworkError:
+        logger.error(msg=f"Network error {e}")
+        e=f" Network error {e}"
+    except ccxt.ExchangeError:
+        logger.error(msg=f"Exchange error: {e}")
+        e=f"Exchange error: {e}"
+    except telegram.error:
+        logger.error(msg=f"telegram error: {e}")
+        e=f"telegram error: {e}"
+    except Exception:
+        logger.error(msg=f"error: {e}")
         logger.error(msg="Exception:", exc_info=context.error)
         tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
         tb_string = "".join(tb_list)
         tb_trim = tb_string[:1000]
-        e=f"⚠️ {tb_trim}"
+        e=f"{tb_trim}"
+    message=f"⚠️ {e}"
+    await notify(message)
+#=========  bot error handling ========
+async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.error(msg="Exception:", exc_info=context.error)
+    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
+    tb_string = "".join(tb_list)
+    tb_trim = tb_string[:1000]
+    e=f"{tb_trim}"
     message=f"⚠️ {e}"
     await send(update,message)
+
 #================== BOT =================
 def main():
     try:
