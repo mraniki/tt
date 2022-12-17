@@ -80,8 +80,8 @@ def Convert(string):
 
 def SearchEx(string1,string2):
     query = ((q.name.search(string1))&(q.testmode == string2))
-    CEXResult = cexDB.search(query=query)
-    DEXSearch = dexDB.search(query=query)
+    CEXResult = cexDB.search(query)
+    DEXSearch = dexDB.search(query)
     if (len(CEXSearch)==1):
         return CEXResult
     elif (len(DEXSearch)==1):
