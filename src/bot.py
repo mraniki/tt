@@ -84,6 +84,7 @@ def LoadExchange(exchangeid, mode):
     if Ex_CEX:
         if mode:
             newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode=="True"))
+            logger.info(msg=f"newex: {newex}")
             exchange = getattr(ccxt, exchangeid)
             exchanges[exchangeid] = exchange()
             try:
@@ -102,6 +103,7 @@ def LoadExchange(exchangeid, mode):
                 logger.error(msg=f"{e}")
         else:
             newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode!="True"))
+            logger.info(msg=f"newex: {newex}")
             exchange = getattr(ccxt, exchangeid)
             exchanges[exchangeid] = exchange()
             try:
