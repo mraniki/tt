@@ -21,6 +21,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 import apprise
 
 #db
+import tinydb
 from tinydb import TinyDB, Query
 import re
 
@@ -39,7 +40,7 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 logger.info(msg=f"{TTVersion}")
 logger.info(msg=f"python {sys.version}")
-logger.info(msg=f"TinyDB {TinyDB.__version__}")
+logger.info(msg=f"TinyDB {tinydb.__version__}")
 logger.info(msg=f"CCXT {ccxt.__version__}")
 logger.info(msg=f"Web3 {web3.__version__}")
 ##=============== CONFIG ===============
