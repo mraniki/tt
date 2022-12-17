@@ -48,8 +48,8 @@
         "2":
         {
             "name": "binance",
-            "api": "",
-            "secret": "",
+            "api": "zDEh8hnqdwBtmjZMoViqedoFCmUJqD4d4KwfVFMXYIdpU3V8pN2lMQjxnXIfj8yo",
+            "secret": "PhwpPArVy7I8xexXtP4RPSGygDcThbEQKeYYTMBxtuVqEN4loyukVY1uuVzXgS8n",
             "password": "",
             "testmode": "True",
             "defaultType": "FUTURE",
@@ -58,10 +58,10 @@
         "3":
         {
             "name": "binance",
-            "api": "",
-            "secret": "",
+            "api": "1O0y3bMuXSJ5H9r31vsSKsszfgRUACCHVEWSANoRSs7A7qB6reZ0OJH8ZNvl8W34",
+            "secret": "ZS6kwhyhfRAjvLrK12gzwrmX95pjqdMmPqJBSLrNcRAZUDpQwZ6Z4MCOQWbFIT95",
             "password": "",
-            "testmode": "",
+            "testmode": "False",
             "defaultType": "SPOT",
             "ordertype": "MARKET"
         },
@@ -91,7 +91,7 @@
             "api": "",
             "secret": "",
             "password": "",
-            "testmode": "",
+            "testmode": "False",
             "defaultType": "SPOT",
             "ordertype": "MARKET"
         },
@@ -101,7 +101,7 @@
             "api": "",
             "secret": "",
             "password": "",
-            "testmode": "",
+            "testmode": "False",
             "defaultType": "SPOT",
             "ordertype": "MARKET"
         },
@@ -111,7 +111,7 @@
             "api": "",
             "secret": "",
             "password": "",
-            "testmode": "",
+            "testmode": "False",
             "defaultType": "SPOT",
             "ordertype": "MARKET"
         },
@@ -121,7 +121,7 @@
             "api": "",
             "secret": "",
             "password": "",
-            "testmode": "",
+            "testmode": "False",
             "defaultType": "SPOT",
             "ordertype": "MARKET"
         },
@@ -151,7 +151,7 @@
             "api": "",
             "secret": "",
             "password": "",
-            "testmode": "",
+            "testmode": "False",
             "defaultType": "SPOT",
             "ordertype": "MARKET"
         },
@@ -171,7 +171,7 @@
             "api": "",
             "secret": "",
             "password": "",
-            "testmode": "",
+            "testmode": "False",
             "defaultType": "SPOT",
             "ordertype": "MARKET"
         }
@@ -193,42 +193,68 @@
         },
         "2":
         {
-            "name": "uniswap",
-            "address": "",
-            "privatekey": "",
-            "version": "v3",
-            "networkprovider": "",
-            "router": "",
-            "testmode": "",
+            "name": "pancake",
+            "address": "0x8dCF2F97C931ECc01afC7d41c8fF1a15037f06Bb",
+            "privatekey": "2866251e015660056dbefeed6cece7268c778ed7417e2372b015503ccba65f72",
+            "version": "v2",
+            "networkprovider": "https://data-seed-prebsc-1-s1.binance.org:8545/",
+            "router": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+            "testmode": "True",
             "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
-            "abiurl":"https://api.bscscan.com/api",
-            "abiurltoken":""
+            "abiurl":"https://api-testnet.bscscan.com/api",
+            "abiurltoken":"5XE9QACZCT3KXG2WWIAH7X1C5RKF1872TM"
         },
         "3":
         {
-            "name": "quickswap",
-            "address": "",
-            "privatekey": "",
+            "name": "uniswap",
+            "address": "0x8dCF2F97C931ECc01afC7d41c8fF1a15037f06Bb",
+            "privatekey": "2866251e015660056dbefeed6cece7268c778ed7417e2372b015503ccba65f72",
             "version": "v2",
             "networkprovider": "",
-            "router": "https://polygonscan.com",
-            "testmode": "",
-            "tokenlist":"https://raw.githubusercontent.com/sameepsi/quickswap-default-token-list/master/src/tokens/mainnet.json",
-            "abiurl":"https://api.polygonscan.com/",
-            "abiurltoken":"FYBIZHS3N9TSBV39KIG1962EY2ZNMYYE8V"
+            "router": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+            "testmode": "False",
+            "tokenlist":"https://gateway.ipfs.io/ipns/tokens.uniswap.org",
+            "abiurl":"https://api.etherscan.io/api",
+            "abiurltoken":"IXCATPQJKSCZAFRRZVKS42K9AR5X94IE4M"
         },
         "4":
         {
-            "name": "curve",
-            "address": "",
-            "privatekey": "",
+            "name": "uniswap",
+            "address": "0x8dCF2F97C931ECc01afC7d41c8fF1a15037f06Bb",
+            "privatekey": "2866251e015660056dbefeed6cece7268c778ed7417e2372b015503ccba65f72",
             "version": "v3",
             "networkprovider": "",
-            "router": "",
-            "testmode": "",
-            "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
-            "abiurl":"https://api.bscscan.com/api",
-            "abiurltoken":""
+            "router": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
+            "testmode": "True",
+            "tokenlist":"https://gateway.ipfs.io/ipns/tokens.uniswap.org",
+            "abiurl":"https://api-goerli.etherscan.io/api",
+            "abiurltoken":"IXCATPQJKSCZAFRRZVKS42K9AR5X94IE4M"
+        },
+        "5":
+        {
+            "name": "quickswap",
+            "address": "0x8dCF2F97C931ECc01afC7d41c8fF1a15037f06Bb",
+            "privatekey": "2866251e015660056dbefeed6cece7268c778ed7417e2372b015503ccba65f72",
+            "version": "v2",
+            "networkprovider": "https://polygon-mainnet.g.alchemy.com/v2/hwvQA9bAWzTPEfMCmOZd8Q7YMu7sNZ-I",
+            "router": "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff",
+            "testmode": "False",
+            "tokenlist":"https://raw.githubusercontent.com/sameepsi/quickswap-default-token-list/master/src/tokens/mainnet.json",
+            "abiurl":"https://api.polygonscan.com/api",
+            "abiurltoken":"hwvQA9bAWzTPEfMCmOZd8Q7YMu7sNZ-I"
+        },
+        "6":
+        {
+            "name": "quickswap",
+            "address": "0x8dCF2F97C931ECc01afC7d41c8fF1a15037f06Bb",
+            "privatekey": "2866251e015660056dbefeed6cece7268c778ed7417e2372b015503ccba65f72",
+            "version": "v2",
+            "networkprovider": "https://polygon-mainnet.g.alchemy.com/v2/hwvQA9bAWzTPEfMCmOZd8Q7YMu7sNZ-I",
+            "router": "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff",
+            "testmode": "True",
+            "tokenlist":"https://raw.githubusercontent.com/sameepsi/quickswap-default-token-list/master/src/tokens/mainnet.json",
+            "abiurl":"https://api-testnet.polygonscan.com/api",
+            "abiurltoken":"hwvQA9bAWzTPEfMCmOZd8Q7YMu7sNZ-I"
         }
     }
 }

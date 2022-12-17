@@ -41,6 +41,7 @@ logger = logging.getLogger(__name__)
 logger.info(msg=f"{TTVersion}")
 logger.info(msg=f"python {sys.version}")
 logger.info(msg=f"TinyDB {tinydb.__version__}")
+logger.info(msg=f"TPB {telegram.__version__}")
 logger.info(msg=f"CCXT {ccxt.__version__}")
 logger.info(msg=f"Web3 {web3.__version__}")
 ##=============== CONFIG ===============
@@ -62,7 +63,7 @@ global messaging
 global address
 exchanges = {}
 trading=True
-testmode=False
+testmode="False"
 #===================
 commandlist= """
 <code>/bal</code>
@@ -79,24 +80,39 @@ def Convert(string):
     li = list(string.split(" "))
     return li
 
-
 def SearchCEX(string1,string2):
-    query = ((q.name.search(string1, flags=re.IGNORECASE))&(q.testmode == string2))
-    CEXSearch = cexDB.search(query)
-    if (len(CEXSearch)==1):
-        return CEXSearch
+    if type(string1) is str:
+        query1 = ((q.name==string1)&(q['testmode'] == string2))
+        CEXSearch = cexDB.search(query1)
+        logger.info(msg=f"CEXSearch1: {CEXSearch}")
+        if (len(CEXSearch)==1):
+            return CEXSearch
+    elif type(string1) is not str:
+        try:
+            query1 = ((q.name==string1.name.lower())&(q['testmode'] == string2))
+            CEXSearch = cexDB.search(query1)
+            logger.info(msg=f"CEXSearch2: {CEXSearch}")
+            if (len(CEXSearch)==1):
+                return CEXSearch
+            else:
+                logger.error(msg=f"NO CEX {CEXSearch}")
+                return 0
+        except Exception as e:
+            return 0
     else:
-        logger.error(msg=f"CEX search error {string1} {string2}")
-        return
+        logger.error(msg=f"NO CEX {CEXSearch}")
+        return 0
 
 def SearchDEX(string1,string2):
-    query = ((q.name.search(string1, flags=re.IGNORECASE))&(q.testmode == string2))
+    print(type(string1))
+    query = ((q.name==string1)&(q['testmode'] == string2))
     DEXSearch = dexDB.search(query)
+    logger.info(msg=f"DEXSearch: {DEXSearch}")
     if (len(DEXSearch)==1):
         return DEXSearch
     else:
-        logger.error(msg=f"DEX search error {string1} {string2}")
-        return
+        logger.error(msg=f"DEX search error {DEXSearch}")
+        return 0
 
 def SearchEx(string1,string2):
     CEXCheck=SearchCEX(string1,string2)
@@ -127,7 +143,9 @@ def LoadExchange(exchangeid, mode):
                 if (mode==True):
                     ex.set_sandbox_mode('enabled')
                     return ex
-                return ex
+                else:
+                    logger.info(msg=f"ccxt ex: {ex}")
+                    return ex
             except ccxt.NetworkError as e:
                 logger.error(msg=f"network error {e}")
             except ccxt.ExchangeError as e:
@@ -150,15 +168,15 @@ def DEXLoadExchange(exchangeid,mode):
     SearchDEXResults= SearchDEX(exchangeid,mode)
     logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
     if SearchDEXResults:
-        name= newex[0]['name']
-        address= newex[0]['address']
-        privatekey= newex[0]['privatekey']
-        networkprovider= newex[0]['networkprovider']
-        router= newex[0]['router']
-        mode=newex[0]['testmode']
-        tokenlist=newex[0]['tokenlist']
-        abiurl=newex[0]['abiurl']
-        abiurltoken=newex[0]['abiurltoken']
+        name= SearchDEXResults[0]['name']
+        address= SearchDEXResults[0]['address']
+        privatekey= SearchDEXResults[0]['privatekey']
+        networkprovider= SearchDEXResults[0]['networkprovider']
+        router= SearchDEXResults[0]['router']
+        mode=SearchDEXResults[0]['testmode']
+        tokenlist=SearchDEXResults[0]['tokenlist']
+        abiurl=SearchDEXResults[0]['abiurl']
+        abiurltoken=SearchDEXResults[0]['abiurltoken']
         ex = Web3(Web3.HTTPProvider(networkprovider))
         if ex.net.listening:
             logger.info(msg=f"{ex.net.listening}")
@@ -242,8 +260,8 @@ if os.path.exists(db_path):
     TG_CHANNEL_ID = tg[0]['channel']
     cexdb=cexDB.all()
     dexdb=dexDB.all()
-    logger.info(msg=f"{cexdb}")
-    logger.info(msg=f"{dexdb}")
+    #logger.info(msg=f"{cexdb}")
+    #logger.info(msg=f"{dexdb}")
     CEX_name = cexdb[0]['name']
     CEX_api = cexdb[0]['api']
     CEX_secret = cexdb[0]['secret']
@@ -315,10 +333,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     await send(update,msg)
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    global ex
-    logger.info(msg=f"ex: {ex}")
-    SearchCEXResults= SearchEX(ex,testmode)
-    logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
+    SearchCEXResults= SearchCEX(ex,testmode)
     if SearchCEXResults:
         try:
             bal = ex.fetch_free_balance()
@@ -359,7 +374,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             message="TRADING DISABLED"
             await send(update,message)
         else:
-            SearchCEXResults= SearchCEX(ex,testmode)
+            SearchCEXResults= SearchCEX(ex.name.lower(),testmode)
             logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
             if SearchCEXResults:
                 try:
@@ -426,30 +441,30 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(msg=f"SearchCEXResults: {SearchCEXResults}")
     logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
     if SearchCEXResults:
-        logger.info(msg=f"CEX for {newex} testmode: {testmode}")
         CEX_name = SearchCEXResults[0]['name']
         CEX_test_mode = SearchCEXResults[0]['testmode']
+        logger.info(msg=f"CEX for {CEX_name} testmode: {CEX_test_mode}")
         res = LoadExchange(CEX_name,CEX_test_mode)
         response = f"CEX is {res}"
         logger.info(msg=f"ex is {ex}")
     elif SearchDEXResults:
-        SearchDEXResults= SearchDEX(newex,testmode)
-        logger.info(msg=f"SearchDEXResults: {SearchCEXResults}")
-        name= SearchDEXResults[0]['name']
-        mode= SearchDEXResults[0]['testmode']
-        res = DEXLoadExchange(name,mode)
-        response = f"DEX is {name}"
+        DEX_name= SearchDEXResults[0]['name']
+        DEX_test_mode= SearchDEXResults[0]['testmode']
+        logger.info(msg=f"DEX for {DEX_name} testmode: {DEX_test_mode}")
+        res = DEXLoadExchange(DEX_name,DEX_test_mode)
+        logger.info(msg=f"DEX res {res}")
+        response = f"DEX is {DEX_name}"
     else:  
-        response = f"Ex error"
+        response = f"Error. Exchange is {ex}"
     await send(update,response)
 
 ##========== Test mode switch ===========
 async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global testmode
-    if (testmode==False):
-        testmode=True
+    if (testmode=="False"):
+        testmode="True"
     else:
-        testmode=False
+        testmode="False"
     message=f"Sandbox is {testmode}"
     await send(update,message)
 ##============ DB COMMAND ===============
