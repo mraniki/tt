@@ -143,7 +143,7 @@ def DEXLoadExchange(exchangeid,mode):
                 privatekey= newex[0]['privatekey']
                 networkprovider= newex[0]['networkprovider']
                 router= newex[0]['router']
-                testmode=newex[0]['testmode']
+                mode=newex[0]['testmode']
                 tokenlist=newex[0]['tokenlist']
                 abiurl=newex[0]['abiurl']
                 abiurltoken=newex[0]['abiurltoken']
