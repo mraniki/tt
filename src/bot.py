@@ -295,8 +295,8 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     global ex
     logger.info(msg=f"ex: {ex}")
     Ex_CEX=cexDB.search(q.name==f'{ex}')
-    logger.info(msg=f"Ex_CEX: {Ex_CEX}")
-    if (Ex_CEX!= ""):
+    logger.info(msg=f"Ex_CEXbal: {Ex_CEX}")
+    if (Ex_CEX):
         try:
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
