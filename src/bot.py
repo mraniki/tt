@@ -298,6 +298,8 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     logger.info(msg=f"ex: {ex}")
     Ex_CEX=cexDB.search(q.name==f'{ex}')
     logger.info(msg=f"Ex_CEXbal: {Ex_CEX}")
+    Ex_CEX2=cexDB.search(q['name'] == f'{ex}')
+    logger.info(msg=f"Ex_CEX2: {Ex_CEX2}")
     if (Ex_CEX):
         try:
             bal = ex.fetch_free_balance()
