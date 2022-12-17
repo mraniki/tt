@@ -295,7 +295,6 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     global ex
     logger.info(msg=f"ex: {ex}")
     Ex_CEX=cexDB.search(q.name==f'{ex}')
-    Ex_CEX=cexDB.search(q.name==f'{exchangeid}')
     logger.info(msg=f"Ex_CEX: {Ex_CEX}")
     if (Ex_CEX!= ""):
         try:
