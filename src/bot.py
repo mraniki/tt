@@ -93,7 +93,7 @@ def SearchEx(string1,string2):
 
 def SearchCEX(string1,string2):
     query = ((q.name.search(string1))&(q.testmode == string2))
-    CEXSearch = cexDB.search(query=query)
+    CEXSearch = cexDB.search(query)
     if (len(CEXSearch)==1):
         return CEXSearch
     else:
@@ -102,7 +102,7 @@ def SearchCEX(string1,string2):
 
 def SearchDEX(string1,string2):
     query = ((q.name.search(string1))&(q.testmode == string2))
-    DEXSearch = dexDB.search(query=query)
+    DEXSearch = dexDB.search(query)
     if (len(DEXSearch)==1):
         return DEXSearch
     else:
@@ -147,30 +147,22 @@ def DEXLoadExchange(exchangeid,mode):
     global tokenlist
     global abiurl
     global abiurltoken
-    Ex_DEX=dexDB.search(q.name==f'{exchangeid}')
-    if Ex_DEX:
-        if mode:
-            newex=dexDB.search((q.name==f'{exchangeid}')&(q.testmode=="True"))
-        else:
-            newex=dexDB.search((q.name==f'{exchangeid}')&(q.testmode!="True"))
-        if len(newex):
-            try:
-                name= newex[0]['name']
-                address= newex[0]['address']
-                privatekey= newex[0]['privatekey']
-                networkprovider= newex[0]['networkprovider']
-                router= newex[0]['router']
-                mode=newex[0]['testmode']
-                tokenlist=newex[0]['tokenlist']
-                abiurl=newex[0]['abiurl']
-                abiurltoken=newex[0]['abiurltoken']
-                ex = Web3(Web3.HTTPProvider(networkprovider))
-                if ex.net.listening:
-                    logger.info(msg=f"{ex.net.listening}")
-                    return name
-            except Exception as e:
-                logger.error(msg=f"web3: {e}")
-                return {e}
+    SearchDEXResults= SearchDEX(exchangeid,mode)
+    logger.info(msg=f"SearchDEXResults: {SearchDEXResults}")
+    if SearchDEXResults:
+        name= newex[0]['name']
+        address= newex[0]['address']
+        privatekey= newex[0]['privatekey']
+        networkprovider= newex[0]['networkprovider']
+        router= newex[0]['router']
+        mode=newex[0]['testmode']
+        tokenlist=newex[0]['tokenlist']
+        abiurl=newex[0]['abiurl']
+        abiurltoken=newex[0]['abiurltoken']
+        ex = Web3(Web3.HTTPProvider(networkprovider))
+        if ex.net.listening:
+            logger.info(msg=f"{ex.net.listening}")
+            return name
 
 def DEXContractLookup(symbol):
     url = requests.get(tokenlist)
