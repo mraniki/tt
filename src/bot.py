@@ -296,8 +296,9 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     global ex
     logger.info(msg=f"ex: {ex}")
     Ex_CEX=cexDB.search(q.name==f'{ex}')
+    Ex_CEX=cexDB.search(q.name==f'{exchangeid}')
     logger.info(msg=f"Ex_CEX: {Ex_CEX}")
-    if (Ex_CEX):
+    if (Ex_CEX!= ""):
         try:
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
@@ -338,7 +339,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             message="TRADING DISABLED"
             await send(update,message)
         else:
-            Ex_CEX=cexDB.search((q.name=={ex}))
+            Ex_CEX=cexDB.search(q.name=={ex})
             if (Ex_CEX):
                 try:
                     order_m = Convert(msgtxt_upper)
