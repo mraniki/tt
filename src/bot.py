@@ -306,7 +306,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global ex
     logger.info(msg=f"ex: {ex}")
-    Ex_CEX=cexDB.search(q.name==f'{ex}')
+    Ex_CEX=cexDB.search(q.name==ex)
     logger.info(msg=f"Ex_CEXbal: {Ex_CEX}")
     Ex_CEX2=cexDB.search(q['name'] == f'{ex}')
     logger.info(msg=f"Ex_CEX2: {Ex_CEX2}")
