@@ -71,7 +71,7 @@ commandlist= """
 <code>/trading</code>
 <code>/testmode</code>"""
 menu=f'{TTVersion} \n {commandlist}\n'
-#=============== functions ===============
+#=============== Functions ===============
 def Convert(string):
     li = list(string.split(" "))
     return li
@@ -79,9 +79,9 @@ def Convert(string):
 def LoadExchange(exchangeid, mode):
     global ex
     logger.info(msg=f"ex: {ex}")
-    logger.info(msg=f"ex: {exchangeid}")
+    logger.info(msg=f"exchangeid: {exchangeid}")
     Ex_CEX=cexDB.search(q.name==f'{exchangeid}')
-    #logger.info(msg=f"ExceX: {Ex_CEX}")
+    logger.info(msg=f"ExceX: {Ex_CEX}")
     if Ex_CEX:
         if mode:
             newex=cexDB.search((q.name==f'{exchangeid}')&(q.testmode=="True"))
@@ -139,7 +139,7 @@ def DEXLoadExchange(exchangeid,mode):
                     logger.info(msg=f"{ex.net.listening}")
                     return name
             except Exception as e:
-                logger.error(msg=f"web3 error: {e}")
+                logger.error(msg=f"web3: {e}")
                 return {e}
 
 def DEXContractLookup(symbol):
