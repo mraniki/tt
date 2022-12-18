@@ -41,6 +41,8 @@ Environment file is loaded in db at the startup.
 [DB sample](config/db.json.sample)
 
  ## Features
+ 
+ v1
  - Enable bot in pythontelegram v20 and support exchange formatted error via telegram
  - Push your signal manually or from system like trading view webhook to submit order to your ccxt exchange and receive confirmation
  - Disable or Enable trading process via /trading command
