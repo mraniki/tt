@@ -49,36 +49,33 @@ Environment file is loaded in db at the startup.
  - Support multiple enviroment, testnet and production exchange via environment variable file
  - Support % of USDT balance for order
  - Support bot in private channel (or private chat) and multiple channel per enviroment
- - Handle Multi CEFI config (verified with Binance, Binance Testnet and ~~FTX~~ Kraken) and DEFI (test with Pancake)
+ - Handle Multi CEFI config (verified with Binance, Binance Testnet and ~~FTX~~ Kraken) and DEFI (test with Pancakeswap and Quickswap)
  - Switch between CEFI using `/cex binance` or `/cex kraken` or DEFI `/dex pancake`
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
  - Setup send message overall function for further improvement
- - Integrate initial DEFI DEX (tested with BSC & pancakeswap) for balance query and order placing
+ - Integrate DEFI DEX (tested with BSC & pancakeswap) for balance query and order placing for mainnet and testnet
  - Integrate with apprise library to support more notification delivery
- - Handle libraries exceptions in one consolidated function
+ - Handle libraries exceptions in one consolidated function to ease notifications
  
-
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 Roadmap
-v1
 
-- clean up and refactorize the code structure for clean v1
-- more testing of the different dex/cex
 v1.1
-- support futures and margin for CEX (to be tested)
-- view opened future position via /pos command
+- Support DEFI DEX uniswap and quickswap (to be tested)
+- Support futures and margin for CEX (to be tested)
 
 v2
-- view last closed orders via /order command 
 - view daily pnl and free margin in /bal response
+- view weekly pnl with /w command
+- view opened future position via /pos command
 - Support bot in webhook instead of getupdate
-- Integrate DEFI DEX (uniswap/quickswap)
 
 v3
 - Integrate with messaging platform agnostic like Matrix (https://github.com/poljar/matrix-ni)
 - Merge with Telegram MQL4 version which integrate with MT4 exchanges [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/)
 - create / modify db via bot command
+
  ## ⚠️ Disclaimer
  This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK**
 
