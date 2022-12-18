@@ -104,6 +104,7 @@ def SearchDEX(string1,string2):
     try:
         query = ((q.name==string1)&(q['testmode'] == string2))
         DEXSearch = dexDB.search(query)
+        logger.info(msg=f"ex: {DEXSearch}")
         if (len(DEXSearch)==1):
             return DEXSearch
         else:
@@ -133,6 +134,7 @@ async def LoadExchange(exchangeid, mode):
     global router
     global abiurl
     global abiurltoken
+    global basesymbol
     CEXCheck=SearchCEX(exchangeid,mode)
     DEXCheck=SearchDEX(exchangeid,mode)
     if (CEXCheck!= None):
@@ -169,9 +171,11 @@ async def LoadExchange(exchangeid, mode):
         tokenlist=newex[0]['tokenlist']
         abiurl=newex[0]['abiurl']
         abiurltoken=newex[0]['abiurltoken']
+        basesymbol=newex[0]['basesymbol']
         ex = Web3(Web3.HTTPProvider(networkprovider))
         if ex.net.listening:
-            return name #logger.info(msg=f"{ex.net.listening}")
+            logger.info(msg=f"Connected to Web3 {ex}")
+            return name 
     else:
         return 0
 
@@ -183,6 +187,7 @@ async def DEXContractLookup(symbol):
         #logger.info(msg=f"{token_list}")
         target_token = [token for token in token_list if token['symbol'] == symbol]
         return target_token[0]['address'] if len(target_token)  >  0 else None
+        logger.info(msg=f"{target_token[0]['address']}")
     except Exception as e:
         await HandleExceptions(e)
 
@@ -206,20 +211,20 @@ async def DEXBuy(tokenAddress, amountToBuy):
     transactionRevertTime = 10000
     gasAmount = 100
     gasPrice = 5
-    tokenToBuy = tokenAddress
-    SymboltoSell = 'WBNB'
+    tokenToBuy = web3.to_checksum_address(tokenAddress)
+    tokenToSell = basesymbol
     amountToBuy = amountToBuy
     txntime = (int(time.time()) + transactionRevertTime)
     try:
         if(tokenToBuy != None):
-            tokenToSell=await DEXContractLookup(SymboltoSell)
+            tokenToSell=web3.to_checksum_address(await DEXContractLookup(tokenToSell))
             dexabi= await DEXFetchAbi(router)
             contract = web3.eth.contract(address=router, abi=dexabi)
             nonce = web3.eth.get_transaction_count(address)
             path=[tokenToSell, tokenToBuy]
         try:
             DEXtxn = contract.functions.swapExactETHForTokens(0,path,address,txntime).build_transaction({
-            'from': address, # based Token(BNB)
+            'from': address, # based Token
             'value': web3.to_wei(float(amountToBuy), 'ether'),
             'gas': gasAmount,
             'gasPrice': web3.to_wei(gasPrice, 'gwei'),
@@ -255,10 +260,10 @@ if os.path.exists(db_path):
     cexdb=cexDB.all()
     dexdb=dexDB.all()
     CEX_name = cexdb[0]['name']
-    CEX_api = cexdb[0]['api']
-    CEX_secret = cexdb[0]['secret']
-    CEX_password = cexdb[0]['password']
-    CEX_test_mode = cexdb[0]['testmode']
+    # CEX_api = cexdb[0]['api']
+    # CEX_secret = cexdb[0]['secret']
+    # CEX_password = cexdb[0]['password']
+    # CEX_test_mode = cexdb[0]['testmode']
     CEX_ordertype = cexdb[0]['ordertype']
     CEX_defaulttype = cexdb[0]['defaultType']
 else:
@@ -294,15 +299,10 @@ else:
         "testmode": CEX_test_mode,
         "ordertype": CEX_ordertype,
         "defaultType": CEX_defaulttype})
-    tgtodb=telegramDB.search(q.token==TG_TK)
-    if len(tgtodb):
+    if len(telegramDB.search(q.token==TG_TK)):
         logger.info(msg=f"token is already setup")
     else:
-        telegramDB.insert({
-            "token": TG_TK,
-            "channel": TG_CHANNEL_ID,
-            "platform": "PRD"
-            })
+        telegramDB.insert({"token": TG_TK,"channel": TG_CHANNEL_ID,"platform": "PRD"})
     if (TG_TK==""):
         logger.error(msg=f"no TG TK")
         sys.exit()
@@ -417,13 +417,13 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if (typeex=="/cex"):
         SearchCEXResults= SearchCEX(newex,testmode)
         CEX_name = SearchCEXResults[0]['name']
-        CEX_test_mode = SearchCEXResults[0]['testmode']
+        CEX_test_mode = testmode
         res = await LoadExchange(CEX_name,CEX_test_mode)
         response = f"CEX is {ex}"
     elif (typeex=="/dex"):
         SearchDEXResults= SearchDEX(newex,testmode)
         DEX_name= SearchDEXResults[0]['name']
-        DEX_test_mode= SearchDEXResults[0]['testmode']
+        DEX_test_mode= testmode
         logger.info(msg=f"DEX_test_mode: {DEX_test_mode}")
         logger.info(msg=f"DEX_name: {DEX_name}")
         res = await LoadExchange(DEX_name,DEX_test_mode)
@@ -470,12 +470,15 @@ async def HandleExceptions(e) -> None:
     try:
         e==""
         logger.error(msg=f"{e}")
+    except KeyError:
+        logger.error(msg=f"DB content error {e}")
+        e=f"DB content error  {e}"  
     except ccxt.base.errors:
         logger.error(msg=f"CCXT error {e}")
-        e=f" CCXT error {e}"
+        e=f"CCXT error {e}"
     except ccxt.NetworkError:
         logger.error(msg=f"Network error {e}")
-        e=f" Network error {e}"
+        e=f"Network error {e}"
     except ccxt.ExchangeError:
         logger.error(msg=f"Exchange error: {e}")
         e=f"Exchange error: {e}"
