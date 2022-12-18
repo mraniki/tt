@@ -65,11 +65,11 @@ testmode="False"
 #===================
 commandlist= """
 <code>/bal</code>
-<code>/cex binance</code>
-<code>/cex kraken</code>
-<code>/cex binancecoinm</code>
-<code>/dex pancake</code>
-<code>/dex quickswap</code>
+<code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
+<code>/cex kraken</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
+<code>/cex binancecoinm</code> <code>buy btcbusd sl=1000 tp=20 q=5%</code>
+<code>/dex pancake</code> <code>buy btcb</code>
+<code>/dex quickswap</code> <code>buy wbtc</code>
 <code>/trading</code>
 <code>/testmode</code>"""
 menu=f'{TTVersion} \n {commandlist}\n'
@@ -169,25 +169,31 @@ async def LoadExchange(exchangeid, mode):
     else:
         return 0
 
-def DEXContractLookup(symbol):
-    url = requests.get(tokenlist)
-    text = url.text
-    token_list = json.loads(text)['tokens']
-    #logger.info(msg=f"{token_list}")
-    target_token = [token for token in token_list if token['symbol'] == symbol]
-    return target_token[0]['address'] if len(target_token)  >  0 else None
+async def DEXContractLookup(symbol):
+    try:
+        url = requests.get(tokenlist)
+        text = url.text
+        token_list = json.loads(text)['tokens']
+        #logger.info(msg=f"{token_list}")
+        target_token = [token for token in token_list if token['symbol'] == symbol]
+        return target_token[0]['address'] if len(target_token)  >  0 else None
+    except Exception as e:
+        await HandleExceptions(e)
 
-def DEXFetchAbi(address):
-    url = abiurl
-    params = {
-        "module": "contract",
-        "action": "getabi",
-        "address": address,
-        "apikey": abiurltoken }
-    resp = requests.get(url, params=params).json()
-    abi = resp["result"]
-    #logger.info(msg=f"{abi}")
-    return abi
+async def DEXFetchAbi(address):
+    try:
+        url = abiurl
+        params = {
+            "module": "contract",
+            "action": "getabi",
+            "address": address,
+            "apikey": abiurltoken }
+        resp = requests.get(url, params=params).json()
+        abi = resp["result"]
+        #logger.info(msg=f"{abi}")
+        return abi
+    except Exception as e:
+        await HandleExceptions(e)
 
 async def DEXBuy(tokenAddress, amountToBuy):
     web3=ex
@@ -200,8 +206,9 @@ async def DEXBuy(tokenAddress, amountToBuy):
     txntime = (int(time.time()) + transactionRevertTime)
     try:
         if(tokenToBuy != None):
-            tokenToSell=DEXContractLookup(SymboltoSell)
-            contract = web3.eth.contract(address=router, abi=DEXFetchAbi(router))
+            tokenToSell=await DEXContractLookup(SymboltoSell)
+            dexabi= await DEXFetchAbi(router)
+            contract = web3.eth.contract(address=router, abi=dexabi)
             nonce = web3.eth.get_transaction_count(address)
             path=[tokenToSell, tokenToBuy]
             try:
@@ -380,7 +387,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             else:
                 order_m = Convert(msgtxt_upper)
                 m_dir= order_m[0]
-                m_symbol=DEXContractLookup(order_m[1])
+                m_symbol=await DEXContractLookup(order_m[1])
                 m_q=1  #m_q=order_m[2][2:-1]
                 res=await DEXBuy(m_symbol,m_q)
                 response=f"{res}"
