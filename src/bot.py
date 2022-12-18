@@ -260,9 +260,9 @@ if os.path.exists(db_path):
     cexdb=cexDB.all()
     dexdb=dexDB.all()
     CEX_name = cexdb[0]['name']
-    # CEX_api = cexdb[0]['api']
-    # CEX_secret = cexdb[0]['secret']
-    # CEX_password = cexdb[0]['password']
+    CEX_api = cexdb[0]['api']
+    CEX_secret = cexdb[0]['secret']
+    #CEX_password = cexdb[0]['password']
     # CEX_test_mode = cexdb[0]['testmode']
     CEX_ordertype = cexdb[0]['ordertype']
     CEX_defaulttype = cexdb[0]['defaultType']

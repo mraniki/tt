@@ -189,7 +189,8 @@
             "testmode": "False",
             "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
             "abiurl":"https://api.bscscan.com/api",
-            "abiurltoken":"abc"
+            "abiurltoken":"abc",
+            "basesymbol":"WBNB"
         },
         "2":
         {
@@ -202,7 +203,8 @@
             "testmode": "True",
             "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
             "abiurl":"https://api-testnet.bscscan.com/api",
-            "abiurltoken":"abc"
+            "abiurltoken":"abc",
+            "basesymbol":"WBNB"
         }, 
         "3":
         {
@@ -215,7 +217,8 @@
             "testmode": "False",
             "tokenlist":"https://gateway.ipfs.io/ipns/tokens.uniswap.org",
             "abiurl":"https://api.etherscan.io/api",
-            "abiurltoken":"abc"
+            "abiurltoken":"abc",
+            "basesymbol":"USDT"
         },
         "4":
         {
@@ -228,7 +231,8 @@
             "testmode": "True",
             "tokenlist":"https://gateway.ipfs.io/ipns/tokens.uniswap.org",
             "abiurl":"https://api-goerli.etherscan.io/api",
-            "abiurltoken":"abc"
+            "abiurltoken":"abc",
+            "basesymbol":"USDT"
         },
         "5":
         {
@@ -241,7 +245,8 @@
             "testmode": "False",
             "tokenlist":"https://api-polygon-tokens.polygon.technology/tokenlists/polygonTokens.tokenlist.json",
             "abiurl":"https://api.polygonscan.com/api",
-            "abiurltoken":"abc"
+            "abiurltoken":"abc",
+            "basesymbol":"USDT"
         },
         "6":
         {
@@ -254,7 +259,8 @@
             "testmode": "True",
             "tokenlist":"https://api-polygon-tokens.polygon.technology/tokenlists/testnet.tokenlist.json",
             "abiurl":"https://api-testnet.polygonscan.com/api",
-            "abiurltoken":"abc"
+            "abiurltoken":"abc",
+            "basesymbol":"USDT"
         }
     }
 }

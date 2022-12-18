@@ -9,6 +9,7 @@
 
 Built with
 [![telegrambot](https://badgen.net/badge/icon/telegrambot?icon=telegram&label)](https://t.me/pythontelegrambotchannel)
+[![python3.10](https://badgen.net/badge/icon/3.10/black?icon=pypi&label)](https://www.python.org/downloads/release/python-3100/)
 [![ccxt](https://badgen.net/badge/icon/ccxt/black?icon=libraries&label)](https://github.com/ccxt/ccxt)
 [![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py)
 [![apprise](https://badgen.net/badge/icon/apprise/black?icon=libraries&label)](https://github.com/caronc/apprise)
@@ -26,7 +27,7 @@ Built with
 3) Update the config (as per below), bot token, API in the .env file or in db config (and point your config to container volume /code/config)
 4) Deploy :
 - via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`)
-- or `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` and `python bot.py` 
+- or `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` and `python3 bot.py` 
 6) Start your container
 7) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) or for DEFI `BUY BTCB`
