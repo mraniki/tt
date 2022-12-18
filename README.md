@@ -55,17 +55,19 @@ Environment file is loaded in db at the startup.
  - Setup send message overall function for further improvement
  - Integrate initial DEFI DEX (tested with BSC & pancakeswap) for balance query and order placing
  - Integrate with apprise library to support more notification delivery
+ - Handle libraries exceptions in one consolidated function
  
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 Roadmap
 v1
-- support futures and margin for CEX (to be tested)
+
 - clean up and refactorize the code structure for clean v1
-- view opened future position via /pos command
 - more testing of the different dex/cex
-- simplify the commands /c /d /t
+v1.1
+- support futures and margin for CEX (to be tested)
+- view opened future position via /pos command
 
 v2
 - view last closed orders via /order command 

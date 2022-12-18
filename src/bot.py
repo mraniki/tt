@@ -149,6 +149,8 @@ async def LoadExchange(exchangeid, mode):
                 markets=ex.loadMarkets ()
                 #ex.verbose = True
                 #logger.info(msg=f"markets: {markets}")
+                #logger.info(msg=f"ex: {ex}")
+                #logger.info(msg=f"ex: {ex.id}")
                 return ex
         except Exception as e:
             await HandleExceptions(e)
@@ -319,9 +321,9 @@ async def post_init(application: Application):
 
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    SearchCEXResults= SearchCEX(ex,testmode)
-    if SearchCEXResults:
-        try:
+    try:
+        SearchCEXResults= SearchCEX(ex,testmode)
+        if (SearchCEX(ex.id,testmode)):
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
             trimmedbal=""
@@ -330,16 +332,13 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             if(trimmedbal==""):
                 trimmedbal="No Balance"
             msg=f"🏦 Balance \n{trimmedbal}"
-        except Exception as e:
-            await HandleExceptions(e)
-    else:
-        try:
+        else:
             bal = ex.eth.get_balance(address)
             bal = ex.from_wei(bal,'ether')
             msg = f"🏦 Balance: {bal}"
-        except Exception as e:
-            await HandleExceptions(e)
-    await send(update,msg)
+        await send(update,msg)
+    except Exception as e:
+        await HandleExceptions(e)
 #===== order parsing and placing ======
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msgtxt = update.effective_message.text
@@ -351,7 +350,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             message="TRADING DISABLED"
             await send(update,message)
         else:
-            SearchCEXResults= SearchCEX(ex,testmode)
+            SearchCEXResults= SearchCEX(ex.id,testmode)
             SearchDEXResults= SearchDEX(ex,testmode)
             if SearchCEXResults:
                 try:
@@ -407,18 +406,19 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     msg_ex  = update.effective_message.text
     newexmsg = Convert(msg_ex)
     newex=newexmsg[1]
-    SearchCEXResults= SearchCEX(newex,testmode)
-    SearchDEXResults= SearchDEX(newex,testmode)
-    if SearchCEXResults:
+    typeex=newexmsg[0]
+    if (typeex=="/cex"):
+        SearchCEXResults= SearchCEX(newex,testmode)
         CEX_name = SearchCEXResults[0]['name']
         CEX_test_mode = SearchCEXResults[0]['testmode']
         res = await LoadExchange(CEX_name,CEX_test_mode)
-        response = f"CEX is {res}"
-    elif SearchDEXResults:
+        response = f"CEX is {ex}"
+    elif (typeex=="/dex"):
+        SearchDEXResults= SearchDEX(newex,testmode)
         DEX_name= SearchDEXResults[0]['name']
         DEX_test_mode= SearchDEXResults[0]['testmode']
         res = await LoadExchange(DEX_name,DEX_test_mode)
-        response = f"DEX is {DEX_name}"
+        response = f"DEX is {ex}"
     else:  
         response = f"Error. Exchange is {ex}"
     await send(update,response)
@@ -470,11 +470,7 @@ async def HandleExceptions(e) -> None:
         e=f"telegram error: {e}"
     except Exception:
         logger.error(msg=f"error: {e}")
-        logger.error(msg="Exception:", exc_info=context.error)
-        tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
-        tb_string = "".join(tb_list)
-        tb_trim = tb_string[:1000]
-        e=f"{tb_trim}"
+        e=f"{e}"
     message=f"⚠️ {e}"
     await notify(message)
 #=========  bot error handling ==========
