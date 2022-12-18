@@ -322,7 +322,6 @@ async def post_init(application: Application):
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
-        SearchCEXResults= SearchCEX(ex,testmode)
         if (SearchCEX(ex.id,testmode)):
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
@@ -337,6 +336,11 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             bal = ex.from_wei(bal,'ether')
             msg = f"🏦 Balance: {bal}"
         await send(update,msg)
+    except AttributeError:
+        bal = ex.eth.get_balance(address)
+        bal = ex.from_wei(bal,'ether')
+        msg = f"🏦 Balance: {bal}"
+        await send(update,msg)
     except Exception as e:
         await HandleExceptions(e)
 #===== order parsing and placing ======
@@ -350,10 +354,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             message="TRADING DISABLED"
             await send(update,message)
         else:
-            SearchCEXResults= SearchCEX(ex.id,testmode)
-            SearchDEXResults= SearchDEX(ex,testmode)
-            if SearchCEXResults:
-                try:
+            try:
+                if SearchCEX(ex.id,testmode):
                     order_m = Convert(msgtxt_upper)
                     m_dir= order_m[0]
                     m_symbol=order_m[1]
@@ -381,16 +383,17 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                         price=res['price']
                         response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
                     else: response=f"⚠️ not enough money"
-                except Exception as e:
-                   await HandleExceptions(e)
-            else:
+                    await send(update,response)
+            except AttributeError:
                 order_m = Convert(msgtxt_upper)
                 m_dir= order_m[0]
                 m_symbol=await DEXContractLookup(order_m[1])
                 m_q=1  #m_q=order_m[2][2:-1]
                 res=await DEXBuy(m_symbol,m_q)
-                response=f"{res}"
-        await send(update,response)
+                response=f"{res}"   
+                await send(update,response)
+            except Exception as e:
+                await HandleExceptions(e)
 
 ##======== trading switch  =============
 async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -417,8 +420,11 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
         SearchDEXResults= SearchDEX(newex,testmode)
         DEX_name= SearchDEXResults[0]['name']
         DEX_test_mode= SearchDEXResults[0]['testmode']
+        logger.info(msg=f"DEX_test_mode: {DEX_test_mode}")
+        logger.info(msg=f"DEX_name: {DEX_name}")
         res = await LoadExchange(DEX_name,DEX_test_mode)
-        response = f"DEX is {ex}"
+        logger.info(msg=f"res: {res}")
+        response = f"DEX is {DEX_name}"
     else:  
         response = f"Error. Exchange is {ex}"
     await send(update,response)
