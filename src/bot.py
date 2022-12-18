@@ -322,6 +322,7 @@ async def post_init(application: Application):
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
+        logger.info(msg=f"{ex}")
         if (SearchCEX(ex.id,testmode)):
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
