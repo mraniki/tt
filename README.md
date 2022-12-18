@@ -64,7 +64,8 @@ Environment file is loaded in db at the startup.
  ## 🚧 Roadmap
 
 v1.1
-- Support DEFI DEX uniswap and quickswap (to be tested)
+- Support DEFI DEX uniswap and quickswap (built and to be tested)
+- Simplify the Exchange search
 - Support futures and margin for CEX (to be tested)
 
 v2
