@@ -58,8 +58,9 @@ try:
     telegramDB = db.table('telegram')
     cexDB = db.table('cex')
     dexDB = db.table('dex')
-except Exception as e:
-    logger.warning(msg=f"no db")
+except:
+    pass
+    logger.warning(msg=f"no db {db_path}")
 #===================
 global ex
 exchanges = {}
@@ -95,7 +96,7 @@ def SearchCEX(string1,string2):
                 return CEXSearch
             else:
                 return
-        except Exception as e:
+        except Exception:
             return
     else:
         return
@@ -108,7 +109,7 @@ def SearchDEX(string1,string2):
             return DEXSearch
         else:
             return
-    except Exception as e:
+    except Exception:
         return 
 
 def SearchEx(string1,string2):
@@ -264,7 +265,7 @@ async def DEXBuy(tokenAddress, amountToBuy):
         return message
 
 ##============= variables ================
-if os.path.exists(db_path):
+if os.path.isfile(db_path):
     logger.info(msg=f"Existing DB found")
     tg=telegramDB.search(q.platform==env)
     TG_TK = tg[0]['token']
