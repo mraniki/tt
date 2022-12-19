@@ -38,13 +38,18 @@ import time
 ##=============== Logging  =============
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
-logger.info(msg=f"{TTVersion}")
-logger.info(msg=f"python {sys.version}")
-logger.info(msg=f"TinyDB {tinydb.__version__}")
-logger.info(msg=f"TPB {telegram.__version__}")
-logger.info(msg=f"CCXT {ccxt.__version__}")
-logger.info(msg=f"Web3 {web3.__version__}")
-logger.info(msg=f"apprise {apprise.__version__}")
+
+def LibCheck():
+    logger.info(msg=f"{TTVersion}")
+    logger.info(msg=f"python {sys.version}")
+    logger.info(msg=f"TinyDB {tinydb.__version__}")
+    logger.info(msg=f"TPB {telegram.__version__}")
+    logger.info(msg=f"CCXT {ccxt.__version__}")
+    logger.info(msg=f"Web3 {web3.__version__}")
+    logger.info(msg=f"apprise {apprise.__version__}")
+    return
+
+LibCheck()
 ##=============== CONFIG ===============
 dotenv_path = './config/.env'
 db_path= './config/db.json'
