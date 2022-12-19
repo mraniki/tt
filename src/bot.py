@@ -85,6 +85,8 @@ def SearchCEX(string1,string2):
     if type(string1) is str:
         query1 = ((q.name==string1)&(q['testmode'] == string2))
         CEXSearch = cexDB.search(query1)
+        logger.info(msg=f"CEXSearch: {CEXSearch}")
+        logger.info(msg=f"len(str(CEXSearch)): {len(str(CEXSearch))}")
         if (len(str(CEXSearch))==1):
             return CEXSearch
     elif type(string1) is not str:
@@ -94,27 +96,31 @@ def SearchCEX(string1,string2):
             if (len(str(CEXSearch))==1):
                 return CEXSearch
             else:
-                return 0
+                return
         except Exception as e:
-            return 0
+            return
     else:
-        return 0
+        return
 
 def SearchDEX(string1,string2):
     try:
         query = ((q.name==string1)&(q['testmode'] == string2))
         DEXSearch = dexDB.search(query)
-        logger.info(msg=f"ex: {DEXSearch}")
+        logger.info(msg=f"DEXSearch: {DEXSearch}")
         if (len(str(DEXSearch))==1):
             return DEXSearch
         else:
-            return 0
+            return 
     except Exception as e:
-        return 0
+        return 
              
 def SearchEx(string1,string2):
+    logger.info(msg=f"string1: {string1}")
+    logger.info(msg=f"string2: {string2}")
     CEXCheck=SearchCEX(string1,string2)
+    logger.info(msg=f"CEXCheck: {CEXCheck}")
     DEXCheck=SearchDEX(string1,string2)
+    logger.info(msg=f"DEXCheck: {DEXCheck}")
     if (CEXCheck!= None):
         if(len(str(CEXCheck))==1):
             return CEXCheck[0]['name']
@@ -122,7 +128,7 @@ def SearchEx(string1,string2):
         return DEXCheck[0]['name']
     else:
         logger.error(msg=f"Error with DB search {string1} {string2}")
-        return 0
+        return None
 
 async def LoadExchange(exchangeid, mode):
     global ex
@@ -135,6 +141,8 @@ async def LoadExchange(exchangeid, mode):
     global abiurl
     global abiurltoken
     global basesymbol
+    logger.info(msg=f"exchangeid: {exchangeid}")
+    logger.info(msg=f"mode: {mode}")
     CEXCheck=SearchCEX(exchangeid,mode)
     logger.info(msg=f"CEXCheck: {CEXCheck}")
     DEXCheck=SearchDEX(exchangeid,mode)
@@ -179,7 +187,7 @@ async def LoadExchange(exchangeid, mode):
             logger.info(msg=f"Connected to Web3 {ex}")
             return name 
     else:
-        return 0
+        return
 
 async def DEXContractLookup(symbol):
     try:
