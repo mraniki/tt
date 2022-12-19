@@ -112,12 +112,19 @@ def SearchDEX(string1,string2):
         return 
 
 def SearchEx(string1,string2):
-    CEXCheck=SearchCEX(string1,string2)
-    DEXCheck=SearchDEX(string1,string2)
-    if (CEXCheck!= None):
-        if(len(str(CEXCheck))>=1):
-            return CEXCheck[0]['name']
-    elif (len(str(DEXCheck))>=1):
+    if (isinstance(string1,str)):
+        CEXCheck=SearchCEX(string1,string2)
+        DEXCheck=SearchDEX(string1,string2)
+        if (CEXCheck!= None):
+            if(len(str(CEXCheck))>=1):
+                return CEXCheck[0]['name']
+        elif (len(str(DEXCheck))>=1):
+            return DEXCheck[0]['name']
+    elif not (isinstance(string1,web3.main.Web3)):
+        CEXCheck=SearchCEX(string1.id,string2)
+        return CEXCheck[0]['name']
+    elif (isinstance(string1,web3.main.Web3)):
+        DEXCheck=SearchDEX(string1,string2)
         return DEXCheck[0]['name']
     else:
         logger.error(msg=f"Error with DB search {string1} {string2}")
@@ -134,37 +141,37 @@ async def LoadExchange(exchangeid, mode):
     global abiurl
     global abiurltoken
     global basesymbol
+    logger.info(msg=f"LoadExchange")
     logger.info(msg=f"exchangeid: {exchangeid}")
     logger.info(msg=f"mode: {mode}")
     CEXCheck=SearchCEX(exchangeid,mode)
     logger.info(msg=f"CEXCheck: {CEXCheck}")
     DEXCheck=SearchDEX(exchangeid,mode)
     logger.info(msg=f"DEXCheck: {DEXCheck}")
-    if (CEXCheck!= None):
-        if (len(str(CEXCheck))>=1):
-            newex=CEXCheck
-            exchange = getattr(ccxt, exchangeid)
-            exchanges[exchangeid] = exchange()
-            try:
-                exchanges[exchangeid] = exchange({'apiKey': newex[0]['api'],'secret': newex[0]['secret']})
-                ex=exchanges[exchangeid]
-                if (mode=="True"):
-                    ex.set_sandbox_mode('enabled')
-                    markets=ex.loadMarkets() 
-                    #ex.verbose = True
-                    #logger.info(msg=f"markets: {markets}")
-                    logger.info(msg=f"ex: {ex}")
-                    return ex
-                else:
-                    markets=ex.loadMarkets ()
-                    #ex.verbose = True
-                    #logger.info(msg=f"markets: {markets}")
-                    logger.info(msg=f"ex: {ex}")
-                    #logger.info(msg=f"ex: {ex.id}")
-                    return ex
-            except Exception as e:
-                await HandleExceptions(e)
-    elif (len(str(DEXCheck))>=1):
+    if (CEXCheck):
+        newex=CEXCheck
+        exchange = getattr(ccxt, exchangeid)
+        exchanges[exchangeid] = exchange()
+        try:
+            exchanges[exchangeid] = exchange({'apiKey': newex[0]['api'],'secret': newex[0]['secret']})
+            ex=exchanges[exchangeid]
+            if (mode=="True"):
+                ex.set_sandbox_mode('enabled')
+                markets=ex.loadMarkets() 
+                #ex.verbose = True
+                #logger.info(msg=f"markets: {markets}")
+                logger.info(msg=f"ex: {ex}")
+                return ex
+            else:
+                markets=ex.loadMarkets ()
+                #ex.verbose = True
+                #logger.info(msg=f"markets: {markets}")
+                logger.info(msg=f"ex: {ex}")
+                #logger.info(msg=f"ex: {ex.id}")
+                return ex
+        except Exception as e:
+            await HandleExceptions(e)
+    elif (DEXCheck):
         newex= DEXCheck
         name= newex[0]['name']
         address= newex[0]['address']
@@ -330,7 +337,7 @@ async def post_init(application: Application):
     ex=CEX_name
     await LoadExchange(ex,testmode)
     logger.info(msg=f"bot is online")
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\n Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
 
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
