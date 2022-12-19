@@ -41,7 +41,7 @@ logger = logging.getLogger(__name__)
 
 def LibCheck():
     logger.info(msg=f"{TTVersion}")
-    logger.info(msg=f"python {sys.version}")
+    logger.info(msg=f"Python {sys.version}")
     logger.info(msg=f"TinyDB {tinydb.__version__}")
     logger.info(msg=f"TPB {telegram.__version__}")
     logger.info(msg=f"CCXT {ccxt.__version__}")
