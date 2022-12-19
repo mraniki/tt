@@ -18,7 +18,7 @@
         {
             "token": "",
             "channel": "",
-            "platform": ""
+            "platform": "DEV"
         },
         "3":
         {
@@ -28,8 +28,8 @@
         },
         "4":
         {
-            "token": "",
-            "channel": "",
+            "token": "YOURBOTTOKEN",
+            "channel": "YOURCHANNELID",
             "platform": "PRD"
         }
     },
