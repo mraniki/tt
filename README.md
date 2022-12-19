@@ -70,6 +70,7 @@ v1.1
 
 V1.2
 - Update the buy/sell parsing logic to align dex and cex format and manage missing argument error with default values
+- Support /p command for symbol price check
 
 V1.3
 - Simplify the Exchange search

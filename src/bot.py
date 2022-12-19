@@ -49,7 +49,7 @@ logger.info(msg=f"apprise {apprise.__version__}")
 dotenv_path = './config/.env'
 db_path= './config/db.json'
 #===================
-#add DB setup and env setup here
+#add DB check / ENV check and if missing create pancake testnet setup for price check
 try:
     db = TinyDB(db_path)
     q = Query()
@@ -274,10 +274,6 @@ if os.path.exists(db_path):
     cexdb=cexDB.all()
     dexdb=dexDB.all()
     CEX_name = cexdb[0]['name']
-    #CEX_api = cexdb[0]['api']
-    #CEX_secret = cexdb[0]['secret']
-    #CEX_password = cexdb[0]['password']
-    # CEX_test_mode = cexdb[0]['testmode']
     CEX_ordertype = cexdb[0]['ordertype']
     CEX_defaulttype = cexdb[0]['defaultType']
 else:
@@ -412,6 +408,12 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 response=f"⚠️ error with exchange setup"
             await send(update,response)
 
+##=========== view price  =============
+async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    try:
+        logger.info(msg=f"Price command")
+    except Exception as e:
+        await HandleExceptions(e)
 ##======== trading switch  =============
 async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global trading
@@ -522,6 +524,7 @@ def main():
 #TPBMenusHandlers
         application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
         application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
+        application.add_handler(MessageHandler(filters.Regex('/p'), price_command))
         application.add_handler(MessageHandler(filters.Regex('/trading'), TradingSwitch))
         application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
         application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), SwitchEx))
