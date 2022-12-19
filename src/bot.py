@@ -29,7 +29,7 @@ import re
 import ccxt
 
 #DEX
-import web3 
+import web3
 from web3 import Web3
 from web3.contract import Contract
 from typing import List #Dict, List
@@ -111,7 +111,7 @@ def SearchDEX(string1,string2):
         else:
             return
     except Exception:
-        return 
+        return
 
 def SearchEx(string1,string2):
     if (isinstance(string1,str)):
@@ -159,7 +159,7 @@ async def LoadExchange(exchangeid, mode):
             ex=exchanges[exchangeid]
             if (mode=="True"):
                 ex.set_sandbox_mode('enabled')
-                markets=ex.loadMarkets() 
+                markets=ex.loadMarkets()
                 #ex.verbose = True
                 #logger.info(msg=f"markets: {markets}")
                 logger.info(msg=f"ex: {ex}")
@@ -188,7 +188,7 @@ async def LoadExchange(exchangeid, mode):
         ex = Web3(Web3.HTTPProvider(networkprovider))
         if ex.net.listening:
             logger.info(msg=f"Connected to Web3 {ex}")
-            return name 
+            return name
     else:
         logger.warning(msg=f"Exchange Config Error")
         return
@@ -385,7 +385,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
                     totalusdtbal = ex.fetchBalance()['USDT']['free']
                     amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
-                ######## ORDER 
+                ######## ORDER
                     res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
                     orderid=res['id']
                     timestamp=res['datetime']
@@ -394,7 +394,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     amount=res['amount']
                     price=res['price']
                     response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
-                else: 
+                else:
                     response=f"⚠️ not enough money"
             elif (isinstance(ex,web3.main.Web3)):
                 order_m = Convert(msgtxt_upper)
@@ -402,7 +402,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 m_symbol=await DEXContractLookup(order_m[1])
                 m_q=1  #m_q=order_m[2][2:-1]
                 res=await DEXBuy(m_symbol,m_q)
-                response=f"{res}"   
+                response=f"{res}"
             else:
                 logger.warning(msg=f"error with exchange type {type(ex)}")
                 response=f"⚠️ error with exchange setup"
@@ -445,7 +445,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
         res = await LoadExchange(DEX_name,DEX_test_mode)
         logger.info(msg=f"res: {res}")
         response = f"DEX is {DEX_name}"
-    else:  
+    else:
         response = f"Error. Exchange is {ex}"
     await send(update,response)
     logger.info(msg=f"newex {ex}")
@@ -479,7 +479,7 @@ async def send (self, messaging):
 async def notify(messaging):
     try:
         apobj.notify(body=messaging)
-    except Exception as e: 
+    except Exception as e:
         logger.error(msg=f"error: {e}")
 #=========  overall error handling ========
 async def HandleExceptions(e) -> None:
@@ -488,7 +488,7 @@ async def HandleExceptions(e) -> None:
         logger.error(msg=f"{e}")
     except KeyError:
         logger.error(msg=f"DB content error {e}")
-        e=f"DB content error  {e}"  
+        e=f"DB content error  {e}"
     except ccxt.base.errors:
         logger.error(msg=f"CCXT error {e}")
         e=f"CCXT error {e}"
