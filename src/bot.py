@@ -463,6 +463,7 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                     if(TokenToPrice != None):
                         try:
                             price = contract.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
+                            #need to include the decimals logic
                             logger.info(msg=f"price {price}")
                             response=f"₿ {TokenToPrice}\n{symbol} @ {round(price,6)}"
                         except Exception as e:
