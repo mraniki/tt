@@ -97,5 +97,5 @@ v3
 
 
  ## ⚠️ Disclaimer
- This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK**
-
+ This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK** 
+ **NEVER use your main account for automatic trade**
