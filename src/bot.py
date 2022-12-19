@@ -82,6 +82,7 @@ def Convert(string):
     return li
 
 def SearchCEX(string1,string2):
+    logger.info(msg=f"string1: {type(string1)}")
     if type(string1) is str:
         query1 = ((q.name==string1)&(q['testmode'] == string2))
         CEXSearch = cexDB.search(query1)
@@ -94,11 +95,11 @@ def SearchCEX(string1,string2):
             if (len(str(CEXSearch))==1):
                 return CEXSearch
             else:
-                return 0
+                return 
         except Exception as e:
-            return 0
+            return
     else:
-        return 0
+        return
 
 def SearchDEX(string1,string2):
     try:
@@ -108,9 +109,9 @@ def SearchDEX(string1,string2):
         if (len(str(DEXSearch))==1):
             return DEXSearch
         else:
-            return 0
+            return
     except Exception as e:
-        return 0
+        return
              
 def SearchEx(string1,string2):
     CEXCheck=SearchCEX(string1,string2)
@@ -122,7 +123,7 @@ def SearchEx(string1,string2):
         return DEXCheck[0]['name']
     else:
         logger.error(msg=f"Error with DB search {string1} {string2}")
-        return 0
+        return
 
 async def LoadExchange(exchangeid, mode):
     global ex
