@@ -50,6 +50,7 @@ def LibCheck():
     return
 
 LibCheck()
+
 ##=============== CONFIG ===============
 dotenv_path = './config/.env'
 db_path= './config/db.json'
