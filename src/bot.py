@@ -147,7 +147,7 @@ async def LoadExchange(exchangeid, mode):
             try:
                 exchanges[exchangeid] = exchange({'apiKey': newex[0]['api'],'secret': newex[0]['secret']})
                 ex=exchanges[exchangeid]
-                if (mode==True):
+                if (mode=="True"):
                     ex.set_sandbox_mode('enabled')
                     markets=ex.loadMarkets() 
                     #ex.verbose = True
@@ -179,7 +179,8 @@ async def LoadExchange(exchangeid, mode):
             logger.info(msg=f"Connected to Web3 {ex}")
             return name 
     else:
-        return 0
+        logger.error(msg=f"error with {exchangeid} {mode}")
+        return exchangeid
 
 async def DEXContractLookup(symbol):
     try:
