@@ -79,9 +79,9 @@ testmode="False"
 commandlist= """
 <code>/bal</code>
 <code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
-<code>/cex kraken</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
+<code>/cex kraken</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code><code>/price btc/usdt</code>
 <code>/cex binancecoinm</code> <code>buy btcbusd sl=1000 tp=20 q=5%</code>
-<code>/dex pancake</code> <code>buy btcb</code>
+<code>/dex pancake</code> <code>buy btcb</code><code>/price bnb-busd</code>
 <code>/dex quickswap</code> <code>buy wbtc</code>
 <code>/trading</code>
 <code>/testmode</code>"""
@@ -89,6 +89,12 @@ menu=f'{TTVersion} \n {commandlist}\n'
 #=============== Functions ===============
 def Convert(string):
     li = list(string.split(" "))
+    #improve this function to return
+    # DIRECTION BUY SELL
+    # SYMBOL 
+    # SL
+    # TP
+    # QUANTITY
     return li
 
 def SearchCEX(string1,string2):
@@ -418,8 +424,27 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 ##=========== view price  =============
 async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.info(msg=f"Price command")
+    logger.info(msg=f"current ex {ex}")
+    tginput  = update.effective_message.text
+    input = Convert(tginput)
+    symbol=input[1]
+    logger.info(msg=f"symbol {symbol} ")
     try:
-        logger.info(msg=f"Price command")
+        if not (isinstance(ex,web3.main.Web3)):
+            logger.info(msg=f"ccxt price logic")
+            price= ex.fetch_ticker(symbol.upper())
+            response=f"₿ {symbol} @ {price}"
+        elif (isinstance(ex,web3.main.Web3)):
+            logger.info(msg=f"web3 price logic")
+            pair_contract_address = await DEXContractLookup(symbol)
+            print(pair_contract_address)
+            price=1
+            response=f"₿ {symbol} @ {price}"
+        else:
+            logger.info(msg=f"error handling")
+            response=f"error symbol {symbol}"
+        await send(update,response)
     except Exception as e:
         await HandleExceptions(e)
 ##======== trading switch  =============
