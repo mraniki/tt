@@ -82,6 +82,7 @@ def Convert(string):
     return li
 
 def SearchCEX(string1,string2):
+    logger.info(msg=f"string1: {type(string1)}")
     if type(string1) is str:
         query1 = ((q.name==string1)&(q['testmode'] == string2))
         CEXSearch = cexDB.search(query1)
@@ -110,9 +111,9 @@ def SearchDEX(string1,string2):
         if (len(str(DEXSearch))==1):
             return DEXSearch
         else:
-            return 
+            return 0
     except Exception as e:
-        return 
+        return 0
              
 def SearchEx(string1,string2):
     logger.info(msg=f"string1: {string1}")
@@ -128,7 +129,7 @@ def SearchEx(string1,string2):
         return DEXCheck[0]['name']
     else:
         logger.error(msg=f"Error with DB search {string1} {string2}")
-        return None
+        return 0
 
 async def LoadExchange(exchangeid, mode):
     global ex
@@ -155,7 +156,7 @@ async def LoadExchange(exchangeid, mode):
             try:
                 exchanges[exchangeid] = exchange({'apiKey': newex[0]['api'],'secret': newex[0]['secret']})
                 ex=exchanges[exchangeid]
-                if (mode==True):
+                if (mode=="True"):
                     ex.set_sandbox_mode('enabled')
                     markets=ex.loadMarkets() 
                     #ex.verbose = True
@@ -187,7 +188,7 @@ async def LoadExchange(exchangeid, mode):
             logger.info(msg=f"Connected to Web3 {ex}")
             return name 
     else:
-        return
+        return 0
 
 async def DEXContractLookup(symbol):
     try:
