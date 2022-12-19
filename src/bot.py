@@ -85,13 +85,13 @@ def SearchCEX(string1,string2):
     if type(string1) is str:
         query1 = ((q.name==string1)&(q['testmode'] == string2))
         CEXSearch = cexDB.search(query1)
-        if (len(CEXSearch)==1):
+        if (len(str(CEXSearch))==1):
             return CEXSearch
     elif type(string1) is not str:
         try:
             query1 = ((q.name==string1.name.lower())&(q['testmode'] == string2))
             CEXSearch = cexDB.search(query1)
-            if (len(CEXSearch)==1):
+            if (len(str(CEXSearch))==1):
                 return CEXSearch
             else:
                 return 0
@@ -105,7 +105,7 @@ def SearchDEX(string1,string2):
         query = ((q.name==string1)&(q['testmode'] == string2))
         DEXSearch = dexDB.search(query)
         logger.info(msg=f"ex: {DEXSearch}")
-        if (len(DEXSearch)==1):
+        if (len(str(DEXSearch))==1):
             return DEXSearch
         else:
             return 0
@@ -116,9 +116,9 @@ def SearchEx(string1,string2):
     CEXCheck=SearchCEX(string1,string2)
     DEXCheck=SearchDEX(string1,string2)
     if (CEXCheck!= None):
-        if(len(CEXCheck)==1):
+        if(len(str(CEXCheck))==1):
             return CEXCheck[0]['name']
-    elif (len(DEXCheck)==1):
+    elif (len(str(DEXCheck))==1):
         return DEXCheck[0]['name']
     else:
         logger.error(msg=f"Error with DB search {string1} {string2}")
@@ -136,9 +136,11 @@ async def LoadExchange(exchangeid, mode):
     global abiurltoken
     global basesymbol
     CEXCheck=SearchCEX(exchangeid,mode)
+    logger.info(msg=f"CEXCheck: {CEXCheck}")
     DEXCheck=SearchDEX(exchangeid,mode)
+    logger.info(msg=f"DEXCheck: {DEXCheck}")
     if (CEXCheck!= None):
-        if (len(CEXCheck)==1):
+        if (len(str(CEXCheck))==1):
             newex=CEXCheck
             exchange = getattr(ccxt, exchangeid)
             exchanges[exchangeid] = exchange()
@@ -160,7 +162,7 @@ async def LoadExchange(exchangeid, mode):
                     return ex
             except Exception as e:
                 await HandleExceptions(e)
-    elif (len(DEXCheck)==1):
+    elif (len(str(DEXCheck))==1):
         newex= DEXCheck
         name= newex[0]['name']
         address= newex[0]['address']
@@ -370,7 +372,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 bal = ex.fetch_free_balance()
                 bal = {k: v for k, v in bal.items() if v is not None and v>0}
                 logger.info(msg=f"bal: {bal}")
-                if (len(bal)):
+                if (len(str(bal))):
                 ######## % of bal
                     m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
                     totalusdtbal = ex.fetchBalance()['USDT']['free']
