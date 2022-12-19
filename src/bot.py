@@ -82,13 +82,10 @@ def Convert(string):
     return li
 
 def SearchCEX(string1,string2):
-    logger.info(msg=f"string1: {type(string1)}")
     if type(string1) is str:
         query1 = ((q.name==string1)&(q['testmode'] == string2))
         CEXSearch = cexDB.search(query1)
-        logger.info(msg=f"CEXSearch: {CEXSearch}")
-        logger.info(msg=f"len(str(CEXSearch)): {len(str(CEXSearch))}")
-        if (len(str(CEXSearch))==1):
+        if (len(str(CEXSearch))>=1):
             return CEXSearch
     elif type(string1) is not str:
         try:
@@ -107,29 +104,24 @@ def SearchDEX(string1,string2):
     try:
         query = ((q.name==string1)&(q['testmode'] == string2))
         DEXSearch = dexDB.search(query)
-        logger.info(msg=f"DEXSearch: {DEXSearch}")
-        if (len(str(DEXSearch))==1):
+        if (len(str(DEXSearch))>=1):
             return DEXSearch
         else:
-            return 0
+            return
     except Exception as e:
-        return 0
-             
+        return 
+
 def SearchEx(string1,string2):
-    logger.info(msg=f"string1: {string1}")
-    logger.info(msg=f"string2: {string2}")
     CEXCheck=SearchCEX(string1,string2)
-    logger.info(msg=f"CEXCheck: {CEXCheck}")
     DEXCheck=SearchDEX(string1,string2)
-    logger.info(msg=f"DEXCheck: {DEXCheck}")
     if (CEXCheck!= None):
-        if(len(str(CEXCheck))==1):
+        if(len(str(CEXCheck))>=1):
             return CEXCheck[0]['name']
-    elif (len(str(DEXCheck))==1):
+    elif (len(str(DEXCheck))>=1):
         return DEXCheck[0]['name']
     else:
         logger.error(msg=f"Error with DB search {string1} {string2}")
-        return 0
+        return
 
 async def LoadExchange(exchangeid, mode):
     global ex
@@ -149,7 +141,7 @@ async def LoadExchange(exchangeid, mode):
     DEXCheck=SearchDEX(exchangeid,mode)
     logger.info(msg=f"DEXCheck: {DEXCheck}")
     if (CEXCheck!= None):
-        if (len(str(CEXCheck))==1):
+        if (len(str(CEXCheck))>=1):
             newex=CEXCheck
             exchange = getattr(ccxt, exchangeid)
             exchanges[exchangeid] = exchange()
@@ -161,17 +153,18 @@ async def LoadExchange(exchangeid, mode):
                     markets=ex.loadMarkets() 
                     #ex.verbose = True
                     #logger.info(msg=f"markets: {markets}")
+                    logger.info(msg=f"ex: {ex}")
                     return ex
                 else:
                     markets=ex.loadMarkets ()
                     #ex.verbose = True
                     #logger.info(msg=f"markets: {markets}")
-                    #logger.info(msg=f"ex: {ex}")
+                    logger.info(msg=f"ex: {ex}")
                     #logger.info(msg=f"ex: {ex.id}")
                     return ex
             except Exception as e:
                 await HandleExceptions(e)
-    elif (len(str(DEXCheck))==1):
+    elif (len(str(DEXCheck))>=1):
         newex= DEXCheck
         name= newex[0]['name']
         address= newex[0]['address']
@@ -188,7 +181,8 @@ async def LoadExchange(exchangeid, mode):
             logger.info(msg=f"Connected to Web3 {ex}")
             return name 
     else:
-        return 0
+        logger.warning(msg=f"Exchange Config Error")
+        return
 
 async def DEXContractLookup(symbol):
     try:
@@ -271,8 +265,8 @@ if os.path.exists(db_path):
     cexdb=cexDB.all()
     dexdb=dexDB.all()
     CEX_name = cexdb[0]['name']
-    CEX_api = cexdb[0]['api']
-    CEX_secret = cexdb[0]['secret']
+    #CEX_api = cexdb[0]['api']
+    #CEX_secret = cexdb[0]['secret']
     #CEX_password = cexdb[0]['password']
     # CEX_test_mode = cexdb[0]['testmode']
     CEX_ordertype = cexdb[0]['ordertype']
@@ -336,7 +330,7 @@ async def post_init(application: Application):
     ex=CEX_name
     await LoadExchange(ex,testmode)
     logger.info(msg=f"bot is online")
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\n Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
 
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
