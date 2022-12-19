@@ -50,7 +50,8 @@ dotenv_path = './config/.env'
 db_path= './config/db.json'
 #===================
 #add DB check / ENV check 
-#  if missing create pancake testnet setup for price check
+#  if missing create pancake testnet setup 
+# and send to empty db support command
 try:
     db = TinyDB(db_path)
     q = Query()
