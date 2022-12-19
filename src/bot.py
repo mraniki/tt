@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTVersion="🪙TT Beta 1.02"
+TTVersion="🪙TT Beta 1.09"
 ##=============== import  =============
 ##log
 import logging
@@ -82,7 +82,7 @@ commandlist= """
 <code>/cex kraken</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code> <code>/price btc/usdt</code>
 <code>/cex binancecoinm</code> <code>buy btcbusd sl=1000 tp=20 q=5%</code>
 <code>/dex pancake</code> <code>buy btcb</code> <code>/price BTCB</code>
-<code>/dex quickswap</code> <code>buy wbtc</code> <code>/price matic</code>
+<code>/dex quickswap</code> <code>buy wbtc</code> <code>/price wbtc</code>
 <code>/trading</code>
 <code>/testmode</code>"""
 menu=f'{TTVersion} \n {commandlist}\n'
@@ -217,11 +217,21 @@ async def DEXContractLookup(symbol):
         #logger.info(msg=f"{token_list}")
         symbol=symbol.upper()
         logger.info(msg=f"symbol {symbol}")
-        symbolcontract = [token for token in token_list if token['symbol'] == symbol]
-        logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
-        return symbolcontract[0]['address'] if len(symbolcontract)  >  0 else None
+        try:
+            symbolcontract = [token for token in token_list if token['symbol'] == symbol]
+            if len(symbolcontract) > 0:
+                logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
+                return symbolcontract[0]['address']
+            else:
+                logger.warning(msg=f"{symbol} symbol not available in tokenlist")
+                return None
+        except Exception as e:
+            logger.warning(msg=f"{symbol} symbol & tokenlist error ")
+            await HandleExceptions(e)
+            return None
     except Exception as e:
         await HandleExceptions(e)
+        return None
 
 async def DEXFetchAbi(address):
     try:
@@ -430,31 +440,41 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     tginput  = update.effective_message.text
     input = Convert(tginput)
+    logger.info(msg=f"symbol {input}")
     symbol=input[1]
+    logger.info(msg=f"symbol {symbol}")
     try:
         if not (isinstance(ex,web3.main.Web3)):
             price= ex.fetch_ticker(symbol.upper())['last']
             response=f"₿ {symbol} @ {price}"
         elif (isinstance(ex,web3.main.Web3)):
-            token = ex.to_checksum_address(await DEXContractLookup(symbol))
-            logger.info(msg=f"token{token}")
-            tokenToSell='USDT'
-            basesymbol=ex.to_checksum_address(await DEXContractLookup(tokenToSell))
-            logger.info(msg=f"basesymbol{basesymbol}")
-            qty=1
-            logger.info(msg=f"router{router}")
-            dexabi= await DEXFetchAbi(router)
-            contract = ex.eth.contract(address=router, abi=dexabi) #liquidityContract
-            logger.info(msg=f"contract{contract}")
             try:
-                price = contract.functions.getAmountsOut(1, [token,basesymbol]).call()[1]
+                if(await DEXContractLookup(symbol) != None):
+                    TokenToPrice = ex.to_checksum_address(await DEXContractLookup(symbol))
+                    logger.info(msg=f"token{TokenToPrice}")
+                    tokenToSell='USDT'
+                    basesymbol=ex.to_checksum_address(await DEXContractLookup(tokenToSell))
+                    logger.info(msg=f"basesymbol{basesymbol}")
+                    qty=1
+                    logger.info(msg=f"router{router}")
+                    dexabi= await DEXFetchAbi(router)
+                    contract = ex.eth.contract(address=router, abi=dexabi) #liquidityContract
+                    logger.info(msg=f"contract{contract}")
+                    if(TokenToPrice != None):
+                        try:
+                            price = contract.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
+                            logger.info(msg=f"price {price}")
+                            response=f"₿ {TokenToPrice}\n{symbol} @ {round(price,6)}"
+                        except Exception as e:
+                            await HandleExceptions(e)
+                            logger.warning(msg=f"price error")
+                            response=f"price error with {symbol}"
+                else:
+                    response=f"TokenList error with {symbol}\nCheck if the symbol exist or the tokenlist"
             except Exception as e:
                 await HandleExceptions(e)
                 logger.warning(msg=f"price error")
-                price=0
-
-            logger.info(msg=f"price {price}")
-            response=f"₿ {symbol} @ {price}"
+                response=f"error symbol {symbol}"
         else:
             logger.info(msg=f"error handling")
             response=f"error symbol {symbol}"
