@@ -47,7 +47,7 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
  
  v1 
  - Enable bot in pythontelegram v20 and support exchange formatted error via telegram
- - Push your signal manually or from system like trading view webhook to submit order to your ccxt exchange and receive confirmation
+ - Push your signal manually or from system like trading view webhook to submit order to your ccxt exchange and receive confirmation with the format `sell BTCUSDT sl=6000 tp=4500 q=1%`
  - Disable or Enable trading process via /trading command
  - Query balance via /bal command and view it in formatted way
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
@@ -57,7 +57,7 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
  - Handle Multi CEFI config (verified with Binance, Binance Testnet and ~~FTX~~ Kraken) and DEFI (test with Pancakeswap and Quickswap) and switch between CEFI using `/cex binance` or `/cex kraken` or DEFI `/dex pancake`
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
  - Setup send message overall function for further improvement
- - Integrate DEFI DEX (tested with BSC & pancakeswap) for balance query and order placing for mainnet and testnet with format `buy btcb`
+ - Integrate DEFI DEX (tested with BSC & pancakeswap, polygon and quickswap) for balance query, order placing and symbol quote for mainnet and testnet with format `buy btcb`
  - Integrate with apprise library to support more notification delivery
  - Handle libraries exceptions in one consolidated function to ease notifications
  - Support `/price BTCB` or `/price btc/usdt` command for symbol price check for both CEX and DEX
@@ -66,11 +66,8 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
 
  ## 🚧 Roadmap
 
-v1.1
-- Support DEFI DEX quickswap (built done; to be tested)
-
 V1.2
-- Update the buy/sell parsing logic to align dex and cex format and manage missing argument error with default values
+- Update the buy/sell parsing logic to align dex and cex format and manage missing argument error with default values for SL/TP and Q
 
 V1.3
 - Simplify the Exchange search
@@ -97,5 +94,5 @@ v3
 
 
  ## ⚠️ Disclaimer
- This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK**
-
+ This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK** 
+ **NEVER use your main account for automatic trade**
