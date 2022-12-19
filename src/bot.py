@@ -49,7 +49,8 @@ logger.info(msg=f"apprise {apprise.__version__}")
 dotenv_path = './config/.env'
 db_path= './config/db.json'
 #===================
-#add DB check / ENV check and if missing create pancake testnet setup for price check
+#add DB check / ENV check 
+#  if missing create pancake testnet setup for price check
 try:
     db = TinyDB(db_path)
     q = Query()
