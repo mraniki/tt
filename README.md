@@ -22,12 +22,12 @@ Built with
 ## Install
 1) Create a private channel and a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
 2) Get your 
-  - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
-  - DEX contract router supported by [Web3](https://github.com/ethereum/web3.py)
+    - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
+    - DEX contract router supported by [Web3](https://github.com/ethereum/web3.py)
 3) Update the config (as per below), bot token, API in the .env file or in db config (and point your config to container volume /code/config)
 4) Deploy :
-- via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`)
-- or `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` and `python3 bot.py` 
+  - via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`)
+  - or `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` and `python3 bot.py` 
 6) Start your container
 7) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) or for DEFI `BUY BTCB`
@@ -60,13 +60,14 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
  - Integrate DEFI DEX (tested with BSC & pancakeswap) for balance query and order placing for mainnet and testnet with format `buy btcb`
  - Integrate with apprise library to support more notification delivery
  - Handle libraries exceptions in one consolidated function to ease notifications
+ - Support `/price BTCB` or `/price btc/usdt` command for symbol price check for both CEX and DEX
  
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 Roadmap
 
 v1.1
-- Support DEFI DEX quickswap (built done and to be tested)
+- Support DEFI DEX quickswap (built done; to be tested)
 
 V1.2
 - Update the buy/sell parsing logic to align dex and cex format and manage missing argument error with default values
