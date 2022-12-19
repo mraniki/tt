@@ -60,6 +60,7 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
  - Integrate DEFI DEX (tested with BSC & pancakeswap) for balance query and order placing for mainnet and testnet with format `buy btcb`
  - Integrate with apprise library to support more notification delivery
  - Handle libraries exceptions in one consolidated function to ease notifications
+ - Support `/price BTCB` or `/price btc/usdt` command for symbol price check for both CEX and DEX
  
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
@@ -70,7 +71,7 @@ v1.1
 
 V1.2
 - Update the buy/sell parsing logic to align dex and cex format and manage missing argument error with default values
-- Support /p command for symbol price check
+
 
 V1.3
 - Simplify the Exchange search

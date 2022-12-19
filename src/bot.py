@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTVersion="🪙TT Beta 1.00"
+TTVersion="🪙TT Beta 1.01"
 ##=============== import  =============
 ##log
 import logging
@@ -79,9 +79,9 @@ testmode="False"
 commandlist= """
 <code>/bal</code>
 <code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
-<code>/cex kraken</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code><code>/price btc/usdt</code>
+<code>/cex kraken</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code> <code>/price btc/usdt</code>
 <code>/cex binancecoinm</code> <code>buy btcbusd sl=1000 tp=20 q=5%</code>
-<code>/dex pancake</code> <code>buy btcb</code><code>/price bnb-busd</code>
+<code>/dex pancake</code> <code>buy btcb</code> <code>/price BTCB</code>
 <code>/dex quickswap</code> <code>buy wbtc</code>
 <code>/trading</code>
 <code>/testmode</code>"""
@@ -203,6 +203,8 @@ async def LoadExchange(exchangeid, mode):
         if ex.net.listening:
             logger.info(msg=f"Connected to Web3 {ex}")
             return name
+        else:
+            raise ConnectionError(f'Couldn\'t connect to {router}')
     else:
         logger.warning(msg=f"Exchange Config Error")
         return
@@ -214,8 +216,8 @@ async def DEXContractLookup(symbol):
         token_list = json.loads(text)['tokens']
         #logger.info(msg=f"{token_list}")
         target_token = [token for token in token_list if token['symbol'] == symbol]
+        logger.info(msg=f"target_token {target_token[0]['address']}")
         return target_token[0]['address'] if len(target_token)  >  0 else None
-        logger.info(msg=f"{target_token[0]['address']}")
     except Exception as e:
         await HandleExceptions(e)
 
@@ -247,7 +249,7 @@ async def DEXBuy(tokenAddress, amountToBuy):
         if(tokenToBuy != None):
             tokenToSell=web3.to_checksum_address(await DEXContractLookup(tokenToSell))
             dexabi= await DEXFetchAbi(router)
-            contract = web3.eth.contract(address=router, abi=dexabi)
+            contract = web3.eth.contract(address=router, abi=dexabi) #liquidityContract
             nonce = web3.eth.get_transaction_count(address)
             path=[tokenToSell, tokenToBuy]
         try:
@@ -436,10 +438,18 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             price= ex.fetch_ticker(symbol.upper())
             response=f"₿ {symbol} @ {price}"
         elif (isinstance(ex,web3.main.Web3)):
-            logger.info(msg=f"web3 price logic")
-            pair_contract_address = await DEXContractLookup(symbol)
-            print(pair_contract_address)
-            price=1
+            token = ex.to_checksum_address(await DEXContractLookup(symbol))
+
+            tokenToSell='USDT'
+            basesymbol=ex.to_checksum_address(await DEXContractLookup(tokenToSell))
+
+            qty=1
+
+            dexabi= await DEXFetchAbi(router)
+            contract = ex.eth.contract(address=router, abi=dexabi) #liquidityContract
+            price = contract.functions.getAmountsOut(1, [token, basesymbol]).call()[1]
+            logger.info(msg=f"price {price}")
+
             response=f"₿ {symbol} @ {price}"
         else:
             logger.info(msg=f"error handling")
