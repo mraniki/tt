@@ -49,6 +49,7 @@ logger.info(msg=f"apprise {apprise.__version__}")
 dotenv_path = './config/.env'
 db_path= './config/db.json'
 #===================
+#add DB setup and env setup here
 try:
     db = TinyDB(db_path)
     q = Query()
@@ -58,7 +59,7 @@ try:
     telegramDB = db.table('telegram')
     cexDB = db.table('cex')
     dexDB = db.table('dex')
-except:
+except Exception:
     pass
     logger.warning(msg=f"no db {db_path}")
 #===================
@@ -265,7 +266,7 @@ async def DEXBuy(tokenAddress, amountToBuy):
         return message
 
 ##============= variables ================
-if os.path.isfile(db_path):
+if os.path.exists(db_path):
     logger.info(msg=f"Existing DB found")
     tg=telegramDB.search(q.platform==env)
     TG_TK = tg[0]['token']
