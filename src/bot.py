@@ -451,12 +451,12 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             try:
                 if(await DEXContractLookup(symbol) != None):
                     TokenToPrice = ex.to_checksum_address(await DEXContractLookup(symbol))
-                    logger.info(msg=f"token{TokenToPrice}")
+                    logger.info(msg=f"token {TokenToPrice}")
                     tokenToSell='USDT'
                     basesymbol=ex.to_checksum_address(await DEXContractLookup(tokenToSell))
-                    logger.info(msg=f"basesymbol{basesymbol}")
+                    logger.info(msg=f"basesymbol {basesymbol}")
                     qty=1
-                    logger.info(msg=f"router{router}")
+                    logger.info(msg=f"router {router}")
                     dexabi= await DEXFetchAbi(router)
                     contract = ex.eth.contract(address=router, abi=dexabi) #liquidityContract
 
@@ -464,11 +464,12 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                         try:
                             price = contract.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
                             logger.info(msg=f"price {price}")
-                            #tickerabi= await DEXFetchAbi(TokenToPrice)
-                            #tickercontract = ex.eth.contract(TokenToPrice, tickerabi) #liquidityContract
-                            #logger.info(msg=f"tickercontract{tickercontract}")
-                            #decimal_factor=tickercontract.functions.decimals().call()
-                            #logger.info(msg=f"decimal_factor {decimal_factor}")
+                            #tickerabi= await DEXFetchAbi(TokenToPrice) #logger.info(msg=f"tickerabi {tickerabi}")
+                            #tickercontract=ex.eth.contract(TokenToPrice,abi=tickerabi)
+                            #decimals = tickercontract.functions.decimals().call()
+                            #logger.info(msg=f"decimals {decimals}")
+                            #price2 = (1 / (10)) * price
+                            #logger.info(msg=f"price2 {price2}")
                             response=f"₿ {TokenToPrice}\n{symbol} @ {(price)}"
                         except Exception as e:
                             await HandleExceptions(e)
