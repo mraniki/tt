@@ -459,15 +459,16 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                     logger.info(msg=f"router{router}")
                     dexabi= await DEXFetchAbi(router)
                     contract = ex.eth.contract(address=router, abi=dexabi) #liquidityContract
-                    logger.info(msg=f"contract{contract}")
+
                     if(TokenToPrice != None):
                         try:
                             price = contract.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
                             logger.info(msg=f"price {price}")
-                            decimal_factor= ex.from_wei(price, 'Ether')
-                            logger.info(msg=f"decimal_factor {decimal_factor}")
-                            #decimal_factor2=contract.functions.decimals().call()
-                            #logger.info(msg=f"decimal_factor {decimal_factor2}")
+                            #tickerabi= await DEXFetchAbi(TokenToPrice)
+                            #tickercontract = ex.eth.contract(TokenToPrice, tickerabi) #liquidityContract
+                            #logger.info(msg=f"tickercontract{tickercontract}")
+                            #decimal_factor=tickercontract.functions.decimals().call()
+                            #logger.info(msg=f"decimal_factor {decimal_factor}")
                             response=f"₿ {TokenToPrice}\n{symbol} @ {(price)}"
                         except Exception as e:
                             await HandleExceptions(e)
