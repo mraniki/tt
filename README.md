@@ -42,6 +42,8 @@ Using:
 7) `/bal` command to query balance
 8) `/price BTCB` or `/price btc/usdt` to query ticker price 
 9) `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/dex quickswap`) to switch between multiple CEX and DEX with prefix 
+10) `/testmode` to switch between sandbox, mainnet, testnet
+11) `/trading` to disable/enable trading
 
 ## Config
 Either use .env file or json db as per below structure.
