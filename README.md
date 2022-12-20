@@ -79,7 +79,9 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
 
 V1.2
 - Update the buy/sell parsing logic to align dex and cex format and manage missing argument error with default values for SL/TP and Q
-- Better error handling (empty balance for order taking in CEX)
+- Better error handling
+      - empty balance for order taking in CEX
+      - binance amount of BTC/USDT must be greater than minimum amount precision of 5
 - More testing
 
 V1.3

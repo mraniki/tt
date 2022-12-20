@@ -463,9 +463,12 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                     if(TokenToPrice != None):
                         try:
                             price = contract.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
-                            #need to include the decimals logic
                             logger.info(msg=f"price {price}")
-                            response=f"₿ {TokenToPrice}\n{symbol} @ {round(price,6)}"
+                            decimal_factor= ex.from_wei(price, 'Ether')
+                            logger.info(msg=f"decimal_factor {decimal_factor}")
+                            #decimal_factor2=contract.functions.decimals().call()
+                            #logger.info(msg=f"decimal_factor {decimal_factor2}")
+                            response=f"₿ {TokenToPrice}\n{symbol} @ {(price)}"
                         except Exception as e:
                             await HandleExceptions(e)
                             logger.warning(msg=f"price error")
