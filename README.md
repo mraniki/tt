@@ -40,8 +40,8 @@ Using:
 5) Start your container or use `python3 bot.py` 
 6)`sell BTCUSDT sl=6000 tp=4500 q=1%` or for DEFI `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY
 7) `/bal` command to query balance
-9) `/price BTCB` or `/price btc/usdt` to query ticker price 
-10) `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/dex quickswap`) to switch between multiple CEX and DEX with prefix 
+8) `/price BTCB` or `/price btc/usdt` to query ticker price 
+9) `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/dex quickswap`) to switch between multiple CEX and DEX with prefix 
 
 ## Config
 Either use .env file or json db as per below structure.
