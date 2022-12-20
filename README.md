@@ -37,9 +37,13 @@ Using:
 4) Deploy :
     - via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
     - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
-6) Start your container or use `python3 bot.py` 
-7) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
-  (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) or for DEFI `BUY BTCB`
+5) Start your container or use `python3 bot.py`
+6) `sell BTCUSDT sl=6000 tp=4500 q=1%` or for DEFI `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY
+7) `/bal` command to query balance
+8) `/price BTCB` or `/price btc/usdt` to query ticker price 
+9) `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/dex quickswap`) to switch between multiple CEX and DEX with prefix 
+10) `/testmode` to switch between sandbox, mainnet, testnet
+11) `/trading` to disable/enable trading
 
 ## Config
 Either use .env file or json db as per below structure.
@@ -64,6 +68,7 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
  - Query balance via `/bal` command and view it in formatted way
  - Query ticker price via `/price BTCB` or `/price btc/usdt` command to view last symbol price (USDT as basis)
  - Switch between multiple CEX and DEX in one environment with prefix `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
+ - Switch between testnet and mainnet with `/testmode` 
  - Support % of USDT balance for CEX order
  - Support standard DEX token list per exchange (e.g. [https://tokenlists.org/](tokenlist.org)) with function to convert symbol to checksum address from the token list
  
