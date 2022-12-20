@@ -3,6 +3,7 @@ name: 'Up merge'
 
 on:
   push:
+      branches: [ "dev" ]
 
 jobs:
   nightly-merge:
