@@ -79,6 +79,7 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
 
 V1.2
 - Update the buy/sell parsing logic to align dex and cex format and manage missing argument error with default values for SL/TP and Q
+- Better error handling (empty balance for order taking in CEX)
 - More testing
 
 V1.3
@@ -90,7 +91,7 @@ v1.4
 - create / modify db via bot command
 
 v1.5
-- Support DEFI DEX uniswap (to be tested)
+- Support DEFI DEX uniswap and dydx (to be tested)
 - Support futures and margin for CEX (to be tested)
 - Support Web3 ENS
 
