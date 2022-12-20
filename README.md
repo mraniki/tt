@@ -8,7 +8,7 @@
 
 
 
-If you like it feel free to 
+If you like it, feel free to 
 [![donate](https://badgen.net/badge/icon/coindrop/6F4E37?icon=buymeacoffee&label)](https://coindrop.to/mraniki)
 
 Using:
