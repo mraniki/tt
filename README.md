@@ -68,6 +68,7 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
  - Query balance via `/bal` command and view it in formatted way
  - Query ticker price via `/price BTCB` or `/price btc/usdt` command to view last symbol price (USDT as basis)
  - Switch between multiple CEX and DEX in one environment with prefix `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
+ - Switch between testnet and mainnet with `/testmode` 
  - Support % of USDT balance for CEX order
  - Support standard DEX token list per exchange (e.g. [https://tokenlists.org/](tokenlist.org)) with function to convert symbol to checksum address from the token list
  
