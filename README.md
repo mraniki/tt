@@ -38,11 +38,10 @@ Using:
     - via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
     - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
 5) Start your container or use `python3 bot.py` 
-6) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
-  (e.g. for CEFI `sell BTCUSDT sl=6000 tp=4500 q=1%` or for DEFI `BUY BTCB`)
-7) Query balance via `/bal` command
-8) Query ticker price via `/price BTCB` or `/price btc/usdt`
-9) Switch between multiple CEX and DEX with prefix `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/dex quickswap`)
+6)`sell BTCUSDT sl=6000 tp=4500 q=1%` or for DEFI `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY
+7) `/bal` command to query balance
+9) `/price BTCB` or `/price btc/usdt` to query ticker price 
+10) `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/dex quickswap`) to switch between multiple CEX and DEX with prefix 
 
 ## Config
 Either use .env file or json db as per below structure.
