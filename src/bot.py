@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTVersion="🪙TT Beta 1.09"
+version="🪙TT Beta 1.02"
 ##=============== import  =============
 ##log
 import logging
@@ -40,7 +40,7 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 def LibCheck():
-    logger.info(msg=f"{TTVersion}")
+    logger.info(msg=f"{version}")
     logger.info(msg=f"Python {sys.version}")
     logger.info(msg=f"TinyDB {tinydb.__version__}")
     logger.info(msg=f"TPB {telegram.__version__}")
@@ -68,7 +68,6 @@ try:
     cexDB = db.table('cex')
     dexDB = db.table('dex')
 except Exception:
-    pass
     logger.warning(msg=f"no db {db_path}")
 #===================
 global ex
@@ -79,22 +78,21 @@ testmode="False"
 commandlist= """
 <code>/bal</code>
 <code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
-<code>/cex kraken</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code> <code>/price btc/usdt</code>
+<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=5%</code> <code>/price btc/usdt</code>
 <code>/cex binancecoinm</code> <code>buy btcbusd sl=1000 tp=20 q=5%</code>
 <code>/dex pancake</code> <code>buy btcb</code> <code>/price BTCB</code>
 <code>/dex quickswap</code> <code>buy wbtc</code> <code>/price wbtc</code>
 <code>/trading</code>
 <code>/testmode</code>"""
-menu=f'{TTVersion} \n {commandlist}\n'
+menu=f'{version} \n {commandlist}\n'
 #=============== Functions ===============
 def Convert(string):
     li = list(string.split(" "))
-    #improve this function to return
-    # DIRECTION BUY SELL
-    # SYMBOL 
-    # SL
-    # TP
-    # QUANTITY
+    #m_dir= li[0]
+    #m_symbol=li[1]
+    #m_sl=li[2][3:7]
+    #m_tp=li[3][3:7]
+    #m_q=li[4][2:-1]
     return li
 
 def SearchCEX(string1,string2):
@@ -157,6 +155,7 @@ async def LoadExchange(exchangeid, mode):
     global abiurl
     global abiurltoken
     global basesymbol
+    global m_ordertype
     logger.info(msg=f"LoadExchange")
     logger.info(msg=f"exchangeid: {exchangeid}")
     logger.info(msg=f"mode: {mode}")
@@ -170,6 +169,7 @@ async def LoadExchange(exchangeid, mode):
         exchanges[exchangeid] = exchange()
         try:
             exchanges[exchangeid] = exchange({'apiKey': newex[0]['api'],'secret': newex[0]['secret']})
+            m_ordertype=newex[0]['ordertype']
             ex=exchanges[exchangeid]
             if (mode=="True"):
                 ex.set_sandbox_mode('enabled')
@@ -402,7 +402,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 m_sl=order_m[2][3:7]
                 m_tp=order_m[3][3:7]
                 m_q=order_m[4][2:-1]
-                m_ordertype=CEX_ordertype
+                #m_ordertype=CEX_ordertype
                 logger.info(msg=f"Processing: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
                 #Check Balance
                 bal = ex.fetch_free_balance()
@@ -430,7 +430,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 m_symbol=await DEXContractLookup(order_m[1])
                 m_q=1  #m_q=order_m[2][2:-1]
                 res=await DEXBuy(m_symbol,m_q)
-                response=f"{res}"
+                response=f"🟢 ORDER Processed: {res}"
             else:
                 logger.warning(msg=f"error with exchange type {type(ex)}")
                 response=f"⚠️ error with exchange setup"
@@ -451,21 +451,26 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             try:
                 if(await DEXContractLookup(symbol) != None):
                     TokenToPrice = ex.to_checksum_address(await DEXContractLookup(symbol))
-                    logger.info(msg=f"token{TokenToPrice}")
+                    logger.info(msg=f"token {TokenToPrice}")
                     tokenToSell='USDT'
                     basesymbol=ex.to_checksum_address(await DEXContractLookup(tokenToSell))
-                    logger.info(msg=f"basesymbol{basesymbol}")
+                    logger.info(msg=f"basesymbol {basesymbol}")
                     qty=1
-                    logger.info(msg=f"router{router}")
+                    logger.info(msg=f"router {router}")
                     dexabi= await DEXFetchAbi(router)
                     contract = ex.eth.contract(address=router, abi=dexabi) #liquidityContract
-                    logger.info(msg=f"contract{contract}")
+
                     if(TokenToPrice != None):
                         try:
                             price = contract.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
-                            #need to include the decimals logic
                             logger.info(msg=f"price {price}")
-                            response=f"₿ {TokenToPrice}\n{symbol} @ {round(price,6)}"
+                            #tickerabi= await DEXFetchAbi(TokenToPrice) #logger.info(msg=f"tickerabi {tickerabi}")
+                            #tickercontract=ex.eth.contract(TokenToPrice,abi=tickerabi)
+                            #decimals = tickercontract.functions.decimals().call()
+                            #logger.info(msg=f"decimals {decimals}")
+                            #price2 = (1 / (10)) * price
+                            #logger.info(msg=f"price2 {price2}")
+                            response=f"₿ {TokenToPrice}\n{symbol} @ {(price)}"
                         except Exception as e:
                             await HandleExceptions(e)
                             logger.warning(msg=f"price error")
