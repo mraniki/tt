@@ -37,7 +37,7 @@ Using:
 4) Deploy :
     - via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
     - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
-5) Start your container or use `python3 bot.py` 
+5) Start your container or use `python3 bot.py`
 6)`sell BTCUSDT sl=6000 tp=4500 q=1%` or for DEFI `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY
 7)`/bal` command to query balance
 8)`/price BTCB` or `/price btc/usdt` to query ticker price 
