@@ -2,13 +2,13 @@
  [![](https://badgen.net/badge/icon/TT/E2B13C?icon=bitcoin&label)](https://github.com/mraniki/tt) 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)
 
- CEX, DEX and Telegram integration. 
+ CEX, DEX and Telegram integration. Query Balance, quote ticker and place order for CEFI and DEFI.
  Based on python telegram bot v20, CCXT, Web3 v6 and TinyDB.
  Deploy it via docker. 
 
 
 
-If you like it feel free to 
+If you like it, feel free to 
 [![donate](https://badgen.net/badge/icon/coindrop/6F4E37?icon=buymeacoffee&label)](https://coindrop.to/mraniki)
 
 Using:
@@ -33,11 +33,11 @@ Using:
 2) Get your 
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
     - DEX contract router supported by [Web3](https://github.com/ethereum/web3.py)
-3) Update the config (as per below), bot token, API in the .env file or in db config (and point your config to container volume /code/config)
+3) Update the config (telegram token, API, router). Point your config to container volume /code/config)
 4) Deploy :
     - via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
-    - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` and `python3 bot.py` 
-6) Start your container
+    - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
+6) Start your container or use `python3 bot.py` 
 7) Submit order to the bot as per the following Order format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY 
   (e.g. `sell BTCUSDT sl=6000 tp=4500 q=1%`) or for DEFI `BUY BTCB`
 
@@ -54,58 +54,63 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
 
  ## Features Available
  
- v1 
- - Enable bot in pythontelegram v20 and support exchange formatted error via telegram
- - Push your signal manually or from system like trading view webhook to submit order to your:
-      - CEFI exchange (via CCXT) and receive confirmation with the format `sell BTCUSDT sl=6000 tp=4500 q=1%` (verified with Binance, Binance Testnet and ~~FTX~~ Kraken)
-      - DEFI exchange (via Web3) for balance query, order placing and symbol quote for mainnet and testnet with format `buy btcb` (verified with BSC & pancakeswap, polygon and quickswap)
- - Disable or Enable trading process via /trading command
+ ### v1 
+ - Enable bot in pythontelegram v20 and support CEX and DEX exchange formatted error via telegram
+ - Query Balance, quote ticker and place order for CEX and DEX
+ - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order for
+      - `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI exchange (via CCXT)(verified with Binance, Binance Testnet and ~~FTX~~ Kraken)
+      - `buy btcb` for DEFI exchange (via Web3) (verified with BSC & pancakeswap, polygon and quickswap)
+ - Disable or Enable trading process via `/trading` command
  - Query balance via `/bal` command and view it in formatted way
  - Query ticker price via `/price BTCB` or `/price btc/usdt` command to view last symbol price (USDT as basis)
- - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
- - Support multiple enviroment via environment variable file (e.g. POC, DEV, SIT, PRD)
+ - Switch between multiple CEX and DEX in one environment with prefix `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
  - Support % of USDT balance for CEX order
- - Support bot in private channel (or private chat) and multiple channel per enviroment
- - Handle multiple CEX and DEX and switch between exchanges with: e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap` or the exchange name setup in your config
- - Support DEX token list per exchange and convert symbol to checksum address
- - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
- - Handle send message in one function function
- - Handle libraries exceptions in one function and deliver with apprise to support more notification system
-
+ - Support standard DEX token list per exchange (e.g. [https://tokenlists.org/](tokenlist.org)) with function to convert symbol to checksum address from the token list
  
+ ### Other Features
+ - Support bot in private channel (or private chat) and multiple channel per enviroment
+ - Support multiple environment via variable (e.g. DEV, PRD or PRD DEX / PRD CEX)
+ - Handle messaging in one function
+ - Handle libraries exceptions in one function and delivery with apprise to support more notification system
+ - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
+ - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
+
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 Roadmap
 
-V1.2
+### V1.2
 - Update the buy/sell parsing logic to align dex and cex format and manage missing argument error with default values for SL/TP and Q
 - Better error handling
       - empty balance for order taking in CEX
       - binance amount of BTC/USDT must be greater than minimum amount precision of 5
-- More testing
+- More testing and code hardening
 
-V1.3
+### V1.3
 - Simplify the Exchange search functions
+- Add Base currency at exchange variable (like USDT/USDC/BUSD or others)
 - Allow to start with DEX for initial start
+- Support DEFI DEX uniswap and dydx (to be tested)
+- Support DEX limit order if supported like dydx
 
-v1.4
+### v1.4
 - Update the start logic to build the db to simplify the start 
 - create / modify db via bot command
 
-v1.5
-- Support DEFI DEX uniswap and dydx (to be tested)
+### v1.5
+
 - Support futures and margin for CEX (to be tested)
 - Support Web3 ENS
 
-v2
+### v2
 - view daily pnl in /bal response
 - view free margin for futures in /bal response
 - view opened future position via /pos command
 - Support bot in webhook instead of getupdate
 - View weekly pnl with /w command
 
-v3
-- [![Matrix](https://badgen.net/badge/icon/matrix/black?icon=libraries&label)](https://github.com/poljar/matrix-ni) Integrate with messaging platform agnostic
+### v3
+- [![Matrix](https://badgen.net/badge/icon/matrix/black?icon=libraries&label)](https://github.com/poljar/matrix-ni) Integrate with agnostic chat bot  platform 
 - [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/) Merge with Telegram MQL4 version which integrate with MT4 exchanges for TradFi support
 
 
