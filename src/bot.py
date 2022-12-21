@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.02"
+version="🪙TT Beta 1.03"
 ##=============== import  =============
 ##log
 import logging
@@ -55,21 +55,6 @@ LibCheck()
 dotenv_path = './config/.env'
 db_path= './config/db.json'
 #===================
-#add DB check / ENV check 
-#  if missing create pancake testnet setup 
-# and send to empty db support command
-try:
-    db = TinyDB(db_path)
-    q = Query()
-    globalDB = db.table('global')
-    env = globalDB.all()[0]['env']
-    logger.info(msg=f"Environment is {env}")
-    telegramDB = db.table('telegram')
-    cexDB = db.table('cex')
-    dexDB = db.table('dex')
-except Exception:
-    logger.warning(msg=f"no db {db_path}")
-#===================
 global ex
 exchanges = {}
 trading=True
@@ -94,6 +79,43 @@ def Convert(string):
     #m_tp=li[3][3:7]
     #m_q=li[4][2:-1]
     return li
+##=========== DB COMMAND =================
+def DBCommand_Add_TG(string1,string2,string3):
+    if len(telegramDB.search(q.token==string1)):
+        logger.info(msg=f"token is already setup")
+    else:
+        telegramDB.insert({"token": string1,"channel": string2,"platform": string3})
+
+def DBCommand_Add_CEX(string1,string2,string3,string4,string5,string6,string7):
+    if len(cexDB.search(q.api==string2)):
+        logger.info(msg=f"EX exists in DB")
+    else:
+        cexDB.insert({
+        "name": string1,
+        "api": string2,
+        "secret": string3,
+        "password": string4,
+        "testmode": string5,
+        "ordertype": string6,
+        "defaultType": string7}) 
+
+def DBCommand_Add_DEX(string1,string2,string3,string4,string5,string6,string7,string8,string9,string10,string11):
+    if len(dexDB.search(q.name==string1)):
+        logger.info(msg=f"EX exists in DB")
+    else:
+        dexDB.insert({
+            "name": string1,
+            "address": string2,
+            "privatekey": string3,
+            "version": string4,
+            "networkprovider": string5,
+            "router": string6,
+            "testmode": string7,
+            "tokenlist":string8,
+            "abiurl":string9,
+            "abiurltoken":string10,
+            "basesymbol":string11
+        }) 
 
 def SearchCEX(string1,string2):
     if type(string1) is str:
@@ -293,78 +315,10 @@ async def DEXBuy(tokenAddress, amountToBuy):
         message="Transaction Failed"
         return message
 
-##============= variables ================
-if os.path.exists(db_path):
-    logger.info(msg=f"Existing DB found")
-    tg=telegramDB.search(q.platform==env)
-    TG_TK = tg[0]['token']
-    TG_CHANNEL_ID = tg[0]['channel']
-    cexdb=cexDB.all()
-    dexdb=dexDB.all()
-    CEX_name = cexdb[0]['name']
-    CEX_ordertype = cexdb[0]['ordertype']
-    CEX_defaulttype = cexdb[0]['defaultType']
-else:
-    logger.warning(msg=f"no DB, env file")
-    if os.path.exists(dotenv_path):
-        logger.info(msg=f"env file found")
-        load_dotenv(dotenv_path)
-    else:
-        logger.warning("no env file, trying the env variable")
-        try:
-             #ENV VAR (via file or docker)
-            TG_TK = os.getenv("TG_TK")
-            TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
-            CEX_name = os.getenv("EX_NAME")
-            CEX_api = os.getenv("EX_YOURAPIKEY")
-            CEX_secret = os.getenv("EX_YOURSECRET")
-            CEX_password = os.getenv("EX_YOURPASSWORD")
-            CEX_ordertype = os.getenv("EX_ORDERTYPE")
-            CEX_defaulttype = os.getenv("EX_DEFAULTTYPE")
-            CEX_test_mode = os.getenv("EX_SANDBOXMODE")
-        except Exception as e:
-            logger.error("no env variables")
-
-##=========== DB SETUP =============
-    if len(cexDB.search(q.api==CEX_api)):
-        logger.info(msg=f"EX exists in DB")
-    else:
-        cexDB.insert({
-        "name": CEX_name,
-        "api": CEX_api,
-        "secret": CEX_secret,
-        "password": CEX_password,
-        "testmode": CEX_test_mode,
-        "ordertype": CEX_ordertype,
-        "defaultType": CEX_defaulttype})
-    if len(telegramDB.search(q.token==TG_TK)):
-        logger.info(msg=f"token is already setup")
-    else:
-        telegramDB.insert({"token": TG_TK,"channel": TG_CHANNEL_ID,"platform": "PRD"})
-    if (TG_TK==""):
-        logger.error(msg=f"no TG TK")
-        sys.exit()
-    elif (CEX_name==""):
-        logger.error(msg=f"missing cex")
-        sys.exit()
-    elif (CEX_name==""):
-        logger.error(msg=f"no sandbox")
-##======== APPRISE Setup ===============
-apobj = apprise.Apprise()
-apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 ##=============== help  ================
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg= f"Environment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}"
     await send(update,msg)
-##========== startup message ===========
-async def post_init(application: Application):
-    global ex
-    logger.info(msg=f"Setting up exchange {CEX_name}")
-    ex=CEX_name
-    await LoadExchange(ex,testmode)
-    logger.info(msg=f"bot is online")
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
-
 ##========== view balance  =============
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
@@ -579,6 +533,89 @@ async def HandleExceptions(e) -> None:
         e=f"{e}"
     message=f"⚠️ {e}"
     await notify(message)
+##======== END OF FUNCTIONS =======
+
+
+##======== DB START ===============
+if not os.path.exists(db_path):
+    logger.info(msg=f"setting up new DB")
+    open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
+    if os.path.exists(dotenv_path):
+        logger.info(msg=f"env file found")
+        load_dotenv(dotenv_path)
+    elif os.getenv("TG_TK")!="":
+        logger.info("Using docker variable")
+        try:
+            TG_TK = os.getenv("TG_TK")
+            TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
+            CEX_name = os.getenv("EX_NAME")
+            CEX_api = os.getenv("EX_YOURAPIKEY")
+            CEX_secret = os.getenv("EX_YOURSECRET")
+            CEX_password = os.getenv("EX_YOURPASSWORD")
+            CEX_ordertype = os.getenv("EX_ORDERTYPE")
+            CEX_defaulttype = os.getenv("EX_DEFAULTTYPE")
+            CEX_test_mode = os.getenv("EX_SANDBOXMODE")
+        except Exception as e:
+            logger.error("no env variables")
+    #### adding ENV data to DB
+        if (TG_TK==""):
+            logger.error(msg=f"no TG TK")
+            sys.exit()
+        else:
+            DBCommand_Add_TG(TG_TK,TG_CHANNEL_ID)
+        if (CEX_name==""):
+            logger.error(msg=f"NO CEX")
+        else:
+            logger.error(msg=f"adding CEX to DB")
+            DBCommand_Add_CEX(CEX_name,CEX_api,CEX_secret,CEX_password,CEX_ordertype,CEX_defaulttype,CEX_test_mode)
+        if (DEX_name==""):
+            ogger.error(msg=f"NO DEX")
+        else:
+            DBCommand_Add_DEX()
+else:
+    logger.info(msg=f"Verifying existing DB")
+
+if os.path.exists(db_path):
+    logger.info(msg=f"Existing DB found")
+    try:
+        db = TinyDB(db_path)
+        q = Query()
+        globalDB = db.table('global')
+        env = globalDB.all()[0]['env']
+        logger.info(msg=f"Environment is {env}")
+        telegramDB = db.table('telegram')
+        cexDB = db.table('cex')
+        dexDB = db.table('dex')
+        tg=telegramDB.search(q.platform==env)
+        TG_TK = tg[0]['token']
+        TG_CHANNEL_ID = tg[0]['channel']
+        cexdb=cexDB.all()
+        dexdb=dexDB.all()
+        CEX_name = cexdb[0]['name']
+        CEX_ordertype = cexdb[0]['ordertype']
+        CEX_defaulttype = cexdb[0]['defaultType']
+        if (TG_TK==""):
+            logger.error(msg=f"no TG TK")
+            sys.exit()
+        elif (CEX_name==""):
+            logger.error(msg=f"missing cex")
+            sys.exit()
+    except Exception:
+        logger.warning(msg=f"error with existing db file {db_path}")
+
+##======== APPRISE Setup ===============
+apobj = apprise.Apprise()
+apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
+
+##========== startup message ===========
+async def post_init(application: Application):
+    global ex
+    logger.info(msg=f"Setting up exchange {CEX_name}")
+    ex=CEX_name
+    await LoadExchange(ex,testmode)
+    logger.info(msg=f"bot is online")
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
+
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
@@ -588,6 +625,8 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     e=f"{tb_trim}"
     message=f"⚠️ {e}"
     await send(update,message)
+
+
 #================== BOT =================
 def main():
     try:
