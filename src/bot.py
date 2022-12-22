@@ -1,55 +1,37 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.03"
+version="🪙TT Beta 1.20"
 ##=============== import  =============
 ##log
 import logging
 import sys
 import traceback
-
 ##env
 import os
 from os import getenv
 from dotenv import load_dotenv
 import json, requests
-
 #telegram
 import telegram
 from telegram import Update, constants
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
-
 #notification
 import apprise
-
 #db
 import tinydb
 from tinydb import TinyDB, Query
 import re
-
 #CEX
 import ccxt
-
 #DEX
 import web3
 from web3 import Web3
 from web3.contract import Contract
-from typing import List #Dict, List
+from typing import List
 import time
 
 ##=============== Logging  =============
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-def LibCheck():
-    logger.info(msg=f"{version}")
-    logger.info(msg=f"Python {sys.version}")
-    logger.info(msg=f"TinyDB {tinydb.__version__}")
-    logger.info(msg=f"TPB {telegram.__version__}")
-    logger.info(msg=f"CCXT {ccxt.__version__}")
-    logger.info(msg=f"Web3 {web3.__version__}")
-    logger.info(msg=f"apprise {apprise.__version__}")
-    return
-
-LibCheck()
 
 ##=============== CONFIG ===============
 dotenv_path = './config/.env'
@@ -70,62 +52,70 @@ commandlist= """
 <code>/trading</code>
 <code>/testmode</code>"""
 menu=f'{version} \n {commandlist}\n'
-#=============== Functions ===============
-def Convert(string):
-    li = list(string.split(" "))
-    #m_dir= li[0]
-    #m_symbol=li[1]
-    #m_sl=li[2][3:7]
-    #m_tp=li[3][3:7]
-    #m_q=li[4][2:-1]
-    return li
-##=========== DB COMMAND =================
-def DBCommand_Add_TG(string1,string2,string3):
-    if len(telegramDB.search(q.token==string1)):
+#===========Common Functions ===============
+
+def LibCheck():
+    logger.info(msg=f"{version}")
+    logger.info(msg=f"Python {sys.version}")
+    logger.info(msg=f"TinyDB {tinydb.__version__}")
+    logger.info(msg=f"TPB {telegram.__version__}")
+    logger.info(msg=f"CCXT {ccxt.__version__}")
+    logger.info(msg=f"Web3 {web3.__version__}")
+    logger.info(msg=f"apprise {apprise.__version__}")
+    return
+
+##===========DB Functions
+def DBCommand_Add_TG(s1,s2,s3):
+    if len(telegramDB.search(q.token==s1)):
         logger.info(msg=f"token is already setup")
     else:
-        telegramDB.insert({"token": string1,"channel": string2,"platform": string3})
-
-def DBCommand_Add_CEX(string1,string2,string3,string4,string5,string6,string7):
-    if len(cexDB.search(q.api==string2)):
+        telegramDB.insert({"token": s1,"channel": s2,"platform": s3})
+def DBCommand_Add_CEX(s1,s2,s3,s4,s5,s6,s7):
+    if len(cexDB.search(q.api==s2)):
         logger.info(msg=f"EX exists in DB")
     else:
         cexDB.insert({
-        "name": string1,
-        "api": string2,
-        "secret": string3,
-        "password": string4,
-        "testmode": string5,
-        "ordertype": string6,
-        "defaultType": string7}) 
-
-def DBCommand_Add_DEX(string1,string2,string3,string4,string5,string6,string7,string8,string9,string10,string11):
-    if len(dexDB.search(q.name==string1)):
+        "name": s1,
+        "api": s2,
+        "secret": s3,
+        "password": s4,
+        "testmode": s5,
+        "ordertype": s6,
+        "defaultType": s7}) 
+def DBCommand_Add_DEX(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11):
+    if len(dexDB.search(q.name==s1)):
         logger.info(msg=f"EX exists in DB")
     else:
         dexDB.insert({
-            "name": string1,
-            "address": string2,
-            "privatekey": string3,
-            "version": string4,
-            "networkprovider": string5,
-            "router": string6,
-            "testmode": string7,
-            "tokenlist":string8,
-            "abiurl":string9,
-            "abiurltoken":string10,
-            "basesymbol":string11
-        }) 
-
-def SearchCEX(string1,string2):
-    if type(string1) is str:
-        query1 = ((q.name==string1)&(q['testmode'] == string2))
+            "name": s1,
+            "address": s2,
+            "privatekey": s3,
+            "version": s4,
+            "networkprovider": s5,
+            "router": s6,
+            "testmode": s7,
+            "tokenlist":s8,
+            "abiurl":s9,
+            "abiurltoken":s10,
+            "basesymbol":s11}) 
+async def dropDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.info(msg=f"db dropped")
+    db.drop_tables()
+async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.info(msg=f"display db")
+    message=f" db extract: \n {db.all()}"
+    await send(update,message)
+    
+#=========Exchange Functions
+def SearchCEX(s1,s2):
+    if type(s1) is str:
+        query1 = ((q.name==s1)&(q['testmode'] == s2))
         CEXSearch = cexDB.search(query1)
         if (len(str(CEXSearch))>=1):
             return CEXSearch
     elif type(string1) is not str:
         try:
-            query1 = ((q.name==string1.name.lower())&(q['testmode'] == string2))
+            query1 = ((q.name==s1.name.lower())&(q['testmode'] == s2))
             CEXSearch = cexDB.search(query1)
             if (len(str(CEXSearch))==1):
                 return CEXSearch
@@ -135,10 +125,9 @@ def SearchCEX(string1,string2):
             return
     else:
         return
-
-def SearchDEX(string1,string2):
+def SearchDEX(s1,s2):
     try:
-        query = ((q.name==string1)&(q['testmode'] == string2))
+        query = ((q.name==s1)&(q['testmode'] == s2))
         DEXSearch = dexDB.search(query)
         if (len(str(DEXSearch))>=1):
             return DEXSearch
@@ -146,26 +135,25 @@ def SearchDEX(string1,string2):
             return
     except Exception:
         return
-
-def SearchEx(string1,string2):
-    if (isinstance(string1,str)):
-        CEXCheck=SearchCEX(string1,string2)
-        DEXCheck=SearchDEX(string1,string2)
+def SearchEx(s1,s2):
+    if (isinstance(s1,str)):
+        CEXCheck=SearchCEX(s1,s2)
+        DEXCheck=SearchDEX(s1,s2)
         if (CEXCheck!= None):
             if(len(str(CEXCheck))>=1):
                 return CEXCheck[0]['name']
         elif (len(str(DEXCheck))>=1):
             return DEXCheck[0]['name']
-    elif not (isinstance(string1,web3.main.Web3)):
-        CEXCheck=SearchCEX(string1.id,string2)
+    elif not (isinstance(s1,web3.main.Web3)):
+        CEXCheck=SearchCEX(s1.id,s2)
         return CEXCheck[0]['name']
-    elif (isinstance(string1,web3.main.Web3)):
-        DEXCheck=SearchDEX(string1,string2)
+    elif (isinstance(s1,web3.main.Web3)):
+        DEXCheck=SearchDEX(s1,s2)
         return DEXCheck[0]['name']
     else:
-        logger.error(msg=f"Error with DB search {string1} {string2}")
+        logger.error(msg=f"DB search error {s1} {s2}")
         return
-
+        
 async def LoadExchange(exchangeid, mode):
     global ex
     global name
@@ -226,58 +214,94 @@ async def LoadExchange(exchangeid, mode):
             logger.info(msg=f"Connected to Web3 {ex}")
             return name
         else:
-            raise ConnectionError(f'Couldn\'t connect to {router}')
+            raise ConnectionError(f'Could not connect to {router}')
     else:
-        logger.warning(msg=f"Exchange Config Error")
+        logger.warning(msg=f"Config Error")
         return
 
-async def DEXContractLookup(symbol):
+async def DEXContractLookup(symb):
     try:
         url = requests.get(tokenlist)
         text = url.text
         token_list = json.loads(text)['tokens']
         #logger.info(msg=f"{token_list}")
-        symbol=symbol.upper()
-        logger.info(msg=f"symbol {symbol}")
+        symb=symb.upper()
+        logger.info(msg=f"symbol {symb}")
         try:
-            symbolcontract = [token for token in token_list if token['symbol'] == symbol]
+            symbolcontract = [token for token in token_list if token['symbol'] == symb]
             if len(symbolcontract) > 0:
                 logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
                 return symbolcontract[0]['address']
             else:
-                logger.warning(msg=f"{symbol} symbol not available in tokenlist")
+                logger.warning(msg=f"{symb} tokenlist error")
                 return None
         except Exception as e:
-            logger.warning(msg=f"{symbol} symbol & tokenlist error ")
+            logger.warning(msg=f"{symb} symbol & tokenlist error ")
             await HandleExceptions(e)
             return None
     except Exception as e:
         await HandleExceptions(e)
         return None
 
-async def DEXFetchAbi(address):
+async def DEXFetchAbi(addr):
     try:
         url = abiurl
         params = {
             "module": "contract",
             "action": "getabi",
-            "address": address,
+            "address": addr,
             "apikey": abiurltoken }
         resp = requests.get(url, params=params).json()
         abi = resp["result"]
         #logger.info(msg=f"{abi}")
-        return abi
+        if(abi!=""):
+            return abi
+        else:
+            return None
     except Exception as e:
         await HandleExceptions(e)
 
-async def DEXBuy(tokenAddress, amountToBuy):
+#ORDER PARSER
+def Convert(s):
+    li = s.split(" ")
+    try:
+        m_dir= li[0]
+    except (IndexError, TypeError):
+        logger.error(msg=f"{s} no direction")
+        return  
+    try:
+        m_symbol=li[1]
+    except (IndexError, TypeError):
+        logger.warning(msg=f"{s} no symbol")
+        return
+    try:
+        m_sl=li[2][3:7]
+    except (IndexError, TypeError):
+        logger.warning(msg=f"{s} no sl")
+        m_sl=0
+    try:
+        m_tp=li[3][3:7]
+    except (IndexError, TypeError):
+        logger.warning(msg=f"{s} no sl")
+        m_tp=0
+    try:
+        m_q=li[4][2:-1]
+    except (IndexError, TypeError):
+        logger.warning(msg=f"{s} no size default to 1") 
+        m_q=1
+    order=[m_dir,m_symbol,m_sl,m_tp,m_q]
+    logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
+    return order
+
+#========== Buy function
+async def DEXBuy(TknAddr, AmnToBuy):
     web3=ex
     transactionRevertTime = 10000
     gasAmount = 100
     gasPrice = 5
-    tokenToBuy = web3.to_checksum_address(tokenAddress)
+    tokenToBuy = web3.to_checksum_address(TknAddr)
     tokenToSell = basesymbol
-    amountToBuy = amountToBuy
+    amountToBuy = AmnToBuy
     txntime = (int(time.time()) + transactionRevertTime)
     try:
         if(tokenToBuy != None):
@@ -301,44 +325,85 @@ async def DEXBuy(tokenAddress, amountToBuy):
             checkTransactionRequest = requests.get(url=checkTransactionSuccessURL)
             txResult = checkTransactionRequest.json()['status']
             if(txResult == "1"):
-                #logger.info(msg=f"{txHash}")
+                logger.info(msg=f"{txHash}")
                 return txHash
             else:
-                message="Transaction Failed"
-                return message
+                logger.info(msg="1Transaction Failed")
+                return None
         except Exception as e:
-            message="Transaction Failed"
+            logger.info(msg=f"2Transaction Failed {e}")
             await HandleExceptions(e)
-            return message
+            return {e}
     except Exception as e:
         await HandleExceptions(e)
-        message="Transaction Failed"
-        return message
+        logger.info(msg="3Transaction Failed")
+        return {e}
+#=========== Send function
+async def send (self, messaging):
+    try:
+        await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
+    except Exception as e:
+        await HandleExceptions(e)
+#========== notification function
+async def notify(messaging):
+    try:
+        apobj.notify(body=messaging)
+    except Exception as e:
+        logger.error(msg=f"error: {e}")
+#======= error handling
+async def HandleExceptions(e) -> None:
+    try:
+        e==""
+        logger.error(msg=f"{e}")
+    except KeyError:
+        logger.error(msg=f"DB content error {e}")
+        e=f"DB content error  {e}"
+    except ccxt.base.errors:
+        logger.error(msg=f"CCXT error {e}")
+        e=f"CCXT error {e}"
+    except ccxt.NetworkError:
+        logger.error(msg=f"Network error {e}")
+        e=f"Network error {e}"
+    except ccxt.ExchangeError:
+        logger.error(msg=f"Exchange error: {e}")
+        e=f"Exchange error: {e}"
+    except telegram.error:
+        logger.error(msg=f"telegram error: {e}")
+        e=f"telegram error: {e}"
+    except Exception:
+        logger.error(msg=f"error: {e}")
+        e=f"{e}"
+    message=f"⚠️ {e}"
+    await notify(message)
+##======== END OF FUNCTIONS ============
 
-##=============== help  ================
+##============TG COMMAND================
+#
+
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg= f"Environment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}"
     await send(update,msg)
-##========== view balance  =============
+##====TG COMMAND view balance  =========
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
+        msg=f"🏦 Balance"
         if not isinstance(ex,web3.main.Web3):
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
-            trimmedbal=""
+            sbal=""
             for iterator in bal:
-                trimmedbal += (f"{iterator} : {bal[iterator]} \n")
-            if(trimmedbal==""):
-                trimmedbal="No Balance"
-            msg=f"🏦 Balance \n{trimmedbal}"
+                sbal += (f"{iterator} : {bal[iterator]} \n")
+            if(sbal==""):
+                sbal="No Balance"
+            msg+=f"\n{sbal}"
         else:
             bal = ex.eth.get_balance(address)
             bal = ex.from_wei(bal,'ether')
-            msg = f"🏦 Balance: {bal}"
+            msg += f"\n{bal}"
         await send(update,msg)
     except Exception as e:
         await HandleExceptions(e)
-#===== order parsing and placing ======
+#=== TG COMMAND order parsing  ======
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msgtxt = update.effective_message.text
     msgtxt_upper =msgtxt.upper()
@@ -353,47 +418,60 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 order_m = Convert(msgtxt_upper)
                 m_dir= order_m[0]
                 m_symbol=order_m[1]
-                m_sl=order_m[2][3:7]
-                m_tp=order_m[3][3:7]
-                m_q=order_m[4][2:-1]
+                m_sl=order_m[2]
+                m_tp=order_m[3]
+                m_q=order_m[4]
                 #m_ordertype=CEX_ordertype
                 logger.info(msg=f"Processing: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
                 #Check Balance
-                bal = ex.fetch_free_balance()
-                bal = {k: v for k, v in bal.items() if v is not None and v>0}
-                logger.info(msg=f"bal: {bal}")
-                if (len(str(bal))):
-                ######## % of bal
-                    m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
-                    totalusdtbal = ex.fetchBalance()['USDT']['free']
-                    amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
-                ######## ORDER
-                    res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
-                    orderid=res['id']
-                    timestamp=res['datetime']
-                    symbol=res['symbol']
-                    side=res['side']
-                    amount=res['amount']
-                    price=res['price']
-                    response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
-                else:
-                    response=f"⚠️ not enough money"
+                try:
+                    bal = ex.fetch_free_balance()
+                    bal = {k: v for k, v in bal.items() if v is not None and v>0}
+                    logger.info(msg=f"bal: {bal}")
+                    if (len(str(bal))):
+                    ######## % of bal
+                        m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
+                        totalusdtbal = ex.fetchBalance()['USDT']['free']
+                        amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
+                    ######## ORDER
+                        try:
+                            res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
+                            orderid=res['id']
+                            timestamp=res['datetime']
+                            symbol=res['symbol']
+                            side=res['side']
+                            amount=res['amount']
+                            price=res['price']
+                            response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                        except Exception as e:
+                            response=f"❌ ORDER failed: {e}"
+                except Exception as e:
+                    await HandleExceptions(e)
+                    logger.warning(msg=f"balance error")
+                    return
             elif (isinstance(ex,web3.main.Web3)):
                 order_m = Convert(msgtxt_upper)
+                logger.info(msg=f"order_m= {order_m}")
                 m_dir= order_m[0]
                 m_symbol=await DEXContractLookup(order_m[1])
                 m_q=1  #m_q=order_m[2][2:-1]
-                res=await DEXBuy(m_symbol,m_q)
-                response=f"🟢 ORDER Processed: {res}"
+                try:
+                    res=await DEXBuy(m_symbol,m_q)
+                    logger.info(msg=f"res= {res}")
+                    if({res}!= ValueError):
+                        response=f"🟢 ORDER Processed: {res}"
+                    else:
+                        response=f"❌ ORDER failed"
+                except Exception:
+                    response=f"❌ ORDER failed"
             else:
                 logger.warning(msg=f"error with exchange type {type(ex)}")
                 response=f"⚠️ error with exchange setup"
             await send(update,response)
-
-##=========== view price  =============
+##======TG COMMAND view price ===========
 async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     tginput  = update.effective_message.text
-    input = Convert(tginput)
+    input = tginput.split(" ")
     logger.info(msg=f"symbol {input}")
     symbol=input[1]
     logger.info(msg=f"symbol {symbol}")
@@ -441,7 +519,7 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         await send(update,response)
     except Exception as e:
         await HandleExceptions(e)
-##======== trading switch  =============
+##====TG COMMAND Trading switch  ========
 async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global trading
     if (trading==False):
@@ -450,11 +528,11 @@ async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         trading=False
     message=f"Trading is {trading}"
     await send(update,message)
-##=========== CEX DEX switch ============
+##====TG COMMAND CEX DEX switch =========
 async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(msg=f"current ex {ex}")
     msg_ex  = update.effective_message.text
-    newexmsg = Convert(msg_ex)
+    newexmsg = msg_ex.split(" ")
     newex=newexmsg[1]
     typeex=newexmsg[0]
     if (typeex=="/cex"):
@@ -478,8 +556,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(msg=f"newex {ex}")
     logger.info(msg=f"type {type(ex)}")
     logger.info(msg=f"isinstance {isinstance(ex,web3.main.Web3)}")
-
-##========== Test mode switch ===========
+##======TG COMMAND Test mode switch ======
 async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global testmode
     if (testmode=="False"):
@@ -488,53 +565,6 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         testmode="False"
     message=f"Sandbox is {testmode}"
     await send(update,message)
-##============ DB COMMAND ===============
-async def dropDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info(msg=f"db table dropped")
-    db.drop_tables()
-async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info(msg=f"display db")
-    message=f" db extract: \n {db.all()}"
-    await send(update,message)
-#=========== sendmessage command =========
-async def send (self, messaging):
-    try:
-        await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
-    except Exception as e:
-        await HandleExceptions(e)
-#=========== notification command =========
-async def notify(messaging):
-    try:
-        apobj.notify(body=messaging)
-    except Exception as e:
-        logger.error(msg=f"error: {e}")
-#=========  overall error handling ========
-async def HandleExceptions(e) -> None:
-    try:
-        e==""
-        logger.error(msg=f"{e}")
-    except KeyError:
-        logger.error(msg=f"DB content error {e}")
-        e=f"DB content error  {e}"
-    except ccxt.base.errors:
-        logger.error(msg=f"CCXT error {e}")
-        e=f"CCXT error {e}"
-    except ccxt.NetworkError:
-        logger.error(msg=f"Network error {e}")
-        e=f"Network error {e}"
-    except ccxt.ExchangeError:
-        logger.error(msg=f"Exchange error: {e}")
-        e=f"Exchange error: {e}"
-    except telegram.error:
-        logger.error(msg=f"telegram error: {e}")
-        e=f"telegram error: {e}"
-    except Exception:
-        logger.error(msg=f"error: {e}")
-        e=f"{e}"
-    message=f"⚠️ {e}"
-    await notify(message)
-##======== END OF FUNCTIONS =======
-
 
 ##======== DB START ===============
 if not os.path.exists(db_path):
@@ -573,10 +603,10 @@ if not os.path.exists(db_path):
         else:
             DBCommand_Add_DEX()
 else:
-    logger.info(msg=f"Verifying existing DB")
+    logger.info(msg=f"Verifying DB")
 
 if os.path.exists(db_path):
-    logger.info(msg=f"Existing DB found")
+    logger.info(msg=f"Existing DB")
     try:
         db = TinyDB(db_path)
         q = Query()
@@ -602,11 +632,9 @@ if os.path.exists(db_path):
             sys.exit()
     except Exception:
         logger.warning(msg=f"error with existing db file {db_path}")
-
 ##======== APPRISE Setup ===============
 apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
-
 ##========== startup message ===========
 async def post_init(application: Application):
     global ex
@@ -615,7 +643,6 @@ async def post_init(application: Application):
     await LoadExchange(ex,testmode)
     logger.info(msg=f"bot is online")
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
-
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
@@ -625,11 +652,10 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     e=f"{tb_trim}"
     message=f"⚠️ {e}"
     await send(update,message)
-
-
 #================== BOT =================
 def main():
     try:
+        LibCheck()
 #Starting Bot TPB
         application = Application.builder().token(TG_TK).post_init(post_init).build()
 
