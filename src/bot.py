@@ -39,17 +39,7 @@ import time
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def LibCheck():
-    logger.info(msg=f"{version}")
-    logger.info(msg=f"Python {sys.version}")
-    logger.info(msg=f"TinyDB {tinydb.__version__}")
-    logger.info(msg=f"TPB {telegram.__version__}")
-    logger.info(msg=f"CCXT {ccxt.__version__}")
-    logger.info(msg=f"Web3 {web3.__version__}")
-    logger.info(msg=f"apprise {apprise.__version__}")
-    return
 
-LibCheck()
 
 ##=============== CONFIG ===============
 dotenv_path = './config/.env'
@@ -79,6 +69,17 @@ def Convert(string):
     #m_tp=li[3][3:7]
     #m_q=li[4][2:-1]
     return li
+
+def LibCheck():
+    logger.info(msg=f"{version}")
+    logger.info(msg=f"Python {sys.version}")
+    logger.info(msg=f"TinyDB {tinydb.__version__}")
+    logger.info(msg=f"TPB {telegram.__version__}")
+    logger.info(msg=f"CCXT {ccxt.__version__}")
+    logger.info(msg=f"Web3 {web3.__version__}")
+    logger.info(msg=f"apprise {apprise.__version__}")
+    return
+
 ##=========== DB COMMAND =================
 def DBCommand_Add_TG(string1,string2,string3):
     if len(telegramDB.search(q.token==string1)):
@@ -536,6 +537,7 @@ async def HandleExceptions(e) -> None:
 ##======== END OF FUNCTIONS =======
 
 
+
 ##======== DB START ===============
 if not os.path.exists(db_path):
     logger.info(msg=f"setting up new DB")
@@ -626,10 +628,10 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     message=f"⚠️ {e}"
     await send(update,message)
 
-
 #================== BOT =================
 def main():
     try:
+        LibCheck()
 #Starting Bot TPB
         application = Application.builder().token(TG_TK).post_init(post_init).build()
 
