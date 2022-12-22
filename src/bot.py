@@ -55,18 +55,36 @@ menu=f'{version} \n {commandlist}\n'
 #=============== Functions ===============
 def Convert(s):
     li = list(s.split(" "))
-    if (li[0]!="")
-        m_dir= li[0]
-    if (li[1]!="")
-        m_symbol=li[1]
-    if (li[2]!="")
-        m_sl=li[2][3:7]
-    if (li[3]!="")
-        m_tp=li[3][3:7]
-    if (li[4]!="")
-        m_q=li[4][2:-1]
-    logger.info(msg=f"convert {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
-    return li
+    try:
+        if (li[0]!=""):
+            m_dir= li[0]
+        else:
+            logger.error(msg=f"{s} no direction")
+            return 
+        if (li[1]!=""):
+            m_symbol=li[1]
+        else:
+            logger.error(msg=f"{s} no symbol")
+            return
+        if (li[2]!=""):
+            m_sl=li[2][3:7]
+        else:
+            logger.warning(msg=f"{s} no sl")
+            m_sl=0
+        if (li[3]!=""):
+            m_tp=li[3][3:7]
+        else:
+            m_tp=0
+        if (li[4]!=""):
+            m_q=li[4][2:-1]
+        else:
+            logger.warning(msg=f"{s} no size default to 1") 
+            m_q=1
+        logger.info(msg=f"{m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
+        return li
+    except IndexError:
+        logger.info(msg=f"{s} li: {li}")
+        return li
 
 def LibCheck():
     logger.info(msg=f"{version}")
@@ -85,7 +103,7 @@ def DBCommand_Add_TG(s1,s2,s3):
     else:
         telegramDB.insert({"token": s1,"channel": s2,"platform": s3})
 def DBCommand_Add_CEX(s1,s2,s3,s4,s5,s6,s7):
-    if len(cexDB.search(q.api==string2)):
+    if len(cexDB.search(q.api==s2)):
         logger.info(msg=f"EX exists in DB")
     else:
         cexDB.insert({
@@ -97,7 +115,7 @@ def DBCommand_Add_CEX(s1,s2,s3,s4,s5,s6,s7):
         "ordertype": s6,
         "defaultType": s7}) 
 def DBCommand_Add_DEX(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11):
-    if len(dexDB.search(q.name==string1)):
+    if len(dexDB.search(q.name==s1)):
         logger.info(msg=f"EX exists in DB")
     else:
         dexDB.insert({
@@ -123,7 +141,7 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 #=========exchange functions ============
 def SearchCEX(s1,s2):
     if type(s1) is str:
-        query1 = ((q.name==string1)&(q['testmode'] == s2))
+        query1 = ((q.name==s1)&(q['testmode'] == s2))
         CEXSearch = cexDB.search(query1)
         if (len(str(CEXSearch))>=1):
             return CEXSearch
@@ -242,7 +260,7 @@ async def DEXContractLookup(symb):
         symb=symb.upper()
         logger.info(msg=f"symbol {symb}")
         try:
-            symbolcontract = [token for token in token_list if token['symbol'] == symbol]
+            symbolcontract = [token for token in token_list if token['symbol'] == symb]
             if len(symbolcontract) > 0:
                 logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
                 return symbolcontract[0]['address']
@@ -428,8 +446,11 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 m_dir= order_m[0]
                 m_symbol=await DEXContractLookup(order_m[1])
                 m_q=1  #m_q=order_m[2][2:-1]
-                res=await DEXBuy(m_symbol,m_q)
-                response=f"🟢 ORDER Processed: {res}"
+                try:
+                    res=await DEXBuy(m_symbol,m_q)
+                    response=f"🟢 ORDER Processed: {res}"
+                except Exception as e:
+                    response=f"❌ {e}"
             else:
                 logger.warning(msg=f"error with exchange type {type(ex)}")
                 response=f"⚠️ error with exchange setup"
@@ -437,7 +458,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 ##======TG COMMAND view price ===========
 async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     tginput  = update.effective_message.text
-    input = Convert(tginput)
+    input = tginput.split(" ")
     logger.info(msg=f"symbol {input}")
     symbol=input[1]
     logger.info(msg=f"symbol {symbol}")
@@ -498,7 +519,7 @@ async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(msg=f"current ex {ex}")
     msg_ex  = update.effective_message.text
-    newexmsg = Convert(msg_ex)
+    newexmsg = msg_ex.split(" ")
     newex=newexmsg[1]
     typeex=newexmsg[0]
     if (typeex=="/cex"):
