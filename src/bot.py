@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.03"
+version="🪙TT Beta 1.04"
 ##=============== import  =============
 ##log
 import logging
@@ -32,8 +32,6 @@ import time
 ##=============== Logging  =============
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-
 
 ##=============== CONFIG ===============
 dotenv_path = './config/.env'
@@ -603,7 +601,6 @@ if os.path.exists(db_path):
 ##======== APPRISE Setup ===============
 apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
-
 ##========== startup message ===========
 async def post_init(application: Application):
     global ex
