@@ -52,39 +52,7 @@ commandlist= """
 <code>/trading</code>
 <code>/testmode</code>"""
 menu=f'{version} \n {commandlist}\n'
-#=============== Functions ===============
-def Convert(s):
-    li = list(s.split(" "))
-    try:
-        if (li[0]!=""):
-            m_dir= li[0]
-        else:
-            logger.error(msg=f"{s} no direction")
-            return 
-        if (li[1]!=""):
-            m_symbol=li[1]
-        else:
-            logger.error(msg=f"{s} no symbol")
-            return
-        if (li[2]!=""):
-            m_sl=li[2][3:7]
-        else:
-            logger.warning(msg=f"{s} no sl")
-            m_sl=0
-        if (li[3]!=""):
-            m_tp=li[3][3:7]
-        else:
-            m_tp=0
-        if (li[4]!=""):
-            m_q=li[4][2:-1]
-        else:
-            logger.warning(msg=f"{s} no size default to 1") 
-            m_q=1
-        logger.info(msg=f"{m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
-        return li
-    except IndexError:
-        logger.info(msg=f"{s} li: {li}")
-        return li
+#===========Common Functions ===============
 
 def LibCheck():
     logger.info(msg=f"{version}")
@@ -96,7 +64,7 @@ def LibCheck():
     logger.info(msg=f"apprise {apprise.__version__}")
     return
 
-##=========== DB COMMAND =================
+##===========DB Functions
 def DBCommand_Add_TG(s1,s2,s3):
     if len(telegramDB.search(q.token==s1)):
         logger.info(msg=f"token is already setup")
@@ -138,7 +106,7 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     message=f" db extract: \n {db.all()}"
     await send(update,message)
     
-#=========exchange functions ============
+#=========Exchange Functions
 def SearchCEX(s1,s2):
     if type(s1) is str:
         query1 = ((q.name==s1)&(q['testmode'] == s2))
@@ -246,7 +214,7 @@ async def LoadExchange(exchangeid, mode):
             logger.info(msg=f"Connected to Web3 {ex}")
             return name
         else:
-            raise ConnectionError(f'Couldn\'t connect to {router}')
+            raise ConnectionError(f'Could not connect to {router}')
     else:
         logger.warning(msg=f"Config Error")
         return
@@ -293,7 +261,39 @@ async def DEXFetchAbi(addr):
     except Exception as e:
         await HandleExceptions(e)
 
-#========== buy function ===============
+#ORDER PARSER
+def Convert(s):
+    li = s.split(" ")
+    try:
+        m_dir= li[0]
+    except IndexError:
+        logger.error(msg=f"{s} no direction")
+        return  
+    try:
+        m_symbol=li[1]
+    except IndexError:
+        logger.warning(msg=f"{s} no symbol")
+        return
+    try:
+        m_sl=li[2][3:7]
+    except IndexError:
+        logger.warning(msg=f"{s} no sl")
+        m_sl=0
+    try:
+        m_tp=li[3][3:7]
+    except IndexError:
+        logger.warning(msg=f"{s} no sl")
+        m_tp=0
+    try:
+        m_q=li[4][2:-1]
+    except IndexError:
+        logger.warning(msg=f"{s} no size default to 1") 
+        m_q=1
+    order=[m_dir,m_symbol,m_sl,m_tp,m_q]
+    logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
+    return order
+
+#========== Buy function
 async def DEXBuy(TknAddr, AmnToBuy):
     web3=ex
     transactionRevertTime = 10000
@@ -325,32 +325,32 @@ async def DEXBuy(TknAddr, AmnToBuy):
             checkTransactionRequest = requests.get(url=checkTransactionSuccessURL)
             txResult = checkTransactionRequest.json()['status']
             if(txResult == "1"):
-                #logger.info(msg=f"{txHash}")
+                logger.info(msg=f"{txHash}")
                 return txHash
             else:
-                message="Transaction Failed"
-                return message
+                logger.info(msg="1Transaction Failed")
+                return None
         except Exception as e:
-            message="Transaction Failed"
+            logger.info(msg=f"2Transaction Failed {e}")
             await HandleExceptions(e)
-            return message
+            return {e}
     except Exception as e:
         await HandleExceptions(e)
-        message="Transaction Failed"
-        return message
-#=========== sendmessage command =========
+        logger.info(msg="3Transaction Failed")
+        return {e}
+#=========== Send function
 async def send (self, messaging):
     try:
         await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
     except Exception as e:
         await HandleExceptions(e)
-#========== notification command =========
+#========== notification function
 async def notify(messaging):
     try:
         apobj.notify(body=messaging)
     except Exception as e:
         logger.error(msg=f"error: {e}")
-#========  overall error handling ========
+#======= error handling
 async def HandleExceptions(e) -> None:
     try:
         e==""
@@ -377,7 +377,9 @@ async def HandleExceptions(e) -> None:
     await notify(message)
 ##======== END OF FUNCTIONS ============
 
-##=====TG COMMAND help  ================
+##============TG COMMAND================
+#
+
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg= f"Environment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}"
     await send(update,msg)
@@ -422,35 +424,46 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 #m_ordertype=CEX_ordertype
                 logger.info(msg=f"Processing: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
                 #Check Balance
-                bal = ex.fetch_free_balance()
-                bal = {k: v for k, v in bal.items() if v is not None and v>0}
-                logger.info(msg=f"bal: {bal}")
-                if (len(str(bal))):
-                ######## % of bal
-                    m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
-                    totalusdtbal = ex.fetchBalance()['USDT']['free']
-                    amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
-                ######## ORDER
-                    res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
-                    orderid=res['id']
-                    timestamp=res['datetime']
-                    symbol=res['symbol']
-                    side=res['side']
-                    amount=res['amount']
-                    price=res['price']
-                    response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
-                else:
-                    response=f"⚠️ not enough money"
+                try:
+                    bal = ex.fetch_free_balance()
+                    bal = {k: v for k, v in bal.items() if v is not None and v>0}
+                    logger.info(msg=f"bal: {bal}")
+                    if (len(str(bal))):
+                    ######## % of bal
+                        m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
+                        totalusdtbal = ex.fetchBalance()['USDT']['free']
+                        amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
+                    ######## ORDER
+                        try:
+                            res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
+                            orderid=res['id']
+                            timestamp=res['datetime']
+                            symbol=res['symbol']
+                            side=res['side']
+                            amount=res['amount']
+                            price=res['price']
+                            response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                        except Exception as e:
+                            response=f"❌ ORDER failed: {e}"
+                except Exception as e:
+                    await HandleExceptions(e)
+                    logger.warning(msg=f"balance error")
+                    return
             elif (isinstance(ex,web3.main.Web3)):
                 order_m = Convert(msgtxt_upper)
+                logger.info(msg=f"order_m= {order_m}")
                 m_dir= order_m[0]
                 m_symbol=await DEXContractLookup(order_m[1])
                 m_q=1  #m_q=order_m[2][2:-1]
                 try:
                     res=await DEXBuy(m_symbol,m_q)
-                    response=f"🟢 ORDER Processed: {res}"
-                except Exception as e:
-                    response=f"❌ {e}"
+                    logger.info(msg=f"res= {res}")
+                    if({res}!= ValueError):
+                        response=f"🟢 ORDER Processed: {res}"
+                    else:
+                        response=f"❌ ORDER failed"
+                except Exception:
+                    response=f"❌ ORDER failed"
             else:
                 logger.warning(msg=f"error with exchange type {type(ex)}")
                 response=f"⚠️ error with exchange setup"
