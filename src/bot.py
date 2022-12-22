@@ -266,27 +266,27 @@ def Convert(s):
     li = s.split(" ")
     try:
         m_dir= li[0]
-    except IndexError:
+    except (IndexError, TypeError):
         logger.error(msg=f"{s} no direction")
         return  
     try:
         m_symbol=li[1]
-    except IndexError:
+    except (IndexError, TypeError):
         logger.warning(msg=f"{s} no symbol")
         return
     try:
         m_sl=li[2][3:7]
-    except IndexError:
+    except (IndexError, TypeError):
         logger.warning(msg=f"{s} no sl")
         m_sl=0
     try:
         m_tp=li[3][3:7]
-    except IndexError:
+    except (IndexError, TypeError):
         logger.warning(msg=f"{s} no sl")
         m_tp=0
     try:
         m_q=li[4][2:-1]
-    except IndexError:
+    except (IndexError, TypeError):
         logger.warning(msg=f"{s} no size default to 1") 
         m_q=1
     order=[m_dir,m_symbol,m_sl,m_tp,m_q]
@@ -418,9 +418,9 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 order_m = Convert(msgtxt_upper)
                 m_dir= order_m[0]
                 m_symbol=order_m[1]
-                m_sl=order_m[2][3:7]
-                m_tp=order_m[3][3:7]
-                m_q=order_m[4][2:-1]
+                m_sl=order_m[2]
+                m_tp=order_m[3]
+                m_q=order_m[4]
                 #m_ordertype=CEX_ordertype
                 logger.info(msg=f"Processing: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
                 #Check Balance
