@@ -5,34 +5,28 @@ version="🪙TT Beta 1.03"
 import logging
 import sys
 import traceback
-
 ##env
 import os
 from os import getenv
 from dotenv import load_dotenv
 import json, requests
-
 #telegram
 import telegram
 from telegram import Update, constants
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
-
 #notification
 import apprise
-
 #db
 import tinydb
 from tinydb import TinyDB, Query
 import re
-
 #CEX
 import ccxt
-
 #DEX
 import web3
 from web3 import Web3
 from web3.contract import Contract
-from typing import List #Dict, List
+from typing import List
 import time
 
 ##=============== Logging  =============
@@ -83,7 +77,7 @@ def Convert(s):
         m_tp=li[3][3:7]
     if (li[4]!="")
         m_q=li[4][2:-1]
-    print (m_dir,m_symbol,m_sl,m_tp,m_q)
+    logger.info(msg=f"convert {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
     return li
 ##=========== DB COMMAND =================
 def DBCommand_Add_TG(s1,s2,s3):
@@ -282,7 +276,6 @@ async def DEXFetchAbi(addr):
     except Exception as e:
         await HandleExceptions(e)
 
-        
 #========== buy function ===============
 async def DEXBuy(TknAddr, AmnToBuy):
     web3=ex
@@ -328,12 +321,50 @@ async def DEXBuy(TknAddr, AmnToBuy):
         await HandleExceptions(e)
         message="Transaction Failed"
         return message
+#=========== sendmessage command =========
+async def send (self, messaging):
+    try:
+        await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
+    except Exception as e:
+        await HandleExceptions(e)
+#========== notification command =========
+async def notify(messaging):
+    try:
+        apobj.notify(body=messaging)
+    except Exception as e:
+        logger.error(msg=f"error: {e}")
+#========  overall error handling ========
+async def HandleExceptions(e) -> None:
+    try:
+        e==""
+        logger.error(msg=f"{e}")
+    except KeyError:
+        logger.error(msg=f"DB content error {e}")
+        e=f"DB content error  {e}"
+    except ccxt.base.errors:
+        logger.error(msg=f"CCXT error {e}")
+        e=f"CCXT error {e}"
+    except ccxt.NetworkError:
+        logger.error(msg=f"Network error {e}")
+        e=f"Network error {e}"
+    except ccxt.ExchangeError:
+        logger.error(msg=f"Exchange error: {e}")
+        e=f"Exchange error: {e}"
+    except telegram.error:
+        logger.error(msg=f"telegram error: {e}")
+        e=f"telegram error: {e}"
+    except Exception:
+        logger.error(msg=f"error: {e}")
+        e=f"{e}"
+    message=f"⚠️ {e}"
+    await notify(message)
+##======== END OF FUNCTIONS ============
 
-##============ help  ===================
+##=====TG COMMAND help  ================
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg= f"Environment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}"
     await send(update,msg)
-##========== view balance  =============
+##====TG COMMAND view balance  =========
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         msg=f"🏦 Balance"
@@ -353,7 +384,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         await send(update,msg)
     except Exception as e:
         await HandleExceptions(e)
-#===== order parsing and placing ======
+#=== TG COMMAND order parsing  ======
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msgtxt = update.effective_message.text
     msgtxt_upper =msgtxt.upper()
@@ -404,8 +435,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 logger.warning(msg=f"error with exchange type {type(ex)}")
                 response=f"⚠️ error with exchange setup"
             await send(update,response)
-
-##=========== view price  =============
+##======TG COMMAND view price ===========
 async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     tginput  = update.effective_message.text
     input = Convert(tginput)
@@ -456,7 +486,7 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         await send(update,response)
     except Exception as e:
         await HandleExceptions(e)
-##======== trading switch  =============
+##====TG COMMAND Trading switch  ========
 async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global trading
     if (trading==False):
@@ -465,7 +495,7 @@ async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         trading=False
     message=f"Trading is {trading}"
     await send(update,message)
-##=========== CEX DEX switch ============
+##====TG COMMAND CEX DEX switch =========
 async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(msg=f"current ex {ex}")
     msg_ex  = update.effective_message.text
@@ -493,8 +523,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(msg=f"newex {ex}")
     logger.info(msg=f"type {type(ex)}")
     logger.info(msg=f"isinstance {isinstance(ex,web3.main.Web3)}")
-
-##========== Test mode switch ===========
+##======TG COMMAND Test mode switch ======
 async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global testmode
     if (testmode=="False"):
@@ -503,45 +532,6 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         testmode="False"
     message=f"Sandbox is {testmode}"
     await send(update,message)
-#=========== sendmessage command =========
-async def send (self, messaging):
-    try:
-        await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
-    except Exception as e:
-        await HandleExceptions(e)
-#========== notification command =========
-async def notify(messaging):
-    try:
-        apobj.notify(body=messaging)
-    except Exception as e:
-        logger.error(msg=f"error: {e}")
-#========  overall error handling ========
-async def HandleExceptions(e) -> None:
-    try:
-        e==""
-        logger.error(msg=f"{e}")
-    except KeyError:
-        logger.error(msg=f"DB content error {e}")
-        e=f"DB content error  {e}"
-    except ccxt.base.errors:
-        logger.error(msg=f"CCXT error {e}")
-        e=f"CCXT error {e}"
-    except ccxt.NetworkError:
-        logger.error(msg=f"Network error {e}")
-        e=f"Network error {e}"
-    except ccxt.ExchangeError:
-        logger.error(msg=f"Exchange error: {e}")
-        e=f"Exchange error: {e}"
-    except telegram.error:
-        logger.error(msg=f"telegram error: {e}")
-        e=f"telegram error: {e}"
-    except Exception:
-        logger.error(msg=f"error: {e}")
-        e=f"{e}"
-    message=f"⚠️ {e}"
-    await notify(message)
-##======== END OF FUNCTIONS =======
-
 
 ##======== DB START ===============
 if not os.path.exists(db_path):
@@ -580,10 +570,10 @@ if not os.path.exists(db_path):
         else:
             DBCommand_Add_DEX()
 else:
-    logger.info(msg=f"Verifying existing DB")
+    logger.info(msg=f"Verifying DB")
 
 if os.path.exists(db_path):
-    logger.info(msg=f"Existing DB found")
+    logger.info(msg=f"Existing DB")
     try:
         db = TinyDB(db_path)
         q = Query()
@@ -609,7 +599,6 @@ if os.path.exists(db_path):
             sys.exit()
     except Exception:
         logger.warning(msg=f"error with existing db file {db_path}")
-
 ##======== APPRISE Setup ===============
 apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
@@ -622,7 +611,6 @@ async def post_init(application: Application):
     await LoadExchange(ex,testmode)
     logger.info(msg=f"bot is online")
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
-
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
@@ -632,8 +620,6 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     e=f"{tb_trim}"
     message=f"⚠️ {e}"
     await send(update,message)
-
-
 #================== BOT =================
 def main():
     try:
