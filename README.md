@@ -61,9 +61,7 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
  ### v1 
  - Enable bot in pythontelegram v20 and support CEX and DEX exchange formatted error via telegram
  - Query Balance, quote ticker and place order for CEX and DEX
- - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order for
-      - `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI exchange (via CCXT)(verified with Binance, Binance Testnet and ~~FTX~~ Kraken)
-      - `buy btcb` for DEFI exchange (via Web3) (verified with BSC & pancakeswap, polygon and quickswap)
+ - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). Same format and it SL / TP or QTY are missing (`sell BTCUSDT`) values are defaulted
  - Disable or Enable trading process via `/trading` command
  - Query balance via `/bal` command and view it in formatted way
  - Query ticker price via `/price BTCB` or `/price btc/usdt` command to view last symbol price (USDT as basis)
@@ -79,13 +77,14 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
  - Handle libraries exceptions in one function and delivery with apprise to support more notification system
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
+ - Start up simplified to create DB if it is missing
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
  ## 🚧 Roadmap
 
 ### V1.2
-- Update the buy/sell parsing logic to align dex and cex format and manage missing argument error with default values for SL/TP and Q
+
 - Better error handling
       - empty balance for order taking in CEX
       - binance amount of BTC/USDT must be greater than minimum amount precision of 5
@@ -99,7 +98,6 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
 - Support DEX limit order if supported like dydx
 
 ### v1.4
-- Update the start logic to build the db to simplify the start 
 - create / modify db via bot command
 
 ### v1.5
