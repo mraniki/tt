@@ -436,15 +436,19 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     ######## ORDER
                         try:
                             res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
-                            orderid=res['id']
-                            timestamp=res['datetime']
-                            symbol=res['symbol']
-                            side=res['side']
-                            amount=res['amount']
-                            price=res['price']
-                            response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                                if({res}!= ValueError):                            
+                                    orderid=res['id']
+                                    timestamp=res['datetime']
+                                    symbol=res['symbol']
+                                    side=res['side']
+                                    amount=res['amount']
+                                    price=res['price']
+                                    response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                                else:
+                                    response=f"❌ ORDER failed"
                         except Exception as e:
-                            response=f"❌ ORDER failed: {e}"
+                            await HandleExceptions(e)
+                            return
                 except Exception as e:
                     await HandleExceptions(e)
                     logger.warning(msg=f"balance error")
@@ -454,7 +458,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 logger.info(msg=f"order_m= {order_m}")
                 m_dir= order_m[0]
                 m_symbol=await DEXContractLookup(order_m[1])
-                m_q=1  #m_q=order_m[2][2:-1]
+                m_q=order_m[4]
                 try:
                     res=await DEXBuy(m_symbol,m_q)
                     logger.info(msg=f"res= {res}")
@@ -463,7 +467,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     else:
                         response=f"❌ ORDER failed"
                 except Exception as e:
-                    response=f"❌ {e}"
+                    await HandleExceptions(e)
+                    return
             else:
                 logger.warning(msg=f"error with exchange type {type(ex)}")
                 response=f"⚠️ error with exchange setup"
