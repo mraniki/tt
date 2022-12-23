@@ -462,8 +462,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                         response=f"🟢 ORDER Processed: {res}"
                     else:
                         response=f"❌ ORDER failed"
-                except Exception:
-                    response=f"❌ ORDER failed"
+                except Exception as e:
+                    response=f"❌ {e}"
             else:
                 logger.warning(msg=f"error with exchange type {type(ex)}")
                 response=f"⚠️ error with exchange setup"
