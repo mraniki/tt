@@ -167,12 +167,8 @@ async def LoadExchange(exchangeid, mode):
     global basesymbol
     global m_ordertype
     logger.info(msg=f"LoadExchange")
-    logger.info(msg=f"exchangeid: {exchangeid}")
-    logger.info(msg=f"mode: {mode}")
     CEXCheck=SearchCEX(exchangeid,mode)
-    logger.info(msg=f"CEXCheck: {CEXCheck}")
     DEXCheck=SearchDEX(exchangeid,mode)
-    logger.info(msg=f"DEXCheck: {DEXCheck}")
     if (CEXCheck):
         newex=CEXCheck
         exchange = getattr(ccxt, exchangeid)
@@ -291,15 +287,56 @@ def Convert(s):
         m_q=1
     order=[m_dir,m_symbol,m_sl,m_tp,m_q]
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
-    return order
+    ≈ order
 
 #========== Buy function
-async def DEXBuy(TknAddr, AmnToBuy):
+async def Buy(s1,s2,s3,s4,s5)
+    if not isinstance(ex,web3.main.Web3):
+        CEXBuy(s1,s2,s3,s4,s5)
+    elif (isinstance(ex,web3.main.Web3)):
+        DEXBuy(s1,s2,s3,s4,s5)
+    else:
+        logger.warning(msg=f"exchange error {ex}") 
+        await HandleExceptions(e)
+        return
+
+async def CEXBuy(s1,s2,s3,s4,s5):
+    try:
+        bal = ex.fetch_free_balance()
+        bal = {k: v for k, v in bal.items() if v is not None and v>0}
+        logger.info(msg=f"bal: {bal}")
+        if (len(str(bal))):
+            ######## % of bal
+            m_price = float(ex.fetchTicker(f'{s2}').get('last'))
+            totalusdtbal = ex.fetchBalance()['USDT']['free']
+            amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price)
+            ######## ORDER
+            try:
+                res = ex.create_order(s2, m_ordertype, s1, amountpercent)
+                if({res}!= ValueError):                            
+                    orderid=res['id']
+                    timestamp=res['datetime']
+                    symbol=res['symbol']
+                    side=res['side']
+                    amount=res['amount']
+                    price=res['price']
+                    response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                else:
+                    response=f"❌ ORDER failed"
+            except Exception as e:
+                await HandleExceptions(e)
+                return
+    except Exception as e:
+        await HandleExceptions(e)
+        logger.warning(msg=f"balance error")
+        return
+
+async def DEXBuy(s1,s2,s3,s4,s5):
     web3=ex
     transactionRevertTime = 10000
     gasAmount = 100
     gasPrice = 5
-    tokenToBuy = web3.to_checksum_address(TknAddr)
+    tokenToBuy = web3.to_checksum_address(await DEXContractLookup(s2))
     tokenToSell = basesymbol
     amountToBuy = AmnToBuy
     txntime = (int(time.time()) + transactionRevertTime)
@@ -378,12 +415,11 @@ async def HandleExceptions(e) -> None:
 ##======== END OF FUNCTIONS ============
 
 ##============TG COMMAND================
-#
-
+##====view help =======
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg= f"Environment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}"
     await send(update,msg)
-##====TG COMMAND view balance  =========
+##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         msg=f"🏦 Balance"
@@ -403,7 +439,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         await send(update,msg)
     except Exception as e:
         await HandleExceptions(e)
-#=== TG COMMAND order parsing  ======
+#===order parsing  ======
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msgtxt = update.effective_message.text
     msgtxt_upper =msgtxt.upper()
@@ -414,64 +450,30 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             message="TRADING DISABLED"
             await send(update,message)
         else:
-            if not (isinstance(ex,web3.main.Web3)):
-                order_m = Convert(msgtxt_upper)
-                m_dir= order_m[0]
-                m_symbol=order_m[1]
-                m_sl=order_m[2]
-                m_tp=order_m[3]
-                m_q=order_m[4]
-                #m_ordertype=CEX_ordertype
-                logger.info(msg=f"Processing: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
-                #Check Balance
-                try:
-                    bal = ex.fetch_free_balance()
-                    bal = {k: v for k, v in bal.items() if v is not None and v>0}
-                    logger.info(msg=f"bal: {bal}")
-                    if (len(str(bal))):
-                    ######## % of bal
-                        m_price = float(ex.fetchTicker(f'{m_symbol}').get('last'))
-                        totalusdtbal = ex.fetchBalance()['USDT']['free']
-                        amountpercent=((totalusdtbal)*(float(m_q)/100))/float(m_price)
-                    ######## ORDER
-                        try:
-                            res = ex.create_order(m_symbol, m_ordertype, m_dir, amountpercent)
-                                if({res}!= ValueError):                            
-                                    orderid=res['id']
-                                    timestamp=res['datetime']
-                                    symbol=res['symbol']
-                                    side=res['side']
-                                    amount=res['amount']
-                                    price=res['price']
-                                    response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
-                                else:
-                                    response=f"❌ ORDER failed"
-                        except Exception as e:
-                            await HandleExceptions(e)
-                            return
-                except Exception as e:
-                    await HandleExceptions(e)
-                    logger.warning(msg=f"balance error")
-                    return
-            elif (isinstance(ex,web3.main.Web3)):
-                order_m = Convert(msgtxt_upper)
-                logger.info(msg=f"order_m= {order_m}")
-                m_dir= order_m[0]
-                m_symbol=await DEXContractLookup(order_m[1])
-                m_q=order_m[4]
-                try:
-                    res=await DEXBuy(m_symbol,m_q)
-                    logger.info(msg=f"res= {res}")
-                    if({res}!= ValueError):
-                        response=f"🟢 ORDER Processed: {res}"
-                    else:
-                        response=f"❌ ORDER failed"
-                except Exception as e:
-                    await HandleExceptions(e)
-                    return
-            else:
-                logger.warning(msg=f"error with exchange type {type(ex)}")
-                response=f"⚠️ error with exchange setup"
+            order_m = Convert(msgtxt_upper)
+            logger.info(msg=f"order_m= {order_m}")
+            m_dir= order_m[0]
+            m_symbol=order_m[1]
+            m_sl=order_m[2]
+            m_tp=order_m[3]
+            m_q=order_m[4]
+            logger.info(msg=f"Processing: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
+            try:
+                if not (isinstance(ex,web3.main.Web3)):
+                    res=await CEXBuy(m_dir,m_symbol,m_sl,m_tp,m_q)
+                elif (isinstance(ex,web3.main.Web3)):               
+                    res=await DEXBuy(m_dir,m_symbol,m_sl,m_tp,m_q)                
+            except Exception as e:
+                await HandleExceptions(e)
+                return
+            try:
+                if({res}!= ValueError):
+                    response=f"🟢 ORDER Processed: {res}"
+                else:
+                    response=f"❌ ORDER failed"
+            except Exception as e:
+                await HandleExceptions(e)
+                return
             await send(update,response)
 ##======TG COMMAND view price ===========
 async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -496,7 +498,6 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                     logger.info(msg=f"router {router}")
                     dexabi= await DEXFetchAbi(router)
                     contract = ex.eth.contract(address=router, abi=dexabi) #liquidityContract
-
                     if(TokenToPrice != None):
                         try:
                             price = contract.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
