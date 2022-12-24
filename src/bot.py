@@ -290,7 +290,7 @@ def Convert(s):
     return order
 
 #========== Buy function
-async def Buy(s1,s2,s3,s4,s5)
+async def Buy(s1,s2,s3,s4,s5):
     if not isinstance(ex,web3.main.Web3):
         CEXBuy(s1,s2,s3,s4,s5)
     elif (isinstance(ex,web3.main.Web3)):
