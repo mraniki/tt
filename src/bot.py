@@ -466,22 +466,15 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             except Exception as e:
                 await HandleExceptions(e)
                 return
-            try:
-                if({res}!= ValueError):
-                    response=f"🟢 ORDER Processed: {res}"
-                else:
-                    response=f"❌ ORDER failed"
-            except Exception as e:
-                await HandleExceptions(e)
-                return
+            if({res}!= ValueError):
+                response=f"🟢 ORDER Processed: {res}"
+            else:
+                 response=f" failed order {res}"
             await send(update,response)
 ##======TG COMMAND view price ===========
 async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     tginput  = update.effective_message.text
     input = tginput.split(" ")
-    logger.info(msg=f"symbol {input}")
-    symbol=input[1]
-    logger.info(msg=f"symbol {symbol}")
     try:
         if not (isinstance(ex,web3.main.Web3)):
             price= ex.fetch_ticker(symbol.upper())['last']
@@ -571,7 +564,6 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         testmode="False"
     message=f"Sandbox is {testmode}"
     await send(update,message)
-
 ##======== DB START ===============
 if not os.path.exists(db_path):
     logger.info(msg=f"setting up new DB")
