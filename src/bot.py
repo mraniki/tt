@@ -610,7 +610,9 @@ if os.path.exists(db_path):
         q = Query()
         globalDB = db.table('global')
         env = globalDB.all()[0]['env']
-        logger.info(msg=f"Environment is {env}")
+        ex = globalDB.all()[0]['defaultex']
+        testmode = globalDB.all()[0]['defaulttestmode']
+        logger.info(msg=f"Env {env} ex {ex}")
         telegramDB = db.table('telegram')
         cexDB = db.table('cex')
         dexDB = db.table('dex')
@@ -636,8 +638,7 @@ apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 ##========== startup message ===========
 async def post_init(application: Application):
     global ex
-    logger.info(msg=f"Setting up exchange {CEX_name}")
-    ex=pancake
+    logger.info(msg=f"Setting up exchange {ex}")
     await LoadExchange(ex,testmode)
     logger.info(msg=f"bot is online")
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)

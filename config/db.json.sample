@@ -3,7 +3,9 @@
     {
         "1":
         {
-            "env": "PRD"
+            "env": "PRD",
+            "defaultex": "pancake",
+            "defaulttestmode":"True"
         }
     },
     "telegram":
