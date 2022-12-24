@@ -40,7 +40,7 @@ db_path= './config/db.json'
 global ex
 exchanges = {}
 trading=True
-testmode="False"
+testmode="True"
 #===================
 commandlist= """
 <code>/bal</code>
@@ -637,7 +637,7 @@ apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 async def post_init(application: Application):
     global ex
     logger.info(msg=f"Setting up exchange {CEX_name}")
-    ex=CEX_name
+    ex=pancake
     await LoadExchange(ex,testmode)
     logger.info(msg=f"bot is online")
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
