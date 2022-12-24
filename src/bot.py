@@ -287,7 +287,7 @@ def Convert(s):
         m_q=1
     order=[m_dir,m_symbol,m_sl,m_tp,m_q]
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
-    ≈ order
+    return order
 
 #========== Buy function
 async def Buy(s1,s2,s3,s4,s5)
