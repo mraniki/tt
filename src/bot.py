@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.22"
+version="🪙TT Beta 1.23"
 ##=============== import  =============
 ##log
 import logging
@@ -143,18 +143,18 @@ async def SearchDEX(s1,s2):
 async def SearchEx(s1,s2):
     try:
       if (isinstance(s1,str)):
-        CEXCheck=SearchCEX(s1,s2)
-        DEXCheck=SearchDEX(s1,s2)
+        CEXCheck= await SearchCEX(s1,s2)
+        DEXCheck= await SearchDEX(s1,s2)
         if (CEXCheck!= None):
             if(len(str(CEXCheck))>=1):
                 return CEXCheck[0]['name']
         elif (len(str(DEXCheck))>=1):
             return DEXCheck[0]['name']
       elif not (isinstance(s1,web3.main.Web3)):
-        CEXCheck=SearchCEX(s1.id,s2)
+        CEXCheck=await SearchCEX(s1.id,s2)
         return CEXCheck[0]['name']
       elif (isinstance(s1,web3.main.Web3)):
-        DEXCheck=SearchDEX(s1,s2)
+        DEXCheck=await SearchDEX(s1,s2)
         return DEXCheck[0]['name']
       else:
         return
@@ -543,13 +543,13 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     newex=newexmsg[1]
     typeex=newexmsg[0]
     if (typeex=="/cex"):
-        SearchCEXResults= SearchCEX(newex,testmode)
+        SearchCEXResults= await SearchCEX(newex,testmode)
         CEX_name = SearchCEXResults[0]['name']
         CEX_test_mode = testmode
         res = await LoadExchange(CEX_name,CEX_test_mode)
         response = f"CEX is {ex}"
     elif (typeex=="/dex"):
-        SearchDEXResults= SearchDEX(newex,testmode)
+        SearchDEXResults= await SearchDEX(newex,testmode)
         DEX_name= SearchDEXResults[0]['name']
         DEX_test_mode= testmode
         logger.info(msg=f"DEX_test_mode: {DEX_test_mode}")
