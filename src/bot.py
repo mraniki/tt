@@ -175,8 +175,8 @@ async def LoadExchange(exchangeid, mode):
     global basesymbol
     global m_ordertype
     logger.info(msg=f"LoadExchange")
-    CEXCheck=SearchCEX(exchangeid,mode)
-    DEXCheck=SearchDEX(exchangeid,mode)
+    CEXCheck= await SearchCEX(exchangeid,mode)
+    DEXCheck= await SearchDEX(exchangeid,mode)
     if (CEXCheck):
         newex=CEXCheck
         exchange = getattr(ccxt, exchangeid)
@@ -425,7 +425,7 @@ async def HandleExceptions(e) -> None:
 ##============TG COMMAND================
 ##====view help =======
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    msg= f"Environment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}"
+    msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}"
     await send(update,msg)
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
