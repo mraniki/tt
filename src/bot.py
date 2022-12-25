@@ -649,7 +649,7 @@ async def post_init(application: Application):
     logger.info(msg=f"Setting up exchange {ex}")
     await LoadExchange(ex,testmode)
     logger.info(msg=f"bot is online")
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
