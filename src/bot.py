@@ -185,6 +185,7 @@ async def LoadExchange(exchangeid, mode):
             exchanges[exchangeid] = exchange({'apiKey': newex[0]['api'],'secret': newex[0]['secret']})
             m_ordertype=newex[0]['ordertype']
             ex=exchanges[exchangeid]
+            name=ex
             if (mode=="True"):
                 ex.set_sandbox_mode('enabled')
                 markets=ex.loadMarkets()
@@ -649,7 +650,7 @@ async def post_init(application: Application):
     logger.info(msg=f"Setting up exchange {ex}")
     await LoadExchange(ex,testmode)
     logger.info(msg=f"bot is online")
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {name} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
