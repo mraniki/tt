@@ -130,13 +130,15 @@ def SearchDEX(s1,s2):
         query = ((q.name==s1)&(q['testmode'] == s2))
         DEXSearch = dexDB.search(query)
         if (len(str(DEXSearch))>=1):
+         logger.info(msg=f"{DEXSearch}")
             return DEXSearch
         else:
             return
     except Exception:
         return
 def SearchEx(s1,s2):
-    if (isinstance(s1,str)):
+    try:
+      if (isinstance(s1,str)):
         CEXCheck=SearchCEX(s1,s2)
         DEXCheck=SearchDEX(s1,s2)
         if (CEXCheck!= None):
@@ -144,14 +146,14 @@ def SearchEx(s1,s2):
                 return CEXCheck[0]['name']
         elif (len(str(DEXCheck))>=1):
             return DEXCheck[0]['name']
-    elif not (isinstance(s1,web3.main.Web3)):
+      elif not (isinstance(s1,web3.main.Web3)):
         CEXCheck=SearchCEX(s1.id,s2)
         return CEXCheck[0]['name']
-    elif (isinstance(s1,web3.main.Web3)):
+      elif (isinstance(s1,web3.main.Web3)):
         DEXCheck=SearchDEX(s1,s2)
         return DEXCheck[0]['name']
-    else:
-        logger.error(msg=f"DB search error {s1} {s2}")
+    except Exception as e:
+        await HandleExceptions(e)
         return
         
 async def LoadExchange(exchangeid, mode):
