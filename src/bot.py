@@ -131,9 +131,9 @@ def SearchDEX(s1,s2):
         DEXSearch = dexDB.search(query)
         if (len(str(DEXSearch))>=1):
          logger.info(msg=f"{DEXSearch}")
-            return DEXSearch
+         return DEXSearch
         else:
-            return
+         return
     except Exception:
         return
 def SearchEx(s1,s2):
