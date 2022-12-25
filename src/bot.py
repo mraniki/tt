@@ -465,7 +465,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             m_sl=order_m[2]
             m_tp=order_m[3]
             m_q=order_m[4]
-            logger.info(msg=f"Processing: {m_symbol} {m_ordertype} {m_dir} {m_sl} {m_tp} {m_q}")
+            logger.info(msg=f"Processing: {m_symbol} {m_dir} {m_sl} {m_tp} {m_q}")
             try:
                 if not (isinstance(ex,web3.main.Web3)):
                     res=await CEXBuy(m_dir,m_symbol,m_sl,m_tp,m_q)
