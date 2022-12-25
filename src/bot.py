@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.21"
+version="🪙TT Beta 1.22
 ##=============== import  =============
 ##log
 import logging
@@ -136,6 +136,7 @@ def SearchDEX(s1,s2):
          return
     except Exception:
         return
+    
 def SearchEx(s1,s2):
     try:
       if (isinstance(s1,str)):
@@ -152,6 +153,8 @@ def SearchEx(s1,s2):
       elif (isinstance(s1,web3.main.Web3)):
         DEXCheck=SearchDEX(s1,s2)
         return DEXCheck[0]['name']
+      else
+        return
     except Exception as e:
         await HandleExceptions(e)
         return
