@@ -107,7 +107,7 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     await send(update,message)
     
 #=========Exchange Functions
-def SearchCEX(s1,s2):
+async def SearchCEX(s1,s2):
     if type(s1) is str:
         query1 = ((q.name==s1)&(q['testmode'] == s2))
         CEXSearch = cexDB.search(query1)
@@ -121,11 +121,13 @@ def SearchCEX(s1,s2):
                 return CEXSearch
             else:
                 return
-        except Exception:
+        except Exception as e:
+            await HandleExceptions(e)
             return
     else:
         return
-def SearchDEX(s1,s2):
+    
+async def SearchDEX(s1,s2):
     try:
         query = ((q.name==s1)&(q['testmode'] == s2))
         DEXSearch = dexDB.search(query)
@@ -134,10 +136,11 @@ def SearchDEX(s1,s2):
          return DEXSearch
         else:
          return
-    except Exception:
+    except Exception as e:
+        await HandleExceptions(e)
         return
     
-def SearchEx(s1,s2):
+async def SearchEx(s1,s2):
     try:
       if (isinstance(s1,str)):
         CEXCheck=SearchCEX(s1,s2)
