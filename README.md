@@ -32,7 +32,7 @@ Using:
 1) Create a private channel and a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
 2) Get your 
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
-    - DEX contract router supported by [Web3](https://github.com/ethereum/web3.py)
+    - DEX chain supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org) or [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) for RPC detail per chain.
 3) Update the config (telegram token, API, router). Point your config to container volume /code/config)
 4) Deploy :
     - via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
@@ -47,7 +47,7 @@ Using:
 
 ## Config
 Either use .env file or json db as per below structure. Environment file or docker variable are automatically loaded in a new db at the startup if there is no DB.
-Approach: Do an initial launch to have the DB structure created automatically and add your telegram bot details or copy and update the below DB sample.
+Approach: Do an initial launch to have the DB structure created automatically and add your telegram bot details or update the DB sample.
 
 ### Env
 [env sample](config/env.sample)
