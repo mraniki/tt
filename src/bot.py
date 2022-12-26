@@ -251,9 +251,9 @@ async def DEXFetchAbi(addr):
             "action": "getabi",
             "address": addr,
             "apikey": abiurltoken }
-        logger.info(msg=f"{url}")
-        logger.info(msg=f"{params}")
-        logger.info(msg=f"request {requests.get(url, params=params)}")    
+        #logger.info(msg=f"{url}")
+        #logger.info(msg=f"{params}")
+        #logger.info(msg=f"request {requests.get(url, params=params)}")    
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}   
         resp = requests.get(url, params=params, headers=headers).json()
         abi = resp["result"]

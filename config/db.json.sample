@@ -203,7 +203,7 @@
             "networkprovider": "https://data-seed-prebsc-1-s1.binance.org:8545/",
             "router": "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3",
             "testmode": "True",
-            "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
+            "tokenlist":"https://raw.githubusercontent.com/tokenine/tokenslist/c30bdbf26040e9d08d9bda3766a5d2b78a089f4b/src/tokens/testnet.json",
             "abiurl":"https://api-testnet.bscscan.com/api",
             "abiurltoken":"abc",
             "basesymbol":"WBNB"
