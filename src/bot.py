@@ -226,11 +226,11 @@ async def DEXContractLookup(symb):
         text = url.text
         token_list = json.loads(text)['tokens']
         symb=symb.upper()
-        logger.info(msg=f"symbol {symb}")
+        #logger.info(msg=f"symbol {symb}")
         try:
             symbolcontract = [token for token in token_list if token['symbol'] == symb]
             if len(symbolcontract) > 0:
-                logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
+                #logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
                 return symbolcontract[0]['address']
             else:
                 msg=f"{symb} does not exist in the token list {tokenlist}"
@@ -282,7 +282,7 @@ def Convert(s):
     try:
         m_tp=li[3][3:7]
     except (IndexError, TypeError):
-        logger.warning(msg=f"{s} no sl")
+        logger.warning(msg=f"{s} no tp")
         m_tp=0
     try:
         m_q=li[4][2:-1]
@@ -300,7 +300,7 @@ async def Buy(s1,s2,s3,s4,s5):
     elif (isinstance(ex,web3.main.Web3)):
         await DEXBuy(s1,s2,s3,s4,s5)
     else:
-        logger.warning(msg=f"exchange error {ex}") 
+        logger.warning(msg=f"exchange error {ex}")
         await HandleExceptions(e)
         return
 
@@ -342,7 +342,6 @@ async def DEXBuy(s1,s2,s3,s4,s5):
     txntime = (int(time.time()) + transactionRevertTime)
     try:
         if(await DEXContractLookup(s2)!= None):
-            logger.info(msg=f"DEXContractLookup {await DEXContractLookup(s2)}")
             tokenToBuy = web3.to_checksum_address(await DEXContractLookup(s2))
             tokenToSell=web3.to_checksum_address(await DEXContractLookup(tokenToSell))
             dexabi= await DEXFetchAbi(router)
