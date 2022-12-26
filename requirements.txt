@@ -4,4 +4,4 @@ tinydb
 ccxt
 web3>=v6.0.0-beta.8
 apprise
-simplematrixbotlib
+#simplematrixbotlib
