@@ -265,6 +265,19 @@ async def DEXFetchAbi(addr):
     except Exception as e:
         await HandleExceptions(e)
 
+async def DEXFetchSwapMethod(abidata):
+    try:
+        logger.info(msg=f"abidata {abidata}")
+        for i in abidata:
+            if i['function'] == 'swapExactETHForTokens':
+                return 'swapExactETHForTokens'
+            elif i['function'] == 'swapExactInputSingle':
+                return 'swapExactInputSingle'
+            else:
+                return None
+    except Exception as e:
+        await HandleExceptions(e)
+
 #ORDER PARSER
 def Convert(s):
     li = s.split(" ")
@@ -349,6 +362,8 @@ async def DEXBuy(s1,s2,s3,s4,s5):
             tokenToBuy = web3.to_checksum_address(await DEXContractLookup(s2))
             tokenToSell=web3.to_checksum_address(await DEXContractLookup(tokenToSell))
             dexabi= await DEXFetchAbi(router)
+            method= await DEXFetchSwapMethod(dexabi)
+            logger.info(msg=f"method {method}")
             contract = web3.eth.contract(address=router, abi=dexabi) #liquidityContract
             nonce = web3.eth.get_transaction_count(address)
             path=[tokenToSell, tokenToBuy]

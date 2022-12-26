@@ -232,7 +232,7 @@
             "router": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
             "testmode": "True",
             "tokenlist":"https://gateway.ipfs.io/ipns/tokens.uniswap.org",
-            "abiurl":"https://api-goerli.etherscan.io/api",
+            "abiurl":"https://api.etherscan.io/api",
             "abiurltoken":"abc",
             "basesymbol":"USDT"
         },
