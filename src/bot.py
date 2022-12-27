@@ -47,8 +47,8 @@ commandlist= """
 <code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=5%</code> <code>/price btc/usdt</code>
 <code>/cex binancecoinm</code> <code>buy btcbusd sl=1000 tp=20 q=5%</code>
-<code>/dex pancake</code> <code>buy btcb sl=1000 tp=20 q=0.1</code> <code>/price BTCB</code>
-<code>/dex quickswap</code> <code>buy wbtc sl=1000 tp=20 q=0.1</code> <code>/price wbtc</code>
+<code>/dex pancake</code> <code>buy btcb sl=1000 tp=20 q=0.001</code> <code>/price BTCB</code>
+<code>/dex quickswap</code> <code>buy wbtc sl=1000 tp=20 q=0.01</code> <code>/price wbtc</code>
 <code>/trading</code>
 <code>/testmode</code>"""
 menu=f'{version} \n {commandlist}\n'
@@ -253,9 +253,9 @@ async def DEXFetchAbi(addr):
             "apikey": abiurltoken }
         #logger.info(msg=f"{url}")
         #logger.info(msg=f"{params}")
-        logger.info(msg=f"request {requests.get(url, params=params)}")    
-        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}   
+        headers = { "User-Agent": "Mozilla/5.0" }
         resp = requests.get(url, params=params, headers=headers).json()
+        logger.info(msg=f"request {requests.get(url, params=params, headers=headers)}")    
         abi = resp["result"]
         #logger.info(msg=f"{abi}")
         if(abi!=""):
@@ -312,9 +312,11 @@ def Convert(s):
 #========== Buy function
 async def Buy(s1,s2,s3,s4,s5):
     if not isinstance(ex,web3.main.Web3):
-        await CEXBuy(s1,s2,s3,s4,s5)
+        response = await CEXBuy(s1,s2,s3,s4,s5)
+        return response
     elif (isinstance(ex,web3.main.Web3)):
-        await DEXBuy(s1,s2,s3,s4,s5)
+        response = await DEXBuy(s1,s2,s3,s4,s5)
+        return response
     else:
         logger.warning(msg=f"exchange error {ex}")
         await HandleExceptions(e)
@@ -351,8 +353,8 @@ async def CEXBuy(s1,s2,s3,s4,s5):
 async def DEXBuy(s1,s2,s3,s4,s5):
     web3=ex
     transactionRevertTime = 10000
-    gasAmount = 100
-    gasPrice = 5
+    gasAmount = 70000
+    gasPrice = 20
     tokenToSell = basesymbol
     amountToBuy = s5
     txntime = (int(time.time()) + transactionRevertTime)
@@ -378,8 +380,10 @@ async def DEXBuy(s1,s2,s3,s4,s5):
                 txHash = str(web3.to_hex(tx_token)) # TOKEN BOUGHT
                 checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + \
                 txHash + "&apikey=" + abiurltoken
-                checkTransactionRequest = requests.get(url=checkTransactionSuccessURL)
+                headers = { "User-Agent": "Mozilla/5.0" }
+                checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
                 txResult = checkTransactionRequest.json()['status']
+                logger.info(msg=f"{txResult}")
                 if(txResult == "1"):
                     logger.info(msg=f"{txHash}")
                     return txHash
