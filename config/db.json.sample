@@ -192,7 +192,7 @@
             "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
             "abiurl":"https://api.bscscan.com/api",
             "abiurltoken":"abc",
-            "basesymbol":"WBNB"
+            "basesymbol":"BNB"
         },
         "2":
         {

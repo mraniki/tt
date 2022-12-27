@@ -47,8 +47,8 @@ commandlist= """
 <code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=5%</code> <code>/price btc/usdt</code>
 <code>/cex binancecoinm</code> <code>buy btcbusd sl=1000 tp=20 q=5%</code>
-<code>/dex pancake</code> <code>buy btcb</code> <code>/price BTCB</code>
-<code>/dex quickswap</code> <code>buy wbtc</code> <code>/price wbtc</code>
+<code>/dex pancake</code> <code>buy btcb sl=1000 tp=20 q=0.1</code> <code>/price BTCB</code>
+<code>/dex quickswap</code> <code>buy wbtc sl=1000 tp=20 q=0.1</code> <code>/price wbtc</code>
 <code>/trading</code>
 <code>/testmode</code>"""
 menu=f'{version} \n {commandlist}\n'
@@ -257,7 +257,7 @@ async def DEXFetchAbi(addr):
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}   
         resp = requests.get(url, params=params, headers=headers).json()
         abi = resp["result"]
-        logger.info(msg=f"{abi}")
+        #logger.info(msg=f"{abi}")
         if(abi!=""):
             return abi
         else:
@@ -301,7 +301,7 @@ def Convert(s):
         logger.warning(msg=f"{s} no tp")
         m_tp=0
     try:
-        m_q=li[4][2:5]
+        m_q=li[4][2:8]
     except (IndexError, TypeError):
         logger.warning(msg=f"{s} no size default to 1") 
         m_q=0.1
