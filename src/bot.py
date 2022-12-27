@@ -267,14 +267,12 @@ async def DEXFetchAbi(addr):
 
 async def DEXFetchSwapMethod(abidata):
     try:
-        logger.info(msg=f"abidata {abidata}")
-        for i in abidata:
-            if i['function'] == 'swapExactETHForTokens':
-                return 'swapExactETHForTokens'
-            elif i['function'] == 'swapExactInputSingle':
-                return 'swapExactInputSingle'
-            else:
-                return None
+        #logger.info(msg=f"abidata {abidata}")
+        swapfunction = abidata.find("swapExactETHForTokens")
+        if(swapfunction!=""):
+            return 'swapExactETHForTokens'
+        else:
+            return 'swapExactInputSingle'
     except Exception as e:
         await HandleExceptions(e)
 
