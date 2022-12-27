@@ -301,7 +301,7 @@ def Convert(s):
         logger.warning(msg=f"{s} no tp")
         m_tp=0
     try:
-        m_q=li[4][2:8]
+       o m_q=(li[4][2:8])
     except (IndexError, TypeError):
         logger.warning(msg=f"{s} no size default to 1") 
         m_q=0.1
@@ -324,6 +324,7 @@ async def Buy(s1,s2,s3,s4,s5):
 
 async def CEXBuy(s1,s2,s3,s4,s5):
     try:
+        s5=s5[0:-1]
         bal = ex.fetch_free_balance()
         bal = {k: v for k, v in bal.items() if v is not None and v>0}
         logger.info(msg=f"bal: {bal}")
@@ -356,7 +357,7 @@ async def DEXBuy(s1,s2,s3,s4,s5):
     gasAmount = 70000
     gasPrice = 20
     tokenToSell = basesymbol
-    amountToBuy = s5
+    amountToBuy = s5[0:-1]
     txntime = (int(time.time()) + transactionRevertTime)
     try:
         if(await DEXContractLookup(s2)!= None):
