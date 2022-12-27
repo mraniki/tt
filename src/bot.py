@@ -253,11 +253,11 @@ async def DEXFetchAbi(addr):
             "apikey": abiurltoken }
         #logger.info(msg=f"{url}")
         #logger.info(msg=f"{params}")
-        #logger.info(msg=f"request {requests.get(url, params=params)}")    
+        logger.info(msg=f"request {requests.get(url, params=params)}")    
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}   
         resp = requests.get(url, params=params, headers=headers).json()
         abi = resp["result"]
-        #logger.info(msg=f"{abi}")
+        logger.info(msg=f"{abi}")
         if(abi!=""):
             return abi
         else:
@@ -279,6 +279,7 @@ async def DEXFetchSwapMethod(abidata):
 #ORDER PARSER
 def Convert(s):
     li = s.split(" ")
+    logger.info(msg=f"li{li} no direction")
     try:
         m_dir= li[0]
     except (IndexError, TypeError):
@@ -300,10 +301,10 @@ def Convert(s):
         logger.warning(msg=f"{s} no tp")
         m_tp=0
     try:
-        m_q=li[4][2:-1]
+        m_q=li[4][2:5]
     except (IndexError, TypeError):
         logger.warning(msg=f"{s} no size default to 1") 
-        m_q=1
+        m_q=0.1
     order=[m_dir,m_symbol,m_sl,m_tp,m_q]
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
     return order
