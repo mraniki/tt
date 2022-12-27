@@ -32,7 +32,7 @@ Using:
 1) Create a private channel and a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
 2) Get your 
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
-    - DEX contract router supported by [Web3](https://github.com/ethereum/web3.py)
+    - DEX chain supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org) or [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) for RPC detail per chain.
 3) Update the config (telegram token, API, router). Point your config to container volume /code/config)
 4) Deploy :
     - via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
@@ -41,14 +41,13 @@ Using:
 6) `sell BTCUSDT sl=6000 tp=4500 q=1%` or for DEFI `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY
 7) `/bal` command to query balance
 8) `/price BTCB` or `/price btc/usdt` to query ticker price 
-9) `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/dex quickswap`) to switch between multiple CEX and DEX with prefix 
+9) `/cex exchangename` or `/dex exchangename` (e.g `/cex binance`, `/dex quickswap`) to switch between multiple CEX and DEX with prefix 
 10) `/testmode` to switch between sandbox, mainnet, testnet
 11) `/trading` to disable/enable trading
 
 ## Config
-Either use .env file or json db as per below structure.
-Environment file is loaded in db at the startup. 
-Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CEX.
+Either use .env file or json db as per below structure. Environment file or docker variable are automatically loaded in a new db at the startup if there is no DB.
+Approach: Do an initial launch to have the DB structure created automatically and add your telegram bot details or update the DB sample.
 
 ### Env
 [env sample](config/env.sample)
@@ -86,8 +85,6 @@ Approach: Env is best for 1 CEX setup. DB allows support for multiple DEX and CE
 ### V1.2
 
 - Better error handling
-      - empty balance for order taking in CEX
-      - binance amount of BTC/USDT must be greater than minimum amount precision of 5
 - More testing and code hardening
 
 ### V1.3
