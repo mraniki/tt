@@ -283,7 +283,6 @@ async def DEXFetchSwapMethod(abidata):
 #ORDER PARSER
 def Convert(s):
     li = s.split(" ")
-    logger.info(msg=f"li{li} no direction")
     try:
         m_dir= li[0]
     except (IndexError, TypeError):
@@ -306,8 +305,6 @@ def Convert(s):
         m_tp=0
     try:
         m_q=li[4][2:-1]
-        #m_q= m_q.replace(' ', '')
-        logger.info(msg=f"m_q {m_q}") 
     except (IndexError, TypeError):
         logger.warning(msg=f"{s} no size default to 1") 
         m_q=0.1
@@ -361,7 +358,10 @@ async def DEXBuy(s1,s2,s3,s4,s5):
     web3=ex
     transactionRevertTime = 10000
     tokenToSell = basesymbol
-    amountToBuy = s5[0:-1]
+    amountToBuy = float(s5)
+    #totalusdtbal = ex.fetchBalance()['USDT']['free']
+    #amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price)
+    amountpercent=float(amountToBuy/100)
     txntime = (int(time.time()) + transactionRevertTime)
     try:
         if(await DEXContractLookup(s2)!= None):
@@ -376,13 +376,17 @@ async def DEXBuy(s1,s2,s3,s4,s5):
             try:
                 DEXtxn = contract.functions.swapExactETHForTokens(0,path,address,txntime).build_transaction({
                 'from': address, # based Token
-                'value': web3.to_wei(float(amountToBuy), 'ether'),
-                'gas': gasAmount,
-                'gasPrice': web3.to_wei(gasPrice, 'gwei'),
+                'value': web3.to_wei(float(amountpercent), 'ether'),
+                'gas': web3.to_wei(gasAmount,'wei'),
+                'gasPrice': web3.to_wei(gasPrice,'wei'),
                 'nonce': nonce})
+                logger.info(msg=f"amountpercent{amountpercent}")
+                logger.info(msg=f"gas{web3.to_wei(gasAmount,'wei')}")
+                logger.info(msg=f"gasPrice{web3.to_wei(gasPrice,'wei')}")
                 signed_txn = web3.eth.account.sign_transaction(DEXtxn, privatekey)
                 tx_token = web3.eth.send_raw_transaction(signed_txn.rawTransaction) # BUY THE TK
                 txHash = str(web3.to_hex(tx_token)) # TOKEN BOUGHT
+                logger.info(msg=f"{txHash}")
                 checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + \
                 txHash + "&apikey=" + abiurltoken
                 headers = { "User-Agent": "Mozilla/5.0" }
