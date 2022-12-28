@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.24"
+version="🪙TT Beta 1.25"
 ##=============== import  =============
 ##log
 import logging
@@ -377,8 +377,8 @@ async def DEXBuy(s1,s2,s3,s4,s5):
                 DEXtxn = contract.functions.swapExactETHForTokens(0,path,address,txntime).build_transaction({
                 'from': address, # based Token
                 'value': web3.to_wei(float(amountpercent), 'ether'),
-                'gas': web3.to_wei(gasAmount,'wei'),
-                'gasPrice': web3.to_wei(gasPrice,'wei'),
+                'gas': web3.to_wei(float(gasAmount),'wei'),
+                'gasPrice': web3.to_wei(float(gasPrice),'wei'),
                 'nonce': nonce})
                 logger.info(msg=f"amountpercent{amountpercent}")
                 logger.info(msg=f"gas{web3.to_wei(gasAmount,'wei')}")
