@@ -45,10 +45,10 @@ testmode="True"
 commandlist= """
 <code>/bal</code>
 <code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
-<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=5%</code> <code>/price btc/usdt</code>
+<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
 <code>/cex binancecoinm</code> <code>buy btcbusd sl=1000 tp=20 q=5%</code>
-<code>/dex pancake</code> <code>buy btcb sl=1000 tp=20 q=0.001</code> <code>/price BTCB</code>
-<code>/dex quickswap</code> <code>buy wbtc sl=1000 tp=20 q=0.01</code> <code>/price wbtc</code>
+<code>/dex pancake</code> <code>buy btcb sl=1000 tp=20 q=5%</code> <code>/price BTCB</code>
+<code>/dex quickswap</code> <code>buy wbtc sl=1000 tp=20 q=1%</code> <code>/price wbtc</code>
 <code>/trading</code>
 <code>/testmode</code>"""
 menu=f'{version} \n {commandlist}\n'
@@ -173,7 +173,9 @@ async def LoadExchange(exchangeid, mode):
     global abiurl
     global abiurltoken
     global basesymbol
+    global gasPrice
     global m_ordertype
+    global gasAmount
     logger.info(msg=f"Setting up exchange {exchangeid}")
     CEXCheck= await SearchCEX(exchangeid,mode)
     DEXCheck= await SearchDEX(exchangeid,mode)
@@ -211,6 +213,8 @@ async def LoadExchange(exchangeid, mode):
         abiurl=newex[0]['abiurl']
         abiurltoken=newex[0]['abiurltoken']
         basesymbol=newex[0]['basesymbol']
+        gasAmount=newex[0]['gasAmount']
+        gasPrice=newex[0]['gasPrice']
         ex = Web3(Web3.HTTPProvider(networkprovider))
         if ex.net.listening:
             logger.info(msg=f"Connected to Web3 {ex}")
@@ -330,12 +334,10 @@ async def CEXBuy(s1,s2,s3,s4,s5):
         #s5=s5[0:-1]
         bal = ex.fetch_free_balance()
         bal = {k: v for k, v in bal.items() if v is not None and v>0}
-        logger.info(msg=f"bal: {bal}")
         if (len(str(bal))):
             ######## % of bal
             m_price = float(ex.fetchTicker(f'{s2}').get('last'))
             totalusdtbal = ex.fetchBalance()['USDT']['free']
-            logger.info(msg=f"m_price: {m_price}")
             amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price)
             ######## ORDER
             try:
@@ -346,7 +348,7 @@ async def CEXBuy(s1,s2,s3,s4,s5):
                 side=res['side']
                 amount=res['amount']
                 price=res['price']   
-                response=f"order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                response=f"{timestamp}\norder id {orderid}\n{side} {symbol}\n{amount} @ {price}"
                 return response
             except Exception as e:
                 await HandleExceptions(e)
@@ -358,8 +360,6 @@ async def CEXBuy(s1,s2,s3,s4,s5):
 async def DEXBuy(s1,s2,s3,s4,s5):
     web3=ex
     transactionRevertTime = 10000
-    gasAmount = 70000
-    gasPrice = 20
     tokenToSell = basesymbol
     amountToBuy = s5[0:-1]
     txntime = (int(time.time()) + transactionRevertTime)
@@ -392,8 +392,6 @@ async def DEXBuy(s1,s2,s3,s4,s5):
                 if(txResult == "1"):
                     logger.info(msg=f"{txHash}")
                     return txHash
-                else:
-                    return
             except Exception as e:
                 await HandleExceptions(e)
                 return
@@ -477,7 +475,6 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             await send(update,message)
         else:
             order_m = Convert(msgtxt_upper)
-            logger.info(msg=f"order_m2= {order_m}")
             m_dir= order_m[0]
             m_symbol=order_m[1]
             m_sl=order_m[2]
