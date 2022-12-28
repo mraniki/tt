@@ -301,9 +301,9 @@ def Convert(s):
         logger.warning(msg=f"{s} no tp")
         m_tp=0
     try:
-        m_q=li[4][2:8]
+        m_q=li[4][2:-1]
+        #m_q= m_q.replace(' ', '')
         logger.info(msg=f"m_q {m_q}") 
-        #m_q.replace("%", "")
     except (IndexError, TypeError):
         logger.warning(msg=f"{s} no size default to 1") 
         m_q=0.1
@@ -314,6 +314,7 @@ def Convert(s):
 #========== Buy function
 async def Buy(s1,s2,s3,s4,s5):
     if not isinstance(ex,web3.main.Web3):
+        logger.info(msg=f"order: {s1} {s2} {s3} {s4} {s5}")
         response = await CEXBuy(s1,s2,s3,s4,s5)
         return response
     elif (isinstance(ex,web3.main.Web3)):
@@ -326,7 +327,7 @@ async def Buy(s1,s2,s3,s4,s5):
 
 async def CEXBuy(s1,s2,s3,s4,s5):
     try:
-        s5=s5[0:-1]
+        #s5=s5[0:-1]
         bal = ex.fetch_free_balance()
         bal = {k: v for k, v in bal.items() if v is not None and v>0}
         logger.info(msg=f"bal: {bal}")
@@ -334,12 +335,14 @@ async def CEXBuy(s1,s2,s3,s4,s5):
             ######## % of bal
             m_price = float(ex.fetchTicker(f'{s2}').get('last'))
             totalusdtbal = ex.fetchBalance()['USDT']['free']
+            logger.info(msg=f"m_price: {m_price}")
             amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price)
             ######## ORDER
             try:
-                res = ex.create_order(s2, m_ordertype, s1, amountpercent)
+                res = ex.create_order(s2, m_ordertype, s1, amountpercent)   
                 if({res}!= ValueError):                            
                     orderid=res['id']
+                    logger.info(msg=f"orderid: {orderid}")    
                     timestamp=res['datetime']
                     symbol=res['symbol']
                     side=res['side']
@@ -475,13 +478,13 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             await send(update,message)
         else:
             order_m = Convert(msgtxt_upper)
-            logger.info(msg=f"order_m= {order_m}")
+            logger.info(msg=f"order_m2= {order_m}")
             m_dir= order_m[0]
             m_symbol=order_m[1]
             m_sl=order_m[2]
             m_tp=order_m[3]
             m_q=order_m[4]
-            logger.info(msg=f"Processing: {m_symbol} {m_dir} {m_sl} {m_tp} {m_q}")
+            logger.info(msg=f"Processing: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
             try:
                 res=await Buy(m_dir,m_symbol,m_sl,m_tp,m_q)          
                 if (res!= None):       
