@@ -301,7 +301,8 @@ def Convert(s):
         logger.warning(msg=f"{s} no tp")
         m_tp=0
     try:
-       o m_q=(li[4][2:8])
+        m_q=li[4][2:8]
+        m_q.replace("%", "")
     except (IndexError, TypeError):
         logger.warning(msg=f"{s} no size default to 1") 
         m_q=0.1
