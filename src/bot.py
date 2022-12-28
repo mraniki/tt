@@ -339,16 +339,15 @@ async def CEXBuy(s1,s2,s3,s4,s5):
             amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price)
             ######## ORDER
             try:
-                res = ex.create_order(s2, m_ordertype, s1, amountpercent)   
-                if({res}!= ValueError):                            
-                    orderid=res['id']
-                    logger.info(msg=f"orderid: {orderid}")    
-                    timestamp=res['datetime']
-                    symbol=res['symbol']
-                    side=res['side']
-                    amount=res['amount']
-                    price=res['price']
-                    response=f"🟢 ORDER Processed: \n order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                res = ex.create_order(s2, m_ordertype, s1, amountpercent)                               
+                orderid=res['id']   
+                timestamp=res['datetime']  
+                symbol=res['symbol']
+                side=res['side']
+                amount=res['amount']
+                price=res['price']   
+                response=f"order id {orderid} @ {timestamp} \n  {side} {symbol} {amount} @ {price}"
+                return response
             except Exception as e:
                 await HandleExceptions(e)
                 return
@@ -488,7 +487,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             try:
                 res=await Buy(m_dir,m_symbol,m_sl,m_tp,m_q)          
                 if (res!= None):       
-                    response=f"🟢 ORDER Processed: {res}"
+                    response=f"🟢 ORDER Processed:\n{res}"
                     await send(update,response)
             except Exception as e:
                 await HandleExceptions(e)
