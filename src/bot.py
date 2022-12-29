@@ -361,7 +361,7 @@ async def DEXBuy(s1,s2,s3,s4,s5):
     amountToBuy = float(s5)
     #totalusdtbal = ex.fetchBalance()['USDT']['free']
     #amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price)
-    amountpercent=float(amountToBuy/100)
+    amountpercent=float(amountToBuy/1000)
     txntime = (int(time.time()) + transactionRevertTime)
     try:
         if(await DEXContractLookup(s2)!= None):
