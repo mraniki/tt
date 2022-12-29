@@ -192,7 +192,9 @@
             "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
             "abiurl":"https://api.bscscan.com/api",
             "abiurltoken":"abc",
-            "basesymbol":"BNB"
+            "basesymbol":"BNB",
+            "gasAmount":"70000",
+            "gasPrice":"20"
         },
         "2":
         {
@@ -206,7 +208,9 @@
             "tokenlist":"https://raw.githubusercontent.com/medhussam/pancake-swap-interface-v1-testnet/05b2aa2e84b07f5ffd9c01c1bc46e2dd7f3ad7f1/src/constants/token/pancakeswap.json",
             "abiurl":"https://api-testnet.bscscan.com/api",
             "abiurltoken":"abc",
-            "basesymbol":"WBNB"
+            "basesymbol":"WBNB",
+            "gasAmount":"70000",
+            "gasPrice":"20"
         }, 
         "3":
         {
@@ -220,7 +224,9 @@
             "tokenlist":"https://gateway.ipfs.io/ipns/tokens.uniswap.org",
             "abiurl":"https://api.etherscan.io/api",
             "abiurltoken":"abc",
-            "basesymbol":"USDT"
+            "basesymbol":"USDT",
+            "gasAmount":"70000",
+            "gasPrice":"20"
         },
         "4":
         {
@@ -234,7 +240,9 @@
             "tokenlist":"https://gateway.ipfs.io/ipns/tokens.uniswap.org",
             "abiurl":"https://api.etherscan.io/api",
             "abiurltoken":"abc",
-            "basesymbol":"USDT"
+            "basesymbol":"USDT",
+            "gasAmount":"70000",
+            "gasPrice":"20"
         },
         "5":
         {
@@ -248,7 +256,9 @@
             "tokenlist":"https://api-polygon-tokens.polygon.technology/tokenlists/polygonTokens.tokenlist.json",
             "abiurl":"https://api.polygonscan.com/api",
             "abiurltoken":"abc",
-            "basesymbol":"USDT"
+            "basesymbol":"USDT",
+            "gasAmount":"70000",
+            "gasPrice":"20"
         },
         "6":
         {
@@ -262,7 +272,9 @@
             "tokenlist":"https://api-polygon-tokens.polygon.technology/tokenlists/testnet.tokenlist.json",
             "abiurl":"https://api-testnet.polygonscan.com/api",
             "abiurltoken":"abc",
-            "basesymbol":"USDT"
+            "basesymbol":"USDT",
+            "gasAmount":"70000",
+            "gasPrice":"20"
         }
     }
 }
