@@ -60,7 +60,7 @@ Approach: Do an initial launch to have the DB structure created automatically an
  ### v1 
  - Enable bot in pythontelegram v20 and support CEX and DEX exchange formatted error via telegram
  - Query Balance, quote ticker and place order for CEX and DEX
- - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). Same format and it SL / TP or QTY are missing (`sell BTCUSDT`) values are defaulted
+ - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing (`sell BTCUSDT`) values are defaulted
  - Disable or Enable trading process via `/trading` command
  - Query balance via `/bal` command and view it in formatted way
  - Query ticker price via `/price BTCB` or `/price btc/usdt` command to view last symbol price (USDT as basis)
