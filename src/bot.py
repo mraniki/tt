@@ -232,7 +232,8 @@ async def DEXContractLookup(symb):
         symb=symb.upper()
         #logger.info(msg=f"symbol {symb}")
         try:
-            symbolcontract = [token for token in token_list if token['symbol'] == symb]
+            symbolcontract = [token for token in token_list if token['symbol'] == symb or token['symbol'].startswith(symb)]
+            logger.info(msg=f"symbolcontract {symbolcontract}")
             if len(symbolcontract) > 0:
                 #logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
                 return symbolcontract[0]['address']
