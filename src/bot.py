@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.25"
+version="🪙TT Beta 1.26"
 ##=============== import  =============
 ##log
 import logging
@@ -47,7 +47,7 @@ commandlist= """
 <code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
 <code>/cex binancecoinm</code> <code>buy btcbusd sl=1000 tp=20 q=5%</code>
-<code>/dex pancake</code> <code>buy btcb sl=1000 tp=20 q=5%</code> <code>/price BTCB</code>
+<code>/dex pancake</code> <code>buy wbnb sl=1000 tp=20 q=5%</code> <code>/price BTCB</code>
 <code>/dex quickswap</code> <code>buy wbtc sl=1000 tp=20 q=1%</code> <code>/price wbtc</code>
 <code>/trading</code>
 <code>/testmode</code>"""
@@ -356,9 +356,15 @@ async def CEXBuy(s1,s2,s3,s4,s5):
         return
 
 async def DEXBuy(s1,s2,s3,s4,s5):
+    logger.info(msg=f"s1 {s1}")
     web3=ex
     transactionRevertTime = 10000
-    tokenToSell = basesymbol
+    if (s1=="BUY"):
+        tokenToBuy = s2
+        tokenToSell = basesymbol
+    else:
+        tokenToBuy = basesymbol
+        tokenToSell = s2
     amountToBuy = float(s5)
     #totalusdtbal = ex.fetchBalance()['USDT']['free']
     #amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price)
@@ -366,24 +372,28 @@ async def DEXBuy(s1,s2,s3,s4,s5):
     txntime = (int(time.time()) + transactionRevertTime)
     try:
         if(await DEXContractLookup(s2)!= None):
-            tokenToBuy = web3.to_checksum_address(await DEXContractLookup(s2))
+            tokenToBuy = web3.to_checksum_address(await DEXContractLookup(tokenToBuy))
             tokenToSell=web3.to_checksum_address(await DEXContractLookup(tokenToSell))
             dexabi= await DEXFetchAbi(router)
             method= await DEXFetchSwapMethod(dexabi)
             logger.info(msg=f"method {method}")
             contract = web3.eth.contract(address=router, abi=dexabi) #liquidityContract
             nonce = web3.eth.get_transaction_count(address)
+            # path[0] = tokenToSwap;
+            # path[1] = uniswap.WETH(); // returns address of Wrapped BNB
+            # path[2] = SwaptokenOut;
             path=[tokenToSell, tokenToBuy]
             try:
                 DEXtxn = contract.functions.swapExactETHForTokens(0,path,address,txntime).build_transaction({
                 'from': address, # based Token
                 'value': web3.to_wei(float(amountpercent), 'ether'),
-                'gas': web3.to_wei(float(gasAmount),'wei'),
-                'gasPrice': web3.to_wei(float(gasPrice),'wei'),
+                'gas': int(gasAmount),
+                'gasPrice':web3.to_wei(gasPrice,'gwei'),
                 'nonce': nonce})
                 logger.info(msg=f"amountpercent{amountpercent}")
-                logger.info(msg=f"gas{web3.to_wei(gasAmount,'wei')}")
-                logger.info(msg=f"gasPrice{web3.to_wei(gasPrice,'wei')}")
+                logger.info(msg=f"gas{int(gasAmount)}")
+                logger.info(msg=f"gasPrice{web3.to_wei(gasPrice,'gwei')}")
+                logger.info(msg=f"path {path}")
                 signed_txn = web3.eth.account.sign_transaction(DEXtxn, privatekey)
                 tx_token = web3.eth.send_raw_transaction(signed_txn.rawTransaction) # BUY THE TK
                 txHash = str(web3.to_hex(tx_token)) # TOKEN BOUGHT
