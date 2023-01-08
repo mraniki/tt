@@ -47,7 +47,7 @@ commandlist= """
 <code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
 <code>/cex binancecoinm</code> <code>buy btcbusd sl=1000 tp=20 q=5%</code>
-<code>/dex pancake</code> <code>buy wbnb sl=1000 tp=20 q=5%</code> <code>/price BTCB</code>
+<code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>
 <code>/dex quickswap</code> <code>buy wbtc sl=1000 tp=20 q=1%</code> <code>/price wbtc</code>
 <code>/trading</code>
 <code>/testmode</code>"""
@@ -270,16 +270,16 @@ async def DEXFetchAbi(addr):
     except Exception as e:
         await HandleExceptions(e)
 
-async def DEXFetchSwapMethod(abidata):
-    try:
-        #logger.info(msg=f"abidata {abidata}")
-        swapfunction = abidata.find("swapExactETHForTokens")
-        if(swapfunction!=""):
-            return 'swapExactETHForTokens'
-        else:
-            return 'swapExactInputSingle'
-    except Exception as e:
-        await HandleExceptions(e)
+# async def DEXFetchSwapMethod(abidata):
+#     try:
+#         #logger.info(msg=f"abidata {abidata}")
+#         swapfunction = abidata.find("swapExactETHForTokens")
+#         if(swapfunction!=""):
+#             return 'swapExactETHForTokens'
+#         else:
+#             return 'swapTokensForExactETH'
+#     except Exception as e:
+#         await HandleExceptions(e)
 
 #ORDER PARSER
 def Convert(s):
@@ -375,16 +375,15 @@ async def DEXBuy(s1,s2,s3,s4,s5):
             tokenToBuy = web3.to_checksum_address(await DEXContractLookup(tokenToBuy))
             tokenToSell=web3.to_checksum_address(await DEXContractLookup(tokenToSell))
             dexabi= await DEXFetchAbi(router)
-            method= await DEXFetchSwapMethod(dexabi)
-            logger.info(msg=f"method {method}")
             contract = web3.eth.contract(address=router, abi=dexabi) #liquidityContract
             nonce = web3.eth.get_transaction_count(address)
-            # path[0] = tokenToSwap;
-            # path[1] = uniswap.WETH(); // returns address of Wrapped BNB
-            # path[2] = SwaptokenOut;
             path=[tokenToSell, tokenToBuy]
             try:
-                DEXtxn = contract.functions.swapExactETHForTokens(0,path,address,txntime).build_transaction({
+                if (s1=="BUY"):
+                    method =contract.functions.swapExactETHForTokens(0,path,address,txntime)
+                else:
+                    method =contract.functions.swapTokensForExactETH(0,int(amountpercent),path,address,txntime)
+                DEXtxn = method.build_transaction({
                 'from': address, # based Token
                 'value': web3.to_wei(float(amountpercent), 'ether'),
                 'gas': int(gasAmount),
