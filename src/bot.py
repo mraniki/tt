@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.25"
+version="🪙TT Beta 1.26"
 ##=============== import  =============
 ##log
 import logging
@@ -47,7 +47,7 @@ commandlist= """
 <code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
 <code>/cex binancecoinm</code> <code>buy btcbusd sl=1000 tp=20 q=5%</code>
-<code>/dex pancake</code> <code>buy btcb sl=1000 tp=20 q=5%</code> <code>/price BTCB</code>
+<code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>
 <code>/dex quickswap</code> <code>buy wbtc sl=1000 tp=20 q=1%</code> <code>/price wbtc</code>
 <code>/trading</code>
 <code>/testmode</code>"""
@@ -232,7 +232,8 @@ async def DEXContractLookup(symb):
         symb=symb.upper()
         #logger.info(msg=f"symbol {symb}")
         try:
-            symbolcontract = [token for token in token_list if token['symbol'] == symb]
+            symbolcontract = [token for token in token_list if token['symbol'] == symb or token['symbol'].startswith(symb)]
+            logger.info(msg=f"symbolcontract {symbolcontract}")
             if len(symbolcontract) > 0:
                 #logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
                 return symbolcontract[0]['address']
@@ -269,16 +270,6 @@ async def DEXFetchAbi(addr):
     except Exception as e:
         await HandleExceptions(e)
 
-async def DEXFetchSwapMethod(abidata):
-    try:
-        #logger.info(msg=f"abidata {abidata}")
-        swapfunction = abidata.find("swapExactETHForTokens")
-        if(swapfunction!=""):
-            return 'swapExactETHForTokens'
-        else:
-            return 'swapExactInputSingle'
-    except Exception as e:
-        await HandleExceptions(e)
 
 #ORDER PARSER
 def Convert(s):
@@ -357,42 +348,64 @@ async def CEXBuy(s1,s2,s3,s4,s5):
 async def DEXBuy(s1,s2,s3,s4,s5):
     web3=ex
     transactionRevertTime = 10000
-    tokenToSell = basesymbol
-    amountToBuy = float(s5)
-    #totalusdtbal = ex.fetchBalance()['USDT']['free']
-    #amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price)
-    amountpercent=float(amountToBuy/1000)
+    if (s1=="BUY"):
+        tokenToBuy = web3.to_checksum_address(await DEXContractLookup(s2))
+        tokenToSell = web3.to_checksum_address(await DEXContractLookup(basesymbol))
+        contractabi= await DEXFetchAbi(tokenToSell)
+        tokeninfo = web3.eth.contract(address=tokenToSell, abi=contractabi) #ContractSellInfo
+        tokeninfobal=tokeninfo.functions.balanceOf(address).call()
+        tokeninfobaldecimal=tokeninfo.functions.decimals().call()
+        amountToBuy = (tokeninfobal)/(10 ** tokeninfobaldecimal) * (10/100) 
+        logger.info(msg=f"amountToBuy {amountToBuy}")
+        amountOut=web3.to_wei(amountToBuy, 'ether')
+        logger.info(msg=f"amountOut {amountOut}")
+        # 0.1% slippage
+        amountOutMin = amountOut - (amountOut * 0.01)
+    else:
+        tokenToBuy = web3.to_checksum_address(await DEXContractLookup(basesymbol))
+        tokenToSell = web3.to_checksum_address(await DEXContractLookup(s2))
+        contractabi= await DEXFetchAbi(tokenToSell)
+        tokeninfo = web3.eth.contract(address=tokenToSell, abi=contractabi) #ContractPurchaseInfo
+        tokeninfobal=tokeninfo.functions.balanceOf(address).call()
+        tokeninfobaldecimal=tokeninfo.functions.decimals().call()
+        amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal)
+        logger.info(msg=f"amountTosell {amountTosell}")
+        amountOut=web3.to_wei(amountTosell, 'ether')
+        logger.info(msg=f"amountOut {amountOut}")
+        # 0.1% slippage
+        amountOutMin = amountOut - (amountOut * 0.01)
     txntime = (int(time.time()) + transactionRevertTime)
     try:
         if(await DEXContractLookup(s2)!= None):
-            tokenToBuy = web3.to_checksum_address(await DEXContractLookup(s2))
-            tokenToSell=web3.to_checksum_address(await DEXContractLookup(tokenToSell))
             dexabi= await DEXFetchAbi(router)
-            method= await DEXFetchSwapMethod(dexabi)
-            logger.info(msg=f"method {method}")
             contract = web3.eth.contract(address=router, abi=dexabi) #liquidityContract
             nonce = web3.eth.get_transaction_count(address)
-            path=[tokenToSell, tokenToBuy]
             try:
-                DEXtxn = contract.functions.swapExactETHForTokens(0,path,address,txntime).build_transaction({
+                path=[tokenToSell, tokenToBuy]
+                if (s1=="BUY"):
+                    method =contract.functions.swapExactETHForTokens(amountOut,path,address,txntime)
+                else:
+                    method =contract.functions.swapExactTokensForETH(amountOut,amountOut,path,address,txntime)
+                DEXtxn = method.build_transaction({
                 'from': address, # based Token
-                'value': web3.to_wei(float(amountpercent), 'ether'),
-                'gas': web3.to_wei(float(gasAmount),'wei'),
-                'gasPrice': web3.to_wei(float(gasPrice),'wei'),
+                'value': amountOut,
+                'gas': int(gasAmount),
+                'gasPrice':web3.to_wei(gasPrice,'gwei'),
                 'nonce': nonce})
-                logger.info(msg=f"amountpercent{amountpercent}")
-                logger.info(msg=f"gas{web3.to_wei(gasAmount,'wei')}")
-                logger.info(msg=f"gasPrice{web3.to_wei(gasPrice,'wei')}")
+                logger.info(msg=f"path {path}")
+                logger.info(msg=f"method {method}")
+                logger.info(msg=f"gas {int(gasAmount)}")
+                logger.info(msg=f"gasPrice {web3.to_wei(gasPrice,'gwei')}")
                 signed_txn = web3.eth.account.sign_transaction(DEXtxn, privatekey)
                 tx_token = web3.eth.send_raw_transaction(signed_txn.rawTransaction) # BUY THE TK
                 txHash = str(web3.to_hex(tx_token)) # TOKEN BOUGHT
-                logger.info(msg=f"{txHash}")
+                #logger.info(msg=f"{txHash}")
                 checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + \
                 txHash + "&apikey=" + abiurltoken
                 headers = { "User-Agent": "Mozilla/5.0" }
                 checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
                 txResult = checkTransactionRequest.json()['status']
-                logger.info(msg=f"{txResult}")
+                #logger.info(msg=f"{txResult}")
                 if(txResult == "1"):
                     logger.info(msg=f"{txHash}")
                     return txHash
