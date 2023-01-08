@@ -270,16 +270,6 @@ async def DEXFetchAbi(addr):
     except Exception as e:
         await HandleExceptions(e)
 
-# async def DEXFetchSwapMethod(abidata):
-#     try:
-#         #logger.info(msg=f"abidata {abidata}")
-#         swapfunction = abidata.find("swapExactETHForTokens")
-#         if(swapfunction!=""):
-#             return 'swapExactETHForTokens'
-#         else:
-#             return 'swapTokensForExactETH'
-#     except Exception as e:
-#         await HandleExceptions(e)
 
 #ORDER PARSER
 def Convert(s):
@@ -356,36 +346,47 @@ async def CEXBuy(s1,s2,s3,s4,s5):
         return
 
 async def DEXBuy(s1,s2,s3,s4,s5):
-    logger.info(msg=f"s1 {s1}")
     web3=ex
     transactionRevertTime = 10000
     if (s1=="BUY"):
-        tokenToBuy = s2
-        tokenToSell = basesymbol
+        tokenToBuy = web3.to_checksum_address(await DEXContractLookup(s2))
+        tokenToSell = web3.to_checksum_address(await DEXContractLookup(basesymbol))
+        contractabi= await DEXFetchAbi(tokenToSell)
+        tokeninfo = web3.eth.contract(address=tokenToSell, abi=contractabi) #ContractSellInfo
+        tokeninfobal=tokeninfo.functions.balanceOf(address).call()
+        tokeninfobaldecimal=tokeninfo.functions.decimals().call()
+        amountToBuy = (tokeninfobal)/(10 ** tokeninfobaldecimal) * (10/100) 
+        logger.info(msg=f"amountToBuy {amountToBuy}")
+        amountOut=int(amountToBuy/100)
+        # 0.1% slippage
+        amountOutMin = amountOut - (amountOut * 0.01)
     else:
-        tokenToBuy = basesymbol
-        tokenToSell = s2
-    amountToBuy = float(s5)
-    #totalusdtbal = ex.fetchBalance()['USDT']['free']
-    #amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price)
-    amountpercent=float(amountToBuy/1000)
+        tokenToBuy = web3.to_checksum_address(await DEXContractLookup(basesymbol))
+        tokenToSell = web3.to_checksum_address(await DEXContractLookup(s2))
+        contractabi= await DEXFetchAbi(tokenToSell)
+        tokeninfo = web3.eth.contract(address=tokenToSell, abi=contractabi) #ContractPurchaseInfo
+        tokeninfobal=tokeninfo.functions.balanceOf(address).call()
+        tokeninfobaldecimal=tokeninfo.functions.decimals().call()
+        amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal)
+        logger.info(msg=f"amountTosell {amountTosell}")
+        amountOut=int(amountTosell)
+        # 0.1% slippage
+        amountOutMin = amountOut - (amountOut * 0.01)
     txntime = (int(time.time()) + transactionRevertTime)
     try:
         if(await DEXContractLookup(s2)!= None):
-            tokenToBuy = web3.to_checksum_address(await DEXContractLookup(tokenToBuy))
-            tokenToSell=web3.to_checksum_address(await DEXContractLookup(tokenToSell))
             dexabi= await DEXFetchAbi(router)
             contract = web3.eth.contract(address=router, abi=dexabi) #liquidityContract
             nonce = web3.eth.get_transaction_count(address)
-            path=[tokenToSell, tokenToBuy]
             try:
+                path=[tokenToSell, tokenToBuy]
                 if (s1=="BUY"):
-                    method =contract.functions.swapExactETHForTokens(0,path,address,txntime)
+                    method =contract.functions.swapExactETHForTokens(int(amountOutMin),path,address,txntime)
                 else:
-                    method =contract.functions.swapTokensForExactETH(0,int(amountpercent),path,address,txntime)
+                    method =contract.functions.swapExactTokensForETH(int(amountOut),int(amountOutMin),path,address,txntime)
                 DEXtxn = method.build_transaction({
                 'from': address, # based Token
-                'value': web3.to_wei(float(amountpercent), 'ether'),
+                'value': web3.to_wei(int(amountOutMin), 'ether'),
                 'gas': int(gasAmount),
                 'gasPrice':web3.to_wei(gasPrice,'gwei'),
                 'nonce': nonce})
@@ -394,13 +395,13 @@ async def DEXBuy(s1,s2,s3,s4,s5):
                 signed_txn = web3.eth.account.sign_transaction(DEXtxn, privatekey)
                 tx_token = web3.eth.send_raw_transaction(signed_txn.rawTransaction) # BUY THE TK
                 txHash = str(web3.to_hex(tx_token)) # TOKEN BOUGHT
-                logger.info(msg=f"{txHash}")
+                #logger.info(msg=f"{txHash}")
                 checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + \
                 txHash + "&apikey=" + abiurltoken
                 headers = { "User-Agent": "Mozilla/5.0" }
                 checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
                 txResult = checkTransactionRequest.json()['status']
-                logger.info(msg=f"{txResult}")
+                #logger.info(msg=f"{txResult}")
                 if(txResult == "1"):
                     logger.info(msg=f"{txHash}")
                     return txHash
