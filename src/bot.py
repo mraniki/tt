@@ -368,7 +368,7 @@ async def DEXBuy(s1,s2,s3,s4,s5):
         tokeninfo = web3.eth.contract(address=tokenToSell, abi=contractabi) #ContractPurchaseInfo
         tokeninfobal=tokeninfo.functions.balanceOf(address).call()
         tokeninfobaldecimal=tokeninfo.functions.decimals().call()
-        amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal)
+        amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal)* (10/100) 
         logger.info(msg=f"amountTosell {amountTosell}")
         amountOut=web3.to_wei(amountTosell, 'ether')
         logger.info(msg=f"amountOut {amountOut}")
