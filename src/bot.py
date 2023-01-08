@@ -389,10 +389,8 @@ async def DEXBuy(s1,s2,s3,s4,s5):
                 'gas': int(gasAmount),
                 'gasPrice':web3.to_wei(gasPrice,'gwei'),
                 'nonce': nonce})
-                logger.info(msg=f"amountpercent{amountpercent}")
-                logger.info(msg=f"gas{int(gasAmount)}")
-                logger.info(msg=f"gasPrice{web3.to_wei(gasPrice,'gwei')}")
                 logger.info(msg=f"path {path}")
+                logger.info(msg=f"method {method}")
                 signed_txn = web3.eth.account.sign_transaction(DEXtxn, privatekey)
                 tx_token = web3.eth.send_raw_transaction(signed_txn.rawTransaction) # BUY THE TK
                 txHash = str(web3.to_hex(tx_token)) # TOKEN BOUGHT
