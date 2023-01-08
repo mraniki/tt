@@ -388,7 +388,7 @@ async def DEXBuy(s1,s2,s3,s4,s5):
                     method =contract.functions.swapExactTokensForETH(amountOut,0,path,address,txntime)
                 DEXtxn = method.build_transaction({
                 'from': address, # based Token
-                'value': web3.to_wei(amountOutMin, 'ether'),
+                'value': web3.to_wei(amountOut, 'ether'),
                 'gas': int(gasAmount),
                 'gasPrice':web3.to_wei(gasPrice,'gwei'),
                 'nonce': nonce})
