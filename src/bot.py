@@ -385,7 +385,7 @@ async def DEXBuy(s1,s2,s3,s4,s5):
                 if (s1=="BUY"):
                     method =contract.functions.swapExactETHForTokens(amountOut,path,address,txntime)
                 else:
-                    method =contract.functions.swapExactTokensForETH(amountOut,0,path,address,txntime)
+                    method =contract.functions.swapExactTokensForETH(amountOut,amountOut,path,address,txntime)
                 DEXtxn = method.build_transaction({
                 'from': address, # based Token
                 'value': amountOut,
@@ -394,6 +394,8 @@ async def DEXBuy(s1,s2,s3,s4,s5):
                 'nonce': nonce})
                 logger.info(msg=f"path {path}")
                 logger.info(msg=f"method {method}")
+                logger.info(msg=f"gas {int(gasAmount)}")
+                logger.info(msg=f"gasPrice {web3.to_wei(gasPrice,'gwei')}")
                 signed_txn = web3.eth.account.sign_transaction(DEXtxn, privatekey)
                 tx_token = web3.eth.send_raw_transaction(signed_txn.rawTransaction) # BUY THE TK
                 txHash = str(web3.to_hex(tx_token)) # TOKEN BOUGHT
