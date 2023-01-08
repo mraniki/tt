@@ -345,6 +345,20 @@ async def CEXBuy(s1,s2,s3,s4,s5):
         await HandleExceptions(e)
         return
 
+# def approve(tokenContract, nonce):
+#     print(style.GREEN + 'Approving token')
+
+#     approve_tx = tokenContract.functions.approve(pancakeSwapRouterAddress, max_allowance).buildTransaction({
+#         'from': walletAddress,
+#         'nonce': nonce
+#     })
+
+#     signed_tx = web3.eth.account.sign_transaction(approve_tx, private_key)
+#     tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
+#     print(style.GREEN + 'Operation sent')        
+        
+#swapTokensForExactTokens
+
 async def DEXBuy(s1,s2,s3,s4,s5):
     web3=ex
     transactionRevertTime = 10000
