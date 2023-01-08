@@ -357,7 +357,8 @@ async def DEXBuy(s1,s2,s3,s4,s5):
         tokeninfobaldecimal=tokeninfo.functions.decimals().call()
         amountToBuy = (tokeninfobal)/(10 ** tokeninfobaldecimal) * (10/100) 
         logger.info(msg=f"amountToBuy {amountToBuy}")
-        amountOut=int(amountToBuy/100)
+        amountOut=web3.to_wei(amountToBuy, 'ether')
+        logger.info(msg=f"amountOut {amountOut}")
         # 0.1% slippage
         amountOutMin = amountOut - (amountOut * 0.01)
     else:
@@ -369,7 +370,8 @@ async def DEXBuy(s1,s2,s3,s4,s5):
         tokeninfobaldecimal=tokeninfo.functions.decimals().call()
         amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal)
         logger.info(msg=f"amountTosell {amountTosell}")
-        amountOut=int(amountTosell)
+        amountOut=web3.to_wei(amountTosell, 'ether')
+        logger.info(msg=f"amountOut {amountOut}")
         # 0.1% slippage
         amountOutMin = amountOut - (amountOut * 0.01)
     txntime = (int(time.time()) + transactionRevertTime)
@@ -381,12 +383,12 @@ async def DEXBuy(s1,s2,s3,s4,s5):
             try:
                 path=[tokenToSell, tokenToBuy]
                 if (s1=="BUY"):
-                    method =contract.functions.swapExactETHForTokens(int(amountOutMin),path,address,txntime)
+                    method =contract.functions.swapExactETHForTokens(amountOut,path,address,txntime)
                 else:
-                    method =contract.functions.swapExactTokensForETH(int(amountOut),int(amountOutMin),path,address,txntime)
+                    method =contract.functions.swapExactTokensForETH(amountOut,0,path,address,txntime)
                 DEXtxn = method.build_transaction({
                 'from': address, # based Token
-                'value': web3.to_wei(int(amountOutMin), 'ether'),
+                'value': web3.to_wei(amountOutMin, 'ether'),
                 'gas': int(gasAmount),
                 'gasPrice':web3.to_wei(gasPrice,'gwei'),
                 'nonce': nonce})
