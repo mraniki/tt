@@ -45,9 +45,7 @@ testmode="True"
 commandlist= """
 <code>/bal</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
-<code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>
-<code>/trading</code>
-<code>/testmode</code>"""
+<code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>"""
 fullcommandlist= """
 <code>/bal</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
@@ -86,14 +84,14 @@ def DBCommand_Add_CEX(s1,s2,s3,s4,s5,s6,s7):
         "password": s4,
         "testmode": s5,
         "ordertype": s6,
-        "defaultType": s7}) 
+        "defaultType": s7})
 def DBCommand_Add_DEX(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11):
     if len(dexDB.search(q.name==s1)):
         logger.info(msg=f"EX exists in DB")
     else:
         dexDB.insert({
             "name": s1,
-            "address": s2,
+            "walletaddress": s2,
             "privatekey": s3,
             "version": s4,
             "networkprovider": s5,
@@ -102,7 +100,7 @@ def DBCommand_Add_DEX(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11):
             "tokenlist":s8,
             "abiurl":s9,
             "abiurltoken":s10,
-            "basesymbol":s11}) 
+            "basesymbol":s11})
 async def dropDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"db dropped")
     db.drop_tables()
@@ -110,7 +108,7 @@ async def showDB_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     logger.info(msg=f"display db")
     message=f" db extract: \n {db.all()}"
     await send(update,message)
-    
+
 #=========Exchange Functions
 async def SearchCEX(s1,s2):
     if type(s1) is str:
@@ -131,7 +129,7 @@ async def SearchCEX(s1,s2):
             return
     else:
         return
-    
+
 async def SearchDEX(s1,s2):
     try:
         query = ((q.name==s1)&(q['testmode'] == s2))
@@ -144,7 +142,7 @@ async def SearchDEX(s1,s2):
     except Exception as e:
         await HandleExceptions(e)
         return
-    
+
 async def SearchEx(s1,s2):
     try:
       if (isinstance(s1,str)):
@@ -166,12 +164,12 @@ async def SearchEx(s1,s2):
     except Exception as e:
         await HandleExceptions(e)
         return
-        
+
 async def LoadExchange(exchangeid, mode):
     global ex
     global name
     global networkprovider
-    global address
+    global walletaddress
     global privatekey
     global tokenlist
     global router
@@ -180,7 +178,7 @@ async def LoadExchange(exchangeid, mode):
     global basesymbol
     global gasPrice
     global m_ordertype
-    global gasAmount
+    global gasLimit
     logger.info(msg=f"Setting up exchange {exchangeid}")
     CEXCheck= await SearchCEX(exchangeid,mode)
     DEXCheck= await SearchDEX(exchangeid,mode)
@@ -209,7 +207,7 @@ async def LoadExchange(exchangeid, mode):
     elif (DEXCheck):
         newex= DEXCheck
         name= newex[0]['name']
-        address= newex[0]['address']
+        walletaddress= newex[0]['walletaddress']
         privatekey= newex[0]['privatekey']
         networkprovider= newex[0]['networkprovider']
         router= newex[0]['router']
@@ -218,7 +216,7 @@ async def LoadExchange(exchangeid, mode):
         abiurl=newex[0]['abiurl']
         abiurltoken=newex[0]['abiurltoken']
         basesymbol=newex[0]['basesymbol']
-        gasAmount=newex[0]['gasAmount']
+        gasLimit=newex[0]['gasLimit']
         gasPrice=newex[0]['gasPrice']
         ex = Web3(Web3.HTTPProvider(networkprovider))
         if ex.net.listening:
@@ -265,7 +263,7 @@ async def DEXFetchAbi(addr):
         #logger.info(msg=f"{params}")
         headers = { "User-Agent": "Mozilla/5.0" }
         resp = requests.get(url, params=params, headers=headers).json()
-        logger.info(msg=f"request {requests.get(url, params=params, headers=headers)}")    
+        logger.info(msg=f"request {requests.get(url, params=params, headers=headers)}")
         abi = resp["result"]
         #logger.info(msg=f"{abi}")
         if(abi!=""):
@@ -283,7 +281,7 @@ def Convert(s):
         m_dir= li[0]
     except (IndexError, TypeError):
         logger.error(msg=f"{s} no direction")
-        return  
+        return
     try:
         m_symbol=li[1]
     except (IndexError, TypeError):
@@ -302,7 +300,7 @@ def Convert(s):
     try:
         m_q=li[4][2:-1]
     except (IndexError, TypeError):
-        logger.warning(msg=f"{s} no size default to 1") 
+        logger.warning(msg=f"{s} no size default to 1")
         m_q=0.1
     order=[m_dir,m_symbol,m_sl,m_tp,m_q]
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
@@ -334,13 +332,13 @@ async def CEXBuy(s1,s2,s3,s4,s5):
             amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price)
             ######## ORDER
             try:
-                res = ex.create_order(s2, m_ordertype, s1, amountpercent)                               
-                orderid=res['id']   
-                timestamp=res['datetime']  
+                res = ex.create_order(s2, m_ordertype, s1, amountpercent)
+                orderid=res['id']
+                timestamp=res['datetime']
                 symbol=res['symbol']
                 side=res['side']
                 amount=res['amount']
-                price=res['price']   
+                price=res['price']
                 response=f"{timestamp}\norder id {orderid}\n{side} {symbol}\n{amount} @ {price}"
                 return response
             except Exception as e:
@@ -350,90 +348,102 @@ async def CEXBuy(s1,s2,s3,s4,s5):
         await HandleExceptions(e)
         return
 
-# def approve(tokenContract, nonce):
-#     print(style.GREEN + 'Approving token')
+# def sign_send_tx(web3_interface, contract_tx, address, priv):
+#     nonce = web3_interface.eth.get_transaction_count(address, 'pending')
+#     chain_id = web3_interface.eth.chainId
 
-#     approve_tx = tokenContract.functions.approve(pancakeSwapRouterAddress, max_allowance).buildTransaction({
-#         'from': walletAddress,
-#         'nonce': nonce
-#     })
+#     tx_fields = {
+#         'chainId': chain_id,
+#         'gas': int(GAS_LIMIT),
+#         'gasPrice': web3_interface.toWei(GAS_PRICE, 'gwei'),
+#         'nonce': nonce,
+#     }
 
-#     signed_tx = web3.eth.account.sign_transaction(approve_tx, private_key)
-#     tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
-#     print(style.GREEN + 'Operation sent')        
-        
-#swapTokensForExactTokens
+#     tx = contract_tx.buildTransaction(tx_fields)
+#     signed = web3_interface.eth.account.sign_transaction(tx, priv)
+#     raw_tx = signed.rawTransaction
+#     return web3_interface.eth.send_raw_transaction(raw_tx)
+
+
 
 async def DEXBuy(s1,s2,s3,s4,s5):
-    web3=ex
-    transactionRevertTime = 10000
-    if (s1=="BUY"):
-        tokenToBuy = web3.to_checksum_address(await DEXContractLookup(s2))
-        tokenToSell = web3.to_checksum_address(await DEXContractLookup(basesymbol))
-        contractabi= await DEXFetchAbi(tokenToSell)
-        tokeninfo = web3.eth.contract(address=tokenToSell, abi=contractabi) #ContractSellInfo
-        tokeninfobal=tokeninfo.functions.balanceOf(address).call()
-        tokeninfobaldecimal=tokeninfo.functions.decimals().call()
-        amountToBuy = (tokeninfobal)/(10 ** tokeninfobaldecimal) * (10/100) 
-        logger.info(msg=f"amountToBuy {amountToBuy}")
-        amountOut=web3.to_wei(amountToBuy, 'ether')
-        logger.info(msg=f"amountOut {amountOut}")
-        # 0.1% slippage
-        amountOutMin = amountOut - (amountOut * 0.01)
-    else:
-        tokenToBuy = web3.to_checksum_address(await DEXContractLookup(basesymbol))
-        tokenToSell = web3.to_checksum_address(await DEXContractLookup(s2))
-        contractabi= await DEXFetchAbi(tokenToSell)
-        tokeninfo = web3.eth.contract(address=tokenToSell, abi=contractabi) #ContractPurchaseInfo
-        tokeninfobal=tokeninfo.functions.balanceOf(address).call()
-        tokeninfobaldecimal=tokeninfo.functions.decimals().call()
-        amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal)* (10/100) 
-        logger.info(msg=f"amountTosell {amountTosell}")
-        amountOut=web3.to_wei(amountTosell, 'ether')
-        logger.info(msg=f"amountOut {amountOut}")
-        # 0.1% slippage
-        amountOutMin = amountOut - (amountOut * 0.01)
-    txntime = (int(time.time()) + transactionRevertTime)
     try:
-        if(await DEXContractLookup(s2)!= None):
-            dexabi= await DEXFetchAbi(router)
-            contract = web3.eth.contract(address=router, abi=dexabi) #liquidityContract
-            nonce = web3.eth.get_transaction_count(address)
-            try:
-                path=[tokenToSell, tokenToBuy]
-                if (s1=="BUY"):
-                    method =contract.functions.swapExactTokensForTokens(amountOut,amountOut,path,address,txntime)
-                else:
-                    method =contract.functions.swapExactTokensForETH(amountOut,amountOut,path,address,txntime)
-                DEXtxn = method.build_transaction({
-                'from': address, # based Token
-                'value': amountOut,
-                'gas': int(gasAmount),
-                'gasPrice':web3.to_wei(gasPrice,'gwei'),
-                'nonce': nonce})
-                logger.info(msg=f"path {path}")
-                logger.info(msg=f"method {method}")
-                logger.info(msg=f"gas {int(gasAmount)}")
-                logger.info(msg=f"gasPrice {web3.to_wei(gasPrice,'gwei')}")
-                signed_txn = web3.eth.account.sign_transaction(DEXtxn, privatekey)
-                tx_token = web3.eth.send_raw_transaction(signed_txn.rawTransaction) # BUY THE TK
-                txHash = str(web3.to_hex(tx_token)) # TOKEN BOUGHT
-                #logger.info(msg=f"{txHash}")
-                checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + \
-                txHash + "&apikey=" + abiurltoken
-                headers = { "User-Agent": "Mozilla/5.0" }
-                checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
-                txResult = checkTransactionRequest.json()['status']
-                #logger.info(msg=f"{txResult}")
-                if(txResult == "1"):
-                    logger.info(msg=f"{txHash}")
-                    return txHash
-            except Exception as e:
-                await HandleExceptions(e)
-                return
+        w3 = ex
+        if (s1=="BUY"):
+            tokenA=basesymbol
+            tokenB=s2
+            i_OrderAmount = (w3.to_wei(s5,'ether'))
+        else:
+            tokenA=s2
+            tokenB=basesymbol
+        dexabi= await DEXFetchAbi(router) #Router ABI
+        contractR = w3.eth.contract(address=router, abi=dexabi) #ContractLiquidityRouter
+        tokenToSell=w3.to_checksum_address(await DEXContractLookup(tokenA))
+        AbiTokenA= await DEXFetchAbi(tokenToSell) #tokenToSell ABI
+        contractTokenA = w3.eth.contract(address=tokenToSell, abi=AbiTokenA) 
+        logger.info(msg=f"contractTokenA {contractTokenA}")
+        ##aproval of the sell token
+        approvalcheck = contractTokenA.functions.allowance(walletaddress, router).call();
+        logger.info(msg=f"approvalcheck {approvalcheck}")
+        if (approvalcheck==0):
+            maxamount = (w3.to_wei(2**64-1,'ether'))
+            #maxamount=10000 * (10 ** 18)
+            logger.info(msg=f"maxamount {maxamount}")
+            approval_TX = contractTokenA.functions.approve(router, maxamount).build_transaction({
+                            'from': walletaddress,
+                            'gas': int(gasLimit),
+                            'gasPrice': w3.to_wei(gasPrice,'gwei'),
+                            'nonce': w3.eth.get_transaction_count(walletaddress)
+                            })
+            logger.info(msg=f"approval_TX {approval_TX}")
+            signed_tx = w3.eth.account.sign_transaction(approval_TX, privatekey)
+            ApprovaltxHash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+            logger.info(msg=f"Approval Transaction {str(w3.to_hex(ApprovaltxHash))}")
+            time.sleep(10) #wait for approval
+        tokenToBuy= w3.to_checksum_address(await DEXContractLookup(tokenB))
+        OrderPath=[tokenToSell, tokenToBuy]
+        if (s1=="SELL"):
+            tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
+            tokeninfobaldecimal=contractTokenA.functions.decimals().call()
+            amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal)
+            logger.info(msg=f"amountTosell {amountTosell}")
+            i_OrderAmount=(w3.to_wei(amountTosell,'ether'))
+        OrderAmount = i_OrderAmount
+        OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
+        MinimumAmount = int(OptimalOrderAmount[1] *0.9)#slippage
+        logger.info(msg=f"Minimum received {w3.from_wei(MinimumAmount, 'ether')}")
+        transactionRevertTime = 1000000
+        txntime = (int(time.time()) + transactionRevertTime)
+        swap_TX = contractR.functions.swapExactTokensForTokens(
+                    OrderAmount,
+                    MinimumAmount,
+                    OrderPath,
+                    walletaddress,
+                    txntime
+                    ).build_transaction({
+                    'from': walletaddress,
+                    'gas': int(gasLimit),
+                    'gasPrice': w3.to_wei(gasPrice,'gwei'),
+                    'nonce': w3.eth.get_transaction_count(walletaddress)
+                    })
+        logger.info(msg=f"swap_TX {swap_TX}")
+        signed_TX = w3.eth.account.sign_transaction(swap_TX, privatekey)
+        tx_token = w3.eth.send_raw_transaction(signed_TX.rawTransaction)
+        txHash = str(w3.to_hex(tx_token)) # TOKEN BOUGHT
+        logger.info(msg=f"Transaction reference {txHash}")
+        checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
+        headers = { "User-Agent": "Mozilla/5.0" }
+        checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
+        txResult = checkTransactionRequest.json()['status']
+        logger.info(msg=f"{txResult}")
+        if(txResult == "1"):
+            logger.info(msg=f"{txHash}")
+            response= f"{txHash}\n {checkTransactionSuccessURL}"
+            return response
     except Exception as e:
         await HandleExceptions(e)
         return
+
 #=========== Send function
 async def send (self, messaging):
     try:
@@ -492,7 +502,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
                 sbal="No Balance"
             msg+=f"\n{sbal}"
         else:
-            bal = ex.eth.get_balance(address)
+            bal = ex.eth.get_balance(walletaddress)
             bal = ex.from_wei(bal,'ether')
             msg += f"\n{bal}"
         await send(update,msg)
@@ -518,8 +528,8 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             m_q=order_m[4]
             logger.info(msg=f"Processing: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
             try:
-                res=await Buy(m_dir,m_symbol,m_sl,m_tp,m_q)          
-                if (res!= None):       
+                res=await Buy(m_dir,m_symbol,m_sl,m_tp,m_q)
+                if (res!= None):
                     response=f"🟢 ORDER Processed:\n{res}"
                     await send(update,response)
             except Exception as e:
@@ -553,7 +563,7 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                     await send(update,response)
     except Exception as e:
         await HandleExceptions(e)
-        return   
+        return
 
 ##====TG COMMAND Trading switch  ========
 async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

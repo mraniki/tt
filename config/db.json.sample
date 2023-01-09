@@ -183,7 +183,7 @@
         "1":
         {
             "name": "pancake",
-            "address": "abc",
+            "walletaddress": "abc",
             "privatekey": "abc",
             "version": "v2",
             "networkprovider": "https://bsc-dataseed.binance.org/",
@@ -193,13 +193,13 @@
             "abiurl":"https://api.bscscan.com/api",
             "abiurltoken":"abc",
             "basesymbol":"BUSD",
-            "gasAmount":"300000",
+            "gasLimit":"300000",
             "gasPrice":"5"
         },
         "2":
         {
             "name": "pancake",
-            "address": "abc",
+            "walletaddress": "abc",
             "privatekey": "abc",
             "version": "v2",
             "networkprovider": "https://data-seed-prebsc-1-s1.binance.org:8545/",
@@ -209,13 +209,13 @@
             "abiurl":"https://api-testnet.bscscan.com/api",
             "abiurltoken":"abc",
             "basesymbol":"BUSD",
-            "gasAmount":"300000",
+            "gasLimit":"300000",
             "gasPrice":"5"
         }, 
         "3":
         {
             "name": "uniswap",
-            "address": "abc",
+            "walletaddress": "abc",
             "privatekey": "abc",
             "version": "v2",
             "networkprovider": "https://ethereum.publicnode.com",
@@ -225,13 +225,13 @@
             "abiurl":"https://api.etherscan.io/api",
             "abiurltoken":"abc",
             "basesymbol":"USDT",
-            "gasAmount":"70000",
+            "gasLimit":"70000",
             "gasPrice":"20"
         },
         "4":
         {
             "name": "uniswap",
-            "address": "abc",
+            "walletaddress": "abc",
             "privatekey": "abc",
             "version": "v3",
             "networkprovider": "https://rpc.sepolia.org",
@@ -241,13 +241,13 @@
             "abiurl":"https://api.etherscan.io/api",
             "abiurltoken":"abc",
             "basesymbol":"USDT",
-            "gasAmount":"70000",
+            "gasLimit":"70000",
             "gasPrice":"20"
         },
         "5":
         {
             "name": "quickswap",
-            "address": "abc",
+            "walletaddress": "abc",
             "privatekey": "abc",
             "version": "v2",
             "networkprovider": "https://polygon-rpc.com",
@@ -257,13 +257,13 @@
             "abiurl":"https://api.polygonscan.com/api",
             "abiurltoken":"abc",
             "basesymbol":"USDT",
-            "gasAmount":"70000",
+            "gasLimit":"70000",
             "gasPrice":"20"
         },
         "6":
         {
             "name": "quickswap",
-            "address": "abc",
+            "walletaddress": "abc",
             "privatekey": "abc",
             "version": "v2",
             "networkprovider": "https://matic-testnet-archive-rpc.bwarelabs.com",
@@ -273,7 +273,7 @@
             "abiurl":"https://api-testnet.polygonscan.com/api",
             "abiurltoken":"abc",
             "basesymbol":"USDT",
-            "gasAmount":"70000",
+            "gasLimit":"70000",
             "gasPrice":"20"
         }
     }
