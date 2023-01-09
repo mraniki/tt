@@ -322,7 +322,6 @@ async def Buy(s1,s2,s3,s4,s5):
 
 async def CEXBuy(s1,s2,s3,s4,s5):
     try:
-        #s5=s5[0:-1]
         bal = ex.fetch_free_balance()
         bal = {k: v for k, v in bal.items() if v is not None and v>0}
         if (len(str(bal))):
@@ -368,7 +367,6 @@ async def DEXBuy(s1,s2,s3,s4,s5):
         if (s1=="BUY"):
             tokenA=basesymbol
             tokenB=s2
-            i_OrderAmount = (w3.to_wei(s5,'ether'))
         else:
             tokenA=s2
             tokenB=basesymbol
@@ -386,17 +384,13 @@ async def DEXBuy(s1,s2,s3,s4,s5):
             time.sleep(10) #wait for approval
         tokenToBuy= w3.to_checksum_address(await DEXContractLookup(tokenB))
         OrderPath=[tokenToSell, tokenToBuy]
+        tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
+        tokeninfobaldecimal=contractTokenA.functions.decimals().call()
         if (s1=="SELL"):
-            tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
-            tokeninfobaldecimal=contractTokenA.functions.decimals().call()
-            amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal)
-            i_OrderAmount=(w3.to_wei(amountTosell,'ether'))
+            amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
         else:
-            tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
-            tokeninfobaldecimal=contractTokenA.functions.decimals().call()
-            amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100)
-            logger.info(msg=f"amountTosell {amountTosell}")
-            i_OrderAmount=(w3.to_wei(amountTosell,'ether'))
+            amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
+        i_OrderAmount=(w3.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
         MinimumAmount = int(OptimalOrderAmount[1] *0.9)#slippage
