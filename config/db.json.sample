@@ -192,7 +192,7 @@
             "tokenlist":"https://tokens.pancakeswap.finance/pancakeswap-extended.json",
             "abiurl":"https://api.bscscan.com/api",
             "abiurltoken":"abc",
-            "basesymbol":"WBNB",
+            "basesymbol":"BUSD",
             "gasAmount":"300000",
             "gasPrice":"5"
         },
@@ -208,7 +208,7 @@
             "tokenlist":"https://raw.githubusercontent.com/medhussam/pancake-swap-interface-v1-testnet/05b2aa2e84b07f5ffd9c01c1bc46e2dd7f3ad7f1/src/constants/token/pancakeswap.json",
             "abiurl":"https://api-testnet.bscscan.com/api",
             "abiurltoken":"abc",
-            "basesymbol":"WBNB",
+            "basesymbol":"BUSD",
             "gasAmount":"300000",
             "gasPrice":"5"
         }, 

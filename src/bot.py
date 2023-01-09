@@ -44,14 +44,19 @@ testmode="True"
 #===================
 commandlist= """
 <code>/bal</code>
-<code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=5%</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
-<code>/cex binancecoinm</code> <code>buy btcbusd sl=1000 tp=20 q=5%</code>
 <code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>
-<code>/dex quickswap</code> <code>buy wbtc sl=1000 tp=20 q=1%</code> <code>/price wbtc</code>
+<code>/trading</code>
+<code>/testmode</code>"""
+fullcommandlist= """
+<code>/bal</code>
+<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
+<code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=1%</code> <code>/price btcusdt</code>
+<code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>
 <code>/trading</code>
 <code>/testmode</code>"""
 menu=f'{version} \n {commandlist}\n'
+menuhelp=f'{version} \n {fullcommandlist}\n'
 #===========Common Functions ===============
 
 def LibCheck():
@@ -397,7 +402,7 @@ async def DEXBuy(s1,s2,s3,s4,s5):
             try:
                 path=[tokenToSell, tokenToBuy]
                 if (s1=="BUY"):
-                    method =contract.functions.swapExactETHForTokens(amountOut,path,address,txntime)
+                    method =contract.functions.swapExactTokensForTokens(amountOut,amountOut,path,address,txntime)
                 else:
                     method =contract.functions.swapExactTokensForETH(amountOut,amountOut,path,address,txntime)
                 DEXtxn = method.build_transaction({
