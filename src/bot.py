@@ -300,8 +300,8 @@ def Convert(s):
     try:
         m_q=li[4][2:-1]
     except (IndexError, TypeError):
-        logger.warning(msg=f"{s} no size default to 1")
-        m_q=0.1
+        logger.warning(msg=f"{s} no size default to 1 %")
+        m_q=1
     order=[m_dir,m_symbol,m_sl,m_tp,m_q]
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
     return order
@@ -377,17 +377,12 @@ async def DEXBuy(s1,s2,s3,s4,s5):
         tokenToSell=w3.to_checksum_address(await DEXContractLookup(tokenA))
         AbiTokenA= await DEXFetchAbi(tokenToSell) #tokenToSell ABI
         contractTokenA = w3.eth.contract(address=tokenToSell, abi=AbiTokenA) 
-        logger.info(msg=f"contractTokenA {contractTokenA}")
-        ##aproval of the sell token
         approvalcheck = contractTokenA.functions.allowance(walletaddress, router).call();
-        logger.info(msg=f"approvalcheck {approvalcheck}")
         if (approvalcheck==0):
             maxamount = (w3.to_wei(2**64-1,'ether'))
-            #maxamount=10000 * (10 ** 18)
-            logger.info(msg=f"maxamount {maxamount}")
             approval_TX = contractTokenA.functions.approve(router, maxamount)
             ApprovaltxHash = await DEX_Sign_TX(approval_TX)
-            logger.info(msg=f"Approval Transaction {str(w3.to_hex(ApprovaltxHash))}")
+            logger.info(msg=f"Approval {str(w3.to_hex(ApprovaltxHash))}")
             time.sleep(10) #wait for approval
         tokenToBuy= w3.to_checksum_address(await DEXContractLookup(tokenB))
         OrderPath=[tokenToSell, tokenToBuy]
@@ -395,6 +390,11 @@ async def DEXBuy(s1,s2,s3,s4,s5):
             tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
             tokeninfobaldecimal=contractTokenA.functions.decimals().call()
             amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal)
+            i_OrderAmount=(w3.to_wei(amountTosell,'ether'))
+        else:
+            tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
+            tokeninfobaldecimal=contractTokenA.functions.decimals().call()
+            amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100)
             logger.info(msg=f"amountTosell {amountTosell}")
             i_OrderAmount=(w3.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
@@ -404,16 +404,15 @@ async def DEXBuy(s1,s2,s3,s4,s5):
         txntime = (int(time.time()) + 1000000)
         swap_TX = contractR.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,txntime)
         tx_token = await DEX_Sign_TX(swap_TX)
-        txHash = str(w3.to_hex(tx_token)) # TOKEN BOUGHT
-        logger.info(msg=f"Transaction reference {txHash}")
+        txHash = str(w3.to_hex(tx_token))
+        logger.info(msg=f"Transaction {txHash}")
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
         headers = { "User-Agent": "Mozilla/5.0" }
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
-        logger.info(msg=f"{txResult}")
         if(txResult == "1"):
-            logger.info(msg=f"{txHash}")
             response= f"{txHash}\n {checkTransactionSuccessURL}"
+            logger.info(msg=f"{response}")
             return response
     except Exception as e:
         await HandleExceptions(e)
