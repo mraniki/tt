@@ -348,23 +348,19 @@ async def CEXBuy(s1,s2,s3,s4,s5):
         await HandleExceptions(e)
         return
 
-# def sign_send_tx(web3_interface, contract_tx, address, priv):
-#     nonce = web3_interface.eth.get_transaction_count(address, 'pending')
-#     chain_id = web3_interface.eth.chainId
-
-#     tx_fields = {
-#         'chainId': chain_id,
-#         'gas': int(GAS_LIMIT),
-#         'gasPrice': web3_interface.toWei(GAS_PRICE, 'gwei'),
-#         'nonce': nonce,
-#     }
-
-#     tx = contract_tx.buildTransaction(tx_fields)
-#     signed = web3_interface.eth.account.sign_transaction(tx, priv)
-#     raw_tx = signed.rawTransaction
-#     return web3_interface.eth.send_raw_transaction(raw_tx)
-
-
+async def DEX_Sign_TX(contract_tx):
+    w3 = ex
+    nonce = w3.eth.get_transaction_count(walletaddress)
+    tx_fields = {
+        'from': walletaddress,
+        'gas': int(gasLimit),
+        'gasPrice': w3.to_wei(gasPrice,'gwei'),
+        'nonce': nonce,
+    }
+    tx = contract_tx.build_transaction(tx_fields)
+    signed = w3.eth.account.sign_transaction(tx, privatekey)
+    raw_tx = signed.rawTransaction
+    return w3.eth.send_raw_transaction(raw_tx)
 
 async def DEXBuy(s1,s2,s3,s4,s5):
     try:
@@ -389,15 +385,8 @@ async def DEXBuy(s1,s2,s3,s4,s5):
             maxamount = (w3.to_wei(2**64-1,'ether'))
             #maxamount=10000 * (10 ** 18)
             logger.info(msg=f"maxamount {maxamount}")
-            approval_TX = contractTokenA.functions.approve(router, maxamount).build_transaction({
-                            'from': walletaddress,
-                            'gas': int(gasLimit),
-                            'gasPrice': w3.to_wei(gasPrice,'gwei'),
-                            'nonce': w3.eth.get_transaction_count(walletaddress)
-                            })
-            logger.info(msg=f"approval_TX {approval_TX}")
-            signed_tx = w3.eth.account.sign_transaction(approval_TX, privatekey)
-            ApprovaltxHash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+            approval_TX = contractTokenA.functions.approve(router, maxamount)
+            ApprovaltxHash = await DEX_Sign_TX(approval_TX)
             logger.info(msg=f"Approval Transaction {str(w3.to_hex(ApprovaltxHash))}")
             time.sleep(10) #wait for approval
         tokenToBuy= w3.to_checksum_address(await DEXContractLookup(tokenB))
@@ -412,23 +401,9 @@ async def DEXBuy(s1,s2,s3,s4,s5):
         OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
         MinimumAmount = int(OptimalOrderAmount[1] *0.9)#slippage
         logger.info(msg=f"Minimum received {w3.from_wei(MinimumAmount, 'ether')}")
-        transactionRevertTime = 1000000
-        txntime = (int(time.time()) + transactionRevertTime)
-        swap_TX = contractR.functions.swapExactTokensForTokens(
-                    OrderAmount,
-                    MinimumAmount,
-                    OrderPath,
-                    walletaddress,
-                    txntime
-                    ).build_transaction({
-                    'from': walletaddress,
-                    'gas': int(gasLimit),
-                    'gasPrice': w3.to_wei(gasPrice,'gwei'),
-                    'nonce': w3.eth.get_transaction_count(walletaddress)
-                    })
-        logger.info(msg=f"swap_TX {swap_TX}")
-        signed_TX = w3.eth.account.sign_transaction(swap_TX, privatekey)
-        tx_token = w3.eth.send_raw_transaction(signed_TX.rawTransaction)
+        txntime = (int(time.time()) + 1000000)
+        swap_TX = contractR.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,txntime)
+        tx_token = await DEX_Sign_TX(swap_TX)
         txHash = str(w3.to_hex(tx_token)) # TOKEN BOUGHT
         logger.info(msg=f"Transaction reference {txHash}")
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
