@@ -41,6 +41,7 @@ global ex
 exchanges = {}
 trading=True
 testmode="True"
+headers = { "User-Agent": "Mozilla/5.0" }
 #===================
 commandlist= """
 <code>/bal</code>
@@ -261,7 +262,7 @@ async def DEXFetchAbi(addr):
             "apikey": abiurltoken }
         #logger.info(msg=f"{url}")
         #logger.info(msg=f"{params}")
-        headers = { "User-Agent": "Mozilla/5.0" }
+        #headers = { "User-Agent": "Mozilla/5.0" }
         resp = requests.get(url, params=params, headers=headers).json()
         logger.info(msg=f"request {requests.get(url, params=params, headers=headers)}")
         abi = resp["result"]
@@ -300,8 +301,8 @@ def Convert(s):
     try:
         m_q=li[4][2:-1]
     except (IndexError, TypeError):
-        logger.warning(msg=f"{s} no size default to 1 %")
-        m_q=1
+        logger.warning(msg=f"{s} no size default to 10 %")
+        m_q=10
     order=[m_dir,m_symbol,m_sl,m_tp,m_q]
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
     return order
@@ -348,22 +349,26 @@ async def CEXBuy(s1,s2,s3,s4,s5):
         return
 
 async def DEX_Sign_TX(contract_tx):
-    w3 = ex
-    nonce = w3.eth.get_transaction_count(walletaddress)
+    # global gasPrice
+    # checkgasURL = abiurl + "?module=gastracker&action=gasoracle&apikey=" + abiurltoken
+    # checkgasRequest = requests.get(url=checkgasURL,headers=headers)
+    # gasresults = checkgasRequest.json()['result']['SafeGasPrice']
+    # logger.info(msg=f"gasresults {gasresults}")
+    # if (gasPrice<=gasresults):
+    #     gasPrice=gasresults
     tx_fields = {
         'from': walletaddress,
         'gas': int(gasLimit),
-        'gasPrice': w3.to_wei(gasPrice,'gwei'),
-        'nonce': nonce,
+        'gasPrice': ex.to_wei(gasPrice,'gwei'),
+        'nonce': ex.eth.get_transaction_count(walletaddress),
     }
     tx = contract_tx.build_transaction(tx_fields)
-    signed = w3.eth.account.sign_transaction(tx, privatekey)
+    signed = ex.eth.account.sign_transaction(tx, privatekey)
     raw_tx = signed.rawTransaction
-    return w3.eth.send_raw_transaction(raw_tx)
+    return ex.eth.send_raw_transaction(raw_tx)
 
 async def DEXBuy(s1,s2,s3,s4,s5):
     try:
-        w3 = ex
         if (s1=="BUY"):
             tokenA=basesymbol
             tokenB=s2
@@ -371,18 +376,18 @@ async def DEXBuy(s1,s2,s3,s4,s5):
             tokenA=s2
             tokenB=basesymbol
         dexabi= await DEXFetchAbi(router) #Router ABI
-        contractR = w3.eth.contract(address=router, abi=dexabi) #ContractLiquidityRouter
-        tokenToSell=w3.to_checksum_address(await DEXContractLookup(tokenA))
+        contractR = ex.eth.contract(address=router, abi=dexabi) #ContractLiquidityRouter
+        tokenToSell=ex.to_checksum_address(await DEXContractLookup(tokenA))
         AbiTokenA= await DEXFetchAbi(tokenToSell) #tokenToSell ABI
-        contractTokenA = w3.eth.contract(address=tokenToSell, abi=AbiTokenA) 
+        contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
         approvalcheck = contractTokenA.functions.allowance(walletaddress, router).call();
         if (approvalcheck==0):
-            maxamount = (w3.to_wei(2**64-1,'ether'))
+            maxamount = (ex.to_wei(2**64-1,'ether'))
             approval_TX = contractTokenA.functions.approve(router, maxamount)
             ApprovaltxHash = await DEX_Sign_TX(approval_TX)
-            logger.info(msg=f"Approval {str(w3.to_hex(ApprovaltxHash))}")
+            logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
             time.sleep(10) #wait for approval
-        tokenToBuy= w3.to_checksum_address(await DEXContractLookup(tokenB))
+        tokenToBuy= ex.to_checksum_address(await DEXContractLookup(tokenB))
         OrderPath=[tokenToSell, tokenToBuy]
         tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
         tokeninfobaldecimal=contractTokenA.functions.decimals().call()
@@ -390,18 +395,18 @@ async def DEXBuy(s1,s2,s3,s4,s5):
             amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
         else:
             amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
-        i_OrderAmount=(w3.to_wei(amountTosell,'ether'))
+        i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
         MinimumAmount = int(OptimalOrderAmount[1] *0.9)#slippage
-        logger.info(msg=f"Minimum received {w3.from_wei(MinimumAmount, 'ether')}")
+        logger.info(msg=f"Minimum received {ex.from_wei(MinimumAmount, 'ether')}")
         txntime = (int(time.time()) + 1000000)
         swap_TX = contractR.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,txntime)
         tx_token = await DEX_Sign_TX(swap_TX)
-        txHash = str(w3.to_hex(tx_token))
+        txHash = str(ex.to_hex(tx_token))
         logger.info(msg=f"Transaction {txHash}")
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
-        headers = { "User-Agent": "Mozilla/5.0" }
+        #headers = { "User-Agent": "Mozilla/5.0" }
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
         if(txResult == "1"):
