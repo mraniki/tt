@@ -417,7 +417,8 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
         if(txResult == "1"):
-            response= f"{txHash}\n {checkTransactionSuccessURL}"
+            txURLtracking=abiurl+"/tx/"+txHash
+            response= f"{s2} {s1} Size: {MinimumAmount}\nPrice: \n {txHash}\n {txURLtracking}"
             logger.info(msg=f"{response}")
             return response
     except Exception as e:
