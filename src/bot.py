@@ -467,7 +467,7 @@ async def HandleExceptions(e) -> None:
 ##============TG COMMAND================
 ##====view help =======
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}"
+    msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{fullcommandlist}"
     await send(update,msg)
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -507,7 +507,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             m_sl=order_m[2]
             m_tp=order_m[3]
             m_q=order_m[4]
-            logger.info(msg=f"Processing: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
+            logger.info(msg=f"Processing order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
             try:
                 res=await SendOrder(m_dir,m_symbol,m_sl,m_tp,m_q)
                 if (res!= None):
@@ -593,6 +593,7 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##======== DB START ===============
 if not os.path.exists(db_path):
     logger.info(msg=f"setting up new DB")
+    #review that method for future
     open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
     if os.path.exists(dotenv_path):
         logger.info(msg=f"env file found")
@@ -666,7 +667,7 @@ async def post_init(application: Application):
     global ex
     await LoadExchange(ex,testmode)
     logger.info(msg=f"Bot is online")
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {name} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online {version}\nEnvironment: {env}\nExchange: {name} Sandbox: {testmode}", parse_mode=constants.ParseMode.HTML)
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
