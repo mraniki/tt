@@ -511,7 +511,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             try:
                 res=await SendOrder(m_dir,m_symbol,m_sl,m_tp,m_q)
                 if (res!= None):
-                    response=f"{m_symbol} {m_dir} \n{res}"
+                    response=f"{res}"
                     await send(update,response)
             except Exception as e:
                 await HandleExceptions(e)
