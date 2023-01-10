@@ -349,12 +349,12 @@ async def CEXBuy(s1,s2,s3,s4,s5):
         return
 
 async def DEX_Sign_TX(contract_tx):
-    checkgasPriceURL = abiurl + "?module=gastracker&action=gasoracle&apikey=" + abiurltoken
-    checkgasPriceRequest = requests.get(url=checkgasPriceURL,headers=headers)
-    gasresults = checkgasPriceRequest.json()['result']['SafeGasPrice']
-    logger.info(msg=f"gasPriceresults {gasresults}")
-    if (gasPrice<=gasresults):
-        logger.warning(msg=f"gasprice warning: {gasPrice} {gasresults}")
+    # checkgasPriceURL = abiurl + "?module=gastracker&action=gasoracle&apikey=" + abiurltoken
+    # checkgasPriceRequest = requests.get(url=checkgasPriceURL,headers=headers)
+    # gasresults = checkgasPriceRequest.json()['result']['SafeGasPrice']
+    # logger.info(msg=f"gasPriceresults {gasresults}")
+    # if (gasPrice<=gasresults):
+    #     logger.warning(msg=f"gasprice warning: {gasPrice} {gasresults}")
     # checkgasLimitURL = abiurl + "?module=stats&action=dailyavggaslimit&startdate=2022-01-09&enddate=2022-01-09&sort=asc&apikey=" + abiurltoken
     # checkgasLimitRequest = requests.get(url=checkgasLimitURL,headers=headers)
     # gasLimitresults = checkgasLimitRequest.json()['result']['gasLimit']

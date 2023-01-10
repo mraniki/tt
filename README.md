@@ -59,23 +59,24 @@ Approach: Do an initial launch to have the DB structure created automatically an
  ### v1 
  - Enable bot in pythontelegram v20 and support CEX and DEX exchange formatted error via telegram
  - Query Balance, quote ticker and place order for CEX and DEX
- - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). Same format and it SL / TP or QTY are missing (`sell BTCUSDT`) values are defaulted
+ - Push your order signal manually or from system like trading view (via n8n or ngrok webhook) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). Same format and it SL / TP or QTY are missing (`sell BTCUSDT`) values are defaulted
  - Disable or Enable trading process via `/trading` command
  - Query balance via `/bal` command and view it in formatted way
  - Query ticker price via `/price BTCB` or `/price btc/usdt` command to view last symbol price (USDT as basis)
  - Switch between multiple CEX and DEX in one environment with prefix `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
  - Switch between testnet and mainnet with `/testmode` 
- - Support % of USDT balance for CEX order
- - Support standard DEX token list per exchange (e.g. [https://tokenlists.org/](tokenlist.org)) with function to convert symbol to checksum address from the token list
+ - Support % of USDT balance for CEX order and DEX order
+ - Support standard DEX token list per exchange (e.g. [https://tokenlists.org/](tokenlist.org)) with function to convert symbol to checksum address from the token list as well as base currency for a given DEX
+ - Able to start the bot with DEX or CEX as default option. 
  
  ### Other Features
  - Support bot in private channel (or private chat) and multiple channel per enviroment
- - Support multiple environment via variable (e.g. DEV, PRD or PRD DEX / PRD CEX)
+ - Support multiple environment via variable (e.g. DEV, PRD or PRD DEX / PRD CEX / UNI1 / UNI2)
  - Handle messaging in one function
  - Handle libraries exceptions in one function and delivery with apprise to support more notification system
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
- - Start up simplified to create DB if it is missing
+ - Create DB as the start if it is missing and connect to default DEX (Pancake)
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
@@ -87,10 +88,7 @@ Approach: Do an initial launch to have the DB structure created automatically an
 - More testing and code hardening
 
 ### V1.3
-- Simplify the Exchange search functions
-- Add Base currency at exchange variable (like USDT/USDC/BUSD or others)
-- Allow to start with DEX for initial start
-- Support DEFI DEX uniswap and dydx (to be tested)
+- Support DEFI DEX uniswapV3 and dydx (to be tested)
 - Support DEX limit order if supported like dydx
 
 ### v1.4
