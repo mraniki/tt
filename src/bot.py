@@ -36,6 +36,7 @@ logger = logging.getLogger(__name__)
 ##=============== CONFIG ===============
 dotenv_path = './config/.env'
 db_path= './config/db.json'
+contingency_db_path= './config/sample_db.json'
 #===================
 global ex
 exchanges = {}
@@ -584,7 +585,8 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 if not os.path.exists(db_path):
     logger.info(msg=f"setting up new DB")
     #review that method for future
-    open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
+    #open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
+    db_path= contingency_db_path
     if os.path.exists(dotenv_path):
         logger.info(msg=f"env file found")
         load_dotenv(dotenv_path)
