@@ -406,7 +406,7 @@ async def DEXBuy(s1,s2,s3,s4,s5):
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
-        MinimumAmount = int(OptimalOrderAmount[1] *0.9)#slippage
+        MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
         logger.info(msg=f"Minimum received {ex.from_wei(MinimumAmount, 'ether')}")
         txntime = (int(time.time()) + 1000000)
         swap_TX = contractR.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,txntime)
@@ -414,7 +414,6 @@ async def DEXBuy(s1,s2,s3,s4,s5):
         txHash = str(ex.to_hex(tx_token))
         logger.info(msg=f"Transaction {txHash}")
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
-        #headers = { "User-Agent": "Mozilla/5.0" }
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
         if(txResult == "1"):
