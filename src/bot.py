@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.26"
+version="🪙TT Beta 1.27"
 ##=============== import  =============
 ##log
 import logging
@@ -43,10 +43,6 @@ trading=True
 testmode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
 #===================
-commandlist= """
-<code>/bal</code>
-<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
-<code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>"""
 fullcommandlist= """
 <code>/bal</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
@@ -54,7 +50,6 @@ fullcommandlist= """
 <code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>
 <code>/trading</code>
 <code>/testmode</code>"""
-menu=f'{version} \n {commandlist}\n'
 menuhelp=f'{version} \n {fullcommandlist}\n'
 #===========Common Functions ===============
 
@@ -221,7 +216,7 @@ async def LoadExchange(exchangeid, mode):
         gasPrice=newex[0]['gasPrice']
         ex = Web3(Web3.HTTPProvider(networkprovider))
         if ex.net.listening:
-            logger.info(msg=f"Connected to Web3 {ex}")
+            logger.info(msg=f"Connected to {ex}")
             return name
         else:
             raise ConnectionError(f'Could not connect to {router}')
@@ -234,7 +229,6 @@ async def DEXContractLookup(symb):
         text = url.text
         token_list = json.loads(text)['tokens']
         symb=symb.upper()
-        #logger.info(msg=f"symbol {symb}")
         try:
             symbolcontract = [token for token in token_list if token['symbol'] == symb or token['symbol'].startswith(symb)]
             logger.info(msg=f"symbolcontract {symbolcontract}")
@@ -260,11 +254,7 @@ async def DEXFetchAbi(addr):
             "action": "getabi",
             "address": addr,
             "apikey": abiurltoken }
-        #logger.info(msg=f"{url}")
-        #logger.info(msg=f"{params}")
-        #headers = { "User-Agent": "Mozilla/5.0" }
         resp = requests.get(url, params=params, headers=headers).json()
-        logger.info(msg=f"request {requests.get(url, params=params, headers=headers)}")
         abi = resp["result"]
         #logger.info(msg=f"{abi}")
         if(abi!=""):
@@ -307,21 +297,21 @@ def Convert(s):
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
     return order
 
-#========== Buy function
-async def Buy(s1,s2,s3,s4,s5):
+#========== Order function
+async def SendOrder(s1,s2,s3,s4,s5):
     if not isinstance(ex,web3.main.Web3):
         logger.info(msg=f"order: {s1} {s2} {s3} {s4} {s5}")
-        response = await CEXBuy(s1,s2,s3,s4,s5)
+        response = await SendOrder_CEX(s1,s2,s3,s4,s5)
         return response
     elif (isinstance(ex,web3.main.Web3)):
-        response = await DEXBuy(s1,s2,s3,s4,s5)
+        response = await SendOrder_DEX(s1,s2,s3,s4,s5)
         return response
     else:
         logger.warning(msg=f"exchange error {ex}")
         await HandleExceptions(e)
         return
 
-async def CEXBuy(s1,s2,s3,s4,s5):
+async def SendOrder_CEX(s1,s2,s3,s4,s5):
     try:
         bal = ex.fetch_free_balance()
         bal = {k: v for k, v in bal.items() if v is not None and v>0}
@@ -339,7 +329,7 @@ async def CEXBuy(s1,s2,s3,s4,s5):
                 side=res['side']
                 amount=res['amount']
                 price=res['price']
-                response=f"{timestamp}\norder id {orderid}\n{side} {symbol}\n{amount} @ {price}"
+                response= f"{symbol} {side} Size: {amount}\nPrice: {price}\nRef: {orderid}\n {timestamp}"
                 return response
             except Exception as e:
                 await HandleExceptions(e)
@@ -348,19 +338,22 @@ async def CEXBuy(s1,s2,s3,s4,s5):
         await HandleExceptions(e)
         return
 
-async def DEX_Sign_TX(contract_tx):
+
+async def DEX_GasControl(contract_tx):
     checkgasPriceURL = abiurl + "?module=gastracker&action=gasoracle&apikey=" + abiurltoken
     checkgasPriceRequest = requests.get(url=checkgasPriceURL,headers=headers)
     gasresults = checkgasPriceRequest.json()['result']['SafeGasPrice']
     logger.info(msg=f"gasPriceresults {gasresults}")
     if (gasPrice<=gasresults):
         logger.warning(msg=f"gasprice warning: {gasPrice} {gasresults}")
-    # checkgasLimitURL = abiurl + "?module=stats&action=dailyavggaslimit&startdate=2022-01-09&enddate=2022-01-09&sort=asc&apikey=" + abiurltoken
-    # checkgasLimitRequest = requests.get(url=checkgasLimitURL,headers=headers)
-    # gasLimitresults = checkgasLimitRequest.json()['result']['gasLimit']
-    # logger.info(msg=f"gasLimitresults {gasLimitresults}")
-    # if (gasLimit<=gasLimitresults):
-    #     logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
+    checkgasLimitURL = abiurl + "?module=stats&action=dailyavggaslimit&startdate=2022-01-09&enddate=2022-01-09&sort=asc&apikey=" + abiurltoken
+    checkgasLimitRequest = requests.get(url=checkgasLimitURL,headers=headers)
+    gasLimitresults = checkgasLimitRequest.json()['result']['gasLimit']
+    logger.info(msg=f"gasLimitresults {gasLimitresults}")
+    if (gasLimit<=gasLimitresults):
+        logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
+
+async def DEX_Sign_TX(contract_tx):
     tx_fields = {
         'from': walletaddress,
         'gas': int(gasLimit),
@@ -372,7 +365,7 @@ async def DEX_Sign_TX(contract_tx):
     raw_tx = signed.rawTransaction
     return ex.eth.send_raw_transaction(raw_tx)
 
-async def DEXBuy(s1,s2,s3,s4,s5):
+async def SendOrder_DEX(s1,s2,s3,s4,s5):
     try:
         if (s1=="BUY"):
             tokenA=basesymbol
@@ -380,8 +373,8 @@ async def DEXBuy(s1,s2,s3,s4,s5):
         else:
             tokenA=s2
             tokenB=basesymbol
-        dexabi= await DEXFetchAbi(router) #Router ABI
-        contractR = ex.eth.contract(address=router, abi=dexabi) #ContractLiquidityRouter
+        contractRabi= await DEXFetchAbi(router) #Router ABI
+        contractR = ex.eth.contract(address=router, abi=contractRabi) #ContractLiquidityRouter
         tokenToSell=ex.to_checksum_address(await DEXContractLookup(tokenA))
         AbiTokenA= await DEXFetchAbi(tokenToSell) #tokenToSell ABI
         contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
@@ -403,19 +396,19 @@ async def DEXBuy(s1,s2,s3,s4,s5):
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
-        MinimumAmount = int(OptimalOrderAmount[1] *0.9)#slippage
-        logger.info(msg=f"Minimum received {ex.from_wei(MinimumAmount, 'ether')}")
+        MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
+        logger.info(msg=f"Min received {ex.from_wei(MinimumAmount, 'ether')}")
         txntime = (int(time.time()) + 1000000)
         swap_TX = contractR.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,txntime)
         tx_token = await DEX_Sign_TX(swap_TX)
         txHash = str(ex.to_hex(tx_token))
-        logger.info(msg=f"Transaction {txHash}")
+        logger.info(msg=f"{txHash}")
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
-        #headers = { "User-Agent": "Mozilla/5.0" }
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
         if(txResult == "1"):
-            response= f"{txHash}\n {checkTransactionSuccessURL}"
+            txURLtracking=abiurl+"/tx/"+txHash
+            response= f"{s2} {s1} Size: {MinimumAmount}\nPrice: \n {txHash}\n {txURLtracking}"
             logger.info(msg=f"{response}")
             return response
     except Exception as e:
@@ -464,7 +457,7 @@ async def HandleExceptions(e) -> None:
 ##============TG COMMAND================
 ##====view help =======
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n {menu}"
+    msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
     await send(update,msg)
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -504,11 +497,11 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             m_sl=order_m[2]
             m_tp=order_m[3]
             m_q=order_m[4]
-            logger.info(msg=f"Processing: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
+            logger.info(msg=f"Processing order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
             try:
-                res=await Buy(m_dir,m_symbol,m_sl,m_tp,m_q)
+                res=await SendOrder(m_dir,m_symbol,m_sl,m_tp,m_q)
                 if (res!= None):
-                    response=f"🟢 ORDER Processed:\n{res}"
+                    response=f"{res}"
                     await send(update,response)
             except Exception as e:
                 await HandleExceptions(e)
@@ -590,6 +583,7 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##======== DB START ===============
 if not os.path.exists(db_path):
     logger.info(msg=f"setting up new DB")
+    #review that method for future
     open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
     if os.path.exists(dotenv_path):
         logger.info(msg=f"env file found")
@@ -663,7 +657,7 @@ async def post_init(application: Application):
     global ex
     await LoadExchange(ex,testmode)
     logger.info(msg=f"Bot is online")
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online\nEnvironment: {env}\nExchange: {name} Sandbox: {testmode}\n {menu}", parse_mode=constants.ParseMode.HTML)
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online {version}\nEnvironment: {env}\nExchange: {name} Sandbox: {testmode}", parse_mode=constants.ParseMode.HTML)
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)

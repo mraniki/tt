@@ -240,7 +240,7 @@
             "tokenlist":"https://gateway.ipfs.io/ipns/tokens.uniswap.org",
             "abiurl":"https://api.etherscan.io/api",
             "abiurltoken":"abc",
-            "basesymbol":"USDT",
+            "basesymbol":"USDC",
             "gasLimit":"70000",
             "gasPrice":"20"
         },
@@ -256,23 +256,23 @@
             "tokenlist":"https://api-polygon-tokens.polygon.technology/tokenlists/polygonTokens.tokenlist.json",
             "abiurl":"https://api.polygonscan.com/api",
             "abiurltoken":"abc",
-            "basesymbol":"USDT",
+            "basesymbol":"USDC",
             "gasLimit":"70000",
             "gasPrice":"20"
         },
         "6":
         {
-            "name": "quickswap",
+            "name": "optimism",
             "walletaddress": "abc",
             "privatekey": "abc",
             "version": "v2",
-            "networkprovider": "https://matic-testnet-archive-rpc.bwarelabs.com",
-            "router": "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff",
-            "testmode": "True",
+            "networkprovider": "https://mainnet.optimism.io",
+            "router": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
+            "testmode": "false",
             "tokenlist":"https://api-polygon-tokens.polygon.technology/tokenlists/testnet.tokenlist.json",
-            "abiurl":"https://api-testnet.polygonscan.com/api",
+            "abiurl":"https://api-optimistic.etherscan.io/api",
             "abiurltoken":"abc",
-            "basesymbol":"USDT",
+            "basesymbol":"USDC",
             "gasLimit":"70000",
             "gasPrice":"20"
         }
