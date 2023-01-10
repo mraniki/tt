@@ -383,8 +383,8 @@ async def DEXBuy(s1,s2,s3,s4,s5):
         else:
             tokenA=s2
             tokenB=basesymbol
-        dexabi= await DEXFetchAbi(router) #Router ABI
-        contractR = ex.eth.contract(address=router, abi=dexabi) #ContractLiquidityRouter
+        contractRabi= await DEXFetchAbi(router) #Router ABI
+        contractR = ex.eth.contract(address=router, abi=contractRabi) #ContractLiquidityRouter
         tokenToSell=ex.to_checksum_address(await DEXContractLookup(tokenA))
         AbiTokenA= await DEXFetchAbi(tokenToSell) #tokenToSell ABI
         contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
