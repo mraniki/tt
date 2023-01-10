@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.26"
+version="🪙TT Beta 1.27"
 ##=============== import  =============
 ##log
 import logging
@@ -43,10 +43,6 @@ trading=True
 testmode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
 #===================
-commandlist= """
-<code>/bal</code>
-<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
-<code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>"""
 fullcommandlist= """
 <code>/bal</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
@@ -54,7 +50,6 @@ fullcommandlist= """
 <code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>
 <code>/trading</code>
 <code>/testmode</code>"""
-menu=f'{version} \n {commandlist}\n'
 menuhelp=f'{version} \n {fullcommandlist}\n'
 #===========Common Functions ===============
 
@@ -221,7 +216,7 @@ async def LoadExchange(exchangeid, mode):
         gasPrice=newex[0]['gasPrice']
         ex = Web3(Web3.HTTPProvider(networkprovider))
         if ex.net.listening:
-            logger.info(msg=f"Connected to Web3 {ex}")
+            logger.info(msg=f"Connected to {ex}")
             return name
         else:
             raise ConnectionError(f'Could not connect to {router}')
@@ -234,7 +229,6 @@ async def DEXContractLookup(symb):
         text = url.text
         token_list = json.loads(text)['tokens']
         symb=symb.upper()
-        #logger.info(msg=f"symbol {symb}")
         try:
             symbolcontract = [token for token in token_list if token['symbol'] == symb or token['symbol'].startswith(symb)]
             logger.info(msg=f"symbolcontract {symbolcontract}")
@@ -260,11 +254,7 @@ async def DEXFetchAbi(addr):
             "action": "getabi",
             "address": addr,
             "apikey": abiurltoken }
-        #logger.info(msg=f"{url}")
-        #logger.info(msg=f"{params}")
-        #headers = { "User-Agent": "Mozilla/5.0" }
         resp = requests.get(url, params=params, headers=headers).json()
-        logger.info(msg=f"request {requests.get(url, params=params, headers=headers)}")
         abi = resp["result"]
         #logger.info(msg=f"{abi}")
         if(abi!=""):
@@ -407,12 +397,12 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         OrderAmount = i_OrderAmount
         OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
         MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
-        logger.info(msg=f"Minimum received {ex.from_wei(MinimumAmount, 'ether')}")
+        logger.info(msg=f"Min received {ex.from_wei(MinimumAmount, 'ether')}")
         txntime = (int(time.time()) + 1000000)
         swap_TX = contractR.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,txntime)
         tx_token = await DEX_Sign_TX(swap_TX)
         txHash = str(ex.to_hex(tx_token))
-        logger.info(msg=f"Transaction {txHash}")
+        logger.info(msg=f"{txHash}")
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
@@ -467,7 +457,7 @@ async def HandleExceptions(e) -> None:
 ##============TG COMMAND================
 ##====view help =======
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{fullcommandlist}"
+    msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
     await send(update,msg)
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
