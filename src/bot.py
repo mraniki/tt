@@ -307,21 +307,21 @@ def Convert(s):
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
     return order
 
-#========== Buy function
-async def Buy(s1,s2,s3,s4,s5):
+#========== Order function
+async def SendOrder(s1,s2,s3,s4,s5):
     if not isinstance(ex,web3.main.Web3):
         logger.info(msg=f"order: {s1} {s2} {s3} {s4} {s5}")
-        response = await CEXBuy(s1,s2,s3,s4,s5)
+        response = await SendOrder_CEX(s1,s2,s3,s4,s5)
         return response
     elif (isinstance(ex,web3.main.Web3)):
-        response = await DEXBuy(s1,s2,s3,s4,s5)
+        response = await SendOrder_DEX(s1,s2,s3,s4,s5)
         return response
     else:
         logger.warning(msg=f"exchange error {ex}")
         await HandleExceptions(e)
         return
 
-async def CEXBuy(s1,s2,s3,s4,s5):
+async def SendOrder_CEX(s1,s2,s3,s4,s5):
     try:
         bal = ex.fetch_free_balance()
         bal = {k: v for k, v in bal.items() if v is not None and v>0}
@@ -375,7 +375,7 @@ async def DEX_Sign_TX(contract_tx):
     raw_tx = signed.rawTransaction
     return ex.eth.send_raw_transaction(raw_tx)
 
-async def DEXBuy(s1,s2,s3,s4,s5):
+async def SendOrder_DEX(s1,s2,s3,s4,s5):
     try:
         if (s1=="BUY"):
             tokenA=basesymbol
@@ -508,9 +508,9 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             m_q=order_m[4]
             logger.info(msg=f"Processing: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
             try:
-                res=await Buy(m_dir,m_symbol,m_sl,m_tp,m_q)
+                res=await SendOrder(m_dir,m_symbol,m_sl,m_tp,m_q)
                 if (res!= None):
-                    response=f"🟢 ORDER Processed:\n{res}"
+                    response=f"{m_symbol} {m_dir} \n{res}"
                     await send(update,response)
             except Exception as e:
                 await HandleExceptions(e)
