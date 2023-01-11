@@ -16,7 +16,7 @@ COPY ./src .
 
 #RUN mkdir ./config
 RUN mkdir -p /config
-ADD ./config/db.json.sample /config/sample_db.json
+ADD ./config/sample_db.json /config/sample_db.json
 
 # command to run on container start
 CMD [ "python", "./bot.py" ]
