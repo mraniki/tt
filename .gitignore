@@ -5,3 +5,4 @@ config/.env
 /src/db.json
 src/config/db.json
 config/db.json
+config/db1.json

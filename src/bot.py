@@ -637,8 +637,6 @@ if not os.path.exists(db_path):
     #         ogger.error(msg=f"NO DEX")
     #     else:
     #         DBCommand_Add_DEX()
-else:
-    logger.info(msg=f"Verifying DB")
 
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB")
