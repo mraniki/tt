@@ -175,7 +175,7 @@ async def LoadExchange(exchangeid, mode):
     global gasPrice
     global m_ordertype
     global gasLimit
-    logger.info(msg=f"Setting up exchange {exchangeid}")
+    logger.info(msg=f"Setting up {exchangeid}")
     CEXCheck= await SearchCEX(exchangeid,mode)
     DEXCheck= await SearchDEX(exchangeid,mode)
     if (CEXCheck):
@@ -402,8 +402,9 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
+        txHashDetail=ex.eth.get_transaction(txHash)
         if(txResult == "1"):
-            response= f"{s2} {s1} Size:{ex.from_wei(MinimumAmount, 'ether')}\nPrice: TBD\nRef: {txHash}"
+            response= f"{s2} {s1} Size:{ex.from_wei(MinimumAmount, 'ether')}\nPrice: TBD\nRef: {txHash}\n{txHashDetail}"
             logger.info(msg=f"{response}")
             return response
     except Exception as e:
