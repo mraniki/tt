@@ -602,40 +602,41 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##======== DB START ===============
 if not os.path.exists(db_path):
     logger.info(msg=f"setting up new DB")
+    db_path=contingency_db_path
     #review that method for future
-    open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
-    if os.path.exists(dotenv_path):
-        logger.info(msg=f"env file found")
-        load_dotenv(dotenv_path)
-    elif os.getenv("TG_TK")!="":
-        logger.info("Using docker variable")
-        try:
-            TG_TK = os.getenv("TG_TK")
-            TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
-            CEX_name = os.getenv("EX_NAME")
-            CEX_api = os.getenv("EX_YOURAPIKEY")
-            CEX_secret = os.getenv("EX_YOURSECRET")
-            CEX_password = os.getenv("EX_YOURPASSWORD")
-            CEX_ordertype = os.getenv("EX_ORDERTYPE")
-            CEX_defaulttype = os.getenv("EX_DEFAULTTYPE")
-            CEX_test_mode = os.getenv("EX_SANDBOXMODE")
-        except Exception as e:
-            logger.error("no env variables")
-    #### adding ENV data to DB
-        if (TG_TK==""):
-            logger.error(msg=f"no TG TK")
-            sys.exit()
-        else:
-            DBCommand_Add_TG(TG_TK,TG_CHANNEL_ID)
-        if (CEX_name==""):
-            logger.error(msg=f"NO CEX")
-        else:
-            logger.error(msg=f"adding CEX to DB")
-            DBCommand_Add_CEX(CEX_name,CEX_api,CEX_secret,CEX_password,CEX_ordertype,CEX_defaulttype,CEX_test_mode)
-        if (DEX_name==""):
-            ogger.error(msg=f"NO DEX")
-        else:
-            DBCommand_Add_DEX()
+    #open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
+    # if os.path.exists(dotenv_path):
+    #     logger.info(msg=f"env file found")
+    #     load_dotenv(dotenv_path)
+    # elif os.getenv("TG_TK")!="":
+    #     logger.info("Using docker variable")
+    #     try:
+    #         TG_TK = os.getenv("TG_TK")
+    #         TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
+    #         CEX_name = os.getenv("EX_NAME")
+    #         CEX_api = os.getenv("EX_YOURAPIKEY")
+    #         CEX_secret = os.getenv("EX_YOURSECRET")
+    #         CEX_password = os.getenv("EX_YOURPASSWORD")
+    #         CEX_ordertype = os.getenv("EX_ORDERTYPE")
+    #         CEX_defaulttype = os.getenv("EX_DEFAULTTYPE")
+    #         CEX_test_mode = os.getenv("EX_SANDBOXMODE")
+    #     except Exception as e:
+    #         logger.error("no env variables")
+    # #### adding ENV data to DB
+    #     if (TG_TK==""):
+    #         logger.error(msg=f"no TG TK")
+    #         sys.exit()
+    #     else:
+    #         DBCommand_Add_TG(TG_TK,TG_CHANNEL_ID)
+    #     if (CEX_name==""):
+    #         logger.error(msg=f"NO CEX")
+    #     else:
+    #         logger.error(msg=f"adding CEX to DB")
+    #         DBCommand_Add_CEX(CEX_name,CEX_api,CEX_secret,CEX_password,CEX_ordertype,CEX_defaulttype,CEX_test_mode)
+    #     if (DEX_name==""):
+    #         ogger.error(msg=f"NO DEX")
+    #     else:
+    #         DBCommand_Add_DEX()
 else:
     logger.info(msg=f"Verifying DB")
 
