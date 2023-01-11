@@ -603,6 +603,7 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 if not os.path.exists(db_path):
     logger.info(msg=f"setting up new DB")
     db_path=contingency_db_path
+    failsafe=true
     ex='pancake'
     #review that method for future
     #open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
@@ -627,17 +628,17 @@ if not os.path.exists(db_path):
         if (TG_TK==""):
             logger.error(msg=f"no TG TK")
             sys.exit()
-        else:
-            DBCommand_Add_TG(TG_TK,TG_CHANNEL_ID)
-        if (CEX_name==""):
-            logger.error(msg=f"NO CEX")
-        else:
-            logger.error(msg=f"adding CEX to DB")
-            DBCommand_Add_CEX(CEX_name,CEX_api,CEX_secret,CEX_password,CEX_ordertype,CEX_defaulttype,CEX_test_mode)
-        if (DEX_name==""):
-            ogger.error(msg=f"NO DEX")
-        else:
-            DBCommand_Add_DEX()
+     #   else:
+            #DBCommand_Add_TG(TG_TK,TG_CHANNEL_ID)
+       # if (CEX_name==""):
+    #        logger.error(msg=f"NO CEX")
+       # else:
+    #        logger.error(msg=f"adding CEX to DB")
+            #DBCommand_Add_CEX(CEX_name,CEX_api,CEX_secret,CEX_password,CEX_ordertype,CEX_defaulttype,CEX_test_mode)
+     #   if (DEX_name==""):
+      #      logger.error(msg=f"NO DEX")
+     #   else:
+      #      DBCommand_Add_DEX()
 
 # if os.path.exists(db_path):
 #     logger.info(msg=f"Existing DB")
@@ -674,7 +675,7 @@ apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 ##========== startup message ===========
 async def post_init(application: Application):
     global ex
-    await LoadExchange(ex,testmode)
+    #await LoadExchange(ex,testmode)
     logger.info(msg=f"Bot is online")
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online {version}\nEnvironment: {env}\nExchange: {name} Sandbox: {testmode}", parse_mode=constants.ParseMode.HTML)
 #===========bot error handling ==========
