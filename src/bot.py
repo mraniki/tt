@@ -393,13 +393,11 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         if (s1=="SELL"):
             amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
             tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToSell)
-            tokenprice=tokeninfo['market_data']['current_price']['usd']
-            tokenlogo=tokeninfo['image']['small']
+            response = f"{s2} {s1}⬇️"
         else:
             amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
             tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToBuy)
-            tokenprice=tokeninfo['market_data']['current_price']['usd']
-            tokenlogo=tokeninfo['image']['small']
+            response = f"{s2} {s1}⬆️"
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
@@ -415,9 +413,11 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         txResult = checkTransactionRequest.json()['status']
         await DEX_GasControl()
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
+        tokenprice=tokeninfo['market_data']['current_price']['usd']
+        tokenlogo=tokeninfo['image']['small']
         gasUsed=txHashDetail['gasUsed']
         if(txResult == "1"):
-            response= f"{s2} {s1} Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\nPrice: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
+            response+= f"Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}n\Entry: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
             logger.info(msg=f"{response}")
             #logger.info(msg=f"{txHashDetail}")
             return response
@@ -425,11 +425,12 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         await HandleExceptions(e)
         return
 
-async def DEX_TokenInfo(contract):
+async def DEX_TokenInfo(token):
+    global tokenprice
+    global tokeninfo
     #asset_platforms = cg.get_asset_platforms()
     #logger.info(msg=f"cg.get_asset_platforms {asset_platforms}")
-    #logger.info(msg=f"{tokenToBuy}")
-    tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToBuy)
+    tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=token)
     #logger.info(msg=f"tokeninfo {tokeninfo}")
     tokenprice=tokeninfo['market_data']['current_price']['usd']
     tokenlogo=tokeninfo['image']['small']
