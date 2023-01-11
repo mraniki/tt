@@ -603,7 +603,7 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 if not os.path.exists(db_path):
     logger.info(msg=f"setting up new DB")
     db_path=contingency_db_path
-    failsafe=true
+    failsafe=True
     #ex='matic'
     #review that method for future
     #open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
