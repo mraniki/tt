@@ -63,7 +63,6 @@ def LibCheck():
     logger.info(msg=f"Web3 {web3.__version__}")
     logger.info(msg=f"apprise {apprise.__version__}")
     return
-
 ##===========DB Functions
 def DBCommand_Add_TG(s1,s2,s3):
     if len(telegramDB.search(q.token==s1)):
@@ -265,7 +264,6 @@ async def DEXFetchAbi(addr):
     except Exception as e:
         await HandleExceptions(e)
 
-
 #ORDER PARSER
 def Convert(s):
     li = s.split(" ")
@@ -277,7 +275,7 @@ def Convert(s):
     try:
         m_symbol=li[1]
     except (IndexError, TypeError):
-        logger.warning(msg=f"{s} no symbol")
+        logger.error(msg=f"{s} no symbol")
         return
     try:
         m_sl=li[2][3:7]
@@ -320,7 +318,6 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
             m_price = float(ex.fetchTicker(f'{s2}').get('last'))
             totalusdtbal = ex.fetchBalance()['USDT']['free']
             amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price)
-            ######## ORDER
             try:
                 res = ex.create_order(s2, m_ordertype, s1, amountpercent)
                 orderid=res['id']
@@ -337,7 +334,6 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
     except Exception as e:
         await HandleExceptions(e)
         return
-
 
 async def DEX_GasControl(contract_tx):
     checkgasPriceURL = abiurl + "?module=gastracker&action=gasoracle&apikey=" + abiurltoken
@@ -413,7 +409,6 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
     except Exception as e:
         await HandleExceptions(e)
         return
-
 #=========== Send function
 async def send (self, messaging):
     try:
@@ -467,7 +462,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
             sbal=""
             for iterator in bal:
-                sbal += (f"{iterator} : {bal[iterator]} \n")
+                sbal += (f"{iterator}: {bal[iterator]} \n")
             if(sbal==""):
                 sbal="No Balance"
             msg+=f"\n{sbal}"
