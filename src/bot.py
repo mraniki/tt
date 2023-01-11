@@ -405,7 +405,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
         gasUsed=txHashDetail['gasUsed']
         if(txResult == "1"):
-            response= f"{s2} {s1} Size: {MinimumAmount}\nPrice: \ntxHash: {txHash}\ngasUsed: {gasUsed}"
+            response= f"{s2} {s1} Size: {ex.from_wei(MinimumAmount, 'ether')}\nPrice: \ntxHash: {txHash}\ngasUsed: {gasUsed}"
             logger.info(msg=f"{response}")
             return response
     except Exception as e:
