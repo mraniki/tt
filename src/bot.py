@@ -419,7 +419,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
         gasUsed=txHashDetail['gasUsed']
         if(txResult == "1"):
-            response= f"{s2} {s1} Size: {ex.from_wei(MinimumAmount, 'ether')}\nPrice: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
+            response= f"{s2} {s1} Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\nPrice: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
             logger.info(msg=f"{response}")
             #logger.info(msg=f"{txHashDetail}")
             return response
