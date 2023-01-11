@@ -335,19 +335,21 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
         await HandleExceptions(e)
         return
 
-async def DEX_GasControl(contract_tx):
-    checkgasPriceURL = abiurl + "?module=gastracker&action=gasoracle&apikey=" + abiurltoken
-    checkgasPriceRequest = requests.get(url=checkgasPriceURL,headers=headers)
-    gasresults = checkgasPriceRequest.json()['result']['SafeGasPrice']
-    logger.info(msg=f"gasPriceresults {gasresults}")
-    if (gasPrice<=gasresults):
-        logger.warning(msg=f"gasprice warning: {gasPrice} {gasresults}")
-    checkgasLimitURL = abiurl + "?module=stats&action=dailyavggaslimit&startdate=2022-01-09&enddate=2022-01-09&sort=asc&apikey=" + abiurltoken
-    checkgasLimitRequest = requests.get(url=checkgasLimitURL,headers=headers)
-    gasLimitresults = checkgasLimitRequest.json()['result']['gasLimit']
-    logger.info(msg=f"gasLimitresults {gasLimitresults}")
-    if (gasLimit<=gasLimitresults):
-        logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
+async def DEX_GasControl():
+    CurrentGasPrice=ex.to_wei(ex.eth.gas_price,'wei')
+    logger.info(msg=f"CurrentGasPrice {CurrentGasPrice}")
+    MyGasPrice=ex.to_wei(gasPrice,'gwei')
+    logger.info(msg=f"MyGasPrice {MyGasPrice}")
+    if (CurrentGasPrice>=MyGasPrice):
+        logger.warning(msg=f"{CurrentGasPrice} {MyGasPrice} ")
+    else:
+        logger.info(msg=f"gas setup{MyGasPrice} aligned with current gas price {CurrentGasPrice}")
+    # checkgasLimitURL = abiurl + "?module=stats&action=dailyavggaslimit&startdate=2022-01-09&enddate=2022-01-09&sort=asc&apikey=" + abiurltoken
+    # checkgasLimitRequest = requests.get(url=checkgasLimitURL,headers=headers)
+    # gasLimitresults = checkgasLimitRequest.json()['result']['gasLimit']
+    # logger.info(msg=f"gasLimitresults {gasLimitresults}")
+    # if (gasLimit<=gasLimitresults):
+    #     logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
 
 async def DEX_Sign_TX(contract_tx):
     tx_fields = {
@@ -403,6 +405,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
+        await DEX_GasControl()
         gasUsed=txHashDetail['gasUsed']
         if(txResult == "1"):
             response= f"{s2} {s1} Size: {ex.from_wei(MinimumAmount, 'ether')}\nPrice: \ntxHash: {txHash}\ngasUsed: {gasUsed}"
