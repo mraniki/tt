@@ -36,6 +36,7 @@ logger = logging.getLogger(__name__)
 ##=============== CONFIG ===============
 dotenv_path = './config/.env'
 db_path= './config/db.json'
+contingency_db_path= './config/sample_db.json'
 #===================
 global ex
 exchanges = {}
@@ -50,8 +51,8 @@ fullcommandlist= """
 <code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>
 <code>/trading</code>
 <code>/testmode</code>"""
-menuhelp=f'{version} \n {fullcommandlist}\n'
-#===========Common Functions ===============
+menuhelp=f"{version} \n {fullcommandlist}"
+#========== Common Functions =============
 
 def LibCheck():
     logger.info(msg=f"{version}")
@@ -62,7 +63,6 @@ def LibCheck():
     logger.info(msg=f"Web3 {web3.__version__}")
     logger.info(msg=f"apprise {apprise.__version__}")
     return
-
 ##===========DB Functions
 def DBCommand_Add_TG(s1,s2,s3):
     if len(telegramDB.search(q.token==s1)):
@@ -175,7 +175,7 @@ async def LoadExchange(exchangeid, mode):
     global gasPrice
     global m_ordertype
     global gasLimit
-    logger.info(msg=f"Setting up exchange {exchangeid}")
+    logger.info(msg=f"Setting up {exchangeid}")
     CEXCheck= await SearchCEX(exchangeid,mode)
     DEXCheck= await SearchDEX(exchangeid,mode)
     if (CEXCheck):
@@ -230,7 +230,7 @@ async def DEXContractLookup(symb):
         token_list = json.loads(text)['tokens']
         symb=symb.upper()
         try:
-            symbolcontract = [token for token in token_list if token['symbol'] == symb or token['symbol'].startswith(symb)]
+            symbolcontract = [token for token in token_list if token['symbol'] == symb]
             logger.info(msg=f"symbolcontract {symbolcontract}")
             if len(symbolcontract) > 0:
                 #logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
@@ -264,7 +264,6 @@ async def DEXFetchAbi(addr):
     except Exception as e:
         await HandleExceptions(e)
 
-
 #ORDER PARSER
 def Convert(s):
     li = s.split(" ")
@@ -276,7 +275,7 @@ def Convert(s):
     try:
         m_symbol=li[1]
     except (IndexError, TypeError):
-        logger.warning(msg=f"{s} no symbol")
+        logger.error(msg=f"{s} no symbol")
         return
     try:
         m_sl=li[2][3:7]
@@ -299,17 +298,16 @@ def Convert(s):
 
 #========== Order function
 async def SendOrder(s1,s2,s3,s4,s5):
-    if not isinstance(ex,web3.main.Web3):
+    try:
+      if not isinstance(ex,web3.main.Web3):
         logger.info(msg=f"order: {s1} {s2} {s3} {s4} {s5}")
         response = await SendOrder_CEX(s1,s2,s3,s4,s5)
-        return response
-    elif (isinstance(ex,web3.main.Web3)):
+      elif (isinstance(ex,web3.main.Web3)):
         response = await SendOrder_DEX(s1,s2,s3,s4,s5)
-        return response
-    else:
-        logger.warning(msg=f"exchange error {ex}")
-        await HandleExceptions(e)
-        return
+      return response
+    except Exception as e:
+      await HandleExceptions(e)
+      return
 
 async def SendOrder_CEX(s1,s2,s3,s4,s5):
     try:
@@ -320,7 +318,6 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
             m_price = float(ex.fetchTicker(f'{s2}').get('last'))
             totalusdtbal = ex.fetchBalance()['USDT']['free']
             amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price)
-            ######## ORDER
             try:
                 res = ex.create_order(s2, m_ordertype, s1, amountpercent)
                 orderid=res['id']
@@ -337,7 +334,6 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
     except Exception as e:
         await HandleExceptions(e)
         return
-
 
 async def DEX_GasControl(contract_tx):
     checkgasPriceURL = abiurl + "?module=gastracker&action=gasoracle&apikey=" + abiurltoken
@@ -384,7 +380,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             approval_TX = contractTokenA.functions.approve(router, maxamount)
             ApprovaltxHash = await DEX_Sign_TX(approval_TX)
             logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
-            time.sleep(10) #wait for approval
+            time.sleep(10) #wait approval
         tokenToBuy= ex.to_checksum_address(await DEXContractLookup(tokenB))
         OrderPath=[tokenToSell, tokenToBuy]
         tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
@@ -406,15 +402,14 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
+        txHashDetail=ex.eth.get_transaction(txHash)
         if(txResult == "1"):
-            txURLtracking=abiurl+"/tx/"+txHash
-            response= f"{s2} {s1} Size: {MinimumAmount}\nPrice: \n {txHash}\n {txURLtracking}"
+            response= f"{s2} {s1} Size:{ex.from_wei(MinimumAmount, 'ether')}\nPrice: TBD\nRef: {txHash}\n{txHashDetail}"
             logger.info(msg=f"{response}")
             return response
     except Exception as e:
         await HandleExceptions(e)
         return
-
 #=========== Send function
 async def send (self, messaging):
     try:
@@ -468,7 +463,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
             sbal=""
             for iterator in bal:
-                sbal += (f"{iterator} : {bal[iterator]} \n")
+                sbal += (f"{iterator}: {bal[iterator]} \n")
             if(sbal==""):
                 sbal="No Balance"
             msg+=f"\n{sbal}"
@@ -584,7 +579,8 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 if not os.path.exists(db_path):
     logger.info(msg=f"setting up new DB")
     #review that method for future
-    open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
+    #open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
+    db_path= contingency_db_path
     if os.path.exists(dotenv_path):
         logger.info(msg=f"env file found")
         load_dotenv(dotenv_path)
