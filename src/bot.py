@@ -604,7 +604,7 @@ if not os.path.exists(db_path):
     logger.info(msg=f"setting up new DB")
     db_path=contingency_db_path
     failsafe=true
-    ex='pancake'
+    #ex='matic'
     #review that method for future
     #open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
     # if os.path.exists(dotenv_path):
@@ -675,7 +675,7 @@ apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 ##========== startup message ===========
 async def post_init(application: Application):
     global ex
-    if (failsafe)
+    if (failsafe):
         ex = Web3(Web3.HTTPProvider('https://polygon-rpc.com'))
     else
         await LoadExchange(ex,testmode)
