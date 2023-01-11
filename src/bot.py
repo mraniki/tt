@@ -603,6 +603,7 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 if not os.path.exists(db_path):
     logger.info(msg=f"setting up new DB")
     db_path=contingency_db_path
+    ex='pancake'
     #review that method for future
     #open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
     # if os.path.exists(dotenv_path):
@@ -623,50 +624,50 @@ if not os.path.exists(db_path):
     except Exception as e:
         logger.error("no env variables")
     # #### adding ENV data to DB
-    #     if (TG_TK==""):
-    #         logger.error(msg=f"no TG TK")
-    #         sys.exit()
-    #     else:
-    #         DBCommand_Add_TG(TG_TK,TG_CHANNEL_ID)
-    #     if (CEX_name==""):
-    #         logger.error(msg=f"NO CEX")
-    #     else:
-    #         logger.error(msg=f"adding CEX to DB")
-    #         DBCommand_Add_CEX(CEX_name,CEX_api,CEX_secret,CEX_password,CEX_ordertype,CEX_defaulttype,CEX_test_mode)
-    #     if (DEX_name==""):
-    #         ogger.error(msg=f"NO DEX")
-    #     else:
-    #         DBCommand_Add_DEX()
-
-if os.path.exists(db_path):
-    logger.info(msg=f"Existing DB")
-    try:
-        db = TinyDB(db_path)
-        q = Query()
-        globalDB = db.table('global')
-        env = globalDB.all()[0]['env']
-        ex = globalDB.all()[0]['defaultex']
-        testmode = globalDB.all()[0]['defaulttestmode']
-        logger.info(msg=f"Env {env} ex {ex}")
-        telegramDB = db.table('telegram')
-        cexDB = db.table('cex')
-        dexDB = db.table('dex')
-        tg=telegramDB.search(q.platform==env)
-        TG_TK = tg[0]['token']
-        TG_CHANNEL_ID = tg[0]['channel']
-        cexdb=cexDB.all()
-        dexdb=dexDB.all()
-        CEX_name = cexdb[0]['name']
-        CEX_ordertype = cexdb[0]['ordertype']
-        CEX_defaulttype = cexdb[0]['defaultType']
         if (TG_TK==""):
             logger.error(msg=f"no TG TK")
             sys.exit()
-        elif (CEX_name==""):
-            logger.error(msg=f"missing cex")
-            sys.exit()
-    except Exception:
-        logger.warning(msg=f"error with existing db file {db_path}")
+        else:
+            DBCommand_Add_TG(TG_TK,TG_CHANNEL_ID)
+        if (CEX_name==""):
+            logger.error(msg=f"NO CEX")
+        else:
+            logger.error(msg=f"adding CEX to DB")
+            DBCommand_Add_CEX(CEX_name,CEX_api,CEX_secret,CEX_password,CEX_ordertype,CEX_defaulttype,CEX_test_mode)
+        if (DEX_name==""):
+            ogger.error(msg=f"NO DEX")
+        else:
+            DBCommand_Add_DEX()
+
+# if os.path.exists(db_path):
+#     logger.info(msg=f"Existing DB")
+#     try:
+#         db = TinyDB(db_path)
+#         q = Query()
+#         globalDB = db.table('global')
+#         env = globalDB.all()[0]['env']
+#         ex = globalDB.all()[0]['defaultex']
+#         testmode = globalDB.all()[0]['defaulttestmode']
+#         logger.info(msg=f"Env {env} ex {ex}")
+#         telegramDB = db.table('telegram')
+#         cexDB = db.table('cex')
+#         dexDB = db.table('dex')
+#         tg=telegramDB.search(q.platform==env)
+#         TG_TK = tg[0]['token']
+#         TG_CHANNEL_ID = tg[0]['channel']
+#         cexdb=cexDB.all()
+#         dexdb=dexDB.all()
+#         CEX_name = cexdb[0]['name']
+#         CEX_ordertype = cexdb[0]['ordertype']
+#         CEX_defaulttype = cexdb[0]['defaultType']
+#         if (TG_TK==""):
+#             logger.error(msg=f"no TG TK")
+#             sys.exit()
+#         elif (CEX_name==""):
+#             logger.error(msg=f"missing cex")
+#             sys.exit()
+#     except Exception:
+#         logger.warning(msg=f"error with existing db file {db_path}")
 ##======== APPRISE Setup ===============
 apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
