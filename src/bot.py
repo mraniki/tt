@@ -51,8 +51,8 @@ fullcommandlist= """
 <code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>
 <code>/trading</code>
 <code>/testmode</code>"""
-menuhelp=f'{version} \n {fullcommandlist}\n'
-#===========Common Functions ===============
+menuhelp=f"{version} \n {fullcommandlist}"
+#========== Common Functions =============
 
 def LibCheck():
     logger.info(msg=f"{version}")
@@ -231,7 +231,7 @@ async def DEXContractLookup(symb):
         token_list = json.loads(text)['tokens']
         symb=symb.upper()
         try:
-            symbolcontract = [token for token in token_list if token['symbol'] == symb or token['symbol'].startswith(symb)]
+            symbolcontract = [token for token in token_list if token['symbol'] == symb]
             logger.info(msg=f"symbolcontract {symbolcontract}")
             if len(symbolcontract) > 0:
                 #logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
@@ -300,17 +300,16 @@ def Convert(s):
 
 #========== Order function
 async def SendOrder(s1,s2,s3,s4,s5):
-    if not isinstance(ex,web3.main.Web3):
+    try:
+      if not isinstance(ex,web3.main.Web3):
         logger.info(msg=f"order: {s1} {s2} {s3} {s4} {s5}")
         response = await SendOrder_CEX(s1,s2,s3,s4,s5)
-        return response
-    elif (isinstance(ex,web3.main.Web3)):
+      elif (isinstance(ex,web3.main.Web3)):
         response = await SendOrder_DEX(s1,s2,s3,s4,s5)
-        return response
-    else:
-        logger.warning(msg=f"exchange error {ex}")
-        await HandleExceptions(e)
-        return
+      return response
+    except Exception as e:
+      await HandleExceptions(e)
+      return
 
 async def SendOrder_CEX(s1,s2,s3,s4,s5):
     try:
@@ -385,7 +384,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             approval_TX = contractTokenA.functions.approve(router, maxamount)
             ApprovaltxHash = await DEX_Sign_TX(approval_TX)
             logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
-            time.sleep(10) #wait for approval
+            time.sleep(10) #wait approval
         tokenToBuy= ex.to_checksum_address(await DEXContractLookup(tokenB))
         OrderPath=[tokenToSell, tokenToBuy]
         tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
@@ -408,8 +407,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
         if(txResult == "1"):
-            txURLtracking=abiurl+"/tx/"+txHash
-            response= f"{s2} {s1} Size: {MinimumAmount}\nPrice: \n {txHash}\n {txURLtracking}"
+            response= f"{s2} {s1} Size:{ex.from_wei(MinimumAmount, 'ether')}\nPrice: TBD\nRef: {txHash}"
             logger.info(msg=f"{response}")
             return response
     except Exception as e:
