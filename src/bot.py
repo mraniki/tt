@@ -404,7 +404,8 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         txResult = checkTransactionRequest.json()['status']
         txHashDetail=ex.eth.get_transaction(txHash)
         if(txResult == "1"):
-            response= f"{s2} {s1} Size:{ex.from_wei(MinimumAmount, 'ether')}\nPrice: TBD\nRef: {txHash}\n{txHashDetail}"
+            txURLtracking=abiurl+"/tx/"+txHash
+            response= f"{s2} {s1} Size: {MinimumAmount}\nPrice: \n {txHash}\n {txURLtracking}"
             logger.info(msg=f"{response}")
             return response
     except Exception as e:
@@ -579,8 +580,7 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 if not os.path.exists(db_path):
     logger.info(msg=f"setting up new DB")
     #review that method for future
-    #open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
-    db_path= contingency_db_path
+    open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
     if os.path.exists(dotenv_path):
         logger.info(msg=f"env file found")
         load_dotenv(dotenv_path)
