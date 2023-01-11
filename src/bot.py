@@ -28,6 +28,8 @@ from web3 import Web3
 from web3.contract import Contract
 from typing import List
 import time
+from pycoingecko import CoinGeckoAPI
+
 
 ##=============== Logging  =============
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
@@ -43,6 +45,7 @@ exchanges = {}
 trading=True
 testmode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
+cg = CoinGeckoAPI()
 #===================
 fullcommandlist= """
 <code>/bal</code>
@@ -335,19 +338,21 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
         await HandleExceptions(e)
         return
 
-async def DEX_GasControl(contract_tx):
-    checkgasPriceURL = abiurl + "?module=gastracker&action=gasoracle&apikey=" + abiurltoken
-    checkgasPriceRequest = requests.get(url=checkgasPriceURL,headers=headers)
-    gasresults = checkgasPriceRequest.json()['result']['SafeGasPrice']
-    logger.info(msg=f"gasPriceresults {gasresults}")
-    if (gasPrice<=gasresults):
-        logger.warning(msg=f"gasprice warning: {gasPrice} {gasresults}")
-    checkgasLimitURL = abiurl + "?module=stats&action=dailyavggaslimit&startdate=2022-01-09&enddate=2022-01-09&sort=asc&apikey=" + abiurltoken
-    checkgasLimitRequest = requests.get(url=checkgasLimitURL,headers=headers)
-    gasLimitresults = checkgasLimitRequest.json()['result']['gasLimit']
-    logger.info(msg=f"gasLimitresults {gasLimitresults}")
-    if (gasLimit<=gasLimitresults):
-        logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
+async def DEX_GasControl():
+    CurrentGasPrice=int(ex.to_wei(ex.eth.gas_price,'wei'))
+    logger.info(msg=f"CurrentGasPrice {CurrentGasPrice}")
+    MyGasPrice=int(ex.to_wei(gasPrice,'gwei'))
+    logger.info(msg=f"MyGasPrice {MyGasPrice}")
+    if (CurrentGasPrice>=MyGasPrice):
+        logger.warning(msg=f"{CurrentGasPrice} {MyGasPrice} ")
+    else:
+        logger.info(msg=f"gas setup{MyGasPrice} aligned with current gas price {CurrentGasPrice}")
+    # checkgasLimitURL = abiurl + "?module=stats&action=dailyavggaslimit&startdate=2022-01-09&enddate=2022-01-09&sort=asc&apikey=" + abiurltoken
+    # checkgasLimitRequest = requests.get(url=checkgasLimitURL,headers=headers)
+    # gasLimitresults = checkgasLimitRequest.json()['result']['gasLimit']
+    # logger.info(msg=f"gasLimitresults {gasLimitresults}")
+    # if (gasLimit<=gasLimitresults):
+    #     logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
 
 async def DEX_Sign_TX(contract_tx):
     tx_fields = {
@@ -387,8 +392,12 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokeninfobaldecimal=contractTokenA.functions.decimals().call()
         if (s1=="SELL"):
             amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
+            tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToSell)
+            response = f"{s2} {s1}⬇️"
         else:
             amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
+            tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToBuy)
+            response = f"{s2} {s1}⬆️"
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
@@ -402,15 +411,29 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
+        await DEX_GasControl()
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
+        tokenprice=tokeninfo['market_data']['current_price']['usd']
+        tokenlogo=tokeninfo['image']['small']
         gasUsed=txHashDetail['gasUsed']
         if(txResult == "1"):
-            response= f"{s2} {s1} Size: {ex.from_wei(MinimumAmount, 'ether')}\nPrice: \ntxHash: {txHash}\ngasUsed: {gasUsed}"
+            response+= f"Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}n\Entry: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
             logger.info(msg=f"{response}")
+            #logger.info(msg=f"{txHashDetail}")
             return response
     except Exception as e:
         await HandleExceptions(e)
         return
+
+async def DEX_TokenInfo(token):
+    global tokenprice
+    global tokeninfo
+    #asset_platforms = cg.get_asset_platforms()
+    #logger.info(msg=f"cg.get_asset_platforms {asset_platforms}")
+    tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=token)
+    #logger.info(msg=f"tokeninfo {tokeninfo}")
+    tokenprice=tokeninfo['market_data']['current_price']['usd']
+    tokenlogo=tokeninfo['image']['small']
 #=========== Send function
 async def send (self, messaging):
     try:
