@@ -393,13 +393,11 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         if (s1=="SELL"):
             amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
             tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToSell)
-            #logger.info(msg=f"tokeninfo {tokeninfo}")
             tokenprice=tokeninfo['market_data']['current_price']['usd']
             tokenlogo=tokeninfo['image']['small']
         else:
             amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
             tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToBuy)
-            #logger.info(msg=f"tokeninfo {tokeninfo}")
             tokenprice=tokeninfo['market_data']['current_price']['usd']
             tokenlogo=tokeninfo['image']['small']
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
@@ -432,6 +430,7 @@ async def DEX_TokenInfo(contract):
     #logger.info(msg=f"cg.get_asset_platforms {asset_platforms}")
     #logger.info(msg=f"{tokenToBuy}")
     tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToBuy)
+    #logger.info(msg=f"tokeninfo {tokeninfo}")
     tokenprice=tokeninfo['market_data']['current_price']['usd']
     tokenlogo=tokeninfo['image']['small']
 #=========== Send function
