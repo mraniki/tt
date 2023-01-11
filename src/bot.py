@@ -28,6 +28,8 @@ from web3 import Web3
 from web3.contract import Contract
 from typing import List
 import time
+from pycoingecko import CoinGeckoAPI
+
 
 ##=============== Logging  =============
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
@@ -43,6 +45,7 @@ exchanges = {}
 trading=True
 testmode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
+cg = CoinGeckoAPI()
 #===================
 fullcommandlist= """
 <code>/bal</code>
@@ -336,9 +339,9 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
         return
 
 async def DEX_GasControl():
-    CurrentGasPrice=ex.to_wei(ex.eth.gas_price,'wei')
+    CurrentGasPrice=int(ex.to_wei(ex.eth.gas_price,'wei'))
     logger.info(msg=f"CurrentGasPrice {CurrentGasPrice}")
-    MyGasPrice=ex.to_wei(gasPrice,'gwei')
+    MyGasPrice=int(ex.to_wei(gasPrice,'gwei'))
     logger.info(msg=f"MyGasPrice {MyGasPrice}")
     if (CurrentGasPrice>=MyGasPrice):
         logger.warning(msg=f"{CurrentGasPrice} {MyGasPrice} ")
@@ -389,8 +392,16 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokeninfobaldecimal=contractTokenA.functions.decimals().call()
         if (s1=="SELL"):
             amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
+            tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToSell)
+            #logger.info(msg=f"tokeninfo {tokeninfo}")
+            tokenprice=tokeninfo['market_data']['current_price']['usd']
+            tokenlogo=tokeninfo['image']['small']
         else:
             amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
+            tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToBuy)
+            #logger.info(msg=f"tokeninfo {tokeninfo}")
+            tokenprice=tokeninfo['market_data']['current_price']['usd']
+            tokenlogo=tokeninfo['image']['small']
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
@@ -404,16 +415,25 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
-        txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
         await DEX_GasControl()
+        txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
         gasUsed=txHashDetail['gasUsed']
         if(txResult == "1"):
-            response= f"{s2} {s1} Size: {ex.from_wei(MinimumAmount, 'ether')}\nPrice: \ntxHash: {txHash}\ngasUsed: {gasUsed}"
+            response= f"{s2} {s1} Size: {ex.from_wei(MinimumAmount, 'ether')}\nPrice: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
             logger.info(msg=f"{response}")
+            #logger.info(msg=f"{txHashDetail}")
             return response
     except Exception as e:
         await HandleExceptions(e)
         return
+
+async def DEX_TokenInfo(contract):
+    #asset_platforms = cg.get_asset_platforms()
+    #logger.info(msg=f"cg.get_asset_platforms {asset_platforms}")
+    #logger.info(msg=f"{tokenToBuy}")
+    tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToBuy)
+    tokenprice=tokeninfo['market_data']['current_price']['usd']
+    tokenlogo=tokeninfo['image']['small']
 #=========== Send function
 async def send (self, messaging):
     try:
