@@ -677,10 +677,11 @@ async def post_init(application: Application):
     global ex
     if (failsafe):
         ex = Web3(Web3.HTTPProvider('https://polygon-rpc.com'))
+        
     else:
         await LoadExchange(ex,testmode)
     logger.info(msg=f"Bot is online")
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online {version}\nEnvironment: {env}\nExchange: {name} Sandbox: {testmode}", parse_mode=constants.ParseMode.HTML)
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online {version}", parse_mode=constants.ParseMode.HTML)
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
