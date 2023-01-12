@@ -602,8 +602,8 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##======== DB START ===============
 if not os.path.exists(db_path):
     logger.info(msg=f"contingency process DB")
-    db_path=contingency_db_path
     failsafe=True
+    db_path=contingency_db_path
     try:
         load_dotenv(dotenv_path)
         TG_TK = os.getenv("TG_TK")
@@ -646,7 +646,7 @@ apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 async def post_init(application: Application):
     global ex
     if (failsafe):
-        ex = Web3(Web3.HTTPProvider('https://bscrpc.com'))
+        ex = Web3(Web3.HTTPProvider('https://ethereum.publicnode.com'))
     else:
         await LoadExchange(ex,testmode)
     logger.info(msg=f"Bot is online")
