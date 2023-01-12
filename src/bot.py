@@ -10,6 +10,7 @@ import os
 from os import getenv
 from dotenv import load_dotenv
 import json, requests
+from pythonping import ping
 #telegram
 import telegram
 from telegram import Update, constants
@@ -483,7 +484,8 @@ async def HandleExceptions(e) -> None:
 ##============TG COMMAND================
 ##====view help =======
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
+    response_ping = ping('8.8.8.8', size=40, count=10)
+    msg= f"Environment: {env} Ping: {response_ping}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
     await send(update,msg)
 ##====restart =======
 # async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
