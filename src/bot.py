@@ -329,7 +329,7 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
                 side=res['side']
                 amount=res['amount']
                 price=res['price']
-                response= f"{symbol} {side} Size: {amount}\nPrice: {price}\nRef: {orderid}\n {timestamp}"
+                response= f"{symbol} {side} Size: {amount}\Entry: {price}\nRef: {orderid}\n {timestamp}"
                 return response
             except Exception as e:
                 await HandleExceptions(e)
@@ -601,46 +601,20 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     await send(update,message)
 ##======== DB START ===============
 if not os.path.exists(db_path):
-    logger.info(msg=f"setting up new DB")
-    #review that method for future
-    open('./config/db.json', 'w').write(open('./config/db.json.sample').read())
-    if os.path.exists(dotenv_path):
-        logger.info(msg=f"env file found")
+    logger.info(msg=f"contingency process DB")
+    db_path=contingency_db_path
+    failsafe=True
+    try:
         load_dotenv(dotenv_path)
-    elif os.getenv("TG_TK")!="":
-        logger.info("Using docker variable")
-        try:
-            TG_TK = os.getenv("TG_TK")
-            TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
-            CEX_name = os.getenv("EX_NAME")
-            CEX_api = os.getenv("EX_YOURAPIKEY")
-            CEX_secret = os.getenv("EX_YOURSECRET")
-            CEX_password = os.getenv("EX_YOURPASSWORD")
-            CEX_ordertype = os.getenv("EX_ORDERTYPE")
-            CEX_defaulttype = os.getenv("EX_DEFAULTTYPE")
-            CEX_test_mode = os.getenv("EX_SANDBOXMODE")
-        except Exception as e:
-            logger.error("no env variables")
-    #### adding ENV data to DB
-        if (TG_TK==""):
-            logger.error(msg=f"no TG TK")
-            sys.exit()
-        else:
-            DBCommand_Add_TG(TG_TK,TG_CHANNEL_ID)
-        if (CEX_name==""):
-            logger.error(msg=f"NO CEX")
-        else:
-            logger.error(msg=f"adding CEX to DB")
-            DBCommand_Add_CEX(CEX_name,CEX_api,CEX_secret,CEX_password,CEX_ordertype,CEX_defaulttype,CEX_test_mode)
-        if (DEX_name==""):
-            ogger.error(msg=f"NO DEX")
-        else:
-            DBCommand_Add_DEX()
-else:
-    logger.info(msg=f"Verifying DB")
+        TG_TK = os.getenv("TG_TK")
+        TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
+    except Exception as e:
+        logger.error("no TG TK")
+        sys.exit()
 
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB")
+    failsafe=False
     try:
         db = TinyDB(db_path)
         q = Query()
@@ -657,14 +631,11 @@ if os.path.exists(db_path):
         TG_CHANNEL_ID = tg[0]['channel']
         cexdb=cexDB.all()
         dexdb=dexDB.all()
-        CEX_name = cexdb[0]['name']
-        CEX_ordertype = cexdb[0]['ordertype']
-        CEX_defaulttype = cexdb[0]['defaultType']
+        # CEX_name = cexdb[0]['name']
+        # CEX_ordertype = cexdb[0]['ordertype']
+        # CEX_defaulttype = cexdb[0]['defaultType']
         if (TG_TK==""):
             logger.error(msg=f"no TG TK")
-            sys.exit()
-        elif (CEX_name==""):
-            logger.error(msg=f"missing cex")
             sys.exit()
     except Exception:
         logger.warning(msg=f"error with existing db file {db_path}")
@@ -674,9 +645,12 @@ apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 ##========== startup message ===========
 async def post_init(application: Application):
     global ex
-    await LoadExchange(ex,testmode)
+    if (failsafe):
+        ex = Web3(Web3.HTTPProvider('https://bscrpc.com'))
+    else:
+        await LoadExchange(ex,testmode)
     logger.info(msg=f"Bot is online")
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online {version}\nEnvironment: {env}\nExchange: {name} Sandbox: {testmode}", parse_mode=constants.ParseMode.HTML)
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online {version}", parse_mode=constants.ParseMode.HTML)
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
