@@ -329,7 +329,7 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
                 side=res['side']
                 amount=res['amount']
                 price=res['price']
-                response= f"{symbol} {side} Size: {amount}\nPrice: {price}\nRef: {orderid}\n {timestamp}"
+                response= f"{symbol} {side} Size: {amount}\Entry: {price}\nRef: {orderid}\n {timestamp}"
                 return response
             except Exception as e:
                 await HandleExceptions(e)
