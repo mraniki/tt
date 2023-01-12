@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.29.2"
+version="🪙TT Beta 1.29.3"
 ##=============== import  =============
 ##log
 import logging
