@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.27"
+version="🪙TT Beta 1.28"
 ##=============== import  =============
 ##log
 import logging
@@ -30,11 +30,9 @@ from typing import List
 import time
 from pycoingecko import CoinGeckoAPI
 
-
 ##=============== Logging  =============
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 ##=============== CONFIG ===============
 dotenv_path = './config/.env'
 db_path= './config/db.json'
@@ -49,9 +47,9 @@ cg = CoinGeckoAPI()
 #===================
 fullcommandlist= """
 <code>/bal</code>
-<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
-<code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=1%</code> <code>/price btcusdt</code>
-<code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>
+<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/p btc/usdt</code>
+<code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=1%</code> <code>/p btcusdt</code>
+<code>/dex pancake</code> <code>buy cake</code> <code>/p BTCB</code>
 <code>/trading</code>
 <code>/testmode</code>"""
 menuhelp=f"{version} \n {fullcommandlist}"
@@ -157,7 +155,7 @@ async def SearchEx(s1,s2):
         return CEXCheck[0]['name']
       elif (isinstance(s1,web3.main.Web3)):
         DEXCheck=await SearchDEX(s1,s2)
-        return DEXCheck[0]['name']
+        return name
       else:
         return
     except Exception as e:
@@ -178,6 +176,9 @@ async def LoadExchange(exchangeid, mode):
     global gasPrice
     global m_ordertype
     global gasLimit
+    if (failsafe):
+        ex = Web3(Web3.HTTPProvider('https://ethereum.publicnode.com'))
+        return
     logger.info(msg=f"Setting up {exchangeid}")
     CEXCheck= await SearchCEX(exchangeid,mode)
     DEXCheck= await SearchDEX(exchangeid,mode)
@@ -478,6 +479,11 @@ async def HandleExceptions(e) -> None:
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
     await send(update,msg)
+
+async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    os.execv(__file__, sys.argv)
+    #os.execv(sys.executable, ['python'] + [sys.argv[0]])
+    #os.execv(sys.executable, ['python'] + os.path.abspath(sys.argv[0]))
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg=f"🏦 Balance"
@@ -602,8 +608,9 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 ##======== DB START ===============
 if not os.path.exists(db_path):
     logger.info(msg=f"contingency process DB")
-    db_path=contingency_db_path
     failsafe=True
+    ex='tbd'
+    db_path=contingency_db_path
     try:
         load_dotenv(dotenv_path)
         TG_TK = os.getenv("TG_TK")
@@ -631,9 +638,6 @@ if os.path.exists(db_path):
         TG_CHANNEL_ID = tg[0]['channel']
         cexdb=cexDB.all()
         dexdb=dexDB.all()
-        # CEX_name = cexdb[0]['name']
-        # CEX_ordertype = cexdb[0]['ordertype']
-        # CEX_defaulttype = cexdb[0]['defaultType']
         if (TG_TK==""):
             logger.error(msg=f"no TG TK")
             sys.exit()
@@ -644,11 +648,7 @@ apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 ##========== startup message ===========
 async def post_init(application: Application):
-    global ex
-    if (failsafe):
-        ex = Web3(Web3.HTTPProvider('https://bscrpc.com'))
-    else:
-        await LoadExchange(ex,testmode)
+    await LoadExchange(ex,testmode)
     logger.info(msg=f"Bot is online")
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online {version}", parse_mode=constants.ParseMode.HTML)
 #===========bot error handling ==========
@@ -674,9 +674,10 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/trading'), TradingSwitch))
         application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
         application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), SwitchEx))
-        application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
-        application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
+        # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
+        # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
         application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
+        application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
         application.add_error_handler(error_handler)
 #Run the bot
         application.run_polling()

@@ -39,7 +39,7 @@ Using:
 5) Start your container or use `python3 bot.py`
 6) `sell BTCUSDT sl=6000 tp=4500 q=1%` or  `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY. note that STOPLOSS TAKEPROFIT are not yet implemented.
 7) `/bal` command to query balance
-8) `/price BTCB` or `/price btc/usdt` to query ticker price 
+8) `/p BTCB` or `/p btc/usdt` to query ticker price 
 9) `/cex exchangename` or `/dex exchangename` (e.g `/cex binance`, `/dex quickswap`) to switch between multiple CEX and DEX with prefix 
 10) `/testmode` to switch between sandbox, mainnet, testnet
 11) `/trading` to disable/enable trading
@@ -62,7 +62,7 @@ Approach: Do an initial launch to have the DB structure created automatically an
  - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing (`sell BTCUSDT`) values are defaulted
  - Disable or Enable trading process via `/trading` command
  - Query balance via `/bal` command and view it in formatted way
- - Query ticker price via `/price BTCB` or `/price btc/usdt` command to view last symbol price (USDT as basis)
+ - Query ticker price via `/p BTCB` or `/p btc/usdt` command to view last symbol price (USDT as basis)
  - Switch between multiple CEX and DEX in one environment with prefix `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
  - Switch between testnet and mainnet with `/testmode` 
  - Support % of USDT balance for CEX order and DEX order
