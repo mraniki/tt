@@ -29,7 +29,6 @@ from web3.contract import Contract
 from typing import List
 import time
 from pycoingecko import CoinGeckoAPI
-
 ##=============== Logging  =============
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -54,7 +53,6 @@ fullcommandlist= """
 <code>/testmode</code>"""
 menuhelp=f"{version} \n {fullcommandlist}"
 #========== Common Functions =============
-
 def LibCheck():
     logger.info(msg=f"{version}")
     logger.info(msg=f"Python {sys.version}")
@@ -539,7 +537,6 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             except Exception as e:
                 await HandleExceptions(e)
                 return
-
 ##======TG COMMAND view price ===========
 async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     tginput  = update.effective_message.text
@@ -678,11 +675,12 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/trading'), TradingSwitch))
         application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
         application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), SwitchEx))
+        application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
+        #application.add_error_handler(error_handler)
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
-        application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
         #application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
-        #application.add_error_handler(error_handler)
+
 #Run the bot
 
         application.run_polling()
