@@ -330,7 +330,13 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
                 side=res['side']
                 amount=res['amount']
                 price=res['price']
-                response= f"{symbol} {side} Size: {amount}\Entry: {price}\nRef: {orderid}\n {timestamp}"
+                if (s1=="SELL"):
+                    response = f"{symbol} {side}⬇️"
+                else:
+                    response = f"{symbol} {side}⬆️"
+                # tokeninfo = cg.search(query = symbol)
+                # logger.info(msg=f"tokeninfo {tokeninfo}")
+                response+= f" Size: {amount}\nEntry: {price}\nRef: {orderid}\n{timestamp}"
                 return response
             except Exception as e:
                 await HandleExceptions(e)
@@ -479,7 +485,7 @@ async def HandleExceptions(e) -> None:
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
     await send(update,msg)
-
+##====restart =======
 async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     os.execv(__file__, sys.argv)
     #os.execv(sys.executable, ['python'] + [sys.argv[0]])
