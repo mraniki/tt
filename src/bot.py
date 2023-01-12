@@ -499,7 +499,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             msg+=f"\n{sbal}"
         else:
             bal = ex.eth.get_balance(walletaddress)
-            bal = ex.from_wei(bal,'ether')
+            bal = round(ex.from_wei(bal,'ether'),5)
             msg += f"\n{bal}"
         await send(update,msg)
     except Exception as e:
