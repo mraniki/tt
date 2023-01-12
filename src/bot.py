@@ -1,10 +1,11 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.29.3"
+version="🪙TT Beta 1.3.0"
 ##=============== import  =============
 ##log
 import logging
 import sys
 import traceback
+from ping3 import ping, verbose_ping
 ##env
 import os
 from os import getenv
@@ -483,7 +484,8 @@ async def HandleExceptions(e) -> None:
 ##============TG COMMAND================
 ##====view help =======
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
+    r_ping = round(ping('google.com', unit='ms'),3)
+    msg= f"Environment: {env} Ping: {r_ping}ms\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
     await send(update,msg)
 ##====restart =======
 # async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
