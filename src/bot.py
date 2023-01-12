@@ -682,17 +682,19 @@ def main():
         #application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
 
 #Run the bot
-
-        application.run_polling()
-
-        # application.run_webhook(
-        #     listen='0.0.0.0',
-        #     port=TG_WBHK_PORT,
-        #     secret_token=TG_WBHK_SECRET,
-        #     key=TG_WBHK_PVTKEY,
-        #     cert=TG_WBHK_CERT,
-        #     webhook_url=TG_WBHK_URL
-        # )
+        webhook=False
+        if (webhook):
+            logger.info(msg=f"Webhook initiation")
+            application.run_webhook(
+                listen='0.0.0.0',
+                port=TG_WBHK_PORT,
+                secret_token=TG_WBHK_SECRET,
+                key=TG_WBHK_PVTKEY,
+                cert=TG_WBHK_CERT,
+                webhook_url=TG_WBHK_URL
+            )
+        else:
+            application.run_polling()
 
     except Exception as e:
         logger.fatal("Bot failed to start. Error: " + str(e))

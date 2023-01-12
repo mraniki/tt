@@ -32,7 +32,7 @@ Using:
 2) Get your 
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
     - DEX chain supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org) or [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) for RPC detail per chain.
-3) Update the config (telegram token, API, router). Point your config to container volume /code/config)
+3) Update the config (telegram token and telegram channel). Point your config to container volume /code/config)
 4) Deploy :
     - via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
     - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
@@ -59,7 +59,7 @@ Approach: Do an initial launch to have the DB structure created automatically an
  ### v1 
  - Enable bot in pythontelegram v20 and support CEX and DEX exchange formatted error via telegram
  - Query Balance, quote ticker and place order for CEX and DEX
- - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing (`sell BTCUSDT`) values are defaulted
+ - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing (e.g. `sell BTCUSDT`) values are defaulted
  - Disable or Enable trading process via `/trading` command
  - Query balance via `/bal` command and view it in formatted way
  - Query ticker price via `/p BTCB` or `/p btc/usdt` command to view last symbol price (USDT as basis)
