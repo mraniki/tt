@@ -157,7 +157,7 @@ async def SearchEx(s1,s2):
         return CEXCheck[0]['name']
       elif (isinstance(s1,web3.main.Web3)):
         DEXCheck=await SearchDEX(s1,s2)
-        return DEXCheck[0]['name']
+        return name
       else:
         return
     except Exception as e:
