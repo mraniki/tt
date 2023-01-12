@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.27"
+version="🪙TT Beta 1.28"
 ##=============== import  =============
 ##log
 import logging
@@ -30,11 +30,9 @@ from typing import List
 import time
 from pycoingecko import CoinGeckoAPI
 
-
 ##=============== Logging  =============
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 ##=============== CONFIG ===============
 dotenv_path = './config/.env'
 db_path= './config/db.json'
@@ -49,7 +47,7 @@ cg = CoinGeckoAPI()
 #===================
 fullcommandlist= """
 <code>/bal</code>
-<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
+<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/p btc/usdt</code>
 <code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=1%</code> <code>/p btcusdt</code>
 <code>/dex pancake</code> <code>buy cake</code> <code>/p BTCB</code>
 <code>/trading</code>
