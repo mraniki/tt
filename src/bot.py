@@ -637,6 +637,11 @@ if os.path.exists(db_path):
         tg=telegramDB.search(q.platform==env)
         TG_TK = tg[0]['token']
         TG_CHANNEL_ID = tg[0]['channel']
+        # TG_WBHK_PORT=tg[0]['port']
+        # TG_WBHK_SECRET=tg[0]['secret_token']
+        # TG_WBHK_PVTKEY=tg[0]['key']
+        # TG_WBHK_CERT=tg[0]['cert']
+        # TG_WBHK_URL=tg[0]['webhook_url']
         cexdb=cexDB.all()
         dexdb=dexDB.all()
         if (TG_TK==""):
