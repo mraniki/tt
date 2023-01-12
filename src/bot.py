@@ -623,11 +623,12 @@ if not os.path.exists(db_path):
     #         CEX_defaulttype = os.getenv("EX_DEFAULTTYPE")
     #         CEX_test_mode = os.getenv("EX_SANDBOXMODE")
     except Exception as e:
-        logger.error("no env variables")
+        logger.error("no tg varaiables ")
+        sys.exit()
     # #### adding ENV data to DB
-        if (TG_TK==""):
-            logger.error(msg=f"no TG TK")
-            sys.exit()
+        # if (TG_TK==""):
+        #     logger.error(msg=f"no TG TK")
+        #     sys.exit()
      #   else:
             #DBCommand_Add_TG(TG_TK,TG_CHANNEL_ID)
        # if (CEX_name==""):
@@ -640,35 +641,35 @@ if not os.path.exists(db_path):
      #   else:
       #      DBCommand_Add_DEX()
 
-# if os.path.exists(db_path):
-#     logger.info(msg=f"Existing DB")
-#     try:
-#         db = TinyDB(db_path)
-#         q = Query()
-#         globalDB = db.table('global')
-#         env = globalDB.all()[0]['env']
-#         ex = globalDB.all()[0]['defaultex']
-#         testmode = globalDB.all()[0]['defaulttestmode']
-#         logger.info(msg=f"Env {env} ex {ex}")
-#         telegramDB = db.table('telegram')
-#         cexDB = db.table('cex')
-#         dexDB = db.table('dex')
-#         tg=telegramDB.search(q.platform==env)
-#         TG_TK = tg[0]['token']
-#         TG_CHANNEL_ID = tg[0]['channel']
-#         cexdb=cexDB.all()
-#         dexdb=dexDB.all()
-#         CEX_name = cexdb[0]['name']
-#         CEX_ordertype = cexdb[0]['ordertype']
-#         CEX_defaulttype = cexdb[0]['defaultType']
-#         if (TG_TK==""):
-#             logger.error(msg=f"no TG TK")
-#             sys.exit()
-#         elif (CEX_name==""):
-#             logger.error(msg=f"missing cex")
-#             sys.exit()
-#     except Exception:
-#         logger.warning(msg=f"error with existing db file {db_path}")
+if os.path.exists(db_path):
+    logger.info(msg=f"Existing DB")
+    try:
+        db = TinyDB(db_path)
+        q = Query()
+        globalDB = db.table('global')
+        env = globalDB.all()[0]['env']
+        ex = globalDB.all()[0]['defaultex']
+        testmode = globalDB.all()[0]['defaulttestmode']
+        logger.info(msg=f"Env {env} ex {ex}")
+        telegramDB = db.table('telegram')
+        cexDB = db.table('cex')
+        dexDB = db.table('dex')
+        tg=telegramDB.search(q.platform==env)
+        TG_TK = tg[0]['token']
+        TG_CHANNEL_ID = tg[0]['channel']
+        cexdb=cexDB.all()
+        dexdb=dexDB.all()
+        CEX_name = cexdb[0]['name']
+        CEX_ordertype = cexdb[0]['ordertype']
+        CEX_defaulttype = cexdb[0]['defaultType']
+        if (TG_TK==""):
+            logger.error(msg=f"no TG TK")
+            sys.exit()
+        elif (CEX_name==""):
+            logger.error(msg=f"missing cex")
+            sys.exit()
+    except Exception:
+        logger.warning(msg=f"error with existing db file {db_path}")
 ##======== APPRISE Setup ===============
 apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
@@ -676,8 +677,7 @@ apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 async def post_init(application: Application):
     global ex
     if (failsafe):
-        ex = Web3(Web3.HTTPProvider('https://polygon-rpc.com'))
-        
+        ex = Web3(Web3.HTTPProvider('https://bscrpc.com'))
     else:
         await LoadExchange(ex,testmode)
     logger.info(msg=f"Bot is online")
