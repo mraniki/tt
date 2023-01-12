@@ -486,10 +486,10 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
     await send(update,msg)
 ##====restart =======
-async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    os.execv(__file__, sys.argv)
-    #os.execv(sys.executable, ['python'] + [sys.argv[0]])
-    #os.execv(sys.executable, ['python'] + os.path.abspath(sys.argv[0]))
+# async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+#     os.execv(__file__, sys.argv)
+#     #os.execv(sys.executable, ['python'] + [sys.argv[0]])
+#     #os.execv(sys.executable, ['python'] + os.path.abspath(sys.argv[0]))
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg=f"🏦 Balance"
@@ -684,7 +684,7 @@ def main():
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
         application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
         application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
-        application.add_error_handler(error_handler)
+        #application.add_error_handler(error_handler)
 #Run the bot
 
         application.run_polling()
