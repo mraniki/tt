@@ -424,7 +424,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokenlogo=tokeninfo['image']['small']
         gasUsed=txHashDetail['gasUsed']
         if(txResult == "1"):
-            response+= f"Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}n\Entry: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
+            response+= f"Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\nEntry: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
             logger.info(msg=f"{response}")
             #logger.info(msg=f"{txHashDetail}")
             return response
