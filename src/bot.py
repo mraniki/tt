@@ -178,6 +178,9 @@ async def LoadExchange(exchangeid, mode):
     global gasPrice
     global m_ordertype
     global gasLimit
+    if (failsafe):
+        ex = Web3(Web3.HTTPProvider('https://ethereum.publicnode.com'))
+        return
     logger.info(msg=f"Setting up {exchangeid}")
     CEXCheck= await SearchCEX(exchangeid,mode)
     DEXCheck= await SearchDEX(exchangeid,mode)
@@ -603,6 +606,7 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 if not os.path.exists(db_path):
     logger.info(msg=f"contingency process DB")
     failsafe=True
+    ex='tbd'
     db_path=contingency_db_path
     try:
         load_dotenv(dotenv_path)
@@ -631,9 +635,6 @@ if os.path.exists(db_path):
         TG_CHANNEL_ID = tg[0]['channel']
         cexdb=cexDB.all()
         dexdb=dexDB.all()
-        # CEX_name = cexdb[0]['name']
-        # CEX_ordertype = cexdb[0]['ordertype']
-        # CEX_defaulttype = cexdb[0]['defaultType']
         if (TG_TK==""):
             logger.error(msg=f"no TG TK")
             sys.exit()
@@ -644,11 +645,7 @@ apobj = apprise.Apprise()
 apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 ##========== startup message ===========
 async def post_init(application: Application):
-    global ex
-    if (failsafe):
-        ex = Web3(Web3.HTTPProvider('https://ethereum.publicnode.com'))
-    else:
-        await LoadExchange(ex,testmode)
+    await LoadExchange(ex,testmode)
     logger.info(msg=f"Bot is online")
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online {version}", parse_mode=constants.ParseMode.HTML)
 #===========bot error handling ==========
