@@ -683,7 +683,7 @@ def main():
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
         application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
-        application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
+        #application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
         #application.add_error_handler(error_handler)
 #Run the bot
 
