@@ -17,6 +17,7 @@ COPY ./src .
 #RUN mkdir ./config
 RUN mkdir -p /config
 ADD ./config/sample_db.json /config/sample_db.json
-EXPOSE 8443
+#EXPOSE 8443
+EXPOSE 8080
 # command to run on container start
 CMD [ "python", "./bot.py" ]

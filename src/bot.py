@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.28"
+version="🪙TT Beta 1.29"
 ##=============== import  =============
 ##log
 import logging
@@ -330,7 +330,13 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
                 side=res['side']
                 amount=res['amount']
                 price=res['price']
-                response= f"{symbol} {side} Size: {amount}\Entry: {price}\nRef: {orderid}\n {timestamp}"
+                if (s1=="SELL"):
+                    response = f"{symbol} {side}⬇️"
+                else:
+                    response = f"{symbol} {side}⬆️"
+                # tokeninfo = cg.search(query = symbol)
+                # logger.info(msg=f"tokeninfo {tokeninfo}")
+                response+= f" Size: {amount}\nEntry: {price}\nRef: {orderid}\n{timestamp}"
                 return response
             except Exception as e:
                 await HandleExceptions(e)
@@ -479,11 +485,11 @@ async def HandleExceptions(e) -> None:
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
     await send(update,msg)
-
-async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    os.execv(__file__, sys.argv)
-    #os.execv(sys.executable, ['python'] + [sys.argv[0]])
-    #os.execv(sys.executable, ['python'] + os.path.abspath(sys.argv[0]))
+##====restart =======
+# async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+#     os.execv(__file__, sys.argv)
+#     #os.execv(sys.executable, ['python'] + [sys.argv[0]])
+#     #os.execv(sys.executable, ['python'] + os.path.abspath(sys.argv[0]))
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg=f"🏦 Balance"
@@ -499,7 +505,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             msg+=f"\n{sbal}"
         else:
             bal = ex.eth.get_balance(walletaddress)
-            bal = ex.from_wei(bal,'ether')
+            bal = round(ex.from_wei(bal,'ether'),5)
             msg += f"\n{bal}"
         await send(update,msg)
     except Exception as e:
@@ -677,10 +683,21 @@ def main():
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
         application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
-        application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
-        application.add_error_handler(error_handler)
+        #application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
+        #application.add_error_handler(error_handler)
 #Run the bot
+
         application.run_polling()
+
+        # application.run_webhook(
+        #     listen='0.0.0.0',
+        #     port=8443,
+        #     secret_token='ASecretTokenIHaveChangedByNow',
+        #     key='private.key',
+        #     cert='cert.pem',
+        #     webhook_url='https://example.com:8443'
+        # )
+
     except Exception as e:
         logger.fatal("Bot failed to start. Error: " + str(e))
 
