@@ -612,10 +612,9 @@ if not os.path.exists(db_path):
         logger.error("no tg variables ")
         sys.exit()
 
-
-
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB")
+    failsafe=False
     try:
         db = TinyDB(db_path)
         q = Query()
@@ -632,14 +631,11 @@ if os.path.exists(db_path):
         TG_CHANNEL_ID = tg[0]['channel']
         cexdb=cexDB.all()
         dexdb=dexDB.all()
-        CEX_name = cexdb[0]['name']
-        CEX_ordertype = cexdb[0]['ordertype']
-        CEX_defaulttype = cexdb[0]['defaultType']
+        # CEX_name = cexdb[0]['name']
+        # CEX_ordertype = cexdb[0]['ordertype']
+        # CEX_defaulttype = cexdb[0]['defaultType']
         if (TG_TK==""):
             logger.error(msg=f"no TG TK")
-            sys.exit()
-        elif (CEX_name==""):
-            logger.error(msg=f"missing cex")
             sys.exit()
     except Exception:
         logger.warning(msg=f"error with existing db file {db_path}")
