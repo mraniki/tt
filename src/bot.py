@@ -680,7 +680,18 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
         application.add_error_handler(error_handler)
 #Run the bot
+
         application.run_polling()
+
+        # application.run_webhook(
+        #     listen='0.0.0.0',
+        #     port=8443,
+        #     secret_token='ASecretTokenIHaveChangedByNow',
+        #     key='private.key',
+        #     cert='cert.pem',
+        #     webhook_url='https://example.com:8443'
+        # )
+
     except Exception as e:
         logger.fatal("Bot failed to start. Error: " + str(e))
 
