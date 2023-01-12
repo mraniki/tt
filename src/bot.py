@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.29.2"
+version="🪙TT Beta 1.29.3"
 ##=============== import  =============
 ##log
 import logging
@@ -637,6 +637,11 @@ if os.path.exists(db_path):
         tg=telegramDB.search(q.platform==env)
         TG_TK = tg[0]['token']
         TG_CHANNEL_ID = tg[0]['channel']
+        # TG_WBHK_PORT=tg[0]['port']
+        # TG_WBHK_SECRET=tg[0]['secret_token']
+        # TG_WBHK_PVTKEY=tg[0]['key']
+        # TG_WBHK_CERT=tg[0]['cert']
+        # TG_WBHK_URL=tg[0]['webhook_url']
         cexdb=cexDB.all()
         dexdb=dexDB.all()
         if (TG_TK==""):
@@ -682,17 +687,19 @@ def main():
         #application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
 
 #Run the bot
-
-        application.run_polling()
-
-        # application.run_webhook(
-        #     listen='0.0.0.0',
-        #     port=TG_WBHK_PORT,
-        #     secret_token=TG_WBHK_SECRET,
-        #     key=TG_WBHK_PVTKEY,
-        #     cert=TG_WBHK_CERT,
-        #     webhook_url=TG_WBHK_URL
-        # )
+        webhook=False
+        if (webhook):
+            logger.info(msg=f"Webhook initiation")
+            application.run_webhook(
+                listen='0.0.0.0',
+                port=TG_WBHK_PORT,
+                secret_token=TG_WBHK_SECRET,
+                key=TG_WBHK_PVTKEY,
+                cert=TG_WBHK_CERT,
+                webhook_url=TG_WBHK_URL
+            )
+        else:
+            application.run_polling()
 
     except Exception as e:
         logger.fatal("Bot failed to start. Error: " + str(e))
