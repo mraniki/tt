@@ -14,7 +14,12 @@
         {
             "token": "",
             "channel": "",
-            "platform": "POC"
+            "platform": "POC",
+            "port":"8443",
+            "secret_token":"ASecretTokenIHaveChangedByNow",
+            "key":"private.key",
+            "cert":"cert.pem",
+            "webhook_url":"https://example.com:8443"
         },
         "2":
         {
@@ -210,7 +215,8 @@
             "abiurltoken":"abc",
             "basesymbol":"BUSD",
             "gasLimit":"300000",
-            "gasPrice":"5"
+            "gasPrice":"5",
+            "platform":"binance-smart-chain"
         }, 
         "3":
         {
@@ -226,7 +232,8 @@
             "abiurltoken":"abc",
             "basesymbol":"USDT",
             "gasLimit":"70000",
-            "gasPrice":"20"
+            "gasPrice":"20",
+            "platform":"ethereum"
         },
         "4":
         {
@@ -242,7 +249,8 @@
             "abiurltoken":"abc",
             "basesymbol":"USDC",
             "gasLimit":"70000",
-            "gasPrice":"20"
+            "gasPrice":"20",
+            "platform":"ethereum"
         },
         "5":
         {
@@ -258,7 +266,8 @@
             "abiurltoken":"abc",
             "basesymbol":"USDC",
             "gasLimit":"70000",
-            "gasPrice":"20"
+            "gasPrice":"20",
+            "platform":"polygon-pos"
         },
         "6":
         {
@@ -274,7 +283,8 @@
             "abiurltoken":"abc",
             "basesymbol":"USDC",
             "gasLimit":"70000",
-            "gasPrice":"20"
+            "gasPrice":"20",
+            "platform":"optimistic-ethereum"
         }
     }
 }

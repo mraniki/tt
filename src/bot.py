@@ -687,11 +687,11 @@ def main():
 
         # application.run_webhook(
         #     listen='0.0.0.0',
-        #     port=8443,
-        #     secret_token='ASecretTokenIHaveChangedByNow',
-        #     key='private.key',
-        #     cert='cert.pem',
-        #     webhook_url='https://example.com:8443'
+        #     port=TG_WBHK_PORT,
+        #     secret_token=TG_WBHK_SECRET,
+        #     key=TG_WBHK_PVTKEY,
+        #     cert=TG_WBHK_CERT,
+        #     webhook_url=TG_WBHK_URL
         # )
 
     except Exception as e:
