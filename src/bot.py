@@ -601,7 +601,7 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     await send(update,message)
 ##======== DB START ===============
 if not os.path.exists(db_path):
-    logger.info(msg=f"setting up new DB")
+    logger.info(msg=f"contingency process DB")
     db_path=contingency_db_path
     failsafe=True
     try:
@@ -609,7 +609,7 @@ if not os.path.exists(db_path):
         TG_TK = os.getenv("TG_TK")
         TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
     except Exception as e:
-        logger.error("no tg variables ")
+        logger.error("no TG TK")
         sys.exit()
 
 if os.path.exists(db_path):
