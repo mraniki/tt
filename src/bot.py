@@ -50,8 +50,8 @@ cg = CoinGeckoAPI()
 fullcommandlist= """
 <code>/bal</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/price btc/usdt</code>
-<code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=1%</code> <code>/price btcusdt</code>
-<code>/dex pancake</code> <code>buy cake</code> <code>/price BTCB</code>
+<code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=1%</code> <code>/p btcusdt</code>
+<code>/dex pancake</code> <code>buy cake</code> <code>/p BTCB</code>
 <code>/trading</code>
 <code>/testmode</code>"""
 menuhelp=f"{version} \n {fullcommandlist}"
@@ -481,6 +481,10 @@ async def HandleExceptions(e) -> None:
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg= f"Environment: {env}\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
     await send(update,msg)
+
+async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    os.execv(__file__, sys.argv)
+
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg=f"🏦 Balance"
@@ -671,9 +675,10 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/trading'), TradingSwitch))
         application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
         application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), SwitchEx))
-        application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
-        application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
+        # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
+        # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
         application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
+        application.add_handler(MessageHandler(filters.Regex('/restart'), TestModeSwitch))
         application.add_error_handler(error_handler)
 #Run the bot
         application.run_polling()
