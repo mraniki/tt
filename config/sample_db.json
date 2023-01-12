@@ -14,7 +14,12 @@
         {
             "token": "",
             "channel": "",
-            "platform": "POC"
+            "platform": "POC",
+            "port":"8443",
+            "secret_token":"ASecretTokenIHaveChangedByNow",
+            "key":"private.key",
+            "cert":"cert.pem",
+            "webhook_url":"https://example.com:8443"
         },
         "2":
         {
@@ -210,7 +215,8 @@
             "abiurltoken":"abc",
             "basesymbol":"BUSD",
             "gasLimit":"300000",
-            "gasPrice":"5"
+            "gasPrice":"5",
+            "platform":"binance-smart-chain"
         }, 
         "3":
         {
@@ -226,7 +232,8 @@
             "abiurltoken":"abc",
             "basesymbol":"USDT",
             "gasLimit":"70000",
-            "gasPrice":"20"
+            "gasPrice":"20",
+            "platform":"ethereum"
         },
         "4":
         {
@@ -234,15 +241,16 @@
             "walletaddress": "abc",
             "privatekey": "abc",
             "version": "v3",
-            "networkprovider": "https://rpc.sepolia.org",
-            "router": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+            "networkprovider": "https://eth-goerli.public.blastapi.io",
+            "router": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
             "testmode": "True",
             "tokenlist":"https://gateway.ipfs.io/ipns/tokens.uniswap.org",
             "abiurl":"https://api.etherscan.io/api",
             "abiurltoken":"abc",
             "basesymbol":"USDC",
             "gasLimit":"70000",
-            "gasPrice":"20"
+            "gasPrice":"20",
+            "platform":"ethereum"
         },
         "5":
         {
@@ -258,7 +266,8 @@
             "abiurltoken":"abc",
             "basesymbol":"USDC",
             "gasLimit":"70000",
-            "gasPrice":"20"
+            "gasPrice":"20",
+            "platform":"polygon-pos"
         },
         "6":
         {
@@ -274,7 +283,8 @@
             "abiurltoken":"abc",
             "basesymbol":"USDC",
             "gasLimit":"70000",
-            "gasPrice":"20"
+            "gasPrice":"20",
+            "platform":"optimistic-ethereum"
         }
     }
 }

@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.29"
+version="🪙TT Beta 1.29.2"
 ##=============== import  =============
 ##log
 import logging
@@ -29,7 +29,6 @@ from web3.contract import Contract
 from typing import List
 import time
 from pycoingecko import CoinGeckoAPI
-
 ##=============== Logging  =============
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -54,7 +53,6 @@ fullcommandlist= """
 <code>/testmode</code>"""
 menuhelp=f"{version} \n {fullcommandlist}"
 #========== Common Functions =============
-
 def LibCheck():
     logger.info(msg=f"{version}")
     logger.info(msg=f"Python {sys.version}")
@@ -176,6 +174,8 @@ async def LoadExchange(exchangeid, mode):
     global gasPrice
     global m_ordertype
     global gasLimit
+    global contractR
+    global contractRabi
     if (failsafe):
         ex = Web3(Web3.HTTPProvider('https://ethereum.publicnode.com'))
         return
@@ -219,6 +219,8 @@ async def LoadExchange(exchangeid, mode):
         gasLimit=newex[0]['gasLimit']
         gasPrice=newex[0]['gasPrice']
         ex = Web3(Web3.HTTPProvider(networkprovider))
+        contractRabi= await DEXFetchAbi(router) #Router ABI
+        contractR = ex.eth.contract(address=router, abi=contractRabi) #ContractLiquidityRouter
         if ex.net.listening:
             logger.info(msg=f"Connected to {ex}")
             return name
@@ -381,12 +383,10 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         else:
             tokenA=s2
             tokenB=basesymbol
-        contractRabi= await DEXFetchAbi(router) #Router ABI
-        contractR = ex.eth.contract(address=router, abi=contractRabi) #ContractLiquidityRouter
         tokenToSell=ex.to_checksum_address(await DEXContractLookup(tokenA))
         AbiTokenA= await DEXFetchAbi(tokenToSell) #tokenToSell ABI
         contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
-        approvalcheck = contractTokenA.functions.allowance(walletaddress, router).call();
+        approvalcheck = contractTokenA.functions.allowance(walletaddress, router).call()
         if (approvalcheck==0):
             maxamount = (ex.to_wei(2**64-1,'ether'))
             approval_TX = contractTokenA.functions.approve(router, maxamount)
@@ -424,7 +424,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokenlogo=tokeninfo['image']['small']
         gasUsed=txHashDetail['gasUsed']
         if(txResult == "1"):
-            response+= f"Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}n\Entry: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
+            response+= f"Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\nEntry: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
             logger.info(msg=f"{response}")
             #logger.info(msg=f"{txHashDetail}")
             return response
@@ -537,7 +537,6 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             except Exception as e:
                 await HandleExceptions(e)
                 return
-
 ##======TG COMMAND view price ===========
 async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     tginput  = update.effective_message.text
@@ -553,13 +552,9 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 logger.info(msg=f"token {TokenToPrice}")
                 tokenToSell='USDT'
                 basesymbol=ex.to_checksum_address(await DEXContractLookup(tokenToSell))
-                logger.info(msg=f"basesymbol {basesymbol}")
                 qty=1
-                logger.info(msg=f"router {router}")
-                dexabi= await DEXFetchAbi(router)
-                contract = ex.eth.contract(address=router, abi=dexabi) #liquidityContract
                 if(TokenToPrice != None):
-                    price = contract.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
+                    price = contractR.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
                     logger.info(msg=f"price {price}")
                     response=f"₿ {TokenToPrice}\n{symbol} @ {(price)}"
                     await send(update,response)
@@ -680,22 +675,23 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/trading'), TradingSwitch))
         application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
         application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), SwitchEx))
+        application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
+        #application.add_error_handler(error_handler)
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
-        application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
         #application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
-        #application.add_error_handler(error_handler)
+
 #Run the bot
 
         application.run_polling()
 
         # application.run_webhook(
         #     listen='0.0.0.0',
-        #     port=8443,
-        #     secret_token='ASecretTokenIHaveChangedByNow',
-        #     key='private.key',
-        #     cert='cert.pem',
-        #     webhook_url='https://example.com:8443'
+        #     port=TG_WBHK_PORT,
+        #     secret_token=TG_WBHK_SECRET,
+        #     key=TG_WBHK_PVTKEY,
+        #     cert=TG_WBHK_CERT,
+        #     webhook_url=TG_WBHK_URL
         # )
 
     except Exception as e:
