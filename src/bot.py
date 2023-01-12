@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.29"
+version="🪙TT Beta 1.29.1"
 ##=============== import  =============
 ##log
 import logging
@@ -176,6 +176,8 @@ async def LoadExchange(exchangeid, mode):
     global gasPrice
     global m_ordertype
     global gasLimit
+    global contractR
+    global contractRabi
     if (failsafe):
         ex = Web3(Web3.HTTPProvider('https://ethereum.publicnode.com'))
         return
@@ -219,6 +221,8 @@ async def LoadExchange(exchangeid, mode):
         gasLimit=newex[0]['gasLimit']
         gasPrice=newex[0]['gasPrice']
         ex = Web3(Web3.HTTPProvider(networkprovider))
+        contractRabi= await DEXFetchAbi(router) #Router ABI
+        contractR = ex.eth.contract(address=router, abi=contractRabi) #ContractLiquidityRouter
         if ex.net.listening:
             logger.info(msg=f"Connected to {ex}")
             return name
@@ -381,8 +385,6 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         else:
             tokenA=s2
             tokenB=basesymbol
-        contractRabi= await DEXFetchAbi(router) #Router ABI
-        contractR = ex.eth.contract(address=router, abi=contractRabi) #ContractLiquidityRouter
         tokenToSell=ex.to_checksum_address(await DEXContractLookup(tokenA))
         AbiTokenA= await DEXFetchAbi(tokenToSell) #tokenToSell ABI
         contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
@@ -553,13 +555,9 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 logger.info(msg=f"token {TokenToPrice}")
                 tokenToSell='USDT'
                 basesymbol=ex.to_checksum_address(await DEXContractLookup(tokenToSell))
-                logger.info(msg=f"basesymbol {basesymbol}")
                 qty=1
-                logger.info(msg=f"router {router}")
-                dexabi= await DEXFetchAbi(router)
-                contract = ex.eth.contract(address=router, abi=dexabi) #liquidityContract
                 if(TokenToPrice != None):
-                    price = contract.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
+                    price = contractR.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
                     logger.info(msg=f"price {price}")
                     response=f"₿ {TokenToPrice}\n{symbol} @ {(price)}"
                     await send(update,response)
