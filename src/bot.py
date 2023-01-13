@@ -36,15 +36,6 @@ logger = logging.getLogger(__name__)
 ##=============== CONFIG ===============
 # dotenv_path = './config/.env'
 load_dotenv() #.env
-DBURL=os.getenv("DBURL")
-if DBURL==None:
-    logger.info(msg=f"No remote DB {DBURL}")
-else:
-    outfile = os.path.join('./config', 'db.json')
-    response = requests.get(DBURL, stream=True)
-    logger.info(msg=f"{response}")
-    with open(outfile,'wb') as output:
-        output.write(response.content)
 db_path= './config/db.json'
 contingency_db_path= './config/sample_db.json'
 #===================
@@ -638,6 +629,16 @@ async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     message=f"Sandbox is {testmode}"
     await send(update,message)
 ##======== DB START ===============
+DBURL=os.getenv("DBURL")
+if DBURL==None:
+    logger.info(msg=f"No remote DB")
+else:
+    outfile = os.path.join('./config', 'db.json')
+    response = requests.get(DBURL, stream=True)
+    logger.info(msg=f"{response}")
+    with open(outfile,'wb') as output:
+        output.write(response.content)
+
 if not os.path.exists(db_path):
     logger.info(msg=f"contingency process DB")
     failsafe=True
