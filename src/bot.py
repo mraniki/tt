@@ -442,6 +442,28 @@ async def DEX_TokenInfo(token):
     #logger.info(msg=f"tokeninfo {tokeninfo}")
     tokenprice=tokeninfo['market_data']['current_price']['usd']
     tokenlogo=tokeninfo['image']['small']
+
+async def EX_Ping():
+    if not isinstance(ex,web3.main.Web3):
+        symbol = 'BTC/USDT'
+        results = []
+        num_iterations = 50
+        for i in range(0, num_iterations):
+            started = exchange.milliseconds()
+            orderbook = exchange.fetch_order_book(symbol)
+            ended = exchange.milliseconds()
+            elapsed = ended - started
+            pprint(elapsed, 'ms')
+            results.append(elapsed)
+        pprint(results)
+        rtt = int(sum(results) / len(results))
+        print('S')
+            response = rtt
+    elif (isinstance(ex,web3.main.Web3)):
+        response = round(ping('google.com', unit='ms'),3)
+    return response
+    
+
 #=========== Send function
 async def send (self, messaging):
     try:
@@ -484,7 +506,7 @@ async def HandleExceptions(e) -> None:
 ##============TG COMMAND================
 ##====view help =======
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    r_ping = round(ping('google.com', unit='ms'),3)
+    r_ping = await EX_Ping()
     msg= f"Environment: {env} Ping: {r_ping}ms\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
     await send(update,msg)
 ##====restart =======
