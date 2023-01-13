@@ -447,23 +447,20 @@ async def EX_Ping():
     if not isinstance(ex,web3.main.Web3):
         symbol = 'BTC/USDT'
         results = []
-        num_iterations = 50
+        num_iterations = 5
         for i in range(0, num_iterations):
-            started = exchange.milliseconds()
-            orderbook = exchange.fetch_order_book(symbol)
-            ended = exchange.milliseconds()
+            started = ex.milliseconds()
+            orderbook = ex.fetch_order_book(symbol)
+            ended = ex.milliseconds()
             elapsed = ended - started
-            pprint(elapsed, 'ms')
+            logger.info(msg=f"elapsed {elapsed}")
             results.append(elapsed)
-        pprint(results)
         rtt = int(sum(results) / len(results))
-        print('S')
-            response = rtt
+        response = rtt
     elif (isinstance(ex,web3.main.Web3)):
         response = round(ping('google.com', unit='ms'),3)
     return response
     
-
 #=========== Send function
 async def send (self, messaging):
     try:
