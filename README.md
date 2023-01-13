@@ -45,8 +45,7 @@ Using:
 11) `/trading` to disable/enable trading
 
 ## Config
-Either use .env file or json db as per below structure. Environment file or docker variable are automatically loaded in a new db at the startup if there is no DB.
-Approach: Do an initial launch to have the DB structure created automatically and add your telegram bot details or update the DB sample.
+Approach: Update the sample db with your parameters and save it as db.json 
 
 ### Env
 [env sample](config/env.sample)
@@ -82,10 +81,6 @@ Approach: Do an initial launch to have the DB structure created automatically an
 
  ## 🚧 Roadmap
 
-### V1.2
-
-- Better error handling
-- More testing and code hardening
 
 ### V1.3
 - Support DEFI DEX uniswapV3 and dydx (to be tested)

@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.3.0"
+version="🪙TT Beta 1.3.1"
 ##=============== import  =============
 ##log
 import logging
@@ -34,7 +34,17 @@ from pycoingecko import CoinGeckoAPI
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 ##=============== CONFIG ===============
-dotenv_path = './config/.env'
+# dotenv_path = './config/.env'
+load_dotenv() #.env
+DBURL=os.getenv("DBURL")
+if DBURL==None:
+    logger.info(msg=f"No remote DB {DBURL}")
+else:
+    outfile = os.path.join('./config', 'db.json')
+    response = requests.get(DBURL, stream=True)
+    logger.info(msg=f"{response}")
+    with open(outfile,'wb') as output:
+        output.write(response.content)
 db_path= './config/db.json'
 contingency_db_path= './config/sample_db.json'
 #===================
@@ -658,11 +668,11 @@ if os.path.exists(db_path):
         tg=telegramDB.search(q.platform==env)
         TG_TK = tg[0]['token']
         TG_CHANNEL_ID = tg[0]['channel']
-        # TG_WBHK_PORT=tg[0]['port']
-        # TG_WBHK_SECRET=tg[0]['secret_token']
-        # TG_WBHK_PVTKEY=tg[0]['key']
-        # TG_WBHK_CERT=tg[0]['cert']
-        # TG_WBHK_URL=tg[0]['webhook_url']
+        TG_WBHK_PORT=tg[0]['port']
+        TG_WBHK_SECRET=tg[0]['secret_token']
+        TG_WBHK_PVTKEY=tg[0]['key']
+        TG_WBHK_CERT=tg[0]['cert']
+        TG_WBHK_URL=tg[0]['webhook_url']
         cexdb=cexDB.all()
         dexdb=dexDB.all()
         if (TG_TK==""):
