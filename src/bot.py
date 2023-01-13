@@ -220,7 +220,7 @@ async def LoadExchange(exchangeid, mode):
         basesymbol=newex[0]['basesymbol']
         gasLimit=newex[0]['gasLimit']
         gasPrice=newex[0]['gasPrice']
-        ex = Web3(Web3.HTTPProvider(networkprovider))
+        ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         contractRabi= await DEXFetchAbi(router) #Router ABI
         contractR = ex.eth.contract(address=router, abi=contractRabi) #ContractLiquidityRouter
         if ex.net.listening:
@@ -459,7 +459,8 @@ async def EX_Ping():
         rtt = int(sum(results) / len(results))
         response = rtt
     elif (isinstance(ex,web3.main.Web3)):
-        response = round(ping('google.com', unit='ms'),3)
+        logger.info(msg=f"networkprovider {networkprovider}")
+        response = round(ping(networkprovider, unit='ms'),3)
     return response
     
 #=========== Send function
