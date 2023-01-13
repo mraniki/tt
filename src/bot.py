@@ -339,12 +339,12 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
                 amount=res['amount']
                 price=res['price']
                 if (s1=="SELL"):
-                    response = f"{symbol} {side}⬇️"
+                    response = f"⬇️ {symbol}"
                 else:
-                    response = f"{symbol} {side}⬆️"
+                    response = f"⬆️ {symbol}"
                 # tokeninfo = cg.search(query = symbol)
                 # logger.info(msg=f"tokeninfo {tokeninfo}")
-                response+= f"\n➕Size: {amount}\n⚫️Entry: {price}\nℹ️ {orderid}\n🗓️ {timestamp}"
+                response+= f"\n➕ Size: {amount}\n⚫️ Entry: {price}\nℹ️ {orderid}\n🗓️ {timestamp}"
                 return response
             except Exception as e:
                 await HandleExceptions(e)
@@ -430,7 +430,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokenlogo=tokeninfo['image']['small']
         gasUsed=txHashDetail['gasUsed']
         if(txResult == "1"):
-            response+= f"\nSize: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\n⚫️Entry: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n🗓️ TBD"
+            response+= f"\n➕ Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\ngasUsed: {gasUsed}\n🗓️ TBD"
             logger.info(msg=f"{response}")
             #logger.info(msg=f"{txHashDetail}")
             return response
