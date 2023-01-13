@@ -344,7 +344,7 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
                     response = f"{symbol} {side}⬆️"
                 # tokeninfo = cg.search(query = symbol)
                 # logger.info(msg=f"tokeninfo {tokeninfo}")
-                response+= f"\nSize: {amount}\n⚫️Entry: {price}\nRef: {orderid}\n{timestamp}"
+                response+= f"\n➕Size: {amount}\n⚫️Entry: {price}\nℹ️ {orderid}\n🗓️ {timestamp}"
                 return response
             except Exception as e:
                 await HandleExceptions(e)
@@ -406,11 +406,11 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         if (s1=="SELL"):
             amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
             tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=tokenToSell)
-            response = f"{s2} {s1}⬇️"
+            response = f"⬇️ {s2}"
         else:
             amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
             tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=tokenToBuy)
-            response = f"{s2} {s1}⬆️"
+            response = f"⬆️ {s2}"
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
@@ -430,7 +430,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokenlogo=tokeninfo['image']['small']
         gasUsed=txHashDetail['gasUsed']
         if(txResult == "1"):
-            response+= f"\nSize: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\n⚫️Entry: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
+            response+= f"\nSize: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\n⚫️Entry: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n🗓️ TBD"
             logger.info(msg=f"{response}")
             #logger.info(msg=f"{txHashDetail}")
             return response
