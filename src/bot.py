@@ -178,6 +178,7 @@ async def LoadExchange(exchangeid, mode):
     global gasLimit
     global contractR
     global contractRabi
+    global platform
     if (failsafe):
         ex = Web3(Web3.HTTPProvider('https://ethereum.publicnode.com'))
         return
@@ -220,6 +221,7 @@ async def LoadExchange(exchangeid, mode):
         basesymbol=newex[0]['basesymbol']
         gasLimit=newex[0]['gasLimit']
         gasPrice=newex[0]['gasPrice']
+        platform=newex[0]['platform']
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         #ex = Web3(Web3.HTTPProvider(networkprovider))
         contractRabi= await DEXFetchAbi(router) #Router ABI
@@ -342,7 +344,7 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
                     response = f"{symbol} {side}⬆️"
                 # tokeninfo = cg.search(query = symbol)
                 # logger.info(msg=f"tokeninfo {tokeninfo}")
-                response+= f" Size: {amount}\nEntry: {price}\nRef: {orderid}\n{timestamp}"
+                response+= f"\nSize: {amount}\n⚫️Entry: {price}\nRef: {orderid}\n{timestamp}"
                 return response
             except Exception as e:
                 await HandleExceptions(e)
@@ -403,11 +405,11 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokeninfobaldecimal=contractTokenA.functions.decimals().call()
         if (s1=="SELL"):
             amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
-            tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToSell)
+            tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=tokenToSell)
             response = f"{s2} {s1}⬇️"
         else:
             amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
-            tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=tokenToBuy)
+            tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=tokenToBuy)
             response = f"{s2} {s1}⬆️"
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
@@ -428,7 +430,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokenlogo=tokeninfo['image']['small']
         gasUsed=txHashDetail['gasUsed']
         if(txResult == "1"):
-            response+= f"Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\nEntry: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
+            response+= f"\nSize: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\n⚫️Entry: {tokenprice}USD \nRef: {txHash}\ngasUsed: {gasUsed}\n{tokenlogo}"
             logger.info(msg=f"{response}")
             #logger.info(msg=f"{txHashDetail}")
             return response
@@ -579,9 +581,11 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 basesymbol=ex.to_checksum_address(await DEXContractLookup(tokenToSell))
                 qty=1
                 if(TokenToPrice != None):
+                    tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=TokenToPrice)
+                    tokenprice=tokeninfo['market_data']['current_price']['usd']
                     price = contractR.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
                     logger.info(msg=f"price {price}")
-                    response=f"₿ {TokenToPrice}\n{symbol} @ {(price)}"
+                    response=f"₿ {TokenToPrice}\n{symbol} @ {(price)} or {tokenprice}"
                     await send(update,response)
     except Exception as e:
         await HandleExceptions(e)
