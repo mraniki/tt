@@ -246,7 +246,7 @@ async def DEXContractLookup(symb):
                 #logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
                 return symbolcontract[0]['address']
             else:
-                msg=f"{symb} does not exist in the token list {tokenlist}"
+                msg=f"⚠️ {symb} does not exist in {tokenlist}"
                 await HandleExceptions(msg)
                 return
         except Exception as e:
