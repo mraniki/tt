@@ -220,8 +220,8 @@ async def LoadExchange(exchangeid, mode):
         basesymbol=newex[0]['basesymbol']
         gasLimit=newex[0]['gasLimit']
         gasPrice=newex[0]['gasPrice']
-        #ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
-        ex = Web3(Web3.HTTPProvider(networkprovider))
+        ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
+        #ex = Web3(Web3.HTTPProvider(networkprovider))
         contractRabi= await DEXFetchAbi(router) #Router ABI
         contractR = ex.eth.contract(address=router, abi=contractRabi) #ContractLiquidityRouter
         if ex.net.listening:
@@ -231,6 +231,7 @@ async def LoadExchange(exchangeid, mode):
             raise ConnectionError(f'Could not connect to {router}')
     else:
         return
+
 
 async def DEXContractLookup(symb):
     try:
