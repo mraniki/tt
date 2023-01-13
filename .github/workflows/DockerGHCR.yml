@@ -1,10 +1,5 @@
 name: DockerGHCR
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 on:
   schedule:
     - cron: '45 8 * * *'
@@ -14,108 +9,44 @@ on:
     tags: [ 'latest']
   pull_request:
     branches: [ "main" ]
-
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
 
-
 jobs:
   build:
 
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
-      # This is used to complete the identity challenge
-      # with sigstore/fulcio when running outside of PRs.
       id-token: write
-
     steps:
-      - name: Checkout repository
+      - name: Check out the repo
         uses: actions/checkout@v3
-      - name: Prepare
-        run: |
-          DOCKER_IMAGE=${GITHUB_REPOSITORY/docker-/}
-          if [[ $GITHUB_REF == refs/heads/* ]]; then
-             if [[ $GITHUB_REF == refs/heads/*/* ]] ; then
-               BRANCH="${DOCKER_IMAGE}:$(echo $GITHUB_REF | sed "s|refs/heads/||g" | sed "s|/|-|g")"
-             else
-               BRANCH=${GITHUB_REF#refs/heads/}
-             fi
-            case ${BRANCH} in
-              "main" | "master" )
-                  ## Irrelevant
-                  BRANCHTAG="${DOCKER_IMAGE}:${DISTRO}-${DISTRO_VARIANT}-php${PHP_VERSION}-kc${KC_VERSION},${DOCKER_IMAGE}:kc${KC_VERSION}-php${PHP_VERSION}-${DISTRO}_${DISTRO_VARIANT}"
-                ;;
-            esac
-          fi
-          if [[ $GITHUB_REF == refs/tags/* ]]; then
-               GITTAG="${DOCKER_IMAGE}:kc${KC_VERSION}-php${PHP_VERSION}-${DISTRO}_${DISTRO_VARIANT}-$(echo $GITHUB_REF | sed 's|refs/tags/||g')"
-          fi
-          if [ -n "${BRANCHTAG}" ] && [ -n "${GITTAG}" ]; then
-            TAGS="${BRANCHTAG},${GITTAG}"
-          else
-            TAGS="${BRANCHTAG}${GITTAG}"
-          fi
-          echo ::set-output name=tags::${TAGS}
-          echo ::set-output name=docker_image::${DOCKER_IMAGE}
-      # Install the cosign tool except on PR
-      # https://github.com/sigstore/cosign-installer
-      - name: Install cosign
-        if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@latest
-        with:
-          cosign-release: 'latest'
 
-
-      # Workaround: https://github.com/docker/build-push-action/issues/461
-      - name: Setup Docker buildx
-        uses: docker/setup-buildx-action@latest
-
-      # Login against a Docker registry except on PR
-      # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@latest
+        uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Extract metadata (tags, labels) for Docker
-      # https://github.com/docker/metadata-action
-      - name: Extract Docker metadata
+      - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@latest
+        uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
-      # Build and push Docker image with Buildx (don't push on PR)
-      # https://github.com/docker/build-push-action
+          images: mraniki/tt
+          tags: latest
+      
       - name: Build and push Docker image
-        id: build-and-push
-        uses: docker/build-push-action@latest
+        uses: docker/build-push-action@v3
         with:
           context: .
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-
-      # Sign the resulting Docker image digest except on PRs.
-      # This will only write to the public Rekor transparency log when the Docker
-      # repository is public to avoid leaking data.  If you would like to publish
-      # transparency data even for private images, pass --force to cosign below.
-      # https://github.com/sigstore/cosign
-      - name: Sign the published Docker image
-        if: ${{ github.event_name != 'pull_request' }}
-        env:
-          COSIGN_EXPERIMENTAL: "true"
-        # This step uses the identity token to provision an ephemeral certificate
-        # against the sigstore community Fulcio instance.
-        run: echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign {}@${{ steps.build-and-push.outputs.digest }}
