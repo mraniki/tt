@@ -29,6 +29,7 @@ from web3 import Web3
 from web3.contract import Contract
 from typing import List
 import time
+from datetime import datetime
 from pycoingecko import CoinGeckoAPI
 ##=============== Logging  =============
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
