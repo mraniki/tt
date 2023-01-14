@@ -1,4 +1,4 @@
-name: LatestDockerHub
+name: Latest Docker
 
 on:
   push:

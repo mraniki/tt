@@ -1,4 +1,4 @@
-name: Nightly DockerHub
+name: Nightly Docker
 
 on:
   push:

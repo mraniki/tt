@@ -20,4 +20,3 @@ jobs:
           automatic_release_tag: "nightly"
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
-        
