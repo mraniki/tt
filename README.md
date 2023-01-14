@@ -19,7 +19,7 @@ Using:
 [![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py)
 [![tinyDB](https://badgen.net/badge/icon/tinyDB/black?icon=libraries&label)](https://github.com/msiemens/tinydb)
 [![apprise](https://badgen.net/badge/icon/apprise/black?icon=libraries&label)](https://github.com/caronc/apprise)
-
+[![coingecko](https://badgen.net/badge/icon/coingecko/black?icon=libraries&label)](https://github.com/coingecko)
 
 [![sublime](https://badgen.net/badge/icon/sublime/F96854?icon=terminal&label)](https://www.sublimetext.com/)
 [![workingcopy](https://badgen.net/badge/icon/workingcopy/16DCCD?icon=github&label)](https://workingcopy.app/)
@@ -37,7 +37,7 @@ Using:
     - via docker dockerhub `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
     - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
 5) Start your container or use `python3 bot.py`
-6) `sell BTCUSDT sl=6000 tp=4500 q=1%` or  `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY. note that STOPLOSS TAKEPROFIT are not yet implemented.
+6) `sell BTCUSDT sl=6000 tp=4500 q=1%` or  `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY.
 7) `/bal` command to query balance
 8) `/p BTCB` or `/p btc/usdt` to query ticker price 
 9) `/c bitcoin` or `/p gmx` to query coin info via coingecko api
@@ -86,6 +86,7 @@ Approach: Update the sample db with your parameters and save it as db.json
 
 ### V1.3
 - Support DEX limit order if supported like dydx / Kwenta / GMX
+- Support STOPLOSS TAKEPROFIT for DEX
 
 ### v1.4
 - create / modify db via bot command
@@ -93,6 +94,7 @@ Approach: Update the sample db with your parameters and save it as db.json
 ### v1.5
 
 - Support futures and margin for CEX (to be tested)
+- Support STOPLOSS TAKEPROFIT for CEX
 - Support Web3 ENS
 
 ### v2
