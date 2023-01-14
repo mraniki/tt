@@ -31,10 +31,10 @@ Using:
 1) Create a private channel and a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
 2) Get your 
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
-    - DEX chain supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org) or [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) for RPC detail per chain.
+    - DEX chain supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org), [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) or [cointool](https://cointool.app/) for chain details
 3) Update the config (telegram token and telegram channel). Point your config to container volume /code/config)
 4) Deploy :
-    - via docker dockerhub (or ghcr.io) `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
+    - via docker dockerhub `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
     - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
 5) Start your container or use `python3 bot.py`
 6) `sell BTCUSDT sl=6000 tp=4500 q=1%` or  `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY. note that STOPLOSS TAKEPROFIT are not yet implemented.
