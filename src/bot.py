@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.3.2"
+version="🪙TT Beta 1.3.3"
 ##=============== import  =============
 ##log
 import logging
@@ -248,7 +248,7 @@ async def DEXContractLookup(symb):
                 #logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
                 return symbolcontract[0]['address']
             else:
-                msg=f"⚠️ {symb} does not exist in {tokenlist}"
+                msg=f"{symb} does not exist in {tokenlist}"
                 await HandleExceptions(msg)
                 return
         except Exception as e:
@@ -438,15 +438,25 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         await HandleExceptions(e)
         return
 
-async def DEX_TokenInfo(token):
+async def TokenInfo(token):
     global tokenprice
     global tokeninfo
-    #asset_platforms = cg.get_asset_platforms()
+    asset_platforms = cg.get_asset_platforms()
     #logger.info(msg=f"cg.get_asset_platforms {asset_platforms}")
-    tokeninfo=cg.get_coin_info_from_contract_address_by_id(id='binance-smart-chain',contract_address=token)
+    coininfo=cg.get_coin_by_id(id=token) 
+    #logger.info(msg=f"coininfo {coininfo}")
+    #tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=token)
     #logger.info(msg=f"tokeninfo {tokeninfo}")
-    tokenprice=tokeninfo['market_data']['current_price']['usd']
-    tokenlogo=tokeninfo['image']['small']
+    #tokenprice=tokeninfo['market_data']['current_price']['usd']
+    #tokenlogo=tokeninfo['image']['small']
+    coinplatfrom=coininfo['asset_platform_id']
+    coindescription=coininfo['description']['en']
+    coinprice=coininfo['market_data']['current_price']['usd']
+    coinsymbol=coininfo['symbol']
+    coinlink='https://www.coingecko.com/en/coins/'+coininfo['symbol']
+    response = f'{coinsymbol} {coinprice} USD \n{coindescription}\n{coinlink}'
+    logger.info(msg=f"coininfo {coinplatfrom} {coindescription} {coinprice} {coinlink}")   
+    return response
 
 async def EX_Ping():
     if not isinstance(ex,web3.main.Web3):
@@ -586,11 +596,22 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                     price = contractR.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
                     logger.info(msg=f"price {price}")
                     response=f"₿ {TokenToPrice}\n{symbol} @ {(price)} or {tokenprice}"
+                    await DEX_TokenInfo(symbol)
                     await send(update,response)
     except Exception as e:
         await HandleExceptions(e)
         return
-
+##======TG COMMAND coin info  ===========
+async def coin_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    tginput  = update.effective_message.text
+    input = tginput.split(" ")
+    symbol=input[1]
+    try:
+        response=await TokenInfo(symbol)
+        await send(update,response)
+    except Exception as e:
+        await HandleExceptions(e)
+        return
 ##====TG COMMAND Trading switch  ========
 async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global trading
@@ -716,6 +737,7 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
         application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
         application.add_handler(MessageHandler(filters.Regex('/p'), price_command))
+        application.add_handler(MessageHandler(filters.Regex('/c'), coin_command))
         application.add_handler(MessageHandler(filters.Regex('/trading'), TradingSwitch))
         application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
         application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), SwitchEx))

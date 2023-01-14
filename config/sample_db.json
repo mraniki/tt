@@ -199,7 +199,8 @@
             "abiurltoken":"abc",
             "basesymbol":"BUSD",
             "gasLimit":"300000",
-            "gasPrice":"5"
+            "gasPrice":"5",
+            "platform":"binance-smart-chain"
         },
         "2":
         {
@@ -231,7 +232,7 @@
             "abiurl":"https://api.etherscan.io/api",
             "abiurltoken":"abc",
             "basesymbol":"USDT",
-            "gasLimit":"70000",
+            "gasLimit":"300000",
             "gasPrice":"20",
             "platform":"ethereum"
         },
@@ -248,7 +249,7 @@
             "abiurl":"https://api.etherscan.io/api",
             "abiurltoken":"abc",
             "basesymbol":"USDC",
-            "gasLimit":"70000",
+            "gasLimit":"300000",
             "gasPrice":"20",
             "platform":"ethereum"
         },
@@ -265,8 +266,8 @@
             "abiurl":"https://api.polygonscan.com/api",
             "abiurltoken":"abc",
             "basesymbol":"USDC",
-            "gasLimit":"70000",
-            "gasPrice":"20",
+            "gasLimit":"300000",
+            "gasPrice":"60",
             "platform":"polygon-pos"
         },
         "6":
@@ -282,9 +283,26 @@
             "abiurl":"https://api-optimistic.etherscan.io/api",
             "abiurltoken":"abc",
             "basesymbol":"USDC",
-            "gasLimit":"70000",
-            "gasPrice":"20",
+            "gasLimit":"300000",
+            "gasPrice":"0.001",
             "platform":"optimistic-ethereum"
+        },
+        "7":
+        {
+            "name": "gmx",
+            "walletaddress": "abc",
+            "privatekey": "abc",
+            "version": "v2",
+            "networkprovider": "arb1.arbitrum.io/rpc",
+            "router": "0xaBBc5F99639c9B6bCb58544ddf04EFA6802F4064",
+            "testmode": "True",
+            "tokenlist":"https://api.gmx.io/tokens",
+            "abiurl":"https://arbiscan.io/api",
+            "abiurltoken":"abc",
+            "basesymbol":"USDC",
+            "gasLimit":"500000",
+            "gasPrice":"0.5",
+            "platform":"arbitrum-one"
         }
     }
 }
