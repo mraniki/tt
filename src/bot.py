@@ -429,8 +429,9 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokenprice=tokeninfo['market_data']['current_price']['usd']
         tokenlogo=tokeninfo['image']['small']
         gasUsed=txHashDetail['gasUsed']
+        txtimestamp=datetime.datetime.now()
         if(txResult == "1"):
-            response+= f"\n➕ Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\ngasUsed: {gasUsed}\n🗓️ TBD"
+            response+= f"\n➕ Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\ngasUsed: {gasUsed}\n🗓️ {txtimestamp}"
             logger.info(msg=f"{response}")
             #logger.info(msg=f"{txHashDetail}")
             return response
