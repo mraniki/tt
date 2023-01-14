@@ -199,7 +199,8 @@
             "abiurltoken":"abc",
             "basesymbol":"BUSD",
             "gasLimit":"300000",
-            "gasPrice":"5"
+            "gasPrice":"5",
+            "platform":"binance-smart-chain"
         },
         "2":
         {
