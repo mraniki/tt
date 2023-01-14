@@ -40,7 +40,7 @@ Using:
 6) `sell BTCUSDT sl=6000 tp=4500 q=1%` or  `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY. note that STOPLOSS TAKEPROFIT are not yet implemented.
 7) `/bal` command to query balance
 8) `/p BTCB` or `/p btc/usdt` to query ticker price 
-9) 
+9) `/c bitcoin` or `/p gmx` to query coin info via coingecko api
 9) `/cex exchangename` or `/dex exchangename` (e.g `/cex binance`, `/dex quickswap`) to switch between multiple CEX and DEX with prefix 
 10) `/testmode` to switch between sandbox, mainnet, testnet
 11) `/trading` to disable/enable trading
@@ -63,6 +63,7 @@ Approach: Update the sample db with your parameters and save it as db.json
  - Disable or Enable trading process via `/trading` command
  - Query balance via `/bal` command and view it in formatted way
  - Query ticker price via `/p BTCB` or `/p btc/usdt` command to view last symbol price (USDT as basis)
+ - Query ticker price via `/c bitcoin` command to retrive coin info available on coingecko
  - Switch between multiple CEX and DEX in one environment with prefix `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
  - Switch between testnet and mainnet with `/testmode` 
  - Support % of USDT balance for CEX order and DEX order
@@ -84,8 +85,7 @@ Approach: Update the sample db with your parameters and save it as db.json
 
 
 ### V1.3
-- Support DEFI DEX uniswapV3 and dydx (to be tested)
-- Support DEX limit order if supported like dydx
+- Support DEX limit order if supported like dydx / Kwenta / GMX
 
 ### v1.4
 - create / modify db via bot command
@@ -96,6 +96,7 @@ Approach: Update the sample db with your parameters and save it as db.json
 - Support Web3 ENS
 
 ### v2
+- Support Uniswap V3
 - view daily pnl in /bal response
 - view free margin for futures in /bal response
 - view opened future position via /pos command
