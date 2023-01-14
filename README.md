@@ -40,6 +40,7 @@ Using:
 6) `sell BTCUSDT sl=6000 tp=4500 q=1%` or  `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY. note that STOPLOSS TAKEPROFIT are not yet implemented.
 7) `/bal` command to query balance
 8) `/p BTCB` or `/p btc/usdt` to query ticker price 
+9) 
 9) `/cex exchangename` or `/dex exchangename` (e.g `/cex binance`, `/dex quickswap`) to switch between multiple CEX and DEX with prefix 
 10) `/testmode` to switch between sandbox, mainnet, testnet
 11) `/trading` to disable/enable trading
