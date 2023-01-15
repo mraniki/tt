@@ -382,6 +382,25 @@ async def DEX_Sign_TX(contract_tx):
     raw_tx = signed.rawTransaction
     return ex.eth.send_raw_transaction(raw_tx)
 
+async def TokenPrice(s1):
+    try:
+        coininfo=cg.search(query=s1) 
+        for i in coininfo['coins']:
+            tokeninfo=i['symbol']
+            if (tokeninfo==s1):
+                logger.info(msg=f"{i['api_symbol']}")
+                coininfo=cg.get_coin_by_id(id=i['api_symbol'])
+                coinplatfrom=coininfo['asset_platform_id']
+                logger.info(msg=f"coinplatfrom {coinplatfrom}")
+                coinprice=coininfo['market_data']['current_price']['usd']
+                logger.info(msg=f"coinprice {coinprice}")
+                coinsymbol=coininfo['symbol']
+                response = f'{coinsymbol} {coinprice} USD on {coinplatfrom}'
+                logger.info(msg=f"{response}")
+                return coinprice
+    except Exception:
+        return
+
 async def SendOrder_DEX(s1,s2,s3,s4,s5):
     try:
         if (s1=="BUY"):
@@ -406,12 +425,13 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokeninfobaldecimal=contractTokenA.functions.decimals().call()
         if (s1=="SELL"):
             amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
-            #tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=tokenToSell)
             response = f"⬇️ {s2}"
+            coinprice= await TokenPrice(tokenA)
         else:
-            amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
-            #tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=tokenToBuy)
+            amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage  
             response = f"⬆️ {s2}"
+            coinprice= await TokenPrice(tokenB)
+        logger.info(msg=f"coinprice {coinprice}")
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
@@ -427,9 +447,9 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         txResult = checkTransactionRequest.json()['status']
         await DEX_GasControl()
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-        #tokenprice=tokeninfo['market_data']['current_price']['usd']
+        tokenprice=coinprice
         #tokenlogo=tokeninfo['image']['small']
-        tokenprice=""
+        #tokenprice=""
         gasUsed=txHashDetail['gasUsed']
         txtimestamp=datetime.now()
         if(txResult == "1"):
@@ -444,22 +464,44 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
 async def TokenInfo(token):
     global tokenprice
     global tokeninfo
-    asset_platforms = cg.get_asset_platforms()
+    #asset_platforms = cg.get_asset_platforms()
     #logger.info(msg=f"cg.get_asset_platforms {asset_platforms}")
-    coininfo=cg.get_coin_by_id(id=token) 
-    #logger.info(msg=f"coininfo {coininfo}")
-    #tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=token)
-    #logger.info(msg=f"tokeninfo {tokeninfo}")
-    #tokenprice=tokeninfo['market_data']['current_price']['usd']
-    #tokenlogo=tokeninfo['image']['small']
-    coinplatfrom=coininfo['asset_platform_id']
-    coindescription=coininfo['description']['en']
-    coinprice=coininfo['market_data']['current_price']['usd']
-    coinsymbol=coininfo['symbol']
-    coinlink='https://www.coingecko.com/en/coins/'+coininfo['symbol']
-    response = f'{coinsymbol} {coinprice} USD \n{coindescription}\n{coinlink}'
-    logger.info(msg=f"coininfo {coinplatfrom} {coindescription} {coinprice} {coinlink}")   
-    return response
+    try:
+        coininfo=cg.get_coin_by_id(id=token) 
+        coinplatfrom=coininfo['asset_platform_id']
+        coindescription=coininfo['description']['en']
+        coinprice=coininfo['market_data']['current_price']['usd']
+        coinsymbol=coininfo['symbol']
+        coinlink='https://www.coingecko.com/en/coins/'+coininfo['symbol']
+        response = f'{coinsymbol} {coinprice} USD \n{coindescription}\n{coinlink}'
+        logger.info(msg=f"{response}")   
+        return response
+    except Exception:
+        return
+       
+async def token_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    tginput  = update.effective_message.text
+    input = tginput.split(" ")
+    symbol=input[1].upper()
+    try:
+        coininfo=cg.search(query=symbol) 
+        #logger.info(msg=f"coininfo {coininfo}")
+        for i in coininfo['coins']:
+            tokeninfo=i['symbol']
+            if (tokeninfo==symbol):
+                logger.info(msg=f"Pass")
+                logger.info(msg=f"{i['api_symbol']}")
+                coininfo=cg.get_coin_by_id(id=i['api_symbol'])
+                #logger.info(msg=f"coininfo {coininfo}")
+                coinplatfrom=coininfo['asset_platform_id']
+                logger.info(msg=f"coinplatfrom {coinplatfrom}")
+                coinprice=coininfo['market_data']['current_price']['usd']
+                logger.info(msg=f"coinprice {coinprice}")
+                coinsymbol=coininfo['symbol']
+                response = f'{coinsymbol} {coinprice} USD on {coinplatfrom}'
+                logger.info(msg=f"{response}")
+    except Exception as e:
+        return
 
 async def EX_Ping():
     if not isinstance(ex,web3.main.Web3):
@@ -745,6 +787,7 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
         application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), SwitchEx))
         application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
+        application.add_handler(MessageHandler(filters.Regex('/g'), token_command))
         #application.add_error_handler(error_handler)
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
