@@ -406,11 +406,11 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokeninfobaldecimal=contractTokenA.functions.decimals().call()
         if (s1=="SELL"):
             amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
-            tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=tokenToSell)
+            #tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=tokenToSell)
             response = f"⬇️ {s2}"
         else:
             amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
-            tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=tokenToBuy)
+            #tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=tokenToBuy)
             response = f"⬆️ {s2}"
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
@@ -427,8 +427,9 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         txResult = checkTransactionRequest.json()['status']
         await DEX_GasControl()
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-        tokenprice=tokeninfo['market_data']['current_price']['usd']
-        tokenlogo=tokeninfo['image']['small']
+        #tokenprice=tokeninfo['market_data']['current_price']['usd']
+        #tokenlogo=tokeninfo['image']['small']
+        tokenprice=""
         gasUsed=txHashDetail['gasUsed']
         txtimestamp=datetime.now()
         if(txResult == "1"):
