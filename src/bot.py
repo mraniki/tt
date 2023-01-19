@@ -133,7 +133,7 @@ async def SearchDEX(s1,s2):
         query = ((q.name==s1)&(q['testmode'] == s2))
         DEXSearch = dexDB.search(query)
         if (len(str(DEXSearch))>=1):
-         #logger.info(msg=f"{DEXSearch}")
+         logger.info(msg=f"{DEXSearch}")
          return DEXSearch
         else:
          return
@@ -194,18 +194,30 @@ async def LoadExchange(exchangeid, mode):
             exchanges[exchangeid] = exchange({'apiKey': newex[0]['api'],'secret': newex[0]['secret']})
             m_ordertype=newex[0]['ordertype']
             ex=exchanges[exchangeid]
+            # tickers = ex.fetch_tickers()
+            # for symbol, ticker in tickers.items():
+            #     print(
+            #         symbol,
+            #         ticker['datetime'],
+            #         'high: ' + str(ticker['high']),
+            #         'low: ' + str(ticker['low']),
+            #         'bid: ' + str(ticker['bid']),
+            #         'ask: ' + str(ticker['ask']),
+            #         'volume: ' + str(ticker['quoteVolume'] or ticker['baseVolume'])
+            #     )
             name=ex
-            #ex.verbose = True
-            #logger.info(msg=f"markets: {markets}")
             if (mode=="True"):
                 ex.set_sandbox_mode('enabled')
                 markets=ex.loadMarkets()
                 logger.info(msg=f"ex: {ex}")
+                #ex.verbose = True
+                #logger.info(msg=f"markets: {markets}")
                 return ex
             else:
                 markets=ex.loadMarkets ()
                 logger.info(msg=f"ex: {ex}")
                 return ex
+
         except Exception as e:
             await HandleExceptions(e)
     elif (DEXCheck):
@@ -492,7 +504,6 @@ async def token_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 logger.info(msg=f"Pass")
                 logger.info(msg=f"{i['api_symbol']}")
                 coininfo=cg.get_coin_by_id(id=i['api_symbol'])
-                #logger.info(msg=f"coininfo {coininfo}")
                 coinplatfrom=coininfo['asset_platform_id']
                 logger.info(msg=f"coinplatfrom {coinplatfrom}")
                 coinprice=coininfo['market_data']['current_price']['usd']
@@ -809,7 +820,7 @@ def main():
             application.run_polling()
 
     except Exception as e:
-        logger.fatal("Bot failed to start. Error: " + str(e))
+        logger.info("Bot failed to start. Error: " + str(e))
 
 if __name__ == '__main__':
     main()
