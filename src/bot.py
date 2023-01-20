@@ -180,6 +180,7 @@ async def LoadExchange(exchangeid, mode):
     global contractR
     global contractRabi
     global platform
+    global chainId
     if (failsafe):
         ex = Web3(Web3.HTTPProvider('https://ethereum.publicnode.com'))
         return
@@ -235,6 +236,7 @@ async def LoadExchange(exchangeid, mode):
         gasLimit=newex[0]['gasLimit']
         gasPrice=newex[0]['gasPrice']
         platform=newex[0]['platform']
+        chainId=newex[0]['platform']
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         #ex = Web3(Web3.HTTPProvider(networkprovider))
         contractRabi= await DEXFetchAbi(router) #Router ABI
