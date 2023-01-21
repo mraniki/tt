@@ -457,49 +457,41 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         if (version=="v2"):
             {
             swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,txntime)
-            tx_token = await DEX_Sign_TX(swap_TX)
-            txHash = str(ex.to_hex(tx_token))
-            logger.info(msg=f"{txHash}")
-            checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
-            checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
-            txResult = checkTransactionRequest.json()['status']
-            await DEX_GasControl()
-            txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-            tokenprice=coinprice
-            #tokenlogo=tokeninfo['image']['small']
-            #tokenprice=""
-            gasUsed=txHashDetail['gasUsed']
-            txtimestamp=datetime.now()
-            if(txResult == "1"):
-                response+= f"\n➕ Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
-                logger.info(msg=f"{response}")
-                #logger.info(msg=f"{txHashDetail}")
-                return response
             }
         elif (version =="v3"):
             {
                 params = {
-                'tokenIn': WETH_ADDR,
-                'tokenOut': ENS_ADDR,
+                'tokenIn': tokenToBuy,
+                'tokenOut': tokenToSell,
                 'fee': 3000,
-                'recipient': WALLET_ADDR,
+                'recipient': walletaddress,
                 'deadline': int((datetime.now() + timedelta(seconds=20)).timestamp()),
-                'amountIn': Web3.toWei(0.01, 'ether'),
+                'amountIn': ex.from_wei(MinimumAmount, 'ether'),
                 'amountOutMinimum': 0,
                 'sqrtPriceLimitX96': 0,
                 }
 
-                tx_params = {
-                    # what is this even used for?
-                    'value': w3.toWei(0.000001, 'ether'),
-                }
+                tx_params = {'value': ex.to_wei(0.000001, 'ether'),}
 
-                router_instance.functions.exactInputSingle(
-                    params
-                ).buildTransaction(
-                    tx_params
-                )
+                swap_TX=router_instance.functions.exactInputSingle(params).buildTransaction(tx_params)
             }
+
+        tx_token = await DEX_Sign_TX(swap_TX)
+        txHash = str(ex.to_hex(tx_token))
+        logger.info(msg=f"{txHash}")
+        checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
+        checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
+        txResult = checkTransactionRequest.json()['status']
+        await DEX_GasControl()
+        txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
+        tokenprice=coinprice
+        gasUsed=txHashDetail['gasUsed']
+        txtimestamp=datetime.now()
+        if(txResult == "1"):
+            response+= f"\n➕ Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
+            logger.info(msg=f"{response}")
+            #logger.info(msg=f"{txHashDetail}")
+            return response     
     except Exception as e:
         await HandleExceptions(e)
         return
