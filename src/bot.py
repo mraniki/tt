@@ -167,6 +167,7 @@ async def LoadExchange(exchangeid, mode):
     global ex
     global name
     global networkprovider
+    global version
     global walletaddress
     global privatekey
     global tokenlist
@@ -177,8 +178,8 @@ async def LoadExchange(exchangeid, mode):
     global gasPrice
     global m_ordertype
     global gasLimit
-    global contractR
-    global contractRabi
+    global router_instance
+    global router_instanceabi
     global platform
     global chainId
     if (failsafe):
@@ -226,6 +227,7 @@ async def LoadExchange(exchangeid, mode):
         name= newex[0]['name']
         walletaddress= newex[0]['walletaddress']
         privatekey= newex[0]['privatekey']
+        version= newex[0]['version']
         networkprovider= newex[0]['networkprovider']
         router= newex[0]['router']
         mode=newex[0]['testmode']
@@ -239,8 +241,8 @@ async def LoadExchange(exchangeid, mode):
         chainId=newex[0]['platform']
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         #ex = Web3(Web3.HTTPProvider(networkprovider))
-        contractRabi= await DEXFetchAbi(router) #Router ABI
-        contractR = ex.eth.contract(address=router, abi=contractRabi) #ContractLiquidityRouter
+        router_instanceabi= await DEXFetchAbi(router) #Router ABI
+        router_instance = ex.eth.contract(address=router, abi=router_instanceabi) #ContractLiquidityRouter
         if ex.net.listening:
             logger.info(msg=f"Connected to {ex}")
             return name
@@ -448,29 +450,56 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         logger.info(msg=f"coinprice {coinprice}")
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
-        OptimalOrderAmount  = contractR.functions.getAmountsOut(OrderAmount, OrderPath).call()
+        OptimalOrderAmount  = router_instance.functions.getAmountsOut(OrderAmount, OrderPath).call()
         MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
         logger.info(msg=f"Min received {ex.from_wei(MinimumAmount, 'ether')}")
         txntime = (int(time.time()) + 1000000)
-        swap_TX = contractR.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,txntime)
-        tx_token = await DEX_Sign_TX(swap_TX)
-        txHash = str(ex.to_hex(tx_token))
-        logger.info(msg=f"{txHash}")
-        checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
-        checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
-        txResult = checkTransactionRequest.json()['status']
-        await DEX_GasControl()
-        txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-        tokenprice=coinprice
-        #tokenlogo=tokeninfo['image']['small']
-        #tokenprice=""
-        gasUsed=txHashDetail['gasUsed']
-        txtimestamp=datetime.now()
-        if(txResult == "1"):
-            response+= f"\n➕ Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
-            logger.info(msg=f"{response}")
-            #logger.info(msg=f"{txHashDetail}")
-            return response
+        if (version=="v2"):
+            {
+            swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,txntime)
+            tx_token = await DEX_Sign_TX(swap_TX)
+            txHash = str(ex.to_hex(tx_token))
+            logger.info(msg=f"{txHash}")
+            checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
+            checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
+            txResult = checkTransactionRequest.json()['status']
+            await DEX_GasControl()
+            txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
+            tokenprice=coinprice
+            #tokenlogo=tokeninfo['image']['small']
+            #tokenprice=""
+            gasUsed=txHashDetail['gasUsed']
+            txtimestamp=datetime.now()
+            if(txResult == "1"):
+                response+= f"\n➕ Size: {round(ex.from_wei(MinimumAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
+                logger.info(msg=f"{response}")
+                #logger.info(msg=f"{txHashDetail}")
+                return response
+            }
+        elif (version ==".git/v3"):
+            {
+                params = {
+                'tokenIn': WETH_ADDR,
+                'tokenOut': ENS_ADDR,
+                'fee': 3000,
+                'recipient': WALLET_ADDR,
+                'deadline': int((datetime.now() + timedelta(seconds=20)).timestamp()),
+                'amountIn': Web3.toWei(0.01, 'ether'),
+                'amountOutMinimum': 0,
+                'sqrtPriceLimitX96': 0,
+                }
+
+                tx_params = {
+                    # what is this even used for?
+                    'value': w3.toWei(0.000001, 'ether'),
+                }
+
+                router_instance.functions.exactInputSingle(
+                    params
+                ).buildTransaction(
+                    tx_params
+                )
+            }
     except Exception as e:
         await HandleExceptions(e)
         return
@@ -651,7 +680,7 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 if(TokenToPrice != None):
                     tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=TokenToPrice)
                     tokenprice=tokeninfo['market_data']['current_price']['usd']
-                    price = contractR.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
+                    price = router_instance.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
                     logger.info(msg=f"price {price}")
                     response=f"₿ {TokenToPrice}\n{symbol} @ {(price)} or {tokenprice}"
                     await DEX_TokenInfo(symbol)
