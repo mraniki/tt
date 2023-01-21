@@ -476,7 +476,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
                 #logger.info(msg=f"{txHashDetail}")
                 return response
             }
-        elif (version ==".git/v3"):
+        elif (version =="v3"):
             {
                 params = {
                 'tokenIn': WETH_ADDR,
