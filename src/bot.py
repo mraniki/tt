@@ -457,6 +457,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         if (version=="v2"):
             {
             swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,txntime)
+            tx_token = await DEX_Sign_TX(swap_TX)
             }
         elif (version =="v3"):
             {
@@ -474,9 +475,12 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
                 tx_params = {'value': ex.to_wei(0.000001, 'ether'),}
 
                 swap_TX=router_instance.functions.exactInputSingle(params).buildTransaction(tx_params)
+                tx = contract_tx.build_transaction(tx_fields)
+                signed = ex.eth.account.sign_transaction(tx, privatekey)
+                raw_tx = signed.rawTransaction
+                return ex.eth.send_raw_transaction(raw_tx)
             }
 
-        tx_token = await DEX_Sign_TX(swap_TX)
         txHash = str(ex.to_hex(tx_token))
         logger.info(msg=f"{txHash}")
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
