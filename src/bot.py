@@ -454,14 +454,11 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
         logger.info(msg=f"Min received {ex.from_wei(MinimumAmount, 'ether')}")
         txntime = (int(time.time()) + 1000000)
-        if (version=="v2"):
-            {
+        if (version=='v2'):
             swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,txntime)
             tx_token = await DEX_Sign_TX(swap_TX)
-            }
-        elif (version =="v3"):
-            {
-                params = {
+        elif (version=="v3"):
+            params = {
                 'tokenIn': tokenToBuy,
                 'tokenOut': tokenToSell,
                 'fee': 3000,
@@ -471,19 +468,16 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
                 'amountOutMinimum': 0,
                 'sqrtPriceLimitX96': 0,
                 }
-
-                tx_params = {'value': ex.to_wei(0.000001, 'ether'),}
-
-                swap_TX=router_instance.functions.exactInputSingle(params).buildTransaction(tx_params)
-                tx = contract_tx.build_transaction(tx_fields)
-                signed = ex.eth.account.sign_transaction(tx, privatekey)
-                raw_tx = signed.rawTransaction
-                return ex.eth.send_raw_transaction(raw_tx)
-            }
+            tx_params = {'value': ex.to_wei(0.000001, 'ether'),}
+            swap_TX=router_instance.functions.exactInputSingle(params).buildTransaction(tx_params)
+            tx = contract_tx.build_transaction(tx_fields)
+            signed = ex.eth.account.sign_transaction(tx, privatekey)
+            raw_tx = signed.rawTransaction
+            return ex.eth.send_raw_transaction(raw_tx)
         elif (version =="limitorder"):
-            {
-            logger.info(msg=f"limitorder")
-            }
+            logger.info(msg=f"limitorder processing")
+        else:
+            return
         txHash = str(ex.to_hex(tx_token))
         logger.info(msg=f"{txHash}")
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
