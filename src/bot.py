@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-version="🪙TT Beta 1.3.3"
+TTversion="🪙TT Beta 1.3.3"
 ##=============== import  =============
 ##log
 import logging
@@ -54,10 +54,10 @@ fullcommandlist= """
 <code>/dex pancake</code> <code>buy cake</code> <code>/p BTCB</code>
 <code>/trading</code>
 <code>/testmode</code>"""
-menuhelp=f"{version} \n {fullcommandlist}"
+menuhelp=f"{TTversion} \n {fullcommandlist}"
 #========== Common Functions =============
 def LibCheck():
-    logger.info(msg=f"{version}")
+    logger.info(msg=f"{TTversion}")
     logger.info(msg=f"Python {sys.version}")
     logger.info(msg=f"TinyDB {tinydb.__version__}")
     logger.info(msg=f"TPB {telegram.__version__}")
@@ -386,17 +386,7 @@ async def DEX_GasControl():
     # if (gasLimit<=gasLimitresults):
     #     logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
 
-async def DEX_Sign_TX(contract_tx):
-    tx_fields = {
-        'from': walletaddress,
-        'gas': int(gasLimit),
-        'gasPrice': ex.to_wei(gasPrice,'gwei'),
-        'nonce': ex.eth.get_transaction_count(walletaddress),
-    }
-    tx = contract_tx.build_transaction(tx_fields)
-    signed = ex.eth.account.sign_transaction(tx, privatekey)
-    raw_tx = signed.rawTransaction
-    return ex.eth.send_raw_transaction(raw_tx)
+
 
 async def TokenPrice(s1):
     try:
@@ -414,6 +404,30 @@ async def TokenPrice(s1):
                 response = f'{coinsymbol} {coinprice} USD on {coinplatfrom}'
                 logger.info(msg=f"{response}")
                 return coinprice
+    except Exception:
+        return
+
+async def DEX_Sign_TX(contract_tx):
+    try:
+        if (version=='v2'):
+            tx_params = {
+                'from': walletaddress,
+                'gas': int(gasLimit),
+                'gasPrice': ex.to_wei(gasPrice,'gwei'),
+                'nonce': ex.eth.get_transaction_count(walletaddress),
+            }
+            tx = contract_tx.build_transaction(tx_params)
+            signed = ex.eth.account.sign_transaction(tx, privatekey)
+            raw_tx = signed.rawTransaction
+            return ex.eth.send_raw_transaction(raw_tx)
+        elif (version=="v3"):
+            tx_params = {'value': ex.to_wei(0.000001, 'ether'),}
+            tx = contract_tx.build_transaction(tx_params)
+            signed = ex.eth.account.sign_transaction(tx, privatekey)
+            raw_tx = signed.rawTransaction
+            return ex.eth.send_raw_transaction(raw_tx)
+        else:
+            return
     except Exception:
         return
 
@@ -447,35 +461,21 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage  
             response = f"⬆️ {s2}"
             coinprice= await TokenPrice(tokenB)
-        logger.info(msg=f"coinprice {coinprice}")
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         OptimalOrderAmount  = router_instance.functions.getAmountsOut(OrderAmount, OrderPath).call()
         MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
         logger.info(msg=f"Min received {ex.from_wei(MinimumAmount, 'ether')}")
-        txntime = (int(time.time()) + 1000000)
+        deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
-            swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,txntime)
+            swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,deadline)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version=="v3"):
-            params = {
-                'tokenIn': tokenToBuy,
-                'tokenOut': tokenToSell,
-                'fee': 3000,
-                'recipient': walletaddress,
-                'deadline': int((datetime.now() + timedelta(seconds=20)).timestamp()),
-                'amountIn': ex.from_wei(MinimumAmount, 'ether'),
-                'amountOutMinimum': 0,
-                'sqrtPriceLimitX96': 0,
-                }
-            tx_params = {'value': ex.to_wei(0.000001, 'ether'),}
-            swap_TX=router_instance.functions.exactInputSingle(params).buildTransaction(tx_params)
-            tx = contract_tx.build_transaction(tx_fields)
-            signed = ex.eth.account.sign_transaction(tx, privatekey)
-            raw_tx = signed.rawTransaction
-            return ex.eth.send_raw_transaction(raw_tx)
+            swap_TX=router_instance.functions.exactInputSingle(tokenToBuy,tokenToSell,3000,walletaddress,deadline,MinimumAmount,0,0)
+            tx_token = await DEX_Sign_TX(swap_TX)
         elif (version =="limitorder"):
             logger.info(msg=f"limitorder processing")
+            #TBDhttps://docs.1inch.io/docs/limit-order-protocol/examples/#python-example-for-1inch-limit-order-v3 
         else:
             return
         txHash = str(ex.to_hex(tx_token))
@@ -796,7 +796,7 @@ apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
 async def post_init(application: Application):
     await LoadExchange(ex,testmode)
     logger.info(msg=f"Bot is online")
-    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online {version}", parse_mode=constants.ParseMode.HTML)
+    await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online {TTversion}", parse_mode=constants.ParseMode.HTML)
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
