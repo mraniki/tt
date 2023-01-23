@@ -257,17 +257,8 @@ def tokenlist_search(parsedJson, name):
     for entry in parsedJson:
         if name == entry ['symbol']:
             logger.info(msg=f"entry{entry ['symbol']}{entry ['chainId']} {entry ['address']}")
-            logger.info(msg=f"entry ['chainId'] ")
-            logger.info(msg=f"entry ['address'] ")
             if int(chainId) == entry ['chainId']:
                 return entry ['address']
-    # logger.info(msg=f"name {name} chainId {chainId}")
-    # for dict in json_object:
-    #     if (dict['chainId'] == chainId):
-    #         logger.info(msg=f"dict['address'] {dict['address']}")
-    #         if dict['chainId'] == chainId:
-    #             logger.info(msg=f"dict['address'] {dict['address']}")
-    #             return dict['address']
 
 async def DEXContractLookup(symb):
     try:
