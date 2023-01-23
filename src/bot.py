@@ -253,11 +253,12 @@ async def LoadExchange(exchangeid, mode):
 
 async def DEXContractLookup(symb):
     try:
+        logger.info(msg=f"tokenlist {tokenlist}")
         url = requests.get(tokenlist)
+        logger.info(msg=f"url {url}  symb {symb}")
         text = url.text
         token_list = json.loads(text)['tokens']
         symb=symb.upper()
-        logger.info(msg=f"DEXContractLookup {url} {symb}")
         try:
             symbolcontract = [token for token in token_list if (token['symbol'] == symb and token['chainId']==chainId)]
             logger.info(msg=f"symbolcontract {symbolcontract}")
