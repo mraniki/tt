@@ -260,6 +260,7 @@ async def DEXContractLookup(symb):
         #logger.info(msg=f"url.text {url.text} text {text}")
         token_list = json.loads(text)['tokens']
         logger.info(msg=f"token_list {token_list}")
+        logger.info(msg=f"chainId {chainId}")
         symb=symb.upper()
         try:
             symbolcontract = [token for token in token_list if (token['symbol'] == symb and token['chainId']==chainId)]
