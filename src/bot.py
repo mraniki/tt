@@ -484,20 +484,20 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         deadline = (int(time.time()) + 1000000)
-        if (version=='v2'):
-            OptimalOrderAmount  = router_instance.functions.getAmountsOut(OrderAmount, OrderPath).call()
-            MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
-            logger.info(msg=f"Min received {ex.from_wei(MinimumAmount, 'ether')}")
-            swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,deadline)
-            tx_token = await DEX_Sign_TX(swap_TX)
-        elif (version=="v3"):
-            swap_TX=router_instance.functions.swapExactTokensForTokens(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
-            tx_token = await DEX_Sign_TX(swap_TX)
-        elif (version =="limitorder"):
-            logger.info(msg=f"limitorder processing")
-            #TBDhttps://docs.1inch.io/docs/limit-order-protocol/examples/#python-example-for-1inch-limit-order-v3 
-        else:
-            return
+        # if (version=='v2'):
+        OptimalOrderAmount  = router_instance.functions.getAmountsOut(OrderAmount, OrderPath).call()
+        MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
+        logger.info(msg=f"Min received {ex.from_wei(MinimumAmount, 'ether')}")
+        swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,deadline)
+        tx_token = await DEX_Sign_TX(swap_TX)
+        # elif (version=="v3"):
+        #     swap_TX=router_instance.functions.swapExactTokensForTokens(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
+        #     tx_token = await DEX_Sign_TX(swap_TX)
+        # elif (version =="limitorder"):
+        #     logger.info(msg=f"limitorder processing")
+        #     #TBDhttps://docs.1inch.io/docs/limit-order-protocol/examples/#python-example-for-1inch-limit-order-v3 
+        # else:
+        #     return
         txHash = str(ex.to_hex(tx_token))
         logger.info(msg=f"{txHash}")
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
