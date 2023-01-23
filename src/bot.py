@@ -492,7 +492,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         deadline = (int(time.time()) + 1000000)
         # if (version=='v2'):
         # OptimalOrderAmount  = router_instance.functions.quoteExactInputSingle(OrderAmount, OrderPath).call()
-        _amountOutRaw = quoter_instance.functions.quoteExactInputSingle(OrderPath,OrderPath).call()
+        _amountOutRaw = quoter_instance.functions.quoteExactInputSingle(tokenToBuy,tokenToSell).call()
         # _amountOut = _amountOutRaw / (10 ** int(tokens[_tokenOut]['decimals']))
         # feeTier = str(_feeTier / 10000) + '%'
         # quotes[feeTier] = _amountOut
