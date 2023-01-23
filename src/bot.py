@@ -286,19 +286,22 @@ async def DEXContractLookup(symb):
 
 async def DEXFetchAbi(addr):
     try:
-        url = abiurl
-        params = {
-            "module": "contract",
-            "action": "getabi",
-            "address": addr,
-            "apikey": abiurltoken }
-        resp = requests.get(url, params=params, headers=headers).json()
-        abi = resp["result"]
-        #logger.info(msg=f"{abi}")
-        if(abi!=""):
-            return abi
-        else:
-            return None
+       # if(version=="v2"):
+            url = abiurl
+            params = {
+                "module": "contract",
+                "action": "getabi",
+                "address": addr,
+                "apikey": abiurltoken }
+            resp = requests.get(url, params=params, headers=headers).json()
+            abi = resp["result"]
+            #logger.info(msg=f"{abi}")
+            if(abi!=""):
+                return abi
+            else:
+                return None
+        #elif(version=="v3")
+
     except Exception as e:
         await HandleExceptions(e)
 
