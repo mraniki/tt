@@ -456,11 +456,11 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         AbiTokenA= await DEXFetchAbi(tokenToSell) #tokenToSell ABI
         #logger.info(msg=f"AbiTokenA {AbiTokenA}")
         contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
-        approvalcheck = contractTokenA.functions.allowance(walletaddress, router).call()
+        approvalcheck = contractTokenA.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
         logger.info(msg=f"approvalcheck {approvalcheck}")
         if (approvalcheck==0):
             maxamount = (ex.to_wei(2**64-1,'ether'))
-            approval_TX = contractTokenA.functions.approve(router, maxamount)
+            approval_TX = contractTokenA.functions.approve(ex.to_checksum_address(router), maxamount)
             ApprovaltxHash = await DEX_Sign_TX(approval_TX)
             logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
             time.sleep(10) #wait approval
