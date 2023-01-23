@@ -254,7 +254,7 @@ async def LoadExchange(exchangeid, mode):
 def tokenlist_search(json_object, name):
     logger.info(msg=f"name {name} chainId {chainId}")
     for dict in json_object:
-        if (dict['symbol'] == name and dict['chainId'] == chainId):
+        if (dict['chainId'] == chainId):
             logger.info(msg=f"dict['address'] {dict['address']}")
             if dict['chainId'] == chainId:
                 logger.info(msg=f"dict['address'] {dict['address']}")
