@@ -255,6 +255,7 @@ def tokenlist_search(json_object, name):
     logger.info(msg=f"name {name} chainId {chainId}")
     for dict in json_object:
         if dict['symbol'] == name:
+            logger.info(msg=f"dict['address'] {dict['address']}")
             if dict['chainId'] == chainId:
                 return dict['address']
 
@@ -267,7 +268,7 @@ async def DEXContractLookup(symb):
         try:
             symbolcontract=tokenlist_search(token_list,symb)
             logger.info(msg=f"symbolcontract {symbolcontract}")
-            if len(symbolcontract) > 0:
+            if symbolcontract is not None:
                 return symbolcontract
             else:
                 msg=f"{symb} does not exist in {tokenlist}"
