@@ -251,22 +251,19 @@ async def LoadExchange(exchangeid, mode):
     else:
         return
 
-def function(json_object, name):
-        return [obj for obj in json_object if obj['name']==name][0]['price']
+def tokenlist_search(json_object, name):
+    logger.info(msg=f"json_object {json_object}")
+    logger.info(msg=f"name {name}")
+    return [obj for obj in json_object if obj['symbol']==name][0]['address']
 
 async def DEXContractLookup(symb):
     try:
-        #logger.info(msg=f"tokenlist {tokenlist}")
         url = requests.get(tokenlist)
-        #logger.info(msg=f"url {url}  symb {symb}")
         text = url.text
-        #logger.info(msg=f"url.text {url.text} text {text}")
         token_list = json.loads(text)['tokens']
-        logger.info(msg=f"token_list {token_list}")
-        logger.info(msg=f"chainId {chainId}")
         symb=symb.upper()
         try:
-            symbolcontract = [token for token in token_list if (token['symbol'] == symb)]
+            symbolcontract=tokenlist_search(token_list,symb)
             logger.info(msg=f"symbolcontract {symbolcontract}")
             if len(symbolcontract) > 0:
                 #logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
