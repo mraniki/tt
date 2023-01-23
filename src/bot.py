@@ -242,7 +242,8 @@ async def LoadExchange(exchangeid, mode):
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         #ex = Web3(Web3.HTTPProvider(networkprovider))
         router_instanceabi= await DEXFetchAbi(router) #Router ABI
-        router_instance = ex.eth.contract(address=router, abi=router_instanceabi) #ContractLiquidityRouter
+        Web3.to_checksum_address
+        router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
         if ex.net.listening:
             logger.info(msg=f"Connected to {ex}")
             return name
