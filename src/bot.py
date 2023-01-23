@@ -463,7 +463,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
             time.sleep(10) #wait approval
         tokenToBuy= ex.to_checksum_address(await DEXContractLookup(tokenB))
-        logger.info(msg=f"tokenToBuy {tokenToBuy}")
+        logger.info(msg=f"tokenToBuy {s2} {tokenToBuy}")
         OrderPath=[tokenToSell, tokenToBuy]
         tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
         tokeninfobaldecimal=contractTokenA.functions.decimals().call()
