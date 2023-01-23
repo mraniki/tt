@@ -266,6 +266,7 @@ async def DEXContractLookup(symb):
         symb=symb.upper()
         try:
             symbolcontract=tokenlist_search(token_list,symb)
+            logger.info(msg=f"symbolcontract {symbolcontract}")
             if len(symbolcontract) > 0:
                 return symbolcontract
             else:
