@@ -439,6 +439,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         else:
             tokenA=s2
             tokenB=basesymbol
+        logger.info(msg=f"SendOrder_DEX")
         tokenToSell=ex.to_checksum_address(await DEXContractLookup(tokenA))
         AbiTokenA= await DEXFetchAbi(tokenToSell) #tokenToSell ABI
         contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
