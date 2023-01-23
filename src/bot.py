@@ -493,6 +493,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         # quotes[feeTier] = _amountOut
         # # OptimalOrderAmount  = router_instance.functions.getOutputAmount(OrderAmount, OrderPath).call()
         # MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
+        0x61fFE014bA17989E743c5F6cB21bF9697530B21e
         MinimumAmount=0
         logger.info(msg=f"Min received {ex.from_wei(MinimumAmount, 'ether')}")
         swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
