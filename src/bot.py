@@ -459,14 +459,14 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         AbiTokenA= await DEXFetchAbi(tokenToSell) #tokenToSell ABI
         #logger.info(msg=f"AbiTokenA {AbiTokenA}")
         contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
-        approvalcheck = contractTokenA.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
-        logger.info(msg=f"approvalcheck {approvalcheck}")
-        if (approvalcheck==0):
-            maxamount = (ex.to_wei(2**64-1,'ether'))
-            approval_TX = contractTokenA.functions.approve(ex.to_checksum_address(router), maxamount)
-            ApprovaltxHash = await DEX_Sign_TX(approval_TX)
-            logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
-            time.sleep(10) #wait approval
+        # approvalcheck = contractTokenA.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
+        # logger.info(msg=f"approvalcheck {approvalcheck}")
+        # if (approvalcheck==0):
+        #     maxamount = (ex.to_wei(2**64-1,'ether'))
+        #     approval_TX = contractTokenA.functions.approve(ex.to_checksum_address(router), maxamount)
+        #     ApprovaltxHash = await DEX_Sign_TX(approval_TX)
+        #     logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
+        #     time.sleep(10) #wait approval
         logger.info(msg=f"tokenToBuy {await DEXContractLookup(tokenB)}")
         tokenToBuy= ex.to_checksum_address(await DEXContractLookup(tokenB))
         logger.info(msg=f"tokenToBuy {s2} {tokenToBuy}")
@@ -491,7 +491,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,deadline)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version=="v3"):
-            swap_TX=router_instance.functions.ExactInputSingle(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
+            swap_TX=router_instance.functions.swapExactTokensForTokens(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version =="limitorder"):
             logger.info(msg=f"limitorder processing")
