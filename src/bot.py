@@ -450,6 +450,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         logger.info(msg=f"SendOrder_DEX")
         logger.info(msg=f"{tokenA}")
         tokenToSell=ex.to_checksum_address(await DEXContractLookup(tokenA))
+        logger.info(msg=f"tokenToSell {tokenToSell}")
         AbiTokenA= await DEXFetchAbi(tokenToSell) #tokenToSell ABI
         contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
         approvalcheck = contractTokenA.functions.allowance(walletaddress, router).call()
