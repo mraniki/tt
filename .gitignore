@@ -7,4 +7,4 @@ src/config/db.json
 config/db.json
 config/db1.json
 .vscode/settings.json
-tokenlist.json
+config/tokenlist.json
