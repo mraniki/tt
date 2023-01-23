@@ -252,8 +252,8 @@ async def LoadExchange(exchangeid, mode):
         return
 
 def tokenlist_search(json_object, name):
-    tokenaddress= [obj for obj in json_object if obj['symbol']==name and obj['chainId']==chainId][0]['address']
-    return
+    return [obj for obj in json_object if obj['symbol']==name and obj['chainId']==chainId][0]['address']
+
 async def DEXContractLookup(symb):
     try:
         url = requests.get(tokenlist)
