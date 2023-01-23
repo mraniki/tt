@@ -452,8 +452,10 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokenToSell=ex.to_checksum_address(await DEXContractLookup(tokenA))
         logger.info(msg=f"tokenToSell {tokenToSell}")
         AbiTokenA= await DEXFetchAbi(tokenToSell) #tokenToSell ABI
+        #logger.info(msg=f"AbiTokenA {AbiTokenA}")
         contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
         approvalcheck = contractTokenA.functions.allowance(walletaddress, router).call()
+        logger.info(msg=f"approvalcheck {approvalcheck}")
         if (approvalcheck==0):
             maxamount = (ex.to_wei(2**64-1,'ether'))
             approval_TX = contractTokenA.functions.approve(router, maxamount)
