@@ -447,6 +447,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         else:
             tokenA=s2
             tokenB=basesymbol
+        logger.info(msg=f"ORDER {tokenA} {tokenB}")
         logger.info(msg=f"SendOrder_DEX")
         logger.info(msg=f"{tokenA}")
         tokenToSell=ex.to_checksum_address(await DEXContractLookup(tokenA))
