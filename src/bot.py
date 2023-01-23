@@ -253,8 +253,8 @@ async def LoadExchange(exchangeid, mode):
         return
 
 def tokenlist_search(parsedJson, name):
-    logger.info(msg=f"name {name} chainId {chainId}")
-    logger.info(msg=f"parsedJson {parsedJson}")
+    #logger.info(msg=f"name {name} chainId {chainId}")
+    #logger.info(msg=f"parsedJson {parsedJson}")
     for entry in parsedJson:
         if name == entry ['symbol']:
             logger.info(msg=f"entry{entry ['symbol']}{entry ['chainId']} {entry ['address']}")
