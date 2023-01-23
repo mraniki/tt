@@ -253,11 +253,11 @@ async def LoadExchange(exchangeid, mode):
 
 async def DEXContractLookup(symb):
     try:
-        logger.info(msg=f"tokenlist {tokenlist}")
+        #logger.info(msg=f"tokenlist {tokenlist}")
         url = requests.get(tokenlist)
-        logger.info(msg=f"url {url}  symb {symb}")
+        #logger.info(msg=f"url {url}  symb {symb}")
         text = url.text
-        logger.info(msg=f"url.text {url.text} text {text}")
+        #logger.info(msg=f"url.text {url.text} text {text}")
         token_list = json.loads(text)['tokens']
         logger.info(msg=f"token_list {token_list}")
         symb=symb.upper()
