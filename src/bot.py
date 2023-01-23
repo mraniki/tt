@@ -421,7 +421,7 @@ async def TokenPrice(s1):
 
 async def DEX_Sign_TX(contract_tx):
     try:
-        if (version=='v2'):
+        # if (version=='v2'):
             tx_params = {
                 'from': walletaddress,
                 'gas': int(gasLimit),
@@ -432,14 +432,14 @@ async def DEX_Sign_TX(contract_tx):
             signed = ex.eth.account.sign_transaction(tx, privatekey)
             raw_tx = signed.rawTransaction
             return ex.eth.send_raw_transaction(raw_tx)
-        elif (version=="v3"):
-            tx_params = {'value': ex.to_wei(0.000001, 'ether'),}
-            tx = contract_tx.build_transaction(tx_params)
-            signed = ex.eth.account.sign_transaction(tx, privatekey)
-            raw_tx = signed.rawTransaction
-            return ex.eth.send_raw_transaction(raw_tx)
-        else:
-            return
+        # elif (version=="v3"):
+        #     tx_params = {'value': ex.to_wei(0.000001, 'ether'),}
+        #     tx = contract_tx.build_transaction(tx_params)
+        #     signed = ex.eth.account.sign_transaction(tx, privatekey)
+        #     raw_tx = signed.rawTransaction
+        #     return ex.eth.send_raw_transaction(raw_tx)
+        # else:
+        #     return
     except Exception:
         return
 
