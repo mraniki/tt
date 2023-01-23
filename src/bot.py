@@ -180,6 +180,8 @@ async def LoadExchange(exchangeid, mode):
     global gasLimit
     global router_instance
     global router_instanceabi
+    global quoter_instance
+    global quoter_instanceabi
     global platform
     global chainId
     if (failsafe):
@@ -490,7 +492,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         deadline = (int(time.time()) + 1000000)
         # if (version=='v2'):
         # OptimalOrderAmount  = router_instance.functions.quoteExactInputSingle(OrderAmount, OrderPath).call()
-        _amountOutRaw = quoter_instance.functions.quoteExactInputSingle(tokenToSell, tokenToBuy, 3000, OrderAmount, 0).call()
+        _amountOutRaw = quoter_instance.functions.quoteExactInputSingle(OrderPath,OrderPath).call()
         # _amountOut = _amountOutRaw / (10 ** int(tokens[_tokenOut]['decimals']))
         # feeTier = str(_feeTier / 10000) + '%'
         # quotes[feeTier] = _amountOut
