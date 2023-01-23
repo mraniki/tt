@@ -272,6 +272,7 @@ async def DEXContractLookup(symb):
             await HandleExceptions(e)
             return
     except Exception as e:
+        logger.info(msg=f"error {DEXContractLookup} {symb}")
         await HandleExceptions(e)
         return
 
