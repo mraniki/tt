@@ -257,6 +257,7 @@ def tokenlist_search(json_object, name):
         if dict['symbol'] == name:
             logger.info(msg=f"dict['address'] {dict['address']}")
             if dict['chainId'] == chainId:
+                logger.info(msg=f"dict['address'] {dict['address']}")
                 return dict['address']
 
 async def DEXContractLookup(symb):
