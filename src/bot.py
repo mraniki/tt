@@ -464,7 +464,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             ApprovaltxHash = await DEX_Sign_TX(approval_TX)
             logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
             time.sleep(10) #wait approval
-        logger.info(msg=f"{await DEXContractLookup(tokenB)}")
+        logger.info(msg=f"tokenToBuy {await DEXContractLookup(tokenB)}")
         tokenToBuy= ex.to_checksum_address(await DEXContractLookup(tokenB))
         logger.info(msg=f"tokenToBuy {s2} {tokenToBuy}")
         OrderPath=[tokenToSell, tokenToBuy]
