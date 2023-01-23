@@ -256,10 +256,10 @@ def tokenlist_search(parsedJson, name):
     logger.info(msg=f"parsedJson {parsedJson}")
     for entry in parsedJson:
         if name == entry ['symbol']:
-            logger.info(msg=f"entry ['symbol'] {entry ['symbol']}")
-            logger.info(msg=f"entry ['chainId'] {entry ['chainId']}")
-            logger.info(msg=f"entry ['address'] {entry ['address']}")
-            if chainId == entry ['chainId']:
+            logger.info(msg=f"entry{entry ['symbol']}{entry ['chainId']} {entry ['address']}")
+            logger.info(msg=f"entry ['chainId'] ")
+            logger.info(msg=f"entry ['address'] ")
+            if int(chainId) == entry ['chainId']:
                 return entry ['address']
     # logger.info(msg=f"name {name} chainId {chainId}")
     # for dict in json_object:
