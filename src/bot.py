@@ -252,7 +252,7 @@ async def LoadExchange(exchangeid, mode):
         return
 
 def tokenlist_search(json_object, name):
-    return [obj for obj in json_object if obj['symbol']==name and obj['chainId']==chainId][0]['address']
+    return [obj for obj in json_object if obj['symbol']==name][0]['address']
 
 async def DEXContractLookup(symb):
     try:
