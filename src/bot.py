@@ -251,6 +251,9 @@ async def LoadExchange(exchangeid, mode):
     else:
         return
 
+def function(json_object, name):
+        return [obj for obj in json_object if obj['name']==name][0]['price']
+
 async def DEXContractLookup(symb):
     try:
         #logger.info(msg=f"tokenlist {tokenlist}")
