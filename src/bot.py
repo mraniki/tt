@@ -488,7 +488,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress,deadline)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version=="v3"):
-            swap_TX=router_instance.functions.swapExactInputSingle(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
+            swap_TX=router_instance.functions.ExactInputSingle(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version =="limitorder"):
             logger.info(msg=f"limitorder processing")
