@@ -252,8 +252,6 @@ async def LoadExchange(exchangeid, mode):
         return
 
 def tokenlist_search(json_object, name):
-    logger.info(msg=f"json_object {json_object}")
-    logger.info(msg=f"name {name}")
     return [obj for obj in json_object if obj['symbol']==name][0]['address']
 
 async def DEXContractLookup(symb):
@@ -264,10 +262,8 @@ async def DEXContractLookup(symb):
         symb=symb.upper()
         try:
             symbolcontract=tokenlist_search(token_list,symb)
-            logger.info(msg=f"symbolcontract {symbolcontract}")
             if len(symbolcontract) > 0:
-                #logger.info(msg=f"symbolcontract {symbolcontract[0]['address']}")
-                return symbolcontract[0]['address']
+                return symbolcontract
             else:
                 msg=f"{symb} does not exist in {tokenlist}"
                 await HandleExceptions(msg)
