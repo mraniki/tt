@@ -470,22 +470,21 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         #     ApprovaltxHash = await DEX_Sign_TX(approval_TX)
         #     logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
         #     time.sleep(10) #wait approval
-        OrderPath=[tokenToSell, tokenToBuy]
-        tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
-        tokeninfobaldecimal=contractTokenA.functions.decimals().call()
-        if (s1=="SELL"):
-            amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
-            response = f"⬇️ {s2}"
-            coinprice= await TokenPrice(tokenA)
-        else:
-            amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
-            response = f"⬆️ {s2}"
-            coinprice= await TokenPrice(tokenB)
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
-
+            OrderPath=[tokenToSell, tokenToBuy]
+            tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
+            tokeninfobaldecimal=contractTokenA.functions.decimals().call()
+            if (s1=="SELL"):
+                amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
+                response = f"⬇️ {s2}"
+                coinprice= await TokenPrice(tokenA)
+            else:
+                amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
+                response = f"⬆️ {s2}"
+                coinprice= await TokenPrice(tokenB)
             OptimalOrderAmount  = router_instance.functions.getOutputAmount(OrderAmount, OrderPath).call()
         # MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
             MinimumAmount=0
