@@ -496,7 +496,6 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version=="v3"):
-            [tokenToBuy, fee, tokenToSell] = path
             fee=int(3000)
             sqrt_price_limit_x96 = 0
             _amountOutRaw= quoter_instance.functions.quoteExactInputSingle(tokenToBuy, tokenToSell, fee, OrderAmount, sqrt_price_limit_x96).call()
