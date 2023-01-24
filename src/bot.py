@@ -494,7 +494,6 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         # # OptimalOrderAmount  = router_instance.functions.getOutputAmount(OrderAmount, OrderPath).call()
         # MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
         MinimumAmount=0
-        logger.info(msg=f"Min received {ex.from_wei(MinimumAmount, 'ether')}")
         swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
         tx_token = await DEX_Sign_TX(swap_TX)
         # elif (version=="v3"):
@@ -506,11 +505,10 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         # else:
         #     return
         txHash = str(ex.to_hex(tx_token))
-        logger.info(msg=f"{txHash}")
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
-        await DEX_GasControl()
+        #await DEX_GasControl()
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
         tokenprice=coinprice
         gasUsed=txHashDetail['gasUsed']
@@ -518,7 +516,6 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         if(txResult == "1"):
             response+= f"\n➕ Size: {round(ex.from_wei(OrderAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
             logger.info(msg=f"{response}")
-            #logger.info(msg=f"{txHashDetail}")
             return response     
     except Exception as e:
         await HandleExceptions(e)
