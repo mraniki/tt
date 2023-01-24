@@ -486,7 +486,6 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         # if (version=='v2'):
     # this is just to check if the bot is still running
         # OptimalOrderAmount  = router_instance.functions.quoteExactInputSingle(OrderAmount, OrderPath).call()
-        _amountOutRaw = quoter_instance.functions.quoteExactInput(tokenToBuy,tokenToSell,int(3000),int(OrderAmount)).call()
         logger.info(msg=f"{_amountOutRaw}")
         # _amountOut = _amountOutRaw / (10 ** int(tokens[_tokenOut]['decimals']))
         # feeTier = str(_feeTier / 10000) + '%'
@@ -497,6 +496,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
         tx_token = await DEX_Sign_TX(swap_TX)
         # elif (version=="v3"):
+        _amountOutRaw = quoter_instance.functions.quoteExactInputSingle(tokenToBuy,tokenToSell,int(3000),int(OrderAmount)).call()
         #     swap_TX=router_instance.functions.swapExactTokensForTokens(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
         #     tx_token = await DEX_Sign_TX(swap_TX)
         # elif (version =="limitorder"):
