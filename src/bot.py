@@ -486,15 +486,13 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
                 response = f"⬆️ {s2}"
                 coinprice= await TokenPrice(tokenB)
             OptimalOrderAmount  = router_instance.functions.getOutputAmount(OrderAmount, OrderPath).call()
-        # MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
-            MinimumAmount=0
+            MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
             swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version=="v3"):
             fee=int(3000)
             sqrt_price_limit_x96 = 0
             OptimalOrderAmount  = router_instance.functions.quoteExactInputSingle(OrderAmount, OrderPath).call()
-            logger.info(msg=f"{_amountOutRaw}")
             swap_TX=router_instance.functions.swapExactTokensForTokens(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version =="limitorder"):
