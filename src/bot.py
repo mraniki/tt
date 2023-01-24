@@ -428,7 +428,7 @@ async def TokenPrice(s1):
 
 async def DEX_Sign_TX(contract_tx):
     try:
-        # if (version=='v2'):
+        if (version=='v2'):
             tx_params = {
                 'from': walletaddress,
                 'gas': int(gasLimit),
@@ -439,14 +439,14 @@ async def DEX_Sign_TX(contract_tx):
             signed = ex.eth.account.sign_transaction(tx, privatekey)
             raw_tx = signed.rawTransaction
             return ex.eth.send_raw_transaction(raw_tx)
-        # elif (version=="v3"):
-        #     tx_params = {'value': ex.to_wei(0.000001, 'ether'),}
-        #     tx = contract_tx.build_transaction(tx_params)
-        #     signed = ex.eth.account.sign_transaction(tx, privatekey)
-        #     raw_tx = signed.rawTransaction
-        #     return ex.eth.send_raw_transaction(raw_tx)
-        # else:
-        #     return
+        elif (version=="v3"):
+            tx_params = {'value': ex.to_wei(0.000001, 'ether'),}
+            tx = contract_tx.build_transaction(tx_params)
+            signed = ex.eth.account.sign_transaction(tx, privatekey)
+            raw_tx = signed.rawTransaction
+            return ex.eth.send_raw_transaction(raw_tx)
+        else:
+            return
     except Exception:
         return
 
@@ -462,9 +462,6 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         AbiTokenA= await DEXFetchAbi(tokenToSell) 
         contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
         tokenToBuy= ex.to_checksum_address(await DEXContractLookup(tokenB))
-        i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
-        OrderAmount = i_OrderAmount
-        deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
             approvalcheck = contractTokenA.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
             logger.info(msg=f"approvalcheck {approvalcheck}")
@@ -485,6 +482,9 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
                 amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
                 response = f"⬆️ {s2}"
                 coinprice= await TokenPrice(tokenB)
+            i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
+            OrderAmount = i_OrderAmount
+            deadline = (int(time.time()) + 1000000)
             OptimalOrderAmount  = router_instance.functions.getOutputAmount(OrderAmount, OrderPath).call()
             MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
             swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
@@ -492,8 +492,9 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         elif (version=="v3"):
             fee=int(3000)
             sqrt_price_limit_x96 = 0
-            OptimalOrderAmount  = quoter_instance.functions.quoteExactInputSingle(OrderAmount, OrderPath).call()
-            swap_TX=router_instance.functions.swapExactTokensForTokens(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
+            OptimalOrderAmount  = quoter_instance.functions.quoteExactInputSingle(tokenToBuy,tokenToSell,fee,MinimumAmount, sqrt_price_limit_x96).call()
+            MinimumAmount=int(OptimalOrderAmount[1] *0.98)# max 2% slippage
+            swap_TX=router_instance.functions.swapExactInputSingle(tokenToBuy,tokenToSell,fee,walletaddress,deadline,OrderAmount,MinimumAmount,sqrt_price_limit_x96)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version =="limitorder"):
             logger.info(msg=f"limitorder processing")
