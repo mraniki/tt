@@ -485,7 +485,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             coinprice= await TokenPrice(tokenA)
         else:
             #amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
-            amountTosell=0.1
+            amountTosell=10000
             response = f"⬆️ {s2}"
             coinprice= await TokenPrice(tokenB)
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
