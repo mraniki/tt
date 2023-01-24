@@ -485,11 +485,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         OrderAmount = i_OrderAmount
         deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
-        # OptimalOrderAmount  = router_instance.functions.quoteExactInputSingle(OrderAmount, OrderPath).call()
-            logger.info(msg=f"{_amountOutRaw}")
-        # _amountOut = _amountOutRaw / (10 ** int(tokens[_tokenOut]['decimals']))
-        # feeTier = str(_feeTier / 10000) + '%'
-        # quotes[feeTier] = _amountOut
+
             OptimalOrderAmount  = router_instance.functions.getOutputAmount(OrderAmount, OrderPath).call()
         # MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
             MinimumAmount=0
@@ -498,27 +494,28 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         elif (version=="v3"):
             fee=int(3000)
             sqrt_price_limit_x96 = 0
-            _amountOutRaw= quoter_instance.functions.quoteExactInputSingle(tokenToBuy, tokenToSell, fee, int(amountTosell), sqrt_price_limit_x96).call()
-        #     swap_TX=router_instance.functions.swapExactTokensForTokens(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
-        #     tx_token = await DEX_Sign_TX(swap_TX)
-        # elif (version =="limitorder"):
-        #     logger.info(msg=f"limitorder processing")
-        #     #TBDhttps://docs.1inch.io/docs/limit-order-protocol/examples/#python-example-for-1inch-limit-order-v3 
-        # else:
-        #     return
-        # txHash = str(ex.to_hex(tx_token))
-        # checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
-        # checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
-        # txResult = checkTransactionRequest.json()['status']
-        # #await DEX_GasControl()
-        # txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-        # tokenprice=coinprice
-        # gasUsed=txHashDetail['gasUsed']
-        # txtimestamp=datetime.now()
-        # if(txResult == "1"):
-        #     response+= f"\n➕ Size: {round(ex.from_wei(OrderAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
-        #     logger.info(msg=f"{response}")
-        #     return response     
+            OptimalOrderAmount  = router_instance.functions.quoteExactInputSingle(OrderAmount, OrderPath).call()
+            logger.info(msg=f"{_amountOutRaw}")
+            swap_TX=router_instance.functions.swapExactTokensForTokens(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
+            tx_token = await DEX_Sign_TX(swap_TX)
+        elif (version =="limitorder"):
+            logger.info(msg=f"limitorder processing")
+            #TBDhttps://docs.1inch.io/docs/limit-order-protocol/examples/#python-example-for-1inch-limit-order-v3 
+        else:
+            return
+        txHash = str(ex.to_hex(tx_token))
+        checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
+        checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
+        txResult = checkTransactionRequest.json()['status']
+        #await DEX_GasControl()
+        txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
+        tokenprice=coinprice
+        gasUsed=txHashDetail['gasUsed']
+        txtimestamp=datetime.now()
+        if(txResult == "1"):
+            response+= f"\n➕ Size: {round(ex.from_wei(OrderAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
+            logger.info(msg=f"{response}")
+            return response     
     except Exception as e:
         await HandleExceptions(e)
         return
