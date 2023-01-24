@@ -477,8 +477,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             response = f"⬇️ {s2}"
             coinprice= await TokenPrice(tokenA)
         else:
-            #amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
-            amountTosell=0.00004394
+            amountTosell = ((tokeninfobal)/(10 ** tokeninfobaldecimal))*(float(s5)/100) #buy %p ercentage
             response = f"⬆️ {s2}"
             coinprice= await TokenPrice(tokenB)
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
@@ -496,7 +495,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         # MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
         MinimumAmount=0
         logger.info(msg=f"Min received {ex.from_wei(MinimumAmount, 'ether')}")
-        swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,0,OrderPath,walletaddress)
+        swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
         tx_token = await DEX_Sign_TX(swap_TX)
         # elif (version=="v3"):
         #     swap_TX=router_instance.functions.swapExactTokensForTokens(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
