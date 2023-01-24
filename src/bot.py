@@ -485,13 +485,12 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         OrderAmount = i_OrderAmount
         deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
-    # this is just to check if the bot is still running
         # OptimalOrderAmount  = router_instance.functions.quoteExactInputSingle(OrderAmount, OrderPath).call()
             logger.info(msg=f"{_amountOutRaw}")
         # _amountOut = _amountOutRaw / (10 ** int(tokens[_tokenOut]['decimals']))
         # feeTier = str(_feeTier / 10000) + '%'
         # quotes[feeTier] = _amountOut
-        # # OptimalOrderAmount  = router_instance.functions.getOutputAmount(OrderAmount, OrderPath).call()
+            OptimalOrderAmount  = router_instance.functions.getOutputAmount(OrderAmount, OrderPath).call()
         # MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
             MinimumAmount=0
             swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
