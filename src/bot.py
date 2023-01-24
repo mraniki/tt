@@ -462,18 +462,18 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         AbiTokenA= await DEXFetchAbi(tokenToSell) 
         contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
         tokenToBuy= ex.to_checksum_address(await DEXContractLookup(tokenB))
-        # approvalcheck = contractTokenA.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
-        # logger.info(msg=f"approvalcheck {approvalcheck}")
-        # if (approvalcheck==0):
-        #     maxamount = (ex.to_wei(2**64-1,'ether'))
-        #     approval_TX = contractTokenA.functions.approve(ex.to_checksum_address(router), maxamount)
-        #     ApprovaltxHash = await DEX_Sign_TX(approval_TX)
-        #     logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
-        #     time.sleep(10) #wait approval
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
         deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
+            approvalcheck = contractTokenA.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
+            logger.info(msg=f"approvalcheck {approvalcheck}")
+            if (approvalcheck==0):
+                maxamount = (ex.to_wei(2**64-1,'ether'))
+                approval_TX = contractTokenA.functions.approve(ex.to_checksum_address(router), maxamount)
+                ApprovaltxHash = await DEX_Sign_TX(approval_TX)
+                logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
+                time.sleep(10) #wait approval
             OrderPath=[tokenToSell, tokenToBuy]
             tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
             tokeninfobaldecimal=contractTokenA.functions.decimals().call()
