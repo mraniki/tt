@@ -492,7 +492,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         elif (version=="v3"):
             fee=int(3000)
             sqrt_price_limit_x96 = 0
-            OptimalOrderAmount  = quoter_instance.functions.quoteExactInputSingle(tokenToBuy,tokenToSell,fee,MinimumAmount, sqrt_price_limit_x96).call()
+            OptimalOrderAmount  = quoter_instance.functions.quoteExactInputSingle(tokenToBuy,tokenToSell,fee,OrderAmount, sqrt_price_limit_x96).call()
             MinimumAmount=int(OptimalOrderAmount[1] *0.98)# max 2% slippage
             swap_TX=router_instance.functions.swapExactInputSingle(tokenToBuy,tokenToSell,fee,walletaddress,deadline,OrderAmount,MinimumAmount,sqrt_price_limit_x96)
             tx_token = await DEX_Sign_TX(swap_TX)
