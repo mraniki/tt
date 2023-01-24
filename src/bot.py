@@ -486,7 +486,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         # if (version=='v2'):
     # this is just to check if the bot is still running
         # OptimalOrderAmount  = router_instance.functions.quoteExactInputSingle(OrderAmount, OrderPath).call()
-        _amountOutRaw = quoter_instance.functions.quoteExactInput(tokenToBuy,tokenToSell,int(3000),int(OrderAmount),int(0)).call()
+        _amountOutRaw = quoter_instance.functions.quoteExactInput(tokenToBuy,tokenToSell,int(3000),int(OrderAmount)).call()
         logger.info(msg=f"{_amountOutRaw}")
         # _amountOut = _amountOutRaw / (10 ** int(tokens[_tokenOut]['decimals']))
         # feeTier = str(_feeTier / 10000) + '%'
