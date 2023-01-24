@@ -494,8 +494,8 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         # if (version=='v2'):
     # this is just to check if the bot is still running
         # OptimalOrderAmount  = router_instance.functions.quoteExactInputSingle(OrderAmount, OrderPath).call()
-        _amountOutRaw = quoter_instance.functions.quoteExactInputSingle(tokenToBuy,tokenToSell,int(3000),int(OrderAmount),int(0)).call()
-        logger.info(msg=f"{_amountOutRaw}")
+        #_amountOutRaw = quoter_instance.functions.quoteExactInputSingle(tokenToBuy,tokenToSell,int(3000),int(OrderAmount),int(0)).call()
+        #logger.info(msg=f"{_amountOutRaw}")
         # _amountOut = _amountOutRaw / (10 ** int(tokens[_tokenOut]['decimals']))
         # feeTier = str(_feeTier / 10000) + '%'
         # quotes[feeTier] = _amountOut
@@ -503,7 +503,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         # MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
         MinimumAmount=0
         logger.info(msg=f"Min received {ex.from_wei(MinimumAmount, 'ether')}")
-        swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
+        swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,0,OrderPath,walletaddress)
         tx_token = await DEX_Sign_TX(swap_TX)
         # elif (version=="v3"):
         #     swap_TX=router_instance.functions.swapExactTokensForTokens(tokenToBuy,tokenToSell,3000,walletaddress,deadline,OrderAmount,0,0)
