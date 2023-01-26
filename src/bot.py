@@ -512,6 +512,10 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             quote_response = requests.get(quote_url)
             quote = quote_response.json()
             logger.info(msg=f"quote {quote}")
+            estimatedGas = quote['estimatedGas']
+            logger.info(msg=f"quote {estimatedGas}")
+            toTokenAmount = quote['toTokenAmount']
+            logger.info(msg=f"quote {toTokenAmount}")
             # swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={amountTosell}&fromAddress={walletaddress}&slippage={slippage}"
             # swap_response = requests.get(swap_url)
             # order = swap_response.json()
