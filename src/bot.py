@@ -470,6 +470,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         OrderPath=[tokenToSell, tokenToBuy]
         tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
         tokeninfobaldecimal=contractTokenA.functions.decimals().call()
+        slippage=1
         if (s1=="SELL"):
             amountTosell = (tokeninfobal)/(10 ** tokeninfobaldecimal) #SELL all token in case of sell order
             response = f"⬇️ {s2}"
@@ -504,6 +505,14 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version =="limitorder"):
             logger.info(msg=f"limitorder processing")
+            endpoint='https://api.1inch.exchange/v5.0/1/'
+            quote_url = f"{endpoint}{chainId}/quote?fromTokenAddress={tokenToSell}&toTokenAddress={tokenToBuy}&amount={amountTosell}"
+            quote_response = requests.get(quote_url)
+            quote = quote_response.json()
+            logger.info(msg=f"quote {quote}")
+            # swap_url = f"{endpoint}{chainId}/swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={amountTosell}&fromAddress={walletaddress}&slippage={slippage}"
+            # swap_response = requests.get(swap_url)
+            # order = swap_response.json()
             #TBDhttps://docs.1inch.io/docs/limit-order-protocol/examples/#python-example-for-1inch-limit-order-v3 
         else:
             return
@@ -523,108 +532,6 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
     except Exception as e:
         await HandleExceptions(e)
         return
-
-
-# DEx order V3
-# from web3 import Web3
-
-# # Connect to a local or remote Ethereum node
-# w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
-
-# # The address of the Uniswap v3 exchange contract
-# uniswap_v3_address = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45"
-
-# # The ABI (Application Binary Interface) of the Uniswap v3 exchange contract
-# uniswap_v3_abi = [{...}]
-
-# # Create a contract object
-# uniswap_v3 = w3.eth.contract(address=uniswap_v3_address, abi=uniswap_v3_abi)
-
-# # The address of the user making the order
-# user_address = "0x1234567890abcdef01234567890abcdef0123456"
-
-# # The amount of tokens the user wants to sell
-# sell_amount = w3.toWei(1, "ether")
-
-# # The amount of tokens the user wants to buy
-# buy_amount = w3.toWei(2, "ether")
-
-# # The token address for the token the user wants to sell
-# sell_token = "0x0000000000000000000000000000000000000000"
-
-# # The token address for the token the user wants to buy
-# buy_token = "0x0000000000000000000000000000000000000000"
-
-# # The deadline for the order to be filled
-# deadline = w3.eth.getBlock("latest")["timestamp"] + 3600
-
-# # The gas price for the transaction
-# gas_price = w3.toWei(20, "gwei")
-
-# # The nonce of the user's account
-# nonce = w3.eth.getTransactionCount(user_address)
-
-# # The data for the transaction
-# data = uniswap_v3.functions.addOrder(sell_token, sell_amount, buy_token, buy_amount, deadline).buildTransaction(
-#     {
-#         "from": user_address,
-#         "gasPrice": gas_price,
-#         "nonce": nonce,
-#     }
-# )
-
-# # Sign the transaction
-# signed_txn = w3.eth.account.signTransaction(data, private_key=user_private_key)
-
-# # Send the transaction
-# txn_hash = w3.eth.sendRawTransaction(signed_txn.rawTransaction)
-
-# # Wait for the transaction to be mined
-# txn_receipt = w3.eth.waitForTransactionReceipt(txn_hash)
-
-# # Check if the transaction was successful
-# if txn_receipt["status"] == 1:
-#     print("Order added successfully")
-# else:
-#     print("Error adding order")
-
-
-# Quote
-
-# # Connect to a local or remote Ethereum node
-# w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
-
-# # The address of the Uniswap v3 exchange contract
-# uniswap_v3_address = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45"
-
-# # The ABI (Application Binary Interface) of the Uniswap v3 exchange contract
-# uniswap_v3_abi = [{...}]
-
-# # Create a contract object
-# uniswap_v3 = w3.eth.contract(address=uniswap_v3_address, abi=uniswap_v3_abi)
-
-# # The token address for the token you want to quote
-# opt_token = "0x4355fC160f74328f9b383dF2EC589bB3dFd82Ba0"
-
-# # The amount of tokens you want to quote
-# quote_amount = w3.toWei(1, "ether")
-
-# # The token address for the token you want to pay with
-# pay_token = "0x0000000000000000000000000000000000000000"
-
-# # The address of the user making the quote
-# user_address = "0x1234567890abcdef01234567890abcdef0123456"
-
-# # Call the getSwapQuote function
-# quote = uniswap_v3.functions.getSwapQuote(pay_token, quote_amount, opt_token).call(
-#     {"from": user_address}
-# )
-
-# # The returned quote contains the amount of opt_token and pay_token to be received/paid
-# opt_amount_returned = quote[0]
-# pay_amount_returned = quote[1]
-
-# print(f"For {w3.fromWei(quote_amount, 'ether')} {w3.fromWei(opt_amount_returned, 'ether')} OPT  will be received")
 
 
 async def TokenInfo(token):
