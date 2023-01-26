@@ -504,10 +504,11 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             swap_TX=router_instance.functions.addOrder(tokenToBuy,OrderAmount,tokenToSell,OrderAmountfee)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version =="limitorder"):
-            logger.info(msg=f"limitorder processing")
+            logger.info(msg=f"V3 processing")
             endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
             swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={amountTosell}&fromAddress={walletaddress}&slippage={slippage}"
             swap_response = requests.get(swap_url)
+            logger.info(msg=f"{swap_response}")
             order = swap_response.json()
             tx_token=order['data']
         else:
