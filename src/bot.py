@@ -480,7 +480,8 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             coinprice= await TokenPrice(tokenB)
         i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
         OrderAmount = i_OrderAmount
-        deadline = ex.eth.getBlock("latest")["timestamp"] + 3600
+        # deadline = ex.eth.getBlock("latest")["timestamp"] + 3600
+        deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
             approvalcheck = contractTokenA.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
             logger.info(msg=f"approvalcheck {approvalcheck}")
