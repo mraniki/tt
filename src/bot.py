@@ -501,6 +501,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             logger.info(msg=f"{OrderAmount}")
             endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
             approval_URL = f"{endpoint}approve/transaction?tokenAddress={walletaddress}"
+            logger.info(msg=f"{approval_URL}")
             approval_response = requests.get(approval_URL)
             logger.info(msg=f"{approval_response}")
             swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={OrderAmount}&fromAddress={walletaddress}&slippage={slippage}"
