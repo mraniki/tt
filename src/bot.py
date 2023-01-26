@@ -418,9 +418,9 @@ async def TokenPrice(s1):
                 coinplatfrom=coininfo['asset_platform_id']
                 logger.info(msg=f"coinplatfrom {coinplatfrom}")
                 coinprice=coininfo['market_data']['current_price']['usd']
-                logger.info(msg=f"coinprice {coinprice}")
+                logger.info(msg=f"coingeckoprice {coinprice}")
                 coinsymbol=coininfo['symbol']
-                response = f'{coinsymbol} {coinprice} USD on {coinplatfrom}'
+                response = f'coingecko info: {coinsymbol} {coinprice} USD on {coinplatfrom}'
                 logger.info(msg=f"{response}")
                 return coinprice
     except Exception:
@@ -508,6 +508,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             logger.info(msg=f"limitorder processing")
             endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
             quote_url = f"{endpoint}quote?fromTokenAddress={tokenToSell}&toTokenAddress={tokenToBuy}&amount={amountTosell}"
+            logger.info(msg=f"quote {quote_url}")
             quote_response = requests.get(quote_url)
             quote = quote_response.json()
             logger.info(msg=f"quote {quote}")
