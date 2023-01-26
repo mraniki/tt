@@ -513,9 +513,9 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             quote = quote_response.json()
             logger.info(msg=f"quote {quote}")
             estimatedGas = quote['estimatedGas']
-            logger.info(msg=f"quote {estimatedGas}")
+            logger.info(msg=f"estimatedGas {estimatedGas}")
             toTokenAmount = quote['toTokenAmount']
-            logger.info(msg=f"quote {toTokenAmount}")
+            logger.info(msg=f"toTokenAmount {toTokenAmount}")
             # swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={amountTosell}&fromAddress={walletaddress}&slippage={slippage}"
             # swap_response = requests.get(swap_url)
             # order = swap_response.json()
@@ -716,9 +716,22 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 if(TokenToPrice != None):
                     tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=TokenToPrice)
                     tokenprice=tokeninfo['market_data']['current_price']['usd']
-                    price = router_instance.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
-                    logger.info(msg=f"price {price}")
-                    response=f"₿ {TokenToPrice}\n{symbol} @ {(price)} or {tokenprice}"
+                    amountTosell=100
+                    logger.info(msg=f"limitorder processing")
+                    endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
+                    quote_url = f"{endpoint}quote?fromTokenAddress={TokenToPrice}&toTokenAddress={basesymbol}&amount={amountTosell}"
+                    logger.info(msg=f"quote {quote_url}")
+                    quote_response = requests.get(quote_url)
+                    quote = quote_response.json()
+                    logger.info(msg=f"quote {quote}")
+                    estimatedGas = quote['estimatedGas']
+                    logger.info(msg=f"estimatedGas {estimatedGas}")
+                    toTokenAmount = quote['toTokenAmount']
+                    logger.info(msg=f"toTokenAmount {toTokenAmount}")
+                    # price = router_instance.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
+                    # logger.info(msg=f"price {price}")
+                    # response=f"₿ {TokenToPrice}\n{symbol} @ {(price)} or {tokenprice}"
+                    response=f"₿ {TokenToPrice}\n{symbol} @ {toTokenAmount} or {tokenprice}"
                     await DEX_TokenInfo(symbol)
                     await send(update,response)
     except Exception as e:
