@@ -506,11 +506,11 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         elif (version =="limitorder"):
             logger.info(msg=f"limitorder processing")
             endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
-            quote_url = f"quote?fromTokenAddress={tokenToSell}&toTokenAddress={tokenToBuy}&amount={amountTosell}"
+            quote_url = f"{endpoint}quote?fromTokenAddress={tokenToSell}&toTokenAddress={tokenToBuy}&amount={amountTosell}"
             quote_response = requests.get(quote_url)
             quote = quote_response.json()
             logger.info(msg=f"quote {quote}")
-            # swap_url = f"swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={amountTosell}&fromAddress={walletaddress}&slippage={slippage}"
+            # swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={amountTosell}&fromAddress={walletaddress}&slippage={slippage}"
             # swap_response = requests.get(swap_url)
             # order = swap_response.json()
             #TBDhttps://docs.1inch.io/docs/limit-order-protocol/examples/#python-example-for-1inch-limit-order-v3 
