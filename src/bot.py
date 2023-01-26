@@ -503,14 +503,15 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             approval_URL = f"{endpoint}approve/transaction?tokenAddress={tokenToSell}"
             logger.info(msg=f"{approval_URL}")
             approval_response = requests.get(approval_URL)
-            logger.info(msg=f"{approval_response}")
+            approval= approval_response.json()
+            logger.info(msg=f"{approval}")
             swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={OrderAmount}&fromAddress={walletaddress}&slippage={slippage}"
             logger.info(msg=f"{swap_url}")
             swap_response = requests.get(swap_url)
             logger.info(msg=f"{swap_response}")
-            order = swap_response.json()
-            logger.info(msg=f"{order}")
-            tx_token=order['data']
+            swap = swap_response.json()
+            logger.info(msg=f"{swap}")
+            tx_token=swap['data']
             #Uniswap V3
             # fee=int(3000)
             # sqrt_price_limit_x96 = 0
