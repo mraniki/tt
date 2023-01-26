@@ -516,19 +516,19 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             #TBDhttps://docs.1inch.io/docs/limit-order-protocol/examples/#python-example-for-1inch-limit-order-v3 
         else:
             return
-        txHash = str(ex.to_hex(tx_token))
-        checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
-        checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
-        txResult = checkTransactionRequest.json()['status']
-        #await DEX_GasControl()
-        txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-        tokenprice=coinprice
-        gasUsed=txHashDetail['gasUsed']
-        txtimestamp=datetime.now()
-        if(txResult == "1"):
-            response+= f"\n➕ Size: {round(ex.from_wei(OrderAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
-            logger.info(msg=f"{response}")
-            return response     
+        # txHash = str(ex.to_hex(tx_token))
+        # checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
+        # checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
+        # txResult = checkTransactionRequest.json()['status']
+        # #await DEX_GasControl()
+        # txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
+        # tokenprice=coinprice
+        # gasUsed=txHashDetail['gasUsed']
+        # txtimestamp=datetime.now()
+        # if(txResult == "1"):
+        #     response+= f"\n➕ Size: {round(ex.from_wei(OrderAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
+        #     logger.info(msg=f"{response}")
+        #     return response     
     except Exception as e:
         await HandleExceptions(e)
         return
