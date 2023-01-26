@@ -500,7 +500,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             logger.info(msg=f"V3 processing")
             logger.info(msg=f"{OrderAmount}")
             endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
-            approval_URL = f"{endpoint}approve/transaction?tokenAddress={walletaddress}"
+            approval_URL = f"{endpoint}approve/transaction?tokenAddress={tokenToSell}"
             logger.info(msg=f"{approval_URL}")
             approval_response = requests.get(approval_URL)
             logger.info(msg=f"{approval_response}")
