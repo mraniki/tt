@@ -498,6 +498,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version=="v3"):
             logger.info(msg=f"V3 processing")
+            logger.info(msg=f"{OrderAmount}")
             endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
             swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={OrderAmount}&fromAddress={walletaddress}&slippage={slippage}"
             logger.info(msg=f"{swap_url}")
