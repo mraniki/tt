@@ -504,37 +504,27 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             swap_TX=router_instance.functions.addOrder(tokenToBuy,OrderAmount,tokenToSell,OrderAmountfee)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version =="limitorder"):
-            amountTosell=100
             logger.info(msg=f"limitorder processing")
             endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
-            quote_url = f"{endpoint}quote?fromTokenAddress={tokenToSell}&toTokenAddress={tokenToBuy}&amount={amountTosell}"
-            logger.info(msg=f"quote {quote_url}")
-            quote_response = requests.get(quote_url)
-            quote = quote_response.json()
-            logger.info(msg=f"quote {quote}")
-            estimatedGas = quote['estimatedGas']
-            logger.info(msg=f"estimatedGas {estimatedGas}")
-            toTokenAmount = quote['toTokenAmount']
-            logger.info(msg=f"toTokenAmount {toTokenAmount}")
-            # swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={amountTosell}&fromAddress={walletaddress}&slippage={slippage}"
-            # swap_response = requests.get(swap_url)
-            # order = swap_response.json()
-            #TBDhttps://docs.1inch.io/docs/limit-order-protocol/examples/#python-example-for-1inch-limit-order-v3 
+            swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={amountTosell}&fromAddress={walletaddress}&slippage={slippage}"
+            swap_response = requests.get(swap_url)
+            order = swap_response.json()
+
         else:
             return
-        # txHash = str(ex.to_hex(tx_token))
-        # checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
-        # checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
-        # txResult = checkTransactionRequest.json()['status']
-        # #await DEX_GasControl()
-        # txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-        # tokenprice=coinprice
-        # gasUsed=txHashDetail['gasUsed']
-        # txtimestamp=datetime.now()
-        # if(txResult == "1"):
-        #     response+= f"\n➕ Size: {round(ex.from_wei(OrderAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
-        #     logger.info(msg=f"{response}")
-        #     return response     
+        txHash = str(ex.to_hex(tx_token))
+        checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
+        checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
+        txResult = checkTransactionRequest.json()['status']
+        #await DEX_GasControl()
+        txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
+        tokenprice=coinprice
+        gasUsed=txHashDetail['gasUsed']
+        txtimestamp=datetime.now()
+        if(txResult == "1"):
+            response+= f"\n➕ Size: {round(ex.from_wei(OrderAmount, 'ether'),5)}\n⚫️ Entry: {tokenprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
+            logger.info(msg=f"{response}")
+            return response     
     except Exception as e:
         await HandleExceptions(e)
         return
@@ -712,22 +702,16 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 logger.info(msg=f"token {TokenToPrice}")
                 tokenToSell='USDT'
                 basesymbol=ex.to_checksum_address(await DEXContractLookup(tokenToSell))
-                qty=1
                 if(TokenToPrice != None):
                     tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=TokenToPrice)
                     tokenprice=tokeninfo['market_data']['current_price']['usd']
                     amountTosell=100
-                    logger.info(msg=f"limitorder processing")
                     endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
                     quote_url = f"{endpoint}quote?fromTokenAddress={TokenToPrice}&toTokenAddress={basesymbol}&amount={amountTosell}"
-                    logger.info(msg=f"quote {quote_url}")
                     quote_response = requests.get(quote_url)
                     quote = quote_response.json()
-                    logger.info(msg=f"quote {quote}")
                     estimatedGas = quote['estimatedGas']
-                    logger.info(msg=f"estimatedGas {estimatedGas}")
                     toTokenAmount = quote['toTokenAmount']
-                    logger.info(msg=f"toTokenAmount {toTokenAmount}")
                     # price = router_instance.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
                     # logger.info(msg=f"price {price}")
                     # response=f"₿ {TokenToPrice}\n{symbol} @ {(price)} or {tokenprice}"
