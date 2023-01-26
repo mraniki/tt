@@ -509,7 +509,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={amountTosell}&fromAddress={walletaddress}&slippage={slippage}"
             swap_response = requests.get(swap_url)
             order = swap_response.json()
-
+            tx_token=order['data']
         else:
             return
         txHash = str(ex.to_hex(tx_token))
