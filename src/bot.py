@@ -732,7 +732,7 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                     # logger.info(msg=f"price {price}")
                     # response=f"₿ {TokenToPrice}\n{symbol} @ {(price)} or {tokenprice}"
                     response=f"₿ {TokenToPrice}\n{symbol} @ {toTokenAmount} or {tokenprice}"
-                    await DEX_TokenInfo(symbol)
+                   #await DEX_TokenInfo(symbol)
                     await send(update,response)
     except Exception as e:
         await HandleExceptions(e)
