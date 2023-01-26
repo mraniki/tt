@@ -85,20 +85,21 @@ Approach: Update the sample db with your parameters and save it as db.json
 
 
 ### V1.3
+- Support Uniswap V3
+
+### v1.4
+
 - Support DEX limit order if supported like dydx / Kwenta / GMX
 - Support STOPLOSS TAKEPROFIT for DEX
 
-### v1.4
-- create / modify db via bot command
-
 ### v1.5
-
-- Support futures and margin for CEX (to be tested)
-- Support STOPLOSS TAKEPROFIT for CEX
 - Support Web3 ENS
 
 ### v2
-- Support Uniswap V3
+
+- Support futures and margin for CEX (to be tested)
+- Support STOPLOSS TAKEPROFIT for CEX
+- create / modify db via bot command
 - view daily pnl in /bal response
 - view free margin for futures in /bal response
 - view opened future position via /pos command
