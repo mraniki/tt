@@ -413,14 +413,14 @@ async def TokenPrice(s1):
         for i in coininfo['coins']:
             tokeninfo=i['symbol']
             if (tokeninfo==s1):
-                logger.info(msg=f"{i['api_symbol']}")
+                # logger.info(msg=f"{i['api_symbol']}")
                 coininfo=cg.get_coin_by_id(id=i['api_symbol'])
-                coinplatfrom=coininfo['asset_platform_id']
-                logger.info(msg=f"coinplatfrom {coinplatfrom}")
+                coinplatform=coininfo['asset_platform_id']
+                # logger.info(msg=f"coinplatform {coinplatfrom}")
                 coinprice=coininfo['market_data']['current_price']['usd']
-                logger.info(msg=f"coingeckoprice {coinprice}")
+                # logger.info(msg=f"coingeckoprice {coinprice}")
                 coinsymbol=coininfo['symbol']
-                response = f'coingecko info: {coinsymbol} {coinprice} USD on {coinplatfrom}'
+                response = f'coingecko info: {coinsymbol} {coinprice} USD on {coinplatform}'
                 logger.info(msg=f"{response}")
                 return coinprice
     except Exception:
@@ -504,7 +504,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             swap_TX=router_instance.functions.addOrder(tokenToBuy,OrderAmount,tokenToSell,OrderAmountfee)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version =="limitorder"):
-            amountTosell=1
+            amountTosell=1000000000000000000
             logger.info(msg=f"limitorder processing")
             endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
             quote_url = f"{endpoint}quote?fromTokenAddress={tokenToSell}&toTokenAddress={tokenToBuy}&amount={amountTosell}"
@@ -543,7 +543,7 @@ async def TokenInfo(token):
     #logger.info(msg=f"cg.get_asset_platforms {asset_platforms}")
     try:
         coininfo=cg.get_coin_by_id(id=token) 
-        coinplatfrom=coininfo['asset_platform_id']
+        coinplatform=coininfo['asset_platform_id']
         coindescription=coininfo['description']['en']
         coinprice=coininfo['market_data']['current_price']['usd']
         coinsymbol=coininfo['symbol']
@@ -567,12 +567,12 @@ async def token_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 logger.info(msg=f"Pass")
                 logger.info(msg=f"{i['api_symbol']}")
                 coininfo=cg.get_coin_by_id(id=i['api_symbol'])
-                coinplatfrom=coininfo['asset_platform_id']
+                coinplatform=coininfo['asset_platform_id']
                 logger.info(msg=f"coinplatfrom {coinplatfrom}")
                 coinprice=coininfo['market_data']['current_price']['usd']
                 logger.info(msg=f"coinprice {coinprice}")
                 coinsymbol=coininfo['symbol']
-                response = f'{coinsymbol} {coinprice} USD on {coinplatfrom}'
+                response = f'{coinsymbol} {coinprice} USD on {coinplatform}'
                 logger.info(msg=f"{response}")
     except Exception as e:
         return
