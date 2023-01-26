@@ -465,7 +465,8 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             tokenB=basesymbol
         tokenToSell=ex.to_checksum_address(await DEXContractLookup(tokenA))
         AbiTokenA= await DEXFetchAbi(tokenToSell) 
-        contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA) 
+        contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA)
+        logger.info(msg=f"contractTokenA {contractTokenA}")
         tokenToBuy= ex.to_checksum_address(await DEXContractLookup(tokenB))
         OrderPath=[tokenToSell, tokenToBuy]
         tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
