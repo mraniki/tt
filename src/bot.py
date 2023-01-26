@@ -497,13 +497,6 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
             tx_token = await DEX_Sign_TX(swap_TX)
         elif (version=="v3"):
-            fee=int(3000)
-            sqrt_price_limit_x96 = 0
-            #OptimalOrderAmount  = quoter_instance.functions.getSwapQuote(tokenToSell, OrderAmount, tokenToBuy).call()
-            #MinimumAmount=int(OptimalOrderAmount[1] *0.98)# max 2% slippage
-            swap_TX=router_instance.functions.addOrder(tokenToBuy,OrderAmount,tokenToSell,OrderAmountfee)
-            tx_token = await DEX_Sign_TX(swap_TX)
-        elif (version =="limitorder"):
             logger.info(msg=f"V3 processing")
             endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
             swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={OrderAmount}&fromAddress={walletaddress}&slippage={slippage}"
@@ -511,7 +504,19 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             swap_response = requests.get(swap_url)
             logger.info(msg=f"{swap_response}")
             order = swap_response.json()
+            logger.info(msg=f"{order}")
             tx_token=order['data']
+            #Uniswap V3
+            # fee=int(3000)
+            # sqrt_price_limit_x96 = 0
+            # #OptimalOrderAmount  = quoter_instance.functions.getSwapQuote(tokenToSell, OrderAmount, tokenToBuy).call()
+            # #MinimumAmount=int(OptimalOrderAmount[1] *0.98)# max 2% slippage
+            # swap_TX=router_instance.functions.addOrder(tokenToBuy,OrderAmount,tokenToSell,OrderAmountfee)
+            # tx_token = await DEX_Sign_TX(swap_TX)
+        elif (version =="limitorder"):
+            logger.info(msg=f"limitorder processing")
+            return
+            #TBD
         else:
             return
         txHash = str(ex.to_hex(tx_token))
