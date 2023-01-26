@@ -469,6 +469,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
         tokenToBuy= ex.to_checksum_address(await DEXContractLookup(tokenB))
         OrderPath=[tokenToSell, tokenToBuy]
         tokeninfobal=contractTokenA.functions.balanceOf(walletaddress).call()
+        logger.info(msg=f"tokeninfobal {tokeninfobal}")
         tokeninfobaldecimal=contractTokenA.functions.decimals().call()
         slippage=1
         if (s1=="SELL"):
@@ -512,7 +513,8 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             swap = swap_response.json()
             logger.info(msg=f"{swap}")
             tx_token=swap['data']
-            #Uniswap V3
+
+            ####Uniswap V3 contrac function prep
             # fee=int(3000)
             # sqrt_price_limit_x96 = 0
             # #OptimalOrderAmount  = quoter_instance.functions.getSwapQuote(tokenToSell, OrderAmount, tokenToBuy).call()
