@@ -507,6 +507,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             logger.info(msg=f"V3 processing")
             endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
             swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={amountTosell}&fromAddress={walletaddress}&slippage={slippage}"
+            logger.info(msg=f"{swap_url}")
             swap_response = requests.get(swap_url)
             logger.info(msg=f"{swap_response}")
             order = swap_response.json()
