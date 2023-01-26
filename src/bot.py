@@ -731,7 +731,7 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                     # price = router_instance.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
                     # logger.info(msg=f"price {price}")
                     # response=f"₿ {TokenToPrice}\n{symbol} @ {(price)} or {tokenprice}"
-                    response=f"₿ {TokenToPrice}\n{symbol} @ {toTokenAmount} or {tokenprice}"
+                    response=f"₿ {TokenToPrice}\n{symbol} @ {toTokenAmount} (1inch - live) or {tokenprice} (gecko)"
                    #await DEX_TokenInfo(symbol)
                     await send(update,response)
     except Exception as e:
