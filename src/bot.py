@@ -245,13 +245,13 @@ async def LoadExchange(exchangeid, mode):
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         #ex = Web3(Web3.HTTPProvider(networkprovider))
         router_instanceabi= await DEXFetchAbi(router) #Router ABI
-        #quoter_instanceabi= await DEXFetchAbi('0x61fFE014bA17989E743c5F6cB21bF9697530B21e') #Quoter ABI
-        #quoter_instanceabi= await DEXFetchAbi('0xb555edf5dcf85f42ceef1f3630a52a108e55a654') #Quoter ABI       
         #logger.info(msg=f"Router ABI {router_instanceabi}")
         #logger.info(msg=f"Quoter ABI {quoter_instanceabi}")
         Web3.to_checksum_address
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
-        #quoter_instance = ex.eth.contract(address=ex.to_checksum_address('0x61fFE014bA17989E743c5F6cB21bF9697530B21e'), abi=quoter_instanceabi) #ContractLiquidityRouter
+        if (version=="v3")
+          quoter_instanceabi= await DEXFetchAbi('0x61fFE014bA17989E743c5F6cB21bF9697530B21e') #Quoter ABI
+          quoter_instance = ex.eth.contract(address=ex.to_checksum_address('0x61fFE014bA17989E743c5F6cB21bF9697530B21e'), abi=quoter_instanceabi) #ContractLiquidityQuoter
         if ex.net.listening:
             logger.info(msg=f"Connected to {ex}")
             return name
@@ -655,34 +655,29 @@ async def notify(messaging):
     except Exception as e:
         logger.error(msg=f"error: {e}")
   else:
-    logger.warning(msg=f"not delivered {messaging}")
+    logger.error(msg=f"not delivered {messaging}")
 #======= error handling
 async def HandleExceptions(e) -> None:
     try:
-        e==""
-        logger.error(msg=f"{e}")
+        msg==""
     except KeyError:
-        logger.error(msg=f"DB content error {e}")
-        e=f"DB content error {e}"
+        msg=f"DB content error"
+    except ConnectionError:
+        msg=f'Could not connect to RPC'
     except Web3Exception:
-        logger.error(msg=f"web3 error {e}")
-        e=f"web3 error {e}"
+        msg=f"web3 error"
     except ccxt.base.errors:
-        logger.error(msg=f"CCXT error {e}")
-        e=f"CCXT error {e}"
+        msg=f"CCXT error"
     except ccxt.NetworkError:
-        logger.error(msg=f"Network error {e}")
-        e=f"Network error {e}"
+        msg=f"Network error"
     except ccxt.ExchangeError:
-        logger.error(msg=f"Exchange error: {e}")
-        e=f"Exchange error: {e}"
+        msg=f"Exchange error"
     except telegram.error:
-        logger.error(msg=f"telegram error: {e}")
-        e=f"telegram error: {e}"
+        msg=f"telegram error"
     except Exception:
-        logger.error(msg=f"error: {e}")
-        e=f"{e}"
-    message=f"⚠️ {e}"
+        msg=f"{e}"
+    message=f"⚠️ {msg} {e}"
+    logger.error(msg=f"{message}")
     await notify(message)
 ##======== END OF FUNCTIONS ============
 
