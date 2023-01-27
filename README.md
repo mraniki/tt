@@ -78,6 +78,7 @@ Approach: Update the sample db with your parameters and save it as db.json
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
  - Create DB as the start if it is missing and connect to default DEX (Pancake)
+ - Support restart capability
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 

@@ -43,6 +43,7 @@ contingency_db_path= './config/sample_db.json'
 global ex
 exchanges = {}
 trading=True
+restart_flag=False
 testmode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
 cg = CoinGeckoAPI()
@@ -679,10 +680,11 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     msg= f"Environment: {env} Ping: {r_ping}ms\nExchange: {await SearchEx(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
     await send(update,msg)
 ##====restart =======
-# async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-#     os.execv(__file__, sys.argv)
-#     #os.execv(sys.executable, ['python'] + [sys.argv[0]])
-#     #os.execv(sys.executable, ['python'] + os.path.abspath(sys.argv[0]))
+async def restart_command(application: Application, update: Update) -> None:
+    logger.info(msg=f"restarting ")
+    os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
+
+
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg=f"🏦 Balance"
@@ -909,10 +911,11 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), SwitchEx))
         application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
         application.add_handler(MessageHandler(filters.Regex('/g'), token_command))
+        application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
         #application.add_error_handler(error_handler)
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
-        #application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
+
 
 #Run the bot
         webhook=False
@@ -927,11 +930,9 @@ def main():
                 webhook_url=TG_WBHK_URL
             )
         else:
-            application.run_polling()
-
+            application.run_polling(drop_pending_updates=True)
     except Exception as e:
         logger.info("Bot failed to start. Error: " + str(e))
-
 
 
 if __name__ == '__main__':
