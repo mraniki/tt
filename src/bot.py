@@ -319,28 +319,35 @@ def Convert(s):
     try:
         m_dir= li[0]
     except (IndexError, TypeError):
-        logger.error(msg=f"{s} no direction")
+        e=f"{s} no direction"
+        logger.error(msg=f"{e}")
+        HandleExceptions(e)
         return
     try:
         m_symbol=li[1]
     except (IndexError, TypeError):
-        logger.error(msg=f"{s} no symbol")
+        e=f"{s} no symbol"
+        logger.error(msg=f"{e}")
+        HandleExceptions(e)
         return
     try:
         m_sl=li[2][3:7]
     except (IndexError, TypeError):
         logger.warning(msg=f"{s} no sl")
         m_sl=0
+        pass
     try:
         m_tp=li[3][3:7]
     except (IndexError, TypeError):
         logger.warning(msg=f"{s} no tp")
         m_tp=0
+        pass
     try:
         m_q=li[4][2:-1]
     except (IndexError, TypeError):
         logger.warning(msg=f"{s} no size default to 10 %")
-        m_q=10
+        m_q=5
+        pass
     order=[m_dir,m_symbol,m_sl,m_tp,m_q]
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
     return order
@@ -693,7 +700,6 @@ async def restart_command(application: Application, update: Update) -> None:
 async def stop(self) -> None:
         if self.application is None or self.application.updater is None:
             return
-
         await self.application.updater.stop()
         await self.application.stop()
         await self.application.shutdown()
@@ -903,8 +909,9 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     tb_string = "".join(tb_list)
     tb_trim = tb_string[:1000]
     e=f"{tb_trim}"
-    message=f"⚠️ {e}"
-    await send(update,message)
+    #message=f"⚠️ {e}"
+    HandleExceptions(e)
+    # await send(update,message)
 #================== BOT =================
 def main():
     try:
