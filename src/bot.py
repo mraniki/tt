@@ -764,7 +764,7 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 if(TokenToPrice != None):
                     tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=TokenToPrice)
                     tokenprice=tokeninfo['market_data']['current_price']['usd']
-                    amountTosell=100
+                    amountTosell=1
                     endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
                     quote_url = f"{endpoint}quote?fromTokenAddress={TokenToPrice}&toTokenAddress={basesymbol}&amount={amountTosell}"
                     quote_response = requests.get(quote_url)
@@ -905,7 +905,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     tb_trim = tb_string[:1000]
     e=f"{tb_trim}"
     #message=f"⚠️ {e}"
-    HandleExceptions(e)
+    await HandleExceptions(e)
     # await send(update,message)
 #================== BOT =================
 def main():
