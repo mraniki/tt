@@ -88,15 +88,16 @@ Approach: Update the sample db with your parameters and save it as db.json
 - Support Uniswap V3
 
 ### v1.4
-
-- Support DEX limit order if supported like dydx / Kwenta / GMX
-- Support STOPLOSS TAKEPROFIT for DEX
+- Review PrivateKey strategy
 
 ### v1.5
+
+- Support STOPLOSS TAKEPROFIT for DEX
 - Support Web3 ENS
 
-### v2
+### v2 backlog
 
+- Support DEX limit order if supported like dydx / Kwenta / GMX
 - Support futures and margin for CEX (to be tested)
 - Support STOPLOSS TAKEPROFIT for CEX
 - create / modify db via bot command
@@ -106,12 +107,12 @@ Approach: Update the sample db with your parameters and save it as db.json
 - Support bot in webhook instead of getupdate
 - View weekly pnl with /w command
 
-### v3
+### v3 backlog
 - [![Matrix](https://badgen.net/badge/icon/matrix/black?icon=libraries&label)](https://github.com/poljar/matrix-ni) Integrate with agnostic chat bot  platform 
 - [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/) Merge with Telegram MQL4 version which integrate with MT4 exchanges for TradFi support
 
 
  ## ⚠️ Disclaimer
- This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK** 
+ This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK**. For DEX, Never share your private keys.
 
  **NEVER use your main account for automatic trade**

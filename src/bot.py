@@ -650,6 +650,9 @@ async def HandleExceptions(e) -> None:
     except KeyError:
         logger.error(msg=f"DB content error {e}")
         e=f"DB content error {e}"
+    except Web3Exception:
+        logger.error(msg=f"web3 error {e}")
+        e=f"web3 error {e}"
     except ccxt.base.errors:
         logger.error(msg=f"CCXT error {e}")
         e=f"CCXT error {e}"
@@ -839,7 +842,9 @@ if not os.path.exists(db_path):
         TG_CHANNEL_ID = os.getenv("TG_CHANNEL_ID")
     except Exception as e:
         logger.error("no TG TK")
-        sys.exit()
+        logger.warning(msg=f"Failover process")
+        time.sleep(1000)
+
 
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB")
@@ -926,6 +931,8 @@ def main():
 
     except Exception as e:
         logger.info("Bot failed to start. Error: " + str(e))
+
+
 
 if __name__ == '__main__':
     main()
