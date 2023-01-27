@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.3.07"
+TTversion="🪙TT Beta 1.03.08"
 ##=============== import  =============
 ##log
 import logging
@@ -36,14 +36,13 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 ##=============== CONFIG ===============
 # dotenv_path = './config/.env'
-load_dotenv() #.env
+load_dotenv() #.env loading
 db_path= './config/db.json'
 contingency_db_path= './config/sample_db.json'
 #===================
 global ex
 exchanges = {}
 trading=True
-restart_flag=False
 testmode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
 cg = CoinGeckoAPI()
@@ -124,7 +123,7 @@ async def SearchCEX(s1,s2):
             else:
                 return
         except Exception as e:
-            await HandleExceptions(e)
+            await handle_exception(e)
             return
     else:
         return
@@ -139,7 +138,7 @@ async def SearchDEX(s1,s2):
         else:
          return
     except Exception as e:
-        await HandleExceptions(e)
+        await handle_exception(e)
         return
 
 async def SearchEx(s1,s2):
@@ -161,10 +160,10 @@ async def SearchEx(s1,s2):
       else:
         return
     except Exception as e:
-        await HandleExceptions(e)
+        await handle_exception(e)
         return
 
-async def LoadExchange(exchangeid, mode):
+async def load_exchange(exchangeid, mode):
     global ex
     global name
     global networkprovider
@@ -224,7 +223,7 @@ async def LoadExchange(exchangeid, mode):
                 return ex
 
         except Exception as e:
-            await HandleExceptions(e)
+            await handle_exception(e)
     elif (DEXCheck):
         newex= DEXCheck
         name= newex[0]['name']
@@ -249,7 +248,7 @@ async def LoadExchange(exchangeid, mode):
         #logger.info(msg=f"Quoter ABI {quoter_instanceabi}")
         Web3.to_checksum_address
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
-        if (version=="v3")
+        if (version=="v3"):
           quoter_instanceabi= await DEXFetchAbi('0x61fFE014bA17989E743c5F6cB21bF9697530B21e') #Quoter ABI
           quoter_instance = ex.eth.contract(address=ex.to_checksum_address('0x61fFE014bA17989E743c5F6cB21bF9697530B21e'), abi=quoter_instanceabi) #ContractLiquidityQuoter
         if ex.net.listening:
@@ -282,14 +281,14 @@ async def DEXContractLookup(symb):
                 return symbolcontract
             else:
                 msg=f"{symb} does not exist in {tokenlist}"
-                await HandleExceptions(msg)
+                await handle_exception(msg)
                 return
         except Exception as e:
-            await HandleExceptions(e)
+            await handle_exception(e)
             return
     except Exception as e:
         #logger.info(msg=f"error {DEXContractLookup} {symb}")
-        await HandleExceptions(e)
+        await handle_exception(e)
         return
 
 async def DEXFetchAbi(addr):
@@ -311,24 +310,24 @@ async def DEXFetchAbi(addr):
         #elif(version=="v3")
 
     except Exception as e:
-        await HandleExceptions(e)
+        await handle_exception(e)
 
 #ORDER PARSER
-def Convert(s):
+def convert(s):
     li = s.split(" ")
     try:
         m_dir= li[0]
     except (IndexError, TypeError):
         e=f"{s} no direction"
         logger.error(msg=f"{e}")
-        HandleExceptions(e)
+        handle_exception(e)
         return
     try:
         m_symbol=li[1]
     except (IndexError, TypeError):
         e=f"{s} no symbol"
         logger.error(msg=f"{e}")
-        HandleExceptions(e)
+        handle_exception(e)
         return
     try:
         m_sl=li[2][3:7]
@@ -362,7 +361,7 @@ async def SendOrder(s1,s2,s3,s4,s5):
         response = await SendOrder_DEX(s1,s2,s3,s4,s5)
       return response
     except Exception as e:
-      await HandleExceptions(e)
+      await handle_exception(e)
       return
 
 async def SendOrder_CEX(s1,s2,s3,s4,s5):
@@ -391,10 +390,10 @@ async def SendOrder_CEX(s1,s2,s3,s4,s5):
                 response+= f"\n➕ Size: {amount}\n⚫️ Entry: {price}\nℹ️ {orderid}\n🗓️ {timestamp}"
                 return response
             except Exception as e:
-                await HandleExceptions(e)
+                await handle_exception(e)
                 return
     except Exception as e:
-        await HandleExceptions(e)
+        await handle_exception(e)
         return
 
 async def DEX_GasControl():
@@ -574,7 +573,7 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             logger.info(msg=f"{response}")
             return response     
     except Exception as e:
-        await HandleExceptions(e)
+        await handle_exception(e)
         return
 
 
@@ -643,12 +642,12 @@ async def send (self, messaging):
     try:
         await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
     except Exception as e:
-        await HandleExceptions(e)
+        await handle_exception(e)
 #========== notification function
 async def notify(messaging):
 #=APPRISE Setup
   apobj = apprise.Apprise()
-  if (TG_TK is not None):
+  if (TG_TK != None):
     apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
     try:
         apobj.notify(body=messaging)
@@ -657,7 +656,7 @@ async def notify(messaging):
   else:
     logger.error(msg=f"not delivered {messaging}")
 #======= error handling
-async def HandleExceptions(e) -> None:
+async def handle_exceptions(e) -> None:
     try:
         msg==""
     except KeyError:
@@ -692,7 +691,7 @@ async def restart_command(application: Application, update: Update) -> None:
     logger.info(msg=f"restarting ")
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 ##====stop =======
-async def stop(self) -> None:
+async def stop_command(self) -> None:
         if self.application is None or self.application.updater is None:
             return
         await self.application.updater.stop()
@@ -718,7 +717,7 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             msg += f"\n{bal}"
         await send(update,msg)
     except Exception as e:
-        await HandleExceptions(e)
+        await handle_exception(e)
 
 #===order parsing  ======
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -731,7 +730,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             message="TRADING DISABLED"
             await send(update,message)
         else:
-            order_m = Convert(msgtxt_upper)
+            order_m = convert(msgtxt_upper)
             m_dir= order_m[0]
             m_symbol=order_m[1]
             m_sl=order_m[2]
@@ -744,7 +743,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     response=f"{res}"
                     await send(update,response)
             except Exception as e:
-                await HandleExceptions(e)
+                await handle_exception(e)
                 return
 ##======TG COMMAND view price ===========
 async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -779,10 +778,10 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                    #await DEX_TokenInfo(symbol)
                     await send(update,response)
     except Exception as e:
-        await HandleExceptions(e)
+        await handle_exception(e)
         return
 ##======TG COMMAND coin info  ===========
-async def coin_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def coininfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     tginput  = update.effective_message.text
     input = tginput.split(" ")
     symbol=input[1]
@@ -790,10 +789,10 @@ async def coin_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         response=await TokenInfo(symbol)
         await send(update,response)
     except Exception as e:
-        await HandleExceptions(e)
+        await handle_exception(e)
         return
 ##====TG COMMAND Trading switch  ========
-async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global trading
     if (trading==False):
         trading=True
@@ -802,7 +801,7 @@ async def TradingSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     message=f"Trading is {trading}"
     await send(update,message)
 ##====TG COMMAND CEX DEX switch =========
-async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(msg=f"current ex {ex}")
     msg_ex  = update.effective_message.text
     newexmsg = msg_ex.split(" ")
@@ -813,7 +812,7 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
             SearchCEXResults= await SearchCEX(newex,testmode)
             CEX_name = SearchCEXResults[0]['name']
             CEX_test_mode = testmode
-            res = await LoadExchange(CEX_name,CEX_test_mode)
+            res = await load_exchange(CEX_name,CEX_test_mode)
             response = f"CEX is {ex}"
         elif (typeex=="/dex"):
             SearchDEXResults= await SearchDEX(newex,testmode)
@@ -821,14 +820,14 @@ async def SwitchEx(update: Update, context: ContextTypes.DEFAULT_TYPE):
             DEX_test_mode= testmode
             logger.info(msg=f"DEX_test_mode: {DEX_test_mode}")
             logger.info(msg=f"DEX_name: {DEX_name}")
-            res = await LoadExchange(DEX_name,DEX_test_mode)
+            res = await load_exchange(DEX_name,DEX_test_mode)
             logger.info(msg=f"res: {res}")
             response = f"DEX is {DEX_name}"
         await send(update,response)
     except Exception as e:
-        await HandleExceptions(e)
+        await handle_exception(e)
 ##======TG COMMAND Test mode switch ======
-async def TestModeSwitch(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def testmode_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global testmode
     if (testmode=="False"):
         testmode="True"
@@ -860,7 +859,6 @@ if not os.path.exists(db_path):
         logger.error("no TG TK")
         logger.warning(msg=f"Failover process")
         time.sleep(1000)
-
 
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB")
@@ -894,7 +892,7 @@ if os.path.exists(db_path):
         
 ##========== startup message ===========
 async def post_init(application: Application):
-    await LoadExchange(ex,testmode)
+    await load_exchange(ex,testmode)
     logger.info(msg=f"Bot is online")
     await application.bot.send_message(TG_CHANNEL_ID, f"Bot is online {TTversion}", parse_mode=constants.ParseMode.HTML)
 #===========bot error handling ==========
@@ -905,7 +903,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     tb_trim = tb_string[:1000]
     e=f"{tb_trim}"
     #message=f"⚠️ {e}"
-    await HandleExceptions(e)
+    await handle_exception(e)
     # await send(update,message)
 #================== BOT =================
 def main():
@@ -918,11 +916,11 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
         application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
         application.add_handler(MessageHandler(filters.Regex('/p'), price_command))
-        application.add_handler(MessageHandler(filters.Regex('/c'), coin_command))
-        application.add_handler(MessageHandler(filters.Regex('/trading'), TradingSwitch))
+        application.add_handler(MessageHandler(filters.Regex('/c'), coininfo_command))
+        application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
         application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
-        application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), SwitchEx))
-        application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
+        application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), switch_exchange_command))
+        application.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
         application.add_handler(MessageHandler(filters.Regex('/g'), token_command))
         application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
         application.add_error_handler(error_handler)
