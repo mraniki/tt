@@ -181,8 +181,8 @@ async def LoadExchange(exchangeid, mode):
     global gasLimit
     global router_instance
     global router_instanceabi
-    global quoter_instance
-    global quoter_instanceabi
+   # global quoter_instance
+   # global quoter_instanceabi
     global platform
     global chainId
     if (failsafe):
@@ -245,13 +245,13 @@ async def LoadExchange(exchangeid, mode):
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         #ex = Web3(Web3.HTTPProvider(networkprovider))
         router_instanceabi= await DEXFetchAbi(router) #Router ABI
-        quoter_instanceabi= await DEXFetchAbi('0x61fFE014bA17989E743c5F6cB21bF9697530B21e') #Quoter ABI
+        #quoter_instanceabi= await DEXFetchAbi('0x61fFE014bA17989E743c5F6cB21bF9697530B21e') #Quoter ABI
         #quoter_instanceabi= await DEXFetchAbi('0xb555edf5dcf85f42ceef1f3630a52a108e55a654') #Quoter ABI       
-        logger.info(msg=f"Router ABI {router_instanceabi}")
-        logger.info(msg=f"Quoter ABI {quoter_instanceabi}")
+        #logger.info(msg=f"Router ABI {router_instanceabi}")
+        #logger.info(msg=f"Quoter ABI {quoter_instanceabi}")
         Web3.to_checksum_address
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
-        quoter_instance = ex.eth.contract(address=ex.to_checksum_address('0x61fFE014bA17989E743c5F6cB21bF9697530B21e'), abi=quoter_instanceabi) #ContractLiquidityRouter
+        #quoter_instance = ex.eth.contract(address=ex.to_checksum_address('0x61fFE014bA17989E743c5F6cB21bF9697530B21e'), abi=quoter_instanceabi) #ContractLiquidityRouter
         if ex.net.listening:
             logger.info(msg=f"Connected to {ex}")
             return name
