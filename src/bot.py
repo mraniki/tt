@@ -134,7 +134,7 @@ async def SearchDEX(s1,s2):
         query = ((q.name==s1)&(q['testmode'] == s2))
         DEXSearch = dexDB.search(query)
         if (len(str(DEXSearch))>=1):
-         logger.info(msg=f"{DEXSearch}")
+         #logger.info(msg=f"{DEXSearch}")
          return DEXSearch
         else:
          return
@@ -214,13 +214,13 @@ async def LoadExchange(exchangeid, mode):
             if (mode=="True"):
                 ex.set_sandbox_mode('enabled')
                 markets=ex.loadMarkets()
-                logger.info(msg=f"ex: {ex}")
+                #logger.info(msg=f"ex: {ex}")
                 #ex.verbose = True
                 #logger.info(msg=f"markets: {markets}")
                 return ex
             else:
                 markets=ex.loadMarkets ()
-                logger.info(msg=f"ex: {ex}")
+                #logger.info(msg=f"ex: {ex}")
                 return ex
 
         except Exception as e:
@@ -288,7 +288,7 @@ async def DEXContractLookup(symb):
             await HandleExceptions(e)
             return
     except Exception as e:
-        logger.info(msg=f"error {DEXContractLookup} {symb}")
+        #logger.info(msg=f"error {DEXContractLookup} {symb}")
         await HandleExceptions(e)
         return
 
@@ -622,12 +622,12 @@ async def EX_Ping():
             orderbook = ex.fetch_order_book(symbol)
             ended = ex.milliseconds()
             elapsed = ended - started
-            logger.info(msg=f"elapsed {elapsed}")
+            #logger.info(msg=f"elapsed {elapsed}")
             results.append(elapsed)
         rtt = int(sum(results) / len(results))
         response = rtt
     elif (isinstance(ex,web3.main.Web3)):
-        logger.info(msg=f"networkprovider {networkprovider}")
+        #logger.info(msg=f"networkprovider {networkprovider}")
         response = round(ping(networkprovider, unit='ms'),3)
     return response
     
