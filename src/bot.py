@@ -356,6 +356,13 @@ def convert(s):
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
     return order
 
+async def parse_message (message)
+    parsed_message = message.split(" ")
+    filter_lst_order = ['buy']
+    filter_lst_quote = ['/q']
+    if [ele for ele in filter_lst_order if(ele in parsed_message)]: 
+      logger.info(msg=f"case 1: {message}")
+    
 #========== Order function
 async def send_order(s1,s2,s3,s4,s5):
     try:
@@ -398,7 +405,7 @@ async def send_order_cex(s1,s2,s3,s4,s5):
         await handle_exception(e)
         return
 
-async def verify_dex_gas():
+async def verify_gas_dex():
     CurrentGasPrice=int(ex.to_wei(ex.eth.gas_price,'wei'))
     logger.info(msg=f"CurrentGasPrice {CurrentGasPrice}")
     MyGasPrice=int(ex.to_wei(gasPrice,'gwei'))
@@ -565,7 +572,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
         checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
         txResult = checkTransactionRequest.json()['status']
-        #await verify_dex_gas()
+        #await verify_gas_dex()
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
         fetch_token_price=coinprice
         gasUsed=txHashDetail['gasUsed']
@@ -912,7 +919,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     tb_trim = tb_string[:1000]
     e=f"{tb_trim}"
     await handle_exception(e)
-    # await send(update,message)
+
 #================== BOT =================
 def main():
     try:
