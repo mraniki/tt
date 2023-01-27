@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.3.5"
+TTversion="🪙TT Beta 1.3.6"
 ##=============== import  =============
 ##log
 import logging
@@ -450,6 +450,19 @@ async def DEX_Sign_TX(contract_tx):
             signed = ex.eth.account.sign_transaction(tx, privatekey)
             raw_tx = signed.rawTransaction
             return ex.eth.send_raw_transaction(raw_tx)
+        elif (version=="1inch"):
+            tx_params = {
+                'nonce': ex.eth.get_transaction_count(walletaddress),
+                'gas': int(gasLimit),
+                'gasPrice': ex.to_wei(gasPrice,'gwei'),
+            }
+            tx = contract_tx.build_transaction(tx_params)
+            logger.info(msg=f"tx {tx}")
+            signed = ex.eth.account.sign_transaction(tx, privatekey)
+            logger.info(msg=f"signed {signed}")
+            raw_tx = signed.rawTransaction
+            logger.info(msg=f"raw_tx {raw_tx}")
+            return ex.eth.send_raw_transaction(raw_tx)
         else:
             return
     except Exception:
@@ -498,23 +511,34 @@ async def SendOrder_DEX(s1,s2,s3,s4,s5):
             MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
             swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
             tx_token = await DEX_Sign_TX(swap_TX)
-        elif (version=="v3"):
-            logger.info(msg=f"V3 processing")
+        elif (version=="1inch"):
+            logger.info(msg=f"1inch processing")
             logger.info(msg=f"{OrderAmount}")
             endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
             approval_URL = f"{endpoint}approve/transaction?tokenAddress={tokenToSell}"
             logger.info(msg=f"{approval_URL}")
             approval_response = requests.get(approval_URL)
             approval= approval_response.json()
-            logger.info(msg=f"{approval}")
-            swap_url = f"{endpoint}swap?fromToken={tokenToSell}&toToken={tokenToBuy}&amount={OrderAmount}&fromAddress={walletaddress}&slippage={slippage}"
-            logger.info(msg=f"{swap_url}")
+            logger.info(msg=f"approval {approval}")
+            swap_url = f"{endpoint}swap?fromTokenAddress={tokenToSell}&toTokenAddress={tokenToBuy}&amount={OrderAmount}&fromAddress={walletaddress}&slippage={slippage}"
+            logger.info(msg=f"swap_url {swap_url}")
             swap_response = requests.get(swap_url)
-            logger.info(msg=f"{swap_response}")
-            swap = swap_response.json()
-            logger.info(msg=f"{swap}")
-            tx_token=swap['data']
-
+            logger.info(msg=f"swap_response {swap_response}")
+            swap_raw = swap_response.json()
+            logger.info(msg=f"swap_raw {swap_raw}")
+            # tx_token = await DEX_Sign_TX(swap_raw)
+            # logger.info(msg=f"tx_token {tx_token}")
+            swap_raw['nonce'] = ex.eth.get_transaction_count(walletaddress)
+            swap_raw['gas']= int(gasLimit)
+            swap_raw['gasPrice']= ex.to_wei(gasPrice,'gwei')
+            logger.info(msg=f"swap_raw updated {swap_raw}")
+            signed = ex.eth.account.sign_transaction(swap_raw, privatekey)
+            logger.info(msg=f"signed {signed}")
+            raw_tx = signed.rawTransaction
+            tx_token= ex.eth.send_raw_transaction(raw_tx)
+        elif (version=="v3"):
+            logger.info(msg=f"v3 support")
+            return
             ####Uniswap V3 contrac function prep
             # fee=int(3000)
             # sqrt_price_limit_x96 = 0
@@ -728,6 +752,7 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                     quote = quote_response.json()
                     estimatedGas = quote['estimatedGas']
                     toTokenAmount = quote['toTokenAmount']
+                    #version2 router command
                     # price = router_instance.functions.getAmountsOut(1, [TokenToPrice,basesymbol]).call()[1]
                     # logger.info(msg=f"price {price}")
                     # response=f"₿ {TokenToPrice}\n{symbol} @ {(price)} or {tokenprice}"
