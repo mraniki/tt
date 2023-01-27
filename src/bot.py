@@ -639,10 +639,16 @@ async def send (self, messaging):
         await HandleExceptions(e)
 #========== notification function
 async def notify(messaging):
+#=APPRISE Setup
+  apobj = apprise.Apprise()
+  if (TG_TK is not None):
+    apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
     try:
         apobj.notify(body=messaging)
     except Exception as e:
         logger.error(msg=f"error: {e}")
+  else:
+    logger.warning(msg=f"not delivered {messaging}")
 #======= error handling
 async def HandleExceptions(e) -> None:
     try:
@@ -683,8 +689,15 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def restart_command(application: Application, update: Update) -> None:
     logger.info(msg=f"restarting ")
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
+##====stop =======
+async def stop(self) -> None:
+        if self.application is None or self.application.updater is None:
+            return
 
-
+        await self.application.updater.stop()
+        await self.application.stop()
+        await self.application.shutdown()
+        
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg=f"🏦 Balance"
@@ -877,9 +890,7 @@ if os.path.exists(db_path):
             sys.exit()
     except Exception:
         logger.warning(msg=f"error with existing db file {db_path}")
-##======== APPRISE Setup ===============
-apobj = apprise.Apprise()
-apobj.add('tgram://' + str(TG_TK) + "/" + str(TG_CHANNEL_ID))
+        
 ##========== startup message ===========
 async def post_init(application: Application):
     await LoadExchange(ex,testmode)
