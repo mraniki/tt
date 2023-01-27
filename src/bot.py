@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.3.7"
+TTversion="🪙TT Beta 1.3.07"
 ##=============== import  =============
 ##log
 import logging
@@ -923,6 +923,7 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/testmode'), TestModeSwitch))
         application.add_handler(MessageHandler(filters.Regex('/g'), token_command))
         application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
+        application.add_error_handler(error_handler)
         #application.add_error_handler(error_handler)
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
