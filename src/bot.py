@@ -938,7 +938,7 @@ def main():
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
 
 #Run the bot
-        webhook=True
+        webhook=False
         if (webhook):
             logger.info(msg=f"Webhook initiation")
             application.run_webhook(
