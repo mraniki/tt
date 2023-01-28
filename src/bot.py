@@ -845,6 +845,7 @@ async def testmode_switch_command(update: Update, context: ContextTypes.DEFAULT_
         testmode="False"
     message=f"Sandbox is {testmode}"
     await send(update,message)
+    
 ##======== DB START ===============
 db_url=os.getenv("DB_URL")
 if db_url==None:
@@ -937,7 +938,7 @@ def main():
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
 
 #Run the bot
-        webhook=True
+        webhook=False
         if (webhook):
             logger.info(f"Webhook start")
             try:
