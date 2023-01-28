@@ -947,13 +947,14 @@ def main():
               application.run_webhook(
                 listen='0.0.0.0',
                 port=telegram_webhook_port,
-                secret_token=telegram_webhook_secret,
+                #secret_token=telegram_webhook_secret,
                 #key=telegram_webhook_privatekey,
                 #cert=telegram_webhook_certificate,
                 webhook_url=telegram_webhook_url
               )
             except Exception as e:
              logger.info("Bot failed to start. Error: " + str(e))
+             sleep(1000)
              #application.run_polling(drop_pending_updates=True)
         else:
          application.run_polling(drop_pending_updates=True)
