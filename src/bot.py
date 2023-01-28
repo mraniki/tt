@@ -493,7 +493,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         token_in_address= ex.to_checksum_address(await search_contract_dex(token_in_symbol))
         OrderPath=[token_out_address, token_in_address]
         token_out_balance=token_out_contract.functions.balanceOf(walletaddress).call()
-        if (token_out_balance <=0)
+        if (token_out_balance <=0):
           return
         logger.info(msg=f"token_out_balance {token_out_balance}")
         token_out_decimals=token_out_contract.functions.decimals().call()
