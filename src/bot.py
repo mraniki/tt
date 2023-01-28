@@ -940,7 +940,7 @@ def main():
 #Run the bot
         webhook=True
         if (webhook):
-            logger.info(msg=f"Webhook initiation")
+            logger.info(f"Webhook start")
             try:
               application.run_webhook(
                 listen='0.0.0.0',
@@ -951,7 +951,7 @@ def main():
                 webhook_url=telegram_webhook_url
               )
             except Exception as e:
-                logger.info(msg=f"Webhook failed using polling")
+             logger.info("Bot failed to start. Error: " + str(e))
                application.run_polling(drop_pending_updates=True)
         else:
             application.run_polling(drop_pending_updates=True)
