@@ -12,13 +12,13 @@ processes = []
   allowed_public_ports = []
   auto_rollback = true
 
-[mounts]
-  destination = "/code/config"
-  source = "myapp_data"
+#[mounts]
+#  destination = "/code/config"
+#  source = "myapp_data"
 
 [[services]]
   http_checks = []
-  internal_port = 8080
+  internal_port = 8443
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
