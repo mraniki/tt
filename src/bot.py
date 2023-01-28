@@ -955,7 +955,7 @@ def main():
               )
             except Exception as e:
              logger.info("Bot failed to start. Error: " + str(e))
-             sleep(1000)
+             #sleep(1000)
              #application.run_polling(drop_pending_updates=True)
         else:
          application.run_polling(drop_pending_updates=True)
