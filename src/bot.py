@@ -854,7 +854,7 @@ else:
     outfile = os.path.join('./config', 'db.json')
     #response = requests.get(db_url, stream=True)
     response = requests.get(db_url, headers=headers).json()
-    logger.info(msg=f"{response}")
+    #logger.info(msg=f"{response}")
     with open(outfile,'w') as output:
       output.write(response)
       logger.info(msg=f"copied the remote DB")
@@ -940,7 +940,7 @@ def main():
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
 
 #Run the bot
-        webhook=False
+        webhook=True
         if (webhook):
             logger.info(f"Webhook start")
             try:
