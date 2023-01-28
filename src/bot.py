@@ -37,8 +37,7 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 ##=============== CONFIG ===============
-# dotenv_path = './config/.env'
-load_dotenv()  # .env loading by default 
+load_dotenv()  # .env loading 
 db_path = './config/db.json'
 
 #===================
@@ -251,10 +250,10 @@ async def load_exchange(exchangeid, mode):
         platform=newex[0]['platform']
         chainId=newex[0]['chainId']
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
-        router_instanceabi= await fetch_dex_abi(router) #Router ABI
+        router_instanceabi= await fetch_abi_dex(router) #Router ABI
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
         if (version=="v3"):
-            quoter_instanceabi= await fetch_dex_abi('0x61fFE014bA17989E743c5F6cB21bF9697530B21e') #Quoter ABI
+            quoter_instanceabi= await fetch_abi_dex('0x61fFE014bA17989E743c5F6cB21bF9697530B21e') #Quoter ABI
             quoter_instance = ex.eth.contract(address=ex.to_checksum_address('0x61fFE014bA17989E743c5F6cB21bF9697530B21e'), abi=quoter_instanceabi) #ContractLiquidityQuoter
         try:
             ex.net.listening
@@ -299,7 +298,7 @@ async def search_contract_dex(symb):
         await handle_exception(e)
         return
 
-async def fetch_dex_abi(addr):
+async def fetch_abi_dex(addr):
     try:
        # if(version=="v2"):
             url = abiurl
@@ -487,39 +486,40 @@ async def sign_dex_transaction(contract_tx):
 async def send_order_dex(s1,s2,s3,s4,s5):
     try:
         if (s1=="BUY"):
-            tokenA=basesymbol
-            tokenB=s2
+            token_out_symbol=basesymbol
+            token_in_symbol=s2
         else:
-            tokenA=s2
-            tokenB=basesymbol
-        tokenToSell=ex.to_checksum_address(await search_contract_dex(tokenA))
-        AbiTokenA= await fetch_dex_abi(tokenToSell) 
-        contractTokenA = ex.eth.contract(address=tokenToSell, abi=AbiTokenA)
-        logger.info(msg=f"contractTokenA {contractTokenA}")
-        tokenToBuy= ex.to_checksum_address(await search_contract_dex(tokenB))
-        OrderPath=[tokenToSell, tokenToBuy]
-        sell_token_balance=contractTokenA.functions.balanceOf(walletaddress).call()
-        logger.info(msg=f"sell_token_balance {sell_token_balance}")
-        sell_token_decimals=contractTokenA.functions.decimals().call()
+            token_out_symbol=s2
+            token_in_symbol=basesymbol
+        token_out_address=ex.to_checksum_address(await search_contract_dex(token_out_symbol))
+        token_out_abi= await fetch_abi_dex(token_out_address) 
+        token_out_contract = ex.eth.contract(address=token_out_address, abi=token_out_abi)
+        token_in_address= ex.to_checksum_address(await search_contract_dex(token_in_symbol))
+        OrderPath=[token_out_address, token_in_address]
+        token_out_balance=token_out_contract.functions.balanceOf(walletaddress).call()
+        if (token_out_balance <=0)
+          return
+        logger.info(msg=f"token_out_balance {token_out_balance}")
+        token_out_decimals=token_out_contract.functions.decimals().call()
         slippage=1
         if (s1=="SELL"):
-            amountTosell = (sell_token_balance)/(10 ** sell_token_decimals) #SELL all token in case of sell order
+            token_out_amount = (token_out_balance)/(10 ** token_out_decimals) #SELL all token in case of sell order
             response = f"⬇️ {s2}"
-            coinprice= await fetch_token_price(tokenA)
+            token_out_quote= await fetch_token_price(token_out_symbol)
         else:
-            amountTosell = ((sell_token_balance)/(10 ** sell_token_decimals))*(float(s5)/100) #buy %p ercentage
+            token_out_amount = ((token_out_balance)/(10 ** token_out_decimals))*(float(s5)/100) #buy %p ercentage
             response = f"⬆️ {s2}"
-            coinprice= await fetch_token_price(tokenB)
-        i_OrderAmount=(ex.to_wei(amountTosell,'ether'))
+            token_in_quote= await fetch_token_price(token_in_symbol)
+        i_OrderAmount=(ex.to_wei(token_out_amount,'ether'))
         OrderAmount = i_OrderAmount
         # deadline = ex.eth.getBlock("latest")["timestamp"] + 3600
         deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
-            approvalcheck = contractTokenA.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
+            approvalcheck = token_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
             logger.info(msg=f"approvalcheck {approvalcheck}")
             if (approvalcheck==0):
                 maxamount = (ex.to_wei(2**64-1,'ether'))
-                approval_TX = contractTokenA.functions.approve(ex.to_checksum_address(router), maxamount)
+                approval_TX = token_out_contract.functions.approve(ex.to_checksum_address(router), maxamount)
                 ApprovaltxHash = await sign_dex_transaction(approval_TX)
                 logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
                 time.sleep(10) #wait approval
@@ -536,7 +536,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             approval_response = requests.get(approval_URL)
             approval= approval_response.json()
             logger.info(msg=f"approval {approval}")
-            swap_url = f"{endpoint}swap?fromTokenAddress={tokenToSell}&toTokenAddress={tokenToBuy}&amount={OrderAmount}&fromAddress={walletaddress}&slippage={slippage}"
+            swap_url = f"{endpoint}swap?fromTokenAddress={token_out_address}&toTokenAddress={token_in_address}&amount={OrderAmount}&fromAddress={walletaddress}&slippage={slippage}"
             logger.info(msg=f"swap_url {swap_url}")
             swap_response = requests.get(swap_url)
             logger.info(msg=f"swap_response {swap_response}")
@@ -584,7 +584,6 @@ async def send_order_dex(s1,s2,s3,s4,s5):
     except Exception as e:
         await handle_exception(e)
         return
-
 
 async def fetch_tokeninfo(token):
     global token_price
