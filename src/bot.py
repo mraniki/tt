@@ -891,8 +891,6 @@ if os.path.exists(db_path):
         telegram_webhook_privatekey=tg[0]['key']
         telegram_webhook_certificate=tg[0]['cert']
         telegram_webhook_url=tg[0]['webhook_url']
-        # cex_db=cex_db.all()
-        # dex_db=dex_db.all()
         if (telegram_token==""):
             logger.error("no TG TK")
             logger.warning(msg=f"Failover process")
