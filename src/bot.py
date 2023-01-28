@@ -854,7 +854,7 @@ else:
     outfile = os.path.join('./config', 'db.json')
     response = requests.get(db_url)
     with open(outfile,'w') as output:
-        output.write(response.text)
+        output.write(response.content)
         logger.info(msg=f"copied the remote DB")
 
         
