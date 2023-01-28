@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.09"
+TTversion="🪙TT Beta 1.03.10"
 ##=============== import  =============
 ##log
 import logging
@@ -136,7 +136,6 @@ async def search_cex(ex_name, ex_mode):
     else:
         return
 
-
 async def search_dex(ex_name, ex_mode):
     try:
         query = ((q.name == ex_name) & (q['testmode'] == ex_mode))
@@ -264,7 +263,6 @@ async def load_exchange(exchangeid, mode):
     else:
         return
 
-# Define a function with 2 inputs
 def search_tokenlist(parsedJson, name):
     #logger.info(msg=f"name {name} chainId {chainId}")
     #logger.info(msg=f"parsedJson {parsedJson}")
@@ -300,7 +298,6 @@ async def search_contract_dex(symb):
 
 async def fetch_abi_dex(addr):
     try:
-       # if(version=="v2"):
             url = abiurl
             params = {
                 "module": "contract",
@@ -314,7 +311,6 @@ async def fetch_abi_dex(addr):
                 return abi
             else:
                 return None
-        #elif(version=="v3")
 
     except Exception as e:
         await handle_exception(e)
