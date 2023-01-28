@@ -857,6 +857,7 @@ else:
         output.write(response.text)
         logger.info(msg=f"copied the remote DB")
 
+        
 if not os.path.exists(db_path):
     logger.info(msg=f"contingency process DB")
     failsafe=True
