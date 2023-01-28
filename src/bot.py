@@ -951,7 +951,8 @@ def main():
                 webhook_url=telegram_webhook_url
               )
               except Exception as e:
-                application.run_polling(drop_pending_updates=True)
+                logger.info(msg=f"Webhook failed using polling")
+               application.run_polling(drop_pending_updates=True)
         else:
             application.run_polling(drop_pending_updates=True)
     except Exception as e:
