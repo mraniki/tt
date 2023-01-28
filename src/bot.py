@@ -950,7 +950,7 @@ def main():
                 #cert=telegram_webhook_certificate,
                 webhook_url=telegram_webhook_url
               )
-              except Exception as e:
+            except Exception as e:
                 logger.info(msg=f"Webhook failed using polling")
                application.run_polling(drop_pending_updates=True)
         else:
