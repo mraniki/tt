@@ -852,8 +852,8 @@ if db_url==None:
     logger.info(msg=f"No remote DB")
 else:
     outfile = os.path.join('./config', 'db.json')
-    #response = requests.get(db_url, stream=True)
-    response = requests.get(db_url, headers=headers).json()
+    response = requests.get(db_url, stream=True)
+    #response = requests.get(db_url, headers=headers).json()
     #logger.info(msg=f"{response}")
     with open(outfile,'w') as output:
       output.write(response)
