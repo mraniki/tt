@@ -858,7 +858,7 @@ else:
     logger.info(msg=f"{remote_db}")
     logger.info(msg=f"{db_url}")
     with open(outfile,'wb') as output:
-        output.write(remote_db)
+        output.write(response.text)
         logger.info(msg=f"copied the remote DB")
 
 if not os.path.exists(db_path):
