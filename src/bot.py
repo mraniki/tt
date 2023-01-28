@@ -136,6 +136,7 @@ async def search_cex(ex_name, ex_mode):
     else:
         return
 
+        
 async def search_dex(ex_name, ex_mode):
     try:
         query = ((q.name == ex_name) & (q['testmode'] == ex_mode))
