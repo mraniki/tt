@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.11"
+TTversion="🪙TT Beta 1.03.12"
 ##=============== import  =============
 ##log
 import logging
@@ -837,7 +837,7 @@ async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_
     except Exception as e:
         await handle_exception(e)
 ##======TG COMMAND Test mode switch ======
-async def testmode_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def switch_testmode_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global testmode
     if (testmode=="False"):
         testmode="True"
@@ -932,7 +932,7 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
         application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), monitor))
         application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), switch_exchange_command))
-        application.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
+        application.add_handler(MessageHandler(filters.Regex('/testmode'), switch_testmode_command))
         application.add_handler(MessageHandler(filters.Regex('/g'), fetch_tokeninfo_command))
         application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
         application.add_error_handler(error_handler)
