@@ -15,7 +15,7 @@ RUN pip install -r requirements.txt
 COPY ./src .
 
 #RUN mkdir ./config
-RUN mkdir -p /config
+RUN mkdir -p ./config
 ADD ./config/sample_db.json /config/sample_db.json
 EXPOSE 8443
 EXPOSE 8080
