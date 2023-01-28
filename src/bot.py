@@ -855,7 +855,7 @@ else:
     response = requests.get(db_url, stream=True)
     #response = requests.get(db_url, headers=headers).json()
     logger.info(msg=f"{response.content}")
-    with open(outfile,'w') as output:
+    with open(outfile,'wb') as output:
       output.write(response.content)
       logger.info(msg=f"copied the remote DB")
 
