@@ -853,8 +853,9 @@ else:
     outfile = os.path.join('./config', 'db.json')
     response = requests.get(db_url, stream=True)
     logger.info(msg=f"{response}")
-    with open(outfile,'wb') as output:
+    with open(outfile,'w') as output:
         output.write(response.content)
+        logger.info(msg=f"copied the remote DB")
 
 if not os.path.exists(db_path):
     logger.info(msg=f"contingency process DB")
