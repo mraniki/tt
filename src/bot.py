@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.10"
+TTversion="🪙TT Beta 1.03.11"
 ##=============== import  =============
 ##log
 import logging
@@ -940,7 +940,7 @@ def main():
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
 
 #Run the bot
-        webhook=False
+        webhook=True
         if (webhook):
             logger.info(f"Webhook start")
             try:
