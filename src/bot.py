@@ -852,8 +852,9 @@ if db_url==None:
     logger.info(msg=f"No remote DB")
 else:
     outfile = os.path.join('./config', 'db.json')
-    response = requests.get(db_url, stream=True)
+    response = requests.get(db_url)
     logger.info(msg=f"{response.content}")
+    logger.info(msg=f"{db_url}")
     with open(outfile,'wb') as output:
         output.write(response.content)
         logger.info(msg=f"copied the remote DB")
