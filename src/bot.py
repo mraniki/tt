@@ -355,7 +355,7 @@ def convert(s):
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
     return order
 
-async def parse_message (message)
+async def parse_message (message):
     parsed_message = message.split(" ")
     filter_lst_order = ['buy']
     filter_lst_quote = ['/q']
@@ -940,7 +940,6 @@ def main():
         application.add_error_handler(error_handler)
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
-
 
 #Run the bot
         webhook=True
