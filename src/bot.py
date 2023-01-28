@@ -954,5 +954,6 @@ def main():
     except Exception as e:
         logger.info("Bot failed to start. Error: " + str(e))
 
+        
 if __name__ == '__main__':
     main()
