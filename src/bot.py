@@ -38,7 +38,6 @@ logger = logging.getLogger(__name__)
 
 ##=============== CONFIG ===============
 load_dotenv()  # .env loading
-
 #===================
 global ex
 exchanges = {}
@@ -51,7 +50,8 @@ cg = CoinGeckoAPI()
 fullcommandlist = """
 <code>/bal</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/q btc/usdt</code>
-<code>/dex pancake</code> <code>buy cake</code> <code>/q BTCB</code>
+<code>/dex pancake</code> <code>buy cake</code> 
+<code>/q BTCB</code> <code>/q WBTC</code>
 <code>/trading</code> <code>/testmode</code>"""
 menuhelp = f"{TTversion} \n {fullcommandlist}"
 
@@ -272,7 +272,6 @@ def search_tokenlist(parsedJson, name):
             if int(chainId) == entry ['chainId']:
                 return entry ['address']
 
-
 async def search_contract_dex(symb):
     try:
         url = requests.get(tokenlist)
@@ -416,8 +415,6 @@ async def verify_gas_dex():
     # logger.info(msg=f"gasLimitresults {gasLimitresults}")
     # if (gasLimit<=gasLimitresults):
     #     logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
-
-
 
 async def fetch_token_price(s1):
     try:
