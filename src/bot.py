@@ -261,8 +261,10 @@ async def load_exchange(exchangeid, mode):
         except e as Exception:
             await handle_exception(e)
     else:
-     networkprovider='ethereum.publicnode.com'
-     ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
+        logger.warning(msg=f"Error with the DB to setup {exchangeid} {mode}, going with default")
+        networkprovider='ethereum.publicnode.com'
+        ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
+        name='pancake'
 
 def search_tokenlist(parsedJson, name):
     #logger.info(msg=f"name {name} chainId {chainId}")
