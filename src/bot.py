@@ -437,7 +437,7 @@ async def fetch_token_price(s1):
     except Exception:
         return
 
-async def sign_dex_transaction(contract_tx):
+async def sign_transaction_dex(contract_tx):
     try:
         if (version=='v2'):
             tx_params = {
@@ -516,13 +516,13 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             if (approvalcheck==0):
                 maxamount = (ex.to_wei(2**64-1,'ether'))
                 approval_TX = token_out_contract.functions.approve(ex.to_checksum_address(router), maxamount)
-                ApprovaltxHash = await sign_dex_transaction(approval_TX)
+                ApprovaltxHash = await sign_transaction_dex(approval_TX)
                 logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
                 time.sleep(10) #wait approval
             OptimalOrderAmount  = router_instance.functions.getOutputAmount(OrderAmount, OrderPath).call()
             MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
             swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
-            tx_token = await sign_dex_transaction(swap_TX)
+            tx_token = await sign_transaction_dex(swap_TX)
         elif (version=="1inch"):
             logger.info(msg=f"1inch processing")
             logger.info(msg=f"{OrderAmount}")
@@ -538,7 +538,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             logger.info(msg=f"swap_response {swap_response}")
             swap_raw = swap_response.json()
             logger.info(msg=f"swap_raw {swap_raw}")
-            # tx_token = await sign_dex_transaction(swap_raw)
+            # tx_token = await sign_transaction_dex(swap_raw)
             # logger.info(msg=f"tx_token {tx_token}")
             swap_raw['nonce'] = ex.eth.get_transaction_count(walletaddress)
             swap_raw['gas']= int(gasLimit)
@@ -557,7 +557,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             # #OptimalOrderAmount  = quoter_instance.functions.getSwapQuote(tokenToSell, OrderAmount, tokenToBuy).call()
             # #MinimumAmount=int(OptimalOrderAmount[1] *0.98)# max 2% slippage
             # swap_TX=router_instance.functions.addOrder(tokenToBuy,OrderAmount,tokenToSell,OrderAmountfee)
-            # tx_token = await sign_dex_transaction(swap_TX)
+            # tx_token = await sign_transaction_dex(swap_TX)
         elif (version =="limitorder"):
             logger.info(msg=f"limitorder processing")
             return
