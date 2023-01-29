@@ -38,7 +38,6 @@ logger = logging.getLogger(__name__)
 
 ##=============== CONFIG ===============
 load_dotenv()  # .env loading 
-db_path = './config/db.json'
 
 #===================
 global ex
@@ -671,9 +670,6 @@ async def handle_exception(e) -> None:
         sys.exit()
     except IndexError:
         msg=f"Parsing error"
-    except telegram.error.Conflict:
-        msg=f"telegram bot conflict"
-        sys.exit()
     except telegram.error:
         msg=f"telegram error"
     except ConnectionError:
@@ -865,7 +861,7 @@ else:
       output.write(response.content)
       logger.info(msg=f"copied the remote DB")
 
-        
+db_path = './config/db.json'        
 if not os.path.exists(db_path):
     logger.info(msg=f"contingency process DB")
     failsafe=True
@@ -877,7 +873,7 @@ if not os.path.exists(db_path):
         telegram_channel_id = os.getenv("TG_CHANNEL_ID")
     except Exception as e:
         logger.error("no telegram token")
-        time.sleep(1000)
+        sys.exit()
 
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB")
@@ -904,9 +900,10 @@ if os.path.exists(db_path):
         if (telegram_token==""):
             logger.error("no TG TK")
             logger.warning(msg=f"Failover process")
-            time.sleep(1000)
+            sys.exit()
     except Exception:
         logger.warning(msg=f"error with existing db file {db_path}")
+        sys.exit()
         
 ##========== startup message ===========
 async def post_init(application: Application):
@@ -959,13 +956,15 @@ def main():
                 webhook_url=telegram_webhook_url
               )
             except Exception as e:
-             logger.info("Bot failed to start. Error: " + str(e))
-             #sleep(1000)
-             #application.run_polling(drop_pending_updates=True)
+             logger.error("Bot failed to start. Error: " + str(e))
         else:
-         application.run_polling(drop_pending_updates=True)
+           try:
+              application.run_polling(drop_pending_updates=True)
+           except telegram.error.Conflict:
+              logger.error(msg="Bot failed to start due to conflict”)
+              sys.exit()
     except Exception as e:
-        logger.info("Bot failed to start. Error: " + str(e))
+        logger.info(msg="Bot failed to start. Error: " + str(e))
 
         
 if __name__ == '__main__':
