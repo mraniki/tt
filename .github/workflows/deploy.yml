@@ -6,7 +6,9 @@ on:
   pull_request:
     branches: [ "dev" ]
 
-    
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+ 
 jobs:
   build:
     name:  🐳 Build
@@ -37,16 +39,11 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
-    name: 🚀 Deploy
+    name: Deploy app
     runs-on: ubuntu-latest
-    needs: [build]
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
 
-      - name: 🚀 Deploy Staging
-        if: ${{ github.ref == 'refs/heads/dev' }}
-        - uses: superfly/flyctl-actions/setup-flyctl@master
-        - run: flyctl deploy --remote-only
-          env:
-            FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
