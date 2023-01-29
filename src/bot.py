@@ -52,10 +52,8 @@ cg = CoinGeckoAPI()
 fullcommandlist = """
 <code>/bal</code>
 <code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/q btc/usdt</code>
-<code>/cex binance</code> <code>buy btcusdt sl=1000 tp=20 q=1%</code> <code>/q btcusdt</code>
 <code>/dex pancake</code> <code>buy cake</code> <code>/q BTCB</code>
-<code>/trading</code>
-<code>/testmode</code>"""
+<code>/trading</code> <code>/testmode</code>"""
 menuhelp = f"{TTversion} \n {fullcommandlist}"
 
 #========== Common Functions =============
