@@ -354,6 +354,7 @@ def convert(s):
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
     return order
 
+#parserv2
 async def parse_message (message):
     parsed_message = message.split(" ")
     filter_lst_order = ['buy']
@@ -669,8 +670,12 @@ async def handle_exception(e) -> None:
         logger.error(msg=f"error: {e}")
     except KeyError:
         msg=f"DB content error"
+        sys.exit()
     except IndexError:
         msg=f"Parsing error"
+    except telegram.error.Conflict:
+        msg=f"telegram bot conflict"
+        sys.exit()
     except telegram.error:
         msg=f"telegram error"
     except ConnectionError:
