@@ -261,7 +261,7 @@ async def load_exchange(exchangeid, mode):
         except e as Exception:
             await handle_exception(e)
     else:
-     networkprovider=ethereum.publicnode.com
+     networkprovider='ethereum.publicnode.com'
      ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
 
 def search_tokenlist(parsedJson, name):
