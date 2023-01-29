@@ -192,11 +192,10 @@ async def load_exchange(exchangeid, mode):
    # global quoter_instanceabi
     global platform
     global chainId
-    if (failsafe):
-        ex = Web3(Web3.HTTPProvider('https://ethereum.publicnode.com'))
-        return
+
     logger.info(msg=f"Setting up {exchangeid}")
     check_cex= await search_cex(exchangeid,mode)
+    logger.info(msg=f"cex {check_cex}")
     check_dex= await search_dex(exchangeid,mode)
     if (check_cex):
         newex=check_cex
@@ -262,7 +261,7 @@ async def load_exchange(exchangeid, mode):
         except e as Exception:
             await handle_exception(e)
     else:
-        return
+        ex = Web3(Web3.HTTPProvider('https://ethereum.publicnode.com'))
 
 def search_tokenlist(parsedJson, name):
     #logger.info(msg=f"name {name} chainId {chainId}")
