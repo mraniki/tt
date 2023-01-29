@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.17"
+TTversion="🪙TT Beta 1.03.18"
 ##=============== import  =============
 ##log
 import logging
@@ -44,7 +44,7 @@ db_path = './config/db.json'
 global ex
 exchanges = {}
 trading=True
-testmode="True"
+ex_test_mode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
 cg = CoinGeckoAPI()
 
@@ -114,16 +114,16 @@ async def show_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     await send(update, message)
 
 #=========Exchange Functions
-async def search_cex(ex_name, ex_mode):
+async def search_cex(ex_name, ex_test_mode):
     if type(ex_name) is str:
-        query1 = ((q.name == ex_name) & (q['testmode'] == ex_mode))
+        query1 = ((q.name == ex_name) & (q['testmode'] == ex_test_mode))
         result_cex_db = cex_db.search(query1)
         logger.info(msg=f"result_cex_db {result_cex_db}")
         if (len(str(result_cex_db)) >= 1):
             return result_cex_db
     elif type(string1) is not str:
         try:
-            query1 = ((q.name == ex_name.name.lower()) & (q['testmode'] == ex_mode))
+            query1 = ((q.name == ex_name.name.lower()) & (q['testmode'] == ex_test_mode))
             result_cex_db = cex_db.search(query1)
             if (len(str(result_cex_db)) == 1):
                 return result_cex_db
@@ -135,9 +135,9 @@ async def search_cex(ex_name, ex_mode):
     else:
         return
 
-async def search_dex(ex_name, ex_mode):
+async def search_dex(ex_name, ex_test_mode):
     try:
-        query = ((q.name == ex_name) & (q['testmode'] == ex_mode))
+        query = ((q.name == ex_name) & (q['testmode'] == ex_test_mode))
         result_dex_db = dex_db.search(query)
         logger.info(msg=f"result_dex_db {result_dex_db}")
         if (len(str(result_dex_db)) >= 1):
@@ -148,21 +148,21 @@ async def search_dex(ex_name, ex_mode):
         await handle_exception(e)
         return
 
-async def search_exchange(ex_name, ex_mode):
+async def search_exchange(ex_name, ex_test_mode):
     try:
         if (isinstance(ex_name, str)):
-            check_cex = await search_cex(ex_name, ex_mode)
-            check_dex = await search_dex(ex_name, ex_mode)
+            check_cex = await search_cex(ex_name, ex_test_mode)
+            check_dex = await search_dex(ex_name, ex_test_mode)
             if (check_cex != None):
                 if(len(str(check_cex)) >= 1):
                     return check_cex[0]['name']
             elif (len(str(check_dex)) >= 1):
                 return check_dex[0]['name']
         elif not (isinstance(ex_name, web3.main.Web3)):
-            check_cex = await search_cex(ex_name.id, ex_mode)
+            check_cex = await search_cex(ex_name.id, ex_test_mode)
             return check_cex[0]['name']
         elif (isinstance(ex_name, web3.main.Web3)):
-            check_dex = await search_dex(ex_name, ex_mode)
+            check_dex = await search_dex(ex_name, ex_test_mode)
             return name
         else:
             return
@@ -259,7 +259,7 @@ async def load_exchange(exchangeid, mode):
         except e as Exception:
             await handle_exception(e)
     else:
-        logger.warning(msg=f"Error with the DB to setup {exchangeid} {mode}, going with default")
+        logger.warning(msg=f"Error with the DB to setup {exchangeid} {ex_test_mode}, going with default")
         networkprovider='ethereum.publicnode.com'
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         name='pancake'
@@ -697,7 +697,7 @@ async def handle_exception(e) -> None:
 ##====view help =====
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     r_ping = await verify_latency_ex()
-    msg= f"Environment: {env} Ping: {r_ping}ms\nExchange: {await search_exchange(ex,testmode)} Sandbox: {testmode}\n{menuhelp}"
+    msg= f"Environment: {env} Ping: {r_ping}ms\nExchange: {await search_exchange(ex,ex_test_mode)} Sandbox: {ex_test_mode}\n{menuhelp}"
     await send(update,msg)
 ##====restart ====
 async def restart_command(application: Application, update: Update) -> None:
@@ -825,15 +825,15 @@ async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_
     typeex=parsed_message[0]
     try:
         if (typeex=="/cex"):
-            results_search_cex= await search_cex(newex,testmode)
+            results_search_cex= await search_cex(newex,ex_test_mode)
             CEX_name = results_search_cex[0]['name']
-            CEX_test_mode = testmode
+            CEX_test_mode = ex_test_mode
             res = await load_exchange(CEX_name,CEX_test_mode)
             response = f"CEX is {ex}"
         elif (typeex=="/dex"):
-            results_search_dex= await search_dex(newex,testmode)
+            results_search_dex= await search_dex(newex,ex_test_mode)
             DEX_name= results_search_dex[0]['name']
-            DEX_test_mode= testmode
+            DEX_test_mode= ex_test_mode
             logger.info(msg=f"DEX_test_mode: {DEX_test_mode}")
             logger.info(msg=f"DEX_name: {DEX_name}")
             res = await load_exchange(DEX_name,DEX_test_mode)
@@ -844,12 +844,12 @@ async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_
         await handle_exception(e)
 ##======TG COMMAND Test mode switch ======
 async def switch_testmode_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    global testmode
-    if (testmode=="False"):
-        testmode="True"
+    global ex_test_mode
+    if (ex_test_mode=="False"):
+        ex_test_mode="True"
     else:
-        testmode="False"
-    message=f"Sandbox is {testmode}"
+        ex_test_mode="False"
+    message=f"Sandbox is {ex_test_mode}"
     await send(update,message)
     
 ##======== DB START ===============
@@ -888,7 +888,7 @@ if os.path.exists(db_path):
         globalDB = db.table('global')
         env = globalDB.all()[0]['env']
         ex = globalDB.all()[0]['defaultex']
-        testmode = globalDB.all()[0]['defaulttestmode']
+        ex_test_mode = globalDB.all()[0]['defaulttestmode']
         logger.info(msg=f"Env {env} ex {ex}")
         telegram_db = db.table('telegram')
         cex_db = db.table('cex')
@@ -911,7 +911,7 @@ if os.path.exists(db_path):
 ##========== startup message ===========
 async def post_init(application: Application):
     message=f"Bot is online {TTversion}"
-    await load_exchange(ex,testmode)
+    await load_exchange(ex,ex_test_mode)
     logger.info(msg=f"{message}")
     await application.bot.send_message(telegram_channel_id, message, parse_mode=constants.ParseMode.HTML)
 #===========bot error handling ==========
