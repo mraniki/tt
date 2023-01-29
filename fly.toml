@@ -1,6 +1,6 @@
 app = "autumn-paper-9536"
-kill_signal = "SIGKILL"
-kill_timeout = 10
+kill_signal = "SIGINT"
+kill_timeout = 2
 processes = []
 
 [build]

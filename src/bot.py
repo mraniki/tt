@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.15"
+TTversion="🪙TT Beta 1.03.16"
 ##=============== import  =============
 ##log
 import logging
@@ -855,7 +855,7 @@ else:
     outfile = os.path.join('./config', 'db.json')
     response = requests.get(db_url, stream=True)
     #response = requests.get(db_url, headers=headers).json()
-    logger.info(msg=f"{response.content}")
+    #logger.info(msg=f"{response.content}")
     with open(outfile,'wb') as output:
       output.write(response.content)
       logger.info(msg=f"copied the remote DB")
@@ -941,7 +941,7 @@ def main():
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
 
 #Run the bot
-        webhook=False
+        webhook=True
         if (webhook):
             logger.info(f"Webhook start")
             try:
