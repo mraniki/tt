@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.13"
+TTversion="🪙TT Beta 1.03.14"
 ##=============== import  =============
 ##log
 import logging
@@ -531,15 +531,9 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             logger.info(msg=f"{approval_URL}")
             approval_response = requests.get(approval_URL)
             approval= approval_response.json()
-<<<<<<< HEAD
             logger.info(msg=f"approval {approval}")
             swap_url = f"{endpoint}swap?fromTokenAddress={token_out_address}&toTokenAddress={token_in_address}&amount={OrderAmount}&fromAddress={walletaddress}&slippage={slippage}"
             logger.info(msg=f"swap_url {swap_url}")
-=======
-            logger.info(msg=f"{approval}")
-            swap_url = f"{endpoint}swap?fromTokenAddress={tokenToSell}&toTokenAddress={tokenToBuy}&amount={OrderAmount}&fromAddress={walletaddress}&slippage={slippage}"
-            logger.info(msg=f"{swap_url}")
->>>>>>> dbfa4e0 (Jan 26, 2023, 3:33 PM)
             swap_response = requests.get(swap_url)
             logger.info(msg=f"swap_response {swap_response}")
             swap_raw = swap_response.json()
