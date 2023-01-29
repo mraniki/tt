@@ -37,7 +37,7 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 ##=============== CONFIG ===============
-load_dotenv()  # .env loading 
+load_dotenv()  # .env loading
 
 #===================
 global ex
@@ -356,9 +356,9 @@ async def parse_message (message):
     parsed_message = message.split(" ")
     filter_lst_order = ['buy']
     filter_lst_quote = ['/q']
-    if [ele for ele in filter_lst_order if(ele in parsed_message)]: 
+    if [ele for ele in filter_lst_order if(ele in parsed_message)]:
       logger.info(msg=f"case 1: {message}")
-    
+
 #========== Order function
 async def send_order(s1,s2,s3,s4,s5):
     try:
@@ -421,7 +421,7 @@ async def verify_gas_dex():
 
 async def fetch_token_price(s1):
     try:
-        coininfo=cg.search(query=s1) 
+        coininfo=cg.search(query=s1)
         for i in coininfo['coins']:
             fetch_tokeninfo=i['symbol']
             if (fetch_tokeninfo==s1):
@@ -489,7 +489,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             token_out_symbol=s2
             token_in_symbol=basesymbol
         token_out_address=ex.to_checksum_address(await search_contract_dex(token_out_symbol))
-        token_out_abi= await fetch_abi_dex(token_out_address) 
+        token_out_abi= await fetch_abi_dex(token_out_address)
         token_out_contract = ex.eth.contract(address=token_out_address, abi=token_out_abi)
         token_in_address= ex.to_checksum_address(await search_contract_dex(token_in_symbol))
         OrderPath=[token_out_address, token_in_address]
@@ -577,7 +577,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         if(txResult == "1"):
             response+= f"\n➕ Size: {round(ex.from_wei(OrderAmount, 'ether'),5)}\n⚫️ Entry: {fetch_token_price}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
             logger.info(msg=f"{response}")
-            return response     
+            return response
     except Exception as e:
         await handle_exception(e)
         return
@@ -588,24 +588,24 @@ async def fetch_tokeninfo(token):
     #asset_platforms = cg.get_asset_platforms()
     #logger.info(msg=f"cg.get_asset_platforms {asset_platforms}")
     try:
-        coininfo=cg.get_coin_by_id(id=token) 
+        coininfo=cg.get_coin_by_id(id=token)
         coinplatform=coininfo['asset_platform_id']
         coindescription=coininfo['description']['en']
         coinprice=coininfo['market_data']['current_price']['usd']
         coinsymbol=coininfo['symbol']
         coinlink='https://www.coingecko.com/en/coins/'+coininfo['symbol']
         response = f'{coinsymbol} {coinprice} USD \n{coindescription}\n{coinlink}'
-        logger.info(msg=f"{response}")   
+        logger.info(msg=f"{response}")
         return response
     except Exception:
         return
-       
+
 async def fetch_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message  = update.effective_message.text
     parsed_message = channel_message.split(" ")
     symbol=parsed_message[1].upper()
     try:
-        coininfo=cg.search(query=symbol) 
+        coininfo=cg.search(query=symbol)
         #logger.info(msg=f"coininfo {coininfo}")
         for i in coininfo['coins']:
             results_search_coin = i['symbol']
@@ -706,7 +706,7 @@ async def stop_command(self) -> None:
   await self.application.updater.stop()
   await self.application.stop()
   await self.application.shutdown()
-        
+
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     msg=f"🏦 Balance"
@@ -847,7 +847,7 @@ async def switch_testmode_command(update: Update, context: ContextTypes.DEFAULT_
         ex_test_mode="False"
     message=f"Sandbox is {ex_test_mode}"
     await send(update,message)
-    
+
 ##======== DB START ===============
 db_url=os.getenv("DB_URL")
 if db_url==None:
@@ -861,7 +861,7 @@ else:
       output.write(response.content)
       logger.info(msg=f"copied the remote DB")
 
-db_path = './config/db.json'        
+db_path = './config/db.json'
 if not os.path.exists(db_path):
     logger.info(msg=f"contingency process DB")
     failsafe=True
@@ -904,7 +904,7 @@ if os.path.exists(db_path):
     except Exception:
         logger.warning(msg=f"error with existing db file {db_path}")
         sys.exit()
-        
+
 ##========== startup message ===========
 async def post_init(application: Application):
     message=f"Bot is online {TTversion}"
@@ -947,25 +947,25 @@ def main():
         if (webhook):
             logger.info(f"Webhook start")
             try:
-              application.run_webhook(
-                listen='0.0.0.0',
-                port=telegram_webhook_port,
-                #secret_token=telegram_webhook_secret,
-                #key=telegram_webhook_privatekey,
-                #cert=telegram_webhook_certificate,
-                webhook_url=telegram_webhook_url
-              )
+                application.run_webhook(
+                    listen='0.0.0.0',
+                    port=telegram_webhook_port,
+                    #secret_token=telegram_webhook_secret,
+                    #key=telegram_webhook_privatekey,
+                    #cert=telegram_webhook_certificate,
+                    webhook_url=telegram_webhook_url
+                    )
             except Exception as e:
-             logger.error("Bot failed to start. Error: " + str(e))
+                logger.error("Bot failed to start. Error: " + str(e))
         else:
-           try:
-              application.run_polling(drop_pending_updates=True)
-           except telegram.error.Conflict:
-              logger.error(msg="Bot failed to start due to conflict”)
-              sys.exit()
+            try:
+                application.run_polling(drop_pending_updates=True)
+            except telegram.error.Conflict:
+                logger.error(msg='Bot failed to start due to conflict')
+                sys.exit()
     except Exception as e:
         logger.info(msg="Bot failed to start. Error: " + str(e))
 
-        
+
 if __name__ == '__main__':
     main()
