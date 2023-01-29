@@ -43,6 +43,7 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
+
       - name: 🚀 Deploy Staging
         if: ${{ github.ref == 'refs/heads/dev' }}
         - uses: superfly/flyctl-actions/setup-flyctl@master
