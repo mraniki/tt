@@ -23,18 +23,6 @@
         },
         "2":
         {
-            "token": "",
-            "channel": "",
-            "platform": "DEV"
-        },
-        "3":
-        {
-            "token": "",
-            "channel": "",
-            "platform": "SIT"
-        },
-        "4":
-        {
             "token": "YOURBOTTOKEN",
             "channel": "YOURCHANNELID",
             "platform": "PRD"
@@ -303,6 +291,24 @@
             "gasLimit":"500000",
             "gasPrice":"0.5",
             "platform":"arbitrum-one"
+        },
+        "8":
+        {
+            "name": "1inch",
+            "walletaddress": "abc",
+            "privatekey": "abc",
+            "version": "1inch",
+            "networkprovider": "endpoints.omniatech.io/v1/op/mainnet/public",
+            "router": "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
+            "testmode": "false",
+            "tokenlist":"https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json",
+            "abiurl":"https://api-optimistic.etherscan.io/api",
+            "abiurltoken":"6WESQRVAVWE1Z7BYGEU1C4V8S41GUBU2K7",
+            "basesymbol":"SUSD",
+            "gasLimit":"200000",
+            "gasPrice":"1",
+            "platform":"optimistic-ethereum",
+            "chainId":"10"
         }
     }
 }

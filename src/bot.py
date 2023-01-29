@@ -120,6 +120,7 @@ async def search_cex(ex_name, ex_mode):
     if type(ex_name) is str:
         query1 = ((q.name == ex_name) & (q['testmode'] == ex_mode))
         result_cex_db = cex_db.search(query1)
+        logger.info(msg=f"result_cex_db {result_cex_db}")
         if (len(str(result_cex_db)) >= 1):
             return result_cex_db
     elif type(string1) is not str:
@@ -136,11 +137,11 @@ async def search_cex(ex_name, ex_mode):
     else:
         return
 
-        
 async def search_dex(ex_name, ex_mode):
     try:
         query = ((q.name == ex_name) & (q['testmode'] == ex_mode))
         result_dex_db = dex_db.search(query)
+        logger.info(msg=f"result_dex_db {result_dex_db}")
         if (len(str(result_dex_db)) >= 1):
             return result_dex_db
         else:
@@ -195,7 +196,6 @@ async def load_exchange(exchangeid, mode):
 
     logger.info(msg=f"Setting up {exchangeid}")
     check_cex= await search_cex(exchangeid,mode)
-    logger.info(msg=f"cex {check_cex}")
     check_dex= await search_dex(exchangeid,mode)
     if (check_cex):
         newex=check_cex
