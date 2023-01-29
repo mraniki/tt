@@ -903,7 +903,6 @@ if os.path.exists(db_path):
             sys.exit()
     except Exception:
         logger.warning(msg=f"error with existing db file {db_path}")
-        sys.exit()
 
 ##========== startup message ===========
 async def post_init(application: Application):
