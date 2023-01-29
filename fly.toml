@@ -7,7 +7,7 @@ processes = []
   image = "mraniki/tt:nightly"
 
 [deploy]
-  strategy = "bluegreen"
+  strategy = "rolling"
   
 [env]
 
