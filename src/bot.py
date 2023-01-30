@@ -108,14 +108,17 @@ async def add_dex_db_command(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11):
             "abiurltoken": s10,
             "basesymbol": s11})
 
+
 async def drop_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"db dropped")
     db.drop_tables()
+
 
 async def show_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"display db")
     message = f" db extract: \n {db.all()}"
     await send(update, message)
+
 
 #=========Exchange Functions
 async def search_cex(ex_name, ex_test_mode):
@@ -310,39 +313,50 @@ async def fetch_abi_dex(addr):
 
 #ORDER PARSER
 def convert(s):
-    li = s.split(" ")
+    # li = s.split(" ")
+    # try:
+    #     m_dir= li[0]
+    # except (IndexError, TypeError):
+    #     e=f"{s} no direction"
+    #     logger.error(msg=f"{e}")
+    #     handle_exception(e)
+    #     return
+    # try:
+    #     m_symbol=li[1]
+    # except (IndexError, TypeError):
+    #     e=f"{s} no symbol"
+    #     logger.error(msg=f"{e}")
+    #     handle_exception(e)
+    #     return
+    # try:
+    #     m_sl=li[2][3:7]
+    # except (IndexError, TypeError):
+    #     logger.warning(msg=f"{s} no sl")
+    #     m_sl=0
+    # try:
+    #     m_tp=li[3][3:7]
+    # except (IndexError, TypeError):
+    #     logger.warning(msg=f"{s} no tp")
+    #     m_tp=0
+    # try:
+    #     m_q=li[4][2:-1]
+    # except (IndexError, TypeError):
+    #     logger.warning(msg=f"{s} no size default to 10 %")
+    #     m_q=5
+    # order=[m_dir,m_symbol,m_sl,m_tp,m_q]
+    # logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
+    # return order
     try:
-        m_dir= li[0]
-    except (IndexError, TypeError):
-        e=f"{s} no direction"
-        logger.error(msg=f"{e}")
-        handle_exception(e)
-        return
-    try:
-        m_symbol=li[1]
-    except (IndexError, TypeError):
-        e=f"{s} no symbol"
-        logger.error(msg=f"{e}")
-        handle_exception(e)
-        return
-    try:
-        m_sl=li[2][3:7]
-    except (IndexError, TypeError):
-        logger.warning(msg=f"{s} no sl")
-        m_sl=0
-    try:
-        m_tp=li[3][3:7]
-    except (IndexError, TypeError):
-        logger.warning(msg=f"{s} no tp")
-        m_tp=0
-    try:
-        m_q=li[4][2:-1]
-    except (IndexError, TypeError):
-        logger.warning(msg=f"{s} no size default to 10 %")
-        m_q=5
-    order=[m_dir,m_symbol,m_sl,m_tp,m_q]
-    logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
-    return order
+        parts = s.split(" ")
+        direction = parts[0]
+        symbol = parts[1]
+        stop_loss = int(parts[2][3:7]) if len(parts) >= 3 else 0
+        take_profit = int(parts[3][3:7]) if len(parts) >= 4 else 0
+        quantity = int(parts[4][2:-1]) if len(parts) >= 5 else 5
+        return [direction, symbol, stop_loss, take_profit, quantity]
+    except (IndexError, TypeError, ValueError) as e:
+        logger.error(f"Error parsing order string '{s}': {e}")
+        return None
 
 #parserv2
 async def parse_message (message):
@@ -411,23 +425,35 @@ async def verify_gas_dex():
     #     logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
 
 async def fetch_token_price(s1):
+    # try:
+    #     coininfo=cg.search(query=s1)
+    #     for i in coininfo['coins']:
+    #         fetch_tokeninfo=i['symbol']
+    #         if (fetch_tokeninfo == s1):
+    #             # logger.info(msg=f"{i['api_symbol']}")
+    #             coininfo=cg.get_coin_by_id(id=i['api_symbol'])
+    #             coinplatform=coininfo['asset_platform_id']
+    #             # logger.info(msg=f"coinplatform {coinplatfrom}")
+    #             coinprice=coininfo['market_data']['current_price']['usd']
+    #             # logger.info(msg=f"coingeckoprice {coinprice}")
+    #             coinsymbol=coininfo['symbol']
+    #             response = f'coingecko info: {coinsymbol} {coinprice} USD on {coinplatform}'
+    #             logger.info(msg=f"{response}")
+    #             return coinprice
+    # except Exception:
+    #     return
     try:
-        coininfo=cg.search(query=s1)
-        for i in coininfo['coins']:
-            fetch_tokeninfo=i['symbol']
-            if (fetch_tokeninfo==s1):
-                # logger.info(msg=f"{i['api_symbol']}")
-                coininfo=cg.get_coin_by_id(id=i['api_symbol'])
-                coinplatform=coininfo['asset_platform_id']
-                # logger.info(msg=f"coinplatform {coinplatfrom}")
-                coinprice=coininfo['market_data']['current_price']['usd']
-                # logger.info(msg=f"coingeckoprice {coinprice}")
-                coinsymbol=coininfo['symbol']
-                response = f'coingecko info: {coinsymbol} {coinprice} USD on {coinplatform}'
-                logger.info(msg=f"{response}")
-                return coinprice
-    except Exception:
-        return
+        # Search for WBTC on CoinGecko
+        coin_info = cg.get_coin_by_id(id=s1)
+
+        # Get the WBTC token's contract address on the chain
+        for token in coin_info['contract']:
+            if token['chain_id'] == str(chain_id):
+                token_address = token['contract_address']
+                print(f"address: {token_address}")
+                return token_address
+    except Exception as e:
+        print(f"An error occurred while retrieving the WBTC address: {e}")
 
 async def sign_transaction_dex(contract_tx):
     try:
@@ -561,11 +587,11 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         txResult = checkTransactionRequest.json()['status']
         #await verify_gas_dex()
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-        fetch_token_price=coinprice
+        coinprice=fetch_token_price()
         gasUsed=txHashDetail['gasUsed']
         txtimestamp=datetime.now()
         if(txResult == "1"):
-            response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {fetch_token_price}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
+            response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {coinprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
             logger.info(msg=f"{response}")
             return response
     except Exception as e:
