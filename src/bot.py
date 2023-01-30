@@ -850,7 +850,7 @@ if not os.path.exists(db_path):
     contingency_db_path = './config/sample_db.json'
     os.rename(contingency_db_path, db_path)
     try:
-         bot_token = os.getenv("TG_TK")
+        bot_token = os.getenv("TG_TK")
         bot_channel_id = os.getenv("TG_CHANNEL_ID")
     except Exception as e:
         logger.error("no telegram token")
