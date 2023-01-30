@@ -609,7 +609,7 @@ async def fetch_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_
     parsed_message = channel_message.split(" ")
     parsed_symbol=parsed_message[1].upper()
     try:
-        await fetch_tokeninfo(parsed_symbol):
+        await fetch_tokeninfo(parsed_symbol)
     except Exception as e:
         return
 
