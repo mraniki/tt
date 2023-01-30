@@ -1,6 +1,5 @@
 name: 🚀 Deploy
 
-
 on:
   workflow_run:
     workflows: ["🥷🐳 Nightly Docker"]
@@ -11,9 +10,9 @@ on:
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           
-if: ${{ github.event.workflow_run.conclusion == 'success' }}
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: 🚀 Deploy staging 
     runs-on: ubuntu-latest
     steps:

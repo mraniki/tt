@@ -69,106 +69,6 @@
             "testmode": "True",
             "defaultType": "FUTURE",
             "ordertype": "MARKET"
-        },
-        "5":
-        {
-            "name": "binanceusdm",
-            "api": "",
-            "secret": "",
-            "password": "",
-            "testmode": "True",
-            "defaultType": "FUTURE",
-            "ordertype": "MARKET"
-        },
-        "6":
-        {
-            "name": "huobi",
-            "api": "",
-            "secret": "",
-            "password": "",
-            "testmode": "",
-            "defaultType": "SPOT",
-            "ordertype": "MARKET"
-        },
-        "7":
-        {
-            "name": "coinbase",
-            "api": "",
-            "secret": "",
-            "password": "",
-            "testmode": "",
-            "defaultType": "SPOT",
-            "ordertype": "MARKET"
-        },
-        "8":
-        {
-            "name": "gate",
-            "api": "",
-            "secret": "",
-            "password": "",
-            "testmode": "",
-            "defaultType": "SPOT",
-            "ordertype": "MARKET"
-        },
-        "9":
-        {
-            "name": "kucoin",
-            "api": "",
-            "secret": "",
-            "password": "",
-            "testmode": "",
-            "defaultType": "SPOT",
-            "ordertype": "MARKET"
-        },
-        "10":
-        {
-            "name": "bybit",
-            "api": "",
-            "secret": "",
-            "password": "",
-            "testmode": "",
-            "defaultType": "SPOT",
-            "ordertype": "MARKET"
-        },
-        "11":
-        {
-            "name": "okx",
-            "api": "",
-            "secret": "",
-            "password": "",
-            "testmode": "",
-            "defaultType": "SPOT",
-            "ordertype": "MARKET"
-        },
-        "12":
-        {
-            "name": "bitfinex",
-            "api": "",
-            "secret": "",
-            "password": "",
-            "testmode": "",
-            "defaultType": "SPOT",
-            "ordertype": "MARKET"
-        },
-        "13":
-        {
-            "name": "poloniex",
-            "api": "",
-            "secret": "",
-            "password": "",
-            "testmode": "",
-            "defaultType": "SPOT",
-            "ordertype": "MARKET"
-        },
-        "14":
-        {
-            "name": "ftx",
-            "api": "",
-            "secret": "",
-            "password": "",
-            "testmode": "",
-            "defaultType": "SPOT",
-            "ordertype": "MARKET"
         }
     },
     "dex":
@@ -226,23 +126,6 @@
         },
         "4":
         {
-            "name": "uniswap",
-            "walletaddress": "abc",
-            "privatekey": "abc",
-            "version": "v3",
-            "networkprovider": "eth-goerli.public.blastapi.io",
-            "router": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
-            "testmode": "True",
-            "tokenlist":"https://gateway.ipfs.io/ipns/tokens.uniswap.org",
-            "abiurl":"https://api.etherscan.io/api",
-            "abiurltoken":"abc",
-            "basesymbol":"USDC",
-            "gasLimit":"300000",
-            "gasPrice":"20",
-            "platform":"ethereum"
-        },
-        "5":
-        {
             "name": "quickswap",
             "walletaddress": "abc",
             "privatekey": "abc",
@@ -258,7 +141,7 @@
             "gasPrice":"60",
             "platform":"polygon-pos"
         },
-        "6":
+        "5":
         {
             "name": "optimism",
             "walletaddress": "abc",
@@ -266,7 +149,7 @@
             "version": "v2",
             "networkprovider": "mainnet.optimism.io",
             "router": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
-            "testmode": "false",
+            "testmode": "False",
             "tokenlist":"https://api-polygon-tokens.polygon.technology/tokenlists/testnet.tokenlist.json",
             "abiurl":"https://api-optimistic.etherscan.io/api",
             "abiurltoken":"abc",
@@ -275,24 +158,7 @@
             "gasPrice":"0.001",
             "platform":"optimistic-ethereum"
         },
-        "7":
-        {
-            "name": "gmx",
-            "walletaddress": "abc",
-            "privatekey": "abc",
-            "version": "v2",
-            "networkprovider": "arb1.arbitrum.io/rpc",
-            "router": "0xaBBc5F99639c9B6bCb58544ddf04EFA6802F4064",
-            "testmode": "True",
-            "tokenlist":"https://api.gmx.io/tokens",
-            "abiurl":"https://arbiscan.io/api",
-            "abiurltoken":"abc",
-            "basesymbol":"USDC",
-            "gasLimit":"500000",
-            "gasPrice":"0.5",
-            "platform":"arbitrum-one"
-        },
-        "8":
+        "6":
         {
             "name": "1inch",
             "walletaddress": "abc",
@@ -300,7 +166,7 @@
             "version": "1inch",
             "networkprovider": "endpoints.omniatech.io/v1/op/mainnet/public",
             "router": "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
-            "testmode": "false",
+            "testmode": "False",
             "tokenlist":"https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json",
             "abiurl":"https://api-optimistic.etherscan.io/api",
             "abiurltoken":"6WESQRVAVWE1Z7BYGEU1C4V8S41GUBU2K7",
