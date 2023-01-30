@@ -73,10 +73,10 @@ def verify_import_library():
 
 
 async def add_tg_db_command(s1, s2, s3):
-    if len(telegram_db.search(q.token == s1)):
+    if len(bot_db.search(q.token == s1)):
         logger.info(msg=f"token is already setup")
     else:
-        telegram_db.insert({"token": s1, "channel": s2, "platform": s3})
+        bot_db.insert({"token": s1, "channel": s2, "platform": s3})
 
 async def add_cex_db_command(s1, s2, s3, s4, s5, s6, s7):
     if len(cex_db.search(q.api == s2)):
@@ -200,56 +200,46 @@ async def load_exchange(exchangeid, mode):
     check_cex = await search_cex(exchangeid,mode)
     check_dex = await search_dex(exchangeid,mode)
     if (check_cex):
-        newex=check_cex
-        exchange = getattr(ccxt, exchangeid)
+        ex_new=check_cex
+        exchange = getattr(ccxt, exchangeid)({
+        'enableRateLimit': True, 
+        })
         exchanges[exchangeid] = exchange()
         try:
-            exchanges[exchangeid] = exchange({'apiKey': newex[0]['api'],'secret': newex[0]['secret']})
-            m_ordertype=newex[0]['ordertype']
+            exchanges[exchangeid] = exchange({'apiKey': ex_new[0]['api'],'secret': ex_new[0]['secret']})
+            m_ordertype=ex_new[0]['ordertype']
             ex=exchanges[exchangeid]
-            # tickers = ex.fetch_tickers()
-            # for symbol, ticker in tickers.items():
-            #     print(
-            #         symbol,
-            #         ticker['datetime'],
-            #         'high: ' + str(ticker['high']),
-            #         'low: ' + str(ticker['low']),
-            #         'bid: ' + str(ticker['bid']),
-            #         'ask: ' + str(ticker['ask']),
-            #         'volume: ' + str(ticker['quoteVolume'] or ticker['baseVolume'])
-            #     )
+            tickers = ex.fetch_tickers()
+            for symbol, ticker in tickers.items():
+             print(symbol,ticker['datetime'],'high: ' + str(ticker['high']))
             name=ex
             if (mode=="True"):
                 ex.set_sandbox_mode('enabled')
                 markets=ex.loadMarkets()
-                #logger.info(msg=f"ex: {ex}")
-                #ex.verbose = True
-                #logger.info(msg=f"markets: {markets}")
                 return ex
             else:
                 markets=ex.loadMarkets ()
-                #logger.info(msg=f"ex: {ex}")
                 return ex
 
         except Exception as e:
             await handle_exception(e)
     elif (check_dex):
-        newex= check_dex
-        name= newex[0]['name']
-        walletaddress= newex[0]['walletaddress']
-        privatekey= newex[0]['privatekey']
-        version= newex[0]['version']
-        networkprovider= newex[0]['networkprovider']
-        router= newex[0]['router']
-        mode=newex[0]['testmode']
-        tokenlist=newex[0]['tokenlist']
-        abiurl=newex[0]['abiurl']
-        abiurltoken=newex[0]['abiurltoken']
-        basesymbol=newex[0]['basesymbol']
-        gasLimit=newex[0]['gasLimit']
-        gasPrice=newex[0]['gasPrice']
-        platform=newex[0]['platform']
-        chainId=newex[0]['chainId']
+        ex_new= check_dex
+        name= ex_new[0]['name']
+        walletaddress= ex_new[0]['walletaddress']
+        privatekey= ex_new[0]['privatekey']
+        version= ex_new[0]['version']
+        networkprovider= ex_new[0]['networkprovider']
+        router= ex_new[0]['router']
+        mode=ex_new[0]['testmode']
+        tokenlist=ex_new[0]['tokenlist']
+        abiurl=ex_new[0]['abiurl']
+        abiurltoken=ex_new[0]['abiurltoken']
+        basesymbol=ex_new[0]['basesymbol']
+        gasLimit=ex_new[0]['gasLimit']
+        gasPrice=ex_new[0]['gasPrice']
+        platform=ex_new[0]['platform']
+        chainId=ex_new[0]['chainId']
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         router_instanceabi= await fetch_abi_dex(router) #Router ABI
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
@@ -266,7 +256,7 @@ async def load_exchange(exchangeid, mode):
         logger.warning(msg=f"Error with the DB to setup {exchangeid} {ex_test_mode}, going with default")
         networkprovider='ethereum.publicnode.com'
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
-        name='pancake'
+        name='uniswap'
 
 def search_tokenlist(parsedJson, name):
     #logger.info(msg=f"name {name} chainId {chainId}")
@@ -315,7 +305,6 @@ async def fetch_abi_dex(addr):
                 return abi
             else:
                 return None
-
     except Exception as e:
         await handle_exception(e)
 
@@ -564,7 +553,6 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         elif (version =="limitorder"):
             logger.info(msg=f"limitorder processing")
             return
-            #TBD
         else:
             return
         txHash = str(ex.to_hex(tx_token))
@@ -590,25 +578,16 @@ async def fetch_tokeninfo(token):
     #asset_platforms = cg.get_asset_platforms()
     #logger.info(msg=f"cg.get_asset_platforms {asset_platforms}")
     try:
-        coininfo=cg.get_coin_by_id(id=token)
-        coinplatform=coininfo['asset_platform_id']
-        coindescription=coininfo['description']['en']
-        coinprice=coininfo['market_data']['current_price']['usd']
-        coinsymbol=coininfo['symbol']
-        coinlink='https://www.coingecko.com/en/coins/'+coininfo['symbol']
-        response = f'{coinsymbol} {coinprice} USD \n{coindescription}\n{coinlink}'
-        logger.info(msg=f"{response}")
-        return response
-    except Exception:
-        return
-
-async def fetch_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    channel_message  = update.effective_message.text
-    parsed_message = channel_message.split(" ")
-    symbol=parsed_message[1].upper()
-    try:
+        #coininfo=cg.get_coin_by_id(id=token)
+        #coinplatform=coininfo['asset_platform_id']
+        #coindescription=coininfo['description']['en']
+      #  coinprice=coininfo['market_data']['current_price']['usd']
+       # coinsymbol=coininfo['symbol']
+        #coinlink='https://www.coingecko.com/en/coins/'+coininfo['symbol']
+       # response = f'{coinsymbol} {coinprice} USD \n{coindescription}\n{coinlink}'
+        #logger.info(msg=f"{response}")
+      #  return response
         coininfo=cg.search(query=symbol)
-        #logger.info(msg=f"coininfo {coininfo}")
         for i in coininfo['coins']:
             results_search_coin = i['symbol']
             if (results_search_coin==symbol):
@@ -622,6 +601,15 @@ async def fetch_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_
                 coinsymbol=coininfo['symbol']
                 response = f'{coinsymbol} {coinprice} USD on {coinplatform}'
                 logger.info(msg=f"{response}")
+    except Exception:
+        return
+
+async def fetch_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    channel_message  = update.effective_message.text
+    parsed_message = channel_message.split(" ")
+    parsed_symbol=parsed_message[1].upper()
+    try:
+        await fetch_tokeninfo(parsed_symbol):
     except Exception as e:
         return
 
@@ -640,7 +628,6 @@ async def verify_latency_ex():
         rtt = int(sum(results) / len(results))
         response = rtt
     elif (isinstance(ex,web3.main.Web3)):
-        #logger.info(msg=f"networkprovider {networkprovider}")
         response = round(ping(networkprovider, unit='ms'),3)
     return response
 
@@ -654,8 +641,8 @@ async def send (self, messaging):
 async def notify(messaging):
 #=APPRISE Setup
   apobj = apprise.Apprise()
-  if (telegram_token is not None):
-    apobj.add('tgram://' + str(telegram_token) + "/" + str(telegram_channel_id))
+  if ( bot_token is not None):
+    apobj.add('tgram://' + str( bot_token) + "/" + str(bot_channel_id))
     try:
         apobj.notify(body=messaging)
     except Exception as e:
@@ -771,7 +758,6 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             elif (isinstance(ex,web3.main.Web3)):
                 if(await search_contract_dex(symbol) != None):
                     symbol_to_quote = ex.to_checksum_address(await search_contract_dex(symbol))
-                    logger.info(msg=f"token {symbol_to_quote}")
                     tokenToSell='USDT'
                     basesymbol=ex.to_checksum_address(await search_contract_dex(tokenToSell))
                     if(symbol_to_quote != None):
@@ -817,29 +803,22 @@ async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_T
     message=f"Trading is {bot_trading_switch}"
     await send(update,message)
 
-
 ##====TG COMMAND CEX DEX switch =========
 async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    logger.info(msg=f"current ex {ex}")
     channel_message  = update.effective_message.text
     parsed_message = channel_message.split(" ")
-    newex=parsed_message[1]
-    typeex=parsed_message[0]
+    ex_new =parsed_message[1]
+    ex_type=parsed_message[0]
     try:
-        if (typeex == "/cex"):
-            results_search_cex = await search_cex(newex,ex_test_mode)
+        if (ex_type == "/cex"):
+            results_search_cex = await search_cex(ex_new,ex_test_mode)
             CEX_name = results_search_cex[0]['name']
-            CEX_test_mode = ex_test_mode
-            res = await load_exchange(CEX_name,CEX_test_mode)
+            res = await load_exchange(CEX_name,ex_test_mode)
             response = f"CEX is {ex}"
-        elif (typeex == "/dex"):
-            results_search_dex = await search_dex(newex,ex_test_mode)
+        elif (ex_type == "/dex"):
+            results_search_dex = await search_dex(ex_new,ex_test_mode)
             DEX_name= results_search_dex[0]['name']
-            DEX_test_mode = ex_test_mode
-            logger.info(msg=f"DEX_test_mode: {DEX_test_mode}")
-            logger.info(msg=f"DEX_name: {DEX_name}")
-            res = await load_exchange(DEX_name,DEX_test_mode)
-            logger.info(msg = f"res: {res}")
+            res = await load_exchange(DEX_name,ex_test_mode)
             response = f"DEX is {DEX_name}"
         await send(update,response)
     except Exception as e:
@@ -851,7 +830,7 @@ async def switch_testmode_command(update: Update, context: ContextTypes.DEFAULT_
         ex_test_mode = "True"
     else:
         ex_test_mode = "False"
-    message = f"Sandbox is {ex_test_mode}"
+    message = f"Test mode is {ex_test_mode}"
     await send(update, message)
 
 ##======== DB START ===============
@@ -868,12 +847,11 @@ else:
 db_path = './config/db.json'
 if not os.path.exists(db_path):
     logger.info(msg=f"contingency process DB")
-    ex = 'tbd'
     contingency_db_path = './config/sample_db.json'
     os.rename(contingency_db_path, db_path)
     try:
-        telegram_token = os.getenv("TG_TK")
-        telegram_channel_id = os.getenv("TG_CHANNEL_ID")
+         bot_token = os.getenv("TG_TK")
+        bot_channel_id = os.getenv("TG_CHANNEL_ID")
     except Exception as e:
         logger.error("no telegram token")
         sys.exit()
@@ -888,18 +866,18 @@ if os.path.exists(db_path):
         ex = globalDB.all()[0]['defaultex']
         ex_test_mode = globalDB.all()[0]['defaulttestmode']
         logger.info(msg=f"Env {env} ex {ex}")
-        telegram_db = db.table('telegram')
+        bot_db = db.table('telegram')
         cex_db = db.table('cex')
         dex_db = db.table('dex')
-        tg = telegram_db.search(q.platform==env)
-        telegram_token = tg[0]['token']
-        telegram_channel_id = tg[0]['channel']
-        telegram_webhook_port = tg[0]['port']
-        telegram_webhook_secret = tg[0]['secret_token']
-        telegram_webhook_privatekey = tg[0]['key']
-        telegram_webhook_certificate = tg[0]['cert']
-        telegram_webhook_url = tg[0]['webhook_url']
-        if (telegram_token == ""):
+        tg = bot_db.search(q.platform==env)
+        bot_token = tg[0]['token']
+        bot_channel_id = tg[0]['channel']
+        bot_webhook_port = tg[0]['port']
+        bot_webhook_secret = tg[0]['secret_token']
+        bot_webhook_privatekey = tg[0]['key']
+        bot_webhook_certificate = tg[0]['cert']
+        bot_webhook_url = tg[0]['webhook_url']
+        if (bot_token == ""):
             logger.error("no TG TK")
             logger.warning(msg=f"Failover process")
             sys.exit()
@@ -911,7 +889,7 @@ async def post_init(application: Application):
     message=f"Bot is online {TTversion}"
     await load_exchange(ex,ex_test_mode)
     logger.info(msg=f"{message}")
-    await application.bot.send_message(telegram_channel_id, message, parse_mode=constants.ParseMode.HTML)
+    await application.bot.send_message(bot_channel_id, message, parse_mode=constants.ParseMode.HTML)
 
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -927,7 +905,7 @@ def main():
     try:
         verify_import_library()
 #Starting Bot TPB
-        application = Application.builder().token(telegram_token).post_init(post_init).build()
+        application = Application.builder().token( bot_token).post_init(post_init).build()
 
 #TPBMenusHandlers
         application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
@@ -951,8 +929,8 @@ def main():
             try:
                 application.run_webhook(
                     listen='0.0.0.0',
-                    port=telegram_webhook_port,
-                    webhook_url=telegram_webhook_url)
+                    port=bot_webhook_port,
+                    webhook_url=bot_webhook_url)
             except Exception as e:
                 logger.error("Bot failed to start. Error: " + str(e))
         else:
