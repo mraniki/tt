@@ -660,29 +660,29 @@ async def notify(messaging):
 #======= error handling
 async def handle_exception(e) -> None:
     try:
-        msg=f"error:"
+        msg = f"error:"
         logger.error(msg=f"error: {e}")
     except KeyError:
-        msg=f"DB content error"
+        msg = f"DB content error"
         sys.exit()
     except IndexError:
-        msg=f"Parsing error"
+        msg = f"Parsing error"
     except telegram.error:
-        msg=f"telegram error"
+        msg = f"telegram error"
     except ConnectionError:
-        msg=f'Could not connect to RPC'
+        msg = f'Could not connect to RPC'
     except Web3Exception.error:
-        msg=f"web3 error"
+        msg = f"web3 error"
     except ccxt.base.errors:
-        msg=f"CCXT error"
+        msg = f"CCXT error"
     except ccxt.NetworkError:
-        msg=f"Network error"
+        msg = f"Network error"
     except ccxt.ExchangeError:
-        msg=f"Exchange error"
+        msg = f"Exchange error"
     except Exception:
-        msg=f"{e}"
-    message=f"⚠️ {msg} {e}"
-    logger.error(msg=f"{message}")
+        msg = f"{e}"
+    message = f"⚠️ {msg} {e}"
+    logger.error(msg = f"{message}")
     await notify(message)
 ##======== END OF FUNCTIONS ============
 
@@ -711,12 +711,12 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         if not isinstance(ex,web3.main.Web3):
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
-            sbal=""
+            sbal = ""
             for iterator in bal:
                 sbal += (f"{iterator}: {bal[iterator]} \n")
-            if(sbal==""):
-                sbal="No Balance"
-            msg+=f"\n{sbal}"
+            if(sbal == ""):
+                sbal = "No Balance"
+            msg += f"\n{sbal}"
         else:
             bal = ex.eth.get_balance(walletaddress)
             bal = round(ex.from_wei(bal,'ether'),5)
@@ -730,24 +730,24 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
     uppercased_message = channel_message.upper()
     filter_lst = ['BUY', 'SELL']
-    msg=""
+    msg = ""
     if [ele for ele in filter_lst if(ele in uppercased_message)]:
-        if (trading==False):
-            message="TRADING DISABLED"
+        if (trading == False):
+            message = "TRADING DISABLED"
             await send(update,message)
         else:
             print('echo')
             try:
                 order_m = convert(uppercased_message)
-                m_dir= order_m[0]
-                m_symbol=order_m[1]
-                m_sl=order_m[2]
-                m_tp=order_m[3]
-                m_q=order_m[4]
-                logger.info(msg=f"Processing order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
-                res=await send_order(m_dir,m_symbol,m_sl,m_tp,m_q)
-                if (res!= None):
-                    response=f"{res}"
+                m_dir = order_m[0]
+                m_symbol = order_m[1]
+                m_sl = order_m[2]
+                m_tp = order_m[3]
+                m_q = order_m[4]
+                logger.info(msg = f"Processing order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
+                res = await send_order(m_dir,m_symbol,m_sl,m_tp,m_q)
+                if (res != None):
+                    response = f"{res}"
                     await send(update,response)
             except Exception as e:
                 await handle_exception(e)
@@ -789,6 +789,7 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         except Exception as e:
             await handle_exception(e)
             return
+
 ##======TG COMMAND coin info  ===========
 async def coininfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message  = update.effective_message.text
@@ -800,6 +801,7 @@ async def coininfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     except Exception as e:
         await handle_exception(e)
         return
+
 ##====TG COMMAND Trading switch  ========
 async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global trading
@@ -809,6 +811,8 @@ async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_T
         trading=False
     message=f"Trading is {trading}"
     await send(update,message)
+
+
 ##====TG COMMAND CEX DEX switch =========
 async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logger.info(msg=f"current ex {ex}")
@@ -817,20 +821,20 @@ async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_
     newex=parsed_message[1]
     typeex=parsed_message[0]
     try:
-        if (typeex=="/cex"):
-            results_search_cex= await search_cex(newex,ex_test_mode)
+        if (typeex == "/cex"):
+            results_search_cex = await search_cex(newex,ex_test_mode)
             CEX_name = results_search_cex[0]['name']
             CEX_test_mode = ex_test_mode
             res = await load_exchange(CEX_name,CEX_test_mode)
             response = f"CEX is {ex}"
-        elif (typeex=="/dex"):
-            results_search_dex= await search_dex(newex,ex_test_mode)
+        elif (typeex == "/dex"):
+            results_search_dex = await search_dex(newex,ex_test_mode)
             DEX_name= results_search_dex[0]['name']
-            DEX_test_mode= ex_test_mode
+            DEX_test_mode = ex_test_mode
             logger.info(msg=f"DEX_test_mode: {DEX_test_mode}")
             logger.info(msg=f"DEX_name: {DEX_name}")
             res = await load_exchange(DEX_name,DEX_test_mode)
-            logger.info(msg=f"res: {res}")
+            logger.info(msg = f"res: {res}")
             response = f"DEX is {DEX_name}"
         await send(update,response)
     except Exception as e:
@@ -838,33 +842,30 @@ async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_
 ##======TG COMMAND Test mode switch ======
 async def switch_testmode_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global ex_test_mode
-    if (ex_test_mode=="False"):
-        ex_test_mode="True"
+    if (ex_test_mode == "False"):
+        ex_test_mode = "True"
     else:
-        ex_test_mode="False"
-    message=f"Sandbox is {ex_test_mode}"
-    await send(update,message)
+        ex_test_mode = "False"
+    message = f"Sandbox is {ex_test_mode}"
+    await send(update, message)
 
 ##======== DB START ===============
 db_url=os.getenv("DB_URL")
-if db_url==None:
-    logger.info(msg=f"No remote DB")
+if db_url == None:
+    logger.info(msg = f"No remote DB")
 else:
     outfile = os.path.join('./config', 'db.json')
     response = requests.get(db_url, stream=True)
-    #response = requests.get(db_url, headers=headers).json()
-    #logger.info(msg=f"{response.content}")
     with open(outfile,'wb') as output:
       output.write(response.content)
-      logger.info(msg=f"copied the remote DB")
+      logger.info(msg = f"copied the remote DB")
 
 db_path = './config/db.json'
 if not os.path.exists(db_path):
     logger.info(msg=f"contingency process DB")
-    failsafe=True
-    ex='tbd'
+    ex = 'tbd'
     contingency_db_path = './config/sample_db.json'
-    db_path=contingency_db_path
+    os.rename(contingency_db_path, db_path)
     try:
         telegram_token = os.getenv("TG_TK")
         telegram_channel_id = os.getenv("TG_CHANNEL_ID")
@@ -874,7 +875,6 @@ if not os.path.exists(db_path):
 
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB")
-    failsafe=False
     try:
         db = TinyDB(db_path)
         q = Query()
@@ -886,15 +886,15 @@ if os.path.exists(db_path):
         telegram_db = db.table('telegram')
         cex_db = db.table('cex')
         dex_db = db.table('dex')
-        tg=telegram_db.search(q.platform==env)
+        tg = telegram_db.search(q.platform==env)
         telegram_token = tg[0]['token']
         telegram_channel_id = tg[0]['channel']
-        telegram_webhook_port=tg[0]['port']
-        telegram_webhook_secret=tg[0]['secret_token']
-        telegram_webhook_privatekey=tg[0]['key']
-        telegram_webhook_certificate=tg[0]['cert']
-        telegram_webhook_url=tg[0]['webhook_url']
-        if (telegram_token==""):
+        telegram_webhook_port = tg[0]['port']
+        telegram_webhook_secret = tg[0]['secret_token']
+        telegram_webhook_privatekey = tg[0]['key']
+        telegram_webhook_certificate = tg[0]['cert']
+        telegram_webhook_url = tg[0]['webhook_url']
+        if (telegram_token == ""):
             logger.error("no TG TK")
             logger.warning(msg=f"Failover process")
             sys.exit()
@@ -907,13 +907,14 @@ async def post_init(application: Application):
     await load_exchange(ex,ex_test_mode)
     logger.info(msg=f"{message}")
     await application.bot.send_message(telegram_channel_id, message, parse_mode=constants.ParseMode.HTML)
+
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
     tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
     tb_string = "".join(tb_list)
     tb_trim = tb_string[:1000]
-    e=f"{tb_trim}"
+    e = f"{tb_trim}"
     await handle_exception(e)
 
 #================== BOT =================
@@ -939,18 +940,14 @@ def main():
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
 
 #Run the bot
-        webhook=False
+        webhook = False
         if (webhook):
             logger.info(f"Webhook start")
             try:
                 application.run_webhook(
                     listen='0.0.0.0',
                     port=telegram_webhook_port,
-                    #secret_token=telegram_webhook_secret,
-                    #key=telegram_webhook_privatekey,
-                    #cert=telegram_webhook_certificate,
-                    webhook_url=telegram_webhook_url
-                    )
+                    webhook_url=telegram_webhook_url)
             except Exception as e:
                 logger.error("Bot failed to start. Error: " + str(e))
         else:
