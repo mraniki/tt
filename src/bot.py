@@ -406,14 +406,14 @@ async def send_order_cex(s1,s2,s3,s4,s5):
         return
 
 async def verify_gas_dex():
-    CurrentGasPrice=int(ex.to_wei(ex.eth.gas_price,'wei'))
-    logger.info(msg=f"CurrentGasPrice {CurrentGasPrice}")
-    MyGasPrice=int(ex.to_wei(gasPrice,'gwei'))
-    logger.info(msg=f"MyGasPrice {MyGasPrice}")
-    if (CurrentGasPrice>=MyGasPrice):
-        logger.warning(msg=f"{CurrentGasPrice} {MyGasPrice} ")
+    current_gas_price_dex=int(ex.to_wei(ex.eth.gas_price,'wei'))
+    logger.info(msg=f"current_gas_price_dex {current_gas_price_dex}")
+    config_gas_price_dex=int(ex.to_wei(gasPrice,'gwei'))
+    logger.info(msg=f"config_gas_price_dex {config_gas_price_dex}")
+    if (current_gas_price_dex>=config_gas_price_dex):
+        logger.warning(msg=f"{current_gas_price_dex} {config_gas_price_dex} ")
     else:
-        logger.info(msg=f"gas setup{MyGasPrice} aligned with current gas price {CurrentGasPrice}")
+        logger.info(msg=f"gas setup{config_gas_price_dex} aligned with current gas price {current_gas_price_dex}")
     # checkgasLimitURL = abiurl + "?module=stats&action=dailyavggaslimit&startdate=2022-01-09&enddate=2022-01-09&sort=asc&apikey=" + abiurltoken
     # checkgasLimitRequest = requests.get(url=checkgasLimitURL,headers=headers)
     # gasLimitresults = checkgasLimitRequest.json()['result']['gasLimit']
