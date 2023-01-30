@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.19"
+TTversion="🪙TT Beta 1.03.20"
 ##=============== import  =============
 ##log
 import logging
@@ -38,7 +38,6 @@ logger = logging.getLogger(__name__)
 
 ##=============== CONFIG ===============
 load_dotenv()  # .env loading
-
 #===================
 global ex
 exchanges = {}
@@ -47,17 +46,19 @@ ex_test_mode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
 cg = CoinGeckoAPI()
 #===================
-
 fullcommandlist = """
 <code>/bal</code>
-<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
+<code>/cex kraken</code> 
+order sample
+<code>buy btc/usdt sl=1000 tp=20 q=1%</code>
 <code>/dex pancake</code> <code>buy cake</code> 
+quote sample
 <code>/q BTCB</code> <code>/q WBTC</code> <code>/q btc/usdt</code>
+other commands
 <code>/trading</code> <code>/testmode</code>"""
 bot_menu_help = f"{TTversion} \n {fullcommandlist}"
 
 #========== Common Functions =============
-
 
 def verify_import_library():
     logger.info(msg=f"{TTversion}")
@@ -70,7 +71,6 @@ def verify_import_library():
     return
 
 ##===========DB Functions
-
 
 async def add_tg_db_command(s1, s2, s3):
     if len(bot_db.search(q.token == s1)):
