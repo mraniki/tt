@@ -125,7 +125,7 @@ async def search_cex(ex_name, ex_test_mode):
         logger.info(msg=f"result_cex_db {result_cex_db}")
         if (len(str(result_cex_db)) >= 1):
             return result_cex_db
-    elif type(string1) is not str:
+    elif type(ex_name) is not str:
         try:
             query1 = ((q.name == ex_name.name.lower()) & (q['testmode'] == ex_test_mode))
             result_cex_db = cex_db.search(query1)
