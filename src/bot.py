@@ -38,24 +38,27 @@ logger = logging.getLogger(__name__)
 
 ##=============== CONFIG ===============
 load_dotenv()  # .env loading
+
 #===================
 global ex
 exchanges = {}
-trading=True
+bot_trading_switch=True
 ex_test_mode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
 cg = CoinGeckoAPI()
-
 #===================
+
 fullcommandlist = """
 <code>/bal</code>
-<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code> <code>/q btc/usdt</code>
+<code>/cex kraken</code> <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
 <code>/dex pancake</code> <code>buy cake</code> 
-<code>/q BTCB</code> <code>/q WBTC</code>
+<code>/q BTCB</code> <code>/q WBTC</code> <code>/q btc/usdt</code>
 <code>/trading</code> <code>/testmode</code>"""
-menuhelp = f"{TTversion} \n {fullcommandlist}"
+bot_menu_help = f"{TTversion} \n {fullcommandlist}"
 
 #========== Common Functions =============
+
+
 def verify_import_library():
     logger.info(msg=f"{TTversion}")
     logger.info(msg=f"Python {sys.version}")
@@ -67,6 +70,8 @@ def verify_import_library():
     return
 
 ##===========DB Functions
+
+
 async def add_tg_db_command(s1, s2, s3):
     if len(telegram_db.search(q.token == s1)):
         logger.info(msg=f"token is already setup")
@@ -649,7 +654,7 @@ async def send (self, messaging):
 async def notify(messaging):
 #=APPRISE Setup
   apobj = apprise.Apprise()
-  if (telegram_token != None):
+  if (telegram_token is not None):
     apobj.add('tgram://' + str(telegram_token) + "/" + str(telegram_channel_id))
     try:
         apobj.notify(body=messaging)
@@ -690,7 +695,7 @@ async def handle_exception(e) -> None:
 ##====view help =====
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     r_ping = await verify_latency_ex()
-    msg= f"Environment: {env} Ping: {r_ping}ms\nExchange: {await search_exchange(ex,ex_test_mode)} Sandbox: {ex_test_mode}\n{menuhelp}"
+    msg= f"Environment: {env} Ping: {r_ping}ms\nExchange: {await search_exchange(ex,ex_test_mode)} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     await send(update,msg)
 ##====restart ====
 async def restart_command(application: Application, update: Update) -> None:
@@ -698,11 +703,11 @@ async def restart_command(application: Application, update: Update) -> None:
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 ##====stop =======
 async def stop_command(self) -> None:
-  if self.application is None or self.application.updater is None:
-    return
-  await self.application.updater.stop()
-  await self.application.stop()
-  await self.application.shutdown()
+    if self.application is None or self.application.updater is None:
+        return
+    await self.application.updater.stop()
+    await self.application.stop()
+    await self.application.shutdown()
 
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -732,7 +737,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     filter_lst = ['BUY', 'SELL']
     msg = ""
     if [ele for ele in filter_lst if(ele in uppercased_message)]:
-        if (trading == False):
+        if (bot_trading_switch == False):
             message = "TRADING DISABLED"
             await send(update,message)
         else:
@@ -804,12 +809,12 @@ async def coininfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 
 ##====TG COMMAND Trading switch  ========
 async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    global trading
-    if (trading==False):
-        trading=True
+    global bot_trading_switch
+    if (bot_trading_switch==False):
+        bot_trading_switch=True
     else:
-        trading=False
-    message=f"Trading is {trading}"
+        bot_trading_switch=False
+    message=f"Trading is {bot_trading_switch}"
     await send(update,message)
 
 

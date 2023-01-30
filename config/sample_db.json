@@ -49,26 +49,6 @@
             "testmode": "True",
             "defaultType": "FUTURE",
             "ordertype": "MARKET"
-        },
-        "3":
-        {
-            "name": "binance",
-            "api": "",
-            "secret": "",
-            "password": "",
-            "testmode": "",
-            "defaultType": "SPOT",
-            "ordertype": "MARKET"
-        },
-        "4":
-        {
-            "name": "binancecoinm",
-            "api": "",
-            "secret": "",
-            "password": "",
-            "testmode": "True",
-            "defaultType": "FUTURE",
-            "ordertype": "MARKET"
         }
     },
     "dex":
@@ -143,23 +123,6 @@
         },
         "5":
         {
-            "name": "optimism",
-            "walletaddress": "abc",
-            "privatekey": "abc",
-            "version": "v2",
-            "networkprovider": "mainnet.optimism.io",
-            "router": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
-            "testmode": "False",
-            "tokenlist":"https://api-polygon-tokens.polygon.technology/tokenlists/testnet.tokenlist.json",
-            "abiurl":"https://api-optimistic.etherscan.io/api",
-            "abiurltoken":"abc",
-            "basesymbol":"USDC",
-            "gasLimit":"300000",
-            "gasPrice":"0.001",
-            "platform":"optimistic-ethereum"
-        },
-        "6":
-        {
             "name": "1inch",
             "walletaddress": "abc",
             "privatekey": "abc",
@@ -170,7 +133,7 @@
             "tokenlist":"https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json",
             "abiurl":"https://api-optimistic.etherscan.io/api",
             "abiurltoken":"6WESQRVAVWE1Z7BYGEU1C4V8S41GUBU2K7",
-            "basesymbol":"SUSD",
+            "basesymbol":"USDC",
             "gasLimit":"200000",
             "gasPrice":"1",
             "platform":"optimistic-ethereum",
