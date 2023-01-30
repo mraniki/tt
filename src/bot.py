@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.18"
+TTversion="🪙TT Beta 1.03.19"
 ##=============== import  =============
 ##log
 import logging
@@ -119,13 +119,13 @@ async def show_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 
 #=========Exchange Functions
 async def search_cex(ex_name, ex_test_mode):
-    if type(ex_name) is str:
+    if (isinstance(ex_name, str)):
         query1 = ((q.name == ex_name) & (q['testmode'] == ex_test_mode))
         result_cex_db = cex_db.search(query1)
         logger.info(msg=f"result_cex_db {result_cex_db}")
         if (len(str(result_cex_db)) >= 1):
             return result_cex_db
-    elif type(ex_name) is not str:
+    if not (isinstance(ex_name, str)):
         try:
             query1 = ((q.name == ex_name.name.lower()) & (q['testmode'] == ex_test_mode))
             result_cex_db = cex_db.search(query1)
@@ -157,7 +157,7 @@ async def search_exchange(ex_name, ex_test_mode):
         if (isinstance(ex_name, str)):
             check_cex = await search_cex(ex_name, ex_test_mode)
             check_dex = await search_dex(ex_name, ex_test_mode)
-            if (check_cex != None):
+            if (check_cex is not None):
                 if(len(str(check_cex)) >= 1):
                     return check_cex[0]['name']
             elif (len(str(check_dex)) >= 1):
@@ -197,8 +197,8 @@ async def load_exchange(exchangeid, mode):
     global chainId
 
     logger.info(msg=f"Setting up {exchangeid}")
-    check_cex= await search_cex(exchangeid,mode)
-    check_dex= await search_dex(exchangeid,mode)
+    check_cex = await search_cex(exchangeid,mode)
+    check_dex = await search_dex(exchangeid,mode)
     if (check_cex):
         newex=check_cex
         exchange = getattr(ccxt, exchangeid)
@@ -485,57 +485,57 @@ async def sign_transaction_dex(contract_tx):
 async def send_order_dex(s1,s2,s3,s4,s5):
     try:
         if (s1=="BUY"):
-            token_out_symbol=basesymbol
-            token_in_symbol=s2
+            asset_out_symbol=basesymbol
+            asset_in_symbol=s2
         else:
-            token_out_symbol=s2
-            token_in_symbol=basesymbol
-        token_out_address=ex.to_checksum_address(await search_contract_dex(token_out_symbol))
-        token_out_abi= await fetch_abi_dex(token_out_address)
-        token_out_contract = ex.eth.contract(address=token_out_address, abi=token_out_abi)
-        token_in_address= ex.to_checksum_address(await search_contract_dex(token_in_symbol))
-        OrderPath=[token_out_address, token_in_address]
-        token_out_balance=token_out_contract.functions.balanceOf(walletaddress).call()
-        if (token_out_balance <=0):
+            asset_out_symbol=s2
+            asset_in_symbol=basesymbol
+        asset_out_address=ex.to_checksum_address(await search_contract_dex(asset_out_symbol))
+        asset_out_abi= await fetch_abi_dex(asset_out_address)
+        asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
+        asset_in_address= ex.to_checksum_address(await search_contract_dex(asset_in_symbol))
+        order_path_dex=[asset_out_address, asset_in_address]
+        asset_out_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
+        if (asset_out_balance <=0):
           return
-        logger.info(msg=f"token_out_balance {token_out_balance}")
-        token_out_decimals=token_out_contract.functions.decimals().call()
+        logger.info(msg=f"asset_out_balance {asset_out_balance}")
+        asset_out_decimals=asset_out_contract.functions.decimals().call()
         slippage=1
         if (s1=="SELL"):
-            token_out_amount = (token_out_balance)/(10 ** token_out_decimals) #SELL all token in case of sell order
+            asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
             response = f"⬇️ {s2}"
-            token_out_quote= await fetch_token_price(token_out_symbol)
+            asset_out_quote= await fetch_token_price(asset_out_symbol)
         else:
-            token_out_amount = ((token_out_balance)/(10 ** token_out_decimals))*(float(s5)/100) #buy %p ercentage
+            asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(s5)/100) #buy %p ercentage
             response = f"⬆️ {s2}"
-            token_in_quote= await fetch_token_price(token_in_symbol)
-        i_OrderAmount=(ex.to_wei(token_out_amount,'ether'))
-        OrderAmount = i_OrderAmount
+            asset_in_quote= await fetch_token_price(asset_in_symbol)
+        asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
+        transaction_amount = asset_out_amount_converted
         # deadline = ex.eth.getBlock("latest")["timestamp"] + 3600
         deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
-            approvalcheck = token_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
+            approvalcheck = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
             logger.info(msg=f"approvalcheck {approvalcheck}")
             if (approvalcheck==0):
-                maxamount = (ex.to_wei(2**64-1,'ether'))
-                approval_TX = token_out_contract.functions.approve(ex.to_checksum_address(router), maxamount)
-                ApprovaltxHash = await sign_transaction_dex(approval_TX)
-                logger.info(msg=f"Approval {str(ex.to_hex(ApprovaltxHash))}")
+                approved_amount = (ex.to_wei(2**64-1,'ether'))
+                approval_TX = asset_out_contract.functions.approve(ex.to_checksum_address(router), approved_amount)
+                approval_txHash = await sign_transaction_dex(approval_TX)
+                logger.info(msg=f"Approval {str(ex.to_hex(approval_txHash))}")
                 time.sleep(10) #wait approval
-            OptimalOrderAmount  = router_instance.functions.getOutputAmount(OrderAmount, OrderPath).call()
-            MinimumAmount = int(OptimalOrderAmount[1] *0.98)# max 2% slippage
-            swap_TX = router_instance.functions.swapExactTokensForTokens(OrderAmount,MinimumAmount,OrderPath,walletaddress)
+            transaction_getoutput_amount  = router_instance.functions.getOutputAmount(transaction_amount, order_path_dex).call()
+            transaction_minimum_amount = int(transaction_getoutput_amount[1] *0.98)# max 2% slippage
+            swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress)
             tx_token = await sign_transaction_dex(swap_TX)
         elif (version=="1inch"):
             logger.info(msg=f"1inch processing")
-            logger.info(msg=f"{OrderAmount}")
+            logger.info(msg=f"{transaction_amount}")
             endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
             approval_URL = f"{endpoint}approve/transaction?tokenAddress={tokenToSell}"
             logger.info(msg=f"{approval_URL}")
             approval_response = requests.get(approval_URL)
             approval= approval_response.json()
             logger.info(msg=f"approval {approval}")
-            swap_url = f"{endpoint}swap?fromTokenAddress={token_out_address}&toTokenAddress={token_in_address}&amount={OrderAmount}&fromAddress={walletaddress}&slippage={slippage}"
+            swap_url = f"{endpoint}swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
             logger.info(msg=f"swap_url {swap_url}")
             swap_response = requests.get(swap_url)
             logger.info(msg=f"swap_response {swap_response}")
@@ -557,9 +557,9 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             ####Uniswap V3 contrac function prep
             # fee=int(3000)
             # sqrt_price_limit_x96 = 0
-            # #OptimalOrderAmount  = quoter_instance.functions.getSwapQuote(tokenToSell, OrderAmount, tokenToBuy).call()
+            # #OptimalOrderAmount  = quoter_instance.functions.getSwapQuote(tokenToSell, transaction_amount, tokenToBuy).call()
             # #MinimumAmount=int(OptimalOrderAmount[1] *0.98)# max 2% slippage
-            # swap_TX=router_instance.functions.addOrder(tokenToBuy,OrderAmount,tokenToSell,OrderAmountfee)
+            # swap_TX=router_instance.functions.addOrder(tokenToBuy,transaction_amount,tokenToSell,OrderAmountfee)
             # tx_token = await sign_transaction_dex(swap_TX)
         elif (version =="limitorder"):
             logger.info(msg=f"limitorder processing")
@@ -577,7 +577,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         gasUsed=txHashDetail['gasUsed']
         txtimestamp=datetime.now()
         if(txResult == "1"):
-            response+= f"\n➕ Size: {round(ex.from_wei(OrderAmount, 'ether'),5)}\n⚫️ Entry: {fetch_token_price}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
+            response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {fetch_token_price}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
             logger.info(msg=f"{response}")
             return response
     except Exception as e:
@@ -586,7 +586,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
 
 async def fetch_tokeninfo(token):
     global token_price
-    global token_info
+    global asset_info
     #asset_platforms = cg.get_asset_platforms()
     #logger.info(msg=f"cg.get_asset_platforms {asset_platforms}")
     try:
