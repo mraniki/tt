@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ "dev" ]
 
-    
 jobs:
   push_to_registry:
     name: 🐳 Build and Push Docker image to Docker Hub
@@ -35,4 +34,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
