@@ -45,6 +45,7 @@ bot_trading_switch=True
 ex_test_mode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
 cg = CoinGeckoAPI()
+1inch_api=f'https://api.1inch.exchange/v5.0/{chainId}/'
 #===================
 fullcommandlist = """
 <code>/bal</code>
@@ -544,13 +545,13 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         elif (version=="1inch"):
             logger.info(msg=f"1inch processing")
             logger.info(msg=f"{transaction_amount}")
-            endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
-            approval_URL = f"{endpoint}approve/transaction?tokenAddress={tokenToSell}"
+            1inch_api=f'https://api.1inch.exchange/v5.0/{chainId}/'
+            approval_URL = f"{1inch_api}approve/transaction?tokenAddress={tokenToSell}"
             logger.info(msg=f"{approval_URL}")
             approval_response = requests.get(approval_URL)
             approval= approval_response.json()
             logger.info(msg=f"approval {approval}")
-            swap_url = f"{endpoint}swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
+            swap_url = f"{1inch_api}swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
             logger.info(msg=f"swap_url {swap_url}")
             swap_response = requests.get(swap_url)
             logger.info(msg=f"swap_response {swap_response}")
@@ -774,7 +775,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message  = update.effective_message.text
     parsed_message = channel_message.split(" ")
-    filter_lst = ['/p']
+    filter_lst = ['/q']
     if [ele for ele in filter_lst if(ele in parsed_message)]:
         symbol=parsed_message[1]
         try:
@@ -783,20 +784,17 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 response=f"₿ {symbol} @ {price}"
             elif (isinstance(ex,web3.main.Web3)):
                 if(await search_contract_dex(symbol) != None):
-                    symbol_to_quote = ex.to_checksum_address(await search_contract_dex(symbol))
-                    tokenToSell='USDT'
-                    basesymbol=ex.to_checksum_address(await search_contract_dex(tokenToSell))
+                    asset_in_address = ex.to_checksum_address(await search_contract_dex(symbol))
+                    asset_out_address =ex.to_checksum_address(await search_contract_dex('USDT'))
                     if(symbol_to_quote != None):
                         fetch_tokeninfo=cg.get_coin_info_from_contract_address_by_id(id=platform,contract_address=symbol_to_quote)
-                        fetch_token_price=fetch_tokeninfo['market_data']['current_price']['usd']
-                        amountTosell=1
-                        endpoint=f'https://api.1inch.exchange/v5.0/{chainId}/'
-                        quote_url = f"{endpoint}quote?fromTokenAddress={symbol_to_quote}&toTokenAddress={basesymbol}&amount={amountTosell}"
+                        asset_out_cg_quote=fetch_tokeninfo['market_data']['current_price']['usd']
+                        asset_out_amount=1
+                        quote_url = f"{1inch_api}quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                         quote_response = requests.get(quote_url)
                         quote = quote_response.json()
-                        estimatedGas = quote['estimatedGas']
-                        toTokenAmount = quote['toTokenAmount']
-                        response=f"₿ {symbol_to_quote}\n{symbol} @ {toTokenAmount} (1inch - live) or {fetch_token_price} (gecko)"
+                        asset_out_quote = quote['toTokenAmount']
+                        response=f"₿ {symbol_to_quote}\n{symbol} @ {asset_out_quote} (1inch - live) or {asset_out_cg_quote} (gecko)"
                         await send(update,response)
                         #version2 router command
                             # price = router_instance.functions.getAmountsOut(1, [symbol_to_quote,basesymbol]).call()[1]
