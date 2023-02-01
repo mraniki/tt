@@ -40,12 +40,15 @@ logger = logging.getLogger(__name__)
 load_dotenv()  # .env loading
 #===================
 global ex
+chainId = 1
 exchanges = {}
 bot_trading_switch=True
 ex_test_mode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
+ex_gecko_api = CoinGeckoAPI()
 dex_1inch_api = f"https://api.1inch.exchange/v5.0"
-cg_api = CoinGeckoAPI()
+dex_cow_api = f"https://api.cow.fi/mainnet"
+dex_guru_api = f"https://api.dev.dex.guru/v1/{chainId}/?api-key="
 
 #===================
 fullcommandlist = """
@@ -469,12 +472,12 @@ async def verify_gas_dex():
 
 async def fetch_token_price(s1):
 # try:
-#     coininfo=cg_api.search(query=s1)
+#     coininfo=ex_gecko_api.search(query=s1)
 #     for i in coininfo['coins']:
 #         fetch_tokeninfo=i['symbol']
 #         if (fetch_tokeninfo == s1):
 #             # logger.info(msg=f"{i['api_symbol']}")
-#             coininfo=cg_api.get_coin_by_id(id=i['api_symbol'])
+#             coininfo=ex_gecko_api.get_coin_by_id(id=i['api_symbol'])
 #             coinplatform=coininfo['asset_platform_id']
 #             # logger.info(msg=f"coinplatform {coinplatfrom}")
 #             coinprice=coininfo['market_data']['current_price']['usd']
@@ -487,7 +490,7 @@ async def fetch_token_price(s1):
 #     return
     try:
         # Search for WBTC on CoinGecko
-        coin_info = cg_api.get_coin_by_id(id=s1)
+        coin_info = ex_gecko_api.get_coin_by_id(id=s1)
         # Get the WBTC token's contract address on the chain
         for token in coin_info['contract']:
             if token['chain_id'] == str(chain_id):
@@ -654,13 +657,13 @@ async def fetch_tokeninfo(token):
         # response = f'{coinsymbol} {coinprice} USD \n{coindescription}\n{coinlink}'
         #logger.info(msg=f"{response}")
         #  return response
-        coininfo=cg_api.search(query=symbol)
+        coininfo=ex_gecko_api.search(query=symbol)
         for i in coininfo['coins']:
             results_search_coin = i['symbol']
             if (results_search_coin==symbol):
                 logger.info(msg=f"Pass")
                 logger.info(msg=f"{i['api_symbol']}")
-                coininfo=cg_api.get_coin_by_id(id=i['api_symbol'])
+                coininfo=ex_gecko_api.get_coin_by_id(id=i['api_symbol'])
                 coinplatform=coininfo['asset_platform_id']
                 logger.info(msg=f"coinplatfrom {coinplatfrom}")
                 coinprice=coininfo['market_data']['current_price']['usd']
@@ -829,7 +832,7 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                     asset_in_address = ex.to_checksum_address(await search_contract_dex(symbol))
                     asset_out_address =ex.to_checksum_address(await search_contract_dex('USDT'))
                     if(symbol_to_quote != None):
-                        fetch_tokeninfo=cg_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=symbol_to_quote)
+                        fetch_tokeninfo=ex_gecko_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=symbol_to_quote)
                         asset_out_cg_quote=fetch_tokeninfo['market_data']['current_price']['usd']
                         asset_out_amount=1
                         quote_url = f"{dex_1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
