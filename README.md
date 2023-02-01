@@ -99,9 +99,9 @@ Approach: Update the sample db with your parameters and save it as db.json
 ### v2 backlog
 
 - Support DEX limit order if supported like dydx / Kwenta / GMX
-- Support futures and margin for CEX (to be tested)
+- Support futures and margin for CEX (to be tested via CCXT)
 - Support STOPLOSS TAKEPROFIT for CEX
-- create / modify db via bot command
+- create / modify db via bot chat nexted command
 - view daily pnl in /bal response
 - view free margin for futures in /bal response
 - view opened future position via /pos command
