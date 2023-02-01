@@ -919,45 +919,45 @@ else:
       output.write(response.content)
       logger.info(msg = f"copied the remote DB")
 
-      db_path = './config/db.json'
-      if not os.path.exists(db_path):
-        logger.info(msg=f"contingency process DB")
-        contingency_db_path = './config/sample_db.json'
-        os.rename(contingency_db_path, db_path)
-        try:
-            bot_token = os.getenv("TG_TK")
-            bot_channel_id = os.getenv("TG_CHANNEL_ID")
-        except Exception as e:
-            logger.error("no telegram token")
-            sys.exit()
+db_path = './config/db.json'
+if not os.path.exists(db_path):
+logger.info(msg=f"contingency process DB")
+contingency_db_path = './config/sample_db.json'
+os.rename(contingency_db_path, db_path)
+try:
+    bot_token = os.getenv("TG_TK")
+    bot_channel_id = os.getenv("TG_CHANNEL_ID")
+except Exception as e:
+    logger.error("no telegram token")
+    sys.exit()
 
-            if os.path.exists(db_path):
-                logger.info(msg=f"Existing DB")
-                try:
-                    db = TinyDB(db_path)
-                    q = Query()
-                    globalDB = db.table('global')
-                    env = globalDB.all()[0]['env']
-                    ex = globalDB.all()[0]['defaultex']
-                    ex_test_mode = globalDB.all()[0]['defaulttestmode']
-                    logger.info(msg=f"Env {env} ex {ex}")
-                    bot_db = db.table('telegram')
-                    cex_db = db.table('cex')
-                    dex_db = db.table('dex')
-                    tg = bot_db.search(q.platform==env)
-                    bot_token = tg[0]['token']
-                    bot_channel_id = tg[0]['channel']
-                    bot_webhook_port = tg[0]['port']
-                    bot_webhook_secret = tg[0]['secret_token']
-                    bot_webhook_privatekey = tg[0]['key']
-                    bot_webhook_certificate = tg[0]['cert']
-                    bot_webhook_url = tg[0]['webhook_url']
-                    if (bot_token == ""):
-                        logger.error("no TG TK")
-                        logger.warning(msg=f"Failover process")
-                        sys.exit()
-                    except Exception:
-                        logger.warning(msg=f"error with existing db file {db_path}")
+if os.path.exists(db_path):
+    logger.info(msg=f"Existing DB")
+    try:
+        db = TinyDB(db_path)
+        q = Query()
+        globalDB = db.table('global')
+        env = globalDB.all()[0]['env']
+        ex = globalDB.all()[0]['defaultex']
+        ex_test_mode = globalDB.all()[0]['defaulttestmode']
+        logger.info(msg=f"Env {env} ex {ex}")
+        bot_db = db.table('telegram')
+        cex_db = db.table('cex')
+        dex_db = db.table('dex')
+        tg = bot_db.search(q.platform==env)
+        bot_token = tg[0]['token']
+        bot_channel_id = tg[0]['channel']
+        bot_webhook_port = tg[0]['port']
+        bot_webhook_secret = tg[0]['secret_token']
+        bot_webhook_privatekey = tg[0]['key']
+        bot_webhook_certificate = tg[0]['cert']
+        bot_webhook_url = tg[0]['webhook_url']
+        if (bot_token == ""):
+            logger.error("no TG TK")
+            logger.warning(msg=f"Failover process")
+            sys.exit()
+        except Exception:
+            logger.warning(msg=f"error with existing db file {db_path}")
 
 ##========== startup message ===========
 async def post_init(application: Application):
