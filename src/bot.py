@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.20"
+TTversion="🪙TT Beta 1.03.21"
 ##=============== import  =============
 ##log
 import logging
@@ -44,7 +44,7 @@ exchanges = {}
 bot_trading_switch=True
 ex_test_mode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
-#1inch_api = f"https://api.1inch.exchange/v5.0"
+dex_1inch_api = f"https://api.1inch.exchange/v5.0"
 cg_api = CoinGeckoAPI()
 
 #===================
@@ -586,12 +586,12 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         elif (version=="1inch"):
             logger.info(msg=f"1inch processing")
             logger.info(msg=f"{transaction_amount}")
-            #approval_URL = f"{1inch_api}/{chainId}/approve/transaction?tokenAddress={tokenToSell}"
+            approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={tokenToSell}"
             logger.info(msg=f"{approval_URL}")
             approval_response = requests.get(approval_URL)
             approval= approval_response.json()
             logger.info(msg=f"approval {approval}")
-            #swap_url = f"{1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
+            swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
             logger.info(msg=f"swap_url {swap_url}")
             swap_response = requests.get(swap_url)
             logger.info(msg=f"swap_response {swap_response}")
@@ -832,7 +832,7 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                         fetch_tokeninfo=cg_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=symbol_to_quote)
                         asset_out_cg_quote=fetch_tokeninfo['market_data']['current_price']['usd']
                         asset_out_amount=1
-                        #quote_url = f"{1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
+                        quote_url = f"{dex_1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                         quote_response = requests.get(quote_url)
                         quote = quote_response.json()
                         asset_out_quote = quote['toTokenAmount']
