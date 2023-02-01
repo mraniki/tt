@@ -913,6 +913,7 @@ if db_url == None:
 else:
     outfile = os.path.join('./config', 'db.json')
     response = requests.get(db_url, stream=True)
+    logger.info(msg=f"{response}")
     with open(outfile,'wb') as output:
       output.write(response.content)
       logger.info(msg = f"copied the remote DB")
@@ -951,8 +952,7 @@ if os.path.exists(db_path):
                 logger.error("no telegram token")
                 sys.exit()
     except Exception:
-        logger.warning(msg=f"error with db file {db_path}")
-
+        logger.warning(msg=f"error with existing db file {db_path} \n {db.all()}")
 
 ##========== startup message ===========
 async def post_init(application: Application):
