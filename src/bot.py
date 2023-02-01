@@ -25,7 +25,6 @@ import re
 import ccxt
 #DEX
 import web3
-from ens import ENS
 from web3 import Web3
 from web3.contract import Contract
 from typing import List
@@ -45,8 +44,9 @@ exchanges = {}
 bot_trading_switch=True
 ex_test_mode="True"
 headers = { "User-Agent": "Mozilla/5.0" }
+#1inch_api = f"https://api.1inch.exchange/v5.0"
 cg_api = CoinGeckoAPI()
-1inch_api=f"https://api.1inch.exchange/v5.0/{chainId}/"
+
 #===================
 fullcommandlist = """
 <code>/bal</code>
@@ -84,7 +84,7 @@ async def add_tg_db_command(s1, s2, s3):
 
 async def add_cex_db_command(s1, s2, s3, s4, s5, s6, s7):
     if len(cex_db.search(q.api == s2)):
-    logger.info(msg=f"EX exists in DB")
+        logger.info(msg=f"EX exists in DB")
     else:
         cex_db.insert({"name": s1,
                         "api": s2,
@@ -208,7 +208,7 @@ async def search_cex(ex_name, ex_test_mode):
                     return
             except Exception as e:
                 await handle_exception(e)
-        return
+                return
     else:
         return
 
@@ -221,9 +221,9 @@ async def search_dex(ex_name, ex_test_mode):
             return result_dex_db
         else:
             return
-        except Exception as e:
-            await handle_exception(e)
-            return
+    except Exception as e:
+        await handle_exception(e)
+        return
 
 async def search_exchange(ex_name, ex_test_mode):
     try:
@@ -269,70 +269,67 @@ async def load_exchange(exchangeid, mode):
     global platform
     global chainId
 
-   logger.info(msg=f"Setting up {exchangeid}")
-   check_cex = await search_cex(exchangeid,mode)
-   check_dex = await search_dex(exchangeid,mode)
-   if (check_cex):
-    ex_new=check_cex
-    exchange = getattr(ccxt, exchangeid)({
-        'enableRateLimit': True,
-        })
-    exchanges[exchangeid] = exchange()
-    try:
-        exchanges[exchangeid] = exchange({'apiKey': ex_new[0]['api'],'secret': ex_new[0]['secret']})
-        m_ordertype=ex_new[0]['ordertype']
-        ex=exchanges[exchangeid]
-        tickers = ex.fetch_tickers()
-        for symbol, ticker in tickers.items():
-           print(symbol,ticker['datetime'],'high: ' + str(ticker['high']))
-           name=ex
-           if (mode=="True"):
-            ex.set_sandbox_mode('enabled')
-            markets=ex.loadMarkets()
-            return ex
-        else:
-            markets=ex.loadMarkets ()
-            return ex
-
+    logger.info(msg=f"Setting up {exchangeid}")
+    check_cex = await search_cex(exchangeid,mode)
+    check_dex = await search_dex(exchangeid,mode)
+    if (check_cex):
+        ex_new=check_cex
+        exchange = getattr(ccxt, exchangeid)({'enableRateLimit': True,})
+        exchanges[exchangeid] = exchange()
+        try:
+            exchanges[exchangeid] = exchange({'apiKey': ex_new[0]['api'],'secret': ex_new[0]['secret']})
+            m_ordertype=ex_new[0]['ordertype']
+            ex=exchanges[exchangeid]
+            tickers = ex.fetch_tickers()
+            for symbol, ticker in tickers.items():
+               print(symbol,ticker['datetime'],'high: ' + str(ticker['high']))
+               name=ex
+               if (mode=="True"):
+                ex.set_sandbox_mode('enabled')
+                markets=ex.loadMarkets()
+                return ex
+            else:
+                markets=ex.loadMarkets ()
+                return ex
         except Exception as e:
             await handle_exception(e)
-        elif (check_dex):
-            ex_new= check_dex
-            name= ex_new[0]['name']
-            walletaddress= ex_new[0]['walletaddress']
-            privatekey= ex_new[0]['privatekey']
-            version= ex_new[0]['version']
-            networkprovider= ex_new[0]['networkprovider']
-            router= ex_new[0]['router']
-            mode=ex_new[0]['testmode']
-            tokenlist=ex_new[0]['tokenlist']
-            abiurl=ex_new[0]['abiurl']
-            abiurltoken=ex_new[0]['abiurltoken']
-            basesymbol=ex_new[0]['basesymbol']
-            gasLimit=ex_new[0]['gasLimit']
-            gasPrice=ex_new[0]['gasPrice']
-            platform=ex_new[0]['platform']
-            chainId=ex_new[0]['chainId']
-            ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
-            ns = ENS.fromWeb3(web3)
+    elif (check_dex):
+        ex_new= check_dex
+        name= ex_new[0]['name']
+        walletaddress= ex_new[0]['walletaddress']
+        privatekey= ex_new[0]['privatekey']
+        version= ex_new[0]['version']
+        networkprovider= ex_new[0]['networkprovider']
+        router= ex_new[0]['router']
+        mode=ex_new[0]['testmode']
+        tokenlist=ex_new[0]['tokenlist']
+        abiurl=ex_new[0]['abiurl']
+        abiurltoken=ex_new[0]['abiurltoken']
+        basesymbol=ex_new[0]['basesymbol']
+        gasLimit=ex_new[0]['gasLimit']
+        gasPrice=ex_new[0]['gasPrice']
+        platform=ex_new[0]['platform']
+        chainId=ex_new[0]['chainId']
+        ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
+        #ns = ns.fromWeb3(web3)
         router_instanceabi= await fetch_abi_dex(router) #Router ABI
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
         if (version=="v3"):
             quoter_instanceabi= await fetch_abi_dex('0x61fFE014bA17989E743c5F6cB21bF9697530B21e') #Quoter ABI
             quoter_instance = ex.eth.contract(address=ex.to_checksum_address('0x61fFE014bA17989E743c5F6cB21bF9697530B21e'), abi=quoter_instanceabi) #ContractLiquidityQuoter
-            try:
-                ex.net.listening
-                logger.info(msg=f"connected to {ex}")
-                return name
-            except e as Exception:
-                await handle_exception(e)
-            else:
-                logger.warning(msg=f"Error with the DB to setup {exchangeid} {ex_test_mode}, going with default")
-                networkprovider='ethereum.publicnode.com'
-                ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
-                name='uniswap'
+        try:
+            ex.net.listening
+            logger.info(msg=f"connected to {ex}")
+            return name
+        except e as Exception:
+            await handle_exception(e)
+    else:
+        logger.warning(msg=f"Error with the DB to setup {exchangeid} {ex_test_mode}, going with default")
+        networkprovider='ethereum.publicnode.com'
+        ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
+        name='uniswap'
 
-                def search_tokenlist(parsedJson, name):
+def search_tokenlist(parsedJson, name):
     #logger.info(msg=f"name {name} chainId {chainId}")
     #logger.info(msg=f"parsedJson {parsedJson}")
     for entry in parsedJson:
@@ -341,28 +338,28 @@ async def load_exchange(exchangeid, mode):
             if int(chainId) == entry ['chainId']:
                 return entry ['address']
 
-                async def search_contract_dex(symb):
-                    try:
-                        url = requests.get(tokenlist)
-                        text = url.text
-                        token_list = json.loads(text)['tokens']
-                        symb=symb.upper()
-                        try:
-                            symbolcontract=search_tokenlist(token_list,symb)
-                            logger.info(msg=f"symbolcontract {symbolcontract}")
-                            if symbolcontract != None:
-                                return symbolcontract
-                            else:
-                                msg=f"{symb} does not exist in {tokenlist}"
-                                await handle_exception(msg)
-                                return
-                            except Exception as e:
-                                await handle_exception(e)
-                                return
-                            except Exception as e:
+async def search_contract_dex(symb):
+    try:
+        url = requests.get(tokenlist)
+        text = url.text
+        token_list = json.loads(text)['tokens']
+        symb=symb.upper()
+        try:
+            symbolcontract=search_tokenlist(token_list,symb)
+            logger.info(msg=f"symbolcontract {symbolcontract}")
+            if symbolcontract != None:
+                return symbolcontract
+            else:
+                msg=f"{symb} does not exist in {tokenlist}"
+                await handle_exception(msg)
+                return
+        except Exception as e:
+            await handle_exception(e)
+            return
+    except Exception as e:
         #logger.info(msg=f"error {search_contract_dex} {symb}")
-    await handle_exception(e)
-    return
+        await handle_exception(e)
+        return
 
 
 ###DEX##SPECIFCI
@@ -374,9 +371,9 @@ async def fetch_abi_dex(addr):
             "action": "getabi",
             "address": addr,
             "apikey": abiurltoken }
-            resp = requests.get(url, params=params, headers=headers).json()
-            abi = resp["result"]
-            #logger.info(msg=f"{abi}")
+        resp = requests.get(url, params=params, headers=headers).json()
+        abi = resp["result"]
+        #logger.info(msg=f"{abi}")
         if(abi!=""):
             return abi
         else:
@@ -384,17 +381,17 @@ async def fetch_abi_dex(addr):
     except Exception as e:
         await handle_exception(e)
 
-async def ens_resolve_dex(address):
-    try:
-        name = ns.name(address)
-        forward = ns.address(name)
-        if forward is None:
-            return None
-        if address.lower().strip() != forward.lower().strip():
-            return None
-        return name
-    except:
-        return None
+# async def ens_resolve_dex(address):
+#     try:
+#         name = ns.name(address)
+#         forward = ns.address(name)
+#         if forward is None:
+#             return None
+#         if address.lower().strip() != forward.lower().strip():
+#             return None
+#         return name
+#     except:
+#         return None
 
 async def transaction_scan_request_dex(self, address):
     url = abiurl
@@ -415,15 +412,15 @@ async def transaction_scan_request_dex(self, address):
 #========== Order function
 async def send_order(s1,s2,s3,s4,s5):
     try:
-      if not isinstance(ex,web3.main.Web3):
-        logger.info(msg=f"order: {s1} {s2} {s3} {s4} {s5}")
-        response = await send_order_cex(s1,s2,s3,s4,s5)
-    elif (isinstance(ex,web3.main.Web3)):
-        response = await send_order_dex(s1,s2,s3,s4,s5)
-        return response
+        if not isinstance(ex,web3.main.Web3):
+            logger.info(msg=f"order: {s1} {s2} {s3} {s4} {s5}")
+            response = await send_order_cex(s1,s2,s3,s4,s5)
+        elif (isinstance(ex,web3.main.Web3)):
+            response = await send_order_dex(s1,s2,s3,s4,s5)
+            return response
     except Exception as e:
-      await handle_exception(e)
-      return
+        await handle_exception(e)
+        return
 
 async def send_order_cex(s1,s2,s3,s4,s5):
     try:
@@ -491,15 +488,14 @@ async def fetch_token_price(s1):
     try:
         # Search for WBTC on CoinGecko
         coin_info = cg_api.get_coin_by_id(id=s1)
-
         # Get the WBTC token's contract address on the chain
         for token in coin_info['contract']:
             if token['chain_id'] == str(chain_id):
                 token_address = token['contract_address']
                 print(f"address: {token_address}")
                 return token_address
-            except Exception as e:
-                print(f"An error occurred while retrieving the WBTC address: {e}")
+    except Exception as e:
+        print(f"An error occurred while retrieving address {e}")
 
 async def sign_transaction_dex(contract_tx):
     try:
@@ -569,9 +565,9 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         else:
             asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(s5)/100) #buy %p ercentage
             response = f"⬆️ {s2}"
-            asset_in_quote= await fetch_token_price(asset_in_symbol)
-            asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
-            transaction_amount = asset_out_amount_converted
+        asset_in_quote= await fetch_token_price(asset_in_symbol)
+        asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
+        transaction_amount = asset_out_amount_converted
         # deadline = ex.eth.getBlock("latest")["timestamp"] + 3600
         deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
@@ -590,13 +586,12 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         elif (version=="1inch"):
             logger.info(msg=f"1inch processing")
             logger.info(msg=f"{transaction_amount}")
-            1inch_api=f'https://api.1inch.exchange/v5.0/{chainId}/'
-            approval_URL = f"{1inch_api}approve/transaction?tokenAddress={tokenToSell}"
+            #approval_URL = f"{1inch_api}/{chainId}/approve/transaction?tokenAddress={tokenToSell}"
             logger.info(msg=f"{approval_URL}")
             approval_response = requests.get(approval_URL)
             approval= approval_response.json()
             logger.info(msg=f"approval {approval}")
-            swap_url = f"{1inch_api}swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
+            #swap_url = f"{1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
             logger.info(msg=f"swap_url {swap_url}")
             swap_response = requests.get(swap_url)
             logger.info(msg=f"swap_response {swap_response}")
@@ -627,10 +622,10 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             return
         else:
             return
-            txHash = str(ex.to_hex(tx_token))
-            checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
-            checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
-            txResult = checkTransactionRequest.json()['status']
+        txHash = str(ex.to_hex(tx_token))
+        checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
+        checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
+        txResult = checkTransactionRequest.json()['status']
         #await verify_gas_dex()
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
         coinprice=fetch_token_price()
@@ -700,9 +695,9 @@ async def verify_latency_ex():
                 results.append(elapsed)
                 rtt = int(sum(results) / len(results))
                 response = rtt
-            elif (isinstance(ex,web3.main.Web3)):
-                response = round(ping(networkprovider, unit='ms'),3)
-                return response
+        elif (isinstance(ex,web3.main.Web3)):
+            response = round(ping(networkprovider, unit='ms'),3)
+            return response
     except Exception as e:
         await handle_exception(e)
 
@@ -715,15 +710,15 @@ async def send (self, messaging):
 #========== notification function
 async def notify(messaging):
 #=APPRISE Setup
-apobj = apprise.Apprise()
-if (bot_token is not None):
-    apobj.add('tgram://' + str(bot_token) + "/" + str(bot_channel_id))
-    try:
-        apobj.notify(body=messaging)
-    except Exception as e:
-        logger.error(msg=f"error: {e}")
-    else:
-        logger.error(msg=f"not delivered {messaging}")
+    apobj = apprise.Apprise()
+    if (bot_token is not None):
+        apobj.add('tgram://' + str(bot_token) + "/" + str(bot_channel_id))
+        try:
+            apobj.notify(body=messaging)
+        except Exception as e:
+            logger.error(msg=f"error: {e}")
+        else:
+            logger.error(msg=f"not delivered {messaging}")
 #======= error handling
 async def handle_exception(e) -> None:
     try:
@@ -837,7 +832,7 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                         fetch_tokeninfo=cg_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=symbol_to_quote)
                         asset_out_cg_quote=fetch_tokeninfo['market_data']['current_price']['usd']
                         asset_out_amount=1
-                        quote_url = f"{1inch_api}quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
+                        #quote_url = f"{1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                         quote_response = requests.get(quote_url)
                         quote = quote_response.json()
                         asset_out_quote = quote['toTokenAmount']
@@ -917,15 +912,15 @@ else:
 
 db_path = './config/db.json'
 if not os.path.exists(db_path):
-logger.info(msg=f"contingency process DB")
-contingency_db_path = './config/sample_db.json'
-os.rename(contingency_db_path, db_path)
-try:
-    bot_token = os.getenv("TG_TK")
-    bot_channel_id = os.getenv("TG_CHANNEL_ID")
-except Exception as e:
-    logger.error("no telegram token")
-    sys.exit()
+    logger.info(msg=f"contingency process DB")
+    contingency_db_path = './config/sample_db.json'
+    os.rename(contingency_db_path, db_path)
+    try:
+        bot_token = os.getenv("TG_TK")
+        bot_channel_id = os.getenv("TG_CHANNEL_ID")
+    except Exception as e:
+        logger.error("no telegram token")
+        sys.exit()
 
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB")
@@ -940,7 +935,7 @@ if os.path.exists(db_path):
         bot_db = db.table('telegram')
         cex_db = db.table('cex')
         dex_db = db.table('dex')
-        tg = bot_db.search(q.platform==env)
+        tg = bot_db.search(q.platform == env)
         bot_token = tg[0]['token']
         bot_channel_id = tg[0]['channel']
         bot_webhook_port = tg[0]['port']
@@ -952,8 +947,8 @@ if os.path.exists(db_path):
             logger.error("no TG TK")
             logger.warning(msg=f"Failover process")
             sys.exit()
-        except Exception:
-            logger.warning(msg=f"error with existing db file {db_path}")
+    except Exception:
+        logger.warning(msg=f"error with existing db file {db_path}")
 
 ##========== startup message ===========
 async def post_init(application: Application):
@@ -975,10 +970,10 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
 def main():
     try:
         verify_import_library()
-        #Starting Bot TPB
+#Starting Bot TPB
         application = Application.builder().token(bot_token).post_init(post_init).build()
 
-        #TPBMenusHandlers
+#TPBMenusHandlers
         application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
         application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
         application.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
@@ -1016,4 +1011,4 @@ def main():
 
 
 if __name__ == '__main__':
-main()
+    main()
