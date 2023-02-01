@@ -240,12 +240,12 @@ async def search_exchange(ex_name, ex_test_mode):
                     return check_cex[0]['name']
             elif (len(str(check_dex)) >= 1):
                 return check_dex[0]['name']
-            elif not (isinstance(ex_name, web3.main.Web3)):
-                check_cex = await search_cex(ex_name.id, ex_test_mode)
-                return check_cex[0]['name']
-            elif (isinstance(ex_name, web3.main.Web3)):
-                check_dex = await search_dex(ex_name, ex_test_mode)
-                return name
+        elif not (isinstance(ex_name, web3.main.Web3)):
+            check_cex = await search_cex(ex_name.id, ex_test_mode)
+            return check_cex[0]['name']
+        elif (isinstance(ex_name, web3.main.Web3)):
+            check_dex = await search_dex(ex_name, ex_test_mode)
+            return name
         else:
             return
     except Exception as e:
