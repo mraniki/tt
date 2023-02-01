@@ -73,7 +73,6 @@ def verify_import_library():
     logger.info(msg=f"CCXT {ccxt.__version__}")
     logger.info(msg=f"Web3 {web3.__version__}")
     logger.info(msg=f"apprise {apprise.__version__}")
-    return
 
 ##===========DB Functions
 
@@ -87,14 +86,13 @@ async def add_cex_db_command(s1, s2, s3, s4, s5, s6, s7):
     if len(cex_db.search(q.api == s2)):
     logger.info(msg=f"EX exists in DB")
     else:
-        cex_db.insert({
-    "name": s1,
-    "api": s2,
-    "secret": s3,
-    "password": s4,
-    "testmode": s5,
-    "ordertype": s6,
-    "defaultType": s7})
+        cex_db.insert({"name": s1,
+                        "api": s2,
+                        "secret": s3,
+                        "password": s4,
+                        "testmode": s5,
+                        "ordertype": s6,
+                        "defaultType": s7})
 
 async def add_dex_db_command(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11):
     if len(dex_db.search(q.name == s1)):
@@ -112,20 +110,18 @@ async def add_dex_db_command(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11):
                     "abiurltoken": s10,
                     "basesymbol": s11})
 
-
 async def drop_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"db dropped")
     db.drop_tables()
 
-
 async def show_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(msg=f"display db")
-                                message = f" db extract: \n {db.all()}"
-                                await send(update, message)
+    message = f" db extract: \n {db.all()}"
+    await send(update, message)
 
 ####Search related Functions
 
-#ORDER PARSER
+#PARSER
 def convert(s):
     # li = s.split(" ")
     # try:
@@ -189,12 +185,9 @@ async def request_eur(self):
         d = json.loads(r.text)
         self.latest_eur = float(d['rates']['EUR'])
             #print('eur updated')
-        except:
-            logger.info(msg=f"error getting EUR rate")
-            self.latest_eur = 1 #reasonable rate
-
-
-
+    except:
+        logger.info(msg=f"error getting EUR rate")
+        self.latest_eur = 1 #reasonable rate
 
 
 #=========Exchange Functions
@@ -248,11 +241,11 @@ async def search_exchange(ex_name, ex_test_mode):
                 elif (isinstance(ex_name, web3.main.Web3)):
                     check_dex = await search_dex(ex_name, ex_test_mode)
                     return name
-                else:
-                    return
-                except Exception as e:
-                    await handle_exception(e)
-                    return
+        else:
+            return
+    except Exception as e:
+        await handle_exception(e)
+        return
 
 async def load_exchange(exchangeid, mode):
     global ex
@@ -368,8 +361,8 @@ async def load_exchange(exchangeid, mode):
                                 return
                             except Exception as e:
         #logger.info(msg=f"error {search_contract_dex} {symb}")
-        await handle_exception(e)
-        return
+    await handle_exception(e)
+    return
 
 
 ###DEX##SPECIFCI
