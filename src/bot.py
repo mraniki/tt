@@ -39,18 +39,20 @@ logger = logging.getLogger(__name__)
 ##=============== CONFIG ===============
 load_dotenv()  # .env loading
 #===================
-global ex
-chainId = 1
+ex = "pancake"
+chainId = 56
 exchanges = {}
 bot_trading_switch=True
 ex_test_mode="True"
+
+#=======API endpoint
 headers = { "User-Agent": "Mozilla/5.0" }
 ex_gecko_api = CoinGeckoAPI()
-dex_1inch_api = f"https://api.1inch.exchange/v5.0"
+dex_1inch_api = f"https://api.1inch.exchange/v5.0/{chainId}"
 dex_cow_api = f"https://api.cow.fi/mainnet"
 dex_guru_api = f"https://api.dev.dex.guru/v1/{chainId}/?api-key="
 
-#===================
+#=======TG command
 fullcommandlist = """
 <code>/bal</code>
 <code>/cex kraken</code>
@@ -125,7 +127,7 @@ async def show_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 ####Search related Functions
 
 #PARSER
-def convert(s):
+async def convert(s):
     # li = s.split(" ")
     # try:
     #     m_dir= li[0]
@@ -236,14 +238,14 @@ async def search_exchange(ex_name, ex_test_mode):
             if (check_cex is not None):
                 if(len(str(check_cex)) >= 1):
                     return check_cex[0]['name']
-                elif (len(str(check_dex)) >= 1):
-                    return check_dex[0]['name']
-                elif not (isinstance(ex_name, web3.main.Web3)):
-                    check_cex = await search_cex(ex_name.id, ex_test_mode)
-                    return check_cex[0]['name']
-                elif (isinstance(ex_name, web3.main.Web3)):
-                    check_dex = await search_dex(ex_name, ex_test_mode)
-                    return name
+            elif (len(str(check_dex)) >= 1):
+                return check_dex[0]['name']
+            elif not (isinstance(ex_name, web3.main.Web3)):
+                check_cex = await search_cex(ex_name.id, ex_test_mode)
+                return check_cex[0]['name']
+            elif (isinstance(ex_name, web3.main.Web3)):
+                check_dex = await search_dex(ex_name, ex_test_mode)
+                return name
         else:
             return
     except Exception as e:
@@ -332,7 +334,7 @@ async def load_exchange(exchangeid, mode):
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         name='uniswap'
 
-def search_tokenlist(parsedJson, name):
+async def search_tokenlist(parsedJson, name):
     #logger.info(msg=f"name {name} chainId {chainId}")
     #logger.info(msg=f"parsedJson {parsedJson}")
     for entry in parsedJson:
@@ -499,6 +501,29 @@ async def fetch_token_price(s1):
                 return token_address
     except Exception as e:
         print(f"An error occurred while retrieving address {e}")
+
+
+async def verify_latency_ex():
+    try:
+        if not isinstance(ex,web3.main.Web3):
+            symbol = 'BTC/USDT'
+            results = []
+            num_iterations = 5
+            for i in range(0, num_iterations):
+                started = ex.milliseconds()
+                orderbook = ex.fetch_order_book(symbol)
+                ended = ex.milliseconds()
+                elapsed = ended - started
+                #logger.info(msg=f"elapsed {elapsed}")
+                results.append(elapsed)
+                rtt = int(sum(results) / len(results))
+                response = rtt
+        elif (isinstance(ex,web3.main.Web3)):
+            response = round(ping(networkprovider, unit='ms'),3)
+            return response
+    except Exception as e:
+        await handle_exception(e)
+
 
 async def sign_transaction_dex(contract_tx):
     try:
@@ -683,26 +708,6 @@ async def fetch_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_
     except Exception as e:
         return
 
-async def verify_latency_ex():
-    try:
-        if not isinstance(ex,web3.main.Web3):
-            symbol = 'BTC/USDT'
-            results = []
-            num_iterations = 5
-            for i in range(0, num_iterations):
-                started = ex.milliseconds()
-                orderbook = ex.fetch_order_book(symbol)
-                ended = ex.milliseconds()
-                elapsed = ended - started
-                #logger.info(msg=f"elapsed {elapsed}")
-                results.append(elapsed)
-                rtt = int(sum(results) / len(results))
-                response = rtt
-        elif (isinstance(ex,web3.main.Web3)):
-            response = round(ping(networkprovider, unit='ms'),3)
-            return response
-    except Exception as e:
-        await handle_exception(e)
 
 #=========== Send function
 async def send (self, messaging):
@@ -820,8 +825,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message  = update.effective_message.text
     parsed_message = channel_message.split(" ")
-    filter_lst = ['/q']
-    if [ele for ele in filter_lst if(ele in parsed_message)]:
+    if [ele for ele in filter_quote if(ele in parsed_message)]:
         symbol=parsed_message[1]
         try:
             if not (isinstance(ex,web3.main.Web3)):
@@ -835,7 +839,7 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                         fetch_tokeninfo=ex_gecko_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=symbol_to_quote)
                         asset_out_cg_quote=fetch_tokeninfo['market_data']['current_price']['usd']
                         asset_out_amount=1
-                        quote_url = f"{dex_1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
+                        quote_url = f"{dex_1inch_api}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                         quote_response = requests.get(quote_url)
                         quote = quote_response.json()
                         asset_out_quote = quote['toTokenAmount']
@@ -854,9 +858,9 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 async def coininfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message  = update.effective_message.text
     parsed_message = channel_message.split(" ")
-    symbol=parsed_message[1]
+    token=parsed_message[1]
     try:
-        response=await fetch_tokeninfo(symbol)
+        response=await fetch_tokeninfo(token)
         await send(update,response)
     except Exception as e:
         await handle_exception(e)
@@ -914,17 +918,6 @@ else:
       logger.info(msg = f"copied the remote DB")
 
 db_path = './config/db.json'
-if not os.path.exists(db_path):
-    logger.info(msg=f"contingency process DB")
-    contingency_db_path = './config/sample_db.json'
-    os.rename(contingency_db_path, db_path)
-    try:
-        bot_token = os.getenv("TG_TK")
-        bot_channel_id = os.getenv("TG_CHANNEL_ID")
-    except Exception as e:
-        logger.error("no telegram token")
-        sys.exit()
-
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB")
     try:
@@ -948,10 +941,18 @@ if os.path.exists(db_path):
         bot_webhook_url = tg[0]['webhook_url']
         if (bot_token == ""):
             logger.error("no TG TK")
-            logger.warning(msg=f"Failover process")
-            sys.exit()
+            logger.info(msg=f"Failover process with sample DB")
+            contingency_db_path = './config/sample_db.json'
+            os.rename(contingency_db_path, db_path)
+            try:
+                bot_token = os.getenv("TG_TK")
+                bot_channel_id = os.getenv("TG_CHANNEL_ID")
+            except Exception as e:
+                logger.error("no telegram token")
+                sys.exit()
     except Exception:
-        logger.warning(msg=f"error with existing db file {db_path}")
+        logger.warning(msg=f"error with db file {db_path}")
+
 
 ##========== startup message ===========
 async def post_init(application: Application):
