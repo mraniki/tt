@@ -952,7 +952,7 @@ if os.path.exists(db_path):
                 logger.error("no telegram token")
                 sys.exit()
     except Exception:
-        logger.warning(msg=f"error with existing db file {db_path} \n {db.all()}")
+        logger.warning(msg=f"error with existing db file {db_path}")
 
 ##========== startup message ===========
 async def post_init(application: Application):
