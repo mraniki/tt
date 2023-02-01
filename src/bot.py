@@ -384,9 +384,7 @@ async def fetch_abi_dex(addr):
     except Exception as e:
         await handle_exception(e)
 
-def ens_resolve_dex(address):
-    if address in OVERRIDE_ADDRESSES:
-        return OVERRIDE_ADDRESSES[address]
+async def ens_resolve_dex(address):
     try:
         name = ns.name(address)
         forward = ns.address(name)
@@ -427,44 +425,44 @@ async def send_order(s1,s2,s3,s4,s5):
       await handle_exception(e)
       return
 
-      async def send_order_cex(s1,s2,s3,s4,s5):
+async def send_order_cex(s1,s2,s3,s4,s5):
+    try:
+        bal = ex.fetch_free_balance()
+        bal = {k: v for k, v in bal.items() if v is not None and v>0}
+        if (len(str(bal))):
+            m_price = float(ex.fetchTicker(f'{s2}').get('last'))
+            totalusdtbal = ex.fetchBalance()['USDT']['free']
+        amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price) # % of bal
         try:
-            bal = ex.fetch_free_balance()
-            bal = {k: v for k, v in bal.items() if v is not None and v>0}
-            if (len(str(bal))):
-                m_price = float(ex.fetchTicker(f'{s2}').get('last'))
-                totalusdtbal = ex.fetchBalance()['USDT']['free']
-            amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price) # % of bal
-            try:
-                res = ex.create_order(s2, m_ordertype, s1, amountpercent)
-                orderid=res['id']
-                timestamp=res['datetime']
-                symbol=res['symbol']
-                side=res['side']
-                amount=res['amount']
-                price=res['price']
-                if (s1=="SELL"):
-                    response = f"⬇️ {symbol}"
-                else:
-                    response = f"⬆️ {symbol}"
-                    response+= f"\n➕ Size: {amount}\n⚫️ Entry: {price}\nℹ️ {orderid}\n🗓️ {timestamp}"
-                    return response
-                except Exception as e:
-                    await handle_exception(e)
-                    return
-                except Exception as e:
-                    await handle_exception(e)
-                    return
+            res = ex.create_order(s2, m_ordertype, s1, amountpercent)
+            orderid=res['id']
+            timestamp=res['datetime']
+            symbol=res['symbol']
+            side=res['side']
+            amount=res['amount']
+            price=res['price']
+            if (s1=="SELL"):
+                response = f"⬇️ {symbol}"
+            else:
+                response = f"⬆️ {symbol}"
+                response+= f"\n➕ Size: {amount}\n⚫️ Entry: {price}\nℹ️ {orderid}\n🗓️ {timestamp}"
+                return response
+        except Exception as e:
+            await handle_exception(e)
+            return
+    except Exception as e:
+        await handle_exception(e)
+        return
 
-                    async def verify_gas_dex():
-                        current_gas_price_dex=int(ex.to_wei(ex.eth.gas_price,'wei'))
-                        logger.info(msg=f"current_gas_price_dex {current_gas_price_dex}")
-                        config_gas_price_dex=int(ex.to_wei(gasPrice,'gwei'))
-                        logger.info(msg=f"config_gas_price_dex {config_gas_price_dex}")
-                        if (current_gas_price_dex>=config_gas_price_dex):
-                            logger.warning(msg=f"{current_gas_price_dex} {config_gas_price_dex} ")
-                        else:
-                            logger.info(msg=f"gas setup{config_gas_price_dex} aligned with current gas price {current_gas_price_dex}")
+async def verify_gas_dex():
+    current_gas_price_dex=int(ex.to_wei(ex.eth.gas_price,'wei'))
+    logger.info(msg=f"current_gas_price_dex {current_gas_price_dex}")
+    config_gas_price_dex=int(ex.to_wei(gasPrice,'gwei'))
+    logger.info(msg=f"config_gas_price_dex {config_gas_price_dex}")
+    if (current_gas_price_dex>=config_gas_price_dex):
+        logger.warning(msg=f"{current_gas_price_dex} {config_gas_price_dex} ")
+    else:
+        logger.info(msg=f"gas setup{config_gas_price_dex} aligned with current gas price {current_gas_price_dex}")
     # checkgasLimitURL = abiurl + "?module=stats&action=dailyavggaslimit&startdate=2022-01-09&enddate=2022-01-09&sort=asc&apikey=" + abiurltoken
     # checkgasLimitRequest = requests.get(url=checkgasLimitURL,headers=headers)
     # gasLimitresults = checkgasLimitRequest.json()['result']['gasLimit']
@@ -472,24 +470,24 @@ async def send_order(s1,s2,s3,s4,s5):
     # if (gasLimit<=gasLimitresults):
     #     logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
 
-    async def fetch_token_price(s1):
-    # try:
-    #     coininfo=cg_api.search(query=s1)
-    #     for i in coininfo['coins']:
-    #         fetch_tokeninfo=i['symbol']
-    #         if (fetch_tokeninfo == s1):
-    #             # logger.info(msg=f"{i['api_symbol']}")
-    #             coininfo=cg_api.get_coin_by_id(id=i['api_symbol'])
-    #             coinplatform=coininfo['asset_platform_id']
-    #             # logger.info(msg=f"coinplatform {coinplatfrom}")
-    #             coinprice=coininfo['market_data']['current_price']['usd']
-    #             # logger.info(msg=f"coingeckoprice {coinprice}")
-    #             coinsymbol=coininfo['symbol']
-    #             response = f'coingecko info: {coinsymbol} {coinprice} USD on {coinplatform}'
-    #             logger.info(msg=f"{response}")
-    #             return coinprice
-    # except Exception:
-    #     return
+async def fetch_token_price(s1):
+# try:
+#     coininfo=cg_api.search(query=s1)
+#     for i in coininfo['coins']:
+#         fetch_tokeninfo=i['symbol']
+#         if (fetch_tokeninfo == s1):
+#             # logger.info(msg=f"{i['api_symbol']}")
+#             coininfo=cg_api.get_coin_by_id(id=i['api_symbol'])
+#             coinplatform=coininfo['asset_platform_id']
+#             # logger.info(msg=f"coinplatform {coinplatfrom}")
+#             coinprice=coininfo['market_data']['current_price']['usd']
+#             # logger.info(msg=f"coingeckoprice {coinprice}")
+#             coinsymbol=coininfo['symbol']
+#             response = f'coingecko info: {coinsymbol} {coinprice} USD on {coinplatform}'
+#             logger.info(msg=f"{response}")
+#             return coinprice
+# except Exception:
+#     return
     try:
         # Search for WBTC on CoinGecko
         coin_info = cg_api.get_coin_by_id(id=s1)
@@ -504,46 +502,46 @@ async def send_order(s1,s2,s3,s4,s5):
                 print(f"An error occurred while retrieving the WBTC address: {e}")
 
 async def sign_transaction_dex(contract_tx):
-                    try:
-                        if (version=='v2'):
-                            tx_params = {
-                            'from': walletaddress,
-                            'gas': int(gasLimit),
-                            'gasPrice': ex.to_wei(gasPrice,'gwei'),
-                            'nonce': ex.eth.get_transaction_count(walletaddress),
-                            }
-                            tx = contract_tx.build_transaction(tx_params)
-                            signed = ex.eth.account.sign_transaction(tx, privatekey)
-                            raw_tx = signed.rawTransaction
-                            return ex.eth.send_raw_transaction(raw_tx)
-                        elif (version=="v3"):
-                            tx_params = {
-                            'from': walletaddress,
-                            'gas': int(gasLimit),
-                            'gasPrice': ex.to_wei(gasPrice,'gwei'),
-                            'nonce': ex.eth.get_transaction_count(walletaddress),
-                            }
-                            tx = contract_tx.build_transaction(tx_params)
-                            signed = ex.eth.account.sign_transaction(tx, privatekey)
-                            raw_tx = signed.rawTransaction
-                            return ex.eth.send_raw_transaction(raw_tx)
-                        elif (version=="1inch"):
-                            tx_params = {
-                            'nonce': ex.eth.get_transaction_count(walletaddress),
-                            'gas': int(gasLimit),
-                            'gasPrice': ex.to_wei(gasPrice,'gwei'),
-                            }
-                            tx = contract_tx.build_transaction(tx_params)
-                            logger.info(msg=f"tx {tx}")
-                            signed = ex.eth.account.sign_transaction(tx, privatekey)
-                            logger.info(msg=f"signed {signed}")
-                            raw_tx = signed.rawTransaction
-                            logger.info(msg=f"raw_tx {raw_tx}")
-                            return ex.eth.send_raw_transaction(raw_tx)
-                        else:
-                            return
-                        except Exception:
-                            return
+    try:
+        if (version=='v2'):
+            tx_params = {
+            'from': walletaddress,
+            'gas': int(gasLimit),
+            'gasPrice': ex.to_wei(gasPrice,'gwei'),
+            'nonce': ex.eth.get_transaction_count(walletaddress),
+            }
+            tx = contract_tx.build_transaction(tx_params)
+            signed = ex.eth.account.sign_transaction(tx, privatekey)
+            raw_tx = signed.rawTransaction
+            return ex.eth.send_raw_transaction(raw_tx)
+        elif (version=="v3"):
+            tx_params = {
+            'from': walletaddress,
+            'gas': int(gasLimit),
+            'gasPrice': ex.to_wei(gasPrice,'gwei'),
+            'nonce': ex.eth.get_transaction_count(walletaddress),
+            }
+            tx = contract_tx.build_transaction(tx_params)
+            signed = ex.eth.account.sign_transaction(tx, privatekey)
+            raw_tx = signed.rawTransaction
+            return ex.eth.send_raw_transaction(raw_tx)
+        elif (version=="1inch"):
+            tx_params = {
+            'nonce': ex.eth.get_transaction_count(walletaddress),
+            'gas': int(gasLimit),
+            'gasPrice': ex.to_wei(gasPrice,'gwei'),
+            }
+            tx = contract_tx.build_transaction(tx_params)
+            logger.info(msg=f"tx {tx}")
+            signed = ex.eth.account.sign_transaction(tx, privatekey)
+            logger.info(msg=f"signed {signed}")
+            raw_tx = signed.rawTransaction
+            logger.info(msg=f"raw_tx {raw_tx}")
+            return ex.eth.send_raw_transaction(raw_tx)
+        else:
+            return
+    except Exception:
+        return
 
 async def send_order_dex(s1,s2,s3,s4,s5):
     try:
@@ -642,9 +640,9 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {coinprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
             logger.info(msg=f"{response}")
             return response
-        except Exception as e:
-            await handle_exception(e)
-            return
+    except Exception as e:
+        await handle_exception(e)
+        return
 
 async def fetch_tokeninfo(token):
     global token_price
@@ -688,22 +686,25 @@ async def fetch_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_
         return
 
 async def verify_latency_ex():
-    if not isinstance(ex,web3.main.Web3):
-        symbol = 'BTC/USDT'
-        results = []
-        num_iterations = 5
-        for i in range(0, num_iterations):
-            started = ex.milliseconds()
-            orderbook = ex.fetch_order_book(symbol)
-            ended = ex.milliseconds()
-            elapsed = ended - started
-            #logger.info(msg=f"elapsed {elapsed}")
-            results.append(elapsed)
-            rtt = int(sum(results) / len(results))
-            response = rtt
-        elif (isinstance(ex,web3.main.Web3)):
-            response = round(ping(networkprovider, unit='ms'),3)
-            return response
+    try:
+        if not isinstance(ex,web3.main.Web3):
+            symbol = 'BTC/USDT'
+            results = []
+            num_iterations = 5
+            for i in range(0, num_iterations):
+                started = ex.milliseconds()
+                orderbook = ex.fetch_order_book(symbol)
+                ended = ex.milliseconds()
+                elapsed = ended - started
+                #logger.info(msg=f"elapsed {elapsed}")
+                results.append(elapsed)
+                rtt = int(sum(results) / len(results))
+                response = rtt
+            elif (isinstance(ex,web3.main.Web3)):
+                response = round(ping(networkprovider, unit='ms'),3)
+                return response
+    except Exception as e:
+        await handle_exception(e)
 
 #=========== Send function
 async def send (self, messaging):
@@ -715,8 +716,8 @@ async def send (self, messaging):
 async def notify(messaging):
 #=APPRISE Setup
 apobj = apprise.Apprise()
-if ( bot_token is not None):
-    apobj.add('tgram://' + str( bot_token) + "/" + str(bot_channel_id))
+if (bot_token is not None):
+    apobj.add('tgram://' + str(bot_token) + "/" + str(bot_channel_id))
     try:
         apobj.notify(body=messaging)
     except Exception as e:
@@ -788,8 +789,8 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
                     bal = round(ex.from_wei(bal,'ether'),5)
                     msg += f"\n{bal}"
                     await send(update,msg)
-                except Exception as e:
-                    await handle_exception(e)
+    except Exception as e:
+        await handle_exception(e)
 
 #===order parsing  ======
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -802,7 +803,6 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             message = "TRADING DISABLED"
             await send(update,message)
         else:
-            print('echo')
             try:
                 order_m = convert(uppercased_message)
                 m_dir = order_m[0]
@@ -815,9 +815,9 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 if (res != None):
                     response = f"{res}"
                     await send(update,response)
-                except Exception as e:
-                    await handle_exception(e)
-                    return
+            except Exception as e:
+                await handle_exception(e)
+                return
 ##======TG COMMAND view price ===========
 async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message  = update.effective_message.text
