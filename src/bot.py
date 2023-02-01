@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 ##=============== CONFIG ===============
 load_dotenv()  # .env loading
 #===================
-ex = "pancake"
+ex_name = "pancake"
 chainId = 56
 exchanges = {}
 bot_trading_switch=True
@@ -47,6 +47,7 @@ ex_test_mode="True"
 
 #=======API endpoint
 headers = { "User-Agent": "Mozilla/5.0" }
+ex_ccyrate_api = f"https://api.exchangerate.host"
 ex_gecko_api = CoinGeckoAPI()
 dex_1inch_api = f"https://api.1inch.exchange/v5.0/{chainId}"
 dex_cow_api = f"https://api.cow.fi/mainnet"
@@ -64,9 +65,6 @@ quote sample
 other commands
 <code>/trading</code> <code>/testmode</code>"""
 bot_menu_help = f"{TTversion} \n {fullcommandlist}"
-
-filter_order = ['BUY', 'SELL']
-filter_quote = ['/q', '/p']
 
 #========== Common Functions =============
 
@@ -124,6 +122,14 @@ async def show_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     message = f" db extract: \n {db.all()}"
     await send(update, message)
 
+async def getFieldData():
+    return
+    # parsedJson=json.loads(db_path.content)
+    # for entry in parsedJson:
+    #     if name in entry ['name']:
+    #         logger.info(msg=f"name{entry ['name']}")
+
+
 ####Search related Functions
 
 #PARSER
@@ -179,20 +185,19 @@ async def parse_message (message):
     filter_lst_order = ['buy']
     filter_lst_quote = ['/q']
     if [ele for ele in filter_lst_order if(ele in parsed_message)]:
-      logger.info(msg=f"case 1: {message}")
+        logger.info(msg=f"case 1: {message}")
 
 #exchangerater
-async def request_eur(self):
-    url = 'https://openexchangerates.org/api/latest.json'
-    params = {'app_id':openexchange_api_key, 'symbols':'EUR', 'base':'USD', 'prettyprint':False}
-    r = requests.get(url, params=params)
+async def convert_currency(_from_: 'USD', _to_: 'EUR'):
     try:
-        d = json.loads(r.text)
-        self.latest_eur = float(d['rates']['EUR'])
-            #print('eur updated')
-    except:
-        logger.info(msg=f"error getting EUR rate")
-        self.latest_eur = 1 #reasonable rate
+        url = f"{ex_ccyrate_api}/convert?from={_from_}&to={_to_}"
+        response = requests.get(url)
+        rate = response.json()
+        return rate["result"]
+    except Exception as e:
+        await handle_exception(e)
+        logger.warning(msg=f"API conversion error {e}")
+        return
 
 
 #=========Exchange Functions
@@ -949,17 +954,18 @@ if os.path.exists(db_path):
                 bot_token = os.getenv("TG_TK")
                 bot_channel_id = os.getenv("TG_CHANNEL_ID")
             except Exception as e:
-                logger.error("no telegram token")
+                logger.error("no bot token")
                 sys.exit()
     except Exception:
-        logger.warning(msg=f"error with existing db file {db_path}")
+        logger.warning(msg=f"error with db file {db_path}")
 
 ##========== startup message ===========
 async def post_init(application: Application):
     message=f"Bot is online {TTversion}"
-    await load_exchange(ex,ex_test_mode)
+    await load_exchange(ex_name,ex_test_mode)
     logger.info(msg=f"{message}")
     await application.bot.send_message(bot_channel_id, message, parse_mode=constants.ParseMode.HTML)
+    logger.info(msg=f"getFieldData loading {await getFieldData()}")
 
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
