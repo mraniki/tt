@@ -60,6 +60,9 @@ other commands
 <code>/trading</code> <code>/testmode</code>"""
 bot_menu_help = f"{TTversion} \n {fullcommandlist}"
 
+filter_order = ['BUY', 'SELL']
+filter_quote = ['/q', '/p']
+
 #========== Common Functions =============
 
 def verify_import_library():
@@ -896,8 +899,8 @@ async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_
             res = await load_exchange(DEX_name,ex_test_mode)
             response = f"DEX is {DEX_name}"
             await send(update,response)
-        except Exception as e:
-            await handle_exception(e)
+    except Exception as e:
+        await handle_exception(e)
 ##======TG COMMAND Test mode switch ======
 async def switch_testmode_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global ex_test_mode
@@ -1014,7 +1017,7 @@ def main():
             except telegram.error.Conflict:
                 logger.error(msg='Bot failed to start due to conflict')
                 sys.exit()
-                
+
     except Exception as e:
         logger.info(msg="Bot failed to start. Error: " + str(e))
 
