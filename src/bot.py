@@ -11,7 +11,7 @@ import os
 from os import getenv
 from dotenv import load_dotenv
 import json, requests
-from textparser import Parser, Sequence
+#from textparser import Parser, Sequence
 #telegram
 import telegram
 from telegram import Update, constants
