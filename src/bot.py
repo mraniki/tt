@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.21"
+TTversion="🪙TT Beta 1.03.22"
 ##=============== import  =============
 ##log
 import logging
@@ -11,7 +11,6 @@ import os
 from os import getenv
 from dotenv import load_dotenv
 import json, requests
-#from textparser import Parser, Sequence
 #telegram
 import telegram
 from telegram import Update, constants
@@ -44,15 +43,15 @@ ex_name = "pancake"
 chainId = 56
 exchanges = {}
 bot_trading_switch=True
-ex_test_mode="True"
+ex_test_mode = "True"
 
 #=======API endpoint
 headers = { "User-Agent": "Mozilla/5.0" }
 ex_ccyrate_api = f"https://api.exchangerate.host"
 ex_gecko_api = CoinGeckoAPI()
 dex_1inch_api = f"https://api.1inch.exchange/v5.0/{chainId}"
-dex_cow_api = f"https://api.cow.fi/mainnet"
 dex_guru_api = f"https://api.dev.dex.guru/v1/{chainId}/?api-key="
+dex_cow_api = f"https://api.cow.fi/mainnet"
 
 #=======TG command
 fullcommandlist = """
@@ -123,20 +122,7 @@ async def show_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     message = f" db extract: \n {db.all()}"
     await send(update, message)
 
-async def search_exchange(searched_data):
-    #logger.info(msg=f"input {searchedDB} {field_name} {searched_data}")
-    results_cex = cex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
-    results_dex = dex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
-    if (len(str(results_cex)) >= 1):
-        for result in results_cex:
-            #logger.info(msg=f"result {result}")
-            return result
-    elif (len(str(results_dex)) >= 1):
-        for result in results_dex:
-        #logger.info(msg=f"result {result}")
-            return result
-    else:  
-        return None
+
 
 ####Search related Functions
 
@@ -175,39 +161,33 @@ async def convert(s):
     order=[m_dir,m_symbol,m_sl,m_tp,m_q]
     logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
     return order
-    # try:
-    #     parts = s.split(" ")
-    #     direction = parts[0]
-    #     symbol = parts[1]
-    #     stop_loss = int(parts[2][3:7]) if len(parts) >= 3 else 0
-    #     take_profit = int(parts[3][3:7]) if len(parts) >= 4 else 0
-    #     quantity = int(parts[4][2:-1]) if len(parts) >= 5 else 5
-    #     return [direction, symbol, stop_loss, take_profit, quantity]
-    # except (IndexError, TypeError, ValueError) as e:
-    #     logger.error(f"Error parsing order string '{s}': {e}")
-    #     return None
 
 #parserv2
 async def parse_message (message):
-    orderparser = message.split(" ")
+    wordlist = message.split(" ")
     filter_lst_order = ['BUY', 'SELL']
-    if [ele for ele in filter_lst_order if(ele in orderparser)]:
-        try:
-            if len(token[0]) > 0:
-                direction = orderparser[0]
-            else: 
-                return
-            if len(token[1]) > 0:
-                symbol = orderparser[1]
-            logger.info(msg=f"{direction} {symbol}")
-        except Exception as e:
-            logger.warning(msg=f"Message parsing anomally")
-            return
-
-#exchangerater
-async def convert_currency(_from_: 'USD', _to_: 'EUR'):
+    filter_lst_switch = ['cex', 'dex']
     try:
-        url = f"{ex_ccyrate_api}/convert?from={_from_}&to={_to_}"
+        if [ele for ele in filter_lst_order if(ele in wordlist)]:
+            if len(token[0]) > 0:
+                direction = wordlist[0]
+                if len(token[1]) > 0:
+                    symbol = wordlist[1]
+                    return wordlist
+                    logger.info(msg=f"{wordlist} \n {direction} {symbol}")
+        elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
+            if len(token[1]) > 0:
+                return token[1]
+        else:
+            return
+    except Exception as e:
+        await handle_exception(e)
+        logger.warning(msg=f"Message parsing anomaly")
+        return
+
+async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
+    try:
+        url = f"{ex_ccyrate_api}/convert?from={_from_}&to={_to_}&amount={amount}"
         response = requests.get(url)
         rate = response.json()
         return rate["result"]
@@ -218,63 +198,21 @@ async def convert_currency(_from_: 'USD', _to_: 'EUR'):
 
 
 #=========Exchange Functions
-# async def search_cex(ex_name, ex_test_mode):
-#     if (isinstance(ex_name, str)):
-#         query1 = ((q.name == ex_name) & (q['testmode'] == ex_test_mode))
-#         result_cex_db = cex_db.search(query1)
-#         #logger.info(msg=f"result_cex_db {result_cex_db}")
-#         if (len(str(result_cex_db)) >= 1):
-#             return result_cex_db
-#         if not (isinstance(ex_name, str)):
-#             try:
-#                 query1 = ((q.name == ex_name.name.lower()) & (q['testmode'] == ex_test_mode))
-#                 result_cex_db = cex_db.search(query1)
-#                 if (len(str(result_cex_db)) == 1):
-#                     return result_cex_db
-#                 else:
-#                     return
-#             except Exception as e:
-#                 await handle_exception(e)
-#                 return
-#     else:
-#         return
 
-# async def search_dex(ex_name, ex_test_mode):
-#     try:
-#         query = ((q.name == ex_name) & (q['testmode'] == ex_test_mode))
-#         result_dex_db = dex_db.search(query)
-#         #logger.info(msg=f"result_dex_db {result_dex_db}")
-#         if (len(str(result_dex_db)) >= 1):
-#             return result_dex_db
-#         else:
-#             return
-#     except Exception as e:
-#         await handle_exception(e)
-#         return
+async def search_exchange(searched_data):
+    results_cex = cex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
+    results_dex = dex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
+    if (len(results_cex) >= 1):
+        for result in results_cex:
+            return result
+    elif (len(results_dex) >= 1):
+        for result in results_dex:
+            return result
+    else:  
+        return None
 
-# async def search_exchange(ex_name, ex_test_mode):
-#     try:
-#         if (isinstance(ex_name, str)):
-#             check_cex = await search_cex(ex_name, ex_test_mode)
-#             check_dex = await search_dex(ex_name, ex_test_mode)
-#             if (check_cex is not None):
-#                 if(len(str(check_cex)) >= 1):
-#                     return check_cex[0]['name']
-#             elif (len(str(check_dex)) >= 1):
-#                 return check_dex[0]['name']
-#         elif not (isinstance(ex_name, web3.main.Web3)):
-#             check_cex = await search_cex(ex_name.id, ex_test_mode)
-#             return check_cex[0]['name']
-#         elif (isinstance(ex_name, web3.main.Web3)):
-#             check_dex = await search_dex(ex_name, ex_test_mode)
-#             return name
-#         else:
-#             return
-#     except Exception as e:
-#         await handle_exception(e)
-#         return
 
-async def load_exchange(exchangeid, mode):
+async def load_exchange(exchangeid):
     global ex
     global name
     global networkprovider
@@ -297,17 +235,44 @@ async def load_exchange(exchangeid, mode):
     global chainId
 
     logger.info(msg=f"Setting up {exchangeid}")
-    # check_cex = await search_cex(exchangeid,mode)
-    # check_dex = await search_dex(exchangeid,mode)
-    check_cex = await search_exchange(exchangeid)
-    check_dex = await search_exchange(exchangeid)
-    if (check_cex):
-        ex_new=check_cex
+    check_ex = await search_exchange(exchangeid)
+    if (check_ex['walletaddress']):
+        ex_new= check_ex
+        name= ex_new['name']
+        walletaddress= ex_new['walletaddress']
+        privatekey= ex_new['privatekey']
+        version= ex_new['version']
+        networkprovider= ex_new['networkprovider']
+        router= ex_new['router']
+        mode=ex_new['testmode']
+        tokenlist=ex_new['tokenlist']
+        abiurl=ex_new['abiurl']
+        abiurltoken=ex_new['abiurltoken']
+        basesymbol=ex_new['basesymbol']
+        gasLimit=ex_new['gasLimit']
+        gasPrice=ex_new['gasPrice']
+        platform=ex_new['platform']
+        chainId=ex_new['chainId']
+        ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
+        #ns = ns.fromWeb3(web3)
+        router_instanceabi= await fetch_abi_dex(router) #Router ABI
+        router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
+        if (version=="v3"):
+            quoter_instanceabi= await fetch_abi_dex('0x61fFE014bA17989E743c5F6cB21bF9697530B21e') #Quoter ABI
+            quoter_instance = ex.eth.contract(address=ex.to_checksum_address('0x61fFE014bA17989E743c5F6cB21bF9697530B21e'), abi=quoter_instanceabi) #ContractLiquidityQuoter
+        try:
+            ex.net.listening
+            logger.info(msg=f"connected to {ex}")
+            return name
+        except e as Exception:
+            await handle_exception(e)
+    elif (check_ex['secret']):
+        ex_new=check_ex
         exchange = getattr(ccxt, exchangeid)({'enableRateLimit': True,})
         exchanges[exchangeid] = exchange()
         try:
-            exchanges[exchangeid] = exchange({'apiKey': ex_new[0]['api'],'secret': ex_new[0]['secret']})
-            m_ordertype=ex_new[0]['ordertype']
+            exchanges[exchangeid] = exchange({'apiKey': ex_new['api'],'secret': ex_new['secret']})
+            m_ordertype=ex_new['ordertype']
             ex=exchanges[exchangeid]
             tickers = ex.fetch_tickers()
             for symbol, ticker in tickers.items():
@@ -322,38 +287,8 @@ async def load_exchange(exchangeid, mode):
                 return ex
         except Exception as e:
             await handle_exception(e)
-    elif (check_dex):
-        ex_new= check_dex
-        name= ex_new[0]['name']
-        walletaddress= ex_new[0]['walletaddress']
-        privatekey= ex_new[0]['privatekey']
-        version= ex_new[0]['version']
-        networkprovider= ex_new[0]['networkprovider']
-        router= ex_new[0]['router']
-        mode=ex_new[0]['testmode']
-        tokenlist=ex_new[0]['tokenlist']
-        abiurl=ex_new[0]['abiurl']
-        abiurltoken=ex_new[0]['abiurltoken']
-        basesymbol=ex_new[0]['basesymbol']
-        gasLimit=ex_new[0]['gasLimit']
-        gasPrice=ex_new[0]['gasPrice']
-        platform=ex_new[0]['platform']
-        chainId=ex_new[0]['chainId']
-        ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
-        #ns = ns.fromWeb3(web3)
-        router_instanceabi= await fetch_abi_dex(router) #Router ABI
-        router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
-        if (version=="v3"):
-            quoter_instanceabi= await fetch_abi_dex('0x61fFE014bA17989E743c5F6cB21bF9697530B21e') #Quoter ABI
-            quoter_instance = ex.eth.contract(address=ex.to_checksum_address('0x61fFE014bA17989E743c5F6cB21bF9697530B21e'), abi=quoter_instanceabi) #ContractLiquidityQuoter
-        try:
-            ex.net.listening
-            logger.info(msg=f"connected to {ex}")
-            return name
-        except e as Exception:
-            await handle_exception(e)
     else:
-        logger.warning(msg=f"Error with the DB to setup {exchangeid} {ex_test_mode}, going with default")
+        logger.warning(msg=f"Error with the DB search for {exchangeid} {ex_test_mode} Failover")
         networkprovider='ethereum.publicnode.com'
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         name='uniswap'
@@ -366,6 +301,7 @@ async def search_tokenlist(parsedJson, name):
             logger.info(msg=f"entry{entry ['symbol']}{entry ['chainId']} {entry ['address']}")
             if int(chainId) == entry ['chainId']:
                 return entry ['address']
+
 
 async def search_contract_dex(symb):
     try:
@@ -822,10 +758,8 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 #===order parsing  ======
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
-    uppercased_message = channel_message.upper()
-    filter_lst = ['BUY', 'SELL']
-    msg = ""
-    if [ele for ele in filter_lst if(ele in uppercased_message)]:
+    order = parse_message(channel_message)
+    if (order):
         if (bot_trading_switch == False):
             message = "TRADING DISABLED"
             await send(update,message)
@@ -909,13 +843,13 @@ async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_
     try:
         if (ex_type == "/cex"):
             results_search_cex = await search_exchange(ex_new)
-            CEX_name = results_search_cex[0]['name']
-            res = await load_exchange(CEX_name,ex_test_mode)
+            CEX_name = results_search_cex['name']
+            res = await load_exchange(CEX_name)
             response = f"CEX is {ex}"
         elif (ex_type == "/dex"):
             results_search_dex = await search_exchange(ex_new)
-            DEX_name= results_search_dex[0]['name']
-            res = await load_exchange(DEX_name,ex_test_mode)
+            DEX_name= results_search_dex['name']
+            res = await load_exchange(DEX_name)
             response = f"DEX is {DEX_name}"
             await send(update,response)
     except Exception as e:
@@ -952,18 +886,19 @@ if os.path.exists(db_path):
         env = globalDB.all()[0]['env']
         ex_name = globalDB.all()[0]['defaultex']
         ex_test_mode = globalDB.all()[0]['defaulttestmode']
-        logger.info(msg=f"Env {env} ex {ex}")
+        logger.info(msg=f"Env {env} ex {ex_name}")
         bot_db = db.table('telegram')
         cex_db = db.table('cex')
         dex_db = db.table('dex')
-        tg = bot_db.search(q.platform == env)
-        bot_token = tg[0]['token']
-        bot_channel_id = tg[0]['channel']
-        bot_webhook_port = tg[0]['port']
-        bot_webhook_secret = tg[0]['secret_token']
-        bot_webhook_privatekey = tg[0]['key']
-        bot_webhook_certificate = tg[0]['cert']
-        bot_webhook_url = tg[0]['webhook_url']
+        bot = bot_db.search(q.platform == env)
+        logger.info(msg=f"{bot}")
+        bot_token = bot[0]['token']
+        bot_channel_id = bot[0]['channel']
+        bot_webhook_port = bot[0]['port']
+        bot_webhook_secret = bot[0]['secret_token']
+        bot_webhook_privatekey = bot[0]['key']
+        bot_webhook_certificate = bot[0]['cert']
+        bot_webhook_url = bot[0]['webhook_url']
         if (bot_token == ""):
             logger.error("no TG TK")
             logger.info(msg=f"Failover process with sample DB")
@@ -981,10 +916,8 @@ if os.path.exists(db_path):
 ##========== startup message ===========
 async def post_init(application: Application):
     message=f"Bot is online {TTversion}"
-    await load_exchange(ex_name,ex_test_mode)
-    logger.info(msg=f"{message}")
+    await load_exchange(ex_name)
     await application.bot.send_message(bot_channel_id, message, parse_mode=constants.ParseMode.HTML)
-    logger.info(msg=f"search_exchange loading {await search_exchange(ex_name)}")
 
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
