@@ -886,12 +886,11 @@ if os.path.exists(db_path):
         env = globalDB.all()[0]['env']
         ex_name = globalDB.all()[0]['defaultex']
         ex_test_mode = globalDB.all()[0]['defaulttestmode']
-        logger.info(msg=f"Env {env} ex {ex_name}")
+        #logger.info(msg=f"Env {env} ex {ex_name}")
         bot_db = db.table('telegram')
         cex_db = db.table('cex')
         dex_db = db.table('dex')
         bot = bot_db.search(q.platform == env)
-        logger.info(msg=f"{bot}")
         bot_token = bot[0]['token']
         bot_channel_id = bot[0]['channel']
         bot_webhook_port = bot[0]['port']
