@@ -720,7 +720,7 @@ async def handle_exception(e) -> None:
 ##====view help =====
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     r_ping = await verify_latency_ex()
-    msg= f"Environment: {env} Ping: {r_ping}ms\nExchange: {await search_exchange(exchangeid)} Sandbox: {ex_test_mode}\n{bot_menu_help}"
+    msg= f"Environment: {env} Ping: {r_ping}ms\nExchange: {await search_exchange(ex_name)} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     await send(update,msg)
 ##====restart ====
 async def restart_command(application: Application, update: Update) -> None:
