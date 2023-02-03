@@ -11,6 +11,7 @@ import os
 from os import getenv
 from dotenv import load_dotenv
 import json, requests
+from textparser import Parser, Sequence
 #telegram
 import telegram
 from telegram import Update, constants
@@ -19,7 +20,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 import apprise
 #db
 import tinydb
-from tinydb import TinyDB, Query
+from tinydb import TinyDB, Query, where
 import re
 #CEX
 import ccxt
@@ -122,70 +123,86 @@ async def show_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     message = f" db extract: \n {db.all()}"
     await send(update, message)
 
-async def getFieldData():
-    return
-    # parsedJson=json.loads(db_path.content)
-    # for entry in parsedJson:
-    #     if name in entry ['name']:
-    #         logger.info(msg=f"name{entry ['name']}")
-
+async def search_exchange(searched_data):
+    #logger.info(msg=f"input {searchedDB} {field_name} {searched_data}")
+    results_cex = cex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
+    results_dex = dex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
+    if (len(str(results_cex)) >= 1):
+        for result in results_cex:
+            #logger.info(msg=f"result {result}")
+            return result
+    elif (len(str(results_dex)) >= 1):
+        for result in results_dex:
+        #logger.info(msg=f"result {result}")
+            return result
+    else:  
+        return None
 
 ####Search related Functions
 
 #PARSER
 async def convert(s):
-    # li = s.split(" ")
-    # try:
-    #     m_dir= li[0]
-    # except (IndexError, TypeError):
-    #     e=f"{s} no direction"
-    #     logger.error(msg=f"{e}")
-    #     handle_exception(e)
-    #     return
-    # try:
-    #     m_symbol=li[1]
-    # except (IndexError, TypeError):
-    #     e=f"{s} no symbol"
-    #     logger.error(msg=f"{e}")
-    #     handle_exception(e)
-    #     return
-    # try:
-    #     m_sl=li[2][3:7]
-    # except (IndexError, TypeError):
-    #     logger.warning(msg=f"{s} no sl")
-    #     m_sl=0
-    # try:
-    #     m_tp=li[3][3:7]
-    # except (IndexError, TypeError):
-    #     logger.warning(msg=f"{s} no tp")
-    #     m_tp=0
-    # try:
-    #     m_q=li[4][2:-1]
-    # except (IndexError, TypeError):
-    #     logger.warning(msg=f"{s} no size default to 10 %")
-    #     m_q=5
-    # order=[m_dir,m_symbol,m_sl,m_tp,m_q]
-    # logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
-    # return order
+    li = s.split(" ")
     try:
-        parts = s.split(" ")
-        direction = parts[0]
-        symbol = parts[1]
-        stop_loss = int(parts[2][3:7]) if len(parts) >= 3 else 0
-        take_profit = int(parts[3][3:7]) if len(parts) >= 4 else 0
-        quantity = int(parts[4][2:-1]) if len(parts) >= 5 else 5
-        return [direction, symbol, stop_loss, take_profit, quantity]
-    except (IndexError, TypeError, ValueError) as e:
-        logger.error(f"Error parsing order string '{s}': {e}")
-        return None
+        m_dir= li[0]
+    except (IndexError, TypeError):
+        e=f"{s} no direction"
+        logger.error(msg=f"{e}")
+        handle_exception(e)
+        return
+    try:
+        m_symbol=li[1]
+    except (IndexError, TypeError):
+        e=f"{s} no symbol"
+        logger.error(msg=f"{e}")
+        handle_exception(e)
+        return
+    try:
+        m_sl=li[2][3:7]
+    except (IndexError, TypeError):
+        logger.warning(msg=f"{s} no sl")
+        m_sl=0
+    try:
+        m_tp=li[3][3:7]
+    except (IndexError, TypeError):
+        logger.warning(msg=f"{s} no tp")
+        m_tp=0
+    try:
+        m_q=li[4][2:-1]
+    except (IndexError, TypeError):
+        logger.warning(msg=f"{s} no size default to 10 %")
+        m_q=5
+    order=[m_dir,m_symbol,m_sl,m_tp,m_q]
+    logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
+    return order
+    # try:
+    #     parts = s.split(" ")
+    #     direction = parts[0]
+    #     symbol = parts[1]
+    #     stop_loss = int(parts[2][3:7]) if len(parts) >= 3 else 0
+    #     take_profit = int(parts[3][3:7]) if len(parts) >= 4 else 0
+    #     quantity = int(parts[4][2:-1]) if len(parts) >= 5 else 5
+    #     return [direction, symbol, stop_loss, take_profit, quantity]
+    # except (IndexError, TypeError, ValueError) as e:
+    #     logger.error(f"Error parsing order string '{s}': {e}")
+    #     return None
 
 #parserv2
 async def parse_message (message):
-    parsed_message = message.split(" ")
-    filter_lst_order = ['buy']
-    filter_lst_quote = ['/q']
-    if [ele for ele in filter_lst_order if(ele in parsed_message)]:
-        logger.info(msg=f"case 1: {message}")
+    orderparser = message.split(" ")
+    filter_lst_order = ['BUY', 'SELL']
+    if [ele for ele in filter_lst_order if(ele in orderparser)]:
+        try:
+            if len(token[0]) > 0:
+                direction = orderparser[0]
+            else: 
+                return
+            if len(token[1]) > 0:
+                symbol = orderparser[1]
+            logger.info(msg=f"{direction} {symbol}")
+        except Exception as e:
+            logger.warning(msg=f"Message parsing anomally")
+            return
 
 #exchangerater
 async def convert_currency(_from_: 'USD', _to_: 'EUR'):
@@ -201,61 +218,61 @@ async def convert_currency(_from_: 'USD', _to_: 'EUR'):
 
 
 #=========Exchange Functions
-async def search_cex(ex_name, ex_test_mode):
-    if (isinstance(ex_name, str)):
-        query1 = ((q.name == ex_name) & (q['testmode'] == ex_test_mode))
-        result_cex_db = cex_db.search(query1)
-        logger.info(msg=f"result_cex_db {result_cex_db}")
-        if (len(str(result_cex_db)) >= 1):
-            return result_cex_db
-        if not (isinstance(ex_name, str)):
-            try:
-                query1 = ((q.name == ex_name.name.lower()) & (q['testmode'] == ex_test_mode))
-                result_cex_db = cex_db.search(query1)
-                if (len(str(result_cex_db)) == 1):
-                    return result_cex_db
-                else:
-                    return
-            except Exception as e:
-                await handle_exception(e)
-                return
-    else:
-        return
+# async def search_cex(ex_name, ex_test_mode):
+#     if (isinstance(ex_name, str)):
+#         query1 = ((q.name == ex_name) & (q['testmode'] == ex_test_mode))
+#         result_cex_db = cex_db.search(query1)
+#         #logger.info(msg=f"result_cex_db {result_cex_db}")
+#         if (len(str(result_cex_db)) >= 1):
+#             return result_cex_db
+#         if not (isinstance(ex_name, str)):
+#             try:
+#                 query1 = ((q.name == ex_name.name.lower()) & (q['testmode'] == ex_test_mode))
+#                 result_cex_db = cex_db.search(query1)
+#                 if (len(str(result_cex_db)) == 1):
+#                     return result_cex_db
+#                 else:
+#                     return
+#             except Exception as e:
+#                 await handle_exception(e)
+#                 return
+#     else:
+#         return
 
-async def search_dex(ex_name, ex_test_mode):
-    try:
-        query = ((q.name == ex_name) & (q['testmode'] == ex_test_mode))
-        result_dex_db = dex_db.search(query)
-        logger.info(msg=f"result_dex_db {result_dex_db}")
-        if (len(str(result_dex_db)) >= 1):
-            return result_dex_db
-        else:
-            return
-    except Exception as e:
-        await handle_exception(e)
-        return
+# async def search_dex(ex_name, ex_test_mode):
+#     try:
+#         query = ((q.name == ex_name) & (q['testmode'] == ex_test_mode))
+#         result_dex_db = dex_db.search(query)
+#         #logger.info(msg=f"result_dex_db {result_dex_db}")
+#         if (len(str(result_dex_db)) >= 1):
+#             return result_dex_db
+#         else:
+#             return
+#     except Exception as e:
+#         await handle_exception(e)
+#         return
 
-async def search_exchange(ex_name, ex_test_mode):
-    try:
-        if (isinstance(ex_name, str)):
-            check_cex = await search_cex(ex_name, ex_test_mode)
-            check_dex = await search_dex(ex_name, ex_test_mode)
-            if (check_cex is not None):
-                if(len(str(check_cex)) >= 1):
-                    return check_cex[0]['name']
-            elif (len(str(check_dex)) >= 1):
-                return check_dex[0]['name']
-        elif not (isinstance(ex_name, web3.main.Web3)):
-            check_cex = await search_cex(ex_name.id, ex_test_mode)
-            return check_cex[0]['name']
-        elif (isinstance(ex_name, web3.main.Web3)):
-            check_dex = await search_dex(ex_name, ex_test_mode)
-            return name
-        else:
-            return
-    except Exception as e:
-        await handle_exception(e)
-        return
+# async def search_exchange(ex_name, ex_test_mode):
+#     try:
+#         if (isinstance(ex_name, str)):
+#             check_cex = await search_cex(ex_name, ex_test_mode)
+#             check_dex = await search_dex(ex_name, ex_test_mode)
+#             if (check_cex is not None):
+#                 if(len(str(check_cex)) >= 1):
+#                     return check_cex[0]['name']
+#             elif (len(str(check_dex)) >= 1):
+#                 return check_dex[0]['name']
+#         elif not (isinstance(ex_name, web3.main.Web3)):
+#             check_cex = await search_cex(ex_name.id, ex_test_mode)
+#             return check_cex[0]['name']
+#         elif (isinstance(ex_name, web3.main.Web3)):
+#             check_dex = await search_dex(ex_name, ex_test_mode)
+#             return name
+#         else:
+#             return
+#     except Exception as e:
+#         await handle_exception(e)
+#         return
 
 async def load_exchange(exchangeid, mode):
     global ex
@@ -280,8 +297,10 @@ async def load_exchange(exchangeid, mode):
     global chainId
 
     logger.info(msg=f"Setting up {exchangeid}")
-    check_cex = await search_cex(exchangeid,mode)
-    check_dex = await search_dex(exchangeid,mode)
+    # check_cex = await search_cex(exchangeid,mode)
+    # check_dex = await search_dex(exchangeid,mode)
+    check_cex = await search_exchange(exchangeid)
+    check_dex = await search_exchange(exchangeid)
     if (check_cex):
         ex_new=check_cex
         exchange = getattr(ccxt, exchangeid)({'enableRateLimit': True,})
@@ -601,8 +620,8 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         asset_in_quote= await fetch_token_price(asset_in_symbol)
         asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
         transaction_amount = asset_out_amount_converted
-        # deadline = ex.eth.getBlock("latest")["timestamp"] + 3600
-        deadline = (int(time.time()) + 1000000)
+        deadline = ex.eth.get_block("latest")["timestamp"] + 3600
+        #deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
             approvalcheck = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
             logger.info(msg=f"approvalcheck {approvalcheck}")
@@ -765,7 +784,7 @@ async def handle_exception(e) -> None:
 ##====view help =====
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     r_ping = await verify_latency_ex()
-    msg= f"Environment: {env} Ping: {r_ping}ms\nExchange: {await search_exchange(ex,ex_test_mode)} Sandbox: {ex_test_mode}\n{bot_menu_help}"
+    msg= f"Environment: {env} Ping: {r_ping}ms\nExchange: {await search_exchange(exchangeid)} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     await send(update,msg)
 ##====restart ====
 async def restart_command(application: Application, update: Update) -> None:
@@ -812,7 +831,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             await send(update,message)
         else:
             try:
-                order_m = convert(uppercased_message)
+                order_m = parse_message(uppercased_message)
                 m_dir = order_m[0]
                 m_symbol = order_m[1]
                 m_sl = order_m[2]
@@ -889,12 +908,12 @@ async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_
     ex_type=parsed_message[0]
     try:
         if (ex_type == "/cex"):
-            results_search_cex = await search_cex(ex_new,ex_test_mode)
+            results_search_cex = await search_exchange(ex_new)
             CEX_name = results_search_cex[0]['name']
             res = await load_exchange(CEX_name,ex_test_mode)
             response = f"CEX is {ex}"
         elif (ex_type == "/dex"):
-            results_search_dex = await search_dex(ex_new,ex_test_mode)
+            results_search_dex = await search_exchange(ex_new)
             DEX_name= results_search_dex[0]['name']
             res = await load_exchange(DEX_name,ex_test_mode)
             response = f"DEX is {DEX_name}"
@@ -931,7 +950,7 @@ if os.path.exists(db_path):
         q = Query()
         globalDB = db.table('global')
         env = globalDB.all()[0]['env']
-        ex = globalDB.all()[0]['defaultex']
+        ex_name = globalDB.all()[0]['defaultex']
         ex_test_mode = globalDB.all()[0]['defaulttestmode']
         logger.info(msg=f"Env {env} ex {ex}")
         bot_db = db.table('telegram')
@@ -965,7 +984,7 @@ async def post_init(application: Application):
     await load_exchange(ex_name,ex_test_mode)
     logger.info(msg=f"{message}")
     await application.bot.send_message(bot_channel_id, message, parse_mode=constants.ParseMode.HTML)
-    logger.info(msg=f"getFieldData loading {await getFieldData()}")
+    logger.info(msg=f"search_exchange loading {await search_exchange(ex_name)}")
 
 #===========bot error handling ==========
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:

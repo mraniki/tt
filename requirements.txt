@@ -7,3 +7,4 @@ apprise
 pycoingecko
 ping3
 tornado
+textparser
