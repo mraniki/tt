@@ -758,14 +758,14 @@ async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 #===order parsing  ======
 async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
-    order = parse_message(channel_message)
+    order = await parse_message(channel_message)
     if (order):
         if (bot_trading_switch == False):
             message = "TRADING DISABLED"
             await send(update,message)
         else:
             try:
-                order_m = parse_message(uppercased_message)
+                #order_m = await parse_message(uppercased_message)
                 m_dir = order_m[0]
                 m_symbol = order_m[1]
                 m_sl = order_m[2]
