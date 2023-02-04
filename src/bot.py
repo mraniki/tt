@@ -595,14 +595,12 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         await handle_exception(e)
         return
 
-async def fetch_tokeninfo(token):
-    global token_price
-    global asset_info
+async def search_symbol(token):
     try:
-        coininfo=ex_gecko_api.search(query=symbol)
+        symbol_info = ex_gecko_api.search(query=token)
         for i in coininfo['coins']:
             results_search_coin = i['symbol']
-            if (results_search_coin==symbol):
+            if (results_search_coin==token):
                 logger.info(msg=f"Pass")
                 logger.info(msg=f"{i['api_symbol']}")
                 coininfo=ex_gecko_api.get_coin_by_id(id=i['api_symbol'])
@@ -613,6 +611,32 @@ async def fetch_tokeninfo(token):
                 coinsymbol=coininfo['symbol']
                 response = f'{coinsymbol} {coinprice} USD on {coinplatform}'
                 logger.info(msg=f"{response}")
+                    # fetch_tokeninfo=ex_gecko_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=asset_in_address)
+                    # #logger.info(msg = f"fetch_tokeninfo {fetch_tokeninfo}")
+                    # asset_out_cg_quote=fetch_tokeninfo['market_data']['current_price']['usd']
+    except Exception:
+        return
+
+async def fetch_gecko_quote(token):
+    try:
+        asset_in_address = ex.to_checksum_address(await search_contract_dex(token))
+        fetch_tokeninfo = ex_gecko_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=asset_in_address)
+        asset_out_cg_quote = fetch_tokeninfo['market_data']['current_price']['usd']
+        return asset_out_cg_quote
+    except Exception:
+        return
+
+async def fetch_1inch_quote(token):
+    dex_1inch_api = f"https://api.1inch.exchange/v5.0/{chainId}"
+    asset_in_address = ex.to_checksum_address(await search_contract_dex(token))
+    asset_out_address =ex.to_checksum_address(await search_contract_dex('USDT'))
+    try:
+        asset_out_amount=100
+        quote_url = f"{dex_1inch_api}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
+        quote_response = requests.get(quote_url)
+        quote = quote_response.json()
+        asset_out_1inch_quote = quote['toTokenAmount']
+        return asset_out_1inch_quote
     except Exception:
         return
 
@@ -739,35 +763,20 @@ async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
 ##====== COMMAND view price ===========
 async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    dex_1inch_api = f"https://api.1inch.exchange/v5.0/{chainId}"
     channel_message  = update.effective_message.text
     parsed_message = channel_message.split(" ")
     symbol=parsed_message[1]
+    asset_out_cg_quote = await fetch_gecko_quote (symbol)
+    response=f"₿ {symbol}\n"
     try:
-        if not (isinstance(ex,web3.main.Web3)):
-            price= ex.fetch_ticker(symbol.upper())['last']
-            response=f"₿ {symbol} @ {price}"
-        elif (isinstance(ex,web3.main.Web3)):
+        if (isinstance(ex,web3.main.Web3)):
             if(await search_contract_dex(symbol) != None):
-                asset_in_address = ex.to_checksum_address(await search_contract_dex(symbol))
-                asset_out_address =ex.to_checksum_address(await search_contract_dex('USDT'))
-                if(symbol != None):
-                    fetch_tokeninfo=ex_gecko_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=asset_in_address)
-                    #logger.info(msg = f"fetch_tokeninfo {fetch_tokeninfo}")
-                    asset_out_cg_quote=fetch_tokeninfo['market_data']['current_price']['usd']
-                    asset_out_amount=100
-                    quote_url = f"{dex_1inch_api}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
-                    quote_response = requests.get(quote_url)
-                    quote = quote_response.json()
-                    #logger.info(msg = f"quote {quote}")
-                    asset_out_quote = quote['toTokenAmount']
-                    response=f"₿ {symbol}\n{symbol} @ {asset_out_quote} (1inch - live) or {asset_out_cg_quote} (gecko)"
-                    await send(update,response)
-                    #version2 router command
-                        # price = router_instance.functions.getAmountsOut(1, [symbol_to_quote,basesymbol]).call()[1]
-                        # logger.info(msg=f"price {price}")
-                        # response=f"₿ {symbol_to_quote}\n{symbol} @ {(price)} or {fetch_token_price}"
-                        #await DEX_fetch_tokeninfo(symbol)
+                asset_out_1inch_quote = await fetch_1inch_quote (symbol)
+                response+=f"{await search_contract_dex(symbol)}\n🦄 {asset_out_1inch_quote} USD\n🦎 {asset_out_cg_quote} USD"
+                await send(update,response)
+        elif not (isinstance(ex,web3.main.Web3)):
+            price= ex.fetch_ticker(symbol.upper())['last']
+            response+=f"₿ {symbol} 🏛️ {price} USD\n🦎 {asset_out_cg_quote} USD"
     except Exception as e:
         await handle_exception(e)
         return
