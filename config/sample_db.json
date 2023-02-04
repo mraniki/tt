@@ -3,7 +3,7 @@
     {
         "1":
         {
-            "env": "PRD",
+            "defaultenv": "PRD",
             "defaultex": "pancake",
             "defaulttestmode":"True"
         }
@@ -14,18 +14,25 @@
         {
             "token": "",
             "channel": "",
-            "platform": "POC",
+            "env": "TEST",
             "port":"8443",
             "secret_token":"ASecretTokenIHaveChangedByNow",
             "key":"private.key",
             "cert":"cert.pem",
-            "webhook_url":"https://example.com:8443"
+            "webhook_url":"https://example.com:8443",
+            "domain":"abc"
         },
         "2":
         {
             "token": "YOURBOTTOKEN",
             "channel": "YOURCHANNELID",
-            "platform": "PRD"
+            "env": "PRD",
+            "port":"8443",
+            "secret_token":"ASecretTokenIHaveChangedByNow",
+            "key":"private.key",
+            "cert":"cert.pem",
+            "webhook_url":"https://example.com:8443",
+            "domain":"abc"
         }
     },
     "cex":
@@ -68,7 +75,8 @@
             "basesymbol":"BUSD",
             "gasLimit":"300000",
             "gasPrice":"5",
-            "platform":"binance-smart-chain"
+            "platform":"binance-smart-chain",
+            "chainId":"56"
         },
         "2":
         {
@@ -85,7 +93,8 @@
             "basesymbol":"BUSD",
             "gasLimit":"300000",
             "gasPrice":"5",
-            "platform":"binance-smart-chain"
+            "platform":"binance-smart-chain",
+            "chainId":"56"
         }, 
         "3":
         {
@@ -102,7 +111,8 @@
             "basesymbol":"USDT",
             "gasLimit":"300000",
             "gasPrice":"20",
-            "platform":"ethereum"
+            "platform":"ethereum",
+            "chainId":"1"
         },
         "4":
         {
@@ -119,7 +129,8 @@
             "basesymbol":"USDC",
             "gasLimit":"300000",
             "gasPrice":"60",
-            "platform":"polygon-pos"
+            "platform":"polygon-pos",
+            "chainId":"137"
         },
         "5":
         {

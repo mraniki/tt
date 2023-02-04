@@ -83,7 +83,7 @@ async def add_tg_db_command(s1, s2, s3):
     if len(bot_db.search(q.token == s1)):
         logger.info(msg=f"token is already setup")
     else:
-        bot_db.insert({"token": s1, "channel": s2, "platform": s3})
+        bot_db.insert({"token": s1, "channel": s2, "env": s3})
 
 async def add_cex_db_command(s1, s2, s3, s4, s5, s6, s7):
     if len(cex_db.search(q.api == s2)):
@@ -165,19 +165,27 @@ async def convert(s):
 #parserv2
 async def parse_message (message):
     wordlist = message.split(" ")
-    filter_lst_order = ['BUY', 'SELL']
+    logger.info(msg=f"{wordlist}")
+    filter_lst_order = ['BUY', 'SELL', 'buy','sell']
     filter_lst_switch = ['cex', 'dex']
     try:
         if [ele for ele in filter_lst_order if(ele in wordlist)]:
-            if len(token[0]) > 0:
+            logger.info(msg=f"echo")
+            if len(wordlist[0]) > 0:
                 direction = wordlist[0]
-                if len(token[1]) > 0:
+                if len(wordlist[1]) > 0:
                     symbol = wordlist[1]
-                    return wordlist
-                    logger.info(msg=f"{wordlist} \n {direction} {symbol}")
+                    m_sl=0
+                    m_tp=0
+                    m_q=5
+                    order=[direction,symbol,m_sl,m_tp,m_q]
+                    logger.info(msg=f"{symbol}")
+                    return order
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
-            if len(token[1]) > 0:
-                return token[1]
+            if len(wordlist[1]) > 0:
+                return wordlist[1]
+            else:
+                return
         else:
             return
     except Exception as e:
@@ -229,9 +237,9 @@ async def load_exchange(exchangeid):
     global gasLimit
     global router_instance
     global router_instanceabi
-    # global quoter_instance
-    # global quoter_instanceabi
-    global platform
+    global quoter_instance
+    global quoter_instanceabi
+    global env
     global chainId
 
     logger.info(msg=f"Setting up {exchangeid}")
@@ -288,29 +296,29 @@ async def load_exchange(exchangeid):
         except Exception as e:
             await handle_exception(e)
     else:
-        logger.warning(msg=f"Error with the DB search for {exchangeid} {ex_test_mode} Failover")
+        logger.warning(msg=f"Error with the DB search for {exchangeid} {ex_test_mode}\nFailover initiated")
         networkprovider='ethereum.publicnode.com'
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         name='uniswap'
 
-async def search_tokenlist(parsedJson, name):
-    #logger.info(msg=f"name {name} chainId {chainId}")
-    #logger.info(msg=f"parsedJson {parsedJson}")
+async def search_tokenlist(parsedJson, token):
     for entry in parsedJson:
-        if name == entry ['symbol']:
+        logger.info(msg=f"entry {entry ['symbol']}")
+        logger.info(msg=f"token {token}")
+        if token == entry ['symbol']:
             logger.info(msg=f"entry{entry ['symbol']}{entry ['chainId']} {entry ['address']}")
             if int(chainId) == entry ['chainId']:
                 return entry ['address']
-
 
 async def search_contract_dex(symb):
     try:
         url = requests.get(tokenlist)
         text = url.text
         token_list = json.loads(text)['tokens']
-        symb=symb.upper()
+        logger.info(msg=f"token_list{token_list}")
+        #symb=symb.upper()
         try:
-            symbolcontract=search_tokenlist(token_list,symb)
+            symbolcontract= await search_tokenlist(token_list,symb)
             logger.info(msg=f"symbolcontract {symbolcontract}")
             if symbolcontract != None:
                 return symbolcontract
@@ -319,15 +327,10 @@ async def search_contract_dex(symb):
                 await handle_exception(msg)
                 return
         except Exception as e:
-            await handle_exception(e)
             return
     except Exception as e:
-        #logger.info(msg=f"error {search_contract_dex} {symb}")
-        await handle_exception(e)
         return
 
-
-###DEX##SPECIFCI
 async def fetch_abi_dex(addr):
     try:
         url = abiurl
@@ -433,27 +436,8 @@ async def verify_gas_dex():
     #     logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
 
 async def fetch_token_price(s1):
-# try:
-#     coininfo=ex_gecko_api.search(query=s1)
-#     for i in coininfo['coins']:
-#         fetch_tokeninfo=i['symbol']
-#         if (fetch_tokeninfo == s1):
-#             # logger.info(msg=f"{i['api_symbol']}")
-#             coininfo=ex_gecko_api.get_coin_by_id(id=i['api_symbol'])
-#             coinplatform=coininfo['asset_platform_id']
-#             # logger.info(msg=f"coinplatform {coinplatfrom}")
-#             coinprice=coininfo['market_data']['current_price']['usd']
-#             # logger.info(msg=f"coingeckoprice {coinprice}")
-#             coinsymbol=coininfo['symbol']
-#             response = f'coingecko info: {coinsymbol} {coinprice} USD on {coinplatform}'
-#             logger.info(msg=f"{response}")
-#             return coinprice
-# except Exception:
-#     return
     try:
-        # Search for WBTC on CoinGecko
         coin_info = ex_gecko_api.get_coin_by_id(id=s1)
-        # Get the WBTC token's contract address on the chain
         for token in coin_info['contract']:
             if token['chain_id'] == str(chain_id):
                 token_address = token['contract_address']
@@ -630,18 +614,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
 async def fetch_tokeninfo(token):
     global token_price
     global asset_info
-    #asset_platforms = cg.get_asset_platforms()
-    #logger.info(msg=f"cg.get_asset_platforms {asset_platforms}")
     try:
-        #coininfo=cg.get_coin_by_id(id=token)
-        #coinplatform=coininfo['asset_platform_id']
-        #coindescription=coininfo['description']['en']
-        #  coinprice=coininfo['market_data']['current_price']['usd']
-        # coinsymbol=coininfo['symbol']
-        #coinlink='https://www.coingecko.com/en/coins/'+coininfo['symbol']
-        # response = f'{coinsymbol} {coinprice} USD \n{coindescription}\n{coinlink}'
-        #logger.info(msg=f"{response}")
-        #  return response
         coininfo=ex_gecko_api.search(query=symbol)
         for i in coininfo['coins']:
             results_search_coin = i['symbol']
@@ -667,7 +640,6 @@ async def fetch_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_
         await fetch_tokeninfo(parsed_symbol)
     except Exception as e:
         return
-
 
 #=========== Send function
 async def send (self, messaging):
@@ -716,7 +688,7 @@ async def handle_exception(e) -> None:
         await notify(message)
 ##======== END OF FUNCTIONS ============
 
-##============TG COMMAND================
+##============BOT COMMAND================
 ##====view help =====
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     r_ping = await verify_latency_ex()
@@ -765,12 +737,20 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             await send(update,message)
         else:
             try:
+<<<<<<< Updated upstream
                 #order_m = await parse_message(uppercased_message)
                 m_dir = order_m[0]
                 m_symbol = order_m[1]
                 m_sl = order_m[2]
                 m_tp = order_m[3]
                 m_q = order_m[4]
+=======
+                m_dir = order[0]
+                m_symbol = order[1]
+                m_sl = order[2]
+                m_tp = order[3]
+                m_q = order[4]
+>>>>>>> Stashed changes
                 logger.info(msg = f"Processing order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
                 res = await send_order(m_dir,m_symbol,m_sl,m_tp,m_q)
                 if (res != None):
@@ -779,7 +759,7 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             except Exception as e:
                 await handle_exception(e)
                 return
-##======TG COMMAND view price ===========
+##====== COMMAND view price ===========
 async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message  = update.effective_message.text
     parsed_message = channel_message.split(" ")
@@ -812,7 +792,7 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             await handle_exception(e)
             return
 
-##======TG COMMAND coin info  ===========
+##====== COMMAND coin info  ===========
 async def coininfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message  = update.effective_message.text
     parsed_message = channel_message.split(" ")
@@ -824,7 +804,7 @@ async def coininfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         await handle_exception(e)
         return
 
-##====TG COMMAND Trading switch  ========
+##==== COMMAND Trading switch  ========
 async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global bot_trading_switch
     if (bot_trading_switch==False):
@@ -834,7 +814,7 @@ async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_T
         message=f"Trading is {bot_trading_switch}"
         await send(update,message)
 
-##====TG COMMAND CEX DEX switch =========
+##==== COMMAND CEX DEX switch =========
 async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     channel_message  = update.effective_message.text
     parsed_message = channel_message.split(" ")
@@ -854,7 +834,7 @@ async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_
             await send(update,response)
     except Exception as e:
         await handle_exception(e)
-##======TG COMMAND Test mode switch ======
+##====== COMMAND Test mode switch ======
 async def switch_testmode_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global ex_test_mode
     if (ex_test_mode == "False"):
@@ -883,14 +863,23 @@ if os.path.exists(db_path):
         db = TinyDB(db_path)
         q = Query()
         globalDB = db.table('global')
-        env = globalDB.all()[0]['env']
+        defaultenv = globalDB.all()[0]['defaultenv']
         ex_name = globalDB.all()[0]['defaultex']
         ex_test_mode = globalDB.all()[0]['defaulttestmode']
+<<<<<<< Updated upstream
         #logger.info(msg=f"Env {env} ex {ex_name}")
         bot_db = db.table('telegram')
         cex_db = db.table('cex')
         dex_db = db.table('dex')
         bot = bot_db.search(q.platform == env)
+=======
+        logger.info(msg=f"Env {defaultenv} ex {ex_name}")
+        bot_db = db.table('bot')
+        cex_db = db.table('cex')
+        dex_db = db.table('dex')
+        bot = bot_db.search(q.env == defaultenv)
+        logger.info(msg=f"{bot}")
+>>>>>>> Stashed changes
         bot_token = bot[0]['token']
         bot_channel_id = bot[0]['channel']
         bot_webhook_port = bot[0]['port']
@@ -910,7 +899,7 @@ if os.path.exists(db_path):
                 logger.error("no bot token")
                 sys.exit()
     except Exception:
-        logger.warning(msg=f"error with db file {db_path}")
+        logger.warning(msg=f"error with db file {db_path}, Verify Json")
 
 ##========== startup message ===========
 async def post_init(application: Application):
