@@ -595,25 +595,26 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         await handle_exception(e)
         return
 
-async def search_symbol(token):
+async def search_gecko_symbol(token):
     try:
         symbol_info = ex_gecko_api.search(query=token)
-        for i in coininfo['coins']:
+        for i in symbol_info['coins']:
             results_search_coin = i['symbol']
             if (results_search_coin==token):
-                logger.info(msg=f"Pass")
+                api_symbol = i['api_symbol']
                 logger.info(msg=f"{i['api_symbol']}")
-                coininfo=ex_gecko_api.get_coin_by_id(id=i['api_symbol'])
-                coinplatform=coininfo['asset_platform_id']
-                logger.info(msg=f"coinplatfrom {coinplatfrom}")
-                coinprice=coininfo['market_data']['current_price']['usd']
-                logger.info(msg=f"coinprice {coinprice}")
-                coinsymbol=coininfo['symbol']
-                response = f'{coinsymbol} {coinprice} USD on {coinplatform}'
-                logger.info(msg=f"{response}")
-                    # fetch_tokeninfo=ex_gecko_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=asset_in_address)
-                    # #logger.info(msg = f"fetch_tokeninfo {fetch_tokeninfo}")
-                    # asset_out_cg_quote=fetch_tokeninfo['market_data']['current_price']['usd']
+                return api_symbol
+    except Exception:
+        return
+
+async def search_gecko_id(apisymbol):
+    try:
+        coininfo = ex_gecko_api.get_coin_by_id(id=i['{apisymbol}'])
+        coinplatform = coininfo['asset_platform_id']
+        coinsymbol=coininfo['symbol']
+        response = f'{coinsymbol} on {coinplatform}'
+        logger.info(msg=f"{response}")
+        return response
     except Exception:
         return
 
@@ -640,14 +641,31 @@ async def fetch_1inch_quote(token):
     except Exception:
         return
 
-async def fetch_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    channel_message  = update.effective_message.text
-    parsed_message = channel_message.split(" ")
-    parsed_symbol=parsed_message[1].upper()
+#=========== PRIVATE
+
+async def get_account_balance():
+    msg=f"🏦 Balance"
     try:
-        await fetch_tokeninfo(parsed_symbol)
+        if not isinstance(ex,web3.main.Web3):
+            bal = ex.fetch_free_balance()
+            bal = {k: v for k, v in bal.items() if v is not None and v>0}
+            sbal = ""
+            for iterator in bal:
+                sbal += (f"{iterator}: {bal[iterator]} \n")
+                if(sbal == ""):
+                    sbal = "No Balance"
+                msg += f"\n{sbal}"       
+        elif (isinstance(ex,web3.main.Web3)):
+            bal = ex.eth.get_balance(walletaddress)
+            bal = round(ex.from_wei(bal,'ether'),5)
+            msg += f"\n{bal}"
+        else:
+            msg += "0"
+        return msg
     except Exception as e:
         return
+
+
 
 #=========== Send function
 async def send (self, messaging):
@@ -718,26 +736,9 @@ async def stop_command(self) -> None:
 
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    msg=f"🏦 Balance"
-    try:
-        if not isinstance(ex,web3.main.Web3):
-            bal = ex.fetch_free_balance()
-            bal = {k: v for k, v in bal.items() if v is not None and v>0}
-            sbal = ""
-            for iterator in bal:
-                sbal += (f"{iterator}: {bal[iterator]} \n")
-                if(sbal == ""):
-                    sbal = "No Balance"
-                    msg += f"\n{sbal}"
-        else:
-            bal = ex.eth.get_balance(walletaddress)
-            bal = round(ex.from_wei(bal,'ether'),5)
-            msg += f"\n{bal}"
-            await send(update,msg)
-    except Exception as e:
-        await handle_exception(e)
-
-#===order parsing  ======
+    balance = await get_account_balance()
+    await send(update,balance)
+#===orderscanner======
 async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
     order = await parse_message(channel_message)
@@ -760,8 +761,7 @@ async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             except Exception as e:
                 await handle_exception(e)
                 return
-
-##====== COMMAND view price ===========
+##====== view quote ===========
 async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message  = update.effective_message.text
     parsed_message = channel_message.split(" ")
@@ -772,26 +772,23 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         if (isinstance(ex,web3.main.Web3)):
             if(await search_contract_dex(symbol) != None):
                 asset_out_1inch_quote = await fetch_1inch_quote (symbol)
-                response+=f"{await search_contract_dex(symbol)}\n🦄 {asset_out_1inch_quote} USD\n🦎 {asset_out_cg_quote} USD"
+                response+=f"✒️ {await search_contract_dex(symbol)}\n🦄 {asset_out_1inch_quote} USD\n🦎 {asset_out_cg_quote} USD"
                 await send(update,response)
         elif not (isinstance(ex,web3.main.Web3)):
             price= ex.fetch_ticker(symbol.upper())['last']
-            response+=f"₿ {symbol} 🏛️ {price} USD\n🦎 {asset_out_cg_quote} USD"
+            response+=f"🏛️ {price} USD"
     except Exception as e:
         await handle_exception(e)
         return
 
-##====== COMMAND coin info  ===========
-async def coininfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+##====== view tokeninfo ===========
+async def get_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message  = update.effective_message.text
     parsed_message = channel_message.split(" ")
-    token=parsed_message[1]
-    try:
-        response=await fetch_tokeninfo(token)
-        await send(update,response)
-    except Exception as e:
-        await handle_exception(e)
-        return
+    symbol=parsed_message[1].upper()
+    gecko_symbol_info = await search_gecko_symbol(symbol)
+    await send(update,gecko_symbol_info)
+
 
 ##==== COMMAND Trading switch  ========
 async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -910,12 +907,12 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
         application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
         application.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
-        application.add_handler(MessageHandler(filters.Regex('/c'), coininfo_command))
+        application.add_handler(MessageHandler(filters.Regex('/c'), get_tokeninfo_command))
         application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
         application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
         application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), switch_exchange_command))
         application.add_handler(MessageHandler(filters.Regex('/testmode'), switch_testmode_command))
-        application.add_handler(MessageHandler(filters.Regex('/g'), fetch_tokeninfo_command))
+        application.add_handler(MessageHandler(filters.Regex('/testcommand'), help_command))
         application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
         application.add_error_handler(error_handler)
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
