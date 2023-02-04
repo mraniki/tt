@@ -737,22 +737,13 @@ async def monitor(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             await send(update,message)
         else:
             try:
-<<<<<<< Updated upstream
-                #order_m = await parse_message(uppercased_message)
-                m_dir = order_m[0]
-                m_symbol = order_m[1]
-                m_sl = order_m[2]
-                m_tp = order_m[3]
-                m_q = order_m[4]
-=======
-                m_dir = order[0]
-                m_symbol = order[1]
-                m_sl = order[2]
-                m_tp = order[3]
-                m_q = order[4]
->>>>>>> Stashed changes
-                logger.info(msg = f"Processing order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
-                res = await send_order(m_dir,m_symbol,m_sl,m_tp,m_q)
+                direction = order[0]
+                symbol = order[1]
+                stoploss = order[2]
+                takeprofit = order[3]
+                quantity = order[4]
+                logger.info(msg = f"Processing order: {direction} {symbol} {stoploss} {takeprofit} {quantity}")
+                res = await send_order(direction,symbol,stoploss,takeprofit,quantity)
                 if (res != None):
                     response = f"{res}"
                     await send(update,response)
@@ -866,20 +857,12 @@ if os.path.exists(db_path):
         defaultenv = globalDB.all()[0]['defaultenv']
         ex_name = globalDB.all()[0]['defaultex']
         ex_test_mode = globalDB.all()[0]['defaulttestmode']
-<<<<<<< Updated upstream
-        #logger.info(msg=f"Env {env} ex {ex_name}")
-        bot_db = db.table('telegram')
-        cex_db = db.table('cex')
-        dex_db = db.table('dex')
-        bot = bot_db.search(q.platform == env)
-=======
         logger.info(msg=f"Env {defaultenv} ex {ex_name}")
         bot_db = db.table('bot')
         cex_db = db.table('cex')
         dex_db = db.table('dex')
         bot = bot_db.search(q.env == defaultenv)
         logger.info(msg=f"{bot}")
->>>>>>> Stashed changes
         bot_token = bot[0]['token']
         bot_channel_id = bot[0]['channel']
         bot_webhook_port = bot[0]['port']
