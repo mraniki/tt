@@ -550,12 +550,10 @@ async def search_gecko_exchange(exchange):
 async def search_gecko_platform():
     try:
         assetplatform = gecko_api.get_asset_platforms()
-        logger.info(msg=f"assetplatform {assetplatform}")
-        logger.info(msg=f"chainId {chainId}")
         for i in assetplatform:
             results_search_chain = i['chain_identifier']
             if (results_search_chain == int(chainId)):
-                response = i
+                response = i['id']
                 return response
     except Exception:
         return
@@ -564,10 +562,10 @@ async def search_gecko_contract(token):
     try:
         coin_info = gecko_api.get_coin_by_id(id=f'{await search_gecko(token)}')
         #logger.info(msg=f"coininfo {coininfo}")
-        coin_symbol= coin_info['symbol']
-        coin_contract_BSC = coin_info['detail_platforms']['binance-smart-chain']['contract_address']
-        logger.info(msg=f"coin_contract_1 {coin_contract_1}")
-        response = f'Symbol {coin_symbol}\nPlatform {coin_platform}\n{coin_contract_BSC}'
+        platform = await search_gecko_platform()
+        coin_contract = coin_info['platforms'][f'{platform}']
+        logger.info(msg=f"coin_contract {coin_contract}")
+        response = f'{coin_contract}'
         logger.info(msg=f"gecko contract {response}")
         return response
     except Exception:
@@ -584,8 +582,7 @@ async def fetch_token_price(token):
     except Exception as e:
         print(f"An error occurred while retrieving address {e}")
 
-
-
+wx 
 #===========QUOTE
 async def fetch_gecko_quote(token):
     try:
