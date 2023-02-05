@@ -583,10 +583,10 @@ async def fetch_gecko_quote(token):
     try:
         asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
         fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=asset_in_address)
-        #logger.info(msg=f"fetch_tokeninfo{fetch_tokeninfo}")
+        logger.debug(msg=f"fetch_tokeninfo{fetch_tokeninfo}")
         asset_out_cg_quote = fetch_tokeninfo['market_data']['current_price']['usd']
         asset_out_cg_name = fetch_tokeninfo['name']
-        response = f"{asset_out_cg_name}\n🦎{asset_out_cg_quote} USD\n🖊️{chainId}: {asset_in_address}"
+        response = f"{asset_out_cg_name}\n🦎{asset_out_cg_quote} USD"
         return response
     except Exception:
         return
@@ -596,12 +596,11 @@ async def fetch_1inch_quote(token):
     asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
     asset_out_address =ex.to_checksum_address(await search_gecko_contract('USDC'))
     try:
-        asset_out_amount=100000
+        asset_out_amount=1000000000000
         quote_url = f"{dex_1inch_api}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
-        logger.debug(msg=f"quote_url{quote_url}")
         quote_response = requests.get(quote_url)
-        logger.debug(msg=f"quote_response{quote_response}")
         quote = quote_response.json()
+        logger.debug(msg=f"quote {quote}")
         asset_out_1inch_quote = quote['toTokenAmount']
         return asset_out_1inch_quote
     except Exception:
@@ -612,7 +611,6 @@ async def fetch_dex_quote(token):
         return
     except Exception:
         return
-
 
 ####UTILS
 async def verify_latency_ex():
@@ -626,7 +624,6 @@ async def verify_latency_ex():
                 orderbook = ex.fetch_order_book(symbol)
                 ended = ex.milliseconds()
                 elapsed = ended - started
-                #logger.info(msg=f"elapsed {elapsed}")
                 results.append(elapsed)
                 rtt = int(sum(results) / len(results))
                 response = rtt
@@ -788,7 +785,7 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         if (isinstance(ex,web3.main.Web3)):
             if(await search_gecko_contract(symbol) != None):
                 asset_out_1inch_quote = await fetch_1inch_quote (symbol)
-                response+=f"🦄 {asset_out_1inch_quote} USD"
+                response+=f"🦄{asset_out_1inch_quote} USD\n🖊️{chainId}: {await search_gecko_contract(symbol)}"
                 await send(update,response)
         elif not (isinstance(ex,web3.main.Web3)):
             price= ex.fetch_ticker(symbol.upper())['last']
