@@ -47,10 +47,7 @@ bot_trading_switch=True
 ex_test_mode = "True"
 #=======API endpoint
 headers = { "User-Agent": "Mozilla/5.0" }
-ex_ccyrate_api = f"https://api.exchangerate.host"
-ex_gecko_api = CoinGeckoAPI()
-dex_guru_api = f"https://api.dev.dex.guru/v1/{chainId}/?api-key="
-dex_cow_api = f"https://api.cow.fi/mainnet"
+gecko_api = CoinGeckoAPI()
 
 #=======TG command
 fullcommandlist = """
@@ -122,50 +119,13 @@ async def show_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     await send(update, message)
 
 
-####Search related Functions
-
-#PARSER
-async def convert(s):
-    li = s.split(" ")
-    try:
-        m_dir= li[0]
-    except (IndexError, TypeError):
-        e=f"{s} no direction"
-        logger.error(msg=f"{e}")
-        handle_exception(e)
-        return
-    try:
-        m_symbol=li[1]
-    except (IndexError, TypeError):
-        e=f"{s} no symbol"
-        logger.error(msg=f"{e}")
-        handle_exception(e)
-        return
-    try:
-        m_sl=li[2][3:7]
-    except (IndexError, TypeError):
-        logger.warning(msg=f"{s} no sl")
-        m_sl=0
-    try:
-        m_tp=li[3][3:7]
-    except (IndexError, TypeError):
-        logger.warning(msg=f"{s} no tp")
-        m_tp=0
-    try:
-        m_q=li[4][2:-1]
-    except (IndexError, TypeError):
-        logger.warning(msg=f"{s} no size default to 10 %")
-        m_q=5
-    order=[m_dir,m_symbol,m_sl,m_tp,m_q]
-    logger.info(msg=f"order: {m_dir} {m_symbol} {m_sl} {m_tp} {m_q}")
-    return order
-
-#parserv2
+###MESSAGEPARSER
 async def parse_message (message):
     wordlist = message.split(" ")
     logger.info(msg=f"{wordlist}")
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
-    filter_lst_switch = ['cex', 'dex']
+    filter_lst_switch = ['/cex', '/dex']
+    filter_lst_quote = ['/q','/c']
     logger.info(msg=f"{len(wordlist)}")
     try:
         if [ele for ele in filter_lst_order if(ele in wordlist)]:
@@ -184,24 +144,17 @@ async def parse_message (message):
                 return wordlist[1]
             else:
                 return
+        elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
+            if len(wordlist[1]) > 0:
+                return wordlist[1]
+            else:
+                return
         else:
             return
     except Exception as e:
         await handle_exception(e)
         logger.warning(msg=f"Message parsing anomaly")
         return
-
-async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
-    try:
-        url = f"{ex_ccyrate_api}/convert?from={_from_}&to={_to_}&amount={amount}"
-        response = requests.get(url)
-        rate = response.json()
-        return rate["result"]
-    except Exception as e:
-        await handle_exception(e)
-        logger.warning(msg=f"API conversion error {e}")
-        return
-
 
 #=========Exchange Functions
 
@@ -216,7 +169,6 @@ async def search_exchange(searched_data):
             return result
     else:  
         return None
-
 
 async def load_exchange(exchangeid):
     global ex
@@ -267,8 +219,8 @@ async def load_exchange(exchangeid):
         router_instanceabi= await fetch_abi_dex(router) #Router ABI
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
         if (version=="v3"):
-            quoter_instanceabi= await fetch_abi_dex('0x61fFE014bA17989E743c5F6cB21bF9697530B21e') #Quoter ABI
-            quoter_instance = ex.eth.contract(address=ex.to_checksum_address('0x61fFE014bA17989E743c5F6cB21bF9697530B21e'), abi=quoter_instanceabi) #ContractLiquidityQuoter
+            quoter_instanceabi= await fetch_abi_dex(quoter_instance) #Quoter ABI
+            quoter_instance = ex.eth.contract(address=ex.to_checksum_address(quoter_instanceabi), abi=quoter_instanceabi) #ContractLiquidityQuoter
         try:
             ex.net.listening
             logger.info(msg=f"connected to {ex}")
@@ -284,88 +236,12 @@ async def load_exchange(exchangeid):
             ex=exchange
             if (ex_test_mode=="True"):
                 ex.set_sandbox_mode('enabled')
-                markets=ex.loadMarkets()
-                return ex
-            else:
-                markets= ex.loadMarkets()
-                return ex
+            markets= ex.loadMarkets()
+            return ex
         except Exception as e:
             await handle_exception(e)
     else:
         return
-        # logger.warning(msg=f"Error with the DB search for {exchangeid} {ex_test_mode}\nFailover initiated")
-        # networkprovider='ethereum.publicnode.com'
-        # ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
-        # name='uniswap'
-
-async def search_tokenlist(parsedJson, token):
-    for entry in parsedJson:
-        if token == entry ['symbol']:
-            if int(chainId) == entry ['chainId']:
-                return entry ['address']
-
-async def search_contract_dex(symb):
-    try:
-        url = requests.get(tokenlist)
-        text = url.text
-        token_list = json.loads(text)['tokens']
-        try:
-            symbolcontract= await search_tokenlist(token_list,symb)
-            if symbolcontract != None:
-                return symbolcontract
-            else:
-                msg=f"{symb} does not exist in {tokenlist}"
-                await handle_exception(msg)
-                return
-        except Exception as e:
-            return
-    except Exception as e:
-        return
-
-async def fetch_abi_dex(addr):
-    try:
-        url = abiurl
-        params = {
-            "module": "contract",
-            "action": "getabi",
-            "address": addr,
-            "apikey": abiurltoken }
-        resp = requests.get(url, params=params, headers=headers).json()
-        abi = resp["result"]
-        if(abi!=""):
-            return abi
-        else:
-            return None
-    except Exception as e:
-        await handle_exception(e)
-
-# async def ens_resolve_dex(address):
-#     try:
-#         name = ns.name(address)
-#         forward = ns.address(name)
-#         if forward is None:
-#             return None
-#         if address.lower().strip() != forward.lower().strip():
-#             return None
-#         return name
-#     except:
-#         return None
-
-async def transaction_scanner (address):
-    url = abiurl
-    query = {'module':'account',
-            'action':'tokenbalance',
-            'contractaddress':self.rpl_address,
-            'address':address,
-            'tag':'latest',
-            'apikey':ethscan_api_key}
-    r = requests.get(url, params=query)
-    try:
-        d = json.loads(r.text)
-    except:
-        return None
-    value = int(d['result']) / self.zeroes
-    return(value)
 
 #========== Order function
 
@@ -401,97 +277,6 @@ async def execute_order(s1,s2,s3,s4,s5):
         await handle_exception(e)
         return
 
-async def verify_gas_dex():
-    current_gas_price_dex=int(ex.to_wei(ex.eth.gas_price,'wei'))
-    logger.info(msg=f"current_gas_price_dex {current_gas_price_dex}")
-    config_gas_price_dex=int(ex.to_wei(gasPrice,'gwei'))
-    logger.info(msg=f"config_gas_price_dex {config_gas_price_dex}")
-    if (current_gas_price_dex>=config_gas_price_dex):
-        logger.warning(msg=f"{current_gas_price_dex} {config_gas_price_dex} ")
-    else:
-        logger.info(msg=f"gas setup{config_gas_price_dex} aligned with current gas price {current_gas_price_dex}")
-    # checkgasLimitURL = abiurl + "?module=stats&action=dailyavggaslimit&startdate=2022-01-09&enddate=2022-01-09&sort=asc&apikey=" + abiurltoken
-    # checkgasLimitRequest = requests.get(url=checkgasLimitURL,headers=headers)
-    # gasLimitresults = checkgasLimitRequest.json()['result']['gasLimit']
-    # logger.info(msg=f"gasLimitresults {gasLimitresults}")
-    # if (gasLimit<=gasLimitresults):
-    #     logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
-
-async def fetch_token_price(s1):
-    try:
-        coin_info = ex_gecko_api.get_coin_by_id(id=s1)
-        for token in coin_info['contract']:
-            if token['chain_id'] == str(chain_id):
-                token_address = token['contract_address']
-                print(f"address: {token_address}")
-                return token_address
-    except Exception as e:
-        print(f"An error occurred while retrieving address {e}")
-
-
-async def verify_latency_ex():
-    try:
-        if not isinstance(ex,web3.main.Web3):
-            symbol = 'BTC/USDT'
-            results = []
-            num_iterations = 5
-            for i in range(0, num_iterations):
-                started = ex.milliseconds()
-                orderbook = ex.fetch_order_book(symbol)
-                ended = ex.milliseconds()
-                elapsed = ended - started
-                #logger.info(msg=f"elapsed {elapsed}")
-                results.append(elapsed)
-                rtt = int(sum(results) / len(results))
-                response = rtt
-        elif (isinstance(ex,web3.main.Web3)):
-            response = round(ping(networkprovider, unit='ms'),3)
-            return response
-    except Exception as e:
-        await handle_exception(e)
-
-
-async def sign_transaction_dex(contract_tx):
-    try:
-        if (version=='v2'):
-            tx_params = {
-            'from': walletaddress,
-            'gas': int(gasLimit),
-            'gasPrice': ex.to_wei(gasPrice,'gwei'),
-            'nonce': ex.eth.get_transaction_count(walletaddress),
-            }
-            tx = contract_tx.build_transaction(tx_params)
-            signed = ex.eth.account.sign_transaction(tx, privatekey)
-            raw_tx = signed.rawTransaction
-            return ex.eth.send_raw_transaction(raw_tx)
-        elif (version=="v3"):
-            tx_params = {
-            'from': walletaddress,
-            'gas': int(gasLimit),
-            'gasPrice': ex.to_wei(gasPrice,'gwei'),
-            'nonce': ex.eth.get_transaction_count(walletaddress),
-            }
-            tx = contract_tx.build_transaction(tx_params)
-            signed = ex.eth.account.sign_transaction(tx, privatekey)
-            raw_tx = signed.rawTransaction
-            return ex.eth.send_raw_transaction(raw_tx)
-        elif (version=="1inch"):
-            tx_params = {
-            'nonce': ex.eth.get_transaction_count(walletaddress),
-            'gas': int(gasLimit),
-            'gasPrice': ex.to_wei(gasPrice,'gwei'),
-            }
-            tx = contract_tx.build_transaction(tx_params)
-            logger.info(msg=f"tx {tx}")
-            signed = ex.eth.account.sign_transaction(tx, privatekey)
-            logger.info(msg=f"signed {signed}")
-            raw_tx = signed.rawTransaction
-            logger.info(msg=f"raw_tx {raw_tx}")
-            return ex.eth.send_raw_transaction(raw_tx)
-        else:
-            return
-    except Exception:
-        return
 
 async def send_order_dex(s1,s2,s3,s4,s5):
     dex_1inch_api = f"https://api.1inch.exchange/v5.0/{chainId}"
@@ -595,33 +380,215 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         await handle_exception(e)
         return
 
-async def search_gecko_symbol(token):
+
+##DEX specific
+
+async def sign_transaction_dex(contract_tx):
     try:
-        symbol_info = ex_gecko_api.search(query=token)
+        if (version=='v2'):
+            tx_params = {
+            'from': walletaddress,
+            'gas': int(gasLimit),
+            'gasPrice': ex.to_wei(gasPrice,'gwei'),
+            'nonce': ex.eth.get_transaction_count(walletaddress),
+            }
+            tx = contract_tx.build_transaction(tx_params)
+            signed = ex.eth.account.sign_transaction(tx, privatekey)
+            raw_tx = signed.rawTransaction
+            return ex.eth.send_raw_transaction(raw_tx)
+        elif (version=="v3"):
+            tx_params = {
+            'from': walletaddress,
+            'gas': int(gasLimit),
+            'gasPrice': ex.to_wei(gasPrice,'gwei'),
+            'nonce': ex.eth.get_transaction_count(walletaddress),
+            }
+            tx = contract_tx.build_transaction(tx_params)
+            signed = ex.eth.account.sign_transaction(tx, privatekey)
+            raw_tx = signed.rawTransaction
+            return ex.eth.send_raw_transaction(raw_tx)
+        elif (version=="1inch"):
+            tx_params = {
+            'nonce': ex.eth.get_transaction_count(walletaddress),
+            'gas': int(gasLimit),
+            'gasPrice': ex.to_wei(gasPrice,'gwei'),
+            }
+            tx = contract_tx.build_transaction(tx_params)
+            logger.info(msg=f"tx {tx}")
+            signed = ex.eth.account.sign_transaction(tx, privatekey)
+            logger.info(msg=f"signed {signed}")
+            raw_tx = signed.rawTransaction
+            logger.info(msg=f"raw_tx {raw_tx}")
+            return ex.eth.send_raw_transaction(raw_tx)
+        else:
+            return
+    except Exception:
+        return
+
+async def search_tokenlist(parsedJson, token):
+    for entry in parsedJson:
+        if token == entry ['symbol']:
+            if int(chainId) == entry ['chainId']:
+                return entry ['address']
+
+async def search_contract_dex(symb):
+    try:
+        url = requests.get(tokenlist)
+        text = url.text
+        token_list = json.loads(text)['tokens']
+        try:
+            symbolcontract= await search_tokenlist(token_list,symb)
+            if symbolcontract != None:
+                return symbolcontract
+            else:
+                msg=f"{symb} does not exist in {tokenlist}"
+                await handle_exception(msg)
+                return
+        except Exception as e:
+            return
+    except Exception as e:
+        return
+
+async def fetch_abi_dex(addr):
+    try:
+        url = abiurl
+        params = {
+            "module": "contract",
+            "action": "getabi",
+            "address": addr,
+            "apikey": abiurltoken }
+        resp = requests.get(url, params=params, headers=headers).json()
+        abi = resp["result"]
+        if(abi!=""):
+            return abi
+        else:
+            return None
+    except Exception as e:
+        await handle_exception(e)
+
+# async def ens_resolve_dex(address):
+#     try:
+#         name = ns.name(address)
+#         forward = ns.address(name)
+#         if forward is None:
+#             return None
+#         if address.lower().strip() != forward.lower().strip():
+#             return None
+#         return name
+#     except:
+#         return None
+
+# async def transaction_scanner (address):
+#     url = abiurl
+#     query = {'module':'account',
+#             'action':'tokenbalance',
+#             'contractaddress':self.rpl_address,
+#             'address':address,
+#             'tag':'latest',
+#             'apikey':ethscan_api_key}
+#     r = requests.get(url, params=query)
+#     try:
+#         d = json.loads(r.text)
+#     except:
+#         return None
+#     value = int(d['result']) / self.zeroes
+#     return(value)
+
+async def verify_gas_dex():
+    current_gas_price_dex=int(ex.to_wei(ex.eth.gas_price,'wei'))
+    config_gas_price_dex=int(ex.to_wei(gasPrice,'gwei'))
+    if (current_gas_price_dex>=config_gas_price_dex):
+        logger.warning(msg=f"{current_gas_price_dex} {config_gas_price_dex} ")
+    else:
+        logger.info(msg=f"gas setup{config_gas_price_dex} aligned with current gas price {current_gas_price_dex}")
+    # checkgasLimitURL = abiurl + "?module=stats&action=dailyavggaslimit&startdate=2022-01-09&enddate=2022-01-09&sort=asc&apikey=" + abiurltoken
+    # checkgasLimitRequest = requests.get(url=checkgasLimitURL,headers=headers)
+    # gasLimitresults = checkgasLimitRequest.json()['result']['gasLimit']
+    # logger.info(msg=f"gasLimitresults {gasLimitresults}")
+    # if (gasLimit<=gasLimitresults):
+    #     logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
+
+#===========GECKO
+async def search_gecko(token):
+    try:
+        symbol_info = gecko_api.search(query=token)
         for i in symbol_info['coins']:
             results_search_coin = i['symbol']
             if (results_search_coin==token):
                 api_symbol = i['api_symbol']
-                logger.info(msg=f"{i['api_symbol']}")
+                logger.info(msg=f"api info {api_symbol}")
                 return api_symbol
     except Exception:
         return
 
-async def search_gecko_id(apisymbol):
+async def search_gecko_detailed(token):
     try:
-        coininfo = ex_gecko_api.get_coin_by_id(id=i['{apisymbol}'])
-        coinplatform = coininfo['asset_platform_id']
-        coinsymbol=coininfo['symbol']
-        response = f'{coinsymbol} on {coinplatform}'
-        logger.info(msg=f"{response}")
+        coin_info = gecko_api.get_coin_by_id(id=f'{await search_gecko(token)}')
+        await search_gecko_platform()
+        #logger.info(msg=f"coininfo {coininfo}")
+        coin_symbol= coin_info['symbol']
+        logger.info(msg=f"coin_symbol {coin_symbol}")
+        coin_platform = coin_info['asset_platform_id']
+        logger.info(msg=f"coin_platform {coin_platform}")
+        response = f'Symbol {coin_symbol}\nPlatform {coin_platform}'
+        logger.info(msg=f"gecko detailed {response}")
         return response
     except Exception:
         return
 
+async def search_gecko_exchange(exchange):
+    try:
+        exchange_list = gecko_api.get_exchanges_list()
+        for entry in exchange_list:
+            if exchange == entry ['id']:
+                return entry ['name']
+    except Exception:
+        return
+
+async def search_gecko_platform():
+    try:
+        assetplatform = gecko_api.get_asset_platforms()
+        logger.info(msg=f"assetplatform {assetplatform}")
+        logger.info(msg=f"chainId {chainId}")
+        for entry in assetplatform:
+            logger.info(msg=f"entry {entry}")
+            if (int(chainId) == entry['chain_identifier']):
+                response = 'ECHO'
+                logger.info(msg=f"gecko platform {response}")
+    except Exception:
+        return
+
+async def search_gecko_contract(token):
+    try:
+        coin_info = gecko_api.get_coin_by_id(id=f'{await search_gecko(token)}')
+        #logger.info(msg=f"coininfo {coininfo}")
+        coin_symbol= coin_info['symbol']
+        coin_contract_BSC = coin_info['detail_platforms']['binance-smart-chain']['contract_address']
+        logger.info(msg=f"coin_contract_1 {coin_contract_1}")
+        response = f'Symbol {coin_symbol}\nPlatform {coin_platform}\n{coin_contract_BSC}'
+        logger.info(msg=f"gecko contract {response}")
+        return response
+    except Exception:
+        return
+
+async def fetch_token_price(token):
+    try:
+        coin_info = gecko_api.get_coin_by_id(id=f'{await search_gecko(token)}')
+        for token in coin_info['contract']:
+            if token['chain_id'] == str(chain_id):
+                token_address = token['contract_address']
+                print(f"address: {token_address}")
+                return token_address
+    except Exception as e:
+        print(f"An error occurred while retrieving address {e}")
+
+
+
+#===========QUOTE
 async def fetch_gecko_quote(token):
     try:
         asset_in_address = ex.to_checksum_address(await search_contract_dex(token))
-        fetch_tokeninfo = ex_gecko_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=asset_in_address)
+        fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=asset_in_address)
         asset_out_cg_quote = fetch_tokeninfo['market_data']['current_price']['usd']
         return asset_out_cg_quote
     except Exception:
@@ -639,6 +606,47 @@ async def fetch_1inch_quote(token):
         asset_out_1inch_quote = quote['toTokenAmount']
         return asset_out_1inch_quote
     except Exception:
+        return
+
+async def fetch_dex_quote(token):
+    try:
+        return
+    except Exception:
+        return
+
+
+####UTILS
+async def verify_latency_ex():
+    try:
+        if not isinstance(ex,web3.main.Web3):
+            symbol = 'BTC/USDT'
+            results = []
+            num_iterations = 5
+            for i in range(0, num_iterations):
+                started = ex.milliseconds()
+                orderbook = ex.fetch_order_book(symbol)
+                ended = ex.milliseconds()
+                elapsed = ended - started
+                #logger.info(msg=f"elapsed {elapsed}")
+                results.append(elapsed)
+                rtt = int(sum(results) / len(results))
+                response = rtt
+        elif (isinstance(ex,web3.main.Web3)):
+            response = round(ping(networkprovider, unit='ms'),3)
+            return response
+    except Exception as e:
+        await handle_exception(e)
+
+async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
+    ex_ccyrate_api = f"https://api.exchangerate.host"
+    try:
+        url = f"{ex_ccyrate_api}/convert?from={_from_}&to={_to_}&amount={amount}"
+        response = requests.get(url)
+        rate = response.json()
+        return rate["result"]
+    except Exception as e:
+        await handle_exception(e)
+        logger.warning(msg=f"API conversion error {e}")
         return
 
 #=========== PRIVATE
@@ -665,7 +673,17 @@ async def get_account_balance():
     except Exception as e:
         return
 
+async def get_account_position():
+    try:
+        return
+    except Exception as e:
+        return
 
+async def get_wallet_auth():
+    try:
+        return
+    except Exception as e:
+        return
 
 #=========== Send function
 async def send (self, messaging):
@@ -733,7 +751,6 @@ async def stop_command(self) -> None:
         await self.application.updater.stop()
         await self.application.stop()
         await self.application.shutdown()
-
 ##====view balance=====
 async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     balance = await get_account_balance()
@@ -763,16 +780,16 @@ async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 return
 ##====== view quote ===========
 async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    channel_message  = update.effective_message.text
-    parsed_message = channel_message.split(" ")
-    symbol=parsed_message[1]
+    channel_message = update.effective_message.text
+    symbol = await parse_message(channel_message)
+    logger.info(msg=f"searching for  {symbol}")
     asset_out_cg_quote = await fetch_gecko_quote (symbol)
     response=f"₿ {symbol}\n"
     try:
         if (isinstance(ex,web3.main.Web3)):
             if(await search_contract_dex(symbol) != None):
                 asset_out_1inch_quote = await fetch_1inch_quote (symbol)
-                response+=f"✒️ {await search_contract_dex(symbol)}\n🦄 {asset_out_1inch_quote} USD\n🦎 {asset_out_cg_quote} USD"
+                response+=f"✒️ {symbol}\n🦄 {asset_out_1inch_quote} USD\n🦎 {asset_out_cg_quote} USD"
                 await send(update,response)
         elif not (isinstance(ex,web3.main.Web3)):
             price= ex.fetch_ticker(symbol.upper())['last']
@@ -783,12 +800,10 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
 ##====== view tokeninfo ===========
 async def get_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    channel_message  = update.effective_message.text
-    parsed_message = channel_message.split(" ")
-    symbol=parsed_message[1].upper()
-    gecko_symbol_info = await search_gecko_symbol(symbol)
+    symbol= await parse_message(update.effective_message.text)
+    gecko_symbol_info = await search_gecko_detailed(symbol)
+    logger.info(msg=f"gecko_symbol_info {gecko_symbol_info}")
     await send(update,gecko_symbol_info)
-
 
 ##==== COMMAND Trading switch  ========
 async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -801,27 +816,16 @@ async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_T
         await send(update,message)
 
 ##==== COMMAND CEX DEX switch =========
-async def switch_exchange_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    channel_message  = update.effective_message.text
-    parsed_message = channel_message.split(" ")
-    ex_new =parsed_message[1]
-    ex_type=parsed_message[0]
-    try:
-        if (ex_type == "/cex"):
-            results_search_cex = await search_exchange(ex_new)
-            CEX_name = results_search_cex['name']
-            res = await load_exchange(CEX_name)
-            response = f"CEX is {ex}"
-        elif (ex_type == "/dex"):
-            results_search_dex = await search_exchange(ex_new)
-            DEX_name= results_search_dex['name']
-            res = await load_exchange(DEX_name)
-            response = f"DEX is {DEX_name}"
-            await send(update,response)
-    except Exception as e:
-        await handle_exception(e)
+async def exchange_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    new_exchange  = parse_message(update.effective_message.text)
+    results = await search_exchange(new_exchange)
+    ex_name = results['name']
+    res = await load_exchange(ex_name)
+    response = f"{ex_name} is active"
+    await send(update,response)
+
 ##====== COMMAND Test mode switch ======
-async def switch_testmode_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def testmode_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global ex_test_mode
     if (ex_test_mode == "False"):
         ex_test_mode = "True"
@@ -910,9 +914,9 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/c'), get_tokeninfo_command))
         application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
         application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
-        application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), switch_exchange_command))
-        application.add_handler(MessageHandler(filters.Regex('/testmode'), switch_testmode_command))
-        application.add_handler(MessageHandler(filters.Regex('/testcommand'), help_command))
+        application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), exchange_switch_command))
+        application.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
+        application.add_handler(MessageHandler(filters.Regex('/t'), search_gecko))
         application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
         application.add_error_handler(error_handler)
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
