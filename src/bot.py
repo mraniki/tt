@@ -539,9 +539,11 @@ async def search_gecko_detailed(token):
 async def search_gecko_exchange(exchange):
     try:
         exchange_list = gecko_api.get_exchanges_list()
-        for entry in exchange_list:
-            if exchange == entry ['id']:
-                return entry ['name']
+        for i in exchange_list:
+            results_search_exchange = i['id']
+            if results_search_exchange == exchange
+                response = i
+                return response
     except Exception:
         return
 
@@ -550,11 +552,11 @@ async def search_gecko_platform():
         assetplatform = gecko_api.get_asset_platforms()
         logger.info(msg=f"assetplatform {assetplatform}")
         logger.info(msg=f"chainId {chainId}")
-        for entry in assetplatform:
-            logger.info(msg=f"entry {entry}")
-            if (int(chainId) == entry['chain_identifier']):
-                response = 'ECHO'
-                logger.info(msg=f"gecko platform {response}")
+        for i in assetplatform:
+            results_search_chain = i['chain_identifier']
+            if (results_search_chain == int(chainId)):
+                response = i
+                return response
     except Exception:
         return
 
