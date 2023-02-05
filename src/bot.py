@@ -287,10 +287,10 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         else:
             asset_out_symbol=s2
             asset_in_symbol=basesymbol
-        asset_out_address=ex.to_checksum_address(await search_contract_dex(asset_out_symbol))
+        asset_out_address=ex.to_checksum_address(await search_gecko_contract(asset_out_symbol))
         asset_out_abi= await fetch_abi_dex(asset_out_address)
         asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
-        asset_in_address= ex.to_checksum_address(await search_contract_dex(asset_in_symbol))
+        asset_in_address= ex.to_checksum_address(await search_gecko_contract(asset_in_symbol))
         order_path_dex=[asset_out_address, asset_in_address]
         asset_out_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
         if (asset_out_balance <=0):
@@ -425,29 +425,6 @@ async def sign_transaction_dex(contract_tx):
     except Exception:
         return
 
-async def search_tokenlist(parsedJson, token):
-    for entry in parsedJson:
-        if token == entry ['symbol']:
-            if int(chainId) == entry ['chainId']:
-                return entry ['address']
-
-async def search_contract_dex(symb):
-    try:
-        url = requests.get(tokenlist)
-        text = url.text
-        token_list = json.loads(text)['tokens']
-        try:
-            symbolcontract= await search_tokenlist(token_list,symb)
-            if symbolcontract != None:
-                return symbolcontract
-            else:
-                msg=f"{symb} does not exist in {tokenlist}"
-                await handle_exception(msg)
-                return
-        except Exception as e:
-            return
-    except Exception as e:
-        return
 
 async def fetch_abi_dex(addr):
     try:
@@ -465,6 +442,30 @@ async def fetch_abi_dex(addr):
             return None
     except Exception as e:
         await handle_exception(e)
+
+# async def search_tokenlist(parsedJson, token):
+#     for entry in parsedJson:
+#         if token == entry ['symbol']:
+#             if int(chainId) == entry ['chainId']:
+#                 return entry ['address']
+
+# async def search_contract_dex(symb):
+#     try:
+#         url = requests.get(tokenlist)
+#         text = url.text
+#         token_list = json.loads(text)['tokens']
+#         try:
+#             symbolcontract= await search_tokenlist(token_list,symb)
+#             if symbolcontract != None:
+#                 return symbolcontract
+#             else:
+#                 msg=f"{symb} does not exist in {tokenlist}"
+#                 await handle_exception(msg)
+#                 return
+#         except Exception as e:
+#             return
+#     except Exception as e:
+#         return
 
 # async def ens_resolve_dex(address):
 #     try:
@@ -512,11 +513,12 @@ async def verify_gas_dex():
 async def search_gecko(token):
     try:
         symbol_info = gecko_api.search(query=token)
+        #logger.info(msg=f"symbol_info {symbol_info}")
         for i in symbol_info['coins']:
             results_search_coin = i['symbol']
-            if (results_search_coin==token):
+            if (results_search_coin==token.upper()):
                 api_symbol = i['api_symbol']
-                logger.info(msg=f"api info {api_symbol}")
+                #logger.info(msg=f"api info {api_symbol}")
                 return api_symbol
     except Exception:
         return
@@ -525,25 +527,12 @@ async def search_gecko_detailed(token):
     try:
         coin_info = gecko_api.get_coin_by_id(id=f'{await search_gecko(token)}')
         await search_gecko_platform()
+        await search_gecko_contract(token)
         #logger.info(msg=f"coininfo {coininfo}")
         coin_symbol= coin_info['symbol']
-        logger.info(msg=f"coin_symbol {coin_symbol}")
         coin_platform = coin_info['asset_platform_id']
-        logger.info(msg=f"coin_platform {coin_platform}")
         response = f'Symbol {coin_symbol}\nPlatform {coin_platform}'
-        logger.info(msg=f"gecko detailed {response}")
         return response
-    except Exception:
-        return
-
-async def search_gecko_exchange(exchange):
-    try:
-        exchange_list = gecko_api.get_exchanges_list()
-        for i in exchange_list:
-            results_search_exchange = i['id']
-            if results_search_exchange == exchange
-                response = i
-                return response
     except Exception:
         return
 
@@ -561,13 +550,9 @@ async def search_gecko_platform():
 async def search_gecko_contract(token):
     try:
         coin_info = gecko_api.get_coin_by_id(id=f'{await search_gecko(token)}')
-        #logger.info(msg=f"coininfo {coininfo}")
-        platform = await search_gecko_platform()
-        coin_contract = coin_info['platforms'][f'{platform}']
-        logger.info(msg=f"coin_contract {coin_contract}")
-        response = f'{coin_contract}'
-        logger.info(msg=f"gecko contract {response}")
-        return response
+        coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
+        logger.info(msg=f"search gecko contract {token} {coin_contract}")
+        return coin_contract
     except Exception:
         return
 
@@ -582,25 +567,40 @@ async def fetch_token_price(token):
     except Exception as e:
         print(f"An error occurred while retrieving address {e}")
 
-wx 
+async def search_gecko_exchange(exchange):
+    try:
+        exchange_list = gecko_api.get_exchanges_list()
+        for i in exchange_list:
+            results_search_exchange = i['id']
+            if (results_search_exchange == exchange):
+                response = i
+                return response
+    except Exception:
+        return
+
 #===========QUOTE
 async def fetch_gecko_quote(token):
     try:
-        asset_in_address = ex.to_checksum_address(await search_contract_dex(token))
+        asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
         fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=asset_in_address)
+        #logger.info(msg=f"fetch_tokeninfo{fetch_tokeninfo}")
         asset_out_cg_quote = fetch_tokeninfo['market_data']['current_price']['usd']
-        return asset_out_cg_quote
+        asset_out_cg_name = fetch_tokeninfo['name']
+        response = f"{asset_out_cg_name}\n🦎{asset_out_cg_quote} USD\n🖊️{chainId}: {asset_in_address}"
+        return response
     except Exception:
         return
 
 async def fetch_1inch_quote(token):
     dex_1inch_api = f"https://api.1inch.exchange/v5.0/{chainId}"
-    asset_in_address = ex.to_checksum_address(await search_contract_dex(token))
-    asset_out_address =ex.to_checksum_address(await search_contract_dex('USDT'))
+    asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
+    asset_out_address =ex.to_checksum_address(await search_gecko_contract('USDC'))
     try:
-        asset_out_amount=100
+        asset_out_amount=100000
         quote_url = f"{dex_1inch_api}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
+        logger.debug(msg=f"quote_url{quote_url}")
         quote_response = requests.get(quote_url)
+        logger.debug(msg=f"quote_response{quote_response}")
         quote = quote_response.json()
         asset_out_1inch_quote = quote['toTokenAmount']
         return asset_out_1inch_quote
@@ -782,13 +782,13 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     channel_message = update.effective_message.text
     symbol = await parse_message(channel_message)
     logger.info(msg=f"searching for  {symbol}")
-    asset_out_cg_quote = await fetch_gecko_quote (symbol)
-    response=f"₿ {symbol}\n"
+    asset_out_cg_quote = await fetch_gecko_quote(symbol)
+    response=f"₿ {asset_out_cg_quote}\n"
     try:
         if (isinstance(ex,web3.main.Web3)):
-            if(await search_contract_dex(symbol) != None):
+            if(await search_gecko_contract(symbol) != None):
                 asset_out_1inch_quote = await fetch_1inch_quote (symbol)
-                response+=f"✒️ {symbol}\n🦄 {asset_out_1inch_quote} USD\n🦎 {asset_out_cg_quote} USD"
+                response+=f"🦄 {asset_out_1inch_quote} USD"
                 await send(update,response)
         elif not (isinstance(ex,web3.main.Web3)):
             price= ex.fetch_ticker(symbol.upper())['last']
@@ -801,7 +801,6 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 async def get_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     symbol= await parse_message(update.effective_message.text)
     gecko_symbol_info = await search_gecko_detailed(symbol)
-    logger.info(msg=f"gecko_symbol_info {gecko_symbol_info}")
     await send(update,gecko_symbol_info)
 
 ##==== COMMAND Trading switch  ========
