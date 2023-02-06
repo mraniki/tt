@@ -39,11 +39,7 @@ Using:
 5) Start your container or use `python3 bot.py`
 6) `sell BTCUSDT sl=6000 tp=4500 q=1%` or  `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY.
 7) `/bal` command to query balance
-8) `/p BTCB` or `/p btc/usdt` to query ticker price 
-9) `/c bitcoin` or `/c gmx` to query coin info via coingecko api
-9) `/cex exchangename` or `/dex exchangename` (e.g `/cex binance`, `/dex quickswap`) to switch between multiple CEX and DEX with prefix 
-10) `/testmode` to switch between sandbox, mainnet, testnet
-11) `/trading` to disable/enable trading
+8) `/q BTCB` to query ticker price via coingeck and your active exchange
 
 ## Config
 Approach: Update the sample db with your parameters and save it as db.json 
@@ -62,12 +58,12 @@ Approach: Update the sample db with your parameters and save it as db.json
  - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing (e.g. `sell BTCUSDT`) values are defaulted
  - Disable or Enable trading process via `/trading` command
  - Query balance via `/bal` command and view it in formatted way
- - Query ticker price via `/p BTCB` or `/p btc/usdt` command to view last symbol price (USDT as basis)
- - Query ticker price via `/c bitcoin` command to retrive coin info available on coingecko
+ - Query ticker price via `/q BTCB` command to view last symbol price (USDT as basis)
+ - Query ticker price via `/coin BTC` command to retrive coin info available on coingecko
  - Switch between multiple CEX and DEX in one environment with prefix `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
  - Switch between testnet and mainnet with `/testmode` 
  - Support % of USDT balance for CEX order and DEX order
- - Support standard DEX token list per exchange (e.g. [https://tokenlists.org/](tokenlist.org)) with function to convert symbol to checksum address from the token list as well as base currency for a given DEX
+ - Convert symbol to checksum address via coingecko API to support any symbol and chain listed in coingecko
  - Able to start the bot with DEX or CEX as default option. 
  
  ### Other Features
@@ -75,9 +71,10 @@ Approach: Update the sample db with your parameters and save it as db.json
  - Support multiple environment via variable (e.g. DEV, PRD or PRD DEX / PRD CEX / UNI1 / UNI2)
  - Handle messaging in one function
  - Handle libraries exceptions in one function and delivery with apprise to support more notification system
- - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
+ - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
- - Create DB as the start if it is missing and connect to default DEX (Pancake)
+ - Create DB as the start if it is missing and connect to default DEX
+ - Support restart capability
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
@@ -85,32 +82,34 @@ Approach: Update the sample db with your parameters and save it as db.json
 
 
 ### V1.3
-- Support DEX limit order if supported like dydx / Kwenta / GMX
-- Support STOPLOSS TAKEPROFIT for DEX
+- Support Uniswap V3
 
 ### v1.4
-- create / modify db via bot command
+- Review PrivateKey strategy
 
 ### v1.5
 
-- Support futures and margin for CEX (to be tested)
-- Support STOPLOSS TAKEPROFIT for CEX
+- Support limit order for DEX
 - Support Web3 ENS
 
-### v2
-- Support Uniswap V3
+### v2 backlog
+
+- Support DEX limit order if supported like dydx / Kwenta / GMX
+- Support futures and margin for CEX (to be tested via CCXT)
+- Support STOPLOSS TAKEPROFIT for CEX
+- create / modify db via bot chat nexted command
 - view daily pnl in /bal response
 - view free margin for futures in /bal response
 - view opened future position via /pos command
 - Support bot in webhook instead of getupdate
 - View weekly pnl with /w command
 
-### v3
-- [![Matrix](https://badgen.net/badge/icon/matrix/black?icon=libraries&label)](https://github.com/poljar/matrix-ni) Integrate with agnostic chat bot  platform 
+### v3 backlog
+- [![Matrix](https://badgen.net/badge/icon/matrix/black?icon=libraries&label)](https://github.com/poljar/matrix-ni) Integrate with agnostic chat bot system 
 - [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/) Merge with Telegram MQL4 version which integrate with MT4 exchanges for TradFi support
 
 
  ## ⚠️ Disclaimer
- This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK** 
+ This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK**. For DEX, Never share your private keys.
 
  **NEVER use your main account for automatic trade**
