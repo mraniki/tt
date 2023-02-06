@@ -27,6 +27,7 @@ import ccxt
 import web3
 from web3 import Web3
 from web3.contract import Contract
+from ens import ENS
 #from pywalletconnect.client import WCClient
 from typing import List
 import time
@@ -98,11 +99,8 @@ async def parse_message (message):
 
 async def retrieve_url_json(url,params=None):
     headers = { "User-Agent": "Mozilla/5.0" }
-    logger.debug(msg=f"url: {url} params {params} headers {headers}")
     response = requests.get(url,params =params,headers=headers)
-    logger.debug(msg=f"response: {response}")
     response_json = response.json()
-    logger.debug(msg=f"response_json: {response_json}")
     return response_json
 
 async def verify_latency_ex():
@@ -188,6 +186,7 @@ async def load_exchange(exchangeid):
     global router_instanceabi
     global quoter_instance
     global quoter_instanceabi
+    global ns
 
     logger.info(msg=f"Setting up {exchangeid}")
     ex_result = await search_exchange(exchangeid)
@@ -209,7 +208,8 @@ async def load_exchange(exchangeid):
         walletaddress= ex_result['walletaddress']
         privatekey= ex_result['privatekey']
         ex = Web3(Web3.HTTPProvider('https://'+ex_node_provider))
-        #ns = ns.fromWeb3(web3)
+        ns = ENS.from_web3(ex)
+        #await resolve_ens_dex(router)
         router_instanceabi= await fetch_abi_dex(router) #Router ABI
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
         if (version=="v3"):
@@ -267,7 +267,7 @@ async def execute_order(s1,s2,s3,s4,s5):
 
         elif (isinstance(ex,web3.main.Web3)):
             response = await send_order_dex(s1,s2,s3,s4,s5)
-            
+
         return response
     except Exception as e:
         await handle_exception(e)
@@ -358,8 +358,10 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         return
 
 #🦄DEX
-async def resolve_ens_dex(address):
+async def resolve_ens_dex(addr):
     try:
+        domain = ns.name(addr)
+        logger.info(msg=f"{domain}")
         return
     except Exception as e:
         await handle_exception(e)
