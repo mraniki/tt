@@ -33,38 +33,21 @@ import time
 from datetime import datetime
 from pycoingecko import CoinGeckoAPI
 
-##=============== Logging  =============
+#🧐LOGGING
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-##=============== CONFIG ===============
-load_dotenv()  # .env loading
-#===================
-ex_name = "pancake"
-chainId = 56
-exchanges = {}
-bot_trading_switch=True
-ex_test_mode = True
-#=======API endpoint
+#🔧CONFIG
+load_dotenv()
+
+#🔗API
 headers = { "User-Agent": "Mozilla/5.0" }
 gecko_api = CoinGeckoAPI()
 dex_1inch_api = f"https://api.1inch.exchange/v5.0"
-
-#=======TG command
-fullcommandlist = """
-<code>/bal</code>
-<code>/cex kraken</code>
-order sample
-<code>buy btc/usdt sl=1000 tp=20 q=1%</code>
-<code>/dex pancake</code> <code>buy cake</code>
-quote sample
-<code>/q BTCB</code> <code>/q WBTC</code> <code>/q btc/usdt</code>
-other commands
-<code>/trading</code> <code>/testmode</code>"""
-bot_menu_help = f"{TTversion} \n {fullcommandlist}"
+exchangerate_api = f"https://api.exchangerate.host"
 
 #🔁UTILS
-async def verify_import_library():
+def verify_import_library():
     logger.info(msg=f"{TTversion}")
     logger.info(msg=f"Python {sys.version}")
     logger.info(msg=f"TinyDB {tinydb.__version__}")
@@ -132,7 +115,6 @@ async def verify_latency_ex():
         await handle_exception(e)
 
 async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
-    ex_ccyrate_api = f"https://api.exchangerate.host"
     try:
         url = f"{ex_ccyrate_api}/convert?from={_from_}&to={_to_}&amount={amount}"
         response = requests.get(url)
@@ -143,10 +125,30 @@ async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
         logger.warning(msg=f"API conversion error {e}")
         return
 
+#💬MESSAGING
+async def send (self, messaging):
+    try:
+        await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
+    except Exception as e:
+        await handle_exception(e)
+
+async def notify(messaging):
+    apobj = apprise.Apprise()
+    if (bot_token is not None):
+        apobj.add('tgram://' + str(bot_token) + "/" + str(bot_channel_id))
+        try:
+            apobj.notify(body=messaging)
+        except Exception as e:
+            logger.error(msg=f"delivered: {e}")
+    else:
+        logger.error(msg=f"not delivered {messaging}")
+
 #💱EXCHANGE
 async def search_exchange(searched_data):
     results_cex = cex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
+    logger.info(msg=f"results_cex {results_cex}")
     results_dex = dex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
+    logger.info(msg=f"results_dex {results_dex}")
     if (len(results_cex) >= 1):
         for result in results_cex:
             return result
@@ -158,7 +160,9 @@ async def search_exchange(searched_data):
 
 async def search_exchange_name(searched_data):
     results_cex = cex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
+    logger.info(msg=f"results_cex {results_cex}")
     results_dex = dex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
+    logger.info(msg=f"results_dex {results_dex}")
     if (len(results_cex) >= 1):
         for result in results_cex:
             return result['name']
@@ -591,24 +595,6 @@ async def get_wallet_auth():
     except Exception as e:
         return
 
-#=========== Send function
-async def send (self, messaging):
-    try:
-        await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
-    except Exception as e:
-        await handle_exception(e)
-#========== notification function
-async def notify(messaging):
-#=APPRISE Setup
-    apobj = apprise.Apprise()
-    if (bot_token is not None):
-        apobj.add('tgram://' + str(bot_token) + "/" + str(bot_channel_id))
-        try:
-            apobj.notify(body=messaging)
-        except Exception as e:
-            logger.error(msg=f"error: {e}")
-    else:
-        logger.error(msg=f"not delivered {messaging}")
 
 #======= error handling
 async def handle_exception(e) -> None:
@@ -642,6 +628,18 @@ async def handle_exception(e) -> None:
 """
 
 #🦾BOT COMMAND
+
+fullcommandlist = """
+<code>/bal</code>
+<code>/cex kraken</code>
+order sample
+<code>buy btc/usdt sl=1000 tp=20 q=1%</code>
+<code>/dex pancake</code> <code>buy cake</code>
+quote sample
+<code>/q BTCB</code> <code>/q WBTC</code> <code>/q btc/usdt</code>
+other commands
+<code>/trading</code> <code>/testmode</code>"""
+bot_menu_help = f"{TTversion} \n {fullcommandlist}"
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     bot_ping = await verify_latency_ex()
@@ -749,14 +747,14 @@ if db_url == None:
 else:
     outfile = os.path.join('./config', 'db.json')
     response = requests.get(db_url, stream=True)
-    logger.info(msg=f"{response}")
+    logger.debug(msg=f"{response}")
     with open(outfile,'wb') as output:
       output.write(response.content)
-      logger.info(msg = f"copied the remote DB")
+      logger.debug(msg = f"copied the remote DB")
       
 db_path = './config/db.json'
 if os.path.exists(db_path):
-    logger.info(msg=f"Existing DB")
+    logger.debug(msg=f"Existing DB")
     try:
         db = TinyDB(db_path)
         q = Query()
@@ -777,6 +775,7 @@ if os.path.exists(db_path):
         bot_webhook_privatekey = bot[0]['key']
         bot_webhook_certificate = bot[0]['cert']
         bot_webhook_url = bot[0]['webhook_url']
+        bot_trading_switch = True
         if (bot_token == ""):
             logger.error("no TG TK")
             logger.info(msg=f"Failover process with sample DB")
@@ -835,11 +834,10 @@ async def add_dex_db_command(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11):
 #     message = f" db extract: \n {db.all()}"
 #     await send(update, message)
 
-
 #🤖BOT
 def main():
     try:
-        await verify_import_library()
+        verify_import_library()
 
 #Starting Bot
         application = Application.builder().token(bot_token).post_init(post_init).build()
