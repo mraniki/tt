@@ -254,8 +254,10 @@ async def load_exchange(exchangeid):
         return
 
 #📦ORDER
-
 async def execute_order(s1,s2,s3,s4,s5):
+    if (bot_trading_switch == False):
+        logger.info(msg=f"TRADING is {bot_trading_switch}")
+        return
     try:
         if not isinstance(ex,web3.main.Web3):
             logger.debug(msg=f"cex order: {s1} {s2} {s3} {s4} {s5}")
@@ -567,10 +569,9 @@ async def fetch_gecko_quote(token):
         return
 
 #🔒PRIVATE
-
 async def get_account_balance():
-    msg=f"🏦 Balance"
     try:
+        msg = ""
         if not isinstance(ex,web3.main.Web3):
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
@@ -637,15 +638,23 @@ async def handle_exception(e) -> None:
 #🦾BOT COMMAND
 
 fullcommandlist = """
-<code>/bal</code>
-<code>/cex kraken</code>
-order sample
+🏦<code>/bal</code>
+
+🏛️<code>/cex kraken</code>
+🦄<code>/dex pancake</code>
+
+📦
 <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
-<code>/dex pancake</code> <code>buy cake</code>
-quote sample
-<code>/q BTCB</code> <code>/q WBTC</code> <code>/q btc/usdt</code>
-other commands
-<code>/trading</code> <code>/testmode</code>"""
+<code>buy cake</code>
+
+🦎
+<code>/q BTCB</code> 
+<code>/q WBTC</code> 
+<code>/q btc/usdt</code>
+
+🔀
+<code>/trading</code>
+<code>/testmode</code>"""
 bot_menu_help = f"{TTversion} \n {fullcommandlist}"
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -665,32 +674,28 @@ async def stop_command(self) -> None:
         await self.application.shutdown()
 
 async def account_balance_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    balance = await get_account_balance()
+    balance =f"🏦 Balance"
+    balance += await get_account_balance()
     await send(update,balance)
 
 async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
-    logger.info(msg=f"order_scanner {channel_message}")
     order = await parse_message(channel_message)
     if (order):
-        if (bot_trading_switch == False):
-            message = "TRADING DISABLED"
-            await send(update,message)
-        else:
-            try:
-                direction = order[0]
-                symbol = order[1]
-                stoploss = order[2]
-                takeprofit = order[3]
-                quantity = order[4]
-                logger.info(msg = f"Processing order: {direction} {symbol} {stoploss} {takeprofit} {quantity}")
-                res = await execute_order(direction,symbol,stoploss,takeprofit,quantity)
-                if (res != None):
-                    response = f"{res}"
-                    await send(update,response)
-            except Exception as e:
-                await handle_exception(e)
-                return
+        try:
+            direction = order[0]
+            symbol = order[1]
+            stoploss = order[2]
+            takeprofit = order[3]
+            quantity = order[4]
+            logger.info(msg = f"Processing order: {direction} {symbol} {stoploss} {takeprofit} {quantity}")
+            res = await execute_order(direction,symbol,stoploss,takeprofit,quantity)
+            if (res != None):
+                response = f"{res}"
+                await send(update,response)
+        except Exception as e:
+            await handle_exception(e)
+            return
 
 async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
@@ -718,14 +723,9 @@ async def get_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_TY
     await send(update,gecko_symbol_info)
 
 async def exchange_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    logger.info(msg=f"ECHO1")
     new_exchange_request = await parse_message(update.effective_message.text)
-    logger.info(msg=f"ECHO2")
-    logger.info(msg=f"new_exchange_request  {new_exchange_request}")
     new_exchange = await search_exchange_name(new_exchange_request)
-    logger.info(msg=f"new_exchange  {new_exchange}")
     res = await load_exchange(new_exchange)
-    logger.info(msg=f"res  {res}")
     response = f"{ex_name} is active"
     await send(update,response)
 

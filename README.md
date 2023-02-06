@@ -41,9 +41,6 @@ Using:
 7) `/bal` command to query balance
 8) `/p BTCB` or `/p btc/usdt` to query ticker price 
 9) `/c bitcoin` or `/c gmx` to query coin info via coingecko api
-9) `/cex exchangename` or `/dex exchangename` (e.g `/cex binance`, `/dex quickswap`) to switch between multiple CEX and DEX with prefix 
-10) `/testmode` to switch between sandbox, mainnet, testnet
-11) `/trading` to disable/enable trading
 
 ## Config
 Approach: Update the sample db with your parameters and save it as db.json 
@@ -67,7 +64,7 @@ Approach: Update the sample db with your parameters and save it as db.json
  - Switch between multiple CEX and DEX in one environment with prefix `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
  - Switch between testnet and mainnet with `/testmode` 
  - Support % of USDT balance for CEX order and DEX order
- - Support standard DEX token list per exchange (e.g. [https://tokenlists.org/](tokenlist.org)) with function to convert symbol to checksum address from the token list as well as base currency for a given DEX
+ - Convert symbol to checksum address via coingecko API to support any symbol and chain listed in coingecko
  - Able to start the bot with DEX or CEX as default option. 
  
  ### Other Features
@@ -75,9 +72,9 @@ Approach: Update the sample db with your parameters and save it as db.json
  - Support multiple environment via variable (e.g. DEV, PRD or PRD DEX / PRD CEX / UNI1 / UNI2)
  - Handle messaging in one function
  - Handle libraries exceptions in one function and delivery with apprise to support more notification system
- - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub and github container repo
+ - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
- - Create DB as the start if it is missing and connect to default DEX (Pancake)
+ - Create DB as the start if it is missing and connect to default DEX
  - Support restart capability
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
@@ -93,7 +90,7 @@ Approach: Update the sample db with your parameters and save it as db.json
 
 ### v1.5
 
-- Support STOPLOSS TAKEPROFIT for DEX
+- Support limit order for DEX
 - Support Web3 ENS
 
 ### v2 backlog

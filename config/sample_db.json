@@ -12,6 +12,7 @@
     {
         "1":
         {
+            "service":"telegram",
             "token": "",
             "channel": "",
             "env": "TEST",
@@ -24,6 +25,7 @@
         },
         "2":
         {
+            "service":"telegram",
             "token": "YOURBOTTOKEN",
             "channel": "YOURCHANNELID",
             "env": "PRD",
