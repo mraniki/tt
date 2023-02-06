@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.23"
+TTversion="🪙TT Beta 1.03.24"
 ##=============== import  =============
 ##log
 import logging
@@ -44,10 +44,11 @@ ex_name = "pancake"
 chainId = 56
 exchanges = {}
 bot_trading_switch=True
-ex_test_mode = "True"
+ex_test_mode = True
 #=======API endpoint
 headers = { "User-Agent": "Mozilla/5.0" }
 gecko_api = CoinGeckoAPI()
+dex_1inch_api = f"https://api.1inch.exchange/v5.0"
 
 #=======TG command
 fullcommandlist = """
@@ -62,9 +63,8 @@ other commands
 <code>/trading</code> <code>/testmode</code>"""
 bot_menu_help = f"{TTversion} \n {fullcommandlist}"
 
-#========== Common Functions =============
-
-def verify_import_library():
+#🔁UTILS
+async def verify_import_library():
     logger.info(msg=f"{TTversion}")
     logger.info(msg=f"Python {sys.version}")
     logger.info(msg=f"TinyDB {tinydb.__version__}")
@@ -73,60 +73,13 @@ def verify_import_library():
     logger.info(msg=f"Web3 {web3.__version__}")
     logger.info(msg=f"apprise {apprise.__version__}")
 
-##===========DB Functions
-
-async def add_tg_db_command(s1, s2, s3):
-    if len(bot_db.search(q.token == s1)):
-        logger.info(msg=f"token is already setup")
-    else:
-        bot_db.insert({"token": s1, "channel": s2, "env": s3})
-
-async def add_cex_db_command(s1, s2, s3, s4, s5, s6, s7):
-    if len(cex_db.search(q.api == s2)):
-        logger.info(msg=f"EX exists in DB")
-    else:
-        cex_db.insert({"name": s1,
-                        "api": s2,
-                        "secret": s3,
-                        "password": s4,
-                        "testmode": s5,
-                        "ordertype": s6,
-                        "defaultType": s7})
-
-async def add_dex_db_command(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11):
-    if len(dex_db.search(q.name == s1)):
-        logger.info(msg=f"EX exists in DB")
-    else:
-        dex_db.insert({"name": s1,
-                    "walletaddress": s2,
-                    "privatekey": s3,
-                    "version": s4,
-                    "networkprovider": s5,
-                    "router": s6,
-                    "testmode": s7,
-                    "tokenlist": s8,
-                    "abiurl": s9,
-                    "abiurltoken": s10,
-                    "basesymbol": s11})
-
-async def drop_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info(msg=f"db dropped")
-    db.drop_tables()
-
-async def show_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info(msg=f"display db")
-    message = f" db extract: \n {db.all()}"
-    await send(update, message)
-
-
-###MESSAGEPARSER
 async def parse_message (message):
     wordlist = message.split(" ")
-    logger.info(msg=f"{wordlist}")
+    logger.debug(msg=f"wordlist {wordlist}")
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
     filter_lst_switch = ['/cex', '/dex']
     filter_lst_quote = ['/q','/c']
-    logger.info(msg=f"{len(wordlist)}")
+    logger.debug(msg=f"wordlist len {len(wordlist)}")
     try:
         if [ele for ele in filter_lst_order if(ele in wordlist)]:
             if len(wordlist[0]) > 0:
@@ -137,15 +90,17 @@ async def parse_message (message):
                     m_tp=0
                     m_q=5
                     order=[direction,symbol,m_sl,m_tp,m_q]
-                    logger.info(msg=f"{symbol}")
+                    logger.info(msg=f"{order}")
                     return order
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
+                logger.debug(msg=f"filter_lst_switch {wordlist[1]}")
                 return wordlist[1]
             else:
                 return
         elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
+                logger.debug(msg=f"filter_lst_quote {wordlist[1]}")
                 return wordlist[1]
             else:
                 return
@@ -156,8 +111,39 @@ async def parse_message (message):
         logger.warning(msg=f"Message parsing anomaly")
         return
 
-#=========Exchange Functions
+async def verify_latency_ex():
+    try:
+        if not isinstance(ex,web3.main.Web3):
+            symbol = 'BTC/USDT'
+            results = []
+            num_iterations = 5
+            for i in range(0, num_iterations):
+                started = ex.milliseconds()
+                orderbook = ex.fetch_order_book(symbol)
+                ended = ex.milliseconds()
+                elapsed = ended - started
+                results.append(elapsed)
+                rtt = int(sum(results) / len(results))
+                response = rtt
+        elif (isinstance(ex,web3.main.Web3)):
+            response = round(ping(networkprovider, unit='ms'),3)
+            return response
+    except Exception as e:
+        await handle_exception(e)
 
+async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
+    ex_ccyrate_api = f"https://api.exchangerate.host"
+    try:
+        url = f"{ex_ccyrate_api}/convert?from={_from_}&to={_to_}&amount={amount}"
+        response = requests.get(url)
+        rate = response.json()
+        return rate["result"]
+    except Exception as e:
+        await handle_exception(e)
+        logger.warning(msg=f"API conversion error {e}")
+        return
+
+#💱EXCHANGE
 async def search_exchange(searched_data):
     results_cex = cex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
     results_dex = dex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
@@ -170,9 +156,21 @@ async def search_exchange(searched_data):
     else:  
         return None
 
+async def search_exchange_name(searched_data):
+    results_cex = cex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
+    results_dex = dex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
+    if (len(results_cex) >= 1):
+        for result in results_cex:
+            return result['name']
+    elif (len(results_dex) >= 1):
+        for result in results_dex:
+            return result['name']
+    else:  
+        return None
+
 async def load_exchange(exchangeid):
     global ex
-    global name
+    global ex_name
     global networkprovider
     global version
     global walletaddress
@@ -195,25 +193,24 @@ async def load_exchange(exchangeid):
     global platform
 
     logger.info(msg=f"Setting up {exchangeid}")
-    check_ex = await search_exchange(exchangeid)
-    if ('walletaddress' in check_ex):
-        ex_new= check_ex
-        name= ex_new['name']
-        walletaddress= ex_new['walletaddress']
-        privatekey= ex_new['privatekey']
-        version= ex_new['version']
-        networkprovider= ex_new['networkprovider']
-        router= ex_new['router']
-        ex_test_mode=ex_new['testmode']
-        tokenlist=ex_new['tokenlist']
-        abiurl=ex_new['abiurl']
-        abiurltoken=ex_new['abiurltoken']
-        basesymbol=ex_new['basesymbol']
-        gasLimit=ex_new['gasLimit']
-        gasPrice=ex_new['gasPrice']
-        platform=ex_new['platform']
-        chainId=ex_new['chainId']
-        logger.info(msg=f"chainId {chainId}")
+    ex_result = await search_exchange(exchangeid)
+    logger.debug(msg=f"ex_result {ex_result}")
+    if ('router' in ex_result):
+        ex_name = ex_result['name']
+        walletaddress= ex_result['walletaddress']
+        privatekey= ex_result['privatekey']
+        version= ex_result['version']
+        networkprovider= ex_result['networkprovider']
+        router= ex_result['router']
+        ex_test_mode=ex_result['testmode']
+        tokenlist=ex_result['tokenlist']
+        abiurl=ex_result['abiurl']
+        abiurltoken=ex_result['abiurltoken']
+        basesymbol=ex_result['basesymbol']
+        gasLimit=ex_result['gasLimit']
+        gasPrice=ex_result['gasPrice']
+        platform=ex_result['platform']
+        chainId=ex_result['chainId']
         ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
         #ns = ns.fromWeb3(web3)
         router_instanceabi= await fetch_abi_dex(router) #Router ABI
@@ -224,17 +221,17 @@ async def load_exchange(exchangeid):
         try:
             ex.net.listening
             logger.info(msg=f"connected to {ex}")
-            return name
+            return ex_name
         except Exception as e:
             await handle_exception(e)
-    elif ('api' in check_ex):
+    elif ('api' in ex_result):
         exchange_id = check_ex['name']
         client = getattr(ccxt, exchange_id)
         try:
             exchange = client({'apiKey': check_ex['api'],'secret': check_ex['secret']})
             m_ordertype=check_ex['ordertype']
             ex=exchange
-            if (ex_test_mode=="True"):
+            if (ex_test_mode):
                 ex.set_sandbox_mode('enabled')
             markets= ex.loadMarkets()
             return ex
@@ -243,12 +240,12 @@ async def load_exchange(exchangeid):
     else:
         return
 
-#========== Order function
+#📦ORDER
 
 async def execute_order(s1,s2,s3,s4,s5):
     try:
         if not isinstance(ex,web3.main.Web3):
-            logger.info(msg=f"cex order: {s1} {s2} {s3} {s4} {s5}")
+            logger.debug(msg=f"cex order: {s1} {s2} {s3} {s4} {s5}")
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
             if (len(str(bal))):
@@ -279,7 +276,6 @@ async def execute_order(s1,s2,s3,s4,s5):
 
 
 async def send_order_dex(s1,s2,s3,s4,s5):
-    dex_1inch_api = f"https://api.1inch.exchange/v5.0/{chainId}"
     try:
         if (s1=="BUY"):
             asset_out_symbol=basesymbol
@@ -287,15 +283,15 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         else:
             asset_out_symbol=s2
             asset_in_symbol=basesymbol
-        asset_out_address=ex.to_checksum_address(await search_gecko_contract(asset_out_symbol))
+        asset_out_address= await search_gecko_contract(asset_out_symbol)
         asset_out_abi= await fetch_abi_dex(asset_out_address)
         asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
-        asset_in_address= ex.to_checksum_address(await search_gecko_contract(asset_in_symbol))
+        asset_in_address= await search_gecko_contract(asset_in_symbol)
         order_path_dex=[asset_out_address, asset_in_address]
         asset_out_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
         if (asset_out_balance <=0):
             return
-        logger.info(msg=f"asset_out_balance {asset_out_balance}")
+        logger.debug(msg=f"asset_out_balance {asset_out_balance}")
         asset_out_decimals=asset_out_contract.functions.decimals().call()
         slippage=1
         if (s1=="SELL"):
@@ -311,9 +307,9 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         deadline = ex.eth.get_block("latest")["timestamp"] + 3600
         #deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
-            approvalcheck = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
-            logger.info(msg=f"approvalcheck {approvalcheck}")
-            if (approvalcheck==0):
+            approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
+            logger.info(msg=f"approval_check {approval_check}")
+            if (approval_check==0):
                 approved_amount = (ex.to_wei(2**64-1,'ether'))
                 approval_TX = asset_out_contract.functions.approve(ex.to_checksum_address(router), approved_amount)
                 approval_txHash = await sign_transaction_dex(approval_TX)
@@ -324,49 +320,33 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress)
             tx_token = await sign_transaction_dex(swap_TX)
         elif (version=="1inch"):
-            logger.info(msg=f"1inch processing")
-            logger.info(msg=f"{transaction_amount}")
-            approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={tokenToSell}"
-            logger.info(msg=f"{approval_URL}")
-            approval_response = requests.get(approval_URL)
-            approval= approval_response.json()
-            logger.info(msg=f"approval {approval}")
+            approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allocwance?tokenAddress={tokenToSell}&walletAddress={walletaddress}"
+            approval_check_URL_response = requests.get(approval_URL)
+            approval_check = approval_response.json()['allowance']
+            if (approval_check==0):
+                approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={tokenToSell}"
+                approval_response = requests.get(approval_URL)
+                approval= approval_response.json()
             swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
-            logger.info(msg=f"swap_url {swap_url}")
             swap_response = requests.get(swap_url)
-            logger.info(msg=f"swap_response {swap_response}")
             swap_raw = swap_response.json()
-            logger.info(msg=f"swap_raw {swap_raw}")
-            # tx_token = await sign_transaction_dex(swap_raw)
-            # logger.info(msg=f"tx_token {tx_token}")
             swap_raw['nonce'] = ex.eth.get_transaction_count(walletaddress)
             swap_raw['gas']= int(gasLimit)
             swap_raw['gasPrice']= ex.to_wei(gasPrice,'gwei')
-            logger.info(msg=f"swap_raw updated {swap_raw}")
             signed = ex.eth.account.sign_transaction(swap_raw, privatekey)
-            logger.info(msg=f"signed {signed}")
             raw_tx = signed.rawTransaction
             tx_token= ex.eth.send_raw_transaction(raw_tx)
         elif (version=="v3"):
             logger.info(msg=f"v3 support")
+            ####Uniswap V3 Support
             return
-            ####Uniswap V3 contrac function prep
-            # fee=int(3000)
-            # sqrt_price_limit_x96 = 0
-            # #OptimalOrderAmount  = quoter_instance.functions.getSwapQuote(tokenToSell, transaction_amount, tokenToBuy).call()
-            # #MinimumAmount=int(OptimalOrderAmount[1] *0.98)# max 2% slippage
-            # swap_TX=router_instance.functions.addOrder(tokenToBuy,transaction_amount,tokenToSell,OrderAmountfee)
-            # tx_token = await sign_transaction_dex(swap_TX)
         elif (version =="limitorder"):
             logger.info(msg=f"limitorder processing")
             return
         else:
             return
         txHash = str(ex.to_hex(tx_token))
-        #transaction_scanner(txHash)
-        checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
-        checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
-        txResult = checkTransactionRequest.json()['status']
+        txResult = await fectch_transaction_dex(txHash)
         #await verify_gas_dex()
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
         coinprice=fetch_token_price()
@@ -380,8 +360,12 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         await handle_exception(e)
         return
 
-
-##DEX specific
+#🦄DEX
+async def resolve_ens_dex(address):
+    try:
+        return
+    except Exception as e:
+        await handle_exception(e)
 
 async def sign_transaction_dex(contract_tx):
     try:
@@ -414,17 +398,13 @@ async def sign_transaction_dex(contract_tx):
             'gasPrice': ex.to_wei(gasPrice,'gwei'),
             }
             tx = contract_tx.build_transaction(tx_params)
-            logger.info(msg=f"tx {tx}")
             signed = ex.eth.account.sign_transaction(tx, privatekey)
-            logger.info(msg=f"signed {signed}")
             raw_tx = signed.rawTransaction
-            logger.info(msg=f"raw_tx {raw_tx}")
             return ex.eth.send_raw_transaction(raw_tx)
         else:
             return
     except Exception:
         return
-
 
 async def fetch_abi_dex(addr):
     try:
@@ -443,57 +423,47 @@ async def fetch_abi_dex(addr):
     except Exception as e:
         await handle_exception(e)
 
-# async def search_tokenlist(parsedJson, token):
-#     for entry in parsedJson:
-#         if token == entry ['symbol']:
-#             if int(chainId) == entry ['chainId']:
-#                 return entry ['address']
+async def fectch_transaction_dex (txHash):
+    checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
+    checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
+    txResult = checkTransactionRequest.json()['status']
+    return txResult
 
-# async def search_contract_dex(symb):
-#     try:
-#         url = requests.get(tokenlist)
-#         text = url.text
-#         token_list = json.loads(text)['tokens']
-#         try:
-#             symbolcontract= await search_tokenlist(token_list,symb)
-#             if symbolcontract != None:
-#                 return symbolcontract
-#             else:
-#                 msg=f"{symb} does not exist in {tokenlist}"
-#                 await handle_exception(msg)
-#                 return
-#         except Exception as e:
-#             return
-#     except Exception as e:
-#         return
+async def fetch_1inch_quote(token):
+    asset_in_address = await search_gecko_contract(token)
+    asset_out_address = await search_gecko_contract('USDC')
+    try:
+        asset_out_amount=1000000000000
+        quote_url = f"{dex_1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
+        quote_response = requests.get(quote_url)
+        quote = quote_response.json()
+        logger.debug(msg=f"quote {quote}")
+        asset_out_1inch_quote = quote['toTokenAmount']
+        return asset_out_1inch_quote
+    except Exception:
+        return
 
-# async def ens_resolve_dex(address):
-#     try:
-#         name = ns.name(address)
-#         forward = ns.address(name)
-#         if forward is None:
-#             return None
-#         if address.lower().strip() != forward.lower().strip():
-#             return None
-#         return name
-#     except:
-#         return None
+async def fetch_oracle_quote(token):
+    try:
+        return
+    except Exception:
+        return
 
-# async def transaction_scanner (address):
-#     url = abiurl
-#     query = {'module':'account',
-#             'action':'tokenbalance',
-#             'contractaddress':self.rpl_address,
-#             'address':address,
-#             'tag':'latest',
-#             'apikey':ethscan_api_key}
-#     r = requests.get(url, params=query)
-#     try:
-#         d = json.loads(r.text)
-#     except:
-#         return None
-#     value = int(d['result']) / self.zeroes
-#     return(value)
+async def fetch_account_dex (addr):
+    url = abiurl
+    query = {'module':'account',
+            'action':'tokenbalance',
+            'contractaddress':addr,
+            'address':walletaddress,
+            'tag':'latest',
+            'apikey':abiurltoken}
+    r = requests.get(url, params=query)
+    try:
+        d = json.loads(r.text)
+    except:
+        return None
+    value = int(d['result']) / self.zeroes
+    return(value)
 
 async def verify_gas_dex():
     current_gas_price_dex=int(ex.to_wei(ex.eth.gas_price,'wei'))
@@ -502,14 +472,9 @@ async def verify_gas_dex():
         logger.warning(msg=f"{current_gas_price_dex} {config_gas_price_dex} ")
     else:
         logger.info(msg=f"gas setup{config_gas_price_dex} aligned with current gas price {current_gas_price_dex}")
-    # checkgasLimitURL = abiurl + "?module=stats&action=dailyavggaslimit&startdate=2022-01-09&enddate=2022-01-09&sort=asc&apikey=" + abiurltoken
-    # checkgasLimitRequest = requests.get(url=checkgasLimitURL,headers=headers)
-    # gasLimitresults = checkgasLimitRequest.json()['result']['gasLimit']
-    # logger.info(msg=f"gasLimitresults {gasLimitresults}")
-    # if (gasLimit<=gasLimitresults):
-    #     logger.warning(msg=f"gaslimit warning: {gasLimit} {gasLimitresults}")
 
-#===========GECKO
+
+#🦎GECKO
 async def search_gecko(token):
     try:
         symbol_info = gecko_api.search(query=token)
@@ -547,12 +512,23 @@ async def search_gecko_platform():
     except Exception:
         return
 
+async def search_gecko_exchange(exchange):
+    try:
+        exchange_list = gecko_api.get_exchanges_list()
+        for i in exchange_list:
+            results_search_exchange = i['id']
+            if (results_search_exchange == exchange):
+                response = i
+                return response
+    except Exception:
+        return
+
 async def search_gecko_contract(token):
     try:
         coin_info = gecko_api.get_coin_by_id(id=f'{await search_gecko(token)}')
         coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
         logger.info(msg=f"search gecko contract {token} {coin_contract}")
-        return coin_contract
+        return ex.to_checksum_address(coin_contract)
     except Exception:
         return
 
@@ -567,18 +543,6 @@ async def fetch_token_price(token):
     except Exception as e:
         print(f"An error occurred while retrieving address {e}")
 
-async def search_gecko_exchange(exchange):
-    try:
-        exchange_list = gecko_api.get_exchanges_list()
-        for i in exchange_list:
-            results_search_exchange = i['id']
-            if (results_search_exchange == exchange):
-                response = i
-                return response
-    except Exception:
-        return
-
-#===========QUOTE
 async def fetch_gecko_quote(token):
     try:
         asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
@@ -591,61 +555,7 @@ async def fetch_gecko_quote(token):
     except Exception:
         return
 
-async def fetch_1inch_quote(token):
-    dex_1inch_api = f"https://api.1inch.exchange/v5.0/{chainId}"
-    asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
-    asset_out_address =ex.to_checksum_address(await search_gecko_contract('USDC'))
-    try:
-        asset_out_amount=1000000000000
-        quote_url = f"{dex_1inch_api}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
-        quote_response = requests.get(quote_url)
-        quote = quote_response.json()
-        logger.debug(msg=f"quote {quote}")
-        asset_out_1inch_quote = quote['toTokenAmount']
-        return asset_out_1inch_quote
-    except Exception:
-        return
-
-async def fetch_dex_quote(token):
-    try:
-        return
-    except Exception:
-        return
-
-####UTILS
-async def verify_latency_ex():
-    try:
-        if not isinstance(ex,web3.main.Web3):
-            symbol = 'BTC/USDT'
-            results = []
-            num_iterations = 5
-            for i in range(0, num_iterations):
-                started = ex.milliseconds()
-                orderbook = ex.fetch_order_book(symbol)
-                ended = ex.milliseconds()
-                elapsed = ended - started
-                results.append(elapsed)
-                rtt = int(sum(results) / len(results))
-                response = rtt
-        elif (isinstance(ex,web3.main.Web3)):
-            response = round(ping(networkprovider, unit='ms'),3)
-            return response
-    except Exception as e:
-        await handle_exception(e)
-
-async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
-    ex_ccyrate_api = f"https://api.exchangerate.host"
-    try:
-        url = f"{ex_ccyrate_api}/convert?from={_from_}&to={_to_}&amount={amount}"
-        response = requests.get(url)
-        rate = response.json()
-        return rate["result"]
-    except Exception as e:
-        await handle_exception(e)
-        logger.warning(msg=f"API conversion error {e}")
-        return
-
-#=========== PRIVATE
+#🔒PRIVATE
 
 async def get_account_balance():
     msg=f"🏦 Balance"
@@ -727,31 +637,32 @@ async def handle_exception(e) -> None:
         message = f"⚠️ {msg} {e}"
         logger.error(msg = f"{message}")
         await notify(message)
+"""
+🔚END OF COMMON FUNCTIONS
+"""
 
-##======== END OF FUNCTIONS ============
+#🦾BOT COMMAND
 
-##============BOT COMMAND================
-##====view help =====
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    r_ping = await verify_latency_ex()
-    msg= f"Environment: {env} Ping: {r_ping}ms\nExchange: {await search_exchange(ex_name)} Sandbox: {ex_test_mode}\n{bot_menu_help}"
+    bot_ping = await verify_latency_ex()
+    msg= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {await search_exchange_name(ex_name)} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     await send(update,msg)
-##====restart ====
+
 async def restart_command(application: Application, update: Update) -> None:
     logger.info(msg=f"restarting ")
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
-##====stop =======
+
 async def stop_command(self) -> None:
     if self.application is None or self.application.updater is None:
         return
         await self.application.updater.stop()
         await self.application.stop()
         await self.application.shutdown()
-##====view balance=====
-async def bal_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+
+async def account_balance_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     balance = await get_account_balance()
     await send(update,balance)
-#===orderscanner======
+
 async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
     order = await parse_message(channel_message)
@@ -774,7 +685,7 @@ async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             except Exception as e:
                 await handle_exception(e)
                 return
-##====== view quote ===========
+
 async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
     symbol = await parse_message(channel_message)
@@ -794,42 +705,44 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         await handle_exception(e)
         return
 
-##====== view tokeninfo ===========
 async def get_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     symbol= await parse_message(update.effective_message.text)
     gecko_symbol_info = await search_gecko_detailed(symbol)
     await send(update,gecko_symbol_info)
 
-##==== COMMAND Trading switch  ========
-async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    global bot_trading_switch
-    if (bot_trading_switch==False):
-        bot_trading_switch=True
-    else:
-        bot_trading_switch=False
-        message=f"Trading is {bot_trading_switch}"
-        await send(update,message)
-
-##==== COMMAND CEX DEX switch =========
 async def exchange_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    new_exchange  = parse_message(update.effective_message.text)
-    results = await search_exchange(new_exchange)
-    ex_name = results['name']
-    res = await load_exchange(ex_name)
+    new_exchange = await search_exchange_name(await parse_message(update.effective_message.text))
+    res = await load_exchange(new_exchange)
     response = f"{ex_name} is active"
     await send(update,response)
 
-##====== COMMAND Test mode switch ======
+async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    global bot_trading_switch
+    bot_trading_switch = not bot_trading_switch
+    message=f"Trading is {bot_trading_switch}"
+    await send(update,message)
+
 async def testmode_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global ex_test_mode
-    if (ex_test_mode == "False"):
-        ex_test_mode = "True"
-    else:
-        ex_test_mode = "False"
-        message = f"Test mode is {ex_test_mode}"
-        await send(update, message)
+    ex_test_mode = not ex_test_mode
+    message = f"Test mode is {ex_test_mode}"
+    await send(update, message)
 
-##======== DB START ===============
+async def post_init(application: Application):
+    message=f"Bot is online {TTversion}"
+    await load_exchange(ex_name)
+    await application.bot.send_message(bot_channel_id, message, parse_mode=constants.ParseMode.HTML)
+
+async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.error(msg="Exception:", exc_info=context.error)
+    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
+    tb_string = "".join(tb_list)
+    tb_trim = tb_string[:1000]
+    e = f"{tb_trim}"
+    await handle_exception(e)
+
+
+#💾DB
 db_url=os.getenv("DB_URL")
 if db_url == None:
     logger.info(msg = f"No remote DB")
@@ -840,7 +753,7 @@ else:
     with open(outfile,'wb') as output:
       output.write(response.content)
       logger.info(msg = f"copied the remote DB")
-
+      
 db_path = './config/db.json'
 if os.path.exists(db_path):
     logger.info(msg=f"Existing DB")
@@ -878,33 +791,61 @@ if os.path.exists(db_path):
     except Exception as e:
         logger.warning(msg=f"error with db file {db_path}, Verify Json. error: {e}")
 
-##========== startup message ===========
-async def post_init(application: Application):
-    message=f"Bot is online {TTversion}"
-    await load_exchange(ex_name)
-    logger.warning(msg=f"exchange type {type(ex)}")
-    logger.warning(msg=f"exchange isinstance {isinstance(ex,web3.main.Web3)}")
-    await application.bot.send_message(bot_channel_id, message, parse_mode=constants.ParseMode.HTML)
+#DBcommandWIP
+async def add_tg_db_command(s1, s2, s3):
+    if len(bot_db.search(q.token == s1)):
+        logger.info(msg=f"token is already setup")
+    else:
+        bot_db.insert({"token": s1, "channel": s2, "env": s3})
 
-#===========bot error handling ==========
-async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.error(msg="Exception:", exc_info=context.error)
-    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
-    tb_string = "".join(tb_list)
-    tb_trim = tb_string[:1000]
-    e = f"{tb_trim}"
-    await handle_exception(e)
+async def add_cex_db_command(s1, s2, s3, s4, s5, s6, s7):
+    if len(cex_db.search(q.api == s2)):
+        logger.info(msg=f"EX exists in DB")
+    else:
+        cex_db.insert({"name": s1,
+                        "api": s2,
+                        "secret": s3,
+                        "password": s4,
+                        "testmode": s5,
+                        "ordertype": s6,
+                        "defaultType": s7})
 
-#================== BOT =================
+async def add_dex_db_command(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11):
+    if len(dex_db.search(q.name == s1)):
+        logger.info(msg=f"EX exists in DB")
+    else:
+        dex_db.insert({"name": s1,
+                    "walletaddress": s2,
+                    "privatekey": s3,
+                    "version": s4,
+                    "networkprovider": s5,
+                    "router": s6,
+                    "testmode": s7,
+                    "tokenlist": s8,
+                    "abiurl": s9,
+                    "abiurltoken": s10,
+                    "basesymbol": s11})
+
+# async def drop_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+#     logger.info(msg=f"db dropped")
+#     db.drop_tables()
+
+# async def show_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+#     logger.info(msg=f"display db")
+#     message = f" db extract: \n {db.all()}"
+#     await send(update, message)
+
+
+#🤖BOT
 def main():
     try:
-        verify_import_library()
-#Starting Bot TPB
-        application = Application.builder().token(bot_token).post_init(post_init).build()
+        await verify_import_library()
 
-#TPBMenusHandlers
+#Starting Bot
+        application = Application.builder().token(bot_token).post_init(post_init).build()
+#BotMenu
         application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
-        application.add_handler(MessageHandler(filters.Regex('/bal'), bal_command))
+        application.add_handler(MessageHandler(filters.Regex('/bal'), account_balance_command))
         application.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
         application.add_handler(MessageHandler(filters.Regex('/c'), get_tokeninfo_command))
         application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
@@ -917,7 +858,9 @@ def main():
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
 
-    #Run the bot
+#BotConversation
+
+#Run the bot
         webhook = False
         if (webhook):
             logger.info(f"Webhook start")
