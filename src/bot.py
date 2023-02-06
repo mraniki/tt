@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.26"
+TTversion="🪙TT Beta 1.2.27"
 ##=============== import  =============
 ##log
 import logging
@@ -26,6 +26,7 @@ import ccxt
 #DEX
 import web3
 from web3 import Web3
+from web3.middleware import geth_poa_middleware
 from web3.contract import Contract
 from ens import ENS
 #from pywalletconnect.client import WCClient
@@ -208,7 +209,8 @@ async def load_exchange(exchangeid):
         walletaddress= ex_result['walletaddress']
         privatekey= ex_result['privatekey']
         ex = Web3(Web3.HTTPProvider('https://'+ex_node_provider))
-        ns = ENS.from_web3(ex)
+        ex.middleware_onion.inject(geth_poa_middleware, layer=0)
+        #ns = ENS.from_web3(ex)
         #await resolve_ens_dex(router)
         router_instanceabi= await fetch_abi_dex(router) #Router ABI
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
@@ -278,9 +280,11 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         if (s1=="BUY"):
             asset_out_symbol=basesymbol
             asset_in_symbol=s2
+            response = f"⬆️ {asset_in_symbol}"
         else:
             asset_out_symbol=s2
             asset_in_symbol=basesymbol
+            response = f"⬇️ {asset_out_symbol}"
         asset_out_address= await search_gecko_contract(asset_out_symbol)
         asset_out_abi= await fetch_abi_dex(asset_out_address)
         asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
@@ -288,65 +292,49 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         order_path_dex=[asset_out_address, asset_in_address]
         asset_out_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
         if (asset_out_balance <=0):
+            logger.warning(msg=f"asset_out_balance {asset_out_balance}")
             return
-        logger.debug(msg=f"asset_out_balance {asset_out_balance}")
         asset_out_decimals=asset_out_contract.functions.decimals().call()
-        slippage=1
-        if (s1=="SELL"):
-            asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
-            response = f"⬇️ {s2}"
-            asset_out_quote= await fetch_gecko_asset_price(asset_out_symbol)
-        else:
-            asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(s5)/100) #buy %p ercentage
-            response = f"⬆️ {s2}"
-            asset_in_quote= await fetch_gecko_asset_price(asset_in_symbol)
+        asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(s5)/100) #buy %p ercentage  
+        #asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
         asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
-        transaction_amount = asset_out_amount_converted
-        deadline = ex.eth.get_block("latest")["timestamp"] + 3600
-        #deadline = (int(time.time()) + 1000000)
+        transaction_amount = (asset_out_amount_converted *0.98) # max 2% slippage
+        deadline = ex.eth.get_block("latest")["timestamp"] + 3600 #deadline = (int(time.time()) + 1000000)
         if (version=='v2'):
             approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
             logger.info(msg=f"approval_check {approval_check}")
             if (approval_check==0):
-                approved_amount = (ex.to_wei(2**64-1,'ether'))
-                approval_TX = asset_out_contract.functions.approve(ex.to_checksum_address(router), approved_amount)
-                approval_txHash = await sign_transaction_dex(approval_TX)
-                logger.info(msg=f"Approval {str(ex.to_hex(approval_txHash))}")
-                time.sleep(10) #wait approval
-                transaction_getoutput_amount  = router_instance.functions.getOutputAmount(transaction_amount, order_path_dex).call()
-            transaction_minimum_amount = int(transaction_getoutput_amount[1] *0.98)# max 2% slippage
-            swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress)
+                approve_asset_router(asset_out_address)
+            transaction_getoutput_amount  = router_instance.functions.getOutputAmount(transaction_amount, order_path_dex).call()
+            transaction_minimum_amount = int(transaction_getoutput_amount[1])
+            swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress,deadline)
             tx_token = await sign_transaction_dex(swap_TX)
         elif (version=="1inch"):
-            approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={tokenToSell}&walletAddress={walletaddress}"
+            approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
             approval_response = await retrieve_url_json(approval_check_URL)
             approval_check = approval_response['allowance']
             if (approval_check==0):
-                approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={tokenToSell}"
-                approval_response = await retrieve_url_json(approval_URL)
+                approve_asset_router(asset_out_address)
             swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
-            swap_response = await retrieve_url_json(swap_url)
-            swap_response['nonce'] = ex.eth.get_transaction_count(walletaddress)
-            swap_response['gas']= int(gasLimit)
-            swap_response['gasPrice']= ex.to_wei(gasPrice,'gwei')
-            signed = ex.eth.account.sign_transaction(swap_response, privatekey)
+            swap_TX = await retrieve_url_json(swap_url)
+            swap_TX['nonce'] = ex.eth.get_transaction_count(walletaddress)
+            swap_TX['gas']= int(gasLimit)
+            swap_TX['gasPrice']= ex.to_wei(gasPrice,'gwei')
+            signed = ex.eth.account.sign_transaction(swap_TX, privatekey)
             raw_tx = signed.rawTransaction
             tx_token= ex.eth.send_raw_transaction(raw_tx)
-        elif (version=="v3"):
+        elif (version=="v3"): #Uniswap V3 Support
             logger.info(msg=f"v3 processing")
-            ####Uniswap V3 Support
             return
-        elif (version =="limitorder"):
+        elif (version =="limitorder"): #1inchLimitOrderSupport
             logger.info(msg=f"limitorder processing")
-            ####1inchLimitOrderSupport
             return
         else:
             return
         txHash = str(ex.to_hex(tx_token))
         txResult = await fectch_transaction_dex(txHash)
-        #await verify_gas_dex()
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-        coinprice=fetch_gecko_asset_price(asset_in_address)
+        coinprice = fetch_gecko_asset_price(asset_in_address)
         gasUsed=txHashDetail['gasUsed']
         txtimestamp=datetime.now()
         if(txResult == "1"):
@@ -360,11 +348,29 @@ async def send_order_dex(s1,s2,s3,s4,s5):
 #🦄DEX
 async def resolve_ens_dex(addr):
     try:
+        #pending middleware approach for implementation WIP
         domain = ns.name(addr)
         logger.info(msg=f"{domain}")
         return
     except Exception as e:
         await handle_exception(e)
+
+async def approve_asset_router(asset_out_address):
+    try:
+        if (version=="v2"):
+            approved_amount = (ex.to_wei(2**64-1,'ether'))
+            asset_out_abi = await fetch_abi_dex(asset_out_address)
+            asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
+            approval_TX = asset_out_contract.functions.approve(ex.to_checksum_address(router), approved_amount)
+            approval_txHash = await sign_transaction_dex(approval_TX)
+            logger.info(msg=f"Approval {str(ex.to_hex(approval_txHash))}")
+            time.sleep(10) #wait approval
+        if (version=="1inch"):
+            approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={asset_out_address}"
+            approval_response = await retrieve_url_json(approval_URL)
+    except Exception as e:
+        await handle_exception(e)
+
 
 async def sign_transaction_dex(contract_tx):
     try:
@@ -642,21 +648,15 @@ fullcommandlist = """
 <code>/testmode</code>"""
 bot_menu_help = f"{TTversion} \n {fullcommandlist}"
 
+async def post_init(application: Application):
+    message=f"Bot is online {TTversion}"
+    await load_exchange(ex_name)
+    await application.bot.send_message(bot_channel_id, message, parse_mode=constants.ParseMode.HTML)
+
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     bot_ping = await verify_latency_ex()
     msg= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     await send(update,msg)
-
-async def restart_command(application: Application, update: Update) -> None:
-    logger.info(msg=f"restarting ")
-    os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
-
-async def stop_command(self) -> None:
-    if self.application is None or self.application.updater is None:
-        return
-        await self.application.updater.stop()
-        await self.application.stop()
-        await self.application.shutdown()
 
 async def account_balance_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     balance =f"🏦 Balance"
@@ -720,10 +720,16 @@ async def testmode_switch_command(update: Update, context: ContextTypes.DEFAULT_
     message = f"Test mode is {ex_test_mode}"
     await send(update, message)
 
-async def post_init(application: Application):
-    message=f"Bot is online {TTversion}"
-    await load_exchange(ex_name)
-    await application.bot.send_message(bot_channel_id, message, parse_mode=constants.ParseMode.HTML)
+async def restart_command(application: Application, update: Update) -> None:
+    logger.info(msg=f"restarting ")
+    os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
+
+async def stop_command(self) -> None:
+    if self.application is None or self.application.updater is None:
+        return
+        await self.application.updater.stop()
+        await self.application.stop()
+        await self.application.shutdown()
 
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
@@ -802,27 +808,8 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/t1'), search_gecko))
         application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
         application.add_error_handler(error_handler)
-
-#BotConversationTBD
-
 #Run the bot
-        webhook = False
-        if (webhook):
-            logger.info(f"Webhook start")
-            try:
-                application.run_webhook(
-                    listen='0.0.0.0',
-                    port=bot_webhook_port,
-                    webhook_url=bot_webhook_url)
-            except Exception as e:
-                logger.error("Bot failed to start. Error: " + str(e))
-        else:
-            try:
-                logger.info(f"Polling start")
-                application.run_polling(drop_pending_updates=True)
-            except telegram.error.Conflict:
-                logger.error(msg='Bot failed to start due to conflict')
-                sys.exit()
+        application.run_polling(drop_pending_updates=True)
 
     except Exception as e:
         logger.info(msg="Bot failed to start. Error: " + str(e))
