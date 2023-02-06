@@ -57,11 +57,11 @@ def verify_import_library():
 
 async def parse_message (message):
     wordlist = message.split(" ")
-    logger.info(msg=f"wordlist {wordlist}")
+    logger.debug(msg=f"wordlist {wordlist}")
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
     filter_lst_switch = ['/cex', '/dex']
     filter_lst_quote = ['/q','/c']
-    logger.info(msg=f"wordlist len {len(wordlist)}")
+    logger.debug(msg=f"wordlist len {len(wordlist)}")
     try:
         if [ele for ele in filter_lst_order if(ele in wordlist)]:
             if len(wordlist[0]) > 0:
@@ -72,12 +72,12 @@ async def parse_message (message):
                     m_tp=0
                     m_q=5
                     order=[direction,symbol,m_sl,m_tp,m_q]
-                    logger.info(msg=f"{order}")
+                    logger.debug(msg=f"{order}")
                     return order
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
                 exchange = wordlist[1]
-                logger.info(msg=f"filter_lst_switch {wordlist[1]} {exchange}")
+                logger.debug(msg=f"filter_lst_switch {wordlist[1]} {exchange}")
                 return exchange
             else:
                 return
@@ -824,7 +824,7 @@ async def add_cex_db_command(s1, s2, s3, s4, s5, s6, s7):
                         "ordertype": s6,
                         "defaultType": s7})
 
-async def add_dex_db_command(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11):
+async def add_dex_db_command(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10):
     if len(dex_db.search(q.name == s1)):
         logger.info(msg=f"EX exists in DB")
     else:
@@ -835,10 +835,9 @@ async def add_dex_db_command(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11):
                     "networkprovider": s5,
                     "router": s6,
                     "testmode": s7,
-                    "tokenlist": s8,
-                    "abiurl": s9,
-                    "abiurltoken": s10,
-                    "basesymbol": s11})
+                    "abiurl": s8,
+                    "abiurltoken": s9,
+                    "basesymbol": s10})
 
 # async def drop_db_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 #     logger.info(msg=f"db dropped")
@@ -860,12 +859,12 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
         application.add_handler(MessageHandler(filters.Regex('/bal'), account_balance_command))
         application.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
-        application.add_handler(MessageHandler(filters.Regex('/coin'), get_tokeninfo_command))
         application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
         application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), exchange_switch_command))
         application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
         application.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
-        application.add_handler(MessageHandler(filters.Regex('/t'), search_gecko))
+        application.add_handler(MessageHandler(filters.Regex('/coin'), get_tokeninfo_command))
+        application.add_handler(MessageHandler(filters.Regex('/t1'), search_gecko))
         application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
         application.add_error_handler(error_handler)
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
