@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.03.24"
+TTversion="🪙TT Beta 1.03.25"
 ##=============== import  =============
 ##log
 import logging
@@ -33,15 +33,14 @@ import time
 from datetime import datetime
 from pycoingecko import CoinGeckoAPI
 
-#🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
-logger = logging.getLogger(__name__)
-
 #🔧CONFIG
 load_dotenv()
 
+#🧐LOGGING
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 #🔗API
-headers = { "User-Agent": "Mozilla/5.0" }
 gecko_api = CoinGeckoAPI()
 dex_1inch_api = f"https://api.1inch.exchange/v5.0"
 exchangerate_api = f"https://api.exchangerate.host"
@@ -58,11 +57,11 @@ def verify_import_library():
 
 async def parse_message (message):
     wordlist = message.split(" ")
-    logger.debug(msg=f"wordlist {wordlist}")
+    logger.info(msg=f"wordlist {wordlist}")
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
     filter_lst_switch = ['/cex', '/dex']
     filter_lst_quote = ['/q','/c']
-    logger.debug(msg=f"wordlist len {len(wordlist)}")
+    logger.info(msg=f"wordlist len {len(wordlist)}")
     try:
         if [ele for ele in filter_lst_order if(ele in wordlist)]:
             if len(wordlist[0]) > 0:
@@ -77,8 +76,9 @@ async def parse_message (message):
                     return order
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
-                logger.debug(msg=f"filter_lst_switch {wordlist[1]}")
-                return wordlist[1]
+                exchange = wordlist[1]
+                logger.info(msg=f"filter_lst_switch {wordlist[1]} {exchange}")
+                return exchange
             else:
                 return
         elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
@@ -93,6 +93,15 @@ async def parse_message (message):
         await handle_exception(e)
         logger.warning(msg=f"Message parsing anomaly")
         return
+
+async def retrieve_url_json(url,params=None):
+    headers = { "User-Agent": "Mozilla/5.0" }
+    logger.debug(msg=f"url: {url} params {params} headers {headers}")
+    response = requests.get(url,params =params,headers=headers)
+    logger.debug(msg=f"response: {response}")
+    response_json = response.json()
+    logger.debug(msg=f"response_json: {response_json}")
+    return response_json
 
 async def verify_latency_ex():
     try:
@@ -117,8 +126,7 @@ async def verify_latency_ex():
 async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
     try:
         url = f"{ex_ccyrate_api}/convert?from={_from_}&to={_to_}&amount={amount}"
-        response = requests.get(url)
-        rate = response.json()
+        rate = await retrieve_url_json(url)
         return rate["result"]
     except Exception as e:
         await handle_exception(e)
@@ -146,9 +154,9 @@ async def notify(messaging):
 #💱EXCHANGE
 async def search_exchange(searched_data):
     results_cex = cex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
-    logger.info(msg=f"results_cex {results_cex}")
+    logger.debug(msg=f"results_cex {results_cex}")
     results_dex = dex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
-    logger.info(msg=f"results_dex {results_dex}")
+    logger.debug(msg=f"results_dex {results_dex}")
     if (len(results_cex) >= 1):
         for result in results_cex:
             return result
@@ -160,9 +168,9 @@ async def search_exchange(searched_data):
 
 async def search_exchange_name(searched_data):
     results_cex = cex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
-    logger.info(msg=f"results_cex {results_cex}")
+    logger.debug(msg=f"results_cex {results_cex}")
     results_dex = dex_db.search((where('name')==searched_data) & (where ('testmode') == ex_test_mode))
-    logger.info(msg=f"results_dex {results_dex}")
+    logger.debug(msg=f"results_dex {results_dex}")
     if (len(results_cex) >= 1):
         for result in results_cex:
             return result['name']
@@ -229,13 +237,14 @@ async def load_exchange(exchangeid):
         except Exception as e:
             await handle_exception(e)
     elif ('api' in ex_result):
-        exchange_id = check_ex['name']
-        client = getattr(ccxt, exchange_id)
+        ex_name = ex_result['name']
+        client = getattr(ccxt, ex_name)
         try:
-            exchange = client({'apiKey': check_ex['api'],'secret': check_ex['secret']})
-            m_ordertype=check_ex['ordertype']
+            exchange = client({'apiKey': ex_result['api'],'secret': ex_result['secret']})
+            m_ordertype=ex_result['ordertype']
             ex=exchange
-            if (ex_test_mode):
+            if (ex_result['testmode']=='True'):
+                logger.info(msg=f"sandbox setup")
                 ex.set_sandbox_mode('enabled')
             markets= ex.loadMarkets()
             return ex
@@ -301,11 +310,11 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         if (s1=="SELL"):
             asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
             response = f"⬇️ {s2}"
-            asset_out_quote= await fetch_token_price(asset_out_symbol)
+            asset_out_quote= await fetch_gecko_asset_price(asset_out_symbol)
         else:
             asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(s5)/100) #buy %p ercentage
             response = f"⬆️ {s2}"
-        asset_in_quote= await fetch_token_price(asset_in_symbol)
+            asset_in_quote= await fetch_gecko_asset_price(asset_in_symbol)
         asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
         transaction_amount = asset_out_amount_converted
         deadline = ex.eth.get_block("latest")["timestamp"] + 3600
@@ -324,28 +333,27 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress)
             tx_token = await sign_transaction_dex(swap_TX)
         elif (version=="1inch"):
-            approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allocwance?tokenAddress={tokenToSell}&walletAddress={walletaddress}"
-            approval_check_URL_response = requests.get(approval_URL)
-            approval_check = approval_response.json()['allowance']
+            approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={tokenToSell}&walletAddress={walletaddress}"
+            approval_response = await retrieve_url_json(approval_check_URL)
+            approval_check = approval_response['allowance']
             if (approval_check==0):
                 approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={tokenToSell}"
-                approval_response = requests.get(approval_URL)
-                approval= approval_response.json()
+                approval_response = await retrieve_url_json(approval_URL)
             swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
-            swap_response = requests.get(swap_url)
-            swap_raw = swap_response.json()
-            swap_raw['nonce'] = ex.eth.get_transaction_count(walletaddress)
-            swap_raw['gas']= int(gasLimit)
-            swap_raw['gasPrice']= ex.to_wei(gasPrice,'gwei')
-            signed = ex.eth.account.sign_transaction(swap_raw, privatekey)
+            swap_response = await retrieve_url_json(swap_url)
+            swap_response['nonce'] = ex.eth.get_transaction_count(walletaddress)
+            swap_response['gas']= int(gasLimit)
+            swap_response['gasPrice']= ex.to_wei(gasPrice,'gwei')
+            signed = ex.eth.account.sign_transaction(swap_response, privatekey)
             raw_tx = signed.rawTransaction
             tx_token= ex.eth.send_raw_transaction(raw_tx)
         elif (version=="v3"):
-            logger.info(msg=f"v3 support")
+            logger.info(msg=f"v3 processing")
             ####Uniswap V3 Support
             return
         elif (version =="limitorder"):
             logger.info(msg=f"limitorder processing")
+            ####1inchLimitOrderSupport
             return
         else:
             return
@@ -353,7 +361,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         txResult = await fectch_transaction_dex(txHash)
         #await verify_gas_dex()
         txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-        coinprice=fetch_token_price()
+        coinprice=fetch_gecko_asset_price(asset_in_address)
         gasUsed=txHashDetail['gasUsed']
         txtimestamp=datetime.now()
         if(txResult == "1"):
@@ -418,7 +426,7 @@ async def fetch_abi_dex(addr):
             "action": "getabi",
             "address": addr,
             "apikey": abiurltoken }
-        resp = requests.get(url, params=params, headers=headers).json()
+        resp = await retrieve_url_json(url, params)
         abi = resp["result"]
         if(abi!=""):
             return abi
@@ -429,8 +437,8 @@ async def fetch_abi_dex(addr):
 
 async def fectch_transaction_dex (txHash):
     checkTransactionSuccessURL = abiurl + "?module=transaction&action=gettxreceiptstatus&txhash=" + txHash + "&apikey=" + abiurltoken
-    checkTransactionRequest = requests.get(url=checkTransactionSuccessURL,headers=headers)
-    txResult = checkTransactionRequest.json()['status']
+    checkTransactionRequest =  await retrieve_url_json(checkTransactionSuccessURL)
+    txResult = checkTransactionRequest['status']
     return txResult
 
 async def fetch_1inch_quote(token):
@@ -536,14 +544,13 @@ async def search_gecko_contract(token):
     except Exception:
         return
 
-async def fetch_token_price(token):
+async def fetch_gecko_asset_price(token):
     try:
-        coin_info = gecko_api.get_coin_by_id(id=f'{await search_gecko(token)}')
-        for token in coin_info['contract']:
-            if token['chain_id'] == str(chain_id):
-                token_address = token['contract_address']
-                print(f"address: {token_address}")
-                return token_address
+        asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
+        fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=platform,contract_address=asset_in_address)
+        logger.debug(msg=f"fetch_tokeninfo{fetch_tokeninfo}")
+        asset_out_cg_quote = fetch_tokeninfo['market_data']['current_price']['usd']
+        return asset_out_cg_quote
     except Exception as e:
         print(f"An error occurred while retrieving address {e}")
 
@@ -663,6 +670,7 @@ async def account_balance_command(update: Update, context: ContextTypes.DEFAULT_
 
 async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
+    logger.info(msg=f"order_scanner {channel_message}")
     order = await parse_message(channel_message)
     if (order):
         if (bot_trading_switch == False):
@@ -687,7 +695,7 @@ async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
     symbol = await parse_message(channel_message)
-    logger.info(msg=f"searching for  {symbol}")
+    logger.info(msg=f"searching quote for  {symbol}")
     asset_out_cg_quote = await fetch_gecko_quote(symbol)
     response=f"₿ {asset_out_cg_quote}\n"
     try:
@@ -706,11 +714,18 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 async def get_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     symbol= await parse_message(update.effective_message.text)
     gecko_symbol_info = await search_gecko_detailed(symbol)
+    logger.info(msg=f"searching get_tokeninfo_command {symbol}")
     await send(update,gecko_symbol_info)
 
 async def exchange_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    new_exchange = await search_exchange_name(await parse_message(update.effective_message.text))
+    logger.info(msg=f"ECHO1")
+    new_exchange_request = await parse_message(update.effective_message.text)
+    logger.info(msg=f"ECHO2")
+    logger.info(msg=f"new_exchange_request  {new_exchange_request}")
+    new_exchange = await search_exchange_name(new_exchange_request)
+    logger.info(msg=f"new_exchange  {new_exchange}")
     res = await load_exchange(new_exchange)
+    logger.info(msg=f"res  {res}")
     response = f"{ex_name} is active"
     await send(update,response)
 
@@ -767,7 +782,7 @@ if os.path.exists(db_path):
         cex_db = db.table('cex')
         dex_db = db.table('dex')
         bot = bot_db.search(q.env == defaultenv)
-        logger.info(msg=f"{bot}")
+        logger.debug(msg=f"{bot}")
         bot_token = bot[0]['token']
         bot_channel_id = bot[0]['channel']
         bot_webhook_port = bot[0]['port']
@@ -845,10 +860,10 @@ def main():
         application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
         application.add_handler(MessageHandler(filters.Regex('/bal'), account_balance_command))
         application.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
-        application.add_handler(MessageHandler(filters.Regex('/c'), get_tokeninfo_command))
+        application.add_handler(MessageHandler(filters.Regex('/coin'), get_tokeninfo_command))
         application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
-        application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
         application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), exchange_switch_command))
+        application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
         application.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
         application.add_handler(MessageHandler(filters.Regex('/t'), search_gecko))
         application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
@@ -856,7 +871,7 @@ def main():
         # application.add_handler(MessageHandler(filters.Regex('/dbdisplay'), showDB_command))
         # application.add_handler(MessageHandler(filters.Regex('/dbpurge'), dropDB_command))
 
-#BotConversation
+#BotConversationTBD
 
 #Run the bot
         webhook = False
@@ -871,6 +886,7 @@ def main():
                 logger.error("Bot failed to start. Error: " + str(e))
         else:
             try:
+                logger.info(f"Polling start")
                 application.run_polling(drop_pending_updates=True)
             except telegram.error.Conflict:
                 logger.error(msg='Bot failed to start due to conflict')
