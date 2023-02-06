@@ -37,7 +37,7 @@ from pycoingecko import CoinGeckoAPI
 load_dotenv()
 
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 #🔗API
@@ -120,7 +120,7 @@ async def verify_latency_ex():
                 rtt = int(sum(results) / len(results))
                 response = rtt
         elif (isinstance(ex,web3.main.Web3)):
-            response = round(ping(networkprovider, unit='ms'),3)
+            response = round(ping(ex_node_provider, unit='ms'),3)
             return response
     except Exception as e:
         await handle_exception(e)
@@ -171,10 +171,9 @@ async def search_exchange(searched_data):
 async def load_exchange(exchangeid):
     global ex
     global ex_name
-    global env
     global ex_test_mode
-    global m_ordertype
-    global networkprovider
+    global ex_ordertype
+    global ex_node_provider
     global version
     global walletaddress
     global privatekey
@@ -197,20 +196,19 @@ async def load_exchange(exchangeid):
     logger.info(msg=f"exchange_info {exchange_info}")
     if ('router' in ex_result):
         ex_name = ex_result['name']
-        walletaddress= ex_result['walletaddress']
-        privatekey= ex_result['privatekey']
-        version= ex_result['version']
-        networkprovider= ex_result['networkprovider']
-        router= ex_result['router']
         ex_test_mode=ex_result['testmode']
-        tokenlist=ex_result['tokenlist']
+        ex_node_provider= ex_result['networkprovider']
+        router= ex_result['router']
         abiurl=ex_result['abiurl']
         abiurltoken=ex_result['abiurltoken']
         basesymbol=ex_result['basesymbol']
+        version= ex_result['version']
         gasLimit=ex_result['gasLimit']
         gasPrice=ex_result['gasPrice']
         chainId=ex_result['chainId']
-        ex = Web3(Web3.HTTPProvider('https://'+networkprovider))
+        walletaddress= ex_result['walletaddress']
+        privatekey= ex_result['privatekey']
+        ex = Web3(Web3.HTTPProvider('https://'+ex_node_provider))
         #ns = ns.fromWeb3(web3)
         router_instanceabi= await fetch_abi_dex(router) #Router ABI
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
@@ -225,11 +223,11 @@ async def load_exchange(exchangeid):
             await handle_exception(e)
     elif ('api' in ex_result):
         ex_name = ex_result['name']
+        chainId= 0
         client = getattr(ccxt, ex_name)
         try:
-            exchange = client({'apiKey': ex_result['api'],'secret': ex_result['secret']})
-            m_ordertype=ex_result['ordertype']
-            ex=exchange
+            ex = client({'apiKey': ex_result['api'],'secret': ex_result['secret']})
+            ex_ordertype=ex_result['ordertype']
             if (ex_result['testmode']=='True'):
                 logger.info(msg=f"sandbox setup")
                 ex.set_sandbox_mode('enabled')
@@ -254,7 +252,7 @@ async def execute_order(s1,s2,s3,s4,s5):
                 m_price = float(ex.fetchTicker(f'{s2}').get('last'))
                 totalusdtbal = ex.fetchBalance()['USDT']['free']
             amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price) # % of bal
-            res = ex.create_order(s2, m_ordertype, s1, amountpercent)
+            res = ex.create_order(s2, ex_ordertype, s1, amountpercent)
             orderid=res['id']
             timestamp=res['datetime']
             symbol=res['symbol']
