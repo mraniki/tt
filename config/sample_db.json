@@ -76,7 +76,6 @@
             "basesymbol":"BUSD",
             "gasLimit":"300000",
             "gasPrice":"5",
-            "platform":"binance-smart-chain",
             "chainId":"56"
         },
         "2":
@@ -93,12 +92,11 @@
             "basesymbol":"BUSD",
             "gasLimit":"300000",
             "gasPrice":"5",
-            "platform":"binance-smart-chain",
             "chainId":"56"
         }, 
         "3":
         {
-            "name": "uniswap",
+            "name": "uniswap_v2",
             "walletaddress": "abc",
             "privatekey": "abc",
             "version": "v2",
@@ -110,7 +108,6 @@
             "basesymbol":"USDT",
             "gasLimit":"300000",
             "gasPrice":"20",
-            "platform":"ethereum",
             "chainId":"1"
         },
         "4":
@@ -127,7 +124,6 @@
             "basesymbol":"USDC",
             "gasLimit":"300000",
             "gasPrice":"60",
-            "platform":"polygon-pos",
             "chainId":"137"
         },
         "5":
@@ -144,7 +140,6 @@
             "basesymbol":"USDC",
             "gasLimit":"200000",
             "gasPrice":"1",
-            "platform":"optimistic-ethereum",
             "chainId":"10"
         }
     }
