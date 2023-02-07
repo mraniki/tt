@@ -39,7 +39,7 @@ from pycoingecko import CoinGeckoAPI
 load_dotenv()
 
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 #🔗API
@@ -73,7 +73,7 @@ async def parse_message (message):
                     stoploss = wordlist[2] or 100
                     takeprofit = wordlist[3] or 100
                     quantity = wordlist[4] or 10
-                    order=[direction,symbol,stoploss,takeprofit,m_q]
+                    order=[direction,symbol,stoploss,takeprofit,quantity]
                     logger.debug(msg=f"{order}")
                     return order
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
@@ -100,8 +100,11 @@ async def parse_message (message):
 
 async def retrieve_url_json(url,params=None):
     headers = { "User-Agent": "Mozilla/5.0" }
+    logger.info(msg=f"url {url} {params} ")
     response = requests.get(url,params =params,headers=headers)
+    logger.info(msg=f"response {response} ")
     response_json = response.json()
+    logger.info(msg=f"response_json {response_json} ")
     return response_json
 
 async def verify_latency_ex():
@@ -171,9 +174,9 @@ async def load_exchange(exchangeid):
     global ex
     global ex_name
     global ex_test_mode
-    global ex_ordertype
+    global price_type
     global ex_node_provider
-    global version
+    global dex_version
     global walletaddress
     global privatekey
     global chainId
@@ -191,7 +194,7 @@ async def load_exchange(exchangeid):
 
     logger.info(msg=f"Setting up {exchangeid}")
     ex_result = await search_exchange(exchangeid)
-    logger.debug(msg=f"ex_result {ex_result}")
+    logger.info(msg=f"ex_result {ex_result}")
     exchange_info = await search_gecko_exchange(exchangeid)
     logger.info(msg=f"exchange_info {exchange_info}")
     if ('router' in ex_result):
@@ -202,7 +205,7 @@ async def load_exchange(exchangeid):
         abiurl=ex_result['abiurl']
         abiurltoken=ex_result['abiurltoken']
         basesymbol=ex_result['basesymbol']
-        version= ex_result['version']
+        dex_version= ex_result['version']
         gasLimit=ex_result['gasLimit']
         gasPrice=ex_result['gasPrice']
         chainId=ex_result['chainId']
@@ -213,8 +216,9 @@ async def load_exchange(exchangeid):
         #ns = ENS.from_web3(ex)
         #await resolve_ens_dex(router)
         router_instanceabi= await fetch_abi_dex(router) #Router ABI
+        logger.info(msg=f"router_instanceabi {router_instanceabi}")
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
-        if (version=="v3"):
+        if (dex_version=="v3"):
             quoter_instanceabi= await fetch_abi_dex(quoter_instance) #Quoter ABI
             quoter_instance = ex.eth.contract(address=ex.to_checksum_address(quoter_instanceabi), abi=quoter_instanceabi) #ContractLiquidityQuoter
         try:
@@ -229,7 +233,7 @@ async def load_exchange(exchangeid):
         client = getattr(ccxt, ex_name)
         try:
             ex = client({'apiKey': ex_result['api'],'secret': ex_result['secret']})
-            ex_ordertype=ex_result['ordertype']
+            price_type=ex_result['ordertype']
             if (ex_result['testmode']=='True'):
                 logger.info(msg=f"sandbox setup")
                 ex.set_sandbox_mode('enabled')
@@ -241,50 +245,45 @@ async def load_exchange(exchangeid):
         return
 
 #📦ORDER
-async def execute_order(s1,s2,s3,s4,s5):
+async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
     if (bot_trading_switch == False):
         logger.info(msg=f"TRADING is {bot_trading_switch}")
         return
     try:
         if not isinstance(ex,web3.main.Web3):
-            logger.debug(msg=f"cex order: {s1} {s2} {s3} {s4} {s5}")
+            logger.debug(msg=f"cex order: {direction} {symbol} {stoploss} {takeprofit} {quantity}")
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
             if (len(str(bal))):
-                m_price = float(ex.fetchTicker(f'{s2}').get('last'))
+                m_price = float(ex.fetchTicker(f'{symbol}').get('last'))
                 totalusdtbal = ex.fetchBalance()['USDT']['free']
-            amountpercent=((totalusdtbal)*(float(s5)/100))/float(m_price) # % of bal
-            res = ex.create_order(s2, ex_ordertype, s1, amountpercent)
+            amountpercent=((totalusdtbal)*(float(quantity)/100))/float(m_price) # % of bal
+            res = ex.create_order(symbol, price_type, direction, amountpercent)
             orderid=res['id']
             timestamp=res['datetime']
             symbol=res['symbol']
             side=res['side']
             amount=res['amount']
             price=res['price']
-            if (s1=="SELL"):
+            if (direction=="SELL"):
                 response = f"⬇️ {symbol}"
             else:
                 response = f"⬆️ {symbol}"
             response+= f"\n➕ Size: {amount}\n⚫️ Entry: {price}\nℹ️ {orderid}\n🗓️ {timestamp}"
 
         elif (isinstance(ex,web3.main.Web3)):
-            response = await send_order_dex(s1,s2,s3,s4,s5)
+            response = await send_order_dex(direction,symbol,stoploss,takeprofit,quantity)
 
         return response
     except Exception as e:
         await handle_exception(e)
         return
 
-async def send_order_dex(s1,s2,s3,s4,s5):
+async def send_order_dex(direction,symbol,stoploss,takeprofit,quantity):
     try:
-        if (s1=="BUY"):
-            asset_out_symbol=basesymbol
-            asset_in_symbol=s2
-            response = f"⬆️ {asset_in_symbol}"
-        else:
-            asset_out_symbol=s2
-            asset_in_symbol=basesymbol
-            response = f"⬇️ {asset_out_symbol}"
+        asset_out_symbol = basesymbol if direction=="BUY" else symbol
+        asset_in_symbol = symbol if direction=="BUY" else basesymbol
+        response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
         asset_out_address= await search_gecko_contract(asset_out_symbol)
         asset_out_abi= await fetch_abi_dex(asset_out_address)
         asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
@@ -296,12 +295,12 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             await handle_exception(msg)
             return
         asset_out_decimals=asset_out_contract.functions.decimals().call()
-        asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(s5)/100) #buy %p ercentage  
+        asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(quantity)/100) #buy %p ercentage  
         #asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
         asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
         transaction_amount = (asset_out_amount_converted *0.98) # max 2% slippage
         deadline = ex.eth.get_block("latest")["timestamp"] + 3600 #deadline = (int(time.time()) + 1000000)
-        if (version=='v2'):
+        if (dex_version=='v2'):
             approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
             logger.info(msg=f"approval_check {approval_check}")
             if (approval_check==0):
@@ -310,7 +309,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             transaction_minimum_amount = int(transaction_getoutput_amount[1])
             swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress,deadline)
             tx_token = await sign_transaction_dex(swap_TX)
-        elif (version=="1inch"):
+        elif (dex_version=="1inch"):
             approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
             approval_response = await retrieve_url_json(approval_check_URL)
             approval_check = approval_response['allowance']
@@ -324,10 +323,10 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             signed = ex.eth.account.sign_transaction(swap_TX, privatekey)
             raw_tx = signed.rawTransaction
             tx_token= ex.eth.send_raw_transaction(raw_tx)
-        elif (version=="v3"): #Uniswap V3 Support
+        elif (dex_version=="v3"): #Uniswap V3 Support
             logger.info(msg=f"v3 processing")
             return
-        elif (version =="limitorder"): #1inchLimitOrderSupport
+        elif (dex_version =="limitorder"): #1inchLimitOrderSupport
             logger.info(msg=f"limitorder processing")
             return
         else:
@@ -358,7 +357,7 @@ async def resolve_ens_dex(addr):
 
 async def approve_asset_router(asset_out_address):
     try:
-        if (version=="v2"):
+        if (dex_version=="v2"):
             approved_amount = (ex.to_wei(2**64-1,'ether'))
             asset_out_abi = await fetch_abi_dex(asset_out_address)
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
@@ -366,7 +365,7 @@ async def approve_asset_router(asset_out_address):
             approval_txHash = await sign_transaction_dex(approval_TX)
             logger.info(msg=f"Approval {str(ex.to_hex(approval_txHash))}")
             time.sleep(10) #wait approval
-        if (version=="1inch"):
+        if (dex_version=="1inch"):
             approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={asset_out_address}"
             approval_response = await retrieve_url_json(approval_URL)
     except Exception as e:
@@ -375,7 +374,7 @@ async def approve_asset_router(asset_out_address):
 
 async def sign_transaction_dex(contract_tx):
     try:
-        if (version=='v2'):
+        if (dex_version=='v2'):
             tx_params = {
             'from': walletaddress,
             'gas': int(gasLimit),
@@ -386,18 +385,9 @@ async def sign_transaction_dex(contract_tx):
             signed = ex.eth.account.sign_transaction(tx, privatekey)
             raw_tx = signed.rawTransaction
             return ex.eth.send_raw_transaction(raw_tx)
-        elif (version=="v3"):
-            tx_params = {
-            'from': walletaddress,
-            'gas': int(gasLimit),
-            'gasPrice': ex.to_wei(gasPrice,'gwei'),
-            'nonce': ex.eth.get_transaction_count(walletaddress),
-            }
-            tx = contract_tx.build_transaction(tx_params)
-            signed = ex.eth.account.sign_transaction(tx, privatekey)
-            raw_tx = signed.rawTransaction
-            return ex.eth.send_raw_transaction(raw_tx)
-        elif (version=="1inch"):
+        elif (dex_version=="v3"):
+            return
+        elif (dex_version=="1inch"):
             tx_params = {
             'nonce': ex.eth.get_transaction_count(walletaddress),
             'gas': int(gasLimit),
@@ -421,7 +411,9 @@ async def fetch_abi_dex(addr):
             "address": addr,
             "apikey": abiurltoken }
         resp = await retrieve_url_json(url, params)
+        logger.info(msg=f"resp {resp}")
         abi = resp["result"]
+        logger.info(msg=f"abi {abi}")
         if(abi!=""):
             return abi
         else:
