@@ -70,10 +70,10 @@ async def parse_message (message):
                 direction = wordlist[0].upper()
                 if len(wordlist[1]) > 0:
                     symbol = wordlist[1]
-                    m_sl = wordlist[2] or 0
-                    m_tp = wordlist[3] or 0
-                    m_q = wordlist[4] or 5
-                    order=[direction,symbol,m_sl,m_tp,m_q]
+                    stoploss = wordlist[2] or 100
+                    takeprofit = wordlist[3] or 100
+                    quantity = wordlist[4] or 10
+                    order=[direction,symbol,stoploss,takeprofit,m_q]
                     logger.debug(msg=f"{order}")
                     return order
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
