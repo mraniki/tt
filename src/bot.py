@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.27"
+TTversion="🪙TT Beta 1.2.28"
 ##=============== import  =============
 ##log
 import logging
@@ -39,7 +39,7 @@ from pycoingecko import CoinGeckoAPI
 load_dotenv()
 
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 #🔗API
@@ -100,11 +100,11 @@ async def parse_message (message):
 
 async def retrieve_url_json(url,params=None):
     headers = { "User-Agent": "Mozilla/5.0" }
-    logger.info(msg=f"url {url} {params} ")
+    #logger.info(msg=f"url {url} {params} ")
     response = requests.get(url,params =params,headers=headers)
-    logger.info(msg=f"response {response} ")
+    #logger.info(msg=f"response {response} ")
     response_json = response.json()
-    logger.info(msg=f"response_json {response_json} ")
+    #logger.info(msg=f"response_json {response_json} ")
     return response_json
 
 async def verify_latency_ex():
@@ -194,9 +194,9 @@ async def load_exchange(exchangeid):
 
     logger.info(msg=f"Setting up {exchangeid}")
     ex_result = await search_exchange(exchangeid)
-    logger.info(msg=f"ex_result {ex_result}")
+    #logger.info(msg=f"ex_result {ex_result}")
     exchange_info = await search_gecko_exchange(exchangeid)
-    logger.info(msg=f"exchange_info {exchange_info}")
+    #logger.info(msg=f"exchange_info {exchange_info}")
     if ('router' in ex_result):
         ex_name = ex_result['name']
         ex_test_mode=ex_result['testmode']
@@ -216,7 +216,7 @@ async def load_exchange(exchangeid):
         #ns = ENS.from_web3(ex)
         #await resolve_ens_dex(router)
         router_instanceabi= await fetch_abi_dex(router) #Router ABI
-        logger.info(msg=f"router_instanceabi {router_instanceabi}")
+        #buy BNB sl=1000 tp=300 q=20%logger.info(msg=f"router_instanceabi {router_instanceabi}")
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
         if (dex_version=="v3"):
             quoter_instanceabi= await fetch_abi_dex(quoter_instance) #Quoter ABI
@@ -411,9 +411,9 @@ async def fetch_abi_dex(addr):
             "address": addr,
             "apikey": abiurltoken }
         resp = await retrieve_url_json(url, params)
-        logger.info(msg=f"resp {resp}")
+        #logger.info(msg=f"resp {resp}")
         abi = resp["result"]
-        logger.info(msg=f"abi {abi}")
+        #logger.info(msg=f"abi {abi}")
         if(abi!=""):
             return abi
         else:
