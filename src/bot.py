@@ -73,7 +73,7 @@ async def parse_message (message):
                     stoploss = wordlist[2] or 100
                     takeprofit = wordlist[3] or 100
                     quantity = wordlist[4] or 10
-                    order=[direction,symbol,stoploss,takeprofit,quantity]
+                    order=[direction,symbol,stoploss[3:],takeprofit[3:],quantity[2:-1]]
                     logger.debug(msg=f"{order}")
                     return order
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
@@ -298,6 +298,7 @@ async def send_order_dex(direction,symbol,stoploss,takeprofit,quantity):
         asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(quantity)/100) #buy %p ercentage  
         #asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
         asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
+        slippage=1
         transaction_amount = (asset_out_amount_converted *0.98) # max 2% slippage
         deadline = ex.eth.get_block("latest")["timestamp"] + 3600 #deadline = (int(time.time()) + 1000000)
         if (dex_version=='v2'):
