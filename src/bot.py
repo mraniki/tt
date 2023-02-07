@@ -318,12 +318,7 @@ async def send_order_dex(direction,symbol,stoploss,takeprofit,quantity):
                 await approve_asset_router(asset_out_address)
             swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
             swap_TX = await retrieve_url_json(swap_url)
-            swap_TX['nonce'] = ex.eth.get_transaction_count(walletaddress)
-            swap_TX['gas']= int(gasLimit)
-            swap_TX['gasPrice']= ex.to_wei(gasPrice,'gwei')
-            signed = ex.eth.account.sign_transaction(swap_TX, privatekey)
-            raw_tx = signed.rawTransaction
-            tx_token= ex.eth.send_raw_transaction(raw_tx)
+            tx_token= await sign_transaction_dex(swap_TX)
         elif (dex_version=="v3"): #Uniswap V3 Support
             logger.info(msg=f"v3 processing")
             return
