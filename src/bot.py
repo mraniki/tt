@@ -26,9 +26,9 @@ import ccxt
 #DEX
 import web3
 from web3 import Web3
-from web3.middleware import geth_poa_middleware
 from web3.contract import Contract
-from ens import ENS
+from ens import ENS 
+from web3.middleware import geth_poa_middleware
 #from pywalletconnect.client import WCClient
 from typing import List
 import time
@@ -67,12 +67,12 @@ async def parse_message (message):
     try:
         if [ele for ele in filter_lst_order if(ele in wordlist)]:
             if len(wordlist[0]) > 0:
-                direction = wordlist[0]
+                direction = wordlist[0].upper()
                 if len(wordlist[1]) > 0:
                     symbol = wordlist[1]
-                    m_sl=0
-                    m_tp=0
-                    m_q=5
+                    m_sl = wordlist[2] or 0
+                    m_tp = wordlist[3] or 0
+                    m_q = wordlist[4] or 5
                     order=[direction,symbol,m_sl,m_tp,m_q]
                     logger.debug(msg=f"{order}")
                     return order
@@ -292,7 +292,8 @@ async def send_order_dex(s1,s2,s3,s4,s5):
         order_path_dex=[asset_out_address, asset_in_address]
         asset_out_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
         if (asset_out_balance <=0):
-            logger.warning(msg=f"asset_out_balance {asset_out_balance}")
+            msg=f"Balance for {asset_out_symbol} is {asset_out_balance}"
+            await handle_exception(msg)
             return
         asset_out_decimals=asset_out_contract.functions.decimals().call()
         asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(s5)/100) #buy %p ercentage  
@@ -304,7 +305,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
             logger.info(msg=f"approval_check {approval_check}")
             if (approval_check==0):
-                approve_asset_router(asset_out_address)
+                await approve_asset_router(asset_out_address)
             transaction_getoutput_amount  = router_instance.functions.getOutputAmount(transaction_amount, order_path_dex).call()
             transaction_minimum_amount = int(transaction_getoutput_amount[1])
             swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress,deadline)
@@ -314,7 +315,7 @@ async def send_order_dex(s1,s2,s3,s4,s5):
             approval_response = await retrieve_url_json(approval_check_URL)
             approval_check = approval_response['allowance']
             if (approval_check==0):
-                approve_asset_router(asset_out_address)
+                await approve_asset_router(asset_out_address)
             swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
             swap_TX = await retrieve_url_json(swap_url)
             swap_TX['nonce'] = ex.eth.get_transaction_count(walletaddress)
@@ -531,6 +532,7 @@ async def search_gecko_exchange(exchange):
 async def search_gecko_contract(token):
     try:
         coin_info = gecko_api.get_coin_by_id(id=f'{await search_gecko(token)}')
+        logger.info(msg=f"coin_info {coin_info}")
         coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
         logger.info(msg=f"search gecko contract {token} {coin_contract}")
         return ex.to_checksum_address(coin_contract)
@@ -619,9 +621,9 @@ async def handle_exception(e) -> None:
         msg = f"Exchange error"
     except Exception:
         msg = f"{e}"
-        message = f"⚠️ {msg} {e}"
-        logger.error(msg = f"{message}")
-        await notify(message)
+    message = f"⚠️ {msg} {e}"
+    logger.error(msg = f"{message}")
+    await notify(message)
 """
 🔚END OF COMMON FUNCTIONS
 """
