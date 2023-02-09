@@ -32,16 +32,14 @@ Using:
 2) Get your 
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
     - DEX keys and RPC supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org), [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) or [cointool](https://cointool.app/) for chain details
-3) Update the config (bot token and bot channel and exchange details). Point your config to container volume /code/config)
+3) Update the config (bot token, bot channel and exchange details). Point or copy your config [db.json](config/db.json.sample) to the volume /code/config)
 4) Deploy via:
     - docker dockerhub `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
     - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
 5) Start your container or use `python3 bot.py`
 
 ## Config
-Quick start approach:
-- Update the sample db with your parameters and save it as db.json
-- if you deploy the bot on a cloud platform, you can use `DB_URL` to import db.json from a secure location
+Quick start approach: Update the sample db with your parameters and save it as db.json. If you deploy the bot on a cloud platform, you can use `DB_URL` to import db.json from a secure location.
 
 ### Env
 [env sample](config/env.sample)
@@ -77,7 +75,7 @@ Quick start approach:
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
  - Support config file as variable to deploy on cloud platform (like northflank or fly.io)
- - Create DB as the start if it is missing and connect to default DEX
+ - Create DB if it is missing and connect to default DEX
  - Support bot restart capability
  - Support standard json [tokenlist.org](tokenlist.org) search for testnet DEX support
 
