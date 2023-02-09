@@ -295,7 +295,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             #asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
             asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
             slippage=1
-            transaction_amount = (asset_out_amount_converted *0.98) # max 2% slippage
+            transaction_amount = (asset_out_amount_converted *(slippage/100)) # max 2% slippage
             deadline = ex.eth.get_block("latest")["timestamp"] + 3600 #deadline = (int(time.time()) + 1000000)
             if (dex_version=='uni_v2'): #https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02
                 approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
@@ -323,9 +323,6 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 tx_token = await sign_transaction_dex(swap_TX)
             elif (dex_version =="1inch_LimitOrder_v2"): #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
                 logger.info(msg=f"limitorder processing")
-                return
-            else:
-                return
             txHash = str(ex.to_hex(tx_token))
             txResult = await fectch_transaction_dex(txHash)
             txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
