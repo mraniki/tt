@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.28"
+TTversion="🪙TT Beta 1.2.29"
 ##=============== import  =============
 ##log
 import logging
@@ -626,8 +626,9 @@ async def handle_exception(e) -> None:
 fullcommandlist = """
 🏦<code>/bal</code>
 
-🏛️<code>/cex kraken</code>
-🦄<code>/dex pancake</code>
+🏛️ <code>/cex kraken</code>
+🥞 <code>/dex pancake</code>
+🦄 <code>/dex uniswap_v2</code>
 
 📦
 <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
