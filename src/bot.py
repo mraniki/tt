@@ -74,11 +74,11 @@ async def parse_message (message):
                     takeprofit = 100
                     quantity = 10
                     if len(wordlist[2]) > 0:
-                        stoploss = wordlist[2]
-                        takeprofit = wordlist[3]
-                        quantity = wordlist[4] 
-                    order=[direction,symbol,stoploss[3:],takeprofit[3:],quantity[2:-1]]
-                    logger.debug(msg=f"{order}")
+                        stoploss = wordlist[2][3:]
+                        takeprofit = wordlist[3][3:]
+                        quantity = wordlist[4][2:-1]
+                    order=[direction,symbol,stoploss,takeprofit,quantity]
+                    logger.debug(msg=f"Order: {order}")
                     return order
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
@@ -279,18 +279,18 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
             asset_in_address= await search_gecko_contract(asset_in_symbol)
             order_path_dex=[asset_out_address, asset_in_address]
-            asset_out_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
+            asset_out_decimals=asset_out_contract.functions.decimals().call()
+            asset_out_balance=fetch_user_token_balance(asset_out_symbol)
             if (asset_out_balance <=0):
                 msg=f"Balance for {asset_out_symbol} is {asset_out_balance}"
                 await handle_exception(msg)
                 return
-            asset_out_decimals=asset_out_contract.functions.decimals().call()
             asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(quantity)/100) #buy %p ercentage  
             #asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
             asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
-            slippage=1
-            transaction_amount = (asset_out_amount_converted *(slippage/100)) # max 2% slippage
-            deadline = ex.eth.get_block("latest")["timestamp"] + 3600 #deadline = (int(time.time()) + 1000000)
+            slippage=2# max 2% slippage
+            transaction_amount = (asset_out_amount_converted *(slippage/100)) 
+            deadline = ex.eth.get_block("latest")["timestamp"] + 3600 # or deadline = (int(time.time()) + 1000000)
             if (dex_version=='uni_v2'): #https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02
                 approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
                 logger.info(msg=f"approval_check {approval_check}")
@@ -300,6 +300,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 transaction_minimum_amount = int(transaction_getoutput_amount[1])
                 swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress,deadline)
                 tx_token = await sign_transaction_dex(swap_TX)
+
             elif (dex_version=="1inch_v5.0"): #https://docs.1inch.io/docs/aggregation-protocol/api/swagger/#
                 approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
                 approval_response = await retrieve_url_json(approval_check_URL)
@@ -309,6 +310,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
                 swap_TX = await retrieve_url_json(swap_url)
                 tx_token= await sign_transaction_dex(swap_TX)
+
             elif (dex_version=="uni_v3"):  # https://docs.uniswap.org/contracts/v3/guides/swaps/single-swaps
                 approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
                 logger.info(msg=f"approval_check {approval_check}")
@@ -319,6 +321,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 transaction_minimum_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
                 swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_minimum_amount,sqrtPriceLimitX96)
                 tx_token = await sign_transaction_dex(swap_TX)
+
             elif (dex_version =="1inch_LimitOrder_v2"): #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
                 return
             txHash = str(ex.to_hex(tx_token))
@@ -346,7 +349,7 @@ async def resolve_ens_dex(addr):
 
 async def approve_asset_router(asset_out_address):
     try:
-        if (dex_version=="uni_v2" || dex_version=="uni_v3"):
+        if (dex_version=="uni_v2" or dex_version=="uni_v3"):
             approved_amount = (ex.to_wei(2**64-1,'ether'))
             asset_out_abi = await fetch_abi_dex(asset_out_address)
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
@@ -442,6 +445,16 @@ async def fetch_1inch_quote(token):
 async def fetch_oracle_quote(token):
     try:
         return
+    except Exception:
+        return
+
+async def fetch_user_token_balance(token):
+    try:
+        token_address= await search_gecko_contract(token)
+        token_abi= await fetch_abi_dex(asset_out_address)
+        token_contract = ex.eth.contract(address=token_address, abi=token_abi)
+        token_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
+        return token_balance
     except Exception:
         return
 
@@ -567,7 +580,8 @@ async def get_account_balance():
         elif (isinstance(ex,web3.main.Web3)):
             bal = ex.eth.get_balance(walletaddress)
             bal = round(ex.from_wei(bal,'ether'),5)
-            msg += f"\n{bal}"
+            basesymbol_bal = round(ex.from_wei(await fetch_user_token_balance(basesymbol),'ether'),5)
+            msg += f"\n{bal} \n{basesymbol_bal} {basesymbol}"
         else:
             msg += "0"
         return msg
@@ -661,13 +675,7 @@ async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     order = await parse_message(channel_message)
     if (order):
         try:
-            direction = order[0]
-            symbol = order[1]
-            stoploss = order[2]
-            takeprofit = order[3]
-            quantity = order[4]
-            logger.info(msg = f"Processing order: {direction} {symbol} {stoploss} {takeprofit} {quantity}")
-            res = await execute_order(direction,symbol,stoploss,takeprofit,quantity)
+            res = await execute_order(order[0],order[1],order[2],order[3],order[4])
             if (res != None):
                 response = f"{res}"
                 await send(update,response)
@@ -677,7 +685,6 @@ async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
 async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     symbol = await parse_message(update.effective_message.text)
-    logger.info(msg=f"searching quote for {symbol}")
     asset_out_cg_quote = await fetch_gecko_quote(symbol)
     response=f"₿ {asset_out_cg_quote}\n"
     if (isinstance(ex,web3.main.Web3)):
