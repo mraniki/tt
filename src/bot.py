@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.29"
+TTversion="🪙TT Beta 1.2.30"
 ##=============== import  =============
 ##log
 import logging
@@ -339,7 +339,6 @@ async def resolve_ens_dex(addr):
 
 async def approve_asset_router(asset_out_address):
     try:
-        
         if (dex_version=="uni_v2" or dex_version=="uni_v3"):
             approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
             logger.info(msg=f"approval_check {approval_check}")
@@ -409,9 +408,9 @@ async def fetch_abi_dex(addr):
             "address": addr,
             "apikey": abiurltoken }
         resp = await retrieve_url_json(url, params)
-        #logger.info(msg=f"resp {resp}")
+        logger.debug(msg=f"resp {resp}")
         abi = resp["result"]
-        #logger.info(msg=f"abi {abi}")
+        logger.debug(msg=f"abi {abi}")
         if(abi!=""):
             return abi
         else:
@@ -451,9 +450,11 @@ async def fetch_user_token_balance(token):
         token_abi= await fetch_abi_dex(asset_out_address)
         token_contract = ex.eth.contract(address=token_address, abi=token_abi)
         token_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
+        if ((token_balance <=0) or token_balance==None):
+            return 0
         return token_balance
     except Exception:
-        return
+        return 0
 
 async def fetch_account_dex (addr):
     url = abiurl
@@ -492,7 +493,7 @@ async def search_gecko(token):
             results_search_coin = i['symbol']
             if (results_search_coin==token.upper()):
                 api_symbol = i['api_symbol']
-                logger.info(msg=f"api info {api_symbol}")
+                logger.debug(msg=f"api info {api_symbol}")
                 return api_symbol
     except Exception:
         return
@@ -500,7 +501,7 @@ async def search_gecko(token):
 async def search_gecko_detailed(token):
     try:
         coin_info = gecko_api.get_coin_by_id(await search_gecko(token))
-        logger.debug(msg=f"coin_info {coin_info}")
+        #logger.debug(msg=f"coin_info {coin_info}")
         coin_symbol= coin_info['symbol']
         coin_platform = coin_info['asset_platform_id']
         coin_image = coin_info['image']['small']
@@ -536,7 +537,7 @@ async def search_gecko_exchange(exchange):
 async def search_gecko_contract(token):
     try:
         coin_info = gecko_api.get_coin_by_id(id=f'{await search_gecko(token)}')
-        logger.info(msg=f"coin_info {coin_info}")
+        logger.debug(msg=f"coin_info {coin_info}")
         coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
         logger.info(msg=f"search gecko contract {token} {coin_contract}")
         return ex.to_checksum_address(coin_contract)
@@ -582,7 +583,7 @@ async def get_account_balance():
             bal = ex.eth.get_balance(walletaddress)
             bal = round(ex.from_wei(bal,'ether'),5)
             basesymbol_bal = round(ex.from_wei(await fetch_user_token_balance(basesymbol),'ether'),5)
-            msg += f"\n{bal} \n{basesymbol_bal} {basesymbol}"
+            msg += f"\n₿ {bal} \n💲{basesymbol_bal} {basesymbol}"
         else:
             msg += "0"
         return msg
