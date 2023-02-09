@@ -138,6 +138,7 @@ async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
         logger.warning(msg=f"API conversion error {e}")
         return
 
+
 #💬MESSAGING
 async def send (self, messaging):
     try:
@@ -481,6 +482,29 @@ async def verify_gas():
     else:
         logger.info(msg=f"gas setup{config_gas_price_dex} aligned with current gas price {current_gas_price_dex}")
 
+async def search_test_contract(symbol):
+    try:
+        tokenlist = 'https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json'
+        token_list = await retrieve_url_json(tokenlist)
+        token_list = json.loads(text)['tokens']
+        logger.info(msg=f"token_list {token_list}")
+        try:
+            symbolcontract = [token for token in token_list if (token['symbol'] == symbol and token['chainId']==chainId)]
+            logger.info(msg=f"📝 contract  {symbolcontract}")
+            if len(symbolcontract) > 0:
+                return symbolcontract[0]['address']
+            else:
+                msg=f"{symb} does not exist in {tokenlist}"
+                await HandleExceptions(msg)
+                return
+        except Exception as e:
+            await HandleExceptions(e)
+            return
+    except Exception as e:
+        logger.error(msg=f"search_test_contract error {token}")
+        await HandleExceptions(e)
+        return
+
 #🦎GECKO
 async def search_gecko(token):
     try:
@@ -511,10 +535,16 @@ async def search_gecko_detailed(token):
 
 async def search_gecko_contract(token):
     try:
-        coin_info = await search_gecko(token)
-        coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
-        logger.info(msg=f"🦎 contract {token} {coin_contract}")
-        return ex.to_checksum_address(coin_contract)
+        if (ex_test_mode):
+            logger.info(msg=f"📝 test contract search")
+            coin_contract = await search_test_contract(token)
+            logger.info(msg=f"📝 contract {token} {coin_contract}")
+            return ex.to_checksum_address(coin_contract)
+        else:
+            coin_info = await search_gecko(token)
+            coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
+            logger.info(msg=f"🦎 contract {token} {coin_contract}")
+            return ex.to_checksum_address(coin_contract)
     except Exception:
         return
 
@@ -539,8 +569,6 @@ async def search_gecko_exchange(exchange):
                 return response
     except Exception:
         return
-
-
 
 async def fetch_gecko_asset_price(token):
     try:
