@@ -263,17 +263,11 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 totalusdtbal = ex.fetchBalance()['USDT']['free']
             amountpercent=((totalusdtbal)*(float(quantity)/100))/float(m_price) # % of bal
             res = ex.create_order(symbol, price_type, direction, amountpercent)
-            orderid=res['id']
-            timestamp=res['datetime']
-            symbol=res['symbol']
-            side=res['side']
-            amount=res['amount']
-            price=res['price']
             if (direction=="SELL"):
                 response = f"⬇️ {symbol}"
             else:
                 response = f"⬆️ {symbol}"
-            response+= f"\n➕ Size: {amount}\n⚫️ Entry: {price}\nℹ️ {orderid}\n🗓️ {timestamp}"
+            response+= f"\n➕ Size: {res['amount']}\n⚫️ Entry: {res['price']}\nℹ️ {res['id']}\n🗓️ {res['datetime']}"
 
         elif (isinstance(ex,web3.main.Web3)):
      
@@ -316,21 +310,22 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 swap_TX = await retrieve_url_json(swap_url)
                 tx_token= await sign_transaction_dex(swap_TX)
             elif (dex_version=="uni_v3"):  # https://docs.uniswap.org/contracts/v3/guides/swaps/single-swaps
+                approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
+                logger.info(msg=f"approval_check {approval_check}")
+                if (approval_check==0):
+                    await approve_asset_router(asset_out_address)
                 sqrtPriceLimitX96 = 0
                 fee = 3000
                 transaction_minimum_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
                 swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_minimum_amount,sqrtPriceLimitX96)
                 tx_token = await sign_transaction_dex(swap_TX)
             elif (dex_version =="1inch_LimitOrder_v2"): #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
-                logger.info(msg=f"limitorder processing")
+                return
             txHash = str(ex.to_hex(tx_token))
             txResult = await fectch_transaction_dex(txHash)
             txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-            coinprice = fetch_gecko_asset_price(asset_in_address)
-            gasUsed=txHashDetail['gasUsed']
-            txtimestamp=datetime.now()
             if(txResult == "1"):
-                response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {coinprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
+                response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {await fetch_gecko_asset_price(asset_in_address)}USD \nℹ️ {txHash}\n⛽️ {txHashDetail['gasUsed']}\n🗓️ {datetime.now()}"
                 logger.info(msg=f"{response}")
 
         return response
@@ -351,7 +346,7 @@ async def resolve_ens_dex(addr):
 
 async def approve_asset_router(asset_out_address):
     try:
-        if (dex_version=="v2"):
+        if (dex_version=="uni_v2" || dex_version=="uni_v3"):
             approved_amount = (ex.to_wei(2**64-1,'ether'))
             asset_out_abi = await fetch_abi_dex(asset_out_address)
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
@@ -359,7 +354,7 @@ async def approve_asset_router(asset_out_address):
             approval_txHash = await sign_transaction_dex(approval_TX)
             logger.info(msg=f"Approval {str(ex.to_hex(approval_txHash))}")
             time.sleep(10) #wait approval
-        if (dex_version=="1inch"):
+        if (dex_version=="1inch_v5"):
             approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={asset_out_address}"
             approval_response = await retrieve_url_json(approval_URL)
     except Exception as e:
@@ -368,7 +363,7 @@ async def approve_asset_router(asset_out_address):
 
 async def sign_transaction_dex(contract_tx):
     try:
-        if (dex_version=='v2'):
+        if (dex_version=='uni_v2'):
             tx_params = {
             'from': walletaddress,
             'gas': int(gasLimit),
@@ -379,9 +374,18 @@ async def sign_transaction_dex(contract_tx):
             signed = ex.eth.account.sign_transaction(tx, privatekey)
             raw_tx = signed.rawTransaction
             return ex.eth.send_raw_transaction(raw_tx)
-        elif (dex_version=="v3"):
-            return
-        elif (dex_version=="1inch"):
+        elif (dex_version=="uni_v3"):
+            tx_params = {
+            'from': walletaddress,
+            'gas': int(gasLimit),
+            'gasPrice': ex.to_wei(gasPrice,'gwei'),
+            'nonce': ex.eth.get_transaction_count(walletaddress),
+            }
+            tx = contract_tx.build_transaction(tx_params)
+            signed = ex.eth.account.sign_transaction(tx, privatekey)
+            raw_tx = signed.rawTransaction
+            return ex.eth.send_raw_transaction(raw_tx)
+        elif (dex_version=="1inch_v5"):
             tx_params = {
             'nonce': ex.eth.get_transaction_count(walletaddress),
             'gas': int(gasLimit),
