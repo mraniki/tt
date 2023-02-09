@@ -78,12 +78,12 @@ async def parse_message (message):
                         takeprofit = wordlist[3][3:]
                         quantity = wordlist[4][2:-1]
                     order=[direction,symbol,stoploss,takeprofit,quantity]
-                    logger.debug(msg=f"Order: {order}")
+                    logger.info(msg=f"Order: {order}")
                     return order
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
                 exchange = wordlist[1]
-                logger.debug(msg=f"filter_lst_switch {wordlist[1]} {exchange}")
+                logger.info(msg=f"Exchange switch {wordlist[1]} {exchange}")
                 exchange_search = await search_exchange(exchange)
                 return exchange_search
             else:
@@ -91,7 +91,7 @@ async def parse_message (message):
         elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
                 symbol = wordlist[1]
-                logger.info(msg=f"filter_lst_quote {wordlist[1]} {symbol}")
+                logger.info(msg=f"Symbol identified {wordlist[1]} {symbol}")
                 return symbol
             else:
                 return
@@ -99,16 +99,13 @@ async def parse_message (message):
             return
     except Exception as e:
         await handle_exception(e)
-        logger.warning(msg=f"Message parsing anomaly")
+        logger.warning(msg=f"Parsing anomaly")
         return
 
 async def retrieve_url_json(url,params=None):
     headers = { "User-Agent": "Mozilla/5.0" }
-    #logger.info(msg=f"url {url} {params} ")
     response = requests.get(url,params =params,headers=headers)
-    #logger.info(msg=f"response {response} ")
     response_json = response.json()
-    #logger.info(msg=f"response_json {response_json} ")
     return response_json
 
 async def verify_latency_ex():
@@ -488,27 +485,36 @@ async def verify_gas():
 async def search_gecko(token):
     try:
         symbol_info = gecko_api.search(query=token)
-        #logger.info(msg=f"symbol_info {symbol_info}")
+        logger.debug(msg=f"🦎 Search {symbol_info}")
         for i in symbol_info['coins']:
             results_search_coin = i['symbol']
             if (results_search_coin==token.upper()):
                 api_symbol = i['api_symbol']
-                logger.debug(msg=f"api info {api_symbol}")
-                return api_symbol
+                coin_info =gecko_api.get_coin_by_id(api_symbol)
+                logger.debug(msg=f"coin_info {coin_info}")
+                return coin_info
     except Exception:
         return
 
 async def search_gecko_detailed(token):
     try:
-        coin_info = gecko_api.get_coin_by_id(await search_gecko(token))
-        #logger.debug(msg=f"coin_info {coin_info}")
+        coin_info = await search_gecko(token)
         coin_symbol= coin_info['symbol']
         coin_platform = coin_info['asset_platform_id']
         coin_image = coin_info['image']['small']
         coin_link = coin_info['links']['homepage'][0]
         coin_price = coin_info['market_data']['current_price']['usd']
-        response = f'Symbol {coin_symbol}\nPlatform {coin_platform}\nPrice: {coin_price}USD\nmore info {coin_link} {coin_image}'
+        response = f'Symbol {coin_symbol}\nPlatform {coin_platform}\nPrice: {coin_price} USD\nmore info {coin_link} {coin_image}'
         return response
+    except Exception:
+        return
+
+async def search_gecko_contract(token):
+    try:
+        coin_info = await search_gecko(token)
+        coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
+        logger.info(msg=f"🦎 contract {token} {coin_contract}")
+        return ex.to_checksum_address(coin_contract)
     except Exception:
         return
 
@@ -534,15 +540,7 @@ async def search_gecko_exchange(exchange):
     except Exception:
         return
 
-async def search_gecko_contract(token):
-    try:
-        coin_info = gecko_api.get_coin_by_id(id=f'{await search_gecko(token)}')
-        logger.debug(msg=f"coin_info {coin_info}")
-        coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
-        logger.info(msg=f"search gecko contract {token} {coin_contract}")
-        return ex.to_checksum_address(coin_contract)
-    except Exception:
-        return
+
 
 async def fetch_gecko_asset_price(token):
     try:
@@ -701,7 +699,6 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 async def get_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     symbol= await parse_message(update.effective_message.text)
     gecko_symbol_info = await search_gecko_detailed(symbol)
-    logger.info(msg=f"token info for {symbol}\n {gecko_symbol_info}")
     await send(update,gecko_symbol_info)
 
 async def exchange_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -744,18 +741,18 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
 #💾DB
 db_url=os.getenv("DB_URL")
 if db_url == None:
-    logger.info(msg = f"No remote DB")
+    logger.info(msg = f"No remote DB variable, checking local file")
 else:
     outfile = os.path.join('./config', 'db.json')
     response = requests.get(db_url, stream=True)
     logger.debug(msg=f"{response}")
     with open(outfile,'wb') as output:
       output.write(response.content)
-      logger.debug(msg = f"copied the remote DB")
+      logger.debug(msg = f"remote DB copied")
       
 db_path = './config/db.json'
 if os.path.exists(db_path):
-    logger.debug(msg=f"Existing DB")
+    logger.info(msg=f"Existing DB found")
     try:
         db = TinyDB(db_path)
         q = Query()
@@ -778,18 +775,17 @@ if os.path.exists(db_path):
         bot_webhook_url = bot[0]['webhook_url']
         bot_trading_switch = True
         if (bot_token == ""):
-            logger.error("no TG TK")
-            logger.info(msg=f"Failover process with sample DB")
+            logger.error("no bot token in the DB,failover process with sample DB")
             contingency_db_path = './config/sample_db.json'
             os.rename(contingency_db_path, db_path)
             try:
-                bot_token = os.getenv("TG_TK")
-                bot_channel_id = os.getenv("TG_CHANNEL_ID")
+                bot_token = os.getenv("TG_TK") #checking if TOKEN is given via enviroment variable
+                bot_channel_id = os.getenv("TG_CHANNEL_ID") #checking if Channel is given via enviroment variable
             except Exception as e:
                 logger.error("no bot token")
                 sys.exit()
     except Exception as e:
-        logger.warning(msg=f"error with db file {db_path}, verify Json. error: {e}")
+        logger.warning(msg=f"error with db file {db_path}, verify Json structure and content. error: {e}")
 
 #🤖BOT
 def main():
