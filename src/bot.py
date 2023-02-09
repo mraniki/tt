@@ -292,30 +292,20 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             transaction_amount = (asset_out_amount_converted *(slippage/100)) 
             deadline = ex.eth.get_block("latest")["timestamp"] + 3600 # or deadline = (int(time.time()) + 1000000)
             if (dex_version=='uni_v2'): #https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02
-                approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
-                logger.info(msg=f"approval_check {approval_check}")
-                if (approval_check==0):
-                    await approve_asset_router(asset_out_address)
+                await approve_asset_router(asset_out_address)
                 transaction_getoutput_amount  = router_instance.functions.getOutputAmount(transaction_amount, order_path_dex).call()
                 transaction_minimum_amount = int(transaction_getoutput_amount[1])
                 swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress,deadline)
                 tx_token = await sign_transaction_dex(swap_TX)
 
             elif (dex_version=="1inch_v5.0"): #https://docs.1inch.io/docs/aggregation-protocol/api/swagger/#
-                approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
-                approval_response = await retrieve_url_json(approval_check_URL)
-                approval_check = approval_response['allowance']
-                if (approval_check==0):
-                    await approve_asset_router(asset_out_address)
+                await approve_asset_router(asset_out_address)
                 swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
                 swap_TX = await retrieve_url_json(swap_url)
                 tx_token= await sign_transaction_dex(swap_TX)
 
             elif (dex_version=="uni_v3"):  # https://docs.uniswap.org/contracts/v3/guides/swaps/single-swaps
-                approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
-                logger.info(msg=f"approval_check {approval_check}")
-                if (approval_check==0):
-                    await approve_asset_router(asset_out_address)
+                await approve_asset_router(asset_out_address)
                 sqrtPriceLimitX96 = 0
                 fee = 3000
                 transaction_minimum_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
@@ -349,17 +339,24 @@ async def resolve_ens_dex(addr):
 
 async def approve_asset_router(asset_out_address):
     try:
+        
         if (dex_version=="uni_v2" or dex_version=="uni_v3"):
-            approved_amount = (ex.to_wei(2**64-1,'ether'))
-            asset_out_abi = await fetch_abi_dex(asset_out_address)
-            asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
-            approval_TX = asset_out_contract.functions.approve(ex.to_checksum_address(router), approved_amount)
-            approval_txHash = await sign_transaction_dex(approval_TX)
-            logger.info(msg=f"Approval {str(ex.to_hex(approval_txHash))}")
-            time.sleep(10) #wait approval
+            approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
+            logger.info(msg=f"approval_check {approval_check}")
+            if (approval_check==0):
+                approved_amount = (ex.to_wei(2**64-1,'ether'))
+                asset_out_abi = await fetch_abi_dex(asset_out_address)
+                asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
+                approval_TX = asset_out_contract.functions.approve(ex.to_checksum_address(router), approved_amount)
+                approval_txHash = await sign_transaction_dex(approval_TX)
+                time.sleep(10) #wait approval
         if (dex_version=="1inch_v5"):
-            approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={asset_out_address}"
-            approval_response = await retrieve_url_json(approval_URL)
+            approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
+            approval_response = await retrieve_url_json(approval_check_URL)
+            approval_check = approval_response['allowance']
+            if (approval_check==0):
+                approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={asset_out_address}"
+                approval_response = await retrieve_url_json(approval_URL)
     except Exception as e:
         await handle_exception(e)
 
@@ -474,9 +471,13 @@ async def fetch_account_dex (addr):
     value = int(d['result']) / self.zeroes
     return(value)
 
-async def verify_gas_dex():
-    current_gas_price_dex=int(ex.to_wei(ex.eth.gas_price,'wei'))
-    config_gas_price_dex=int(ex.to_wei(gasPrice,'gwei'))
+async def estimate_gas(transaction):
+    estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(transaction) * 1.2),'wei')
+    
+
+async def verify_gas():
+    current_gas_price = int(ex.to_wei(ex.eth.gas_price,'wei'))
+    config_gas_price_dex = int(ex.to_wei(gasPrice,'gwei'))
     if (current_gas_price_dex>=config_gas_price_dex):
         logger.warning(msg=f"{current_gas_price_dex} {config_gas_price_dex} ")
     else:
