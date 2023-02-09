@@ -583,7 +583,7 @@ async def get_account_balance():
             bal = ex.eth.get_balance(walletaddress)
             bal = round(ex.from_wei(bal,'ether'),5)
             basesymbol_bal = round(ex.from_wei(await fetch_user_token_balance(basesymbol),'ether'),5)
-            msg += f"\n₿ {bal} \n💲{basesymbol_bal} {basesymbol}"
+            msg += f"\n💲{bal} \n💵{basesymbol_bal} {basesymbol}"
         else:
             msg += "0"
         return msg
