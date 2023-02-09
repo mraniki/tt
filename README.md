@@ -89,11 +89,11 @@ Quick start approach: Update the sample db with your parameters and save it as d
 - Support Uniswap V3
 
 ### v1.4
-- Review DEX private key strategy (wallet authentification)
+- Support limit order for DEX (1inch and v3)
 
 ### v1.5
 
-- Support limit order for DEX (1inch and v3)
+- Review DEX private key strategy (wallet authentification)
 
 ### v2 backlog
 
