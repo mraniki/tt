@@ -488,18 +488,10 @@ async def search_test_contract(symbol):
         token_list = await retrieve_url_json(tokenlist)
         token_list = json.loads(text)['tokens']
         logger.info(msg=f"token_list {token_list}")
-        try:
-            symbolcontract = [token for token in token_list if (token['symbol'] == symbol and token['chainId']==chainId)]
-            logger.info(msg=f"📝 contract  {symbolcontract}")
-            if len(symbolcontract) > 0:
-                return symbolcontract[0]['address']
-            else:
-                msg=f"{symb} does not exist in {tokenlist}"
-                await HandleExceptions(msg)
-                return
-        except Exception as e:
-            await HandleExceptions(e)
-            return
+        symbolcontract = [token for token in token_list if (token['symbol'] == symbol and token['chainId']==chainId)]
+        logger.info(msg=f"📝 contract  {symbolcontract}")
+        if len(symbolcontract) > 0:
+            return symbolcontract[0]['address']
     except Exception as e:
         logger.error(msg=f"search_test_contract error {token}")
         await HandleExceptions(e)
@@ -813,7 +805,7 @@ if os.path.exists(db_path):
                 logger.error("no bot token")
                 sys.exit()
     except Exception as e:
-        logger.warning(msg=f"error with db file {db_path}, verify Json structure and content. error: {e}")
+        logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
 
 #🤖BOT
 def main():
