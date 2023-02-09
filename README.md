@@ -39,22 +39,22 @@ Using:
 5) Start your container or use `python3 bot.py`
 
 ## Config
-Quick start approach: Update the sample db with your parameters and save it as db.json. If you deploy the bot on a cloud platform, you can use `DB_URL` to import db.json from a secure location.
-
-### Env
-[env sample](config/env.sample)
+Quick start approach: Update the sample db with your parameters and save it as db.json. If you deploy the bot on a cloud platform, you can use `DB_URL` environment variable to import db.json from a secure location.
 
 ### DB Structure
 [DB sample](config/db.json.sample)
 
+### Env
+[env sample](config/env.sample)
+
 ## Bot commands
- - `/bal` Query user account balance
+ - `/bal` Query user account exchange balance
+ - `/cex name` or `/dex name` Switch between any CEX or DEX (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
+ - `/trading` Disable or Enable trading
+ - `/testmode` Switch between testnet,sandbox or mainnet  
  - `/q BTCB` Retrieve ticker quote from exchange and coingecko.
  - `/coin BTC` Get coingecko token information
- - `/cex exchangename` or `/dex exchangename` Switch between any CEX or DEX (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
- - `/trading` Disable or Enable trading
- - `/testmode` Switch between testnet,sandbox and mainnet  
- 
+
 ## Features Available
  
  ### v1 
@@ -64,8 +64,6 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Support DEX automatic token approval
  - Support uniswap v2, 1inch api and uniswap v3 swap methods
  - Support % of balance when placing order
- - Convert symbol to checksum address via coingecko API to support any symbol and any chain listed in coingecko
- - Able to start the bot with any exchange as default option. 
  
  ### Other Features
  - Support bot in private channel (or private chat) and multiple channel per environment
@@ -78,6 +76,8 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Create DB if it is missing and connect to default DEX
  - Support bot restart capability
  - Support standard json [tokenlist.org](tokenlist.org) search for testnet DEX support
+ - Convert symbol to DEX checksum address via coingecko API to support any symbol and any chain listed in coingecko
+ - Configured the default exchange and default test mode when starting the bot. 
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
@@ -101,12 +101,12 @@ Quick start approach: Update the sample db with your parameters and save it as d
 - Support Web3 ENS
 - Support futures and margin for CEX (to be tested via CCXT)
 - Support STOPLOSS TAKEPROFIT for CEX
-- create / modify db via bot chat nexted command
+- create / modify db via bot chat nested conversation
 - view daily pnl in /bal response
-- view free margin for futures in /bal response
-- view opened future position via /pos command
+- view free margin for futures in /bal
+- view opened position via /pos (futures and limit order)
 - Support bot in webhook instead of getupdate
-- View weekly pnl with /w command
+- View weekly pnl with /w command and scheduling
 
 ### v3 backlog
 - Simplify the integration with any chat bot system [![Matrix](https://badgen.net/badge/icon/matrix/black?icon=libraries&label)](https://github.com/poljar/matrix-ni), RocketChat or others.
