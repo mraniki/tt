@@ -276,72 +276,68 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             response+= f"\n➕ Size: {amount}\n⚫️ Entry: {price}\nℹ️ {orderid}\n🗓️ {timestamp}"
 
         elif (isinstance(ex,web3.main.Web3)):
-            response = await send_order_dex(direction,symbol,stoploss,takeprofit,quantity)
+     
+            asset_out_symbol = basesymbol if direction=="BUY" else symbol
+            asset_in_symbol = symbol if direction=="BUY" else basesymbol
+            response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
+            asset_out_address= await search_gecko_contract(asset_out_symbol)
+            asset_out_abi= await fetch_abi_dex(asset_out_address)
+            asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
+            asset_in_address= await search_gecko_contract(asset_in_symbol)
+            order_path_dex=[asset_out_address, asset_in_address]
+            asset_out_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
+            if (asset_out_balance <=0):
+                msg=f"Balance for {asset_out_symbol} is {asset_out_balance}"
+                await handle_exception(msg)
+                return
+            asset_out_decimals=asset_out_contract.functions.decimals().call()
+            asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(quantity)/100) #buy %p ercentage  
+            #asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
+            asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
+            slippage=1
+            transaction_amount = (asset_out_amount_converted *0.98) # max 2% slippage
+            deadline = ex.eth.get_block("latest")["timestamp"] + 3600 #deadline = (int(time.time()) + 1000000)
+            if (dex_version=='uni_v2'): #https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02
+                approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
+                logger.info(msg=f"approval_check {approval_check}")
+                if (approval_check==0):
+                    await approve_asset_router(asset_out_address)
+                transaction_getoutput_amount  = router_instance.functions.getOutputAmount(transaction_amount, order_path_dex).call()
+                transaction_minimum_amount = int(transaction_getoutput_amount[1])
+                swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress,deadline)
+                tx_token = await sign_transaction_dex(swap_TX)
+            elif (dex_version=="1inch_v5.0"): #https://docs.1inch.io/docs/aggregation-protocol/api/swagger/#
+                approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
+                approval_response = await retrieve_url_json(approval_check_URL)
+                approval_check = approval_response['allowance']
+                if (approval_check==0):
+                    await approve_asset_router(asset_out_address)
+                swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
+                swap_TX = await retrieve_url_json(swap_url)
+                tx_token= await sign_transaction_dex(swap_TX)
+            elif (dex_version=="uni_v3"):  # https://docs.uniswap.org/contracts/v3/guides/swaps/single-swaps
+                sqrtPriceLimitX96 = 0
+                fee = 3000
+                transaction_minimum_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
+                swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_minimum_amount,sqrtPriceLimitX96)
+                tx_token = await sign_transaction_dex(swap_TX)
+            elif (dex_version =="1inch_LimitOrder_v2"): #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
+                logger.info(msg=f"limitorder processing")
+                return
+            else:
+                return
+            txHash = str(ex.to_hex(tx_token))
+            txResult = await fectch_transaction_dex(txHash)
+            txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
+            coinprice = fetch_gecko_asset_price(asset_in_address)
+            gasUsed=txHashDetail['gasUsed']
+            txtimestamp=datetime.now()
+            if(txResult == "1"):
+                response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {coinprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
+                logger.info(msg=f"{response}")
 
         return response
-    except Exception as e:
-        await handle_exception(e)
-        return
 
-async def send_order_dex(direction,symbol,stoploss,takeprofit,quantity):
-    try:
-        asset_out_symbol = basesymbol if direction=="BUY" else symbol
-        asset_in_symbol = symbol if direction=="BUY" else basesymbol
-        response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
-        asset_out_address= await search_gecko_contract(asset_out_symbol)
-        asset_out_abi= await fetch_abi_dex(asset_out_address)
-        asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
-        asset_in_address= await search_gecko_contract(asset_in_symbol)
-        order_path_dex=[asset_out_address, asset_in_address]
-        asset_out_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
-        if (asset_out_balance <=0):
-            msg=f"Balance for {asset_out_symbol} is {asset_out_balance}"
-            await handle_exception(msg)
-            return
-        asset_out_decimals=asset_out_contract.functions.decimals().call()
-        asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(quantity)/100) #buy %p ercentage  
-        #asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
-        asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
-        slippage=1
-        transaction_amount = (asset_out_amount_converted *0.98) # max 2% slippage
-        deadline = ex.eth.get_block("latest")["timestamp"] + 3600 #deadline = (int(time.time()) + 1000000)
-        if (dex_version=='uni_v2'): #https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02
-            approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
-            logger.info(msg=f"approval_check {approval_check}")
-            if (approval_check==0):
-                await approve_asset_router(asset_out_address)
-            transaction_getoutput_amount  = router_instance.functions.getOutputAmount(transaction_amount, order_path_dex).call()
-            transaction_minimum_amount = int(transaction_getoutput_amount[1])
-            swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress,deadline)
-            tx_token = await sign_transaction_dex(swap_TX)
-        elif (dex_version=="1inch_v5.0"): #https://docs.1inch.io/docs/aggregation-protocol/api/swagger/#
-            approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
-            approval_response = await retrieve_url_json(approval_check_URL)
-            approval_check = approval_response['allowance']
-            if (approval_check==0):
-                await approve_asset_router(asset_out_address)
-            swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
-            swap_TX = await retrieve_url_json(swap_url)
-            tx_token= await sign_transaction_dex(swap_TX)
-        elif (dex_version=="uni_v3"):  # https://docs.uniswap.org/contracts/v3/guides/swaps/single-swaps
-            transaction_minimum_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee = 3000, transaction_amount, sqrtPriceLimitX96 = 0).call()
-            swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_minimum_amount,sqrtPriceLimitX96)
-            tx_token = await sign_transaction_dex(swap_TX)
-        elif (dex_version =="1inch_LimitOrder_v2"): #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
-            logger.info(msg=f"limitorder processing")
-            return
-        else:
-            return
-        txHash = str(ex.to_hex(tx_token))
-        txResult = await fectch_transaction_dex(txHash)
-        txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-        coinprice = fetch_gecko_asset_price(asset_in_address)
-        gasUsed=txHashDetail['gasUsed']
-        txtimestamp=datetime.now()
-        if(txResult == "1"):
-            response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {coinprice}USD \nℹ️ {txHash}\n⛽️ {gasUsed}\n🗓️ {txtimestamp}"
-            logger.info(msg=f"{response}")
-            return response
     except Exception as e:
         await handle_exception(e)
         return
