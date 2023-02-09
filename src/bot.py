@@ -799,8 +799,8 @@ if os.path.exists(db_path):
             contingency_db_path = './config/sample_db.json'
             os.rename(contingency_db_path, db_path)
             try:
-                bot_token = os.getenv("TG_TK") #checking if TOKEN is given via enviroment variable
-                bot_channel_id = os.getenv("TG_CHANNEL_ID") #checking if Channel is given via enviroment variable
+                bot_token = os.getenv("TK") #checking if TOKEN is given via enviroment variable
+                bot_channel_id = os.getenv("CHANNEL_ID") #checking if Channel is given via enviroment variable
             except Exception as e:
                 logger.error("no bot token")
                 sys.exit()
