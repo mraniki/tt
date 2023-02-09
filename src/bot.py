@@ -70,9 +70,13 @@ async def parse_message (message):
                 direction = wordlist[0].upper()
                 if len(wordlist[1]) > 0:
                     symbol = wordlist[1]
-                    stoploss = wordlist[2] or 100
-                    takeprofit = wordlist[3] or 100
-                    quantity = wordlist[4] or 10
+                    stoploss = 100
+                    takeprofit = 100
+                    quantity = 10
+                    if len(wordlist[2]) > 0:
+                        stoploss = wordlist[2]
+                        takeprofit = wordlist[3]
+                        quantity = wordlist[4] 
                     order=[direction,symbol,stoploss[3:],takeprofit[3:],quantity[2:-1]]
                     logger.debug(msg=f"{order}")
                     return order
@@ -301,7 +305,7 @@ async def send_order_dex(direction,symbol,stoploss,takeprofit,quantity):
         slippage=1
         transaction_amount = (asset_out_amount_converted *0.98) # max 2% slippage
         deadline = ex.eth.get_block("latest")["timestamp"] + 3600 #deadline = (int(time.time()) + 1000000)
-        if (dex_version=='v2'):
+        if (dex_version=='uni_v2'): #https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02
             approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
             logger.info(msg=f"approval_check {approval_check}")
             if (approval_check==0):
@@ -310,7 +314,7 @@ async def send_order_dex(direction,symbol,stoploss,takeprofit,quantity):
             transaction_minimum_amount = int(transaction_getoutput_amount[1])
             swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress,deadline)
             tx_token = await sign_transaction_dex(swap_TX)
-        elif (dex_version=="1inch"):
+        elif (dex_version=="1inch_v5.0"): #https://docs.1inch.io/docs/aggregation-protocol/api/swagger/#
             approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
             approval_response = await retrieve_url_json(approval_check_URL)
             approval_check = approval_response['allowance']
@@ -319,10 +323,11 @@ async def send_order_dex(direction,symbol,stoploss,takeprofit,quantity):
             swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
             swap_TX = await retrieve_url_json(swap_url)
             tx_token= await sign_transaction_dex(swap_TX)
-        elif (dex_version=="v3"): #Uniswap V3 Support
-            logger.info(msg=f"v3 processing")
-            return
-        elif (dex_version =="limitorder"): #1inchLimitOrderSupport
+        elif (dex_version=="uni_v3"):  # https://docs.uniswap.org/contracts/v3/guides/swaps/single-swaps
+            transaction_minimum_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee = 3000, transaction_amount, sqrtPriceLimitX96 = 0).call()
+            swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_minimum_amount,sqrtPriceLimitX96)
+            tx_token = await sign_transaction_dex(swap_TX)
+        elif (dex_version =="1inch_LimitOrder_v2"): #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
             logger.info(msg=f"limitorder processing")
             return
         else:
