@@ -37,12 +37,11 @@ Using:
     - via docker dockerhub `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
     - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
 5) Start your container or use `python3 bot.py`
-6) `sell BTCUSDT sl=6000 tp=4500 q=1%` or  `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY.
-7) `/bal` command to query balance
-8) `/q BTCB` to query ticker price via coingeck and your active exchange
 
 ## Config
-Approach: Update the sample db with your parameters and save it as db.json 
+Approach:
+- Update the sample db with your parameters and save it as db.json
+- if you deploy the bot on a cloud platform, you can use `DB_URL` to import db.json
 
 ### Env
 [env sample](config/env.sample)
@@ -50,31 +49,37 @@ Approach: Update the sample db with your parameters and save it as db.json
 ### DB Structure
 [DB sample](config/db.json.sample)
 
- ## Features Available
+### Bot commands
+ - Disable or Enable trading via `/trading` 
+ - Query account balance via `/bal`
+ - Query ticker price via `/q BTCB` to view exchange and coingecko quotes.
+ - Get coingecko token information via `/coin BTC`
+ - Switch between any CEX or DEX in one environment with prefix `/cex exchangename` or `/dex exchangename` (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
+ - Switch test and mainnet with `/testmode` 
+ 
+### Features Available
  
  ### v1 
  - Enable bot in pythontelegram v20 and support CEX and DEX exchange formatted error via telegram
  - Query Balance, quote ticker and place order for CEX and DEX
  - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing (e.g. `sell BTCUSDT`) values are defaulted
- - Disable or Enable trading process via `/trading` command
- - Query balance via `/bal` command and view it in formatted way
- - Query ticker price via `/q BTCB` command to view last symbol price (USDT as basis)
- - Query ticker price via `/coin BTC` command to retrive coin info available on coingecko
- - Switch between multiple CEX and DEX in one environment with prefix `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
- - Switch between testnet and mainnet with `/testmode` 
- - Support % of USDT balance for CEX order and DEX order
- - Convert symbol to checksum address via coingecko API to support any symbol and chain listed in coingecko
- - Able to start the bot with DEX or CEX as default option. 
+ - Support DEX automatic token approval
+ - Support uniswap v2, 1inch api and uniswap v3 swap methods
+ - Support % of balance when placing order
+ - Convert symbol to checksum address via coingecko API to support any symbol and any chain listed in coingecko
+ - Able to start the bot with any exchange as default option. 
  
  ### Other Features
  - Support bot in private channel (or private chat) and multiple channel per enviroment
- - Support multiple environment via variable (e.g. DEV, PRD or PRD DEX / PRD CEX / UNI1 / UNI2)
+ - Support multiple environment via variable (e.g. DEV, PRD, PRD CEX, UNI1 or UNI2)
  - Handle messaging in one function
  - Handle libraries exceptions in one function and delivery with apprise to support more notification system
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
+ - support config file as variable to ease deployment on cloud platform
  - Create DB as the start if it is missing and connect to default DEX
  - Support restart capability
+ - Support standard json tokenlist search for testnet support more info on [tokenlist.org](tokenlist.org)
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
