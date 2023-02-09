@@ -31,18 +31,17 @@ Using:
 1) Create a private channel and a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
 2) Get your 
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
-    - DEX chain supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org), [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) or [cointool](https://cointool.app/) for chain details
-3) Update the config (telegram token and telegram channel). Point your config to container volume /code/config)
-4) Deploy :
-    - via docker dockerhub `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
+    - DEX keys and RPC supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org), [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) or [cointool](https://cointool.app/) for chain details
+3) Update the config (bot token and bot channel and exchange details). Point your config to container volume /code/config)
+4) Deploy via:
+    - docker dockerhub `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
     - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
 5) Start your container or use `python3 bot.py`
-6) `sell BTCUSDT sl=6000 tp=4500 q=1%` or  `BUY BTCB` to place order as per format DIRECTION SYMBOL STOPLOSS TAKEPROFIT QUANTITY.
-7) `/bal` command to query balance
-8) `/q BTCB` to query ticker price via coingeck and your active exchange
 
 ## Config
-Approach: Update the sample db with your parameters and save it as db.json 
+Quick start approach:
+- Update the sample db with your parameters and save it as db.json
+- if you deploy the bot on a cloud platform, you can use `DB_URL` to import db.json from a secure location
 
 ### Env
 [env sample](config/env.sample)
@@ -50,51 +49,58 @@ Approach: Update the sample db with your parameters and save it as db.json
 ### DB Structure
 [DB sample](config/db.json.sample)
 
- ## Features Available
+## Bot commands
+ - `/bal` Query user account balance
+ - `/q BTCB` Retrieve ticker quote from exchange and coingecko.
+ - `/coin BTC` Get coingecko token information
+ - `/cex exchangename` or `/dex exchangename` Switch between any CEX or DEX (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
+ - `/trading` Disable or Enable trading
+ - `/testmode` Switch between testnet,sandbox and mainnet  
+ 
+## Features Available
  
  ### v1 
  - Enable bot in pythontelegram v20 and support CEX and DEX exchange formatted error via telegram
  - Query Balance, quote ticker and place order for CEX and DEX
  - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing (e.g. `sell BTCUSDT`) values are defaulted
- - Disable or Enable trading process via `/trading` command
- - Query balance via `/bal` command and view it in formatted way
- - Query ticker price via `/q BTCB` command to view last symbol price (USDT as basis)
- - Query ticker price via `/coin BTC` command to retrive coin info available on coingecko
- - Switch between multiple CEX and DEX in one environment with prefix `/cexexchange name` or `/dex exchange name` (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
- - Switch between testnet and mainnet with `/testmode` 
- - Support % of USDT balance for CEX order and DEX order
- - Convert symbol to checksum address via coingecko API to support any symbol and chain listed in coingecko
- - Able to start the bot with DEX or CEX as default option. 
+ - Support DEX automatic token approval
+ - Support uniswap v2, 1inch api and uniswap v3 swap methods
+ - Support % of balance when placing order
+ - Convert symbol to checksum address via coingecko API to support any symbol and any chain listed in coingecko
+ - Able to start the bot with any exchange as default option. 
  
  ### Other Features
- - Support bot in private channel (or private chat) and multiple channel per enviroment
- - Support multiple environment via variable (e.g. DEV, PRD or PRD DEX / PRD CEX / UNI1 / UNI2)
+ - Support bot in private channel (or private chat) and multiple channel per environment
+ - Support multiple environment via variable (e.g. DEV, PRD, PRD CEX, UNI1 or UNI2)
  - Handle messaging in one function
- - Handle libraries exceptions in one function and delivery with apprise to support more notification system
+ - Handle libraries exceptions in one function and notification delivery with apprise 
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
+ - Support config file as variable to deploy on cloud platform (like northflank or fly.io)
  - Create DB as the start if it is missing and connect to default DEX
- - Support restart capability
+ - Support bot restart capability
+ - Support standard json [tokenlist.org](tokenlist.org) search for testnet DEX support
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
- ## 🚧 Roadmap
+
+## 🚧 Roadmap
 
 
 ### V1.3
 - Support Uniswap V3
 
 ### v1.4
-- Review PrivateKey strategy
+- Review DEX private key strategy (wallet authentification)
 
 ### v1.5
 
-- Support limit order for DEX
-- Support Web3 ENS
+- Support limit order for DEX (1inch and v3)
 
 ### v2 backlog
 
 - Support DEX limit order if supported like dydx / Kwenta / GMX
+- Support Web3 ENS
 - Support futures and margin for CEX (to be tested via CCXT)
 - Support STOPLOSS TAKEPROFIT for CEX
 - create / modify db via bot chat nexted command
@@ -105,11 +111,11 @@ Approach: Update the sample db with your parameters and save it as db.json
 - View weekly pnl with /w command
 
 ### v3 backlog
-- [![Matrix](https://badgen.net/badge/icon/matrix/black?icon=libraries&label)](https://github.com/poljar/matrix-ni) Integrate with agnostic chat bot system 
-- [![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/) Merge with Telegram MQL4 version which integrate with MT4 exchanges for TradFi support
+- Simplify the integration with any chat bot system [![Matrix](https://badgen.net/badge/icon/matrix/black?icon=libraries&label)](https://github.com/poljar/matrix-ni), RocketChat or others.
+- Merge with MQL4 bot version integrated with MT4 exchanges for TradFi support[![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/) 
 
 
  ## ⚠️ Disclaimer
  This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK**. For DEX, Never share your private keys.
-
+ 
  **NEVER use your main account for automatic trade**
