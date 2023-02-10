@@ -844,7 +844,7 @@ def main():
             bot.run(bot_token)
         elif(bot_service=='matrix'):
             #StartTheBot
-            bot = AsyncClient("https://matrix.example.org", "@xxx:example.org")
+            bot = AsyncClient("https://matrix-client.matrix.org", "@xxx:example.org")
             #BotMenu
 
             #Run the bot
