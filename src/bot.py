@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.31"
+TTversion="🪙TT Beta 1.2.32"
 ##=============== import  =============
 ##log
 import logging
@@ -746,17 +746,8 @@ async def testmode_switch_command(update: Update, context: ContextTypes.DEFAULT_
     message = f"Test mode is {ex_test_mode}"
     await send(update, message)
 
-async def restart_command(application: Application, update: Update) -> None:
-    logger.info(msg=f"restarting ")
-    application.shutdown()
+async def restart_command(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
-
-async def stop_command(self) -> None:
-    if self.application is None or self.application.updater is None:
-        return
-        await self.application.updater.stop()
-        await self.application.stop()
-        await self.application.shutdown()
 
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
@@ -813,33 +804,36 @@ if os.path.exists(db_path):
 
 #🤖BOT
 def main():
+    global bot
     try:
         verify_import_library()
 
         if(bot_service=='tgram'):
             #StartTheBot
-            application = Application.builder().token(bot_token).post_init(post_init).build()
+            bot = Application.builder().token(bot_token).post_init(post_init).build()
             #BotMenu
-            application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
-            application.add_handler(MessageHandler(filters.Regex('/bal'), account_balance_command))
-            application.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
-            application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
-            application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), exchange_switch_command))
-            application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
-            application.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
-            application.add_handler(MessageHandler(filters.Regex('/coin'), get_tokeninfo_command))
-            application.add_handler(MessageHandler(filters.Regex('/t1'), search_gecko))
-            application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
-            application.add_error_handler(error_handler)
+            bot.add_handler(MessageHandler(filters.Regex('/help'), help_command))
+            bot.add_handler(MessageHandler(filters.Regex('/bal'), account_balance_command))
+            bot.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
+            bot.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), exchange_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
+            bot.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex('/coin'), get_tokeninfo_command))
+            bot.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
+            bot.add_handler(MessageHandler(filters.Regex('/t1'), search_gecko))
+            bot.add_error_handler(error_handler)
             #Run the bot
-            application.run_polling(drop_pending_updates=True)
+            bot.run_polling(drop_pending_updates=True)
         elif(bot_service=='discord'):
             #StartTheBot
             intents = discord.Intents.default()
             intents.message_content = True
-            bot = commands.Bot(command_prefix='/', intents=intents)
+            bot = commands.Bot(command_prefix='!', intents=intents)
             #BotMenu
-
+            @bot.event
+            async def ping(ctx):
+                await ctx.send("Pong")
             #Run the bot
             bot.run(bot_token)
         elif(bot_service=='matrix'):
