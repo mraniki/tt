@@ -1,4 +1,4 @@
-name: 🥷🐳 Nightly Docker
+name: 🥷🐳 Nightly
 
 on:
   push:

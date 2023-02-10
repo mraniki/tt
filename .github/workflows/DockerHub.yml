@@ -1,4 +1,4 @@
-name: 🐳 Latest Docker
+name: 🐳 Latest
 
 on:
   push:

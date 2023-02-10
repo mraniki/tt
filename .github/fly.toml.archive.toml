@@ -15,10 +15,6 @@ processes = []
   allowed_public_ports = []
   auto_rollback = false
 
-#[mounts]
-#  destination = "/code/config"
-#  source = "myapp_data"
-
 [[services]]
   http_checks = []
   internal_port = 8443
