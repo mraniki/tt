@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.31"
+TTversion="🪙TT Beta 1.2.32"
 ##=============== import  =============
 ##log
 import logging
@@ -749,13 +749,6 @@ async def testmode_switch_command(update: Update, context: ContextTypes.DEFAULT_
 async def restart_command(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
-async def stop_command(self) -> None:
-    if self.application is None or self.application.updater is None:
-        return
-        await self.application.updater.stop()
-        await self.application.stop()
-        await self.application.shutdown()
-
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
     tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
@@ -827,8 +820,8 @@ def main():
             bot.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
             bot.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
             bot.add_handler(MessageHandler(filters.Regex('/coin'), get_tokeninfo_command))
-            bot.add_handler(MessageHandler(filters.Regex('/t1'), search_gecko))
             bot.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
+            bot.add_handler(MessageHandler(filters.Regex('/t1'), search_gecko))
             bot.add_error_handler(error_handler)
             #Run the bot
             bot.run_polling(drop_pending_updates=True)
