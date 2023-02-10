@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.30"
+TTversion="🪙TT Beta 1.2.31"
 ##=============== import  =============
 ##log
 import logging
@@ -15,6 +15,11 @@ import json, requests
 import telegram
 from telegram import Update, constants
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
+#otherchatbotplatform
+from nio import AsyncClient, MatrixRoom, RoomMessageText
+import asyncio
+import discord
+from discord.ext import commands
 #notification
 import apprise
 #db
@@ -29,7 +34,6 @@ from web3 import Web3
 from web3.contract import Contract
 from ens import ENS 
 from web3.middleware import geth_poa_middleware
-#from pywalletconnect.client import WCClient
 from typing import List
 import time
 from datetime import datetime
@@ -149,6 +153,7 @@ async def send (self, messaging):
 
 async def notify(messaging):
     apobj = apprise.Apprise()
+
     if (bot_token is not None):
         apobj.add('tgram://' + str(bot_token) + "/" + str(bot_channel_id))
         try:
@@ -788,6 +793,7 @@ if os.path.exists(db_path):
         dex_db = db.table('dex')
         bot = bot_db.search(q.env == defaultenv)
         logger.debug(msg=f"{bot}")
+        bot_service = bot[0]['service']
         bot_token = bot[0]['token']
         bot_channel_id = bot[0]['channel']
         bot_trading_switch = True
@@ -809,25 +815,44 @@ def main():
     try:
         verify_import_library()
 
-#Starting Bot
-        application = Application.builder().token(bot_token).post_init(post_init).build()
-#BotMenu
-        application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
-        application.add_handler(MessageHandler(filters.Regex('/bal'), account_balance_command))
-        application.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
-        application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
-        application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), exchange_switch_command))
-        application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
-        application.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
-        application.add_handler(MessageHandler(filters.Regex('/coin'), get_tokeninfo_command))
-        application.add_handler(MessageHandler(filters.Regex('/t1'), search_gecko))
-        application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
-        application.add_error_handler(error_handler)
-#Run the bot
-        application.run_polling(drop_pending_updates=True)
+        if(bot_service=='tgram'):
+            #StartTheBot
+            application = Application.builder().token(bot_token).post_init(post_init).build()
+            #BotMenu
+            application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
+            application.add_handler(MessageHandler(filters.Regex('/bal'), account_balance_command))
+            application.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
+            application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
+            application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), exchange_switch_command))
+            application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
+            application.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
+            application.add_handler(MessageHandler(filters.Regex('/coin'), get_tokeninfo_command))
+            application.add_handler(MessageHandler(filters.Regex('/t1'), search_gecko))
+            application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
+            application.add_error_handler(error_handler)
+            #Run the bot
+            application.run_polling(drop_pending_updates=True)
+        elif(bot_service=='discord'):
+            #StartTheBot
+            intents = discord.Intents.default()
+            intents.message_content = True
+            bot = commands.Bot(command_prefix='/', intents=intents)
+            #BotMenu
+
+            #Run the bot
+            bot.run(bot_token)
+        elif(bot_service=='matrix'):
+            #StartTheBot
+            client = AsyncClient("https://matrix.example.org", "@xxx:example.org")
+            #BotMenu
+
+            #Run the bot
+            asyncio.run(main())
+        else:
+            logger.error(msg="Bot failed to start. Error: " + str(e))
 
     except Exception as e:
-        logger.info(msg="Bot failed to start. Error: " + str(e))
+        logger.error(msg="Bot failed to start. Error: " + str(e))
 
 
 if __name__ == '__main__':
