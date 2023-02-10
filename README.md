@@ -72,7 +72,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Handle libraries exceptions in one function and notification delivery with apprise 
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
- - Support config file as variable to deploy on cloud platform (like northflank or fly.io)
+ - Support config file as variable to deploy on cloud platform (like northflank, render or fly.io)
  - Create DB if it is missing and connect to default DEX
  - Support bot restart capability
  - Support standard json [tokenlist.org](tokenlist.org) search for testnet DEX support
