@@ -748,6 +748,7 @@ async def testmode_switch_command(update: Update, context: ContextTypes.DEFAULT_
 
 async def restart_command(application: Application, update: Update) -> None:
     logger.info(msg=f"restarting ")
+    application.shutdown()
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
 async def stop_command(self) -> None:
@@ -843,7 +844,7 @@ def main():
             bot.run(bot_token)
         elif(bot_service=='matrix'):
             #StartTheBot
-            client = AsyncClient("https://matrix.example.org", "@xxx:example.org")
+            bot = AsyncClient("https://matrix.example.org", "@xxx:example.org")
             #BotMenu
 
             #Run the bot
