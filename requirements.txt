@@ -7,3 +7,5 @@ apprise
 pycoingecko
 ping3
 tornado
+matrix-nio
+discord

@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.30"
+TTversion="🪙TT Beta 1.2.32"
 ##=============== import  =============
 ##log
 import logging
@@ -15,6 +15,11 @@ import json, requests
 import telegram
 from telegram import Update, constants
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
+#otherchatbotplatform
+from nio import AsyncClient, MatrixRoom, RoomMessageText
+import asyncio
+import discord
+from discord.ext import commands
 #notification
 import apprise
 #db
@@ -29,7 +34,6 @@ from web3 import Web3
 from web3.contract import Contract
 from ens import ENS 
 from web3.middleware import geth_poa_middleware
-#from pywalletconnect.client import WCClient
 from typing import List
 import time
 from datetime import datetime
@@ -39,11 +43,12 @@ from pycoingecko import CoinGeckoAPI
 load_dotenv()
 
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 #🔗API
 gecko_api = CoinGeckoAPI()
+llama_api = f"https://api.llama.fi/"
 dex_1inch_api = f"https://api.1inch.exchange/v5.0"
 exchangerate_api = f"https://api.exchangerate.host"
 
@@ -148,6 +153,7 @@ async def send (self, messaging):
 
 async def notify(messaging):
     apobj = apprise.Apprise()
+
     if (bot_token is not None):
         apobj.add('tgram://' + str(bot_token) + "/" + str(bot_channel_id))
         try:
@@ -278,7 +284,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             asset_in_address= await search_gecko_contract(asset_in_symbol)
             order_path_dex=[asset_out_address, asset_in_address]
             asset_out_decimals=asset_out_contract.functions.decimals().call()
-            asset_out_balance=fetch_user_token_balance(asset_out_symbol)
+            asset_out_balance=await fetch_user_token_balance(asset_out_symbol)
             if (asset_out_balance <=0):
                 msg=f"Balance for {asset_out_symbol} is {asset_out_balance}"
                 await handle_exception(msg)
@@ -447,6 +453,7 @@ async def fetch_user_token_balance(token):
         token_address= await search_gecko_contract(token)
         token_abi= await fetch_abi_dex(asset_out_address)
         token_contract = ex.eth.contract(address=token_address, abi=token_abi)
+        logger.debug(msg=f"token_contract {token_contract}")
         token_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
         if ((token_balance <=0) or token_balance==None):
             return 0
@@ -527,7 +534,7 @@ async def search_gecko_detailed(token):
 
 async def search_gecko_contract(token):
     try:
-        if (ex_test_mode):
+        if (ex_test_mode=='True'):
             logger.info(msg=f"📝 test contract search")
             coin_contract = await search_test_contract(token)
             logger.info(msg=f"📝 contract {token} {coin_contract}")
@@ -594,9 +601,9 @@ async def get_account_balance():
             sbal = ""
             for iterator in bal:
                 sbal += (f"{iterator}: {bal[iterator]} \n")
-                if(sbal == ""):
-                    sbal = "No Balance"
-                msg += f"\n{sbal}"       
+            if(sbal == ""):
+                sbal = "No Balance"
+            msg += f"\n{sbal}"       
         elif (isinstance(ex,web3.main.Web3)):
             bal = ex.eth.get_balance(walletaddress)
             bal = round(ex.from_wei(bal,'ether'),5)
@@ -739,16 +746,8 @@ async def testmode_switch_command(update: Update, context: ContextTypes.DEFAULT_
     message = f"Test mode is {ex_test_mode}"
     await send(update, message)
 
-async def restart_command(application: Application, update: Update) -> None:
-    logger.info(msg=f"restarting ")
+async def restart_command(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
-
-async def stop_command(self) -> None:
-    if self.application is None or self.application.updater is None:
-        return
-        await self.application.updater.stop()
-        await self.application.stop()
-        await self.application.shutdown()
 
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.error(msg="Exception:", exc_info=context.error)
@@ -786,13 +785,9 @@ if os.path.exists(db_path):
         dex_db = db.table('dex')
         bot = bot_db.search(q.env == defaultenv)
         logger.debug(msg=f"{bot}")
+        bot_service = bot[0]['service']
         bot_token = bot[0]['token']
         bot_channel_id = bot[0]['channel']
-        bot_webhook_port = bot[0]['port']
-        bot_webhook_secret = bot[0]['secret_token']
-        bot_webhook_privatekey = bot[0]['key']
-        bot_webhook_certificate = bot[0]['cert']
-        bot_webhook_url = bot[0]['webhook_url']
         bot_trading_switch = True
         if (bot_token == ""):
             logger.error("no bot token in the DB,failover process with sample DB")
@@ -809,28 +804,50 @@ if os.path.exists(db_path):
 
 #🤖BOT
 def main():
+    global bot
     try:
         verify_import_library()
 
-#Starting Bot
-        application = Application.builder().token(bot_token).post_init(post_init).build()
-#BotMenu
-        application.add_handler(MessageHandler(filters.Regex('/help'), help_command))
-        application.add_handler(MessageHandler(filters.Regex('/bal'), account_balance_command))
-        application.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
-        application.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
-        application.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), exchange_switch_command))
-        application.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
-        application.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
-        application.add_handler(MessageHandler(filters.Regex('/coin'), get_tokeninfo_command))
-        application.add_handler(MessageHandler(filters.Regex('/t1'), search_gecko))
-        application.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
-        application.add_error_handler(error_handler)
-#Run the bot
-        application.run_polling(drop_pending_updates=True)
+        if(bot_service=='tgram'):
+            #StartTheBot
+            bot = Application.builder().token(bot_token).post_init(post_init).build()
+            #BotMenu
+            bot.add_handler(MessageHandler(filters.Regex('/help'), help_command))
+            bot.add_handler(MessageHandler(filters.Regex('/bal'), account_balance_command))
+            bot.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
+            bot.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), exchange_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
+            bot.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex('/coin'), get_tokeninfo_command))
+            bot.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
+            bot.add_handler(MessageHandler(filters.Regex('/t1'), search_gecko))
+            bot.add_error_handler(error_handler)
+            #Run the bot
+            bot.run_polling(drop_pending_updates=True)
+        elif(bot_service=='discord'):
+            #StartTheBot
+            intents = discord.Intents.default()
+            intents.message_content = True
+            bot = commands.Bot(command_prefix='!', intents=intents)
+            #BotMenu
+            @bot.event
+            async def ping(ctx):
+                await ctx.send("Pong")
+            #Run the bot
+            bot.run(bot_token)
+        elif(bot_service=='matrix'):
+            #StartTheBot
+            bot = AsyncClient("https://matrix.example.org", "@xxx:example.org")
+            #BotMenu
+
+            #Run the bot
+            asyncio.run(main())
+        else:
+            logger.error(msg="Bot failed to start. Error: " + str(e))
 
     except Exception as e:
-        logger.info(msg="Bot failed to start. Error: " + str(e))
+        logger.error(msg="Bot failed to start. Error: " + str(e))
 
 
 if __name__ == '__main__':

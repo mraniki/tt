@@ -1,4 +1,4 @@
-name: 🥷🐳 Nightly Docker
+name: 🐳🥷 Nightly
 
 on:
   push:
@@ -11,8 +11,9 @@ jobs:
     name: 🐳 Build and Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     permissions:
-      packages: write
       contents: read
+      packages: write
+      id-token: write
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3.3.0

@@ -2,7 +2,7 @@ name: 🚀 Deploy
 
 on:
   workflow_run:
-    workflows: ["🥷🐳 Nightly Docker"]
+    workflows: ["🥷🐳 Nightly"]
     branches: [ "dev" ]
     types: 
       - completed

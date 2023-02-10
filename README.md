@@ -72,7 +72,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Handle libraries exceptions in one function and notification delivery with apprise 
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
- - Support config file as variable to deploy on cloud platform (like northflank or fly.io)
+ - Support config file as variable to deploy on cloud platform (like northflank, render or fly.io)
  - Create DB if it is missing and connect to default DEX
  - Support bot restart capability
  - Support standard json [tokenlist.org](tokenlist.org) search for testnet DEX support
@@ -90,21 +90,21 @@ Quick start approach: Update the sample db with your parameters and save it as d
 
 ### v1.4
 - Support limit order for DEX (1inch and v3)
+- Support DEX limit order if supported like dydx / Kwenta / GMX
 
 ### v1.5
 
-- Review DEX private key strategy (wallet authentification)
+- Support futures and margin for CEX (to be tested via CCXT)
+- Support STOPLOSS TAKEPROFIT for CEX
+- view free margin for futures in /bal
+- view opened position via /pos (futures and limit order)
+- create / modify db via bot chat nested conversation
 
 ### v2 backlog
 
-- Support DEX limit order if supported like dydx / Kwenta / GMX
+- Review DEX private key strategy (wallet authentification, pywalletconnect?)
 - Support Web3 ENS
-- Support futures and margin for CEX (to be tested via CCXT)
-- Support STOPLOSS TAKEPROFIT for CEX
-- create / modify db via bot chat nested conversation
 - view daily pnl in /bal response
-- view free margin for futures in /bal
-- view opened position via /pos (futures and limit order)
 - Support bot in webhook instead of getupdate
 - View weekly pnl with /w command and scheduling
 

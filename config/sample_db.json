@@ -99,7 +99,7 @@
             "name": "uniswap_v2",
             "walletaddress": "abc",
             "privatekey": "abc",
-            "version": "uni_v2",
+            "version": "uni_v3",
             "networkprovider": "ethereum.publicnode.com",
             "router": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
             "testmode": "False",
