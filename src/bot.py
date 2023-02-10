@@ -44,6 +44,7 @@ logger = logging.getLogger(__name__)
 
 #🔗API
 gecko_api = CoinGeckoAPI()
+llama_api = f"https://api.llama.fi/"
 dex_1inch_api = f"https://api.1inch.exchange/v5.0"
 exchangerate_api = f"https://api.exchangerate.host"
 
