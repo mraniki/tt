@@ -594,9 +594,9 @@ async def get_account_balance():
             sbal = ""
             for iterator in bal:
                 sbal += (f"{iterator}: {bal[iterator]} \n")
-                if(sbal == ""):
-                    sbal = "No Balance"
-                msg += f"\n{sbal}"       
+            if(sbal == ""):
+                sbal = "No Balance"
+            msg += f"\n{sbal}"       
         elif (isinstance(ex,web3.main.Web3)):
             bal = ex.eth.get_balance(walletaddress)
             bal = round(ex.from_wei(bal,'ether'),5)
@@ -788,11 +788,6 @@ if os.path.exists(db_path):
         logger.debug(msg=f"{bot}")
         bot_token = bot[0]['token']
         bot_channel_id = bot[0]['channel']
-        bot_webhook_port = bot[0]['port']
-        bot_webhook_secret = bot[0]['secret_token']
-        bot_webhook_privatekey = bot[0]['key']
-        bot_webhook_certificate = bot[0]['cert']
-        bot_webhook_url = bot[0]['webhook_url']
         bot_trading_switch = True
         if (bot_token == ""):
             logger.error("no bot token in the DB,failover process with sample DB")
