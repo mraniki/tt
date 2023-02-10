@@ -39,7 +39,7 @@ from pycoingecko import CoinGeckoAPI
 load_dotenv()
 
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 #🔗API
@@ -279,7 +279,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             asset_in_address= await search_gecko_contract(asset_in_symbol)
             order_path_dex=[asset_out_address, asset_in_address]
             asset_out_decimals=asset_out_contract.functions.decimals().call()
-            asset_out_balance=fetch_user_token_balance(asset_out_symbol)
+            asset_out_balance=await fetch_user_token_balance(asset_out_symbol)
             if (asset_out_balance <=0):
                 msg=f"Balance for {asset_out_symbol} is {asset_out_balance}"
                 await handle_exception(msg)
@@ -448,6 +448,7 @@ async def fetch_user_token_balance(token):
         token_address= await search_gecko_contract(token)
         token_abi= await fetch_abi_dex(asset_out_address)
         token_contract = ex.eth.contract(address=token_address, abi=token_abi)
+        logger.debug(msg=f"token_contract {token_contract}")
         token_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
         if ((token_balance <=0) or token_balance==None):
             return 0
@@ -528,7 +529,7 @@ async def search_gecko_detailed(token):
 
 async def search_gecko_contract(token):
     try:
-        if (ex_test_mode):
+        if (ex_test_mode=='True'):
             logger.info(msg=f"📝 test contract search")
             coin_contract = await search_test_contract(token)
             logger.info(msg=f"📝 contract {token} {coin_contract}")
