@@ -150,8 +150,10 @@ async def send (self, messaging):
         if(bot_service=='tgram'):
             await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
         elif(bot_service=='discord'):
-            return
+            logger.debug(msg=f"message {bot_service}")
+            await self.send(messaging)
         elif(bot_service=='matrix'):
+            logger.debug(msg=f"message {bot_service}")
             return
     except Exception as e:
         await handle_exception(e)
@@ -598,6 +600,7 @@ async def fetch_gecko_quote(token):
 #🔒PRIVATE
 async def get_account_balance():
     try:
+        logger.debug(msg=f"get_account_balance ECHO")
         msg = ""
         if not isinstance(ex,web3.main.Web3):
             bal = ex.fetch_free_balance()
@@ -609,12 +612,15 @@ async def get_account_balance():
                 sbal = "No Balance"
             msg += f"\n{sbal}"       
         elif (isinstance(ex,web3.main.Web3)):
+            logger.debug(msg=f"WEB3 BALANCE ECHO")
             bal = ex.eth.get_balance(walletaddress)
+            logger.debug(msg=f"message {bal}")
             bal = round(ex.from_wei(bal,'ether'),5)
             basesymbol_bal = round(ex.from_wei(await fetch_user_token_balance(basesymbol),'ether'),5)
             msg += f"\n💲{bal} \n💵{basesymbol_bal} {basesymbol}"
+            logger.debug(msg=f"message {msg}")
         else:
-            msg += "0"
+            msg += 0
         return msg
     except Exception as e:
         return
@@ -685,7 +691,7 @@ helpcommand = """
 
 📦
 <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
-<code>buy cake</code>
+`buy cake`
 
 🦎
 <code>/q BTCB</code> 
@@ -707,10 +713,20 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     msg= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     await send(update,msg)
 
+async def help_command1() -> None:
+    bot_ping = await verify_latency_ex()
+    msg= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
+    return msg
+
 async def account_balance_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     balance =f"🏦 Balance"
     balance += await get_account_balance()
     await send(update,balance)
+
+async def account_balance_command1(self, context) -> None:
+    balance =f"🏦 Balance"
+    balance += await get_account_balance()
+    await send(self,balance)
 
 async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
@@ -800,11 +816,16 @@ if os.path.exists(db_path):
         dex_db = db.table('dex')
         bot = bot_db.search(q.env == defaultenv)
         logger.debug(msg=f"{bot}")
+        bot_trading_switch = True
         bot_service = bot[0]['service']
         bot_token = bot[0]['token']
         bot_channel_id = bot[0]['channel']
         bot_trading_switch = True
-        if (bot_token == ""):
+        if (bot_service=='matrix'):
+            bot_domain = bot[0]['domain']
+            bot_user = bot[0]['user']
+            bot_pass= bot[0]['pass']
+        if ((bot_service=='tgram' or bot_service=='discord') & (bot_token == "")):
             logger.error("no bot token in the DB,failover process with sample DB")
             contingency_db_path = './config/sample_db.json'
             os.rename(contingency_db_path, db_path)
@@ -845,23 +866,28 @@ def main():
             intents = discord.Intents.default()
             intents.message_content = True
             bot = commands.Bot(command_prefix='!', intents=intents)
-            #BotMenu
             @bot.event
-            async def help():
-                await help_command
+            async def on_ready():
+                logger.debug(msg=f"Logged in as {bot.user} (ID: {bot.user.id})")
+            #BotMenu
+            @bot.command()
+            async def echo(ctx):
+                msg = await help_command1(bot,ctx)
+                await ctx.send(msg)
             #Run the bot
             bot.run(bot_token)
         elif(bot_service=='matrix'):
             #StartTheBot
-            creds = botlib.Creds("https://matrix-client.matrix.org", "TT", "pass")
-            bot = botlib.Bot(creds)
-            PREFIX = '/'
+            config = botlib.Config()
+            config.encryption_enabled = True
+            config.emoji_verify = False
+            config.ignore_unverified_devices = True
+            creds = botlib.Creds(bot_domain, bot_user, bot_pass)
+            bot = botlib.Bot(creds,config)
             #BotMenu
             @bot.listener.on_message_event
-            async def echo(room, message):
-                match = botlib.MessageMatch(room, message, bot, PREFIX)
-                if match.is_not_from_this_bot() and match.prefix() and match.command("echo"):
-                    await bot.api.send_text_message(room.room_id, " ".join(arg for arg in match.args()))
+            async def echo(message):
+                await bot.api.send_text_message(bot_channel_id, "ECHO")
             #Run the bot
             bot.run()
         else:
