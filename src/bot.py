@@ -15,6 +15,9 @@ import json, requests
 import telegram
 from telegram import Update, constants
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
+import telethon
+from telethon import TelegramClient, events
+from collections import defaultdict
 #matrix
 import simplematrixbotlib as botlib
 #discord
@@ -58,6 +61,8 @@ def verify_import_library():
     logger.debug(msg=f"Python {sys.version}")
     logger.debug(msg=f"TinyDB {tinydb.__version__}")
     logger.debug(msg=f"TPB {telegram.__version__}")
+    logger.debug(msg=f"TLT {telethon.__version__}")
+    logger.debug(msg=f"DSC {discord.__version__}")
     logger.debug(msg=f"CCXT {ccxt.__version__}")
     logger.debug(msg=f"Web3 {web3.__version__}")
     logger.debug(msg=f"apprise {apprise.__version__}")
@@ -150,11 +155,12 @@ async def send (self, messaging):
         if(bot_service=='tgram'):
             await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
         elif(bot_service=='discord'):
-            logger.debug(msg=f"message {bot_service}")
             await self.send(messaging)
         elif(bot_service=='matrix'):
-            logger.debug(msg=f"message {bot_service}")
             await bot.api.send_text_message(bot_channel_id, messaging)
+            return
+        elif(bot_service=='telethon'):
+            await bot.send_message(bot_channel_id, messaging)
             return
     except Exception as e:
         await handle_exception(e)
@@ -166,7 +172,7 @@ async def notify(messaging):
     elif (bot_service =='discord'):
         apobj.add(f'{bot_service}://' + str(bot_webhook_id) + "/" + str(bot_webhook_token))
     elif (bot_service =='matrix'):
-        apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@matrix.org:80/"+bot_channel_id)
+        apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@matrix.org:80/" + bot_channel_id)
     else:
         logger.error(msg=f"not delivered {messaging}")
     try:
@@ -834,7 +840,10 @@ if os.path.exists(db_path):
             bot_hostname = bot[0]['hostname']
             bot_user = bot[0]['user']
             bot_pass= bot[0]['pass']
-        if ((bot_service=='tgram' or bot_service=='discord') & (bot_token == "")): #or ((bot_service=='matrix') & (bot_pass == ""))):
+        if (bot_service=='telethon'):
+            bot_api_id = bot[0]['api_id']
+            bot_api_hash = bot[0]['api_hash']
+        if ((bot_service=='tgram') & (bot_token == "")): #or ((bot_service=='matrix') & (bot_pass == ""))):
             logger.error("Failover process with sample DB")
             contingency_db_path = './config/sample_db.json'
             os.rename(contingency_db_path, db_path)
@@ -846,6 +855,14 @@ if os.path.exists(db_path):
                 sys.exit()
     except Exception as e:
         logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
+
+
+
+@events.register(events.NewMessage)
+async def handler(event):
+    print('Message', event.id, 'changed at', event.date)
+
+
 
 #🤖BOT
 def main():
@@ -902,11 +919,19 @@ def main():
                 await send(bot,msg)
             #Run the bot
             bot.run()
+        elif(bot_service=='telethon'):
+            bot = TelegramClient('bot', bot_api_id, bot_api_hash)
+            bot.start(bot_token=bot_token)
+            with bot:
+                bot.add_event_handler(handler)
+                bot.run_until_disconnected()
+
         else:
-            logger.error(msg="Bot failed to start. Error: " + str(e))
+            logger.error(msg=f" Bot failed to start. Error: " + str(e))
+
 
     except Exception as e:
-        logger.error(msg="Bot failed to start. Error: " + str(e))
+        logger.error(msg="FAILURE Error: " + str(e))
 
 
 if __name__ == '__main__':

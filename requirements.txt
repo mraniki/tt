@@ -1,5 +1,8 @@
 python-dotenv>=0.20.0
 python-telegram-bot>=20.0
+telethon
+simplematrixbotlib
+discord
 tinydb
 ccxt
 web3>=v6.0.0-beta.8
@@ -7,5 +10,4 @@ apprise
 pycoingecko
 ping3
 tornado
-simplematrixbotlib
-discord
+
