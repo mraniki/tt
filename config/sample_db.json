@@ -3,7 +3,7 @@
     {
         "1":
         {
-            "defaultenv": "PRD",
+            "defaultenv": "TT01",
             "defaultex": "pancake",
             "defaulttestmode":"True"
         }
@@ -12,29 +12,33 @@
     {
         "1":
         {
-            "service":"telegram",
+            "service":"tgram",
             "token": "",
             "channel": "",
-            "env": "TEST",
-            "port":"8443",
-            "secret_token":"ASecretTokenIHaveChangedByNow",
-            "key":"private.key",
-            "cert":"cert.pem",
-            "webhook_url":"https://example.com:8443",
-            "domain":"abc"
+            "env": "TT01",
+            "hostname":"",
+            "user": "",
+            "pass": ""
         },
         "2":
         {
-            "service":"telegram",
-            "token": "YOURBOTTOKEN",
-            "channel": "YOURCHANNELID",
-            "env": "PRD",
-            "port":"8443",
-            "secret_token":"ASecretTokenIHaveChangedByNow",
-            "key":"private.key",
-            "cert":"cert.pem",
-            "webhook_url":"https://example.com:8443",
-            "domain":"abc"
+            "service":"discord",
+            "token": "",
+            "channel": "",
+            "env": "DISCORD01",
+            "hostname":"",
+            "user": "",
+            "pass": ""
+        },
+        "3":
+        {
+            "service":"matrix",
+            "token": "",
+            "channel": "",
+            "env": "NEO01",
+            "hostname":"https://matrix.org",
+            "user": "",
+            "pass": ""
         }
     },
     "cex":

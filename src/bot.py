@@ -15,9 +15,9 @@ import json, requests
 import telegram
 from telegram import Update, constants
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
-#otherchatbotplatform
-from nio import AsyncClient, MatrixRoom, RoomMessageText
-import asyncio
+#matrix
+import simplematrixbotlib as botlib
+#discord
 import discord
 from discord.ext import commands
 #notification
@@ -147,21 +147,33 @@ async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
 #💬MESSAGING
 async def send (self, messaging):
     try:
-        await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
+        if(bot_service=='tgram'):
+            await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
+        elif(bot_service=='discord'):
+            logger.debug(msg=f"message {bot_service}")
+            await self.send(messaging)
+        elif(bot_service=='matrix'):
+            logger.debug(msg=f"message {bot_service}")
+            await bot.api.send_text_message(bot_channel_id, messaging)
+            return
     except Exception as e:
         await handle_exception(e)
 
 async def notify(messaging):
     apobj = apprise.Apprise()
-
-    if (bot_token is not None):
-        apobj.add('tgram://' + str(bot_token) + "/" + str(bot_channel_id))
-        try:
-            apobj.notify(body=messaging)
-        except Exception as e:
-            logger.error(msg=f"delivered: {e}")
+    if (bot_service =='tgram'):
+        apobj.add(f'{bot_service}://' + str(bot_token) + "/" + str(bot_channel_id))
+    elif (bot_service =='discord'):
+        apobj.add(f'{bot_service}://' + str(bot_webhook_id) + "/" + str(bot_webhook_token))
+    elif (bot_service =='matrix'):
+        apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@matrix.org:80/"+bot_channel_id)
     else:
         logger.error(msg=f"not delivered {messaging}")
+    try:
+        apobj.notify(body=messaging)
+    except Exception as e:
+        logger.error(msg=f"delivered: {e}")
+
 
 #💱EXCHANGE
 async def search_exchange(searched_data):
@@ -594,6 +606,7 @@ async def fetch_gecko_quote(token):
 #🔒PRIVATE
 async def get_account_balance():
     try:
+        logger.debug(msg=f"get_account_balance ECHO")
         msg = ""
         if not isinstance(ex,web3.main.Web3):
             bal = ex.fetch_free_balance()
@@ -605,12 +618,15 @@ async def get_account_balance():
                 sbal = "No Balance"
             msg += f"\n{sbal}"       
         elif (isinstance(ex,web3.main.Web3)):
+            logger.debug(msg=f"WEB3 BALANCE ECHO")
             bal = ex.eth.get_balance(walletaddress)
+            logger.debug(msg=f"message {bal}")
             bal = round(ex.from_wei(bal,'ether'),5)
             basesymbol_bal = round(ex.from_wei(await fetch_user_token_balance(basesymbol),'ether'),5)
             msg += f"\n💲{bal} \n💵{basesymbol_bal} {basesymbol}"
+            logger.debug(msg=f"message {msg}")
         else:
-            msg += "0"
+            msg += 0
         return msg
     except Exception as e:
         return
@@ -660,8 +676,19 @@ async def handle_exception(e) -> None:
 """
 
 #🦾BOT COMMAND
-
-fullcommandlist = """
+PREFIX = "/"
+command00 = "!t"
+command01 = "/help"
+command02 = "/bal"
+command03 = "/pos"
+command04 = "/q"
+command05 = "/coin"
+command06 = "/trading"
+command07 = "/testmode"
+command08 = "/restart"
+command09 = "(?:cex|dex)"
+command10 = "(?:buy|Buy|BUY|sell|Sell|SELL)"
+helpcommand = """
 🏦<code>/bal</code>
 
 🏛️ <code>/cex kraken</code>
@@ -670,7 +697,7 @@ fullcommandlist = """
 
 📦
 <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
-<code>buy cake</code>
+`buy cake`
 
 🦎
 <code>/q BTCB</code> 
@@ -680,7 +707,7 @@ fullcommandlist = """
 🔀
 <code>/trading</code>
 <code>/testmode</code>"""
-bot_menu_help = f"{TTversion} \n {fullcommandlist}"
+bot_menu_help = f"{TTversion} \n {helpcommand}"
 
 async def post_init(application: Application):
     message=f"Bot is online {TTversion}"
@@ -692,10 +719,20 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     msg= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     await send(update,msg)
 
+async def help_command1() -> None:
+    bot_ping = await verify_latency_ex()
+    msg= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
+    await send(bot,msg)
+
 async def account_balance_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     balance =f"🏦 Balance"
     balance += await get_account_balance()
     await send(update,balance)
+
+async def account_balance_command1(self, context) -> None:
+    balance =f"🏦 Balance"
+    balance += await get_account_balance()
+    await send(self,balance)
 
 async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
@@ -785,12 +822,20 @@ if os.path.exists(db_path):
         dex_db = db.table('dex')
         bot = bot_db.search(q.env == defaultenv)
         logger.debug(msg=f"{bot}")
+        bot_trading_switch = True
         bot_service = bot[0]['service']
         bot_token = bot[0]['token']
         bot_channel_id = bot[0]['channel']
         bot_trading_switch = True
-        if (bot_token == ""):
-            logger.error("no bot token in the DB,failover process with sample DB")
+        if (bot_service=='discord'):
+            bot_webhook_id = bot[0]['webhook_id']
+            bot_webhook_token = bot[0]['webhook_token']
+        if (bot_service=='matrix'):
+            bot_hostname = bot[0]['hostname']
+            bot_user = bot[0]['user']
+            bot_pass= bot[0]['pass']
+        if ((bot_service=='tgram' or bot_service=='discord') & (bot_token == "")): #or ((bot_service=='matrix') & (bot_pass == ""))):
+            logger.error("Failover process with sample DB")
             contingency_db_path = './config/sample_db.json'
             os.rename(contingency_db_path, db_path)
             try:
@@ -812,16 +857,16 @@ def main():
             #StartTheBot
             bot = Application.builder().token(bot_token).post_init(post_init).build()
             #BotMenu
-            bot.add_handler(MessageHandler(filters.Regex('/help'), help_command))
-            bot.add_handler(MessageHandler(filters.Regex('/bal'), account_balance_command))
-            bot.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
-            bot.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
-            bot.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), exchange_switch_command))
-            bot.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
-            bot.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
-            bot.add_handler(MessageHandler(filters.Regex('/coin'), get_tokeninfo_command))
-            bot.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
-            bot.add_handler(MessageHandler(filters.Regex('/t1'), search_gecko))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command01}'), help_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command02}'), account_balance_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command04}'), quote_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command05}'), get_tokeninfo_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command06}'), trading_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command07}'), testmode_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command08}'), restart_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command09}'), exchange_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command10}'), order_scanner))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command00}'), search_gecko))
             bot.add_error_handler(error_handler)
             #Run the bot
             bot.run_polling(drop_pending_updates=True)
@@ -830,19 +875,34 @@ def main():
             intents = discord.Intents.default()
             intents.message_content = True
             bot = commands.Bot(command_prefix='!', intents=intents)
-            #BotMenu
             @bot.event
-            async def ping(ctx):
-                await ctx.send("Pong")
+            async def on_ready():
+                logger.debug(msg=f"Logged in as {bot.user} (ID: {bot.user.id})")
+            #BotMenu
+            @bot.command()
+            async def echo(ctx):
+                msg = "ECHO DISCO"
+                await send(ctx, msg)
             #Run the bot
             bot.run(bot_token)
         elif(bot_service=='matrix'):
             #StartTheBot
-            bot = AsyncClient("https://matrix.example.org", "@xxx:example.org")
+            config = botlib.Config()
+            config.encryption_enabled = True
+            config.emoji_verify = True
+            # config.ignore_unverified_devices = True
+            config.store_path ='./config/store/'
+            creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
+            bot = botlib.Bot(creds,config)
+            PREFIX = '!'
             #BotMenu
-
+            @bot.listener.on_message_event
+            async def echo(room, message):
+                msg = "ECHO NEO"
+                await send(bot,msg)
+                #await bot.api.send_text_message(room.room_id, msg)
             #Run the bot
-            asyncio.run(main())
+            bot.run()
         else:
             logger.error(msg="Bot failed to start. Error: " + str(e))
 
