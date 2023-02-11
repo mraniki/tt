@@ -664,6 +664,7 @@ async def handle_exception(e) -> None:
 """
 
 #🦾BOT COMMAND
+command00 = "!t"
 command01 = "/help"
 command02 = "/bal"
 command03 = "/pos"
@@ -825,16 +826,16 @@ def main():
             #StartTheBot
             bot = Application.builder().token(bot_token).post_init(post_init).build()
             #BotMenu
-            bot.add_handler(MessageHandler(filters.Regex('/help'), help_command))
-            bot.add_handler(MessageHandler(filters.Regex('/bal'), account_balance_command))
-            bot.add_handler(MessageHandler(filters.Regex('/q'), quote_command))
-            bot.add_handler(MessageHandler(filters.Regex('/trading'), trading_switch_command))
-            bot.add_handler(MessageHandler(filters.Regex('(?:cex|dex)'), exchange_switch_command))
-            bot.add_handler(MessageHandler(filters.Regex('(?:buy|Buy|BUY|sell|Sell|SELL)'), order_scanner))
-            bot.add_handler(MessageHandler(filters.Regex('/testmode'), testmode_switch_command))
-            bot.add_handler(MessageHandler(filters.Regex('/coin'), get_tokeninfo_command))
-            bot.add_handler(MessageHandler(filters.Regex('/restart'), restart_command))
-            bot.add_handler(MessageHandler(filters.Regex('/t1'), search_gecko))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command01}'), help_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command02}'), account_balance_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command04}'), quote_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command05}'), get_tokeninfo_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command06}'), trading_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command07}'), testmode_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command08}'), restart_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command09}'), exchange_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command10}'), order_scanner))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command00}'), search_gecko))
             bot.add_error_handler(error_handler)
             #Run the bot
             bot.run_polling(drop_pending_updates=True)
@@ -845,8 +846,8 @@ def main():
             bot = commands.Bot(command_prefix='!', intents=intents)
             #BotMenu
             @bot.event
-            async def ping(ctx):
-                await ctx.send("Pong")
+            async def help():
+                await help_command
             #Run the bot
             bot.run(bot_token)
         elif(bot_service=='matrix'):
