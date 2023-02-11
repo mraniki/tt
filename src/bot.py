@@ -15,9 +15,9 @@ import json, requests
 import telegram
 from telegram import Update, constants
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
-#otherchatbotplatform
-from nio import AsyncClient, MatrixRoom, RoomMessageText
-import asyncio
+#matrix
+import simplematrixbotlib as botlib
+#discord
 import discord
 from discord.ext import commands
 #notification
@@ -147,15 +147,19 @@ async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
 #💬MESSAGING
 async def send (self, messaging):
     try:
-        await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
+        if(bot_service=='tgram'):
+            await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
+        elif(bot_service=='discord'):
+            return
+        elif(bot_service=='matrix'):
+            return
     except Exception as e:
         await handle_exception(e)
 
 async def notify(messaging):
     apobj = apprise.Apprise()
-
     if (bot_token is not None):
-        apobj.add('tgram://' + str(bot_token) + "/" + str(bot_channel_id))
+        apobj.add(f'{bot_service}://' + str(bot_token) + "/" + str(bot_channel_id))
         try:
             apobj.notify(body=messaging)
         except Exception as e:
@@ -660,8 +664,17 @@ async def handle_exception(e) -> None:
 """
 
 #🦾BOT COMMAND
-
-fullcommandlist = """
+command01 = "/help"
+command02 = "/bal"
+command03 = "/pos"
+command04 = "/q"
+command05 = "/coin"
+command06 = "/trading"
+command07 = "/testmode"
+command08 = "/restart"
+command09 = "(?:cex|dex)"
+command10 = "(?:buy|Buy|BUY|sell|Sell|SELL)"
+helpcommand = """
 🏦<code>/bal</code>
 
 🏛️ <code>/cex kraken</code>
@@ -680,7 +693,7 @@ fullcommandlist = """
 🔀
 <code>/trading</code>
 <code>/testmode</code>"""
-bot_menu_help = f"{TTversion} \n {fullcommandlist}"
+bot_menu_help = f"{TTversion} \n {helpcommand}"
 
 async def post_init(application: Application):
     message=f"Bot is online {TTversion}"
@@ -838,11 +851,17 @@ def main():
             bot.run(bot_token)
         elif(bot_service=='matrix'):
             #StartTheBot
-            bot = AsyncClient("https://matrix-client.matrix.org", "@xxx:example.org")
+            creds = botlib.Creds("https://matrix-client.matrix.org", "TT", "pass")
+            bot = botlib.Bot(creds)
+            PREFIX = '/'
             #BotMenu
-
+            @bot.listener.on_message_event
+            async def echo(room, message):
+                match = botlib.MessageMatch(room, message, bot, PREFIX)
+                if match.is_not_from_this_bot() and match.prefix() and match.command("echo"):
+                    await bot.api.send_text_message(room.room_id, " ".join(arg for arg in match.args()))
             #Run the bot
-            asyncio.run(main())
+            bot.run()
         else:
             logger.error(msg="Bot failed to start. Error: " + str(e))
 
