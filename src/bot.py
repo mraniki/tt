@@ -857,11 +857,10 @@ if os.path.exists(db_path):
         logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
 
 
-
-@events.register(events.NewMessage)
-async def handler(event):
-    print('Message', event.id, 'changed at', event.date)
-
+@events.register(events.NewMessage(pattern='/start'))
+async def start(event):
+    await event.respond('Hi!')
+    raise events.StopPropagation
 
 
 #🤖BOT
@@ -920,10 +919,9 @@ def main():
             #Run the bot
             bot.run()
         elif(bot_service=='telethon'):
-            bot = TelegramClient('bot', bot_api_id, bot_api_hash)
-            bot.start(bot_token=bot_token)
+            bot = TelegramClient('bot', bot_api_id, bot_api_hash).start(bot_token=bot_token)
             with bot:
-                bot.add_event_handler(handler)
+                bot.add_event_handler(start)
                 bot.run_until_disconnected()
 
         else:
