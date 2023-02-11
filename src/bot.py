@@ -900,7 +900,6 @@ def main():
             async def echo(room, message):
                 msg = "ECHO NEO"
                 await send(bot,msg)
-                #await bot.api.send_text_message(room.room_id, msg)
             #Run the bot
             bot.run()
         else:
