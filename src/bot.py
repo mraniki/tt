@@ -151,10 +151,10 @@ async def send (self, messaging):
             await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
         elif(bot_service=='discord'):
             logger.debug(msg=f"message {bot_service}")
-            await bot.send(messaging)
+            await self.send(messaging)
         elif(bot_service=='matrix'):
             logger.debug(msg=f"message {bot_service}")
-            await bot.api.send_text_message(room.room_id, messaging)
+            await bot.api.send_text_message(bot_channel_id, messaging)
             return
     except Exception as e:
         await handle_exception(e)
@@ -834,7 +834,7 @@ if os.path.exists(db_path):
             bot_hostname = bot[0]['hostname']
             bot_user = bot[0]['user']
             bot_pass= bot[0]['pass']
-        if ((bot_service=='tgram' or bot_service=='discord') & (bot_token == "") or ((bot_service=='matrix') & (bot_pass == ""))):
+        if ((bot_service=='tgram' or bot_service=='discord') & (bot_token == "")): #or ((bot_service=='matrix') & (bot_pass == ""))):
             logger.error("Failover process with sample DB")
             contingency_db_path = './config/sample_db.json'
             os.rename(contingency_db_path, db_path)
@@ -881,24 +881,26 @@ def main():
             #BotMenu
             @bot.command()
             async def echo(ctx):
-                msg = await help_command1()
-                await ctx.send(msg)
+                msg = "ECHO DISCO"
+                await send(ctx, msg)
             #Run the bot
             bot.run(bot_token)
         elif(bot_service=='matrix'):
             #StartTheBot
             config = botlib.Config()
             config.encryption_enabled = True
-            config.emoji_verify = False
-            config.ignore_unverified_devices = True
+            config.emoji_verify = True
+            # config.ignore_unverified_devices = True
+            config.store_path ='./config/store/'
             creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
             bot = botlib.Bot(creds,config)
             PREFIX = '!'
             #BotMenu
             @bot.listener.on_message_event
-            async def help(room, message):
-                msg = await help_command1()
-                await bot.api.send_text_message(room.room_id, msg)
+            async def echo(room, message):
+                msg = "ECHO NEO"
+                await send(bot,msg)
+                #await bot.api.send_text_message(room.room_id, msg)
             #Run the bot
             bot.run()
         else:
