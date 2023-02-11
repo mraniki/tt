@@ -664,6 +664,7 @@ async def handle_exception(e) -> None:
 """
 
 #🦾BOT COMMAND
+PREFIX = "/"
 command00 = "!t"
 command01 = "/help"
 command02 = "/bal"
