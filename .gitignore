@@ -5,3 +5,4 @@ config/.env
 config/db.json
 config/db1.json
 src/config/db.json
+src/session.txt

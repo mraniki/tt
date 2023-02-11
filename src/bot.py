@@ -151,23 +151,29 @@ async def send (self, messaging):
             await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
         elif(bot_service=='discord'):
             logger.debug(msg=f"message {bot_service}")
-            await self.send(messaging)
+            await bot.send(messaging)
         elif(bot_service=='matrix'):
             logger.debug(msg=f"message {bot_service}")
+            await bot.api.send_text_message(room.room_id, messaging)
             return
     except Exception as e:
         await handle_exception(e)
 
 async def notify(messaging):
     apobj = apprise.Apprise()
-    if (bot_token is not None):
+    if (bot_service =='tgram'):
         apobj.add(f'{bot_service}://' + str(bot_token) + "/" + str(bot_channel_id))
-        try:
-            apobj.notify(body=messaging)
-        except Exception as e:
-            logger.error(msg=f"delivered: {e}")
+    elif (bot_service =='discord'):
+        apobj.add(f'{bot_service}://' + str(bot_webhook_id) + "/" + str(bot_webhook_token))
+    elif (bot_service =='matrix'):
+        apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@matrix.org:80/"+bot_channel_id)
     else:
         logger.error(msg=f"not delivered {messaging}")
+    try:
+        apobj.notify(body=messaging)
+    except Exception as e:
+        logger.error(msg=f"delivered: {e}")
+
 
 #💱EXCHANGE
 async def search_exchange(searched_data):
@@ -716,7 +722,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def help_command1() -> None:
     bot_ping = await verify_latency_ex()
     msg= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
-    return msg
+    await send(bot,msg)
 
 async def account_balance_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     balance =f"🏦 Balance"
@@ -821,12 +827,15 @@ if os.path.exists(db_path):
         bot_token = bot[0]['token']
         bot_channel_id = bot[0]['channel']
         bot_trading_switch = True
+        if (bot_service=='discord'):
+            bot_webhook_id = bot[0]['webhook_id']
+            bot_webhook_token = bot[0]['webhook_token']
         if (bot_service=='matrix'):
-            bot_domain = bot[0]['domain']
+            bot_hostname = bot[0]['hostname']
             bot_user = bot[0]['user']
             bot_pass= bot[0]['pass']
-        if ((bot_service=='tgram' or bot_service=='discord') & (bot_token == "")):
-            logger.error("no bot token in the DB,failover process with sample DB")
+        if ((bot_service=='tgram' or bot_service=='discord') & (bot_token == "") or ((bot_service=='matrix') & (bot_pass == ""))):
+            logger.error("Failover process with sample DB")
             contingency_db_path = './config/sample_db.json'
             os.rename(contingency_db_path, db_path)
             try:
@@ -872,7 +881,7 @@ def main():
             #BotMenu
             @bot.command()
             async def echo(ctx):
-                msg = await help_command1(bot,ctx)
+                msg = await help_command1()
                 await ctx.send(msg)
             #Run the bot
             bot.run(bot_token)
@@ -882,12 +891,14 @@ def main():
             config.encryption_enabled = True
             config.emoji_verify = False
             config.ignore_unverified_devices = True
-            creds = botlib.Creds(bot_domain, bot_user, bot_pass)
+            creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
             bot = botlib.Bot(creds,config)
+            PREFIX = '!'
             #BotMenu
             @bot.listener.on_message_event
-            async def echo(message):
-                await bot.api.send_text_message(bot_channel_id, "ECHO")
+            async def help(room, message):
+                msg = await help_command1()
+                await bot.api.send_text_message(room.room_id, msg)
             #Run the bot
             bot.run()
         else:
