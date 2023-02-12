@@ -856,7 +856,21 @@ if os.path.exists(db_path):
     except Exception as e:
         logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
 
+def handle(self, event, obj):
+        method_name = f"on_{event.lower()}"
+        handler = getattr(self, method_name, None)
+        if handler is not None:
+            handler(obj, self)
 
+    def on(self, event):
+        def decorator(func):
+            method_name = f"on_{event.lower()}"
+            setattr(self, method_name, func)
+            return func
+
+        return decorator
+        
+        
 @events.register(events.NewMessage(pattern='/start'))
 async def start(event):
     msg = "ECHO telethon"
