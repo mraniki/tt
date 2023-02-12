@@ -3,6 +3,7 @@ TTversion="🪙TT Beta 1.2.32"
 ##=============== import  =============
 ##log
 import logging
+#from loguru import logger
 import sys
 import traceback
 from ping3 import ping, verbose_ping
@@ -49,6 +50,7 @@ from pycoingecko import CoinGeckoAPI
 load_dotenv()
 nest_asyncio.apply()
 global bot
+global PREFIX
 #🧐LOGGING
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -162,7 +164,8 @@ async def send (self="bot", message="123"):
         elif(bot_service=='discord'):
             await self.send(message)
         elif(bot_service=='matrix'):
-            await bot.api.send_text_message(bot_channel_id, message)
+            # await bot.api.send_text_message(bot_channel_id, message)
+            await bot.api.send_markdown_message(bot_channel_id, message)
             return
         elif(bot_service=='telethon'):
             await self.reply(message=message, parse_mode='html')
@@ -689,7 +692,7 @@ async def handle_exception(e) -> None:
 """
 
 #🦾BOT COMMAND
-PREFIX = "/"
+PREFIX = "!"
 command00 = "test"
 command01 = "/help"
 command02 = "/bal"
@@ -732,22 +735,15 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     msg= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     await send(update,msg)
 
-async def help_command1() -> None:
-    logger.debug(msg=f"help_command1 START")
+async def help_command1(self='bot') -> None:
     bot_ping = await verify_latency_ex()
-    logger.debug(msg=f"bot_ping {bot_ping}")
     msg= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
-    return msg
+    await send(self,msg)
 
 async def account_balance_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     balance =f"🏦 Balance"
     balance += await get_account_balance()
     await send(update,balance)
-
-async def account_balance_command1(self, context) -> None:
-    balance =f"🏦 Balance"
-    balance += await get_account_balance()
-    await send(self,balance)
 
 async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
@@ -913,17 +909,18 @@ async def database_setup():
 async def main():
     global bot
     try:
+#LOAD
         await verify_import_library()
         await database_setup()
         await load_exchange(ex_name)
         logger.debug(msg=f"bot_service {bot_service}")
-        #StartTheBot
+#StartTheBot
         if(bot_service=='tgram'):
             bot = Application.builder().token(bot_token).post_init(post_init).build()
         elif(bot_service=='discord'):
             intents = discord.Intents.default()
             intents.message_content = True
-            bot = commands.Bot(command_prefix='!', intents=intents)
+            bot = commands.Bot(command_prefix=f'{PREFIX}', intents=intents)
             @bot.event
             async def on_ready():
                 logger.debug(msg=f"Logged in as {bot.user} (ID: {bot.user.id})")
@@ -935,40 +932,41 @@ async def main():
             config.store_path ='./config/store/'
             creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
             bot = botlib.Bot(creds,config)
-            PREFIX = '!'
         elif(bot_service=='telethon'):
             bot = await TelegramClient('bot', bot_api_id, bot_api_hash).start(bot_token=bot_token)
         else:
             logger.error(msg=f" Bot failed to start.")
-
+#BOT MENUS
         if(bot_service=='tgram'):
             bot.add_handler(MessageHandler(filters.Regex(f'{command01}'), help_command))
             bot.add_handler(MessageHandler(filters.Regex(f'{command02}'), account_balance_command))
             bot.add_handler(MessageHandler(filters.Regex(f'{command04}'), quote_command))
-            bot.add_handler(MessageHandler(filters.Reegex(f'{command05}'), get_tokeninfo_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command05}'), get_tokeninfo_command))
             bot.add_handler(MessageHandler(filters.Regex(f'{command06}'), trading_switch_command))
             bot.add_handler(MessageHandler(filters.Regex(f'{command07}'), testmode_switch_command))
             bot.add_handler(MessageHandler(filters.Regex(f'{command08}'), restart_command))
             bot.add_handler(MessageHandler(filters.Regex(f'{command09}'), exchange_switch_command))
             bot.add_handler(MessageHandler(filters.Regex(f'{command10}'), order_scanner))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command00}'), search_gecko))
             bot.add_error_handler(error_handler)
         elif(bot_service=='discord'):
             @bot.command()
             async def echo(ctx):
-                msg = "ECHO DISCORD"
-                await send(ctx, msg)
+                await help_command1(ctx)
+            @bot.event
+            async def on_message(message: discord.Message):
+                if message.content.startswith("!hello"):
+                    await message.reply("Hello!", mention_author=True)
         elif(bot_service=='matrix'):
             @bot.listener.on_message_event
             async def echo(room, message):
-                msg = "ECHO NEO"
-                await send(bot,msg)
+                match = botlib.MessageMatch(room, message, bot, PREFIX)
+                if match.is_not_from_this_bot():
+                    await help_command1()
         elif(bot_service=='telethon'): 
-            @bot.on(events.NewMessage(pattern='/echo'))
-            async def send_welcome(event):
-                msg = await help_command1()
-                await send(event,msg)
-
+            @bot.on(events.NewMessage(pattern=f'{command01}'))
+            async def help(event):
+                await help_command1(event)
+#RUN THE BOT
         if(bot_service=='tgram'):
             bot.run_polling(drop_pending_updates=True)
         elif(bot_service=='discord'):
