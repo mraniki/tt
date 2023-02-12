@@ -868,17 +868,37 @@ def on(self, event):
         setattr(self, method_name, func)
         return func
     return decorator
+    
+def command_handler(command):
+    def decorator(func):
+        handler = CommandHandler(command, func)
+        application.add_handler(handler)
+        return func
+        return decorator
+
+@command_handler("hello")
+async def hello(update, context):
+ await context.bot.send_message(chat_id=update.effective_chat.id, text="Echo PTB")
         
-        
-@events.register(events.NewMessage(pattern='/start'))
-async def start(event):
+@bot.command()
+async def echod(ctx):
+    msg = "ECHO DISCORD"
+    await send(ctx, msg)
+    
+@bot.listener.on_message_event
+async def echon(room, message):
+    msg = "ECHO NEO"
+    await send(bot,msg)
+
+@events.register(events.NewMessage(pattern='/echo'))
+async def echot(event):
     msg = "ECHO telethon"
     await send(bot,msg)
     raise events.StopPropagation
 
-@bot.on(events.NewMessage(pattern='(?i)hi|hello'))
-async def handler(event):
-    await event.respond('Hey!')
+#@bot.on(events.NewMessage(pattern='(?i)hi|hello'))
+#async def handler(event):
+#a    await event.respond('!')
     
 #🤖BOT
 def main():
@@ -912,10 +932,7 @@ def main():
             async def on_ready():
                 logger.debug(msg=f"Logged in as {bot.user} (ID: {bot.user.id})")
             #BotMenu
-            @bot.command()
-            async def echo(ctx):
-                msg = "ECHO DISCO"
-                await send(ctx, msg)
+            
             #Run the bot
             bot.run(bot_token)
         elif(bot_service=='matrix'):
@@ -929,10 +946,7 @@ def main():
             bot = botlib.Bot(creds,config)
             PREFIX = '!'
             #BotMenu
-            @bot.listener.on_message_event
-            async def echo(room, message):
-                msg = "ECHO NEO"
-                await send(bot,msg)
+            
             #Run the bot
             bot.run()
         elif(bot_service=='telethon'):
