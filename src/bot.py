@@ -954,12 +954,10 @@ async def main():
                 await help_command1(ctx)
             @bot.event
             async def on_message(message: discord.Message):
-                if message.content.startswith("buy"):
-                    await message.reply("order!", mention_author=True)
-                curses = [" FUCK", "HELL ", " HECK ", "DICK", " STUPID", " DUMB", "SHUT UP", "DAMN"]
-                for curse in curses:
-                    if str(message.content).upper().__contains__(curse):
-                        await message.reply(message, "Language!")
+                if message.content.startswith("echo"):
+                    await message.reply("echo DISCO!", mention_author=True)
+                if re.search(f'{command10}', message.content):
+                    await message.reply("Order !", mention_author=True)
         elif(bot_service=='matrix'):
             @bot.listener.on_message_event
             async def echo(room, message):
