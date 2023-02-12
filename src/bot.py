@@ -920,18 +920,6 @@ async def main():
         #StartTheBot
         if(bot_service=='tgram'):
             bot = Application.builder().token(bot_token).post_init(post_init).build()
-            bot.add_handler(MessageHandler(filters.Regex(f'{command01}'), help_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command02}'), account_balance_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command04}'), quote_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command05}'), get_tokeninfo_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command06}'), trading_switch_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command07}'), testmode_switch_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command08}'), restart_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command09}'), exchange_switch_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command10}'), order_scanner))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command00}'), search_gecko))
-            bot.add_error_handler(error_handler)
-            bot.run_polling(drop_pending_updates=True)
         elif(bot_service=='discord'):
             intents = discord.Intents.default()
             intents.message_content = True
@@ -939,11 +927,6 @@ async def main():
             @bot.event
             async def on_ready():
                 logger.debug(msg=f"Logged in as {bot.user} (ID: {bot.user.id})")
-            @bot.command()
-            async def echo(ctx):
-                msg = "ECHO DISCORD"
-                await send(ctx, msg)
-            bot.run(bot_token)
         elif(bot_service=='matrix'):
             config = botlib.Config()
             config.encryption_enabled = True
@@ -953,21 +936,47 @@ async def main():
             creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
             bot = botlib.Bot(creds,config)
             PREFIX = '!'
+        elif(bot_service=='telethon'):
+            bot = await TelegramClient('bot', bot_api_id, bot_api_hash).start(bot_token=bot_token)
+        else:
+            logger.error(msg=f" Bot failed to start.")
+
+        if(bot_service=='tgram'):
+            bot.add_handler(MessageHandler(filters.Regex(f'{command01}'), help_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command02}'), account_balance_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command04}'), quote_command))
+            bot.add_handler(MessageHandler(filters.Reegex(f'{command05}'), get_tokeninfo_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command06}'), trading_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command07}'), testmode_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command08}'), restart_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command09}'), exchange_switch_command))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command10}'), order_scanner))
+            bot.add_handler(MessageHandler(filters.Regex(f'{command00}'), search_gecko))
+            bot.add_error_handler(error_handler)
+        elif(bot_service=='discord'):
+            @bot.command()
+            async def echo(ctx):
+                msg = "ECHO DISCORD"
+                await send(ctx, msg)
+        elif(bot_service=='matrix'):
             @bot.listener.on_message_event
             async def echo(room, message):
                 msg = "ECHO NEO"
                 await send(bot,msg)
-            bot.run()
-        elif(bot_service=='telethon'):
-            bot = await TelegramClient('bot', bot_api_id, bot_api_hash).start(bot_token=bot_token)
+        elif(bot_service=='telethon'): 
             @bot.on(events.NewMessage(pattern='/echo'))
             async def send_welcome(event):
                 msg = await help_command1()
                 await send(event,msg)
-            await bot.run_until_disconnected()
-        else:
-            logger.error(msg=f" Bot failed to start.")
 
+        if(bot_service=='tgram'):
+            bot.run_polling(drop_pending_updates=True)
+        elif(bot_service=='discord'):
+            bot.run(bot_token)
+        elif(bot_service=='matrix'):
+            bot.run()
+        elif(bot_service=='telethon'): 
+            await bot.run_until_disconnected()
     except Exception as e:
         logger.error(msg="FAILURE Error: " + str(e))
 
