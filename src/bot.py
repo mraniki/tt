@@ -960,7 +960,7 @@ async def main():
                 await help_command1(ctx)
             @bot.event
             async def on_message(message: discord.Message):
-                if message.content.startswith("/bal"):
+                if message.content.startswith(f'{command02}'):
                     await account_balance_command1(message)
                 if re.search(f'{command10}', message.content):
                     await message.reply("Order !", mention_author=True)
