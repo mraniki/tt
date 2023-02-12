@@ -859,10 +859,14 @@ if os.path.exists(db_path):
 
 @events.register(events.NewMessage(pattern='/start'))
 async def start(event):
-    await event.respond('Hi!')
+    msg = "ECHO telethon"
+    await send(bot,msg)
     raise events.StopPropagation
 
-
+@bot.on(events.NewMessage(pattern='(?i)hi|hello'))
+async def handler(event):
+    await event.respond('Hey!')
+    
 #🤖BOT
 def main():
     global bot
