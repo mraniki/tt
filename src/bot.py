@@ -862,13 +862,12 @@ def handle(self, event, obj):
         if handler is not None:
             handler(obj, self)
 
-    def on(self, event):
-        def decorator(func):
-            method_name = f"on_{event.lower()}"
-            setattr(self, method_name, func)
-            return func
-
-        return decorator
+def on(self, event):
+    def decorator(func):
+        method_name = f"on_{event.lower()}"
+        setattr(self, method_name, func)
+        return func
+    return decorator
         
         
 @events.register(events.NewMessage(pattern='/start'))
