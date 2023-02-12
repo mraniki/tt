@@ -156,19 +156,20 @@ async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
 
 
 #💬MESSAGING
-async def send (self="bot", message="123"):
+async def send (self="bot", msg="123"):
     logger.debug(msg=f"💬MESSAGING START")
     try:
         if(bot_service=='tgram'):
-            await self.effective_chat.send_message(f"{message}", parse_mode=constants.ParseMode.HTML)
+            await self.effective_chat.send_message(f"{msg}", parse_mode=constants.ParseMode.HTML)
         elif(bot_service=='discord'):
-            await self.send(message)
+            #await self.send(msg)
+            await self.reply(msg,mention_author=True)
         elif(bot_service=='matrix'):
-            # await bot.api.send_text_message(bot_channel_id, message)
-            await bot.api.send_markdown_message(bot_channel_id, message)
+            # await bot.api.send_text_message(bot_channel_id, msg)
+            await bot.api.send_markdown_message(bot_channel_id, msg)
             return
         elif(bot_service=='telethon'):
-            await self.reply(message=message, parse_mode='html')
+            await self.reply(message=msg, parse_mode='html')
             return
     except Exception as e:
         await handle_exception(e)
@@ -745,6 +746,11 @@ async def account_balance_command(update: Update, context: ContextTypes.DEFAULT_
     balance += await get_account_balance()
     await send(update,balance)
 
+async def account_balance_command1(self='bot') -> None:
+    balance =f"🏦 Balance"
+    balance += await get_account_balance()
+    await send(self,balance)
+
 async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
     order = await parse_message(channel_message)
@@ -954,8 +960,8 @@ async def main():
                 await help_command1(ctx)
             @bot.event
             async def on_message(message: discord.Message):
-                if message.content.startswith("echo"):
-                    await message.reply("echo DISCO!", mention_author=True)
+                if message.content.startswith("/bal"):
+                    await account_balance_command1(message)
                 if re.search(f'{command10}', message.content):
                     await message.reply("Order !", mention_author=True)
         elif(bot_service=='matrix'):
