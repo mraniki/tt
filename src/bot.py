@@ -11,6 +11,9 @@ import os
 from os import getenv
 from dotenv import load_dotenv
 import json, requests
+import asyncio
+import nest_asyncio
+import aiohttp
 #telegram
 import telegram
 from telegram import Update, constants
@@ -44,7 +47,8 @@ from pycoingecko import CoinGeckoAPI
 
 #🔧CONFIG
 load_dotenv()
-
+nest_asyncio.apply()
+global bot
 #🧐LOGGING
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -56,7 +60,7 @@ dex_1inch_api = f"https://api.1inch.exchange/v5.0"
 exchangerate_api = f"https://api.exchangerate.host"
 
 #🔁UTILS
-def verify_import_library():
+async def verify_import_library():
     logger.info(msg=f"{TTversion}")
     logger.debug(msg=f"Python {sys.version}")
     logger.debug(msg=f"TinyDB {tinydb.__version__}")
@@ -150,22 +154,24 @@ async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
 
 
 #💬MESSAGING
-async def send (self, messaging):
+async def send (self="bot", message="123"):
+    logger.debug(msg=f"💬MESSAGING START")
     try:
         if(bot_service=='tgram'):
-            await self.effective_chat.send_message(f"{messaging}", parse_mode=constants.ParseMode.HTML)
+            await self.effective_chat.send_message(f"{message}", parse_mode=constants.ParseMode.HTML)
         elif(bot_service=='discord'):
-            await self.send(messaging)
+            await self.send(message)
         elif(bot_service=='matrix'):
-            await bot.api.send_text_message(bot_channel_id, messaging)
+            await bot.api.send_text_message(bot_channel_id, message)
             return
         elif(bot_service=='telethon'):
-            await bot.send_message(bot_channel_id, messaging)
+            await self.reply(message=message, parse_mode='html')
             return
     except Exception as e:
         await handle_exception(e)
 
-async def notify(messaging):
+async def notify(message):
+    logger.debug(msg=f"NOTIFICATION START")
     apobj = apprise.Apprise()
     if (bot_service =='tgram'):
         apobj.add(f'{bot_service}://' + str(bot_token) + "/" + str(bot_channel_id))
@@ -173,10 +179,11 @@ async def notify(messaging):
         apobj.add(f'{bot_service}://' + str(bot_webhook_id) + "/" + str(bot_webhook_token))
     elif (bot_service =='matrix'):
         apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@matrix.org:80/" + bot_channel_id)
-    else:
-        logger.error(msg=f"not delivered {messaging}")
+    elif (bot_service =='telethon'):
+        apobj.add(f'tgram://' + bot_token + "/" + bot_channel_id)
+
     try:
-        apobj.notify(body=messaging)
+        apobj.notify(body=message)
     except Exception as e:
         logger.error(msg=f"delivered: {e}")
 
@@ -683,7 +690,7 @@ async def handle_exception(e) -> None:
 
 #🦾BOT COMMAND
 PREFIX = "/"
-command00 = "!t"
+command00 = "test"
 command01 = "/help"
 command02 = "/bal"
 command03 = "/pos"
@@ -717,7 +724,7 @@ bot_menu_help = f"{TTversion} \n {helpcommand}"
 
 async def post_init(application: Application):
     message=f"Bot is online {TTversion}"
-    await load_exchange(ex_name)
+    #await load_exchange(ex_name)
     await application.bot.send_message(bot_channel_id, message, parse_mode=constants.ParseMode.HTML)
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -726,9 +733,11 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     await send(update,msg)
 
 async def help_command1() -> None:
+    logger.debug(msg=f"help_command1 START")
     bot_ping = await verify_latency_ex()
+    logger.debug(msg=f"bot_ping {bot_ping}")
     msg= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
-    await send(bot,msg)
+    return msg
 
 async def account_balance_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     balance =f"🏦 Balance"
@@ -801,115 +810,116 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     await handle_exception(e)
 
 #💾DB
-db_url=os.getenv("DB_URL")
-if db_url == None:
-    logger.info(msg = f"No remote DB variable, checking local file")
-else:
-    outfile = os.path.join('./config', 'db.json')
-    response = requests.get(db_url, stream=True)
-    logger.debug(msg=f"{response}")
-    with open(outfile,'wb') as output:
-      output.write(response.content)
-      logger.debug(msg = f"remote DB copied")
-      
-db_path = './config/db.json'
-if os.path.exists(db_path):
-    logger.info(msg=f"Existing DB found")
-    try:
-        db = TinyDB(db_path)
-        q = Query()
-        globalDB = db.table('global')
-        defaultenv = globalDB.all()[0]['defaultenv']
-        ex_name = globalDB.all()[0]['defaultex']
-        ex_test_mode = globalDB.all()[0]['defaulttestmode']
-        logger.info(msg=f"Env {defaultenv} ex {ex_name}")
-        bot_db = db.table('bot')
-        cex_db = db.table('cex')
-        dex_db = db.table('dex')
-        bot = bot_db.search(q.env == defaultenv)
-        logger.debug(msg=f"{bot}")
-        bot_trading_switch = True
-        bot_service = bot[0]['service']
-        bot_token = bot[0]['token']
-        bot_channel_id = bot[0]['channel']
-        bot_trading_switch = True
-        if (bot_service=='discord'):
-            bot_webhook_id = bot[0]['webhook_id']
-            bot_webhook_token = bot[0]['webhook_token']
-        if (bot_service=='matrix'):
-            bot_hostname = bot[0]['hostname']
-            bot_user = bot[0]['user']
-            bot_pass= bot[0]['pass']
-        if (bot_service=='telethon'):
-            bot_api_id = bot[0]['api_id']
-            bot_api_hash = bot[0]['api_hash']
-        if ((bot_service=='tgram') & (bot_token == "")): #or ((bot_service=='matrix') & (bot_pass == ""))):
-            logger.error("Failover process with sample DB")
-            contingency_db_path = './config/sample_db.json'
-            os.rename(contingency_db_path, db_path)
-            try:
-                bot_token = os.getenv("TK") #checking if TOKEN is given via enviroment variable
-                bot_channel_id = os.getenv("CHANNEL_ID") #checking if Channel is given via enviroment variable
-            except Exception as e:
-                logger.error("no bot token")
-                sys.exit()
-    except Exception as e:
-        logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
+async def database_setup():
+    global ex_name
+    global defaultenv
+    global ex_test_mode
+    global bot_db
+    global cex_db
+    global dex_db
+    global bot_token
+    global bot_channel_id
+    global bot_service
+    global bot_trading_switch
+    global bot_hostname
+    global bot_webhook_id
+    global bot_webhook_token
+    global bot_user
+    global bot_pass
+    global bot_api_id
+    global bot_api_hash
+    db_url=os.getenv("DB_URL")
+    if db_url == None:
+        logger.info(msg = f"No remote DB variable, checking local file")
+    else:
+        outfile = os.path.join('./config', 'db.json')
+        response = requests.get(db_url, stream=True)
+        logger.debug(msg=f"{response}")
+        with open(outfile,'wb') as output:
+          output.write(response.content)
+          logger.debug(msg = f"remote DB copied")
+          
+    db_path = './config/db.json'
+    if os.path.exists(db_path):
+        logger.info(msg=f"Existing DB found")
+        try:
+            db = TinyDB(db_path)
+            q = Query()
+            globalDB = db.table('global')
+            defaultenv = globalDB.all()[0]['defaultenv']
+            ex_name = globalDB.all()[0]['defaultex']
+            ex_test_mode = globalDB.all()[0]['defaulttestmode']
+            logger.info(msg=f"Env {defaultenv} ex {ex_name}")
+            bot_db = db.table('bot')
+            cex_db = db.table('cex')
+            dex_db = db.table('dex')
+            bot = bot_db.search(q.env == defaultenv)
+            logger.debug(msg=f"{bot}")
+            bot_trading_switch = True
+            bot_service = bot[0]['service']
+            bot_token = bot[0]['token']
+            bot_channel_id = bot[0]['channel']
+            bot_trading_switch = True
+            if (bot_service=='discord'):
+                bot_webhook_id = bot[0]['webhook_id']
+                bot_webhook_token = bot[0]['webhook_token']
+            if (bot_service=='matrix'):
+                bot_hostname = bot[0]['hostname']
+                bot_user = bot[0]['user']
+                bot_pass= bot[0]['pass']
+            if (bot_service=='telethon'):
+                bot_api_id = bot[0]['api_id']
+                bot_api_hash = bot[0]['api_hash']
+            if ((bot_service=='tgram') & (bot_token == "")): #or ((bot_service=='matrix') & (bot_pass == ""))):
+                logger.error("Failover process with sample DB")
+                contingency_db_path = './config/sample_db.json'
+                os.rename(contingency_db_path, db_path)
+                try:
+                    bot_token = os.getenv("TK") #checking if TOKEN is given via enviroment variable
+                    bot_channel_id = os.getenv("CHANNEL_ID") #checking if Channel is given via enviroment variable
+                except Exception as e:
+                    logger.error("no bot token")
+                    sys.exit()
+        except Exception as e:
+            logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
 
-def handle(self, event, obj):
-        method_name = f"on_{event.lower()}"
-        handler = getattr(self, method_name, None)
-        if handler is not None:
-            handler(obj, self)
+# def handle(self, event, obj):
+#         method_name = f"on_{event.lower()}"
+#         handler = getattr(self, method_name, None)
+#         if handler is not None:
+#             handler(obj, self)
 
-def on(self, event):
-    def decorator(func):
-        method_name = f"on_{event.lower()}"
-        setattr(self, method_name, func)
-        return func
-    return decorator
+# def on(self, event):
+#     def decorator(func):
+#         method_name = f"on({event.lower()})"
+#         setattr(self, method_name, func)
+#         return func
+#     return decorator
     
-def command_handler(command):
-    def decorator(func):
-        handler = CommandHandler(command, func)
-        application.add_handler(handler)
-        return func
-        return decorator
+# def command_handler(command):
+#     def decorator(func):
+#         handler = CommandHandler(command, func)
+#         application.add_handler(handler)
+#         return func
+#         return decorator
 
-@command_handler("hello")
-async def hello(update, context):
- await context.bot.send_message(chat_id=update.effective_chat.id, text="Echo PTB")
+# @command_handler("hello")
+# async def hello(update, context):
+#     await context.bot.send_message(chat_id=update.effective_chat.id, text="Echo PTB")
         
-@bot.command()
-async def echod(ctx):
-    msg = "ECHO DISCORD"
-    await send(ctx, msg)
-    
-@bot.listener.on_message_event
-async def echon(room, message):
-    msg = "ECHO NEO"
-    await send(bot,msg)
 
-@events.register(events.NewMessage(pattern='/echo'))
-async def echot(event):
-    msg = "ECHO telethon"
-    await send(bot,msg)
-    raise events.StopPropagation
 
-#@bot.on(events.NewMessage(pattern='(?i)hi|hello'))
-#async def handler(event):
-#a    await event.respond('!')
-    
 #🤖BOT
-def main():
+async def main():
     global bot
     try:
-        verify_import_library()
-
+        await verify_import_library()
+        await database_setup()
+        await load_exchange(ex_name)
+        logger.debug(msg=f"bot_service {bot_service}")
+        #StartTheBot
         if(bot_service=='tgram'):
-            #StartTheBot
             bot = Application.builder().token(bot_token).post_init(post_init).build()
-            #BotMenu
             bot.add_handler(MessageHandler(filters.Regex(f'{command01}'), help_command))
             bot.add_handler(MessageHandler(filters.Regex(f'{command02}'), account_balance_command))
             bot.add_handler(MessageHandler(filters.Regex(f'{command04}'), quote_command))
@@ -921,47 +931,46 @@ def main():
             bot.add_handler(MessageHandler(filters.Regex(f'{command10}'), order_scanner))
             bot.add_handler(MessageHandler(filters.Regex(f'{command00}'), search_gecko))
             bot.add_error_handler(error_handler)
-            #Run the bot
             bot.run_polling(drop_pending_updates=True)
         elif(bot_service=='discord'):
-            #StartTheBot
             intents = discord.Intents.default()
             intents.message_content = True
             bot = commands.Bot(command_prefix='!', intents=intents)
             @bot.event
             async def on_ready():
                 logger.debug(msg=f"Logged in as {bot.user} (ID: {bot.user.id})")
-            #BotMenu
-            
-            #Run the bot
+            @bot.command()
+            async def echo(ctx):
+                msg = "ECHO DISCORD"
+                await send(ctx, msg)
             bot.run(bot_token)
         elif(bot_service=='matrix'):
-            #StartTheBot
             config = botlib.Config()
             config.encryption_enabled = True
             config.emoji_verify = True
-            # config.ignore_unverified_devices = True
+            config.ignore_unverified_devices = True
             config.store_path ='./config/store/'
             creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
             bot = botlib.Bot(creds,config)
             PREFIX = '!'
-            #BotMenu
-            
-            #Run the bot
+            @bot.listener.on_message_event
+            async def echo(room, message):
+                msg = "ECHO NEO"
+                await send(bot,msg)
             bot.run()
         elif(bot_service=='telethon'):
-            bot = TelegramClient('bot', bot_api_id, bot_api_hash).start(bot_token=bot_token)
-            with bot:
-                bot.add_event_handler(start)
-                bot.run_until_disconnected()
-
+            bot = await TelegramClient('bot', bot_api_id, bot_api_hash).start(bot_token=bot_token)
+            @bot.on(events.NewMessage(pattern='/echo'))
+            async def send_welcome(event):
+                msg = await help_command1()
+                await send(event,msg)
+            await bot.run_until_disconnected()
         else:
-            logger.error(msg=f" Bot failed to start. Error: " + str(e))
-
+            logger.error(msg=f" Bot failed to start.")
 
     except Exception as e:
         logger.error(msg="FAILURE Error: " + str(e))
 
 
-if __name__ == '__main__':
-    main()
+asyncio.run(main())
+
