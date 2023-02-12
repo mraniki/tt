@@ -87,6 +87,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
 
 ### V1.3
 - Support Uniswap V3
+- Support chat decorator (and simple echo for matrix / discord) to Simplify the integration with any chat bot system 
 
 ### v1.4
 - Support limit order for DEX (1inch and v3)
@@ -109,7 +110,6 @@ Quick start approach: Update the sample db with your parameters and save it as d
 - View weekly pnl with /w command and scheduling
 
 ### v3 backlog
-- Simplify the integration with any chat bot system [![Matrix](https://badgen.net/badge/icon/matrix/black?icon=libraries&label)](https://github.com/poljar/matrix-ni), RocketChat or others.
 - Merge with MQL4 bot version integrated with MT4 exchanges for TradFi support[![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/) 
 
 

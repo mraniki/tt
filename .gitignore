@@ -10,3 +10,5 @@ src/config/store/@budfox01:matrix.org_SYTFYXAPQP.blacklisted_devices
 src/config/store/@budfox01:matrix.org_SYTFYXAPQP.db
 src/config/store/@budfox01:matrix.org_SYTFYXAPQP.trusted_devices
 src/config/store/@budfox01:matrix.org_SYTFYXAPQP.ignored_devices
+src/bot.session-journal
+src/bot.session
