@@ -12,6 +12,7 @@ import os
 from os import getenv
 from dotenv import load_dotenv
 import json, requests
+import orjson #to review agains json
 import asyncio
 import nest_asyncio
 import aiohttp
@@ -72,12 +73,13 @@ async def verify_import_library():
     logger.debug(msg=f"Web3 {web3.__version__}")
     logger.debug(msg=f"apprise {apprise.__version__}")
 
-async def parse_message (message):
-    wordlist = message.split(" ")
+async def parse_message (self,msg):
+    wordlist = msg.split(" ")
     logger.debug(msg=f"wordlist {wordlist}")
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
     filter_lst_switch = ['/cex', '/dex']
     filter_lst_quote = ['/q','/coin']
+    filter_lst_bal = [command02]
     logger.debug(msg=f"wordlist len {len(wordlist)}")
     try:
         if [ele for ele in filter_lst_order if(ele in wordlist)]:
@@ -103,6 +105,8 @@ async def parse_message (message):
                 return exchange_search
             else:
                 return
+        elif [ele for ele in filter_lst_bal if(ele in wordlist)]:
+            return await account_balance_command1(self)
         elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
                 symbol = wordlist[1]
@@ -161,7 +165,7 @@ async def send (self="bot", msg="123"):
         if(bot_service=='tgram'):
             await self.effective_chat.send_message(f"{msg}", parse_mode=constants.ParseMode.HTML)
         elif(bot_service=='discord'):
-            #await self.send(msg)
+            #await send(msg)
             await self.reply(msg,mention_author=True)
         elif(bot_service=='matrix'):
             # await bot.api.send_text_message(bot_channel_id, msg)
@@ -752,7 +756,7 @@ async def account_balance_command1(self='bot') -> None:
 
 async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     channel_message = update.effective_message.text
-    order = await parse_message(channel_message)
+    order = await parse_message(update,channel_message)
     if (order):
         try:
             res = await execute_order(order[0],order[1],order[2],order[3],order[4])
@@ -954,15 +958,10 @@ async def main():
             bot.add_handler(MessageHandler(filters.Regex(f'{command10}'), order_scanner))
             bot.add_error_handler(error_handler)
         elif(bot_service=='discord'):
-            @bot.command()
-            async def echo(ctx):
-                await help_command1(ctx)
             @bot.event
             async def on_message(message: discord.Message):
-                if message.content.startswith(f'{command02}'):
-                    await account_balance_command1(message)
-                if re.search(f'{command10}', message.content):
-                    await message.reply("Order !", mention_author=True)
+                logger.debug(msg=f" discord message {message.content}")
+                await parse_message(message,message.content)
         elif(bot_service=='matrix'):
             @bot.listener.on_message_event
             async def echo(room, message):
@@ -970,9 +969,9 @@ async def main():
                 if match.is_not_from_this_bot():
                     await help_command1()
         elif(bot_service=='telethon'): 
-            @bot.on(events.NewMessage(pattern=f'{command01}'))
-            async def help(event):
-                await help_command1(event)
+            @bot.on(events.NewMessage())
+            async def telethon(event):
+                await parse_message(event,event.message.message)
 #RUN THE BOT
         if(bot_service=='tgram'):
             bot.run_polling(drop_pending_updates=True)
