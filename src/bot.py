@@ -25,6 +25,7 @@ from telethon import TelegramClient, events
 from collections import defaultdict
 #matrix
 import simplematrixbotlib as botlib
+#from nio import AsyncClient, MatrixRoom, RoomMessageText
 #discord
 import discord
 from discord.ext import commands
@@ -936,8 +937,6 @@ async def main():
         elif(bot_service=='matrix'):
             config = botlib.Config()
             config.encryption_enabled = True
-            config.emoji_verify = True
-            config.ignore_unverified_devices = True
             config.store_path ='./config/store/'
             creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
             bot = botlib.Bot(creds,config)
@@ -947,15 +946,16 @@ async def main():
             logger.error(msg=f" Bot failed to start.")
 #BOT MENUS
         if(bot_service=='tgram'):
-            bot.add_handler(MessageHandler(filters.Regex(f'{command01}'), help_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command02}'), account_balance_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command04}'), quote_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command05}'), get_tokeninfo_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command06}'), trading_switch_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command07}'), testmode_switch_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command08}'), restart_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command09}'), exchange_switch_command))
-            bot.add_handler(MessageHandler(filters.Regex(f'{command10}'), order_scanner))
+            bot.add_handler(MessageHandler(None, await parse_message(update,update.message.text)))
+            #bot.add_handler(MessageHandler(filters.Regex(f'{command01}'), help_command))
+            #bot.add_handler(MessageHandler(filters.Regex(f'{command02}'), account_balance_command))
+            #bot.add_handler(MessageHandler(filters.Regex(f'{command04}'), quote_command))
+            #bot.add_handler(MessageHandler(filters.Regex(f'{command05}'), get_tokeninfo_command))
+            #bot.add_handler(MessageHandler(filters.Regex(f'{command06}'), trading_switch_command))
+            #bot.add_handler(MessageHandler(filters.Regex(f'{command07}'), testmode_switch_command))
+            #bot.add_handler(MessageHandler(filters.Regex(f'{command08}'), restart_command))
+            #bot.add_handler(MessageHandler(filters.Regex(f'{command09}'), exchange_switch_command))
+            #bot.add_handler(MessageHandler(filters.Regex(f'{command10}'), order_scanner))
             bot.add_error_handler(error_handler)
         elif(bot_service=='discord'):
             @bot.event
@@ -964,10 +964,11 @@ async def main():
                 await parse_message(message,message.content)
         elif(bot_service=='matrix'):
             @bot.listener.on_message_event
-            async def echo(room, message):
-                match = botlib.MessageMatch(room, message, bot, PREFIX)
+            async def neo(room, message):
+                match = botlib.Match(room, event, bot)
                 if match.is_not_from_this_bot():
-                    await help_command1()
+                    #await help_command1()
+                    await parse_message(bot,message)
         elif(bot_service=='telethon'): 
             @bot.on(events.NewMessage())
             async def telethon(event):
