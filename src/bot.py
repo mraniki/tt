@@ -49,7 +49,6 @@ from pycoingecko import CoinGeckoAPI
 #🔧CONFIG
 load_dotenv()
 nest_asyncio.apply()
-global bot
 global PREFIX
 #🧐LOGGING
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
