@@ -946,7 +946,7 @@ async def main():
             logger.error(msg=f" Bot failed to start.")
 #BOT MENUS
         if(bot_service=='tgram'):
-            bot.add_handler(MessageHandler(None, await parse_message(update,update.message.text)))
+            bot.add_handler(MessageHandler(None, await parse_message))
             #bot.add_handler(MessageHandler(filters.Regex(f'{command01}'), help_command))
             #bot.add_handler(MessageHandler(filters.Regex(f'{command02}'), account_balance_command))
             #bot.add_handler(MessageHandler(filters.Regex(f'{command04}'), quote_command))
