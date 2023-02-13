@@ -79,6 +79,7 @@ async def parse_message (self,msg):
         msg=self.effective_message.text
     wordlist = msg.split(" ")
     logger.debug(msg=f"wordlist {wordlist}")
+    filter_lst_error = ['error', '⚠️']
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
     filter_lst_bal = [command02]
     filter_lst_pos = [command03]
@@ -90,6 +91,8 @@ async def parse_message (self,msg):
     filter_lst_switch = ['/cex', '/dex']
     logger.debug(msg=f"wordlist len {len(wordlist)}")
     try:
+        if [ele for ele in filter_lst_error if(ele in wordlist)]:
+            return
         if [ele for ele in filter_lst_order if(ele in wordlist)]:
             if len(wordlist[0]) > 0:
                 direction = wordlist[0].upper()
@@ -135,9 +138,10 @@ async def parse_message (self,msg):
                 logger.info(msg=f"Symbol identified {wordlist[1]} {symbol}")
                 #return symbol
                 response = await quote_command(symbol)
-        await send(self,response)
+        if (response != None):
+            await send(self,response)
     except Exception as e:
-        await handle_exception(e)
+        #await handle_exception(e)
         logger.warning(msg=f"Parsing anomaly")
         return
 
@@ -329,6 +333,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
      
             asset_out_symbol = basesymbol if direction=="BUY" else symbol
             asset_in_symbol = symbol if direction=="BUY" else basesymbol
+            logger.debug(msg=f"asset_out_symbol {asset_out_symbol} asset_in_symbol {asset_in_symbol}")
             response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
             asset_out_address= await search_gecko_contract(asset_out_symbol)
             asset_out_abi= await fetch_abi_dex(asset_out_address)
@@ -859,7 +864,7 @@ async def database_setup():
             defaultenv = globalDB.all()[0]['defaultenv']
             ex_name = globalDB.all()[0]['defaultex']
             ex_test_mode = globalDB.all()[0]['defaulttestmode']
-            logger.info(msg=f"Env {defaultenv} ex {ex_name}")
+            logger.info(msg=f"Env {defaultenv} ex {ex_name} testmode {ex_test_mode}")
             bot_db = db.table('bot')
             cex_db = db.table('cex')
             dex_db = db.table('dex')
@@ -892,8 +897,6 @@ async def database_setup():
                     sys.exit()
         except Exception as e:
             logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
-
-
 
 
 #🤖BOT
