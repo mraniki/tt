@@ -10,4 +10,5 @@ apprise
 pycoingecko
 ping3
 tornado
+nest_asyncio
 
