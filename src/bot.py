@@ -75,12 +75,19 @@ async def verify_import_library():
     logger.debug(msg=f"apprise {apprise.__version__}")
 
 async def parse_message (self,msg):
+    if(bot_service=='tgram'):
+        msg=self.effective_message.text
     wordlist = msg.split(" ")
     logger.debug(msg=f"wordlist {wordlist}")
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
-    filter_lst_switch = ['/cex', '/dex']
-    filter_lst_quote = ['/q','/coin']
     filter_lst_bal = [command02]
+    filter_lst_pos = [command03]
+    filter_lst_quote = [command04] 
+    filter_lst_info = [command05]
+    filter_lst_trading = [command06]
+    filter_lst_test = [command07]
+    filter_lst_restart = [command08]
+    filter_lst_switch = ['/cex', '/dex']
     logger.debug(msg=f"wordlist len {len(wordlist)}")
     try:
         if [ele for ele in filter_lst_order if(ele in wordlist)]:
@@ -97,26 +104,38 @@ async def parse_message (self,msg):
                         quantity = wordlist[4][2:-1]
                     order=[direction,symbol,stoploss,takeprofit,quantity]
                     logger.info(msg=f"Order: {order}")
-                    return order
+                    #return order
+                    if (order):
+                        res = await execute_order(order[0],order[1],order[2],order[3],order[4])
+                        if (res != None):
+                            response = f"{res}"
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
                 exchange = wordlist[1]
                 logger.info(msg=f"Exchange switch {wordlist[1]} {exchange}")
                 exchange_search = await search_exchange(exchange)
-                return exchange_search
+                response = await exchange_switch_command(exchange_search)
             else:
                 return
         elif [ele for ele in filter_lst_bal if(ele in wordlist)]:
-            return await account_balance_command1(self)
+            response= await account_balance_command(self)
+        elif [ele for ele in filter_lst_pos if(ele in wordlist)]:
+            response= await  get_account_position(self)
+        elif [ele for ele in filter_lst_trading if(ele in wordlist)]:
+            response = await  trading_switch_command(self)
+        elif [ele for ele in filter_lst_test if(ele in wordlist)]:
+            response = await testmode_switch_command(self)
+        elif [ele for ele in filter_lst_info if(ele in wordlist)]:
+            if len(wordlist[1]) > 0:
+                symbol = wordlist[1]
+                response = await search_gecko_detailed(symbol)
         elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
                 symbol = wordlist[1]
                 logger.info(msg=f"Symbol identified {wordlist[1]} {symbol}")
-                return symbol
-            else:
-                return
-        else:
-            return
+                #return symbol
+                response = await quote_command(symbol)
+        await send(self,response)
     except Exception as e:
         await handle_exception(e)
         logger.warning(msg=f"Parsing anomaly")
@@ -735,40 +754,31 @@ async def post_init(application: Application):
     #await load_exchange(ex_name)
     await application.bot.send_message(bot_channel_id, message, parse_mode=constants.ParseMode.HTML)
 
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
-    msg= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
-    await send(update,msg)
+    response= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
+    return response
 
-async def help_command1(self='bot') -> None:
-    bot_ping = await verify_latency_ex()
-    msg= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
-    await send(self,msg)
-
-async def account_balance_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def account_balance_command(self='bot') -> None:
     balance =f"🏦 Balance"
     balance += await get_account_balance()
-    await send(update,balance)
+    return balance
 
-async def account_balance_command1(self='bot') -> None:
-    balance =f"🏦 Balance"
-    balance += await get_account_balance()
-    await send(self,balance)
 
-async def order_scanner(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    channel_message = update.effective_message.text
-    order = await parse_message(update,channel_message)
-    if (order):
-        try:
-            res = await execute_order(order[0],order[1],order[2],order[3],order[4])
-            if (res != None):
-                response = f"{res}"
-                await send(update,response)
-        except Exception as e:
-            await handle_exception(e)
-            return
+# async def order_scanner(self='bot') -> None:
+#     channel_message = update.effective_message.text
+#     order = await parse_message(update,channel_message)
+#     if (order):
+#         try:
+#             res = await execute_order(order[0],order[1],order[2],order[3],order[4])
+#             if (res != None):
+#                 response = f"{res}"
+#                 await send(update,response)
+#         except Exception as e:
+#             await handle_exception(e)
+#             return
 
-async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def quote_command(self='bot') -> None:
     symbol = await parse_message(update.effective_message.text)
     asset_out_cg_quote = await fetch_gecko_quote(symbol)
     response=f"₿ {asset_out_cg_quote}\n"
@@ -779,32 +789,26 @@ async def quote_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     elif not (isinstance(ex,web3.main.Web3)):
         price= ex.fetch_ticker(symbol.upper())['last']
         response+=f"🏛️ {price} USD"
-    await send(update,response)
+    return response
 
-async def get_tokeninfo_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    symbol= await parse_message(update.effective_message.text)
-    gecko_symbol_info = await search_gecko_detailed(symbol)
-    await send(update,gecko_symbol_info)
-
-async def exchange_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    new_exchange = await parse_message(update.effective_message.text)
+async def exchange_switch_command(self='bot'):
     res = await load_exchange(new_exchange['name'])
     response = f"{ex_name} is active"
-    await send(update,response)
+    return response
 
-async def trading_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def trading_switch_command(self='bot') -> None:
     global bot_trading_switch
     bot_trading_switch = not bot_trading_switch
-    message=f"Trading is {bot_trading_switch}"
-    await send(update,message)
+    response=f"Trading is {bot_trading_switch}"
+    return response
 
-async def testmode_switch_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def testmode_switch_command(self='bot') -> None:
     global ex_test_mode
     ex_test_mode = not ex_test_mode
-    message = f"Test mode is {ex_test_mode}"
-    await send(update, message)
+    response = f"Test mode is {ex_test_mode}"
+    return response
 
-async def restart_command(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def restart_command(self='bot') -> None:
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -889,30 +893,7 @@ async def database_setup():
         except Exception as e:
             logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
 
-# def handle(self, event, obj):
-#         method_name = f"on_{event.lower()}"
-#         handler = getattr(self, method_name, None)
-#         if handler is not None:
-#             handler(obj, self)
 
-# def on(self, event):
-#     def decorator(func):
-#         method_name = f"on({event.lower()})"
-#         setattr(self, method_name, func)
-#         return func
-#     return decorator
-    
-# def command_handler(command):
-#     def decorator(func):
-#         handler = CommandHandler(command, func)
-#         application.add_handler(handler)
-#         return func
-#         return decorator
-
-# @command_handler("hello")
-# async def hello(update, context):
-#     await context.bot.send_message(chat_id=update.effective_chat.id, text="Echo PTB")
-        
 
 
 #🤖BOT
@@ -924,9 +905,13 @@ async def main():
         await database_setup()
         await load_exchange(ex_name)
         logger.debug(msg=f"bot_service {bot_service}")
+
 #StartTheBot
         if(bot_service=='tgram'):
             bot = Application.builder().token(bot_token).post_init(post_init).build()
+            bot.add_handler(MessageHandler(None, parse_message))
+            bot.add_error_handler(error_handler)
+            bot.run_polling(drop_pending_updates=True)
         elif(bot_service=='discord'):
             intents = discord.Intents.default()
             intents.message_content = True
@@ -934,54 +919,32 @@ async def main():
             @bot.event
             async def on_ready():
                 logger.debug(msg=f"Logged in as {bot.user} (ID: {bot.user.id})")
+            @bot.event
+            async def on_message(message: discord.Message):
+                logger.debug(msg=f" discord message {message.content}")
+                await parse_message(message,message.content)
+            bot.run(bot_token)
         elif(bot_service=='matrix'):
             config = botlib.Config()
             config.encryption_enabled = True
             config.store_path ='./config/store/'
             creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
             bot = botlib.Bot(creds,config)
-        elif(bot_service=='telethon'):
-            bot = await TelegramClient('bot', bot_api_id, bot_api_hash).start(bot_token=bot_token)
-        else:
-            logger.error(msg=f" Bot failed to start.")
-#BOT MENUS
-        if(bot_service=='tgram'):
-            bot.add_handler(MessageHandler(None, parse_message))
-            #bot.add_handler(MessageHandler(filters.Regex(f'{command01}'), help_command))
-            #bot.add_handler(MessageHandler(filters.Regex(f'{command02}'), account_balance_command))
-            #bot.add_handler(MessageHandler(filters.Regex(f'{command04}'), quote_command))
-            #bot.add_handler(MessageHandler(filters.Regex(f'{command05}'), get_tokeninfo_command))
-            #bot.add_handler(MessageHandler(filters.Regex(f'{command06}'), trading_switch_command))
-            #bot.add_handler(MessageHandler(filters.Regex(f'{command07}'), testmode_switch_command))
-            #bot.add_handler(MessageHandler(filters.Regex(f'{command08}'), restart_command))
-            #bot.add_handler(MessageHandler(filters.Regex(f'{command09}'), exchange_switch_command))
-            #bot.add_handler(MessageHandler(filters.Regex(f'{command10}'), order_scanner))
-            bot.add_error_handler(error_handler)
-        elif(bot_service=='discord'):
-            @bot.event
-            async def on_message(message: discord.Message):
-                logger.debug(msg=f" discord message {message.content}")
-                await parse_message(message,message.content)
-        elif(bot_service=='matrix'):
             @bot.listener.on_message_event
             async def neo(room, message):
                 match = botlib.Match(room, event, bot)
                 if match.is_not_from_this_bot():
-                    #await help_command1()
                     await parse_message(bot,message)
-        elif(bot_service=='telethon'): 
+            bot.run()
+        elif(bot_service=='telethon'):
+            bot = await TelegramClient('bot', bot_api_id, bot_api_hash).start(bot_token=bot_token)
             @bot.on(events.NewMessage())
             async def telethon(event):
                 await parse_message(event,event.message.message)
-#RUN THE BOT
-        if(bot_service=='tgram'):
-            bot.run_polling(drop_pending_updates=True)
-        elif(bot_service=='discord'):
-            bot.run(bot_token)
-        elif(bot_service=='matrix'):
-            bot.run()
-        elif(bot_service=='telethon'): 
             await bot.run_until_disconnected()
+        else:
+            logger.error(msg=f" Bot failed to start.")
+
     except Exception as e:
         logger.error(msg="FAILURE Error: " + str(e))
 
