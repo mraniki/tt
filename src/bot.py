@@ -1,9 +1,9 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.33"
+TTversion="🪙TT Beta 1.2.34"
 ##=============== import  =============
 ##log
 import logging
-#from loguru import logger
+#from loguru import logger to be reviewed
 import sys
 import traceback
 from ping3 import ping, verbose_ping
@@ -25,7 +25,6 @@ from telethon import TelegramClient, events
 from collections import defaultdict
 #matrix
 import simplematrixbotlib as botlib
-#from nio import AsyncClient, MatrixRoom, RoomMessageText
 #discord
 import discord
 from discord.ext import commands
@@ -51,7 +50,6 @@ from pycoingecko import CoinGeckoAPI
 #🔧CONFIG
 load_dotenv()
 nest_asyncio.apply()
-global PREFIX
 #🧐LOGGING
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -79,17 +77,18 @@ async def parse_message (self,msg):
         msg=self.effective_message.text
     wordlist = msg.split(" ")
     logger.debug(msg=f"wordlist {wordlist}")
+    #🦾BOT FILTERS
     filter_lst_error = ['error', '⚠️']
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
-    filter_lst_bal = [command02]
-    filter_lst_pos = [command03]
-    filter_lst_quote = [command04] 
-    filter_lst_info = [command05]
-    filter_lst_trading = [command06]
-    filter_lst_test = [command07]
-    filter_lst_restart = [command08]
+    filter_lst_bal = ['/bal']
+    filter_lst_pos = ['/pos']
+    filter_lst_quote = ['/q'] 
+    filter_lst_trading = ['/trading']
+    filter_lst_test = ['/testmode']
+    filter_lst_restart = ['/restart']
     filter_lst_switch = ['/cex', '/dex']
     logger.debug(msg=f"wordlist len {len(wordlist)}")
+
     try:
         if [ele for ele in filter_lst_error if(ele in wordlist)]:
             return
@@ -128,10 +127,6 @@ async def parse_message (self,msg):
             response = await  trading_switch_command(self)
         elif [ele for ele in filter_lst_test if(ele in wordlist)]:
             response = await testmode_switch_command(self)
-        elif [ele for ele in filter_lst_info if(ele in wordlist)]:
-            if len(wordlist[1]) > 0:
-                symbol = wordlist[1]
-                response = await search_gecko_detailed(symbol)
         elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
                 symbol = wordlist[1]
@@ -688,7 +683,6 @@ async def get_wallet_auth():
     except Exception as e:
         return
 
-
 #======= error handling
 async def handle_exception(e) -> None:
     try:
@@ -721,39 +715,6 @@ async def handle_exception(e) -> None:
 """
 
 #🦾BOT COMMAND
-PREFIX = "!"
-command00 = "test"
-command01 = "/help"
-command02 = "/bal"
-command03 = "/pos"
-command04 = "/q"
-command05 = "/coin"
-command06 = "/trading"
-command07 = "/testmode"
-command08 = "/restart"
-command09 = "(?:cex|dex)"
-command10 = "(?:buy|Buy|BUY|sell|Sell|SELL)"
-helpcommand = """
-🏦<code>/bal</code>
-
-🏛️ <code>/cex kraken</code>
-🥞 <code>/dex pancake</code>
-🦄 <code>/dex uniswap_v2</code>
-
-📦
-<code>buy btc/usdt sl=1000 tp=20 q=1%</code>
-`buy cake`
-
-🦎
-<code>/q BTCB</code> 
-<code>/q WBTC</code> 
-<code>/q btc/usdt</code>
-
-🔀
-<code>/trading</code>
-<code>/testmode</code>"""
-bot_menu_help = f"{TTversion} \n {helpcommand}"
-
 async def post_init(application: Application):
     message=f"Bot is online {TTversion}"
     #await load_exchange(ex_name)
@@ -761,6 +722,26 @@ async def post_init(application: Application):
 
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
+    helpcommand = """
+    🏦<code>/bal</code>
+
+    🏛️ <code>/cex kraken</code>
+    🥞 <code>/dex pancake</code>
+    🦄 <code>/dex uniswap_v2</code>
+
+    📦
+    <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
+    `buy cake`
+
+    🦎
+    <code>/q BTCB</code> 
+    <code>/q WBTC</code> 
+    <code>/q btc/usdt</code>
+
+    🔀
+    <code>/trading</code>
+    <code>/testmode</code>"""
+    bot_menu_help = f"{TTversion} \n {helpcommand}"
     response= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     return response
 
@@ -769,28 +750,14 @@ async def account_balance_command(self='bot') -> None:
     balance += await get_account_balance()
     return balance
 
-
-# async def order_scanner(self='bot') -> None:
-#     channel_message = update.effective_message.text
-#     order = await parse_message(update,channel_message)
-#     if (order):
-#         try:
-#             res = await execute_order(order[0],order[1],order[2],order[3],order[4])
-#             if (res != None):
-#                 response = f"{res}"
-#                 await send(update,response)
-#         except Exception as e:
-#             await handle_exception(e)
-#             return
-
-async def quote_command(self='bot') -> None:
-    symbol = await parse_message(update.effective_message.text)
+async def quote_command(symbol) -> None:
     asset_out_cg_quote = await fetch_gecko_quote(symbol)
     response=f"₿ {asset_out_cg_quote}\n"
     if (isinstance(ex,web3.main.Web3)):
         if(await search_gecko_contract(symbol) != None):
             asset_out_1inch_quote = await fetch_1inch_quote (symbol)
             response+=f"🦄{asset_out_1inch_quote} USD\n🖊️{chainId}: {await search_gecko_contract(symbol)}"
+            response+=f"/n{await search_gecko_detailed(symbol)}"
     elif not (isinstance(ex,web3.main.Web3)):
         price= ex.fetch_ticker(symbol.upper())['last']
         response+=f"🏛️ {price} USD"
@@ -918,7 +885,7 @@ async def main():
         elif(bot_service=='discord'):
             intents = discord.Intents.default()
             intents.message_content = True
-            bot = commands.Bot(command_prefix=f'{PREFIX}', intents=intents)
+            bot = commands.Bot(intents=intents)
             @bot.event
             async def on_ready():
                 logger.debug(msg=f"Logged in as {bot.user} (ID: {bot.user.id})")
