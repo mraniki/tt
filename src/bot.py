@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.36"
+TTversion="🪙TT Beta 1.2.38"
 ##=============== import  =============
 ##log
 import logging
@@ -12,7 +12,6 @@ from dotenv import load_dotenv
 import json, requests
 import asyncio
 import nest_asyncio
-import aiohttp
 #telegram
 #import telegram
 from telegram import Update, constants
@@ -65,6 +64,7 @@ async def parse_message (self,msg):
     #🦾BOT FILTERS
     filter_lst_error = ['error', '⚠️']
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
+    filter_lst_help = ['/echo']
     filter_lst_bal = ['/bal']
     filter_lst_pos = ['/pos']
     filter_lst_quote = ['/q'] 
@@ -77,6 +77,8 @@ async def parse_message (self,msg):
     try:
         if [ele for ele in filter_lst_error if(ele in wordlist)]:
             return
+        if [ele for ele in filter_lst_help if(ele in wordlist)]:
+            response = await help_command()
         if [ele for ele in filter_lst_order if(ele in wordlist)]:
             if len(wordlist[0]) > 0:
                 direction = wordlist[0].upper()
@@ -149,12 +151,13 @@ async def verify_latency_ex():
         await handle_exception(e)
 
 #💬MESSAGING
-async def send_msg (self="bot", msg="123"):
+async def send_msg (self="bot", msg="echo"):
     logger.debug(msg=f"💬MESSAGING START")
     logger.debug(msg=f"self {self} msg {msg} ")
     try:
         if(bot_service=='tgram'):
-            await self.effective_chat.send_message(f"{msg}", parse_mode=constants.ParseMode.MARKDOWN_V2)
+            await self.effective_chat.send_message(msg, parse_mode=constants.ParseMode.HTML)
+            #await self.chat.send_message(f"{msg}", parse_mode=constants.ParseMode.MARKDOWN_V2)
         elif(bot_service=='discord'):
             await self.channel.send(msg)
             #await self.reply(msg,mention_author=True)
@@ -687,33 +690,29 @@ async def handle_exception(e) -> None:
 startup_message=f"Bot is online {TTversion}"
 
 #🦾BOT COMMAND
-async def post_init(application: Application):
-    
-    #await load_exchange(ex_name)
-    await application.bot.send_message(bot_channel_id, message, parse_mode=constants.ParseMode.HTML)
+async def post_init(self):
+    logger.info(msg = f"self {self}")
+    startup_message=f"Bot is online {TTversion}"
+    logger.info(msg = f"{startup_message}")
+    #await send_msg(self,startup_message)
+    #await application.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
 
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
+    helpcommand1 = "ECHO"
     helpcommand = """
-    🏦`/bal`
-
-    🏛️ `/cex kraken`
-    🥞 `/dex pancake`
-    🦄 `/dex uniswap_v2`
-
-    📦
-    `buy btc/usdt sl=1000 tp=20 q=1%`
-    `buy cake`
-
-    🦎
-    `/q BTCB` 
-    `/q WBTC` 
-    `/q btc/usdt`
-
-    🔀
-    `/trading`
-    `/testmode`"""
-    bot_menu_help = f"{TTversion} \n {helpcommand}"
+    🏦 <code>/bal</code>
+    🏛️ <code>/cex kraken</code>
+    🥞 <code>/dex pancake</code>
+    🦄 <code>/dex uniswap_v2</code>
+    📦 <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
+           <code>buy cake</code>
+    🦎 <code>/q BTCB</code>
+           <code>/q WBTC</code>
+           <code>/q btc/usdt</code>
+    🔀 <code>/trading</code>
+           <code>/testmode</code>"""
+    bot_menu_help = f"{TTversion}\n{helpcommand}"
     response= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     return response
 
@@ -848,7 +847,9 @@ async def main():
 
 #StartTheBot
         if(bot_service=='tgram'):
-            bot = Application.builder().token(bot_token).post_init(post_init).build()
+            #bot = Application.builder().token(bot_token).post_init(post_init).build()
+            bot = Application.builder().token(bot_token).build()
+            await post_init(bot)
             bot.add_handler(MessageHandler(None, parse_message))
             bot.add_error_handler(error_handler)
             bot.run_polling(drop_pending_updates=True)
@@ -859,7 +860,8 @@ async def main():
             @bot.event
             async def on_ready():
                 channel = bot.get_channel(int(bot_channel_id))
-                await channel.send(startup_message)
+                await post_init()
+                #await channel.send(startup_message)
             @bot.event
             async def on_message(message: discord.Message):
                 await parse_message(message,message.content)
@@ -873,7 +875,8 @@ async def main():
             bot = botlib.Bot(creds,config)
             @bot.listener.on_startup
             async def room_joined(room):
-                await send_msg(bot, startup_message)
+                await post_init(bot)
+                #await send_msg(bot, startup_message)
             @bot.listener.on_message_event
             async def neo(room, message):
                 match = botlib.MessageMatch(room, message, bot)
@@ -882,7 +885,8 @@ async def main():
             bot.run()
         elif(bot_service=='telethon'):
             bot = await TelegramClient(None, bot_api_id, bot_api_hash).start(bot_token=bot_token)
-            await bot.send(startup_message)
+            #await bot.send(startup_message)
+            await post_init(bot)
             @bot.on(events.NewMessage())
             async def telethon(event):
                 await parse_message(event,event.message.message)
