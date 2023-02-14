@@ -876,7 +876,7 @@ async def main():
             config = botlib.Config()
             config.emoji_verify = True
             config.ignore_unverified_devices = True
-            config.store_path ='./config/store/'
+            config.store_path ='./config/matrix/'
             creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
             bot = botlib.Bot(creds,config)
             @bot.listener.on_startup
