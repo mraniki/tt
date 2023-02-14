@@ -175,14 +175,12 @@ async def send_msg (self="bot", msg="123"):
 async def notify(message):
     logger.debug(msg=f"NOTIFICATION START")
     apobj = apprise.Apprise()
-    if (bot_service =='tgram'):
+    if (bot_service =='tgram') or (bot_service =='telethon'):
         apobj.add(f'{bot_service}://' + str(bot_token) + "/" + str(bot_channel_id))
     elif (bot_service =='discord'):
         apobj.add(f'{bot_service}://' + str(bot_webhook_id) + "/" + str(bot_webhook_token))
     elif (bot_service =='matrix'):
-        apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@matrix.org:80/" + bot_channel_id)
-    elif (bot_service =='telethon'):
-        apobj.add(f'tgram://' + bot_token + "/" + bot_channel_id)
+        apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":80/" + bot_channel_id)
 
     try:
         apobj.notify(body=message)
