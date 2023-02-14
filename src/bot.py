@@ -118,13 +118,11 @@ async def parse_message (self,msg):
             if len(wordlist[1]) > 0:
                 symbol = wordlist[1]
                 logger.info(msg=f"Symbol identified {wordlist[1]} {symbol}")
-                #return symbol
                 response = await quote_command(symbol)
         if (response != None):
             await send_msg(self,response)
     except Exception as e:
-        #await handle_exception(e)
-        logger.warning(msg=f"Parsing anomaly")
+        logger.warning(msg=f"Parsing anomaly {e}")
         return
 
 async def retrieve_url_json(url,params=None):
@@ -156,10 +154,10 @@ async def verify_latency_ex():
 #💬MESSAGING
 async def send_msg (self="bot", msg="123"):
     logger.debug(msg=f"💬MESSAGING START")
-    logger.info(msg=f"self {self} msg {msg} ")
+    logger.debug(msg=f"self {self} msg {msg} ")
     try:
         if(bot_service=='tgram'):
-            await self.effective_chat.send_message(f"{msg}", parse_mode=constants.ParseMode.HTML)
+            await self.effective_chat.send_message(f"{msg}", parse_mode=constants.ParseMode.MARKDOWN_V2)
         elif(bot_service=='discord'):
             await self.channel.send(msg)
             #await self.reply(msg,mention_author=True)
@@ -831,13 +829,13 @@ async def database_setup():
             if (bot_service=='telethon'):
                 bot_api_id = bot[0]['api_id']
                 bot_api_hash = bot[0]['api_hash']
-            if ((bot_service=='tgram') & (bot_token == "")): #or ((bot_service=='matrix') & (bot_pass == ""))):
+            if ((bot_service=='tgram') & (bot_token == "")): 
                 logger.error("Failover process with sample DB")
                 contingency_db_path = './config/sample_db.json'
                 os.rename(contingency_db_path, db_path)
                 try:
-                    bot_token = os.getenv("TK") #checking if TOKEN is given via enviroment variable
-                    bot_channel_id = os.getenv("CHANNEL_ID") #checking if Channel is given via enviroment variable
+                    bot_token = os.getenv("TK") 
+                    bot_channel_id = os.getenv("CHANNEL_ID")
                 except Exception as e:
                     logger.error("no bot token")
                     sys.exit()
