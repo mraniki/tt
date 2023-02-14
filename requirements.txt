@@ -1,15 +1,13 @@
-python-dotenv>=0.20.0
+python-dotenv>=0.21.1
 python-telegram-bot>=20.1
 telethon
 simplematrixbotlib
 discord
 tinydb
 ccxt
-web3>=v6.0.0-beta.8
+web3>=v6.0.0b9
 apprise
 pycoingecko
 ping3
 tornado
 nest_asyncio
-orjson
-

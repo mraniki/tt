@@ -1,28 +1,24 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.34"
+TTversion="🪙TT Beta 1.2.35"
 ##=============== import  =============
 ##log
 import logging
-#from loguru import logger to be reviewed
 import sys
 import traceback
 from ping3 import ping, verbose_ping
 ##env
 import os
-from os import getenv
 from dotenv import load_dotenv
 import json, requests
-import orjson #to review agains json
 import asyncio
 import nest_asyncio
 import aiohttp
 #telegram
-import telegram
+#import telegram
 from telegram import Update, constants
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
-import telethon
+#import telethon
 from telethon import TelegramClient, events
-from collections import defaultdict
 #matrix
 import simplematrixbotlib as botlib
 #discord
@@ -31,7 +27,6 @@ from discord.ext import commands
 #notification
 import apprise
 #db
-import tinydb
 from tinydb import TinyDB, Query, where
 import re
 #CEX
@@ -39,40 +34,32 @@ import ccxt
 #DEX
 import web3
 from web3 import Web3
-from web3.contract import Contract
-from ens import ENS 
 from web3.middleware import geth_poa_middleware
-from typing import List
-import time
+from ens import ENS 
 from datetime import datetime
 from pycoingecko import CoinGeckoAPI
+
 
 #🔧CONFIG
 load_dotenv()
 nest_asyncio.apply()
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 #🔗API
 gecko_api = CoinGeckoAPI()
 llama_api = f"https://api.llama.fi/"
 dex_1inch_api = f"https://api.1inch.exchange/v5.0"
-exchangerate_api = f"https://api.exchangerate.host"
+
 
 #🔁UTILS
 async def verify_import_library():
     logger.info(msg=f"{TTversion}")
-    logger.debug(msg=f"Python {sys.version}")
-    logger.debug(msg=f"TinyDB {tinydb.__version__}")
-    logger.debug(msg=f"TPB {telegram.__version__}")
-    logger.debug(msg=f"TLT {telethon.__version__}")
-    logger.debug(msg=f"DSC {discord.__version__}")
-    logger.debug(msg=f"CCXT {ccxt.__version__}")
-    logger.debug(msg=f"Web3 {web3.__version__}")
-    logger.debug(msg=f"apprise {apprise.__version__}")
 
 async def parse_message (self,msg):
+    logger.debug(msg=f"self {self}")
+    logger.debug(msg=f"msg {msg}")
     if(bot_service=='tgram'):
         msg=self.effective_message.text
     wordlist = msg.split(" ")
@@ -134,7 +121,7 @@ async def parse_message (self,msg):
                 #return symbol
                 response = await quote_command(symbol)
         if (response != None):
-            await send(self,response)
+            await send_msg(self,response)
     except Exception as e:
         #await handle_exception(e)
         logger.warning(msg=f"Parsing anomaly")
@@ -166,32 +153,23 @@ async def verify_latency_ex():
     except Exception as e:
         await handle_exception(e)
 
-async def convert_currency(_from_: 'USD', _to_: 'EUR',amount):
-    try:
-        url = f"{ex_ccyrate_api}/convert?from={_from_}&to={_to_}&amount={amount}"
-        rate = await retrieve_url_json(url)
-        return rate["result"]
-    except Exception as e:
-        await handle_exception(e)
-        logger.warning(msg=f"API conversion error {e}")
-        return
-
-
 #💬MESSAGING
-async def send (self="bot", msg="123"):
+async def send_msg (self="bot", msg="123"):
     logger.debug(msg=f"💬MESSAGING START")
+    logger.info(msg=f"self {self} msg {msg} ")
     try:
         if(bot_service=='tgram'):
             await self.effective_chat.send_message(f"{msg}", parse_mode=constants.ParseMode.HTML)
         elif(bot_service=='discord'):
-            #await send(msg)
-            await self.reply(msg,mention_author=True)
+            await self.channel.send(msg)
+            #await self.reply(msg,mention_author=True)
         elif(bot_service=='matrix'):
             # await bot.api.send_text_message(bot_channel_id, msg)
             await bot.api.send_markdown_message(bot_channel_id, msg)
             return
         elif(bot_service=='telethon'):
-            await self.reply(message=msg, parse_mode='html')
+            #await self.reply(message=msg, parse_mode='html')
+            await self.send_message(int(bot_channel_id),msg)
             return
     except Exception as e:
         await handle_exception(e)
@@ -404,7 +382,7 @@ async def approve_asset_router(asset_out_address):
                 asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
                 approval_TX = asset_out_contract.functions.approve(ex.to_checksum_address(router), approved_amount)
                 approval_txHash = await sign_transaction_dex(approval_TX)
-                time.sleep(10) #wait approval
+                approval_txHash_complete = ex.eth.wait_for_transaction_receipt(approval_txHash, timeout=120, poll_latency=0.1)
         if (dex_version=="1inch_v5"):
             approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
             approval_response = await retrieve_url_json(approval_check_URL)
@@ -486,8 +464,7 @@ async def fetch_1inch_quote(token):
     try:
         asset_out_amount=1000000000000
         quote_url = f"{dex_1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
-        quote_response = requests.get(quote_url)
-        quote = quote_response.json()
+        quote = retrieve_url_json(quote_url)
         logger.debug(msg=f"quote {quote}")
         asset_out_1inch_quote = quote['toTokenAmount']
         return asset_out_1inch_quote
@@ -710,13 +687,15 @@ async def handle_exception(e) -> None:
     message = f"⚠️ {msg} {e}"
     logger.error(msg = f"{message}")
     await notify(message)
+
 """
 🔚END OF COMMON FUNCTIONS
 """
+startup_message=f"Bot is online {TTversion}"
 
 #🦾BOT COMMAND
 async def post_init(application: Application):
-    message=f"Bot is online {TTversion}"
+    
     #await load_exchange(ex_name)
     await application.bot.send_message(bot_channel_id, message, parse_mode=constants.ParseMode.HTML)
 
@@ -874,7 +853,6 @@ async def main():
         await verify_import_library()
         await database_setup()
         await load_exchange(ex_name)
-        logger.debug(msg=f"bot_service {bot_service}")
 
 #StartTheBot
         if(bot_service=='tgram'):
@@ -885,38 +863,41 @@ async def main():
         elif(bot_service=='discord'):
             intents = discord.Intents.default()
             intents.message_content = True
-            bot = commands.Bot(intents=intents)
+            bot = discord.Bot(intents=intents)
             @bot.event
             async def on_ready():
-                logger.debug(msg=f"Logged in as {bot.user} (ID: {bot.user.id})")
+                channel = bot.get_channel(int(bot_channel_id))
+                await channel.send(startup_message)
             @bot.event
             async def on_message(message: discord.Message):
-                logger.debug(msg=f" discord message {message.content}")
                 await parse_message(message,message.content)
             bot.run(bot_token)
         elif(bot_service=='matrix'):
             config = botlib.Config()
-            config.encryption_enabled = True
+            config.emoji_verify = True
+            config.ignore_unverified_devices = True
             config.store_path ='./config/store/'
             creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
             bot = botlib.Bot(creds,config)
+            @bot.listener.on_startup
+            async def room_joined(room):
+                await send_msg(bot, startup_message)
             @bot.listener.on_message_event
             async def neo(room, message):
-                match = botlib.Match(room, event, bot)
+                match = botlib.MessageMatch(room, message, bot)
                 if match.is_not_from_this_bot():
-                    await parse_message(bot,message)
+                    await parse_message(bot,message.body)
             bot.run()
         elif(bot_service=='telethon'):
-            bot = await TelegramClient('bot', bot_api_id, bot_api_hash).start(bot_token=bot_token)
+            bot = await TelegramClient(None, bot_api_id, bot_api_hash).start(bot_token=bot_token)
+            await bot.send(startup_message)
             @bot.on(events.NewMessage())
             async def telethon(event):
                 await parse_message(event,event.message.message)
             await bot.run_until_disconnected()
-        else:
-            logger.error(msg=f" Bot failed to start.")
 
     except Exception as e:
-        logger.error(msg="FAILURE Error: " + str(e))
+        logger.error(msg="Bot failed to start: " + str(e))
 
 
 asyncio.run(main())
