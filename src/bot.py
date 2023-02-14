@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.35"
+TTversion="🪙TT Beta 1.2.36"
 ##=============== import  =============
 ##log
 import logging
@@ -28,7 +28,7 @@ from discord.ext import commands
 import apprise
 #db
 from tinydb import TinyDB, Query, where
-import re
+#import re
 #CEX
 import ccxt
 #DEX
@@ -39,19 +39,17 @@ from ens import ENS
 from datetime import datetime
 from pycoingecko import CoinGeckoAPI
 
-
 #🔧CONFIG
 load_dotenv()
 nest_asyncio.apply()
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 #🔗API
 gecko_api = CoinGeckoAPI()
 llama_api = f"https://api.llama.fi/"
 dex_1inch_api = f"https://api.1inch.exchange/v5.0"
-
 
 #🔁UTILS
 async def verify_import_library():
@@ -117,12 +115,11 @@ async def parse_message (self,msg):
         elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
                 symbol = wordlist[1]
-                logger.info(msg=f"Symbol identified {wordlist[1]} {symbol}")
                 response = await quote_command(symbol)
         if (response != None):
             await send_msg(self,response)
     except Exception as e:
-        logger.warning(msg=f"Parsing anomaly {e}")
+        logger.warning(msg=f"Parsing skipped {e}")
         return
 
 async def retrieve_url_json(url,params=None):
@@ -698,24 +695,24 @@ async def post_init(application: Application):
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
     helpcommand = """
-    🏦<code>/bal</code>
+    🏦`/bal`
 
-    🏛️ <code>/cex kraken</code>
-    🥞 <code>/dex pancake</code>
-    🦄 <code>/dex uniswap_v2</code>
+    🏛️ `/cex kraken`
+    🥞 `/dex pancake`
+    🦄 `/dex uniswap_v2`
 
     📦
-    <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
+    `buy btc/usdt sl=1000 tp=20 q=1%`
     `buy cake`
 
     🦎
-    <code>/q BTCB</code> 
-    <code>/q WBTC</code> 
-    <code>/q btc/usdt</code>
+    `/q BTCB` 
+    `/q WBTC` 
+    `/q btc/usdt`
 
     🔀
-    <code>/trading</code>
-    <code>/testmode</code>"""
+    `/trading`
+    `/testmode`"""
     bot_menu_help = f"{TTversion} \n {helpcommand}"
     response= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     return response
@@ -732,7 +729,7 @@ async def quote_command(symbol) -> None:
         if(await search_gecko_contract(symbol) != None):
             asset_out_1inch_quote = await fetch_1inch_quote (symbol)
             response+=f"🦄{asset_out_1inch_quote} USD\n🖊️{chainId}: {await search_gecko_contract(symbol)}"
-            response+=f"/n{await search_gecko_detailed(symbol)}"
+            #response+=f"/n{await search_gecko_detailed(symbol)}"
     elif not (isinstance(ex,web3.main.Web3)):
         price= ex.fetch_ticker(symbol.upper())['last']
         response+=f"🏛️ {price} USD"
@@ -839,7 +836,6 @@ async def database_setup():
                     sys.exit()
         except Exception as e:
             logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
-
 
 #🤖BOT
 async def main():
