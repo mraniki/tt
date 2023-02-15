@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.40"
+TTversion="🪙TT Beta 1.2.41"
 ##=============== import  =============
 ##log
 import logging
@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 import json, requests
 import asyncio
 import nest_asyncio
+from aiohttp import web
 #telegram
 #import telegram
 from telegram import Update, constants
@@ -43,6 +44,10 @@ nest_asyncio.apply()
 #🧐LOGGING
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
+async def hello(request):
+ return web.Response(text="Hello, world")
 
 #🔗API
 gecko_api = CoinGeckoAPI()
@@ -690,6 +695,9 @@ async def post_init(self):
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
+    app = web.Application()
+    app.add_routes([web.get('/', hello)])
+    web.run_app(app)
     await send_msg(self,startup_message)
     #await application.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
 
