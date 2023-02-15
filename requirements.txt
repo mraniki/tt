@@ -11,4 +11,3 @@ ping3
 tornado
 nest_asyncio
 py-cord
-discord
