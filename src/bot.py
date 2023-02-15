@@ -183,7 +183,7 @@ async def notify(message):
     try:
         apobj.notify(body=message)
     except Exception as e:
-        logger.error(msg=f"{message} not delivered due to error: {e}")
+        logger.error(msg=f"{message} not sent due to error: {e}")
 
 
 #💱EXCHANGE
