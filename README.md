@@ -29,7 +29,7 @@ Using:
 [![Docker](https://github.com/mraniki/tt/actions/workflows/DockerHub.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/DockerHub.yml) [![DockerNightly](https://github.com/mraniki/tt/actions/workflows/DockerHub_Nightly.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/DockerHub_Nightly.yml)
 
 ## Install
-1) Create your channel/room and your platfrom bot 
+1) Create your channel/room and your platform bot 
     - Telegram via [Telegram @BotFather](https://core.telegram.org/bots/tutorial)
     - Discord via [Discord Dev Portal](https://discord.com/developers/docs/intro)
     - Matrix via [Matrix.org](https://turt2live.github.io/matrix-bot-sdk/index.html)
@@ -38,7 +38,7 @@ Using:
     - DEX keys and RPC supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org), [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) or [cointool](https://cointool.app/) for chain/RPC details
 3) Update the config (bot token, bot channel and exchange details). Point or copy your config [db.json](config/db.json.sample) to the volume /code/config)
 4) Deploy via:
-    - docker dockerhub `docker push mraniki/tt:latest` (`docker push mraniki/tt:nightly`) or
+    - docker dockerhub `docker push mraniki/tt:latest` (`docker push mraniki/tt:nightly`)
     - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
 5) Start your container or use `python3 bot.py`
 
@@ -52,37 +52,38 @@ Quick start approach: Update the sample db with your parameters and save it as d
 [env sample](config/env.sample)
 
 ## Bot commands
+ - `sell BTCUSDT sl=6000 tp=4500 q=1%` or `sell BTCUSDT` Order processing (direction symbol sl=stoploss tp=takeprofit q=percentagequantity% or direction symbol)
  - `/bal` Query user account exchange balance
- - `/cex name` or `/dex name` Switch between any CEX or DEX (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
+ - `/cex name` or `/dex name` Switch between any CEX or DEX (e.g `/cex kraken`, `/dex pancake`)
  - `/trading` Disable or Enable trading
  - `/testmode` Switch between testnet,sandbox or mainnet  
- - `/q BTCB` Retrieve ticker quote from exchange and coingecko.
- - `/coin BTC` Get coingecko token information
+ - `/q BTCB` Retrieve ticker quote and token information from exchange and coingecko
 
 ## Features Available
  
  ### v1 
- - Enable bot in Telegram (ptb v20 and telethon), Matrix and Discord messaging platform
+ - Enable bot in Telegram (ptb v20 and telethon), Matrix (simplematrixbotlib) and Discord (pycord) messaging platform
  - Place order for CEX and DEX, Query Balance and quote ticker
- - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing (e.g. `sell BTCUSDT`) values are defaulted
+ - Push your order signal manually or from system like trading view webhook (verified with Binance, Binance Testnet and ~~FTX😠~~ Kraken, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing values are defaulted
  - Support DEX automatic token approval
  - Support uniswap v2, 1inch api and uniswap v3 swap methods
- - Support % of balance when placing order
+ - Support % of stablecoin balance when placing order
  
  ### Other Features
- - Support bot in private channel (or private chat) and multiple channel per environment
+ - Support bot in private channel and multiple channel per environment
  - Support multiple environment via variable (e.g. DEV, PRD, PRD CEX, UNI1 or UNI2)
- - Handle messaging in one function
+ - Handle messaging in one function across messaging platforms using HTML format
  - Handle libraries exceptions in one function and notification delivery with apprise 
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub
+ - Support deployment on  or selfhosting 
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
- - Support config file as variable to deploy on cloud platform (like northflank, render or fly.io)
- - Create DB if it is missing and connect to default DEX
+ - Support config file as variable to deploy on [PaaS](https://github.com/ripienaar/free-for-dev#paas) (tested with northflank, render or fly.io)
+ - Create DB if it is missing and check bot variables for failover
  - Support bot restart capability
- - Support standard json [tokenlist.org](tokenlist.org) search for testnet DEX support
+ - Support standard json [tokenlist.org](tokenlist.org) search for testnet DEX support [(example)](https://github.com/mraniki/tokenlist/blob/main/testnet.json)
  - Convert symbol to DEX checksum address via coingecko API to support any symbol and any chain listed in coingecko
- - Configured the default exchange and default test mode when starting the bot.
- - Support multiple Messaging platform (Telegram, Matrix and Discord) 
+ - Configure the default exchange and default test mode when starting the bot.
+ - Support multiple messaging platform (Telegram, Matrix and Discord) 
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
@@ -96,21 +97,21 @@ Quick start approach: Update the sample db with your parameters and save it as d
 ### v1.4
 - Support limit order for DEX (1inch and v3)
 - Support DEX limit order if supported like dydx / Kwenta / GMX
+- Review testmode command to be part of the switch command.
 
 ### v1.5
 
 - Support futures and margin for CEX (to be tested via CCXT)
 - Support STOPLOSS TAKEPROFIT for CEX
-- view free margin for futures in /bal
-- view opened position via /pos (futures and limit order)
-- create / modify db via bot chat nested conversation
+- Support multiple TAKEPROFIT target for CEX
+- View free margin for futures in /bal
+- View opened position via /pos (futures and limit order)
 
 ### v2 backlog
-
-- Review DEX private key strategy (wallet authentification, pywalletconnect?)
+- Create / modify db via bot chat nested conversation
+- Review DEX private key strategy (walletconnect authentification via pywalletconnect)
 - Support Web3 ENS
-- view daily pnl in /bal response
-- Support bot in webhook instead of getupdate
+- View daily pnl in /bal
 - View weekly pnl with /w command and scheduling
 
 ### v3 backlog
