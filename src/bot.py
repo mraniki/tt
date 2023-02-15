@@ -693,7 +693,7 @@ async def post_init(self):
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
-    #await send_msg(self,startup_message)
+    await send_msg(self,startup_message)
     #await application.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
 
 async def help_command(self='bot') -> None:
@@ -884,11 +884,10 @@ async def main():
             bot.run()
         elif(bot_service=='telethon'):
             bot = await TelegramClient(None, bot_api_id, bot_api_hash).start(bot_token=bot_token)
-            #await bot.send(startup_message)
             await post_init(bot)
             @bot.on(events.NewMessage())
             async def telethon(event):
-                await parse_message(event,event.message.message)
+                await parse_message(bot,event.message.message)
             await bot.run_until_disconnected()
 
     except Exception as e:
