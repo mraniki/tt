@@ -1,0 +1,23 @@
+name: ☁️ Deploy
+
+on:
+  workflow_run:
+    workflows: ["🥷🐳 Nightly"]
+    branches: [ "dev" ]
+    types: 
+      - completed
+
+jobs:
+  deploy-deta:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Deploy to Deta
+        uses: BogDAAAMN/deta-deploy-action@v1.0.1
+        with:
+          deta-access-token: ${{ secrets.DETA_ACCESS_TOKEN }}
+          deta-name: ${{ secrets.DETA_STAGING_MICRO_NAME }}
+          deta-project: ${{ secrets.DETA_PROJECT_NAME }}
+a0MJ5S6yDhtX
