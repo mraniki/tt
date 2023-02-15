@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.38"
+TTversion="🪙TT Beta 1.2.39"
 ##=============== import  =============
 ##log
 import logging
@@ -438,9 +438,8 @@ async def fetch_abi_dex(addr):
             "address": addr,
             "apikey": abiurltoken }
         resp = await retrieve_url_json(url, params)
-        logger.debug(msg=f"resp {resp}")
         abi = resp["result"]
-        logger.debug(msg=f"abi {abi}")
+        #logger.debug(msg=f"abi {abi}")
         if(abi!=""):
             return abi
         else:
@@ -860,8 +859,8 @@ async def main():
             @bot.event
             async def on_ready():
                 channel = bot.get_channel(int(bot_channel_id))
-                await post_init()
-                #await channel.send(startup_message)
+                #await post_init()
+                await channel.send(startup_message)
             @bot.event
             async def on_message(message: discord.Message):
                 await parse_message(message,message.content)
