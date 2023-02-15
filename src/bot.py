@@ -41,7 +41,7 @@ from pycoingecko import CoinGeckoAPI
 load_dotenv()
 nest_asyncio.apply()
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 #🔗API
@@ -358,7 +358,6 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
 #🦄DEX
 async def resolve_ens_dex(addr):
     try:
-        #pending middleware approach for implementation WIP
         domain = ns.name(addr)
         logger.info(msg=f"{domain}")
         return
@@ -458,7 +457,7 @@ async def fetch_1inch_quote(token):
         asset_out_amount=1000000000000
         quote_url = f"{dex_1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
         quote = retrieve_url_json(quote_url)
-        logger.debug(msg=f"quote {quote}")
+        #logger.debug(msg=f"quote {quote}")
         asset_out_1inch_quote = quote['toTokenAmount']
         return asset_out_1inch_quote
     except Exception:
