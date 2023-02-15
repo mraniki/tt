@@ -27,7 +27,6 @@ from discord.ext import commands
 import apprise
 #db
 from tinydb import TinyDB, Query, where
-#import re
 #CEX
 import ccxt
 #DEX
@@ -181,11 +180,10 @@ async def notify(message):
         apobj.add(f'{bot_service}://' + str(bot_webhook_id) + "/" + str(bot_webhook_token))
     elif (bot_service =='matrix'):
         apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":80/" + bot_channel_id)
-
     try:
         apobj.notify(body=message)
     except Exception as e:
-        logger.error(msg=f"delivered: {e}")
+        logger.error(msg=f"{message} not delivered due to error: {e}")
 
 
 #💱EXCHANGE
