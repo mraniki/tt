@@ -167,7 +167,7 @@ async def send_msg (self="bot", msg="echo"):
             return
         elif(bot_service=='telethon'):
             #await self.reply(message=msg, parse_mode='html')
-            await self.send_message(int(bot_channel_id),msg)
+            await self.send_message(int(bot_channel_id),msg,parse_mode='html')
             return
     except Exception as e:
         await handle_exception(e)
