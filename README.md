@@ -29,7 +29,7 @@ Using:
 [![Docker](https://github.com/mraniki/tt/actions/workflows/DockerHub.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/DockerHub.yml) [![DockerNightly](https://github.com/mraniki/tt/actions/workflows/DockerHub_Nightly.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/DockerHub_Nightly.yml)
 
 ## Install
-1) Create your channel/room and your platfrom bot 
+1) Create your channel/room and your platform bot 
     - Telegram via [Telegram @BotFather](https://core.telegram.org/bots/tutorial)
     - Discord via [Discord Dev Portal](https://discord.com/developers/docs/intro)
     - Matrix via [Matrix.org](https://turt2live.github.io/matrix-bot-sdk/index.html)
@@ -54,7 +54,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
 ## Bot commands
  - `sell BTCUSDT sl=6000 tp=4500 q=1%` or `sell BTCUSDT` Order processing (direction symbol sl=stoploss tp=takeprofit q=percentagequantity% or direction symbol)
  - `/bal` Query user account exchange balance
- - `/cex name` or `/dex name` Switch between any CEX or DEX (e.g `/cex binance`, `/cex kraken`, `/dex pancake`, `/dex quickswap`)
+ - `/cex name` or `/dex name` Switch between any CEX or DEX (e.g `/cex kraken`, `/dex pancake`)
  - `/trading` Disable or Enable trading
  - `/testmode` Switch between testnet,sandbox or mainnet  
  - `/q BTCB` Retrieve ticker quote and token information from exchange and coingecko
