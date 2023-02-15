@@ -2,9 +2,7 @@
  [![](https://badgen.net/badge/icon/TT/E2B13C?icon=bitcoin&label)](https://github.com/mraniki/tt) 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)
 
- CEX, DEX and Telegram integration. Query Balance, quote ticker and place order for CEFI and DEFI.
- Based on python telegram bot v20, CCXT, Web3 v6 and TinyDB.
- Deploy it via docker. 
+ CEX & DEX integration with multi messaging platform (Telegram, Matrix and Discord). Query Balance, quote ticker and place order for CEFI and DEFI. Deploy it via docker on cloud platform. 
 
 
 If you like it, feel free to 
@@ -13,7 +11,9 @@ If you like it, feel free to
 Using:
 
 [![telegrambot](https://badgen.net/badge/icon/telegrambot?icon=telegram&label)](https://t.me/pythontelegrambotchannel)
-
+[![pycord](https://badgen.net/badge/icon/pycord?icon=discord&label)](https://github.com/Pycord-Development/pycord)
+[![telethon](https://badgen.net/badge/icon/telethon?icon=telegram&label)](https://github.com/LonamiWebs/Telethon)
+[![simplematrixbotlib](https://badgen.net/badge/icon/simplematrixbotlib?icon=telegram&label)](https://codeberg.org/imbev/simplematrixbotlib)
 [![python3.10](https://badgen.net/badge/icon/3.10/black?icon=pypi&label)](https://www.python.org/downloads/release/python-3100/)
 [![ccxt](https://badgen.net/badge/icon/ccxt/black?icon=libraries&label)](https://github.com/ccxt/ccxt)
 [![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py)
@@ -28,13 +28,16 @@ Using:
 [![Docker](https://github.com/mraniki/tt/actions/workflows/DockerHub.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/DockerHub.yml) [![DockerNightly](https://github.com/mraniki/tt/actions/workflows/DockerHub_Nightly.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/DockerHub_Nightly.yml)
 
 ## Install
-1) Create a private channel and a bot via [@BotFather ](https://core.telegram.org/bots/tutorial)
+1) Create your channel/room and your platfrom bot 
+    - Telegram via [Telegram @BotFather](https://core.telegram.org/bots/tutorial)
+    - Discord via [Discord Dev Portal](https://discord.com/developers/docs/intro)
+    - Matrix via [Matrix.org](https://turt2live.github.io/matrix-bot-sdk/index.html)
 2) Get your 
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
-    - DEX keys and RPC supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org), [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) or [cointool](https://cointool.app/) for chain details
+    - DEX keys and RPC supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org), [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) or [cointool](https://cointool.app/) for chain/RPC details
 3) Update the config (bot token, bot channel and exchange details). Point or copy your config [db.json](config/db.json.sample) to the volume /code/config)
 4) Deploy via:
-    - docker dockerhub `docker push mraniki/tt:latest` (or `docker push mraniki/tt:nightly`) or
+    - docker dockerhub `docker push mraniki/tt:latest` (`docker push mraniki/tt:nightly`) or
     - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
 5) Start your container or use `python3 bot.py`
 
@@ -58,8 +61,8 @@ Quick start approach: Update the sample db with your parameters and save it as d
 ## Features Available
  
  ### v1 
- - Enable bot in pythontelegram v20 and support CEX and DEX exchange formatted error via telegram
- - Query Balance, quote ticker and place order for CEX and DEX
+ - Enable bot in Telegram (ptb v20 and telethon), Matrix and Discord messaging platform
+ - Place order for CEX and DEX, Query Balance and quote ticker
  - Push your order signal manually or from system like trading view webhook (via n8n or ngrok) to submit order with `sell BTCUSDT sl=6000 tp=4500 q=1%` for CEFI and DEFI (verified with Binance, Binance Testnet and ~~FTX~~ Kraken, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing (e.g. `sell BTCUSDT`) values are defaulted
  - Support DEX automatic token approval
  - Support uniswap v2, 1inch api and uniswap v3 swap methods
@@ -77,7 +80,8 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Support bot restart capability
  - Support standard json [tokenlist.org](tokenlist.org) search for testnet DEX support
  - Convert symbol to DEX checksum address via coingecko API to support any symbol and any chain listed in coingecko
- - Configured the default exchange and default test mode when starting the bot. 
+ - Configured the default exchange and default test mode when starting the bot.
+ - Support multiple Messaging platform (Telegram, Matrix and Discord) 
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
@@ -86,8 +90,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
 
 
 ### V1.3
-- Support Uniswap V3
-- Support chat decorator (and simple echo for matrix / discord) to Simplify the integration with any chat bot system 
+- Support Uniswap V3 (more testing needed)
 
 ### v1.4
 - Support limit order for DEX (1inch and v3)
