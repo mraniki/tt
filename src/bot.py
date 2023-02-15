@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.39"
+TTversion="🪙TT Beta 1.2.40"
 ##=============== import  =============
 ##log
 import logging
@@ -698,7 +698,6 @@ async def post_init(self):
 
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
-    helpcommand1 = "ECHO"
     helpcommand = """
     🏦 <code>/bal</code>
     🏛️ <code>/cex kraken</code>
