@@ -77,7 +77,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub
  - Support deployment on  or selfhosting 
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
- - Support config file as variable to deploy on [PaaS](https://github.com/ripienaar/free-for-dev#paas) (tested with northflank, render or fly.io)
+ - Support config file as variable to deploy on [PaaS](https://github.com/ripienaar/free-for-dev#paas) (tested with northflank, koyeb, render and fly.io)
  - Create DB if it is missing and check bot variables for failover
  - Support bot restart capability
  - Support standard json [tokenlist.org](tokenlist.org) search for testnet DEX support [(example)](https://github.com/mraniki/tokenlist/blob/main/testnet.json)
