@@ -1,8 +1,12 @@
 # Talky Trader
- [![](https://badgen.net/badge/icon/TT/E2B13C?icon=bitcoin&label)](https://github.com/mraniki/tt) 
+
+
+
+[![Logo](https://i.imgur.io/Q7iDDyB_d.webp?maxwidth=640&shape=thumb&fidelity=medium)](https://github.com/mraniki/tt)
+
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)
 
- CEX & DEX integration with multi messaging platform (Telegram, Matrix and Discord). Query Balance, quote ticker and place order for CEFI and DEFI. Deploy it via docker on cloud platform. 
+ CEX & DEX integration with multi messaging platform (Telegram, Matrix and Discord). Place order for CEFI or DEFI exchanges, query balance and quote ticker. Deploy it via docker on selfhost or on any PaaS  platform. 
 
 
 If you like it, feel free to 
@@ -43,7 +47,7 @@ Using:
 5) Start your container or use `python3 bot.py`
 
 ## Config
-Quick start approach: Update the sample db with your parameters and save it as db.json. If you deploy the bot on a cloud platform, you can use `DB_URL` environment variable to import db.json from a secure location.
+Quick start approach: Update the sample db with your parameters and save it as db.json. If you deploy the bot on a PaaS cloud platform, you can use `DB_URL` environment variable to import db.json from a secure location.
 
 ### DB Structure
 [DB sample](config/db.json.sample)
@@ -77,7 +81,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub
  - Support deployment on  or selfhosting 
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
- - Support config file as variable to deploy on [PaaS](https://github.com/ripienaar/free-for-dev#paas) (tested with northflank, render or fly.io)
+ - Support config file as variable to deploy on [PaaS](https://github.com/ripienaar/free-for-dev#paas) (tested with northflank, koyeb, render and fly.io)
  - Create DB if it is missing and check bot variables for failover
  - Support bot restart capability
  - Support standard json [tokenlist.org](tokenlist.org) search for testnet DEX support [(example)](https://github.com/mraniki/tokenlist/blob/main/testnet.json)
@@ -115,7 +119,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
 - View weekly pnl with /w command and scheduling
 
 ### v3 backlog
-- Merge with MQL4 bot version integrated with MT4 exchanges for TradFi support[![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/) 
+- Merge with MQL4 version for MT4 TradFi support[![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/) 
 
 
  ## ⚠️ Disclaimer

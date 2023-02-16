@@ -11,3 +11,4 @@ ping3
 tornado
 nest_asyncio
 py-cord
+aiohttp

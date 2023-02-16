@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.40"
+TTversion="🪙TT Beta 1.2.41"
 ##=============== import  =============
 ##log
 import logging
@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 import json, requests
 import asyncio
 import nest_asyncio
+from aiohttp import web
 #telegram
 #import telegram
 from telegram import Update, constants
@@ -358,7 +359,6 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
 #🦄DEX
 async def resolve_ens_dex(addr):
     try:
-        #pending middleware approach for implementation WIP
         domain = ns.name(addr)
         logger.info(msg=f"{domain}")
         return
@@ -458,7 +458,7 @@ async def fetch_1inch_quote(token):
         asset_out_amount=1000000000000
         quote_url = f"{dex_1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
         quote = retrieve_url_json(quote_url)
-        logger.debug(msg=f"quote {quote}")
+        #logger.debug(msg=f"quote {quote}")
         asset_out_1inch_quote = quote['toTokenAmount']
         return asset_out_1inch_quote
     except Exception:
@@ -686,6 +686,10 @@ async def handle_exception(e) -> None:
 """
 startup_message=f"Bot is online {TTversion}"
 
+#HEALTHCHECK
+async def hello(request):
+ return web.Response(text=startup_message)
+
 #🦾BOT COMMAND
 async def post_init(self):
     logger.info(msg = f"self {self}")
@@ -693,6 +697,11 @@ async def post_init(self):
     logger.info(msg = f"{startup_message}")
     await send_msg(self,startup_message)
     #await application.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
+    #healthcheck server
+    app = web.Application()
+    app.add_routes([web.get('/', hello)])
+    web.run_app(app)
+
 
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
