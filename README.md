@@ -6,18 +6,13 @@
 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)
 
- CEX & DEX integration with multi messaging platform (Telegram, Matrix and Discord). Place order for CEFI or DEFI exchanges, query balance and quote ticker. Deploy it via docker on selfhost or on any PaaS  platform. 
+ CEX & DEX integration with multi messaging platform (Telegram, Matrix and Discord). Place order for CEFI or DEFI exchanges, query balance and quote ticker. Deploy it via docker on selfhost platform or any PaaS. 
 
-
-If you like it, feel free to 
-[![donate](https://badgen.net/badge/icon/coindrop/6F4E37?icon=buymeacoffee&label)](https://coindrop.to/mraniki)
-
-Using:
-
+ 
 [![telegrambot](https://badgen.net/badge/icon/telegrambot?icon=telegram&label)](https://t.me/pythontelegrambotchannel)
-[![pycord](https://badgen.net/badge/icon/pycord?icon=discord&label)](https://github.com/Pycord-Development/pycord)
 [![telethon](https://badgen.net/badge/icon/telethon?icon=telegram&label)](https://github.com/LonamiWebs/Telethon)
-[![simplematrixbotlib](https://badgen.net/badge/icon/simplematrixbotlib?icon=medium&label)](https://codeberg.org/imbev/simplematrixbotlib)
+[![pycord](https://badgen.net/badge/icon/pycord/purple?icon=discord&label)](https://github.com/Pycord-Development/pycord)
+[![simplematrixbotlib](https://badgen.net/badge/icon/simplematrixbotlib/grey?icon=medium&label)](https://codeberg.org/imbev/simplematrixbotlib)
 
 [![python3.10](https://badgen.net/badge/icon/3.10/black?icon=pypi&label)](https://www.python.org/downloads/release/python-3100/)
 [![ccxt](https://badgen.net/badge/icon/ccxt/black?icon=libraries&label)](https://github.com/ccxt/ccxt)
@@ -28,6 +23,9 @@ Using:
 
 [![sublime](https://badgen.net/badge/icon/sublime/F96854?icon=terminal&label)](https://www.sublimetext.com/)
 [![workingcopy](https://badgen.net/badge/icon/workingcopy/16DCCD?icon=github&label)](https://workingcopy.app/)
+
+If you like it, feel free to 
+[![donate](https://badgen.net/badge/icon/coindrop/6F4E37?icon=buymeacoffee&label)](https://coindrop.to/mraniki)
 
 ## Build status
 [![Docker](https://github.com/mraniki/tt/actions/workflows/DockerHub.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/DockerHub.yml) [![DockerNightly](https://github.com/mraniki/tt/actions/workflows/DockerHub_Nightly.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/DockerHub_Nightly.yml)
@@ -87,7 +85,8 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Support standard json [tokenlist.org](tokenlist.org) search for testnet DEX support [(example)](https://github.com/mraniki/tokenlist/blob/main/testnet.json)
  - Convert symbol to DEX checksum address via coingecko API to support any symbol and any chain listed in coingecko
  - Configure the default exchange and default test mode when starting the bot.
- - Support multiple messaging platform (Telegram, Matrix and Discord) 
+ - Support multiple messaging platform (Telegram, Matrix and Discord)
+ - include basic healthcheck via webserver on port 8080 
 
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 

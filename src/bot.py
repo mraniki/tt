@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.41"
+TTversion="🪙TT Beta 1.2.42"
 ##=============== import  =============
 ##log
 import logging
@@ -42,7 +42,7 @@ from pycoingecko import CoinGeckoAPI
 load_dotenv()
 nest_asyncio.apply()
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 #🔗API
@@ -73,7 +73,6 @@ async def parse_message (self,msg):
     filter_lst_restart = ['/restart']
     filter_lst_switch = ['/cex', '/dex']
     logger.debug(msg=f"wordlist len {len(wordlist)}")
-
     try:
         if [ele for ele in filter_lst_error if(ele in wordlist)]:
             return
@@ -121,7 +120,7 @@ async def parse_message (self,msg):
         if (response != None):
             await send_msg(self,response)
     except Exception as e:
-        logger.warning(msg=f"Parsing skipped {e}")
+        logger.info(msg=f"Parsing skipped {e}")
         return
 
 async def retrieve_url_json(url,params=None):
@@ -156,17 +155,18 @@ async def send_msg (self="bot", msg="echo"):
     logger.debug(msg=f"self {self} msg {msg} ")
     try:
         if(bot_service=='tgram'):
+            #await self.send_message(msg, parse_mode=constants.ParseMode.HTML)
             await self.effective_chat.send_message(msg, parse_mode=constants.ParseMode.HTML)
-            #await self.chat.send_message(f"{msg}", parse_mode=constants.ParseMode.MARKDOWN_V2)
+            #await self.chat.send_message(f"{msg}", parse_mode=constants.ParseMode.HTML)
         elif(bot_service=='discord'):
-            await self.channel.send(msg)
-            #await self.reply(msg,mention_author=True)
+            embed = discord.Embed(description=msg)
+            channel = bot.get_channel(int(bot_channel_id))
+            await channel.send(embed=embed)
         elif(bot_service=='matrix'):
             # await bot.api.send_text_message(bot_channel_id, msg)
             await bot.api.send_markdown_message(bot_channel_id, msg)
             return
         elif(bot_service=='telethon'):
-            #await self.reply(message=msg, parse_mode='html')
             await self.send_message(int(bot_channel_id),msg,parse_mode='html')
             return
     except Exception as e:
@@ -691,16 +691,21 @@ async def hello(request):
  return web.Response(text=startup_message)
 
 #🦾BOT COMMAND
-async def post_init(self):
+async def post_init(self='bot'):
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
-    await send_msg(self,startup_message)
-    #await application.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
+    if(bot_service=='discord'or bot_service=='telethon' or bot_service=='matrix'):
+        await send_msg(self,startup_message)
+    if(bot_service=='tgram'):
+        await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
     #healthcheck server
-    app = web.Application()
-    app.add_routes([web.get('/', hello)])
-    web.run_app(app)
+    try:
+        app = web.Application()
+        app.add_routes([web.get('/', hello)])
+        web.run_app(app)
+    except Exception as e:
+        logger.warning(msg=f"HealthCheck server error {e}")
 
 
 async def help_command(self='bot') -> None:
@@ -717,6 +722,9 @@ async def help_command(self='bot') -> None:
            <code>/q btc/usdt</code>
     🔀 <code>/trading</code>
            <code>/testmode</code>"""
+    if(bot_service=='discord'):
+        helpcommand= msg.replace("<code>", "`")
+        helpcommand= msg.replace("</code>", "`")
     bot_menu_help = f"{TTversion}\n{helpcommand}"
     response= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     return response
@@ -852,7 +860,6 @@ async def main():
 
 #StartTheBot
         if(bot_service=='tgram'):
-            #bot = Application.builder().token(bot_token).post_init(post_init).build()
             bot = Application.builder().token(bot_token).build()
             await post_init(bot)
             bot.add_handler(MessageHandler(None, parse_message))
@@ -864,9 +871,7 @@ async def main():
             bot = discord.Bot(intents=intents)
             @bot.event
             async def on_ready():
-                channel = bot.get_channel(int(bot_channel_id))
-                #await post_init()
-                await channel.send(startup_message)
+                await post_init(bot)
             @bot.event
             async def on_message(message: discord.Message):
                 await parse_message(message,message.content)
@@ -881,11 +886,10 @@ async def main():
             @bot.listener.on_startup
             async def room_joined(room):
                 await post_init(bot)
-                #await send_msg(bot, startup_message)
             @bot.listener.on_message_event
             async def neo(room, message):
                 match = botlib.MessageMatch(room, message, bot)
-                if match.is_not_from_this_bot():
+                if match.is_not_from_this_bot():    
                     await parse_message(bot,message.body)
             bot.run()
         elif(bot_service=='telethon'):
