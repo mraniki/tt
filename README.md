@@ -15,9 +15,9 @@ If you like it, feel free to
 Using:
 
 [![telegrambot](https://badgen.net/badge/icon/telegrambot?icon=telegram&label)](https://t.me/pythontelegrambotchannel)
-[![pycord](https://badgen.net/badge/icon/pycord?icon=discord&label)](https://github.com/Pycord-Development/pycord)
 [![telethon](https://badgen.net/badge/icon/telethon?icon=telegram&label)](https://github.com/LonamiWebs/Telethon)
-[![simplematrixbotlib](https://badgen.net/badge/icon/simplematrixbotlib?icon=medium&label)](https://codeberg.org/imbev/simplematrixbotlib)
+[![pycord](https://badgen.net/badge/icon/pycord/purple?icon=discord&label)](https://github.com/Pycord-Development/pycord)
+[![simplematrixbotlib](https://badgen.net/badge/icon/simplematrixbotlib/grey?icon=medium&label)](https://codeberg.org/imbev/simplematrixbotlib)
 
 [![python3.10](https://badgen.net/badge/icon/3.10/black?icon=pypi&label)](https://www.python.org/downloads/release/python-3100/)
 [![ccxt](https://badgen.net/badge/icon/ccxt/black?icon=libraries&label)](https://github.com/ccxt/ccxt)
