@@ -159,8 +159,11 @@ async def send_msg (self="bot", msg="echo"):
             await self.effective_chat.send_message(msg, parse_mode=constants.ParseMode.HTML)
             #await self.chat.send_message(f"{msg}", parse_mode=constants.ParseMode.MARKDOWN_V2)
         elif(bot_service=='discord'):
-            await self.channel.send(msg)
-            #await self.reply(msg,mention_author=True)
+            msg= msg.replace("<code>", "`")
+            msg= msg.replace("</code>", "`")
+            embed = discord.Embed(description=msg)
+            channel = bot.get_channel(int(bot_channel_id))
+            await channel.send(embed=embed)
         elif(bot_service=='matrix'):
             # await bot.api.send_text_message(bot_channel_id, msg)
             await bot.api.send_markdown_message(bot_channel_id, msg)
@@ -691,16 +694,16 @@ async def hello(request):
  return web.Response(text=startup_message)
 
 #🦾BOT COMMAND
-async def post_init(self):
+async def post_init(self=""):
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
     await send_msg(self,startup_message)
     #await application.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
     #healthcheck server
-    app = web.Application()
-    app.add_routes([web.get('/', hello)])
-    web.run_app(app)
+    # app = web.Application()
+    # app.add_routes([web.get('/', hello)])
+    # web.run_app(app)
 
 
 async def help_command(self='bot') -> None:
@@ -864,9 +867,7 @@ async def main():
             bot = discord.Bot(intents=intents)
             @bot.event
             async def on_ready():
-                channel = bot.get_channel(int(bot_channel_id))
-                #await post_init()
-                await channel.send(startup_message)
+                await post_init(bot)
             @bot.event
             async def on_message(message: discord.Message):
                 await parse_message(message,message.content)
@@ -880,7 +881,7 @@ async def main():
             bot = botlib.Bot(creds,config)
             @bot.listener.on_startup
             async def room_joined(room):
-                await post_init(bot)
+                await post_init()
                 #await send_msg(bot, startup_message)
             @bot.listener.on_message_event
             async def neo(room, message):
