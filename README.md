@@ -1,8 +1,8 @@
 # Talky Trader
- [![](https://badgen.net/badge/icon/TT/E2B13C?icon=bitcoin&label)](https://github.com/mraniki/tt) 
+ [![](https://i.imgur.io/Q7iDDyB_d.webp?maxwidth=640&shape=thumb&fidelity=medium)](https://github.com/mraniki/tt) 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)
 
- CEX & DEX integration with multi messaging platform (Telegram, Matrix and Discord). Place order for CEFI and DEFI, query Balance and quote ticker. Deploy it via docker selfhosted or on any PaaS cloud platform. 
+ CEX & DEX integration with multi messaging platform (Telegram, Matrix and Discord). Place order for CEFI or DEFI exchanges, query balance and quote ticker. Deploy it via docker on selfhost or on any PaaS  platform. 
 
 
 If you like it, feel free to 
