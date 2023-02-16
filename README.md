@@ -95,13 +95,12 @@ Quick start approach: Update the sample db with your parameters and save it as d
 
 ## 🚧 Roadmap
 
-
 ### V1.3
 - Support Uniswap V3 (more testing needed)
 
 ### v1.4
 - Support limit order for DEX (1inch and v3)
-- Support DEX limit order if supported like dydx / Kwenta / GMX
+- Support DEX limit order on dydx / Kwenta / GMX
 - Review testmode command to be part of the switch command.
 
 ### v1.5
