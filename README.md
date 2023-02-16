@@ -88,8 +88,10 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Support multiple messaging platform (Telegram, Matrix and Discord)
  - include basic healthcheck via webserver on port 8080 
 
+## 📷 Screenshots
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
+[more screenshots](https://github.com/mraniki/tt/wiki/Screenshots)
 
 ## 🚧 Roadmap
 
