@@ -45,10 +45,6 @@ nest_asyncio.apply()
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-#HEALTHCHECK
-async def hello(request):
- return web.Response(text="Hello, world")
-
 #🔗API
 gecko_api = CoinGeckoAPI()
 llama_api = f"https://api.llama.fi/"
@@ -690,17 +686,22 @@ async def handle_exception(e) -> None:
 """
 startup_message=f"Bot is online {TTversion}"
 
+#HEALTHCHECK
+async def hello(request):
+ return web.Response(text=startup_message)
+
 #🦾BOT COMMAND
 async def post_init(self):
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
-    app = web.Application()
-    app.add_routes([web.get('/', hello)])
-    #app.add_routes([web.get('/', web.Response(text="Hello, world"))])
-    web.run_app(app)
     await send_msg(self,startup_message)
     #await application.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
+    #healthcheck server
+    app = web.Application()
+    app.add_routes([web.get('/', hello)])
+    web.run_app(app)
+
 
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
