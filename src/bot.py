@@ -268,7 +268,7 @@ async def load_exchange(exchangeid):
             if (ex_result['testmode']=='True'):
                 logger.info(msg=f"sandbox setup")
                 ex.set_sandbox_mode('enabled')
-            markets= ex.loadMarkets()
+            #markets= ex.loadMarkets()
             ex_info = await search_gecko_exchange(ex_name)
             logger.info(msg=f"gecko {ex_info}")
             return ex
@@ -924,4 +924,3 @@ async def main():
 
 
 asyncio.run(main())
-
