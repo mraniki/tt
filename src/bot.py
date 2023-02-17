@@ -111,6 +111,8 @@ async def parse_message (self,msg):
             response= await  get_account_position(self)
         elif [ele for ele in filter_lst_trading if(ele in wordlist)]:
             response = await  trading_switch_command(self)
+        elif [ele for ele in filter_lst_restart if(ele in wordlist)]:
+         response = await  restart_command(self)
         elif [ele for ele in filter_lst_test if(ele in wordlist)]:
             response = await testmode_switch_command(self)
         elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
