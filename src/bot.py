@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.45"
+TTversion="🪙TT Beta 1.2.46"
 ##=============== import  =============
 ##log
 import logging
@@ -62,7 +62,7 @@ async def parse_message (self,msg):
     wordlist = msg.split(" ")
     logger.debug(msg=f"wordlist {wordlist}")
     #🦾BOT FILTERS
-    filter_lst_ignore = ['error', '⚠️']
+    filter_lst_ignore = ['error', '⚠️','🪙','🏦']
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
     filter_lst_help = ['/echo']
     filter_lst_bal = ['/bal']
