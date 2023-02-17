@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.43"
+TTversion="🪙TT Beta 1.2.44"
 ##=============== import  =============
 ##log
 import logging
@@ -62,7 +62,7 @@ async def parse_message (self,msg):
     wordlist = msg.split(" ")
     logger.debug(msg=f"wordlist {wordlist}")
     #🦾BOT FILTERS
-    filter_lst_error = ['error', '⚠️']
+    filter_lst_ignore = ['error', '⚠️']
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
     filter_lst_help = ['/echo']
     filter_lst_bal = ['/bal']
@@ -74,7 +74,7 @@ async def parse_message (self,msg):
     filter_lst_switch = ['/cex', '/dex']
     logger.debug(msg=f"wordlist len {len(wordlist)}")
     try:
-        if [ele for ele in filter_lst_error if(ele in wordlist)]:
+        if [ele for ele in filter_lst_ignore if(ele in wordlist)]:
             return
         if [ele for ele in filter_lst_help if(ele in wordlist)]:
             response = await help_command()
@@ -156,7 +156,7 @@ async def send_msg (self="bot", msg="echo"):
     try:
         if(bot_service=='tgram'):
             #await self.send_message(msg, parse_mode=constants.ParseMode.HTML)
-            #await self.effective_chat.send_message(msg, parse_mode=constants.ParseMode.HTML)
+            await self.effective_chat.send_message(msg, parse_mode=constants.ParseMode.HTML)
             #await self.chat.send_message(f"{msg}", parse_mode=constants.ParseMode.HTML)
             #await self.bot.send_message(bot_channel_id, msg, parse_mode=constants.ParseMode.HTML)
             return 
@@ -272,6 +272,8 @@ async def load_exchange(exchangeid):
                 logger.info(msg=f"sandbox setup")
                 ex.set_sandbox_mode('enabled')
             markets= ex.loadMarkets()
+            ex_info = await search_gecko_exchange(ex_name)
+            logger.info(msg=f"gecko {ex_info}")
             return ex
         except Exception as e:
             await handle_exception(e)
