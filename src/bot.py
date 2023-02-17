@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.44"
+TTversion="🪙TT Beta 1.2.45"
 ##=============== import  =============
 ##log
 import logging
@@ -42,7 +42,7 @@ from pycoingecko import CoinGeckoAPI
 load_dotenv()
 nest_asyncio.apply()
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 #🔗API
