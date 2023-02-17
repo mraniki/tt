@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.46"
+TTversion="🪙TT Beta 1.2.47"
 ##=============== import  =============
 ##log
 import logging
@@ -99,26 +99,22 @@ async def parse_message (self,msg):
                             response = f"{res}"
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
-                exchange = wordlist[1]
-                logger.info(msg=f"Exchange switch {wordlist[1]} {exchange}")
-                exchange_search = await search_exchange(exchange)
-                response = await exchange_switch_command(exchange_search)
+                response = await exchange_switch_command(wordlist[1])
             else:
                 return
         elif [ele for ele in filter_lst_bal if(ele in wordlist)]:
             response= await account_balance_command(self)
         elif [ele for ele in filter_lst_pos if(ele in wordlist)]:
-            response= await  get_account_position(self)
+            response= await  account_position_command(self)
         elif [ele for ele in filter_lst_trading if(ele in wordlist)]:
             response = await  trading_switch_command(self)
-        elif [ele for ele in filter_lst_restart if(ele in wordlist)]:
-         response = await  restart_command(self)
         elif [ele for ele in filter_lst_test if(ele in wordlist)]:
             response = await testmode_switch_command(self)
+        elif [ele for ele in filter_lst_restart if(ele in wordlist)]:
+            response = await  restart_command(self)
         elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
-                symbol = wordlist[1]
-                response = await quote_command(symbol)
+                response = await quote_command(wordlist[1])
         if (response != None):
             await send_msg(self,response)
     except Exception as e:
@@ -230,9 +226,8 @@ async def load_exchange(exchangeid):
 
     logger.info(msg=f"Setting up {exchangeid}")
     ex_result = await search_exchange(exchangeid)
-    #logger.info(msg=f"ex_result {ex_result}")
     exchange_info = await search_gecko_exchange(exchangeid)
-    #logger.info(msg=f"exchange_info {exchange_info}")
+    logger.debug(msg=f"exchange_info {exchange_info}")
     if ('router' in ex_result):
         ex_name = ex_result['name']
         ex_test_mode=ex_result['testmode']
@@ -622,7 +617,7 @@ async def fetch_gecko_quote(token):
 #🔒PRIVATE
 async def get_account_balance():
     try:
-        logger.debug(msg=f"get_account_balance ECHO")
+        logger.debug(msg=f"get_account_balance")
         msg = ""
         if not isinstance(ex,web3.main.Web3):
             bal = ex.fetch_free_balance()
@@ -632,14 +627,14 @@ async def get_account_balance():
                 sbal += (f"{iterator}: {bal[iterator]} \n")
             if(sbal == ""):
                 sbal = "No Balance"
-            msg += f"\n{sbal}"       
+            msg += f"{sbal}"       
         elif (isinstance(ex,web3.main.Web3)):
             logger.debug(msg=f"WEB3 BALANCE ECHO")
             bal = ex.eth.get_balance(walletaddress)
             logger.debug(msg=f"message {bal}")
             bal = round(ex.from_wei(bal,'ether'),5)
             basesymbol_bal = round(ex.from_wei(await fetch_user_token_balance(basesymbol),'ether'),5)
-            msg += f"\n💲{bal} \n💵{basesymbol_bal} {basesymbol}"
+            msg += f"💲{bal} \n💵{basesymbol_bal} {basesymbol}"
             logger.debug(msg=f"message {msg}")
         else:
             msg += 0
@@ -649,7 +644,19 @@ async def get_account_balance():
 
 async def get_account_position():
     try:
-        return
+        logger.debug(msg=f"get_account_position")
+        msg = ""
+        if not isinstance(ex,web3.main.Web3):
+            pos= "test_cex_position"
+            logger.debug(msg=f"position {pos}")
+            msg += f"{pos}"
+        elif (isinstance(ex,web3.main.Web3)):
+            pos= "test_dex_position"
+            logger.debug(msg=f"position {pos}")
+            msg += f"{pos}"
+        else:
+            msg += 0
+        return msg
     except Exception as e:
         return
 
@@ -690,11 +697,10 @@ async def handle_exception(e) -> None:
 """
 🔚END OF COMMON FUNCTIONS
 """
-startup_message=f"Bot is online {TTversion}"
 
 #HEALTHCHECK
 async def hello(request):
- return web.Response(text=startup_message)
+ return web.Response(text=f"Bot is online {TTversion}")
 
 #🦾BOT COMMAND
 async def post_init(self='bot'):
@@ -736,9 +742,14 @@ async def help_command(self='bot') -> None:
     return response
 
 async def account_balance_command(self='bot') -> None:
-    balance =f"🏦 Balance"
+    balance =f"🏦 Balance\n"
     balance += await get_account_balance()
     return balance
+
+async def account_position_command(self='bot') -> None:
+    position = f"📊 Position\n"
+    position += await get_account_position()
+    return position
 
 async def quote_command(symbol) -> None:
     asset_out_cg_quote = await fetch_gecko_quote(symbol)
@@ -753,8 +764,11 @@ async def quote_command(symbol) -> None:
         response+=f"🏛️ {price} USD"
     return response
 
-async def exchange_switch_command(self='bot'):
-    res = await load_exchange(new_exchange['name'])
+async def exchange_switch_command(name):
+    exchange_search = await search_exchange(name)
+    logger.debug(msg=f"exchange_search {exchange_search}")
+    res = await load_exchange(exchange_search['name'])
+    logger.debug(msg=f"res {res}")
     response = f"{ex_name} is active"
     return response
 
