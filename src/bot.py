@@ -698,11 +698,9 @@ async def handle_exception(e) -> None:
 🔚END OF COMMON FUNCTIONS
 """
 
-#HEALTHCHECK
-async def hello(request):
- return web.Response(text=f"Bot is online {TTversion}")
 
-#🦾BOT COMMAND
+#🦾BOT ACTIONS
+
 async def post_init(self='bot'):
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
@@ -711,14 +709,15 @@ async def post_init(self='bot'):
         await send_msg(self,startup_message)
     if(bot_service=='tgram'):
         await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
-    #healthcheck server
     try:
         app = web.Application()
-        app.add_routes([web.get('/', hello)])
+        app.add_routes([web.get('/', health_check)])
         web.run_app(app)
     except Exception as e:
         logger.warning(msg=f"HealthCheck server error {e}")
 
+async def health_check(request):
+ return web.Response(text=f"Bot is online {TTversion}")
 
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
