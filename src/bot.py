@@ -156,8 +156,10 @@ async def send_msg (self="bot", msg="echo"):
     try:
         if(bot_service=='tgram'):
             #await self.send_message(msg, parse_mode=constants.ParseMode.HTML)
-            await self.effective_chat.send_message(msg, parse_mode=constants.ParseMode.HTML)
+            #await self.effective_chat.send_message(msg, parse_mode=constants.ParseMode.HTML)
             #await self.chat.send_message(f"{msg}", parse_mode=constants.ParseMode.HTML)
+            #await self.bot.send_message(bot_channel_id, msg, parse_mode=constants.ParseMode.HTML)
+            return 
         elif(bot_service=='discord'):
             embed = discord.Embed(description=msg)
             channel = bot.get_channel(int(bot_channel_id))
