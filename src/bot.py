@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.48"
+TTversion="🪙TT Beta 1.2.49"
 ##=============== import  =============
 ##log
 import logging
@@ -647,12 +647,17 @@ async def get_account_position():
         logger.debug(msg=f"get_account_position")
         msg = ""
         if not isinstance(ex,web3.main.Web3):
-            pos= "test_cex_position"
-            logger.debug(msg=f"position {pos}")
-            msg += f"{pos}"
+            positions = ex.fetch_positions()
+            open_positions = [p for p in positions if p['type'] == 'open']
+            logger.debug(msg=f"open_positions {open_positions}")
+            msg += f"{open_positions}"
         elif (isinstance(ex,web3.main.Web3)):
-            pos= "test_dex_position"
-            logger.debug(msg=f"position {pos}")
+            # asset_position_address= await search_gecko_contract(asset_out_symbol)
+            # asset_position_abi= await fetch_abi_dex(asset_out_address)
+            # asset_position_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
+            # open_positions = asset_position_contract.functions.getOpenPositions(walletaddress).call()
+            pos = "ECHO"
+            logger.debug(msg=f"open_positions {open_positions}")
             msg += f"{pos}"
         else:
             msg += 0
