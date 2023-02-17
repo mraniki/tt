@@ -88,18 +88,19 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Support multiple messaging platform (Telegram, Matrix and Discord)
  - include basic healthcheck via webserver on port 8080 
 
+## 📷 Screenshots
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
 
+[more screenshots](https://github.com/mraniki/tt/wiki/Screenshots)
 
 ## 🚧 Roadmap
-
 
 ### V1.3
 - Support Uniswap V3 (more testing needed)
 
 ### v1.4
 - Support limit order for DEX (1inch and v3)
-- Support DEX limit order if supported like dydx / Kwenta / GMX
+- Support DEX limit order on dydx / Kwenta / GMX
 - Review testmode command to be part of the switch command.
 
 ### v1.5
