@@ -63,9 +63,9 @@ async def parse_message (self,msg):
     logger.debug(msg=f"wordlist {wordlist}")
     response = ""
     #🦾BOT FILTERS
-    filter_lst_ignore = ['error', 'Environment','Balance']
+    filter_lst_ignore = ['⚠️','error', 'Environment','Balance']
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
-    filter_lst_help = ['/echo']
+    filter_lst_help = ['/echo','/help']
     filter_lst_bal = ['/bal']
     filter_lst_pos = ['/pos']
     filter_lst_quote = ['/q'] 
@@ -98,6 +98,9 @@ async def parse_message (self,msg):
                         res = await execute_order(order[0],order[1],order[2],order[3],order[4])
                         if (res != None):
                             response = f"{res}"
+                            logger.info(msg=f"order response: {response}")
+                        else:
+                            return
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
                 response = await exchange_switch_command(wordlist[1])
@@ -171,10 +174,11 @@ async def send_msg (self="bot", msg="echo"):
             await self.send_message(int(bot_channel_id),msg,parse_mode='html')
             return
     except Exception as e:
+        logger.debug(msg=f"MESSAGING EXCEPTION")
         await handle_exception(e)
 
 async def notify(message):
-    logger.debug(msg=f"NOTIFICATION START")
+    logger.debug(msg=f"NOTIFICATION START {message}")
     apobj = apprise.Apprise()
     if (bot_service =='tgram') or (bot_service =='telethon'):
         apobj.add(f'tgram://' + str(bot_token) + "/" + str(bot_channel_id))
@@ -261,15 +265,19 @@ async def load_exchange(exchangeid):
             await handle_exception(e)
     elif ('api' in ex_result):
         ex_name = ex_result['name']
+        defaultType =  ex_result['defaultType'],
         chainId= 0
         client = getattr(ccxt, ex_name)
         try:
-            ex = client({'apiKey': ex_result['api'],'secret': ex_result['secret'], 'options': {'defaultType': ex_result['defaultType'],    },})
+            if (defaultType=="SPOT"):
+                ex = client({'apiKey': ex_result['api'],'secret': ex_result['secret'], })
+            else:
+                ex = client({'apiKey': ex_result['api'],'secret': ex_result['secret'],'options': {'defaultType': ex_result['defaultType'],    }, })
             price_type=ex_result['ordertype']
             if (ex_result['testmode']=='True'):
                 logger.info(msg=f"sandbox setup")
                 ex.set_sandbox_mode('enabled')
-            markets = ex.load_markets(True)
+            markets = ex.load_markets()
             # ex_info = await search_gecko_exchange(ex_name)
             # logger.info(msg=f"gecko {ex_info}")
             return ex
@@ -290,9 +298,11 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
             if (len(str(bal))):
                 m_price = float(ex.fetchTicker(f'{symbol}').get('last'))
+                logger.debug(msg=f"m_price: {m_price}")
                 totalusdtbal = ex.fetchBalance()['USDT']['free']
-            amountpercent=((totalusdtbal)*(float(quantity)/100))/float(m_price) # % of bal
-            res = ex.create_order(symbol, price_type, direction, amountpercent)
+                logger.debug(msg=f"totalusdtbal: {totalusdtbal}")
+                amountpercent=((totalusdtbal)*(float(quantity)/100))/float(m_price) # % of bal
+                res = ex.create_order(symbol, price_type, direction, amountpercent)
             if (direction=="SELL"):
                 response = f"⬇️ {symbol}"
             else:
@@ -355,6 +365,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         return response
 
     except Exception as e:
+        logger.debug(msg=f"order debugger {e}")
         await handle_exception(e)
         return
 
@@ -647,16 +658,11 @@ async def get_account_position():
     try:
         logger.debug(msg=f"get_account_position")
         if not isinstance(ex,web3.main.Web3):
-            positions = await ex.fetch_positions()
+            positions = ex.fetch_positions()
+            logger.debug(f"positions {positions}")
             open_positions = [p for p in positions if p['type'] == 'open']
-            logger.debug(msg=f"open_positions {open_positions}")
-            # orders = await ex.fetch_orders()
-            #openorders = await ex.fetch_open_orders()
-            #logger.debug(msg=f"openorders {openorders}")
-            # closed orders = await ex.fetch_closed_orders()
-            # mytrades = await ex.fetch_my_trades()
-            msg = f"{open_positions}"
-            #msg += f"{open_positions}\n Open Orders\n {openorders}"
+            logger.debug(f"open_positions {open_positions}")
+            msg = f"open_positions {open_positions}"
         elif (isinstance(ex,web3.main.Web3)):
             # asset_position_address= await search_gecko_contract(asset_out_symbol)
             # asset_position_abi= await fetch_abi_dex(asset_out_address)
@@ -667,9 +673,10 @@ async def get_account_position():
             msg = f"{pos}"
         else:
             msg = 0
+        logger.debug(f"msg {msg}")
         return msg
-    except Exception as e:
-        return
+    except Exception:
+        logger.debug(f"get_account_position exception")
 
 async def get_wallet_auth():
     try:
@@ -680,7 +687,7 @@ async def get_wallet_auth():
 #======= error handling
 async def handle_exception(e) -> None:
     try:
-        msg = f"error:"
+        msg = f"!error:"
         logger.error(msg=f"error: {e}")
     except KeyError:
         msg = f"DB content error"
@@ -798,6 +805,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     tb_trim = tb_string[:1000]
     e = f"{tb_trim}"
     await handle_exception(e)
+    logger.DEBUG(msg="HANDLER")
 
 #💾DB
 async def database_setup():
