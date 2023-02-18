@@ -714,12 +714,12 @@ async def post_init(self='bot'):
         await send_msg(self,startup_message)
     if(bot_service=='tgram'):
         await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
-    try:
-        app = web.Application()
-        app.add_routes([web.get('/', health_check)])
-        web.run_app(app)
-    except Exception as e:
-        logger.warning(msg=f"HealthCheck server error {e}")
+    # try:
+    #     app = web.Application()
+    #     app.add_routes([web.get('/', health_check)])
+    #     web.run_app(app)
+    # except Exception as e:
+    #     logger.warning(msg=f"HealthCheck server error {e}")
 
 async def health_check(request):
  return web.Response(text=f"Bot is online {TTversion}")
