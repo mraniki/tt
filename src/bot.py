@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.62"
+TTversion="🪙TT Beta 1.2.63"
 ##=============== import  =============
 ##log
 import logging
@@ -956,7 +956,7 @@ async def main():
                 async def telethon(event):
                     await parse_message(bot,event.message.message)
                 await bot.run_until_disconnected()
-
+            web.run_app(app)
 
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
