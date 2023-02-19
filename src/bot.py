@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.52"
+TTversion="🪙TT Beta 1.2.53"
 ##=============== import  =============
 ##log
 import logging
@@ -13,8 +13,6 @@ import json, requests
 import asyncio
 import nest_asyncio
 from aiohttp import web
-import tornado.web
-from healthcheck import TornadoHandler, HealthCheck, EnvironmentDump
 
 #telegram
 #import telegram
@@ -58,7 +56,7 @@ async def verify_import_library():
     logger.info(msg=f"{TTversion}")
 
 async def parse_message (self,msg):
-    if (msg!=None):
+    if (msg!=""):
         logger.debug(msg=f"self {self}")
         logger.debug(msg=f"msg {msg}")
         if(bot_service=='tgram'):
@@ -724,6 +722,7 @@ async def handle_exception(e) -> None:
 #🦾BOT ACTIONS
 
 async def post_init(self='bot'):
+    global app
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
@@ -732,20 +731,15 @@ async def post_init(self='bot'):
     if(bot_service=='tgram'):
         await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
     try:
-        health = HealthCheck(checkers=[health_check])
-        app = tornado.web.Application([
-            ('/healthcheck', TornadoHandler, dict(checker=health))
-        ])
-    #     app = web.Application()
-    #     app.add_routes([web.get('/', health_check)])
-    #     web.run_app(app)
+        app = web.Application()
+        app.add_routes([web.get('/', health_check)])
     except Exception as e:    
         logger.warning(msg=f"HealthCheck server error {e}")
 
 
 async def health_check():
     logger.info(msg = f"Healthcheck_Ping")
-    return f"Bot is online {TTversion}"
+    return web.Response(f"Bot is online {TTversion}")
 
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
@@ -947,10 +941,12 @@ async def main():
             async def telethon(event):
                 await parse_message(bot,event.message.message)
             await bot.run_until_disconnected()
-
+        web.run_app(app)
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
 
 
 asyncio.run(main())
+    
+
 
