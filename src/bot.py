@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.64"
+TTversion="🪙TT Beta 1.2.65"
 ##=============== import  =============
 ##log
 import logging
@@ -729,23 +729,8 @@ async def handle_exception(e) -> None:
 
 
 #🦾BOT ACTIONS
-async def appserver():
-    global app
-    try:
-        logger.info(msg = f"Starting appserver")
-        app = web.Application()
-        app.add_routes([web.get('/', health_check)])
-        logger.info(msg = f"exiting appserver setup")
-    except Exception as e:    
-        logger.warning(msg=f"HealthCheck server error {e}")
-
-async def health_check():
-    logger.info(msg = f"Healthcheck_Ping")
-    headers = { "User-Agent": "Mozilla/5.0" }
-    return web.Response(body=f"Bot is online {TTversion}",status=200,headers=headers)
 
 async def post_init(self='bot'):
-    #await appserver()
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
@@ -955,7 +940,7 @@ async def main():
                 async def telethon(event):
                     await parse_message(bot,event.message.message)
                 await bot.run_until_disconnected()
-            #web.run_app(app)
+
 
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))

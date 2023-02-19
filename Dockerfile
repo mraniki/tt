@@ -20,3 +20,5 @@ EXPOSE 8443
 EXPOSE 8080
 # command to run on container start
 CMD [ "python", "./bot.py" ]
+
+HEALTHCHECK CMD ps aux | grep 'python ./bot.py' || exit 1
