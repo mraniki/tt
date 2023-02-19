@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.53"
+TTversion="🪙TT Beta 1.2.54"
 ##=============== import  =============
 ##log
 import logging
@@ -55,8 +55,8 @@ dex_1inch_api = f"https://api.1inch.exchange/v5.0"
 async def verify_import_library():
     logger.info(msg=f"{TTversion}")
 
-async def parse_message (self,msg):
-    if (msg!=""):
+async def parse_message (self,msg='123'):
+    if (msg!="123"):
         logger.debug(msg=f"self {self}")
         logger.debug(msg=f"msg {msg}")
         if(bot_service=='tgram'):
@@ -720,9 +720,17 @@ async def handle_exception(e) -> None:
 
 
 #🦾BOT ACTIONS
+async def appserver():
+    global app
+    try:
+        app = web.Application()
+        app.add_routes([web.get('/', health_check)])
+    except Exception as e:    
+        logger.warning(msg=f"HealthCheck server error {e}")
 
 async def post_init(self='bot'):
-    global app
+    logger.info(msg = f"Starting server")
+    await appserver()
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
@@ -730,16 +738,12 @@ async def post_init(self='bot'):
         await send_msg(self,startup_message)
     if(bot_service=='tgram'):
         await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
-    try:
-        app = web.Application()
-        app.add_routes([web.get('/', health_check)])
-    except Exception as e:    
-        logger.warning(msg=f"HealthCheck server error {e}")
+
 
 
 async def health_check():
     logger.info(msg = f"Healthcheck_Ping")
-    return web.Response(f"Bot is online {TTversion}")
+    return web.Response(body=f"Bot is online {TTversion}",status=200)
 
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
@@ -941,7 +945,7 @@ async def main():
             async def telethon(event):
                 await parse_message(bot,event.message.message)
             await bot.run_until_disconnected()
-        web.run_app(app)
+
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
 
