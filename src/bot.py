@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.55"
+TTversion="🪙TT Beta 1.2.56"
 ##=============== import  =============
 ##log
 import logging
@@ -56,76 +56,75 @@ async def verify_import_library():
     logger.info(msg=f"{TTversion}")
 
 async def parse_message (self,msg='123'):
-    if (msg!=""):
-        logger.debug(msg=f"self {self}")
-        logger.debug(msg=f"msg {msg}")
-        if(bot_service=='tgram'):
-            msg=self.effective_message.text
-        wordlist = msg.split(" ")
-        logger.debug(msg=f"wordlist {wordlist}")
-        response = ""
-        #🦾BOT FILTERS
-        filter_lst_ignore = ['⚠️','error', 'Environment','Balance']
-        filter_lst_order = ['BUY', 'SELL', 'buy','sell']
-        filter_lst_help = ['/echo','/help']
-        filter_lst_bal = ['/bal']
-        filter_lst_pos = ['/pos']
-        filter_lst_quote = ['/q'] 
-        filter_lst_trading = ['/trading']
-        filter_lst_test = ['/testmode']
-        filter_lst_restart = ['/restart']
-        filter_lst_switch = ['/cex', '/dex']
-        logger.debug(msg=f"wordlist len {len(wordlist)}")
-        try:
-            if [ele for ele in filter_lst_ignore if(ele in wordlist)]:
-                return
-            if [ele for ele in filter_lst_help if(ele in wordlist)]:
-                response = await help_command()
-            if [ele for ele in filter_lst_order if(ele in wordlist)]:
-                if len(wordlist[0]) > 0:
-                    direction = wordlist[0].upper()
-                    if len(wordlist[1]) > 0:
-                        symbol = wordlist[1]
-                        stoploss = 100
-                        takeprofit = 100
-                        quantity = 10
-                        if len(wordlist[2]) > 0:
-                            stoploss = wordlist[2][3:]
-                            takeprofit = wordlist[3][3:]
-                            quantity = wordlist[4][2:-1]
-                        order=[direction,symbol,stoploss,takeprofit,quantity]
-                        logger.info(msg=f"Order: {order}")
-                        #return order
-                        if (order):
-                            res = await execute_order(order[0],order[1],order[2],order[3],order[4])
-                            if (res != None):
-                                response = f"{res}"
-                                logger.info(msg=f"order response: {response}")
-                            else:
-                                return
-            elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
-                if len(wordlist[1]) > 0:
-                    response = await exchange_switch_command(wordlist[1])
-                else:
-                    return
-            elif [ele for ele in filter_lst_bal if(ele in wordlist)]:
-                response= await account_balance_command(self)
-            elif [ele for ele in filter_lst_pos if(ele in wordlist)]:
-                response= await  account_position_command(self)
-            elif [ele for ele in filter_lst_trading if(ele in wordlist)]:
-                response = await  trading_switch_command(self)
-            elif [ele for ele in filter_lst_test if(ele in wordlist)]:
-                response = await testmode_switch_command(self)
-            elif [ele for ele in filter_lst_restart if(ele in wordlist)]:
-                response = await  restart_command(self)
-            elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
-                if len(wordlist[1]) > 0:
-                    response = await quote_command(wordlist[1])
-            if (response != None):
-                await send_msg(self,response)
-        except Exception as e:
-            logger.info(msg=f"Parsing skipped {e}")
+    logger.debug(msg=f"parse_message SELF {self}")
+    logger.debug(msg=f"parse_message: {msg}")
+    if(bot_service=='tgram'):
+        msg=self.effective_message.text
+    wordlist = msg.split(" ")
+    logger.debug(msg=f"parse_message wordlist {wordlist}")
+    response = ""
+    #🦾BOT FILTERS
+    filter_lst_ignore = ['⚠️','error', 'Environment','Balance']
+    filter_lst_order = ['BUY', 'SELL', 'buy','sell']
+    filter_lst_help = ['/echo','/help']
+    filter_lst_bal = ['/bal']
+    filter_lst_pos = ['/pos']
+    filter_lst_quote = ['/q'] 
+    filter_lst_trading = ['/trading']
+    filter_lst_test = ['/testmode']
+    filter_lst_restart = ['/restart']
+    filter_lst_switch = ['/cex', '/dex']
+    logger.debug(msg=f"parse_message wordlist len {len(wordlist)}")
+    try:
+        if [ele for ele in filter_lst_ignore if(ele in wordlist)]:
             return
+        if [ele for ele in filter_lst_help if(ele in wordlist)]:
+            response = await help_command()
+        if [ele for ele in filter_lst_order if(ele in wordlist)]:
+            if len(wordlist[0]) > 0:
+                direction = wordlist[0].upper()
+                if len(wordlist[1]) > 0:
+                    symbol = wordlist[1]
+                    stoploss = 100
+                    takeprofit = 100
+                    quantity = 10
+                    if len(wordlist[2]) > 0:
+                        stoploss = wordlist[2][3:]
+                        takeprofit = wordlist[3][3:]
+                        quantity = wordlist[4][2:-1]
+                    order=[direction,symbol,stoploss,takeprofit,quantity]
+                    logger.info(msg=f"parse_message Order: {order}")
+                    #return order
+                    if (order):
+                        res = await execute_order(order[0],order[1],order[2],order[3],order[4])
+                        if (res != None):
+                            response = f"{res}"
+                            logger.info(msg=f"parse_message order response: {response}")
+                        else:
+                            return
+        elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
+            if len(wordlist[1]) > 0:
+                response = await exchange_switch_command(wordlist[1])
+            else:
+                return
+        elif [ele for ele in filter_lst_bal if(ele in wordlist)]:
+            response= await account_balance_command(self)
+        elif [ele for ele in filter_lst_pos if(ele in wordlist)]:
+            response= await  account_position_command(self)
+        elif [ele for ele in filter_lst_trading if(ele in wordlist)]:
+            response = await  trading_switch_command(self)
+        elif [ele for ele in filter_lst_test if(ele in wordlist)]:
+            response = await testmode_switch_command(self)
+        elif [ele for ele in filter_lst_restart if(ele in wordlist)]:
+            response = await  restart_command(self)
+        elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
+            if len(wordlist[1]) > 0:
+                response = await quote_command(wordlist[1])
+        if (response != None):
+            await send_msg(self,response)
+    except Exception as e:
+        logger.info(msg=f"parse_message Parsing skipped {e}")
+        return
 
 async def retrieve_url_json(url,params=None):
     headers = { "User-Agent": "Mozilla/5.0" }
@@ -193,7 +192,6 @@ async def notify(msg):
             apobj.notify(body=msg)
         except Exception as e:
             logger.error(msg=f"{msg} not sent due to error: {e}")
-
 
 #💱EXCHANGE
 async def search_exchange(searched_data):
@@ -739,8 +737,6 @@ async def post_init(self='bot'):
         await send_msg(self,startup_message)
     if(bot_service=='tgram'):
         await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
-
-
 
 async def health_check():
     logger.info(msg = f"Healthcheck_Ping")
