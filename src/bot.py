@@ -39,6 +39,8 @@ from ens import ENS
 from datetime import datetime
 from pycoingecko import CoinGeckoAPI
 
+from fastapi import FastAPI
+app = FastAPI()
 
 #🔧CONFIG
 load_dotenv()
@@ -729,6 +731,11 @@ async def handle_exception(e) -> None:
 
 #🦾BOT ACTIONS
 
+
+@app.get("/")
+def read_root():
+    return { f"Bot is online {TTversion}" }
+
 async def post_init(self='bot'):
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
@@ -946,6 +953,11 @@ async def main():
 
 
 asyncio.run(main())
+
+#loop = asyncio.get_event_loop()
+#loop.create_task(api())
+#loop.create_task(main())
+#loop.run_forever()
 
 
 

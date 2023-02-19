@@ -12,3 +12,4 @@ ping3
 tornado
 nest_asyncio
 aiohttp
+fastapi
