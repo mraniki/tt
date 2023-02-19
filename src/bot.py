@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.63"
+TTversion="🪙TT Beta 1.2.64"
 ##=============== import  =============
 ##log
 import logging
@@ -745,7 +745,7 @@ async def health_check():
     return web.Response(body=f"Bot is online {TTversion}",status=200,headers=headers)
 
 async def post_init(self='bot'):
-    await appserver()
+    #await appserver()
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
@@ -955,13 +955,13 @@ async def main():
                 async def telethon(event):
                     await parse_message(bot,event.message.message)
                 await bot.run_until_disconnected()
-            web.run_app(app)
+            #web.run_app(app)
 
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
 
 
 asyncio.run(main())
-    
+
 
 
