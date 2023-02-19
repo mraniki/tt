@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.67"
+TTversion="🪙TT Beta 1.2.68"
 ##=============== import  =============
 ##log
 import logging
@@ -39,8 +39,8 @@ from ens import ENS
 from datetime import datetime
 from pycoingecko import CoinGeckoAPI
 
-from fastapi import FastAPI
-app = FastAPI()
+#from fastapi import FastAPI
+#app = FastAPI()
 
 #🔧CONFIG
 load_dotenv()
@@ -728,8 +728,6 @@ async def handle_exception(e) -> None:
 🔚END OF COMMON FUNCTIONS
 """
 
-
-
 async def appserver():
     try:
         app = web.Application()
@@ -737,7 +735,11 @@ async def appserver():
         web.run_app(app, port=8080)
     except Exception as e:    
         logger.warning(msg=f"HealthCheck server error {e}")
-        
+
+async def health_check():
+    logger.info(msg = f"Healthcheck_Ping")
+    headers = { "User-Agent": "Mozilla/5.0" }
+    return web.Response(body=f"Bot is online {TTversion}",status=200,headers=headers)
 
 
 #🦾BOT ACTIONS
