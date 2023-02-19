@@ -1,11 +1,11 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.49"
+TTversion="🪙TT Beta 1.2.59"
 ##=============== import  =============
 ##log
 import logging
 import sys
 import traceback
-from ping3 import ping, verbose_ping
+from ping3 import ping
 ##env
 import os
 from dotenv import load_dotenv
@@ -13,6 +13,7 @@ import json, requests
 import asyncio
 import nest_asyncio
 from aiohttp import web
+
 #telegram
 #import telegram
 from telegram import Update, constants
@@ -54,13 +55,13 @@ dex_1inch_api = f"https://api.1inch.exchange/v5.0"
 async def verify_import_library():
     logger.info(msg=f"{TTversion}")
 
-async def parse_message (self,msg):
-    logger.debug(msg=f"self {self}")
-    logger.debug(msg=f"msg {msg}")
+async def parse_message (self,msg='123'):
+    logger.debug(msg=f"parse_message SELF {self}")
+    logger.debug(msg=f"parse_message: {msg}")
     if(bot_service=='tgram'):
         msg=self.effective_message.text
     wordlist = msg.split(" ")
-    logger.debug(msg=f"wordlist {wordlist}")
+    logger.debug(msg=f"parse_message wordlist {wordlist}")
     response = ""
     #🦾BOT FILTERS
     filter_lst_ignore = ['⚠️','error', 'Environment','Balance']
@@ -73,13 +74,14 @@ async def parse_message (self,msg):
     filter_lst_test = ['/testmode']
     filter_lst_restart = ['/restart']
     filter_lst_switch = ['/cex', '/dex']
-    logger.debug(msg=f"wordlist len {len(wordlist)}")
+    logger.debug(msg=f"parse_message wordlist len {len(wordlist)}")
     try:
         if [ele for ele in filter_lst_ignore if(ele in wordlist)]:
             return
-        if [ele for ele in filter_lst_help if(ele in wordlist)]:
+        elif [ele for ele in filter_lst_help if(ele in wordlist)]:
+            logger.info(msg=f"filter_lst_help: {wordlist}")
             response = await help_command()
-        if [ele for ele in filter_lst_order if(ele in wordlist)]:
+        elif [ele for ele in filter_lst_order if(ele in wordlist)]:
             if len(wordlist[0]) > 0:
                 direction = wordlist[0].upper()
                 if len(wordlist[1]) > 0:
@@ -92,13 +94,13 @@ async def parse_message (self,msg):
                         takeprofit = wordlist[3][3:]
                         quantity = wordlist[4][2:-1]
                     order=[direction,symbol,stoploss,takeprofit,quantity]
-                    logger.info(msg=f"Order: {order}")
+                    logger.info(msg=f"parse_message Order: {order}")
                     #return order
                     if (order):
                         res = await execute_order(order[0],order[1],order[2],order[3],order[4])
                         if (res != None):
                             response = f"{res}"
-                            logger.info(msg=f"order response: {response}")
+                            logger.info(msg=f"parse_message order response: {response}")
                         else:
                             return
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
@@ -119,10 +121,13 @@ async def parse_message (self,msg):
         elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
                 response = await quote_command(wordlist[1])
-        if (response != None):
+        else:
+            logger.info(msg=f"Parsing skipped {wordlist}")
+            return
+        if (response != ""):
             await send_msg(self,response)
     except Exception as e:
-        logger.info(msg=f"Parsing skipped {e}")
+        logger.info(msg=f"Parsing exception {e}")
         return
 
 async def retrieve_url_json(url,params=None):
@@ -133,21 +138,26 @@ async def retrieve_url_json(url,params=None):
 
 async def verify_latency_ex():
     try:
-        if not isinstance(ex,web3.main.Web3):
-            symbol = 'BTC/USDT'
-            results = []
-            num_iterations = 5
-            for i in range(0, num_iterations):
-                started = ex.milliseconds()
-                orderbook = ex.fetch_order_book(symbol)
-                ended = ex.milliseconds()
-                elapsed = ended - started
-                results.append(elapsed)
-                rtt = int(sum(results) / len(results))
-                response = rtt
-        elif (isinstance(ex,web3.main.Web3)):
-            response = round(ping(ex_node_provider, unit='ms'),3)
-            return response
+        logger.debug(msg=f"LATENCY CHECK")
+        ping_url="1.1.1.1"
+        response = round(ping(ping_url, unit='ms'),3)
+        logger.debug(msg=f"LATENCY {response}")
+        return response
+        # if not isinstance(ex,web3.main.Web3):
+        #     symbol = 'BTC/USDT'
+        #     results = []
+        #     num_iterations = 5
+        #     for i in range(0, num_iterations):
+        #         started = ex.milliseconds()
+        #         orderbook = ex.fetch_order_book(symbol)
+        #         ended = ex.milliseconds()
+        #         elapsed = ended - started
+        #         results.append(elapsed)
+        #         rtt = int(sum(results) / len(results))
+        #         response = rtt
+        # elif (isinstance(ex,web3.main.Web3)):
+        #     response = round(ping(ex_node_provider, unit='ms'),3)
+        #     return response
     except Exception as e:
         await handle_exception(e)
 
@@ -177,20 +187,20 @@ async def send_msg (self="bot", msg="echo"):
         logger.debug(msg=f"MESSAGING EXCEPTION")
         await handle_exception(e)
 
-async def notify(message):
-    logger.debug(msg=f"NOTIFICATION START {message}")
-    apobj = apprise.Apprise()
-    if (bot_service =='tgram') or (bot_service =='telethon'):
-        apobj.add(f'tgram://' + str(bot_token) + "/" + str(bot_channel_id))
-    elif (bot_service =='discord'):
-        apobj.add(f'{bot_service}://' + str(bot_webhook_id) + "/" + str(bot_webhook_token))
-    elif (bot_service =='matrix'):
-        apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":80/" + bot_channel_id)
-    try:
-        apobj.notify(body=message)
-    except Exception as e:
-        logger.error(msg=f"{message} not sent due to error: {e}")
-
+async def notify(msg):
+    if (msg!=""):
+        logger.debug(msg=f"NOTIFICATION START {msg}")
+        apobj = apprise.Apprise()
+        if (bot_service =='tgram') or (bot_service =='telethon'):
+            apobj.add(f'tgram://' + str(bot_token) + "/" + str(bot_channel_id))
+        elif (bot_service =='discord'):
+            apobj.add(f'{bot_service}://' + str(bot_webhook_id) + "/" + str(bot_webhook_token))
+        elif (bot_service =='matrix'):
+            apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":80/" + bot_channel_id)
+        try:
+            apobj.notify(body=msg)
+        except Exception as e:
+            logger.error(msg=f"{msg} not sent due to error: {e}")
 
 #💱EXCHANGE
 async def search_exchange(searched_data):
@@ -718,8 +728,17 @@ async def handle_exception(e) -> None:
 
 
 #🦾BOT ACTIONS
+async def appserver():
+    global app
+    try:
+        app = web.Application()
+        app.add_routes([web.get('/', health_check)])
+    except Exception as e:    
+        logger.warning(msg=f"HealthCheck server error {e}")
 
 async def post_init(self='bot'):
+    logger.info(msg = f"Starting server")
+    await appserver()
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
@@ -728,8 +747,10 @@ async def post_init(self='bot'):
     if(bot_service=='tgram'):
         await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
 
-async def health_check(request):
- return web.Response(text=f"Bot is online {TTversion}")
+async def health_check():
+    logger.info(msg = f"Healthcheck_Ping")
+    headers = { "User-Agent": "Mozilla/5.0" }
+    return web.Response(body=f"Bot is online {TTversion}",status=200,headers=headers)
 
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
@@ -931,15 +952,12 @@ async def main():
             async def telethon(event):
                 await parse_message(bot,event.message.message)
             await bot.run_until_disconnected()
-        try:
-            app = web.Application()
-            app.add_routes([web.get('/', health_check)])
-            web.run_app(app)
-        except Exception as e:
-            logger.warning(msg=f"HealthCheck server error {e}")
-
+        web.run_app(app, port=8080)
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
 
 
 asyncio.run(main())
+    
+
+
