@@ -735,7 +735,6 @@ async def appserver():
         logger.info(msg = f"Starting appserver")
         app = web.Application()
         app.add_routes([web.get('/', health_check)])
-        web.run_app(app)
         logger.info(msg = f"exiting appserver setup")
     except Exception as e:    
         logger.warning(msg=f"HealthCheck server error {e}")
