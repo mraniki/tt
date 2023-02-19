@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.51"
+TTversion="🪙TT Beta 1.2.52"
 ##=============== import  =============
 ##log
 import logging
@@ -14,7 +14,8 @@ import asyncio
 import nest_asyncio
 from aiohttp import web
 import tornado.web
-from healthcheck import TornadoHandler
+from healthcheck import TornadoHandler, HealthCheck, EnvironmentDump
+
 #telegram
 #import telegram
 from telegram import Update, constants
@@ -731,8 +732,9 @@ async def post_init(self='bot'):
     if(bot_service=='tgram'):
         await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
     try:
+        health = HealthCheck(checkers=[health_check])
         app = tornado.web.Application([
-            ('/healthcheck', TornadoHandler)
+            ('/healthcheck', TornadoHandler, dict(checker=health))
         ])
     #     app = web.Application()
     #     app.add_routes([web.get('/', health_check)])
@@ -741,8 +743,9 @@ async def post_init(self='bot'):
         logger.warning(msg=f"HealthCheck server error {e}")
 
 
-async def health_check(request):
- return web.Response(text=f"Bot is online {TTversion}")
+async def health_check():
+    logger.info(msg = f"Healthcheck_Ping")
+    return f"Bot is online {TTversion}"
 
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
