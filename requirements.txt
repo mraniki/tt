@@ -12,5 +12,4 @@ tornado
 nest_asyncio
 py-cord
 aiohttp
-py-healthcheck
 fastapi
