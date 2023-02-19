@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.59"
+TTversion="🪙TT Beta 1.2.60"
 ##=============== import  =============
 ##log
 import logging
@@ -729,7 +729,6 @@ async def handle_exception(e) -> None:
 
 #🦾BOT ACTIONS
 async def appserver():
-    global app
     try:
         app = web.Application()
         app.add_routes([web.get('/', health_check)])
@@ -952,7 +951,8 @@ async def main():
             async def telethon(event):
                 await parse_message(bot,event.message.message)
             await bot.run_until_disconnected()
-        web.run_app(app, port=8080)
+        web.run_app(app=app,host="0.0.0.0", port="8080")
+
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
 
