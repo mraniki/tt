@@ -80,7 +80,6 @@ async def parse_message (self,msg='123'):
         if [ele for ele in filter_lst_ignore if(ele in wordlist)]:
             return
         elif [ele for ele in filter_lst_help if(ele in wordlist)]:
-            logger.info(msg=f"filter_lst_help: {wordlist}")
             response = await help_command()
         elif [ele for ele in filter_lst_order if(ele in wordlist)]:
             if len(wordlist[0]) > 0:
@@ -739,7 +738,7 @@ async def post_init(self='bot'):
     if(bot_service=='tgram'):
         await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
 
-async def help_command(self='bot') -> None:
+async def help_command() -> None:
     bot_ping = await verify_latency_ex()
     helpcommand = """
     🏦 <code>/bal</code>
@@ -754,8 +753,8 @@ async def help_command(self='bot') -> None:
     🔀 <code>/trading</code>
            <code>/testmode</code>"""
     if(bot_service=='discord'):
-        helpcommand= msg.replace("<code>", "`")
-        helpcommand= msg.replace("</code>", "`")
+        helpcommand= helpcommand.replace("<code>", "`")
+        helpcommand= helpcommand.replace("</code>", "`")
     bot_menu_help = f"{TTversion}\n{helpcommand}"
     response= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     return response
