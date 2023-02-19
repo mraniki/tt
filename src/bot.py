@@ -744,7 +744,8 @@ async def post_init(self='bot'):
 
 async def health_check():
     logger.info(msg = f"Healthcheck_Ping")
-    return web.Response(body=f"Bot is online {TTversion}",status=200)
+    headers = { "User-Agent": "Mozilla/5.0" }
+    return web.Response(body=f"Bot is online {TTversion}",status=200,headers=headers)
 
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
