@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.65"
+TTversion="🪙TT Beta 1.2.66"
 ##=============== import  =============
 ##log
 import logging
@@ -731,10 +731,14 @@ async def handle_exception(e) -> None:
 
 #🦾BOT ACTIONS
 
-
 @app.get("/")
-def read_root():
-    return { f"Bot is online {TTversion}" }
+async def read_root():
+    return {"Hello": "World"}
+
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: int, q: Union[str, None] = None):
+ return {"item_id": item_id, "q": q}
 
 async def post_init(self='bot'):
     logger.info(msg = f"self {self}")
