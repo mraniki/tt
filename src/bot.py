@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.66"
+TTversion="🪙TT Beta 1.2.67"
 ##=============== import  =============
 ##log
 import logging
@@ -729,16 +729,18 @@ async def handle_exception(e) -> None:
 """
 
 
+
+async def appserver():
+    try:
+        app = web.Application()
+        app.add_routes([web.get('/', health_check)])
+        web.run_app(app, port=8080)
+    except Exception as e:    
+        logger.warning(msg=f"HealthCheck server error {e}")
+        
+
+
 #🦾BOT ACTIONS
-
-@app.get("/")
-async def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-async def read_item(item_id: int, q: Union[str, None] = None):
- return {"item_id": item_id, "q": q}
 
 async def post_init(self='bot'):
     logger.info(msg = f"self {self}")
@@ -956,12 +958,12 @@ async def main():
         logger.error(msg="Bot failed to start: " + str(e))
 
 
-asyncio.run(main())
+#asyncio.run(main())
 
-#loop = asyncio.get_event_loop()
-#loop.create_task(api())
-#loop.create_task(main())
-#loop.run_forever()
+loop = asyncio.get_event_loop()
+loop.create_task(appserver())
+loop.create_task(main())
+loop.run_forever()
 
 
 
