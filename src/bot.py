@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.49"
+TTversion="🪙TT Beta 1.2.50"
 ##=============== import  =============
 ##log
 import logging
@@ -13,6 +13,8 @@ import json, requests
 import asyncio
 import nest_asyncio
 from aiohttp import web
+import tornado.web
+from healthcheck import TornadoHandler
 #telegram
 #import telegram
 from telegram import Update, constants
@@ -727,6 +729,16 @@ async def post_init(self='bot'):
         await send_msg(self,startup_message)
     if(bot_service=='tgram'):
         await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
+    try:
+        app = tornado.web.Application([
+            ('/healthcheck', TornadoHandler)
+        ])
+    #     app = web.Application()
+    #     app.add_routes([web.get('/', health_check)])
+    #     web.run_app(app)
+    except Exception as e:    
+        logger.warning(msg=f"HealthCheck server error {e}")
+
 
 async def health_check(request):
  return web.Response(text=f"Bot is online {TTversion}")
@@ -931,15 +943,10 @@ async def main():
             async def telethon(event):
                 await parse_message(bot,event.message.message)
             await bot.run_until_disconnected()
-        try:
-            app = web.Application()
-            app.add_routes([web.get('/', health_check)])
-            web.run_app(app)
-        except Exception as e:
-            logger.warning(msg=f"HealthCheck server error {e}")
 
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
 
 
 asyncio.run(main())
+
