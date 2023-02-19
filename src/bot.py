@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.60"
+TTversion="🪙TT Beta 1.2.61"
 ##=============== import  =============
 ##log
 import logging
@@ -38,6 +38,7 @@ from web3.middleware import geth_poa_middleware
 from ens import ENS 
 from datetime import datetime
 from pycoingecko import CoinGeckoAPI
+
 
 #🔧CONFIG
 load_dotenv()
@@ -729,14 +730,25 @@ async def handle_exception(e) -> None:
 
 #🦾BOT ACTIONS
 async def appserver():
+    global app
     try:
+        logger.info(msg = f"Starting appserver")
         app = web.Application()
         app.add_routes([web.get('/', health_check)])
+        runner = web.AppRunner(app)
+        await runner.setup()
+        site = web.TCPSite(runner, "0.0.0.0", 8080)
+        await site.start()
+        logger.info(msg = f"exiting appserver setup")
     except Exception as e:    
         logger.warning(msg=f"HealthCheck server error {e}")
 
+async def health_check():
+    logger.info(msg = f"Healthcheck_Ping")
+    headers = { "User-Agent": "Mozilla/5.0" }
+    return web.Response(body=f"Bot is online {TTversion}",status=200,headers=headers)
+
 async def post_init(self='bot'):
-    logger.info(msg = f"Starting server")
     await appserver()
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
@@ -745,11 +757,6 @@ async def post_init(self='bot'):
         await send_msg(self,startup_message)
     if(bot_service=='tgram'):
         await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
-
-async def health_check():
-    logger.info(msg = f"Healthcheck_Ping")
-    headers = { "User-Agent": "Mozilla/5.0" }
-    return web.Response(body=f"Bot is online {TTversion}",status=200,headers=headers)
 
 async def help_command(self='bot') -> None:
     bot_ping = await verify_latency_ex()
@@ -910,48 +917,49 @@ async def main():
         await database_setup()
         await load_exchange(ex_name)
 
-#StartTheBot
-        if(bot_service=='tgram'):
-            bot = Application.builder().token(bot_token).build()
-            await post_init(bot)
-            bot.add_handler(MessageHandler(None, parse_message))
-            bot.add_error_handler(error_handler)
-            bot.run_polling(drop_pending_updates=True)
-        elif(bot_service=='discord'):
-            intents = discord.Intents.default()
-            intents.message_content = True
-            bot = discord.Bot(intents=intents)
-            @bot.event
-            async def on_ready():
+        while True:
+    #StartTheBot
+            if(bot_service=='tgram'):
+                bot = Application.builder().token(bot_token).build()
                 await post_init(bot)
-            @bot.event
-            async def on_message(message: discord.Message):
-                await parse_message(message,message.content)
-            bot.run(bot_token)
-        elif(bot_service=='matrix'):
-            config = botlib.Config()
-            config.emoji_verify = True
-            config.ignore_unverified_devices = True
-            config.store_path ='./config/matrix/'
-            creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
-            bot = botlib.Bot(creds,config)
-            @bot.listener.on_startup
-            async def room_joined(room):
+                bot.add_handler(MessageHandler(None, parse_message))
+                bot.add_error_handler(error_handler)
+                bot.run_polling(drop_pending_updates=True)
+            elif(bot_service=='discord'):
+                intents = discord.Intents.default()
+                intents.message_content = True
+                bot = discord.Bot(intents=intents)
+                @bot.event
+                async def on_ready():
+                    await post_init(bot)
+                @bot.event
+                async def on_message(message: discord.Message):
+                    await parse_message(message,message.content)
+                bot.run(bot_token)
+            elif(bot_service=='matrix'):
+                config = botlib.Config()
+                config.emoji_verify = True
+                config.ignore_unverified_devices = True
+                config.store_path ='./config/matrix/'
+                creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
+                bot = botlib.Bot(creds,config)
+                @bot.listener.on_startup
+                async def room_joined(room):
+                    await post_init(bot)
+                @bot.listener.on_message_event
+                async def neo(room, message):
+                    match = botlib.MessageMatch(room, message, bot)
+                    if match.is_not_from_this_bot():    
+                        await parse_message(bot,message.body)
+                bot.run()
+            elif(bot_service=='telethon'):
+                bot = await TelegramClient(None, bot_api_id, bot_api_hash).start(bot_token=bot_token)
                 await post_init(bot)
-            @bot.listener.on_message_event
-            async def neo(room, message):
-                match = botlib.MessageMatch(room, message, bot)
-                if match.is_not_from_this_bot():    
-                    await parse_message(bot,message.body)
-            bot.run()
-        elif(bot_service=='telethon'):
-            bot = await TelegramClient(None, bot_api_id, bot_api_hash).start(bot_token=bot_token)
-            await post_init(bot)
-            @bot.on(events.NewMessage())
-            async def telethon(event):
-                await parse_message(bot,event.message.message)
-            await bot.run_until_disconnected()
-        web.run_app(app=app,host="0.0.0.0", port="8080")
+                @bot.on(events.NewMessage())
+                async def telethon(event):
+                    await parse_message(bot,event.message.message)
+                await bot.run_until_disconnected()
+
 
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
