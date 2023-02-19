@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.61"
+TTversion="🪙TT Beta 1.2.62"
 ##=============== import  =============
 ##log
 import logging
@@ -735,10 +735,7 @@ async def appserver():
         logger.info(msg = f"Starting appserver")
         app = web.Application()
         app.add_routes([web.get('/', health_check)])
-        runner = web.AppRunner(app)
-        await runner.setup()
-        site = web.TCPSite(runner, "0.0.0.0", 8080)
-        await site.start()
+        web.run_app(app)
         logger.info(msg = f"exiting appserver setup")
     except Exception as e:    
         logger.warning(msg=f"HealthCheck server error {e}")
