@@ -1,11 +1,11 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.54"
+TTversion="🪙TT Beta 1.2.55"
 ##=============== import  =============
 ##log
 import logging
 import sys
 import traceback
-from ping3 import ping, verbose_ping
+from ping3 import ping
 ##env
 import os
 from dotenv import load_dotenv
@@ -56,7 +56,7 @@ async def verify_import_library():
     logger.info(msg=f"{TTversion}")
 
 async def parse_message (self,msg='123'):
-    if (msg!="123"):
+    if (msg!=""):
         logger.debug(msg=f"self {self}")
         logger.debug(msg=f"msg {msg}")
         if(bot_service=='tgram'):
@@ -179,19 +179,20 @@ async def send_msg (self="bot", msg="echo"):
         logger.debug(msg=f"MESSAGING EXCEPTION")
         await handle_exception(e)
 
-async def notify(message):
-    logger.debug(msg=f"NOTIFICATION START {message}")
-    apobj = apprise.Apprise()
-    if (bot_service =='tgram') or (bot_service =='telethon'):
-        apobj.add(f'tgram://' + str(bot_token) + "/" + str(bot_channel_id))
-    elif (bot_service =='discord'):
-        apobj.add(f'{bot_service}://' + str(bot_webhook_id) + "/" + str(bot_webhook_token))
-    elif (bot_service =='matrix'):
-        apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":80/" + bot_channel_id)
-    try:
-        apobj.notify(body=message)
-    except Exception as e:
-        logger.error(msg=f"{message} not sent due to error: {e}")
+async def notify(msg):
+    if (msg!=""):
+        logger.debug(msg=f"NOTIFICATION START {msg}")
+        apobj = apprise.Apprise()
+        if (bot_service =='tgram') or (bot_service =='telethon'):
+            apobj.add(f'tgram://' + str(bot_token) + "/" + str(bot_channel_id))
+        elif (bot_service =='discord'):
+            apobj.add(f'{bot_service}://' + str(bot_webhook_id) + "/" + str(bot_webhook_token))
+        elif (bot_service =='matrix'):
+            apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":80/" + bot_channel_id)
+        try:
+            apobj.notify(body=msg)
+        except Exception as e:
+            logger.error(msg=f"{msg} not sent due to error: {e}")
 
 
 #💱EXCHANGE
