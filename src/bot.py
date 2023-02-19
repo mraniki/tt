@@ -120,10 +120,13 @@ async def parse_message (self,msg='123'):
         elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
             if len(wordlist[1]) > 0:
                 response = await quote_command(wordlist[1])
+        else:
+            logger.info(msg=f"Parsing skipped {wordlist}")
+            return
         if (response != None):
             await send_msg(self,response)
     except Exception as e:
-        logger.info(msg=f"parse_message Parsing skipped {e}")
+        logger.info(msg=f"Parsing exception {e}")
         return
 
 async def retrieve_url_json(url,params=None):
