@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.58"
+TTversion="🪙TT Beta 1.2.59"
 ##=============== import  =============
 ##log
 import logging
@@ -78,9 +78,10 @@ async def parse_message (self,msg='123'):
     try:
         if [ele for ele in filter_lst_ignore if(ele in wordlist)]:
             return
-        if [ele for ele in filter_lst_help if(ele in wordlist)]:
+        elif [ele for ele in filter_lst_help if(ele in wordlist)]:
+            logger.info(msg=f"filter_lst_help: {wordlist}")
             response = await help_command()
-        if [ele for ele in filter_lst_order if(ele in wordlist)]:
+        elif [ele for ele in filter_lst_order if(ele in wordlist)]:
             if len(wordlist[0]) > 0:
                 direction = wordlist[0].upper()
                 if len(wordlist[1]) > 0:
@@ -123,7 +124,7 @@ async def parse_message (self,msg='123'):
         else:
             logger.info(msg=f"Parsing skipped {wordlist}")
             return
-        if (response != None):
+        if (response != ""):
             await send_msg(self,response)
     except Exception as e:
         logger.info(msg=f"Parsing exception {e}")
@@ -137,21 +138,26 @@ async def retrieve_url_json(url,params=None):
 
 async def verify_latency_ex():
     try:
-        if not isinstance(ex,web3.main.Web3):
-            symbol = 'BTC/USDT'
-            results = []
-            num_iterations = 5
-            for i in range(0, num_iterations):
-                started = ex.milliseconds()
-                orderbook = ex.fetch_order_book(symbol)
-                ended = ex.milliseconds()
-                elapsed = ended - started
-                results.append(elapsed)
-                rtt = int(sum(results) / len(results))
-                response = rtt
-        elif (isinstance(ex,web3.main.Web3)):
-            response = round(ping(ex_node_provider, unit='ms'),3)
-            return response
+        logger.debug(msg=f"LATENCY CHECK")
+        ping_url="1.1.1.1"
+        response = round(ping(ping_url, unit='ms'),3)
+        logger.debug(msg=f"LATENCY {response}")
+        return response
+        # if not isinstance(ex,web3.main.Web3):
+        #     symbol = 'BTC/USDT'
+        #     results = []
+        #     num_iterations = 5
+        #     for i in range(0, num_iterations):
+        #         started = ex.milliseconds()
+        #         orderbook = ex.fetch_order_book(symbol)
+        #         ended = ex.milliseconds()
+        #         elapsed = ended - started
+        #         results.append(elapsed)
+        #         rtt = int(sum(results) / len(results))
+        #         response = rtt
+        # elif (isinstance(ex,web3.main.Web3)):
+        #     response = round(ping(ex_node_provider, unit='ms'),3)
+        #     return response
     except Exception as e:
         await handle_exception(e)
 
