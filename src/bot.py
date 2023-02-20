@@ -976,11 +976,11 @@ async def webhook(request: Request):
 @app.post("/send", status_code=http.HTTPStatus.ACCEPTED)
 async def sendtobot(request: Request):
     data_received = await request.body()
+    await send_msg(app,data_received)
     logger.info(msg=f"sendtobot event {data_received}")
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app, host='0.0.0.0', port=8080)
-
 
