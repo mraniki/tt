@@ -971,14 +971,12 @@ def health_check():
 @app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
 async def webhook(request: Request):
     payload = await request.body()
-    payload_dict = json.loads(payload)
-    logger.info(msg=f"webhook event {payload_dict}")
+    logger.info(msg=f"webhook event {payload}")
 
 @app.post("/send", status_code=http.HTTPStatus.ACCEPTED)
 async def sendtobot(request: Request):
     data_received = await request.body()
-    data_received_dict = json.loads(data_received)
-    logger.info(msg=f"sendtobot event {data_received_dict}")
+    logger.info(msg=f"sendtobot event {data_received}")
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
