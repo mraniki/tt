@@ -1,11 +1,10 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.69"
+TTversion="🪙TT Beta 1.2.70"
 ##=============== import  =============
 ##log
 import logging
 import sys
 import traceback
-from ping3 import ping
 ##env
 import os
 from dotenv import load_dotenv
@@ -34,8 +33,11 @@ from web3 import Web3
 from web3.middleware import geth_poa_middleware
 from ens import ENS 
 from datetime import datetime
+#Utils
 from pycoingecko import CoinGeckoAPI
+from ping3 import ping
 from fastapi import FastAPI
+import uvicorn
 
 #🔧CONFIG
 load_dotenv()
@@ -939,12 +941,12 @@ async def bot():
                     await parse_message(bot,event.message.message)
                 await bot.run_until_disconnected()
 
-
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
 
+
 #⛓️API
-app = FastAPI()
+app = FastAPI(title="TALKYTRADER",)
 
 @app.on_event("startup")
 def startup_event():
@@ -958,7 +960,7 @@ async def shutdown_event():
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {f"Bot is online {TTversion}"}
 
 @app.get("/health")
 def health_check():
