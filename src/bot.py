@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.74"
+TTversion="🪙TT Beta 1.2.75"
 ##=============== import  =============
 ##log
 import logging
@@ -976,7 +976,7 @@ async def webhook(request: Request):
 @app.post("/notify", status_code=http.HTTPStatus.ACCEPTED)
 async def notifybot(request: Request):
     data_received = await request.body()
-    await notify(msg(data_received)
+    await notify(data_received)
     logger.info(msg=f"notifybot event {data_received}")
 
 #🙊TALKYTRADER
