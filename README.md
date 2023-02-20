@@ -95,7 +95,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
 
 ## 🚧 Roadmap
 
-https://github.com/mraniki/tt/milestones
+[🚧 Roadmap](https://github.com/mraniki/tt/milestones)
 
 ### V1.3
 - Support Uniswap V3 (more testing needed)
