@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.72"
+TTversion="🪙TT Beta 1.2.73"
 ##=============== import  =============
 ##log
 import logging
@@ -36,8 +36,11 @@ from datetime import datetime
 #Utils
 from pycoingecko import CoinGeckoAPI
 from ping3 import ping
-from fastapi import FastAPI
+from fastapi import FastAPI, Header, HTTPException, Request
 import uvicorn
+import hashlib
+import hmac
+import http
 
 #🔧CONFIG
 load_dotenv()
@@ -47,8 +50,7 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 #🔗API
-gecko_api = CoinGeckoAPI()
-llama_api = f"https://api.llama.fi/"
+gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
 dex_1inch_api = f"https://api.1inch.exchange/v5.0"
 
 #🔁UTILS
@@ -137,28 +139,30 @@ async def retrieve_url_json(url,params=None):
 
 async def verify_latency_ex():
     try:
-        logger.debug(msg=f"LATENCY CHECK")
-        ping_url="1.1.1.1"
-        response = round(ping(ping_url, unit='ms'),3)
-        logger.debug(msg=f"LATENCY {response}")
-        return response
-        # if not isinstance(ex,web3.main.Web3):
-        #     symbol = 'BTC/USDT'
-        #     results = []
-        #     num_iterations = 5
-        #     for i in range(0, num_iterations):
-        #         started = ex.milliseconds()
-        #         orderbook = ex.fetch_order_book(symbol)
-        #         ended = ex.milliseconds()
-        #         elapsed = ended - started
-        #         results.append(elapsed)
-        #         rtt = int(sum(results) / len(results))
-        #         response = rtt
-        # elif (isinstance(ex,web3.main.Web3)):
-        #     response = round(ping(ex_node_provider, unit='ms'),3)
-        #     return response
+        if not isinstance(ex,web3.main.Web3):
+            # symbol = 'BTC/USDT' #need to make the symbol a dynamic variable
+            # results = []
+            # num_iterations = 5
+            # for i in range(0, num_iterations):
+            #     started = ex.milliseconds()
+            #     orderbook = ex.fetch_order_book(symbol)
+            #     ended = ex.milliseconds()
+            #     elapsed = ended - started
+            #     results.append(elapsed)
+            #     rtt = int(sum(results) / len(results))
+            #     response = rtt
+            ping_url="1.1.1.1"
+            response = round(ping(ping_url, unit='ms'),3)
+            return response
+        elif (isinstance(ex,web3.main.Web3)):
+            response = round(ping(ex_node_provider, unit='ms'),3)
+            return response
     except Exception as e:
         await handle_exception(e)
+
+async def generate_hash_signature(secret: bytes,payload: bytes,digest_method=hashlib.sha1,):
+    return hmac.new(secret, payload, digest_method).hexdigest()
+
 
 #💬MESSAGING
 async def send_msg (self="bot", msg="echo"):
@@ -934,7 +938,8 @@ async def bot():
                         await parse_message(bot,message.body)
                 #bot.run()
                 await bot.api.login()
-                await bot.api.async_client.sync(timeout=65536, full_state=False)
+                #await bot.api.async_client.sync(timeout=65536, full_state=True)
+                await bot.api.async_client.sync_forever(timeout=65536, full_state=True)
             elif(bot_service=='telethon'):
                 bot = await TelegramClient(None, bot_api_id, bot_api_hash).start(bot_token=bot_token)
                 await post_init(bot)
@@ -957,7 +962,7 @@ def startup_event():
 
 @app.on_event('shutdown')
 async def shutdown_event():
-    logger.info('FastAPI shutting down...')
+    logger.info('Webserver shutting down...')
 
 @app.get("/")
 def read_root():
@@ -967,6 +972,18 @@ def read_root():
 def health_check():
     logger.info(msg = f"Healthcheck_Ping")
     return {f"Bot is online {TTversion}"}
+
+@app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
+async def webhook(request: Request):
+    payload = await request.body()
+    payload_dict = json.loads(payload)
+    logger.info(msg=f"webhook event {payload_dict}")
+
+@app.post("/send", status_code=http.HTTPStatus.ACCEPTED)
+async def sendtobot(request: Request):
+    data_received = await request.body()
+    data_received_dict = json.loads(data_received)
+    logger.info(msg=f"sendtobot event {data_received_dict}")
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
