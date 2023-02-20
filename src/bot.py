@@ -163,7 +163,6 @@ async def verify_latency_ex():
 async def generate_hash_signature(secret: bytes,payload: bytes,digest_method=hashlib.sha1,):
     return hmac.new(secret, payload, digest_method).hexdigest()
 
-
 #💬MESSAGING
 async def send_msg (self="bot", msg="echo"):
     logger.debug(msg=f"💬MESSAGING START")
@@ -890,8 +889,6 @@ async def database_setup():
                     sys.exit()
         except Exception as e:
             logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
-
-
 
 #🤖BOT
 async def bot():

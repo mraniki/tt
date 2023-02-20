@@ -7,7 +7,6 @@ python-telegram-bot>=20.1
 telethon
 simplematrixbotlib
 py-cord
-nio
 pycoingecko
 ping3
 fastapi
