@@ -916,7 +916,7 @@ async def bot():
                 @bot.event
                 async def on_message(message: discord.Message):
                     await parse_message(message,message.content)
-                bot.run(bot_token)
+                await bot.start(bot_token)
             elif(bot_service=='matrix'):
                 config = botlib.Config()
                 config.emoji_verify = True
@@ -951,6 +951,7 @@ app = FastAPI(title="TALKYTRADER",)
 @app.on_event("startup")
 def startup_event():
     loop = asyncio.get_event_loop()
+    #loop.run_until_complete(bot())
     loop.create_task(bot())
     logger.info(msg=f"Webserver started")
 
