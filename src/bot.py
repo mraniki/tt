@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.71"
+TTversion="🪙TT Beta 1.2.72"
 ##=============== import  =============
 ##log
 import logging
@@ -932,7 +932,9 @@ async def bot():
                     match = botlib.MessageMatch(room, message, bot)
                     if match.is_not_from_this_bot():    
                         await parse_message(bot,message.body)
-                bot.run()
+                #bot.run()
+                await bot.api.login()
+                await bot.api.async_client.sync(timeout=65536, full_state=False)
             elif(bot_service=='telethon'):
                 bot = await TelegramClient(None, bot_api_id, bot_api_hash).start(bot_token=bot_token)
                 await post_init(bot)
@@ -943,7 +945,6 @@ async def bot():
 
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
-
 
 #⛓️API
 app = FastAPI(title="TALKYTRADER",)
