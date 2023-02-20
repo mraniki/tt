@@ -44,7 +44,7 @@ import http
 load_dotenv()
 
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 #🔗API
@@ -973,11 +973,11 @@ async def webhook(request: Request):
     payload = await request.body()
     logger.info(msg=f"webhook event {payload}")
 
-@app.post("/send", status_code=http.HTTPStatus.ACCEPTED)
-async def sendtobot(request: Request):
+@app.post("/notify", status_code=http.HTTPStatus.ACCEPTED)
+async def notifybot(request: Request):
     data_received = await request.body()
-    await send_msg(app,data_received)
-    logger.info(msg=f"sendtobot event {data_received}")
+    await notify(msg(data_received)
+    logger.info(msg=f"notifybot event {data_received}")
 
 #🙊TALKYTRADER
 if __name__ == '__main__':

@@ -86,7 +86,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Convert symbol to DEX checksum address via coingecko API to support any symbol and any chain listed in coingecko
  - Configure the default exchange and default test mode when starting the bot.
  - Support multiple messaging platform (Telegram, Matrix and Discord)
- - include basic healthcheck via FastAPI webserver on port 8080 
+ - include healthcheck, webhook and notify capability via FastAPI webserver on port 8080 
 
 ## 📷 Screenshots
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
