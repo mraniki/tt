@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.68"
+TTversion="🪙TT Beta 1.2.69"
 ##=============== import  =============
 ##log
 import logging
@@ -11,9 +11,6 @@ import os
 from dotenv import load_dotenv
 import json, requests
 import asyncio
-import nest_asyncio
-from aiohttp import web
-
 #telegram
 #import telegram
 from telegram import Update, constants
@@ -38,13 +35,11 @@ from web3.middleware import geth_poa_middleware
 from ens import ENS 
 from datetime import datetime
 from pycoingecko import CoinGeckoAPI
-
-#from fastapi import FastAPI
-#app = FastAPI()
+from fastapi import FastAPI
 
 #🔧CONFIG
 load_dotenv()
-nest_asyncio.apply()
+
 #🧐LOGGING
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -728,19 +723,6 @@ async def handle_exception(e) -> None:
 🔚END OF COMMON FUNCTIONS
 """
 
-async def appserver():
-    try:
-        app = web.Application()
-        app.add_routes([web.get('/', health_check)])
-        web.run_app(app, port=8080)
-    except Exception as e:    
-        logger.warning(msg=f"HealthCheck server error {e}")
-
-async def health_check():
-    logger.info(msg = f"Healthcheck_Ping")
-    headers = { "User-Agent": "Mozilla/5.0" }
-    return web.Response(body=f"Bot is online {TTversion}",status=200,headers=headers)
-
 
 #🦾BOT ACTIONS
 
@@ -903,8 +885,10 @@ async def database_setup():
         except Exception as e:
             logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
 
+
+
 #🤖BOT
-async def main():
+async def bot():
     global bot
     try:
 #LOAD
@@ -959,13 +943,31 @@ async def main():
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
 
+#⛓️API
+app = FastAPI()
 
-#asyncio.run(main())
+@app.on_event("startup")
+def startup_event():
+    loop = asyncio.get_event_loop()
+    loop.create_task(bot())
+    logger.info(msg=f"Webserver started")
 
-loop = asyncio.get_event_loop()
-#loop.create_task(appserver())
-loop.create_task(main())
-loop.run_forever()
+@app.on_event('shutdown')
+async def shutdown_event():
+    logger.info('FastAPI shutting down...')
 
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+@app.get("/health")
+def health_check():
+    logger.info(msg = f"Healthcheck_Ping")
+    return {f"Bot is online {TTversion}"}
+
+#🙊TALKYTRADER
+if __name__ == '__main__':
+    import uvicorn
+    uvicorn.run(app, host='0.0.0.0', port=8080)
 
 

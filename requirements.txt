@@ -9,7 +9,5 @@ simplematrixbotlib
 py-cord
 pycoingecko
 ping3
-tornado
-nest_asyncio
-aiohttp
 fastapi
+uvicorn
