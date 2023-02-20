@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.70"
+TTversion="🪙TT Beta 1.2.71"
 ##=============== import  =============
 ##log
 import logging
@@ -951,7 +951,6 @@ app = FastAPI(title="TALKYTRADER",)
 @app.on_event("startup")
 def startup_event():
     loop = asyncio.get_event_loop()
-    #loop.run_until_complete(bot())
     loop.create_task(bot())
     logger.info(msg=f"Webserver started")
 
