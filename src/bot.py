@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.73"
+TTversion="🪙TT Beta 1.2.74"
 ##=============== import  =============
 ##log
 import logging
@@ -38,8 +38,6 @@ from pycoingecko import CoinGeckoAPI
 from ping3 import ping
 from fastapi import FastAPI, Header, HTTPException, Request
 import uvicorn
-import hashlib
-import hmac
 import http
 
 #🔧CONFIG
@@ -160,8 +158,8 @@ async def verify_latency_ex():
     except Exception as e:
         await handle_exception(e)
 
-async def generate_hash_signature(secret: bytes,payload: bytes,digest_method=hashlib.sha1,):
-    return hmac.new(secret, payload, digest_method).hexdigest()
+#async def generate_hash_signature(secret: bytes,payload: bytes,digest_method=hashlib.sha1,):
+    #return hmac.new(secret, payload, digest_method).hexdigest()
 
 #💬MESSAGING
 async def send_msg (self="bot", msg="echo"):
