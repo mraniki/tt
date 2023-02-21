@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.75"
+TTversion="🪙TT Beta 1.2.76"
 ##=============== import  =============
 ##log
 import logging
@@ -33,18 +33,21 @@ from web3 import Web3
 from web3.middleware import geth_poa_middleware
 from ens import ENS 
 from datetime import datetime
-#Utils
-from pycoingecko import CoinGeckoAPI
-from ping3 import ping
+#API
 from fastapi import FastAPI, Header, HTTPException, Request
 import uvicorn
 import http
+#Utils
+from pycoingecko import CoinGeckoAPI
+from ping3 import ping
+
 
 #🔧CONFIG
 load_dotenv()
 
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
+LOGLEVEL=os.getenv("LOGLEVEL", "INFO")
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=LOGLEVEL)
 logger = logging.getLogger(__name__)
 
 #🔗API
@@ -61,7 +64,7 @@ async def parse_message (self,msg='123'):
     if(bot_service=='tgram'):
         msg=self.effective_message.text
     wordlist = msg.split(" ")
-    logger.debug(msg=f"parse_message wordlist {wordlist}")
+    logger.debug(msg=f"parse_message wordlist {wordlist} len {len(wordlist)}")
     response = ""
     #🦾BOT FILTERS
     filter_lst_ignore = ['⚠️','error', 'Environment','Balance']
@@ -73,8 +76,7 @@ async def parse_message (self,msg='123'):
     filter_lst_trading = ['/trading']
     filter_lst_test = ['/testmode']
     filter_lst_restart = ['/restart']
-    filter_lst_switch = ['/cex', '/dex']
-    logger.debug(msg=f"parse_message wordlist len {len(wordlist)}")
+    filter_lst_switch = ['/cex', '/dex', '/cext','/dext']
     try:
         if [ele for ele in filter_lst_ignore if(ele in wordlist)]:
             return
@@ -99,7 +101,7 @@ async def parse_message (self,msg='123'):
                         res = await execute_order(order[0],order[1],order[2],order[3],order[4])
                         if (res != None):
                             response = f"{res}"
-                            logger.info(msg=f"parse_message order response: {response}")
+                            logger.debug(msg=f"parse_message order response: {response}")
                         else:
                             return
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
@@ -121,12 +123,12 @@ async def parse_message (self,msg='123'):
             if len(wordlist[1]) > 0:
                 response = await quote_command(wordlist[1])
         else:
-            logger.info(msg=f"Parsing skipped {wordlist}")
+            logger.debug(msg=f"Parsing skipped {wordlist}")
             return
         if (response != ""):
             await send_msg(self,response)
     except Exception as e:
-        logger.info(msg=f"Parsing exception {e}")
+        logger.warning(msg=f"Parsing exception {e}")
         return
 
 async def retrieve_url_json(url,params=None):
@@ -163,8 +165,7 @@ async def verify_latency_ex():
 
 #💬MESSAGING
 async def send_msg (self="bot", msg="echo"):
-    logger.debug(msg=f"💬MESSAGING START")
-    logger.debug(msg=f"self {self} msg {msg} ")
+    logger.debug(msg=f"💬MESSAGING START self {self} msg {msg}")
     try:
         if(bot_service=='tgram'):
             #await self.send_message(msg, parse_mode=constants.ParseMode.HTML)
@@ -184,7 +185,7 @@ async def send_msg (self="bot", msg="echo"):
             await self.send_message(int(bot_channel_id),msg,parse_mode='html')
             return
     except Exception as e:
-        logger.debug(msg=f"MESSAGING EXCEPTION")
+        logger.warning(msg=f"{msg} {e}")
         await handle_exception(e)
 
 async def notify(msg):
@@ -200,7 +201,7 @@ async def notify(msg):
         try:
             apobj.notify(body=msg)
         except Exception as e:
-            logger.error(msg=f"{msg} not sent due to error: {e}")
+            logger.warning(msg=f"{msg} not sent due to error: {e}")
 
 #💱EXCHANGE
 async def search_exchange(searched_data):
@@ -308,9 +309,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
             if (len(str(bal))):
                 m_price = float(ex.fetchTicker(f'{symbol}').get('last'))
-                logger.debug(msg=f"m_price: {m_price}")
                 totalusdtbal = ex.fetchBalance()['USDT']['free']
-                logger.debug(msg=f"totalusdtbal: {totalusdtbal}")
                 amountpercent=((totalusdtbal)*(float(quantity)/100))/float(m_price) # % of bal
                 res = ex.create_order(symbol, price_type, direction, amountpercent)
             if (direction=="SELL"):
@@ -383,7 +382,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
 async def resolve_ens_dex(addr):
     try:
         domain = ns.name(addr)
-        logger.info(msg=f"{domain}")
+        logger.debug(msg=f"ENS {domain}")
         return
     except Exception as e:
         await handle_exception(e)
@@ -392,7 +391,7 @@ async def approve_asset_router(asset_out_address):
     try:
         if (dex_version=="uni_v2" or dex_version=="uni_v3"):
             approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
-            logger.info(msg=f"approval_check {approval_check}")
+            logger.debug(msg=f"approval_check {approval_check}")
             if (approval_check==0):
                 approved_amount = (ex.to_wei(2**64-1,'ether'))
                 asset_out_abi = await fetch_abi_dex(asset_out_address)
@@ -409,7 +408,6 @@ async def approve_asset_router(asset_out_address):
                 approval_response = await retrieve_url_json(approval_URL)
     except Exception as e:
         await handle_exception(e)
-
 
 async def sign_transaction_dex(contract_tx):
     try:
@@ -522,17 +520,16 @@ async def fetch_account_dex (addr):
     value = int(d['result']) / self.zeroes
     return(value)
 
-async def estimate_gas(transaction):
-    estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(transaction) * 1.2),'wei')
+async def estimate_gas(tx):
+    estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.2),'wei')
     
-
-async def verify_gas():
-    current_gas_price = int(ex.to_wei(ex.eth.gas_price,'wei'))
-    config_gas_price_dex = int(ex.to_wei(gasPrice,'gwei'))
-    if (current_gas_price_dex>=config_gas_price_dex):
-        logger.warning(msg=f"{current_gas_price_dex} {config_gas_price_dex} ")
-    else:
-        logger.info(msg=f"gas setup{config_gas_price_dex} aligned with current gas price {current_gas_price_dex}")
+# async def verify_gas():
+#     current_gas_price = int(ex.to_wei(ex.eth.gas_price,'wei'))
+#     config_gas_price_dex = int(ex.to_wei(gasPrice,'gwei'))
+#     if (current_gas_price_dex>=config_gas_price_dex):
+#         logger.warning(msg=f"{current_gas_price_dex} {config_gas_price_dex} ")
+#     else:
+#         logger.info(msg=f"gas setup{config_gas_price_dex} aligned with current gas price {current_gas_price_dex}")
 
 async def search_test_contract(symbol):
     try:
@@ -725,95 +722,6 @@ async def handle_exception(e) -> None:
 """
 🔚END OF COMMON FUNCTIONS
 """
-
-
-#🦾BOT ACTIONS
-
-async def post_init(self='bot'):
-    logger.info(msg = f"self {self}")
-    startup_message=f"Bot is online {TTversion}"
-    logger.info(msg = f"{startup_message}")
-    if(bot_service=='discord'or bot_service=='telethon' or bot_service=='matrix'):
-        await send_msg(self,startup_message)
-    if(bot_service=='tgram'):
-        await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
-
-async def help_command() -> None:
-    bot_ping = await verify_latency_ex()
-    helpcommand = """
-    🏦 <code>/bal</code>
-    🏛️ <code>/cex kraken</code>
-    🥞 <code>/dex pancake</code>
-    🦄 <code>/dex uniswap_v2</code>
-    📦 <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
-           <code>buy cake</code>
-    🦎 <code>/q BTCB</code>
-           <code>/q WBTC</code>
-           <code>/q btc/usdt</code>
-    🔀 <code>/trading</code>
-           <code>/testmode</code>"""
-    if(bot_service=='discord'):
-        helpcommand= helpcommand.replace("<code>", "`")
-        helpcommand= helpcommand.replace("</code>", "`")
-    bot_menu_help = f"{TTversion}\n{helpcommand}"
-    response= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
-    return response
-
-async def account_balance_command(self='bot') -> None:
-    balance =f"🏦 Balance\n"
-    balance += await get_account_balance()
-    return balance
-
-async def account_position_command(self='bot') -> None:
-    position = f"📊 Position\n"
-    position += await get_account_position()
-    return position
-
-async def quote_command(symbol) -> None:
-    asset_out_cg_quote = await fetch_gecko_quote(symbol)
-    response=f"₿ {asset_out_cg_quote}\n"
-    if (isinstance(ex,web3.main.Web3)):
-        if(await search_gecko_contract(symbol) != None):
-            asset_out_1inch_quote = await fetch_1inch_quote (symbol)
-            response+=f"🦄{asset_out_1inch_quote} USD\n🖊️{chainId}: {await search_gecko_contract(symbol)}"
-            #response+=f"/n{await search_gecko_detailed(symbol)}"
-    elif not (isinstance(ex,web3.main.Web3)):
-        price= ex.fetch_ticker(symbol.upper())['last']
-        response+=f"🏛️ {price} USD"
-    return response
-
-async def exchange_switch_command(name):
-    exchange_search = await search_exchange(name)
-    logger.debug(msg=f"exchange_search {exchange_search}")
-    res = await load_exchange(exchange_search['name'])
-    logger.debug(msg=f"res {res}")
-    response = f"{ex_name} is active"
-    return response
-
-async def trading_switch_command(self='bot') -> None:
-    global bot_trading_switch
-    bot_trading_switch = not bot_trading_switch
-    response=f"Trading is {bot_trading_switch}"
-    return response
-
-async def testmode_switch_command(self='bot') -> None:
-    global ex_test_mode
-    ex_test_mode = not ex_test_mode
-    response = f"Test mode is {ex_test_mode}"
-    return response
-
-async def restart_command(self='bot') -> None:
-    os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
-
-async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.error(msg="Exception:", exc_info=context.error)
-    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
-    tb_string = "".join(tb_list)
-    tb_trim = tb_string[:1000]
-    e = f"{tb_trim}"
-    await handle_exception(e)
-    logger.DEBUG(msg="HANDLER")
-
 #💾DB
 async def database_setup():
     global ex_name
@@ -888,6 +796,91 @@ async def database_setup():
         except Exception as e:
             logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
 
+#🦾BOT ACTIONS
+async def post_init(self='bot'):
+    logger.info(msg = f"self {self}")
+    startup_message=f"Bot is online {TTversion}"
+    logger.info(msg = f"{startup_message}")
+    if(bot_service=='discord'or bot_service=='telethon' or bot_service=='matrix'):
+        await send_msg(self,startup_message)
+    if(bot_service=='tgram'):
+        await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
+
+async def help_command() -> None:
+    bot_ping = await verify_latency_ex()
+    helpcommand = """
+    🏦 <code>/bal</code>
+    🏛️ <code>/cex kraken</code>
+    🥞 <code>/dex pancake</code>
+    🦄 <code>/dex uniswap_v2</code>
+    📦 <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
+           <code>buy cake</code>
+    🦎 <code>/q BTCB</code>
+           <code>/q WBTC</code>
+           <code>/q btc/usdt</code>
+    🔀 <code>/trading</code>
+           <code>/testmode</code>"""
+    if(bot_service=='discord' or bot_service=='matrix'):
+        helpcommand= helpcommand.replace("<code>", "`")
+        helpcommand= helpcommand.replace("</code>", "`")
+    bot_menu_help = f"{TTversion}\n{helpcommand}"
+    response= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
+    return response
+
+async def account_balance_command(self='bot') -> None:
+    balance =f"🏦 Balance\n"
+    balance += await get_account_balance()
+    return balance
+
+async def account_position_command(self='bot') -> None:
+    position = f"📊 Position\n"
+    position += await get_account_position()
+    return position
+
+async def quote_command(symbol) -> None:
+    asset_out_cg_quote = await fetch_gecko_quote(symbol)
+    response=f"₿ {asset_out_cg_quote}\n"
+    if (isinstance(ex,web3.main.Web3)):
+        if(await search_gecko_contract(symbol) != None):
+            asset_out_1inch_quote = await fetch_1inch_quote (symbol)
+            response+=f"🦄{asset_out_1inch_quote} USD\n🖊️{chainId}: {await search_gecko_contract(symbol)}"
+            #response+=f"/n{await search_gecko_detailed(symbol)}"
+    elif not (isinstance(ex,web3.main.Web3)):
+        price= ex.fetch_ticker(symbol.upper())['last']
+        response+=f"🏛️ {price} USD"
+    return response
+
+async def exchange_switch_command(name):
+    exchange_search = await search_exchange(name)
+    logger.debug(msg=f"exchange_search {exchange_search}")
+    res = await load_exchange(exchange_search['name'])
+    logger.debug(msg=f"res {res}")
+    response = f"{ex_name} is active"
+    return response
+
+async def trading_switch_command(self='bot') -> None:
+    global bot_trading_switch
+    bot_trading_switch = not bot_trading_switch
+    response=f"Trading is {bot_trading_switch}"
+    return response
+
+async def testmode_switch_command(self='bot') -> None:
+    global ex_test_mode
+    ex_test_mode = not ex_test_mode
+    response = f"Test mode is {ex_test_mode}"
+    return response
+
+async def restart_command(self='bot') -> None:
+    os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
+
+async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.error(msg="Exception:", exc_info=context.error)
+    tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
+    tb_string = "".join(tb_list)
+    tb_trim = tb_string[:1000]
+    e = f"{tb_trim}"
+    await handle_exception(e)
+
 #🤖BOT
 async def bot():
     global bot
@@ -918,8 +911,8 @@ async def bot():
                 await bot.start(bot_token)
             elif(bot_service=='matrix'):
                 config = botlib.Config()
-                config.emoji_verify = True
-                config.ignore_unverified_devices = True
+                # config.emoji_verify = True
+                # config.ignore_unverified_devices = True
                 config.store_path ='./config/matrix/'
                 creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
                 bot = botlib.Bot(creds,config)
@@ -933,8 +926,9 @@ async def bot():
                         await parse_message(bot,message.body)
                 #bot.run()
                 await bot.api.login()
+                #await bot.api.sync()
                 #await bot.api.async_client.sync(timeout=65536, full_state=True)
-                await bot.api.async_client.sync_forever(timeout=65536, full_state=True)
+                #await bot.api.async_client.sync_forever(timeout=65536, full_state=True)
             elif(bot_service=='telethon'):
                 bot = await TelegramClient(None, bot_api_id, bot_api_hash).start(bot_token=bot_token)
                 await post_init(bot)
@@ -960,7 +954,7 @@ async def shutdown_event():
     logger.info('Webserver shutting down...')
 
 @app.get("/")
-def read_root():
+def root():
     return {f"Bot is online {TTversion}"}
 
 @app.get("/health")
