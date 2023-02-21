@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙TT Beta 1.2.76"
+TTversion="🪙📞🗿 TT Beta 1.2.77"
 ##=============== import  =============
 ##log
 import logging
@@ -40,7 +40,6 @@ import http
 #Utils
 from pycoingecko import CoinGeckoAPI
 from ping3 import ping
-
 
 #🔧CONFIG
 load_dotenv()
@@ -126,7 +125,8 @@ async def parse_message (self,msg='123'):
             logger.debug(msg=f"Parsing skipped {wordlist}")
             return
         if (response != ""):
-            await send_msg(self,response)
+            await notify(response)
+            #await send_msg(self,response)
     except Exception as e:
         logger.warning(msg=f"Parsing exception {e}")
         return
@@ -164,29 +164,29 @@ async def verify_latency_ex():
     #return hmac.new(secret, payload, digest_method).hexdigest()
 
 #💬MESSAGING
-async def send_msg (self="bot", msg="echo"):
-    logger.debug(msg=f"💬MESSAGING START self {self} msg {msg}")
-    try:
-        if(bot_service=='tgram'):
-            #await self.send_message(msg, parse_mode=constants.ParseMode.HTML)
-            await self.effective_chat.send_message(msg, parse_mode=constants.ParseMode.HTML)
-            #await self.chat.send_message(f"{msg}", parse_mode=constants.ParseMode.HTML)
-            #await self.bot.send_message(bot_channel_id, msg, parse_mode=constants.ParseMode.HTML)
-            return 
-        elif(bot_service=='discord'):
-            embed = discord.Embed(description=msg)
-            channel = bot.get_channel(int(bot_channel_id))
-            await channel.send(embed=embed)
-        elif(bot_service=='matrix'):
-            # await bot.api.send_text_message(bot_channel_id, msg)
-            await bot.api.send_markdown_message(bot_channel_id, msg)
-            return
-        elif(bot_service=='telethon'):
-            await self.send_message(int(bot_channel_id),msg,parse_mode='html')
-            return
-    except Exception as e:
-        logger.warning(msg=f"{msg} {e}")
-        await handle_exception(e)
+# async def send_msg (self="bot", msg="echo"):
+#     logger.debug(msg=f"💬MESSAGING START self {self} msg {msg}")
+#     try:
+#         if(bot_service=='tgram'):
+#             #await self.send_message(msg, parse_mode=constants.ParseMode.HTML)
+#             await self.effective_chat.send_message(msg, parse_mode=constants.ParseMode.HTML)
+#             #await self.chat.send_message(f"{msg}", parse_mode=constants.ParseMode.HTML)
+#             #await self.bot.send_message(bot_channel_id, msg, parse_mode=constants.ParseMode.HTML)
+#             return 
+#         elif(bot_service=='discord'):
+#             embed = discord.Embed(description=msg)
+#             channel = bot.get_channel(int(bot_channel_id))
+#             await channel.send(embed=embed)
+#         elif(bot_service=='matrix'):
+#             # await bot.api.send_text_message(bot_channel_id, msg)
+#             await bot.api.send_markdown_message(bot_channel_id, msg)
+#             return
+#         elif(bot_service=='telethon'):
+#             await self.send_message(int(bot_channel_id),msg,parse_mode='html')
+#             return
+#     except Exception as e:
+#         logger.warning(msg=f"{msg} {e}")
+#         await handle_exception(e)
 
 async def notify(msg):
     if (msg!=""):
@@ -263,7 +263,7 @@ async def load_exchange(exchangeid):
         #ns = ENS.from_web3(ex)
         #await resolve_ens_dex(router)
         router_instanceabi= await fetch_abi_dex(router) #Router ABI
-        #buy BNB sl=1000 tp=300 q=20%logger.info(msg=f"router_instanceabi {router_instanceabi}")
+        logger.info(msg=f"router_instanceabi {router_instanceabi}")
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
         if (dex_version=="v3"):
             quoter_instanceabi= await fetch_abi_dex(quoter_instance) #Quoter ABI
@@ -479,7 +479,7 @@ async def fetch_1inch_quote(token):
         asset_out_amount=1000000000000
         quote_url = f"{dex_1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
         quote = retrieve_url_json(quote_url)
-        #logger.debug(msg=f"quote {quote}")
+        logger.debug(msg=f"quote {quote}")
         asset_out_1inch_quote = quote['toTokenAmount']
         return asset_out_1inch_quote
     except Exception:
@@ -794,17 +794,18 @@ async def database_setup():
                     logger.error("no bot token")
                     sys.exit()
         except Exception as e:
-            logger.error(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
+            logger.warning(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
 
 #🦾BOT ACTIONS
 async def post_init(self='bot'):
     logger.info(msg = f"self {self}")
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
-    if(bot_service=='discord'or bot_service=='telethon' or bot_service=='matrix'):
-        await send_msg(self,startup_message)
-    if(bot_service=='tgram'):
-        await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
+    await notify(startup_message)
+    # if(bot_service=='discord'or bot_service=='telethon' or bot_service=='matrix'):
+    #     await send_msg(self,startup_message)
+    # if(bot_service=='tgram'):
+    #     await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
 
 async def help_command() -> None:
     bot_ping = await verify_latency_ex()
@@ -977,4 +978,3 @@ async def notifybot(request: Request):
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app, host='0.0.0.0', port=8080)
-
