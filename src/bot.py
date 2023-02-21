@@ -18,6 +18,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 from telethon import TelegramClient, events
 #matrix
 import simplematrixbotlib as botlib
+from nio import AsyncClient, MatrixRoom, RoomMessageText
 #discord
 import discord
 from discord.ext import commands
@@ -45,9 +46,12 @@ from ping3 import ping
 load_dotenv()
 
 #🧐LOGGING
-LOGLEVEL=os.getenv("LOGLEVEL", "INFO")
+LOGLEVEL=os.getenv("LOGLEVEL", "DEBUG")
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=LOGLEVEL)
 logger = logging.getLogger(__name__)
+
+
+global bot_service
 
 #🔗API
 gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
@@ -66,7 +70,7 @@ async def parse_message (self,msg='123'):
     logger.debug(msg=f"parse_message wordlist {wordlist} len {len(wordlist)}")
     response = ""
     #🦾BOT FILTERS
-    filter_lst_ignore = ['⚠️','error', 'Environment','Balance']
+    filter_lst_ignore = ['⚠️','error','Environment','Balance']
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
     filter_lst_help = ['/echo','/help']
     filter_lst_bal = ['/bal']
@@ -882,6 +886,11 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     e = f"{tb_trim}"
     await handle_exception(e)
 
+async def message_callback(room: MatrixRoom, event: RoomMessageText) -> None:
+    print(
+        f"Message received in room {room.display_name}\n"
+        f"{room.user_name(event.sender)} | {event.body}")
+
 #🤖BOT
 async def bot():
     global bot
@@ -911,25 +920,28 @@ async def bot():
                     await parse_message(message,message.content)
                 await bot.start(bot_token)
             elif(bot_service=='matrix'):
-                config = botlib.Config()
+                bot = AsyncClient(bot_hostname, bot_user)
+                print(await bot.login(bot_pass))
+                await bot.join(bot_channel_id)
+                bot.add_event_callback(message_callback, RoomMessageText)
+                await bot.sync_forever(timeout=30000)
+                # config = botlib.Config()
                 # config.emoji_verify = True
                 # config.ignore_unverified_devices = True
-                config.store_path ='./config/matrix/'
-                creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
-                bot = botlib.Bot(creds,config)
-                @bot.listener.on_startup
-                async def room_joined(room):
-                    await post_init(bot)
-                @bot.listener.on_message_event
-                async def neo(room, message):
-                    match = botlib.MessageMatch(room, message, bot)
-                    if match.is_not_from_this_bot():    
-                        await parse_message(bot,message.body)
-                #bot.run()
-                await bot.api.login()
-                #await bot.api.sync()
-                #await bot.api.async_client.sync(timeout=65536, full_state=True)
-                #await bot.api.async_client.sync_forever(timeout=65536, full_state=True)
+                # config.store_path ='./config/matrix/'
+                # creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
+                # bot = botlib.Bot(creds,config)
+                # @bot.listener.on_startup
+                # async def room_joined(room):
+                #     await post_init(bot)
+                # @bot.listener.on_message_event
+                # async def neo(room, message):
+                #     match = botlib.MessageMatch(room, message, bot)
+                #     if match.is_not_from_this_bot():    
+                #         await parse_message(bot,message.body)
+                # # bot.run()
+                # await bot.api.login()
+                # await bot.api.async_client.sync_forever(timeout=3000, full_state=True)
             elif(bot_service=='telethon'):
                 bot = await TelegramClient(None, bot_api_id, bot_api_hash).start(bot_token=bot_token)
                 await post_init(bot)
@@ -940,6 +952,9 @@ async def bot():
 
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
+
+
+
 
 #⛓️API
 app = FastAPI(title="TALKYTRADER",)
