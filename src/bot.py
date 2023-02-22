@@ -18,7 +18,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 from telethon import TelegramClient, events
 #matrix
 import simplematrixbotlib as botlib
-from nio import AsyncClient, MatrixRoom, RoomMessageText
+# from nio import AsyncClient, MatrixRoom, RoomMessageText
 #discord
 import discord
 from discord.ext import commands
@@ -886,10 +886,10 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     e = f"{tb_trim}"
     await handle_exception(e)
 
-async def message_callback(room: MatrixRoom, event: RoomMessageText) -> None:
-    print(
-        f"Message received in room {room.display_name}\n"
-        f"{room.user_name(event.sender)} | {event.body}")
+# async def message_callback(room: MatrixRoom, event: RoomMessageText) -> None:
+#     print(
+#         f"Message received in room {room.display_name}\n"
+#         f"{room.user_name(event.sender)} | {event.body}")
 
 #🤖BOT
 async def bot():
@@ -920,28 +920,30 @@ async def bot():
                     await parse_message(message,message.content)
                 await bot.start(bot_token)
             elif(bot_service=='matrix'):
-                bot = AsyncClient(bot_hostname, bot_user)
-                print(await bot.login(bot_pass))
-                await bot.join(bot_channel_id)
-                bot.add_event_callback(message_callback, RoomMessageText)
-                await bot.sync_forever(timeout=30000)
-                # config = botlib.Config()
-                # config.emoji_verify = True
-                # config.ignore_unverified_devices = True
-                # config.store_path ='./config/matrix/'
-                # creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
-                # bot = botlib.Bot(creds,config)
-                # @bot.listener.on_startup
-                # async def room_joined(room):
-                #     await post_init(bot)
-                # @bot.listener.on_message_event
-                # async def neo(room, message):
-                #     match = botlib.MessageMatch(room, message, bot)
-                #     if match.is_not_from_this_bot():    
-                #         await parse_message(bot,message.body)
-                # # bot.run()
-                # await bot.api.login()
-                # await bot.api.async_client.sync_forever(timeout=3000, full_state=True)
+                # bot = AsyncClient(bot_hostname, bot_user)
+                # print(await bot.login(bot_pass))
+                # await bot.join(bot_channel_id)
+                # bot.add_event_callback(message_callback, RoomMessageText)
+                # await bot.sync_forever(timeout=30000)
+                config = botlib.Config()
+                config.emoji_verify = True
+                config.ignore_unverified_devices = True
+                config.store_path ='./config/matrix/'
+                creds = botlib.Creds(bot_hostname, bot_user, bot_pass)
+                bot = botlib.Bot(creds,config)
+                @bot.listener.on_startup
+                async def room_joined(room):
+                    await post_init(bot)
+                @bot.listener.on_message_event
+                async def neo(room, message):
+                    match = botlib.MessageMatch(room, message, bot)
+                    if match.is_not_from_this_bot():    
+                        await parse_message(bot,message.body)
+                # bot.run()
+                await bot.api.login()
+                await bot.api.async_client.sync_forever(timeout=3000, full_state=True)
+                #await bot.api.async_client.sync_once()
+                #await bot.api.async_client.sync(timeout=65536, full_state=False) 
             elif(bot_service=='telethon'):
                 bot = await TelegramClient(None, bot_api_id, bot_api_hash).start(bot_token=bot_token)
                 await post_init(bot)
@@ -952,8 +954,6 @@ async def bot():
 
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
-
-
 
 
 #⛓️API
