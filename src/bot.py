@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙📞🗿 TT Beta 1.2.70"
+TTversion="🪙📞🗿 TT Beta 1.2.71"
 ##=============== import  =============
 ##log
 import logging
@@ -745,7 +745,8 @@ async def database_setup():
         outfile = os.path.join('./config', 'db.json')
         response = requests.get(db_url, stream=True)
         logger.debug(msg=f"{response}")
-        with open(outfile,'wb') as output:
+        #with open(outfile,'wb') as output:
+        with open('./config/db.json','wb') as output:
           output.write(response.content)
           logger.debug(msg = f"remote DB copied")
           
