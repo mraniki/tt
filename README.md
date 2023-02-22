@@ -66,7 +66,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
  ### v1 
  - Enable bot in Telegram (ptb v20 and telethon), Matrix (simplematrixbotlib) and Discord (pycord) messaging platform
  - Place order for CEX and DEX, Query Balance and quote ticker
- - Push your order signal manually or from system like trading view webhook (verified with Binance, Binance Testnet and ~~FTX😠~~ Kraken, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing values are defaulted
+ - Push your order signal manually or from system like [trading view webhook alert](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Alerts.html#using-all-alert-calls). Verified with Binance, Binance Testnet, ~~FTX😠~~, Kraken, Huobi, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing values are defaulted
  - Support DEX automatic token approval
  - Support uniswap v2, 1inch api and uniswap v3 swap methods
  - Support % of stablecoin balance when placing order
@@ -74,10 +74,11 @@ Quick start approach: Update the sample db with your parameters and save it as d
  ### Other Features
  - Support bot in private channel and multiple channel per environment
  - Support multiple environment via variable (e.g. DEV, PRD, PRD CEX, UNI1 or UNI2)
- - Handle messaging in one function across messaging platforms using HTML format
  - Handle libraries exceptions in one function and notification delivery with apprise 
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub
- - Support deployment on  or selfhosting 
+ - Support all messaging bot as asynchrousnous process
+ - Support common notification via Apprise for all nessaging platform
+ - Support deployment on PaaS or selfhosting 
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
  - Support config file as variable to deploy on [PaaS](https://github.com/ripienaar/free-for-dev#paas) (tested with northflank, koyeb, render and fly.io)
  - Create DB if it is missing and check bot variables for failover
