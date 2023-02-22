@@ -18,7 +18,7 @@
 [![ccxt](https://badgen.net/badge/icon/ccxt/black?icon=libraries&label)](https://github.com/ccxt/ccxt)
 [![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py)
 [![tinyDB](https://badgen.net/badge/icon/tinyDB/black?icon=libraries&label)](https://github.com/msiemens/tinydb)
-[![apprise](https://badgen.net/badge/icon/apprise/black?icon=libraries&label)](https://github.com/caronc/apprise)
+[![apprise](https://badgen.net/badge/icon/apprise/black?icon=libraries&label)](https://github.com/caronc/apprise) [![FastAPI](https://badgen.net/badge/icon/fastapi/black?icon=libraries&label)](https://github.com/tiangolo/fastapi)
 [![coingecko](https://badgen.net/badge/icon/coingecko/black?icon=libraries&label)](https://github.com/coingecko)
 
 [![sublime](https://badgen.net/badge/icon/sublime/F96854?icon=terminal&label)](https://www.sublimetext.com/)
@@ -80,7 +80,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Support common notification via Apprise for all nessaging platform
  - Support deployment on PaaS or selfhosting 
  - Support config folder and config file in the dockerfile to automatically create the volume folder and its config
- - Support config file as variable to deploy on [PaaS](https://github.com/ripienaar/free-for-dev#paas) (tested with northflank, koyeb, render and fly.io)
+ - Support config file as variable to deploy on [PaaS](https://github.com/ripienaar/free-for-dev#paas) (tested with northflank, koyeb, GKE, render and fly.io)
  - Create DB if it is missing and check bot variables for failover
  - Support bot restart capability
  - Support standard json [tokenlist.org](tokenlist.org) search for testnet DEX support [(example)](https://github.com/mraniki/tokenlist/blob/main/testnet.json)
