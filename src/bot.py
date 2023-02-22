@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙📞🗿 TT Beta 1.2.77"
+TTversion="🪙📞🗿 TT Beta 1.2.78"
 ##=============== import  =============
 ##log
 import logging
@@ -201,7 +201,7 @@ async def notify(msg):
         elif (bot_service =='discord'):
             apobj.add(f'{bot_service}://' + str(bot_webhook_id) + "/" + str(bot_webhook_token))
         elif (bot_service =='matrix'):
-            apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":80/" + bot_channel_id)
+            apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":443/" + str(bot_channel_id))
         try:
             apobj.notify(body=msg)
         except Exception as e:
@@ -825,7 +825,7 @@ async def help_command() -> None:
            <code>/q btc/usdt</code>
     🔀 <code>/trading</code>
            <code>/testmode</code>"""
-    if(bot_service=='discord' or bot_service=='matrix'):
+    if(bot_service=='discord'):
         helpcommand= helpcommand.replace("<code>", "`")
         helpcommand= helpcommand.replace("</code>", "`")
     bot_menu_help = f"{TTversion}\n{helpcommand}"
@@ -886,11 +886,6 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     e = f"{tb_trim}"
     await handle_exception(e)
 
-# async def message_callback(room: MatrixRoom, event: RoomMessageText) -> None:
-#     print(
-#         f"Message received in room {room.display_name}\n"
-#         f"{room.user_name(event.sender)} | {event.body}")
-
 #🤖BOT
 async def bot():
     global bot
@@ -920,11 +915,6 @@ async def bot():
                     await parse_message(message,message.content)
                 await bot.start(bot_token)
             elif(bot_service=='matrix'):
-                # bot = AsyncClient(bot_hostname, bot_user)
-                # print(await bot.login(bot_pass))
-                # await bot.join(bot_channel_id)
-                # bot.add_event_callback(message_callback, RoomMessageText)
-                # await bot.sync_forever(timeout=30000)
                 config = botlib.Config()
                 config.emoji_verify = True
                 config.ignore_unverified_devices = True
@@ -935,15 +925,15 @@ async def bot():
                 async def room_joined(room):
                     await post_init(bot)
                 @bot.listener.on_message_event
-                async def neo(room, message):
-                    match = botlib.MessageMatch(room, message, bot)
-                    if match.is_not_from_this_bot():    
-                        await parse_message(bot,message.body)
-                # bot.run()
+                async def neo(room, message):    
+                    await parse_message(bot,message.body)
                 await bot.api.login()
+                bot.api.async_client.callbacks = botlib.Callbacks(bot.api.async_client, bot)
+                await bot.api.async_client.callbacks.setup_callbacks()
+                for action in bot.listener._startup_registry:
+                    for room_id in bot.api.async_client.rooms:
+                        await action(room_id)
                 await bot.api.async_client.sync_forever(timeout=3000, full_state=True)
-                #await bot.api.async_client.sync_once()
-                #await bot.api.async_client.sync(timeout=65536, full_state=False) 
             elif(bot_service=='telethon'):
                 bot = await TelegramClient(None, bot_api_id, bot_api_hash).start(bot_token=bot_token)
                 await post_init(bot)
