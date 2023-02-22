@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙📞🗿 TT Beta 1.2.78"
+TTversion="🪙📞🗿 TT Beta 1.2.70"
 ##=============== import  =============
 ##log
 import logging
@@ -18,7 +18,6 @@ from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandl
 from telethon import TelegramClient, events
 #matrix
 import simplematrixbotlib as botlib
-# from nio import AsyncClient, MatrixRoom, RoomMessageText
 #discord
 import discord
 from discord.ext import commands
@@ -46,12 +45,9 @@ from ping3 import ping
 load_dotenv()
 
 #🧐LOGGING
-LOGLEVEL=os.getenv("LOGLEVEL", "DEBUG")
+LOGLEVEL=os.getenv("LOGLEVEL", "INFO")
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=LOGLEVEL)
 logger = logging.getLogger(__name__)
-
-
-global bot_service
 
 #🔗API
 gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
@@ -163,9 +159,6 @@ async def verify_latency_ex():
             return response
     except Exception as e:
         await handle_exception(e)
-
-#async def generate_hash_signature(secret: bytes,payload: bytes,digest_method=hashlib.sha1,):
-    #return hmac.new(secret, payload, digest_method).hexdigest()
 
 #💬MESSAGING
 # async def send_msg (self="bot", msg="echo"):
