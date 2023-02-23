@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙📞🗿 TT Beta 1.2.72"
+TTversion="🪙📞🗿 TT Beta 1.2.73"
 ##=============== import  =============
 ##log
 import logging
@@ -48,6 +48,7 @@ load_dotenv()
 LOGLEVEL=os.getenv("LOGLEVEL", "INFO")
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=LOGLEVEL)
 logger = logging.getLogger(__name__)
+logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
 
 #🔗API
 gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
@@ -63,10 +64,11 @@ async def parse_message (self,msg='123'):
     if(bot_service=='tgram'):
         msg=self.effective_message.text
     wordlist = msg.split(" ")
-    logger.debug(msg=f"parse_message wordlist {wordlist} len {len(wordlist)}")
+    wordlistsize = len(wordlist)
+    logger.debug(msg=f"parse_message wordlist {wordlist} len {wordlistsize}")
     response = ""
     #🦾BOT FILTERS
-    filter_lst_ignore = ['⚠️','error','Environment','Balance']
+    filter_lst_ignore = ['⚠️','error','Environment','Balance','Bot']
     filter_lst_order = ['BUY', 'SELL', 'buy','sell']
     filter_lst_help = ['/echo','/help']
     filter_lst_bal = ['/bal']
@@ -82,29 +84,28 @@ async def parse_message (self,msg='123'):
         elif [ele for ele in filter_lst_help if(ele in wordlist)]:
             response = await help_command()
         elif [ele for ele in filter_lst_order if(ele in wordlist)]:
-            if len(wordlist[0]) > 0:
+            if wordlistsize > 1:
                 direction = wordlist[0].upper()
-                if len(wordlist[1]) > 0:
-                    symbol = wordlist[1]
-                    stoploss = 100
-                    takeprofit = 100
-                    quantity = 10
-                    if len(wordlist[2]) > 0:
-                        stoploss = wordlist[2][3:]
-                        takeprofit = wordlist[3][3:]
-                        quantity = wordlist[4][2:-1]
-                    order=[direction,symbol,stoploss,takeprofit,quantity]
-                    logger.info(msg=f"parse_message Order: {order}")
-                    #return order
-                    if (order):
-                        res = await execute_order(order[0],order[1],order[2],order[3],order[4])
-                        if (res != None):
-                            response = f"{res}"
-                            logger.debug(msg=f"parse_message order response: {response}")
-                        else:
-                            return
+                symbol = wordlist[1]
+                stoploss = 100
+                takeprofit = 100
+                quantity = 10
+                if wordlistsize > 2:
+                    stoploss = wordlist[2][3:]
+                    takeprofit = wordlist[3][3:]
+                    quantity = wordlist[4][2:-1]
+                order=[direction,symbol,stoploss,takeprofit,quantity]
+                logger.info(msg=f"parse_message Order: {order}")
+                #return order
+                if (order):
+                    res = await execute_order(order[0],order[1],order[2],order[3],order[4])
+                    if (res != None):
+                        response = f"{res}"
+                        logger.debug(msg=f"parse_message order response: {response}")
+                    else:
+                        return
         elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
-            if len(wordlist[1]) > 0:
+            if wordlistsize > 0:
                 response = await exchange_switch_command(wordlist[1])
             else:
                 return
@@ -119,7 +120,7 @@ async def parse_message (self,msg='123'):
         elif [ele for ele in filter_lst_restart if(ele in wordlist)]:
             response = await  restart_command(self)
         elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
-            if len(wordlist[1]) > 0:
+            if wordlistsize > 0:
                 response = await quote_command(wordlist[1])
         else:
             logger.debug(msg=f"Parsing skipped {wordlist}")
@@ -306,9 +307,13 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
             if (len(str(bal))):
                 m_price = float(ex.fetchTicker(f'{symbol}').get('last'))
-                totalusdtbal = ex.fetchBalance()['USDT']['free']
-                amountpercent=((totalusdtbal)*(float(quantity)/100))/float(m_price) # % of bal
-                res = ex.create_order(symbol, price_type, direction, amountpercent)
+            if (await get_account_balance()=="No Balance"): 
+                msg=f"Check your Balance"
+                await handle_exception(msg)
+                return
+            totalusdtbal = ex.fetchBalance()['USDT']['free']
+            amountpercent=((totalusdtbal)*(float(quantity)/100))/float(m_price) # % of bal
+            res = ex.create_order(symbol, price_type, direction, amountpercent)
             if (direction=="SELL"):
                 response = f"⬇️ {symbol}"
             else:
@@ -691,7 +696,7 @@ async def get_wallet_auth():
 #======= error handling
 async def handle_exception(e) -> None:
     try:
-        msg = f"!error:"
+        msg = ""
         logger.error(msg=f"error: {e}")
     except KeyError:
         msg = f"DB content error"
@@ -975,5 +980,4 @@ async def notifybot(request: Request):
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
-    import uvicorn
     uvicorn.run(app, host='0.0.0.0', port=8080)

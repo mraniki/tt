@@ -6,7 +6,7 @@
 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)
 
- CEX & DEX integration with multi messaging platform (Telegram, Matrix and Discord). Place order for CEFI or DEFI exchanges, query balance and quote ticker. Deploy it via docker on selfhosted platform or PaaS. 
+ CEX & DEX integration with multi messaging platform support (Telegram, Matrix and Discord). Place order for CEFI or DEFI exchanges, query balance and quote ticker. Deploy it via docker on selfhosted platform or PaaS. 
 
  
 [![telegrambot](https://badgen.net/badge/icon/telegrambot?icon=telegram&label)](https://t.me/pythontelegrambotchannel)
