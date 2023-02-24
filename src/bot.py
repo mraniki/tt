@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙📞🗿 TT Beta 1.2.76"
+TTversion="🪙📞🗿 TT Beta 1.2.77"
 ##=============== import  =============
 ##log
 import logging
@@ -825,7 +825,7 @@ async def help_command() -> None:
            <code>/q btc/usdt</code>
     🔀 <code>/trading</code>
            <code>/testmode</code>"""
-    if(bot_service=='discord'):
+    if(bot_service=='discord') or (bot_service =='matrix'):
         helpcommand= helpcommand.replace("<code>", "`")
         helpcommand= helpcommand.replace("</code>", "`")
     bot_menu_help = f"{TTversion}\n{helpcommand}"
