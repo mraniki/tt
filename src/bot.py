@@ -825,9 +825,12 @@ async def help_command() -> None:
            <code>/q btc/usdt</code>
     🔀 <code>/trading</code>
            <code>/testmode</code>"""
-    if(bot_service=='discord') or (bot_service =='matrix'):
+    if(bot_service=='discord'):
         helpcommand= helpcommand.replace("<code>", "`")
         helpcommand= helpcommand.replace("</code>", "`")
+    if(bot_service =='matrix'):
+        helpcommand= helpcommand.replace("", "")
+        helpcommand= helpcommand.replace("", "")
     bot_menu_help = f"{TTversion}\n{helpcommand}"
     response= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     return response
