@@ -23,6 +23,7 @@ import discord
 from discord.ext import commands
 #notification
 import apprise
+from apprise import NotifyFormat
 #db
 from tinydb import TinyDB, Query, where
 #CEX
@@ -197,7 +198,7 @@ async def notify(msg):
         elif (bot_service =='matrix'):
             apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":443/" + str(bot_channel_id))
         try:
-            await apobj.notify(body=msg)
+            await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
         except Exception as e:
             logger.warning(msg=f"{msg} not sent due to error: {e}")
 
