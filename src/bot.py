@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙📞🗿 TT Beta 1.2.74"
+TTversion="🪙📞🗿 TT Beta 1.2.75"
 ##=============== import  =============
 ##log
 import logging
@@ -985,3 +985,5 @@ async def notifybot(request: Request):
 #🙊TALKYTRADER
 if __name__ == '__main__':
     uvicorn.run(app, host='0.0.0.0', port=8080)
+
+
