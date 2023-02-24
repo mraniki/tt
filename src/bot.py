@@ -1,5 +1,7 @@
 ##=============== VERSION =============
+
 TTversion="🪙📞🗿 TT Beta 1.2.78"
+
 ##=============== import  =============
 ##log
 import logging
@@ -198,7 +200,7 @@ async def notify(msg):
         elif (bot_service =='matrix'):
             apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":443/" + str(bot_channel_id))
         try:
-            await apobj.async_notify(body=msg, body_format=NotifyFormat.MARDOWN)
+            await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
         except Exception as e:
             logger.warning(msg=f"{msg} not sent due to error: {e}")
 
