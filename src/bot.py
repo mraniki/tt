@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙📞🗿 TT Beta 1.2.73"
+TTversion="🪙📞🗿 TT Beta 1.2.76"
 ##=============== import  =============
 ##log
 import logging
@@ -23,6 +23,7 @@ import discord
 from discord.ext import commands
 #notification
 import apprise
+from apprise import NotifyFormat
 #db
 from tinydb import TinyDB, Query, where
 #CEX
@@ -197,7 +198,7 @@ async def notify(msg):
         elif (bot_service =='matrix'):
             apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":443/" + str(bot_channel_id))
         try:
-            apobj.notify(body=msg)
+            await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
         except Exception as e:
             logger.warning(msg=f"{msg} not sent due to error: {e}")
 
@@ -901,7 +902,11 @@ async def bot():
                 await post_init(bot)
                 bot.add_handler(MessageHandler(None, parse_message))
                 bot.add_error_handler(error_handler)
-                bot.run_polling(drop_pending_updates=True)
+                #bot.run_polling(drop_pending_updates=True)
+                async with bot:
+                    await bot.initialize()
+                    await bot.start()
+                    await bot.updater.start_polling(drop_pending_updates=True)
             elif(bot_service=='discord'):
                 intents = discord.Intents.default()
                 intents.message_content = True
@@ -944,7 +949,6 @@ async def bot():
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
 
-
 #⛓️API
 app = FastAPI(title="TALKYTRADER",)
 
@@ -981,3 +985,5 @@ async def notifybot(request: Request):
 #🙊TALKYTRADER
 if __name__ == '__main__':
     uvicorn.run(app, host='0.0.0.0', port=8080)
+
+
