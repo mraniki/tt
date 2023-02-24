@@ -902,11 +902,11 @@ async def bot():
                 await post_init(bot)
                 bot.add_handler(MessageHandler(None, parse_message))
                 bot.add_error_handler(error_handler)
-                #bot.run_polling(drop_pending_updates=True)
+                bot.run_polling(drop_pending_updates=True)
                 #async with bot:
-                await bot.initialize()
-                await bot.start()
-                await bot.updater.start_polling(drop_pending_updates=True)
+                #await bot.initialize()
+                #await bot.start()
+                #await bot.updater.start_polling(drop_pending_updates=True)
             elif(bot_service=='discord'):
                 intents = discord.Intents.default()
                 intents.message_content = True
@@ -948,7 +948,6 @@ async def bot():
 
     except Exception as e:
         logger.error(msg="Bot failed to start: " + str(e))
-
 
 #⛓️API
 app = FastAPI(title="TALKYTRADER",)
