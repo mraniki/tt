@@ -806,10 +806,6 @@ async def post_init(self='bot'):
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
     await notify(startup_message)
-    # if(bot_service=='discord'or bot_service=='telethon' or bot_service=='matrix'):
-    #     await send_msg(self,startup_message)
-    # if(bot_service=='tgram'):
-    #     await self.bot.send_message(bot_channel_id, startup_message, parse_mode=constants.ParseMode.HTML)
 
 async def help_command() -> None:
     bot_ping = await verify_latency_ex()
@@ -828,9 +824,6 @@ async def help_command() -> None:
     if(bot_service=='discord'):
         helpcommand= helpcommand.replace("<code>", "`")
         helpcommand= helpcommand.replace("</code>", "`")
-    if(bot_service =='matrix'):
-        helpcommand= helpcommand.replace("", "")
-        helpcommand= helpcommand.replace("", "")
     bot_menu_help = f"{TTversion}\n{helpcommand}"
     response= f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
     return response
