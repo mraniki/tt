@@ -197,7 +197,7 @@ async def notify(msg):
         elif (bot_service =='matrix'):
             apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":443/" + str(bot_channel_id))
         try:
-            apobj.notify(body=msg)
+            await apobj.notify(body=msg)
         except Exception as e:
             logger.warning(msg=f"{msg} not sent due to error: {e}")
 
