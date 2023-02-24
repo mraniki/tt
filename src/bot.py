@@ -1,5 +1,5 @@
 ##=============== VERSION =============
-TTversion="🪙📞🗿 TT Beta 1.2.75"
+TTversion="🪙📞🗿 TT Beta 1.2.76"
 ##=============== import  =============
 ##log
 import logging
@@ -905,7 +905,7 @@ async def bot():
                 #bot.run_polling(drop_pending_updates=True)
                 #async with bot:
                 await bot.initialize()
-                #await bot.start()
+                await bot.start()
                 await bot.updater.start_polling(drop_pending_updates=True)
             elif(bot_service=='discord'):
                 intents = discord.Intents.default()
@@ -985,6 +985,6 @@ async def notifybot(request: Request):
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8085)
+    uvicorn.run(app, host='0.0.0.0', port=8080)
 
 
