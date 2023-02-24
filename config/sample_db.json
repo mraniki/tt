@@ -3,42 +3,68 @@
     {
         "1":
         {
-            "defaultenv": "TT01",
-            "defaultex": "pancake",
-            "defaulttestmode":"True"
+            "defaultenv": "TALKY01",
+            "defaultex": "huobi",
+            "defaulttestmode":"False"
         }
     },
-    "telegram":
+    "bot":
     {
-        "1":
+        "0":
         {
             "service":"tgram",
-            "token": "",
-            "channel": "",
-            "env": "TT01",
+            "token": "abc",
+            "channel": "abc",
+            "env": "TALKY01",
             "hostname":"",
             "user": "",
-            "pass": ""
+            "pass": "",
+            "webhook_id":"",
+            "webhook_token":"",
+            "api_id":"",
+            "api_hash":""
+        },
+        "1":
+        {
+            "service":"telethon",
+            "token": "abc",
+            "channel": "abc",
+            "env": "TALKY01",
+            "hostname":"",
+            "user": "",
+            "pass": "",
+            "webhook_id":"",
+            "webhook_token":"",
+            "api_id":"abc",
+            "api_hash":"abc"
         },
         "2":
         {
-            "service":"discord",
-            "token": "",
-            "channel": "",
-            "env": "DISCORD01",
-            "hostname":"",
-            "user": "",
-            "pass": ""
+            "service":"matrix",
+            "token": "abc",
+            "channel": "!abc:matrix.org", 
+            "env": "TALKY02",
+            "hostname":"https://matrix.org",
+            "user": "abc",
+            "pass": "abc",
+            "webhook_id":"",
+            "webhook_token":"",
+            "api_id":"",
+            "api_hash":""
         },
         "3":
         {
-            "service":"matrix",
-            "token": "",
-            "channel": "",
-            "env": "NEO01",
-            "hostname":"https://matrix.org",
+            "service":"discord",
+            "token": "abc",
+            "channel": "abc", 
+            "env": "TALKY03",
+            "hostname":"",
             "user": "",
-            "pass": ""
+            "pass": "",
+            "webhook_id":"abc",
+            "webhook_token":"abc",
+            "api_id":"",
+            "api_hash":""
         }
     },
     "cex":
@@ -46,21 +72,41 @@
         "1":
         {
             "name": "kraken",
-            "api": "",
-            "secret": "",
+            "api": "abc",
+            "secret": "abc",
             "password": "",
-            "testmode": "",
-            "defaultType": "SPOT",
+            "testmode": "False",
+            "defaultType": "spot",
             "ordertype": "MARKET"
         },
         "2":
         {
             "name": "binance",
-            "api": "",
-            "secret": "",
+            "api": "abc",
+            "secret": "abc",
             "password": "",
             "testmode": "True",
-            "defaultType": "FUTURE",
+            "defaultType": "future",
+            "ordertype": "MARKET"
+        },
+        "3":
+        {
+            "name": "binance",
+            "api": "abc",
+            "secret": "abc",
+            "password": "",
+            "testmode": "False",
+            "defaultType": "spot",
+            "ordertype": "MARKET"
+        },
+        "4":
+        {
+            "name": "huobi",
+            "api": "abc",
+            "secret": "abc",
+            "password": "",
+            "testmode": "False",
+            "defaultType": "future",
             "ordertype": "MARKET"
         }
     },
@@ -72,7 +118,7 @@
             "walletaddress": "abc",
             "privatekey": "abc",
             "version": "uni_v2",
-            "networkprovider": "bsc-dataseed.binance.org/",
+            "networkprovider": "bsc-dataseed.binance.org",
             "router": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
             "testmode": "False",
             "abiurl":"https://api.bscscan.com/api",
@@ -88,7 +134,7 @@
             "walletaddress": "abc",
             "privatekey": "abc",
             "version": "uni_v2",
-            "networkprovider": "data-seed-prebsc-1-s1.binance.org:8545/",
+            "networkprovider": "data-seed-prebsc-2-s3.binance.org:8545",
             "router": "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3",
             "testmode": "True",
             "abiurl":"https://api-testnet.bscscan.com/api",
@@ -100,10 +146,10 @@
         }, 
         "3":
         {
-            "name": "uniswap_v2",
+            "name": "uniswap-eth",
             "walletaddress": "abc",
             "privatekey": "abc",
-            "version": "uni_v3",
+            "version": "uni_v2",
             "networkprovider": "ethereum.publicnode.com",
             "router": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
             "testmode": "False",
@@ -116,23 +162,119 @@
         },
         "4":
         {
+            "name": "uniswap-eth",
+            "walletaddress": "abc",
+            "privatekey": "abc",
+            "version": "uni_v2",
+            "networkprovider": "eth-goerli.public.blastapi.io",
+            "router": "0xb555edF5dcF85f42cEeF1f3630a52A108E55A654",
+            "testmode": "False",
+            "abiurl":"https://api.etherscan.io/api",
+            "abiurltoken":"abc",
+            "basesymbol":"USDT",
+            "gasLimit":"300000",
+            "gasPrice":"20",
+            "chainId":"1"
+        },
+        "5":
+        {
             "name": "quickswap",
             "walletaddress": "abc",
             "privatekey": "abc",
             "version": "uni_v2",
-            "networkprovider": "polygon-rpc.com",
+            "networkprovider": "",
             "router": "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff",
             "testmode": "False",
             "abiurl":"https://api.polygonscan.com/api",
             "abiurltoken":"abc",
-            "basesymbol":"USDC",
+            "basesymbol":"USDT",
             "gasLimit":"300000",
-            "gasPrice":"60",
+            "gasPrice":"20",
             "chainId":"137"
         },
-        "5":
+        "6":
+        {
+            "name": "quickswap",
+            "walletaddress": "abc",
+            "privatekey": "abc",
+            "version": "uni_v2",
+            "networkprovider": "",
+            "router": "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff",
+            "testmode": "True",
+            "abiurl":"https://api-testnet.polygonscan.com/api",
+            "abiurltoken":"abc",
+            "basesymbol":"USDT",
+            "gasLimit":"300000",
+            "gasPrice":"20",
+            "chainId":"137"
+        },
+        "7":
+        {
+            "name": "optimism",
+            "walletaddress": "abc",
+            "privatekey": "abc",
+            "version": "uni_v2",
+            "networkprovider": "mainnet.optimism.io",
+            "router": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
+            "testmode": "False",
+            "abiurl":"https://api-optimistic.etherscan.io/api",
+            "abiurltoken":"abc",
+            "basesymbol":"USDT",
+            "gasLimit":"70000",
+            "gasPrice":"20",
+            "chainId":"10"
+        },
+        "8":
+        {
+            "name": "gmx",
+            "walletaddress": "abc",
+            "privatekey": "abc",
+            "version": "uni_v2",
+            "networkprovider": "arb1.arbitrum.io/rpc",
+            "router": "0xaBBc5F99639c9B6bCb58544ddf04EFA6802F4064",
+            "testmode": "True",
+            "abiurl":"https://arbiscan.io/api",
+            "abiurltoken":"abc",
+            "basesymbol":"USDC",
+            "gasLimit":"500000",
+            "gasPrice":"0.1",
+            "chainId":"42161"
+        },
+        "9":
+        {
+            "name": "gmx",
+            "walletaddress": "abc",
+            "privatekey": "abc",
+            "version": "uni_v2",
+            "networkprovider": "endpoints.omniatech.io/v1/arbitrum/goerli/public",
+            "router": "0x526f42EA12E167E36E3De747187f53b6989d121A",
+            "testmode": "True",
+            "abiurl":"https://arbiscan.io/api",
+            "abiurltoken":"abc",
+            "basesymbol":"USDC",
+            "gasLimit":"500000",
+            "gasPrice":"0.1",
+            "chainId":"42161"
+        },
+        "10":
         {
             "name": "1inch",
+            "walletaddress": "abc",
+            "privatekey": "abc",
+            "version": "uni_v3",
+            "networkprovider": "optimism-mainnet.public.blastapi.io",
+            "router": "0x1111111254EEB25477B68fb85Ed929f73A960582",
+            "testmode": "False",
+            "abiurl":"https://api-optimistic.etherscan.io/api",
+            "abiurltoken":"abc",
+            "basesymbol":"sUSD",
+            "gasLimit":"200000",
+            "gasPrice":"1",
+            "chainId":"10"
+        },
+        "11":
+        {
+            "name": "uniswap_v2",
             "walletaddress": "abc",
             "privatekey": "abc",
             "version": "1inch_v5",
@@ -140,11 +282,27 @@
             "router": "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
             "testmode": "False",
             "abiurl":"https://api-optimistic.etherscan.io/api",
-            "abiurltoken":"6WESQRVAVWE1Z7BYGEU1C4V8S41GUBU2K7",
-            "basesymbol":"USDC",
+            "abiurltoken":"abc",
+            "basesymbol":"sUSD",
             "gasLimit":"200000",
             "gasPrice":"1",
             "chainId":"10"
+        },
+        "12":
+        {
+            "name": "uniswap_v2",
+            "walletaddress": "abc",
+            "privatekey": "abc",
+            "version": "uni_v2",
+            "networkprovider": "",
+            "router": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
+            "testmode": "True",
+            "abiurl":"https://api-goerli.etherscan.io:443/api",
+            "abiurltoken":"abc",
+            "basesymbol":"USDC",
+            "gasLimit":"300000",
+            "gasPrice":"20",
+            "chainId":"5"
         }
     }
 }
