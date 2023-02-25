@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.83"
+TTversion="🪙🗿 TT Beta 1.2.84"
 
 ##=============== import  =============
 ##log
@@ -59,6 +59,10 @@ async def verify_import_library():
 
 
 async def parse_message(self,msg):
+    logger.debug(msg=f"self {self} msg {msg}")
+    if bot_service == 'tgram':
+        msg=self.effective_message.text
+        logger.debug(msg=f"content {self['channel_post']['text']}")
     if not msg:
         return
     wordlist = msg.split(" ")
@@ -764,7 +768,6 @@ async def quote_command(symbol):
         if(await search_gecko_contract(symbol) != None):
             asset_out_1inch_quote = await fetch_1inch_quote (symbol)
             response+=f"🦄{asset_out_1inch_quote} USD\n🖊️{chainId}: {await search_gecko_contract(symbol)}"
-            #response+=f"/n{await search_gecko_detailed(symbol)}"
     else:
         price= ex.fetch_ticker(symbol.upper())['last']
         response+=f"🏛️ {price} USD"
