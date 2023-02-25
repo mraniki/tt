@@ -1,28 +1,25 @@
 ##=============== VERSION =============
 
-TTversion="🪙📞🗿 TT Beta 1.2.79"
+TTversion="🪙📞🗿 TT Beta 1.2.80"
 
 ##=============== import  =============
 ##log
 import logging
 import sys
-import traceback
+#import traceback
 ##env
 import os
 from dotenv import load_dotenv
 import json, requests
 import asyncio
-#telegram
 #import telegram
-from telegram import Update, constants
-from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
+from telegram.ext import Application, MessageHandler
 #import telethon
 from telethon import TelegramClient, events
 #matrix
 import simplematrixbotlib as botlib
 #discord
 import discord
-from discord.ext import commands
 #notification
 import apprise
 from apprise import NotifyFormat
@@ -61,9 +58,9 @@ dex_1inch_api = "https://api.1inch.exchange/v5.0"
 async def verify_import_library():
     logger.info(msg=f"{TTversion}")
 
-async def parse_message(self,msg='123'):
-    logger.debug(msg=f"parse_message SELF {self}")
-    logger.debug(msg=f"parse_message: {msg}")
+async def parse_message(self,msg):
+    if msg=="":
+        return
     if(bot_service=='tgram'):
         msg=self.effective_message.text
     wordlist = msg.split(" ")
@@ -123,11 +120,10 @@ async def parse_message(self,msg='123'):
             if wordlistsize > 0:
                 response = await quote_command(wordlist[1])
         else:
-            logger.debug(msg=f"Parsing skipped {wordlist}")
+            logger.debug(msg=f"Parsing skipped for {wordlist}")
             return
         if (response != ""):
             await notify(response)
-            #await send_msg(self,response)
     except Exception as e:
         logger.warning(msg=f"Parsing exception {e}")
         return
@@ -261,8 +257,6 @@ async def load_exchange(exchangeid):
                 logger.info(msg=f"sandbox setup")
                 ex.set_sandbox_mode('enabled')
             markets = ex.load_markets()
-            # ex_info = await search_gecko_exchange(ex_name)
-            # logger.info(msg=f"gecko {ex_info}")
             return ex
         except Exception as e:
             await handle_exception(e)
@@ -295,8 +289,8 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
      
             asset_out_symbol = basesymbol if direction=="BUY" else symbol
             asset_in_symbol = symbol if direction=="BUY" else basesymbol
-            logger.debug(msg=f"asset_out_symbol {asset_out_symbol} asset_in_symbol {asset_in_symbol}")
             response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
+            logger.debug(msg=f"asset_out_symbol {asset_out_symbol} asset_in_symbol {asset_in_symbol}")
             asset_out_address= await search_gecko_contract(asset_out_symbol)
             asset_out_abi= await fetch_abi_dex(asset_out_address)
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
@@ -314,20 +308,23 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             slippage=2# max 2% slippage
             transaction_amount = (asset_out_amount_converted *(slippage/100)) 
             deadline = ex.eth.get_block("latest")["timestamp"] + 3600 # or deadline = (int(time.time()) + 1000000)
-            if (dex_version=='uni_v2'): #https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02
+            if dex_version == 'uni_v2': 
+                #https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02
                 await approve_asset_router(asset_out_address)
                 transaction_getoutput_amount  = router_instance.functions.getOutputAmount(transaction_amount, order_path_dex).call()
                 transaction_minimum_amount = int(transaction_getoutput_amount[1])
                 swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress,deadline)
                 tx_token = await sign_transaction_dex(swap_TX)
 
-            elif (dex_version=="1inch_v5.0"): #https://docs.1inch.io/docs/aggregation-protocol/api/swagger/#
+            elif dex_version == "1inch_v5.0": 
+                #https://docs.1inch.io/docs/aggregation-protocol/api/swagger/#
                 await approve_asset_router(asset_out_address)
                 swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
                 swap_TX = await retrieve_url_json(swap_url)
                 tx_token= await sign_transaction_dex(swap_TX)
 
-            elif (dex_version=="uni_v3"):  # https://docs.uniswap.org/contracts/v3/guides/swaps/single-swaps
+            elif dex_version == "uni_v3":
+                # https://docs.uniswap.org/contracts/v3/guides/swaps/single-swaps
                 await approve_asset_router(asset_out_address)
                 sqrtPriceLimitX96 = 0
                 fee = 3000
@@ -335,8 +332,10 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_minimum_amount,sqrtPriceLimitX96)
                 tx_token = await sign_transaction_dex(swap_TX)
 
-            elif (dex_version =="1inch_LimitOrder_v2"): #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
+            elif dex_version == "1inch_LimitOrder_v2":
+                #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
                 return
+
             txHash = str(ex.to_hex(tx_token))
             txResult = await fectch_transaction_dex(txHash)
             txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
@@ -381,6 +380,7 @@ async def approve_asset_router(asset_out_address):
                 approval_response = await retrieve_url_json(approval_URL)
     except Exception as e:
         await handle_exception(e)
+
 
 async def sign_transaction_dex(contract_tx):
     try:
@@ -919,6 +919,6 @@ async def notifybot(request: Request):
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8089)
+    uvicorn.run(app, host='0.0.0.0', port=8080)
 
 
