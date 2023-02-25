@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙📞🗿 TT Beta 1.2.80"
+TTversion="🪙📞🗿 TT Beta 1.2.81"
 
 ##=============== import  =============
 ##log
@@ -57,6 +57,7 @@ dex_1inch_api = "https://api.1inch.exchange/v5.0"
 #🔁UTILS
 async def verify_import_library():
     logger.info(msg=f"{TTversion}")
+
 
 async def parse_message(self,msg):
     if msg=="":
@@ -135,24 +136,13 @@ async def retrieve_url_json(url,params=None):
 
 async def verify_latency_ex():
     try:
-        if not isinstance(ex,web3.main.Web3):
-            # symbol = 'BTC/USDT' #need to make the symbol a dynamic variable
-            # results = []
-            # num_iterations = 5
-            # for i in range(0, num_iterations):
-            #     started = ex.milliseconds()
-            #     orderbook = ex.fetch_order_book(symbol)
-            #     ended = ex.milliseconds()
-            #     elapsed = ended - started
-            #     results.append(elapsed)
-            #     rtt = int(sum(results) / len(results))
-            #     response = rtt
-            ping_url="1.1.1.1"
-            return round(ping(ping_url, unit='ms'),3)
-        elif (isinstance(ex,web3.main.Web3)):
-            return round(ping(ex_node_provider, unit='ms'),3)
+        return (
+            round(ping(ex_node_provider, unit='ms'), 3)
+            if isinstance(ex, web3.main.Web3)
+            else round(ping("1.1.1.1", unit='ms'), 3)
+        )
     except Exception as e:
-        await handle_exception(e)
+        logger.warning(msg=f"Latency error {e}")
 
 #💬MESSAGING
 async def notify(msg):
@@ -160,12 +150,14 @@ async def notify(msg):
         return
     logger.debug(msg=f"NOTIFICATION START {msg}")
     apobj = apprise.Apprise()
-    if (bot_service =='tgram') or (bot_service =='telethon'):
-        apobj.add(f'tgram://' + str(bot_token) + "/" + str(bot_channel_id))
+    if bot_service in ['tgram', 'telethon']:
+        apobj.add(f'tgram://{str(bot_token)}/{str(bot_channel_id)}')
     elif (bot_service =='discord'):
-        apobj.add(f'{bot_service}://' + str(bot_webhook_id) + "/" + str(bot_webhook_token))
+        apobj.add(f'{bot_service}://{str(bot_webhook_id)}/{str(bot_webhook_token)}')
     elif (bot_service =='matrix'):
-        apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":443/" + str(bot_channel_id))
+        apobj.add(
+            f"matrixs:// {bot_user}:{bot_pass}@{bot_hostname[8:]}:443/{str(bot_channel_id)}"
+        )
     try:
         await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
     except Exception as e:
@@ -245,7 +237,7 @@ async def load_exchange(exchangeid):
     elif ('api' in ex_result):
         ex_name = ex_result['name']
         defaultType =  ex_result['defaultType'],
-        chainId= 0
+        chainId = 0
         client = getattr(ccxt, ex_name)
         try:
             if (defaultType=="SPOT"):
@@ -254,7 +246,7 @@ async def load_exchange(exchangeid):
                 ex = client({'apiKey': ex_result['api'],'secret': ex_result['secret'],'options': {'defaultType': ex_result['defaultType'],    }, })
             price_type=ex_result['ordertype']
             if (ex_result['testmode']=='True'):
-                logger.info(msg=f"sandbox setup")
+                logger.info(msg="sandbox setup")
                 ex.set_sandbox_mode('enabled')
             markets = ex.load_markets()
             return ex
@@ -265,19 +257,16 @@ async def load_exchange(exchangeid):
 
 #📦ORDER
 async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
-    if (bot_trading_switch == False):
-        logger.info(msg=f"TRADING is {bot_trading_switch}")
+    if bot_trading_switch == False:
         return
     try:
         if not isinstance(ex,web3.main.Web3):
-            logger.debug(msg=f"cex order: {direction} {symbol} {stoploss} {takeprofit} {quantity}")
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
             if (len(str(bal))):
                 m_price = float(ex.fetchTicker(f'{symbol}').get('last'))
             if (await get_account_balance()=="No Balance"): 
-                msg="Check your Balance"
-                await handle_exception(msg)
+                await handle_exception("Check your Balance")
                 return
             totalusdtbal = get_account_basesymbol_balance()
             amountpercent=((totalusdtbal)*(float(quantity)/100))/float(m_price) # % of bal
@@ -346,7 +335,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         return response
 
     except Exception as e:
-        logger.debug(msg=f"order debugger {e}")
+        logger.error(msg=f"Exception with order processing {e}")
         await handle_exception(e)
         return
 
@@ -361,7 +350,7 @@ async def resolve_ens_dex(addr):
 
 async def approve_asset_router(asset_out_address):
     try:
-        if (dex_version=="uni_v2" or dex_version=="uni_v3"):
+        if dex_version in ["uni_v2", "uni_v3"]:
             approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
             logger.debug(msg=f"approval_check {approval_check}")
             if (approval_check==0):
@@ -381,10 +370,9 @@ async def approve_asset_router(asset_out_address):
     except Exception as e:
         await handle_exception(e)
 
-
 async def sign_transaction_dex(contract_tx):
     try:
-        if (dex_version=='uni_v2'):
+        if dex_version in ['uni_v2', "uni_v3"]:
             tx_params = {
             'from': walletaddress,
             'gas': int(gasLimit),
@@ -395,18 +383,7 @@ async def sign_transaction_dex(contract_tx):
             signed = ex.eth.account.sign_transaction(tx, privatekey)
             raw_tx = signed.rawTransaction
             return ex.eth.send_raw_transaction(raw_tx)
-        elif (dex_version=="uni_v3"):
-            tx_params = {
-            'from': walletaddress,
-            'gas': int(gasLimit),
-            'gasPrice': ex.to_wei(gasPrice,'gwei'),
-            'nonce': ex.eth.get_transaction_count(walletaddress),
-            }
-            tx = contract_tx.build_transaction(tx_params)
-            signed = ex.eth.account.sign_transaction(tx, privatekey)
-            raw_tx = signed.rawTransaction
-            return ex.eth.send_raw_transaction(raw_tx)
-        elif (dex_version=="1inch_v5"):
+        elif dex_version == "1inch_v5":
             tx_params = {
             'nonce': ex.eth.get_transaction_count(walletaddress),
             'gas': int(gasLimit),
@@ -487,7 +464,6 @@ async def fetch_account_dex(addr):
 async def estimate_gas(tx):
     estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.2),'wei')
 
-
 async def search_test_contract(symbol):
     try:
         tokenlist = 'https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json'
@@ -534,12 +510,11 @@ async def search_gecko_contract(token):
     try:
         if (ex_test_mode=='True'):
             coin_contract = await search_test_contract(token)
-            return ex.to_checksum_address(coin_contract)
         else:
             coin_info = await search_gecko(token)
             coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
             logger.info(msg=f"🦎 contract {token} {coin_contract}")
-            return ex.to_checksum_address(coin_contract)
+        return ex.to_checksum_address(coin_contract)
     except Exception:
         return
 
@@ -567,10 +542,10 @@ async def fetch_gecko_asset_price(token):
     try:
         asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
         fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{await search_gecko_platform()}',contract_address=asset_in_address)
-        #logger.debug(msg=f"fetch_tokeninfo{fetch_tokeninfo}")
         return fetch_tokeninfo['market_data']['current_price']['usd']
-    except Exception as e:
-        print(f"An error occurred while retrieving address {e}")
+    except Exception:
+        return
+
 
 async def fetch_gecko_quote(token):
     try:
@@ -590,36 +565,38 @@ async def get_account_balance():
         if not isinstance(ex,web3.main.Web3):
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
-            sbal = ""
-            for iterator in bal:
-                sbal += (f"{iterator}: {bal[iterator]} \n")
-            if(sbal == ""):
+            sbal = "".join(f"{iterator}: {value} \n" for iterator, value in bal.items())
+            if not sbal:
                 sbal = "No Balance"
-            msg += f"{sbal}"       
+            msg += f"{sbal}"
         else:
             bal = ex.eth.get_balance(walletaddress)
             bal = round(ex.from_wei(bal,'ether'),5)
-            basesymbol_bal = get_account_basesymbol_balance()
+            basesymbol_bal = await get_account_basesymbol_balance()
             msg += f"💲{bal} \n💵{basesymbol_bal} {basesymbol}"
         return msg
-    except Exception as e:
+    except Exception:
         return
 
 async def get_account_basesymbol_balance():
-    if not isinstance(ex,web3.main.Web3):
-        return ex.fetchBalance()['USDT']['free']
-    return round(ex.from_wei(await fetch_user_token_balance(basesymbol),'ether'),5)
+    return (
+        round(
+            ex.from_wei(await fetch_user_token_balance(basesymbol), 'ether'), 5
+        )
+        if isinstance(ex, web3.main.Web3)
+        else ex.fetchBalance()['USDT']
+    )
 
 async def get_account_position():
     try:
-        logger.debug(msg=f"get_account_position")
+        logger.debug(msg="get_account_position")
         if not isinstance(ex,web3.main.Web3):
             positions = ex.fetch_positions()
             logger.debug(f"positions {positions}")
             open_positions = [p for p in positions if p['type'] == 'open']
             logger.debug(f"open_positions {open_positions}")
             msg = f"open_positions {open_positions}"
-        elif (isinstance(ex,web3.main.Web3)):
+        else:
             # asset_position_address= await search_gecko_contract(asset_out_symbol)
             # asset_position_abi= await fetch_abi_dex(asset_out_address)
             # asset_position_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
@@ -627,8 +604,6 @@ async def get_account_position():
             pos = "DEX POS WiP"
             logger.debug(msg=f"pos {pos}")
             msg = f"{pos}"
-        else:
-            msg = 0
         logger.debug(f"msg {msg}")
         return msg
     except Exception:
@@ -691,7 +666,7 @@ async def database_setup():
     global bot_api_id
     global bot_api_hash
     db_url=os.getenv("DB_URL")
-    if db_url == None:
+    if db_url is None:
         logger.info(msg = "No remote DB variable, checking local file")
     else:
         outfile = os.path.join('./config', 'db.json')
@@ -699,9 +674,12 @@ async def database_setup():
         logger.debug(msg=f"{response}")
         #with open(outfile,'wb') as output:
         with open('./config/db.json','wb') as output:
-          output.write(response.content)
-          logger.debug(msg="remote DB copied")
-          
+            try:
+                output.write(response.content)
+                logger.debug(msg="remote DB copied")
+            except Exception:
+                logger.error(msg="error while copying the DB")
+
     db_path = './config/db.json'
     if os.path.exists(db_path):
         logger.info(msg="Existing DB found")
@@ -790,7 +768,7 @@ async def quote_command(symbol) -> None:
             asset_out_1inch_quote = await fetch_1inch_quote (symbol)
             response+=f"🦄{asset_out_1inch_quote} USD\n🖊️{chainId}: {await search_gecko_contract(symbol)}"
             #response+=f"/n{await search_gecko_detailed(symbol)}"
-    elif not (isinstance(ex,web3.main.Web3)):
+    else:
         price= ex.fetch_ticker(symbol.upper())['last']
         response+=f"🏛️ {price} USD"
     return response
@@ -813,13 +791,6 @@ async def testmode_switch_command(self='bot') -> None:
 async def restart_command(self='bot') -> None:
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
-# async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
-#     logger.error(msg="Exception:", exc_info=context.error)
-#     tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
-#     tb_string = "".join(tb_list)
-#     tb_trim = tb_string[:1000]
-#     e = f"{tb_trim}"
-#     await handle_exception(e)
 
 #🤖BOT
 async def bot():
@@ -836,8 +807,6 @@ async def bot():
                 bot = Application.builder().token(bot_token).build()
                 await post_init()
                 bot.add_handler(MessageHandler(None, parse_message))
-                #bot.add_error_handler(error_handler)
-                #bot.run_polling(drop_pending_updates=True)
                 async with bot:
                     await bot.initialize()
                     await bot.start()
@@ -919,6 +888,7 @@ async def notifybot(request: Request):
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8080)
+    PORT=os.getenv("PORT", "8080")
+    uvicorn.run(app, host='0.0.0.0', port=PORT)
 
 
