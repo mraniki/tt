@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙📞🗿 TT Beta 1.2.82"
+TTversion="🪙🗿 TT Beta 1.2.82"
 
 ##=============== import  =============
 ##log
@@ -71,7 +71,7 @@ async def parse_message(self,msg):
     filters = {
         'ignore': ['⚠️', 'error', 'Environment', 'Balance', 'Bot'],
         'order': ['BUY', 'SELL', 'buy', 'sell'],
-        'help': ['/echo', '/help'],
+        'help': ['/echo', '/help', '/start'],
         'balance': ['/bal'],
         'position': ['/pos'],
         'quote': ['/q'],
@@ -563,6 +563,17 @@ async def get_account_balance():
                 sbal = "No Balance"
             msg += f"{sbal}"
         else:
+        #     tokens = [
+        # {'address': '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', 'decimals': 18, 'symbol': 'UNI'},
+        #     ]
+            # balances = {}
+
+            # # Retrieve balance of each token in wallet
+            # for token in tokens:
+            #     token_contract = web3.eth.contract(address=Web3.toChecksumAddress(token['address']), abi=erc20_abi)
+            #     balance = token_contract.functions.balanceOf(Web3.toChecksumAddress(wallet_address)).call() / 10**token['decimals']
+            #     balances[token['symbol']] = balance
+            # return balances
             bal = ex.eth.get_balance(walletaddress)
             bal = round(ex.from_wei(bal,'ether'),5)
             basesymbol_bal = await get_account_basesymbol_balance()
