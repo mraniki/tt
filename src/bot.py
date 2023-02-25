@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.82"
+TTversion="🪙🗿 TT Beta 1.2.83"
 
 ##=============== import  =============
 ##log
@@ -61,19 +61,17 @@ async def verify_import_library():
 async def parse_message(self,msg):
     if not msg:
         return
-    if(bot_service=='tgram'):
-        msg=self.effective_message.text
     wordlist = msg.split(" ")
     wordlistsize = len(wordlist)
     logger.debug(msg=f"parse_message wordlist {wordlist} len {wordlistsize}")
     response = ""
     #🦾BOT FILTERS
     filters = {
-        'ignore': ['⚠️', 'error', 'Environment', 'Balance', 'Bot'],
+        'ignore': ['⚠️', 'error', 'Environment:', 'Balance', 'Bot'],
         'order': ['BUY', 'SELL', 'buy', 'sell'],
         'help': ['/echo', '/help', '/start'],
         'balance': ['/bal'],
-        'position': ['/pos'],
+        'position': ['/pos','/position'],
         'quote': ['/q'],
         'trading': ['/trading'],
         'test_mode': ['/testmode'],
@@ -104,29 +102,23 @@ async def parse_message(self,msg):
                         if res:
                             response = f"{res}"
                 elif name == 'exchange_switch':
-                    if wordlistsize > 0:
-                        response = await exchange_switch_command(wordlist[1])
-                    else:
-                        return
+                    response = await exchange_switch_command(wordlist[1])
                 elif name == 'balance':
-                    response= await account_balance_command(self)
+                    response = await account_balance_command()
                 elif name == 'position':
-                    response= await  account_position_command(self)
+                    response = await account_position_command()
                 elif name == 'trading':
-                    response = await  trading_switch_command(self)
+                    response = await trading_switch_command()
                 elif name == 'test_mode':
-                    response = await testmode_switch_command(self)
+                    response = await testmode_switch_command()
                 elif name == 'restart':
-                    response = await  restart_command(self)
+                    response = await restart_command()
                 elif name == 'quote':
-                    if wordlistsize > 0:
-                        response = await quote_command(wordlist[1])
+                    response = await quote_command(wordlist[1])
                 if response:
                     await notify(response)
-                return
-    except Exception as e:
-        logger.warning(msg=f"Parsing exception {e}")
-        return
+    except Exception:
+        logger.warning(msg=f"Parsing exception")
 
 async def retrieve_url_json(url,params=None):
     headers = { "User-Agent": "Mozilla/5.0" }
@@ -147,7 +139,6 @@ async def verify_latency_ex():
 async def notify(msg):
     if not msg:
         return
-    logger.debug(msg=f"NOTIFICATION START {msg}")
     apobj = apprise.Apprise()
     if bot_service in ['tgram', 'telethon']:
         apobj.add(f'tgram://{str(bot_token)}/{str(bot_channel_id)}')
@@ -501,7 +492,7 @@ async def search_gecko_detailed(token):
 
 async def search_gecko_contract(token):
     try:
-        if (ex_test_mode=='True'):
+        if ex_test_mode == 'True':
             coin_contract = await search_test_contract(token)
         else:
             coin_info = await search_gecko(token)
@@ -538,7 +529,6 @@ async def fetch_gecko_asset_price(token):
         return fetch_tokeninfo['market_data']['current_price']['usd']
     except Exception:
         return
-
 
 async def fetch_gecko_quote(token):
     try:
@@ -593,30 +583,35 @@ async def get_account_basesymbol_balance():
 
 async def get_account_position():
     try:
-        logger.debug(msg="get_account_position")
+        logger.debug(msg=f"get_account_position")
         if not isinstance(ex,web3.main.Web3):
             positions = ex.fetch_positions()
-            logger.debug(f"positions {positions}")
             open_positions = [p for p in positions if p['type'] == 'open']
-            logger.debug(f"open_positions {open_positions}")
-            msg = f"open_positions {open_positions}"
         else:
             # asset_position_address= await search_gecko_contract(asset_out_symbol)
             # asset_position_abi= await fetch_abi_dex(asset_out_address)
             # asset_position_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
             # open_positions = asset_position_contract.functions.getOpenPositions(walletaddress).call()
-            pos = "DEX POS WiP"
-            logger.debug(msg=f"pos {pos}")
-            msg = f"{pos}"
-        logger.debug(f"msg {msg}")
-        return msg
+            open_positions = "DEX POS WiP"
+        logger.debug(msg=f"open_positions {open_positions}")
+        if open_positions:
+            return open_positions
+        return 0
     except Exception:
-        logger.debug("get_account_position exception")
+        await handle_exception(e)
+
+async def get_account_margin():
+    try:
+        return
+    except Exception as e:
+        await handle_exception(e)
+        return
 
 async def get_wallet_auth():
     try:
         return
     except Exception as e:
+        await handle_exception(e)
         return
 
 #======= error handling
@@ -726,12 +721,12 @@ async def database_setup():
             logger.warning(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
 
 #🦾BOT ACTIONS
-async def post_init(self='bot'):
+async def post_init():
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
     await notify(startup_message)
 
-async def help_command() -> None:
+async def help_command():
     bot_ping = await verify_latency_ex()
     helpcommand = """
     🏦<code>/bal</code>
@@ -751,17 +746,18 @@ async def help_command() -> None:
     bot_menu_help = f"{TTversion}\n{helpcommand}"
     return f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
 
-async def account_balance_command(self='bot') -> None:
+async def account_balance_command():
     balance =f"🏦 Balance\n"
     balance += await get_account_balance()
     return balance
 
-async def account_position_command(self='bot') -> None:
+async def account_position_command():
+    logger.debug(msg=f"account_position_command")
     position = f"📊 Position\n"
     position += await get_account_position()
     return position
 
-async def quote_command(symbol) -> None:
+async def quote_command(symbol):
     asset_out_cg_quote = await fetch_gecko_quote(symbol)
     response=f"₿ {asset_out_cg_quote}\n"
     if (isinstance(ex,web3.main.Web3)):
@@ -776,20 +772,22 @@ async def quote_command(symbol) -> None:
 
 async def exchange_switch_command(name):
     exchange_search = await search_exchange(name)
+    if not exchange_search:
+        return
     res = await load_exchange(exchange_search['name'])
     return f"{ex_name} is active"
 
-async def trading_switch_command(self='bot') -> None:
+async def trading_switch_command():
     global bot_trading_switch
     bot_trading_switch = not bot_trading_switch
     return f"Trading is {bot_trading_switch}"
 
-async def testmode_switch_command(self='bot') -> None:
+async def testmode_switch_command():
     global ex_test_mode
     ex_test_mode = not ex_test_mode
     return f"Test mode is {ex_test_mode}"
 
-async def restart_command(self='bot') -> None:
+async def restart_command():
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
 
