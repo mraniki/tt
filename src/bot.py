@@ -858,20 +858,18 @@ async def exchange_switch_command(name):
     logger.debug(msg=f"exchange_search {exchange_search}")
     res = await load_exchange(exchange_search['name'])
     logger.debug(msg=f"res {res}")
-    response = f"{ex_name} is active"
-    return response
+    return f"{ex_name} is active"
+
 
 async def trading_switch_command(self='bot') -> None:
     global bot_trading_switch
     bot_trading_switch = not bot_trading_switch
-    response=f"Trading is {bot_trading_switch}"
-    return response
+    return=f"Trading is {bot_trading_switch}"
 
 async def testmode_switch_command(self='bot') -> None:
     global ex_test_mode
     ex_test_mode = not ex_test_mode
-    response = f"Test mode is {ex_test_mode}"
-    return response
+    return f"Test mode is {ex_test_mode}"
 
 async def restart_command(self='bot') -> None:
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
@@ -945,7 +943,7 @@ async def bot():
                 await bot.run_until_disconnected()
 
     except Exception as e:
-        logger.error(msg="Bot failed to start: " + str(e))
+        logger.error(msg=f"Bot failed to start: {str(e)})
 
 #⛓️API
 app = FastAPI(title="TALKYTRADER",)
@@ -954,7 +952,7 @@ app = FastAPI(title="TALKYTRADER",)
 def startup_event():
     loop = asyncio.get_event_loop()
     loop.create_task(bot())
-    logger.info(msg=f"Webserver started")
+    logger.info(msg="Webserver started")
 
 @app.on_event('shutdown')
 async def shutdown_event():
@@ -966,7 +964,7 @@ def root():
 
 @app.get("/health")
 def health_check():
-    logger.info(msg = f"Healthcheck_Ping")
+    logger.info(msg="Healthcheck_Ping")
     return {f"Bot is online {TTversion}"}
 
 @app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
