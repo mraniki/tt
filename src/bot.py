@@ -6,7 +6,6 @@ TTversion="🪙📞🗿 TT Beta 1.2.82"
 ##log
 import logging
 import sys
-#import traceback
 ##env
 import os
 from dotenv import load_dotenv
@@ -259,15 +258,12 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         return
     try:
         if not isinstance(ex,web3.main.Web3):
-            bal = ex.fetch_free_balance()
-            bal = {k: v for k, v in bal.items() if v is not None and v>0}
-            if (len(str(bal))):
-                m_price = float(ex.fetchTicker(f'{symbol}').get('last'))
             if (await get_account_balance()=="No Balance"): 
                 await handle_exception("Check your Balance")
                 return
+            asset_out_quote = float(ex.fetchTicker(f'{symbol}').get('last'))
             totalusdtbal = get_account_basesymbol_balance()
-            amountpercent=((totalusdtbal)*(float(quantity)/100))/float(m_price) # % of bal
+            amountpercent=((totalusdtbal)*(float(quantity)/100))/float(asset_out_quote) # % of bal
             res = ex.create_order(symbol, price_type, direction, amountpercent)
             response = f"⬇️ {symbol}" if (direction=="SELL") else f"⬆️ {symbol}"
             response+= f"\n➕ Size: {res['amount']}\n⚫️ Entry: {res['price']}\nℹ️ {res['id']}\n🗓️ {res['datetime']}"
@@ -690,7 +686,6 @@ async def database_setup():
             cex_db = db.table('cex')
             dex_db = db.table('dex')
             bot = bot_db.search(q.env == defaultenv)
-            logger.debug(msg=f"{bot}")
             bot_trading_switch = True
             bot_service = bot[0]['service']
             bot_token = bot[0]['token']
@@ -883,7 +878,8 @@ async def notifybot(request: Request):
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
+    HOST=os.getenv("HOST", "0.0.0.0")
     PORT=os.getenv("PORT", "8080")
-    uvicorn.run(app, host='0.0.0.0', port=PORT)
+    uvicorn.run(app, host=HOST, port=PORT)
 
 
