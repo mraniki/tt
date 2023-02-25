@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙📞🗿 TT Beta 1.2.81"
+TTversion="🪙📞🗿 TT Beta 1.2.82"
 
 ##=============== import  =============
 ##log
@@ -60,7 +60,7 @@ async def verify_import_library():
 
 
 async def parse_message(self,msg):
-    if msg=="":
+    if not msg:
         return
     if(bot_service=='tgram'):
         msg=self.effective_message.text
@@ -69,62 +69,62 @@ async def parse_message(self,msg):
     logger.debug(msg=f"parse_message wordlist {wordlist} len {wordlistsize}")
     response = ""
     #🦾BOT FILTERS
-    filter_lst_ignore = ['⚠️','error','Environment','Balance','Bot']
-    filter_lst_order = ['BUY', 'SELL', 'buy','sell']
-    filter_lst_help = ['/echo','/help']
-    filter_lst_bal = ['/bal']
-    filter_lst_pos = ['/pos']
-    filter_lst_quote = ['/q']
-    filter_lst_trading = ['/trading']
-    filter_lst_test = ['/testmode']
-    filter_lst_restart = ['/restart']
-    filter_lst_switch = ['/cex', '/dex', '/cext','/dext']
+    filters = {
+        'ignore': ['⚠️', 'error', 'Environment', 'Balance', 'Bot'],
+        'order': ['BUY', 'SELL', 'buy', 'sell'],
+        'help': ['/echo', '/help'],
+        'balance': ['/bal'],
+        'position': ['/pos'],
+        'quote': ['/q'],
+        'trading': ['/trading'],
+        'test_mode': ['/testmode'],
+        'restart': ['/restart'],
+        'exchange_switch': ['/cex', '/dex', '/cext', '/dext']
+    }
     try:
-        if [ele for ele in filter_lst_ignore if(ele in wordlist)]:
-            return
-        elif [ele for ele in filter_lst_help if(ele in wordlist)]:
-            response = await help_command()
-        elif [ele for ele in filter_lst_order if(ele in wordlist)]:
-            if wordlistsize > 1:
-                direction = wordlist[0].upper()
-                symbol = wordlist[1]
-                stoploss = 100
-                takeprofit = 100
-                quantity = 10
-                if wordlistsize > 2:
-                    stoploss = wordlist[2][3:]
-                    takeprofit = wordlist[3][3:]
-                    quantity = wordlist[4][2:-1]
-                order=[direction,symbol,stoploss,takeprofit,quantity]
-                logger.info(msg=f"Order identified: {order}")
-                if order:
-                    res = await execute_order(order[0],order[1],order[2],order[3],order[4])
-                    if res is None:
+        for name, keywords in filters.items():
+            if any(keyword in wordlist for keyword in keywords):
+                if name == 'ignore':
+                    return
+                elif name == 'help':
+                    response = await help_command()
+                elif name == 'order':
+                    if wordlistsize > 1:
+                        direction = wordlist[0].upper()
+                        symbol = wordlist[1]
+                        stoploss = 100
+                        takeprofit = 100
+                        quantity = 10
+                        if wordlistsize > 2:
+                            stoploss = wordlist[2][3:]
+                            takeprofit = wordlist[3][3:]
+                            quantity = wordlist[4][2:-1]
+                        order=[direction,symbol,stoploss,takeprofit,quantity]
+                        logger.info(msg=f"Order identified: {order}")
+                        res = await execute_order(order[0],order[1],order[2],order[3],order[4])
+                        if res:
+                            response = f"{res}"
+                elif name == 'exchange_switch':
+                    if wordlistsize > 0:
+                        response = await exchange_switch_command(wordlist[1])
+                    else:
                         return
-                    response = f"{res}"
-        elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
-            if wordlistsize > 0:
-                response = await exchange_switch_command(wordlist[1])
-            else:
+                elif name == 'balance':
+                    response= await account_balance_command(self)
+                elif name == 'position':
+                    response= await  account_position_command(self)
+                elif name == 'trading':
+                    response = await  trading_switch_command(self)
+                elif name == 'test_mode':
+                    response = await testmode_switch_command(self)
+                elif name == 'restart':
+                    response = await  restart_command(self)
+                elif name == 'quote':
+                    if wordlistsize > 0:
+                        response = await quote_command(wordlist[1])
+                if response:
+                    await notify(response)
                 return
-        elif [ele for ele in filter_lst_bal if(ele in wordlist)]:
-            response= await account_balance_command(self)
-        elif [ele for ele in filter_lst_pos if(ele in wordlist)]:
-            response= await  account_position_command(self)
-        elif [ele for ele in filter_lst_trading if(ele in wordlist)]:
-            response = await  trading_switch_command(self)
-        elif [ele for ele in filter_lst_test if(ele in wordlist)]:
-            response = await testmode_switch_command(self)
-        elif [ele for ele in filter_lst_restart if(ele in wordlist)]:
-            response = await  restart_command(self)
-        elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
-            if wordlistsize > 0:
-                response = await quote_command(wordlist[1])
-        else:
-            logger.debug(msg=f"Parsing skipped for {wordlist}")
-            return
-        if (response != ""):
-            await notify(response)
     except Exception as e:
         logger.warning(msg=f"Parsing exception {e}")
         return
@@ -146,7 +146,7 @@ async def verify_latency_ex():
 
 #💬MESSAGING
 async def notify(msg):
-    if msg=="":
+    if not msg:
         return
     logger.debug(msg=f"NOTIFICATION START {msg}")
     apobj = apprise.Apprise()
@@ -155,9 +155,7 @@ async def notify(msg):
     elif (bot_service =='discord'):
         apobj.add(f'{bot_service}://{str(bot_webhook_id)}/{str(bot_webhook_token)}')
     elif (bot_service =='matrix'):
-        apobj.add(
-            f"matrixs:// {bot_user}:{bot_pass}@{bot_hostname[8:]}:443/{str(bot_channel_id)}"
-        )
+        apobj.add(f"matrixs://{bot_user}:{bot_pass}@{bot_hostname[8:]}:443/{str(bot_channel_id)}")
     try:
         await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
     except Exception as e:
@@ -288,8 +286,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             asset_out_decimals=asset_out_contract.functions.decimals().call()
             asset_out_balance=await fetch_user_token_balance(asset_out_symbol)
             if (asset_out_balance <=0):
-                msg=f"Balance for {asset_out_symbol} is {asset_out_balance}"
-                await handle_exception(msg)
+                await handle_exception(f"Balance for {asset_out_symbol} is {asset_out_balance}")
                 return
             asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(quantity)/100) #buy %p ercentage  
             #asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
@@ -623,8 +620,6 @@ async def handle_exception(e) -> None:
     except KeyError:
         msg = "DB content error"
         sys.exit()
-    except IndexError:
-        msg = "Parsing error"
     except telegram.error:
         msg = "telegram error"
     except ConnectionError:
@@ -733,12 +728,12 @@ async def post_init(self='bot'):
 async def help_command() -> None:
     bot_ping = await verify_latency_ex()
     helpcommand = """
-    🏦 <code>/bal</code>
-    🏛️ <code>/cex kraken</code>
-    🥞 <code>/dex pancake</code>
-    🦄 <code>/dex uniswap_v2</code>
-    📦 <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
-           <code>buy cake</code>
+    🏦<code>/bal</code>
+    🏛️<code>/cex kraken</code>
+    🥞<code>/dex pancake</code>
+    🦄<code>/dex uniswap_v2</code>
+    📦<code>buy btc/usdt sl=1000 tp=20 q=1%</code>
+        <code>buy cake</code>
     🦎 <code>/q BTCB</code>
            <code>/q WBTC</code>
            <code>/q btc/usdt</code>
