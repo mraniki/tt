@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙📞🗿 TT Beta 1.2.80"
+TTversion="🪙📞🗿 TT Beta 1.2.81"
 
 ##=============== import  =============
 ##log
@@ -57,6 +57,7 @@ dex_1inch_api = "https://api.1inch.exchange/v5.0"
 #🔁UTILS
 async def verify_import_library():
     logger.info(msg=f"{TTversion}")
+
 
 async def parse_message(self,msg):
     if msg=="":
@@ -141,7 +142,7 @@ async def verify_latency_ex():
             else round(ping("1.1.1.1", unit='ms'), 3)
         )
     except Exception as e:
-        await handle_exception(e)
+        logger.warning(msg=f"Latency error {e}")
 
 #💬MESSAGING
 async def notify(msg):
@@ -236,7 +237,7 @@ async def load_exchange(exchangeid):
     elif ('api' in ex_result):
         ex_name = ex_result['name']
         defaultType =  ex_result['defaultType'],
-        chainId= 0
+        chainId = 0
         client = getattr(ccxt, ex_name)
         try:
             if (defaultType=="SPOT"):
@@ -256,19 +257,16 @@ async def load_exchange(exchangeid):
 
 #📦ORDER
 async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
-    if (bot_trading_switch == False):
-        logger.info(msg=f"TRADING is {bot_trading_switch}")
+    if bot_trading_switch == False:
         return
     try:
         if not isinstance(ex,web3.main.Web3):
-            logger.debug(msg=f"cex order: {direction} {symbol} {stoploss} {takeprofit} {quantity}")
             bal = ex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
             if (len(str(bal))):
                 m_price = float(ex.fetchTicker(f'{symbol}').get('last'))
             if (await get_account_balance()=="No Balance"): 
-                msg="Check your Balance"
-                await handle_exception(msg)
+                await handle_exception("Check your Balance")
                 return
             totalusdtbal = get_account_basesymbol_balance()
             amountpercent=((totalusdtbal)*(float(quantity)/100))/float(m_price) # % of bal
@@ -337,7 +335,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         return response
 
     except Exception as e:
-        logger.debug(msg=f"order debugger {e}")
+        logger.error(msg=f"Exception with order processing {e}")
         await handle_exception(e)
         return
 
@@ -371,7 +369,6 @@ async def approve_asset_router(asset_out_address):
                 approval_response = await retrieve_url_json(approval_URL)
     except Exception as e:
         await handle_exception(e)
-
 
 async def sign_transaction_dex(contract_tx):
     try:
@@ -467,7 +464,6 @@ async def fetch_account_dex(addr):
 async def estimate_gas(tx):
     estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.2),'wei')
 
-
 async def search_test_contract(symbol):
     try:
         tokenlist = 'https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json'
@@ -546,10 +542,10 @@ async def fetch_gecko_asset_price(token):
     try:
         asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
         fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{await search_gecko_platform()}',contract_address=asset_in_address)
-        #logger.debug(msg=f"fetch_tokeninfo{fetch_tokeninfo}")
         return fetch_tokeninfo['market_data']['current_price']['usd']
-    except Exception as e:
-        print(f"An error occurred while retrieving address {e}")
+    except Exception:
+        return
+
 
 async def fetch_gecko_quote(token):
     try:
@@ -576,10 +572,10 @@ async def get_account_balance():
         else:
             bal = ex.eth.get_balance(walletaddress)
             bal = round(ex.from_wei(bal,'ether'),5)
-            basesymbol_bal = get_account_basesymbol_balance()
+            basesymbol_bal = await get_account_basesymbol_balance()
             msg += f"💲{bal} \n💵{basesymbol_bal} {basesymbol}"
         return msg
-    except Exception as e:
+    except Exception:
         return
 
 async def get_account_basesymbol_balance():
@@ -588,7 +584,7 @@ async def get_account_basesymbol_balance():
             ex.from_wei(await fetch_user_token_balance(basesymbol), 'ether'), 5
         )
         if isinstance(ex, web3.main.Web3)
-        else ex.fetchBalance()['USDT']['free']
+        else ex.fetchBalance()['USDT']
     )
 
 async def get_account_position():
@@ -678,8 +674,11 @@ async def database_setup():
         logger.debug(msg=f"{response}")
         #with open(outfile,'wb') as output:
         with open('./config/db.json','wb') as output:
-          output.write(response.content)
-          logger.debug(msg="remote DB copied")
+            try:
+                output.write(response.content)
+                logger.debug(msg="remote DB copied")
+            except Exception:
+                logger.error(msg="error while copying the DB")
 
     db_path = './config/db.json'
     if os.path.exists(db_path):
@@ -792,13 +791,6 @@ async def testmode_switch_command(self='bot') -> None:
 async def restart_command(self='bot') -> None:
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
-# async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
-#     logger.error(msg="Exception:", exc_info=context.error)
-#     tb_list = traceback.format_exception(None, context.error, context.error.__traceback__)
-#     tb_string = "".join(tb_list)
-#     tb_trim = tb_string[:1000]
-#     e = f"{tb_trim}"
-#     await handle_exception(e)
 
 #🤖BOT
 async def bot():
@@ -815,8 +807,6 @@ async def bot():
                 bot = Application.builder().token(bot_token).build()
                 await post_init()
                 bot.add_handler(MessageHandler(None, parse_message))
-                #bot.add_error_handler(error_handler)
-                #bot.run_polling(drop_pending_updates=True)
                 async with bot:
                     await bot.initialize()
                     await bot.start()
@@ -898,6 +888,7 @@ async def notifybot(request: Request):
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8080)
+    PORT=os.getenv("PORT", "8080")
+    uvicorn.run(app, host='0.0.0.0', port=PORT)
 
 
