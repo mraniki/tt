@@ -171,7 +171,7 @@ async def notify(msg):
     elif (bot_service =='matrix'):
         apobj.add(f"matrixs:// "+bot_user+":"+ bot_pass +"@" +bot_hostname[8:] +":443/" + str(bot_channel_id))
     try:
-        await apobj.async_notify(body=msg, body_format=NotifyFormat.MARDOWN)
+        await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
     except Exception as e:
         logger.warning(msg=f"{msg} not sent due to error: {e}")
 
@@ -285,7 +285,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 msg="Check your Balance"
                 await handle_exception(msg)
                 return
-            totalusdtbal = ex.fetchBalance()['USDT']['free']
+            totalusdtbal = get_account_basesymbol_balance()
             amountpercent=((totalusdtbal)*(float(quantity)/100))/float(m_price) # % of bal
             res = ex.create_order(symbol, price_type, direction, amountpercent)
             response = f"⬇️ {symbol}" if (direction=="SELL") else f"⬆️ {symbol}"
@@ -598,17 +598,18 @@ async def get_account_balance():
             msg += f"{sbal}"       
         else:
             bal = ex.eth.get_balance(walletaddress)
-            logger.debug(msg=f"message {bal}")
             bal = round(ex.from_wei(bal,'ether'),5)
-            basesymbol_bal = round(ex.from_wei(await fetch_user_token_balance(basesymbol),'ether'),5)
+            basesymbol_bal = get_account_basesymbol_balance()
             msg += f"💲{bal} \n💵{basesymbol_bal} {basesymbol}"
-            logger.debug(msg=f"message {msg}")
         return msg
     except Exception as e:
         return
 
-#async def get_account_basesymbol_balance():
-        
+async def get_account_basesymbol_balance():
+    if not isinstance(ex,web3.main.Web3):
+        return ex.fetchBalance()['USDT']['free']
+    return round(ex.from_wei(await fetch_user_token_balance(basesymbol),'ether'),5)
+
 async def get_account_position():
     try:
         logger.debug(msg=f"get_account_position")
@@ -918,6 +919,6 @@ async def notifybot(request: Request):
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8080)
+    uvicorn.run(app, host='0.0.0.0', port=8089)
 
 
