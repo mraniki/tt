@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.85"
+TTversion="🪙🗿 TT Beta 1.2.86"
 
 ##=============== import  =============
 ##log
@@ -11,6 +11,7 @@ import os
 from dotenv import load_dotenv
 import json, requests
 import asyncio
+import re
 #import telegram
 from telegram.ext import Application, MessageHandler
 #import telethon
@@ -68,6 +69,12 @@ async def parse_message(self,msg):
     wordlist = msg.split(" ")
     wordlistsize = len(wordlist)
     logger.debug(msg=f"parse_message wordlist {wordlist} len {wordlistsize}")
+    # try:
+    #     logger.debug(msg=f"orderparsing NEW")
+    #     orderparsing = await order_parsing(msg)
+    #     logger.debug(msg=f"orderparsing COMPLETED")
+    # except:
+    #     pass
     response = ""
     #🦾BOT FILTERS
     filters = {
@@ -91,7 +98,6 @@ async def parse_message(self,msg):
                     response = await help_command()
                 elif name == 'order':
                     if wordlistsize > 1:
-                        # ordertest = await order_parsing(msg)
                         direction = wordlist[0].upper()
                         symbol = wordlist[1]
                         stoploss = 100
@@ -125,72 +131,80 @@ async def parse_message(self,msg):
     except Exception:
         logger.warning(msg=f"Parsing exception")
 
-async def order_parsing(data):
-    logger.info(msg=f"order_parsing: {data}")
-    parsed_data = {}
-    # Split the message by the special characters used to separate the data
-    parts = message.split('⚫')[1:]
-    if len(parts) == 0:
-        raise ValueError("Invalid message format")
-    # Parse the first part (BUY or SELL)
-    parsed_data['direction'] = parts[0].split('💱')[0].strip()
-    # Parse the second part (currency)
-    parsed_data['symbol'] = parts[0].split('💱')[1].split('🔵')[0].strip()
-    # Parse the third part (prices)
-    parsed_data['takeprofit'] = [float(price) for price in parts[0].split('🔵')[1].split(',')]
-    # Parse the fourth part (stop loss)
-    parsed_data['stoploss'] = float(parts[0].split('🛑')[1].split()[0])
-    # Parse the fifth part (quantity)
-    parsed_data['quantity'] = int(parts[0].split('📏')[1].split()[0])
-    # Parse the sixth part (leverage) if it exists
-    if '⚡' in parts[0]:
-        parsed_data['leverage'] = int(parts[0].split('⚡')[1].split()[0])
-    else:
-        parsed_data['leverage'] = None
-    # Parse the seventh part (exchange) if it exists
-    if '🏦' in parts[0]:
-        parsed_data['exchange'] = parts[0].split('🏦')[1].split()[0]
-    else:
-        parsed_data['exchange'] = None
-    # Parse the eighth part (notes) if it exists
-    if '🚧' in parts[0]:
-        parsed_data['notes'] = parts[0].split('🚧')[1].strip()
-    else:
-        parsed_data['notes'] = None
-    # Return the parsed data
-    return parsed_data
-
-This version of the function uses the split() method to split the message string by each of the special characters used in the message. It then extracts the relevant data from each part of the message using a combination of split() and string slicing.
-
-Here's an example of how to use the function with the new message format:
-
-python
-
-message = "⚫BUY 💱CAKE 🔵1.7509, 1.8509, 1.9509, 2.7509 🛑1.5558 📏1"
-
-parsed_data = parse_message(message)
-
-print(parsed_data)
-
-This would output the following dictionary:
-
-python
-
-{
-    'action': 'BUY',
-    'currency': 'CAKE',
-    'prices': [1.7509, 1.8509, 1.9509, 2.7509],
-    'stop_loss': 1.5558,
-    'quantity': 1,
-    'leverage': None,
-    'exchange': None,
-    'notes': None
-}
-
-As you can see, the output is the same as before, even though the message format doesn't include newline characters.
-
-
-#    return order
+async def order_parsing(message):
+    logger.info(msg=f"order_parsing with {message}")
+    order_data = []
+    try:
+        if "Entry Orders" in message and "Take-Profit Orders" in message:
+            logger.info(msg=f"format 3 identified")
+            symbol_index = message.index('Symbol:') + 7
+            exchange_index = message.index('Exchange:')
+            order_data['symbol'] = message[symbol_index:exchange_index].strip()
+            order_data['exchange'] = message[exchange_index+9:message.index('\n')].strip()
+            trade_type_index = message.index('Trade Type:') + 11
+            leverage_index = message.index('Leverage:')
+            order_data['trade_type'] = message[trade_type_index:leverage_index].strip()
+            order_data['leverage'] = int(message[leverage_index+10:message.index('\n', leverage_index)])
+            entry_orders_index = message.index('Entry Orders:') + 14
+            take_profit_orders_index = message.index('Take-Profit Orders:')
+            entry_orders_section = message[entry_orders_index:take_profit_orders_index]
+            entry_orders_lines = entry_orders_section.split('\n')[1:-1]
+            order_data['entry_orders'] = []
+            for line in entry_orders_lines:
+                price, percent = line.split('-')
+                order_data['entry_orders'].append((float(price.strip()), float(percent.strip().strip('%'))))
+            take_profit_orders_start_index = message.index('Take-Profit Orders:') + 20
+            take_profit_orders_section = message[take_profit_orders_start_index:]
+            take_profit_orders_lines = take_profit_orders_section.split('\n')[1:-1]
+            order_data['take_profit_orders'] = []
+            for line in take_profit_orders_lines:
+                price, percent = line.split('-')
+                order_data['take_profit_orders'].append((float(price.strip()), float(percent.strip().strip('%'))))
+            logger.info(msg=f"order_data {order_data}")
+        elif message.startswith("⚫"):
+            logger.info(msg=f"format 2 identified")
+            direction_index = message.index('⚫') + 1
+            symbol_index = message.index('💱') + 1
+            entry_prices_index = message.index('🔵') + 1
+            stop_loss_index = message.index('🛑') + 1
+            quantity_index = message.index('📏') + 1
+            leverage_index = message.index('⚡') + 1
+            exchange_index = message.index('🏦') + 1
+            order_data['symbol'] = message[symbol_index:entry_prices_index-2].strip()
+            order_data['takeprofit'] = [float(price) for price in message[entry_prices_index:stop_loss_index-2].split(', ')]
+            order_data['stop_loss'] = float(message[stop_loss_index:quantity_index-2])
+            order_data['quantity'] = int(message[quantity_index:leverage_index-2])
+            order_data['leverage'] = int(message[leverage_index:exchange_index-2])
+            order_data['exchange'] = message[exchange_index:].strip()
+            logger.info(msg=f"order_data {order_data}")
+            return order_data
+        elif message.startswith('buy', 'sell'):
+            logger.info(msg=f"format 1 identified")
+            components = message.split()
+            order_data['direction']= components[0]
+            order_data['symbol']= components[1]
+            #if "sl=" in message and "tp=" in message and "q=" in message:
+            order_data['stop_loss']=float(component[3:]) if component.startswith("sl=") else 1000
+            order_data['take_profit']=float(component[3:]) if component.startswith("tp=") else 1000
+            order_data['quantity']=float(component[2:].strip('%')) if component.startswith("q=") else 10
+            logger.info(msg=f"order_data {order_data}")
+        #     symbol = re.search('[a-zA-Z]+', message.split()[1]).group()
+        #     sl = re.search('sl=(\d+\.?\d*)', message)
+        #     tp = re.search('tp=(\d+\.?\d*)', message)
+        #     q = re.search('q=(\d+\.?\d*)%', message)
+        #     if sl:
+        #         sl = float(sl.group(1))
+        #     if tp:
+        #         tp = float(tp.group(1))
+        #     if q:
+        #         q = float(q.group(1))/100
+        #     logger.info(msg=f"format 1 {message}")
+        #     return {'symbol': symbol, 'sl': sl, 'tp': tp, 'q': q}
+        else:
+            logger.info(msg=f"No valid order format {message}")
+            return
+    except Exception as e:
+        logger.warning(msg=f"Order parsing error {e}")
 
 
 async def retrieve_url_json(url,params=None):
