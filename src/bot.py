@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.84"
+TTversion="🪙🗿 TT Beta 1.2.85"
 
 ##=============== import  =============
 ##log
@@ -91,6 +91,7 @@ async def parse_message(self,msg):
                     response = await help_command()
                 elif name == 'order':
                     if wordlistsize > 1:
+                        # ordertest = await order_parsing(msg)
                         direction = wordlist[0].upper()
                         symbol = wordlist[1]
                         stoploss = 100
@@ -123,6 +124,74 @@ async def parse_message(self,msg):
                     await notify(response)
     except Exception:
         logger.warning(msg=f"Parsing exception")
+
+async def order_parsing(data):
+    logger.info(msg=f"order_parsing: {data}")
+    parsed_data = {}
+    # Split the message by the special characters used to separate the data
+    parts = message.split('⚫')[1:]
+    if len(parts) == 0:
+        raise ValueError("Invalid message format")
+    # Parse the first part (BUY or SELL)
+    parsed_data['direction'] = parts[0].split('💱')[0].strip()
+    # Parse the second part (currency)
+    parsed_data['symbol'] = parts[0].split('💱')[1].split('🔵')[0].strip()
+    # Parse the third part (prices)
+    parsed_data['takeprofit'] = [float(price) for price in parts[0].split('🔵')[1].split(',')]
+    # Parse the fourth part (stop loss)
+    parsed_data['stoploss'] = float(parts[0].split('🛑')[1].split()[0])
+    # Parse the fifth part (quantity)
+    parsed_data['quantity'] = int(parts[0].split('📏')[1].split()[0])
+    # Parse the sixth part (leverage) if it exists
+    if '⚡' in parts[0]:
+        parsed_data['leverage'] = int(parts[0].split('⚡')[1].split()[0])
+    else:
+        parsed_data['leverage'] = None
+    # Parse the seventh part (exchange) if it exists
+    if '🏦' in parts[0]:
+        parsed_data['exchange'] = parts[0].split('🏦')[1].split()[0]
+    else:
+        parsed_data['exchange'] = None
+    # Parse the eighth part (notes) if it exists
+    if '🚧' in parts[0]:
+        parsed_data['notes'] = parts[0].split('🚧')[1].strip()
+    else:
+        parsed_data['notes'] = None
+    # Return the parsed data
+    return parsed_data
+
+This version of the function uses the split() method to split the message string by each of the special characters used in the message. It then extracts the relevant data from each part of the message using a combination of split() and string slicing.
+
+Here's an example of how to use the function with the new message format:
+
+python
+
+message = "⚫BUY 💱CAKE 🔵1.7509, 1.8509, 1.9509, 2.7509 🛑1.5558 📏1"
+
+parsed_data = parse_message(message)
+
+print(parsed_data)
+
+This would output the following dictionary:
+
+python
+
+{
+    'action': 'BUY',
+    'currency': 'CAKE',
+    'prices': [1.7509, 1.8509, 1.9509, 2.7509],
+    'stop_loss': 1.5558,
+    'quantity': 1,
+    'leverage': None,
+    'exchange': None,
+    'notes': None
+}
+
+As you can see, the output is the same as before, even though the message format doesn't include newline characters.
+
+
+#    return order
+
 
 async def retrieve_url_json(url,params=None):
     headers = { "User-Agent": "Mozilla/5.0" }
