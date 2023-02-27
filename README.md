@@ -89,8 +89,9 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Support multiple messaging platform (Telegram, Matrix and Discord)
  - Include healthcheck, webhook and notify capability via FastAPI webserver on port 8080 with build-in JSON API swagger
 
-## Questions? Need help? 
+## Questions? Want to help? 
 Lost? [join us on group chat](https://github.com/mraniki/tt/discussions/49)
+
  
 ## 📷 Screenshots
 ![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
