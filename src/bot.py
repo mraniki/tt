@@ -71,9 +71,9 @@ async def parse_message(self,msg):
     wordlistsize = len(wordlist)
     logger.debug(msg=f"parse_message wordlist {wordlist} len {wordlistsize}")
     try:
-        logger.debug(msg=f"orderparsing NEW")
+        logger.debug(msg="orderparsing NEW")
         orderparsing = await order_parsing(msg)
-        logger.debug(msg=f"orderparsing COMPLETED")
+        logger.debug(msg="orderparsing COMPLETED")
         logger.debug(msg=f"orderparsing {orderparsing}")
     except:
         pass
@@ -94,14 +94,17 @@ async def parse_message(self,msg):
     try:
         for name, keywords in filters.items():
             if any(keyword in wordlist for keyword in keywords):
-                if name == 'ignore':
-                    return
+                if name == 'balance':
+                    response = await account_balance_command()
+                elif name == 'exchange_switch':
+                    response = await exchange_switch_command(wordlist[1])
                 elif name == 'help':
                     response = await help_command()
+                elif name == 'ignore':
+                    return
                 elif name == 'order':
                     if wordlistsize > 1:
                         direction = wordlist[0].upper()
-                        symbol = wordlist[1]
                         stoploss = 100
                         takeprofit = 100
                         quantity = 10
@@ -109,36 +112,33 @@ async def parse_message(self,msg):
                             stoploss = wordlist[2][3:]
                             takeprofit = wordlist[3][3:]
                             quantity = wordlist[4][2:-1]
+                        symbol = wordlist[1]
                         order=[direction,symbol,stoploss,takeprofit,quantity]
                         logger.info(msg=f"Order identified: {order}")
                         res = await execute_order(order[0],order[1],order[2],order[3],order[4])
                         if res:
                             response = f"{res}"
-                elif name == 'exchange_switch':
-                    response = await exchange_switch_command(wordlist[1])
-                elif name == 'balance':
-                    response = await account_balance_command()
                 elif name == 'position':
                     response = await account_position_command()
-                elif name == 'trading':
-                    response = await trading_switch_command()
-                elif name == 'test_mode':
-                    response = await testmode_switch_command()
-                elif name == 'restart':
-                    response = await restart_command()
                 elif name == 'quote':
                     response = await quote_command(wordlist[1])
+                elif name == 'restart':
+                    response = await restart_command()
+                elif name == 'test_mode':
+                    response = await testmode_switch_command()
+                elif name == 'trading':
+                    response = await trading_switch_command()
                 if response:
                     await notify(response)
     except Exception:
-        logger.warning(msg=f"Parsing exception")
+        logger.warning(msg="Parsing exception")
 
 async def order_parsing(message):
     logger.info(msg=f"order_parsing with {message}")
     order_data = []
     try:
         if re.match(r'(?:Entry|Take-Profit)', message):
-            logger.info(msg=f"format 3 identified")
+            logger.info(msg="format 3 identified")
             direction_index = message.index('Trade Type:') + 11
             direction = message[direction_index:leverage_index].strip()
             symbol_index = message.index('Symbol:') + 7
@@ -168,7 +168,7 @@ async def order_parsing(message):
                 # order=[direction,symbol,stoploss,entry_orders,takeprofit,quantity,leverage,exchange]
                 # logger.info(msg=f"order_data {order}")
         elif re.match(r'(?:⚫|🔵)', message):
-            logger.info(msg=f"format 2 identified")
+            logger.info(msg="format 2 identified")
             direction_index = message.index('⚫') + 1
             symbol_index = message.index('💱') + 1
             entry_prices_index = message.index('🔵') + 1
@@ -200,7 +200,7 @@ async def order_parsing(message):
             logger.info(msg=f"format 1 order_data {order}")
         else:
             logger.info(msg=f"No valid order format {message}")
-            return 
+            return
         return order
     except Exception as e:
         logger.warning(msg=f"Order parsing error {e}")
@@ -340,13 +340,13 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 return
             asset_out_quote = float(ex.fetchTicker(f'{symbol}').get('last'))
             totalusdtbal = get_account_basesymbol_balance()
-            amountpercent=((totalusdtbal)*(float(quantity)/100))/float(asset_out_quote) # % of bal
+            amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
             res = ex.create_order(symbol, price_type, direction, amountpercent)
             response = f"⬇️ {symbol}" if (direction=="SELL") else f"⬆️ {symbol}"
             response+= f"\n➕ Size: {res['amount']}\n⚫️ Entry: {res['price']}\nℹ️ {res['id']}\n🗓️ {res['datetime']}"
 
         else:
-     
+
             asset_out_symbol = basesymbol if direction=="BUY" else symbol
             asset_in_symbol = symbol if direction=="BUY" else basesymbol
             response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
@@ -669,7 +669,7 @@ async def get_account_basesymbol_balance():
 
 async def get_account_position():
     try:
-        logger.debug(msg=f"get_account_position")
+        logger.debug(msg="get_account_position")
         if not isinstance(ex,web3.main.Web3):
             positions = ex.fetch_positions()
             open_positions = [p for p in positions if p['type'] == 'open']
@@ -680,9 +680,7 @@ async def get_account_position():
             # open_positions = asset_position_contract.functions.getOpenPositions(walletaddress).call()
             open_positions = "DEX POS WiP"
         logger.debug(msg=f"open_positions {open_positions}")
-        if open_positions:
-            return open_positions
-        return 0
+        return open_positions or 0
     except Exception:
         await handle_exception(e)
 
@@ -838,7 +836,7 @@ async def account_balance_command():
     return balance
 
 async def account_position_command():
-    logger.debug(msg=f"account_position_command")
+    logger.debug(msg="account_position_command")
     position = f"📊 Position\n"
     position += await get_account_position()
     return position
