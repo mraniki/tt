@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.87"
+TTversion="🪙🗿 TT Beta 1.2.88"
 
 ##=============== import  =============
 ##log
@@ -70,13 +70,13 @@ async def parse_message(self,msg):
     wordlist = msg.split(" ")
     wordlistsize = len(wordlist)
     logger.debug(msg=f"parse_message wordlist {wordlist} len {wordlistsize}")
-    try:
-        logger.debug(msg="orderparsing NEW")
-        orderparsing = await order_parsing(msg)
-        logger.debug(msg="orderparsing COMPLETED")
-        logger.debug(msg=f"orderparsing {orderparsing}")
-    except:
-        pass
+    # try:
+    #     logger.debug(msg="orderparsing NEW")
+    #     orderparsing = await order_parsing(msg)
+    #     logger.debug(msg="orderparsing COMPLETED")
+    #     logger.debug(msg=f"orderparsing {orderparsing}")
+    # except:
+    #     pass
     response = ""
     #🦾BOT FILTERS
     filters = {
@@ -139,53 +139,53 @@ async def order_parsing(message):
     try:
         if re.match(r'(?:Entry|Take-Profit)', message):
             logger.info(msg="format 3 identified")
-            direction_index = message.index('Trade Type:') + 11
-            direction = message[direction_index:leverage_index].strip()
-            symbol_index = message.index('Symbol:') + 7
-            symbol = message[symbol_index:exchange_index].strip()
-            if len(components) > 2:
-                entry_orders_index = message.index('Entry Orders:') + 14
-                take_profit_orders_index = message.index('Take-Profit Orders:')
-                entry_orders_section = message[entry_orders_index:take_profit_orders_index]
-                entry_orders_lines = entry_orders_section.split('\n')[1:-1]
-                entry_orders = []
-                for line in entry_orders_lines:
-                    price, percent = line.split('-')
-                    entry_orders.append((float(price.strip()), float(percent.strip().strip('%'))))
-                take_profit_orders_start_index = message.index('Take-Profit Orders:') + 20
-                take_profit_orders_section = message[take_profit_orders_start_index:]
-                take_profit_orders_lines = take_profit_orders_section.split('\n')[1:-1]
-                takeprofit = []
-                for line in take_profit_orders_lines:
-                    price, percent = line.split('-')
-                    takeprofit.append((float(price.strip()), float(percent.strip().strip('%'))))
-                stoploss_index = message.index('Stop Targets:')
-                stoploss = float(message[stoploss_index+3:message.index('\n', stoploss_index)])
-                leverage_index = message.index('Leverage:')
-                leverage = int(message[leverage_index+10:message.index('\n', leverage_index)])
-                exchange_index = message.index('Exchange:')
-                exchange = message[exchange_index+9:message.index('\n')].strip()
+            # direction_index = message.index('Trade Type:') + 11
+            # direction = message[direction_index:leverage_index].strip()
+            # symbol_index = message.index('Symbol:') + 7
+            # symbol = message[symbol_index:exchange_index].strip()
+            # if len(components) > 2:
+            #     entry_orders_index = message.index('Entry Orders:') + 14
+            #     take_profit_orders_index = message.index('Take-Profit Orders:')
+            #     entry_orders_section = message[entry_orders_index:take_profit_orders_index]
+            #     entry_orders_lines = entry_orders_section.split('\n')[1:-1]
+            #     entry_orders = []
+            #     for line in entry_orders_lines:
+            #         price, percent = line.split('-')
+            #         entry_orders.append((float(price.strip()), float(percent.strip().strip('%'))))
+            #     take_profit_orders_start_index = message.index('Take-Profit Orders:') + 20
+            #     take_profit_orders_section = message[take_profit_orders_start_index:]
+            #     take_profit_orders_lines = take_profit_orders_section.split('\n')[1:-1]
+            #     takeprofit = []
+            #     for line in take_profit_orders_lines:
+            #         price, percent = line.split('-')
+            #         takeprofit.append((float(price.strip()), float(percent.strip().strip('%'))))
+            #     stoploss_index = message.index('Stop Targets:')
+            #     stoploss = float(message[stoploss_index+3:message.index('\n', stoploss_index)])
+            #     leverage_index = message.index('Leverage:')
+            #     leverage = int(message[leverage_index+10:message.index('\n', leverage_index)])
+            #     exchange_index = message.index('Exchange:')
+            #     exchange = message[exchange_index+9:message.index('\n')].strip()
                 # order=[direction,symbol,stoploss,entry_orders,takeprofit,quantity,leverage,exchange]
                 # logger.info(msg=f"order_data {order}")
         elif re.match(r'(?:⚫|🔵)', message):
             logger.info(msg="format 2 identified")
-            direction_index = message.index('⚫') + 1
-            symbol_index = message.index('💱') + 1
-            entry_prices_index = message.index('🔵') + 1
-            stop_loss_index = message.index('🛑') + 1
-            quantity_index = message.index('📏') + 1
-            leverage_index = message.index('⚡') + 1
-            exchange_index = message.index('🏦') + 1
-            direction = message[symbol_index:entry_prices_index-2].strip()
-            symbol = message[direction_index:direction_index-2].strip()
-            if len(components) > 2:
-                stoploss = float(message[stop_loss_index:quantity_index-2])
-                takeprofit = [float(price) for price in message[entry_prices_index:stop_loss_index-2].split(', ')]
-                quantity = int(message[quantity_index:leverage_index-2])
-                leverage = int(message[leverage_index:exchange_index-2])
-                exchange = message[exchange_index:].strip()
+            # direction_index = message.index('⚫') + 1
+            # symbol_index = message.index('💱') + 1
+            # entry_prices_index = message.index('🔵') + 1
+            # stop_loss_index = message.index('🛑') + 1
+            # quantity_index = message.index('📏') + 1
+            # leverage_index = message.index('⚡') + 1
+            # exchange_index = message.index('🏦') + 1
+            # direction = message[symbol_index:entry_prices_index-2].strip()
+            # symbol = message[direction_index:direction_index-2].strip()
+            # if len(components) > 2:
+            #     stoploss = float(message[stop_loss_index:quantity_index-2])
+            #     takeprofit = [float(price) for price in message[entry_prices_index:stop_loss_index-2].split(', ')]
+            #     quantity = int(message[quantity_index:leverage_index-2])
+            #     leverage = int(message[leverage_index:exchange_index-2])
+            #     exchange = message[exchange_index:].strip()
 
-            logger.info(msg=f"format 2 order_data {order_data}")
+            # logger.info(msg=f"format 2 order_data {order_data}")
         elif re.match(r'(?:buy|Buy|BUY|sell|Sell|SELL)', message):
             logger.info(msg=f"format 1 identified for {message}")
             components = message.split()
@@ -339,7 +339,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 await handle_exception("Check your Balance")
                 return
             asset_out_quote = float(ex.fetchTicker(f'{symbol}').get('last'))
-            totalusdtbal = get_account_basesymbol_balance()
+            totalusdtbal = await get_account_basesymbol_balance() ##ex.fetchBalance()['USDT']['free']
             amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
             res = ex.create_order(symbol, price_type, direction, amountpercent)
             response = f"⬇️ {symbol}" if (direction=="SELL") else f"⬆️ {symbol}"
@@ -659,13 +659,11 @@ async def get_account_balance():
         return
 
 async def get_account_basesymbol_balance():
-    return (
-        round(
-            ex.from_wei(await fetch_user_token_balance(basesymbol), 'ether'), 5
-        )
-        if isinstance(ex, web3.main.Web3)
-        else ex.fetchBalance()['USDT']
-    )
+    if isinstance(ex, web3.main.Web3):
+        return round(ex.from_wei(await fetch_user_token_balance(basesymbol), 'ether'), 5)
+    else:
+        return ex.fetchBalance()['USDT']['free']
+    
 
 async def get_account_position():
     try:
