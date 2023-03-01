@@ -94,7 +94,7 @@ Lost? [join us on group chat](https://github.com/mraniki/tt/discussions/49)
 
  
 ## 📷 Screenshots
-![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
+<img width="340" alt="Screenshot 2023-02-28 at 20 39 47" src="https://user-images.githubusercontent.com/8766259/222161597-114d488b-ad9c-4468-8dd4-083f435cbb7b.png">
 
 [more screenshots](https://github.com/mraniki/tt/wiki/Screenshots)
 
