@@ -353,7 +353,6 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
             logger.debug(msg=f"asset_out_symbol {asset_out_symbol} asset_in_symbol {asset_in_symbol}")
             asset_out_address= await search_gecko_contract(asset_out_symbol)
-            logger.debug(msg=f"asset_out_address {asset_out_address}")
             asset_out_abi= await fetch_abi_dex(asset_out_address)
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
             asset_in_address= await search_gecko_contract(asset_in_symbol)
@@ -473,6 +472,7 @@ async def sign_transaction_dex(contract_tx):
 async def fetch_abi_dex(addr):
     try:
         url = abiurl
+        logger.debug(msg=f"fetch_abi_dex url {url}")
         params = {
             "module": "contract",
             "action": "getabi",
@@ -510,10 +510,14 @@ async def fetch_oracle_quote(token):
 
 async def fetch_user_token_balance(token):
     try:
-        token_address= await search_gecko_contract(token)
+        if ex_test_mode == 'True':
+            token_address= await search_test_contract(token)
+        else:
+            token_address= await search_gecko_contract(token)
         token_abi= await fetch_abi_dex(asset_out_address)
         token_contract = ex.eth.contract(address=token_address, abi=token_abi)
         token_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
+        logger.debug(msg=f"token_address {token_address} token_balance {token_balance}")
         return 0 if token_balance <=0 or token_balance is None else token_balance
     except Exception:
         return 0
@@ -539,7 +543,7 @@ async def estimate_gas(tx):
 async def search_test_contract(symbol):
     logger.info(msg=f"📝search_test_contract {symbol} and chainId {chainId}")
     try:
-        tokenlist = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
+        tokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
         token_list = await retrieve_url_json(tokenlist)
         token_search = token_list['tokens']
         for keyval in token_search:
