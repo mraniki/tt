@@ -209,6 +209,7 @@ async def order_parsing(message):
 async def retrieve_url_json(url,params=None):
     headers = { "User-Agent": "Mozilla/5.0" }
     response = requests.get(url,params =params,headers=headers)
+    logger.debug(msg=f"retrieve_url_json {response}")
     return response.json()
 
 async def verify_latency_ex():
@@ -536,17 +537,20 @@ async def estimate_gas(tx):
     estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.2),'wei')
 
 async def search_test_contract(symbol):
-    logger.info(msg=f"📝search_test_contract {symbol}")
+    logger.info(msg=f"📝search_test_contract {symbol} and chainId {chainId}")
     try:
         tokenlist = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
-        logger.info(msg=f"tokenlist {tokenlist}")
         token_list = await retrieve_url_json(tokenlist)
-        token_list = json.loads(token_list)['tokens']
-        logger.info(msg=f"token_list {token_list}")
-        symbolcontract = [token for token in token_list if (token['symbol'] == symbol and token['chainId']==chainId)]
+        token_search = token_list['tokens']
+        for keyval in token_search:
+            if (keyval['symbol'] == symbol and keyval['chainId'] == int(chainId)):
+                logger.info(msg=f"address {keyval['address']}")
+                symbolcontract = keyval['address']
         logger.info(msg=f"📝 contract  {symbolcontract}")
         if symbolcontract:
-            return symbolcontract[0]['address']
+            return symbolcontract
+        #symbolcontract = [token for token in token_search[0] if (token_search['symbol'] == symbol and token_search['chainId']==chainId)]
+
     except Exception as e:
         logger.error(msg=f"search_test_contract error {token}")
         await HandleExceptions(e)
