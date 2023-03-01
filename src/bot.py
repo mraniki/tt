@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.89"
+TTversion="🪙🗿 TT Beta 1.2.90"
 
 ##=============== import  =============
 ##log
@@ -352,10 +352,10 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             asset_in_symbol = symbol if direction=="BUY" else basesymbol
             response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
             logger.debug(msg=f"asset_out_symbol {asset_out_symbol} asset_in_symbol {asset_in_symbol}")
-            asset_out_address= await search_gecko_contract(asset_out_symbol)
+            asset_out_address= await search_contract(asset_out_symbol)
             asset_out_abi= await fetch_abi_dex(asset_out_address)
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
-            asset_in_address= await search_gecko_contract(asset_in_symbol)
+            asset_in_address= await search_contract(asset_in_symbol)
             order_path_dex=[asset_out_address, asset_in_address]
             asset_out_decimals=asset_out_contract.functions.decimals().call()
             asset_out_balance=await fetch_user_token_balance(asset_out_symbol)
@@ -491,8 +491,8 @@ async def fectch_transaction_dex (txHash):
     return checkTransactionRequest['status']
 
 async def fetch_1inch_quote(token):
-    asset_in_address = await search_gecko_contract(token)
-    asset_out_address = await search_gecko_contract('USDC')
+    asset_in_address = await search_contract(token)
+    asset_out_address = await search_contract('USDC')
     try:
         asset_out_amount=1000000000000
         quote_url = f"{dex_1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
@@ -510,11 +510,7 @@ async def fetch_oracle_quote(token):
 
 async def fetch_user_token_balance(token):
     try:
-        if ex_test_mode == 'True':
-            logger.debug(msg=f"fetch_user_token_balance TEST {token} wallet{walletaddress}")
-            token_address= await search_test_contract(token)
-        else:
-            token_address= await search_gecko_contract(token)
+        token_address= await search_contract(token)
         token_abi= await fetch_abi_dex(asset_out_address)
         token_contract = ex.eth.contract(address=token_address, abi=token_abi)
         token_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
@@ -593,14 +589,9 @@ async def search_gecko_detailed(token):
 
 async def search_gecko_contract(token):
     try:
-        if ex_test_mode == 'True':
-            logger.info(msg=f"📝 Test contract search for {token} {ex_test_mode}")
-            coin_contract = await search_test_contract(token)
-            logger.info(msg=f"📝 test contract identified {coin_contract}")
-        else:
-            coin_info = await search_gecko(token)
-            coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
-            logger.info(msg=f"🦎 contract {token} {coin_contract}")
+        coin_info = await search_gecko(token)
+        coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
+        logger.info(msg=f"🦎 contract {token} {coin_contract}")
         return ex.to_checksum_address(coin_contract)
     except Exception:
         return
@@ -627,7 +618,7 @@ async def search_gecko_exchange(exchange):
 
 async def fetch_gecko_asset_price(token):
     try:
-        asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
+        asset_in_address = ex.to_checksum_address(await search_contract(token))
         fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{await search_gecko_platform()}',contract_address=asset_in_address)
         return fetch_tokeninfo['market_data']['current_price']['usd']
     except Exception:
@@ -635,12 +626,22 @@ async def fetch_gecko_asset_price(token):
 
 async def fetch_gecko_quote(token):
     try:
-        asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
+        asset_in_address = ex.to_checksum_address(await search_contract(token))
         fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{await search_gecko_platform()}',contract_address=asset_in_address)
         logger.debug(msg=f"fetch_tokeninfo{fetch_tokeninfo}")
         asset_out_cg_quote = fetch_tokeninfo['market_data']['current_price']['usd']
         asset_out_cg_name = fetch_tokeninfo['name']
         return f"{asset_out_cg_name}\n🦎{asset_out_cg_quote} USD"
+    except Exception:
+        return
+
+async def search_contract(token):
+    try:
+        if ex_test_mode == 'True':
+            token_contract = await search_test_contract(token)
+        else:
+            token_contract = await search_gecko_contract(token)
+        return ex.to_checksum_address(token_contract)
     except Exception:
         return
 
@@ -689,7 +690,7 @@ async def get_account_position():
             positions = ex.fetch_positions()
             open_positions = [p for p in positions if p['type'] == 'open']
         else:
-            # asset_position_address= await search_gecko_contract(asset_out_symbol)
+            # asset_position_address= await search_contract(asset_out_symbol)
             # asset_position_abi= await fetch_abi_dex(asset_out_address)
             # asset_position_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
             # open_positions = asset_position_contract.functions.getOpenPositions(walletaddress).call()
@@ -860,9 +861,9 @@ async def quote_command(symbol):
     asset_out_cg_quote = await fetch_gecko_quote(symbol)
     response=f"₿ {asset_out_cg_quote}\n"
     if (isinstance(ex,web3.main.Web3)):
-        if(await search_gecko_contract(symbol) != None):
+        if(await search_contract(symbol) != None):
             asset_out_1inch_quote = await fetch_1inch_quote (symbol)
-            response+=f"🦄{asset_out_1inch_quote} USD\n🖊️{chainId}: {await search_gecko_contract(symbol)}"
+            response+=f"🦄{asset_out_1inch_quote} USD\n🖊️{chainId}: {await search_contract(symbol)}"
     else:
         price= ex.fetch_ticker(symbol.upper())['last']
         response+=f"🏛️ {price} USD"
