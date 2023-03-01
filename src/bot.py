@@ -1,17 +1,17 @@
 ##=============== VERSION =============
 
-TTversion="🪙📞🗿 TT Beta 1.2.81"
+TTversion="🪙🗿 TT Beta 1.2.90"
 
 ##=============== import  =============
 ##log
 import logging
 import sys
-#import traceback
 ##env
 import os
 from dotenv import load_dotenv
 import json, requests
 import asyncio
+import re
 #import telegram
 from telegram.ext import Application, MessageHandler
 #import telethon
@@ -53,6 +53,7 @@ logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
 #🔗API
 gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
 dex_1inch_api = "https://api.1inch.exchange/v5.0"
+dex_0x_api = "https://api.0x.org/orderbook/v1/"
 
 #🔁UTILS
 async def verify_import_library():
@@ -60,78 +61,155 @@ async def verify_import_library():
 
 
 async def parse_message(self,msg):
-    if msg=="":
-        return
-    if(bot_service=='tgram'):
+    logger.debug(msg=f"self {self} msg {msg}")
+    if bot_service == 'tgram':
         msg=self.effective_message.text
+        logger.debug(msg=f"content {self['channel_post']['text']}")
+    if not msg:
+        return
     wordlist = msg.split(" ")
     wordlistsize = len(wordlist)
     logger.debug(msg=f"parse_message wordlist {wordlist} len {wordlistsize}")
+    # try:
+    #     logger.debug(msg="orderparsing NEW")
+    #     orderparsing = await order_parsing(msg)
+    #     logger.debug(msg="orderparsing COMPLETED")
+    #     logger.debug(msg=f"orderparsing {orderparsing}")
+    # except:
+    #     pass
     response = ""
     #🦾BOT FILTERS
-    filter_lst_ignore = ['⚠️','error','Environment','Balance','Bot']
-    filter_lst_order = ['BUY', 'SELL', 'buy','sell']
-    filter_lst_help = ['/echo','/help']
-    filter_lst_bal = ['/bal']
-    filter_lst_pos = ['/pos']
-    filter_lst_quote = ['/q']
-    filter_lst_trading = ['/trading']
-    filter_lst_test = ['/testmode']
-    filter_lst_restart = ['/restart']
-    filter_lst_switch = ['/cex', '/dex', '/cext','/dext']
+    filters = {
+        'ignore': ['⚠️', 'error', 'Environment:', 'Balance', 'Bot'],
+        'order': ['BUY', 'SELL', 'buy', 'sell'],
+        'help': ['/echo', '/help', '/start'],
+        'balance': ['/bal'],
+        'position': ['/pos','/position'],
+        'quote': ['/q'],
+        'trading': ['/trading'],
+        'test_mode': ['/testmode'],
+        'restart': ['/restart'],
+        'exchange_switch': ['/cex', '/dex', '/cext', '/dext']
+    }
     try:
-        if [ele for ele in filter_lst_ignore if(ele in wordlist)]:
-            return
-        elif [ele for ele in filter_lst_help if(ele in wordlist)]:
-            response = await help_command()
-        elif [ele for ele in filter_lst_order if(ele in wordlist)]:
-            if wordlistsize > 1:
-                direction = wordlist[0].upper()
-                symbol = wordlist[1]
-                stoploss = 100
-                takeprofit = 100
-                quantity = 10
-                if wordlistsize > 2:
-                    stoploss = wordlist[2][3:]
-                    takeprofit = wordlist[3][3:]
-                    quantity = wordlist[4][2:-1]
-                order=[direction,symbol,stoploss,takeprofit,quantity]
-                logger.info(msg=f"Order identified: {order}")
-                if order:
-                    res = await execute_order(order[0],order[1],order[2],order[3],order[4])
-                    if res is None:
-                        return
-                    response = f"{res}"
-        elif [ele for ele in filter_lst_switch if(ele in wordlist)]:
-            if wordlistsize > 0:
-                response = await exchange_switch_command(wordlist[1])
-            else:
-                return
-        elif [ele for ele in filter_lst_bal if(ele in wordlist)]:
-            response= await account_balance_command(self)
-        elif [ele for ele in filter_lst_pos if(ele in wordlist)]:
-            response= await  account_position_command(self)
-        elif [ele for ele in filter_lst_trading if(ele in wordlist)]:
-            response = await  trading_switch_command(self)
-        elif [ele for ele in filter_lst_test if(ele in wordlist)]:
-            response = await testmode_switch_command(self)
-        elif [ele for ele in filter_lst_restart if(ele in wordlist)]:
-            response = await  restart_command(self)
-        elif [ele for ele in filter_lst_quote if(ele in wordlist)]:
-            if wordlistsize > 0:
-                response = await quote_command(wordlist[1])
+        for name, keywords in filters.items():
+            if any(keyword in wordlist for keyword in keywords):
+                if name == 'balance':
+                    response = await account_balance_command()
+                elif name == 'exchange_switch':
+                    response = await exchange_switch_command(wordlist[1])
+                elif name == 'help':
+                    response = await help_command()
+                elif name == 'ignore':
+                    return
+                elif name == 'order':
+                    if wordlistsize > 1:
+                        direction = wordlist[0].upper()
+                        stoploss = 100
+                        takeprofit = 100
+                        quantity = 10
+                        if wordlistsize > 2:
+                            stoploss = wordlist[2][3:]
+                            takeprofit = wordlist[3][3:]
+                            quantity = wordlist[4][2:-1]
+                        symbol = wordlist[1]
+                        order=[direction,symbol,stoploss,takeprofit,quantity]
+                        logger.info(msg=f"Order identified: {order}")
+                        res = await execute_order(order[0],order[1],order[2],order[3],order[4])
+                        if res:
+                            response = f"{res}"
+                elif name == 'position':
+                    response = await account_position_command()
+                elif name == 'quote':
+                    response = await quote_command(wordlist[1])
+                elif name == 'restart':
+                    response = await restart_command()
+                elif name == 'test_mode':
+                    response = await testmode_switch_command()
+                elif name == 'trading':
+                    response = await trading_switch_command()
+                if response:
+                    await notify(response)
+    except Exception:
+        logger.warning(msg="Parsing exception")
+
+async def order_parsing(message):
+    logger.info(msg=f"order_parsing with {message}")
+    order_data = []
+    try:
+        if re.match(r'(?:Entry|Take-Profit)', message):
+            logger.info(msg="format 3 identified")
+            # direction_index = message.index('Trade Type:') + 11
+            # direction = message[direction_index:leverage_index].strip()
+            # symbol_index = message.index('Symbol:') + 7
+            # symbol = message[symbol_index:exchange_index].strip()
+            # if len(components) > 2:
+            #     entry_orders_index = message.index('Entry Orders:') + 14
+            #     take_profit_orders_index = message.index('Take-Profit Orders:')
+            #     entry_orders_section = message[entry_orders_index:take_profit_orders_index]
+            #     entry_orders_lines = entry_orders_section.split('\n')[1:-1]
+            #     entry_orders = []
+            #     for line in entry_orders_lines:
+            #         price, percent = line.split('-')
+            #         entry_orders.append((float(price.strip()), float(percent.strip().strip('%'))))
+            #     take_profit_orders_start_index = message.index('Take-Profit Orders:') + 20
+            #     take_profit_orders_section = message[take_profit_orders_start_index:]
+            #     take_profit_orders_lines = take_profit_orders_section.split('\n')[1:-1]
+            #     takeprofit = []
+            #     for line in take_profit_orders_lines:
+            #         price, percent = line.split('-')
+            #         takeprofit.append((float(price.strip()), float(percent.strip().strip('%'))))
+            #     stoploss_index = message.index('Stop Targets:')
+            #     stoploss = float(message[stoploss_index+3:message.index('\n', stoploss_index)])
+            #     leverage_index = message.index('Leverage:')
+            #     leverage = int(message[leverage_index+10:message.index('\n', leverage_index)])
+            #     exchange_index = message.index('Exchange:')
+            #     exchange = message[exchange_index+9:message.index('\n')].strip()
+                # order=[direction,symbol,stoploss,entry_orders,takeprofit,quantity,leverage,exchange]
+                # logger.info(msg=f"order_data {order}")
+        elif re.match(r'(?:⚫|🔵)', message):
+            logger.info(msg="format 2 identified")
+            # direction_index = message.index('⚫') + 1
+            # symbol_index = message.index('💱') + 1
+            # entry_prices_index = message.index('🔵') + 1
+            # stop_loss_index = message.index('🛑') + 1
+            # quantity_index = message.index('📏') + 1
+            # leverage_index = message.index('⚡') + 1
+            # exchange_index = message.index('🏦') + 1
+            # direction = message[symbol_index:entry_prices_index-2].strip()
+            # symbol = message[direction_index:direction_index-2].strip()
+            # if len(components) > 2:
+            #     stoploss = float(message[stop_loss_index:quantity_index-2])
+            #     takeprofit = [float(price) for price in message[entry_prices_index:stop_loss_index-2].split(', ')]
+            #     quantity = int(message[quantity_index:leverage_index-2])
+            #     leverage = int(message[leverage_index:exchange_index-2])
+            #     exchange = message[exchange_index:].strip()
+
+            # logger.info(msg=f"format 2 order_data {order_data}")
+        elif re.match(r'(?:buy|Buy|BUY|sell|Sell|SELL)', message):
+            logger.info(msg=f"format 1 identified for {message}")
+            components = message.split()
+            logger.info(msg=f"components {components}")
+            direction = components[0]
+            symbol = components[1]
+            if len(components) > 2:
+                stoploss=float(components[3:]) if re.match(r'(?:stop|STOP|sl=)', components) else 1000
+                takeprofit[3]=float(components[3:]) if re.match(r'(?:Take-Profit:|TP|tp=)', components) else 1000
+                quantity[4]=float(components[2:].strip('%')) if re.match(r'(?:quantity|unit|q=)', components) else 10
+            order=[direction,symbol,stoploss,takeprofit,quantity]
+            logger.info(msg=f"format 1 order_data {order}")
         else:
-            logger.debug(msg=f"Parsing skipped for {wordlist}")
+            logger.info(msg=f"No valid order format {message}")
             return
-        if (response != ""):
-            await notify(response)
+        return order
     except Exception as e:
-        logger.warning(msg=f"Parsing exception {e}")
-        return
+        logger.warning(msg=f"Order parsing error {e}")
+
 
 async def retrieve_url_json(url,params=None):
     headers = { "User-Agent": "Mozilla/5.0" }
     response = requests.get(url,params =params,headers=headers)
+    logger.debug(msg=f"retrieve_url_json {response}")
     return response.json()
 
 async def verify_latency_ex():
@@ -146,18 +224,15 @@ async def verify_latency_ex():
 
 #💬MESSAGING
 async def notify(msg):
-    if msg=="":
+    if not msg:
         return
-    logger.debug(msg=f"NOTIFICATION START {msg}")
     apobj = apprise.Apprise()
     if bot_service in ['tgram', 'telethon']:
         apobj.add(f'tgram://{str(bot_token)}/{str(bot_channel_id)}')
     elif (bot_service =='discord'):
         apobj.add(f'{bot_service}://{str(bot_webhook_id)}/{str(bot_webhook_token)}')
     elif (bot_service =='matrix'):
-        apobj.add(
-            f"matrixs:// {bot_user}:{bot_pass}@{bot_hostname[8:]}:443/{str(bot_channel_id)}"
-        )
+        apobj.add(f"matrixs://{bot_user}:{bot_pass}@{bot_hostname[8:]}:443/{str(bot_channel_id)}")
     try:
         await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
     except Exception as e:
@@ -261,35 +336,31 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         return
     try:
         if not isinstance(ex,web3.main.Web3):
-            bal = ex.fetch_free_balance()
-            bal = {k: v for k, v in bal.items() if v is not None and v>0}
-            if (len(str(bal))):
-                m_price = float(ex.fetchTicker(f'{symbol}').get('last'))
             if (await get_account_balance()=="No Balance"): 
                 await handle_exception("Check your Balance")
                 return
-            totalusdtbal = get_account_basesymbol_balance()
-            amountpercent=((totalusdtbal)*(float(quantity)/100))/float(m_price) # % of bal
+            asset_out_quote = float(ex.fetchTicker(f'{symbol}').get('last'))
+            totalusdtbal = await get_account_basesymbol_balance() ##ex.fetchBalance()['USDT']['free']
+            amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
             res = ex.create_order(symbol, price_type, direction, amountpercent)
             response = f"⬇️ {symbol}" if (direction=="SELL") else f"⬆️ {symbol}"
             response+= f"\n➕ Size: {res['amount']}\n⚫️ Entry: {res['price']}\nℹ️ {res['id']}\n🗓️ {res['datetime']}"
 
         else:
-     
+
             asset_out_symbol = basesymbol if direction=="BUY" else symbol
             asset_in_symbol = symbol if direction=="BUY" else basesymbol
             response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
             logger.debug(msg=f"asset_out_symbol {asset_out_symbol} asset_in_symbol {asset_in_symbol}")
-            asset_out_address= await search_gecko_contract(asset_out_symbol)
+            asset_out_address= await search_contract(asset_out_symbol)
             asset_out_abi= await fetch_abi_dex(asset_out_address)
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
-            asset_in_address= await search_gecko_contract(asset_in_symbol)
+            asset_in_address= await search_contract(asset_in_symbol)
             order_path_dex=[asset_out_address, asset_in_address]
             asset_out_decimals=asset_out_contract.functions.decimals().call()
             asset_out_balance=await fetch_user_token_balance(asset_out_symbol)
             if (asset_out_balance <=0):
-                msg=f"Balance for {asset_out_symbol} is {asset_out_balance}"
-                await handle_exception(msg)
+                await handle_exception(f"Balance for {asset_out_symbol} is {asset_out_balance}")
                 return
             asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(quantity)/100) #buy %p ercentage  
             #asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
@@ -401,6 +472,7 @@ async def sign_transaction_dex(contract_tx):
 async def fetch_abi_dex(addr):
     try:
         url = abiurl
+        logger.debug(msg=f"fetch_abi_dex url {url}")
         params = {
             "module": "contract",
             "action": "getabi",
@@ -419,8 +491,8 @@ async def fectch_transaction_dex (txHash):
     return checkTransactionRequest['status']
 
 async def fetch_1inch_quote(token):
-    asset_in_address = await search_gecko_contract(token)
-    asset_out_address = await search_gecko_contract('USDC')
+    asset_in_address = await search_contract(token)
+    asset_out_address = await search_contract('USDC')
     try:
         asset_out_amount=1000000000000
         quote_url = f"{dex_1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
@@ -438,12 +510,14 @@ async def fetch_oracle_quote(token):
 
 async def fetch_user_token_balance(token):
     try:
-        token_address= await search_gecko_contract(token)
+        token_address= await search_contract(token)
         token_abi= await fetch_abi_dex(asset_out_address)
         token_contract = ex.eth.contract(address=token_address, abi=token_abi)
         token_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
+        logger.debug(msg=f"token_address {token_address} token_balance {token_balance}")
         return 0 if token_balance <=0 or token_balance is None else token_balance
-    except Exception:
+    except Exception as e:
+        logger.debug(msg=f"fetch_user_token_balance error {e}")
         return 0
 
 async def fetch_account_dex(addr):
@@ -465,15 +539,22 @@ async def estimate_gas(tx):
     estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.2),'wei')
 
 async def search_test_contract(symbol):
+    logger.info(msg=f"📝search_test_contract {symbol} and chainId {chainId}")
     try:
-        tokenlist = 'https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json'
+        tokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
         token_list = await retrieve_url_json(tokenlist)
-        token_list = json.loads(text)['tokens']
-        logger.info(msg=f"token_list {token_list}")
-        symbolcontract = [token for token in token_list if (token['symbol'] == symbol and token['chainId']==chainId)]
+        token_search = token_list['tokens']
+        for keyval in token_search:
+            if (keyval['symbol'] == symbol and keyval['chainId'] == int(chainId)):
+                logger.info(msg=f"address {keyval['address']}")
+                symbolcontract = keyval['address']
         logger.info(msg=f"📝 contract  {symbolcontract}")
         if symbolcontract:
-            return symbolcontract[0]['address']
+            return symbolcontract
+        # symbolcontract = [token for token in token_list if (token['symbol'] == symbol and token['chainId']==chainId)]
+        # logger.info(msg=f"📝 contract  {symbolcontract}")
+        # if symbolcontract:
+        #     return symbolcontract[0]['address']
     except Exception as e:
         logger.error(msg=f"search_test_contract error {token}")
         await HandleExceptions(e)
@@ -508,12 +589,9 @@ async def search_gecko_detailed(token):
 
 async def search_gecko_contract(token):
     try:
-        if (ex_test_mode=='True'):
-            coin_contract = await search_test_contract(token)
-        else:
-            coin_info = await search_gecko(token)
-            coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
-            logger.info(msg=f"🦎 contract {token} {coin_contract}")
+        coin_info = await search_gecko(token)
+        coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
+        logger.info(msg=f"🦎 contract {token} {coin_contract}")
         return ex.to_checksum_address(coin_contract)
     except Exception:
         return
@@ -540,21 +618,30 @@ async def search_gecko_exchange(exchange):
 
 async def fetch_gecko_asset_price(token):
     try:
-        asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
+        asset_in_address = ex.to_checksum_address(await search_contract(token))
         fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{await search_gecko_platform()}',contract_address=asset_in_address)
         return fetch_tokeninfo['market_data']['current_price']['usd']
     except Exception:
         return
 
-
 async def fetch_gecko_quote(token):
     try:
-        asset_in_address = ex.to_checksum_address(await search_gecko_contract(token))
+        asset_in_address = ex.to_checksum_address(await search_contract(token))
         fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{await search_gecko_platform()}',contract_address=asset_in_address)
         logger.debug(msg=f"fetch_tokeninfo{fetch_tokeninfo}")
         asset_out_cg_quote = fetch_tokeninfo['market_data']['current_price']['usd']
         asset_out_cg_name = fetch_tokeninfo['name']
         return f"{asset_out_cg_name}\n🦎{asset_out_cg_quote} USD"
+    except Exception:
+        return
+
+async def search_contract(token):
+    try:
+        if ex_test_mode == 'True':
+            token_contract = await search_test_contract(token)
+        else:
+            token_contract = await search_gecko_contract(token)
+        return ex.to_checksum_address(token_contract)
     except Exception:
         return
 
@@ -570,6 +657,17 @@ async def get_account_balance():
                 sbal = "No Balance"
             msg += f"{sbal}"
         else:
+        #     tokens = [
+        # {'address': '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', 'decimals': 18, 'symbol': 'UNI'},
+        #     ]
+            # balances = {}
+
+            # # Retrieve balance of each token in wallet
+            # for token in tokens:
+            #     token_contract = web3.eth.contract(address=Web3.toChecksumAddress(token['address']), abi=erc20_abi)
+            #     balance = token_contract.functions.balanceOf(Web3.toChecksumAddress(wallet_address)).call() / 10**token['decimals']
+            #     balances[token['symbol']] = balance
+            # return balances
             bal = ex.eth.get_balance(walletaddress)
             bal = round(ex.from_wei(bal,'ether'),5)
             basesymbol_bal = await get_account_basesymbol_balance()
@@ -579,40 +677,41 @@ async def get_account_balance():
         return
 
 async def get_account_basesymbol_balance():
-    return (
-        round(
-            ex.from_wei(await fetch_user_token_balance(basesymbol), 'ether'), 5
-        )
-        if isinstance(ex, web3.main.Web3)
-        else ex.fetchBalance()['USDT']
-    )
+    if isinstance(ex, web3.main.Web3):
+        return round(ex.from_wei(await fetch_user_token_balance(basesymbol), 'ether'), 5)
+    else:
+        return ex.fetchBalance()['USDT']['free']
+    
 
 async def get_account_position():
     try:
         logger.debug(msg="get_account_position")
         if not isinstance(ex,web3.main.Web3):
             positions = ex.fetch_positions()
-            logger.debug(f"positions {positions}")
             open_positions = [p for p in positions if p['type'] == 'open']
-            logger.debug(f"open_positions {open_positions}")
-            msg = f"open_positions {open_positions}"
         else:
-            # asset_position_address= await search_gecko_contract(asset_out_symbol)
+            # asset_position_address= await search_contract(asset_out_symbol)
             # asset_position_abi= await fetch_abi_dex(asset_out_address)
             # asset_position_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
             # open_positions = asset_position_contract.functions.getOpenPositions(walletaddress).call()
-            pos = "DEX POS WiP"
-            logger.debug(msg=f"pos {pos}")
-            msg = f"{pos}"
-        logger.debug(f"msg {msg}")
-        return msg
+            open_positions = "DEX POS WiP"
+        logger.debug(msg=f"open_positions {open_positions}")
+        return open_positions or 0
     except Exception:
-        logger.debug("get_account_position exception")
+        await handle_exception(e)
+
+async def get_account_margin():
+    try:
+        return
+    except Exception as e:
+        await handle_exception(e)
+        return
 
 async def get_wallet_auth():
     try:
         return
     except Exception as e:
+        await handle_exception(e)
         return
 
 #======= error handling
@@ -623,8 +722,6 @@ async def handle_exception(e) -> None:
     except KeyError:
         msg = "DB content error"
         sys.exit()
-    except IndexError:
-        msg = "Parsing error"
     except telegram.error:
         msg = "telegram error"
     except ConnectionError:
@@ -695,7 +792,6 @@ async def database_setup():
             cex_db = db.table('cex')
             dex_db = db.table('dex')
             bot = bot_db.search(q.env == defaultenv)
-            logger.debug(msg=f"{bot}")
             bot_trading_switch = True
             bot_service = bot[0]['service']
             bot_token = bot[0]['token']
@@ -725,20 +821,20 @@ async def database_setup():
             logger.warning(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
 
 #🦾BOT ACTIONS
-async def post_init(self='bot'):
+async def post_init():
     startup_message=f"Bot is online {TTversion}"
     logger.info(msg = f"{startup_message}")
     await notify(startup_message)
 
-async def help_command() -> None:
+async def help_command():
     bot_ping = await verify_latency_ex()
     helpcommand = """
-    🏦 <code>/bal</code>
-    🏛️ <code>/cex kraken</code>
-    🥞 <code>/dex pancake</code>
-    🦄 <code>/dex uniswap_v2</code>
-    📦 <code>buy btc/usdt sl=1000 tp=20 q=1%</code>
-           <code>buy cake</code>
+    🏦<code>/bal</code>
+    🏛️<code>/cex kraken</code>
+    🥞<code>/dex pancake</code>
+    🦄<code>/dex uniswap_v2</code>
+    📦<code>buy btc/usdt sl=1000 tp=20 q=1%</code>
+        <code>buy cake</code>
     🦎 <code>/q BTCB</code>
            <code>/q WBTC</code>
            <code>/q btc/usdt</code>
@@ -750,24 +846,24 @@ async def help_command() -> None:
     bot_menu_help = f"{TTversion}\n{helpcommand}"
     return f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
 
-async def account_balance_command(self='bot') -> None:
+async def account_balance_command():
     balance =f"🏦 Balance\n"
     balance += await get_account_balance()
     return balance
 
-async def account_position_command(self='bot') -> None:
+async def account_position_command():
+    logger.debug(msg="account_position_command")
     position = f"📊 Position\n"
     position += await get_account_position()
     return position
 
-async def quote_command(symbol) -> None:
+async def quote_command(symbol):
     asset_out_cg_quote = await fetch_gecko_quote(symbol)
     response=f"₿ {asset_out_cg_quote}\n"
     if (isinstance(ex,web3.main.Web3)):
-        if(await search_gecko_contract(symbol) != None):
+        if(await search_contract(symbol) != None):
             asset_out_1inch_quote = await fetch_1inch_quote (symbol)
-            response+=f"🦄{asset_out_1inch_quote} USD\n🖊️{chainId}: {await search_gecko_contract(symbol)}"
-            #response+=f"/n{await search_gecko_detailed(symbol)}"
+            response+=f"🦄{asset_out_1inch_quote} USD\n🖊️{chainId}: {await search_contract(symbol)}"
     else:
         price= ex.fetch_ticker(symbol.upper())['last']
         response+=f"🏛️ {price} USD"
@@ -775,20 +871,22 @@ async def quote_command(symbol) -> None:
 
 async def exchange_switch_command(name):
     exchange_search = await search_exchange(name)
+    if not exchange_search:
+        return
     res = await load_exchange(exchange_search['name'])
     return f"{ex_name} is active"
 
-async def trading_switch_command(self='bot') -> None:
+async def trading_switch_command():
     global bot_trading_switch
     bot_trading_switch = not bot_trading_switch
     return f"Trading is {bot_trading_switch}"
 
-async def testmode_switch_command(self='bot') -> None:
+async def testmode_switch_command():
     global ex_test_mode
     ex_test_mode = not ex_test_mode
     return f"Test mode is {ex_test_mode}"
 
-async def restart_command(self='bot') -> None:
+async def restart_command():
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
 
@@ -888,7 +986,8 @@ async def notifybot(request: Request):
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
+    HOST=os.getenv("HOST", "0.0.0.0")
     PORT=os.getenv("PORT", "8080")
-    uvicorn.run(app, host='0.0.0.0', port=PORT)
+    uvicorn.run(app, host=HOST, port=PORT)
 
 

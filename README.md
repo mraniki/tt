@@ -2,7 +2,7 @@
 
 
 
-[![Logo](https://i.imgur.io/Q7iDDyB_d.webp?maxwidth=640&shape=thumb&fidelity=medium)](https://github.com/mraniki/tt)
+[![Logo](https://i.imgur.io/Q7iDDyB_d.webp?maxwidth=640&shape=thumb&fidelity=medium)](https://github.com/mraniki/tt)<img width="340" alt="Screenshot 2023-02-28 at 20 39 47" src="https://user-images.githubusercontent.com/8766259/222161597-114d488b-ad9c-4468-8dd4-083f435cbb7b.png">
 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)
 
@@ -32,7 +32,7 @@ If you like it, feel free to
 
 ## Install
 1) Create your channel/room and your platform bot 
-    - Telegram via [Telegram @BotFather](https://core.telegram.org/bots/tutorial) if you use Telethon [create an api key](https://core.telegram.org/api/obtaining_api_id) 
+    - Telegram via [Telegram @BotFather](https://core.telegram.org/bots/tutorial) if you use Telethon [create an api key](https://docs.telethon.dev/en/stable/basic/signing-in.html) 
     - Discord via [Discord Dev Portal](https://discord.com/developers/docs/intro)
     - Matrix via [Matrix.org](https://turt2live.github.io/matrix-bot-sdk/index.html)
 2) Get your 
@@ -89,8 +89,12 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Support multiple messaging platform (Telegram, Matrix and Discord)
  - Include healthcheck, webhook and notify capability via FastAPI webserver on port 8080 with build-in JSON API swagger
 
+## Questions? Want to help? 
+Lost? [join us on group chat](https://github.com/mraniki/tt/discussions/49)
+
+ 
 ## 📷 Screenshots
-![IMG_2517](https://user-images.githubusercontent.com/8766259/199422978-dc3322d9-164b-42af-9cf2-84c6bc3dae29.jpg)
+<img width="340" alt="Screenshot 2023-02-28 at 20 39 47" src="https://user-images.githubusercontent.com/8766259/222161597-114d488b-ad9c-4468-8dd4-083f435cbb7b.png">
 
 [more screenshots](https://github.com/mraniki/tt/wiki/Screenshots)
 
