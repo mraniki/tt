@@ -2,7 +2,7 @@
 
 
 
-[![Logo](https://i.imgur.io/Q7iDDyB_d.webp?maxwidth=640&shape=thumb&fidelity=medium)](https://github.com/mraniki/tt)
+[![Logo](https://i.imgur.io/Q7iDDyB_d.webp?maxwidth=640&shape=thumb&fidelity=medium)](https://github.com/mraniki/tt)<img width="340" alt="Screenshot 2023-02-28 at 20 39 47" src="https://user-images.githubusercontent.com/8766259/222161597-114d488b-ad9c-4468-8dd4-083f435cbb7b.png">
 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)
 
