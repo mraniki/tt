@@ -511,6 +511,7 @@ async def fetch_oracle_quote(token):
 async def fetch_user_token_balance(token):
     try:
         if ex_test_mode == 'True':
+            logger.debug(msg=f"fetch_user_token_balance TEST {token} wallet{walletaddress}")
             token_address= await search_test_contract(token)
         else:
             token_address= await search_gecko_contract(token)
@@ -519,7 +520,8 @@ async def fetch_user_token_balance(token):
         token_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
         logger.debug(msg=f"token_address {token_address} token_balance {token_balance}")
         return 0 if token_balance <=0 or token_balance is None else token_balance
-    except Exception:
+    except Exception as e:
+        logger.debug(msg=f"fetch_user_token_balance error {e}")
         return 0
 
 async def fetch_account_dex(addr):
@@ -553,8 +555,10 @@ async def search_test_contract(symbol):
         logger.info(msg=f"📝 contract  {symbolcontract}")
         if symbolcontract:
             return symbolcontract
-        #symbolcontract = [token for token in token_search[0] if (token_search['symbol'] == symbol and token_search['chainId']==chainId)]
-
+        # symbolcontract = [token for token in token_list if (token['symbol'] == symbol and token['chainId']==chainId)]
+        # logger.info(msg=f"📝 contract  {symbolcontract}")
+        # if symbolcontract:
+        #     return symbolcontract[0]['address']
     except Exception as e:
         logger.error(msg=f"search_test_contract error {token}")
         await HandleExceptions(e)
