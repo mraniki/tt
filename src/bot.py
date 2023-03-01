@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.88"
+TTversion="🪙🗿 TT Beta 1.2.89"
 
 ##=============== import  =============
 ##log
@@ -352,6 +352,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
             logger.debug(msg=f"asset_out_symbol {asset_out_symbol} asset_in_symbol {asset_in_symbol}")
             asset_out_address= await search_gecko_contract(asset_out_symbol)
+            logger.debug(msg=f"asset_out_address {asset_out_address}")
             asset_out_abi= await fetch_abi_dex(asset_out_address)
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
             asset_in_address= await search_gecko_contract(asset_in_symbol)
@@ -535,10 +536,12 @@ async def estimate_gas(tx):
     estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.2),'wei')
 
 async def search_test_contract(symbol):
+    logger.info(msg=f"📝search_test_contract {symbol}")
     try:
-        tokenlist = 'https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json'
+        tokenlist = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
+        logger.info(msg=f"tokenlist {tokenlist}")
         token_list = await retrieve_url_json(tokenlist)
-        token_list = json.loads(text)['tokens']
+        token_list = json.loads(token_list)['tokens']
         logger.info(msg=f"token_list {token_list}")
         symbolcontract = [token for token in token_list if (token['symbol'] == symbol and token['chainId']==chainId)]
         logger.info(msg=f"📝 contract  {symbolcontract}")
@@ -579,7 +582,9 @@ async def search_gecko_detailed(token):
 async def search_gecko_contract(token):
     try:
         if ex_test_mode == 'True':
+            logger.info(msg=f"📝 Test contract search for {token} {ex_test_mode}")
             coin_contract = await search_test_contract(token)
+            logger.info(msg=f"📝 test contract identified {coin_contract}")
         else:
             coin_info = await search_gecko(token)
             coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
