@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.90"
+TTversion="🪙🗿 TT Beta 1.2.91"
 
 ##=============== import  =============
 ##log
@@ -53,7 +53,7 @@ logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
 #🔗API
 gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
 dex_1inch_api = "https://api.1inch.exchange/v5.0"
-dex_0x_api = "https://api.0x.org/orderbook/v1/"
+dex_0x_api = "https://api.0x.org/orderbook/v1"
 
 #🔁UTILS
 async def verify_import_library():
@@ -353,12 +353,12 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
             logger.debug(msg=f"asset_out_symbol {asset_out_symbol} asset_in_symbol {asset_in_symbol}")
             asset_out_address= await search_contract(asset_out_symbol)
-            if asset_out_address is None
+            if asset_out_address is None:
                 await handle_exception("symbol not supported")
             asset_out_abi= await fetch_abi_dex(asset_out_address)
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
             asset_in_address= await search_contract(asset_in_symbol)
-            if asset_in_address is None
+            if asset_in_address is None:
                 await handle_exception("symbol not supported")
             order_path_dex=[asset_out_address, asset_in_address]
             asset_out_decimals=asset_out_contract.functions.decimals().call()
