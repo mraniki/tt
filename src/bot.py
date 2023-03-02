@@ -355,11 +355,13 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             asset_out_address= await search_contract(asset_out_symbol)
             if asset_out_address is None:
                 await handle_exception("symbol not supported")
+                return
             asset_out_abi= await fetch_abi_dex(asset_out_address)
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
             asset_in_address= await search_contract(asset_in_symbol)
             if asset_in_address is None:
                 await handle_exception("symbol not supported")
+                return
             order_path_dex=[asset_out_address, asset_in_address]
             asset_out_decimals=asset_out_contract.functions.decimals().call()
             asset_out_balance=await fetch_user_token_balance(asset_out_symbol)
