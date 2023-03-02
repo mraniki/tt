@@ -354,13 +354,13 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             logger.debug(msg=f"asset_out_symbol {asset_out_symbol} asset_in_symbol {asset_in_symbol}")
             asset_out_address= await search_contract(asset_out_symbol)
             if asset_out_address is None:
-                await handle_exception("symbol not supported")
+                await handle_exception("{asset_out_symbol} not supported")
                 return
             asset_out_abi= await fetch_abi_dex(asset_out_address)
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
             asset_in_address= await search_contract(asset_in_symbol)
             if asset_in_address is None:
-                await handle_exception("symbol not supported")
+                await handle_exception("{asset_in_symbol} not supported")
                 return
             order_path_dex=[asset_out_address, asset_in_address]
             asset_out_decimals=asset_out_contract.functions.decimals().call()
