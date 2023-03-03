@@ -577,7 +577,7 @@ async def search_gecko(token):
                 api_symbol = i['api_symbol']
                 coin_info =gecko_api.get_coin_by_id(api_symbol)
                 logger.debug(msg=f"coin_info {coin_info}")
-                if (await search_gecko_platform()):
+                if (coin_info['platforms'][f'{await search_gecko_platform()}']):
                     return coin_info
     except Exception:
         return
