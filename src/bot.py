@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.91"
+TTversion="🪙🗿 TT Beta 1.2.92"
 
 ##=============== import  =============
 ##log
@@ -577,7 +577,8 @@ async def search_gecko(token):
                 api_symbol = i['api_symbol']
                 coin_info =gecko_api.get_coin_by_id(api_symbol)
                 logger.debug(msg=f"coin_info {coin_info}")
-                return coin_info
+                if (await search_gecko_platform()):
+                    return coin_info
     except Exception:
         return
 
@@ -609,6 +610,8 @@ async def search_gecko_platform():
             results_search_chain = i['chain_identifier']
             if (results_search_chain == int(chainId)):
                 return i['id']
+            else:
+                return
     except Exception:
         return
 
