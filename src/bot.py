@@ -205,7 +205,6 @@ async def order_parsing(message):
     except Exception as e:
         logger.warning(msg=f"Order parsing error {e}")
 
-
 async def retrieve_url_json(url,params=None):
     headers = { "User-Agent": "Mozilla/5.0" }
     response = requests.get(url,params =params,headers=headers)
@@ -672,7 +671,7 @@ async def fetch_token_balance(token):
     try:
         if isinstance(ex, web3.main.Web3):
             token_address= await search_contract(token)
-            token_abi= await fetch_abi_dex(asset_out_address)
+            token_abi= await fetch_abi_dex(token_address)
             token_contract = ex.eth.contract(address=token_address, abi=token_abi)
             token_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
             logger.debug(msg=f"token_address {token_address} token_balance {token_balance}")
