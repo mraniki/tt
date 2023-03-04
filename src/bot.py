@@ -580,26 +580,38 @@ async def search_gecko_contract(token):
     except Exception:
         return
 
+# async def search_gecko(token):
+#     try:
+#         symbol_info = gecko_api.search(query=token)
+#         logger.debug(msg=f"🦎 Search {symbol_info}")
+#         coin_platform = await search_gecko_platform()
+#         for i in symbol_info['coins']['symbol']:
+#             results_search_coin = i['api_symbol']
+#             logger.debug(msg=f"1 {i}")
+#             #logger.debug(msg=f"results_search_coin {results_search_coin}")
+#             if (results_search_coin==token.upper()):
+#                 logger.debug(msg=f"2 {i}")
+#                 api_symbol = i['api_symbol']
+#                 # logger.debug(msg=f"api_symbol {api_symbol}")
+#                 coin_info = gecko_api.get_coin_by_id(api_symbol)
+#                 # logger.debug(msg=f"coin_platform {coin_platform} coin_info {coin_info}")
+#                 return coin_info
+#     except Exception:
+#         return
+
 async def search_gecko(token):
     try:
         symbol_info = gecko_api.search(query=token)
-        # logger.debug(msg=f"🦎 Search {symbol_info}")
+        logger.debug(msg=f"🦎 Search {symbol_info}")
         coin_platform = await search_gecko_platform()
-        # output_dict = [x for x in symbol_info if x['symbol'] == token.upper()]
         for i in symbol_info['coins']:
             results_search_coin = i['symbol']
-            # logger.debug(msg=f"1 {i}")
-            #logger.debug(msg=f"results_search_coin {results_search_coin}")
-            if (results_search_coin==token.upper()):
-                logger.debug(msg=f"2 {i}")
-                api_symbol = i['api_symbol']
-                # logger.debug(msg=f"api_symbol {api_symbol}")
-                coin_info = gecko_api.get_coin_by_id(api_symbol)
-                # logger.debug(msg=f"coin_platform {coin_platform} coin_info {coin_info}")
-                return coin_info
+            coin_info = gecko_api.get_coin_by_id(i['api_symbol'])
+            if (coin_info['platforms'][f'{coin_platform}']):
+                if (results_search_coin==token.upper()):
+                    return coin_info
     except Exception:
         return
-
 
 async def search_gecko_platform():
     try:
