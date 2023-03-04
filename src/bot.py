@@ -673,7 +673,7 @@ async def fetch_token_balance(token):
             token_address= await search_contract(token)
             token_abi= await fetch_abi_dex(token_address)
             token_contract = ex.eth.contract(address=token_address, abi=token_abi)
-            token_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
+            token_balance=token_contract.functions.balanceOf(walletaddress).call()
             logger.debug(msg=f"token_address {token_address} token_balance {token_balance}")
             return 0 if token_balance <=0 or token_balance is None else token_balance
         else:
