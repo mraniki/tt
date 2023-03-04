@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.93"
+TTversion="🪙🗿 TT Beta 1.2.94"
 
 ##=============== import  =============
 ##log
@@ -580,51 +580,31 @@ async def search_gecko_contract(token):
     except Exception:
         return
 
-# async def search_gecko(token):
-#     try:
-#         symbol_info = gecko_api.search(query=token)
-#         logger.debug(msg=f"🦎 Search {symbol_info}")
-#         coin_platform = await search_gecko_platform()
-#         for i in symbol_info['coins']['symbol']:
-#             results_search_coin = i['api_symbol']
-#             logger.debug(msg=f"1 {i}")
-#             #logger.debug(msg=f"results_search_coin {results_search_coin}")
-#             if (results_search_coin==token.upper()):
-#                 logger.debug(msg=f"2 {i}")
-#                 api_symbol = i['api_symbol']
-#                 # logger.debug(msg=f"api_symbol {api_symbol}")
-#                 coin_info = gecko_api.get_coin_by_id(api_symbol)
-#                 # logger.debug(msg=f"coin_platform {coin_platform} coin_info {coin_info}")
-#                 return coin_info
-#     except Exception:
-#         return
-
 async def search_gecko(token):
     try:
         coin_platform = await search_gecko_platform()
         search_results = gecko_api.search(query=token)
         search_dict = search_results['coins']
-        #logger.debug(msg=f"🦎 search_dict {search_dict}")
         filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
-        logger.debug(msg=f"❤️ filtered_dict {filtered_dict}")
-        for z in filtered_dict:
-            logger.debug(msg=f"🔥 coin_info {z['api_symbol']}")
-            coin_dict = gecko_api.get_coin_by_id(z['api_symbol'])
-            if coin_dict['platforms'][f'{coin_platform}'] is not None:
-                return coin_dict
-
-    except Exception:
+        api_dict = [ sub['api_symbol'] for sub in filtered_dict ]
+        for i in api_dict:
+            coin_dict = gecko_api.get_coin_by_id(i)
+            try:
+                if coin_dict['platforms'][f'{coin_platform}'] is not None:
+                    return coin_dict
+            except KeyError:
+                pass
+    except Exception as e:
+        logger.error(msg=f"search_gecko error {e}")
         return
 
 async def search_gecko_platform():
     try:
         assetplatform = gecko_api.get_asset_platforms()
         output_dict = [x for x in assetplatform if x['chain_identifier'] == int(chainId)]
-        logger.debug(msg=f"🦎 coin_platform results {output_dict[0]['id']}")
         return output_dict[0]['id']
     except Exception as e:
         logger.debug(msg=f"search_gecko_platform error {e}")
-
 
 async def search_gecko_exchange(exchange):
     try:
