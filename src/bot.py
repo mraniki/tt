@@ -81,7 +81,7 @@ async def parse_message(self,msg):
     #🦾BOT FILTERS
     filters = {
         'ignore': ['⚠️', 'error', 'Environment:', 'Balance', 'Bot'],
-        'order': ['BUY', 'SELL', 'buy', 'sell'],
+        'order': ['BUY', 'SELL', 'buy', 'sell', 'Buy','Sell'],
         'help': ['/echo', '/help', '/start'],
         'balance': ['/bal'],
         'position': ['/pos','/position'],
