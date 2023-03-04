@@ -601,15 +601,18 @@ async def search_gecko_contract(token):
 
 async def search_gecko(token):
     try:
-        symbol_info = gecko_api.search(query=token)
-        logger.debug(msg=f"🦎 Search {symbol_info}")
         coin_platform = await search_gecko_platform()
-        for i in symbol_info['coins']:
-            results_search_coin = i['symbol']
-            coin_info = gecko_api.get_coin_by_id(i['api_symbol'])
-            if (coin_info['platforms'][f'{coin_platform}']):
-                if (results_search_coin==token.upper()):
-                    return coin_info
+        search_results = gecko_api.search(query=token)
+        search_dict = search_results['coins']
+        #logger.debug(msg=f"🦎 search_dict {search_dict}")
+        filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
+        logger.debug(msg=f"❤️ filtered_dict {filtered_dict}")
+        for z in filtered_dict:
+            logger.debug(msg=f"🔥 coin_info {z['api_symbol']}")
+            coin_dict = gecko_api.get_coin_by_id(z['api_symbol'])
+            if coin_dict['platforms'][f'{coin_platform}'] is not None:
+                return coin_dict
+
     except Exception:
         return
 
