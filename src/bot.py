@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.90"
+TTversion="🪙🗿 TT Beta 1.2.95"
 
 ##=============== import  =============
 ##log
@@ -33,6 +33,7 @@ from web3 import Web3
 from web3.middleware import geth_poa_middleware
 from ens import ENS
 from datetime import datetime
+import time
 #API
 from fastapi import FastAPI, Header, HTTPException, Request
 import uvicorn
@@ -53,7 +54,7 @@ logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
 #🔗API
 gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
 dex_1inch_api = "https://api.1inch.exchange/v5.0"
-dex_0x_api = "https://api.0x.org/orderbook/v1/"
+dex_0x_api = "https://api.0x.org/orderbook/v1"
 
 #🔁UTILS
 async def verify_import_library():
@@ -81,7 +82,7 @@ async def parse_message(self,msg):
     #🦾BOT FILTERS
     filters = {
         'ignore': ['⚠️', 'error', 'Environment:', 'Balance', 'Bot'],
-        'order': ['BUY', 'SELL', 'buy', 'sell'],
+        'order': ['BUY', 'SELL', 'buy', 'sell', 'Buy','Sell'],
         'help': ['/echo', '/help', '/start'],
         'balance': ['/bal'],
         'position': ['/pos','/position'],
@@ -204,7 +205,6 @@ async def order_parsing(message):
         return order
     except Exception as e:
         logger.warning(msg=f"Order parsing error {e}")
-
 
 async def retrieve_url_json(url,params=None):
     headers = { "User-Agent": "Mozilla/5.0" }
@@ -353,12 +353,19 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
             logger.debug(msg=f"asset_out_symbol {asset_out_symbol} asset_in_symbol {asset_in_symbol}")
             asset_out_address= await search_contract(asset_out_symbol)
+            if asset_out_address is None:
+                await handle_exception(f"{asset_out_symbol} not supported")
+                return
             asset_out_abi= await fetch_abi_dex(asset_out_address)
             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
             asset_in_address= await search_contract(asset_in_symbol)
+            if asset_in_address is None:
+                await handle_exception(f"{asset_in_symbol} not supported")
+                return
+            logger.debug(msg=f"asset_out_address {asset_out_address} asset_in_address {asset_in_address}")
             order_path_dex=[asset_out_address, asset_in_address]
             asset_out_decimals=asset_out_contract.functions.decimals().call()
-            asset_out_balance=await fetch_user_token_balance(asset_out_symbol)
+            asset_out_balance = await fetch_token_balance(asset_out_symbol)
             if (asset_out_balance <=0):
                 await handle_exception(f"Balance for {asset_out_symbol} is {asset_out_balance}")
                 return
@@ -366,41 +373,56 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             #asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
             asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
             slippage=2# max 2% slippage
-            transaction_amount = (asset_out_amount_converted *(slippage/100)) 
-            deadline = ex.eth.get_block("latest")["timestamp"] + 3600 # or deadline = (int(time.time()) + 1000000)
+            transaction_amount = int((asset_out_amount_converted *(slippage/100))) 
+            try:
+                #deadline = ex.eth.get_block("latest")["timestamp"] + 3600 # or 
+                deadline = (int(time.time()) + 1000000)
+            except Exception as e:
+                logger.error(msg=f"Exception deadline {e}")
+                await handle_exception(e)
+                return
             if dex_version == 'uni_v2': 
-                #https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02
-                await approve_asset_router(asset_out_address)
-                transaction_getoutput_amount  = router_instance.functions.getOutputAmount(transaction_amount, order_path_dex).call()
-                transaction_minimum_amount = int(transaction_getoutput_amount[1])
-                swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress,deadline)
+                await approve_asset_router(asset_out_address,asset_out_contract)
+                transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
+                swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,walletaddress,deadline)
                 tx_token = await sign_transaction_dex(swap_TX)
-
             elif dex_version == "1inch_v5.0": 
-                #https://docs.1inch.io/docs/aggregation-protocol/api/swagger/#
-                await approve_asset_router(asset_out_address)
-                swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
-                swap_TX = await retrieve_url_json(swap_url)
+                logger.debug(msg=f"1inch_v5 processing")
+                await approve_asset_router(asset_out_address,asset_out_contract)
+                try:
+                    swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
+                    logger.debug(msg=f"swap_url {swap_url}")
+                except Exception as e:
+                    logger.error(msg=f"Exception with order processing {e}")
+                    await handle_exception(e)
+                    return
+                try:
+                    swap_TX = await retrieve_url_json(swap_url)
+                    logger.debug(msg=f"swap_TX {swap_TX}")
+                except Exception as e:
+                    logger.error(msg=f"Exception with order processing {e}")
+                    await handle_exception(e)
+                    return
                 tx_token= await sign_transaction_dex(swap_TX)
-
             elif dex_version == "uni_v3":
-                # https://docs.uniswap.org/contracts/v3/guides/swaps/single-swaps
-                await approve_asset_router(asset_out_address)
+                await approve_asset_router(asset_out_address,asset_out_contract)
                 sqrtPriceLimitX96 = 0
                 fee = 3000
-                transaction_minimum_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
-                swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_minimum_amount,sqrtPriceLimitX96)
+                transaction_min_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
+                swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_min_amount,sqrtPriceLimitX96)
                 tx_token = await sign_transaction_dex(swap_TX)
-
-            elif dex_version == "1inch_LimitOrder_v2":
+            elif dex_version == "1inch_limitorder_v2":
                 #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
+                return
+            elif dex_version == "0x_limitorder_v4":
+                #https://protocol.0x.org/en/latest/basics/orders.html
                 return
 
             txHash = str(ex.to_hex(tx_token))
             txResult = await fectch_transaction_dex(txHash)
             txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
             if(txResult == "1"):
-                response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {await fetch_gecko_asset_price(asset_in_address)}USD \nℹ️ {txHash}\n⛽️ {txHashDetail['gasUsed']}\n🗓️ {datetime.now()}"
+                response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {await fetch_gecko_asset_price(asset_in_symbol)}USD \nℹ️ {txHash}\n⛽️ {txHashDetail['gasUsed']}\n🗓️ {datetime.now()}"
                 logger.info(msg=f"{response}")
 
         return response
@@ -419,7 +441,7 @@ async def resolve_ens_dex(addr):
     except Exception as e:
         await handle_exception(e)
 
-async def approve_asset_router(asset_out_address):
+async def approve_asset_router(asset_out_address,asset_out_contract):
     try:
         if dex_version in ["uni_v2", "uni_v3"]:
             approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
@@ -439,6 +461,7 @@ async def approve_asset_router(asset_out_address):
                 approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={asset_out_address}"
                 approval_response = await retrieve_url_json(approval_URL)
     except Exception as e:
+        logger.debug(msg=f"🔥 approve_asset_router error {e}")
         await handle_exception(e)
 
 async def sign_transaction_dex(contract_tx):
@@ -492,7 +515,7 @@ async def fectch_transaction_dex (txHash):
 
 async def fetch_1inch_quote(token):
     asset_in_address = await search_contract(token)
-    asset_out_address = await search_contract('USDC')
+    asset_out_address = await search_contract('usdc')
     try:
         asset_out_amount=1000000000000
         quote_url = f"{dex_1inch_api}/{chainId}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
@@ -508,17 +531,8 @@ async def fetch_oracle_quote(token):
     except Exception:
         return
 
-async def fetch_user_token_balance(token):
-    try:
-        token_address= await search_contract(token)
-        token_abi= await fetch_abi_dex(asset_out_address)
-        token_contract = ex.eth.contract(address=token_address, abi=token_abi)
-        token_balance=asset_out_contract.functions.balanceOf(walletaddress).call()
-        logger.debug(msg=f"token_address {token_address} token_balance {token_balance}")
-        return 0 if token_balance <=0 or token_balance is None else token_balance
-    except Exception as e:
-        logger.debug(msg=f"fetch_user_token_balance error {e}")
-        return 0
+async def estimate_gas(tx):
+    estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.2),'wei')
 
 async def fetch_account_dex(addr):
     url = abiurl
@@ -534,9 +548,6 @@ async def fetch_account_dex(addr):
     except:
         return None
     return int(d['result']) / self.zeroes
-
-async def estimate_gas(tx):
-    estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.2),'wei')
 
 async def search_test_contract(symbol):
     logger.info(msg=f"📝search_test_contract {symbol} and chainId {chainId}")
@@ -560,51 +571,52 @@ async def search_test_contract(symbol):
         await HandleExceptions(e)
         return
 
+async def search_contract(token):
+    try:
+        if ex_test_mode == 'True':
+            token_contract = await search_test_contract(token)
+        else:
+            token_contract = await search_gecko_contract(token)
+        return ex.to_checksum_address(token_contract)
+    except Exception:
+        return
+
 #🦎GECKO
-async def search_gecko(token):
-    try:
-        symbol_info = gecko_api.search(query=token)
-        logger.debug(msg=f"🦎 Search {symbol_info}")
-        for i in symbol_info['coins']:
-            results_search_coin = i['symbol']
-            if (results_search_coin==token.upper()):
-                api_symbol = i['api_symbol']
-                coin_info =gecko_api.get_coin_by_id(api_symbol)
-                logger.debug(msg=f"coin_info {coin_info}")
-                return coin_info
-    except Exception:
-        return
-
-async def search_gecko_detailed(token):
-    try:
-        coin_info = await search_gecko(token)
-        coin_symbol= coin_info['symbol']
-        coin_platform = coin_info['asset_platform_id']
-        coin_image = coin_info['image']['small']
-        coin_link = coin_info['links']['homepage'][0]
-        coin_price = coin_info['market_data']['current_price']['usd']
-        return f'Symbol {coin_symbol}\nPlatform {coin_platform}\nPrice: {coin_price} USD\nmore info {coin_link} {coin_image}'
-    except Exception:
-        return
-
 async def search_gecko_contract(token):
     try:
         coin_info = await search_gecko(token)
-        coin_contract = coin_info['platforms'][f'{await search_gecko_platform()}']
+        coin_platform = await search_gecko_platform()
+        coin_contract = coin_info['platforms'][f'{coin_platform}']
         logger.info(msg=f"🦎 contract {token} {coin_contract}")
         return ex.to_checksum_address(coin_contract)
     except Exception:
         return
 
+async def search_gecko(token):
+    try:
+        coin_platform = await search_gecko_platform()
+        search_results = gecko_api.search(query=token)
+        search_dict = search_results['coins']
+        filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
+        api_dict = [ sub['api_symbol'] for sub in filtered_dict ]
+        for i in api_dict:
+            coin_dict = gecko_api.get_coin_by_id(i)
+            try:
+                if coin_dict['platforms'][f'{coin_platform}'] is not None:
+                    return coin_dict
+            except KeyError:
+                pass
+    except Exception as e:
+        logger.error(msg=f"search_gecko error {e}")
+        return
+
 async def search_gecko_platform():
     try:
         assetplatform = gecko_api.get_asset_platforms()
-        for i in assetplatform:
-            results_search_chain = i['chain_identifier']
-            if (results_search_chain == int(chainId)):
-                return i['id']
-    except Exception:
-        return
+        output_dict = [x for x in assetplatform if x['chain_identifier'] == int(chainId)]
+        return output_dict[0]['id']
+    except Exception as e:
+        logger.debug(msg=f"search_gecko_platform error {e}")
 
 async def search_gecko_exchange(exchange):
     try:
@@ -628,20 +640,10 @@ async def fetch_gecko_quote(token):
     try:
         asset_in_address = ex.to_checksum_address(await search_contract(token))
         fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{await search_gecko_platform()}',contract_address=asset_in_address)
-        logger.debug(msg=f"fetch_tokeninfo{fetch_tokeninfo}")
+        logger.debug(msg=f"fetch_tokeninfo {fetch_tokeninfo}")
         asset_out_cg_quote = fetch_tokeninfo['market_data']['current_price']['usd']
         asset_out_cg_name = fetch_tokeninfo['name']
         return f"{asset_out_cg_name}\n🦎{asset_out_cg_quote} USD"
-    except Exception:
-        return
-
-async def search_contract(token):
-    try:
-        if ex_test_mode == 'True':
-            token_contract = await search_test_contract(token)
-        else:
-            token_contract = await search_gecko_contract(token)
-        return ex.to_checksum_address(token_contract)
     except Exception:
         return
 
@@ -657,31 +659,38 @@ async def get_account_balance():
                 sbal = "No Balance"
             msg += f"{sbal}"
         else:
-        #     tokens = [
-        # {'address': '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', 'decimals': 18, 'symbol': 'UNI'},
-        #     ]
-            # balances = {}
-
-            # # Retrieve balance of each token in wallet
-            # for token in tokens:
-            #     token_contract = web3.eth.contract(address=Web3.toChecksumAddress(token['address']), abi=erc20_abi)
-            #     balance = token_contract.functions.balanceOf(Web3.toChecksumAddress(wallet_address)).call() / 10**token['decimals']
-            #     balances[token['symbol']] = balance
-            # return balances
             bal = ex.eth.get_balance(walletaddress)
             bal = round(ex.from_wei(bal,'ether'),5)
             basesymbol_bal = await get_account_basesymbol_balance()
+            #fetch_token_balance(token)
             msg += f"💲{bal} \n💵{basesymbol_bal} {basesymbol}"
         return msg
     except Exception:
         return
 
+async def fetch_token_balance(token):
+    try:
+        if isinstance(ex, web3.main.Web3):
+            token_address= await search_contract(token)
+            token_abi= await fetch_abi_dex(token_address)
+            token_contract = ex.eth.contract(address=token_address, abi=token_abi)
+            token_balance=token_contract.functions.balanceOf(walletaddress).call()
+            logger.debug(msg=f"token_address {token_address} token_balance {token_balance}")
+            return 0 if token_balance <=0 or token_balance is None else token_balance
+        else:
+            return ex.fetch_free_balance()[f'{token}']
+    except Exception as e:
+        logger.error(msg=f"{token} balance error: {e}")
+        return 0
+
 async def get_account_basesymbol_balance():
-    if isinstance(ex, web3.main.Web3):
-        return round(ex.from_wei(await fetch_user_token_balance(basesymbol), 'ether'), 5)
-    else:
-        return ex.fetchBalance()['USDT']['free']
-    
+    try:
+        if isinstance(ex, web3.main.Web3):
+            return round(ex.from_wei(await fetch_token_balance(basesymbol), 'ether'), 5)
+        else:
+            return ex.fetchBalance()['USDT']['free']
+    except Exception:
+        await handle_exception("Check your balance")
 
 async def get_account_position():
     try:
@@ -698,7 +707,8 @@ async def get_account_position():
         logger.debug(msg=f"open_positions {open_positions}")
         return open_positions or 0
     except Exception:
-        await handle_exception(e)
+        await handle_exception("Error when retrieving position")
+
 
 async def get_account_margin():
     try:
@@ -807,7 +817,7 @@ async def database_setup():
             elif bot_service == 'telethon':
                 bot_api_id = bot[0]['api_id']
                 bot_api_hash = bot[0]['api_hash']
-            if ((bot_service=='tgram') & (bot_token == "")): 
+            if ((bot_service=='tgram') & (bot_token is None)): 
                 logger.error("Failover process with sample DB")
                 contingency_db_path = './config/sample_db.json'
                 os.rename(contingency_db_path, db_path)
