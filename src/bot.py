@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.94"
+TTversion="🪙🗿 TT Beta 1.2.95"
 
 ##=============== import  =============
 ##log
@@ -377,18 +377,21 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             if dex_version == 'uni_v2': 
                 #https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02
                 await approve_asset_router(asset_out_address)
-                transaction_getoutput_amount  = router_instance.functions.getOutputAmount(transaction_amount, order_path_dex).call()
+                transaction_getoutput_amount  = router_instance.functions.getAmountOut(transaction_amount, order_path_dex).call()
+                #transaction_getoutput_amount  = router_instance.functions.getOutputAmount(transaction_amount, order_path_dex).call()
                 transaction_minimum_amount = int(transaction_getoutput_amount[1])
                 swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress,deadline)
                 tx_token = await sign_transaction_dex(swap_TX)
 
             elif dex_version == "1inch_v5.0": 
-                #https://docs.1inch.io/docs/aggregation-protocol/api/swagger/#
-                await approve_asset_router(asset_out_address)
-                swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
-                swap_TX = await retrieve_url_json(swap_url)
-                tx_token= await sign_transaction_dex(swap_TX)
-
+                try:
+                    #https://docs.1inch.io/docs/aggregation-protocol/api/swagger/#
+                    await approve_asset_router(asset_out_address)
+                    swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
+                    swap_TX = await retrieve_url_json(swap_url)
+                    tx_token= await sign_transaction_dex(swap_TX)
+                except Exception as e:
+                    logger.error(msg=f"Exception 1inch_v5 {e}")
             elif dex_version == "uni_v3":
                 # https://docs.uniswap.org/contracts/v3/guides/swaps/single-swaps
                 await approve_asset_router(asset_out_address)
