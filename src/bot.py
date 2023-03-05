@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.95"
+TTversion="🪙🗿 TT Beta 1.2.96"
 
 ##=============== import  =============
 ##log
@@ -272,6 +272,7 @@ async def load_exchange(exchangeid):
     global router_instanceabi
     global quoter_instance
     global quoter_instanceabi
+    global coin_platform
     global ns
 
     logger.info(msg=f"Setting up {exchangeid}")
@@ -294,14 +295,16 @@ async def load_exchange(exchangeid):
         privatekey= ex_result['privatekey']
         ex = Web3(Web3.HTTPProvider(f'https://{ex_node_provider}'))
         ex.middleware_onion.inject(geth_poa_middleware, layer=0)
+        coin_platform = await search_gecko_platform()
         #ns = ENS.from_web3(ex)
         #await resolve_ens_dex(router)
-        router_instanceabi= await fetch_abi_dex(router) #Router ABI
+        router_instanceabi= await fetch_abi_dex(router)
         logger.info(msg=f"router_instanceabi {router_instanceabi}")
-        router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi) #ContractLiquidityRouter
-        if (dex_version=="v3"):
-            quoter_instanceabi= await fetch_abi_dex(quoter_instance) #Quoter ABI
-            quoter_instance = ex.eth.contract(address=ex.to_checksum_address(quoter_instanceabi), abi=quoter_instanceabi) #ContractLiquidityQuoter
+        router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi)
+        # if (dex_version=="uni_v3"):
+        #     quoter = '0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6' #uniswap v3 for testing
+        #     quoter_instanceabi= await fetch_abi_dex(quoter)
+        #     quoter_instance = ex.eth.contract(address=ex.to_checksum_address(quoter), abi=quoter_instanceabi)
         try:
             ex.net.listening
             logger.info(msg=f"connected to {ex}")
@@ -374,32 +377,22 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             slippage=2# max 2% slippage
             transaction_amount = int((asset_out_amount_converted *(slippage/100))) 
             deadline = ex.eth.get_block("latest")["timestamp"] + 3600  
-            logger.error(msg=f"deadline {deadline}")
-            logger.error(msg=f"dex_version {dex_version}")
             if dex_version == 'uni_v2': 
                 await approve_asset_router(asset_out_address,asset_out_contract)
                 transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
                 swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,walletaddress,deadline)
                 tx_token = await sign_transaction_dex(swap_TX)
             elif dex_version == '1inch_v5': 
-                try:
-                    await approve_asset_router(asset_out_address,asset_out_contract)
-                    swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
-                    logger.debug(msg=f"swap_url {swap_url}")
-                    swap_TX = await retrieve_url_json(swap_url)
-                    logger.debug(msg=f"swap_TX {swap_TX}")
-                    tx_token= await sign_transaction_dex(swap_TX)
-                    logger.debug(msg=f"tx_token {tx_token}")
-                except Exception as e:
-                    logger.error(msg=f"1inch_v5 error {e}")
-                    await handle_exception(e)
-                    return
+                await approve_asset_router(asset_out_address,asset_out_contract)
+                swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
+                swap_TX = await retrieve_url_json(swap_url)
+                tx_token= await sign_transaction_dex(swap_TX)
             elif dex_version == 'uni_v3':
                 return
                 # await approve_asset_router(asset_out_address,asset_out_contract)
                 # sqrtPriceLimitX96 = 0
                 # fee = 3000
-                # transaction_min_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
+                # transaction_min_amount = quoter_instance.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
                 # swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_min_amount,sqrtPriceLimitX96)
                 # tx_token = await sign_transaction_dex(swap_TX)
             elif dex_version == '1inch_limitorder_v2':
@@ -459,7 +452,7 @@ async def approve_asset_router(asset_out_address,asset_out_contract):
 async def sign_transaction_dex(tx):
     logger.debug(msg=f"✍️ sign_transaction_dex {tx}")
     try:
-        if dex_version in ['uni_v2', "uni_v3"]:
+        if dex_version in ['uni_v2']:
             tx_params = {
             'from': walletaddress,
             'gas': int(gasLimit),
@@ -467,9 +460,14 @@ async def sign_transaction_dex(tx):
             'nonce': ex.eth.get_transaction_count(walletaddress),
             }
             tx = tx.build_transaction(tx_params)
-            # signed = ex.eth.account.sign_transaction(tx, privatekey)
-            # raw_tx = signed.rawTransaction
-            # return ex.eth.send_raw_transaction(raw_tx)
+        if dex_version in ['uni_v3']:
+            tx_params = {
+            'from': walletaddress,
+            'gas': int(gasLimit),
+            'gasPrice': ex.to_wei(gasPrice,'gwei'),
+            'nonce': ex.eth.get_transaction_count(walletaddress),
+            }
+            tx = tx.build_transaction(tx_params)
         elif dex_version == "1inch_v5":
             tx = tx['tx']
             tx['to'] = ex.to_checksum_address(tx['to'])
@@ -480,7 +478,7 @@ async def sign_transaction_dex(tx):
         signed = ex.eth.account.sign_transaction(tx, privatekey)
         raw_tx = signed.rawTransaction
         tx_hash = ex.eth.send_raw_transaction(raw_tx)
-        receipt = ex.eth.wait_for_transaction_receipt(tx_hash, timeout=360)
+        # receipt = ex.eth.wait_for_transaction_receipt(tx_hash, timeout=360)
         return tx_hash
     except Exception as e:
         logger.debug(msg=f"sign_transaction_dex contract {tx} error {e}")
@@ -581,7 +579,7 @@ async def search_contract(token):
 async def search_gecko_contract(token):
     try:
         coin_info = await search_gecko(token)
-        coin_platform = await search_gecko_platform()
+        #coin_platform = await search_gecko_platform()
         coin_contract = coin_info['platforms'][f'{coin_platform}']
         logger.info(msg=f"🦎 contract {token} {coin_contract}")
         return ex.to_checksum_address(coin_contract)
@@ -590,7 +588,7 @@ async def search_gecko_contract(token):
 
 async def search_gecko(token):
     try:
-        coin_platform = await search_gecko_platform()
+        #coin_platform = await search_gecko_platform()
         search_results = gecko_api.search(query=token)
         search_dict = search_results['coins']
         filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
@@ -627,7 +625,7 @@ async def search_gecko_exchange(exchange):
 async def fetch_gecko_asset_price(token):
     try:
         asset_in_address = ex.to_checksum_address(await search_contract(token))
-        fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{await search_gecko_platform()}',contract_address=asset_in_address)
+        fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{coin_platform}',contract_address=asset_in_address)
         return fetch_tokeninfo['market_data']['current_price']['usd']
     except Exception:
         return
@@ -635,7 +633,7 @@ async def fetch_gecko_asset_price(token):
 async def fetch_gecko_quote(token):
     try:
         asset_in_address = ex.to_checksum_address(await search_contract(token))
-        fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{await search_gecko_platform()}',contract_address=asset_in_address)
+        fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{coin_platform}',contract_address=asset_in_address)
         logger.debug(msg=f"fetch_tokeninfo {fetch_tokeninfo}")
         asset_out_cg_quote = fetch_tokeninfo['market_data']['current_price']['usd']
         asset_out_cg_name = fetch_tokeninfo['name']
