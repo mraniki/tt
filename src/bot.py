@@ -637,18 +637,6 @@ async def fetch_gecko_quote(token):
     except Exception:
         return
 
-# async def search_gecko_detailed(token):
-#     try:
-#         coin_info = await search_gecko(token)
-#         coin_symbol= coin_info['symbol']
-#         coin_platform = coin_info['asset_platform_id']
-#         coin_image = coin_info['image']['small']
-#         coin_link = coin_info['links']['homepage'][0]
-#         coin_price = coin_info['market_data']['current_price']['usd']
-#         return f'Symbol {coin_symbol}\nPlatform {coin_platform}\nPrice: {coin_price} USD\nmore info {coin_link} {coin_image}'
-#     except Exception:
-#         return
-
 #🔒PRIVATE
 async def get_account_balance():
     try:
