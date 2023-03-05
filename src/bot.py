@@ -301,10 +301,10 @@ async def load_exchange(exchangeid):
         router_instanceabi= await fetch_abi_dex(router)
         logger.info(msg=f"router_instanceabi {router_instanceabi}")
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi)
-        # if (dex_version=="uni_v3"):
-        #     quoter = '0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6' #uniswap v3 for testing
-        #     quoter_instanceabi= await fetch_abi_dex(quoter)
-        #     quoter_instance = ex.eth.contract(address=ex.to_checksum_address(quoter), abi=quoter_instanceabi)
+        if (dex_version=="uni_v3"):
+            quoter = '0x61fFE014bA17989E743c5F6cB21bF9697530B21e' #uniswap v3 for testing
+            quoter_instanceabi= await fetch_abi_dex(quoter)
+            quoter_instance = ex.eth.contract(address=ex.to_checksum_address(quoter), abi=quoter_instanceabi)
         try:
             ex.net.listening
             logger.info(msg=f"connected to {ex}")
@@ -376,7 +376,8 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
             slippage=2# max 2% slippage
             transaction_amount = int((asset_out_amount_converted *(slippage/100))) 
-            deadline = ex.eth.get_block("latest")["timestamp"] + 3600  
+            deadline = ex.eth.get_block("latest")["timestamp"] + 3600
+            logger.error(msg=f"asset_out_amount {asset_out_amount}  asset_out_amount_converted {asset_out_amount_converted} transaction_amount {transaction_amount}")
             if dex_version == 'uni_v2': 
                 await approve_asset_router(asset_out_address,asset_out_contract)
                 transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
@@ -389,12 +390,14 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 tx_token= await sign_transaction_dex(swap_TX)
             elif dex_version == 'uni_v3':
                 return
-                # await approve_asset_router(asset_out_address,asset_out_contract)
-                # sqrtPriceLimitX96 = 0
-                # fee = 3000
-                # transaction_min_amount = quoter_instance.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
-                # swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_min_amount,sqrtPriceLimitX96)
-                # tx_token = await sign_transaction_dex(swap_TX)
+                #await approve_asset_router(asset_out_address,asset_out_contract)
+                #sqrtPriceLimitX96 = 0
+                #fee = 3000
+                # transaction_amount = ex.to_wei(asset_out_amount,'wei')
+                #transaction_min_amount = quoter_instance.functions.quoteExactInputSingle((asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96)).call()
+                #logger.error(msg=f"transaction_min_amount {transaction_min_amount}")
+                #swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_min_amount,sqrtPriceLimitX96)
+                #tx_token = await sign_transaction_dex(swap_TX)
             elif dex_version == '1inch_limitorder_v2':
                 #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
                 return
@@ -463,7 +466,7 @@ async def sign_transaction_dex(tx):
         if dex_version in ['uni_v3']:
             tx_params = {
             'from': walletaddress,
-            'gas': int(gasLimit),
+            'gas': await estimate_gas(tx),
             'gasPrice': ex.to_wei(gasPrice,'gwei'),
             'nonce': ex.eth.get_transaction_count(walletaddress),
             }
