@@ -301,10 +301,10 @@ async def load_exchange(exchangeid):
         router_instanceabi= await fetch_abi_dex(router)
         logger.info(msg=f"router_instanceabi {router_instanceabi}")
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi)
-        # if (dex_version=="uni_v3"):
-        #     quoter = '0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6' #uniswap v3 for testing
-        #     quoter_instanceabi= await fetch_abi_dex(quoter)
-        #     quoter_instance = ex.eth.contract(address=ex.to_checksum_address(quoter), abi=quoter_instanceabi)
+        if (dex_version=="uni_v3"):
+            quoter = '0x61fFE014bA17989E743c5F6cB21bF9697530B21e' #uniswap v3 for testing
+            quoter_instanceabi= await fetch_abi_dex(quoter)
+            quoter_instance = ex.eth.contract(address=ex.to_checksum_address(quoter), abi=quoter_instanceabi)
         try:
             ex.net.listening
             logger.info(msg=f"connected to {ex}")
