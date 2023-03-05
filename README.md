@@ -68,7 +68,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Place order for CEX and DEX, Query Balance and quote ticker
  - Push your order signal manually or from system like [trading view webhook alert](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Alerts.html#using-all-alert-calls). Verified with Binance, Binance Testnet, ~~FTX😠~~, Kraken, Huobi, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing values are defaulted
  - Support DEX automatic token approval
- - Support uniswap v2, 1inch api and uniswap v3 swap methods
+ - Support uniswap v2 and 1inch api
  - Support % of stablecoin balance when placing order
  
  ### Other Features
