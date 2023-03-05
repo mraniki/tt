@@ -388,13 +388,14 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 swap_TX = await retrieve_url_json(swap_url)
                 tx_token= await sign_transaction_dex(swap_TX)
             elif dex_version == 'uni_v3':
-                return
-                # await approve_asset_router(asset_out_address,asset_out_contract)
-                # sqrtPriceLimitX96 = 0
-                # fee = 3000
-                # transaction_min_amount = quoter_instance.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
-                # swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_min_amount,sqrtPriceLimitX96)
-                # tx_token = await sign_transaction_dex(swap_TX)
+                #return
+                await approve_asset_router(asset_out_address,asset_out_contract)
+                sqrtPriceLimitX96 = 0
+                fee = 3000
+                transaction_min_amount = 0
+                #transaction_min_amount = quoter_instance.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
+                swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_min_amount,sqrtPriceLimitX96)
+                tx_token = await sign_transaction_dex(swap_TX)
             elif dex_version == '1inch_limitorder_v2':
                 #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
                 return
