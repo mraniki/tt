@@ -33,6 +33,7 @@ from web3 import Web3
 from web3.middleware import geth_poa_middleware
 from ens import ENS
 from datetime import datetime
+import time
 #API
 from fastapi import FastAPI, Header, HTTPException, Request
 import uvicorn
@@ -364,7 +365,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             logger.debug(msg=f"asset_out_address {asset_out_address} asset_in_address {asset_in_address}")
             order_path_dex=[asset_out_address, asset_in_address]
             asset_out_decimals=asset_out_contract.functions.decimals().call()
-            asset_out_balance=await fetch_token_balance(asset_out_symbol)
+            asset_out_balance = await fetch_token_balance(asset_out_symbol)
             if (asset_out_balance <=0):
                 await handle_exception(f"Balance for {asset_out_symbol} is {asset_out_balance}")
                 return
@@ -372,39 +373,47 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             #asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
             asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
             slippage=2# max 2% slippage
-            transaction_amount = (asset_out_amount_converted *(slippage/100)) 
-            deadline = ex.eth.get_block("latest")["timestamp"] + 3600 # or deadline = (int(time.time()) + 1000000)
+            transaction_amount = int((asset_out_amount_converted *(slippage/100))) 
+            try:
+                #deadline = ex.eth.get_block("latest")["timestamp"] + 3600 # or 
+                deadline = (int(time.time()) + 1000000)
+            except Exception as e:
+                logger.error(msg=f"Exception deadline {e}")
+                await handle_exception(e)
+                return
             if dex_version == 'uni_v2': 
-                #https://docs.uniswap.org/contracts/v2/reference/smart-contracts/router-02
-                await approve_asset_router(asset_out_address)
-                transaction_getoutput_amount  = router_instance.functions.getAmountOut(transaction_amount, order_path_dex).call()
-                #transaction_getoutput_amount  = router_instance.functions.getOutputAmount(transaction_amount, order_path_dex).call()
-                transaction_minimum_amount = int(transaction_getoutput_amount[1])
-                swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_minimum_amount,order_path_dex,walletaddress,deadline)
+                await approve_asset_router(asset_out_address,asset_out_contract)
+                transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
+                swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,walletaddress,deadline)
                 tx_token = await sign_transaction_dex(swap_TX)
-
             elif dex_version == "1inch_v5.0": 
+                logger.debug(msg=f"1inch_v5 processing")
+                await approve_asset_router(asset_out_address,asset_out_contract)
                 try:
-                    #https://docs.1inch.io/docs/aggregation-protocol/api/swagger/#
-                    await approve_asset_router(asset_out_address)
                     swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
-                    swap_TX = await retrieve_url_json(swap_url)
-                    tx_token= await sign_transaction_dex(swap_TX)
+                    logger.debug(msg=f"swap_url {swap_url}")
                 except Exception as e:
-                    logger.error(msg=f"Exception 1inch_v5 {e}")
+                    logger.error(msg=f"Exception with order processing {e}")
+                    await handle_exception(e)
+                    return
+                try:
+                    swap_TX = await retrieve_url_json(swap_url)
+                    logger.debug(msg=f"swap_TX {swap_TX}")
+                except Exception as e:
+                    logger.error(msg=f"Exception with order processing {e}")
+                    await handle_exception(e)
+                    return
+                tx_token= await sign_transaction_dex(swap_TX)
             elif dex_version == "uni_v3":
-                # https://docs.uniswap.org/contracts/v3/guides/swaps/single-swaps
-                await approve_asset_router(asset_out_address)
+                await approve_asset_router(asset_out_address,asset_out_contract)
                 sqrtPriceLimitX96 = 0
                 fee = 3000
-                transaction_minimum_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
-                swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_minimum_amount,sqrtPriceLimitX96)
+                transaction_min_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
+                swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_min_amount,sqrtPriceLimitX96)
                 tx_token = await sign_transaction_dex(swap_TX)
-
             elif dex_version == "1inch_limitorder_v2":
                 #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
                 return
-
             elif dex_version == "0x_limitorder_v4":
                 #https://protocol.0x.org/en/latest/basics/orders.html
                 return
@@ -413,7 +422,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             txResult = await fectch_transaction_dex(txHash)
             txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
             if(txResult == "1"):
-                response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {await fetch_gecko_asset_price(asset_in_address)}USD \nℹ️ {txHash}\n⛽️ {txHashDetail['gasUsed']}\n🗓️ {datetime.now()}"
+                response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {await fetch_gecko_asset_price(asset_in_symbol)}USD \nℹ️ {txHash}\n⛽️ {txHashDetail['gasUsed']}\n🗓️ {datetime.now()}"
                 logger.info(msg=f"{response}")
 
         return response
@@ -432,7 +441,7 @@ async def resolve_ens_dex(addr):
     except Exception as e:
         await handle_exception(e)
 
-async def approve_asset_router(asset_out_address):
+async def approve_asset_router(asset_out_address,asset_out_contract):
     try:
         if dex_version in ["uni_v2", "uni_v3"]:
             approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
@@ -452,6 +461,7 @@ async def approve_asset_router(asset_out_address):
                 approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={asset_out_address}"
                 approval_response = await retrieve_url_json(approval_URL)
     except Exception as e:
+        logger.debug(msg=f"🔥 approve_asset_router error {e}")
         await handle_exception(e)
 
 async def sign_transaction_dex(contract_tx):
