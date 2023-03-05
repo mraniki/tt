@@ -33,7 +33,6 @@ from web3 import Web3
 from web3.middleware import geth_poa_middleware
 from ens import ENS
 from datetime import datetime
-import time
 #API
 from fastapi import FastAPI, Header, HTTPException, Request
 import uvicorn
@@ -374,57 +373,50 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
             slippage=2# max 2% slippage
             transaction_amount = int((asset_out_amount_converted *(slippage/100))) 
-            try:
-                #deadline = ex.eth.get_block("latest")["timestamp"] + 3600 # or 
-                deadline = (int(time.time()) + 1000000)
-            except Exception as e:
-                logger.error(msg=f"Exception deadline {e}")
-                await handle_exception(e)
-                return
+            deadline = ex.eth.get_block("latest")["timestamp"] + 3600  
+            logger.error(msg=f"deadline {deadline}")
+            logger.error(msg=f"dex_version {dex_version}")
             if dex_version == 'uni_v2': 
                 await approve_asset_router(asset_out_address,asset_out_contract)
                 transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
                 swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,walletaddress,deadline)
                 tx_token = await sign_transaction_dex(swap_TX)
-            elif dex_version == "1inch_v5.0": 
-                logger.debug(msg=f"1inch_v5 processing")
-                await approve_asset_router(asset_out_address,asset_out_contract)
+            elif dex_version == '1inch_v5': 
                 try:
+                    await approve_asset_router(asset_out_address,asset_out_contract)
                     swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
                     logger.debug(msg=f"swap_url {swap_url}")
-                except Exception as e:
-                    logger.error(msg=f"Exception with order processing {e}")
-                    await handle_exception(e)
-                    return
-                try:
                     swap_TX = await retrieve_url_json(swap_url)
                     logger.debug(msg=f"swap_TX {swap_TX}")
+                    tx_token= await sign_transaction_dex(swap_TX)
+                    logger.debug(msg=f"tx_token {tx_token}")
                 except Exception as e:
-                    logger.error(msg=f"Exception with order processing {e}")
+                    logger.error(msg=f"1inch_v5 error {e}")
                     await handle_exception(e)
                     return
-                tx_token= await sign_transaction_dex(swap_TX)
-            elif dex_version == "uni_v3":
-                await approve_asset_router(asset_out_address,asset_out_contract)
-                sqrtPriceLimitX96 = 0
-                fee = 3000
-                transaction_min_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
-                swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_min_amount,sqrtPriceLimitX96)
-                tx_token = await sign_transaction_dex(swap_TX)
-            elif dex_version == "1inch_limitorder_v2":
+            elif dex_version == 'uni_v3':
+                return
+                # await approve_asset_router(asset_out_address,asset_out_contract)
+                # sqrtPriceLimitX96 = 0
+                # fee = 3000
+                # transaction_min_amount = self.quoter.functions.quoteExactInputSingle(asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96).call()
+                # swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_min_amount,sqrtPriceLimitX96)
+                # tx_token = await sign_transaction_dex(swap_TX)
+            elif dex_version == '1inch_limitorder_v2':
                 #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
                 return
-            elif dex_version == "0x_limitorder_v4":
+            elif dex_version == '0x_limitorder_v4':
                 #https://protocol.0x.org/en/latest/basics/orders.html
                 return
-
+            else:
+                logger.error(msg=f"dex_version not supported {dex_version}")
+                return
             txHash = str(ex.to_hex(tx_token))
             txResult = await fectch_transaction_dex(txHash)
             txHashDetail=ex.eth.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
             if(txResult == "1"):
                 response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {await fetch_gecko_asset_price(asset_in_symbol)}USD \nℹ️ {txHash}\n⛽️ {txHashDetail['gasUsed']}\n🗓️ {datetime.now()}"
                 logger.info(msg=f"{response}")
-
         return response
 
     except Exception as e:
@@ -461,10 +453,11 @@ async def approve_asset_router(asset_out_address,asset_out_contract):
                 approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={asset_out_address}"
                 approval_response = await retrieve_url_json(approval_URL)
     except Exception as e:
-        logger.debug(msg=f"🔥 approve_asset_router error {e}")
+        logger.debug(msg=f"approve_asset_router error {e}")
         await handle_exception(e)
 
-async def sign_transaction_dex(contract_tx):
+async def sign_transaction_dex(tx):
+    logger.debug(msg=f"✍️ sign_transaction_dex {tx}")
     try:
         if dex_version in ['uni_v2', "uni_v3"]:
             tx_params = {
@@ -473,23 +466,25 @@ async def sign_transaction_dex(contract_tx):
             'gasPrice': ex.to_wei(gasPrice,'gwei'),
             'nonce': ex.eth.get_transaction_count(walletaddress),
             }
-            tx = contract_tx.build_transaction(tx_params)
-            signed = ex.eth.account.sign_transaction(tx, privatekey)
-            raw_tx = signed.rawTransaction
-            return ex.eth.send_raw_transaction(raw_tx)
+            tx = tx.build_transaction(tx_params)
+            # signed = ex.eth.account.sign_transaction(tx, privatekey)
+            # raw_tx = signed.rawTransaction
+            # return ex.eth.send_raw_transaction(raw_tx)
         elif dex_version == "1inch_v5":
-            tx_params = {
-            'nonce': ex.eth.get_transaction_count(walletaddress),
-            'gas': int(gasLimit),
-            'gasPrice': ex.to_wei(gasPrice,'gwei'),
-            }
-            tx = contract_tx.build_transaction(tx_params)
-            signed = ex.eth.account.sign_transaction(tx, privatekey)
-            raw_tx = signed.rawTransaction
-            return ex.eth.send_raw_transaction(raw_tx)
-        else:
-            return
-    except Exception:
+            tx = tx['tx']
+            tx['to'] = ex.to_checksum_address(tx['to'])
+            tx['gas'] = await estimate_gas(tx)
+            tx['nonce'] = ex.eth.get_transaction_count(walletaddress)
+            tx['value'] = int(tx['value'])
+            tx['gasPrice'] = int(ex.to_wei(gasPrice,'gwei'))
+        signed = ex.eth.account.sign_transaction(tx, privatekey)
+        raw_tx = signed.rawTransaction
+        tx_hash = ex.eth.send_raw_transaction(raw_tx)
+        receipt = ex.eth.wait_for_transaction_receipt(tx_hash, timeout=360)
+        return tx_hash
+    except Exception as e:
+        logger.debug(msg=f"sign_transaction_dex contract {tx} error {e}")
+        await handle_exception(e)
         return
 
 async def fetch_abi_dex(addr):
@@ -532,7 +527,8 @@ async def fetch_oracle_quote(token):
         return
 
 async def estimate_gas(tx):
-    estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.2),'wei')
+    estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.25,'wei'))
+    return estimate_gas_cost
 
 async def fetch_account_dex(addr):
     url = abiurl
