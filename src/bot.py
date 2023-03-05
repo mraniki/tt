@@ -477,9 +477,7 @@ async def sign_transaction_dex(tx):
             tx['gasPrice'] = int(ex.to_wei(gasPrice,'gwei'))
         signed = ex.eth.account.sign_transaction(tx, privatekey)
         raw_tx = signed.rawTransaction
-        tx_hash = ex.eth.send_raw_transaction(raw_tx)
-        # receipt = ex.eth.wait_for_transaction_receipt(tx_hash, timeout=360)
-        return tx_hash
+        return ex.eth.send_raw_transaction(raw_tx)
     except Exception as e:
         logger.debug(msg=f"sign_transaction_dex contract {tx} error {e}")
         await handle_exception(e)
@@ -525,8 +523,7 @@ async def fetch_oracle_quote(token):
         return
 
 async def estimate_gas(tx):
-    estimate_gas_cost = int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.25,'wei'))
-    return estimate_gas_cost
+    return int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.25,'wei'))
 
 async def fetch_account_dex(addr):
     url = abiurl
@@ -664,15 +661,14 @@ async def get_account_balance():
 
 async def fetch_token_balance(token):
     try:
-        if isinstance(ex, web3.main.Web3):
-            token_address= await search_contract(token)
-            token_abi= await fetch_abi_dex(token_address)
-            token_contract = ex.eth.contract(address=token_address, abi=token_abi)
-            token_balance=token_contract.functions.balanceOf(walletaddress).call()
-            logger.debug(msg=f"token_address {token_address} token_balance {token_balance}")
-            return 0 if token_balance <=0 or token_balance is None else token_balance
-        else:
+        if not isinstance(ex, web3.main.Web3):
             return ex.fetch_free_balance()[f'{token}']
+        token_address= await search_contract(token)
+        token_abi= await fetch_abi_dex(token_address)
+        token_contract = ex.eth.contract(address=token_address, abi=token_abi)
+        token_balance=token_contract.functions.balanceOf(walletaddress).call()
+        logger.debug(msg=f"token_address {token_address} token_balance {token_balance}")
+        return 0 if token_balance <=0 or token_balance is None else token_balance
     except Exception as e:
         logger.error(msg=f"{token} balance error: {e}")
         return 0
