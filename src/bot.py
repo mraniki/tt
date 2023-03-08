@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.96"
+TTversion="🪙🗿 TT Beta 1.2.97"
 
 ##=============== import  =============
 ##log
@@ -561,13 +561,35 @@ async def search_test_contract(symbol):
         await HandleExceptions(e)
         return
 
+async def search_json_contract(symbol):
+    logger.info(msg=f"📝search_contract {symbol} and chainId {chainId}")
+    try:
+        alltokenlist="https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json")
+        token_list = await retrieve_url_json(alltokenlist)
+        token_search = token_list
+        for keyval in token_search:
+            if (keyval['symbol'] == symbol and keyval['chainId'] == int(chainId)):
+                logger.info(msg=f"address {keyval['address']}")
+                symbolcontract = keyval['address']
+        logger.info(msg=f"📝 contract  {symbolcontract}")
+        if symbolcontract:
+            return symbolcontract
+    except Exception as e:
+        logger.error(msg=f"search_contract error {token}")
+        await HandleExceptions(e)
+        return
+
+
 async def search_contract(token):
     try:
         if ex_test_mode == 'True':
             token_contract = await search_test_contract(token)
-        else:
+        elif:
+            token_contract = await search_json_contract(token)
+        if token_contract is None:
             token_contract = await search_gecko_contract(token)
-        return ex.to_checksum_address(token_contract)
+        if token_contract:
+            return ex.to_checksum_address(token_contract)
     except Exception:
         return
 
@@ -820,6 +842,7 @@ async def database_setup():
                     sys.exit()
         except Exception as e:
             logger.warning(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
+
 
 #🦾BOT ACTIONS
 async def post_init():
