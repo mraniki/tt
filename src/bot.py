@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.96"
+TTversion="🪙🗿 TT Beta 1.2.97"
 
 ##=============== import  =============
 ##log
@@ -556,30 +556,47 @@ async def search_test_contract(symbol):
         logger.info(msg=f"📝 contract  {symbolcontract}")
         if symbolcontract:
             return symbolcontract
-        # symbolcontract = [token for token in token_list if (token['symbol'] == symbol and token['chainId']==chainId)]
-        # logger.info(msg=f"📝 contract  {symbolcontract}")
-        # if symbolcontract:
-        #     return symbolcontract[0]['address']
     except Exception as e:
         logger.error(msg=f"search_test_contract error {token}")
         await HandleExceptions(e)
         return
+
+async def search_json_contract(symbol):
+    logger.info(msg=f"📝search_contract {symbol} and chainId {chainId}")
+    try:
+        alltokenlist="https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json"
+        token_list = await retrieve_url_json(alltokenlist)
+        logger.info(msg=f"token_list {token_list}")
+        token_search = token_list['592']
+        for keyval in token_search:
+            if (keyval['symbol'] == symbol and keyval['chainId'] == int(chainId)):
+                logger.info(msg=f"address {keyval['address']}")
+                symbolcontract = keyval['address']
+                return symbolcontract
+                logger.info(msg=f"📝 contract  {symbolcontract}")
+            
+    except Exception as e:
+        logger.error(msg=f"search_json_contract error {symbol} {e}")
+
 
 async def search_contract(token):
     try:
         if ex_test_mode == 'True':
             token_contract = await search_test_contract(token)
         else:
+            token_contract = await search_json_contract(token)
+            logger.error(msg=f"search_contract token_contract {token_contract}")
+        if token_contract is None:
             token_contract = await search_gecko_contract(token)
-        return ex.to_checksum_address(token_contract)
-    except Exception:
-        return
+        if token_contract:
+            return ex.to_checksum_address(token_contract)
+    except Exception as e:
+        logger.error(msg=f"search_contract error {token} {e}")
 
 #🦎GECKO
 async def search_gecko_contract(token):
     try:
         coin_info = await search_gecko(token)
-        #coin_platform = await search_gecko_platform()
         coin_contract = coin_info['platforms'][f'{coin_platform}']
         logger.info(msg=f"🦎 contract {token} {coin_contract}")
         return ex.to_checksum_address(coin_contract)
@@ -588,7 +605,6 @@ async def search_gecko_contract(token):
 
 async def search_gecko(token):
     try:
-        #coin_platform = await search_gecko_platform()
         search_results = gecko_api.search(query=token)
         search_dict = search_results['coins']
         filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
@@ -656,8 +672,12 @@ async def get_account_balance():
             bal = ex.eth.get_balance(walletaddress)
             bal = round(ex.from_wei(bal,'ether'),5)
             basesymbol_bal = await get_account_basesymbol_balance()
-            #fetch_token_balance(token)
             msg += f"💲{bal} \n💵{basesymbol_bal} {basesymbol}"
+            # toptokens = ["WBTC","BTCB","ETH","USDT","BNB","USDC","XRP","ADA","DOGE","MATIC","BUSD","SOL","DOT","LTC","TRX","SHIB","AVAX","DAI","UNI","LINK","ATOM","LDO"]
+            # for i in toptokens:
+            #     bal_toptoken = await fetch_token_balance(i)
+            #     if bal_toptoken:
+            #         msg += f"\n💵{bal_toptoken} {i}"
         return msg
     except Exception:
         return
@@ -822,6 +842,7 @@ async def database_setup():
                     sys.exit()
         except Exception as e:
             logger.warning(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
+
 
 #🦾BOT ACTIONS
 async def post_init():
