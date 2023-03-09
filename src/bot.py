@@ -571,10 +571,7 @@ async def search_json_contract(symbol):
         for keyval in token_search:
             if (keyval['symbol'] == symbol and keyval['chainId'] == int(chainId)):
                 logger.info(msg=f"address {keyval['address']}")
-                symbolcontract = keyval['address']
-                return symbolcontract
-                logger.info(msg=f"📝 contract  {symbolcontract}")
-            
+                return keyval['address']
     except Exception as e:
         logger.error(msg=f"search_json_contract error {symbol} {e}")
 
