@@ -566,18 +566,17 @@ async def search_json_contract(symbol):
     try:
         alltokenlist="https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json"
         token_list = await retrieve_url_json(alltokenlist)
-        token_search = token_list
+        logger.info(msg=f"token_list {token_list}")
+        token_search = token_list['592']
         for keyval in token_search:
             if (keyval['symbol'] == symbol and keyval['chainId'] == int(chainId)):
                 logger.info(msg=f"address {keyval['address']}")
                 symbolcontract = keyval['address']
-        logger.info(msg=f"📝 contract  {symbolcontract}")
-        if symbolcontract:
-            return symbolcontract
+                return symbolcontract
+                logger.info(msg=f"📝 contract  {symbolcontract}")
+            
     except Exception as e:
-        logger.error(msg=f"search_contract error {token}")
-        await HandleExceptions(e)
-        return
+        logger.error(msg=f"search_json_contract error {symbol} {e}")
 
 
 async def search_contract(token):
@@ -586,12 +585,13 @@ async def search_contract(token):
             token_contract = await search_test_contract(token)
         else:
             token_contract = await search_json_contract(token)
+            logger.error(msg=f"search_contract token_contract {token_contract}")
         if token_contract is None:
             token_contract = await search_gecko_contract(token)
         if token_contract:
             return ex.to_checksum_address(token_contract)
-    except Exception:
-        return
+    except Exception as e:
+        logger.error(msg=f"search_contract error {token} {e}")
 
 #🦎GECKO
 async def search_gecko_contract(token):
