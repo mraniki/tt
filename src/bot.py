@@ -564,7 +564,7 @@ async def search_test_contract(symbol):
 async def search_json_contract(symbol):
     logger.info(msg=f"📝search_contract {symbol} and chainId {chainId}")
     try:
-        alltokenlist="https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json")
+        alltokenlist="https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json"
         token_list = await retrieve_url_json(alltokenlist)
         token_search = token_list
         for keyval in token_search:
@@ -584,7 +584,7 @@ async def search_contract(token):
     try:
         if ex_test_mode == 'True':
             token_contract = await search_test_contract(token)
-        elif:
+        else:
             token_contract = await search_json_contract(token)
         if token_contract is None:
             token_contract = await search_gecko_contract(token)
