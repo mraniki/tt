@@ -90,9 +90,12 @@ Quick start approach: Update the sample db with your parameters and save it as d
  - Include healthcheck, webhook and notify capability via FastAPI webserver on port 8080 with build-in JSON API swagger
 
 ## Questions? Want to help? 
-Lost? [join us on group chat](https://github.com/mraniki/tt/discussions/49)
 
- 
+[![discord](https://badgen.net/badge/icon/discord/purple?icon=discord&label)](https://discord.gg/vegJQGrRRa)
+[![telegram](https://badgen.net/badge/icon/telegram?icon=telegram&label)](https://t.me/TTTalkyTraderChat/1)
+
+[join us](https://github.com/mraniki/tt/discussions/49)
+
 ## 📷 Screenshots
 <img width="340" alt="Screenshot 2023-02-28 at 20 39 47" src="https://user-images.githubusercontent.com/8766259/222161597-114d488b-ad9c-4468-8dd4-083f435cbb7b.png">
 
