@@ -48,12 +48,8 @@ jobs:
           push: true
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
-          # tags: nightly
-            # mraniki/tt:nightly
-            # ghcr.io/mraniki/tt:nightly
-      # - name: Publish Image
-      #   uses: matootie/github-docker@v3.1.0
-      #   with:
-      #     accessToken: ${{ secrets.GITHUB_TOKEN }}
-      #     containerRegistry: true
-      #     tag: nightly
+          
+      - name: 'Build Inventory Image'
+        run: |
+          docker build . --tag ghcr.io/mraniki/store:nightly
+          docker push ghcr.io/mraniki/store:nightly  
