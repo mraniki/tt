@@ -34,21 +34,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           
-      # - name: Extract metadata (tags, labels) for Docker
-      #   id: meta
-      #   uses: docker/metadata-action@v4.3.0
-      #   with:
-      #     images: mraniki/tt
-      #     tags: nightly
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4.3.0
+        with:
+          images: mraniki/tt
+          tags: nightly
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          tags: nightly
-          # labels: ${{ steps.meta.outputs.labels }}
-          # tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          # tags: nightly
             # mraniki/tt:nightly
             # ghcr.io/mraniki/tt:nightly
       # - name: Publish Image
