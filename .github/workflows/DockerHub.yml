@@ -34,3 +34,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: 'Build Inventory Image'
+        run: |
+          docker build . --tag ghcr.io/mraniki/tt:latest
+          docker push ghcr.io/mraniki/tt:latest 
