@@ -40,9 +40,11 @@ If you like it, feel free to
     - DEX keys and RPC supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org), [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) or [cointool](https://cointool.app/) for chain/RPC details
 3) Update the config (bot token, bot channel and exchange details). Point or copy your config [db.json](config/db.json.sample) to the volume /code/config)
 4) Deploy via:
-    - docker dockerhub `docker push mraniki/tt:latest` (`docker push mraniki/tt:nightly`) or via [github](https://github.com/mraniki/tt/pkgs/container/tt) with `docker pull ghcr.io/mraniki/tt:latest`
-    - `git clone https://github.com/mraniki/tt:main` and `pip install -r requirements.txt` 
-5) Start your container or use `python3 bot.py` to start locally
+    - docker `docker push mraniki/tt:latest` or `docker pull ghcr.io/mraniki/tt:latest`
+    - locally `git clone https://github.com/mraniki/tt:main` && `pip install -r requirements.txt` 
+5) Start your container or if deployed locally use `python3 bot.py` to start
+
+6) More details in [Wiki](https://github.com/mraniki/tt/wiki)
 
 ## Config
 Quick start approach: Update the sample db with your parameters and save it as db.json. If you deploy the bot on a PaaS cloud platform, you can use `DB_URL` environment variable to import db.json from a secure location.
@@ -91,7 +93,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
 
 ## WIKI
 
- [WiKi](https://github.com/mraniki/tt/wiki)
+ [Wiki](https://github.com/mraniki/tt/wiki)
 
 ## Questions? Want to help? 
 
