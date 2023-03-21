@@ -91,7 +91,7 @@ Quick start approach: Update the sample db with your parameters and save it as d
 
 ## WIKI
 
- [WiKi](https://github.com/mraniki/tt/wiki/Get-started)
+ [WiKi](https://github.com/mraniki/tt/wiki)
 
 ## Questions? Want to help? 
 
