@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.97"
+TTversion="🪙🗿 TT Beta 1.2.98"
 
 ##=============== import  =============
 ##log
@@ -104,6 +104,8 @@ async def parse_message(self,msg):
                     return
                 elif name == 'order':
                     if wordlistsize > 1:
+                        order_check = await order_parsing(msg)
+                        logger.info(msg=f"Order parsing: {order_check}")
                         direction = wordlist[0].upper()
                         stoploss = 100
                         takeprofit = 100
@@ -135,73 +137,37 @@ async def parse_message(self,msg):
 
 async def order_parsing(message):
     logger.info(msg=f"order_parsing with {message}")
-    order_data = []
     try:
-        if re.match(r'(?:Entry|Take-Profit)', message):
-            logger.info(msg="format 3 identified")
-            # direction_index = message.index('Trade Type:') + 11
-            # direction = message[direction_index:leverage_index].strip()
-            # symbol_index = message.index('Symbol:') + 7
-            # symbol = message[symbol_index:exchange_index].strip()
-            # if len(components) > 2:
-            #     entry_orders_index = message.index('Entry Orders:') + 14
-            #     take_profit_orders_index = message.index('Take-Profit Orders:')
-            #     entry_orders_section = message[entry_orders_index:take_profit_orders_index]
-            #     entry_orders_lines = entry_orders_section.split('\n')[1:-1]
-            #     entry_orders = []
-            #     for line in entry_orders_lines:
-            #         price, percent = line.split('-')
-            #         entry_orders.append((float(price.strip()), float(percent.strip().strip('%'))))
-            #     take_profit_orders_start_index = message.index('Take-Profit Orders:') + 20
-            #     take_profit_orders_section = message[take_profit_orders_start_index:]
-            #     take_profit_orders_lines = take_profit_orders_section.split('\n')[1:-1]
-            #     takeprofit = []
-            #     for line in take_profit_orders_lines:
-            #         price, percent = line.split('-')
-            #         takeprofit.append((float(price.strip()), float(percent.strip().strip('%'))))
-            #     stoploss_index = message.index('Stop Targets:')
-            #     stoploss = float(message[stoploss_index+3:message.index('\n', stoploss_index)])
-            #     leverage_index = message.index('Leverage:')
-            #     leverage = int(message[leverage_index+10:message.index('\n', leverage_index)])
-            #     exchange_index = message.index('Exchange:')
-            #     exchange = message[exchange_index+9:message.index('\n')].strip()
-                # order=[direction,symbol,stoploss,entry_orders,takeprofit,quantity,leverage,exchange]
-                # logger.info(msg=f"order_data {order}")
-        elif re.match(r'(?:⚫|🔵)', message):
-            logger.info(msg="format 2 identified")
-            # direction_index = message.index('⚫') + 1
-            # symbol_index = message.index('💱') + 1
-            # entry_prices_index = message.index('🔵') + 1
-            # stop_loss_index = message.index('🛑') + 1
-            # quantity_index = message.index('📏') + 1
-            # leverage_index = message.index('⚡') + 1
-            # exchange_index = message.index('🏦') + 1
-            # direction = message[symbol_index:entry_prices_index-2].strip()
-            # symbol = message[direction_index:direction_index-2].strip()
-            # if len(components) > 2:
-            #     stoploss = float(message[stop_loss_index:quantity_index-2])
-            #     takeprofit = [float(price) for price in message[entry_prices_index:stop_loss_index-2].split(', ')]
-            #     quantity = int(message[quantity_index:leverage_index-2])
-            #     leverage = int(message[leverage_index:exchange_index-2])
-            #     exchange = message[exchange_index:].strip()
-
-            # logger.info(msg=f"format 2 order_data {order_data}")
-        elif re.match(r'(?:buy|Buy|BUY|sell|Sell|SELL)', message):
-            logger.info(msg=f"format 1 identified for {message}")
-            components = message.split()
-            logger.info(msg=f"components {components}")
-            direction = components[0]
-            symbol = components[1]
-            if len(components) > 2:
-                stoploss=float(components[3:]) if re.match(r'(?:stop|STOP|sl=)', components) else 1000
-                takeprofit[3]=float(components[3:]) if re.match(r'(?:Take-Profit:|TP|tp=)', components) else 1000
-                quantity[4]=float(components[2:].strip('%')) if re.match(r'(?:quantity|unit|q=)', components) else 10
-            order=[direction,symbol,stoploss,takeprofit,quantity]
-            logger.info(msg=f"format 1 order_data {order}")
+        if re.match(r'(?:buy|Buy|BUY|sell|Sell|SELL)', message):
+            trade_data = {}
+            tokens = message.split()
+            trade_data['direction'] = tokens[0].lower()
+            trade_data['symbol'] = tokens[1].upper()
+            trade_data['stoploss'] = '1000'
+            trade_data['takeprofit'] = '1000'
+            trade_data['trailingstop'] = '1000'
+            trade_data['quantity'] = '1'
+            trade_data['comment'] = f"TT{version}"
+            for token in tokens[2:]:
+                if '=' in token:
+                    key, value = token.split('=')
+                    if key == 'sl':
+                        trade_data['stoploss'] = value
+                    elif key == 'tp':
+                        trade_data['takeprofit'] = value
+                    elif key == 'ts':
+                        trade_data['trailingstop'] = value
+                    elif key == 'q':
+                        trade_data['quantity'] = value.strip('%')
+                    elif key == 'c':
+                        trade_data['comment'] = value
+                    else:
+                        trade_data[key] = value
+            logger.info(msg=f"trade_info {trade_info}")
+            return trade_info
         else:
             logger.info(msg=f"No valid order format {message}")
             return
-        return order
     except Exception as e:
         logger.warning(msg=f"Order parsing error {e}")
 
