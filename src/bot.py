@@ -356,15 +356,6 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 tx_token= await sign_transaction_dex(swap_TX)
             elif dex_version == 'uni_v3':
                 return
-                # await approve_asset_router(asset_out_address,asset_out_contract)
-                # sqrtPriceLimitX96 = 0
-                # fee = 3000
-                # transaction_amount = ex.to_wei(asset_out_amount,'wei')
-                # #transaction_min_amount = quoter_instance.functions.quoteExactInputSingle((asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96)).call()
-                # #logger.error(msg=f"transaction_min_amount {transaction_min_amount}")
-                # #swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_min_amount,sqrtPriceLimitX96)
-                # #swap_TX = router_instance.swapExactInputMultihop(path,walletaddress,deadline,amountIn,amountOutMin)
-                # #tx_token = await sign_transaction_dex(swap_TX)
             elif dex_version == '1inch_limitorder_v2':
                 return
             elif dex_version == '0x_limitorder_v4':

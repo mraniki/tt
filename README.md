@@ -113,14 +113,17 @@ MOre detail on the config: https://github.com/mraniki/tt/wiki/Configuration
 
 ### V1.3
 - Support limit order for DEX (1inch) and review feasibility for dydx / Kwenta / GMX
+- Review testmode command to be part of the switch command
+- Refactoring of more complex functions
 
 ### v1.4
-- Support limit order for DEX (v3) 
-- Support Uniswap V3 (more testing needed)
-- Review testmode command to be part of the switch command.
+
+- Support Uniswap V3 
+
 
 ### v1.5
 
+- Support limit order for DEX (Uniswap v3) 
 - Support futures and margin for CEX (to be tested via CCXT)
 - Support STOPLOSS TAKEPROFIT for CEX
 - Support multiple TAKEPROFIT target for CEX
