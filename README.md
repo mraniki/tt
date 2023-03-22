@@ -48,6 +48,7 @@ If you like it, feel free to
 
 ## Config
 Quick start approach: Update the sample db with your parameters and save it as db.json. If you deploy the bot on a PaaS cloud platform, you can use `DB_URL` environment variable to import db.json from a secure location.
+MOre detail on the config: https://github.com/mraniki/tt/wiki/Configuration
 
 ### DB Structure
 [DB sample](config/db.json.sample)
@@ -111,14 +112,18 @@ Quick start approach: Update the sample db with your parameters and save it as d
 [🚧 Roadmap](https://github.com/mraniki/tt/milestones)
 
 ### V1.3
-- Support Uniswap V3 (more testing needed)
+- Support limit order for DEX (1inch) and review feasibility for dydx / Kwenta / GMX
+- Review testmode command to be part of the switch command
+- Refactoring of more complex functions
 
 ### v1.4
-- Support limit order for DEX (1inch and v3) and review feasibility for dydx / Kwenta / GMX
-- Review testmode command to be part of the switch command.
+
+- Support Uniswap V3 
+
 
 ### v1.5
 
+- Support limit order for DEX (Uniswap v3) 
 - Support futures and margin for CEX (to be tested via CCXT)
 - Support STOPLOSS TAKEPROFIT for CEX
 - Support multiple TAKEPROFIT target for CEX

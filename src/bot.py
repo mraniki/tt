@@ -136,34 +136,35 @@ async def parse_message(self,msg):
         logger.warning(msg="Parsing exception")
 
 async def order_parsing(message):
-    logger.info(msg=f"order_parsing with {message}")
+    logger.info(msg=f"order_parsing V2 with {message}")
     try:
         if re.match(r'(?:buy|Buy|BUY|sell|Sell|SELL)', message):
-            tokens = message.split()
-            trade_data = {'direction': tokens[0].lower()}
-            trade_data['symbol'] = tokens[1].upper()
-            trade_data['stoploss'] = '1000'
-            trade_data['takeprofit'] = '1000'
-            trade_data['trailingstop'] = '1000'
-            trade_data['quantity'] = '1'
-            trade_data['comment'] = f"TT{version}"
-            for token in tokens[2:]:
-                if '=' in token:
-                    key, value = token.split('=')
-                    if key == 'sl':
-                        trade_data['stoploss'] = value
-                    elif key == 'tp':
-                        trade_data['takeprofit'] = value
-                    elif key == 'ts':
-                        trade_data['trailingstop'] = value
-                    elif key == 'q':
-                        trade_data['quantity'] = value.strip('%')
-                    elif key == 'c':
-                        trade_data['comment'] = value
-                    else:
-                        trade_data[key] = value
-            logger.info(msg=f"trade_info {trade_info}")
-            return trade_info
+            order = message.split()
+            order = {'direction': tokens[0].lower()}
+            order['symbol'] = tokens[1].upper()
+            order['stoploss'] = '1000'
+            order['takeprofit'] = '1000'
+            order['trailingstop'] = '200'
+            order['quantity'] = '1'
+            order['comment'] = f"TT{version}"
+            if len(order) > 2:
+                for order in orders[2:]:
+                    if '=' in order:
+                        key, value = order.split('=')
+                        if key == 'sl':
+                            order['stoploss'] = value
+                        elif key == 'tp':
+                            order['takeprofit'] = value
+                        elif key == 'ts':
+                            order['trailingstop'] = value
+                        elif key == 'q':
+                            order['quantity'] = value.strip('%')
+                        elif key == 'c':
+                            order['comment'] = value
+                        else:
+                            order[key] = value
+            logger.info(msg=f"order {order}")
+            return order
         else:
             logger.info(msg=f"No valid order format {message}")
             return
@@ -355,19 +356,9 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 tx_token= await sign_transaction_dex(swap_TX)
             elif dex_version == 'uni_v3':
                 return
-                #await approve_asset_router(asset_out_address,asset_out_contract)
-                #sqrtPriceLimitX96 = 0
-                #fee = 3000
-                # transaction_amount = ex.to_wei(asset_out_amount,'wei')
-                #transaction_min_amount = quoter_instance.functions.quoteExactInputSingle((asset_out_address, asset_in_address, fee, transaction_amount, sqrtPriceLimitX96)).call()
-                #logger.error(msg=f"transaction_min_amount {transaction_min_amount}")
-                #swap_TX = router_instance.functions.exactInputSingle(asset_in_address,asset_out_address,fee,walletaddress,deadline,transaction_amount,transaction_min_amount,sqrtPriceLimitX96)
-                #tx_token = await sign_transaction_dex(swap_TX)
             elif dex_version == '1inch_limitorder_v2':
-                #https://docs.1inch.io/docs/limit-order-protocol/smart-contract/LimitOrderProtocol
                 return
             elif dex_version == '0x_limitorder_v4':
-                #https://protocol.0x.org/en/latest/basics/orders.html
                 return
             else:
                 logger.error(msg=f"dex_version not supported {dex_version}")
