@@ -51,5 +51,5 @@ jobs:
           # ini_path: # optional, default is DEFAULT
 
       - name: PyCharm Python Security Scanner
-        uses: tonybaloney/pycharm-security@1.25.1
+        uses: tonybaloney/pycharm-security@1.28.0
 
