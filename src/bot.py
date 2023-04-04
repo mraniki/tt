@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.98"
+TTversion="🪙🗿 TT Beta 1.2.99"
 
 ##=============== import  =============
 ##log
@@ -502,7 +502,7 @@ async def fetch_account_dex(addr):
 async def search_test_contract(symbol):
     logger.info(msg=f"📝search_test_contract {symbol} and chainId {chainId}")
     try:
-        tokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
+        tokenlist=os.getenv("TESTTOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
         token_list = await retrieve_url_json(tokenlist)
         token_search = token_list['tokens']
         for keyval in token_search:
@@ -520,7 +520,8 @@ async def search_test_contract(symbol):
 async def search_json_contract(symbol):
     logger.info(msg=f"📝search_contract {symbol} and chainId {chainId}")
     try:
-        alltokenlist="https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json"
+        #alltokenlist="https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json"
+        alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json")
         token_list = await retrieve_url_json(alltokenlist)
         logger.info(msg=f"token_list {token_list}")
         token_search = token_list['592']
