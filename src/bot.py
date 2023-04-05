@@ -521,7 +521,7 @@ async def search_json_contract(symbol):
     logger.info(msg=f"📝search_contract {symbol} and chainId {chainId}")
     try:
         #alltokenlist="https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json"
-        alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json")
+        alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json")
         token_list = await retrieve_url_json(alltokenlist)
         logger.info(msg=f"token_list {token_list}")
         token_search = token_list['592']
