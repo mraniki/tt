@@ -524,7 +524,7 @@ async def search_json_contract(symbol):
         alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json")
         token_list = await retrieve_url_json(alltokenlist)
         logger.info(msg=f"token_list {token_list}")
-        token_search = token_list['592']
+        token_search = token_list['tokens']
         for keyval in token_search:
             if (keyval['symbol'] == symbol and keyval['chainId'] == int(chainId)):
                 logger.info(msg=f"address {keyval['address']}")
