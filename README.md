@@ -112,13 +112,14 @@ MOre detail on the config: https://github.com/mraniki/tt/wiki/Configuration
 [🚧 Roadmap](https://github.com/mraniki/tt/milestones)
 
 ### V1.3
-- Support limit order for DEX (1inch) and review feasibility for dydx / Kwenta / GMX
-- Review testmode command to be part of the switch command
+
 - Refactoring of more complex functions
 
 ### v1.4
 
 - Support Uniswap V3 
+- Support limit order for DEX (1inch) and review feasibility for dydx / GMX
+- Review testmode command to be part of the switch command
 
 
 ### v1.5
