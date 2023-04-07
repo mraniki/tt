@@ -337,8 +337,10 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             if (asset_out_balance <=0):
                 await handle_exception(f"Balance for {asset_out_symbol} is {asset_out_balance}")
                 return
-            asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(quantity)/100) #buy %p ercentage  
-            #asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
+            if direction=="BUY":
+                asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(quantity)/100) #buy %p ercentage
+            if direction=="SELL":
+                asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order
             asset_out_amount_converted = (ex.to_wei(asset_out_amount,'ether'))
             slippage=2# max 2% slippage
             transaction_amount = int((asset_out_amount_converted *(slippage/100))) 
