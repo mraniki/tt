@@ -53,6 +53,7 @@ logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
 #🔗API
 gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
 dex_1inch_api = "https://api.1inch.exchange/v5.0"
+dex_1inch_limit_api = "https://limit-orders.1inch.io/v3.0"
 dex_0x_api = "https://api.0x.org/orderbook/v1"
 
 #🔁UTILS
@@ -358,8 +359,18 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 tx_token= await sign_transaction_dex(swap_TX)
             elif dex_version == 'uni_v3':
                 return
-            elif dex_version == '1inch_limitorder_v2':
+            elif dex_version == '1inch_limitorder_v3':
                 return
+                # encoded_message = encode_structured_data(eip712_data)
+                # signed_message = await sign_transaction_dex(encoded_message)
+                # # this is the limit order that will be broadcast to the limit order API
+                # limit_order = {
+                #     "orderHash": signed_message.messageHash.hex(),
+                #     "signature": signed_message.signature.hex(),
+                #     "data": order_data,
+                # }
+                # limit_order_url = dex_1inch_limit_api + str(chain_id) +"/limit-order" # make sure to change the chain_id if you are not using ETH mainnet
+                # response = requests.post(url=limit_order_url,headers={"accept": "application/json, text/plain, */*", "content-type": "application/json"}, json=limit_order)
             elif dex_version == '0x_limitorder_v4':
                 return
             else:
@@ -379,6 +390,13 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         return
 
 #🦄DEX
+
+async def execute_order_dex(direction,symbol,stoploss,takeprofit,quantity):
+    try:
+        return
+    except Exception as e:
+        await handle_exception(e)
+
 async def resolve_ens_dex(addr):
     try:
         domain = ns.name(addr)
@@ -522,8 +540,7 @@ async def search_test_contract(symbol):
 async def search_json_contract(symbol):
     logger.info(msg=f"📝search_contract {symbol} and chainId {chainId}")
     try:
-        #alltokenlist="https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json"
-        alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json")
+        alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
         token_list = await retrieve_url_json(alltokenlist)
         logger.info(msg=f"token_list {token_list}")
         token_search = token_list['tokens']
