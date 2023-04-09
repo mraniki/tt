@@ -12,5 +12,4 @@ ping3
 fastapi
 uvicorn
 many-abis
-swapportunity
 dxsp
