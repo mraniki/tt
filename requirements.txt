@@ -11,4 +11,3 @@ pycoingecko
 ping3
 fastapi
 uvicorn
-dxsp
