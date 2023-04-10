@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import asyncio
 from web3 import Web3
-import many_abis as ma
+#import many_abis as ma
 
 
 #YOUR VARIABLES
