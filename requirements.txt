@@ -11,5 +11,3 @@ pycoingecko
 ping3
 fastapi
 uvicorn
-many_abis
-dxsp
