@@ -238,8 +238,6 @@ async def load_exchange(exchangeid):
     global gasLimit
     global router_instance
     global router_instanceabi
-    global quoter_instance
-    global quoter_instanceabi
     global coin_platform
     global ns
 
@@ -258,9 +256,9 @@ async def load_exchange(exchangeid):
         dex_version= ex_result['version']
         gasLimit=ex_result['gasLimit']
         gasPrice=ex_result['gasPrice']
-        chainId=ex_result['chainId']
-        walletaddress= ex_result['walletaddress']
-        privatekey= ex_result['privatekey']
+        chain_id=ex_result['chainId']
+        wallet_address= ex_result['walletaddress']
+        private_key= ex_result['privatekey']
         dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
         logger.info(msg=f"dexswap object dex {dex}")
         ex = Web3(Web3.HTTPProvider(f'https://{ex_node_provider}'))
@@ -271,10 +269,6 @@ async def load_exchange(exchangeid):
         router_instanceabi= await fetch_abi_dex(router)
         logger.info(msg=f"router_instanceabi {router_instanceabi}")
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi)
-        if (dex_version=="uni_v3"):
-            quoter = '0x61fFE014bA17989E743c5F6cB21bF9697530B21e' #uniswap v3 for testing
-            quoter_instanceabi= await fetch_abi_dex(quoter)
-            quoter_instance = ex.eth.contract(address=ex.to_checksum_address(quoter), abi=quoter_instanceabi)
         try:
             ex.net.listening
             logger.info(msg=f"connected to {ex}")
@@ -360,22 +354,6 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
                 swap_TX = await retrieve_url_json(swap_url)
                 tx_token= await sign_transaction_dex(swap_TX)
-            elif dex_version == 'uni_v3':
-                return
-            elif dex_version == '1inch_limitorder_v3':
-                return
-                # encoded_message = encode_structured_data(eip712_data)
-                # signed_message = await sign_transaction_dex(encoded_message)
-                # # this is the limit order that will be broadcast to the limit order API
-                # limit_order = {
-                #     "orderHash": signed_message.messageHash.hex(),
-                #     "signature": signed_message.signature.hex(),
-                #     "data": order_data,
-                # }
-                # limit_order_url = dex_1inch_limit_api + str(chain_id) +"/limit-order" # make sure to change the chain_id if you are not using ETH mainnet
-                # response = requests.post(url=limit_order_url,headers={"accept": "application/json, text/plain, */*", "content-type": "application/json"}, json=limit_order)
-            elif dex_version == '0x_limitorder_v4':
-                return
             else:
                 logger.error(msg=f"dex_version not supported {dex_version}")
                 return
@@ -495,12 +473,6 @@ async def fetch_1inch_quote(token):
         quote = retrieve_url_json(quote_url)
         logger.debug(msg=f"quote {quote}")
         return quote['toTokenAmount']
-    except Exception:
-        return
-
-async def fetch_oracle_quote(token):
-    try:
-        return
     except Exception:
         return
 
