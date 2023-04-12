@@ -231,8 +231,8 @@ async def load_exchange(exchangeid):
     global privatekey
     global chainId
     global router
-    global abiurl
-    global abiurltoken
+    global block_explorer_url
+    global block_explorer_api
     global basesymbol
     global gasPrice
     global gasLimit
@@ -252,8 +252,8 @@ async def load_exchange(exchangeid):
         ex_test_mode=ex_result['testmode']
         ex_node_provider= ex_result['networkprovider']
         router= ex_result['router']
-        abiurl=ex_result['abiurl']
-        abiurltoken=ex_result['abiurltoken']
+        block_explorer_url=ex_result['block_explorer_url']
+        block_explorer_api=ex_result['block_explorer_api']
         basesymbol=ex_result['basesymbol']
         dex_version= ex_result['version']
         gasLimit=ex_result['gasLimit']
@@ -261,6 +261,7 @@ async def load_exchange(exchangeid):
         chainId=ex_result['chainId']
         walletaddress= ex_result['walletaddress']
         privatekey= ex_result['privatekey']
+        dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
         ex = Web3(Web3.HTTPProvider(f'https://{ex_node_provider}'))
         ex.middleware_onion.inject(geth_poa_middleware, layer=0)
         coin_platform = await search_gecko_platform()
@@ -465,13 +466,13 @@ async def sign_transaction_dex(tx):
 
 async def fetch_abi_dex(addr):
     try:
-        url = abiurl
+        url = block_explorer_url
         logger.debug(msg=f"fetch_abi_dex url {url}")
         params = {
             "module": "contract",
             "action": "getabi",
             "address": addr,
-            "apikey": abiurltoken }
+            "apikey": block_explorer_api }
         resp = await retrieve_url_json(url, params)
         abi = resp["result"]
         #logger.debug(msg=f"abi {abi}")
@@ -480,7 +481,7 @@ async def fetch_abi_dex(addr):
         await handle_exception(e)
 
 async def fectch_transaction_dex (txHash):
-    checkTransactionSuccessURL = f"{abiurl}?module=transaction&action=gettxreceiptstatus&txhash={txHash}&apikey={abiurltoken}"
+    checkTransactionSuccessURL = f"{block_explorer_url}?module=transaction&action=gettxreceiptstatus&txhash={txHash}&apikey={block_explorer_api}"
     checkTransactionRequest =  await retrieve_url_json(checkTransactionSuccessURL)
     return checkTransactionRequest['status']
 
@@ -506,13 +507,13 @@ async def estimate_gas(tx):
     return int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.25,'wei'))
 
 async def fetch_account_dex(addr):
-    url = abiurl
+    url = block_explorer_url
     query = {'module':'account',
             'action':'tokenbalance',
             'contractaddress':addr,
             'address':walletaddress,
             'tag':'latest',
-            'apikey':abiurltoken}
+            'apikey':block_explorer_api}
     r = requests.get(url, params=query)
     try:
         d = json.loads(r.text)
