@@ -262,6 +262,7 @@ async def load_exchange(exchangeid):
         walletaddress= ex_result['walletaddress']
         privatekey= ex_result['privatekey']
         dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
+        logger.info(msg=f"dexswap object dex {dex}")
         ex = Web3(Web3.HTTPProvider(f'https://{ex_node_provider}'))
         ex.middleware_onion.inject(geth_poa_middleware, layer=0)
         coin_platform = await search_gecko_platform()
