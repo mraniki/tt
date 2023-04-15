@@ -11,3 +11,4 @@ pycoingecko
 ping3
 fastapi
 uvicorn
+dxsp>=1.0.6

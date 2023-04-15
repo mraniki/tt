@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.2.99"
+TTversion="🪙🗿 TT Beta 1.3.0"
 
 ##=============== import  =============
 ##log
@@ -33,7 +33,7 @@ from web3 import Web3
 from web3.middleware import geth_poa_middleware
 from ens import ENS
 from datetime import datetime
-
+from dxsp import DexSwap
 #API
 from fastapi import FastAPI, Header, HTTPException, Request
 import uvicorn
@@ -231,15 +231,13 @@ async def load_exchange(exchangeid):
     global privatekey
     global chainId
     global router
-    global abiurl
-    global abiurltoken
+    global block_explorer_url
+    global block_explorer_api
     global basesymbol
     global gasPrice
     global gasLimit
     global router_instance
     global router_instanceabi
-    global quoter_instance
-    global quoter_instanceabi
     global coin_platform
     global ns
 
@@ -252,15 +250,17 @@ async def load_exchange(exchangeid):
         ex_test_mode=ex_result['testmode']
         ex_node_provider= ex_result['networkprovider']
         router= ex_result['router']
-        abiurl=ex_result['abiurl']
-        abiurltoken=ex_result['abiurltoken']
+        block_explorer_url=ex_result['block_explorer_url']
+        block_explorer_api=ex_result['block_explorer_api']
         basesymbol=ex_result['basesymbol']
         dex_version= ex_result['version']
         gasLimit=ex_result['gasLimit']
         gasPrice=ex_result['gasPrice']
-        chainId=ex_result['chainId']
-        walletaddress= ex_result['walletaddress']
-        privatekey= ex_result['privatekey']
+        chain_id=ex_result['chainId']
+        wallet_address= ex_result['walletaddress']
+        private_key= ex_result['privatekey']
+        dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
+        logger.info(msg=f"dexswap object dex {dex}")
         ex = Web3(Web3.HTTPProvider(f'https://{ex_node_provider}'))
         ex.middleware_onion.inject(geth_poa_middleware, layer=0)
         coin_platform = await search_gecko_platform()
@@ -269,10 +269,6 @@ async def load_exchange(exchangeid):
         router_instanceabi= await fetch_abi_dex(router)
         logger.info(msg=f"router_instanceabi {router_instanceabi}")
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi)
-        if (dex_version=="uni_v3"):
-            quoter = '0x61fFE014bA17989E743c5F6cB21bF9697530B21e' #uniswap v3 for testing
-            quoter_instanceabi= await fetch_abi_dex(quoter)
-            quoter_instance = ex.eth.contract(address=ex.to_checksum_address(quoter), abi=quoter_instanceabi)
         try:
             ex.net.listening
             logger.info(msg=f"connected to {ex}")
@@ -358,22 +354,6 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
                 swap_url = f"{dex_1inch_api}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
                 swap_TX = await retrieve_url_json(swap_url)
                 tx_token= await sign_transaction_dex(swap_TX)
-            elif dex_version == 'uni_v3':
-                return
-            elif dex_version == '1inch_limitorder_v3':
-                return
-                # encoded_message = encode_structured_data(eip712_data)
-                # signed_message = await sign_transaction_dex(encoded_message)
-                # # this is the limit order that will be broadcast to the limit order API
-                # limit_order = {
-                #     "orderHash": signed_message.messageHash.hex(),
-                #     "signature": signed_message.signature.hex(),
-                #     "data": order_data,
-                # }
-                # limit_order_url = dex_1inch_limit_api + str(chain_id) +"/limit-order" # make sure to change the chain_id if you are not using ETH mainnet
-                # response = requests.post(url=limit_order_url,headers={"accept": "application/json, text/plain, */*", "content-type": "application/json"}, json=limit_order)
-            elif dex_version == '0x_limitorder_v4':
-                return
             else:
                 logger.error(msg=f"dex_version not supported {dex_version}")
                 return
@@ -465,13 +445,13 @@ async def sign_transaction_dex(tx):
 
 async def fetch_abi_dex(addr):
     try:
-        url = abiurl
+        url = block_explorer_url
         logger.debug(msg=f"fetch_abi_dex url {url}")
         params = {
             "module": "contract",
             "action": "getabi",
             "address": addr,
-            "apikey": abiurltoken }
+            "apikey": block_explorer_api }
         resp = await retrieve_url_json(url, params)
         abi = resp["result"]
         #logger.debug(msg=f"abi {abi}")
@@ -480,7 +460,7 @@ async def fetch_abi_dex(addr):
         await handle_exception(e)
 
 async def fectch_transaction_dex (txHash):
-    checkTransactionSuccessURL = f"{abiurl}?module=transaction&action=gettxreceiptstatus&txhash={txHash}&apikey={abiurltoken}"
+    checkTransactionSuccessURL = f"{block_explorer_url}?module=transaction&action=gettxreceiptstatus&txhash={txHash}&apikey={block_explorer_api}"
     checkTransactionRequest =  await retrieve_url_json(checkTransactionSuccessURL)
     return checkTransactionRequest['status']
 
@@ -496,23 +476,17 @@ async def fetch_1inch_quote(token):
     except Exception:
         return
 
-async def fetch_oracle_quote(token):
-    try:
-        return
-    except Exception:
-        return
-
 async def estimate_gas(tx):
     return int(ex.to_wei(ex.eth.estimate_gas(tx) * 1.25,'wei'))
 
 async def fetch_account_dex(addr):
-    url = abiurl
+    url = block_explorer_url
     query = {'module':'account',
             'action':'tokenbalance',
             'contractaddress':addr,
             'address':walletaddress,
             'tag':'latest',
-            'apikey':abiurltoken}
+            'apikey':block_explorer_api}
     r = requests.get(url, params=query)
     try:
         d = json.loads(r.text)
