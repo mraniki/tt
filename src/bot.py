@@ -41,6 +41,7 @@ import http
 #Utils
 from pycoingecko import CoinGeckoAPI
 from ping3 import ping
+from ttp import ttp
 
 #🔧CONFIG
 load_dotenv()
@@ -264,8 +265,6 @@ async def load_exchange(exchangeid):
         ex = Web3(Web3.HTTPProvider(f'https://{ex_node_provider}'))
         ex.middleware_onion.inject(geth_poa_middleware, layer=0)
         coin_platform = await search_gecko_platform()
-        #ns = ENS.from_web3(ex)
-        #await resolve_ens_dex(router)
         router_instanceabi= await fetch_abi_dex(router)
         logger.info(msg=f"router_instanceabi {router_instanceabi}")
         router_instance = ex.eth.contract(address=ex.to_checksum_address(router), abi=router_instanceabi)
@@ -314,7 +313,8 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
 
         else:
 
-            asset_out_symbol = basesymbol if direction=="BUY" else symbol
+            #execute_order.dex(direction,symbol,stoploss,takeprofit,quantity)
+         asset_out_symbol = basesymbol if direction=="BUY" else symbol
             asset_in_symbol = symbol if direction=="BUY" else basesymbol
             response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
             logger.debug(msg=f"asset_out_symbol {asset_out_symbol} asset_in_symbol {asset_in_symbol}")
@@ -378,13 +378,7 @@ async def execute_order_dex(direction,symbol,stoploss,takeprofit,quantity):
     except Exception as e:
         await handle_exception(e)
 
-async def resolve_ens_dex(addr):
-    try:
-        domain = ns.name(addr)
-        logger.debug(msg=f"ENS {domain}")
-        return
-    except Exception as e:
-        await handle_exception(e)
+
 
 async def approve_asset_router(asset_out_address,asset_out_contract):
     try:
