@@ -314,7 +314,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         else:
 
             #execute_order.dex(direction,symbol,stoploss,takeprofit,quantity)
-         asset_out_symbol = basesymbol if direction=="BUY" else symbol
+            asset_out_symbol = basesymbol if direction=="BUY" else symbol
             asset_in_symbol = symbol if direction=="BUY" else basesymbol
             response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
             logger.debug(msg=f"asset_out_symbol {asset_out_symbol} asset_in_symbol {asset_in_symbol}")
