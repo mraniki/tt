@@ -240,8 +240,12 @@ async def load_exchange(exchangeid):
         chain_id=ex_result['chainId']
         wallet_address= ex_result['walletaddress']
         private_key= ex_result['privatekey']
+
+
         dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
         logger.info(msg=f"dexswap object dex {dex}")
+        
+
         ex = Web3(Web3.HTTPProvider(f'https://{ex_node_provider}'))
         ex.middleware_onion.inject(geth_poa_middleware, layer=0)
         coin_platform = await search_gecko_platform()
@@ -294,6 +298,8 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         else:
 
             #execute_order.dex(direction,symbol,stoploss,takeprofit,quantity)
+
+
             asset_out_symbol = basesymbol if direction=="BUY" else symbol
             asset_in_symbol = symbol if direction=="BUY" else basesymbol
             response = f"⬆️ {asset_in_symbol}" if direction=="BUY" else f"⬇️ {asset_out_symbol}"
@@ -503,6 +509,8 @@ async def search_json_contract(symbol):
 
 async def search_contract(token):
     try:
+        contract = dex.search_contract(token)
+        logger.error(msg=f"dex contract {contract}")
         if ex_test_mode == 'True':
             token_contract = await search_test_contract(token)
         else:

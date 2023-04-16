@@ -4,3 +4,4 @@ config/.env
 config/db.json
 src/config/db.json
 .DS_Store
+src/__pycache__/bot.cpython-311.pyc
