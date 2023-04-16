@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.3.0"
+TTversion="🪙🗿 TT Beta 1.3.1"
 
 ##=============== import  =============
 ##log
@@ -12,17 +12,12 @@ from dotenv import load_dotenv
 import json, requests
 import asyncio
 import re
-#import telegram
-from telegram.ext import Application, MessageHandler
-#import telethon
-from telethon import TelegramClient, events
-#matrix
-import simplematrixbotlib as botlib
-#discord
-import discord
-#notification
-import apprise
-from apprise import NotifyFormat
+
+#Utils
+from pycoingecko import CoinGeckoAPI
+from ping3 import ping
+from ttp import ttp
+
 #db
 from tinydb import TinyDB, Query, where
 #CEX
@@ -34,14 +29,24 @@ from web3.middleware import geth_poa_middleware
 from ens import ENS
 from datetime import datetime
 from dxsp import DexSwap
+
+#messaging platform
+#import telegram
+from telegram.ext import Application, MessageHandler
+#import telethon
+from telethon import TelegramClient, events
+#matrix
+import simplematrixbotlib as botlib
+#discord
+import discord
+#notification
+import apprise
+from apprise import NotifyFormat
+
 #API
 from fastapi import FastAPI, Header, HTTPException, Request
 import uvicorn
 import http
-#Utils
-from pycoingecko import CoinGeckoAPI
-from ping3 import ping
-from ttp import ttp
 
 #🔧CONFIG
 load_dotenv()
@@ -73,13 +78,13 @@ async def parse_message(self,msg):
     wordlist = msg.split(" ")
     wordlistsize = len(wordlist)
     logger.debug(msg=f"parse_message wordlist {wordlist} len {wordlistsize}")
-    # try:
-    #     logger.debug(msg="orderparsing NEW")
-    #     orderparsing = await order_parsing(msg)
-    #     logger.debug(msg="orderparsing COMPLETED")
-    #     logger.debug(msg=f"orderparsing {orderparsing}")
-    # except:
-    #     pass
+    try:
+        logger.debug(msg="orderparsing NEW")
+        orderparsing = await order_parsing(msg)
+        logger.debug(msg="orderparsing COMPLETED")
+        logger.debug(msg=f"orderparsing {orderparsing}")
+    except:
+        pass
     response = ""
     #🦾BOT FILTERS
     filters = {
@@ -138,39 +143,14 @@ async def parse_message(self,msg):
     except Exception:
         logger.warning(msg="Parsing exception")
 
-async def order_parsing(message):
+async def order_parsing(message_to_parse):
     logger.info(msg=f"order_parsing V2 with {message}")
     try:
-        if re.match(r'(?:buy|Buy|BUY|sell|Sell|SELL)', message):
-            order = message.split()
-            order = {'direction': tokens[0].lower()}
-            order['symbol'] = tokens[1].upper()
-            order['stoploss'] = '1000'
-            order['takeprofit'] = '1000'
-            order['trailingstop'] = '200'
-            order['quantity'] = '1'
-            order['comment'] = f"TT{version}"
-            if len(order) > 2:
-                for order in orders[2:]:
-                    if '=' in order:
-                        key, value = order.split('=')
-                        if key == 'sl':
-                            order['stoploss'] = value
-                        elif key == 'tp':
-                            order['takeprofit'] = value
-                        elif key == 'ts':
-                            order['trailingstop'] = value
-                        elif key == 'q':
-                            order['quantity'] = value.strip('%')
-                        elif key == 'c':
-                            order['comment'] = value
-                        else:
-                            order[key] = value
-            logger.info(msg=f"order {order}")
-            return order
-        else:
-            logger.info(msg=f"No valid order format {message}")
-            return
+        order_template = """ {{ direction }} {{ symbol }} sl={{ stoploss }} tp={{ takeprofit }} q={{ quantity }} """
+        parser = ttp(data=message_to_parse, template=order_template)
+        parser.parse()
+        result = parser.result(format="json")
+        print(result[0])
     except Exception as e:
         logger.warning(msg=f"Order parsing error {e}")
 
