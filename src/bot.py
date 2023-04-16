@@ -258,6 +258,7 @@ async def load_exchange(exchangeid):
             return ex_name
         except Exception as e:
             await handle_exception(e)
+
     elif ('api' in ex_result):
         ex_name = ex_result['name']
         defaultType =  ex_result['defaultType'],
@@ -283,7 +284,9 @@ async def load_exchange(exchangeid):
 async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
     if bot_trading_switch == False:
         return
+
     try:
+        response = f"⬇️ {symbol}" if (direction=="SELL") else f"⬆️ {symbol}"
         if not isinstance(ex,web3.main.Web3):
             if (await get_account_balance()=="No Balance"): 
                 await handle_exception("Check your Balance")
@@ -291,14 +294,11 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             asset_out_quote = float(ex.fetchTicker(f'{symbol}').get('last'))
             totalusdtbal = await get_account_basesymbol_balance() ##ex.fetchBalance()['USDT']['free']
             amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
-            res = ex.create_order(symbol, price_type, direction, amountpercent)
-            response = f"⬇️ {symbol}" if (direction=="SELL") else f"⬆️ {symbol}"
-            response+= f"\n➕ Size: {res['amount']}\n⚫️ Entry: {res['price']}\nℹ️ {res['id']}\n🗓️ {res['datetime']}"
-
+            order = ex.create_order(symbol, price_type, direction, amountpercent)
+            response+= f"\n➕ Size: {order['amount']}\n⚫️ Entry: {order['price']}\nℹ️ {order['id']}\n🗓️ {order['datetime']}"
         else:
-
-            #order = execute_order.dex(direction,symbol,stoploss,takeprofit,quantity)
-            #return order
+            order = execute_order.dex(direction,symbol,stoploss,takeprofit,quantity)
+            # response+= f"\n➕ Size: {order['amount']}\n⚫️ Entry: {order['price']}\nℹ️ {order['id']}\n🗓️ {order['datetime']}"
 
             # asset_out_symbol = basesymbol if direction=="BUY" else symbol
             # asset_in_symbol = symbol if direction=="BUY" else basesymbol
