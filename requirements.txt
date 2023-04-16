@@ -1,7 +1,7 @@
 python-dotenv>=0.21.1
 tinydb
 ccxt
-web3>=v6.0.0
+web3>=v6.1.0
 apprise
 python-telegram-bot>=20.1
 telethon
@@ -11,5 +11,5 @@ pycoingecko
 ping3
 fastapi
 uvicorn
-dxsp>=1.0.6
+dxsp>=1.1
 ttp
