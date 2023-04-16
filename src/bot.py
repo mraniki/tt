@@ -57,10 +57,6 @@ logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 logging.getLogger('telegram').setLevel(logging.WARNING)
 
-#🔗API
-dex_1inch_api = "https://api.1inch.exchange/v5.0"
-dex_1inch_limit_api = "https://limit-orders.1inch.io/v3.0"
-dex_0x_api = "https://api.0x.org/orderbook/v1"
 
 #🔁UTILS
 async def verify_import_library():
@@ -487,12 +483,12 @@ async def help_command():
     return f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
 
 async def account_balance_command():
-    balance =f"🏦 Balance\n"
-    balance += await get_account_balance()
-    return balance
+    bal =f"🏦 Balance\n"
+    bal += await get_account_balance()
+    return bal
 
 async def account_position_command():
-    logger.debug(msg="account_position_command")
+    logger.debug(msg="account_pos_command")
     position = f"📊 Position\n"
     position += await get_account_position()
     return position
@@ -500,7 +496,7 @@ async def account_position_command():
 async def quote_command(symbol):
     if (isinstance(ex,web3.main.Web3)):
         asset_out_quote = await dex.get_quote(symbol)
-        response=f"🦄{asset_out_1inch_quote} USD\n🖊️{chainId}: {symbol}"
+        response=f"🦄{asset_out_quote} USD\n🖊️{chainId}: {symbol}"
     else:
         price= ex.fetch_ticker(symbol.upper())['last']
         response=f"🏛️ {price} USD"
