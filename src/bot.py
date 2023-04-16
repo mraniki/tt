@@ -624,7 +624,7 @@ async def notifybot(request: Request):
 #🙊TALKYTRADER
 if __name__ == '__main__':
     HOST=os.getenv("HOST", "0.0.0.0")
-    PORT=os.getenv("PORT", "8080")
+    PORT=os.getenv("PORT", 8080)
     uvicorn.run(app, host=HOST, port=PORT)
 
 
