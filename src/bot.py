@@ -506,12 +506,11 @@ async def search_json_contract(symbol):
     except Exception as e:
         logger.error(msg=f"search_json_contract error {symbol} {e}")
 
-
 async def search_contract(token):
     try:
         token_contract = dex.search_contract(token)
         logger.error(msg=f"dex contract {contract}")
-        
+
         # if ex_test_mode == 'True':
         #     token_contract = await search_test_contract(token)
         # else:
