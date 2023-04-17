@@ -54,7 +54,7 @@ logger = logging.getLogger(__name__)
 logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 logging.getLogger('telegram').setLevel(logging.WARNING)
-logging.getLogger('telethon.network.mtprotosender').setLevel(logging.WARNING)
+logging.getLogger('telethon').setLevel(logging.WARNING)
 
 #🔁UTILS
 async def verify_import_library():
