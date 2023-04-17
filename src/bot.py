@@ -250,6 +250,7 @@ async def load_exchange(exchangeid):
                 logger.info(msg="sandbox setup")
                 ex.set_sandbox_mode('enabled')
             markets = ex.load_markets()
+            print(type(ex))
             return ex
         except Exception as e:
             await handle_exception(e)
