@@ -6,7 +6,6 @@ TTversion="🪙🗿 TT Beta 1.3.2"
 
 ##sys
 import logging, sys, json, requests, asyncio
-import re
 
 ##env
 import os
@@ -28,7 +27,6 @@ import web3
 from web3 import Web3
 from dxsp import DexSwap
 
-
 #messaging platform
 #import telegram
 from telegram.ext import Application, MessageHandler
@@ -43,9 +41,8 @@ import apprise
 from apprise import NotifyFormat
 
 #API
-from fastapi import FastAPI, Header, HTTPException, Request
+from fastapi import FastAPI
 import uvicorn
-import http
 
 #🔧CONFIG
 load_dotenv()
@@ -57,7 +54,6 @@ logger = logging.getLogger(__name__)
 logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 logging.getLogger('telegram').setLevel(logging.WARNING)
-
 
 #🔁UTILS
 async def verify_import_library():
@@ -344,12 +340,6 @@ async def get_account_margin():
         await handle_exception(e)
         return
 
-async def get_wallet_auth():
-    try:
-        return
-    except Exception as e:
-        await handle_exception(e)
-        return
 
 #======= error handling
 async def handle_exception(e) -> None:
@@ -607,16 +597,6 @@ def health_check():
     logger.info(msg="Healthcheck_Ping")
     return {f"Bot is online {TTversion}"}
 
-@app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
-async def webhook(request: Request):
-    payload = await request.body()
-    logger.info(msg=f"webhook event {payload}")
-
-@app.post("/notify", status_code=http.HTTPStatus.ACCEPTED)
-async def notifybot(request: Request):
-    data_received = await request.body()
-    await notify(data_received)
-    logger.info(msg=f"notifybot event {data_received}")
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
