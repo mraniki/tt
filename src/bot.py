@@ -229,12 +229,6 @@ async def load_exchange(exchangeid):
         dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api) ,
         logger.info(msg=f"dexswap object dex {dex}")
         ex = dex
-        try:
-            ex.net.listening
-            logger.info(msg=f"connected to {ex}")
-            return ex_name
-        except Exception as e:
-            await handle_exception(e)
 
     elif ('api' in ex_result):
         ex_name = ex_result['name']
@@ -345,26 +339,8 @@ async def get_account_margin():
 
 #======= error handling
 async def handle_exception(e) -> None:
-    try:
-        msg = ""
-        logger.error(msg=f"error: {e}")
-    except KeyError:
-        msg = "DB content error"
-        sys.exit()
-    except telegram.error:
-        msg = "telegram error"
-    except ConnectionError:
-        msg = 'Could not connect to RPC'
-    except Web3Exception.error:
-        msg = "web3 error"
-    except ccxt.base.errors:
-        msg = "CCXT error"
-    except ccxt.NetworkError:
-        msg = "Network error"
-    except ccxt.ExchangeError:
-        msg = "Exchange error"
-    except Exception:
-        msg = f"{e}"
+    msg = ""
+    logger.error(msg=f"error: {e}")
     message = f"⚠️ {msg} {e}"
     logger.error(msg = f"{message}")
     await notify(message)
