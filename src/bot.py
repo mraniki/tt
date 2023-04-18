@@ -57,8 +57,6 @@ logging.getLogger('telegram').setLevel(logging.WARNING)
 logging.getLogger('telethon').setLevel(logging.WARNING)
 
 #🔁UTILS
-async def verify_import_library():
-    logger.info(msg=f"{TTversion}")
 
 async def parse_message(self,msg):
     logger.debug(msg=f"self {self} msg {msg}")
@@ -147,17 +145,11 @@ async def order_parsing(message_to_parse):
     except Exception as e:
         logger.warning(msg=f"Order parsing error {e}")
 
-async def retrieve_url_json(url,params=None):
-    headers = { "User-Agent": "Mozilla/5.0" }
-    response = requests.get(url,params =params,headers=headers)
-    logger.debug(msg=f"retrieve_url_json {response}")
-    return response.json()
-
 async def verify_latency_ex():
     try:
         return (
             dex.latency
-            if isinstance(ex, web3.main.Web3)
+            if isinstance(ex, dxsp.main.DexSwap)
             else round(ping("1.1.1.1", unit='ms'), 3)
         )
     except Exception as e:
@@ -258,7 +250,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         return
     try:
         response = f"⬇️ {symbol}" if (direction=="SELL") else f"⬆️ {symbol}"
-        if not isinstance(ex,web3.main.Web3):
+        if not isinstance(ex,dxsp.main.DexSwap):
             if (await get_account_balance()=="No Balance"): 
                 await handle_exception("Check your Balance")
                 return
@@ -269,9 +261,8 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             response+= f"\n➕ Size: {order['amount']}\n⚫️ Entry: {order['price']}\nℹ️ {order['id']}\n🗓️ {order['datetime']}"
         else:
             order = execute_order.dex(direction=direction,symbol=symbol,stoploss=stoploss,takeprofit=takeprofit,quantity=quantity)
-            response+= f"\n➕ Size: {quantity}\n⚫️ Entry: {quantity}\nℹ️ {quantity}\n🗓️ {quantity}"
-            #response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {await fetch_gecko_asset_price(asset_in_symbol)}USD \nℹ️ {txHash}\n⛽️ {txHashDetail['gasUsed']}\n🗓️ {datetime.now()}"
-            #logger.info(msg=f"{response}")
+            response+= order['confirmation']
+            
         return response
 
     except Exception as e:
@@ -282,7 +273,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
 #🔒PRIVATE
 async def get_account_balance():
     try:
-        if isinstance(ex, web3.main.Web3):
+        if isinstance(ex, dxsp.main.DexSwap):
             bal = get_account_balance.dex()
             msg = {bal}
         else:
@@ -298,7 +289,7 @@ async def get_account_balance():
 
 async def fetch_token_balance(token):
     try:
-        if isinstance(ex, web3.main.Web3):
+        if isinstance(ex, dxsp.main.DexSwap):
             token_balance = await dex.get_token_balance(token)
         else:
             token_balance = ex.fetch_free_balance()[f'{token}']
@@ -309,7 +300,7 @@ async def fetch_token_balance(token):
 
 async def get_account_basesymbol_balance():
     try:
-        if isinstance(ex, web3.main.Web3):
+        if isinstance(ex, dxsp.main.DexSwap):
             return dex.get_basecoin_balance()
         else:
             return ex.fetchBalance()['USDT']['free']
@@ -319,7 +310,7 @@ async def get_account_basesymbol_balance():
 async def get_account_position():
     try:
         logger.debug(msg="get_account_position")
-        if isinstance(ex, web3.main.Web3):
+        if isinstance(ex, dxsp.main.DexSwap):
             open_positions = await dex.get_account_position()
         else:
             positions = ex.fetch_positions()
@@ -335,7 +326,6 @@ async def get_account_margin():
     except Exception as e:
         await handle_exception(e)
         return
-
 
 #======= error handling
 async def handle_exception(e) -> None:
@@ -423,7 +413,7 @@ async def database_setup():
                     logger.error("no bot token")
                     sys.exit()
         except Exception as e:
-            logger.warning(msg=f"error with db file {db_path}, verify json structure and content. error: {e}")
+            logger.warning(msg=f"error with db file {db_path}, verify json. error: {e}")
 
 #🦾BOT ACTIONS
 async def post_init():
@@ -497,7 +487,6 @@ async def bot():
     global bot
     try:
 #LOAD
-        await verify_import_library()
         await database_setup()
         await load_exchange(ex_name)
 
@@ -533,7 +522,7 @@ async def bot():
                 async def room_joined(room):
                     await post_init()
                 @bot.listener.on_message_event
-                async def neo(room, message):    
+                async def on_matrix_message(room, message):    
                     await parse_message(bot,message.body)
                 await bot.api.login()
                 bot.api.async_client.callbacks = botlib.Callbacks(bot.api.async_client, bot)
@@ -551,7 +540,7 @@ async def bot():
                 await bot.run_until_disconnected()
 
     except Exception as e:
-        logger.error(msg=f"Bot failed to start: {str(e)}")
+        logger.error(msg=f"Bot start failed: {str(e)}")
 
 #⛓️API
 app = FastAPI(title="TALKYTRADER",)
@@ -574,7 +563,6 @@ def root():
 def health_check():
     logger.info(msg="Healthcheck_Ping")
     return {f"Bot is online {TTversion}"}
-
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
