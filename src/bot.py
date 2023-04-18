@@ -1,6 +1,7 @@
 ##=============== VERSION =============
 
 TTversion="🪙🗿 TT Beta 1.3.2"
+version = "1.3.2"
 
 ##=============== import  =============
 
@@ -13,7 +14,6 @@ from dotenv import load_dotenv
 import dynaconf
 
 #Utils
-from pycoingecko import CoinGeckoAPI
 from ping3 import ping
 from ttp import ttp
 
