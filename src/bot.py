@@ -1,6 +1,6 @@
 ##=============== VERSION =============
 
-TTversion="🪙🗿 TT Beta 1.3.2"
+TTversion="🪙🗿 TT Beta 1.3.3"
 version = "1.3.2"
 
 ##=============== import  =============
@@ -11,7 +11,7 @@ import logging, sys, json, requests, asyncio
 ##env
 import os
 from dotenv import load_dotenv
-import dynaconf
+from config import settings
 
 #Utils
 from ping3 import ping
@@ -23,8 +23,6 @@ from tinydb import TinyDB, Query, where
 #CEX
 import ccxt
 #DEX
-import web3
-from web3 import Web3
 from dxsp import DexSwap
 
 #messaging platform
@@ -149,7 +147,7 @@ async def verify_latency_ex():
     try:
         return (
             dex.latency
-            if isinstance(ex, dxsp.main.DexSwap)
+            if hasattr(ex, "w3")
             else round(ping("1.1.1.1", unit='ms'), 3)
         )
     except Exception as e:
@@ -237,7 +235,6 @@ async def load_exchange(exchangeid):
                 logger.info(msg="sandbox setup")
                 ex.set_sandbox_mode('enabled')
             markets = ex.load_markets()
-            print(type(ex))
             return ex
         except Exception as e:
             await handle_exception(e)
@@ -250,7 +247,10 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         return
     try:
         response = f"⬇️ {symbol}" if (direction=="SELL") else f"⬆️ {symbol}"
-        if not isinstance(ex,dxsp.main.DexSwap):
+        if hasattr(ex, "w3"):
+            order = execute_order.dex(direction=direction,symbol=symbol,stoploss=stoploss,takeprofit=takeprofit,quantity=quantity)
+            response+= order['confirmation']
+        else:
             if (await get_account_balance()=="No Balance"): 
                 await handle_exception("Check your Balance")
                 return
@@ -259,10 +259,6 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
             amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
             order = ex.create_order(symbol, price_type, direction, amountpercent)
             response+= f"\n➕ Size: {order['amount']}\n⚫️ Entry: {order['price']}\nℹ️ {order['id']}\n🗓️ {order['datetime']}"
-        else:
-            order = execute_order.dex(direction=direction,symbol=symbol,stoploss=stoploss,takeprofit=takeprofit,quantity=quantity)
-            response+= order['confirmation']
-            
         return response
 
     except Exception as e:
@@ -273,7 +269,7 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
 #🔒PRIVATE
 async def get_account_balance():
     try:
-        if isinstance(ex, dxsp.main.DexSwap):
+        if hasattr(ex, "w3"):
             bal = get_account_balance.dex()
             msg = {bal}
         else:
@@ -289,7 +285,7 @@ async def get_account_balance():
 
 async def fetch_token_balance(token):
     try:
-        if isinstance(ex, dxsp.main.DexSwap):
+        if hasattr(ex, "w3"):
             token_balance = await dex.get_token_balance(token)
         else:
             token_balance = ex.fetch_free_balance()[f'{token}']
@@ -300,7 +296,7 @@ async def fetch_token_balance(token):
 
 async def get_account_basesymbol_balance():
     try:
-        if isinstance(ex, dxsp.main.DexSwap):
+        if hasattr(ex, "w3"):
             return dex.get_basecoin_balance()
         else:
             return ex.fetchBalance()['USDT']['free']
@@ -310,7 +306,7 @@ async def get_account_basesymbol_balance():
 async def get_account_position():
     try:
         logger.debug(msg="get_account_position")
-        if isinstance(ex, dxsp.main.DexSwap):
+        if hasattr(ex, "w3"):
             open_positions = await dex.get_account_position()
         else:
             positions = ex.fetch_positions()
@@ -453,7 +449,7 @@ async def account_position_command():
     return position
 
 async def quote_command(symbol):
-    if (isinstance(ex,web3.main.Web3)):
+    if (hasattr(ex, "w3")):
         asset_out_quote = await dex.get_quote(symbol)
         response=f"🦄{asset_out_quote} USD\n🖊️{chainId}: {symbol}"
     else:
@@ -569,5 +565,4 @@ if __name__ == '__main__':
     HOST=os.getenv("HOST", "0.0.0.0")
     PORT=os.getenv("PORT", 8080)
     uvicorn.run(app, host=HOST, port=PORT)
-
 
