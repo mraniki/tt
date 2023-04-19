@@ -53,6 +53,7 @@ logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 logging.getLogger('telegram').setLevel(logging.WARNING)
 logging.getLogger('telethon').setLevel(logging.WARNING)
+logging.getLogger('discord').setLevel(logging.WARNING)
 
 #🔁UTILS
 
