@@ -233,6 +233,16 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         await handle_exception(e)
         return
 
+async def get_quote(symbol):
+    if ex_type == 'dex':
+        asset_out_quote = await dex.get_quote(symbol)
+        response=f"🦄{asset_out_quote} USD\n🖊️{chainId}: {symbol}"
+    else:
+        price= cex.fetch_ticker(symbol.upper())['last']
+        response=f"🏛️ {price} USD"
+        return response
+        
+        
 #🔒PRIVATE
 async def get_account_balance():
     try:
@@ -249,17 +259,6 @@ async def get_account_balance():
         return msg
     except Exception:
         return
-
-async def fetch_token_balance(token):
-    try:
-        if ex_type == 'dex':
-            token_balance = await dex.get_token_balance(token)
-        else:
-            token_balance = cex.fetch_free_balance()[f'{token}']
-        return 0 if token_balance <=0 or token_balance is None else token_balance
-    except Exception as e:
-        logger.error(msg=f"{token} balance error: {e}")
-        return 0
 
 async def get_account_basesymbol_balance():
     try:
@@ -300,7 +299,6 @@ async def handle_exception(e) -> None:
     logger.error(msg = f"{message}")
     await notify(message)
 
-
 #🦾BOT ACTIONS
 async def post_init():
     startup_message=f"Bot is online {version}"
@@ -334,13 +332,7 @@ async def account_position_command():
     return position
 
 async def quote_command(symbol):
-    if (hasattr(ex, "w3")):
-        asset_out_quote = await dex.get_quote(symbol)
-        response=f"🦄{asset_out_quote} USD\n🖊️{chainId}: {symbol}"
-    else:
-        price= cex.fetch_ticker(symbol.upper())['last']
-        response=f"🏛️ {price} USD"
-    return response
+    return await get_quote(symbol)
 
 async def trading_switch_command():
     global bot_trading_switch
@@ -349,7 +341,6 @@ async def trading_switch_command():
 
 async def restart_command():
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
-
 
 #🤖BOT
 async def bot():
