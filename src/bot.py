@@ -1,23 +1,14 @@
-##=============== VERSION =============
+##========== TalkyTrader 🪙🗿 ========
 
-TTversion="🪙🗿 TT Beta 1.3.3"
 __version__ = "1.0.1"
 
 ##=============== import  =============
 
-##sys
 import logging, sys, json, requests, asyncio
-
-##env
-import os
 from config import settings
-
-#CEX
 import ccxt
-#DEX
 from dxsp import DexSwap
 
-#messaging platformw
 #import telegram
 from telegram.ext import Application, MessageHandler
 #import telethon
@@ -301,7 +292,7 @@ async def handle_exception(e) -> None:
 
 #🦾BOT ACTIONS
 async def post_init():
-    startup_message=f"Bot is online {version}"
+    startup_message=f"Bot is online {__version__}"
     logger.info(msg = f"{startup_message}")
     await notify(startup_message)
 
@@ -318,7 +309,7 @@ async def help_command():
     if settings.DISCORD_WEBHOOK_ID:
         helpcommand= helpcommand.replace("<code>", "`")
         helpcommand= helpcommand.replace("</code>", "`")
-    bot_menu_help = f"{version}\n{helpcommand}"
+    bot_menu_help = f"{__version__}\n{helpcommand}"
     return f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
 
 async def account_balance_command():
@@ -418,12 +409,12 @@ async def shutdown_event():
 
 @app.get("/")
 def root():
-    return {f"Bot is online {version}"}
+    return {f"Bot is online {__version__}"}
 
 @app.get("/health")
 def health_check():
     logger.info(msg="Healthcheck_Ping")
-    return {f"Bot is online {version}"}
+    return {f"Bot is online {__version__}"}
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
