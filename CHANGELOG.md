@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.1 (2023-04-20)
+### Fix
+* Actions ([`cfe5b29`](https://github.com/mraniki/tt/commit/cfe5b291de4254d1506271a47be44303102cad34))
+
 ## v1.0.0 (2023-04-20)
 ### Feature
 * Integration with dxsp lib for dex related function (swap, balance, quote) ([`eb0e9db`](https://github.com/mraniki/tt/commit/eb0e9db49b8af7b1415409c8cc6ed7220884d6a7))
