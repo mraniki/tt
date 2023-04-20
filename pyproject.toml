@@ -15,7 +15,6 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 asyncio = "*"
-python-dotenv = "*"
 dynaconf = "*"
 apprise = "*"
 telethon = "*"
@@ -27,7 +26,6 @@ fastapi = "*"
 uvicorn = "*"
 ping3 = "*"
 ttp = "*"
-tinydb = "*"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"

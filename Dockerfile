@@ -14,8 +14,7 @@ RUN pip install -r requirements.txt
 # copy the content of the local src directory to the working directory
 COPY ./src .
 
-RUN mkdir /code/config
-ADD /config/sample_db.json /code/config/sample_db.json
+ADD /config/example.toml .
 
 EXPOSE 8443 8080
 # command to run on container start
