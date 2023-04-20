@@ -1,4 +1,4 @@
-name: "📦 Nightly"
+name: "📦 Latest"
 
 on:
   push:
@@ -6,7 +6,6 @@ on:
       - "main"
     tags:
       - "latest"
-
 
 jobs:
   release:
