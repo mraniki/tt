@@ -3,9 +3,9 @@ name: "📦 Nightly"
 on:
   push:
     branches:
-      - "dev"
+      - "main"
     tags:
-      - "nightly"
+      - "latest"
 
 
 jobs:
