@@ -149,12 +149,12 @@ async def notify(msg):
 
 #💱EXCHANGE
 async def load_exchange():
-    logger.info(msg=f"Setting up exchange")
+    logger.info(msg="Setting up exchange")
     global ex_type
     global ex_name
     global ex_test_mode
 
-    if (settings.CEX_API):
+    if settings.CEX_API:
         defaultType =  settings.CEX_DEFAULTTYPE
         client = getattr(ccxt, settings.CEX_NAME)
         ex_test_mode = False
@@ -196,7 +196,7 @@ async def load_exchange():
         except Exception as e:
             await handle_exception(e)
     else:
-        logger.info(msg=f"no CEX or DEX config found")
+        logger.info(msg="no CEX or DEX config found")
         return
 
 #📦ORDER
@@ -230,8 +230,7 @@ async def get_quote(symbol):
         response=f"🦄{asset_out_quote} USD\n🖊️{chainId}: {symbol}"
     else:
         price= cex.fetch_ticker(symbol.upper())['last']
-        response=f"🏛️ {price} USD"
-        return response
+        return f"🏛️ {price} USD"
         
         
 #🔒PRIVATE
@@ -239,15 +238,18 @@ async def get_account_balance():
     try:
         if ex_type == 'dex':
             bal = get_account_balance.dex()
-            msg = {bal}
+            return {bal}
         else:
             bal = cex.fetch_free_balance()
             bal = {k: v for k, v in bal.items() if v is not None and v>0}
-            sbal = "".join(f"{iterator}: {value} \n" for iterator, value in bal.items())
-            if not sbal:
-                sbal = "No Balance"
-            msg = f"{sbal}"
-        return msg
+            sbal = (
+                "".join(
+                    f"{iterator}: {value} \n"
+                    for iterator, value in bal.items()
+                )
+                or "No Balance"
+            )
+            return f"{sbal}"
     except Exception:
         return
 
@@ -274,10 +276,7 @@ async def get_account_position():
 
 async def get_account_margin():
     try:
-        if ex_type == 'dex':
-            return
-        else:
-            return
+        return
     except Exception as e:
         await handle_exception(e)
         return
