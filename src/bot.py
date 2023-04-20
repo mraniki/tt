@@ -405,7 +405,7 @@ async def bot():
                     await bot.start()
                     await bot.updater.start_polling(drop_pending_updates=True)
             else:
-                logger.error(msg=f"Check your messaging platform settings")
+                logger.error(msg="Check your messaging platform settings")
                 sys.exit()
     except Exception as e:
         logger.error(msg=f"Bot not started: {str(e)}")
