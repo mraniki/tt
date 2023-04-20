@@ -170,6 +170,7 @@ async def load_exchange():
                 ex_test_mode = True
                 ex_name = settings.CEX_NAME
             markets = cex.load_markets()
+            logger.debug(msg=f"CEX object created {cex}")
             ex_type = 'cex'
         except Exception as e:
             await handle_exception(e)
@@ -190,13 +191,13 @@ async def load_exchange():
         amount_trading_option = settings.DEX_AMOUNT_TRADING_OPTION
 
         try:
-            dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api) ,
-            logger.info(msg=f"dexswap object dex {dex}")
+            dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
+            logger.debug(msg=f"DEX object created{dex}")
             ex_type = 'dex'
         except Exception as e:
             await handle_exception(e)
     else:
-        logger.info(msg=f"no CEX or DEX config found")
+        logger.warning(msg="no CEX or DEX config found")
         return
 
 #📦ORDER
@@ -207,21 +208,20 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         response = f"⬇️ {symbol}" if (direction=="SELL") else f"⬆️ {symbol}"
         if ex_type == 'dex':
             order = execute_order.dex(direction=direction,symbol=symbol,stoploss=stoploss,takeprofit=takeprofit,quantity=quantity)
-            response+= order['confirmation']
+            order_confirmation+= order['confirmation']
         else:
             if (await get_account_balance()=="No Balance"): 
                 await handle_exception("Check your Balance")
                 return
             asset_out_quote = float(cex.fetchTicker(f'{symbol}').get('last'))
-            totalusdtbal = await get_account_basesymbol_balance() ##cex.fetchBalance()['USDT']['free']
+            totalusdtbal = await get_base_trading_symbol_balance() ##cex.fetchBalance()['USDT']['free']
             amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
             order = cex.create_order(symbol, price_type, direction, amountpercent)
-            response+= f"\n➕ Size: {order['amount']}\n⚫️ Entry: {order['price']}\nℹ️ {order['id']}\n🗓️ {order['datetime']}"
-        return response
+            order_confirmation+= f"\n➕ Size: {order['amount']}\n⚫️ Entry: {order['price']}\nℹ️ {order['id']}\n🗓️ {order['datetime']}"
+        return order_confirmation
 
     except Exception as e:
-        logger.error(msg=f"Exception with order processing {e}")
-        await handle_exception(e)
+        await handle_exception(f"Exception with order processing {e}")
         return
 
 async def get_quote(symbol):
@@ -229,46 +229,46 @@ async def get_quote(symbol):
         asset_out_quote = await dex.get_quote(symbol)
         response=f"🦄{asset_out_quote} USD\n🖊️{chainId}: {symbol}"
     else:
-        price= cex.fetch_ticker(symbol.upper())['last']
+        asset_out_quote = cex.fetch_ticker(symbol.upper())['last']
         response=f"🏛️ {price} USD"
-        return response
+    return response
         
-        
+
 #🔒PRIVATE
 async def get_account_balance():
+    balance =f"🏦 Balance\n"
     try:
         if ex_type == 'dex':
-            bal = get_account_balance.dex()
-            msg = {bal}
+            balance += get_account_balance.dex()
         else:
-            bal = cex.fetch_free_balance()
-            bal = {k: v for k, v in bal.items() if v is not None and v>0}
-            sbal = "".join(f"{iterator}: {value} \n" for iterator, value in bal.items())
-            if not sbal:
-                sbal = "No Balance"
-            msg = f"{sbal}"
-        return msg
+            raw_balance = cex.fetch_free_balance()
+            filtered_balance = {k: v for k, v in bal.items() if v is not None and v>0}
+            balance += "".join(f"{iterator}: {value} \n" for iterator, value in filtered_balance.items())
+            if not balance:
+                balance += "No Balance"
+        return balance
     except Exception:
         return
 
-async def get_account_basesymbol_balance():
+async def get_base_trading_symbol_balance():
     try:
         if ex_type == 'dex':
             return dex.get_basecoin_balance()
         else:
-            return cex.fetchBalance()['USDT']['free']
+            return cex.fetchBalance()[f'{CEX_BASE_TRADING_SYMBOL}']['free']
     except Exception:
         await handle_exception("Check your balance")
 
 async def get_account_position():
     try:
+        position = f"📊 Position\n"
         if ex_type == 'dex':
             open_positions = await dex.get_account_position()
         else:
             positions = cex.fetch_positions()
             open_positions = [p for p in positions if p['type'] == 'open']
         logger.debug(msg=f"open_positions {open_positions}")
-        return open_positions or 0
+        return position+=open_positions
     except Exception:
         await handle_exception("Error when retrieving position")
 
@@ -313,14 +313,10 @@ async def help_command():
     return f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
 
 async def account_balance_command():
-    bal =f"🏦 Balance\n"
-    bal += await get_account_balance()
-    return bal
+    return await get_account_balance()
 
 async def account_position_command():
-    position = f"📊 Position\n"
-    position += await get_account_position()
-    return position
+    return await get_account_position()
 
 async def quote_command(symbol):
     return await get_quote(symbol)
