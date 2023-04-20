@@ -1,6 +1,4 @@
 .env
+settings.toml
 src/.env
-config/.env
-config/db.json
-src/config/db.json
-.DS_Store
+db.json
