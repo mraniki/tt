@@ -25,7 +25,7 @@ ccxt = "*"
 fastapi = "*"
 uvicorn = "*"
 ping3 = "*"
-ttp = "*"
+findmyorder = "*"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
