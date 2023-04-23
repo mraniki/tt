@@ -23,8 +23,7 @@ from apprise import NotifyFormat
 
 #Utils
 from ping3 import ping
-from ttp import ttp
-import findmyorder
+from findmyorder import findmyorder
 
 #API
 from fastapi import FastAPI
@@ -112,14 +111,11 @@ async def parse_message(self,msg):
         logger.warning(msg="Parsing exception")
 
 async def order_parsing(message_to_parse):
-    logger.info(msg=f"order_parsing V2 with {message}")
+    logger.info(msg=f"order_parsing V2 with {message_to_parse}")
     try:
-        order_template = """ {{ direction }} {{ symbol }} sl={{ stoploss }} tp={{ takeprofit }} q={{ quantity }} """
-        parser = ttp(data=message_to_parse, template=order_template)
-        parser.parse()
-        result = parser.result(format="json")
-        logger.debug(msg=f"result {result}")
-        return result[0]
+        fmo = findmyoder()
+        order = fmo.identify(message_to_parse)
+        return order
     except Exception as e:
         logger.warning(msg=f"Order parsing error {e}")
 
