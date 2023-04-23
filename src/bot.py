@@ -111,9 +111,7 @@ async def parse_message(self,msg):
 async def order_parsing(message_to_parse):
     logger.info(msg=f"order_parsing V2 with {message_to_parse}")
     try:
-        #fmo = findmyoder()
-        order = fmo.identify(message_to_parse)
-        return order
+        return fmo.identify(message_to_parse)
     except Exception as e:
         logger.warning(msg=f"Order parsing error {e}")
 
@@ -144,7 +142,7 @@ async def notify(msg):
 
 #💱EXCHANGE
 async def load_exchange():
-    logger.info(msg=f"Setting up exchange")
+    logger.info(msg="Setting up exchange")
     global ex_type
     global ex_name
     global ex_test_mode
@@ -222,11 +220,10 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
 async def get_quote(symbol):
     if ex_type == 'dex':
         asset_out_quote = await dex.get_quote(symbol)
-        response=f"🦄{asset_out_quote} USD\n🖊️{chainId}: {symbol}"
+        return f"🦄{asset_out_quote} USD\n🖊️{chainId}: {symbol}"
     else:
         asset_out_quote = cex.fetch_ticker(symbol.upper())['last']
-        response=f"🏛️ {price} USD"
-    return response
+        return f"🏛️ {price} USD"
         
 
 #🔒PRIVATE
@@ -269,10 +266,7 @@ async def get_account_position():
 
 async def get_account_margin():
     try:
-        if ex_type == 'dex':
-            return
-        else:
-            return
+        return
     except Exception as e:
         await handle_exception(e)
         return
