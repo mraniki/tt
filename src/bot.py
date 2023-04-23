@@ -5,7 +5,12 @@ __version__ = "1.0.1"
 ##=============== import  =============
 
 import logging, sys, json, requests, asyncio
+from fastapi import FastAPI
+import uvicorn
+
 from config import settings
+
+from findmyorder import findmyorder
 import ccxt
 from dxsp import DexSwap
 
@@ -23,11 +28,6 @@ from apprise import NotifyFormat
 
 #Utils
 from ping3 import ping
-from findmyorder import findmyorder
-
-#API
-from fastapi import FastAPI
-import uvicorn
 
 
 #🧐LOGGING
@@ -51,9 +51,7 @@ async def parse_message(self,msg):
     wordlistsize = len(wordlist)
     logger.debug(msg=f"parse_message wordlist {wordlist} len {wordlistsize}")
     try:
-        logger.debug(msg="orderparsing NEW")
         orderparsing = await order_parsing(msg)
-        logger.debug(msg="orderparsing COMPLETED")
         logger.debug(msg=f"orderparsing {orderparsing}")
     except:
         pass
