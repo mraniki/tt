@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.2 (2023-04-23)
+### Fix
+* Refactor findmyorder import in bot.py ([`632af9c`](https://github.com/mraniki/tt/commit/632af9c36907b1c036059b9f248083bcc15ed222))
+* Add FastAPI and remove unused imports in bot.py ([`9f3c75b`](https://github.com/mraniki/tt/commit/9f3c75b62a560b5491b321bb3f44a573bcc9937a))
+* Refactor bot.py to use findmyorder instead of ttp for order parsing. ([`ee46ab0`](https://github.com/mraniki/tt/commit/ee46ab0451761e09a99422e6cb883568847c26db))
+* Refactor dependencies and import findmyorder module ([`466a403`](https://github.com/mraniki/tt/commit/466a4034096ed77e18698e001dc6a149b1665f4f))
+
 ## v1.0.1 (2023-04-20)
 ### Fix
 * Actions ([`cfe5b29`](https://github.com/mraniki/tt/commit/cfe5b291de4254d1506271a47be44303102cad34))
