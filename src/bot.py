@@ -259,10 +259,11 @@ async def get_account_position():
         if ex_type == 'dex':
             open_positions = await dex.get_account_position()
         else:
-            positions = cex.fetch_positions()
+            open_positions = cex.fetch_positions()
             open_positions = [p for p in positions if p['type'] == 'open']
         logger.debug(msg=f"open_positions {open_positions}")
-        return position+=open_positions
+        position += open_positions
+        return position
     except Exception:
         await handle_exception("Error when retrieving position")
 
