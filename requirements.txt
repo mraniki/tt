@@ -1,6 +1,5 @@
-python-dotenv>=0.21.1
 ccxt
-web3>=v6.1.0
+web3>=v6.2
 apprise
 python-telegram-bot>=20.1
 telethon
@@ -12,3 +11,4 @@ uvicorn
 dxsp>=1.2
 ttp
 dynaconf
+findmyorder
