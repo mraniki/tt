@@ -10,7 +10,7 @@ import uvicorn
 
 from config import settings
 
-from findmyorder import findmyorder
+import findmyorder as fmo
 import ccxt
 from dxsp import DexSwap
 
@@ -111,7 +111,7 @@ async def parse_message(self,msg):
 async def order_parsing(message_to_parse):
     logger.info(msg=f"order_parsing V2 with {message_to_parse}")
     try:
-        fmo = findmyoder()
+        #fmo = findmyoder()
         order = fmo.identify(message_to_parse)
         return order
     except Exception as e:
