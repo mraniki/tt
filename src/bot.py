@@ -387,8 +387,12 @@ app = FastAPI(title="TALKYTRADER",)
 @app.on_event("startup")
 def startup_event():
     loop = asyncio.get_event_loop()
-    loop.create_task(bot())
-    logger.info(msg="Webserver started")
+    try:
+        loop.create_task(bot())
+        logger.info(msg="Webserver started")
+    except Exception as e:
+        loop.stop()
+        logger.error(msg=f"Bot start error: {str(e)}")
 
 @app.on_event('shutdown')
 async def shutdown_event():
