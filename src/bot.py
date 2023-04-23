@@ -170,7 +170,7 @@ async def load_exchange():
         except Exception as e:
             await handle_exception(e)
 
-    elif (settings.chainId):
+    elif (settings.DEX_CHAINID):
         chain_id = settings.DEX_CHAINID
         wallet_address = settings.DEX_WALLET_ADDRESS
         private_key = settings.DEX_PRIVATE_KEY
