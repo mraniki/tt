@@ -10,7 +10,7 @@ import uvicorn
 
 from config import settings
 
-import findmyorder as fmo
+from findmyorder import findmyorder
 import ccxt
 from dxsp import DexSwap
 
@@ -31,20 +31,22 @@ from ping3 import ping
 
 
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=settings.LOGLEVEL)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=settings.loglevel)
 logger = logging.getLogger(__name__)
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 logging.getLogger('telegram').setLevel(logging.WARNING)
 logging.getLogger('telethon').setLevel(logging.WARNING)
 logging.getLogger('discord').setLevel(logging.WARNING)
+logging.getLogger('simplematrixbotlib').setLevel(logging.WARNING)
+
 
 #🔁UTILS
 
 async def parse_message(self,msg):
     logger.debug(msg=f"self {self} msg {msg}")
-    if self.effective_message.text: #tgram to be reviewed
-        msg=self.effective_message.text
-        logger.debug(msg=f"content {self['channel_post']['text']}")
+    # if self.effective_message.text: #tgram to be reviewed
+    #     msg=self.effective_message.text
+    #     logger.debug(msg=f"content {self['channel_post']['text']}")
     if not msg:
         return
     wordlist = msg.split(" ")
@@ -111,7 +113,9 @@ async def parse_message(self,msg):
 async def order_parsing(message_to_parse):
     logger.info(msg=f"order_parsing V2 with {message_to_parse}")
     try:
+        fmo = findmyoder()
         return fmo.identify(message_to_parse)
+
     except Exception as e:
         logger.warning(msg=f"Order parsing error {e}")
 
@@ -129,12 +133,12 @@ async def notify(msg):
     if not msg:
         return
     apobj = apprise.Apprise()
-    if (settings.DISCORD_WEBHOOK_ID):
-        apobj.add(f'{bot_service}://{str(settings.DISCORD_WEBHOOK_ID)}/{str(settings.DISCORD_WEBHOOK_TOKEN)}')
-    elif (settings.MATRIX_HOSTNAME):
-        apobj.add(f"matrixs://{settings.MATRIX_USER}:{settings.MATRIX_PASS}@{settings.MATRIX_HOSTNAME[8:]}:443/{str(settings.BOT_CHANNEL_ID)}")
+    if (settings.discord_webhook_id):
+        apobj.add(f'discord://{str(settings.discord_webhook_id)}/{str(settings.discord_webhook_token)}')
+    elif (settings.matrix_hostname):
+        apobj.add(f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@{settings.matrix_hostname[8:]}:443/{str(settings.bot_channel_id)}")
     else:
-        apobj.add(f'tgram://{str(settings.BOT_TOKEN)}/{str(settings.BOT_CHANNEL_ID)}')
+        apobj.add(f'tgram://{str(settings.bot_token)}/{str(settings.bot_channel_id)}')
     try:
         await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
     except Exception as e:
@@ -147,41 +151,41 @@ async def load_exchange():
     global ex_name
     global ex_test_mode
 
-    if (settings.CEX_API):
-        defaultType =  settings.CEX_DEFAULTTYPE
-        client = getattr(ccxt, settings.CEX_NAME)
+    if (settings.cex_api):
+        defaultType =  settings.cex_defaultype
+        client = getattr(ccxt, settings.cex_name)
         ex_test_mode = False
         try:
             if (defaultType!="SPOT"):
-                cex = client({'apiKey': settings.CEX_API,'secret': settings.CEX_SECRET,'options': {'defaultType': settings.CEX_DEFAULTTYPE,    }, })
+                cex = client({'apiKey': settings.cex_api,'secret': settings.cex_secret,'options': {'defaultType': settings.cex_defaultype,    }, })
             else:
-                cex = client({'apiKey': settings.CEX_API,'secret': settings.CEX_SECRET, })
-            price_type = settings.CEX_ORDERTYPE
-            if (settings.CEX_TESTMODE=='True'):
+                cex = client({'apiKey': settings.cex_api,'secret': settings.cex_secret, })
+            price_type = settings.cex_ordertype
+            if (settings.cex_testmode=='True'):
                 logger.info(msg="sandbox setup")
                 cex.set_sandbox_mode('enabled')
                 ex_test_mode = True
-                ex_name = settings.CEX_NAME
+                ex_name = settings.cex_name
             markets = cex.load_markets()
             logger.debug(msg=f"CEX object created {cex}")
             ex_type = 'cex'
         except Exception as e:
             await handle_exception(e)
 
-    elif (settings.chainId):
-        chain_id = settings.DEX_CHAINID
-        wallet_address = settings.DEX_WALLET_ADDRESS
-        private_key = settings.DEX_PRIVATE_KEY
-        block_explorer_api = settings.DEX_BLOCK_EXPLORER_API
+    elif (settings.dex_chain_id):
+        chain_id = settings.dex_chain_id
+        wallet_address = settings.dex_wallet_address
+        private_key = settings.dex_private_key
+        block_explorer_api = settings.dex_block_explorer_api
 
-        rpc = settings.DEX_RPC
+        rpc = settings.dex_rpc
 
-        ex_name = settings.DEX_NAME
-        ex_test_mode = settings.DEX_TESTMODE
-        base_trading_symbol = settings.DEX_BASE_TRADING_SYMBOL
-        protocol_type = settings.DEX_PROTOCOL
-        router = settings.DEX_ROUTER
-        amount_trading_option = settings.DEX_AMOUNT_TRADING_OPTION
+        ex_name = settings.dex_name
+        ex_test_mode = settings.dex_testmode
+        base_trading_symbol = settings.dex_base_trading_symbol
+        protocol_type = settings.dex_protocol
+        router = settings.dex_router
+        amount_trading_option = settings.dex_amount_trading_option
 
         try:
             dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
@@ -247,7 +251,7 @@ async def get_base_trading_symbol_balance():
         if ex_type == 'dex':
             return dex.get_basecoin_balance()
         else:
-            return cex.fetchBalance()[f'{CEX_BASE_TRADING_SYMBOL}']['free']
+            return cex.fetchBalance()[f'{cex_base_trading_symbol}']['free']
     except Exception:
         await handle_exception("Check your balance")
 
@@ -257,10 +261,11 @@ async def get_account_position():
         if ex_type == 'dex':
             open_positions = await dex.get_account_position()
         else:
-            positions = cex.fetch_positions()
+            open_positions = cex.fetch_positions()
             open_positions = [p for p in positions if p['type'] == 'open']
         logger.debug(msg=f"open_positions {open_positions}")
-        return position+=open_positions
+        position += open_positions
+        return position
     except Exception:
         await handle_exception("Error when retrieving position")
 
@@ -295,7 +300,7 @@ async def help_command():
            <code>/q WBTC</code>
            <code>/q btc/usdt</code>
     🔀 <code>/trading</code>"""
-    if settings.DISCORD_WEBHOOK_ID:
+    if settings.discord_webhook_id:
         helpcommand= helpcommand.replace("<code>", "`")
         helpcommand= helpcommand.replace("</code>", "`")
     bot_menu_help = f"{__version__}\n{helpcommand}"
@@ -325,7 +330,7 @@ async def bot():
         await load_exchange()
         while True:
     #StartTheBot
-            if settings.DISCORD_WEBHOOK_ID:
+            if settings.discord_webhook_id:
                 intents = discord.Intents.default()
                 intents.message_content = True
                 bot = discord.Bot(intents=intents)
@@ -335,13 +340,13 @@ async def bot():
                 @bot.event
                 async def on_message(message: discord.Message):
                     await parse_message(message,message.content)
-                await bot.start(settings.BOT_TOKEN)
-            elif settings.MATRIX_HOSTNAME:
+                await bot.start(settings.bot_token)
+            elif settings.matrix_hostname:
                 config = botlib.Config()
                 config.emoji_verify = True
                 config.ignore_unverified_devices = True
                 config.store_path ='./config/matrix/'
-                creds = botlib.Creds(settings.MATRIX_HOSTNAME, settings.MATRIX_USER, settings.PASS)
+                creds = botlib.Creds(settings.matrix_hostname, settings.matrix_user, settings.matrix_pass)
                 bot = botlib.Bot(creds,config)
                 @bot.listener.on_startup
                 async def room_joined(room):
@@ -356,15 +361,15 @@ async def bot():
                     for room_id in bot.api.async_client.rooms:
                         await action(room_id)
                 await bot.api.async_client.sync_forever(timeout=3000, full_state=True)
-            elif settings.TELETHON_API_ID:
-                bot = await TelegramClient(None, settings.TELETHON_API_ID, settings.TELETHON_API_HASH).start(bot_token=settings.BOT_TOKEN)
+            elif settings.telethon_api_id:
+                bot = await TelegramClient(None, settings.telethon_api_id, settings.telethon_api_hash).start(bot_token=settings.bot_token)
                 await post_init()
                 @bot.on(events.NewMessage())
                 async def telethon(event):
-                    await parse_message(bot,event.message.message)
+                    await parse_message(None, event.message.message)
                 await bot.run_until_disconnected()
-            elif settings.BOT_TOKEN:
-                bot = Application.builder().token(settings.BOT_TOKEN).build()
+            elif settings.bot_token:
+                bot = Application.builder().token(settings.bot_token).build()
                 await post_init()
                 bot.add_handler(MessageHandler(None, parse_message))
                 async with bot:
@@ -372,8 +377,10 @@ async def bot():
                     await bot.start()
                     await bot.updater.start_polling(drop_pending_updates=True)
             else:
+                logger.warning(msg="token  {settings.bot_token}")
                 logger.error(msg="Check your messaging platform settings")
-                sys.exit()
+                await asyncio.sleep(10000)
+                #sys.exit()
     except Exception as e:
         logger.error(msg=f"Bot not started: {str(e)}")
 
@@ -383,8 +390,12 @@ app = FastAPI(title="TALKYTRADER",)
 @app.on_event("startup")
 def startup_event():
     loop = asyncio.get_event_loop()
-    loop.create_task(bot())
-    logger.info(msg="Webserver started")
+    try:
+        loop.create_task(bot())
+        logger.info(msg="Webserver started")
+    except Exception as e:
+        loop.stop()
+        logger.error(msg=f"Bot start error: {str(e)}")
 
 @app.on_event('shutdown')
 async def shutdown_event():
@@ -403,5 +414,5 @@ def health_check():
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
-    uvicorn.run(app, host=settings.HOST, port=settings.PORT)
+    uvicorn.run(app, host=settings.host, port=settings.port)
 

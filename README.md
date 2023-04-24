@@ -34,7 +34,7 @@ If you like it, feel free to
 ## Install
 1) Create your channel/room and your platform bot 
     - Telegram via [Telegram @BotFather](https://core.telegram.org/bots/tutorial) if you use Telethon [create an api key](https://docs.telethon.dev/en/stable/basic/signing-in.html) 
-    - Discord via [Discord Dev Portal](https://discord.com/developers/docs/intro)
+    - Discord via [Discord Dev portal](https://discord.com/developers/docs/intro)
     - Matrix via [Matrix.org](https://turt2live.github.io/matrix-bot-sdk/index.html)
 2) Get your 
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
