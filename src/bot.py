@@ -11,33 +11,33 @@ import uvicorn
 from config import settings
 
 from findmyorder import findmyorder
+from findmyorder.config import fmosettings
+
 import ccxt
 from dxsp import DexSwap
+# from dxsp.config import settings
 
-#import telegram
 from telegram.ext import Application, MessageHandler
-#import telethon
 from telethon import TelegramClient, events
-#matrix
 import simplematrixbotlib as botlib
-#discord
 import discord
-#notification
 import apprise
 from apprise import NotifyFormat
 
-#Utils
 from ping3 import ping
 
 
 #🧐LOGGING
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=settings.loglevel)
 logger = logging.getLogger(__name__)
-logging.getLogger('urllib3').setLevel(logging.WARNING)
-logging.getLogger('telegram').setLevel(logging.WARNING)
-logging.getLogger('telethon').setLevel(logging.WARNING)
-logging.getLogger('discord').setLevel(logging.WARNING)
-logging.getLogger('simplematrixbotlib').setLevel(logging.WARNING)
+if settings.loglevel=='DEBUG':
+    logging.getLogger('ccxt').setLevel(logging.WARNING)
+    logging.getLogger('urllib3').setLevel(logging.WARNING)
+    logging.getLogger('telegram').setLevel(logging.WARNING)
+    logging.getLogger('apprise').setLevel(logging.WARNING)
+    logging.getLogger('telethon').setLevel(logging.WARNING)
+    logging.getLogger('discord').setLevel(logging.WARNING)
+    logging.getLogger('simplematrixbotlib').setLevel(logging.WARNING)
 
 
 #🔁UTILS
