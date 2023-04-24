@@ -31,7 +31,7 @@ from ping3 import ping
 
 
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=settings.loglevel)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level='DEBUG')#settings.loglevel)
 logger = logging.getLogger(__name__)
 #logging.getLogger('urllib3').setLevel(logging.WARNING)
 #logging.getLogger('telegram').setLevel(logging.WARNING)
