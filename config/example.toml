@@ -16,15 +16,15 @@ matrix_pass = ''
 discord_webhook_id = ''
 discord_webhook_token = ''
 
-dex_name = 'UNISWAP_V2'
+dex_name = ''
 dex_chain_id = 1
 dex_wallet_address = ''
 dex_private_key = ''
 
-dex_testmode = 'False'
-dex_rpc = 'https://rpc.ankr.com/optimism"'
-dex_router = '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f' #uniswap v2
-dex_base_trading_symbol = 'USDC'
+dex_testmode = ''
+dex_rpc = ''
+dex_router = '' # v2
+dex_base_trading_symbol = ''
 dex_block_explorer_api = ''
 dex_protocol = '1inch'
 dex_amount_trading_option = '1'
@@ -33,24 +33,10 @@ cex_name = 'binance'
 cex_api = ''
 cex_secret = ''
 cex_password = ''
-cex_testmode = 'True'
-cex_defaulttype = 'spot'
-cex_ordertype = 'MARKET'
+cex_testmode = ''
+cex_defaulttype = ''
+cex_ordertype = ''
 cex_base_trading_symbol = ''
 
 [DEV]
 loglevel = 'DEBUG'
-
-
-[TT01]
-loglevel = 'INFO'
-
-cex_name = 'kraken'
-cex_api = ''
-cex_secret = ''
-cex_password = ''
-cex_testmode = 'True'
-cex_defaulttype = 'spot'
-cex_ordertype = 'MARKET'
-
-port = 8081
