@@ -31,20 +31,20 @@ from ping3 import ping
 
 
 #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level='DEBUG')#settings.loglevel)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=settings.loglevel)
 logger = logging.getLogger(__name__)
-#logging.getLogger('urllib3').setLevel(logging.WARNING)
-#logging.getLogger('telegram').setLevel(logging.WARNING)
-#logging.getLogger('telethon').setLevel(logging.WARNING)
-#logging.getLogger('discord').setLevel(logging.WARNING)
+logging.getLogger('urllib3').setLevel(logging.WARNING)
+logging.getLogger('telegram').setLevel(logging.WARNING)
+logging.getLogger('telethon').setLevel(logging.WARNING)
+logging.getLogger('discord').setLevel(logging.WARNING)
 
 #🔁UTILS
 
 async def parse_message(self,msg):
     logger.debug(msg=f"self {self} msg {msg}")
-    if self.effective_message.text: #tgram to be reviewed
-        msg=self.effective_message.text
-        logger.debug(msg=f"content {self['channel_post']['text']}")
+    # if self.effective_message.text: #tgram to be reviewed
+    #     msg=self.effective_message.text
+    #     logger.debug(msg=f"content {self['channel_post']['text']}")
     if not msg:
         return
     wordlist = msg.split(" ")
@@ -364,7 +364,7 @@ async def bot():
                 await post_init()
                 @bot.on(events.NewMessage())
                 async def telethon(event):
-                    await parse_message(bot,event.message.message)
+                    await parse_message(None, event.message.message)
                 await bot.run_until_disconnected()
             elif settings.bot_token:
                 bot = Application.builder().token(settings.bot_token).build()
