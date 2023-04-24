@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.4 (2023-04-24)
+### Fix
+* Parsing function ([`d56ed1a`](https://github.com/mraniki/tt/commit/d56ed1a7a25519405234c59d2d39bf26164895ce))
+
 ## v1.0.3 (2023-04-24)
 ### Fix
 * Parsing function ([`0a2a859`](https://github.com/mraniki/tt/commit/0a2a859b704278150731173877d8ad1df2df4ce2))
