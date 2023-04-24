@@ -176,7 +176,7 @@ async def load_exchange():
         private_key = settings.dex_private_key
         block_explorer_api = settings.dex_block_explorer_api
 
-        rpc = settings.dex_rpcc
+        rpc = settings.dex_rpc
 
         ex_name = settings.dex_name
         ex_test_mode = settings.dex_testmode
