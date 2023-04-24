@@ -180,7 +180,7 @@ async def load_exchange():
 
         ex_name = settings.dex_name
         ex_test_mode = settings.dex_testmode
-        base_trading_symbol = settings.dex_base_trading_trading_symbol
+        base_trading_symbol = settings.dex_base_trading_symbol
         protocol_type = settings.dex_protocol
         router = settings.dex_router
         amount_trading_option = settings.dex_amount_trading_option
