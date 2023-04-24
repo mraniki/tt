@@ -3,54 +3,54 @@ loglevel = 'INFO'
 host = "0.0.0.0"
 port = 8080
 
-BOT_TOKEN = ''
-BOT_CHANNEL_ID = ''
+bot_token = ''
+bot_channel_id = ''
 
-TELETHON_API_ID = ''
-TELETHON_API_HASH = ''
+telethon_api_id = ''
+telethon_api_hash = ''
 
-MATRIX_HOSTNAME = ''
-MATRIX_USER = ''
-MATRIX_PASS = ''
+matrix_hostname = ''
+matrix_user = ''
+matrix_pass = ''
 
-DISCORD_WEBHOOK_ID = ''
-DISCORD_WEBHOOK_TOKEN = ''
+discord_webhook_id = ''
+discord_webhook_token = ''
 
-DEX_NAME = 'UNISWAP_V2'
-DEX_CHAINID = 1
-DEX_WALLET_ADDRESS = ''
-DEX_PRIVATE_KEY = ''
+dex_name = 'UNISWAP_V2'
+dex_chain_id = 1
+dex_wallet_address = ''
+dex_private_key = ''
 
-DEX_TESTMODE = 'False'
-DEX_RPC = 'https://rpc.ankr.com/optimism"'
-DEX_ROUTER = '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f' #uniswap v2
-DEX_BASE_TRADING_SYMBOL = 'USDC'
-DEX_BLOCK_EXPLORER_API = ''
-DEX_PROTOCOL = '1inch'
-DEX_AMOUNT_TRADING_OPTION = '1'
+dex_testmode = 'False'
+dex_rpc = 'https://rpc.ankr.com/optimism"'
+dex_router = '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f' #uniswap v2
+dex_base_trading_symbol = 'USDC'
+dex_block_explorer_api = ''
+dex_protocol = '1inch'
+dex_amount_trading_option = '1'
 
-CEX_NAME = 'binance'
-CEX_API = ''
-CEX_SECRET = ''
-CEX_PASSWORD = ''
-CEX_TESTMODE = 'True'
-CEX_DEFAULTTYPE = 'spot'
-CEX_ORDERTYPE = 'MARKET'
-CEX_BASE_TRADING_SYMBOL = ''
+cex_name = 'binance'
+cex_api = ''
+cex_secret = ''
+cex_password = ''
+cex_testmode = 'True'
+cex_defaulttype = 'spot'
+cex_ordertype = 'MARKET'
+cex_base_trading_symbol = ''
 
 [DEV]
-LOGLEVEL = 'DEBUG'
+loglevel = 'DEBUG'
 
 
 [TT01]
-LOGLEVEL = 'INFO'
+loglevel = 'INFO'
 
-CEX_NAME = 'kraken'
-CEX_API = ''
-CEX_SECRET = ''
-CEX_PASSWORD = ''
-CEX_TESTMODE = 'True'
-CEX_DEFAULTTYPE = 'spot'
-CEX_ORDERTYPE = 'MARKET'
+cex_name = 'kraken'
+cex_api = ''
+cex_secret = ''
+cex_password = ''
+cex_testmode = 'True'
+cex_defaulttype = 'spot'
+cex_ordertype = 'MARKET'
 
-PORT = 8081
+port = 8081
