@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.5 (2023-04-24)
+### Fix
+* Typo ([`d72dbd9`](https://github.com/mraniki/tt/commit/d72dbd9406b2c273ee62bd14c7df9ff595dadaad))
+* Typo ([`be37a1f`](https://github.com/mraniki/tt/commit/be37a1f2c0632c93ac955e241dc08ce29a704bb6))
+* Update findmyorder version to >=0.0.20 in pyproject.toml and requirements.txt. ([`252ab47`](https://github.com/mraniki/tt/commit/252ab47aa5ce04edb2a9930c2a0a48d0fbea0e1f))
+
 ## v1.0.4 (2023-04-24)
 ### Fix
 * Parsing function ([`d56ed1a`](https://github.com/mraniki/tt/commit/d56ed1a7a25519405234c59d2d39bf26164895ce))
