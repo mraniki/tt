@@ -11,7 +11,7 @@ import uvicorn
 from config import settings
 
 from findmyorder import findmyorder
-from findmyorder.config import settings
+from findmyorder.config import fmosettings
 
 import ccxt
 from dxsp import DexSwap
