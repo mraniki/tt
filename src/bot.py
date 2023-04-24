@@ -34,7 +34,7 @@ if settings.loglevel=='DEBUG':
     logging.getLogger('ccxt').setLevel(logging.WARNING)
     logging.getLogger('urllib3').setLevel(logging.WARNING)
     logging.getLogger('telegram').setLevel(logging.WARNING)
-    logging.getLogger('apprise').setLevel(logging.WARNING
+    logging.getLogger('apprise').setLevel(logging.WARNING)
     logging.getLogger('telethon').setLevel(logging.WARNING)
     logging.getLogger('discord').setLevel(logging.WARNING)
     logging.getLogger('simplematrixbotlib').setLevel(logging.WARNING)
