@@ -113,7 +113,7 @@ async def parse_message(self,msg):
 async def order_parsing(message_to_parse):
     logger.info(msg=f"order_parsing V2 with {message_to_parse}")
     try:
-        fmo = findmyoder()
+        fmo = findmyorder()
         return fmo.identify(message_to_parse)
 
     except Exception as e:
