@@ -1,14 +1,13 @@
+dynaconf
 ccxt
 web3>=v6.2
+dxsp>=1.2
 apprise
 python-telegram-bot>=20.1
 telethon
 simplematrixbotlib
 py-cord
-ping3
 fastapi
 uvicorn
-dxsp>=1.2
-ttp
-dynaconf
 findmyorder
+ping3
