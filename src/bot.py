@@ -375,6 +375,7 @@ async def bot():
                     await bot.start()
                     await bot.updater.start_polling(drop_pending_updates=True)
             else:
+                logger.warning(msg="token  {settings.bot_token}")
                 logger.error(msg="Check your messaging platform settings")
                 await asyncio.sleep(10000)
                 #sys.exit()
