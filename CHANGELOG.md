@@ -2,6 +2,25 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.3 (2023-04-24)
+### Fix
+* Parsing function ([`0a2a859`](https://github.com/mraniki/tt/commit/0a2a859b704278150731173877d8ad1df2df4ce2))
+* Config example ([`b70641f`](https://github.com/mraniki/tt/commit/b70641fc83074462535e9c7491fd543cf8bc47ee))
+* Uppercase issue ([`92b2323`](https://github.com/mraniki/tt/commit/92b23237d1cc1f259d1a4dfc488498e7243aa7cc))
+* Typo ([`afda1c4`](https://github.com/mraniki/tt/commit/afda1c42d1d59f76721def9a7dd9d3407b6a3da6))
+* Update bot and config files ([`f07e8fe`](https://github.com/mraniki/tt/commit/f07e8fe806099b95bd6b0544cd26152901488cd3))
+* Update bot and config files ([`ababc17`](https://github.com/mraniki/tt/commit/ababc178522c2ecc9f7bb440bca2f0c990f8b242))
+* Update logging level to DEBUG in bot.py ([`694af8a`](https://github.com/mraniki/tt/commit/694af8a163c6dfc915f1edc860abbd0b7bf49992))
+* Refactor logging configuration in bot.py ([`c1ab66b`](https://github.com/mraniki/tt/commit/c1ab66b58e59a3acb514b2005d1e197cf1e09b10))
+* Typo ([`ad7f949`](https://github.com/mraniki/tt/commit/ad7f949f7789cc2c061b062cf54d1a0c3935bc53))
+* Typo ([`fa5bac2`](https://github.com/mraniki/tt/commit/fa5bac2389711b783b18f96b66703ecb6aa918a2))
+* Refactor config and settings variables ([`f485747`](https://github.com/mraniki/tt/commit/f4857477e40314b2b0a513e503f5e99cc81251c8))
+* Requirements versioning ([`7d8f972`](https://github.com/mraniki/tt/commit/7d8f972e2f1b7da0f5971ef039e34f5f84c744fa))
+* Refactor error handling in bot.py ([`85b8d55`](https://github.com/mraniki/tt/commit/85b8d5576febcc3b9944bc93a05acb9b558906c8))
+* Typo DEX_CHAINID ([`f48453d`](https://github.com/mraniki/tt/commit/f48453d598014be78b6834bb32e4c90cda7549b7))
+* Typo position ([`6fe690e`](https://github.com/mraniki/tt/commit/6fe690e09c66fea915db77aa9bfa43c908b5ca2d))
+* Refactor .gitignore and bot.py imports ([`0b9e936`](https://github.com/mraniki/tt/commit/0b9e936e8f5f6e136a09360ed2e57a2292dd76f0))
+
 ## v1.0.2 (2023-04-23)
 ### Fix
 * Refactor findmyorder import in bot.py ([`632af9c`](https://github.com/mraniki/tt/commit/632af9c36907b1c036059b9f248083bcc15ed222))
