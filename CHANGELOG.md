@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.6 (2023-04-25)
+### Fix
+* Import settings ([`19b13d0`](https://github.com/mraniki/tt/commit/19b13d0f59ddfc25d014b6f4cf32e149714d1aff))
+* Refactor bot.py import statement ([`d56b4f9`](https://github.com/mraniki/tt/commit/d56b4f98068ba8a8ccfc9b43b684f0fcae11a926))
+
 ## v1.0.5 (2023-04-24)
 ### Fix
 * Typo ([`d72dbd9`](https://github.com/mraniki/tt/commit/d72dbd9406b2c273ee62bd14c7df9ff595dadaad))
