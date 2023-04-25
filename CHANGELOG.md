@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.7 (2023-04-25)
+### Fix
+* Folder ([`1502dc5`](https://github.com/mraniki/tt/commit/1502dc573164a48a6ccaede81c0173d5eb6c8709))
+
 ## v1.0.6 (2023-04-25)
 ### Fix
 * Import settings ([`19b13d0`](https://github.com/mraniki/tt/commit/19b13d0f59ddfc25d014b6f4cf32e149714d1aff))
