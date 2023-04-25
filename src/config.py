@@ -13,5 +13,6 @@ settings = Dynaconf(
         Validator("port", default=8080, apply_default_on_none=True),
         Validator("bot_token", must_exist=True, messages={"must_exist_true": "You forgot to set {bot_token} in your settings."}),
         Validator("bot_channel_id", must_exist=True, messages={"must_exist_true": "You forgot to set {bot_channel_id} in your settings."}),
+        #Validator("identifier", default=["BUY", "SELL", "buy", "sell","Buy","Sell"],apply_default_on_none=True),
           ]
 )
