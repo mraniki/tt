@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.8 (2023-04-25)
+### Fix
+* Settings ([`4347056`](https://github.com/mraniki/tt/commit/4347056374d70ace17c4365ea13bdf43cb8b60fe))
+* Settings ([`dc257f4`](https://github.com/mraniki/tt/commit/dc257f4a79481eaf7d9aea0ff4a3e30c0f60cbb5))
+
 ## v1.0.7 (2023-04-25)
 ### Fix
 * Folder ([`1502dc5`](https://github.com/mraniki/tt/commit/1502dc573164a48a6ccaede81c0173d5eb6c8709))
