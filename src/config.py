@@ -3,7 +3,7 @@ from dynaconf import Dynaconf, Validator
 
 settings = Dynaconf(
     envvar_prefix="TT",
-    settings_files=['findmyorder/default_settings.toml','settings.toml', '.secrets.toml'],#,'example.toml'],
+    settings_files=['default_settings.toml','settings.toml', '.secrets.toml'],#,'example.toml'],
     load_dotenv=True,
     environments=True,
     default_env="default",
