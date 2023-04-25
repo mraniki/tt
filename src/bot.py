@@ -11,11 +11,8 @@ import uvicorn
 from config import settings
 
 from findmyorder import findmyorder
-from findmyorder.config import fmosettings
-
 import ccxt
 from dxsp import DexSwap
-# from dxsp.config import settings
 
 from telegram.ext import Application, MessageHandler
 from telethon import TelegramClient, events
