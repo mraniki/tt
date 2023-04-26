@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.9 (2023-04-26)
+### Fix
+* Remove identify fmo function ([`8166214`](https://github.com/mraniki/tt/commit/81662145531387a35715e12d721e77531d6af5ab))
+* Dockerfile ([`72b2ae8`](https://github.com/mraniki/tt/commit/72b2ae8aeddbd1735210ba3648f52e548c7d5ac4))
+* Settings ([`38a91c0`](https://github.com/mraniki/tt/commit/38a91c0a521544b6746a3f90ede8a4fdd7758183))
+* Logger and settings ([`88b226c`](https://github.com/mraniki/tt/commit/88b226cae8d59c3bb3989e4c4406d01321eb9d6f))
+* Settings ([`e24b4cc`](https://github.com/mraniki/tt/commit/e24b4cc2d729c5e11346c374f9c2adc5ecfd9f35))
+* Settings testing ([`948ad49`](https://github.com/mraniki/tt/commit/948ad49e26629bf5331dd5c52b187c0b57362bb3))
+* Settings ([`fb42b61`](https://github.com/mraniki/tt/commit/fb42b6138174cb6dbab10e935ae9b54c7e375584))
+
 ## v1.0.8 (2023-04-25)
 ### Fix
 * Settings ([`4347056`](https://github.com/mraniki/tt/commit/4347056374d70ace17c4365ea13bdf43cb8b60fe))
