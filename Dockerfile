@@ -16,7 +16,7 @@ COPY ./src .
 
 ADD /config/example.toml .
 
-ENV ENV_FOR_DYNACONF=default
+# ENV ENV_FOR_DYNACONF=default
 
 EXPOSE 8443 8080
 # command to run on container start
