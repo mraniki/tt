@@ -4,7 +4,7 @@ uvicorn>=0.21.0
 ccxt>=3.0.75
 web3>=6.2.0
 dxsp>=1.2
-findmyorder>=0.0.20
+findmyorder>=1.0.1
 apprise
 python-telegram-bot>=20.1
 telethon
