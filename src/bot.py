@@ -61,7 +61,6 @@ async def parse_message(self,msg):
         'position': ['/pos','/position'],
         'quote': ['/q'],
         'trading': ['/trading'],
-        'test_mode': ['/testmode'],
         'restart': ['/restart'],
     }
     try:
