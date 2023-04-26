@@ -107,7 +107,9 @@ async def order_parsing(message_to_parse):
     logger.info(msg=f"order_parsing V2 with {message_to_parse}")
     try:
         fmo = findmyorder()
-        return fmo.search(message_to_parse)
+        results = fmo.get_order(message_to_parse)
+        logger.info(msg=f"order_parsing V2 results {results}")
+        return results
 
     except Exception as e:
         logger.warning(msg=f"Order parsing error {e}")
