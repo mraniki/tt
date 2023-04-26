@@ -3,7 +3,7 @@
 FROM python:3.10
 
 # set the working directory in the container
-WORKDIR /code
+WORKDIR /app
 
 # copy the dependencies file to the working directory
 COPY requirements.txt .
@@ -16,7 +16,7 @@ COPY ./src .
 
 ADD /config/example.toml .
 
-ENV ENV_FOR_DYNACONF=default
+# ENV ENV_FOR_DYNACONF=default
 
 EXPOSE 8443 8080
 # command to run on container start

@@ -24,7 +24,7 @@ from apprise import NotifyFormat
 from ping3 import ping
 
 
-#🧐LOGGING
+# #🧐LOGGING
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=settings.loglevel)
 logger = logging.getLogger(__name__)
 if settings.loglevel=='DEBUG':
@@ -49,11 +49,8 @@ async def parse_message(self,msg):
     wordlist = msg.split(" ")
     wordlistsize = len(wordlist)
     logger.debug(msg=f"parse_message wordlist {wordlist} len {wordlistsize}")
-    try:
-        orderparsing = await order_parsing(msg)
-        logger.debug(msg=f"orderparsing {orderparsing}")
-    except:
-        pass
+    orderparsing = await order_parsing(msg)
+    logger.debug(msg=f"orderparsing {orderparsing}")
     response = ""
     #🦾BOT FILTERS
     filters = {
@@ -64,7 +61,6 @@ async def parse_message(self,msg):
         'position': ['/pos','/position'],
         'quote': ['/q'],
         'trading': ['/trading'],
-        'test_mode': ['/testmode'],
         'restart': ['/restart'],
     }
     try:
@@ -111,7 +107,7 @@ async def order_parsing(message_to_parse):
     logger.info(msg=f"order_parsing V2 with {message_to_parse}")
     try:
         fmo = findmyorder()
-        return fmo.identify(message_to_parse)
+        return fmo.search(message_to_parse)
 
     except Exception as e:
         logger.warning(msg=f"Order parsing error {e}")
