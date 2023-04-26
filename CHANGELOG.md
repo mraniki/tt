@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.10 (2023-04-26)
+### Fix
+* Fmo function change ([`8b9a9b8`](https://github.com/mraniki/tt/commit/8b9a9b8ef4c6a9fb37616256f8a7266e100004f7))
+
 ## v1.0.9 (2023-04-26)
 ### Fix
 * Remove identify fmo function ([`8166214`](https://github.com/mraniki/tt/commit/81662145531387a35715e12d721e77531d6af5ab))
