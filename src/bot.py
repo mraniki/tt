@@ -9,7 +9,6 @@ from fastapi import FastAPI
 import uvicorn
 
 from config import settings
-from config import logger
 
 from findmyorder import findmyorder
 import ccxt
@@ -26,16 +25,16 @@ from ping3 import ping
 
 
 # #🧐LOGGING
-# logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=settings.loglevel)
-# logger = logging.getLogger(__name__)
-# if settings.loglevel=='DEBUG':
-#     logging.getLogger('ccxt').setLevel(logging.WARNING)
-#     logging.getLogger('urllib3').setLevel(logging.WARNING)
-#     logging.getLogger('telegram').setLevel(logging.WARNING)
-#     logging.getLogger('apprise').setLevel(logging.WARNING)
-#     logging.getLogger('telethon').setLevel(logging.WARNING)
-#     logging.getLogger('discord').setLevel(logging.WARNING)
-#     logging.getLogger('simplematrixbotlib').setLevel(logging.WARNING)
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=settings.loglevel)
+logger = logging.getLogger(__name__)
+if settings.loglevel=='DEBUG':
+    logging.getLogger('ccxt').setLevel(logging.WARNING)
+    logging.getLogger('urllib3').setLevel(logging.WARNING)
+    logging.getLogger('telegram').setLevel(logging.WARNING)
+    logging.getLogger('apprise').setLevel(logging.WARNING)
+    logging.getLogger('telethon').setLevel(logging.WARNING)
+    logging.getLogger('discord').setLevel(logging.WARNING)
+    logging.getLogger('simplematrixbotlib').setLevel(logging.WARNING)
 
 
 #🔁UTILS
@@ -50,11 +49,8 @@ async def parse_message(self,msg):
     wordlist = msg.split(" ")
     wordlistsize = len(wordlist)
     logger.debug(msg=f"parse_message wordlist {wordlist} len {wordlistsize}")
-    try:
-        orderparsing = await order_parsing(msg)
-        logger.debug(msg=f"orderparsing {orderparsing}")
-    except:
-        pass
+    orderparsing = await order_parsing(msg)
+    logger.debug(msg=f"orderparsing {orderparsing}")
     response = ""
     #🦾BOT FILTERS
     filters = {
