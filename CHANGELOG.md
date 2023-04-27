@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.11 (2023-04-27)
+### Fix
+* Command support ([`dcda2c7`](https://github.com/mraniki/tt/commit/dcda2c767bd091f8cb97d82657f4377765b0c92d))
+* Dep typo ([`969e646`](https://github.com/mraniki/tt/commit/969e646ccdc4c1797ea355be0fc8aa3fa389cc7a))
+* Py to toml for default settings extension ([`864b781`](https://github.com/mraniki/tt/commit/864b7819fd209c1a1231ad9a57c23825a782643e))
+* Async function ([`ba7ef41`](https://github.com/mraniki/tt/commit/ba7ef413cc9d5ccb0cee2229d7b1354d68b145ee))
+* Dependency ([`f378cf8`](https://github.com/mraniki/tt/commit/f378cf82ba4fd9283021be56023aff3b8c821568))
+* Add async to functions in bot.py ([`ae875be`](https://github.com/mraniki/tt/commit/ae875be2560d5e63f843b1e49645c5c2c54d58dc))
+* Dependency cleanup ([`a4921ab`](https://github.com/mraniki/tt/commit/a4921ab82fddf236252f0183016027cda317e4d3))
+
 ## v1.0.10 (2023-04-26)
 ### Fix
 * Fmo function change ([`8b9a9b8`](https://github.com/mraniki/tt/commit/8b9a9b8ef4c6a9fb37616256f8a7266e100004f7))
