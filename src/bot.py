@@ -44,7 +44,7 @@ async def parse_message(self,msg):
         order_data = await is_order(msg)
 
         if order_data is None:
-            command = get_bot_command(msg)
+            command = await get_bot_command(msg)
             bot_commands = {
                 'bal': account_balance_command,
                 'help': help_command,
