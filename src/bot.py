@@ -14,12 +14,12 @@ from findmyorder import findmyorder
 import ccxt
 from dxsp import DexSwap
 
-from telegram.ext import Application, MessageHandler
-from telethon import TelegramClient, events
-import simplematrixbotlib as botlib
-import discord
 import apprise
 from apprise import NotifyFormat
+from telegram.ext import Application, MessageHandler
+from telethon import TelegramClient, events
+import discord
+import simplematrixbotlib as botlib
 
 from ping3 import ping
 
@@ -38,7 +38,6 @@ if settings.loglevel=='DEBUG':
 
 
 #🔁UTILS
-
 async def parse_message(self,msg):
     logger.debug(msg=f"self {self} msg {msg}")
     try:
