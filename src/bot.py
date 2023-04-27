@@ -41,7 +41,7 @@ if settings.loglevel=='DEBUG':
 async def parse_message(self,msg):
     logger.debug(msg=f"self {self} msg {msg}")
     try:
-        order_data = is_order(msg)
+        order_data = await is_order(msg)
 
         if order_data is None:
             command = get_bot_command(msg)
@@ -80,7 +80,7 @@ async def verify_latency_ex():
 
 
 #💬MESSAGING
-def get_bot_command(message):
+async def get_bot_command(message):
     logger.info(msg=f"get_bot_command  {message}")
     try:
         if message.startswith("!"):
