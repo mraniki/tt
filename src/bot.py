@@ -53,13 +53,12 @@ async def parse_message(self,msg):
                 'restart': restart_command,
                 'trading': trading_switch_command,
             }
-            if command in bot_commands:
-                logger.debug(msg=f"get_bot_command {command}")
-                response = await bot_commands[command]()
-                logger.debug(msg=f"bot command response {response}")
-            else:
+            if command not in bot_commands:
                 #logger.debug(msg=f"not a valid command nor order received {msg}")
                 return
+            logger.debug(msg=f"get_bot_command {command}")
+            response = await bot_commands[command]()
+            logger.debug(msg=f"bot command response {response}")
         else:
             response = await execute_order(order_data)
 
