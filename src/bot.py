@@ -58,7 +58,7 @@ async def parse_message(self,msg):
                 response = await bot_commands[command]()
                 logger.debug(msg=f"bot command response {response}")
             else:
-                logger.debug(msg=f"not a valid command nor order received {msg}")
+                #logger.debug(msg=f"not a valid command nor order received {msg}")
                 return
         else:
             response = await execute_order(order_data)
@@ -87,10 +87,10 @@ async def get_bot_command(message):
     logger.debug(msg=f"bot_prefix  {bot_prefix}")
     try:
         if message.startswith(tuple(bot_prefix)):
+            logger.debug(msg=f"message[1:]  {message[1:]}")
             return message[1:]
-        else:
-            logger.debug(msg=f"get_bot_command no command identified {message}")
-            return None
+        logger.debug(msg=f"get_bot_command no command identified {message}")
+        return None
     except Exception as e:
         logger.warning(msg=f"get_bot_command error {message} - {e}")
 
