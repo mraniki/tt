@@ -88,9 +88,8 @@ async def get_bot_command(message):
     try:
         if message.startswith(tuple(bot_prefix)):
             return message[1:]
-        else:
-            logger.debug(msg=f"get_bot_command no command identified {message}")
-            return None
+        logger.debug(msg=f"get_bot_command no command identified {message}")
+        return None
     except Exception as e:
         logger.warning(msg=f"get_bot_command error {message} - {e}")
 
