@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.12 (2023-04-27)
+### Fix
+* Update logging ([`21ecc13`](https://github.com/mraniki/tt/commit/21ecc133544f4a71b4ee6e07c9e13f682a03b169))
+
 ## v1.0.11 (2023-04-27)
 ### Fix
 * Command support ([`dcda2c7`](https://github.com/mraniki/tt/commit/dcda2c767bd091f8cb97d82657f4377765b0c92d))
