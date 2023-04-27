@@ -57,7 +57,7 @@ async def parse_message(self,msg):
                 logger.debug(msg=f"get_bot_command {command}")
                 response = await bot_commands[command]()
             else:
-                logger.warning(msg=f"not a valid command nor order received {msg}")
+                logger.debug(msg=f"not a valid command nor order received {msg}")
                 return
         else:
             response = await execute_order(order_data)
@@ -82,15 +82,16 @@ async def verify_latency_ex():
 #💬MESSAGING
 async def get_bot_command(message):
     logger.info(msg=f"get_bot_command  {message}")
+    bot_prefix = settings.bot_prefix
+    logger.debug(msg=f"bot_prefix  {bot_prefix}")
     try:
-        if message.startswith("!"):
-            return message[1:]
-        elif message.startswith("/"):
+        if message.startswith(tuple(bot_prefix)):
             return message[1:]
         else:
+            logger.debug(msg=f"get_bot_command no command identified {message}")
             return None
     except Exception as e:
-        logger.warning(msg=f"is_order error {message} - {e}")
+        logger.warning(msg=f"get_bot_command error {message} - {e}")
 
 async def is_order(message):
     logger.info(msg=f"is_order {message}")
