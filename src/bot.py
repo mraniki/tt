@@ -14,12 +14,12 @@ from findmyorder import findmyorder
 import ccxt
 from dxsp import DexSwap
 
-from telegram.ext import Application, MessageHandler
-from telethon import TelegramClient, events
-import simplematrixbotlib as botlib
-import discord
 import apprise
 from apprise import NotifyFormat
+from telegram.ext import Application, MessageHandler
+from telethon import TelegramClient, events
+import discord
+import simplematrixbotlib as botlib
 
 from ping3 import ping
 
@@ -38,81 +38,37 @@ if settings.loglevel=='DEBUG':
 
 
 #🔁UTILS
-
 async def parse_message(self,msg):
     logger.debug(msg=f"self {self} msg {msg}")
-    # if self.effective_message.text: #tgram to be reviewed
-    #     msg=self.effective_message.text
-    #     logger.debug(msg=f"content {self['channel_post']['text']}")
-    if not msg:
-        return
-    wordlist = msg.split(" ")
-    wordlistsize = len(wordlist)
-    logger.debug(msg=f"parse_message wordlist {wordlist} len {wordlistsize}")
-    orderparsing = await order_parsing(msg)
-    logger.debug(msg=f"orderparsing {orderparsing}")
-    response = ""
-    #🦾BOT FILTERS
-    filters = {
-        'ignore': ['⚠️', 'error', 'Environment:', 'Balance', 'Bot'],
-        'order': ['BUY', 'SELL', 'buy', 'sell', 'Buy','Sell'],
-        'help': ['/echo', '/help', '/start'],
-        'balance': ['/bal'],
-        'position': ['/pos','/position'],
-        'quote': ['/q'],
-        'trading': ['/trading'],
-        'restart': ['/restart'],
-    }
     try:
-        for name, keywords in filters.items():
-            if any(keyword in wordlist for keyword in keywords):
-                if name == 'balance':
-                    response = await account_balance_command()
-                elif name == 'help':
-                    response = await help_command()
-                elif name == 'ignore':
-                    return
-                elif name == 'order':
-                    if wordlistsize > 1:
-                        order_check = await order_parsing(msg)
-                        logger.info(msg=f"Order parsing: {order_check}")
-                        direction = wordlist[0].upper()
-                        stoploss = 100
-                        takeprofit = 100
-                        quantity = 10
-                        if wordlistsize > 2:
-                            stoploss = wordlist[2][3:]
-                            takeprofit = wordlist[3][3:]
-                            quantity = wordlist[4][2:-1]
-                        symbol = wordlist[1]
-                        order=[direction,symbol,stoploss,takeprofit,quantity]
-                        logger.info(msg=f"Order identified: {order}")
-                        res = await execute_order(order[0],order[1],order[2],order[3],order[4])
-                        if res:
-                            response = f"{res}"
-                elif name == 'position':
-                    response = await account_position_command()
-                elif name == 'quote':
-                    response = await quote_command(wordlist[1])
-                elif name == 'restart':
-                    response = await restart_command()
-                elif name == 'trading':
-                    response = await trading_switch_command()
-                if response:
-                    await notify(response)
+        order_data = await is_order(msg)
+
+        if order_data is None:
+            command = await get_bot_command(msg)
+            bot_commands = {
+                'bal': account_balance_command,
+                'help': help_command,
+                'pos': account_position_command,
+                'quote': quote_command,
+                'restart': restart_command,
+                'trading': trading_switch_command,
+            }
+            if command in bot_commands:
+                logger.debug(msg=f"get_bot_command {command}")
+                response = await bot_commands[command]()
+                logger.debug(msg=f"bot command response {response}")
+            else:
+                logger.debug(msg=f"not a valid command nor order received {msg}")
+                return
+        else:
+            response = await execute_order(order_data)
+
+        if response:
+            await notify(response)
+
     except Exception:
         logger.warning(msg="Parsing exception")
 
-async def order_parsing(message_to_parse):
-    logger.info(msg=f"order_parsing V2 with {message_to_parse}")
-    try:
-        fmo = findmyorder()
-        results = fmo.get_order(message_to_parse)
-        logger.info(msg=f"order_parsing V2 results {results}")
-        return results
-
-    except Exception as e:
-        logger.warning(msg=f"Order parsing error {e}")
 
 async def verify_latency_ex():
     try:
@@ -123,7 +79,32 @@ async def verify_latency_ex():
     except Exception as e:
         logger.warning(msg=f"Latency error {e}")
 
+
 #💬MESSAGING
+async def get_bot_command(message):
+    logger.info(msg=f"get_bot_command  {message}")
+    bot_prefix = settings.bot_prefix
+    logger.debug(msg=f"bot_prefix  {bot_prefix}")
+    try:
+        if message.startswith(tuple(bot_prefix)):
+            return message[1:]
+        else:
+            logger.debug(msg=f"get_bot_command no command identified {message}")
+            return None
+    except Exception as e:
+        logger.warning(msg=f"get_bot_command error {message} - {e}")
+
+async def is_order(message):
+    logger.info(msg=f"is_order {message}")
+    try:
+        fmo = findmyorder()
+        results = fmo.get_order(message)
+        logger.info(msg=f"fmo get_order results {results}")
+        return results
+    except Exception as e:
+        logger.warning(msg=f"is_order error {message} - {e}")
+
+
 async def notify(msg):
     if not msg:
         return
