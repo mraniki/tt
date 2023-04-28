@@ -284,6 +284,7 @@ async def help_command():
     return f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
 
 async def account_balance_command():
+    logger.debug(msg="account_bal_command")
     return await get_account_balance()
 
 async def account_position_command():
