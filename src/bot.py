@@ -79,6 +79,7 @@ async def verify_latency_ex():
         logger.warning(msg=f"Latency error {e}")
 
 
+
 #💬MESSAGING
 async def get_bot_command(message):
     logger.info(msg=f"get_bot_command  {message}")
