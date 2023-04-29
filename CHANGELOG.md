@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.14 (2023-04-29)
+### Fix
+* Fmo version ([`f492f44`](https://github.com/mraniki/tt/commit/f492f440ff2f5000df1d2071713390aef2f248a6))
+
 ## v1.0.13 (2023-04-29)
 ### Fix
 * Troubleshoot dynamic bot command ([`8c2be39`](https://github.com/mraniki/tt/commit/8c2be39c4480d98a8307848e082a6e197aceb404))
