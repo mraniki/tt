@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.13 (2023-04-29)
+### Fix
+* Troubleshoot dynamic bot command ([`8c2be39`](https://github.com/mraniki/tt/commit/8c2be39c4480d98a8307848e082a6e197aceb404))
+* Bot ([`303ad2f`](https://github.com/mraniki/tt/commit/303ad2fc1ad07b7ffa7a7f8d6dc94092c2f313ad))
+* Testing ([`4bceefe`](https://github.com/mraniki/tt/commit/4bceefecb2d9c2df21ceb9e852b76b4d4a371e48))
+
 ## v1.0.12 (2023-04-27)
 ### Fix
 * Update logging ([`21ecc13`](https://github.com/mraniki/tt/commit/21ecc133544f4a71b4ee6e07c9e13f682a03b169))
