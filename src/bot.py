@@ -4,9 +4,16 @@ __version__ = "1.0.14"
 
 ##=============== import  =============
 
-import logging, sys, json, requests, asyncio
-from fastapi import FastAPI
+import logging
+import sys 
+import json
+import requests 
+import asyncio
 import uvicorn
+from fastapi import FastAPI
+
+import pyparsing as pp
+from pyparsing import Combine, Optional, Word, alphas, nums, one_of
 
 from config import settings
 
@@ -41,27 +48,24 @@ if settings.loglevel=='DEBUG':
 async def parse_message(self,msg):
     logger.debug(msg=f"self {self} msg {msg}")
     try:
-        order_data = await is_order(msg)
+        response = None
 
-        if order_data is None:
-            command = await get_bot_command(msg)
-            bot_commands = {
-                'bal': account_balance_command,
-                'help': help_command,
-                'pos': account_position_command,
-                'quote': quote_command,
-                'restart': restart_command,
-                'trading': trading_switch_command,
-            }
-            if command not in bot_commands:
-                logger.debug(msg=f"not a valid command nor order received {msg}")
-                return
-            logger.debug(msg=f"get_bot_command {command}")
-            logger.debug(msg=f"bot_commands[command] {bot_commands[command]}")
-            response = await bot_commands[command]()
-            logger.debug(msg=f"bot command response {response}")
-        else:
+        if pp.one_of(settings.bot_prefix):
+            command = msg[1:]
+            if command == settings.bot_command_bal:
+                response = await account_balance_command()
+            elif command == settings.bot_command_help:
+                response = await help_command()
+            elif command == settings.bot_command_pos:
+                response = await account_position_command()
+            elif command == settings.bot_command_restart:
+                response = await restart_command()
+            elif command == trading_bot_command: 
+                response = await trading_switch_command()
+        elif (await is_order(msg)):
             response = await execute_order(order_data)
+        else:
+            return
 
         if response:
             await notify(response)
@@ -69,6 +73,15 @@ async def parse_message(self,msg):
     except Exception:
         logger.warning(msg="Parsing exception")
 
+async def is_order(message):
+    logger.info(msg=f"is_order {message}")
+    try:
+        fmo = await FindMyOrder()
+        results = fmo.get_order(message)
+        logger.info(msg=f"fmo get_order results {results}")
+        return results
+    except Exception as e:
+        logger.warning(msg=f"is_order error {message} - {e}")
 
 async def verify_latency_ex():
     try:
@@ -79,33 +92,7 @@ async def verify_latency_ex():
     except Exception as e:
         logger.warning(msg=f"Latency error {e}")
 
-
-
 #💬MESSAGING
-async def get_bot_command(message):
-    logger.info(msg=f"get_bot_command  {message}")
-    bot_prefix = settings.bot_prefix
-    logger.debug(msg=f"bot_prefix  {bot_prefix}")
-    try:
-        if message.startswith(tuple(bot_prefix)):
-            logger.debug(msg=f"message[1:]  {message[1:]}")
-            return message[1:]
-        logger.debug(msg=f"get_bot_command no command identified {message}")
-        return None
-    except Exception as e:
-        logger.warning(msg=f"get_bot_command error {message} - {e}")
-
-async def is_order(message):
-    logger.info(msg=f"is_order {message}")
-    try:
-        fmo = FindMyOrder()
-        results = fmo.get_order(message)
-        logger.info(msg=f"fmo get_order results {results}")
-        return results
-    except Exception as e:
-        logger.warning(msg=f"is_order error {message} - {e}")
-
-
 async def notify(msg):
     if not msg:
         return
@@ -155,14 +142,14 @@ async def load_exchange():
         private_key = settings.dex_private_key
         block_explorer_api = settings.dex_block_explorer_api
 
-        rpc = settings.dex_rpc
-
-        ex_name = settings.dex_name
-        ex_test_mode = settings.dex_testmode
-        base_trading_symbol = settings.dex_base_trading_symbol
-        protocol_type = settings.dex_protocol
-        router = settings.dex_router
-        amount_trading_option = settings.dex_amount_trading_option
+        if settings.dex_rpc:
+            rpc = settings.dex_rpc
+            ex_name = settings.dex_name
+            ex_test_mode = settings.dex_testmode
+            base_trading_symbol = settings.dex_base_trading_symbol
+            protocol_type = settings.dex_protocol
+            router = settings.dex_router
+            amount_trading_option = settings.dex_amount_trading_option
 
         try:
             dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
@@ -175,22 +162,22 @@ async def load_exchange():
         return
 
 #📦ORDER
-async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
+async def execute_order(action,instrument,stoploss,takeprofit,quantity):
     if bot_trading_switch == False:
         return
     try:
-        response = f"⬇️ {symbol}" if (direction=="SELL") else f"⬆️ {symbol}"
+        response = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}"
         if ex_type == 'dex':
-            order = execute_order.dex(direction=direction,symbol=symbol,stoploss=stoploss,takeprofit=takeprofit,quantity=quantity)
+            order = execute_order.dex(action=action,instrument=instrument,stoploss=stoploss,takeprofit=takeprofit,quantity=quantity)
             order_confirmation+= order['confirmation']
         else:
             if (await get_account_balance()=="No Balance"): 
                 await handle_exception("Check your Balance")
                 return
-            asset_out_quote = float(cex.fetchTicker(f'{symbol}').get('last'))
+            asset_out_quote = float(cex.fetchTicker(f'{instrument}').get('last'))
             totalusdtbal = await get_base_trading_symbol_balance() ##cex.fetchBalance()['USDT']['free']
             amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
-            order = cex.create_order(symbol, price_type, direction, amountpercent)
+            order = cex.create_order(instrument, price_type, action, amountpercent)
             order_confirmation+= f"\n➕ Size: {order['amount']}\n⚫️ Entry: {order['price']}\nℹ️ {order['id']}\n🗓️ {order['datetime']}"
         return order_confirmation
 
@@ -198,14 +185,13 @@ async def execute_order(direction,symbol,stoploss,takeprofit,quantity):
         await handle_exception(f"Exception with order processing {e}")
         return
 
-async def get_quote(symbol):
-    if ex_type == 'dex':
-        asset_out_quote = await dex.get_quote(symbol)
-        return f"🦄{asset_out_quote} USD\n🖊️{chainId}: {symbol}"
-    else:
-        asset_out_quote = cex.fetch_ticker(symbol.upper())['last']
-        return f"🏛️ {price} USD"
-        
+# async def get_quote(instrument):
+#     if ex_type == 'dex':
+#         asset_out_quote = await dex.get_quote(instrument)
+#         return f"🦄{asset_out_quote} USD\n🖊️{chainId}: {instrument}"
+#     else:
+#         asset_out_quote = cex.fetch_ticker(instrument.upper())['last']
+#         return f"🏛️ {price} USD"
 
 #🔒PRIVATE
 async def get_account_balance():
@@ -273,9 +259,6 @@ async def help_command():
     🏦<code>/bal</code>
     📦<code>buy btc/usdt sl=1000 tp=20 q=1%</code>
         <code>buy cake</code>
-    🦎 <code>/q BTCB</code>
-           <code>/q WBTC</code>
-           <code>/q btc/usdt</code>
     🔀 <code>/trading</code>"""
     if settings.discord_webhook_id:
         helpcommand= helpcommand.replace("<code>", "`")
@@ -289,9 +272,6 @@ async def account_balance_command():
 
 async def account_position_command():
     return await get_account_position()
-
-async def quote_command(symbol):
-    return await get_quote(symbol)
 
 async def trading_switch_command():
     global bot_trading_switch
@@ -330,7 +310,7 @@ async def bot():
                 async def room_joined(room):
                     await post_init()
                 @bot.listener.on_message_event
-                async def on_matrix_message(room, message):    
+                async def on_matrix_message(room, message):
                     await parse_message(bot,message.body)
                 await bot.api.login()
                 bot.api.async_client.callbacks = botlib.Callbacks(bot.api.async_client, bot)
@@ -355,10 +335,9 @@ async def bot():
                     await bot.start()
                     await bot.updater.start_polling(drop_pending_updates=True)
             else:
-                logger.warning(msg="token  {settings.bot_token}")
                 logger.error(msg="Check your messaging platform settings")
-                await asyncio.sleep(10000)
-                #sys.exit()
+                await asyncio.sleep(7200)
+
     except Exception as e:
         logger.error(msg=f"Bot not started: {str(e)}")
 

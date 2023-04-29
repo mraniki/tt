@@ -1,5 +1,11 @@
 [default]
-loglevel = 'INFO'
+loglevel = "INFO"
 host = "0.0.0.0"
 port = 8080
-bot_prefix = ["!","/"]
+bot_prefix = "/"
+bot_command_help = "help"
+bot_command_bal = "bal"
+bot_command_pos = "pos"
+bot_command_trading = "trading"
+bot_command_restart = "restart"
+bot_command_quote = "q"
