@@ -54,9 +54,10 @@ async def parse_message(self,msg):
                 'trading': trading_switch_command,
             }
             if command not in bot_commands:
-                #logger.debug(msg=f"not a valid command nor order received {msg}")
+                logger.debug(msg=f"not a valid command nor order received {msg}")
                 return
             logger.debug(msg=f"get_bot_command {command}")
+            logger.debug(msg=f"bot_commands[command] {bot_commands[command]}")
             response = await bot_commands[command]()
             logger.debug(msg=f"bot command response {response}")
         else:
@@ -77,6 +78,7 @@ async def verify_latency_ex():
             round(ping("1.1.1.1", unit='ms'), 3)
     except Exception as e:
         logger.warning(msg=f"Latency error {e}")
+
 
 
 #💬MESSAGING
@@ -282,6 +284,7 @@ async def help_command():
     return f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
 
 async def account_balance_command():
+    logger.debug(msg="account_bal_command")
     return await get_account_balance()
 
 async def account_position_command():
