@@ -13,7 +13,7 @@ import uvicorn
 from fastapi import FastAPI
 
 import pyparsing as pp
-from pyparsing import Combine, Optional, Word, alphas, nums, one_of
+from pyparsing import one_of
 
 from config import settings
 
@@ -46,7 +46,7 @@ if settings.loglevel=='DEBUG':
 
 #🔁UTILS
 async def parse_message(self,msg):
-    logger.debug(msg=f"self {self} msg {msg}")
+    logger.debug("message received %s",msg)
     try:
         response = None
 
@@ -71,17 +71,17 @@ async def parse_message(self,msg):
             await notify(response)
 
     except Exception:
-        logger.warning(msg="Parsing exception")
+        logger.warning("Parsing exception")
 
 async def is_order(message):
-    logger.info(msg=f"is_order {message}")
+    
     try:
         fmo = await FindMyOrder()
-        results = fmo.get_order(message)
-        logger.info(msg=f"fmo get_order results {results}")
+        results = await fmo.get_order(message)
+        logger.debug("results: %s", results)
         return results
     except Exception as e:
-        logger.warning(msg=f"is_order error {message} - {e}")
+        logger.warning("orderparsing %s value: %s", e, results)
 
 async def verify_latency_ex():
     try:
@@ -90,7 +90,7 @@ async def verify_latency_ex():
         else:
             round(ping("1.1.1.1", unit='ms'), 3)
     except Exception as e:
-        logger.warning(msg=f"Latency error {e}")
+        logger.warning("Latency error", e)
 
 #💬MESSAGING
 async def notify(msg):
@@ -106,11 +106,11 @@ async def notify(msg):
     try:
         await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
     except Exception as e:
-        logger.warning(msg=f"{msg} not sent due to error: {e}")
+        logger.warning("%s not sent: %s", msg, e)
 
 #💱EXCHANGE
 async def load_exchange():
-    logger.info(msg="Setting up exchange")
+    logger.info("Setting up exchange")
     global ex_type
     global ex_name
     global ex_test_mode
@@ -126,12 +126,12 @@ async def load_exchange():
                 cex = client({'apiKey': settings.cex_api,'secret': settings.cex_secret, })
             price_type = settings.cex_ordertype
             if (settings.cex_testmode=='True'):
-                logger.info(msg="sandbox setup")
+                logger.info("sandbox setup")
                 cex.set_sandbox_mode('enabled')
                 ex_test_mode = True
                 ex_name = settings.cex_name
             markets = cex.load_markets()
-            logger.debug(msg=f"CEX object created {cex}")
+            logger.debug("CEXcreated: %s", cex)
             ex_type = 'cex'
         except Exception as e:
             await handle_exception(e)
@@ -142,7 +142,7 @@ async def load_exchange():
         private_key = settings.dex_private_key
         block_explorer_api = settings.dex_block_explorer_api
 
-        if settings.dex_rpc:
+        if settings.dex_rpc is not None:
             rpc = settings.dex_rpc
             ex_name = settings.dex_name
             ex_test_mode = settings.dex_testmode
@@ -152,13 +152,18 @@ async def load_exchange():
             amount_trading_option = settings.dex_amount_trading_option
 
         try:
-            dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
-            logger.debug(msg=f"DEX object created{dex}")
+            dex = DexSwap(
+                chain_id=chain_id,
+                wallet_address=wallet_address,
+                private_key=private_key,
+            block_explorer_api=block_explorer_api
+                )
+            logger.debug("DEX created %s", dex)
             ex_type = 'dex'
         except Exception as e:
             await handle_exception(e)
     else:
-        logger.warning(msg="no CEX or DEX config found")
+        logger.warning("no CEX/DEX config")
         return
 
 #📦ORDER
@@ -166,7 +171,7 @@ async def execute_order(action,instrument,stoploss,takeprofit,quantity):
     if bot_trading_switch == False:
         return
     try:
-        response = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}"
+        order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}"
         if ex_type == 'dex':
             order = execute_order.dex(action=action,instrument=instrument,stoploss=stoploss,takeprofit=takeprofit,quantity=quantity)
             order_confirmation+= order['confirmation']
@@ -216,7 +221,7 @@ async def get_base_trading_symbol_balance():
         else:
             return cex.fetchBalance()[f'{cex_base_trading_symbol}']['free']
     except Exception:
-        await handle_exception("Check your balance")
+        await handle_exception("Check  balance")
 
 async def get_account_position():
     try:
@@ -226,11 +231,10 @@ async def get_account_position():
         else:
             open_positions = cex.fetch_positions()
             open_positions = [p for p in positions if p['type'] == 'open']
-        logger.debug(msg=f"open_positions {open_positions}")
         position += open_positions
         return position
     except Exception:
-        await handle_exception("Error when retrieving position")
+        await handle_exception("Error retrieving position")
 
 async def get_account_margin():
     try:
@@ -240,18 +244,15 @@ async def get_account_margin():
         return
 
 #======= error handling
-async def handle_exception(e) -> None:
-    msg = ""
-    logger.error(msg=f"error: {e}")
-    message = f"⚠️ {msg} {e}"
-    logger.error(msg = f"{message}")
+async def handle_exception(e):
+    logger.error("error: %s", e)
+    message = f"⚠️ {e}"
     await notify(message)
 
 #🦾BOT ACTIONS
 async def post_init():
-    startup_message=f"Bot is online {__version__}"
-    logger.info(msg = f"{startup_message}")
-    await notify(startup_message)
+    logger.info("Bot is online %s", __version__)
+    await notify(f"Bot is online {__version__}")
 
 async def help_command():
     bot_ping = await verify_latency_ex()
@@ -267,7 +268,7 @@ async def help_command():
     return f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
 
 async def account_balance_command():
-    logger.debug(msg="account_bal_command")
+    logger.debug("account_bal_command")
     return await get_account_balance()
 
 async def account_position_command():
@@ -335,11 +336,11 @@ async def bot():
                     await bot.start()
                     await bot.updater.start_polling(drop_pending_updates=True)
             else:
-                logger.error(msg="Check your messaging platform settings")
+                logger.error("Check bot settings")
                 await asyncio.sleep(7200)
 
     except Exception as e:
-        logger.error(msg=f"Bot not started: {str(e)}")
+        logger.error("Bot not started: %s", e)
 
 #⛓️API
 app = FastAPI(title="TALKYTRADER",)
@@ -349,24 +350,24 @@ def startup_event():
     loop = asyncio.get_event_loop()
     try:
         loop.create_task(bot())
-        logger.info(msg="Webserver started")
+        logger.info("Webserver started")
     except Exception as e:
         loop.stop()
-        logger.error(msg=f"Bot start error: {str(e)}")
+        logger.error("Bot start error: %s", e)
 
 @app.on_event('shutdown')
 async def shutdown_event():
     global uvicorn
-    logger.info('Webserver shutting down...')
+    logger.info("Webserver shutting down")
     uvicorn.keep_running = False
 
 @app.get("/")
 def root():
-    return {f"Bot is online {__version__}"}
+    return {__name__ __version__}
 
 @app.get("/health")
 def health_check():
-    logger.info(msg="Healthcheck_Ping")
+    logger.info("Healthcheck")
     return {f"Bot is online {__version__}"}
 
 #🙊TALKYTRADER
