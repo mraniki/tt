@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.15 (2023-04-29)
+### Fix
+* Refactor bot.py parse_message and add is_order function ([`065b57c`](https://github.com/mraniki/tt/commit/065b57c53a156cac347989c03a7eca5e75a17e2b))
+
 ## v1.0.14 (2023-04-29)
 ### Fix
 * Fmo version ([`f492f44`](https://github.com/mraniki/tt/commit/f492f440ff2f5000df1d2071713390aef2f248a6))
