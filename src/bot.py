@@ -4,11 +4,17 @@ __version__ = "1.0.14"
 
 ##=============== import  =============
 
-import logging, sys, json, requests, asyncio
-from fastapi import FastAPI
+import logging
+import sys 
+import json
+import requests 
+import asyncio
 import uvicorn
+from fastapi import FastAPI
 
 import pyparsing as pp
+from pyparsing import Combine, Optional, Word, alphas, nums, one_of
+
 from config import settings
 
 from findmyorder import FindMyOrder
@@ -57,7 +63,7 @@ async def parse_message(self,msg):
                 response = await restart_command()
             elif command == trading_bot_command: 
                 response = await trading_switch_command()
-        elif order
+        elif order:
             response = await execute_order(order_data)
         else:
             return
