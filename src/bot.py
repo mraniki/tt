@@ -8,6 +8,7 @@ import logging, sys, json, requests, asyncio
 from fastapi import FastAPI
 import uvicorn
 
+import pyparsing as pp
 from config import settings
 
 from findmyorder import FindMyOrder
@@ -41,27 +42,25 @@ if settings.loglevel=='DEBUG':
 async def parse_message(self,msg):
     logger.debug(msg=f"self {self} msg {msg}")
     try:
-        order_data = await is_order(msg)
+        bot_prefix = pp.one_of(settings.bot_prefix)
+        order = await is_order(msg)
 
-        if order_data is None:
-            command = await get_bot_command(msg)
-            bot_commands = {
-                'bal': account_balance_command,
-                'help': help_command,
-                'pos': account_position_command,
-                'quote': quote_command,
-                'restart': restart_command,
-                'trading': trading_switch_command,
-            }
-            if command not in bot_commands:
-                logger.debug(msg=f"not a valid command nor order received {msg}")
-                return
-            logger.debug(msg=f"get_bot_command {command}")
-            logger.debug(msg=f"bot_commands[command] {bot_commands[command]}")
-            response = await bot_commands[command]()
-            logger.debug(msg=f"bot command response {response}")
-        else:
+        if bot_prefix:
+            command = msg[1:]
+            if command == settings.bot_command_bal:
+                response = await account_balance_command()
+            elif command == settings.bot_command_help:
+                response = await help_command()
+            elif command == settings.bot_command_pos:
+                response = await account_position_command()
+            elif command == settings.bot_command_restart:
+                response = await restart_command()
+            elif command == trading_bot_command: 
+                response = await trading_switch_command()
+        elif order
             response = await execute_order(order_data)
+        else:
+            return
 
         if response:
             await notify(response)
@@ -82,19 +81,6 @@ async def verify_latency_ex():
 
 
 #💬MESSAGING
-async def get_bot_command(message):
-    logger.info(msg=f"get_bot_command  {message}")
-    bot_prefix = settings.bot_prefix
-    logger.debug(msg=f"bot_prefix  {bot_prefix}")
-    try:
-        if message.startswith(tuple(bot_prefix)):
-            logger.debug(msg=f"message[1:]  {message[1:]}")
-            return message[1:]
-        logger.debug(msg=f"get_bot_command no command identified {message}")
-        return None
-    except Exception as e:
-        logger.warning(msg=f"get_bot_command error {message} - {e}")
-
 async def is_order(message):
     logger.info(msg=f"is_order {message}")
     try:
