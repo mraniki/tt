@@ -10,7 +10,7 @@ import uvicorn
 
 from config import settings
 
-from findmyorder import findmyorder
+from findmyorder import FindMyOrder
 import ccxt
 from dxsp import DexSwap
 
@@ -98,7 +98,7 @@ async def get_bot_command(message):
 async def is_order(message):
     logger.info(msg=f"is_order {message}")
     try:
-        fmo = findmyorder()
+        fmo = FindMyOrder()
         results = fmo.get_order(message)
         logger.info(msg=f"fmo get_order results {results}")
         return results
