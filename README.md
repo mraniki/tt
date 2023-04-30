@@ -6,7 +6,7 @@
 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)
 
- CEX & DEX integration with multi messaging platform support (Telegram, Matrix and Discord). Place order for CEFI or DEFI exchanges, query balance and quote ticker. Deploy it via docker on selfhosted platform or PaaS. 
+ CEX & DEX integration with multi messaging platform support (Telegram, Matrix and Discord). Place order for CEFI or DEFI exchanges and query balance. Deploy it via docker on selfhosted platform or PaaS. 
 
  
 [![telegrambot](https://badgen.net/badge/icon/telegrambot?icon=telegram&label)](https://t.me/pythontelegrambotchannel)
@@ -39,7 +39,7 @@ If you like it, feel free to
 2) Get your 
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
     - DEX keys and RPC supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org), [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) or [cointool](https://cointool.app/) for chain/RPC details
-3) Update the config (bot token, bot channel and exchange details). Point or copy your config [settings.toml](config/example.toml) to the volume /code/)
+3) Update the config (bot token, bot channel and exchange details). Point or copy your config [settings.toml](config/example.toml) to the volume /app/)
 4) Deploy via:
     - docker `docker push mraniki/tt:latest` or `docker pull ghcr.io/mraniki/tt:latest`
     - locally `git clone https://github.com/mraniki/tt:main` && `pip install -r requirements.txt` 
@@ -55,21 +55,19 @@ Config is using [dynaconf](https://www.dynaconf.com) module. refer to its docume
 ## Bot commands
  - `sell BTCUSDT sl=6000 tp=4500 q=1%` or `sell BTCUSDT` Order processing (direction symbol sl=stoploss tp=takeprofit q=percentagequantity% or direction symbol)
  - `/bal` Query user account exchange balance
- - `/cex name` or `/dex name` Switch between any CEX or DEX (e.g `/cex kraken`, `/dex pancake`)
  - `/trading` Disable or Enable trading
- - `/q BTCB` Retrieve ticker quote and token information from exchange and coingecko
-
+ 
 ## Features Available
  
  - Enable bot in Telegram (ptb v20 and telethon), Matrix (simplematrixbotlib) and Discord (pycord) messaging platform
  - Place order for CEX and DEX, Query Balance and quote ticker
  - Push your order signal manually or from system like [trading view webhook alert](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Alerts.html#using-all-alert-calls). Verified with Binance, Binance Testnet, ~~FTX😠~~, Kraken, Huobi, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing values are defaulted
  - Support DXSP library (automatic token approval, uniswap v2 and 1inch api protocol, % of stablecoin balance when placing order, coingecko API, contract search)
+ - Support findmyorder library to retrieve standard parsed order
  
  ### Other Features
  - Support bot in private channel and multiple channel per environment
  - Support multiple environment via variable (e.g. DEV, PRD, PRD CEX, UNI1 or UNI2)
- - Handle libraries exceptions in one function and notification delivery with apprise 
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub using semantic release numbering
  - Support all messaging bot as asynchrousnous process
  - Support common notification via Apprise for all nessaging platform
@@ -78,6 +76,7 @@ Config is using [dynaconf](https://www.dynaconf.com) module. refer to its docume
  - Support bot restart capability
  - Support multiple messaging platform (Telegram, Matrix and Discord)
  - Include healthcheck capability via FastAPI webserver on port 8080
+ - Support semantic auto version numbering
 
 ## WIKI
 
@@ -100,35 +99,10 @@ Config is using [dynaconf](https://www.dynaconf.com) module. refer to its docume
 
 [🚧 Roadmap](https://github.com/mraniki/tt/milestones)
 
-### V1.3
+### next version
 
-- Refactoring of more complex functions
+- Refactoring of more complex functions and full integration with dxsp and findmyorder lib
 
-### v1.4
-
-- Support Uniswap V3 
-- Support limit order for DEX (1inch) and review feasibility for dydx / GMX
-- Review testmode command to be part of the switch command
-
-
-### v1.5
-
-- Support limit order for DEX (Uniswap v3) 
-- Support futures and margin for CEX (to be tested via CCXT)
-- Support STOPLOSS TAKEPROFIT for CEX
-- Support multiple TAKEPROFIT target for CEX
-- View free margin for futures in /bal
-- View opened position via /pos (futures and limit order)
-
-### v2 backlog
-- Create / modify db via bot chat nested conversation
-- Review DEX private key strategy (walletconnect authentification via pywalletconnect)
-- Support Web3 ENS
-- View daily pnl in /bal
-- View weekly pnl with /w command and scheduling
-
-### v3 backlog
-- Merge with MQL4 version for MT4 TradFi support[![mql](https://badgen.net/badge/icon/mql/black?icon=libraries&label)](https://mql5.com/) 
 
 
  ## ⚠️ Disclaimer
