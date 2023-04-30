@@ -3,7 +3,6 @@ TalkyTrader 🪙🗿
 """
 __version__ = "1.0.16"
 
-import logging
 import os
 import sys
 import asyncio
@@ -26,14 +25,7 @@ import simplematrixbotlib as botlib
 
 from ping3 import ping
 
-from config import settings
-
-# #🧐LOGGING
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    level=settings.loglevel
-)
-logger = logging.getLogger(__name__)
+from config import settings, logger
 
 #🔁UTILS
 async def parse_message(msg):
