@@ -91,7 +91,6 @@ async def load_exchange():
     logger.info("Setting up exchange")
     global exchange_type
     global exchange_name
-    global test_mode
     global cex
     global dex
     global bot_trading_switch
@@ -99,7 +98,6 @@ async def load_exchange():
     bot_trading_switch = True
     if settings.cex_api:
         client = getattr(ccxt, settings.cex_name)
-        test_mode = False
         try:
             if settings.cex_defaultype!="SPOT":
                 cex = client({
@@ -110,12 +108,14 @@ async def load_exchange():
                                     },
                         })
             else:
-                cex = client({'apiKey': settings.cex_api,'secret': settings.cex_secret, })
+                cex = client({
+                        'apiKey': settings.cex_api,
+                        'secret': settings.cex_secret, 
+                        })
             price_type = settings.cex_ordertype
             if settings.cex_testmode == 'True':
                 logger.info("sandbox setup")
                 cex.set_sandbox_mode('enabled')
-                test_mode = True
                 exchange_name = settings.cex_name
             markets = cex.load_markets()
             logger.debug("CEXcreated: %s", cex)
@@ -132,7 +132,7 @@ async def load_exchange():
         if settings.dex_rpc is not None:
             # rpc = settings.dex_rpc
             exchange_name = settings.dex_name
-            test_mode = settings.dex_testmode
+            # test_mode = settings.dex_testmode
             # base_trading_symbol = settings.dex_base_trading_symbol
             # protocol_type = settings.dex_protocol
             # router = settings.dex_router
