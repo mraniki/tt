@@ -98,7 +98,7 @@ async def load_exchange():
     global price_type
     bot_trading_switch = True
     if settings.cex_api:
-        client = getattr(ccxt, settings.cexchange_name)
+        client = getattr(ccxt, settings.cex_name)
         test_mode = False
         try:
             if settings.cex_defaultype!="SPOT":
@@ -116,7 +116,7 @@ async def load_exchange():
                 logger.info("sandbox setup")
                 cex.set_sandbox_mode('enabled')
                 test_mode = True
-                exchange_name = settings.cexchange_name
+                exchange_name = settings.cex_name
             markets = cex.load_markets()
             logger.debug("CEXcreated: %s", cex)
             exchange_type = 'cex'
@@ -131,7 +131,7 @@ async def load_exchange():
 
         if settings.dex_rpc is not None:
             # rpc = settings.dex_rpc
-            exchange_name = settings.dexchange_name
+            exchange_name = settings.dex_name
             test_mode = settings.dex_testmode
             # base_trading_symbol = settings.dex_base_trading_symbol
             # protocol_type = settings.dex_protocol
@@ -147,7 +147,7 @@ async def load_exchange():
                 )
             logger.debug("DEX created %s", dex)
             exchange_type = 'dex'
-            exchange_name = dex.dex_exchange
+            exchange_name = dex.router
         except Exception as e:
             logger.warning("load_exchange: %s", e)
     else:
