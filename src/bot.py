@@ -47,14 +47,14 @@ async def parse_message(msg):
                 response = await account_position_command()
             elif command == settings.bot_command_restart:
                 response = await restart_command()
-        if fmo.search(msg):
+        if await fmo.search(msg):
             order = await fmo.get_order(msg)
             logger.info("order parsed: %s", order)
             response = await execute_order(
                             order['action'],
                             order["instrument"],
                             order["stop_loss"],
-                            order["takeprofit"],
+                            order["take_profit"],
                             order["quantity"]
                             )
         else:
@@ -91,12 +91,11 @@ async def notify(msg):
     except Exception as e:
         logger.warning("%s not sent: %s", msg, e)
 
-
 async def notify_error(e):
     """error notification."""
     logger.error("error: %s", e)
-    message = f"⚠️ {e}"
-    await notify(message)
+    msg = f"⚠️ {e}"
+    await notify(msg)
 
 #💱EXCHANGE
 async def load_exchange():
@@ -158,18 +157,18 @@ async def load_exchange():
         except Exception as e:
             logger.warning("load_exchange: %s", e)
     else:
-        logger.warning("no CEX/DEX config")
+        logger.error("no CEX/DEX config")
         return
 
 #📦ORDER
-async def execute_order(action,instrument,stoploss,takeprofit,quantity):
+async def execute_order(action,instrument,stop_loss,take_profit,quantity):
     """execute_order."""
     if bot_trading_switch is False:
         return
     try:
         order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}"
         if ex_type == 'dex':
-            order = await dex.execute_order(action=action,instrument=instrument,stoploss=stoploss,takeprofit=takeprofit,quantity=quantity)
+            order = await dex.execute_order(action=action,symbol=instrument,stop_loss=stop_loss,take_profit=take_profit,quantity=quantity)
             order_confirmation+= order['confirmation']
         else:
             if await get_account_balance()=="No Balance":
