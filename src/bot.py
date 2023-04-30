@@ -32,9 +32,11 @@ async def parse_message(msg):
     fmo = FindMyOrder()
     try:
         response = None
+
         if msg[0] == settings.bot_prefix:
             command = msg[1:]
             logger.info("command: %s", command)
+            logger.info("settings.bot_command_help %s command: %s",settings.bot_command_help, command)
             if command == settings.bot_command_help:
                 response = await help_command()
             elif command == settings.bot_command_trading:
@@ -45,7 +47,9 @@ async def parse_message(msg):
                 response = await account_position_command()
             elif command == settings.bot_command_restart:
                 response = await restart_command()
-            return
+            else:
+                logger.warning("invalid command: %s", command)
+                return
         order = await fmo.get_order(msg)
         if order:
             logger.info("order: %s", order)
