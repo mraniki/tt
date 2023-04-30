@@ -78,11 +78,10 @@ async def notify(msg):
     try:
         await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
     except Exception as e:
-        logger.warning("%s not sent: %s", msg, e)
+        logger.error("%s not sent: %s", msg, e)
 
 async def notify_error(e):
     """error notification."""
-    logger.error("error: %s", e)
     msg = f"⚠️ {e}"
     await notify(msg)
 
@@ -90,32 +89,37 @@ async def notify_error(e):
 async def load_exchange():
     """load_exchange."""
     logger.info("Setting up exchange")
-    global ex_type
-    global ex_name
-    global ex_test_mode
+    global exchange_type
+    global exchange_name
+    global test_mode
     global cex
     global dex
     global bot_trading_switch
     global price_type
     bot_trading_switch = True
     if settings.cex_api:
-        defaultType =  settings.cex_defaultype
-        client = getattr(ccxt, settings.cex_name)
-        ex_test_mode = False
+        client = getattr(ccxt, settings.cexchange_name)
+        test_mode = False
         try:
-            if defaultType!="SPOT":
-                cex = client({'apiKey': settings.cex_api,'secret': settings.cex_secret,'options': {'defaultType': settings.cex_defaultype,    }, })
+            if settings.cex_defaultype!="SPOT":
+                cex = client({
+                        'apiKey': settings.cex_api,
+                        'secret': settings.cex_secret,
+                        'options': {
+                                'defaultType': settings.cex_defaultype,
+                                    },
+                        })
             else:
                 cex = client({'apiKey': settings.cex_api,'secret': settings.cex_secret, })
             price_type = settings.cex_ordertype
             if settings.cex_testmode == 'True':
                 logger.info("sandbox setup")
                 cex.set_sandbox_mode('enabled')
-                ex_test_mode = True
-                ex_name = settings.cex_name
+                test_mode = True
+                exchange_name = settings.cexchange_name
             markets = cex.load_markets()
             logger.debug("CEXcreated: %s", cex)
-            ex_type = 'cex'
+            exchange_type = 'cex'
         except Exception as e:
             logger.warning("load_exchange: %s", e)
 
@@ -127,8 +131,8 @@ async def load_exchange():
 
         if settings.dex_rpc is not None:
             # rpc = settings.dex_rpc
-            ex_name = settings.dex_name
-            ex_test_mode = settings.dex_testmode
+            exchange_name = settings.dexchange_name
+            test_mode = settings.dex_testmode
             # base_trading_symbol = settings.dex_base_trading_symbol
             # protocol_type = settings.dex_protocol
             # router = settings.dex_router
@@ -142,7 +146,8 @@ async def load_exchange():
             block_explorer_api=block_explorer_api
                 )
             logger.debug("DEX created %s", dex)
-            ex_type = 'dex'
+            exchange_type = 'dex'
+            exchange_name = dex.dex_exchange
         except Exception as e:
             logger.warning("load_exchange: %s", e)
     else:
@@ -156,7 +161,7 @@ async def execute_order(action,instrument,stop_loss,take_profit,quantity):
         return
     try:
         order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}"
-        if ex_type == 'dex':
+        if exchange_type == 'dex':
             order = await dex.execute_order(action=action,instrument=instrument,stop_loss=stop_loss,take_profit=take_profit,quantity=quantity)
             order_confirmation+= order['confirmation']
         else:
@@ -179,7 +184,7 @@ async def get_account_balance():
     """return account balance."""
     balance = "🏦 Balance\n"
     try:
-        if ex_type == 'dex':
+        if exchange_type == 'dex':
             balance += dex.get_account_balance()
         else:
             raw_balance = cex.fetch_free_balance()
@@ -198,7 +203,7 @@ async def get_account_balance():
 async def get_base_trading_symbol_balance():
     """return main instrument balance."""
     try:
-        if ex_type == 'dex':
+        if exchange_type == 'dex':
             return dex.get_basecoin_balance()
         cex_base_trading_symbol ='USDT'
         return cex.fetchBalance()[f'{cex_base_trading_symbol}']['free']
@@ -210,7 +215,7 @@ async def get_account_position():
     """return account position."""
     try:
         position = "📊 Position\n"
-        if ex_type == 'dex':
+        if exchange_type == 'dex':
             open_positions = await dex.get_account_position()
         else:
             open_positions = cex.fetch_positions()
