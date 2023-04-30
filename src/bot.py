@@ -137,7 +137,10 @@ async def load_exchange():
                 private_key=private_key,
             block_explorer_api=block_explorer_api
                 )
-            logger.debug("DEX created %s", dex)
+            logger.info("DEX created %s on chain %s", 
+                        dex, 
+                        dex.chain_id
+                        )
             exchange_type = 'dex'
             exchange_name = dex.router
         except Exception as e:
@@ -170,11 +173,11 @@ async def execute_order(action,instrument,stop_loss,take_profit,quantity):
             totalusdtbal = await get_base_trading_symbol_balance() ##cex.fetchBalance()['USDT']['free']
             amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
             order = cex.create_order(
-                                    instrument, 
-                                    price_type, 
-                                    action, 
-                                    amountpercent
-                                    )
+                                instrument,
+                                price_type,
+                                action,
+                                amountpercent
+                                )
             order_confirmation+= f"\n➕ Size: {order['amount']}\n⚫️ Entry: {order['price']}\nℹ️ {order['id']}\n🗓️ {order['datetime']}"
         return order_confirmation
 
@@ -207,7 +210,7 @@ async def get_base_trading_symbol_balance():
     """return main instrument balance."""
     try:
         if exchange_type == 'dex':
-            return dex.get_basecoin_balance()
+            return await dex.get_basecoin_balance()
         cex_base_trading_symbol ='USDT'
         return cex.fetchBalance()[f'{cex_base_trading_symbol}']['free']
     except Exception as e:
