@@ -206,7 +206,7 @@ async def execute_order(action,instrument,stoploss,takeprofit,quantity):
 #🔒PRIVATE
 async def get_account_balance():
     """return account balance."""
-    balance = f"🏦 Balance\n"
+    balance = "🏦 Balance\n"
     try:
         if ex_type == 'dex':
             balance += dex.get_account_balance()
