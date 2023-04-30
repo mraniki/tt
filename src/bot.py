@@ -60,8 +60,6 @@ async def parse_message(msg):
                             order["take_profit"],
                             order["quantity"]
                             )
-        else:
-            return
 
         if response:
             await notify(response)
@@ -141,8 +139,8 @@ async def load_exchange():
                 private_key=private_key,
             block_explorer_api=block_explorer_api
                 )
-            logger.info("DEX created %s on chain %s", 
-                        dex, 
+            logger.info("DEX created %s on chain %s",
+                        dex,
                         dex.chain_id
                         )
             exchange_type = 'dex'
