@@ -45,9 +45,9 @@ async def parse_message(msg):
                 response = await account_position_command()
             elif command == settings.bot_command_restart:
                 response = await restart_command()
-        if await fmo.search(msg):
+        if await fmo.get_order(msg):
             order = await fmo.get_order(msg)
-            logger.info("order parsed: %s", order)
+            logger.info("order: %s", order)
             response = await execute_order(
                             order['action'],
                             order["instrument"],
