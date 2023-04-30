@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.0 (2023-04-30)
+### Feature
+* Overall refactoring ([`1bed137`](https://github.com/mraniki/tt/commit/1bed137a6e09e78a52bf19d083593c40b046dcc7))
+
 ## v1.0.16 (2023-04-30)
 ### Fix
 * Refactor error handling and logging in bot.py ([`dad75a8`](https://github.com/mraniki/tt/commit/dad75a83682c5acea476224cf446a91b406e0137))
