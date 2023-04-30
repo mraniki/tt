@@ -1,7 +1,7 @@
 """
 TalkyTrader 🪙🗿
 """
-__version__ = "1.1.0"
+__version__ = "1.0.16"
 
 import os
 import sys
@@ -18,24 +18,23 @@ from findmyorder import FindMyOrder
 
 import apprise
 from apprise import NotifyFormat
-from telegram.ext import Application, MessageHandler
 from telethon import TelegramClient, events
 import discord
 import simplematrixbotlib as botlib
 
-from ping3 import ping
-
 from config import settings, logger
+
 
 #🔁UTILS
 async def parse_message(msg):
     """main parser"""
     logger.info("message received %s",msg)
+    fmo = FindMyOrder()
     try:
         response = None
-        logger.info("order_data %s",order)
         if pp.one_of(settings.bot_prefix):
             command = msg[1:]
+            logger.info("command: %s", command)
             if command == settings.bot_command_help:
                 response = await help_command()
             elif command == settings.bot_command_trading:
@@ -46,13 +45,14 @@ async def parse_message(msg):
                 response = await account_position_command()
             elif command == settings.bot_command_restart:
                 response = await restart_command()
-        order = await is_order(msg)
-        if order:
+        if await fmo.search(msg):
+            order = await fmo.get_order(msg)
+            logger.info("order parsed: %s", order)
             response = await execute_order(
                             order['action'],
                             order["instrument"],
                             order["stop_loss"],
-                            order["takeprofit"],
+                            order["take_profit"],
                             order["quantity"]
                             )
         else:
@@ -63,26 +63,6 @@ async def parse_message(msg):
 
     except Exception as e:
         logger.error("Parsing %s", e)
-
-async def is_order(message):
-    """is_order."""
-    try:
-        fmo = await FindMyOrder()
-        logger.debug("fmo: %s", fmo)
-        results = await fmo.get_order(message)
-        logger.debug("results: %s", results)
-        return results
-    except Exception as e:
-        logger.warning("orderparsing %s value: ", e)
-
-async def verify_latency_ex():
-    """TBD."""
-    try:
-        if ex_type == 'dex':
-            return dex.latency
-        round(ping("1.1.1.1", unit='ms'), 3)
-    except Exception as e:
-        logger.warning("Latency error %s", e)
 
 async def notify(msg):
     """💬MESSAGING"""
@@ -100,12 +80,11 @@ async def notify(msg):
     except Exception as e:
         logger.warning("%s not sent: %s", msg, e)
 
-
 async def notify_error(e):
     """error notification."""
     logger.error("error: %s", e)
-    message = f"⚠️ {e}"
-    await notify(message)
+    msg = f"⚠️ {e}"
+    await notify(msg)
 
 #💱EXCHANGE
 async def load_exchange():
@@ -167,18 +146,18 @@ async def load_exchange():
         except Exception as e:
             logger.warning("load_exchange: %s", e)
     else:
-        logger.warning("no CEX/DEX config")
+        logger.error("no CEX/DEX config")
         return
 
 #📦ORDER
-async def execute_order(action,instrument,stoploss,takeprofit,quantity):
+async def execute_order(action,instrument,stop_loss,take_profit,quantity):
     """execute_order."""
     if bot_trading_switch is False:
         return
     try:
         order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}"
         if ex_type == 'dex':
-            order = await dex.execute_order(action=action,instrument=instrument,stoploss=stoploss,takeprofit=takeprofit,quantity=quantity)
+            order = await dex.execute_order(action=action,instrument=instrument,stop_loss=stop_loss,take_profit=take_profit,quantity=quantity)
             order_confirmation+= order['confirmation']
         else:
             if await get_account_balance()=="No Balance":
@@ -195,18 +174,10 @@ async def execute_order(action,instrument,stoploss,takeprofit,quantity):
         logger.warning("execute_order: %s", e)
         return
 
-# async def get_quote(instrument):
-#     if ex_type == 'dex':
-#         asset_out_quote = await dex.get_quote(instrument)
-#         return f"🦄{asset_out_quote} USD\n🖊️{chainId}: {instrument}"
-#     else:
-#         asset_out_quote = cex.fetch_ticker(instrument.upper())['last']
-#         return f"🏛️ {price} USD"
-
 #🔒PRIVATE
 async def get_account_balance():
     """return account balance."""
-    balance = "🏦 Balance\n"
+    balance = f"🏦 Balance\n"
     try:
         if ex_type == 'dex':
             balance += dex.get_account_balance()
@@ -256,7 +227,6 @@ async def get_account_margin():
         logger.warning("get_account_margin: %s", e)
 
 
-
 #🦾BOT ACTIONS
 async def post_init():
     """TBD"""
@@ -264,7 +234,6 @@ async def post_init():
     await notify(f"Bot is online {__version__}")
 
 async def help_command():
-    bot_ping = await verify_latency_ex()
     helpcommand = """
     🏦<code>/bal</code>
     📦<code>buy btc/usdt sl=1000 tp=20 q=1%</code>
@@ -341,16 +310,8 @@ async def bot():
                 async def telethon(event):
                     await parse_message(event.message.message)
                 await bot.run_until_disconnected()
-            elif settings.bot_token:
-                bot = Application.builder().token(settings.bot_token).build()
-                await post_init()
-                bot.add_handler(MessageHandler(parse_message))
-                async with bot:
-                    await bot.initialize()
-                    await bot.start()
-                    await bot.updater.start_polling(drop_pending_updates=True)
             else:
-                logger.error("Check settings")
+                logger.warning("Check settings")
                 await asyncio.sleep(7200)
 
     except Exception as e:

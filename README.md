@@ -39,8 +39,8 @@ If you like it, feel free to
     - Matrix via [Matrix.org](https://turt2live.github.io/matrix-bot-sdk/index.html)
 2) Get your 
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
-    - DEX keys and RPC supported by [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org), [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) or [cointool](https://cointool.app/) for chain/RPC details
-3) Update the config (bot token, bot channel and exchange details). Point or copy your config [settings.toml](config/example.toml) to the volume /app/)
+    - DEX wallet address and private key and optional details for [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org), [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) or [cointool](https://cointool.app/) for chain/RPC details
+3) Update the config (bot token and bot channel). Point or copy your config [settings.toml](config/example.toml) to the volume /app/)
 4) Deploy via:
     - docker `docker push mraniki/tt:latest` or `docker pull ghcr.io/mraniki/tt:latest`
     - locally `git clone https://github.com/mraniki/tt:main` && `pip install -r requirements.txt` 
@@ -60,18 +60,18 @@ Config is using [dynaconf](https://www.dynaconf.com) module. refer to its docume
  
 ## Features Available
  
- - Enable bot in Telegram (ptb v20 and telethon), Matrix (simplematrixbotlib) and Discord (pycord) messaging platform
- - Place order for CEX and DEX, Query Balance and quote ticker
+ - Enable bot in Telegram (telethon), Matrix (simplematrixbotlib) and Discord (pycord) messaging platform
+ - Place order for CEX and DEX and query balance
  - Push your order signal manually or from system like [trading view webhook alert](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Alerts.html#using-all-alert-calls). Verified with Binance, Binance Testnet, ~~FTX😠~~, Kraken, Huobi, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing values are defaulted
  - Support DXSP library (automatic token approval, uniswap v2 and 1inch api protocol, % of stablecoin balance when placing order, coingecko API, contract search)
- - Support findmyorder library to retrieve standard parsed order
+ - Support findmyorder library to retrieve standard parsed order format
  
  ### Other Features
  - Support bot in private channel and multiple channel per environment
  - Support multiple environment via variable (e.g. DEV, PRD, PRD CEX, UNI1 or UNI2)
  - Enable dev and main branches with auto release and docker deployment pipeline setup for continueous deployment in dockerhub using semantic release numbering
  - Support all messaging bot as asynchrousnous process
- - Support common notification via Apprise for all nessaging platform
+ - Support common notification via Apprise for all messaging platform
  - Support deployment on PaaS or selfhosting 
  - Support standard config via dynaconf (tested with northflank, koyeb, GKE, render and fly.io)
  - Support bot restart capability
@@ -88,7 +88,6 @@ Config is using [dynaconf](https://www.dynaconf.com) module. refer to its docume
 [![discord](https://badgen.net/badge/icon/discord/purple?icon=discord&label)](https://discord.gg/vegJQGrRRa)
 [![telegram](https://badgen.net/badge/icon/telegram?icon=telegram&label)](https://t.me/TTTalkyTraderChat/1)
 
-
 ## 📷 Screenshots
 
 <img width="340" alt="Screenshot 2023-02-28 at 20 39 47" src="https://user-images.githubusercontent.com/8766259/222161597-114d488b-ad9c-4468-8dd4-083f435cbb7b.png">
@@ -99,12 +98,6 @@ Config is using [dynaconf](https://www.dynaconf.com) module. refer to its docume
 ## 🚧 Roadmap
 
 [🚧 Roadmap](https://github.com/mraniki/tt/milestones)
-
-### next version
-
-- Refactoring of more complex functions and full integration with dxsp and findmyorder lib
-
-
 
  ## ⚠️ Disclaimer
  This is an education tool and should not be considered professional financial investment system nor financial advice. Use a testnet account or **USE AT YOUR OWN RISK**. For DEX, Never share your private keys.
