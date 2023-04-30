@@ -14,7 +14,7 @@ from pyparsing import one_of
 
 import ccxt
 from dxsp import DexSwap
-from findmyorder import FindMyOrder
+from findmyorder import FindMyOrder as fmo
 
 import apprise
 from apprise import NotifyFormat
@@ -24,19 +24,16 @@ import simplematrixbotlib as botlib
 
 from config import settings, logger
 
-
 #🔁UTILS
 async def parse_message(msg):
     """main parser"""
     logger.info("message received %s",msg)
-    fmo = FindMyOrder()
+
     try:
         response = None
 
         if msg[0] == settings.bot_prefix:
             command = msg[1:]
-            logger.info("command: %s", command)
-            logger.info("settings.bot_command_help %s command: %s",settings.bot_command_help, command)
             if command == settings.bot_command_help:
                 response = await help_command()
             elif command == settings.bot_command_trading:
