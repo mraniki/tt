@@ -18,13 +18,11 @@ from findmyorder import FindMyOrder
 
 import apprise
 from apprise import NotifyFormat
-from telegram.ext import Application, MessageHandler
 from telethon import TelegramClient, events
 import discord
 import simplematrixbotlib as botlib
 
 from config import settings, logger
-
 
 
 #🔁UTILS
@@ -65,15 +63,6 @@ async def parse_message(msg):
 
     except Exception as e:
         logger.error("Parsing %s", e)
-
-# async def verify_latency_ex():
-#     """TBD."""
-#     try:
-#         if ex_type == 'dex':
-#             return dex.latency
-#         round(ping("1.1.1.1", unit='ms'), 3)
-#     except Exception as e:
-#         logger.warning("Latency error %s", e)
 
 async def notify(msg):
     """💬MESSAGING"""
@@ -168,7 +157,7 @@ async def execute_order(action,instrument,stop_loss,take_profit,quantity):
     try:
         order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}"
         if ex_type == 'dex':
-            order = await dex.execute_order(action=action,symbol=instrument,stop_loss=stop_loss,take_profit=take_profit,quantity=quantity)
+            order = await dex.execute_order(action=action,instrument=instrument,stop_loss=stop_loss,take_profit=take_profit,quantity=quantity)
             order_confirmation+= order['confirmation']
         else:
             if await get_account_balance()=="No Balance":
@@ -184,14 +173,6 @@ async def execute_order(action,instrument,stop_loss,take_profit,quantity):
     except Exception as e:
         logger.warning("execute_order: %s", e)
         return
-
-# async def get_quote(instrument):
-#     if ex_type == 'dex':
-#         asset_out_quote = await dex.get_quote(instrument)
-#         return f"🦄{asset_out_quote} USD\n🖊️{chainId}: {instrument}"
-#     else:
-#         asset_out_quote = cex.fetch_ticker(instrument.upper())['last']
-#         return f"🏛️ {price} USD"
 
 #🔒PRIVATE
 async def get_account_balance():
@@ -244,7 +225,6 @@ async def get_account_margin():
         return
     except Exception as e:
         logger.warning("get_account_margin: %s", e)
-
 
 
 #🦾BOT ACTIONS
@@ -330,16 +310,8 @@ async def bot():
                 async def telethon(event):
                     await parse_message(event.message.message)
                 await bot.run_until_disconnected()
-            elif settings.bot_token:
-                bot = Application.builder().token(settings.bot_token).build()
-                await post_init()
-                bot.add_handler(MessageHandler(parse_message))
-                async with bot:
-                    await bot.initialize()
-                    await bot.start()
-                    await bot.updater.start_polling(drop_pending_updates=True)
             else:
-                logger.error("Check settings")
+                logger.warning("Check settings")
                 await asyncio.sleep(7200)
 
     except Exception as e:
