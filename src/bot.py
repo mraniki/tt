@@ -81,7 +81,7 @@ async def verify_latency_ex():
         else:
             round(ping("1.1.1.1", unit='ms'), 3)
     except Exception as e:
-        logger.warning("Latency error", e)
+        logger.warning("Latency error %s", e)
 
 #💬MESSAGING
 async def notify(msg):
@@ -105,6 +105,8 @@ async def load_exchange():
     global ex_type
     global ex_name
     global ex_test_mode
+    global cex
+    global dex
 
     if (settings.cex_api):
         defaultType =  settings.cex_defaultype
