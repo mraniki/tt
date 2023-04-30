@@ -1,22 +1,17 @@
-##========== TalkyTrader 🪙🗿 ========
-
+"""
+TalkyTrader 🪙🗿
+"""
 __version__ = "1.0.16"
-
-##=============== import  =============
 
 import logging
 import os
-import sys 
-import json
-import requests 
+import sys
 import asyncio
 import uvicorn
 from fastapi import FastAPI
 
 import pyparsing as pp
 from pyparsing import one_of
-
-from config import settings
 
 import ccxt
 from dxsp import DexSwap
@@ -31,16 +26,18 @@ import simplematrixbotlib as botlib
 
 from ping3 import ping
 
+from config import settings
 
 # #🧐LOGGING
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", 
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=settings.loglevel
 )
 logger = logging.getLogger(__name__)
 
 #🔁UTILS
 async def parse_message(msg):
+    """main parser"""
     logger.info("message received %s",msg)
     try:
         response = None
@@ -76,6 +73,7 @@ async def parse_message(msg):
         logger.error("Parsing %s", e)
 
 async def is_order(message):
+    """is_order."""
     try:
         fmo = await FindMyOrder()
         logger.warning("fmo: %s", fmo)
@@ -86,11 +84,11 @@ async def is_order(message):
         logger.warning("orderparsing %s value: %s", e, results)
 
 async def verify_latency_ex():
+    """TBD."""
     try:
         if ex_type == 'dex':
             return dex.latency
-        else:
-            round(ping("1.1.1.1", unit='ms'), 3)
+        round(ping("1.1.1.1", unit='ms'), 3)
     except Exception as e:
         logger.warning("Latency error %s", e)
 
@@ -110,8 +108,16 @@ async def notify(msg):
     except Exception as e:
         logger.warning("%s not sent: %s", msg, e)
 
+
+async def notify_error(e):
+    """error notification."""
+    logger.error("error: %s", e)
+    message = f"⚠️ {e}"
+    await notify(message)
+
 #💱EXCHANGE
 async def load_exchange():
+    """load_exchange."""
     logger.info("Setting up exchange")
     global ex_type
     global ex_name
@@ -121,7 +127,7 @@ async def load_exchange():
     global bot_trading_switch
     global price_type
     bot_trading_switch = True
-    if (settings.cex_api):
+    if settings.cex_api:
         defaultType =  settings.cex_defaultype
         client = getattr(ccxt, settings.cex_name)
         ex_test_mode = False
@@ -142,7 +148,7 @@ async def load_exchange():
         except Exception as e:
             logger.warning("load_exchange: %s", e)
 
-    elif (settings.dex_chain_id):
+    elif settings.dex_chain_id:
         chain_id = settings.dex_chain_id
         wallet_address = settings.dex_wallet_address
         private_key = settings.dex_private_key
@@ -174,16 +180,17 @@ async def load_exchange():
 
 #📦ORDER
 async def execute_order(action,instrument,stoploss,takeprofit,quantity):
-    if bot_trading_switch == False:
+    """execute_order."""
+    if bot_trading_switch is False:
         return
     try:
         order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}"
         if ex_type == 'dex':
-            order = execute_order.dex(action=action,instrument=instrument,stoploss=stoploss,takeprofit=takeprofit,quantity=quantity)
+            order = await dex.execute_order(action=action,instrument=instrument,stoploss=stoploss,takeprofit=takeprofit,quantity=quantity)
             order_confirmation+= order['confirmation']
         else:
             if await get_account_balance()=="No Balance":
-                await handle_exception("Check your Balance")
+                await notify_error("Check your Balance")
                 return
             asset_out_quote = float(cex.fetchTicker(f'{instrument}').get('last'))
             totalusdtbal = await get_base_trading_symbol_balance() ##cex.fetchBalance()['USDT']['free']
@@ -206,34 +213,38 @@ async def execute_order(action,instrument,stoploss,takeprofit,quantity):
 
 #🔒PRIVATE
 async def get_account_balance():
-    balance =f"🏦 Balance\n"
+    """return account balance."""
+    balance = f"🏦 Balance\n"
     try:
         if ex_type == 'dex':
-            balance += get_account_balance.dex()
+            balance += dex.get_account_balance()
         else:
             raw_balance = cex.fetch_free_balance()
-            filtered_balance = {k: v for k, v in 
-                                raw_balance.items() 
+            filtered_balance = {k: v for k, v in
+                                raw_balance.items()
                                 if v is not None and v>0}
-            balance += "".join(f"{iterator}: {value} \n" for 
-                                iterator, value in 
+            balance += "".join(f"{iterator}: {value} \n" for
+                                iterator, value in
                                 filtered_balance.items())
             if not balance:
                 balance += "No Balance"
         return balance
-    except Exception:
+    except Exception as e:
         logger.warning("get_account_balance: %s", e)
 
 async def get_base_trading_symbol_balance():
+    """return main instrument balance."""
     try:
         if ex_type == 'dex':
             return dex.get_basecoin_balance()
-        else:
-            return cex.fetchBalance()[f'{cex_base_trading_symbol}']['free']
-    except Exception:
-        await handle_exception("Check  balance")
+        cex_base_trading_symbol ='USDT'
+        return cex.fetchBalance()[f'{cex_base_trading_symbol}']['free']
+    except Exception as e:
+        logger.warning("get_base_trading_symbol_balance: %s", e)
+        await notify_error("Check  balance")
 
 async def get_account_position():
+    """return account position."""
     try:
         position = f"📊 Position\n"
         if ex_type == 'dex':
@@ -243,23 +254,20 @@ async def get_account_position():
             open_positions = [p for p in open_positions if p['type'] == 'open']
         position += open_positions
         return position
-    except Exception:
+    except Exception as e:
         logger.warning("get_account_position: %s", e)
 
 async def get_account_margin():
     try:
         return
     except Exception as e:
-        logger.warning("get_account_position: %s", e)
+        logger.warning("get_account_margin: %s", e)
 
-#======= error handling
-async def handle_exception(e):
-    logger.error("error: %s", e)
-    message = f"⚠️ {e}"
-    await notify(message)
+
 
 #🦾BOT ACTIONS
 async def post_init():
+    """TBD"""
     logger.info("Bot is online %s", __version__)
     await notify(f"Bot is online {__version__}")
 
@@ -277,22 +285,27 @@ async def help_command():
     return f"{bot_menu_help}"
 
 async def account_balance_command():
+    """TBD"""
     logger.info("account_bal_command")
     return await get_account_balance()
 
 async def account_position_command():
+    """TBD"""
     return await get_account_position()
 
 async def trading_switch_command():
+    """TBD"""
     global bot_trading_switch
     bot_trading_switch = not bot_trading_switch
     return f"Trading is {bot_trading_switch}"
 
 async def restart_command():
+    """TBD"""
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
 #🤖BOT
 async def bot():
+    """TBD"""
     global bot
     try:
         await load_exchange()
@@ -356,6 +369,7 @@ app = FastAPI(title="TALKYTRADER",)
 
 @app.on_event("startup")
 def startup_event():
+    """TBD"""
     loop = asyncio.get_event_loop()
     try:
         loop.create_task(bot())
@@ -366,19 +380,23 @@ def startup_event():
 
 @app.on_event('shutdown')
 async def shutdown_event():
+    """TBD"""
     global uvicorn
     logger.info("Webserver shutting down")
     uvicorn.keep_running = False
 
 @app.get("/")
 def root():
+    """TBD"""
     return {f"Bot is online {__version__}"}
 
 @app.get("/health")
 def health_check():
+    """TBD"""
     logger.info("Healthcheck")
     return {f"Bot is online {__version__}"}
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
+    """TBD"""
     uvicorn.run(app, host=settings.host, port=settings.port)
