@@ -45,8 +45,7 @@ async def parse_message(msg):
                 response = await account_position_command()
             elif command == settings.bot_command_restart:
                 response = await restart_command()
-            else: 
-                return
+            return
         order = await fmo.get_order(msg)
         if order:
             logger.info("order: %s", order)
@@ -155,7 +154,13 @@ async def execute_order(action,instrument,stop_loss,take_profit,quantity):
     try:
         order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}"
         if exchange_type == 'dex':
-            order = await dex.execute_order(action=action,instrument=instrument,stop_loss=stop_loss,take_profit=take_profit,quantity=quantity)
+            order = await dex.execute_order(
+                                action=action,
+                                instrument=instrument,
+                                stop_loss=stop_loss,
+                                take_profit=take_profit,
+                                quantity=quantity
+                                )
             order_confirmation+= order['confirmation']
         else:
             if await get_account_balance()=="No Balance":
@@ -164,7 +169,12 @@ async def execute_order(action,instrument,stop_loss,take_profit,quantity):
             asset_out_quote = float(cex.fetchTicker(f'{instrument}').get('last'))
             totalusdtbal = await get_base_trading_symbol_balance() ##cex.fetchBalance()['USDT']['free']
             amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
-            order = cex.create_order(instrument, price_type, action, amountpercent)
+            order = cex.create_order(
+                                    instrument, 
+                                    price_type, 
+                                    action, 
+                                    amountpercent
+                                    )
             order_confirmation+= f"\n➕ Size: {order['amount']}\n⚫️ Entry: {order['price']}\nℹ️ {order['id']}\n🗓️ {order['datetime']}"
         return order_confirmation
 
