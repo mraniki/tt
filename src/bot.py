@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 
 #🔁UTILS
 async def parse_message(self,msg):
-    logger.debug("message received %s",msg)
+    logger.info("message received %s",msg)
     try:
         response = None
 
