@@ -207,7 +207,7 @@ async def get_account_balance():
                 balance += "No Balance"
         return balance
     except Exception:
-        return
+        await handle_exception("balance")
 
 async def get_base_trading_symbol_balance():
     try:
@@ -263,7 +263,7 @@ async def help_command():
     return f"{bot_menu_help}"
 
 async def account_balance_command():
-    logger.debug("account_bal_command")
+    logger.info("account_bal_command")
     return await get_account_balance()
 
 async def account_position_command():
