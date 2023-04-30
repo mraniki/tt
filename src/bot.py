@@ -108,7 +108,8 @@ async def load_exchange():
     global ex_test_mode
     global cex
     global dex
-
+    global bot_trading_switch
+    bot_trading_switch = True
     if (settings.cex_api):
         defaultType =  settings.cex_defaultype
         client = getattr(ccxt, settings.cex_name)
