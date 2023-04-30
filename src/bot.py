@@ -32,7 +32,7 @@ async def parse_message(msg):
     fmo = FindMyOrder()
     try:
         response = None
-        if pp.one_of(settings.bot_prefix):
+        if msg[0] == settings.bot_prefix:
             command = msg[1:]
             logger.info("command: %s", command)
             if command == settings.bot_command_help:
@@ -45,6 +45,7 @@ async def parse_message(msg):
                 response = await account_position_command()
             elif command == settings.bot_command_restart:
                 response = await restart_command()
+            return
         order = await fmo.get_order(msg)
         if order:
             logger.info("order: %s", order)
@@ -78,44 +79,48 @@ async def notify(msg):
     try:
         await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
     except Exception as e:
-        logger.warning("%s not sent: %s", msg, e)
+        logger.error("%s not sent: %s", msg, e)
 
-async def notify_error(e):
-    """error notification."""
-    logger.error("error: %s", e)
-    msg = f"⚠️ {e}"
+async def notify_error(error_msg):
+    """error notification to user"""
+    msg = f"⚠️ {error_msg}"
     await notify(msg)
 
 #💱EXCHANGE
 async def load_exchange():
     """load_exchange."""
     logger.info("Setting up exchange")
-    global ex_type
-    global ex_name
-    global ex_test_mode
+    global exchange_type
+    global exchange_name
     global cex
     global dex
     global bot_trading_switch
     global price_type
     bot_trading_switch = True
     if settings.cex_api:
-        defaultType =  settings.cex_defaultype
         client = getattr(ccxt, settings.cex_name)
-        ex_test_mode = False
         try:
-            if defaultType!="SPOT":
-                cex = client({'apiKey': settings.cex_api,'secret': settings.cex_secret,'options': {'defaultType': settings.cex_defaultype,    }, })
+            if settings.cex_defaultype!="SPOT":
+                cex = client({
+                        'apiKey': settings.cex_api,
+                        'secret': settings.cex_secret,
+                        'options': {
+                                'defaultType': settings.cex_defaultype,
+                                    },
+                        })
             else:
-                cex = client({'apiKey': settings.cex_api,'secret': settings.cex_secret, })
+                cex = client({
+                        'apiKey': settings.cex_api,
+                        'secret': settings.cex_secret, 
+                        })
             price_type = settings.cex_ordertype
             if settings.cex_testmode == 'True':
                 logger.info("sandbox setup")
                 cex.set_sandbox_mode('enabled')
-                ex_test_mode = True
-                ex_name = settings.cex_name
+                exchange_name = settings.cex_name
             markets = cex.load_markets()
             logger.debug("CEXcreated: %s", cex)
-            ex_type = 'cex'
+            exchange_type = 'cex'
         except Exception as e:
             logger.warning("load_exchange: %s", e)
 
@@ -125,15 +130,6 @@ async def load_exchange():
         private_key = settings.dex_private_key
         block_explorer_api = settings.dex_block_explorer_api
 
-        if settings.dex_rpc is not None:
-            # rpc = settings.dex_rpc
-            ex_name = settings.dex_name
-            ex_test_mode = settings.dex_testmode
-            # base_trading_symbol = settings.dex_base_trading_symbol
-            # protocol_type = settings.dex_protocol
-            # router = settings.dex_router
-            # amount_trading_option = settings.dex_amount_trading_option
-
         try:
             dex = DexSwap(
                 chain_id=chain_id,
@@ -142,7 +138,8 @@ async def load_exchange():
             block_explorer_api=block_explorer_api
                 )
             logger.debug("DEX created %s", dex)
-            ex_type = 'dex'
+            exchange_type = 'dex'
+            exchange_name = dex.router
         except Exception as e:
             logger.warning("load_exchange: %s", e)
     else:
@@ -156,8 +153,14 @@ async def execute_order(action,instrument,stop_loss,take_profit,quantity):
         return
     try:
         order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}"
-        if ex_type == 'dex':
-            order = await dex.execute_order(action=action,instrument=instrument,stop_loss=stop_loss,take_profit=take_profit,quantity=quantity)
+        if exchange_type == 'dex':
+            order = await dex.execute_order(
+                                action=action,
+                                instrument=instrument,
+                                stop_loss=stop_loss,
+                                take_profit=take_profit,
+                                quantity=quantity
+                                )
             order_confirmation+= order['confirmation']
         else:
             if await get_account_balance()=="No Balance":
@@ -166,7 +169,12 @@ async def execute_order(action,instrument,stop_loss,take_profit,quantity):
             asset_out_quote = float(cex.fetchTicker(f'{instrument}').get('last'))
             totalusdtbal = await get_base_trading_symbol_balance() ##cex.fetchBalance()['USDT']['free']
             amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
-            order = cex.create_order(instrument, price_type, action, amountpercent)
+            order = cex.create_order(
+                                    instrument, 
+                                    price_type, 
+                                    action, 
+                                    amountpercent
+                                    )
             order_confirmation+= f"\n➕ Size: {order['amount']}\n⚫️ Entry: {order['price']}\nℹ️ {order['id']}\n🗓️ {order['datetime']}"
         return order_confirmation
 
@@ -177,10 +185,10 @@ async def execute_order(action,instrument,stop_loss,take_profit,quantity):
 #🔒PRIVATE
 async def get_account_balance():
     """return account balance."""
-    balance = f"🏦 Balance\n"
+    balance = "🏦 Balance\n"
     try:
-        if ex_type == 'dex':
-            balance += dex.get_account_balance()
+        if exchange_type == 'dex':
+            balance += await dex.get_account_balance()
         else:
             raw_balance = cex.fetch_free_balance()
             filtered_balance = {k: v for k, v in
@@ -198,7 +206,7 @@ async def get_account_balance():
 async def get_base_trading_symbol_balance():
     """return main instrument balance."""
     try:
-        if ex_type == 'dex':
+        if exchange_type == 'dex':
             return dex.get_basecoin_balance()
         cex_base_trading_symbol ='USDT'
         return cex.fetchBalance()[f'{cex_base_trading_symbol}']['free']
@@ -209,8 +217,8 @@ async def get_base_trading_symbol_balance():
 async def get_account_position():
     """return account position."""
     try:
-        position = f"📊 Position\n"
-        if ex_type == 'dex':
+        position = "📊 Position\n"
+        if exchange_type == 'dex':
             open_positions = await dex.get_account_position()
         else:
             open_positions = cex.fetch_positions()
@@ -265,14 +273,13 @@ async def restart_command():
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
 #🤖BOT
-async def bot():
-    """TBD"""
-    global bot
+async def listener():
+    """Launch Bot Listener"""
     try:
         await load_exchange()
         while True:
-    #StartTheBot
             if settings.discord_webhook_id:
+                # DISCORD
                 intents = discord.Intents.default()
                 intents.message_content = True
                 bot = discord.Bot(intents=intents)
@@ -282,13 +289,20 @@ async def bot():
                 @bot.event
                 async def on_message(message: discord.Message):
                     await parse_message(message.content)
-                await bot.start(settings.bot_token)
+                await bot.start(
+                                settings.bot_token
+                                )
             elif settings.matrix_hostname:
+                # MATRIX
                 config = botlib.Config()
                 config.emoji_verify = True
                 config.ignore_unverified_devices = True
                 config.store_path ='./config/matrix/'
-                creds = botlib.Creds(settings.matrix_hostname, settings.matrix_user, settings.matrix_pass)
+                creds = botlib.Creds(
+                            settings.matrix_hostname,
+                            settings.matrix_user,
+                            settings.matrix_pass
+                            )
                 bot = botlib.Bot(creds,config)
                 @bot.listener.on_startup
                 async def room_joined(room):
@@ -297,35 +311,46 @@ async def bot():
                 async def on_matrix_message(room, message):
                     await parse_message(message.body)
                 await bot.api.login()
-                bot.api.async_client.callbacks = botlib.Callbacks(bot.api.async_client, bot)
+                bot.api.async_client.callbacks = botlib.Callbacks(
+                                                    bot.api.async_client, 
+                                                    bot
+                                                    )
                 await bot.api.async_client.callbacks.setup_callbacks()
                 for action in bot.listener._startup_registry:
                     for room_id in bot.api.async_client.rooms:
                         await action(room_id)
                 await bot.api.async_client.sync_forever(timeout=3000, full_state=True)
             elif settings.telethon_api_id:
-                bot = await TelegramClient(None, settings.telethon_api_id, settings.telethon_api_hash).start(bot_token=settings.bot_token)
+                # TELEGRAM
+                bot = await TelegramClient(
+                            None,
+                            settings.telethon_api_id,
+                            settings.telethon_api_hash
+                            ).start(
+                                bot_token=settings.bot_token
+                                )
                 await post_init()
                 @bot.on(events.NewMessage())
                 async def telethon(event):
                     await parse_message(event.message.message)
                 await bot.run_until_disconnected()
             else:
-                logger.warning("Check settings")
+                logger.error("Check settings")
                 await asyncio.sleep(7200)
 
     except Exception as e:
         logger.error("Bot not started: %s", e)
+
 
 #⛓️API
 app = FastAPI(title="TALKYTRADER",)
 
 @app.on_event("startup")
 def startup_event():
-    """TBD"""
+    """fastapi startup"""
     loop = asyncio.get_event_loop()
     try:
-        loop.create_task(bot())
+        loop.create_task(listener())
         logger.info("Webserver started")
     except Exception as e:
         loop.stop()
@@ -333,23 +358,23 @@ def startup_event():
 
 @app.on_event('shutdown')
 async def shutdown_event():
-    """TBD"""
+    """fastapi shutdown"""
     global uvicorn
     logger.info("Webserver shutting down")
     uvicorn.keep_running = False
 
 @app.get("/")
 def root():
-    """TBD"""
+    """Fastapi root"""
     return {f"Bot is online {__version__}"}
 
 @app.get("/health")
 def health_check():
-    """TBD"""
+    """fastapi health"""
     logger.info("Healthcheck")
     return {f"Bot is online {__version__}"}
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
-    """TBD"""
+    """Launch Talky"""
     uvicorn.run(app, host=settings.host, port=settings.port)

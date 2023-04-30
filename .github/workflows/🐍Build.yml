@@ -25,9 +25,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_MARKDOWN: false
           VALIDATE_PYTHON_BLACK: false
-          VALIDATE_PYTHON_MYPY: false
           VALIDATE_PYTHON_FLAKE8: false
-          VALIDATE_PYTHON_ISORT: false
           #DISABLE_ERRORS: true
 
   # scanning:

@@ -1,3 +1,6 @@
 .env
 settings.toml
 db.json
+*.pyc
+*.pyc
+src/__pycache__/config.cpython-310.pyc

@@ -1,7 +1,9 @@
 [default]
 loglevel = "INFO"
+
 host = "0.0.0.0"
 port = 8080
+
 bot_prefix = "/"
 bot_command_help = "help"
 bot_command_bal = "bal"
@@ -9,3 +11,40 @@ bot_command_pos = "pos"
 bot_command_trading = "trading"
 bot_command_restart = "restart"
 bot_command_quote = "q"
+
+bot_trading_switch = "True"
+
+bot_token = ""
+bot_channel_id = ""
+
+telethon_api_id = ""
+telethon_api_hash = ""
+
+matrix_hostname = ""
+matrix_user = ""
+matrix_pass = ""
+
+discord_webhook_id = ""
+discord_webhook_token = ""
+
+dex_name = ""
+dex_chain_id = 1
+dex_wallet_address = ""
+dex_private_key = ""
+
+dex_testmode = ""
+dex_rpc = ""
+dex_router = "" 
+dex_base_trading_symbol = ""
+dex_block_explorer_api = ""
+dex_protocol = ""
+dex_amount_trading_option = "1"
+
+cex_name = ""
+cex_api = ""
+cex_secret = ""
+cex_password = ""
+cex_testmode = ""
+cex_defaulttype = ""
+cex_ordertype = ""
+cex_base_trading_symbol = ""
