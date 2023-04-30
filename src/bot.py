@@ -256,7 +256,7 @@ async def help_command():
         helpcommand= helpcommand.replace("<code>", "`")
         helpcommand= helpcommand.replace("</code>", "`")
     bot_menu_help = f"{__version__}\n{helpcommand}"
-    return f"Environment: {defaultenv} Ping: {bot_ping}ms\nExchange: {ex_name} Sandbox: {ex_test_mode}\n{bot_menu_help}"
+    return f"{bot_menu_help}"
 
 async def account_balance_command():
     logger.debug("account_bal_command")
@@ -354,7 +354,7 @@ async def shutdown_event():
 
 @app.get("/")
 def root():
-    return {__name__ __version__}
+    return {f"Bot is online {__version__}"}
 
 @app.get("/health")
 def health_check():
