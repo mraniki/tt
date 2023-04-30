@@ -5,6 +5,7 @@ __version__ = "1.0.16"
 ##=============== import  =============
 
 import logging
+import os
 import sys 
 import json
 import requests 
@@ -17,9 +18,9 @@ from pyparsing import one_of
 
 from config import settings
 
-from findmyorder import FindMyOrder
 import ccxt
 from dxsp import DexSwap
+from findmyorder import FindMyOrder
 
 import apprise
 from apprise import NotifyFormat
@@ -32,29 +33,39 @@ from ping3 import ping
 
 
 # #🧐LOGGING
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=settings.loglevel)
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", 
+    level=settings.loglevel
+)
 logger = logging.getLogger(__name__)
 
 #🔁UTILS
 async def parse_message(self,msg):
-    logger.info("message received %s",msg)
+    logger.info("message received %s self: %s",msg, self)
     try:
         response = None
-
+        order = await is_order(msg)
+        logger.info("order_data %s",order)
         if pp.one_of(settings.bot_prefix):
             command = msg[1:]
-            if command == settings.bot_command_bal:
-                response = await account_balance_command()
-            elif command == settings.bot_command_help:
+            if command == settings.bot_command_help:
                 response = await help_command()
+            elif command == settings.bot_command_trading:
+                response = await trading_switch_command()
+            elif command == settings.bot_command_bal:
+                response = await account_balance_command()
             elif command == settings.bot_command_pos:
                 response = await account_position_command()
             elif command == settings.bot_command_restart:
                 response = await restart_command()
-            elif command == settings.bot_command_trading: 
-                response = await trading_switch_command()
-        elif (await is_order(msg)):
-            response = await execute_order(order_data)
+        elif order:
+            response = await execute_order(
+                            order['action'],
+                            order["instrument"],
+                            order["stop_loss"],
+                            order["takeprofit"],
+                            order["quantity"]
+                            )
         else:
             return
 
@@ -62,10 +73,9 @@ async def parse_message(self,msg):
             await notify(response)
 
     except Exception as e:
-        logger.warning("Parsing %s", e)
+        logger.error("Parsing %s", e)
 
 async def is_order(message):
-    
     try:
         fmo = await FindMyOrder()
         logger.warning("fmo: %s", fmo)
@@ -84,14 +94,14 @@ async def verify_latency_ex():
     except Exception as e:
         logger.warning("Latency error %s", e)
 
-#💬MESSAGING
 async def notify(msg):
+    """💬MESSAGING"""
     if not msg:
         return
     apobj = apprise.Apprise()
-    if (settings.discord_webhook_id):
+    if settings.discord_webhook_id:
         apobj.add(f'discord://{str(settings.discord_webhook_id)}/{str(settings.discord_webhook_token)}')
-    elif (settings.matrix_hostname):
+    elif settings.matrix_hostname:
         apobj.add(f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@{settings.matrix_hostname[8:]}:443/{str(settings.bot_channel_id)}")
     else:
         apobj.add(f'tgram://{str(settings.bot_token)}/{str(settings.bot_channel_id)}')
@@ -109,18 +119,19 @@ async def load_exchange():
     global cex
     global dex
     global bot_trading_switch
+    global price_type
     bot_trading_switch = True
     if (settings.cex_api):
         defaultType =  settings.cex_defaultype
         client = getattr(ccxt, settings.cex_name)
         ex_test_mode = False
         try:
-            if (defaultType!="SPOT"):
+            if defaultType!="SPOT":
                 cex = client({'apiKey': settings.cex_api,'secret': settings.cex_secret,'options': {'defaultType': settings.cex_defaultype,    }, })
             else:
                 cex = client({'apiKey': settings.cex_api,'secret': settings.cex_secret, })
             price_type = settings.cex_ordertype
-            if (settings.cex_testmode=='True'):
+            if settings.cex_testmode == 'True':
                 logger.info("sandbox setup")
                 cex.set_sandbox_mode('enabled')
                 ex_test_mode = True
@@ -129,7 +140,7 @@ async def load_exchange():
             logger.debug("CEXcreated: %s", cex)
             ex_type = 'cex'
         except Exception as e:
-            await handle_exception(e)
+            logger.warning("load_exchange: %s", e)
 
     elif (settings.dex_chain_id):
         chain_id = settings.dex_chain_id
@@ -138,13 +149,13 @@ async def load_exchange():
         block_explorer_api = settings.dex_block_explorer_api
 
         if settings.dex_rpc is not None:
-            rpc = settings.dex_rpc
+            # rpc = settings.dex_rpc
             ex_name = settings.dex_name
             ex_test_mode = settings.dex_testmode
-            base_trading_symbol = settings.dex_base_trading_symbol
-            protocol_type = settings.dex_protocol
-            router = settings.dex_router
-            amount_trading_option = settings.dex_amount_trading_option
+            # base_trading_symbol = settings.dex_base_trading_symbol
+            # protocol_type = settings.dex_protocol
+            # router = settings.dex_router
+            # amount_trading_option = settings.dex_amount_trading_option
 
         try:
             dex = DexSwap(
@@ -156,7 +167,7 @@ async def load_exchange():
             logger.debug("DEX created %s", dex)
             ex_type = 'dex'
         except Exception as e:
-            await handle_exception(e)
+            logger.warning("load_exchange: %s", e)
     else:
         logger.warning("no CEX/DEX config")
         return
@@ -171,7 +182,7 @@ async def execute_order(action,instrument,stoploss,takeprofit,quantity):
             order = execute_order.dex(action=action,instrument=instrument,stoploss=stoploss,takeprofit=takeprofit,quantity=quantity)
             order_confirmation+= order['confirmation']
         else:
-            if (await get_account_balance()=="No Balance"): 
+            if await get_account_balance()=="No Balance":
                 await handle_exception("Check your Balance")
                 return
             asset_out_quote = float(cex.fetchTicker(f'{instrument}').get('last'))
@@ -182,7 +193,7 @@ async def execute_order(action,instrument,stoploss,takeprofit,quantity):
         return order_confirmation
 
     except Exception as e:
-        await handle_exception(f"Exception with order processing {e}")
+        logger.warning("execute_order: %s", e)
         return
 
 # async def get_quote(instrument):
@@ -201,13 +212,17 @@ async def get_account_balance():
             balance += get_account_balance.dex()
         else:
             raw_balance = cex.fetch_free_balance()
-            filtered_balance = {k: v for k, v in bal.items() if v is not None and v>0}
-            balance += "".join(f"{iterator}: {value} \n" for iterator, value in filtered_balance.items())
+            filtered_balance = {k: v for k, v in 
+                                raw_balance.items() 
+                                if v is not None and v>0}
+            balance += "".join(f"{iterator}: {value} \n" for 
+                                iterator, value in 
+                                filtered_balance.items())
             if not balance:
                 balance += "No Balance"
         return balance
     except Exception:
-        await handle_exception("balance")
+        logger.warning("get_account_balance: %s", e)
 
 async def get_base_trading_symbol_balance():
     try:
@@ -225,18 +240,17 @@ async def get_account_position():
             open_positions = await dex.get_account_position()
         else:
             open_positions = cex.fetch_positions()
-            open_positions = [p for p in positions if p['type'] == 'open']
+            open_positions = [p for p in open_positions if p['type'] == 'open']
         position += open_positions
         return position
     except Exception:
-        await handle_exception("Error retrieving position")
+        logger.warning("get_account_position: %s", e)
 
 async def get_account_margin():
     try:
         return
     except Exception as e:
-        await handle_exception(e)
-        return
+        logger.warning("get_account_position: %s", e)
 
 #======= error handling
 async def handle_exception(e):
@@ -368,4 +382,3 @@ def health_check():
 #🙊TALKYTRADER
 if __name__ == '__main__':
     uvicorn.run(app, host=settings.host, port=settings.port)
-
