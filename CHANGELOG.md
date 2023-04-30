@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.3 (2023-04-30)
+### Fix
+* Req ([`d590245`](https://github.com/mraniki/tt/commit/d590245d9f033e058281127c3e81965b279e317f))
+* Req ([`358c8f8`](https://github.com/mraniki/tt/commit/358c8f895ff2a3421032bb5490d2618ae7ad0fa1))
+
 ## v1.1.2 (2023-04-30)
 ### Fix
 * Remove invalid characters from requirements.txt ([`bb410e8`](https://github.com/mraniki/tt/commit/bb410e8255585eab0d044a2c5b81a4b743006535))
