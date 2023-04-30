@@ -41,7 +41,6 @@ async def parse_message(msg):
     logger.info("message received %s",msg)
     try:
         response = None
-        order = await is_order(msg)
         logger.info("order_data %s",order)
         if pp.one_of(settings.bot_prefix):
             command = msg[1:]
@@ -55,7 +54,8 @@ async def parse_message(msg):
                 response = await account_position_command()
             elif command == settings.bot_command_restart:
                 response = await restart_command()
-        elif order:
+        order = await is_order(msg)
+        if order:
             response = await execute_order(
                             order['action'],
                             order["instrument"],
@@ -76,12 +76,12 @@ async def is_order(message):
     """is_order."""
     try:
         fmo = await FindMyOrder()
-        logger.warning("fmo: %s", fmo)
+        logger.debug("fmo: %s", fmo)
         results = await fmo.get_order(message)
         logger.debug("results: %s", results)
         return results
     except Exception as e:
-        logger.warning("orderparsing %s value: %s", e, results)
+        logger.warning("orderparsing %s value: ", e)
 
 async def verify_latency_ex():
     """TBD."""
