@@ -23,18 +23,20 @@ from telethon import TelegramClient, events
 import discord
 import simplematrixbotlib as botlib
 
-from ping3 import ping
-
 from config import settings, logger
+
+
 
 #🔁UTILS
 async def parse_message(msg):
     """main parser"""
     logger.info("message received %s",msg)
+    fmo = FindMyOrder()
     try:
         response = None
         if pp.one_of(settings.bot_prefix):
             command = msg[1:]
+            logger.info("command: %s", command)
             if command == settings.bot_command_help:
                 response = await help_command()
             elif command == settings.bot_command_trading:
@@ -45,8 +47,9 @@ async def parse_message(msg):
                 response = await account_position_command()
             elif command == settings.bot_command_restart:
                 response = await restart_command()
-        order = await is_order(msg)
-        if order:
+        if fmo.search(msg):
+            order = await fmo.get_order(msg)
+            logger.info("order parsed: %s", order)
             response = await execute_order(
                             order['action'],
                             order["instrument"],
@@ -63,25 +66,14 @@ async def parse_message(msg):
     except Exception as e:
         logger.error("Parsing %s", e)
 
-async def is_order(message):
-    """is_order."""
-    try:
-        fmo = await FindMyOrder()
-        logger.info("fmo: %s", fmo)
-        results = await fmo.get_order(message)
-        logger.info("results: %s", results)
-        return results
-    except Exception as e:
-        logger.warning("orderparsing %s value: ", e)
-
-async def verify_latency_ex():
-    """TBD."""
-    try:
-        if ex_type == 'dex':
-            return dex.latency
-        round(ping("1.1.1.1", unit='ms'), 3)
-    except Exception as e:
-        logger.warning("Latency error %s", e)
+# async def verify_latency_ex():
+#     """TBD."""
+#     try:
+#         if ex_type == 'dex':
+#             return dex.latency
+#         round(ping("1.1.1.1", unit='ms'), 3)
+#     except Exception as e:
+#         logger.warning("Latency error %s", e)
 
 async def notify(msg):
     """💬MESSAGING"""
@@ -263,7 +255,6 @@ async def post_init():
     await notify(f"Bot is online {__version__}")
 
 async def help_command():
-    bot_ping = await verify_latency_ex()
     helpcommand = """
     🏦<code>/bal</code>
     📦<code>buy btc/usdt sl=1000 tp=20 q=1%</code>
