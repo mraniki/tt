@@ -40,8 +40,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 #🔁UTILS
-async def parse_message(self,msg):
-    logger.info("message received %s self: %s",msg, self)
+async def parse_message(msg):
+    logger.info("message received %s",msg)
     try:
         response = None
         order = await is_order(msg)
@@ -307,7 +307,7 @@ async def bot():
                     await post_init()
                 @bot.event
                 async def on_message(message: discord.Message):
-                    await parse_message(message,message.content)
+                    await parse_message(message.content)
                 await bot.start(settings.bot_token)
             elif settings.matrix_hostname:
                 config = botlib.Config()
@@ -321,7 +321,7 @@ async def bot():
                     await post_init()
                 @bot.listener.on_message_event
                 async def on_matrix_message(room, message):
-                    await parse_message(bot,message.body)
+                    await parse_message(message.body)
                 await bot.api.login()
                 bot.api.async_client.callbacks = botlib.Callbacks(bot.api.async_client, bot)
                 await bot.api.async_client.callbacks.setup_callbacks()
@@ -334,18 +334,18 @@ async def bot():
                 await post_init()
                 @bot.on(events.NewMessage())
                 async def telethon(event):
-                    await parse_message(None, event.message.message)
+                    await parse_message(event.message.message)
                 await bot.run_until_disconnected()
             elif settings.bot_token:
                 bot = Application.builder().token(settings.bot_token).build()
                 await post_init()
-                bot.add_handler(MessageHandler(None, parse_message))
+                bot.add_handler(MessageHandler(parse_message))
                 async with bot:
                     await bot.initialize()
                     await bot.start()
                     await bot.updater.start_polling(drop_pending_updates=True)
             else:
-                logger.error("Check bot settings")
+                logger.error("Check settings")
                 await asyncio.sleep(7200)
 
     except Exception as e:
