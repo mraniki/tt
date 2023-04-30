@@ -2,6 +2,27 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.1 (2023-04-30)
+### Fix
+* Req ([`196786e`](https://github.com/mraniki/tt/commit/196786ea41594a0d5ef78ad3daf1a949c10a82a2))
+* Version mismatch ([`b0a1f95`](https://github.com/mraniki/tt/commit/b0a1f953a99ea23678dcaeefff8071751bd674e2))
+* Fmo object creation ([`4bb64f5`](https://github.com/mraniki/tt/commit/4bb64f5daa9175002abd8eaeea5adeae8eb43e53))
+* Broken menu ([`28d8ea5`](https://github.com/mraniki/tt/commit/28d8ea5133de625902bee3d02fb493ebe90edf30))
+* Menu troubleshoot ([`2ec77e3`](https://github.com/mraniki/tt/commit/2ec77e3470b2b27fdde250576337cd0d449cef04))
+* Typo ([`337f7b8`](https://github.com/mraniki/tt/commit/337f7b8cb1b79fd78464dc77957d906f8387890a))
+* Lint ([`4c82675`](https://github.com/mraniki/tt/commit/4c82675eb643722a49981c643e2316759e34e919))
+* Bot prefix filtering ([`407308c`](https://github.com/mraniki/tt/commit/407308c51e770344553622364fc52ca0de9fdf2d))
+* Req update ([`20ddd56`](https://github.com/mraniki/tt/commit/20ddd56c051c0d7432f93759efaaf2c2948ed7bf))
+* Settings ([`6c60eb8`](https://github.com/mraniki/tt/commit/6c60eb8c8869ee70c775f4820fa40cb11dc13702))
+* Remove test mode global var ([`6d1da1f`](https://github.com/mraniki/tt/commit/6d1da1f9c2493c8669157a1239ced84686db695c))
+* Name typo ([`5cb72f6`](https://github.com/mraniki/tt/commit/5cb72f67131a15e6ee10227ad6bfd6187164e5e2))
+* Variable name ([`1575330`](https://github.com/mraniki/tt/commit/1575330cf5c84ad601534d1ed737c7964404608b))
+* Refactor order logging in parse_message function. ([`222f8fb`](https://github.com/mraniki/tt/commit/222f8fbdd11c5611a14297cf8b8b1f3500d64919))
+* Refactor order logging in parse_message function. ([`41ce4f3`](https://github.com/mraniki/tt/commit/41ce4f356c5d774b63c3b1b7cbe9ba67bd14adf8))
+* Update DEX wallet address and private key in config ([`128cf9a`](https://github.com/mraniki/tt/commit/128cf9a6c6840098094406586d7895230d72ad8b))
+* Typo and fmo handling ([`8125070`](https://github.com/mraniki/tt/commit/812507016103814b1228d6ac2df70a839f0f2505))
+* Order var ([`781c500`](https://github.com/mraniki/tt/commit/781c5002922df7c75f28f27afbd91bbdcfbeb8e9))
+
 ## v1.1.0 (2023-04-30)
 ### Feature
 * Overall refactoring ([`1bed137`](https://github.com/mraniki/tt/commit/1bed137a6e09e78a52bf19d083593c40b046dcc7))
