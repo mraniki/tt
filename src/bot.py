@@ -129,15 +129,6 @@ async def load_exchange():
         private_key = settings.dex_private_key
         block_explorer_api = settings.dex_block_explorer_api
 
-        if settings.dex_rpc is not None:
-            # rpc = settings.dex_rpc
-            exchange_name = settings.dex_name
-            # test_mode = settings.dex_testmode
-            # base_trading_symbol = settings.dex_base_trading_symbol
-            # protocol_type = settings.dex_protocol
-            # router = settings.dex_router
-            # amount_trading_option = settings.dex_amount_trading_option
-
         try:
             dex = DexSwap(
                 chain_id=chain_id,
@@ -270,14 +261,13 @@ async def restart_command():
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
 #🤖BOT
-async def bot():
-    """TBD"""
-    global bot
+async def listener():
+    """Launch Bot Listener"""
     try:
         await load_exchange()
         while True:
-    #StartTheBot
             if settings.discord_webhook_id:
+                # DISCORD
                 intents = discord.Intents.default()
                 intents.message_content = True
                 bot = discord.Bot(intents=intents)
@@ -287,13 +277,20 @@ async def bot():
                 @bot.event
                 async def on_message(message: discord.Message):
                     await parse_message(message.content)
-                await bot.start(settings.bot_token)
+                await bot.start(
+                                settings.bot_token
+                                )
             elif settings.matrix_hostname:
+                # MATRIX
                 config = botlib.Config()
                 config.emoji_verify = True
                 config.ignore_unverified_devices = True
                 config.store_path ='./config/matrix/'
-                creds = botlib.Creds(settings.matrix_hostname, settings.matrix_user, settings.matrix_pass)
+                creds = botlib.Creds(
+                            settings.matrix_hostname,
+                            settings.matrix_user,
+                            settings.matrix_pass
+                            )
                 bot = botlib.Bot(creds,config)
                 @bot.listener.on_startup
                 async def room_joined(room):
@@ -302,35 +299,46 @@ async def bot():
                 async def on_matrix_message(room, message):
                     await parse_message(message.body)
                 await bot.api.login()
-                bot.api.async_client.callbacks = botlib.Callbacks(bot.api.async_client, bot)
+                bot.api.async_client.callbacks = botlib.Callbacks(
+                                                    bot.api.async_client, 
+                                                    bot
+                                                    )
                 await bot.api.async_client.callbacks.setup_callbacks()
                 for action in bot.listener._startup_registry:
                     for room_id in bot.api.async_client.rooms:
                         await action(room_id)
                 await bot.api.async_client.sync_forever(timeout=3000, full_state=True)
             elif settings.telethon_api_id:
-                bot = await TelegramClient(None, settings.telethon_api_id, settings.telethon_api_hash).start(bot_token=settings.bot_token)
+                # TELEGRAM
+                bot = await TelegramClient(
+                            None,
+                            settings.telethon_api_id,
+                            settings.telethon_api_hash
+                            ).start(
+                                bot_token=settings.bot_token
+                                )
                 await post_init()
                 @bot.on(events.NewMessage())
                 async def telethon(event):
                     await parse_message(event.message.message)
                 await bot.run_until_disconnected()
             else:
-                logger.warning("Check settings")
+                logger.error("Check settings")
                 await asyncio.sleep(7200)
 
     except Exception as e:
         logger.error("Bot not started: %s", e)
+
 
 #⛓️API
 app = FastAPI(title="TALKYTRADER",)
 
 @app.on_event("startup")
 def startup_event():
-    """TBD"""
+    """fastapi startup"""
     loop = asyncio.get_event_loop()
     try:
-        loop.create_task(bot())
+        loop.create_task(listener())
         logger.info("Webserver started")
     except Exception as e:
         loop.stop()
@@ -338,23 +346,23 @@ def startup_event():
 
 @app.on_event('shutdown')
 async def shutdown_event():
-    """TBD"""
+    """fastapi shutdown"""
     global uvicorn
     logger.info("Webserver shutting down")
     uvicorn.keep_running = False
 
 @app.get("/")
 def root():
-    """TBD"""
+    """Fastapi root"""
     return {f"Bot is online {__version__}"}
 
 @app.get("/health")
 def health_check():
-    """TBD"""
+    """fastapi health"""
     logger.info("Healthcheck")
     return {f"Bot is online {__version__}"}
 
 #🙊TALKYTRADER
 if __name__ == '__main__':
-    """TBD"""
+    """Launch Talky"""
     uvicorn.run(app, host=settings.host, port=settings.port)

@@ -1,3 +1,5 @@
 .env
 settings.toml
 db.json
+*.pyc
+*.pyc
