@@ -1,7 +1,7 @@
 """
 TalkyTrader 🪙🗿
 """
-__version__ = "1.1.0"
+__version__ = "1.0.16"
 
 import os
 import sys
@@ -33,7 +33,6 @@ async def parse_message(msg):
     logger.info("message received %s",msg)
     try:
         response = None
-        logger.info("order_data %s",order)
         if pp.one_of(settings.bot_prefix):
             command = msg[1:]
             if command == settings.bot_command_help:
@@ -68,9 +67,9 @@ async def is_order(message):
     """is_order."""
     try:
         fmo = await FindMyOrder()
-        logger.debug("fmo: %s", fmo)
+        logger.info("fmo: %s", fmo)
         results = await fmo.get_order(message)
-        logger.debug("results: %s", results)
+        logger.info("results: %s", results)
         return results
     except Exception as e:
         logger.warning("orderparsing %s value: ", e)
@@ -206,7 +205,7 @@ async def execute_order(action,instrument,stoploss,takeprofit,quantity):
 #🔒PRIVATE
 async def get_account_balance():
     """return account balance."""
-    balance = "🏦 Balance\n"
+    balance = f"🏦 Balance\n"
     try:
         if ex_type == 'dex':
             balance += dex.get_account_balance()
