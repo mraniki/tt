@@ -61,13 +61,14 @@ async def parse_message(self,msg):
         if response:
             await notify(response)
 
-    except Exception:
-        logger.warning("Parsing exception")
+    except Exception as e:
+        logger.warning("Parsing %",e)
 
 async def is_order(message):
     
     try:
         fmo = await FindMyOrder()
+        logger.warning("fmo: %s", fmo)
         results = await fmo.get_order(message)
         logger.debug("results: %s", results)
         return results
