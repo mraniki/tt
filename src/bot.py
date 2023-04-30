@@ -32,7 +32,7 @@ async def parse_message(msg):
     fmo = FindMyOrder()
     try:
         response = None
-        if pp.one_of(settings.bot_prefix):
+        if msg[:1] == settings.bot_prefix:
             command = msg[1:]
             logger.info("command: %s", command)
             if command == settings.bot_command_help:
@@ -177,7 +177,7 @@ async def execute_order(action,instrument,stop_loss,take_profit,quantity):
 #🔒PRIVATE
 async def get_account_balance():
     """return account balance."""
-    balance = f"🏦 Balance\n"
+    balance = "🏦 Balance\n"
     try:
         if ex_type == 'dex':
             balance += dex.get_account_balance()
@@ -209,7 +209,7 @@ async def get_base_trading_symbol_balance():
 async def get_account_position():
     """return account position."""
     try:
-        position = f"📊 Position\n"
+        position = "📊 Position\n"
         if ex_type == 'dex':
             open_positions = await dex.get_account_position()
         else:
