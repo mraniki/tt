@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.16 (2023-04-30)
+### Fix
+* Refactor error handling and logging in bot.py ([`dad75a8`](https://github.com/mraniki/tt/commit/dad75a83682c5acea476224cf446a91b406e0137))
+* Remove unnecessary logging configuration in bot.py ([`f821c85`](https://github.com/mraniki/tt/commit/f821c858716ecd6cc5c3942104fb155deb880456))
+* Logger format ([`01e40f0`](https://github.com/mraniki/tt/commit/01e40f018a7f58e8e1ed0268c5134c513280c71c))
+
 ## v1.0.15 (2023-04-29)
 ### Fix
 * Refactor bot.py parse_message and add is_order function ([`065b57c`](https://github.com/mraniki/tt/commit/065b57c53a156cac347989c03a7eca5e75a17e2b))
