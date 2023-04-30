@@ -80,9 +80,9 @@ async def notify(msg):
     except Exception as e:
         logger.error("%s not sent: %s", msg, e)
 
-async def notify_error(e):
-    """error notification."""
-    msg = f"⚠️ {e}"
+async def notify_error(error_msg):
+    """error notification to user"""
+    msg = f"⚠️ {error_msg}"
     await notify(msg)
 
 #💱EXCHANGE
