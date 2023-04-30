@@ -51,7 +51,7 @@ async def parse_message(self,msg):
                 response = await account_position_command()
             elif command == settings.bot_command_restart:
                 response = await restart_command()
-            elif command == trading_bot_command: 
+            elif command == settings.bot_command_trading: 
                 response = await trading_switch_command()
         elif (await is_order(msg)):
             response = await execute_order(order_data)
@@ -62,7 +62,7 @@ async def parse_message(self,msg):
             await notify(response)
 
     except Exception as e:
-        logger.warning("Parsing %",e)
+        logger.warning("Parsing %s", e)
 
 async def is_order(message):
     
