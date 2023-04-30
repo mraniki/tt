@@ -32,7 +32,7 @@ async def parse_message(msg):
     fmo = FindMyOrder()
     try:
         response = None
-        if msg[:1] == settings.bot_prefix:
+        if msg[0] == settings.bot_prefix:
             command = msg[1:]
             logger.info("command: %s", command)
             if command == settings.bot_command_help:
@@ -45,6 +45,8 @@ async def parse_message(msg):
                 response = await account_position_command()
             elif command == settings.bot_command_restart:
                 response = await restart_command()
+            else: 
+                return
         order = await fmo.get_order(msg)
         if order:
             logger.info("order: %s", order)
@@ -176,7 +178,7 @@ async def get_account_balance():
     balance = "🏦 Balance\n"
     try:
         if exchange_type == 'dex':
-            balance += dex.get_account_balance()
+            balance += await dex.get_account_balance()
         else:
             raw_balance = cex.fetch_free_balance()
             filtered_balance = {k: v for k, v in
