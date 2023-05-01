@@ -6,5 +6,5 @@ telethon>=1.28.5
 py-cord>=2.4.1
 simplematrixbotlib
 ccxt>=3.0.75
-dxsp>=1.5.1
-findmyorder>=1.0.47
+dxsp>=1.5.4
+findmyorder>=1.0.51
