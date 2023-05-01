@@ -32,7 +32,9 @@ async def parse_message(msg):
     try:
         response = None
         fmo = FindMyOrder()
-        if msg[0] == settings.bot_prefix:
+
+        # Check if message starts with bot prefix
+        if msg.startswith(settings.bot_prefix):
             command = msg[1:]
             if command == settings.bot_command_help:
                 response = await help_command()
@@ -47,6 +49,7 @@ async def parse_message(msg):
             else:
                 logger.warning("invalid command: %s", command)
                 return
+        # Check if message contains an order
         order = await fmo.get_order(msg)
         if order:
             logger.info("order: %s", order)
@@ -62,7 +65,7 @@ async def parse_message(msg):
             await notify(response)
 
     except Exception as e:
-        logger.error("Parsing %s", e)
+        logger.error("Error while parsing message: %s", e)
 
 async def notify(msg):
     """💬MESSAGING"""
@@ -149,7 +152,12 @@ async def load_exchange():
         return
 
 #📦ORDER
-async def execute_order(action,instrument,stop_loss,take_profit,quantity):
+async def execute_order(action,
+                    instrument,
+                    stop_loss=1000,
+                    take_profit=1000,
+                    quantity=1
+                ):
     """execute_order."""
     if bot_trading_switch is False:
         return
