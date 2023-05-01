@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.4 (2023-05-01)
+### Fix
+* Fmo setup and testing of FMO action in TT settings ([`9eeb7a4`](https://github.com/mraniki/tt/commit/9eeb7a428e4852ea737d9bb7816aa7252b4db466))
+
 ## v1.1.3 (2023-04-30)
 ### Fix
 * Req ([`d590245`](https://github.com/mraniki/tt/commit/d590245d9f033e058281127c3e81965b279e317f))
