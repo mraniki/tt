@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.6 (2023-05-01)
+### Fix
+* New req update ([`da7b7a4`](https://github.com/mraniki/tt/commit/da7b7a4d50e6428a05591e90cb9ed015a7e96d82))
+* New req update ([`3f27e03`](https://github.com/mraniki/tt/commit/3f27e033b1cdf25566d856ae06507df20d5883db))
+
 ## v1.1.5 (2023-05-01)
 ### Fix
 * Dockerfile settings copy ([`d3f18ae`](https://github.com/mraniki/tt/commit/d3f18aea782b6bbbcfddba45ab52fb4bfc05397d))
