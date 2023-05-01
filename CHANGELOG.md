@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.5 (2023-05-01)
+### Fix
+* Dockerfile settings copy ([`d3f18ae`](https://github.com/mraniki/tt/commit/d3f18aea782b6bbbcfddba45ab52fb4bfc05397d))
+
 ## v1.1.4 (2023-05-01)
 ### Fix
 * Fmo setup and testing of FMO action in TT settings ([`9eeb7a4`](https://github.com/mraniki/tt/commit/9eeb7a428e4852ea737d9bb7816aa7252b4db466))
