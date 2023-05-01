@@ -14,7 +14,7 @@ from pyparsing import one_of
 
 import ccxt
 from dxsp import DexSwap
-from findmyorder import FindMyOrder as fmo
+from findmyorder import FindMyOrder
 
 import apprise
 from apprise import NotifyFormat
@@ -31,7 +31,7 @@ async def parse_message(msg):
 
     try:
         response = None
-
+        fmo = FindMyOrder()
         if msg[0] == settings.bot_prefix:
             command = msg[1:]
             if command == settings.bot_command_help:
@@ -81,7 +81,7 @@ async def notify(msg):
         logger.error("%s not sent: %s", msg, e)
 
 async def notify_error(error_msg):
-    """error notification to user"""
+    """⚠️ notification to user"""
     msg = f"⚠️ {error_msg}"
     await notify(msg)
 
@@ -134,7 +134,7 @@ async def load_exchange():
                 chain_id=chain_id,
                 wallet_address=wallet_address,
                 private_key=private_key,
-            block_explorer_api=block_explorer_api
+                block_explorer_api=block_explorer_api
                 )
             logger.info("DEX created %s on chain %s",
                         dex,
@@ -154,7 +154,7 @@ async def execute_order(action,instrument,stop_loss,take_profit,quantity):
     if bot_trading_switch is False:
         return
     try:
-        order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}"
+        order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}\n"
         if exchange_type == 'dex':
             order = await dex.execute_order(
                                 action=action,
@@ -177,7 +177,10 @@ async def execute_order(action,instrument,stop_loss,take_profit,quantity):
                                 action,
                                 amountpercent
                                 )
-            order_confirmation+= f"\n➕ Size: {order['amount']}\n⚫️ Entry: {order['price']}\nℹ️ {order['id']}\n🗓️ {order['datetime']}"
+            order_confirmation+= f"➕ Size: {order['amount']}\n\
+                                    ⚫️ Entry: {order['price']}\n\
+                                    ℹ️ {order['id']}\n\
+                                    🗓️ {order['datetime']}"
         return order_confirmation
 
     except Exception as e:
