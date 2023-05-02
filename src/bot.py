@@ -68,7 +68,7 @@ async def parse_message(msg):
         logger.error("Error while parsing message: %s", e)
 
 async def notify(msg):
-    """💬MESSAGING"""
+    """💬 MESSAGING to user"""
     if not msg:
         return
     apobj = apprise.Apprise()
@@ -92,11 +92,8 @@ async def notify_error(error_msg):
 async def load_exchange():
     """load_exchange."""
     logger.info("Setting up exchange")
-    #global exchange_type
-    global exchange_name
     global exchange
     global bot_trading_switch
-    global price_type
     bot_trading_switch = True
     if settings.cex_api:
         client = getattr(ccxt, settings.cex_name)
@@ -114,11 +111,9 @@ async def load_exchange():
                         'apiKey': settings.cex_api,
                         'secret': settings.cex_secret, 
                         })
-            price_type = settings.cex_ordertype
             if settings.cex_testmode == 'True':
                 logger.info("sandbox setup")
                 exchange.set_sandbox_mode('enabled')
-                exchange_name = settings.cex_name
             markets = exchange.load_markets()
             logger.debug("CEXcreated: %s", cex)
             #exchange_type = 'cex'
@@ -142,8 +137,6 @@ async def load_exchange():
                         dex,
                         dex.chain_id
                         )
-            #exchange_type = 'dex'
-            exchange_name = dex.router
         except Exception as e:
             logger.warning("load_exchange: %s", e)
     else:
@@ -163,13 +156,12 @@ async def execute_order(action,
     try:
         order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}\n"
         if "DexSwap" in str(type(exchange)):
-        #if exchange_type == 'dex':
             order = await exchange.execute_order(
                                 action=action,
                                 instrument=instrument,
-                                stop_loss=stop_loss,
-                                take_profit=take_profit,
-                                quantity=quantity
+                                stop_loss=int(stop_loss),
+                                take_profit=int(take_profit),
+                                quantity=int(quantity)
                                 )
             order_confirmation+= order['confirmation']
         else:
@@ -177,11 +169,11 @@ async def execute_order(action,
                 await notify_error("Check your Balance")
                 return
             asset_out_quote = float(exchange.fetchTicker(f'{instrument}').get('last'))
-            totalusdtbal = await get_base_trading_symbol_balance() ##exchange.fetchBalance()['USDT']['free']
+            totalusdtbal = await get_trading_counter_ccy_balance() ##exchange.fetchBalance()['USDT']['free']
             amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
             order = exchange.create_order(
                                 instrument,
-                                price_type,
+                                settings.cex_ordertype,
                                 action,
                                 amountpercent
                                 )
@@ -218,14 +210,13 @@ async def get_account_balance():
     except Exception as e:
         logger.warning("get_account_balance: %s", e)
 
-async def get_base_trading_symbol_balance():
+async def get_trading_counter_ccy_balance():
     """return main instrument balance."""
     try:
         if "DexSwap" in str(type(exchange)):
         #if exchange_type == 'dex':
             return await exchange.get_basecoin_balance()
-        cex_base_trading_symbol ='USDT'
-        return exchange.fetchBalance()[f'{cex_base_trading_symbol}']['free']
+        return exchange.fetchBalance()[f'{settings.trading_counter_currency}']['free']
     except Exception as e:
         logger.warning("get_base_trading_symbol_balance: %s", e)
         await notify_error("Check  balance")
