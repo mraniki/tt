@@ -194,7 +194,6 @@ async def get_account_balance():
     balance = "🏦 Balance\n"
     try:
         if "DexSwap" in str(type(exchange)):
-        #if exchange_type == 'dex':
             balance += await exchange.get_account_balance()
         else:
             raw_balance = exchange.fetch_free_balance()
@@ -214,8 +213,7 @@ async def get_trading_counter_ccy_balance():
     """return main instrument balance."""
     try:
         if "DexSwap" in str(type(exchange)):
-        #if exchange_type == 'dex':
-            return await exchange.get_basecoin_balance()
+            return await exchange.get_trading_counter_ccy_balance()
         return exchange.fetchBalance()[f'{settings.trading_counter_currency}']['free']
     except Exception as e:
         logger.warning("get_base_trading_symbol_balance: %s", e)
