@@ -193,6 +193,7 @@ async def execute_order(action,
 
     except Exception as e:
         logger.warning("execute_order: %s", e)
+        await notify_error(e)
         return
 
 #🔒PRIVATE
