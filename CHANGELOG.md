@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.0 (2023-05-02)
+### Feature
+* Improv exchange declaration and var ([`4463e94`](https://github.com/mraniki/tt/commit/4463e9483f0839bc849438043f826d6e1aa6fe53))
+
 ## v1.1.6 (2023-05-01)
 ### Fix
 * New req update ([`da7b7a4`](https://github.com/mraniki/tt/commit/da7b7a4d50e6428a05591e90cb9ed015a7e96d82))
