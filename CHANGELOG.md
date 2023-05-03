@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.1 (2023-05-03)
+### Fix
+* Refactor get_trading_counter_ccy_balance function ([`1ddbaf6`](https://github.com/mraniki/tt/commit/1ddbaf6aabf927ad866518d2349938ea75d18cba))
+* Counter currency ([`7a4f4cf`](https://github.com/mraniki/tt/commit/7a4f4cf51b39f971c4b25b90a5d07419ed725f73))
+
 ## v1.2.0 (2023-05-02)
 ### Feature
 * Improv exchange declaration and var ([`4463e94`](https://github.com/mraniki/tt/commit/4463e9483f0839bc849438043f826d6e1aa6fe53))
