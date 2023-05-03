@@ -100,11 +100,11 @@ async def load_exchange():
         client = getattr(ccxt, settings.cex_name)
         try:
             if settings.cex_defaultype!="SPOT":
-                cex = client({
+                exchange = client({
                         'apiKey': settings.cex_api,
                         'secret': settings.cex_secret,
                         'options': {
-                                'defaultType': settings.cex_defaultype,
+                                'defaultType': settings.cex_defaulttype,
                                     },
                         })
             else:
@@ -116,8 +116,7 @@ async def load_exchange():
                 logger.info("sandbox setup")
                 exchange.set_sandbox_mode('enabled')
             markets = exchange.load_markets()
-            logger.debug("CEXcreated: %s", cex)
-            #exchange_type = 'cex'
+            logger.debug("CEXcreated: %s", exchange)
         except Exception as e:
             logger.warning("load_exchange: %s", e)
 
@@ -169,6 +168,8 @@ async def execute_order(order_params):
                 return
             asset_out_quote = float(exchange.fetchTicker(f'{instrument}').get('last'))
             asset_out_balance = await get_quote_ccy_balance()
+            if not asset_out_balance:
+                return
             transaction_amount = (asset_out_balance)*(float(quantity)/100) / asset_out_quote
             order = exchange.create_order(
                                 instrument,
