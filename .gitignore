@@ -3,3 +3,4 @@ settings.toml
 db.json
 *.pyc
 *__pycache__*
+.secrets.*
