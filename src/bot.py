@@ -35,7 +35,7 @@ async def parse_message(msg):
         response = None
         # Initialize FindMyOrder object
         fmo = FindMyOrder()
-        
+
         # Check if message starts with bot prefix
         if msg.startswith(settings.bot_prefix):
             command = msg[1:]
@@ -61,12 +61,8 @@ async def parse_message(msg):
         # Check if message contains an order
         order = await fmo.get_order(msg)
         logger.info("order: %s", order)
-        if order:
-            # Check if trading is activated
-            if bot_trading_switch is False:
-                return
-                response = await execute_order(order)
-
+        if order and bot_trading_switch is False:
+            return
         # Check if response is not none
         if response:
             await notify(response)
@@ -218,11 +214,13 @@ async def get_account_balance():
 async def get_quote_ccy_balance():
     """return main instrument balance."""
     try:
-        if "DexSwap" in str(type(exchange)):
-            balance = await exchange.get_quote_ccy_balance()
-        else: 
-            balance = exchange.fetchBalance()[f"{settings.trading_quote_ccy}"]["free"]
-        return balance
+        return (
+            await exchange.get_quote_ccy_balance()
+            if "DexSwap" in str(type(exchange))
+            else exchange.fetchBalance()[f"{settings.trading_quote_ccy}"][
+                "free"
+            ]
+        )
     except Exception as e:
         logger.warning("get_quote_ccy_balance: %s", e)
         await notify("⚠️ Check  balance")
