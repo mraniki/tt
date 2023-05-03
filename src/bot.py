@@ -24,6 +24,7 @@ import simplematrixbotlib as botlib
 
 from config import settings, logger
 
+
 #🔁UTILS
 async def parse_message(msg):
     """main parser"""
@@ -34,7 +35,7 @@ async def parse_message(msg):
         response = None
         # Initialize FindMyOrder object
         fmo = FindMyOrder()
-
+        
         # Check if message starts with bot prefix
         if msg.startswith(settings.bot_prefix):
             command = msg[1:]
@@ -61,13 +62,9 @@ async def parse_message(msg):
         order = await fmo.get_order(msg)
         if order:
             logger.info("order: %s", order)
-            response = await execute_order(
-                            order['action'],
-                            order["instrument"],
-                            order["stop_loss"],
-                            order["take_profit"],
-                            order["quantity"]
-                            )
+            if bot_trading_switch is False:
+                return
+            response = await execute_order(order)
 
         # Check if response is not none
         if response:
@@ -148,15 +145,13 @@ async def load_exchange():
         return
 
 #📦ORDER
-async def execute_order(action,
-                    instrument,
-                    stop_loss=1000,
-                    take_profit=1000,
-                    quantity=1
-                ):
+async def execute_order(order_params):
     """execute_order."""
-    if bot_trading_switch is False:
-        return
+    action = order_params.get('action')
+    instrument = order_params.get('instrument')
+    stop_loss = order_params.get('stop_loss', 1000)
+    take_profit = order_params.get('take_profit', 1000)
+    quantity = order_params.get('quantity', 1)
     try:
         order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}\n"
         if "DexSwap" in str(type(exchange)):
@@ -268,14 +263,17 @@ async def account_balance_command():
     return await get_account_balance()
 
 async def account_position_command():
-    """TBD"""
+    # Get the account position
     return await get_account_position()
 
 async def trading_switch_command():
-    """TBD"""
+    # global variable to store the trading switch
     global bot_trading_switch
+    # set the trading switch to the opposite of the current value
     bot_trading_switch = not bot_trading_switch
-    return f"Trading is {bot_trading_switch}"
+    # return a string with the trading switch status
+    return f"Trading is now {'enabled' if bot_trading_switch else 'disabled'}."
+
 
 async def restart_command():
     """TBD"""
