@@ -50,4 +50,6 @@ cex_ordertype = ""
 
 trading_quote_ccy = "USDT"
 
+#FindMyOrder config
+action_identifier = "BUY SELL LONG SHORT ECHO TEST"
 
