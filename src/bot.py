@@ -9,9 +9,6 @@ import asyncio
 import uvicorn
 from fastapi import FastAPI
 
-import pyparsing as pp
-from pyparsing import one_of
-
 import ccxt
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
@@ -23,7 +20,6 @@ import discord
 import simplematrixbotlib as botlib
 
 from config import settings, logger
-
 
 #🔁UTILS
 async def parse_message(msg):
