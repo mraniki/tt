@@ -48,6 +48,6 @@ cex_testmode = ""
 cex_defaulttype = ""
 cex_ordertype = ""
 
-trading_counter_currency = "USDT"
+trading_quote_ccy = "USDT"
 
 
