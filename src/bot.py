@@ -213,10 +213,12 @@ async def get_quote_ccy_balance():
     """return main instrument balance."""
     try:
         if "DexSwap" in str(type(exchange)):
-            return await exchange.get_quote_ccy_balance()
-        return exchange.fetchBalance()[f'{settings.trading_quote_ccy}']['free']
+            balance = await exchange.get_quote_ccy_balance()
+        else: 
+            balance = exchange.fetchBalance()[f"{settings.trading_quote_ccy}"]["free"]
+        return balance
     except Exception as e:
-        logger.warning("get_base_trading_symbol_balance: %s", e)
+        logger.warning("get_quote_ccy_balance: %s", e)
         await notify("⚠️ Check  balance")
 
 async def get_account_position():
