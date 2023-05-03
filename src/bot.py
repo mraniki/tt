@@ -24,6 +24,7 @@ import simplematrixbotlib as botlib
 
 from config import settings, logger
 
+
 #🔁UTILS
 async def parse_message(msg):
     """main parser"""
@@ -34,7 +35,7 @@ async def parse_message(msg):
         response = None
         # Initialize FindMyOrder object
         fmo = FindMyOrder()
-
+        
         # Check if message starts with bot prefix
         if msg.startswith(settings.bot_prefix):
             command = msg[1:]
@@ -61,13 +62,9 @@ async def parse_message(msg):
         order = await fmo.get_order(msg)
         if order:
             logger.info("order: %s", order)
-            response = await execute_order(
-                            order['action'],
-                            order["instrument"],
-                            order["stop_loss"],
-                            order["take_profit"],
-                            order["quantity"]
-                            )
+            if bot_trading_switch is False:
+                return
+            response = await execute_order(order)
 
         # Check if response is not none
         if response:
@@ -103,11 +100,11 @@ async def load_exchange():
         client = getattr(ccxt, settings.cex_name)
         try:
             if settings.cex_defaultype!="SPOT":
-                cex = client({
+                exchange = client({
                         'apiKey': settings.cex_api,
                         'secret': settings.cex_secret,
                         'options': {
-                                'defaultType': settings.cex_defaultype,
+                                'defaultType': settings.cex_defaulttype,
                                     },
                         })
             else:
@@ -119,8 +116,7 @@ async def load_exchange():
                 logger.info("sandbox setup")
                 exchange.set_sandbox_mode('enabled')
             markets = exchange.load_markets()
-            logger.debug("CEXcreated: %s", cex)
-            #exchange_type = 'cex'
+            logger.debug("CEXcreated: %s", exchange)
         except Exception as e:
             logger.warning("load_exchange: %s", e)
 
@@ -148,15 +144,13 @@ async def load_exchange():
         return
 
 #📦ORDER
-async def execute_order(action,
-                    instrument,
-                    stop_loss=1000,
-                    take_profit=1000,
-                    quantity=1
-                ):
+async def execute_order(order_params):
     """execute_order."""
-    if bot_trading_switch is False:
-        return
+    action = order_params.get('action')
+    instrument = order_params.get('instrument')
+    stop_loss = order_params.get('stop_loss', 1000)
+    take_profit = order_params.get('take_profit', 1000)
+    quantity = order_params.get('quantity', 1)
     try:
         order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}\n"
         if "DexSwap" in str(type(exchange)):
@@ -174,6 +168,8 @@ async def execute_order(action,
                 return
             asset_out_quote = float(exchange.fetchTicker(f'{instrument}').get('last'))
             asset_out_balance = await get_quote_ccy_balance()
+            if not asset_out_balance:
+                return
             transaction_amount = (asset_out_balance)*(float(quantity)/100) / asset_out_quote
             order = exchange.create_order(
                                 instrument,
@@ -217,10 +213,12 @@ async def get_quote_ccy_balance():
     """return main instrument balance."""
     try:
         if "DexSwap" in str(type(exchange)):
-            return await exchange.get_quote_ccy_balance()
-        return exchange.fetchBalance()[f'{settings.trading_quote_ccy}']['free']
+            balance = await exchange.get_quote_ccy_balance()
+        else: 
+            balance = exchange.fetchBalance()[f"{settings.trading_quote_ccy}"]["free"]
+        return balance
     except Exception as e:
-        logger.warning("get_base_trading_symbol_balance: %s", e)
+        logger.warning("get_quote_ccy_balance: %s", e)
         await notify("⚠️ Check  balance")
 
 async def get_account_position():
@@ -253,8 +251,7 @@ async def post_init():
 async def help_command():
     helpcommand = """
     🏦<code>/bal</code>
-    📦<code>buy btc/usdt sl=1000 tp=20 q=1%</code>
-        <code>buy cake</code>
+    📦<code>buy BTCUSDT sl=1000 tp=20 q=1%</code>
     🔀 <code>/trading</code>"""
     if settings.discord_webhook_id:
         helpcommand= helpcommand.replace("<code>", "`")
@@ -268,14 +265,17 @@ async def account_balance_command():
     return await get_account_balance()
 
 async def account_position_command():
-    """TBD"""
+    # Get the account position
     return await get_account_position()
 
 async def trading_switch_command():
-    """TBD"""
+    # global variable to store the trading switch
     global bot_trading_switch
+    # set the trading switch to the opposite of the current value
     bot_trading_switch = not bot_trading_switch
-    return f"Trading is {bot_trading_switch}"
+    # return a string with the trading switch status
+    return f"Trading is now {'enabled' if bot_trading_switch else 'disabled'}."
+
 
 async def restart_command():
     """TBD"""

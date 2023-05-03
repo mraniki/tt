@@ -12,7 +12,7 @@ bot_command_trading = "trading"
 bot_command_restart = "restart"
 bot_command_quote = "q"
 
-bot_trading_switch = "True"
+# bot_trading_switch = "True"
 
 bot_token = ""
 bot_channel_id = ""
