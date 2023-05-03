@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.0 (2023-05-03)
+### Feature
+* ✨ execute order function to receive dict ([`b84d225`](https://github.com/mraniki/tt/commit/b84d225dd106915ccf4cfcce183247e7b630f5e8))
+
+### Fix
+* Cex fixes ([`c3910db`](https://github.com/mraniki/tt/commit/c3910dbe6399ebc251a7a130111a3717e06d31f0))
+* Order execution for CEX 🚑 ([`caaa62e`](https://github.com/mraniki/tt/commit/caaa62e1d0b914e34007ccfec4cf6078de41a9b8))
+* 🐛 fixed broken code for cex. ([`76cb20f`](https://github.com/mraniki/tt/commit/76cb20fb2ee5fe43d9b964ff6d55e915f27d0b12))
+
 ## v1.2.1 (2023-05-03)
 ### Fix
 * Refactor get_trading_counter_ccy_balance function ([`1ddbaf6`](https://github.com/mraniki/tt/commit/1ddbaf6aabf927ad866518d2349938ea75d18cba))
