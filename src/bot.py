@@ -30,22 +30,30 @@ async def parse_message(msg):
     logger.info("message received %s",msg)
 
     try:
+        # Initialize response
         response = None
+        # Initialize FindMyOrder object
         fmo = FindMyOrder()
 
         # Check if message starts with bot prefix
         if msg.startswith(settings.bot_prefix):
             command = msg[1:]
+            # Check if command is help command
             if command == settings.bot_command_help:
                 response = await help_command()
+            # Check if command is trading command
             elif command == settings.bot_command_trading:
                 response = await trading_switch_command()
+            # Check if command is balance command
             elif command == settings.bot_command_bal:
                 response = await account_balance_command()
+            # Check if command is position command
             elif command == settings.bot_command_pos:
                 response = await account_position_command()
+            # Check if command is restart command
             elif command == settings.bot_command_restart:
                 response = await restart_command()
+            # Check if command is invalid
             else:
                 logger.warning("invalid command: %s", command)
                 return
@@ -61,6 +69,7 @@ async def parse_message(msg):
                             order["quantity"]
                             )
 
+        # Check if response is not none
         if response:
             await notify(response)
 
@@ -82,11 +91,6 @@ async def notify(msg):
         await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
     except Exception as e:
         logger.error("%s not sent: %s", msg, e)
-
-async def notify_error(error_msg):
-    """⚠️ notification to user"""
-    msg = f"⚠️ {error_msg}"
-    await notify(msg)
 
 #💱EXCHANGE
 async def load_exchange():
@@ -166,7 +170,7 @@ async def execute_order(action,
             order_confirmation+= order['confirmation']
         else:
             if await get_account_balance()=="No Balance":
-                await notify_error("Check your Balance")
+                await notify("⚠️ Check your Balance")
                 return
             asset_out_quote = float(exchange.fetchTicker(f'{instrument}').get('last'))
             totalusdtbal = await get_quote_ccy_balance() ##exchange.fetchBalance()['USDT']['free']
@@ -185,7 +189,7 @@ async def execute_order(action,
 
     except Exception as e:
         logger.warning("execute_order: %s", e)
-        await notify_error(e)
+        await notify(f"⚠️ order execution error: {e}")
         return
 
 #🔒PRIVATE
@@ -217,7 +221,7 @@ async def get_quote_ccy_balance():
         return exchange.fetchBalance()[f'{settings.trading_quote_ccy}']['free']
     except Exception as e:
         logger.warning("get_base_trading_symbol_balance: %s", e)
-        await notify_error("Check  balance")
+        await notify("⚠️ Check  balance")
 
 async def get_account_position():
     """return account position."""
