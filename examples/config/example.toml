@@ -23,7 +23,7 @@ dex_private_key = ''
 
 dex_testmode = ''
 dex_rpc = ''
-dex_router = '' # v2
+dex_router = '' 
 dex_base_trading_symbol = ''
 dex_block_explorer_api = ''
 dex_protocol = '1inch'
@@ -39,7 +39,7 @@ cex_ordertype = ''
 cex_base_trading_symbol = ''
 
 #FOM settings
-action_identifier = "BUY SELL LONG SHORT ECHO"
+action_identifier = "BUY SELL LONG SHORT ECHO TOTHEMOON"
 
 [DEV]
 loglevel = 'DEBUG'

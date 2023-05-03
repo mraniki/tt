@@ -1,7 +1,7 @@
 """
 TalkyTrader 🪙🗿
 """
-__version__ = "1.3.0"
+__version__ = "1.2.1"
 
 import os
 import sys
@@ -60,11 +60,12 @@ async def parse_message(msg):
                 return
         # Check if message contains an order
         order = await fmo.get_order(msg)
+        logger.info("order: %s", order)
         if order:
-            logger.info("order: %s", order)
+            # Check if trading is activated
             if bot_trading_switch is False:
                 return
-            response = await execute_order(order)
+                response = await execute_order(order)
 
         # Check if response is not none
         if response:
@@ -146,6 +147,11 @@ async def load_exchange():
 #📦ORDER
 async def execute_order(order_params):
     """execute_order."""
+    """execute_order."""
+    if order_params is None:
+        logger.warning("execute_order: No order params provided")
+        await notify("⚠️ No order params provided")
+        return
     action = order_params.get('action')
     instrument = order_params.get('instrument')
     stop_loss = order_params.get('stop_loss', 1000)
