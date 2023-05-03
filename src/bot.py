@@ -30,22 +30,30 @@ async def parse_message(msg):
     logger.info("message received %s",msg)
 
     try:
+        # Initialize response
         response = None
+        # Initialize FindMyOrder object
         fmo = FindMyOrder()
 
         # Check if message starts with bot prefix
         if msg.startswith(settings.bot_prefix):
             command = msg[1:]
+            # Check if command is help command
             if command == settings.bot_command_help:
                 response = await help_command()
+            # Check if command is trading command
             elif command == settings.bot_command_trading:
                 response = await trading_switch_command()
+            # Check if command is balance command
             elif command == settings.bot_command_bal:
                 response = await account_balance_command()
+            # Check if command is position command
             elif command == settings.bot_command_pos:
                 response = await account_position_command()
+            # Check if command is restart command
             elif command == settings.bot_command_restart:
                 response = await restart_command()
+            # Check if command is invalid
             else:
                 logger.warning("invalid command: %s", command)
                 return
@@ -61,6 +69,7 @@ async def parse_message(msg):
                             order["quantity"]
                             )
 
+        # Check if response is not none
         if response:
             await notify(response)
 
@@ -68,7 +77,7 @@ async def parse_message(msg):
         logger.error("Error while parsing message: %s", e)
 
 async def notify(msg):
-    """💬MESSAGING"""
+    """💬 MESSAGING to user"""
     if not msg:
         return
     apobj = apprise.Apprise()
@@ -83,20 +92,12 @@ async def notify(msg):
     except Exception as e:
         logger.error("%s not sent: %s", msg, e)
 
-async def notify_error(error_msg):
-    """⚠️ notification to user"""
-    msg = f"⚠️ {error_msg}"
-    await notify(msg)
-
 #💱EXCHANGE
 async def load_exchange():
     """load_exchange."""
     logger.info("Setting up exchange")
-    #global exchange_type
-    global exchange_name
     global exchange
     global bot_trading_switch
-    global price_type
     bot_trading_switch = True
     if settings.cex_api:
         client = getattr(ccxt, settings.cex_name)
@@ -114,11 +115,9 @@ async def load_exchange():
                         'apiKey': settings.cex_api,
                         'secret': settings.cex_secret, 
                         })
-            price_type = settings.cex_ordertype
             if settings.cex_testmode == 'True':
                 logger.info("sandbox setup")
                 exchange.set_sandbox_mode('enabled')
-                exchange_name = settings.cex_name
             markets = exchange.load_markets()
             logger.debug("CEXcreated: %s", cex)
             #exchange_type = 'cex'
@@ -142,8 +141,6 @@ async def load_exchange():
                         dex,
                         dex.chain_id
                         )
-            #exchange_type = 'dex'
-            exchange_name = dex.router
         except Exception as e:
             logger.warning("load_exchange: %s", e)
     else:
@@ -163,25 +160,24 @@ async def execute_order(action,
     try:
         order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}\n"
         if "DexSwap" in str(type(exchange)):
-        #if exchange_type == 'dex':
             order = await exchange.execute_order(
                                 action=action,
                                 instrument=instrument,
-                                stop_loss=stop_loss,
-                                take_profit=take_profit,
-                                quantity=quantity
+                                stop_loss=int(stop_loss),
+                                take_profit=int(take_profit),
+                                quantity=int(quantity)
                                 )
             order_confirmation+= order['confirmation']
         else:
             if await get_account_balance()=="No Balance":
-                await notify_error("Check your Balance")
+                await notify("⚠️ Check your Balance")
                 return
             asset_out_quote = float(exchange.fetchTicker(f'{instrument}').get('last'))
-            totalusdtbal = await get_base_trading_symbol_balance() ##exchange.fetchBalance()['USDT']['free']
+            totalusdtbal = await get_quote_ccy_balance() ##exchange.fetchBalance()['USDT']['free']
             amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
             order = exchange.create_order(
                                 instrument,
-                                price_type,
+                                settings.cex_ordertype,
                                 action,
                                 amountpercent
                                 )
@@ -193,6 +189,7 @@ async def execute_order(action,
 
     except Exception as e:
         logger.warning("execute_order: %s", e)
+        await notify(f"⚠️ order execution error: {e}")
         return
 
 #🔒PRIVATE
@@ -201,7 +198,6 @@ async def get_account_balance():
     balance = "🏦 Balance\n"
     try:
         if "DexSwap" in str(type(exchange)):
-        #if exchange_type == 'dex':
             balance += await exchange.get_account_balance()
         else:
             raw_balance = exchange.fetch_free_balance()
@@ -217,17 +213,15 @@ async def get_account_balance():
     except Exception as e:
         logger.warning("get_account_balance: %s", e)
 
-async def get_base_trading_symbol_balance():
+async def get_quote_ccy_balance():
     """return main instrument balance."""
     try:
         if "DexSwap" in str(type(exchange)):
-        #if exchange_type == 'dex':
-            return await exchange.get_basecoin_balance()
-        cex_base_trading_symbol ='USDT'
-        return exchange.fetchBalance()[f'{cex_base_trading_symbol}']['free']
+            return await exchange.get_quote_ccy_balance()
+        return exchange.fetchBalance()[f'{settings.trading_quote_ccy}']['free']
     except Exception as e:
         logger.warning("get_base_trading_symbol_balance: %s", e)
-        await notify_error("Check  balance")
+        await notify("⚠️ Check  balance")
 
 async def get_account_position():
     """return account position."""

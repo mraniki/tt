@@ -47,6 +47,7 @@ cex_password = ""
 cex_testmode = ""
 cex_defaulttype = ""
 cex_ordertype = ""
-cex_base_trading_symbol = ""
+
+trading_quote_ccy = "USDT"
 
 
