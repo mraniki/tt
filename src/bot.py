@@ -251,8 +251,7 @@ async def post_init():
 async def help_command():
     helpcommand = """
     🏦<code>/bal</code>
-    📦<code>buy btc/usdt sl=1000 tp=20 q=1%</code>
-        <code>buy cake</code>
+    📦<code>buy BTCUSDT sl=1000 tp=20 q=1%</code>
     🔀 <code>/trading</code>"""
     if settings.discord_webhook_id:
         helpcommand= helpcommand.replace("<code>", "`")
