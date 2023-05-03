@@ -138,8 +138,8 @@ async def load_exchange():
                 block_explorer_api=block_explorer_api
                 )
             logger.info("DEX created %s on chain %s",
-                        dex,
-                        dex.chain_id
+                        exchange,
+                        exchange.chain_id
                         )
         except Exception as e:
             logger.warning("load_exchange: %s", e)
@@ -173,13 +173,13 @@ async def execute_order(action,
                 await notify("⚠️ Check your Balance")
                 return
             asset_out_quote = float(exchange.fetchTicker(f'{instrument}').get('last'))
-            totalusdtbal = await get_quote_ccy_balance() ##exchange.fetchBalance()['USDT']['free']
-            amountpercent = (totalusdtbal)*(float(quantity)/100) / asset_out_quote
+            asset_out_balance = await get_quote_ccy_balance()
+            transaction_amount = (asset_out_balance)*(float(quantity)/100) / asset_out_quote
             order = exchange.create_order(
                                 instrument,
                                 settings.cex_ordertype,
                                 action,
-                                amountpercent
+                                transaction_amount
                                 )
             order_confirmation+= f"➕ Size: {order['amount']}\n\
                                     ⚫️ Entry: {order['price']}\n\
@@ -228,7 +228,6 @@ async def get_account_position():
     try:
         position = "📊 Position\n"
         if "DexSwap" in str(type(exchange)):
-        #if exchange_type == 'dex':
             open_positions = await exchange.get_account_position()
         else:
             open_positions = exchange.fetch_positions()
