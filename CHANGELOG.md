@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.2 (2023-05-04)
+### Fix
+* ⚡️ order step ([`396de4a`](https://github.com/mraniki/tt/commit/396de4a235e099390a06163c5c91da54146cc5d1))
+
+### Other
+* Merge pull request #309 from mraniki/dev ([`a009385`](https://github.com/mraniki/tt/commit/a009385b232c3f8257beb8a93aeb078153033455))
+* 🎨 code reformating to meet flake8 req ([`1bb5b30`](https://github.com/mraniki/tt/commit/1bb5b30b2feeaf92c4a0dccd34b60453009a1579))
+* 🎨 improve code readibility and new bot ignore setting ([`9e4a391`](https://github.com/mraniki/tt/commit/9e4a39162433cfc9a7d537a724aa7bef35b40845))
+
 ## v1.4.1 (2023-05-04)
 ### Fix
 * 🐛 typo ([`f6ff7e5`](https://github.com/mraniki/tt/commit/f6ff7e59a4724e37e0ced4c71d3f04fcde0f2938))
