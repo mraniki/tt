@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.1 (2023-05-04)
+### Fix
+* 🐛 typo ([`f6ff7e5`](https://github.com/mraniki/tt/commit/f6ff7e59a4724e37e0ced4c71d3f04fcde0f2938))
+
+### Other
+* Merge pull request #308 from mraniki/dev ([`80a7bf4`](https://github.com/mraniki/tt/commit/80a7bf4b0287c3dd001ac59713a42adfc825085c))
+* Fix flow ([`5b0f2d4`](https://github.com/mraniki/tt/commit/5b0f2d45fa5eb5033ca13c5924bc7ac294833cb4))
+* 🎨 adding doc details ([`031eba0`](https://github.com/mraniki/tt/commit/031eba0359ee0662bc517657d53687ae70fd5b2e))
+
 ## v1.4.0 (2023-05-04)
 ### Feature
 * ✨Flow update ([`0950256`](https://github.com/mraniki/tt/commit/09502569be22eaad4cac694af81f805dcdb2d817))
