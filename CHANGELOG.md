@@ -2,6 +2,34 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.0 (2023-05-04)
+### Feature
+* ✨Flow update ([`0950256`](https://github.com/mraniki/tt/commit/09502569be22eaad4cac694af81f805dcdb2d817))
+* ✨ resusable flow and use of emoji for release ([`f127726`](https://github.com/mraniki/tt/commit/f1277266891efc2de797c8ac590b88f087f36eb1))
+* ✨ resusable flow and use of emoji for release and dockerfile reorg ([`6ea7276`](https://github.com/mraniki/tt/commit/6ea727651ac7f020137162fee978bfbfd34f282a))
+
+### Fix
+* ⚡️ fix version ([`8e615d3`](https://github.com/mraniki/tt/commit/8e615d3d28b6339b44957f40ba9aea7f62b40e51))
+* 🐛 flow fix ([`9de76f7`](https://github.com/mraniki/tt/commit/9de76f79028f58bc3045c1cdae0037bcc339d6ca))
+* 🐛 pytoml typo ([`e86ed7b`](https://github.com/mraniki/tt/commit/e86ed7b2279b734685190c1dfa71fbbf1825df45))
+
+### Other
+* Merge pull request #307 from mraniki/dev ([`cc471ca`](https://github.com/mraniki/tt/commit/cc471cade17f2ba50ccc260fd7e4aafa3d849572))
+* Merge pull request #306 from mraniki/dev ([`ae96430`](https://github.com/mraniki/tt/commit/ae96430836f80a0d48919c6f4168aa717fd76e58))
+* Merge pull request #305 from mraniki/dev ([`ff224eb`](https://github.com/mraniki/tt/commit/ff224eb3363f241cbb5addec7276dc12e66351a3))
+* Semantic.yml update ([`0eff0e8`](https://github.com/mraniki/tt/commit/0eff0e851245edacc3c6c3d07fb2abfcf5f3c60d))
+* Merge pull request #301 from mraniki/renovate/configure ([`e9d708a`](https://github.com/mraniki/tt/commit/e9d708a7ccc6e446696af2a4cd069f07843a5338))
+* Merge pull request #302 from mraniki/dev ([`7f1a418`](https://github.com/mraniki/tt/commit/7f1a418c5bb04e044441905971fb99b3e5920d94))
+* Add renovate.json ([`4de8069`](https://github.com/mraniki/tt/commit/4de80696e4edd15b70725f4de79e9f3d36bb65f1))
+* Merge pull request #300 from mraniki/dev ([`8390aa6`](https://github.com/mraniki/tt/commit/8390aa68379ff6733f403ee0cd3148cdc2d5af87))
+* Fix: import ([`a57a05a`](https://github.com/mraniki/tt/commit/a57a05ab632d6cd8d47955620f37a713af57f49e))
+* Merge pull request #299 from mraniki/dev ([`d2cafaf`](https://github.com/mraniki/tt/commit/d2cafaff9a62be9d44de8eac61c87a32a29e9278))
+* Fix: testing for the findmyorder settings ([`6eecc35`](https://github.com/mraniki/tt/commit/6eecc351fd58da8ddeb03625c27a4272301bfde9))
+* Merge pull request #297 from mraniki/dev ([`c0ce2ee`](https://github.com/mraniki/tt/commit/c0ce2eec7c8d2177fbca867b316bea12f71420cf))
+* Merge pull request #298 from mraniki/sourcery/dev ([`6a00428`](https://github.com/mraniki/tt/commit/6a004281aa77cef9928a530eff9f64bfb22a05ee))
+* 'Refactored by Sourcery' ([`48a5709`](https://github.com/mraniki/tt/commit/48a57092048ca2855a760c84036ec87594d60c65))
+* 🎨 fix ([`2bb2151`](https://github.com/mraniki/tt/commit/2bb215172d9a2f9e219d72c7478e1418d47d3c4f))
+
 ## v1.3.0 (2023-05-03)
 ### Feature
 * ✨ execute order function to receive dict ([`b84d225`](https://github.com/mraniki/tt/commit/b84d225dd106915ccf4cfcce183247e7b630f5e8))
