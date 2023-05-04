@@ -1,7 +1,9 @@
 [default]
-loglevel = 'INFO'
-host = "0.0.0.0"
-port = 8080
+# loglevel = 'INFO'
+# host = "0.0.0.0"
+# port = 8080
+
+# bot_ignore = "⚠️ Bot 📊 🏦 ⬇️ ⬆️"
 
 bot_token = 'mybottoken'
 bot_channel_id = 'mychannel'
@@ -36,7 +38,6 @@ cex_password = '' #example: '23490273592081719054' | leave empty if you dont use
 cex_testmode = '' #example: 'True' | leave empty if you dont use it
 cex_defaulttype = '' #example: 'SPOT' | leave empty if you dont use it
 cex_ordertype = '' #example: 'SPOT' | leave empty if you dont use it
-cex_base_trading_symbol = '' #example: 'MARKET' | leave empty if you dont use it
 
 trading_quote_ccy = '' #example: 'USDT' | leave empty if you dont use it
 
