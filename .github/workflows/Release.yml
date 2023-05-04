@@ -9,14 +9,6 @@ on:
 
 jobs:
   release:
-        # Run semantic release:
-        # - Update CHANGELOG.md
-        # - Update version in code
-        # - Create git tag
-        # - Create GitHub release
-        # - Publish to PyPI
-      # if: ${{ github.ref == 'refs/heads/dev' && github.event_name == 'push' }}
-      # name: "Nightly Release"
       runs-on: ubuntu-latest
       # needs: [build]
       steps:
@@ -27,24 +19,8 @@ jobs:
           uses: relekang/python-semantic-release@v7.33.3
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
-            # repository_username: __token__
-            # repository_password: ${{ secrets.PYPI_API_TOKEN }}
-            #additional_options: --major
 
-  # tagged-release:
-  #   name: "Nightly Release"
-  #   runs-on: "ubuntu-latest"
-
-  #   steps:
-  #     - uses: "marvinpinto/action-automatic-releases@latest"
-  #       with:
-  #         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-  #         prerelease: true
-  #         automatic_release_tag: "nightly"
-  #         tag_name: ${{ github.ref }}
-  #         release_name: ${{ github.ref }}
   nightly-merge:
-
     runs-on: ubuntu-latest
     needs: release
     steps:

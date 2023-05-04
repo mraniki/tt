@@ -39,5 +39,15 @@ upload_to_pypi = false
 upload_to_release = false
 build_command = false
 remove_dist = false
+commit_parser = "semantic_release.history.emoji_parser"
+use_textual_changelog_sections = true
 
-
+#patch_emoji
+# 🐛🚑🤖🏁🔒👽🔍💬🥅⚡♿🍏🐧
+#:ambulance:, :lock:, :bug:, :zap:, :goal_net:, :alien:, :wheelchair:, :speech_balloon:, :mag:, :apple:, :penguin:, :checkered_flag:, :robot:, :green_apple
+#minor_emoji
+#✨🥚🚸📱💄📈
+#:sparkles: ✨, :children_crossing:, :lipstick:, :iphone:, :egg:, :chart_with_upwards_trend
+#major_emoji¶
+💥
+# :boom:
