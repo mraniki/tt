@@ -29,6 +29,7 @@ jobs:
   docker:
     needs: [version]
     uses: mraniki/coding_toolset/.github/workflows/🐳Docker.yml@main
+    secrets: inherit
   # deploy:
   #   needs: [docker]
   #   uses: mraniki/coding_toolset/.github/workflows/☁️Deploy.yml@main
