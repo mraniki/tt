@@ -55,11 +55,15 @@ async def parse_message(msg):
                 logger.warning("invalid command: %s", command)
                 return
         # Check if message contains an order
-        order = await fmo.get_order(msg)
-        logger.info("order: %s", order)
-        if order and bot_trading_switch is False:
+        if bot_trading_switch is False:
             return
-        # Check if response is not none
+        if await fmo.search(msg):
+            # Order found
+            order = await fmo.get_order(msg)
+            logger.info("order: %s", order)
+            response = await execute_order(order)
+
+        # Check if response is valid
         if response:
             await notify(response)
 
@@ -138,7 +142,6 @@ async def load_exchange():
 
 #📦ORDER
 async def execute_order(order_params):
-    """execute_order."""
     """execute_order."""
     if order_params is None:
         logger.warning("execute_order: No order params provided")
@@ -219,7 +222,7 @@ async def get_quote_ccy_balance():
         )
     except Exception as e:
         logger.warning("get_quote_ccy_balance: %s", e)
-        await notify("⚠️ Check  balance")
+        await notify(f"⚠️ Check balance {settings.trading_quote_ccy}")
 
 async def get_account_position():
     """return account position."""
