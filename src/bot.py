@@ -21,16 +21,20 @@ import simplematrixbotlib as botlib
 
 from config import settings, logger
 
-#🔁UTILS
+
 async def parse_message(msg):
     """main parser"""
-    logger.info("message received %s",msg)
+    logger.info("message received %s", msg)
 
     try:
         # Initialize response
         response = None
         # Initialize FindMyOrder object
         fmo = FindMyOrder()
+
+        # Check if message starts with word to ignore
+        if msg.startswith(settings.bot_ignore):
+            return
 
         # Check if message starts with bot prefix
         if msg.startswith(settings.bot_prefix):
@@ -70,23 +74,29 @@ async def parse_message(msg):
     except Exception as e:
         logger.error("Error while parsing message: %s", e)
 
+
 async def notify(msg):
     """💬 MESSAGING to user"""
     if not msg:
         return
     apobj = apprise.Apprise()
     if settings.discord_webhook_id:
-        apobj.add(f'discord://{str(settings.discord_webhook_id)}/{str(settings.discord_webhook_token)}')
+        url = (f"discord://{str(settings.discord_webhook_id)}/"
+               f"{str(settings.discord_webhook_token)}")
     elif settings.matrix_hostname:
-        apobj.add(f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@{settings.matrix_hostname[8:]}:443/{str(settings.bot_channel_id)}")
+        url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
+               f"{settings.matrix_hostname[8:]}:443/"
+               f"{str(settings.bot_channel_id)}")
     else:
-        apobj.add(f'tgram://{str(settings.bot_token)}/{str(settings.bot_channel_id)}')
+        url = (f"tgram://{str(settings.bot_token)}/"
+               f"{str(settings.bot_channel_id)}")
     try:
+        apobj.add(url)
         await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
     except Exception as e:
         logger.error("%s not sent: %s", msg, e)
 
-#💱EXCHANGE
+
 async def load_exchange():
     """load_exchange."""
     logger.info("Setting up exchange")
@@ -96,23 +106,24 @@ async def load_exchange():
     if settings.cex_api:
         client = getattr(ccxt, settings.cex_name)
         try:
-            if settings.cex_defaultype!="SPOT":
+            if settings.cex_defaulttype != "SPOT":
                 exchange = client({
                         'apiKey': settings.cex_api,
                         'secret': settings.cex_secret,
                         'options': {
                                 'defaultType': settings.cex_defaulttype,
                                     },
-                        })
+                        }
+                    )
             else:
                 exchange = client({
                         'apiKey': settings.cex_api,
-                        'secret': settings.cex_secret, 
+                        'secret': settings.cex_secret,
                         })
             if settings.cex_testmode == 'True':
                 logger.info("sandbox setup")
                 exchange.set_sandbox_mode('enabled')
-            markets = exchange.load_markets()
+            # markets = exchange.load_markets()
             logger.debug("CEXcreated: %s", exchange)
         except Exception as e:
             logger.warning("load_exchange: %s", e)
@@ -140,7 +151,7 @@ async def load_exchange():
         logger.error("no CEX/DEX config")
         return
 
-#📦ORDER
+
 async def execute_order(order_params):
     """execute_order."""
     if order_params is None:
@@ -153,7 +164,8 @@ async def execute_order(order_params):
     take_profit = order_params.get('take_profit', 1000)
     quantity = order_params.get('quantity', 1)
     try:
-        order_confirmation = f"⬇️ {instrument}" if (action=="SELL") else f"⬆️ {instrument}\n"
+        order_confirmation = (f"⬇️ {instrument}" if (action == "SELL")
+                              else f"⬆️ {instrument}\n")
         if "DexSwap" in str(type(exchange)):
             order = await exchange.execute_order(
                                 action=action,
@@ -162,23 +174,25 @@ async def execute_order(order_params):
                                 take_profit=int(take_profit),
                                 quantity=int(quantity)
                                 )
-            order_confirmation+= order['confirmation']
+            order_confirmation += order['confirmation']
         else:
-            if await get_account_balance()=="No Balance":
+            if await get_account_balance() == "No Balance":
                 await notify("⚠️ Check your Balance")
                 return
-            asset_out_quote = float(exchange.fetchTicker(f'{instrument}').get('last'))
+            asset_out_quote = float(exchange.fetchTicker(f'{instrument}')
+                                    .get('last'))
             asset_out_balance = await get_quote_ccy_balance()
             if not asset_out_balance:
                 return
-            transaction_amount = (asset_out_balance)*(float(quantity)/100) / asset_out_quote
+            transaction_amount = ((asset_out_balance)*(float(quantity)/100)
+                                  / asset_out_quote)
             order = exchange.create_order(
                                 instrument,
                                 settings.cex_ordertype,
                                 action,
                                 transaction_amount
                                 )
-            order_confirmation+= f"➕ Size: {order['amount']}\n\
+            order_confirmation += f"➕ Size: {order['amount']}\n\
                                     ⚫️ Entry: {order['price']}\n\
                                     ℹ️ {order['id']}\n\
                                     🗓️ {order['datetime']}"
@@ -189,7 +203,7 @@ async def execute_order(order_params):
         await notify(f"⚠️ order execution error: {e}")
         return
 
-#🔒PRIVATE
+
 async def get_account_balance():
     """return account balance."""
     balance = "🏦 Balance\n"
@@ -200,15 +214,16 @@ async def get_account_balance():
             raw_balance = exchange.fetch_free_balance()
             filtered_balance = {k: v for k, v in
                                 raw_balance.items()
-                                if v is not None and v>0}
+                                if v is not None and v > 0}
             balance += "".join(f"{iterator}: {value} \n" for
-                                iterator, value in
-                                filtered_balance.items())
+                               iterator, value in
+                               filtered_balance.items())
             if not balance:
                 balance += "No Balance"
         return balance
     except Exception as e:
         logger.warning("get_account_balance: %s", e)
+
 
 async def get_quote_ccy_balance():
     """return main instrument balance."""
@@ -224,6 +239,7 @@ async def get_quote_ccy_balance():
         logger.warning("get_quote_ccy_balance: %s", e)
         await notify(f"⚠️ Check balance {settings.trading_quote_ccy}")
 
+
 async def get_account_position():
     """return account position."""
     try:
@@ -238,6 +254,7 @@ async def get_account_position():
     except Exception as e:
         logger.warning("get_account_position: %s", e)
 
+
 async def get_account_margin():
     try:
         return
@@ -245,31 +262,39 @@ async def get_account_margin():
         logger.warning("get_account_margin: %s", e)
 
 
-#🦾BOT ACTIONS
+# 🦾BOT ACTIONS
+
+
 async def post_init():
-    """TBD"""
+    # Notify the user of the bot's online status
     logger.info("Bot is online %s", __version__)
     await notify(f"Bot is online {__version__}")
 
+
 async def help_command():
-    helpcommand = """
+    # Notify the user of help message
+    help_message = """
     🏦<code>/bal</code>
     📦<code>buy BTCUSDT sl=1000 tp=20 q=1%</code>
     🔀 <code>/trading</code>"""
     if settings.discord_webhook_id:
-        helpcommand= helpcommand.replace("<code>", "`")
-        helpcommand= helpcommand.replace("</code>", "`")
-    bot_menu_help = f"{__version__}\n{helpcommand}"
+        help_message = help_message.replace("<code>", "`")
+        help_message = help_message.replace("</code>", "`")
+    bot_menu_help = f"{__version__}\n{help_message}"
     return f"{bot_menu_help}"
 
+
 async def account_balance_command():
-    """TBD"""
+    # Return the account balance
     logger.info("account_bal_command")
+
     return await get_account_balance()
 
+
 async def account_position_command():
-    # Get the account position
+    # Return the account position
     return await get_account_position()
+
 
 async def trading_switch_command():
     # global variable to store the trading switch
@@ -281,10 +306,12 @@ async def trading_switch_command():
 
 
 async def restart_command():
-    """TBD"""
+    # Restart bot
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
-#🤖BOT
+# 🤖BOT
+
+
 async def listener():
     """Launch Bot Listener"""
     try:
@@ -295,56 +322,60 @@ async def listener():
                 intents = discord.Intents.default()
                 intents.message_content = True
                 bot = discord.Bot(intents=intents)
+
                 @bot.event
                 async def on_ready():
                     await post_init()
+
                 @bot.event
                 async def on_message(message: discord.Message):
                     await parse_message(message.content)
-                await bot.start(
-                                settings.bot_token
-                                )
+                await bot.start(settings.bot_token)
             elif settings.matrix_hostname:
                 # MATRIX
                 config = botlib.Config()
                 config.emoji_verify = True
                 config.ignore_unverified_devices = True
-                config.store_path ='./config/matrix/'
+                config.store_path = './config/matrix/'
                 creds = botlib.Creds(
                             settings.matrix_hostname,
                             settings.matrix_user,
                             settings.matrix_pass
                             )
-                bot = botlib.Bot(creds,config)
+                bot = botlib.Bot(creds, config)
+
                 @bot.listener.on_startup
                 async def room_joined(room):
                     await post_init()
+
                 @bot.listener.on_message_event
                 async def on_matrix_message(room, message):
                     await parse_message(message.body)
                 await bot.api.login()
                 bot.api.async_client.callbacks = botlib.Callbacks(
-                                                    bot.api.async_client, 
-                                                    bot
+                                                    bot.api.async_client, bot
                                                     )
                 await bot.api.async_client.callbacks.setup_callbacks()
                 for action in bot.listener._startup_registry:
                     for room_id in bot.api.async_client.rooms:
                         await action(room_id)
-                await bot.api.async_client.sync_forever(timeout=3000, full_state=True)
+                await bot.api.async_client.sync_forever(
+                                                        timeout=3000,
+                                                        full_state=True
+                                                    )
             elif settings.telethon_api_id:
                 # TELEGRAM
                 bot = await TelegramClient(
                             None,
                             settings.telethon_api_id,
                             settings.telethon_api_hash
-                            ).start(
-                                bot_token=settings.bot_token
-                                )
+                            ).start(bot_token=settings.bot_token)
                 await post_init()
+
                 @bot.on(events.NewMessage())
                 async def telethon(event):
                     await parse_message(event.message.message)
+
                 await bot.run_until_disconnected()
             else:
                 logger.error("Check settings")
@@ -354,8 +385,9 @@ async def listener():
         logger.error("Bot not started: %s", e)
 
 
-#⛓️API
+# ⛓️API
 app = FastAPI(title="TALKYTRADER",)
+
 
 @app.on_event("startup")
 def startup_event():
@@ -368,6 +400,7 @@ def startup_event():
         loop.stop()
         logger.error("Bot start error: %s", e)
 
+
 @app.on_event('shutdown')
 async def shutdown_event():
     """fastapi shutdown"""
@@ -375,10 +408,12 @@ async def shutdown_event():
     logger.info("Webserver shutting down")
     uvicorn.keep_running = False
 
+
 @app.get("/")
 def root():
     """Fastapi root"""
     return {f"Bot is online {__version__}"}
+
 
 @app.get("/health")
 def health_check():
@@ -386,7 +421,10 @@ def health_check():
     logger.info("Healthcheck")
     return {f"Bot is online {__version__}"}
 
-#🙊TALKYTRADER
+
+# 🙊TALKYTRADER
+
+
 if __name__ == '__main__':
     """Launch Talky"""
     uvicorn.run(app, host=settings.host, port=settings.port)
