@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.3 (2023-05-04)
+### Fix
+* 🐛 inherit secrets in action ([`ee475bb`](https://github.com/mraniki/tt/commit/ee475bb5f4decd05f7cec31d3f8a74872adc7e71))
+
+### Other
+* Merge pull request #311 from mraniki/dev ([`da4c27a`](https://github.com/mraniki/tt/commit/da4c27a35834440215f7d4adc453643f4d1b5299))
+* Merge pull request #310 from mraniki/main ([`1abe0b2`](https://github.com/mraniki/tt/commit/1abe0b20ecb39679aa7ad41e81d885d96cf34bdc))
+
 ## v1.4.2 (2023-05-04)
 ### Fix
 * ⚡️ order step ([`396de4a`](https://github.com/mraniki/tt/commit/396de4a235e099390a06163c5c91da54146cc5d1))
