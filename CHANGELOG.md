@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.5 (2023-05-05)
+### Fix
+* ⚡️ docker flow update ([`6ca331a`](https://github.com/mraniki/tt/commit/6ca331ac2f378aada29f5ee8e04686d33bb33041))
+
+### Other
+* Merge pull request #318 from mraniki/dev ([`e83d3f9`](https://github.com/mraniki/tt/commit/e83d3f9cbc18babaa26a73c90635a6dbe47a5ac5))
+* 🎨 settings update ([`066e390`](https://github.com/mraniki/tt/commit/066e39096492decc59b2749b23ca19db7e76d383))
+* Merge pull request #317 from mraniki/dev ([`ca9f25c`](https://github.com/mraniki/tt/commit/ca9f25cca3642eb5eff4486f8e728858cd34f518))
+* Merge pull request #316 from mraniki/main ([`2b2a25c`](https://github.com/mraniki/tt/commit/2b2a25c4dfedb867036b214f29ab11713ad4752f))
+
 ## v1.4.4 (2023-05-05)
 ### Fix
 * ⚡️ linting code ([`f7219e7`](https://github.com/mraniki/tt/commit/f7219e7fd897857709b23be6dcf3079d7ee2d9d0))
