@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.7 (2023-05-05)
+### Fix
+* ⚡️Update .gitignore ([`d6e2000`](https://github.com/mraniki/tt/commit/d6e2000041c5abe34de0afc3784bd9d8fe62a4ce))
+
+### Other
+* Merge pull request #322 from mraniki/dev ([`f0a8218`](https://github.com/mraniki/tt/commit/f0a821835afdcce2115a8db7ac38dcf31e994423))
+* Merge branch 'main' into dev ([`cf9f75a`](https://github.com/mraniki/tt/commit/cf9f75a0da88e5acfc24325e45b13759d1d5e15a))
+
 ## v1.4.6 (2023-05-05)
 ### Fix
 * 💬Update pyproject.toml ([`0967ce6`](https://github.com/mraniki/tt/commit/0967ce6e379bd797a46350c2b133ef2d970b68a2))
