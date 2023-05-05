@@ -1,9 +1,10 @@
-.env
+
+# settings
 settings.toml
 db.json
-*.pyc
-*__pycache__*
 .secrets.*
+
+
 # Environments
 .env
 .venv
@@ -12,3 +13,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+#python
+*.pyc
+*__pycache__*
