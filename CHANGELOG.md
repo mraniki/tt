@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.4 (2023-05-05)
+### Fix
+* ⚡️ linting code ([`f7219e7`](https://github.com/mraniki/tt/commit/f7219e7fd897857709b23be6dcf3079d7ee2d9d0))
+
+### Other
+* Merge pull request #315 from mraniki/dev ([`9fb3fdf`](https://github.com/mraniki/tt/commit/9fb3fdf1ef461de7600e1c5b72dd73ff4037078a))
+* Merge pull request #314 from mraniki/dev ([`e6001ec`](https://github.com/mraniki/tt/commit/e6001ec893690a7d5f4f6e715fa4e020ac7e68aa))
+* Merge pull request #313 from mraniki/main ([`f9a78ad`](https://github.com/mraniki/tt/commit/f9a78ad6fbd6c39ddae5cdc57a116f15f62c683c))
+
 ## v1.4.3 (2023-05-04)
 ### Fix
 * 🐛 inherit secrets in action ([`ee475bb`](https://github.com/mraniki/tt/commit/ee475bb5f4decd05f7cec31d3f8a74872adc7e71))
