@@ -427,4 +427,7 @@ def health_check():
 
 if __name__ == '__main__':
     """Launch Talky"""
-    uvicorn.run(app, host=settings.host, port=settings.port)
+    uvicorn.run(
+        app,
+        host=settings.host,
+        port=settings.port)
