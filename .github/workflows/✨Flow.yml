@@ -27,7 +27,7 @@ jobs:
   #   needs: [lint]
   #   uses: mraniki/coding_toolset/.github/workflows/📦Release.yml@main
   docker:
-    needs: [version]
+    needs: [lint]
     uses: mraniki/coding_toolset/.github/workflows/🐳Docker.yml@main
     secrets: inherit
   # deploy:
