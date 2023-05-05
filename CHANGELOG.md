@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.6 (2023-05-05)
+### Fix
+* 💬Update pyproject.toml ([`0967ce6`](https://github.com/mraniki/tt/commit/0967ce6e379bd797a46350c2b133ef2d970b68a2))
+
+### Other
+* Merge pull request #320 from mraniki/dev ([`3a6ca54`](https://github.com/mraniki/tt/commit/3a6ca54186bfb4231145f5f08e0d80f020bc7792))
+* Merge pull request #319 from mraniki/dev ([`d08de8e`](https://github.com/mraniki/tt/commit/d08de8e4ee883fb97774466015288f92057a4e9c))
+* Delete renovate.json ([`f3f1740`](https://github.com/mraniki/tt/commit/f3f17400dbc63160cd67cb6c44746c2bed56e16f))
+* 🎨 Update requirements.txt ([`3d2025b`](https://github.com/mraniki/tt/commit/3d2025b46fe65b4c70783f932831c98fdb7cc93b))
+
 ## v1.4.5 (2023-05-05)
 ### Fix
 * ⚡️ docker flow update ([`6ca331a`](https://github.com/mraniki/tt/commit/6ca331ac2f378aada29f5ee8e04686d33bb33041))
