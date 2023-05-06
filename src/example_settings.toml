@@ -40,6 +40,9 @@ cex_defaulttype = '' #example: 'SPOT' | leave empty if you dont use it
 cex_ordertype = '' #example: 'SPOT' | leave empty if you dont use it
 
 trading_quote_ccy = '' #example: 'USDT' | leave empty if you dont use it
+trading_risk_amount = 10
+trading_stop_loss = 1000
+trading_take_profit = 1000
 
 #FOM settings
 action_identifier = "" #example: 'BUY SELL LONG SHORT ECHO TOTHEMOON' | leave empty if you dont use it 
