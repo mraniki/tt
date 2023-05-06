@@ -2,7 +2,6 @@
 # loglevel = 'INFO'
 # host = "0.0.0.0"
 # port = 8080
-
 # bot_ignore = "⚠️ Bot 📊 🏦 ⬇️ ⬆️"
 
 bot_token = 'mybottoken'
@@ -18,7 +17,6 @@ matrix_pass = '' #leave empty if you dont use it
 discord_webhook_id = '' #leave empty if you dont use it
 discord_webhook_token = '' #leave empty if you dont use it
 
-dex_name = '' #example: Pancake | leave empty if you dont use it 
 dex_chain_id = 1 #example: 10 | leave empty if you dont use it 
 dex_wallet_address = '' #example: '347987284729347' | leave empty if you dont use it 
 dex_private_key = '' #example: '347987284729347' | leave empty if you dont use it 
@@ -29,7 +27,6 @@ dex_router = ''  #example: 'True' | leave empty if you dont use it
 
 dex_block_explorer_api = '' #example: '234809283049820934' | leave empty if you dont use it 
 dex_protocol = '' #example: '1inch' | leave empty if you dont use it 
-dex_amount_trading_option = 1 #example: 1 | leave empty if you dont use it 
 
 cex_name = '' #example: 'binance' | leave empty if you dont use it 
 cex_api = '' #example: '23490273592081719054' | leave empty if you dont use it 
@@ -47,5 +44,42 @@ trading_take_profit = 1000
 #FOM settings
 action_identifier = "" #example: 'BUY SELL LONG SHORT ECHO TOTHEMOON' | leave empty if you dont use it 
 
-[DEV]
-loglevel = 'DEBUG'
+[CEX01]
+# ENV_FOR_DYNACONF="CEX01" # to load your specific env 
+
+bot_token = 'mybottoken'
+bot_channel_id = 'mychannel'
+
+telethon_api_id = '' #leave empty if you dont use it
+telethon_api_hash = '' #leave empty if you dont use it
+
+matrix_hostname = '' #leave empty if you dont use it
+matrix_user = '' #leave empty if you dont use it
+matrix_pass = '' #leave empty if you dont use it
+
+discord_webhook_id = '' #leave empty if you dont use it
+discord_webhook_token = '' #leave empty if you dont use it
+
+dex_chain_id = 1 #example: 10 | leave empty if you dont use it 
+dex_wallet_address = '' #example: '347987284729347' | leave empty if you dont use it 
+dex_private_key = '' #example: '347987284729347' | leave empty if you dont use it 
+
+dex_testmode = '' #example: 'True' | leave empty if you dont use it 
+dex_rpc = '' #example: 'True' | leave empty if you dont use it 
+dex_router = ''  #example: 'True' | leave empty if you dont use it 
+
+dex_block_explorer_api = '' #example: '234809283049820934' | leave empty if you dont use it 
+dex_protocol = '' #example: '1inch' | leave empty if you dont use it 
+
+cex_name = '' #example: 'binance' | leave empty if you dont use it 
+cex_api = '' #example: '23490273592081719054' | leave empty if you dont use it 
+cex_secret = '' #example: '23490273592081719054' | leave empty if you dont use it 
+cex_password = '' #example: '23490273592081719054' | leave empty if you dont use it
+cex_testmode = '' #example: 'True' | leave empty if you dont use it
+cex_defaulttype = '' #example: 'SPOT' | leave empty if you dont use it
+cex_ordertype = '' #example: 'SPOT' | leave empty if you dont use it
+
+trading_quote_ccy = '' #example: 'USDT' | leave empty if you dont use it
+trading_risk_amount = 10
+trading_stop_loss = 1000
+trading_take_profit = 1000

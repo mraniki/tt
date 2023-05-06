@@ -28,7 +28,6 @@ matrix_pass = ""
 discord_webhook_id = ""
 discord_webhook_token = ""
 
-dex_name = ""
 dex_chain_id = 1
 dex_wallet_address = ""
 dex_private_key = ""
