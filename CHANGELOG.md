@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.1 (2023-05-06)
+### Fix
+* :ambulance: Fix balance display in get_account_balance() function. ([`503ed1f`](https://github.com/mraniki/tt/commit/503ed1f46bbb68f5b74f13688863d7e5026dcdd7))
+
+### Other
+* Merge pull request #330 from mraniki/dev ([`b6a7a3e`](https://github.com/mraniki/tt/commit/b6a7a3ed4e2fc9c469e84ce1b0bb76a5ffee40b1))
+* Merge pull request #329 from mraniki/dev ([`ff4fea3`](https://github.com/mraniki/tt/commit/ff4fea384dc12f70396618499857e459e6acdf2e))
+* Remove DockerHub.yml and add AdhocDocker.yml workflow file. ([`96ec493`](https://github.com/mraniki/tt/commit/96ec493ba4e90388351aa61f4d25adcd5da652ea))
+
 ## v1.5.0 (2023-05-06)
 ### Feature
 * ✨ added new settings for sl, tp and quantity ([`93760f0`](https://github.com/mraniki/tt/commit/93760f0e78b4476b8c256341a03b78aba9fc8e33))
