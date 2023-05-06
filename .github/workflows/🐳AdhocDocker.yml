@@ -1,11 +1,20 @@
 name: 🐳 Latest
 
+#on:
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  #push:
+    #branches: ["main"]
+  #pull_request:
+  workflow_dispatch:
+  workflow_call:
+  #schedule:
+   #   - cron: '42 23 * * 5'
 
+   
 jobs:
   push_to_registry:
     name: 🐳 Build and Push Docker image to Docker Hub
