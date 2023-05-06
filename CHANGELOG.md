@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.0 (2023-05-06)
+### Feature
+* ✨ added new settings for sl, tp and quantity ([`93760f0`](https://github.com/mraniki/tt/commit/93760f0e78b4476b8c256341a03b78aba9fc8e33))
+
+### Fix
+* ⚡️ new settings ([`fa9e75f`](https://github.com/mraniki/tt/commit/fa9e75f09c43f4876eabcbf4a5ce9ae545a8f2e6))
+* ⚡️ improving code / linting ([`d21b9ad`](https://github.com/mraniki/tt/commit/d21b9ad02b02b6040b0ba31cbe24bd35629e32d7))
+* :speech_balloon:docs ([`09a4eb3`](https://github.com/mraniki/tt/commit/09a4eb38c58d3700145c0d1a6fb4cb5d9ee14bb3))
+
+### Other
+* Merge pull request #328 from mraniki/dev ([`235f260`](https://github.com/mraniki/tt/commit/235f260898c9b494d694e301def9ab41d0e183d5))
+
 ## v1.4.11 (2023-05-06)
 ### Fix
 * ⚡️trading confirmation update and help msg ([`3a95f57`](https://github.com/mraniki/tt/commit/3a95f57df1071cfeecf9a830e3e63be42137e5a1))
