@@ -187,13 +187,9 @@ async def execute_order(order_params):
                 return
             transaction_amount = ((asset_out_balance)*(float(quantity)/100)
                                   / asset_out_quote)
-            trade = exchange.create_order(
-                                instrument,
-                                settings.cex_ordertype,
-                                action,
-                                transaction_amount
-                                )
-            if trade:
+            if trade := exchange.create_order(
+                instrument, settings.cex_ordertype, action, transaction_amount
+            ):
                 trade_confirmation += f"➕ Size: {round(trade['amount'],4)}\n"
                 trade_confirmation += f"⚫️ Entry: {round(trade['price'],4)}\n"
                 trade_confirmation += f"ℹ️ {trade['id']}\n"
