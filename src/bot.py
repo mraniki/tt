@@ -1,7 +1,7 @@
 """
 TalkyTrader 🪙🗿
 """
-__version__ = "1.4.7"
+__version__ = "1.4.8"
 
 import os
 import sys

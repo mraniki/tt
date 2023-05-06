@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.8 (2023-05-06)
+### Fix
+* :zap:Update req ([`7b40d97`](https://github.com/mraniki/tt/commit/7b40d9763e747918c6a8643069b65abfe8c97350))
+* :speech_balloon: Update Telegram API key creation process ([`8dadcd3`](https://github.com/mraniki/tt/commit/8dadcd319edea5a8408f6654a192b75b4fd761a7))
+
+### Other
+* Merge pull request #323 from mraniki/dev ([`5709ba8`](https://github.com/mraniki/tt/commit/5709ba8911372a6da67285bc9bb4d8dc21d13c16))
+* Fix Telegram and API key typos, update DXSP library API capitalization ([`7d8f61b`](https://github.com/mraniki/tt/commit/7d8f61b6e6f338b01b5c1e1e7f5c3c4c5dbc32a3))
+
 ## v1.4.7 (2023-05-05)
 ### Fix
 * ⚡️Update .gitignore ([`d6e2000`](https://github.com/mraniki/tt/commit/d6e2000041c5abe34de0afc3784bd9d8fe62a4ce))
