@@ -272,9 +272,9 @@ async def post_init():
 async def help_command():
     # Notify the user of help message
     help_message = """
-    🏦<code>/bal</code>
-    📦<code>buy BTCUSDT</code>
-    🔀<code>/trading</code>"""
+    🏦 <code>/bal</code>
+    📦 <code>buy BTCUSDT</code>
+    🔀 <code>/trading</code>"""
     if settings.discord_webhook_id:
         help_message = help_message.replace("<code>", "`")
         help_message = help_message.replace("</code>", "`")
