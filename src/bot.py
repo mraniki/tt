@@ -207,7 +207,7 @@ async def get_account_balance():
     balance = "🏦 Balance\n"
     try:
         if "DexSwap" in str(type(exchange)):
-            balance += await exchange.get_account_balance()
+            balance += str(await exchange.get_account_balance())
         else:
             raw_balance = exchange.fetch_free_balance()
             filtered_balance = {k: v for k, v in
