@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.10 (2023-05-06)
+### Fix
+* :zap:Refactor execute_order function in bot.py ([`af6b0b5`](https://github.com/mraniki/tt/commit/af6b0b5ad3728dc599015b9456fa6fd806a98a29))
+
+### Other
+* Merge pull request #325 from mraniki/dev ([`e89d3f0`](https://github.com/mraniki/tt/commit/e89d3f0df3d0af30fabe42efbd40414945810a89))
+
 ## v1.4.9 (2023-05-06)
 ### Fix
 * :zap:removing config validator due to default settings ([`983d25f`](https://github.com/mraniki/tt/commit/983d25f4d374124c4c29af09b8338ebe2b243c7d))
