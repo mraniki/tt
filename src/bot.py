@@ -164,17 +164,18 @@ async def execute_order(order_params):
     take_profit = order_params.get('take_profit', 1000)
     quantity = order_params.get('quantity', 1)
     try:
-        order_confirmation = (f"⬇️ {instrument}" if (action == "SELL")
+        trade_confirmation = (f"⬇️ {instrument}" if (action == "SELL")
                               else f"⬆️ {instrument}\n")
         if "DexSwap" in str(type(exchange)):
-            order = await exchange.execute_order(
+            trade = await exchange.execute_order(
                                 action=action,
                                 instrument=instrument,
                                 stop_loss=int(stop_loss),
                                 take_profit=int(take_profit),
                                 quantity=int(quantity)
                                 )
-            order_confirmation += order['confirmation']
+            if trade:
+                trade_confirmation += trade['confirmation']
         else:
             if await get_account_balance() == "No Balance":
                 await notify("⚠️ Check your Balance")
@@ -186,21 +187,22 @@ async def execute_order(order_params):
                 return
             transaction_amount = ((asset_out_balance)*(float(quantity)/100)
                                   / asset_out_quote)
-            order = exchange.create_order(
+            trade = exchange.create_order(
                                 instrument,
                                 settings.cex_ordertype,
                                 action,
                                 transaction_amount
                                 )
-            order_confirmation +=  f"➕ Size: {order['amount']}\n"
-            order_confirmation +=  f"⚫️ Entry: {order['price']}\n"
-            order_confirmation +=  f"ℹ️ {order['id']}\n"
-            order_confirmation +=  f"🗓️ {order['datetime']}"
-        return order_confirmation
+            if trade:
+                trade_confirmation += f"➕ Size: {round(trade['amount'],4)}\n"
+                trade_confirmation += f"⚫️ Entry: {round(trade['price'],4)}\n"
+                trade_confirmation += f"ℹ️ {trade['id']}\n"
+                trade_confirmation += f"🗓️ {trade['datetime']}"
+        return trade_confirmation
 
     except Exception as e:
         logger.warning("execute_order: %s", e)
-        await notify(f"⚠️ order execution error: {e}")
+        await notify(f"⚠️ order execution: {e}")
         return
 
 
@@ -275,8 +277,8 @@ async def help_command():
     # Notify the user of help message
     help_message = """
     🏦<code>/bal</code>
-    📦<code>buy BTCUSDT sl=1000 tp=20 q=1%</code>
-    🔀 <code>/trading</code>"""
+    📦<code>buy BTCUSDT</code>
+    🔀<code>/trading</code>"""
     if settings.discord_webhook_id:
         help_message = help_message.replace("<code>", "`")
         help_message = help_message.replace("</code>", "`")
@@ -287,7 +289,6 @@ async def help_command():
 async def account_balance_command():
     # Return the account balance
     logger.info("account_bal_command")
-
     return await get_account_balance()
 
 
