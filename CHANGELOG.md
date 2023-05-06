@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.2 (2023-05-06)
+### Fix
+* ⚡️Update requirements.txt ([`df84b02`](https://github.com/mraniki/tt/commit/df84b0277cc035a4ec70f3527801a46d2db73181))
+
+### Other
+* Merge pull request #333 from mraniki/dev ([`d804ab7`](https://github.com/mraniki/tt/commit/d804ab7a50d4a0ce52948db07cd448ff466f183b))
+* Merge pull request #332 from mraniki/dev ([`fcfad24`](https://github.com/mraniki/tt/commit/fcfad24d2e4e52d83025631f25ab3699513b1361))
+* Merge pull request #331 from mraniki/main ([`e6843e1`](https://github.com/mraniki/tt/commit/e6843e129abcf643c4ff097b075526885a8abbe6))
+* Update 🐳AdhocDocker.yml ([`34c23e8`](https://github.com/mraniki/tt/commit/34c23e8458a37680abe589b9fe7abd4fcaf21c57))
+* Udpated settings ([`2f4f77d`](https://github.com/mraniki/tt/commit/2f4f77d94da41cef3240ec242bace75d293dfb24))
+
 ## v1.5.1 (2023-05-06)
 ### Fix
 * :ambulance: Fix balance display in get_account_balance() function. ([`503ed1f`](https://github.com/mraniki/tt/commit/503ed1f46bbb68f5b74f13688863d7e5026dcdd7))
