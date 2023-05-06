@@ -38,7 +38,6 @@ dex_rpc = ""
 dex_router = "" 
 dex_block_explorer_api = ""
 dex_protocol = ""
-dex_amount_trading_option = 1
 
 cex_name = ""
 cex_api = ""
