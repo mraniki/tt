@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.11 (2023-05-06)
+### Fix
+* ⚡️trading confirmation update and help msg ([`3a95f57`](https://github.com/mraniki/tt/commit/3a95f57df1071cfeecf9a830e3e63be42137e5a1))
+
+### Other
+* Merge pull request #326 from mraniki/dev ([`63dcc04`](https://github.com/mraniki/tt/commit/63dcc04f87d819c8bc243b3b5bb3d3c87087e3cf))
+* Merge pull request #327 from mraniki/sourcery/dev ([`16af5df`](https://github.com/mraniki/tt/commit/16af5dfdeace3e15b9ab24edfaff4c2bfffac2dd))
+* 'Refactored by Sourcery' ([`5b5b2ef`](https://github.com/mraniki/tt/commit/5b5b2ef94e92d65bbcfe78763b95ba8c79118d24))
+
 ## v1.4.10 (2023-05-06)
 ### Fix
 * :zap:Refactor execute_order function in bot.py ([`af6b0b5`](https://github.com/mraniki/tt/commit/af6b0b5ad3728dc599015b9456fa6fd806a98a29))
