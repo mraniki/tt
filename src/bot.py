@@ -192,10 +192,10 @@ async def execute_order(order_params):
                                 action,
                                 transaction_amount
                                 )
-            order_confirmation += f"➕ Size: {order['amount']}\n\
-                                    ⚫️ Entry: {order['price']}\n\
-                                    ℹ️ {order['id']}\n\
-                                    🗓️ {order['datetime']}"
+            order_confirmation +=  f"➕ Size: {order['amount']}\n"
+            order_confirmation +=  f"⚫️ Entry: {order['price']}\n"
+            order_confirmation +=  f"ℹ️ {order['id']}\n"
+            order_confirmation +=  f"🗓️ {order['datetime']}"
         return order_confirmation
 
     except Exception as e:
