@@ -49,6 +49,9 @@ cex_defaulttype = ""
 cex_ordertype = ""
 
 trading_quote_ccy = "USDT"
+trading_risk_amount = 10
+trading_stop_loss = 1000
+trading_take_profit = 1000
 
 #FindMyOrder config
 action_identifier = "BUY SELL LONG SHORT ECHO TEST"
