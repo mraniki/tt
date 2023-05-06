@@ -161,7 +161,7 @@ async def execute_order(order_params):
     action = order_params.get('action')
     instrument = order_params.get('instrument')
     stop_loss = order_params.get('stop_loss', settings.trading_stop_loss)
-    take_profit = order_params.get('take_profit',  settings.trading_take_profit)
+    take_profit = order_params.get('take_profit', settings.trading_take_profit)
     quantity = order_params.get('quantity', settings.trading_risk_amount)
     try:
         trade_confirmation = (f"⬇️ {instrument}" if (action == "SELL")
