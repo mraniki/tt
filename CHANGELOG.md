@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.9 (2023-05-06)
+### Fix
+* :zap:removing config validator due to default settings ([`983d25f`](https://github.com/mraniki/tt/commit/983d25f4d374124c4c29af09b8338ebe2b243c7d))
+
+### Other
+* Merge pull request #324 from mraniki/dev ([`cbe4b10`](https://github.com/mraniki/tt/commit/cbe4b10d236d5997833d64f562bc6a2874b2149c))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`2c4e7f7`](https://github.com/mraniki/tt/commit/2c4e7f77592a4bbcbacc3969a2b754d8f45fae1c))
+
 ## v1.4.8 (2023-05-06)
 ### Fix
 * :zap:Update req ([`7b40d97`](https://github.com/mraniki/tt/commit/7b40d9763e747918c6a8643069b65abfe8c97350))
