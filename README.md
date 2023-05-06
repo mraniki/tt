@@ -32,7 +32,7 @@ If you like it, feel free to
 
 ## Install
 1) Create your channel/room and your platform bot 
-    - Telegram via [Telegram @BotFather](https://core.telegram.org/bots/tutorial) if you use Telethon [create an api key](https://docs.telethon.dev/en/stable/basic/signing-in.html) 
+    - Telegram via [Telegram @BotFather](https://core.telegram.org/bots/tutorial) and [create an API key](https://docs.telethon.dev/en/stable/basic/signing-in.html) 
     - Discord via [Discord Dev portal](https://discord.com/developers/docs/intro)
     - Matrix via [Matrix.org](https://turt2live.github.io/matrix-bot-sdk/index.html)
 2) Get your 
@@ -61,7 +61,7 @@ Config is using [dynaconf](https://www.dynaconf.com) module. refer to its docume
  - Enable bot in Telegram (telethon), Matrix (simplematrixbotlib) and Discord (pycord) messaging platform
  - Place order for CEX and DEX and query balance
  - Push your order signal manually or from system like [trading view webhook alert](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Alerts.html#using-all-alert-calls). Verified with Binance, Binance Testnet, ~~FTX😠~~, Kraken, Huobi, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing values are defaulted
- - Support DXSP library (automatic token approval, uniswap v2 and 1inch api protocol, % of stablecoin balance when placing order, coingecko API, contract search)
+ - Support DXSP library (automatic token approval, uniswap v2 and 1inch API protocol, % of stablecoin balance when placing order, coingecko API, contract search)
  - Support findmyorder library to retrieve standard parsed order format
  
  ### Other Features
