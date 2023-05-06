@@ -38,7 +38,6 @@ dex_rpc = ""
 dex_router = "" 
 dex_block_explorer_api = ""
 dex_protocol = ""
-dex_amount_trading_option = 1
 
 cex_name = ""
 cex_api = ""
@@ -49,6 +48,9 @@ cex_defaulttype = ""
 cex_ordertype = ""
 
 trading_quote_ccy = "USDT"
+trading_risk_amount = 10
+trading_stop_loss = 1000
+trading_take_profit = 1000
 
 #FindMyOrder config
 action_identifier = "BUY SELL LONG SHORT ECHO TEST"
