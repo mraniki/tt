@@ -32,11 +32,11 @@ dex_chain_id = 1
 dex_wallet_address = ""
 dex_private_key = ""
 
-dex_testmode = ""
 dex_rpc = ""
-dex_router = "" 
+dex_router_contract_addr = "" 
 dex_block_explorer_api = ""
 dex_protocol = ""
+dex_base_api = ""
 
 cex_name = ""
 cex_api = ""
@@ -50,6 +50,7 @@ trading_quote_ccy = "USDT"
 trading_risk_amount = 10
 trading_stop_loss = 1000
 trading_take_profit = 1000
+trading_slippage = 2
 
 #FindMyOrder config
 action_identifier = "BUY SELL LONG SHORT ECHO TEST"
