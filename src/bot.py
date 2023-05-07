@@ -131,7 +131,7 @@ async def load_exchange():
     elif settings.dex_chain_id:
 
         try:
-            exchange = await DexSwap()
+            exchange = DexSwap()
             logger.info("DEX created %s on chain %s",
                         exchange,
                         exchange.chain_id
