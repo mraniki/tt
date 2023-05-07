@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.6 (2023-05-07)
+### Fix
+* :zap:Refactor bot.py file: remove unnecessary comments and format code. ([`42dd7a3`](https://github.com/mraniki/tt/commit/42dd7a36ff8147ed95dd9b551d282b708781f590))
+
+### Other
+* Merge pull request #337 from mraniki/dev ([`6e2b94f`](https://github.com/mraniki/tt/commit/6e2b94f61b434f6a457dd82a88913a4a2cf3b47c))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`4a96a85`](https://github.com/mraniki/tt/commit/4a96a85d01f8fd854516c971986c4c682e50c5e8))
+
 ## v1.5.5 (2023-05-07)
 ### Fix
 * :zap: Refactor bot.py logger messages ([`376b098`](https://github.com/mraniki/tt/commit/376b09814ed241d1f1d28aacd3e04e763f536abc))
