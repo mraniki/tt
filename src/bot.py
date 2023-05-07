@@ -123,7 +123,6 @@ async def load_exchange():
             if settings.cex_testmode == 'True':
                 logger.info("sandbox setup")
                 exchange.set_sandbox_mode('enabled')
-            # markets = exchange.load_markets()
             logger.debug("CEXcreated: %s", exchange)
         except Exception as e:
             logger.warning("CEX: %s", e)
@@ -252,7 +251,7 @@ async def get_account_margin():
 
 
 async def post_init():
-    # Notify the user of the bot's online status
+    # Notify of the bot's online status
     logger.info("Bot is online %s", __version__)
     await notify(f"Bot is online {__version__}")
 
@@ -281,11 +280,11 @@ async def account_position_command():
 
 
 async def trading_switch_command():
-    # global variable to store the trading switch
+    # store the trading switch
     global bot_trading_switch
-    # set the trading switch to the opposite of the current value
+    # set to the opposite of the current value
     bot_trading_switch = not bot_trading_switch
-    # return a string with the trading switch status
+    # return trading switch status
     return f"Trading is now {'enabled' if bot_trading_switch else 'disabled'}."
 
 
@@ -411,7 +410,4 @@ def health_check():
 
 if __name__ == '__main__':
     """Launch Talky"""
-    uvicorn.run(
-        app,
-        host=settings.host,
-        port=settings.port)
+    uvicorn.run(app, host=settings.host, port=int(settings.port))
