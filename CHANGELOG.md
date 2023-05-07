@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.3 (2023-05-07)
+### Fix
+* ⚡️Update requirements.txt ([`a8eebab`](https://github.com/mraniki/tt/commit/a8eebab2b4964affd29a3cd30da86dc28d8e8369))
+
+### Other
+* Update requirements.txt ([`dc4f1a5`](https://github.com/mraniki/tt/commit/dc4f1a53db1f2620746120c465101a7d09a1b312))
+* Merge pull request #334 from mraniki/dev ([`d294abf`](https://github.com/mraniki/tt/commit/d294abf2e73d245d0d4fef10e269485612a1355e))
+* Settings cleanup ([`e114edf`](https://github.com/mraniki/tt/commit/e114edfc9af1d90026068da6b71c806a7b3f17e6))
+* Merge branch 'main' into dev ([`7e4a102`](https://github.com/mraniki/tt/commit/7e4a102fd6aed6ffcd839e2632151ed7e6952b59))
+* Update 🐳AdhocDocker.yml ([`9a34a9a`](https://github.com/mraniki/tt/commit/9a34a9a19bb0e8179d28355f8d4bb74e57801249))
+
 ## v1.5.2 (2023-05-06)
 ### Fix
 * ⚡️Update requirements.txt ([`df84b02`](https://github.com/mraniki/tt/commit/df84b0277cc035a4ec70f3527801a46d2db73181))
