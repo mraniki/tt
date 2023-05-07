@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.4 (2023-05-07)
+### Fix
+* ⚡️ remove async for dexswap ([`c9c97d0`](https://github.com/mraniki/tt/commit/c9c97d032d8888d9c94178eaff30f957fa0e7ff6))
+* ⚡️ updated settings ([`26dc794`](https://github.com/mraniki/tt/commit/26dc79450a36f07f7301b0fbd0bd07af05a7415f))
+* ⚡️ simplification of dexswap obj creation ([`5522841`](https://github.com/mraniki/tt/commit/55228418ab41a77a2ccd30e99827191d27e3f3ae))
+* ⚡️ dependency ([`89eb306`](https://github.com/mraniki/tt/commit/89eb3066096ca9ebd5911b83f7aaad7611006756))
+
+### Other
+* Merge pull request #335 from mraniki/dev ([`e66adb5`](https://github.com/mraniki/tt/commit/e66adb5ddb53a9b716fe46126168b1415d280c4e))
+
 ## v1.5.3 (2023-05-07)
 ### Fix
 * ⚡️Update requirements.txt ([`a8eebab`](https://github.com/mraniki/tt/commit/a8eebab2b4964affd29a3cd30da86dc28d8e8369))
