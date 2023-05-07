@@ -129,18 +129,9 @@ async def load_exchange():
             logger.warning("load_exchange: %s", e)
 
     elif settings.dex_chain_id:
-        chain_id = settings.dex_chain_id
-        wallet_address = settings.dex_wallet_address
-        private_key = settings.dex_private_key
-        block_explorer_api = settings.dex_block_explorer_api
 
         try:
-            exchange = DexSwap(
-                chain_id=chain_id,
-                wallet_address=wallet_address,
-                private_key=private_key,
-                block_explorer_api=block_explorer_api
-                )
+            exchange = await DexSwap()
             logger.info("DEX created %s on chain %s",
                         exchange,
                         exchange.chain_id
