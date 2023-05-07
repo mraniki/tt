@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.9 (2023-05-07)
+### Fix
+* ⚡️Update requirements.txt ([`908d07b`](https://github.com/mraniki/tt/commit/908d07b2d97ec49aebc5377cda4488867560c627))
+
+### Other
+* Merge pull request #340 from mraniki/dev ([`f86664e`](https://github.com/mraniki/tt/commit/f86664e19b6af2a23f52b8f3824e5233aa0b04ad))
+* Update requirements.txt ([`65fe17d`](https://github.com/mraniki/tt/commit/65fe17d6a83be7369817d9d8383b06bcddeb7536))
+
 ## v1.5.8 (2023-05-07)
 ### Fix
 * ⚡️ code lint ([`9ae7698`](https://github.com/mraniki/tt/commit/9ae7698342aefc6a9a8ce7c90aa9bd83210103db))
