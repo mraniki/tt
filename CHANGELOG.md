@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.5 (2023-05-07)
+### Fix
+* :zap: Refactor bot.py logger messages ([`376b098`](https://github.com/mraniki/tt/commit/376b09814ed241d1f1d28aacd3e04e763f536abc))
+
+### Other
+* Merge pull request #336 from mraniki/dev ([`757e4af`](https://github.com/mraniki/tt/commit/757e4af849282166c6a447de94a792f2e76b4260))
+
 ## v1.5.4 (2023-05-07)
 ### Fix
 * ⚡️ remove async for dexswap ([`c9c97d0`](https://github.com/mraniki/tt/commit/c9c97d032d8888d9c94178eaff30f957fa0e7ff6))
