@@ -297,8 +297,12 @@ async def restart_command():
 
 async def listener():
     """Launch Bot Listener"""
-    try:
+    try: 
         await load_exchange()
+    except Exception as e:
+        logger.error("exchange not loaded: %s", e)
+    try:
+        
         while True:
             if settings.discord_webhook_id:
                 # DISCORD
