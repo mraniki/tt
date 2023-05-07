@@ -24,7 +24,7 @@ from config import settings, logger
 
 async def parse_message(msg):
     """main parser"""
-    logger.info("message received %s", msg)
+    logger.info("message %s", msg)
 
     try:
         # Initialize response
@@ -126,18 +126,15 @@ async def load_exchange():
             # markets = exchange.load_markets()
             logger.debug("CEXcreated: %s", exchange)
         except Exception as e:
-            logger.warning("load_exchange: %s", e)
+            logger.warning("CEX: %s", e)
 
     elif settings.dex_chain_id:
 
         try:
             exchange = DexSwap()
-            logger.info("DEX created %s on chain %s",
-                        exchange,
-                        exchange.chain_id
-                        )
+            logger.info("DEX %s", exchange)
         except Exception as e:
-            logger.warning("load_exchange: %s", e)
+            logger.warning("DEX: %s", e)
     else:
         logger.error("no CEX/DEX config")
         return
@@ -147,7 +144,7 @@ async def execute_order(order_params):
     """execute_order."""
     if order_params is None:
         logger.warning("execute_order: No order params provided")
-        await notify("⚠️ No order params provided")
+        await notify("⚠️ Missing params")
         return
     action = order_params.get('action')
     instrument = order_params.get('instrument')
@@ -169,7 +166,7 @@ async def execute_order(order_params):
                 trade_confirmation += trade['confirmation']
         else:
             if await get_account_balance() == "No Balance":
-                await notify("⚠️ Check your Balance")
+                await notify("⚠️ Check Balance")
                 return
             asset_out_quote = float(exchange.fetchTicker(f'{instrument}')
                                     .get('last'))
@@ -241,14 +238,14 @@ async def get_account_position():
         position += open_positions
         return position
     except Exception as e:
-        logger.warning("get_account_position: %s", e)
+        logger.warning("account_position: %s", e)
 
 
 async def get_account_margin():
     try:
         return
     except Exception as e:
-        logger.warning("get_account_margin: %s", e)
+        logger.warning("account_margin: %s", e)
 
 
 # 🦾BOT ACTIONS
@@ -275,7 +272,6 @@ async def help_command():
 
 async def account_balance_command():
     # Return the account balance
-    logger.info("account_bal_command")
     return await get_account_balance()
 
 
