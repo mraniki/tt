@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.7 (2023-05-07)
+### Fix
+* :zap: Added error handling for exchange not loaded in listener function. ([`769cae6`](https://github.com/mraniki/tt/commit/769cae6d598da39e93c4eded184dbf852b3d6eab))
+
+### Other
+* Merge pull request #338 from mraniki/dev ([`f545970`](https://github.com/mraniki/tt/commit/f54597037580c9fb45e7e40ac001f2ba1b3637d7))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`c43ec7c`](https://github.com/mraniki/tt/commit/c43ec7c7eaf4913a2321e940f1950d3ad88cc4a0))
+
 ## v1.5.6 (2023-05-07)
 ### Fix
 * :zap:Refactor bot.py file: remove unnecessary comments and format code. ([`42dd7a3`](https://github.com/mraniki/tt/commit/42dd7a36ff8147ed95dd9b551d282b708781f590))
