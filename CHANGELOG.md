@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.8 (2023-05-07)
+### Fix
+* ⚡️ code lint ([`9ae7698`](https://github.com/mraniki/tt/commit/9ae7698342aefc6a9a8ce7c90aa9bd83210103db))
+
+### Other
+* Merge pull request #339 from mraniki/dev ([`bfbc030`](https://github.com/mraniki/tt/commit/bfbc0300d921dff39bbf1cdaebf93238674a999b))
+
 ## v1.5.7 (2023-05-07)
 ### Fix
 * :zap: Added error handling for exchange not loaded in listener function. ([`769cae6`](https://github.com/mraniki/tt/commit/769cae6d598da39e93c4eded184dbf852b3d6eab))
