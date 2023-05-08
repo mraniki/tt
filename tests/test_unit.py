@@ -1,3 +1,51 @@
+"""
+ TT test
+"""
+import pytest
+from bot import parse_message, __version__
+
+
+@pytest.mark.asyncio
+async def test_parse_message():
+    # Test help command
+    # msg = "/help"
+    # help_message = """
+    # 🏦 <code>/bal</code>
+    # 📦 <code>buy BTCUSDT</code>
+    # 🔀 <code>/trading</code>"""
+    # bot_menu_help = f"{__version__}\n{help_message}"
+    # assert await parse_message(msg) == bot_menu_help
+
+    # # Test trading switch command
+    # msg = "/trading"
+    # assert await parse_message(msg) == "Trading switch toggled."
+
+    # # Test balance command
+    # msg = "/bal"
+    # assert await parse_message(msg) == "Your account balance is $1000."
+
+    # # Test position command
+    # msg = "/pos"
+    # assert await parse_message(msg) == "Your current position is long 10 shares of AAPL."
+
+    # # Test restart command
+    # msg = "/restart"
+    # assert await parse_message(msg) == "Bot restarted successfully."
+
+    # Test invalid command
+    msg = "!foo"
+    assert await parse_message(msg) is None
+
+    # Test message to ignore
+    msg = "hello world"
+    assert await parse_message(msg) is None
+
+
+    # # Test order message
+    # msg = "buy EURUSD sl=1.2 tp=1.5 q=2"
+    # assert await parse_message(msg) == ("Order executed:
+    #  buy 5 shares of MSFT at $250.")
+
 # import pytest
 # from unittest.mock import AsyncMock, patch
 # from bot import parse_message

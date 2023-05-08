@@ -6,6 +6,7 @@ ROOT = os.path.dirname(__file__)
 
 settings = Dynaconf(
     envvar_prefix="TT",
+    root_path=os.path.dirname(ROOT),
     settings_files=[
         os.path.join(ROOT, "default_settings.toml"),
         'settings.toml',
@@ -14,7 +15,6 @@ settings = Dynaconf(
     load_dotenv=True,
     environments=True,
     default_env="default",
-
 )
 
 #  🧐LOGGING

@@ -13,6 +13,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.11"
+pytest = "*"
+pytest-cov = "*"
+pytest-asyncio = "*"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
@@ -30,6 +33,11 @@ build_command = false
 remove_dist = false
 commit_parser = "semantic_release.history.emoji_parser"
 use_textual_changelog_sections = true
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
+]
 
 #patch_emoji
 # 🐛🚑🤖🏁🔒👽🔍💬🥅⚡♿🍏🐧
