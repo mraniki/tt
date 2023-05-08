@@ -35,11 +35,9 @@ async def parse_message(msg):
         # Check if message starts with word to ignore
         if msg.startswith(settings.bot_ignore):
             return
-
         # Check if message starts with bot prefix
         if msg.startswith(settings.bot_prefix):
             command = msg[1:]
-            param = msg.split(" ")[1]
             # Check if command is help command
             if command == settings.bot_command_help:
                 response = await help_command()
@@ -48,6 +46,7 @@ async def parse_message(msg):
                 response = await trading_switch_command()
             # Check if command is trading command
             elif command == settings.bot_command_quote:
+                param = msg.split(" ")[1]
                 response = await get_quote(param)
             # Check if command is balance command
             elif command == settings.bot_command_bal:
