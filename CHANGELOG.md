@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.13 (2023-05-08)
+### Fix
+* :children_crossing: reintroducing the quote feature ([`b0a09d8`](https://github.com/mraniki/tt/commit/b0a09d8fd2c2e9e88b252fef49299a3b1356d786))
+
+### Other
+* Merge pull request #344 from mraniki/dev ([`8daa8a6`](https://github.com/mraniki/tt/commit/8daa8a6a5f4d977530115c8642c1fd6cefd35935))
+
 ## v1.5.12 (2023-05-08)
 ### Fix
 * 🚸 reintroducing the quote feature ([`b6795ea`](https://github.com/mraniki/tt/commit/b6795ea1f2ebd6cb65361adf978c61ac212d92d2))
