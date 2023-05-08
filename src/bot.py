@@ -37,7 +37,7 @@ async def parse_message(msg):
             return
         # Check if message starts with bot prefix
         if msg.startswith(settings.bot_prefix):
-            command = msg[1:]
+            command = (msg.split(" ")[0])[1:]
             # Check if command is help command
             if command == settings.bot_command_help:
                 response = await help_command()
