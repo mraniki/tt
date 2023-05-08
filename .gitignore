@@ -2,6 +2,11 @@
 settings.toml
 .secrets.*
 
+#old db config
+db.json
+db.sqlite
+db.mongo.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
