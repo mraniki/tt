@@ -45,6 +45,9 @@ async def parse_message(msg):
             # Check if command is trading command
             elif command == settings.bot_command_trading:
                 response = await trading_switch_command()
+            # Check if command is trading command
+            elif command == settings.bot_command_quote:
+                response = await get_quote(command[2:])
             # Check if command is balance command
             elif command == settings.bot_command_bal:
                 response = await account_balance_command()
@@ -183,6 +186,17 @@ async def execute_order(order_params):
         logger.warning("execute_order: %s", e)
         await notify(f"⚠️ order execution: {e}")
         return
+
+
+async def get_quote(symbol):
+    """return quote"""
+    try:
+        if "DexSwap" in str(type(exchange)):
+            await exchange.get_quote(symbol)
+        else:
+            return
+    except Exception as e:
+        logger.warning("get_quote: %s", e)
 
 
 async def get_account_balance():
