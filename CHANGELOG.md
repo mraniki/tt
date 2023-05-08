@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.12 (2023-05-08)
+### Fix
+* 🚸 reintroducing the quote feature ([`b6795ea`](https://github.com/mraniki/tt/commit/b6795ea1f2ebd6cb65361adf978c61ac212d92d2))
+* ⚡️ updating gitignore ([`490f4db`](https://github.com/mraniki/tt/commit/490f4db5c1c6d2be6577ef3d0253b6ab7b895124))
+
+### Other
+* Merge pull request #343 from mraniki/dev ([`f40d46f`](https://github.com/mraniki/tt/commit/f40d46f7ac4d560f4422157d2ccae503de78518f))
+
 ## v1.5.11 (2023-05-08)
 ### Fix
 * ⚡️ adding merging capability in config ([`f049313`](https://github.com/mraniki/tt/commit/f049313c473e5a33e1b1515a77f6d8d4b2177cf7))
