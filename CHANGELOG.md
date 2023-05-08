@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.10 (2023-05-08)
+### Fix
+* ⚡️ unit test trial ([`55325e9`](https://github.com/mraniki/tt/commit/55325e984cac09f64bede5954a22fc800333eed0))
+* ⚡️ code cleanup and use or order_param for dexswap ([`a92902d`](https://github.com/mraniki/tt/commit/a92902df98b4a1c9fc61f5e2d64b8c6dbbe7e055))
+* 🐛 order param for Dexswap ([`20b6639`](https://github.com/mraniki/tt/commit/20b6639efca58503c7ef89e8d3cd56e2bc1b0973))
+* :zap: Update requirements.txt ([`4586b2f`](https://github.com/mraniki/tt/commit/4586b2f06a63e44a4176d68fbcc8349ebfed56ee))
+
+### Other
+* Merge pull request #341 from mraniki/dev ([`ebce486`](https://github.com/mraniki/tt/commit/ebce48627fafa4b776a450046eb209eb366b15b0))
+
 ## v1.5.9 (2023-05-07)
 ### Fix
 * ⚡️Update requirements.txt ([`908d07b`](https://github.com/mraniki/tt/commit/908d07b2d97ec49aebc5377cda4488867560c627))
