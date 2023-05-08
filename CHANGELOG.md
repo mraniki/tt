@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.11 (2023-05-08)
+### Fix
+* ⚡️ adding merging capability in config ([`f049313`](https://github.com/mraniki/tt/commit/f049313c473e5a33e1b1515a77f6d8d4b2177cf7))
+* ⚡️ update log name ([`88bbf54`](https://github.com/mraniki/tt/commit/88bbf54b0fc6c2989f2494e5b9d73628ed7947ac))
+
+### Other
+* Merge pull request #342 from mraniki/dev ([`4fca38f`](https://github.com/mraniki/tt/commit/4fca38f28e357c76ef920de3c9d5360402115528))
+
 ## v1.5.10 (2023-05-08)
 ### Fix
 * ⚡️ unit test trial ([`55325e9`](https://github.com/mraniki/tt/commit/55325e984cac09f64bede5954a22fc800333eed0))
