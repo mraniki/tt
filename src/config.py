@@ -22,4 +22,4 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=settings.loglevel
 )
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(f"TT.{__name__}")

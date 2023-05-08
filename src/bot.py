@@ -154,13 +154,7 @@ async def execute_order(order_params):
         trade_confirmation = (f"⬇️ {instrument}" if (action == "SELL")
                               else f"⬆️ {instrument}\n")
         if "DexSwap" in str(type(exchange)):
-            trade = await exchange.execute_order(
-                                action=action,
-                                instrument=instrument,
-                                stop_loss=int(stop_loss),
-                                take_profit=int(take_profit),
-                                quantity=int(quantity)
-                                )
+            trade = await exchange.execute_order(order_params)
             if trade:
                 trade_confirmation += trade['confirmation']
         else:
