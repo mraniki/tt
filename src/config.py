@@ -14,6 +14,7 @@ settings = Dynaconf(
         ],
     load_dotenv=True,
     environments=True,
+    merge=True,
     default_env="default",
 )
 
@@ -22,4 +23,4 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=settings.loglevel
 )
-logger = logging.getLogger(f"TT.{__name__}")
+logger = logging.getLogger("TalkyTrader")
