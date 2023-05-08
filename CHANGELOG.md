@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.14 (2023-05-08)
+### Fix
+* 🐛 bug in the quote symbol parser ([`40c1248`](https://github.com/mraniki/tt/commit/40c1248d82603b58ddf6ff64ce8587251caed3c6))
+
+### Other
+* Merge pull request #346 from mraniki/dev ([`43c8b71`](https://github.com/mraniki/tt/commit/43c8b71d5ef3e46d32542ade3cc070a9129a82a5))
+* Merge pull request #345 from mraniki/dev ([`da4ec5d`](https://github.com/mraniki/tt/commit/da4ec5d2dd8c5f67509028357e9c4120aafafb07))
+* 🚑 quote error iimpacting the whole parser ([`e8561ef`](https://github.com/mraniki/tt/commit/e8561ef4c3222dbc9a6d752c166d1653d0e2aae6))
+
 ## v1.5.13 (2023-05-08)
 ### Fix
 * :children_crossing: reintroducing the quote feature ([`b0a09d8`](https://github.com/mraniki/tt/commit/b0a09d8fd2c2e9e88b252fef49299a3b1356d786))
