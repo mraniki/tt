@@ -151,10 +151,6 @@ async def execute_order(order_params):
     action = order_params.get('action')
     instrument = order_params.get('instrument')
     quantity = order_params.get('quantity', settings.trading_risk_amount)
-    # stop_loss = order_params.get('stop_loss',
-    # settings.trading_stop_loss)
-    # take_profit = order_params.get('take_profit',
-    # settings.trading_take_profit)
     try:
         trade_confirmation = (f"⬇️ {instrument}" if (action == "SELL")
                               else f"⬆️ {instrument}\n")
@@ -162,6 +158,8 @@ async def execute_order(order_params):
             trade = await exchange.execute_order(order_params)
             if trade:
                 trade_confirmation += trade['confirmation']
+            else:
+                return
         else:
             if await get_account_balance() == "No Balance":
                 await notify("⚠️ Check Balance")
@@ -180,6 +178,8 @@ async def execute_order(order_params):
                 trade_confirmation += f"⚫️ Entry: {round(trade['price'],4)}\n"
                 trade_confirmation += f"ℹ️ {trade['id']}\n"
                 trade_confirmation += f"🗓️ {trade['datetime']}"
+            else:
+                return
         return trade_confirmation
 
     except Exception as e:
