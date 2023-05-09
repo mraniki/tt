@@ -36,7 +36,7 @@ dex_rpc = ""
 dex_router_contract_addr = "" 
 dex_block_explorer_api = ""
 dex_protocol = ""
-dex_base_api = ""
+dex_1inch_url = ""
 
 cex_name = ""
 cex_api = ""
