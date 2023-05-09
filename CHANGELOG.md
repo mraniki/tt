@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.20 (2023-05-09)
+### Fix
+* ⚡️ req update ([`be64ff0`](https://github.com/mraniki/tt/commit/be64ff0000b48f4e84581d9eab1fe70ba72ec7fd))
+
+### Other
+* Merge pull request #352 from mraniki/dev ([`0951116`](https://github.com/mraniki/tt/commit/09511161dc0ee4045343e97ccd00e587728754a8))
+
 ## v1.5.19 (2023-05-09)
 ### Fix
 * ⚡️ updated settings ttructure ([`f254a1a`](https://github.com/mraniki/tt/commit/f254a1aff626016601fa19cdf96b8699698572f8))
