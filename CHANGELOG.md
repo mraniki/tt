@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.22 (2023-05-09)
+### Fix
+* :zap: Update bot.py and default_settings.toml files. ([`eeb68e3`](https://github.com/mraniki/tt/commit/eeb68e38a4d339f491a9a5afd98392436c344ade))
+
+### Other
+* Merge pull request #354 from mraniki/dev ([`5194a2a`](https://github.com/mraniki/tt/commit/5194a2ac5e3acf3a841f069d19e38be954a86018))
+
 ## v1.5.21 (2023-05-09)
 ### Fix
 * ⚡️ req update ([`7f1f67e`](https://github.com/mraniki/tt/commit/7f1f67eb4a5e941d79bcc38aa1b9976a6a25383c))
