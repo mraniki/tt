@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.16 (2023-05-09)
+### Fix
+* :zap: req update ([`4de15df`](https://github.com/mraniki/tt/commit/4de15dfd31dc5950925ac27e2156744150fed07b))
+
+### Other
+* Merge pull request #348 from mraniki/dev ([`7352680`](https://github.com/mraniki/tt/commit/73526800b36581b645b31b07d9803aad64f88d57))
+
 ## v1.5.15 (2023-05-09)
 ### Fix
 * ⚡️ req update ([`2fd73d2`](https://github.com/mraniki/tt/commit/2fd73d2ef41a4dc565665d5de62a6eecaa6315dd))
