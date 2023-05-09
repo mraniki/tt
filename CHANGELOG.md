@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.15 (2023-05-09)
+### Fix
+* ⚡️ req update ([`2fd73d2`](https://github.com/mraniki/tt/commit/2fd73d2ef41a4dc565665d5de62a6eecaa6315dd))
+
+### Other
+* Merge pull request #347 from mraniki/dev ([`281ce14`](https://github.com/mraniki/tt/commit/281ce14f6a71f5c5e4c2a5f76963fd3ff853be46))
+
 ## v1.5.14 (2023-05-08)
 ### Fix
 * 🐛 bug in the quote symbol parser ([`40c1248`](https://github.com/mraniki/tt/commit/40c1248d82603b58ddf6ff64ce8587251caed3c6))
