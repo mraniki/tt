@@ -49,7 +49,7 @@ Quick start approach: Update the env with your parameters start as a docker serv
 Config is using [dynaconf](https://www.dynaconf.com) module. refer to its documentation for more details or https://github.com/mraniki/tt/wiki/Configuration
 
 ## Bot commands
- - `sell BTCUSDT sl=6000 tp=4500 q=1%` or `sell BTCUSDT` Order processing (direction symbol sl=stoploss tp=takeprofit q=percentagequantity% or direction symbol)
+ -order using FindMyOrder module to use different action identifier default are buy, sell, long short like `sell BTCUSDT sl=6000 tp=4500 q=1%` or `sell BTCUSDT`
  - `/bal` Query user account exchange balance
  - `/trading` Disable or Enable trading
  
@@ -59,7 +59,7 @@ Config is using [dynaconf](https://www.dynaconf.com) module. refer to its docume
  - Place order for CEX and DEX and query balance
  - Push your order signal manually or from system like [trading view webhook alert](https://www.tradingview.com/pine-script-docs/en/v5/concepts/Alerts.html#using-all-alert-calls). Verified with Binance, Binance Testnet, ~~FTX😠~~, Kraken, Huobi, BSC & pancakeswap, polygon and quickswap). If SL / TP or QTY are missing values are defaulted
  - Support DXSP library (automatic token approval, uniswap v2 and 1inch API protocol, % of stablecoin balance when placing order, coingecko API, contract search)
- - Support findmyorder library to retrieve standard parsed order format
+ - Support FindMyOrder library to retrieve standard parsed order format and allow any custom order identifiers.
  
  ### Other Features
  - Support bot in private channel and multiple channel per environment
