@@ -54,9 +54,11 @@ async def parse_message(msg):
             # Check if command is position command
             elif command == settings.bot_command_pos:
                 response = await account_position_command()
+                
             # Check if command is restart command
             elif command == settings.bot_command_restart:
                 response = await restart_command()
+
             # Check if command is invalid
             else:
                 logger.warning("invalid command: %s", command)
@@ -310,7 +312,7 @@ async def listener():
     try:
         await load_exchange()
     except Exception as e:
-        logger.warning("exchange not loaded: %s", e)
+        logger.error("exchange not loaded: %s", e)
     try:
         while True:
             if settings.discord_webhook_id:
