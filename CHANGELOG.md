@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.17 (2023-05-09)
+### Fix
+* :zap: readme update ([`1c705c0`](https://github.com/mraniki/tt/commit/1c705c0b6a116041a6e474511f5a43adf90a1be6))
+
+### Other
+* Merge pull request #349 from mraniki/dev ([`94364e5`](https://github.com/mraniki/tt/commit/94364e57c57070d2edbec318f9b42aaedf96fe54))
+
 ## v1.5.16 (2023-05-09)
 ### Fix
 * :zap: req update ([`4de15df`](https://github.com/mraniki/tt/commit/4de15dfd31dc5950925ac27e2156744150fed07b))
