@@ -39,32 +39,20 @@ async def parse_message(msg):
             # Check if command is help command
             if command == settings.bot_command_help:
                 await notify(await help_command())
-                return
-            # Check if command is trading command
             elif command == settings.bot_command_trading:
                 await notify(await trading_switch_command())
-                return
-            # Check if command is trading command
             elif command == settings.bot_command_quote:
                 symbol = msg.split(" ")[1]
                 await notify(await get_quote(symbol))
-                return
-            # Check if command is balance command
             elif command == settings.bot_command_bal:
                 await notify(await account_balance_command())
-                return
-            # Check if command is position command
             elif command == settings.bot_command_pos:
                 await notify(await account_position_command())
-                return
-            # Check if command is restart command
             elif command == settings.bot_command_restart:
                 await restart_command()
-                return
-            # Check if command is invalid
             else:
                 logger.warning("invalid command: %s", command)
-                return
+            return
         # Order Process
         if bot_trading_switch is False:
             return
@@ -269,13 +257,11 @@ async def post_init():
 
 
 async def help_command():
-    # Notify the user of help message
-    help_message = f"""
+    return f"""
     🗿 {__version__}
     🏦 <code>/bal</code>
     📦 <code>buy BTCUSDT</code>
     🔀 <code>/trading</code>"""
-    return help_message
 
 
 async def account_balance_command():
