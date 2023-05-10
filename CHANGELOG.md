@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.1 (2023-05-10)
+### Fix
+* ⚡️ improve example with latest default value. ([`1267d4d`](https://github.com/mraniki/tt/commit/1267d4d298b16d0459ffb8690b672d229c6b4526))
+* ⚡️ refactor parse order and load_exchange ([`4fdb3b0`](https://github.com/mraniki/tt/commit/4fdb3b04a31f08bd03db8a6bb994c1841e43191b))
+
+### Other
+* Merge pull request #357 from mraniki/dev ([`484cf89`](https://github.com/mraniki/tt/commit/484cf89115ec86c81018edaa3b308996132014cb))
+* Merge pull request #358 from mraniki/sourcery/dev ([`24b1182`](https://github.com/mraniki/tt/commit/24b1182b3832433124f1c599af89a46a327b4084))
+* 'Refactored by Sourcery' ([`dfd9167`](https://github.com/mraniki/tt/commit/dfd91670574ed141a504740f8bfe250327202f21))
+
 ## v1.6.0 (2023-05-10)
 ### Feature
 * ✨ code reorg and simplification ([`7382acc`](https://github.com/mraniki/tt/commit/7382acc0593bab38f29f2d237af639bec838231d))
