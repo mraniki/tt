@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.2 (2023-05-10)
+### Fix
+* ⚡️ code cleanup ([`874c7bd`](https://github.com/mraniki/tt/commit/874c7bd74125b28858f1ab1f3851dd738cbefd94))
+
+### Other
+* Merge pull request #359 from mraniki/dev ([`b4dd67f`](https://github.com/mraniki/tt/commit/b4dd67fde5e4e50ebbfafe5df9915f438db261ee))
+
 ## v1.6.1 (2023-05-10)
 ### Fix
 * ⚡️ improve example with latest default value. ([`1267d4d`](https://github.com/mraniki/tt/commit/1267d4d298b16d0459ffb8690b672d229c6b4526))
