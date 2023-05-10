@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.0 (2023-05-10)
+### Feature
+* ✨ code reorg and simplification ([`7382acc`](https://github.com/mraniki/tt/commit/7382acc0593bab38f29f2d237af639bec838231d))
+
+### Other
+* Merge pull request #355 from mraniki/dev ([`b5a4462`](https://github.com/mraniki/tt/commit/b5a4462224bf60465799399d353b5085a055ba2e))
+* Merge pull request #356 from mraniki/sourcery/dev ([`d941dac`](https://github.com/mraniki/tt/commit/d941dac8380591ba45614d52ae100d37146d6991))
+* 'Refactored by Sourcery' ([`9666bc5`](https://github.com/mraniki/tt/commit/9666bc59cafccdf5b0451a651e39e2335b953c9b))
+
 ## v1.5.22 (2023-05-09)
 ### Fix
 * :zap: Update bot.py and default_settings.toml files. ([`eeb68e3`](https://github.com/mraniki/tt/commit/eeb68e38a4d339f491a9a5afd98392436c344ade))
