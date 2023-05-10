@@ -54,14 +54,13 @@ async def parse_message(msg):
                 logger.warning("invalid command: %s", command)
             return
         # Order Process
-        if bot_trading_switch:
-            if await fmo.search(msg):
-                # Order found
-                order = await fmo.get_order(msg)
-                logger.info("order: %s", order)
-                order = await execute_order(order)
-                if order:
-                    await notify(order)
+        if bot_trading_switch and await fmo.search(msg):
+            # Order found
+            order = await fmo.get_order(msg)
+            logger.info("order: %s", order)
+            order = await execute_order(order)
+            if order:
+                await notify(order)
 
     except Exception as e:
         logger.error("Error while parsing message: %s", e)
