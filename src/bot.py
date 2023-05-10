@@ -27,8 +27,6 @@ async def parse_message(msg):
     logger.info("message %s", msg)
 
     try:
-        # Initialize response
-        response = None
         # Initialize FindMyOrder object
         fmo = FindMyOrder()
 
@@ -40,41 +38,31 @@ async def parse_message(msg):
             command = (msg.split(" ")[0])[1:]
             # Check if command is help command
             if command == settings.bot_command_help:
-                response = await help_command()
-            # Check if command is trading command
+                await notify(await help_command())
             elif command == settings.bot_command_trading:
-                response = await trading_switch_command()
-            # Check if command is trading command
+                await notify(await trading_switch_command())
             elif command == settings.bot_command_quote:
-                param = msg.split(" ")[1]
-                response = await get_quote(param)
-            # Check if command is balance command
+                symbol = msg.split(" ")[1]
+                await notify(await get_quote(symbol))
             elif command == settings.bot_command_bal:
-                response = await account_balance_command()
-            # Check if command is position command
+                await notify(await account_balance_command())
             elif command == settings.bot_command_pos:
-                response = await account_position_command()
-                
-            # Check if command is restart command
+                await notify(await account_position_command())
             elif command == settings.bot_command_restart:
-                response = await restart_command()
-
-            # Check if command is invalid
+                await restart_command()
             else:
                 logger.warning("invalid command: %s", command)
-                return
-        # Check if message contains an order
+            return
+        # Order Process
         if bot_trading_switch is False:
             return
         if await fmo.search(msg):
             # Order found
             order = await fmo.get_order(msg)
             logger.info("order: %s", order)
-            response = await execute_order(order)
-
-        # Check if response is valid
-        if response:
-            await notify(response)
+            order = await execute_order(order)
+            if order:
+                await notify(order)
 
     except Exception as e:
         logger.error("Error while parsing message: %s", e)
@@ -88,6 +76,8 @@ async def notify(msg):
     if settings.discord_webhook_id:
         url = (f"discord://{str(settings.discord_webhook_id)}/"
                f"{str(settings.discord_webhook_token)}")
+        msg = msg.replace("<code>", "`")
+        msg = msg.replace("</code>", "`")
     elif settings.matrix_hostname:
         url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
                f"{settings.matrix_hostname[8:]}:443/"
@@ -113,18 +103,16 @@ async def load_exchange():
         try:
             if settings.cex_defaulttype != "SPOT":
                 exchange = client({
-                        'apiKey': settings.cex_api,
-                        'secret': settings.cex_secret,
-                        'options': {
-                                'defaultType': settings.cex_defaulttype,
-                                    },
-                        }
-                    )
+                    'apiKey': settings.cex_api,
+                    'secret': settings.cex_secret,
+                    'options': {
+                        'defaultType': settings.cex_defaulttype,
+                                }})
             else:
                 exchange = client({
-                        'apiKey': settings.cex_api,
-                        'secret': settings.cex_secret,
-                        })
+                    'apiKey': settings.cex_api,
+                    'secret': settings.cex_secret,
+                    })
             if settings.cex_testmode == 'True':
                 logger.info("sandbox setup")
                 exchange.set_sandbox_mode('enabled')
@@ -269,16 +257,11 @@ async def post_init():
 
 
 async def help_command():
-    # Notify the user of help message
-    help_message = """
+    return f"""
+    🗿 {__version__}
     🏦 <code>/bal</code>
     📦 <code>buy BTCUSDT</code>
     🔀 <code>/trading</code>"""
-    if settings.discord_webhook_id:
-        help_message = help_message.replace("<code>", "`")
-        help_message = help_message.replace("</code>", "`")
-    bot_menu_help = f"{__version__}\n{help_message}"
-    return f"{bot_menu_help}"
 
 
 async def account_balance_command():
