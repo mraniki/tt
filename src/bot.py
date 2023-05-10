@@ -54,9 +54,7 @@ async def parse_message(msg):
                 logger.warning("invalid command: %s", command)
             return
         # Order Process
-        if bot_trading_switch is False:
-            return
-        if await fmo.search(msg):
+        if bot_trading_switch and await fmo.search(msg):
             # Order found
             order = await fmo.get_order(msg)
             logger.info("order: %s", order)
@@ -98,9 +96,9 @@ async def load_exchange():
     global exchange
     global bot_trading_switch
     bot_trading_switch = True
-    if settings.cex_api:
-        client = getattr(ccxt, settings.cex_name)
-        try:
+    try:
+        if settings.cex_api:
+            client = getattr(ccxt, settings.cex_name)
             if settings.cex_defaulttype != "SPOT":
                 exchange = client({
                     'apiKey': settings.cex_api,
@@ -114,22 +112,16 @@ async def load_exchange():
                     'secret': settings.cex_secret,
                     })
             if settings.cex_testmode == 'True':
-                logger.info("sandbox setup")
                 exchange.set_sandbox_mode('enabled')
-            logger.debug("CEX: %s", exchange)
-        except Exception as e:
-            logger.warning("CEX: %s", e)
-
-    elif settings.dex_chain_id:
-
-        try:
+    except Exception as e:
+        logger.warning("CEX: %s", e)
+    try:
+        if settings.dex_chain_id:
             exchange = DexSwap()
-            logger.info("DEX %s", exchange)
-        except Exception as e:
-            logger.warning("DEX: %s", e)
-    else:
-        logger.error("no CEX/DEX config")
-        return
+            return
+    except Exception as e:
+        logger.warning("DEX: %s", e)
+    logger.error("no valid config")
 
 
 async def execute_order(order_params):
@@ -252,13 +244,12 @@ async def get_account_margin():
 
 async def post_init():
     # Notify of the bot's online status
-    logger.info("Bot is online %s", __version__)
-    await notify(f"Bot is online {__version__}")
+    logger.info("🗿 online %s", __version__)
+    await notify(f"🗿 online {__version__}")
 
 
 async def help_command():
-    return f"""
-    🗿 {__version__}
+    return f"""🗿 {__version__}
     🏦 <code>/bal</code>
     📦 <code>buy BTCUSDT</code>
     🔀 <code>/trading</code>"""
@@ -296,8 +287,8 @@ async def listener():
         await load_exchange()
     except Exception as e:
         logger.error("exchange not loaded: %s", e)
-    try:
-        while True:
+    while True:
+        try:
             if settings.discord_webhook_id:
                 # DISCORD
                 intents = discord.Intents.default()
@@ -359,11 +350,11 @@ async def listener():
 
                 await bot.run_until_disconnected()
             else:
-                logger.error("Check settings")
+                logger.warning("Check bot settings")
                 await asyncio.sleep(7200)
 
-    except Exception as e:
-        logger.error("Bot not started: %s", e)
+        except Exception as e:
+            logger.error("Bot not started: %s", e)
 
 
 # ⛓️API

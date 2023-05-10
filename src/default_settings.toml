@@ -1,9 +1,7 @@
 [default]
 loglevel = "INFO"
-
 host = "0.0.0.0"
 port = 8080
-
 bot_prefix = "/"
 bot_command_help = "help"
 bot_command_bal = "bal"
@@ -11,10 +9,9 @@ bot_command_pos = "pos"
 bot_command_trading = "trading"
 bot_command_restart = "restart"
 bot_command_quote = "q"
+bot_ignore = "⚠️ Bot 🗿 📊 🏦 ⬇️ ⬆️"
 
-bot_ignore = "⚠️ Bot 📊 🏦 ⬇️ ⬆️"
-# bot_trading_switch = "True"
-
+#BOT TOKEN 
 bot_token = ""
 bot_channel_id = ""
 
@@ -28,16 +25,7 @@ matrix_pass = ""
 discord_webhook_id = ""
 discord_webhook_token = ""
 
-dex_chain_id = 1
-dex_wallet_address = ""
-dex_private_key = ""
-
-dex_rpc = ""
-dex_router_contract_addr = "" 
-dex_block_explorer_api = ""
-dex_protocol = ""
-dex_1inch_url = ""
-
+# CEX config
 cex_name = ""
 cex_api = ""
 cex_secret = ""
@@ -46,11 +34,17 @@ cex_testmode = ""
 cex_defaulttype = ""
 cex_ordertype = ""
 
+#DXSP config
+dex_chain_id = 1
+dex_wallet_address = ""
+dex_private_key = ""
+dex_trading_slippage = 2
+
+# TRADING
 trading_quote_ccy = "USDT"
 trading_risk_amount = 10
 trading_stop_loss = 1000
 trading_take_profit = 1000
-trading_slippage = 2
 
 #FindMyOrder config
 action_identifier = "BUY SELL LONG SHORT TEST"
