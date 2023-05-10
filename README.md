@@ -35,7 +35,7 @@ If you like it, feel free to
 2) Get your 
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or 
     - DEX wallet address and private key and optional details for [Web3](https://github.com/ethereum/web3.py). You can use [chainlist](https://chainlist.org), [awesome rpc list](https://github.com/arddluma/awesome-list-rpc-nodes-providers) or [cointool](https://cointool.app/) for chain/RPC details
-3) Update the config (bot token and bot channel). Point or copy your config [settings.toml](config/example.toml) to the volume /app/)
+3) Update the config (bot token and bot channel). Point or copy your config [settings.toml](src/example_settings.toml) to the volume /app/)
 4) Deploy via:
     - docker `docker push mraniki/tt:latest` or `docker pull ghcr.io/mraniki/tt:latest`
     - locally `git clone https://github.com/mraniki/tt:main` && `pip install -r requirements.txt` 
@@ -45,7 +45,7 @@ If you like it, feel free to
 
 ## Config
 Quick start approach: Update the env with your parameters start as a docker service. Parameter can be added as env or as settings.toml 
-[example](config/example.toml)
+[example][(src/example_settings.toml)
 Config is using [dynaconf](https://www.dynaconf.com) module. refer to its documentation for more details or https://github.com/mraniki/tt/wiki/Configuration
 
 ## Bot commands
