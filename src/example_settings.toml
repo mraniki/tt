@@ -1,27 +1,29 @@
 [CEX01]
 # TELEGRAM BOT for Binance
 # ENV_FOR_DYNACONF="CEX01" # 
-bot_token = 'mybottoken'
-bot_channel_id = 'mychannel'
-telethon_api_id = '' #leave empty if you dont use it
-telethon_api_hash = '' #leave empty if you dont use it
-cex_name = 'binance' #example: 'binance' | leave empty if you dont use it 
-cex_api = 'asdhjaslkfjhksadhfklash' #example: '23490273592081719054' | leave empty if you dont use it 
-cex_secret = 'sadkfhklasdhjfklajsh' #example: '23490273592081719054' | leave empty if you dont use it 
-cex_password = '' #example: '23490273592081719054' | leave empty if you dont use it
-cex_testmode = '' #example: 'True' | leave empty if you dont use it
-cex_defaulttype = 'SPOT' #example: 'SPOT' | leave empty if you dont use it
-cex_ordertype = 'MARKET' #example: 'SMARKETPOT' | leave empty if you dont use it
+bot_token = '28409238409'
+bot_channel_id = '-110219301930'
+telethon_api_id = '3247289374982'
+telethon_api_hash = '993287490238409' 
+cex_name = 'binance' 
+cex_api = 'asdhjaslkfjhksadhfklash' 
+cex_secret = 'sadkfhklasdhjfklajsh' 
+cex_password = '' 
+cex_testmode = '' 
+cex_defaulttype = 'SPOT' 
+cex_ordertype = 'MARKET' 
+#FindMyOrder custom  config
+action_identifier = "BUY MOON"
 
 [DEX01]
 #DISCORD BOT on ethereum chain using uniswap v2 router and protocol
 # ENV_FOR_DYNACONF="DEX01" # 
-bot_token = 'mybottoken'
-bot_channel_id = 'mychannel'
-discord_webhook_id = '423423423' #leave empty if you dont use it
-discord_webhook_token = '32423423' #leave empty if you dont use it
-dex_chain_id = 1 #example: 10 | leave empty if you dont use it 
-dex_wallet_address = '4234234234' #example: '347987284729347' | leave empty if you dont use it 
-dex_private_key = '234234234' #example: '347987284729347' | leave empty if you dont use it 
-dex_block_explorer_api = '42342342342' #example: '234809283049820934' | leave empty if you dont use it 
-
+bot_token = '9238409284302'
+bot_channel_id = '293840284309'
+discord_webhook_id = '423423423' 
+discord_webhook_token = '32423423' 
+#DXSP custom  config
+dex_chain_id = 10
+dex_wallet_address = '4234234234'
+dex_private_key = '234234234'
+dex_block_explorer_api = '42342342342'
