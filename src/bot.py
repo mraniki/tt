@@ -92,7 +92,6 @@ async def notify(msg):
 
 async def load_exchange():
     """load_exchange."""
-    logger.info("Setting up exchange")
     global exchange
     global bot_trading_switch
     bot_trading_switch = True
@@ -113,21 +112,16 @@ async def load_exchange():
                     })
             if settings.cex_testmode == 'True':
                 exchange.set_sandbox_mode('enabled')
-    except Exception as e:
-        logger.warning("CEX: %s", e)
-    try:
         if settings.dex_chain_id:
             exchange = DexSwap()
             return
     except Exception as e:
-        logger.warning("DEX: %s", e)
-    logger.error("no valid config")
+        logger.warning("exchange: %s", e)
 
 
 async def execute_order(order_params):
     """execute_order."""
     if order_params is None:
-        logger.warning("execute_order: No order params provided")
         await notify("⚠️ Missing params")
         return
     action = order_params.get('action')
@@ -287,8 +281,8 @@ async def listener():
         await load_exchange()
     except Exception as e:
         logger.error("exchange not loaded: %s", e)
-    while True:
-        try:
+    try:
+        while True:
             if settings.discord_webhook_id:
                 # DISCORD
                 intents = discord.Intents.default()
@@ -353,8 +347,8 @@ async def listener():
                 logger.warning("Check bot settings")
                 await asyncio.sleep(7200)
 
-        except Exception as e:
-            logger.error("Bot not started: %s", e)
+    except Exception as e:
+        logger.error("Bot not started: %s", e)
 
 
 # ⛓️API
