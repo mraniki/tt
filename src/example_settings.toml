@@ -1,6 +1,6 @@
 [CEX01]
-# TELEGRAM BOT
-# ENV_FOR_DYNACONF="CEX01" # to load your specific env 
+# TELEGRAM BOT for Binance
+# ENV_FOR_DYNACONF="CEX01" # 
 bot_token = 'mybottoken'
 bot_channel_id = 'mychannel'
 telethon_api_id = '' #leave empty if you dont use it
@@ -14,14 +14,14 @@ cex_defaulttype = 'SPOT' #example: 'SPOT' | leave empty if you dont use it
 cex_ordertype = 'MARKET' #example: 'SMARKETPOT' | leave empty if you dont use it
 
 [DEX01]
-#DISCORD BOT
-# ENV_FOR_DYNACONF="DEX01" # to load your specific env 
+#DISCORD BOT on ethereum chain using uniswap v2 router and protocol
+# ENV_FOR_DYNACONF="DEX01" # 
 bot_token = 'mybottoken'
 bot_channel_id = 'mychannel'
-discord_webhook_id = '' #leave empty if you dont use it
-discord_webhook_token = '' #leave empty if you dont use it
+discord_webhook_id = '423423423' #leave empty if you dont use it
+discord_webhook_token = '32423423' #leave empty if you dont use it
 dex_chain_id = 1 #example: 10 | leave empty if you dont use it 
-dex_wallet_address = '' #example: '347987284729347' | leave empty if you dont use it 
-dex_private_key = '' #example: '347987284729347' | leave empty if you dont use it 
-dex_block_explorer_api = '' #example: '234809283049820934' | leave empty if you dont use it 
+dex_wallet_address = '4234234234' #example: '347987284729347' | leave empty if you dont use it 
+dex_private_key = '234234234' #example: '347987284729347' | leave empty if you dont use it 
+dex_block_explorer_api = '42342342342' #example: '234809283049820934' | leave empty if you dont use it 
 
