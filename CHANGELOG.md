@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.4 (2023-05-12)
+### Fix
+* ⚡️ cleanup code structure ([`ccc861d`](https://github.com/mraniki/tt/commit/ccc861deb8f75129d119808ffc41495db1b4b37e))
+* ⚡️ settings update ([`072158d`](https://github.com/mraniki/tt/commit/072158d8e806072cc69ac0a0c6bb14678ad8adab))
+
+### Other
+* Merge pull request #361 from mraniki/dev ([`6b2e157`](https://github.com/mraniki/tt/commit/6b2e157404262c8c8ef08ed7a7759d0a046c8b58))
+* Readme cleanup ([`a5d9fd4`](https://github.com/mraniki/tt/commit/a5d9fd4763bd266cdb282be62ea02859de533ea2))
+* Update README.md ([`86a54d3`](https://github.com/mraniki/tt/commit/86a54d3f775c7bf688e279492f433a524b654b7a))
+
 ## v1.6.3 (2023-05-10)
 ### Fix
 * ⚡️ update req ([`bfe146e`](https://github.com/mraniki/tt/commit/bfe146ebf3ccdfbab9c93e6bd30eabb4adb406e0))
