@@ -105,11 +105,10 @@ async def load_exchange():
                     'options': {
                         'defaultType': settings.cex_defaulttype,
                                 }})
-            else:
-                exchange = client({
-                    'apiKey': settings.cex_api,
-                    'secret': settings.cex_secret,
-                    })
+            exchange = client({
+                'apiKey': settings.cex_api,
+                'secret': settings.cex_secret,
+                })
             if settings.cex_testmode == 'True':
                 exchange.set_sandbox_mode('enabled')
         if settings.dex_chain_id:
