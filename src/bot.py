@@ -68,14 +68,16 @@ async def parse_message(msg):
 
 async def notify(msg):
     """💬 MESSAGING to user"""
+    logger.debug("msg %s", msg)
     if not msg:
         return
     apobj = apprise.Apprise()
     if settings.discord_webhook_id:
         url = (f"discord://{str(settings.discord_webhook_id)}/"
                f"{str(settings.discord_webhook_token)}")
-        msg = msg.replace("<code>", "`")
-        msg = msg.replace("</code>", "`")
+        if isinstance(msg, str):
+            msg = msg.replace("<code>", "`")
+            msg = msg.replace("</code>", "`")
     elif settings.matrix_hostname:
         url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
                f"{settings.matrix_hostname[8:]}:443/"
@@ -96,7 +98,7 @@ async def load_exchange():
     global bot_trading_switch
     bot_trading_switch = True
     try:
-        if settings.cex_api:
+        if settings.cex_api != '':
             client = getattr(ccxt, settings.cex_name)
             if settings.cex_defaulttype != "SPOT":
                 exchange = client({
@@ -111,9 +113,8 @@ async def load_exchange():
                 })
             if settings.cex_testmode == 'True':
                 exchange.set_sandbox_mode('enabled')
-        if settings.dex_chain_id:
+        if settings.dex_chain_id != '':
             exchange = DexSwap()
-            return
     except Exception as e:
         logger.warning("exchange: %s", e)
 
@@ -167,7 +168,7 @@ async def get_quote(symbol):
     """return quote"""
     try:
         if "DexSwap" in str(type(exchange)):
-            await exchange.get_quote(symbol)
+            return await exchange.get_quote(symbol)
         else:
             return
     except Exception as e:
