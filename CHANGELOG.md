@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.5 (2023-05-13)
+### Fix
+* ⚡️ req update ([`dde084e`](https://github.com/mraniki/tt/commit/dde084e6e754dd289328ae97b077fbce0ac17e97))
+
+### Other
+* Merge pull request #362 from mraniki/dev ([`6098359`](https://github.com/mraniki/tt/commit/6098359fd2841223ddcd323713e4e4c4da7a69cf))
+
 ## v1.6.4 (2023-05-12)
 ### Fix
 * ⚡️ cleanup code structure ([`ccc861d`](https://github.com/mraniki/tt/commit/ccc861deb8f75129d119808ffc41495db1b4b37e))
