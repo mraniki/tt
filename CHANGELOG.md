@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.6 (2023-05-13)
+### Fix
+* ⚡️Update README.md ([`2807f4c`](https://github.com/mraniki/tt/commit/2807f4c6e7a4cc3edc78c21d5bab74503d90fcb9))
+
+### Other
+* Merge pull request #364 from mraniki/dev ([`3238742`](https://github.com/mraniki/tt/commit/3238742778c05595513e5f418bceaa42d7fa2a8d))
+* ⚡ update requirements.txt ([`4e16d7f`](https://github.com/mraniki/tt/commit/4e16d7f253639a13487afcef08666daffe7c18a9))
+* Merge pull request #363 from mraniki/dev ([`643a2e2`](https://github.com/mraniki/tt/commit/643a2e2dd44db9b32c0c01eb62c96f8ca93abac1))
+* Update requirements.txt ([`1ba4374`](https://github.com/mraniki/tt/commit/1ba4374ca7c4cf523a51b836530c71d909be24f7))
+
 ## v1.6.5 (2023-05-13)
 ### Fix
 * ⚡️ req update ([`dde084e`](https://github.com/mraniki/tt/commit/dde084e6e754dd289328ae97b077fbce0ac17e97))
