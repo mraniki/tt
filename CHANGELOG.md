@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.7 (2023-05-13)
+### Fix
+* 🐛 quote module ([`4bf1cfc`](https://github.com/mraniki/tt/commit/4bf1cfc4162c1c07dea50bd20c5874ce6dbf774c))
+
+### Other
+* Merge pull request #365 from mraniki/dev ([`9d72ba6`](https://github.com/mraniki/tt/commit/9d72ba64d14aa45a82203e0992af5d5e891df3ba))
+
 ## v1.6.6 (2023-05-13)
 ### Fix
 * ⚡️Update README.md ([`2807f4c`](https://github.com/mraniki/tt/commit/2807f4c6e7a4cc3edc78c21d5bab74503d90fcb9))
