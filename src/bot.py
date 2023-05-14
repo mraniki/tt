@@ -169,7 +169,7 @@ async def get_quote(symbol):
     try:
         if "DexSwap" in str(type(exchange)):
             quote = "🦄 "
-            quote += await exchange.get_quote(symbol)
+            quote += str(await exchange.get_quote(symbol))
             return quote
         else:
             return
