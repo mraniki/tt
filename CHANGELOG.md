@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.9 (2023-05-14)
+### Fix
+* :bug: Fix: Convert quote to string before appending. ([`1e22af2`](https://github.com/mraniki/tt/commit/1e22af21f4316c165880dbe1c99eed483eb74d70))
+
+### Other
+* Merge pull request #368 from mraniki/dev ([`4f2b63e`](https://github.com/mraniki/tt/commit/4f2b63e7f5cca7f79ab44576ee5310a1aefe6323))
+
 ## v1.6.8 (2023-05-14)
 ### Fix
 * 🐛 quote module ([`3634121`](https://github.com/mraniki/tt/commit/363412173eb681ae10f1d7d72a299c381d3e42e9))
