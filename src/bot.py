@@ -167,12 +167,11 @@ async def execute_order(order_params):
 async def get_quote(symbol):
     """return quote"""
     try:
-        if "DexSwap" in str(type(exchange)):
-            quote = "🦄 "
-            quote += await exchange.get_quote(symbol)
-            return quote
-        else:
+        if "DexSwap" not in str(type(exchange)):
             return
+        quote = "🦄 "
+        quote += await exchange.get_quote(symbol)
+        return quote
     except Exception as e:
         logger.warning("get_quote: %s", e)
 
