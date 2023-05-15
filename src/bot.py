@@ -239,7 +239,7 @@ async def post_init():
 
 
 async def help_command():
-    await notify(settings.bot_help_msg)
+    return settings.bot_msg_help
 
 
 async def account_balance_command():
