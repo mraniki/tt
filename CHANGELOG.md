@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.14 (2023-05-15)
+### Fix
+* ⚡️Update requirements.txt ([`56a994e`](https://github.com/mraniki/tt/commit/56a994ee3c198161e7a22b046e7c086449a66c17))
+
 ## v1.6.13 (2023-05-15)
 ### Fix
 * ⚡️Update requirements.txt ([`54076d0`](https://github.com/mraniki/tt/commit/54076d0983da852877c6e799fc065fe18633b966))
