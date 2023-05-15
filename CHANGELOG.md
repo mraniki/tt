@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.12 (2023-05-15)
+### Fix
+* ⚡️ example update ([`9947d26`](https://github.com/mraniki/tt/commit/9947d260a6303b6686fbf6e8ac28739b6dccc4ff))
+* ⚡️ added quote for cex ([`041daa7`](https://github.com/mraniki/tt/commit/041daa74f760506700739b37d65d2e924095dcd3))
+* ⚡️ improve setting example ([`141252d`](https://github.com/mraniki/tt/commit/141252d90ecd29a4463191d206df2c3261aea7e9))
+
+### Other
+* Merge pull request #373 from mraniki/dev ([`d39f9c7`](https://github.com/mraniki/tt/commit/d39f9c77a9401e98990ab8dc9ca806f4222ffa43))
+* Cex client ([`8e80850`](https://github.com/mraniki/tt/commit/8e80850aa6f8019909c25fec4011de8fce1a4261))
+
 ## v1.6.11 (2023-05-15)
 ### Fix
 * ⚡️ small change for quote ([`49f1132`](https://github.com/mraniki/tt/commit/49f11329ca542aa243b087dc558b31d1c1715698))
