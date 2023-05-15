@@ -38,7 +38,7 @@ async def parse_message(msg):
             command = (msg.split(" ")[0])[1:]
             # Check if command is help command
             if command == settings.bot_command_help:
-                await notify(await help_command())
+                await notify(settings.bot_msg_help)
             elif command == settings.bot_command_trading:
                 await notify(await trading_switch_command())
             elif command == settings.bot_command_quote:
@@ -164,9 +164,7 @@ async def get_quote(symbol):
     """return quote"""
     try:
         if "DexSwap" in str(type(exchange)):
-            quote = "🦄 "
-            quote += str(await exchange.get_quote(symbol))
-            return quote
+            return f"🦄 {await exchange.get_quote(symbol)}"
         else:
             return
     except Exception as e:
@@ -239,9 +237,6 @@ async def post_init():
     logger.info("🗿 online %s", __version__)
     await notify(f"🗿 online {__version__}")
 
-
-async def help_command():
-    await notify(settings.bot_help_msg)
 
 
 async def account_balance_command():

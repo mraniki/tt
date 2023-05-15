@@ -10,7 +10,7 @@ bot_command_trading = "trading"
 bot_command_restart = "restart"
 bot_command_quote = "q"
 bot_ignore = "⚠️ Bot 🗿 📊 🏦 ⬇️ ⬆️"
-bot_help_msg = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
+bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
 
 # --------------------------
 
