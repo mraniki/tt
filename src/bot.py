@@ -166,7 +166,7 @@ async def get_quote(symbol):
         if "DexSwap" in str(type(exchange)):
             return f"🦄 {await exchange.get_quote(symbol)}"
         else:
-            return
+            return f"🏦 {await exchange.fetchTicker (symbol)}"
     except Exception as e:
         logger.warning("get_quote: %s", e)
 
