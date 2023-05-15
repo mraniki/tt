@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.10 (2023-05-15)
+### Fix
+* ⚡️ moving help message to settings ([`054ad43`](https://github.com/mraniki/tt/commit/054ad434ff795b0ff6148c701651c13f9846b68e))
+
+### Other
+* Merge pull request #370 from mraniki/dev ([`832ad70`](https://github.com/mraniki/tt/commit/832ad706d294037acbadac638df9297215d90681))
+
 ## v1.6.9 (2023-05-14)
 ### Fix
 * :bug: Fix: Convert quote to string before appending. ([`1e22af2`](https://github.com/mraniki/tt/commit/1e22af21f4316c165880dbe1c99eed483eb74d70))
