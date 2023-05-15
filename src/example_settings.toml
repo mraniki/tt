@@ -1,4 +1,4 @@
-[CEX01]
+[CEX01] #CEX Minimum config
 # TELEGRAM BOT for Binance
 # ENV_FOR_DYNACONF="CEX01" # 
 bot_token = '28409238409'
@@ -8,22 +8,60 @@ telethon_api_hash = '993287490238409'
 cex_name = 'binance' 
 cex_api = 'asdhjaslkfjhksadhfklash' 
 cex_secret = 'sadkfhklasdhjfklajsh' 
-cex_password = '' 
-cex_testmode = '' 
 cex_defaulttype = 'SPOT' 
-cex_ordertype = 'MARKET' 
+cex_ordertype = 'MARKET'
 #FindMyOrder custom  config
 action_identifier = "BUY MOON"
 
-[DEX01]
+[DEX01] #DEX Minimum config
 #DISCORD BOT on ethereum chain using uniswap v2 router and protocol
 # ENV_FOR_DYNACONF="DEX01" # 
 bot_token = '9238409284302'
 bot_channel_id = '293840284309'
 discord_webhook_id = '423423423' 
 discord_webhook_token = '32423423' 
-#DXSP custom  config
-dex_chain_id = 10
 dex_wallet_address = '4234234234'
 dex_private_key = '234234234'
 dex_block_explorer_api = '42342342342'
+
+
+#example to modify predefined config for TT
+# bot_command_help = "taimako"
+# bot_command_bal = "balas"
+# bot_command_pos = "wuri"
+# #example to modify predefined message
+# bot_msg_help = "🏦 <code>/baki</code> 📦 <code>kununua BTCUSDT</code> 🔀 <code>/biashara</code>"
+
+#example to modify predefined config for DXSP
+# headers = {User-Agent= 'Mozilla/5.0'}
+# #📝tokenlist
+# token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
+# token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
+# token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+# #📝trading setup
+# trading_quote_ccy = "USDT"
+# trading_risk_amount = 10 # 10% of the position
+# dex_trading_slippage = 2 # 2 % slippage
+# #user settings
+# dex_wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" #this is an example
+# dex_private_key = "0x111111111117dc0aaaaaa0fa6a738034aaaa302" #this is an example
+# #chain_1 #see below for other chain ids or use https://chainlist.org to overwrite settings
+# dex_chain_id = 1
+# dex_protocol_type = "uniswap_v2" #0x | 1inch | uniswap_v3
+# dex_rpc = "https://rpc.ankr.com/eth"
+# dex_block_explorer_url = "https://api.etherscan.io/api?"
+# dex_block_explorer_api =  "798437294880920392"  #this is an example
+# dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" 
+# #protocol specific
+# #🦄1inch
+# dex_1inch_url = "https://api.1inch.exchange/v5.0/"
+# dex_1inch_limit_url = "https://limit-orders.1inch.io/v3.0/"
+# #0️⃣0x
+# dex_0x_url = "https://api.0x.org/mainnet/"
+# dex_0x_api_key = "" 
+# #🪐apollo
+# dex_apollo_url = "https://fapi.apollox.finance/"
+# dex_apollo_spot_api_key = ""
+# dex_apollo_spot_api_secret = ""
+# dex_apollo_future_api_key = ""
+# dex_apollo_future_api_secret = ""
