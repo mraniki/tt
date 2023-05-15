@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.11 (2023-05-15)
+### Fix
+* ⚡️ small change for quote ([`49f1132`](https://github.com/mraniki/tt/commit/49f11329ca542aa243b087dc558b31d1c1715698))
+* 🐛 help message ([`5c3ca88`](https://github.com/mraniki/tt/commit/5c3ca882d1f026031f2ed6b92b6f7c01d393fd39))
+
+### Other
+* Merge pull request #372 from mraniki/dev ([`9d7f22f`](https://github.com/mraniki/tt/commit/9d7f22ff2f64be813774d3794519a34345ce4759))
+* 🎨 code refactor for help ([`bd88ef3`](https://github.com/mraniki/tt/commit/bd88ef385cfbcd43b63782d6939eb6befe0178a5))
+* Merge pull request #371 from mraniki/sourcery/dev ([`2f3cbbe`](https://github.com/mraniki/tt/commit/2f3cbbe41b675055c70202c3bb06771ded4813ad))
+* 'Refactored by Sourcery' ([`6b741a9`](https://github.com/mraniki/tt/commit/6b741a904b819634fe07747c234bf595f284d003))
+
 ## v1.6.10 (2023-05-15)
 ### Fix
 * ⚡️ moving help message to settings ([`054ad43`](https://github.com/mraniki/tt/commit/054ad434ff795b0ff6148c701651c13f9846b68e))
