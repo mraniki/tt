@@ -165,7 +165,7 @@ async def get_quote(symbol):
     """return quote"""
     try:
         if "DexSwap" in str(type(exchange)):
-            return f"🦄 {await exchange.get_quote(symbol)}"
+            return (await exchange.get_quote(symbol))
         else:
             return f"🏦 {await exchange.fetchTicker (symbol)}"
     except Exception as e:
@@ -237,7 +237,6 @@ async def post_init():
     # Notify of the bot's online status
     logger.info("🗿 online %s", __version__)
     await notify(f"🗿 online {__version__}")
-
 
 
 async def account_balance_command():
