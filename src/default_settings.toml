@@ -10,8 +10,10 @@ bot_command_trading = "trading"
 bot_command_restart = "restart"
 bot_command_quote = "q"
 bot_ignore = "⚠️ Bot 🗿 📊 🏦 ⬇️ ⬆️"
+bot_help_msg = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
 
-#BOT TOKEN 
+# --------------------------
+
 bot_token = ""
 bot_channel_id = ""
 
@@ -31,8 +33,8 @@ cex_api = ""
 cex_secret = ""
 cex_password = ""
 cex_testmode = ""
-cex_defaulttype = ""
-cex_ordertype = ""
+cex_defaulttype = "spot"
+cex_ordertype = "market"
 
 #DXSP config
 dex_chain_id = 1

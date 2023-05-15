@@ -87,7 +87,7 @@ async def notify(msg):
                f"{str(settings.bot_channel_id)}")
     try:
         apobj.add(url)
-        await apobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
+        await apobj.async_notify(body=str(msg), body_format=NotifyFormat.HTML)
     except Exception as e:
         logger.error("%s not sent: %s", msg, e)
 
@@ -98,20 +98,16 @@ async def load_exchange():
     global bot_trading_switch
     bot_trading_switch = True
     try:
-        if settings.cex_api != '':
+        if settings.cex_name != '':
             client = getattr(ccxt, settings.cex_name)
-            if settings.cex_defaulttype != "SPOT":
-                exchange = client({
-                    'apiKey': settings.cex_api,
-                    'secret': settings.cex_secret,
-                    'options': {
-                        'defaultType': settings.cex_defaulttype,
-                                }})
             exchange = client({
                 'apiKey': settings.cex_api,
                 'secret': settings.cex_secret,
-                })
-            if settings.cex_testmode == 'True':
+                'password': (settings.cex_password or ''),
+                'options': {
+                    'defaultType': settings.cex_defaulttype,
+                            }})
+            if settings.cex_testmode:
                 exchange.set_sandbox_mode('enabled')
         if settings.dex_chain_id != '':
             exchange = DexSwap()
@@ -245,10 +241,7 @@ async def post_init():
 
 
 async def help_command():
-    return f"""🗿 {__version__}
-    🏦 <code>/bal</code>
-    📦 <code>buy BTCUSDT</code>
-    🔀 <code>/trading</code>"""
+    await notify(settings.bot_help_msg)
 
 
 async def account_balance_command():
