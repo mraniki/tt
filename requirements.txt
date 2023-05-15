@@ -7,4 +7,4 @@ py-cord>=2.4.1
 simplematrixbotlib
 ccxt>=3.0.75
 findmyorder>=1.3.8
-dxsp>=2.2.10
+dxsp>=2.2.11
