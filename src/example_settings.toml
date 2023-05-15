@@ -11,7 +11,7 @@ cex_secret = 'sadkfhklasdhjfklajsh'
 cex_password = '' 
 cex_testmode = '' 
 cex_defaulttype = 'SPOT' 
-cex_ordertype = 'MARKET' 
+cex_ordertype = 'MARKET'
 #FindMyOrder custom  config
 action_identifier = "BUY MOON"
 
@@ -27,3 +27,11 @@ dex_chain_id = 10
 dex_wallet_address = '4234234234'
 dex_private_key = '234234234'
 dex_block_explorer_api = '42342342342'
+
+
+#example to modify predefined config
+# bot_command_help = "taimako"
+# bot_command_bal = "balas"
+# bot_command_pos = "wuri"
+# #example to modify predefined message
+# bot_msg_help = "🏦 <code>/baki</code> 📦 <code>kununua BTCUSDT</code> 🔀 <code>/biashara</code>"
