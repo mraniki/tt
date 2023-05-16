@@ -40,7 +40,7 @@ pythonpath = [
 ]
 
 #patch_emoji
-# 🐛🚑🤖🏁🔒👽🔍💬🥅⚡♿🍏🐧
+# 🐛🚑🔒👽🔍💬🥅⚡♿🍏🐧🤖🏁
 #:ambulance:, :lock:, :bug:, :zap:, :goal_net:, :alien:, :wheelchair:, :speech_balloon:, :mag:, :apple:, :penguin:, :checkered_flag:, :robot:, :green_apple
 #minor_emoji
 #✨🥚🚸📱💄📈
