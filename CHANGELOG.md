@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.15 (2023-05-18)
+### Fix
+* :zap: Fix get_account_margin function ([`a955333`](https://github.com/mraniki/tt/commit/a955333894c7099828e7d8a60e99a6b3f4546f60))
+
+### Other
+* Merge pull request #375 from mraniki/dev ([`0927892`](https://github.com/mraniki/tt/commit/0927892d84e7b8338cde7c2ca5bedf754eec2264))
+* Merge pull request #374 from mraniki/dev ([`a0c593f`](https://github.com/mraniki/tt/commit/a0c593f3cc3bfe459735f66e9ecf4d7e0e98c048))
+* 💬　docs ░ ([`9e2cb58`](https://github.com/mraniki/tt/commit/9e2cb58831a010e7235b6786c565e5a2cf313aad))
+* 💬　docs ░ ([`4dd6dcc`](https://github.com/mraniki/tt/commit/4dd6dcc7cb70c38bf2ada3b5c8958a2fb6b0176f))
+
 ## v1.6.14 (2023-05-15)
 ### Fix
 * ⚡️Update requirements.txt ([`56a994e`](https://github.com/mraniki/tt/commit/56a994ee3c198161e7a22b046e7c086449a66c17))
