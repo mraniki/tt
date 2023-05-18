@@ -218,6 +218,7 @@ async def get_account_position():
             open_positions = exchange.fetch_positions()
             open_positions = [p for p in open_positions if p['type'] == 'open']
         position += open_positions
+        position += await get_account_margin()
         return position
     except Exception as e:
         logger.warning("account_position: %s", e)
@@ -225,7 +226,14 @@ async def get_account_position():
 
 async def get_account_margin():
     try:
-        return
+        margin = "\n🪙 margin\n"
+        if "DexSwap" in str(type(exchange)):
+            margin += 0
+        else:
+            margin += await exchange.fetch_balance({
+                'type': 'margin',
+                })
+        return margin
     except Exception as e:
         logger.warning("account_margin: %s", e)
 
