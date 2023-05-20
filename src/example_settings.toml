@@ -8,10 +8,6 @@ telethon_api_hash = '993287490238409'
 cex_name = 'binance' 
 cex_api = 'asdhjaslkfjhksadhfklash' 
 cex_secret = 'sadkfhklasdhjfklajsh' 
-cex_defaulttype = 'SPOT' 
-cex_ordertype = 'MARKET'
-#FindMyOrder custom  config
-action_identifier = "BUY MOON"
 
 [DEX01] #DEX Minimum config
 #DISCORD BOT on ethereum chain using uniswap v2 router and protocol
