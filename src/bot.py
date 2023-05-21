@@ -268,10 +268,7 @@ async def init_message():
         start_up += f"💱 {type(exchange).__name__}"
     except Exception as e:
         logger.warning("start_up: %s", e)
-        pass
     return start_up
-    logger.info(start_up)
-    await notify(start_up)
 
 
 async def post_init():
