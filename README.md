@@ -40,11 +40,8 @@ Place order for CEFI or DEFI exchanges and query balance. Deploy it via docker o
 
 ![Alt](https://repobeats.axiom.co/api/embed/a2d03eaf66dab33c82d52170d8ebfb0c479590a9.svg "Repobeats analytics image")
 
-</details> 
  
-<details>
- 
-<summary><h2> Libraries </h2></summary>
+<h3> Libraries </h3>
 
 [![telethon](https://badgen.net/badge/icon/telethon?icon=telegram&label)](https://github.com/LonamiWebs/Telethon)
 [![pycord](https://badgen.net/badge/icon/pycord/purple?icon=discord&label)](https://github.com/Pycord-Development/pycord)
