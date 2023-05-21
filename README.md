@@ -54,13 +54,8 @@
 [![apprise](https://badgen.net/badge/icon/apprise/black?icon=libraries&label)](https://github.com/caronc/apprise) [![FastAPI](https://badgen.net/badge/icon/fastapi/black?icon=libraries&label)](https://github.com/tiangolo/fastapi)
 </details> 
 
-<h3><a href="https://github.com/mraniki/tt/wiki/Screenshots">📷 More Screenshots</a></h3>
-<a href="https://github.com/mraniki/tt/wiki/Screenshots">
+<h3><a href="https://github.com/mraniki/tt/wiki/Screenshots">📷 Screenshots</a></h3>
 <picture>
-  <img alt="screenshot" src="https://user-images.githubusercontent.com/8766259/222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3.png" width=194>
-</picture></a>
-
-<picture>
-  <source srcset="https://user-images.githubusercontent.com/8766259/222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3.png" media="(min-width: 194px)" />
+  <img alt="screenshot" src="https://user-images.githubusercontent.com/8766259/222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3.png" width="194" />
 </picture>
 
