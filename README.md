@@ -1,6 +1,5 @@
 # Talky Trader
-CEX & DEX integration with multi messaging platform support (Telegram, Matrix and Discord).<br>
-Place order for CEFI or DEFI exchanges and query balance. Deploy it via docker on selfhosted platform or PaaS.<br>
+![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=100&size=13&pause=1000&color=027CF9&multiline=true&repeat=false&width=500&height=70&lines=CEX+%26+DEX+integration+with+multi+messaging+platform+support.;Place+order+for+CEFI+or+DEFI+exchanges+and+query+balance.;Deploy+it+via+docker+on+selfhosted+platform+or+PaaS.)
 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)
 
@@ -55,8 +54,5 @@ Place order for CEFI or DEFI exchanges and query balance. Deploy it via docker o
 [![apprise](https://badgen.net/badge/icon/apprise/black?icon=libraries&label)](https://github.com/caronc/apprise) [![FastAPI](https://badgen.net/badge/icon/fastapi/black?icon=libraries&label)](https://github.com/tiangolo/fastapi)
 </details> 
 
-<h3><a href="https://github.com/mraniki/tt/wiki/Screenshots">📷 More Screenshots</a></h3>
-<a href="https://github.com/mraniki/tt/wiki/Screenshots">
-<picture>
-  <img alt="screenshot" src="https://user-images.githubusercontent.com/8766259/222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3.png" width=194>
-</picture></a>
+<h3><a href="https://github.com/mraniki/tt/wiki/Screenshots">📷 Screenshots</a></h3>
+<img width="194" alt="222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3" src="https://github.com/mraniki/tt/assets/8766259/14cb1653-f6b4-44e7-b07c-d930060c7363">
