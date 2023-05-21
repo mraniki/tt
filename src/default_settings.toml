@@ -33,8 +33,8 @@ cex_api = ""
 cex_secret = ""
 cex_password = ""
 cex_testmode = ""
-cex_defaulttype = "spot"
-cex_ordertype = "market"
+cex_defaulttype = "SPOT"
+cex_ordertype = "MARKET"
 
 #DXSP config
 dex_chain_id = 1
