@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.16 (2023-05-21)
+### Fix
+* :zap:Update dockerfile ([`2664e50`](https://github.com/mraniki/tt/commit/2664e5024accb1b9737b00c316d1a848ca0ffd58))
+
+### Other
+* Merge pull request #377 from mraniki/dev ([`1e5d139`](https://github.com/mraniki/tt/commit/1e5d1391c2a6360958b9bb796c9dad7da67b2076))
+* Merge pull request #378 from mraniki/sourcery/dev ([`7cb414d`](https://github.com/mraniki/tt/commit/7cb414da46d2d4c3562114011606a07635c4f680))
+* 'Refactored by Sourcery' ([`32d26d2`](https://github.com/mraniki/tt/commit/32d26d24c51686e9913184eba7d8702b54f9e93b))
+* ✨ added ping, ip and message functions ([`9c9931c`](https://github.com/mraniki/tt/commit/9c9931c1567ed04a28efb04bf8523c333a4be5a5))
+* Merge pull request #376 from mraniki/dev ([`1246dea`](https://github.com/mraniki/tt/commit/1246dea50ffd53e36d8a72423d6efc6a25480245))
+* 💬 example update ([`a78751e`](https://github.com/mraniki/tt/commit/a78751eef2fec4faf98355082d80083a8e86fd89))
+
 ## v1.6.15 (2023-05-18)
 ### Fix
 * :zap: Fix get_account_margin function ([`a955333`](https://github.com/mraniki/tt/commit/a955333894c7099828e7d8a60e99a6b3f4546f60))
