@@ -7,6 +7,8 @@ import os
 import sys
 import asyncio
 import uvicorn
+import socket
+import ping3
 from fastapi import FastAPI
 
 import ccxt
@@ -90,6 +92,24 @@ async def notify(msg):
         await apobj.async_notify(body=str(msg), body_format=NotifyFormat.HTML)
     except Exception as e:
         logger.error("%s not sent: %s", msg, e)
+
+
+def get_host_ip() -> str:
+    """Returns the IP address of the host."""
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip_address = s.getsockname()[0]
+        s.close()
+        return ip_address
+    except Exception:
+        pass
+
+
+def get_ping(host: str = settings.ping) -> float:
+    """Returns  ping (in milliseconds)"""
+    response_time = ping3.ping(host, unit='ms')
+    return round(response_time, 3)
 
 
 async def load_exchange():
@@ -239,12 +259,22 @@ async def get_account_margin():
 
 
 # 🦾BOT ACTIONS
+async def init_message():
+    # Notify of the bot's online status
+    start_up = f"🗿 {__version__}\n"
+    try:
+        start_up += f"🕸️ {get_host_ip()}\n"
+        start_up += f"🏓 {get_ping()}\n"
+        start_up += f"💱 {type(exchange).__name__}"
+    except Exception as e:
+        logger.warning("start_up: %s", e)
+    return start_up
 
 
 async def post_init():
     # Notify of the bot's online status
-    logger.info("🗿 online %s", __version__)
-    await notify(f"🗿 online {__version__}")
+    logger.info(await init_message())
+    await notify(await init_message())
 
 
 async def account_balance_command():
@@ -374,16 +404,16 @@ async def shutdown_event():
 
 
 @app.get("/")
-def root():
+async def root():
     """Fastapi root"""
-    return {f"Bot is online {__version__}"}
+    return await init_message()
 
 
 @app.get("/health")
-def health_check():
+async def health_check():
     """fastapi health"""
     logger.info("Healthcheck")
-    return {f"Bot is online {__version__}"}
+    return await init_message()
 
 
 # 🙊TALKYTRADER

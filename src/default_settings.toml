@@ -2,6 +2,7 @@
 loglevel = "INFO"
 host = "0.0.0.0"
 port = 8080
+ping = "8.8.8.8"
 bot_prefix = "/"
 bot_command_help = "help"
 bot_command_bal = "bal"
@@ -9,7 +10,7 @@ bot_command_pos = "pos"
 bot_command_trading = "trading"
 bot_command_restart = "restart"
 bot_command_quote = "q"
-bot_ignore = "⚠️ Bot 🗿 📊 🏦 ⬇️ ⬆️"
+bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
 
 # --------------------------

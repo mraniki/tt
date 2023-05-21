@@ -1,8 +1,6 @@
-FROM python:3.10
+FROM python:3.11
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
 COPY ./src .
-EXPOSE 8443 8080
+RUN pip install -r requirements.txt
+EXPOSE 8080
 CMD [ "python", "./bot.py" ]
