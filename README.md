@@ -59,3 +59,8 @@
 <picture>
   <img alt="screenshot" src="https://user-images.githubusercontent.com/8766259/222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3.png" width=194>
 </picture></a>
+
+<picture>
+  <source srcset="https://user-images.githubusercontent.com/8766259/222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3.png" media="(min-width: 194px)" />
+</picture>
+
