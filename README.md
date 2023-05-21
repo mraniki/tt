@@ -54,11 +54,9 @@ Place order for CEFI or DEFI exchanges and query balance. Deploy it via docker o
 
 [![apprise](https://badgen.net/badge/icon/apprise/black?icon=libraries&label)](https://github.com/caronc/apprise) [![FastAPI](https://badgen.net/badge/icon/fastapi/black?icon=libraries&label)](https://github.com/tiangolo/fastapi)
 </details> 
- 
- 
-## 📷 Screenshots
 
-<img width="388" alt="Screenshot 2023-03-05 at 10 51 04" src="https://user-images.githubusercontent.com/8766259/222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3.png">
-
-[more screenshots](https://github.com/mraniki/tt/wiki/Screenshots)
-
+<h3><a href="https://github.com/mraniki/tt/wiki/Screenshots">📷 More Screenshots</a></h3>
+<a href="https://github.com/mraniki/tt/wiki/Screenshots">
+<picture>
+  <img alt="screenshot" src="https://user-images.githubusercontent.com/8766259/222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3.png" width=194>
+</picture></a>
