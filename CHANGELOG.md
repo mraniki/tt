@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.17 (2023-05-21)
+### Fix
+* :zap:Remove dxsp from requirements.txt ([`8198d83`](https://github.com/mraniki/tt/commit/8198d83da377c2c57d9a577188eeb25ca95c9d8d))
+
+### Other
+* Merge pull request #379 from mraniki/dev ([`b37d7d4`](https://github.com/mraniki/tt/commit/b37d7d4e109d8a69f3fbeb5dff1cd765950570e5))
+
 ## v1.6.16 (2023-05-21)
 ### Fix
 * :zap:Update dockerfile ([`2664e50`](https://github.com/mraniki/tt/commit/2664e5024accb1b9737b00c316d1a848ca0ffd58))
