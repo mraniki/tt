@@ -55,7 +55,4 @@
 </details> 
 
 <h3><a href="https://github.com/mraniki/tt/wiki/Screenshots">📷 Screenshots</a></h3>
-<picture>
-  <img alt="screenshot" src="https://user-images.githubusercontent.com/8766259/222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3.png" width="194" />
-</picture>
-
+<img width="194" alt="222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3" src="https://github.com/mraniki/tt/assets/8766259/14cb1653-f6b4-44e7-b07c-d930060c7363">
