@@ -12,7 +12,7 @@ readme = "README.md"
 "Issues" =  "https://github.com/mraniki/tt/issues"
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.11"
+python = "^3.9"
 pytest = "*"
 pytest-cov = "*"
 pytest-asyncio = "*"
