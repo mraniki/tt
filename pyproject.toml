@@ -33,12 +33,9 @@ build_command = false
 remove_dist = false
 commit_parser = "semantic_release.history.emoji_parser"
 use_textual_changelog_sections = true
-major_emoji = ":boom:"
-#major_emoji¶ #💥:boom:
-minor_emoji = ":sparkles:,:children_crossing:,:lipstick:,:iphone:,:egg:,:chart_with_upwards_trend:"
-#minor_emoji #✨🥚🚸📱💄📈
-patch_emoji = ":ambulance:,:lock:,:arrow_up:,:bug:,:zap:,:goal_net:,:alien:,:wheelchair:,:speech_balloon:,:mag:,:apple:,:penguin:,:checkered_flag:,:robot:,:green_apple:"
-#patch_emoji # 🐛🚑⚡🔒👽🔍💬🥅♿🍏🐧🏁🤖
+major_emoji = "💥,:boom:"
+minor_emoji = "✨,🥚,🚸,📱,💄,📈,:sparkles:,:children_crossing:,:lipstick:,:iphone:,:egg:,:chart_with_upwards_trend:"
+patch_emoji = "🎨,🐛,🚑,⚡,🔥,🚨,♻️,🔧,⬆️,🩹,👷,📝,🔒,👽,🔍,💬,🥅,✅,♿,🐳,🍏,🐧,🏁,🤖,:white_check_mark:,:arrow_up:,:recycle:,:fire,:whale:,:art:,:ambulance:,:lock:,:arrow_up:,:bug:,:zap:,:goal_net:,:alien:,:wheelchair:,:speech_balloon:,:mag:,:apple:,:penguin:,:checkered_flag:,:robot:,:green_apple:,:rotating_light:,:construction_worker:"
 
 [tool.pytest.ini_options]
 pythonpath = [
