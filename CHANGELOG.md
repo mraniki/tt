@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.20 (2023-05-24)
+### Fix
+* 🐳 dockerfile change ([`8a8402f`](https://github.com/mraniki/tt/commit/8a8402fbd89a1d2254a3c8abe6522d9b4363f413))
+
+### Other
+* Merge pull request #389 from mraniki/dev ([`dc5875c`](https://github.com/mraniki/tt/commit/dc5875c449a8918afb20f58a6d96366ca3762f56))
+* Update Dockerfile ([`56e3f19`](https://github.com/mraniki/tt/commit/56e3f199996896962d517cb5d9740cb28bf105b2))
+
 ## v1.6.19 (2023-05-24)
 ### Fix
 * 🔧 config ([`fea913d`](https://github.com/mraniki/tt/commit/fea913d16eaa12bcbd0ccdf67c222d9c5f65c471))
