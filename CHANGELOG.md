@@ -2,6 +2,39 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.19 (2023-05-24)
+### Fix
+* 🔧 config ([`fea913d`](https://github.com/mraniki/tt/commit/fea913d16eaa12bcbd0ccdf67c222d9c5f65c471))
+* 👷 CI Change ([`269c3ca`](https://github.com/mraniki/tt/commit/269c3caa2e9fb6d98c003700e86865a1aedea4b4))
+* 👷 CI Change ([`68e8692`](https://github.com/mraniki/tt/commit/68e86927de1b5564df61fe599eebea13a2da9e0c))
+* ⚡ python update ([`d58571d`](https://github.com/mraniki/tt/commit/d58571d5c3a818336eb0b297a27d624c595db0ba))
+* 🐛 updated env ([`9b03c2d`](https://github.com/mraniki/tt/commit/9b03c2db6a0c2cb94b4c905e4471a1c6ae31fb5d))
+* 🐛 missed settings.toml in dockerfile ([`f6df3cd`](https://github.com/mraniki/tt/commit/f6df3cdd7f2ef1ab0d64201e6a65fd58d79d0446))
+* 🐛 env file ([`d8e3dcd`](https://github.com/mraniki/tt/commit/d8e3dcdbb8d28440da4ee56ba0cb57c80911a0af))
+* 🐛 reorder env loading ([`cc73a55`](https://github.com/mraniki/tt/commit/cc73a55833a9ca03d9260f4a36568c33998a570c))
+* 🐛 env file update for example and autoload ([`1c9c5d1`](https://github.com/mraniki/tt/commit/1c9c5d1b8dc1a949147e595c6304574ba96e29b7))
+* ⚡ added ping in env file ([`e5096e5`](https://github.com/mraniki/tt/commit/e5096e57f04684fa189ebfc95c879e2755d2a1ac))
+* ⚡ dockerfile including env ([`69d260a`](https://github.com/mraniki/tt/commit/69d260a75db69b9884bbd261c7e7c3f05688288b))
+
+### Other
+* Merge pull request #388 from mraniki/dev ([`80a9e99`](https://github.com/mraniki/tt/commit/80a9e99c687fbb4d48012d7b224ae9a672ce59aa))
+* Merge pull request #387 from mraniki/dev ([`f0965e5`](https://github.com/mraniki/tt/commit/f0965e5b3a8f602ca958639d9132dd0062356f3f))
+* Merge branch 'main' into dev ([`9d68549`](https://github.com/mraniki/tt/commit/9d68549ead99c781195e43a37774e27bb3589bb5))
+* Merge pull request #386 from mraniki/dev ([`8032a93`](https://github.com/mraniki/tt/commit/8032a93dd40c0bc5a720c8070a53ccbb8a890000))
+* Merge pull request #385 from mraniki/dev ([`64ccc1d`](https://github.com/mraniki/tt/commit/64ccc1d0ee32063b91ab830bb920b8327f43616e))
+* Merge pull request #384 from mraniki/dev ([`9f4ea7b`](https://github.com/mraniki/tt/commit/9f4ea7bdc70018ad6292db28e547e2b665125f98))
+* Merge pull request #383 from mraniki/dev ([`a1dfd66`](https://github.com/mraniki/tt/commit/a1dfd661dd5842ed3d04518ba8a0950ff1fe3a9e))
+* Merge pull request #382 from mraniki/dev ([`abb913f`](https://github.com/mraniki/tt/commit/abb913f79abff25c92c1ac42756653d22149dc30))
+* Update README.md ([`0dabf90`](https://github.com/mraniki/tt/commit/0dabf90d0ded03ede679cc045e2a622ce0456d24))
+* Update README.md ([`0b066a1`](https://github.com/mraniki/tt/commit/0b066a12fff785064c4389c286a7ce43c9c2ef99))
+* Update README.md ([`7f6f6b9`](https://github.com/mraniki/tt/commit/7f6f6b92ed95afac37eea070d0b7b7c6af853759))
+* Update README.md ([`0ac5200`](https://github.com/mraniki/tt/commit/0ac520064b329253bc6ca61ea2ea449801bb020f))
+* Merge pull request #381 from mraniki/dev ([`ff6cf0b`](https://github.com/mraniki/tt/commit/ff6cf0b90e5159d6bd6c21db9e51d10e3db85cdf))
+* Update README.md ([`8e1e3ce`](https://github.com/mraniki/tt/commit/8e1e3ce5af674a28cf465a2af3547eb2b15b5499))
+* Update README.md ([`56e9548`](https://github.com/mraniki/tt/commit/56e95488772e782d47df7c9a8b6c651e7da45970))
+* Update README.md ([`4b964c8`](https://github.com/mraniki/tt/commit/4b964c84554942e1bc3ac3bbec2cc33ea443ead4))
+* Update README.md ([`592dfce`](https://github.com/mraniki/tt/commit/592dfcea339d899a5491f21a661897e162c76fad))
+
 ## v1.6.18 (2023-05-21)
 ### Fix
 * :zap: dockerfile update ([`2540861`](https://github.com/mraniki/tt/commit/2540861e92d877e697b39b2eb2fb9705b424e364))
