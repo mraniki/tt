@@ -145,8 +145,11 @@ async def execute_order(order_params):
     instrument = order_params.get('instrument')
     quantity = order_params.get('quantity', settings.trading_risk_amount)
     try:
-        trade_confirmation = (f"⬇️ {instrument}" if (action == "SELL")
-                              else f"⬆️ {instrument}\n")
+        if action is None or instrument is None:
+            return
+        trade_confirmation = (
+            f"⬇️ {instrument}" if (action == "SELL")
+            else f"⬆️ {instrument}\n")
         if "DexSwap" in str(type(exchange)):
             trade = await exchange.execute_order(order_params)
             if trade:
