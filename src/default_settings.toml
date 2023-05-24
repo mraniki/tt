@@ -28,7 +28,7 @@ matrix_pass = ""
 discord_webhook_id = ""
 discord_webhook_token = ""
 
-# CEX config
+# CEX config for CeFi
 cex_name = ""
 cex_api = ""
 cex_secret = ""
@@ -37,7 +37,11 @@ cex_testmode = ""
 cex_defaulttype = "SPOT"
 cex_ordertype = "MARKET"
 
-#DXSP config
+#MT/IB config for CeFi
+# cex_host = ""
+# cex_account = ""
+
+#DXSP config for TEFI
 dex_chain_id = 1
 dex_wallet_address = ""
 dex_private_key = ""
