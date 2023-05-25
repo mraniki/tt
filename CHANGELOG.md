@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.21 (2023-05-25)
+### Fix
+* ⬆️ Update requirements.txt ([`7c2c55b`](https://github.com/mraniki/tt/commit/7c2c55b44fd0613ea192892cf2dac3ab4492de71))
+
 ## v1.6.20 (2023-05-24)
 ### Fix
 * 🐳 dockerfile change ([`8a8402f`](https://github.com/mraniki/tt/commit/8a8402fbd89a1d2254a3c8abe6522d9b4363f413))
