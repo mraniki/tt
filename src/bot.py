@@ -277,6 +277,7 @@ async def init_message():
         start_up += f"🕸️ {get_host_ip()}\n"
         start_up += f"🏓 {get_ping()}\n"
         start_up += f"💱 {type(exchange).__name__}"
+        start_up += f"🪪 {get_account()}\n"
     except Exception as e:
         logger.warning("start_up: %s", e)
     return start_up
