@@ -198,10 +198,7 @@ async def get_quote(symbol):
 async def get_account():
     """return account."""
     try:
-        if "DexSwap" in str(type(exchange)):
-            return exchange.account
-        else:
-            return exchange.uid
+        return exchange.account if "DexSwap" in str(type(exchange)) else exchange.uid
     except Exception as e:
         logger.warning("get_account: %s", e)
 
