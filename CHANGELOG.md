@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.2 (2023-05-26)
+### Fix
+* :bug: Update bot.py with exchange name ([`170ec98`](https://github.com/mraniki/tt/commit/170ec98c8fc6eff97456c31a4933dcb7df0de5c7))
+
+### Other
+* Merge pull request #393 from mraniki/dev ([`801bf48`](https://github.com/mraniki/tt/commit/801bf4873c0b91f015fc9e4b363a70b1ebffed5f))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`44a47e0`](https://github.com/mraniki/tt/commit/44a47e0e7bb91872a13573361d67361e0108c069))
+
 ## v1.7.1 (2023-05-26)
 ### Fix
 * :zap:Add get_account() to init_message() ([`ba208e2`](https://github.com/mraniki/tt/commit/ba208e2f82f1c385fab9e83710a7bf2d0e34000b))
