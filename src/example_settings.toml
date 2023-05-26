@@ -1,8 +1,8 @@
 [CEX01] #CEX Minimum config
 # TELEGRAM BOT for Binance
 # ENV_FOR_DYNACONF="CEX01" # 
-bot_token = '28409238409'
-bot_channel_id = '-110219301930'
+bot_token = '24240242424'
+bot_channel_id = '-110219301110'
 telethon_api_id = '3247289374982'
 telethon_api_hash = '993287490238409' 
 cex_name = 'binance' 
