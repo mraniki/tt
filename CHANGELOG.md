@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.0 (2023-05-26)
+### Feature
+* 🥚 Added get_account function to retrieve account information. ([`34c9159`](https://github.com/mraniki/tt/commit/34c91598f78f2a3535f1a15f84ce0e406e8cbae3))
+
+### Other
+* Merge pull request #390 from mraniki/dev ([`2f50b79`](https://github.com/mraniki/tt/commit/2f50b7950da574c7363422b99ba08b5a66df3d97))
+* Merge pull request #391 from mraniki/sourcery/dev ([`968624f`](https://github.com/mraniki/tt/commit/968624fc4256860b7c774287f952112d3a6678d5))
+* 'Refactored by Sourcery' ([`2a84ef1`](https://github.com/mraniki/tt/commit/2a84ef19f1dae2c8aded82abc1ff841758adb20a))
+
 ## v1.6.21 (2023-05-25)
 ### Fix
 * ⬆️ Update requirements.txt ([`7c2c55b`](https://github.com/mraniki/tt/commit/7c2c55b44fd0613ea192892cf2dac3ab4492de71))
