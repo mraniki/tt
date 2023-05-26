@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.1 (2023-05-26)
+### Fix
+* :zap:Add get_account() to init_message() ([`ba208e2`](https://github.com/mraniki/tt/commit/ba208e2f82f1c385fab9e83710a7bf2d0e34000b))
+
+### Other
+* Merge pull request #392 from mraniki/dev ([`2a82093`](https://github.com/mraniki/tt/commit/2a82093e3eac51faa3b5f3753bf9365343e65c59))
+
 ## v1.7.0 (2023-05-26)
 ### Feature
 * 🥚 Added get_account function to retrieve account information. ([`34c9159`](https://github.com/mraniki/tt/commit/34c91598f78f2a3535f1a15f84ce0e406e8cbae3))
