@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.4 (2023-05-27)
+### Fix
+* :wrench: Fix envvar_prefix in config.py ([`c47e747`](https://github.com/mraniki/tt/commit/c47e747ed95d0c637eca13719b5502271efd00c5))
+
+### Other
+* Merge pull request #394 from mraniki/dev ([`d2a2597`](https://github.com/mraniki/tt/commit/d2a2597b258321c0e64b626043ba71a092168559))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`41775bc`](https://github.com/mraniki/tt/commit/41775bc140e4b439169e2a6b6d208f001dd66ecc))
+
 ## v1.7.3 (2023-05-26)
 ### Fix
 * ⬆️ Update requirements.txt ([`7003e9b`](https://github.com/mraniki/tt/commit/7003e9b9903558e2bdf26f82dcd43a82510e4b73))
