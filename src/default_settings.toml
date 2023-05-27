@@ -48,7 +48,7 @@ dex_private_key = ""
 dex_trading_slippage = 2
 
 # TRADING
-trading_quote_ccy = "USDT"
+trading_asset = "USDT"
 trading_risk_amount = 10
 trading_stop_loss = 1000
 trading_take_profit = 1000

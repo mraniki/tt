@@ -224,19 +224,19 @@ async def get_account_balance():
         logger.warning("get_account_balance: %s", e)
 
 
-async def get_quote_ccy_balance():
+async def get_trading_asset_balance():
     """return main instrument balance."""
     try:
         return (
-            await exchange.get_quote_ccy_balance()
+            await exchange.get_trading_asset_balance()
             if "DexSwap" in str(type(exchange))
-            else exchange.fetchBalance()[f"{settings.trading_quote_ccy}"][
+            else exchange.fetchBalance()[f"{settings.trading_asset}"][
                 "free"
             ]
         )
     except Exception as e:
         logger.warning("get_quote_ccy_balance: %s", e)
-        await notify(f"⚠️ Check balance {settings.trading_quote_ccy}")
+        await notify(f"⚠️ Check balance {settings.trading_asset}")
 
 
 async def get_account_position():
@@ -406,7 +406,7 @@ def startup_event():
         loop.stop()
         logger.error("Bot start error: %s", e)
 
-
+ 
 @app.on_event('shutdown')
 async def shutdown_event():
     """fastapi shutdown"""
