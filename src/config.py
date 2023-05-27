@@ -5,7 +5,7 @@ from dynaconf import Dynaconf
 ROOT = os.path.dirname(__file__)
 
 settings = Dynaconf(
-    # envvar_prefix="TT",
+    envvar_prefix="TT",
     root_path=os.path.dirname(ROOT),
     load_dotenv=True,
     settings_files=[
