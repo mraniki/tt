@@ -1,23 +1,23 @@
 [CEX01] #CEX Minimum config
 # TELEGRAM BOT for Binance
 # ENV_FOR_DYNACONF="CEX01" # 
-bot_token = '24240242424'
-bot_channel_id = '-110219301110'
-telethon_api_id = '3247289374982'
-telethon_api_hash = '993287490238409' 
+bot_token = '1212121212121'
+bot_channel_id = '-112121212121'
+telethon_api_id = '1212121212912'
+telethon_api_hash = '121212121212121' 
 cex_name = 'binance' 
-cex_api = 'asdhjaslkfjhksadhfklash' 
-cex_secret = 'sadkfhklasdhjfklajsh' 
+cex_api = 'abcabcabcabcabcabc' 
+cex_secret = 'abcabcabcabcabcabc' 
 
 [DEX01] #DEX Minimum config
 #DISCORD BOT on ethereum chain using uniswap v2 router and protocol
 # ENV_FOR_DYNACONF="DEX01" # 
-bot_token = '9238409284302'
-bot_channel_id = '293840284309'
+bot_token = '1212121212121'
+bot_channel_id = '121212121212'
 discord_webhook_id = '423423423' 
 discord_webhook_token = '32423423' 
-dex_wallet_address = '4234234234'
-dex_private_key = '234234234'
+dex_wallet_address = '0x1234567890123456789012345678901234567890'
+dex_private_key = '0xdeadbeef'
 dex_block_explorer_api = '42342342342'
 
 
@@ -35,7 +35,7 @@ dex_block_explorer_api = '42342342342'
 # token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 # token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 # #📝trading setup
-# trading_quote_ccy = "USDT"
+# trading_asset = "USDT"
 # trading_risk_amount = 10 # 10% of the position
 # dex_trading_slippage = 2 # 2 % slippage
 # #user settings
