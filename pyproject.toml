@@ -20,9 +20,18 @@ pytest-asyncio = "*"
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
 
+
 [tool.pytest.ini_options]
-pythonpath = [
-  "src"
+testpaths = "tests"
+pythonpath = "src"
+python_classes = "Test*"
+log_format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
+log_level = "DEBUG"
+
+[tool.coverage.run]
+branch = true
+omit = [
+    "tests/*",
 ]
 
 [build-system]
@@ -38,6 +47,18 @@ build_command = false
 remove_dist = false
 commit_parser = "semantic_release.history.emoji_parser"
 use_textual_changelog_sections = true
-major_emoji = "💥,:boom:,BREAKING CHANGE"
-minor_emoji = "feat,🥚,🚀,💄,✨,:rocket:,:sparkles:,:lipstick:,:egg:"
-patch_emoji = "fix,🎨,🐛,🚑,⚡,🔥,🚨,♻️,🔧,⬆️,🩹,👷,📝,🔒,👽,💬,🥅,✅,🐳,🙈,⚗️,🧐,🔇,🔊,:mute:,:loud_sound:,:monocle_face:,:alembic:,:see_no_evil:,:white_check_mark:,:arrow_up:,:recycle:,:fire,:whale:,:art:,:ambulance:,:lock:,:arrow_up:,:bug:,:zap:,:goal_net:,:alien:,:speech_balloon:,:rotating_light:,:construction_worker:"
+major_emoji = [
+  "💥,:boom:,BREAKING CHANGE"
+  ]
+minor_emoji = [
+  "feat,🥚,🚀,💄,✨,",
+  ":rocket:,:sparkles:,:lipstick:,:egg:"
+  ]
+patch_emoji = [
+  "fix,🎨,🐛,🚑,⚡,🔥,🚨,♻️,🔧,⬆️,🩹,👷,📝,🔒,👽,💬,🥅,✅,🐳,🙈,⚗️,🧐,🔇,🔊,",
+  ":art:,:bug:,:ambulance:,:zap:,:fire,:rotating_light:,",
+  ":recycle:,:wrench:,:arrow_up:,:adhesive_bandage:,",
+  ":construction_worker:,:memo:,:lock:,:alien:,:speech_balloon:,",
+  ":goal_net::white_check_mark:,:whale:,:see_no_evil:,",
+  ":alembic:,:monocle_face:,:mute:,:loud_sound:"
+]
