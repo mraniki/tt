@@ -2,7 +2,9 @@
  TT test
 """
 import pytest
-from bot import parse_message, load_exchange, execute_order
+from dxsp import DexSwap
+from findmyorder import FindMyOrder
+from bot import parse_message, load_exchange, get_quote, execute_order
 
 
 @pytest.mark.asyncio
@@ -21,6 +23,16 @@ async def test_load_exchange():
     exchange = await load_exchange()
     if exchange:
         assert exchange is not None
+
+
+# @pytest.mark.asyncio
+# async def test_get_quote():
+#     exchange = DexSwap()
+#     symbol = "WBTC"
+#     quote = await get_quote(symbol)
+#     print(quote)
+#     assert quote is not None
+
 
 @pytest.mark.asyncio
 async def test_execute_order():

@@ -12,7 +12,7 @@ readme = "README.md"
 "Issues" =  "https://github.com/mraniki/tt/issues"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 pytest = "*"
 pytest-cov = "*"
 pytest-asyncio = "*"
@@ -20,10 +20,9 @@ pytest-asyncio = "*"
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
 
-
 [tool.pytest.ini_options]
-testpaths = "tests"
 pythonpath = "src"
+testpaths = "tests"
 python_classes = "Test*"
 log_format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
 log_level = "DEBUG"
