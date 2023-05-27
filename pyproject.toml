@@ -19,7 +19,7 @@ pytest-asyncio = "*"
 dxsp = "*"
 findmyorder = "*"
 uvicorn = "*"
-
+ping3 = "*"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
