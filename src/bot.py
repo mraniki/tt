@@ -162,7 +162,7 @@ async def execute_order(order_params):
                 return
             asset_out_quote = float(exchange.fetchTicker(f'{instrument}')
                                     .get('last'))
-            asset_out_balance = await get_quote_ccy_balance()
+            asset_out_balance = await get_trading_asset_balance()
             if not asset_out_balance:
                 return
             transaction_amount = ((asset_out_balance)*(float(quantity)/100)
@@ -198,7 +198,9 @@ async def get_quote(symbol):
 async def get_account():
     """return account."""
     try:
-        return exchange.account if "DexSwap" in str(type(exchange)) else exchange.uid
+        return (
+            exchange.account if "DexSwap" in str(type(exchange))
+            else exchange.uid)
     except Exception as e:
         logger.warning("get_account: %s", e)
 
@@ -406,7 +408,7 @@ def startup_event():
         loop.stop()
         logger.error("Bot start error: %s", e)
 
- 
+
 @app.on_event('shutdown')
 async def shutdown_event():
     """fastapi shutdown"""
