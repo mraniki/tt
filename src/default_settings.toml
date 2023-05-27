@@ -41,7 +41,7 @@ cex_ordertype = "MARKET"
 # cex_host = ""
 # cex_account = ""
 
-#DXSP config for TEFI
+#DXSP config for DEFI
 dex_chain_id = 1
 dex_wallet_address = ""
 dex_private_key = ""
