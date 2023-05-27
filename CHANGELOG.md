@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.5 (2023-05-27)
+### Fix
+* ⬆️ dependencies upgrade ([`88ad66a`](https://github.com/mraniki/tt/commit/88ad66a07d14a7ea1981e92a1a93b1af648a71c6))
+* 🎨 code format ([`b1e6253`](https://github.com/mraniki/tt/commit/b1e625302ad68a573f7dc267c8c3762848983cdd))
+* ♻️ Updated trading_asset ([`4e76a01`](https://github.com/mraniki/tt/commit/4e76a0112d5d08bbf671e291783bbb26d4f53a06))
+* 🔧 removing envvar_prefix ([`7a4b5cc`](https://github.com/mraniki/tt/commit/7a4b5ccc3f0ef89db0ecce4db12ee38317c7d729))
+
+### Other
+* Merge pull request #395 from mraniki/dev ([`8b8ec38`](https://github.com/mraniki/tt/commit/8b8ec381a34f937d65eb3475bcf57ba767708e31))
+
 ## v1.7.4 (2023-05-27)
 ### Fix
 * :wrench: Fix envvar_prefix in config.py ([`c47e747`](https://github.com/mraniki/tt/commit/c47e747ed95d0c637eca13719b5502271efd00c5))
