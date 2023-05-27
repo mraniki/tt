@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.3 (2023-05-26)
+### Fix
+* ⬆️ Update requirements.txt ([`7003e9b`](https://github.com/mraniki/tt/commit/7003e9b9903558e2bdf26f82dcd43a82510e4b73))
+
 ## v1.7.2 (2023-05-26)
 ### Fix
 * :bug: Update bot.py with exchange name ([`170ec98`](https://github.com/mraniki/tt/commit/170ec98c8fc6eff97456c31a4933dcb7df0de5c7))
