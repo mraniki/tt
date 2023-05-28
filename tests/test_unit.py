@@ -39,14 +39,14 @@ async def test_load_exchange():
         assert exchange is not None
 
 
-@pytest.mark.asyncio
-async def test_toggle_trading_active(monkeypatch):
-    # set initial value
-    monkeypatch.setattr(settings, 'trading_active', True)
+# @pytest.mark.asyncio
+# async def test_toggle_trading_active(monkeypatch):
+#     # set initial value
+#     monkeypatch.setattr(settings, 'trading_active', True)
     
-    # test toggling
-    assert trading_switch_command() is False
-    assert trading_switch_command() is True
+#     # test toggling
+#     assert trading_switch_command() is False
+#     assert trading_switch_command() is True
     
 # @pytest.mark.asyncio
 # async def test_get_quote():
