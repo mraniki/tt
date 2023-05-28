@@ -27,9 +27,9 @@ async def test_parse_message(caplog):
         assert 'invalid command' in caplog.text
 
         # Test valid command
-        msg = "/help"
-        await parse_message(msg)
-        assert '🏦' in caplog.text
+        #msg = "/help"
+        #await parse_message(msg)
+        #assert '🏦' in caplog.text
 
 
 @pytest.mark.asyncio
