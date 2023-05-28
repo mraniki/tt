@@ -197,10 +197,7 @@ async def get_quote(symbol):
 async def get_account(exchange):
     """Return the account associated with the exchange."""
     try:
-        if isinstance(exchange, DexSwap):
-            return exchange.account
-        else:
-            return exchange.uid
+        return exchange.account if isinstance(exchange, DexSwap) else exchange.uid
     except Exception as e:
         logger.warning("Failed to get account: %s", e)
 
