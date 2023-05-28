@@ -297,7 +297,7 @@ async def account_position_command():
 
 
 async def trading_switch_command():
-    settings.trading_active = not settings.trading_active
+    settings.trading_enabled = not settings.trading_enabled
     return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
 
 async def restart_command():
