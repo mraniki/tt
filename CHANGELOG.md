@@ -2,6 +2,23 @@
 
 <!--next-version-placeholder-->
 
+## v1.8.0 (2023-05-28)
+### Feature
+* 🥚 Refactor trading switch command and bot trading switch variable ([`9a0c8c7`](https://github.com/mraniki/tt/commit/9a0c8c786ec764bfeedb885f0b5274b0cdbdcc4a))
+* 🥚 Refactor bot.py messaging and exchange functions ([`5ff304f`](https://github.com/mraniki/tt/commit/5ff304f2d5a4f5da01f8ed81068167ed378faa8e))
+* 🥚 Refactor trading switch command and bot trading switch variable ([`d8da4fa`](https://github.com/mraniki/tt/commit/d8da4fa6d8a4ab6084612b5fbc1c7122e66a4738))
+
+### Other
+* Merge pull request #409 from mraniki/dev ([`4451b14`](https://github.com/mraniki/tt/commit/4451b14f559caa8290e99a12d424bcfeb30a1b85))
+* :bug: Fix TT_CEX_TESTMODE value in example.env file ([`4abbeea`](https://github.com/mraniki/tt/commit/4abbeeab08611f0f233d6706d235a2969bf89668))
+* :art: improve help msg ([`94f2e01`](https://github.com/mraniki/tt/commit/94f2e01d140dcb3d7641f29974840f9eab45f29a))
+* Merge pull request #411 from mraniki/sourcery/dev ([`15b4bf7`](https://github.com/mraniki/tt/commit/15b4bf7c18644e5f882d4e7adb9ba168f8c0a62e))
+* 'Refactored by Sourcery' ([`7a4cd14`](https://github.com/mraniki/tt/commit/7a4cd14603abe87dbe81f7dce2db909d0f118c25))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`e8c1591`](https://github.com/mraniki/tt/commit/e8c1591c4627dbc732bb81447ef8453b36ab2416))
+* :recycle: Update trading switch command and default settings. ([`63fc5eb`](https://github.com/mraniki/tt/commit/63fc5ebbd2c02236071d41cc9d75b8b8fee2a314))
+* Update tests/test_unit.py ([`44a65f0`](https://github.com/mraniki/tt/commit/44a65f042acbc8ee94517b8fa677c49f84368698))
+* Update tests/test_unit.py ([`d0b50bc`](https://github.com/mraniki/tt/commit/d0b50bce0007b4eb68b515e127b829e80b415fb0))
+
 ## v1.7.10 (2023-05-28)
 ### Fix
 * 🚑 elif for loadexchange ([`517e612`](https://github.com/mraniki/tt/commit/517e612309b1a6a2833ff768532ba7a36742ba9a))
