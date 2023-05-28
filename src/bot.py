@@ -230,9 +230,9 @@ async def get_trading_asset_balance():
     """return main instrument balance."""
     try:
         if isinstance(exchange, DexSwap):
-            retrun await exchange.get_trading_asset_balance()
+            return await exchange.get_trading_asset_balance()
         else:
-            exchange.fetchBalance()[f"{settings.trading_asset}"]["free"]
+            return exchange.fetchBalance()[f"{settings.trading_asset}"]["free"]
     except Exception as e:
         await notify(f"⚠️ Check balance {settings.trading_asset}")
 
