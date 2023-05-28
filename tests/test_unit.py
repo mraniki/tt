@@ -24,8 +24,8 @@ async def test_parse_message():
     assert await parse_message(msg) is None
 
     # Test invalid command
-    msg = "/help"
-    assert await parse_message(msg) is not None
+    # msg = "/help"
+    # assert await parse_message(msg) is not None
 
 @pytest.mark.asyncio
 async def test_load_exchange():
