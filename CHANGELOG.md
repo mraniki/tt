@@ -2,6 +2,26 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.7 (2023-05-28)
+### Fix
+* 🐛 check semantic error ([`0d31cb2`](https://github.com/mraniki/tt/commit/0d31cb21489b92695fa7c047fbbdde3ea078170a))
+* 💬 readme update ([`53841f5`](https://github.com/mraniki/tt/commit/53841f5282d1977893483ffb15930aa41ef20f7e))
+
+### Other
+* Merge pull request #399 from mraniki/dev ([`fe5cc83`](https://github.com/mraniki/tt/commit/fe5cc83c93396c9bfe7e6d66080f5e240c6e61b3))
+* Merge pull request #398 from mraniki/dev ([`5cba4c3`](https://github.com/mraniki/tt/commit/5cba4c3d75815b4326def4afeb8bf2c0ea18abc6))
+* 🚨 bump ([`2619b1a`](https://github.com/mraniki/tt/commit/2619b1a6598d3be7456e4a50e731c24058d5e969))
+* Merge pull request #397 from mraniki/dev ([`5c14003`](https://github.com/mraniki/tt/commit/5c140037f9bf2cb2b369820d4ec069946aed79ea))
+* 👷 CI Change ([`52375d4`](https://github.com/mraniki/tt/commit/52375d41584391f93e97998abfefe4c04f5461b3))
+* 👷 CI Change ([`4b78ea0`](https://github.com/mraniki/tt/commit/4b78ea0255795b05e4facb574fb0d8104887ac20))
+* :construction_worker_man: CI Change ([`617cabe`](https://github.com/mraniki/tt/commit/617cabea4d24447c4c67b07310e2dddf21603b26))
+* :construction_worker_man:  Add ping3 to pyproject.toml. ([`02fdcb4`](https://github.com/mraniki/tt/commit/02fdcb44b9c293fbe2d0b25fcc7d5e11b53f528b))
+* :construction_worker_man: CI Change ([`3afa0a1`](https://github.com/mraniki/tt/commit/3afa0a13ca3e63faaa5896a034b9b521079ac855))
+* :construction_worker_man: CI Change ([`e61b0de`](https://github.com/mraniki/tt/commit/e61b0def293b0fcc3c98c31da130bdd7fcf5834b))
+* 👷 CI Change ([`df1d9d6`](https://github.com/mraniki/tt/commit/df1d9d648593d874017d312267c5d5f1d04891b3))
+* 👷 CI Change for testing ([`8dcbe5e`](https://github.com/mraniki/tt/commit/8dcbe5ec41d70328783ec1bba32d795044ea3226))
+* :construction_worker_man:‍♂️ Add testpaths and pythonpath to pyproject.toml ([`b19f7d0`](https://github.com/mraniki/tt/commit/b19f7d06d082b169fb43f0ef0b1ebc42b25272d2))
+
 ## v1.7.6 (2023-05-27)
 ### Fix
 * :wrench: Fix envvar_prefix in config.py ([`8c85af2`](https://github.com/mraniki/tt/commit/8c85af2930f548ff23ff7e124e8f54a525aceaa5))
