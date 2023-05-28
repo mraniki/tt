@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.8 (2023-05-28)
+### Fix
+* 🐛 version ([`dc45838`](https://github.com/mraniki/tt/commit/dc458389da0269bcfb8199d33377dcdc22cd80fe))
+* 👷 CI Change ([`178a3fa`](https://github.com/mraniki/tt/commit/178a3fad3ce30bd234d4e0ecc4b5294a321e065f))
+
+### Other
+* Merge pull request #401 from mraniki/dev ([`8a039dd`](https://github.com/mraniki/tt/commit/8a039dd3ec9bce7d30405d398333511d095aff2c))
+* Merge pull request #400 from mraniki/dev ([`f09e4d7`](https://github.com/mraniki/tt/commit/f09e4d79d2627e8b135f6a9ab8b3428cf757d791))
+
 ## v1.7.7 (2023-05-28)
 ### Fix
 * 🐛 check semantic error ([`0d31cb2`](https://github.com/mraniki/tt/commit/0d31cb21489b92695fa7c047fbbdde3ea078170a))
