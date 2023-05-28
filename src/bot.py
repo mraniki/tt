@@ -274,15 +274,16 @@ async def get_account_margin():
 
 # 🦾BOT ACTIONS
 async def init_message():
-    # Notify of the bot's online status
-    start_up = f"🗿 {__version__}\n"
+    version = __version__
     try:
-        start_up += f"🕸️ {get_host_ip()}\n"
-        start_up += f"🏓 {get_ping()}\n"
-        start_up += f"💱 {type(exchange).__name__}\n"
-        start_up += f"🪪 {await get_account(exchange)}"
+        ip = get_host_ip()
+        ping = get_ping()
+        exchange_name = type(exchange).__name__
+        account_info = await get_account(exchange)
+        start_up = f"🗿 {version}\n🕸️ {ip}\n🏓 {ping}\n💱 {exchange_name}\n🪪 {account_info}"
     except Exception as e:
-        logger.warning("start_up: %s", e)
+        logger.warning("init_message: %s", e)
+        start_up = f"🗿 {version}\n"
     return start_up
 
 
