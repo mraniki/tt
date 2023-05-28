@@ -40,6 +40,7 @@ async def parse_message(msg):
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_help:
                 await notify(settings.bot_msg_help)
+                await notify(await init_message())
             elif command == settings.bot_command_trading:
                 await notify(await trading_switch_command())
             elif command == settings.bot_command_quote:
@@ -286,7 +287,6 @@ async def init_message():
 
 async def post_init():
     # Notify bot startup
-    logger.info(await init_message())
     await notify(await init_message())
 
 
