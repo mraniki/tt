@@ -203,7 +203,7 @@ async def get_name():
 async def get_account(exchange):
     """Return the exchange account"""
     try:
-        return exchange.account if isinstance(exchange, DexSwap) else exchange.uid
+        return exchange.account if isinstance(exchange, DexSwap) else str(exchange.uid)
     except Exception as e:
         logger.warning("Failed to get account: %s", e)
 
