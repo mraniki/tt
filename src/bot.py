@@ -38,7 +38,6 @@ async def parse_message(msg):
         # Check if message starts with bot prefix
         if msg.startswith(settings.bot_prefix):
             command = (msg.split(" ")[0])[1:]
-            # Check if command is help command
             if command == settings.bot_command_help:
                 await notify(settings.bot_msg_help)
             elif command == settings.bot_command_trading:
@@ -55,11 +54,11 @@ async def parse_message(msg):
             else:
                 logger.warning("invalid command: %s", command)
             return
+
         # Order Process
         if bot_trading_switch and await fmo.search(msg):
             # Order found
             order = await fmo.get_order(msg)
-            logger.info("order: %s", order)
             order = await execute_order(order)
             if order:
                 await notify(order)
@@ -230,15 +229,11 @@ async def get_account_balance():
 async def get_trading_asset_balance():
     """return main instrument balance."""
     try:
-        return (
-            await exchange.get_trading_asset_balance()
-            if "DexSwap" in str(type(exchange))
-            else exchange.fetchBalance()[f"{settings.trading_asset}"][
-                "free"
-            ]
-        )
+        if isinstance(exchange, DexSwap):
+            retrun await exchange.get_trading_asset_balance()
+        else:
+            exchange.fetchBalance()[f"{settings.trading_asset}"]["free"]
     except Exception as e:
-        logger.warning("get_quote_ccy_balance: %s", e)
         await notify(f"⚠️ Check balance {settings.trading_asset}")
 
 
@@ -246,7 +241,7 @@ async def get_account_position():
     """return account position."""
     try:
         position = "📊 Position\n"
-        if "DexSwap" in str(type(exchange)):
+        if isinstance(exchange, DexSwap):
             open_positions = await exchange.get_account_position()
         else:
             open_positions = exchange.fetch_positions()
@@ -261,7 +256,7 @@ async def get_account_position():
 async def get_account_margin():
     try:
         margin = "\n🪙 margin\n"
-        if "DexSwap" in str(type(exchange)):
+        if isinstance(exchange, DexSwap):
             margin += 0
         else:
             margin += await exchange.fetch_balance({
@@ -304,11 +299,8 @@ async def account_position_command():
 
 
 async def trading_switch_command():
-    # store the trading switch
     global bot_trading_switch
-    # set to the opposite of the current value
     bot_trading_switch = not bot_trading_switch
-    # return trading switch status
     return f"Trading is now {'enabled' if bot_trading_switch else 'disabled'}."
 
 
