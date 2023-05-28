@@ -4,8 +4,8 @@
 import pytest
 import logging
 from dxsp import DexSwap
-from findmyorder import FindMyOrder
-from bot import parse_message, load_exchange, get_quote, execute_order
+# from findmyorder import FindMyOrder
+from bot import parse_message, load_exchange, execute_order
 
 
 @pytest.fixture
