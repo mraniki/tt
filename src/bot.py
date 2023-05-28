@@ -40,6 +40,7 @@ async def parse_message(msg):
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_help:
                 await notify(settings.bot_msg_help)
+                await notify(await init_message())
             elif command == settings.bot_command_trading:
                 await notify(await trading_switch_command())
             elif command == settings.bot_command_quote:
@@ -56,7 +57,7 @@ async def parse_message(msg):
             return
 
         # Order Process
-        if bot_trading_switch and await fmo.search(msg):
+        if settings.trading_enabled and await fmo.search(msg):
             # Order found
             order = await fmo.get_order(msg)
             order = await execute_order(order)
@@ -68,8 +69,7 @@ async def parse_message(msg):
 
 
 async def notify(msg):
-    """💬 MESSAGING to user"""
-    logger.debug("msg %s", msg)
+    """💬 MESSAGING """
     if not msg:
         return
     apobj = apprise.Apprise()
@@ -114,8 +114,6 @@ def get_ping(host: str = settings.ping) -> float:
 async def load_exchange():
     """load_exchange."""
     global exchange
-    global bot_trading_switch
-    bot_trading_switch = True
     try:
         if settings.cex_name != '':
             client = getattr(ccxt, settings.cex_name)
@@ -194,13 +192,18 @@ async def get_quote(symbol):
         logger.warning("get_quote: %s", e)
 
 
-async def get_account(exchange):
-    """Return the account associated with the exchange."""
+async def get_name():
+    """Return exchange name"""
     try:
-        if isinstance(exchange, DexSwap):
-            return exchange.account
-        else:
-            return exchange.uid
+        return exchange.chain_id if isinstance(exchange, DexSwap) else exchange.id
+    except Exception as e:
+        logger.warning("Failed to get exchange: %s", e)
+
+
+async def get_account(exchange):
+    """Return the exchange account"""
+    try:
+        return exchange.account if isinstance(exchange, DexSwap) else exchange.uid
     except Exception as e:
         logger.warning("Failed to get account: %s", e)
 
@@ -227,7 +230,7 @@ async def get_account_balance():
 
 
 async def get_trading_asset_balance():
-    """return main instrument balance."""
+    """return main asset balance."""
     try:
         if isinstance(exchange, DexSwap):
             return await exchange.get_trading_asset_balance()
@@ -273,7 +276,7 @@ async def init_message():
     try:
         ip = get_host_ip()
         ping = get_ping()
-        exchange_name = type(exchange).__name__
+        exchange_name = await get_name()
         account_info = await get_account(exchange)
         start_up = f"🗿 {version}\n🕸️ {ip}\n🏓 {ping}\n💱 {exchange_name}\n🪪 {account_info}"
     except Exception as e:
@@ -283,26 +286,23 @@ async def init_message():
 
 
 async def post_init():
-    # Notify of the bot's online status
-    logger.info(await init_message())
+    # Notify bot startup
     await notify(await init_message())
 
 
 async def account_balance_command():
-    # Return the account balance
+    # Return account balance
     return await get_account_balance()
 
 
 async def account_position_command():
-    # Return the account position
+    # Return account position
     return await get_account_position()
 
 
 async def trading_switch_command():
-    global bot_trading_switch
-    bot_trading_switch = not bot_trading_switch
-    return f"Trading is now {'enabled' if bot_trading_switch else 'disabled'}."
-
+    #settings.trading_active = not settings.trading_active
+    return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
 
 async def restart_command():
     # Restart bot
