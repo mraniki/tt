@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.9 (2023-05-28)
+### Fix
+* ⚡ if isinstance(exchange, DexSwap): ([`441687c`](https://github.com/mraniki/tt/commit/441687c4bcd750af5ed6c9d11e926630bc9cbc22))
+* ♻️ refactor ([`c636b51`](https://github.com/mraniki/tt/commit/c636b51fcbdf6e614ab5f9cb1d24946981bc17aa))
+* ✅ added test case and refactor ([`fd4d5d3`](https://github.com/mraniki/tt/commit/fd4d5d3c4326160d4fedc9bafe9a789ee3706f9c))
+* 🎨 lint ([`45c744f`](https://github.com/mraniki/tt/commit/45c744fdcde4327aef96d6143431a857fcd86c5f))
+* ✅ unit test ([`9e061cc`](https://github.com/mraniki/tt/commit/9e061cccdc95ac4b7092acae550b8c3e2b3a546f))
+
+### Other
+* Merge pull request #402 from mraniki/dev ([`0069824`](https://github.com/mraniki/tt/commit/0069824f70239941aa9099b25b293b7f87b4b334))
+* :bug:  Refactor test_get_account in test_unit.py ([`3f07497`](https://github.com/mraniki/tt/commit/3f07497323825a32bc54c81dc3ed0775a6e53b8c))
+* :bug: Fix typo and add missing return statement in get_trading_asset_balance() function. ([`54a0aee`](https://github.com/mraniki/tt/commit/54a0aee912af467a2111f9297d4843d7a9d60dec))
+
 ## v1.7.8 (2023-05-28)
 ### Fix
 * 🐛 version ([`dc45838`](https://github.com/mraniki/tt/commit/dc458389da0269bcfb8199d33377dcdc22cd80fe))
