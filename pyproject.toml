@@ -20,6 +20,7 @@ dxsp = "*"
 findmyorder = "*"
 uvicorn = "*"
 ping3 = "*"
+fastapi = "*"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
