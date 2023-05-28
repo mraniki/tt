@@ -35,6 +35,8 @@
 
  <h3>Build status</h3>
 
+[![codecov](https://codecov.io/gh/mraniki/tt/branch/main/graph/badge.svg?token=ILJTC0F4K1)](https://codecov.io/gh/mraniki/tt)
+
 [![✨Flow](https://github.com/mraniki/tt/actions/workflows/%E2%9C%A8Flow.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/%E2%9C%A8Flow.yml)
 
 ![Alt](https://repobeats.axiom.co/api/embed/a2d03eaf66dab33c82d52170d8ebfb0c479590a9.svg "Repobeats analytics image")

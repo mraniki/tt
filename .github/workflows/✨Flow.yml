@@ -11,9 +11,9 @@ on:
 jobs:
   lint:
     uses: mraniki/coding_toolset/.github/workflows/🦺Lint.yml@main
-  # test:
-  #   needs: [lint]
-  #   uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
+  test:
+    needs: [lint]
+    uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
   security:
     needs: [lint]
     uses: mraniki/coding_toolset/.github/workflows/🔏Security.yml@main
