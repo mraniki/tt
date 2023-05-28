@@ -120,6 +120,7 @@ async def load_exchange():
     try:
         if settings.cex_name != '':
             client = getattr(ccxt, settings.cex_name)
+            logger.debug("ccxt %s", client)
             exchange = client({
                 'apiKey': settings.cex_api,
                 'secret': settings.cex_secret,
