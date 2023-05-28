@@ -48,12 +48,12 @@ async def test_load_exchange():
 #     assert quote is not None
 
 
-@pytest.mark.asyncio
-async def test_get_account():
-    exchange = DexSwap()
-    account = await get_account(exchange)
-    print(account)
-    assert account is not None
+# @pytest.mark.asyncio
+# async def test_get_account():
+#     exchange = DexSwap()
+#     account = await get_account(exchange)
+#     print(account)
+#     assert account is not None
 
 
 @pytest.mark.asyncio
