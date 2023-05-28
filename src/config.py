@@ -24,8 +24,8 @@ logging.basicConfig(
     level=settings.loglevel
 )
 logger = logging.getLogger("TalkyTrader")
-if settings.loglevel == "DEBUG":
-    logging.getLogger("discord").setLevel(logging.WARNING)
-    logging.getLogger("telethon").setLevel(logging.WARNING)
-    logging.getLogger("urllib3").setLevel(logging.WARNING)
-    logging.getLogger("ccxt").setLevel(logging.WARNING)
+# if settings.loglevel == "DEBUG":
+#     logging.getLogger("discord").setLevel(logging.WARNING)
+#     logging.getLogger("telethon").setLevel(logging.WARNING)
+#     logging.getLogger("urllib3").setLevel(logging.WARNING)
+#     logging.getLogger("ccxt").setLevel(logging.WARNING)
