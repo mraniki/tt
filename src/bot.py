@@ -97,7 +97,7 @@ def get_host_ip() -> str:
     """Returns the IP address of the host."""
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
+        s.connect((settings.ping, 80))
         ip_address = s.getsockname()[0]
         s.close()
         return ip_address
@@ -116,23 +116,20 @@ async def load_exchange():
     global exchange
     global bot_trading_switch
     bot_trading_switch = True
-    logger.debug("cex %s", settings.cex_name)
     try:
         if settings.cex_name != '':
-            logger.debug("cex setup")
             client = getattr(ccxt, settings.cex_name)
-            logger.debug("ccxt %s", client)
             exchange = client({
                 'apiKey': settings.cex_api,
                 'secret': settings.cex_secret,
-                #'password': (settings.cex_password or ''),
+                'password': (settings.cex_password or ''),
                 'enableRateLimit': True,
                 'options': {
                     'defaultType': settings.cex_defaulttype,
                             }})
             if settings.cex_testmode:
                 exchange.set_sandbox_mode('enabled')
-        if settings.dex_chain_id != '':
+        elif settings.dex_chain_id != '':
             exchange = DexSwap()
     except Exception as e:
         logger.warning("exchange: %s", e)
