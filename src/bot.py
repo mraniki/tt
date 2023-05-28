@@ -56,7 +56,7 @@ async def parse_message(msg):
             return
 
         # Order Process
-        if bot_trading_switch and await fmo.search(msg):
+        if settings.trading_active and await fmo.search(msg):
             # Order found
             order = await fmo.get_order(msg)
             order = await execute_order(order)
@@ -114,8 +114,8 @@ def get_ping(host: str = settings.ping) -> float:
 async def load_exchange():
     """load_exchange."""
     global exchange
-    global bot_trading_switch
-    bot_trading_switch = True
+    #global bot_trading_switch
+    #bot_trading_switch = True
     try:
         if settings.cex_name != '':
             client = getattr(ccxt, settings.cex_name)
@@ -299,9 +299,8 @@ async def account_position_command():
 
 
 async def trading_switch_command():
-    global bot_trading_switch
-    bot_trading_switch = not bot_trading_switch
-    return f"Trading is now {'enabled' if bot_trading_switch else 'disabled'}."
+    settings.trading_active = not settings.trading_active
+    return f"Trading is now {'enabled' if settings.trading_active else 'disabled'}."
 
 
 async def restart_command():
