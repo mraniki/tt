@@ -123,7 +123,7 @@ async def load_exchange():
             exchange = client({
                 'apiKey': settings.cex_api,
                 'secret': settings.cex_secret,
-                'password': (settings.cex_password or ''),
+                #'password': (settings.cex_password or ''),
                 'enableRateLimit': True,
                 'options': {
                     'defaultType': settings.cex_defaulttype,
