@@ -150,7 +150,7 @@ async def execute_order(order_params):
         trade_confirmation = (
             f"⬇️ {instrument}" if (action == "SELL")
             else f"⬆️ {instrument}\n")
-        if "DexSwap" in str(type(exchange)):
+        if isinstance(exchange, DexSwap):
             trade = await exchange.execute_order(order_params)
             if trade:
                 trade_confirmation += trade['confirmation']
@@ -187,7 +187,7 @@ async def execute_order(order_params):
 async def get_quote(symbol):
     """return quote"""
     try:
-        if "DexSwap" in str(type(exchange)):
+        if isinstance(exchange, DexSwap):
             return (await exchange.get_quote(symbol))
         else:
             return f"🏦 {await exchange.fetchTicker (symbol)}"
@@ -195,21 +195,22 @@ async def get_quote(symbol):
         logger.warning("get_quote: %s", e)
 
 
-async def get_account():
-    """return account."""
+async def get_account(exchange):
+    """Return the account associated with the exchange."""
     try:
-        return (
-            exchange.account if "DexSwap" in str(type(exchange))
-            else exchange.uid)
+        if isinstance(exchange, DexSwap):
+            return exchange.account
+        else:
+            return exchange.uid
     except Exception as e:
-        logger.warning("get_account: %s", e)
+        logger.warning("Failed to get account: %s", e)
 
 
 async def get_account_balance():
     """return account balance."""
     balance = "🏦 Balance\n"
     try:
-        if "DexSwap" in str(type(exchange)):
+        if isinstance(exchange, DexSwap):
             balance += str(await exchange.get_account_balance())
         else:
             raw_balance = exchange.fetch_free_balance()
@@ -279,7 +280,7 @@ async def init_message():
         start_up += f"🕸️ {get_host_ip()}\n"
         start_up += f"🏓 {get_ping()}\n"
         start_up += f"💱 {type(exchange).__name__}\n"
-        start_up += f"🪪 {await get_account()}"
+        start_up += f"🪪 {await get_account(exchange)}"
     except Exception as e:
         logger.warning("start_up: %s", e)
     return start_up

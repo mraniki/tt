@@ -5,7 +5,7 @@ import pytest
 import logging
 from dxsp import DexSwap
 # from findmyorder import FindMyOrder
-from bot import parse_message, load_exchange, execute_order
+from bot import parse_message, load_exchange, execute_order, get_account
 
 
 @pytest.fixture
@@ -46,6 +46,14 @@ async def test_load_exchange():
 #     quote = await get_quote(symbol)
 #     print(quote)
 #     assert quote is not None
+
+
+@pytest.mark.asyncio
+async def test_get_account():
+    exchange = DexSwap()
+    account = await get_account(exchange)
+    print(account)
+    assert account is not None
 
 
 @pytest.mark.asyncio
