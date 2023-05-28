@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tt"
-version = "1.7.7"
+version = "1.7.6"
 description = "CEX & DEX integration with multi messaging platform support."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"
@@ -57,18 +57,6 @@ build_command = false
 remove_dist = false
 commit_parser = "semantic_release.history.emoji_parser"
 use_textual_changelog_sections = true
-# major_emoji = [
-#   "💥,:boom:,BREAKING CHANGE"
-#   ]
-# minor_emoji = [
-#   "feat,🥚,🚀,💄,✨,",
-#   ":rocket:,:sparkles:,:lipstick:,:egg:"
-#   ]
-# patch_emoji = [
-#   "fix,🎨,🐛,🚑,⚡,🔥,🚨,♻️,🔧,⬆️,🩹,👷,📝,🔒,👽,💬,🥅,✅,🐳,🙈,⚗️,🧐,🔇,🔊,",
-#   ":art:,:bug:,:ambulance:,:zap:,:fire,:rotating_light:,",
-#   ":recycle:,:wrench:,:arrow_up:,:adhesive_bandage:,",
-#   ":construction_worker:,:memo:,:lock:,:alien:,:speech_balloon:,",
-#   ":goal_net::white_check_mark:,:whale:,:see_no_evil:,",
-#   ":alembic:,:monocle_face:,:mute:,:loud_sound:"
-#   ]
+major_emoji = "💥"
+minor_emoji = "🥚,🚀,💄,✨"
+patch_emoji = "🎨,🐛,🚑,⚡,🔥,🚨,♻️,🔧,⬆️,🩹,👷,📝,🔒,👽,💬,🥅,✅,🐳,🙈,⚗️,🧐,🔇,🔊"
