@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.10 (2023-05-28)
+### Fix
+* 🚑 elif for loadexchange ([`517e612`](https://github.com/mraniki/tt/commit/517e612309b1a6a2833ff768532ba7a36742ba9a))
+* 🔊 troubleshoot ([`0d61c70`](https://github.com/mraniki/tt/commit/0d61c70cd151b0fc99788b778a0eae22a1316aa2))
+* 🥅 Remove CEX password from exchange loading function. ([`9c6b00c`](https://github.com/mraniki/tt/commit/9c6b00c4d2bdbd185e86b4397d0fb2ed4850869d))
+
+### Other
+* Merge pull request #407 from mraniki/dev ([`766adb0`](https://github.com/mraniki/tt/commit/766adb095a3ed8cf23ae7297fe8bcaf3bddd3453))
+* Add debug log for ccxt client in load_exchange() function. ([`088b400`](https://github.com/mraniki/tt/commit/088b400f70d81c4929c65e774d6df03ec71d9e38))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`29fb6dc`](https://github.com/mraniki/tt/commit/29fb6dca7f32a48288461e861b8586c898b7102f))
+* Merge pull request #405 from mraniki/dev ([`24bf121`](https://github.com/mraniki/tt/commit/24bf1216aa0e31ad3d62840dd0b585862d414149))
+* :loud_sound:Add debug log for CEX name in load_exchange() function. ([`dd1a4ee`](https://github.com/mraniki/tt/commit/dd1a4eee155653137298017f985fb683842a8068))
+
 ## v1.7.9 (2023-05-28)
 ### Fix
 * ⚡ if isinstance(exchange, DexSwap): ([`441687c`](https://github.com/mraniki/tt/commit/441687c4bcd750af5ed6c9d11e926630bc9cbc22))
