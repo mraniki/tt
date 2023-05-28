@@ -116,6 +116,7 @@ async def load_exchange():
     global exchange
     global bot_trading_switch
     bot_trading_switch = True
+    logger.debug("cex %s", settings.cex_name)
     try:
         if settings.cex_name != '':
             client = getattr(ccxt, settings.cex_name)
