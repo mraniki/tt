@@ -119,6 +119,7 @@ async def load_exchange():
     logger.debug("cex %s", settings.cex_name)
     try:
         if settings.cex_name != '':
+            logger.debug("cex setup")
             client = getattr(ccxt, settings.cex_name)
             logger.debug("ccxt %s", client)
             exchange = client({
