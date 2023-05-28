@@ -46,7 +46,7 @@ async def test_toggle_trading_active(monkeypatch):
     
     # test toggling
     assert trading_switch_command() is False
-    assert trading_switch_command() == True
+    assert trading_switch_command() is True
     
 # @pytest.mark.asyncio
 # async def test_get_quote():
