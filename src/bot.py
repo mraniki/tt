@@ -26,16 +26,15 @@ from config import settings, logger
 
 async def parse_message(msg):
     """main parser"""
-    logger.info("message %s", msg)
 
     try:
-        # Initialize FindMyOrder object
+        # Initialize FindMyOrder
         fmo = FindMyOrder()
 
-        # Check if message starts with word to ignore
+        # Check ignore
         if msg.startswith(settings.bot_ignore):
             return
-        # Check if message starts with bot prefix
+        # Check bot command
         if msg.startswith(settings.bot_prefix):
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_help:
@@ -52,8 +51,6 @@ async def parse_message(msg):
                 await notify(await account_position_command())
             elif command == settings.bot_command_restart:
                 await restart_command()
-            else:
-                logger.warning("invalid command: %s", command)
             return
 
         # Order Process
@@ -65,7 +62,7 @@ async def parse_message(msg):
                 await notify(order)
 
     except Exception as e:
-        logger.error("Error while parsing message: %s", e)
+        logger.error(e)
 
 
 async def notify(msg):
@@ -94,7 +91,7 @@ async def notify(msg):
 
 
 def get_host_ip() -> str:
-    """Returns the IP address of the host."""
+    """Returns host IP address."""
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect((settings.ping, 80))
@@ -195,13 +192,13 @@ async def get_quote(symbol):
 async def get_name():
     """Return exchange name"""
     try:
-        return exchange.chain_id if isinstance(exchange, DexSwap) else exchange.id
+        return await exchange.get_name() if isinstance(exchange, DexSwap) else exchange.id
     except Exception as e:
         logger.warning("Failed to get exchange: %s", e)
 
 
 async def get_account(exchange):
-    """Return the exchange account"""
+    """Return exchange account"""
     try:
         return exchange.account if isinstance(exchange, DexSwap) else str(exchange.uid)
     except Exception as e:
@@ -280,7 +277,6 @@ async def init_message():
         account_info = await get_account(exchange)
         start_up = f"🗿 {version}\n🕸️ {ip}\n🏓 {ping}\n💱 {exchange_name}\n🪪 {account_info}"
     except Exception as e:
-        logger.warning("init_message: %s", e)
         start_up = f"🗿 {version}\n"
     return start_up
 
@@ -301,7 +297,7 @@ async def account_position_command():
 
 
 async def trading_switch_command():
-    #settings.trading_active = not settings.trading_active
+    settings.trading_active = not settings.trading_active
     return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
 
 async def restart_command():
@@ -316,7 +312,7 @@ async def listener():
     try:
         await load_exchange()
     except Exception as e:
-        logger.error("exchange not loaded: %s", e)
+        logger.error("exchange: %s", e)
     try:
         while True:
             if settings.discord_webhook_id:
@@ -380,7 +376,7 @@ async def listener():
 
                 await bot.run_until_disconnected()
             else:
-                logger.warning("Check bot settings")
+                logger.warning("Check settings")
                 await asyncio.sleep(7200)
 
     except Exception as e:
@@ -397,30 +393,29 @@ def startup_event():
     loop = asyncio.get_event_loop()
     try:
         loop.create_task(listener())
-        logger.info("Webserver started")
+        logger.info("started")
     except Exception as e:
         loop.stop()
-        logger.error("Bot start error: %s", e)
+        logger.error("Bot KO: %s", e)
 
 
 @app.on_event('shutdown')
 async def shutdown_event():
     """fastapi shutdown"""
     global uvicorn
-    logger.info("Webserver shutting down")
+    logger.info("shutting down")
     uvicorn.keep_running = False
 
 
 @app.get("/")
 async def root():
-    """Fastapi root"""
+    """fastapi root"""
     return await init_message()
 
 
 @app.get("/health")
 async def health_check():
     """fastapi health"""
-    logger.info("Healthcheck")
     return await init_message()
 
 

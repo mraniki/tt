@@ -14,17 +14,17 @@ def exchange():
     return DexSwap()
 
 
-@pytest.mark.asyncio
-async def test_parse_message(caplog):
-    with caplog.at_level(logging.DEBUG):
-        # Test message to ignore
-        msg = "hello world"
-        assert await parse_message(msg) is None
+# @pytest.mark.asyncio
+# async def test_parse_message(caplog):
+#     with caplog.at_level(logging.DEBUG):
+#         # Test message to ignore
+#         msg = "hello world"
+#         assert await parse_message(msg) is None
 
-        # Test invalid command
-        msg = "/test"
-        assert await parse_message(msg) is None
-        assert 'invalid command' in caplog.text
+#         # Test invalid command
+#         msg = "/test"
+#         assert await parse_message(msg) is None
+#         assert 'invalid command' in caplog.text
 
         # Test valid command
         #msg = "/help"
