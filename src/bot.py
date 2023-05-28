@@ -56,7 +56,7 @@ async def parse_message(msg):
             return
 
         # Order Process
-        if settings.trading_active and await fmo.search(msg):
+        if settings.trading_enabled and await fmo.search(msg):
             # Order found
             order = await fmo.get_order(msg)
             order = await execute_order(order)
@@ -68,8 +68,7 @@ async def parse_message(msg):
 
 
 async def notify(msg):
-    """💬 MESSAGING to user"""
-    logger.debug("msg %s", msg)
+    """💬 MESSAGING """
     if not msg:
         return
     apobj = apprise.Apprise()
@@ -114,8 +113,6 @@ def get_ping(host: str = settings.ping) -> float:
 async def load_exchange():
     """load_exchange."""
     global exchange
-    #global bot_trading_switch
-    #bot_trading_switch = True
     try:
         if settings.cex_name != '':
             client = getattr(ccxt, settings.cex_name)
@@ -194,8 +191,16 @@ async def get_quote(symbol):
         logger.warning("get_quote: %s", e)
 
 
+async def get_name():
+    """Return exchange name"""
+    try:
+        return exchange.chain_id if isinstance(exchange, DexSwap) else exchange.id
+    except Exception as e:
+        logger.warning("Failed to get exchange: %s", e)
+
+
 async def get_account(exchange):
-    """Return the account associated with the exchange."""
+    """Return the exchange account"""
     try:
         return exchange.account if isinstance(exchange, DexSwap) else exchange.uid
     except Exception as e:
@@ -224,7 +229,7 @@ async def get_account_balance():
 
 
 async def get_trading_asset_balance():
-    """return main instrument balance."""
+    """return main asset balance."""
     try:
         if isinstance(exchange, DexSwap):
             return await exchange.get_trading_asset_balance()
@@ -270,7 +275,7 @@ async def init_message():
     try:
         ip = get_host_ip()
         ping = get_ping()
-        exchange_name = type(exchange).__name__
+        exchange_name = await get_name()
         account_info = await get_account(exchange)
         start_up = f"🗿 {version}\n🕸️ {ip}\n🏓 {ping}\n💱 {exchange_name}\n🪪 {account_info}"
     except Exception as e:
@@ -280,25 +285,24 @@ async def init_message():
 
 
 async def post_init():
-    # Notify of the bot's online status
+    # Notify bot startup
     logger.info(await init_message())
     await notify(await init_message())
 
 
 async def account_balance_command():
-    # Return the account balance
+    # Return account balance
     return await get_account_balance()
 
 
 async def account_position_command():
-    # Return the account position
+    # Return account position
     return await get_account_position()
 
 
 async def trading_switch_command():
     #settings.trading_active = not settings.trading_active
-    return f"Trading is {'enabled' if settings.trading_active else 'disabled'}."
-
+    return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
 
 async def restart_command():
     # Restart bot

@@ -48,7 +48,7 @@ dex_private_key = ""
 dex_trading_slippage = 2
 
 # TRADING
-trading_active = true #bool
+trading_enabled = true #bool
 trading_asset = "USDT"
 trading_risk_amount = 10
 trading_stop_loss = 1000
