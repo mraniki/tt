@@ -2,6 +2,33 @@
 
 <!--next-version-placeholder-->
 
+## v1.8.1 (2023-05-29)
+### Fix
+* 🎨 code format ([`0b1dd0b`](https://github.com/mraniki/tt/commit/0b1dd0b966c8f2dc736947908f347ff92ab66aa3))
+* ⬆️ Update requirements.txt ([`5091d91`](https://github.com/mraniki/tt/commit/5091d91897b7449b5cd915a0a6a38f72f0a2d5e5))
+* ✅ unit test ([`1530f06`](https://github.com/mraniki/tt/commit/1530f06bb45b71a4897eba0e2089d494baa0f08d))
+
+### Other
+* Merge pull request #417 from mraniki/dev ([`69c51aa`](https://github.com/mraniki/tt/commit/69c51aa6c0b67f562884e37f5530d3e39e33ea92))
+* :white_check_mark: unit test ([`a49e33d`](https://github.com/mraniki/tt/commit/a49e33dcb8f1f7ea7f2b3dd5359a3c87a7e73d8c))
+* :white_check_mark: unit test ([`cda28a2`](https://github.com/mraniki/tt/commit/cda28a276163c42999080703f79b4f85455008f3))
+* :white_check_mark: unit test ([`fd2a847`](https://github.com/mraniki/tt/commit/fd2a84725e59d798a871f8ef450e431f975eb17c))
+* :white_check_mark: unit test ([`ec4c5ad`](https://github.com/mraniki/tt/commit/ec4c5ad7bc245affd3f0b42f5bb521cd9f445487))
+* :white_check_mark: unit test ([`163ebc3`](https://github.com/mraniki/tt/commit/163ebc35419761a69768fe59fe0d0ac222226996))
+* :white_check_mark: unit test ([`43722fa`](https://github.com/mraniki/tt/commit/43722fabb685787ad2049a59513f6855f63683cb))
+* :arrow_up: Update requirements.txt ([`7fa6708`](https://github.com/mraniki/tt/commit/7fa6708defd90fd85c7c63a632207b4731531065))
+* Merge pull request #416 from mraniki/dev ([`72e3c18`](https://github.com/mraniki/tt/commit/72e3c186cc4c16b8363786961fb50df6391c5611))
+* :bug: Refactor trading switch command to use 'trading_enabled' instead of 'trading_active' ([`71b78b7`](https://github.com/mraniki/tt/commit/71b78b73708f34e1442d5146edd4a793a809b484))
+* Merge pull request #415 from mraniki/dev ([`aff46fa`](https://github.com/mraniki/tt/commit/aff46fab610af88f0bae1c0ef9082971b3d4efc5))
+* :white_check_mark: Refactor test_parse_message function in test_unit.py file ([`af6eeaa`](https://github.com/mraniki/tt/commit/af6eeaa4b751b9f8b5112f81cc71b2e2b4cc4f25))
+* :art: code cleanup ([`4fa6ba0`](https://github.com/mraniki/tt/commit/4fa6ba07e5f49f1252ca08758faa915412a3ceeb))
+* Merge pull request #414 from mraniki/dev ([`4491463`](https://github.com/mraniki/tt/commit/4491463ac8e3e48bf43f2f655b59fe60a2979417))
+* :bug: Fix return type of get_account function in bot.py. ([`0b9b99a`](https://github.com/mraniki/tt/commit/0b9b99ac429cfd7806298ca15cf0ab4056db59e6))
+* Merge pull request #413 from mraniki/dev ([`ae14acc`](https://github.com/mraniki/tt/commit/ae14acc1cbe8d63bd26047f423b9962f8067b60e))
+* Update logging levels in config.py ([`507da59`](https://github.com/mraniki/tt/commit/507da59a3fae42409c33a6785ebd62fa4e701ec1))
+* Merge pull request #412 from mraniki/dev ([`6c8824c`](https://github.com/mraniki/tt/commit/6c8824c7973ead568aff7b0646409462deab7750))
+* :bug: Remove unnecessary test case in test_unit.py. ([`9b91586`](https://github.com/mraniki/tt/commit/9b915868de358c3bf50dff96a8a54a72fe91f32f))
+
 ## v1.8.0 (2023-05-28)
 ### Feature
 * 🥚 Refactor trading switch command and bot trading switch variable ([`9a0c8c7`](https://github.com/mraniki/tt/commit/9a0c8c786ec764bfeedb885f0b5274b0cdbdcc4a))
