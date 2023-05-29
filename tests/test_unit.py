@@ -52,18 +52,18 @@ async def test_toggle_trading_active():
     assert settings.trading_enabled is True
 
 
-# @pytest.mark.asyncio
-# async def test_get_name():
-#     exchange = DexSwap()
-#     name = await get_name(exchange)
-#     print(name)
-#     assert name is not None
+@pytest.mark.asyncio
+async def test_get_name():
+    exchange = DexSwap()
+    name = await get_name(exchange)
+    print(name)
+    assert name is not None
 
 
 @pytest.mark.asyncio
 async def test_get_account():
     exchange = DexSwap()
-    account = await get_account(exchange)
+    account = exchange.account
     print(account)
     assert account is not None
 
