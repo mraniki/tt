@@ -2,10 +2,14 @@
  TT test
 """
 import pytest
-import logging
 from dxsp import DexSwap
+from config import settings, logger
+
 # from findmyorder import FindMyOrder
-from bot import parse_message, load_exchange, execute_order, get_account
+from bot import (
+    parse_message, load_exchange, execute_order,
+    get_account, get_name,
+    trading_switch_command, get_quote)
 
 
 @pytest.fixture
@@ -39,30 +43,29 @@ async def test_load_exchange():
         assert exchange is not None
 
 
-# @pytest.mark.asyncio
-# async def test_toggle_trading_active(monkeypatch):
-#     # set initial value
-#     monkeypatch.setattr(settings, 'trading_active', True)
-    
-#     # test toggling
-#     assert trading_switch_command() is False
-#     assert trading_switch_command() is True
-    
-# @pytest.mark.asyncio
-# async def test_get_quote():
-#     exchange = DexSwap()
-#     symbol = "WBTC"
-#     quote = await get_quote(symbol)
-#     print(quote)
-#     assert quote is not None
+@pytest.mark.asyncio
+async def test_toggle_trading_active():
+    # test toggling
+    await trading_switch_command()
+    assert settings.trading_enabled is False
+    await trading_switch_command()
+    assert settings.trading_enabled is True
 
 
 # @pytest.mark.asyncio
-# async def test_get_account():
+# async def test_get_name():
 #     exchange = DexSwap()
-#     account = await get_account(exchange)
-#     print(account)
-#     assert account is not None
+#     name = await get_name(exchange)
+#     print(name)
+#     assert name is not None
+
+
+@pytest.mark.asyncio
+async def test_get_account():
+    exchange = DexSwap()
+    account = await get_account(exchange)
+    print(account)
+    assert account is not None
 
 
 @pytest.mark.asyncio

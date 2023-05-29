@@ -103,7 +103,7 @@ def get_host_ip() -> str:
 
 
 def get_ping(host: str = settings.ping) -> float:
-    """Returns  ping (in milliseconds)"""
+    """Returns  ping """
     response_time = ping3.ping(host, unit='ms')
     return round(response_time, 3)
 
@@ -192,7 +192,10 @@ async def get_quote(symbol):
 async def get_name():
     """Return exchange name"""
     try:
-        return await exchange.get_name() if isinstance(exchange, DexSwap) else exchange.id
+        return (
+            await exchange.get_name()
+            if isinstance(exchange, DexSwap)
+            else exchange.id)
     except Exception as e:
         logger.warning("Failed to get exchange: %s", e)
 
@@ -200,7 +203,9 @@ async def get_name():
 async def get_account(exchange):
     """Return exchange account"""
     try:
-        return exchange.account if isinstance(exchange, DexSwap) else str(exchange.uid)
+        return (exchange.account
+                if isinstance(exchange, DexSwap)
+                else str(exchange.uid))
     except Exception as e:
         logger.warning("Failed to get account: %s", e)
 
@@ -234,7 +239,7 @@ async def get_trading_asset_balance():
         else:
             return exchange.fetchBalance()[f"{settings.trading_asset}"]["free"]
     except Exception as e:
-        await notify(f"⚠️ Check balance {settings.trading_asset}")
+        await notify(f"⚠️ Check balance {settings.trading_asset}: {e}")
 
 
 async def get_account_position():
@@ -276,7 +281,7 @@ async def init_message():
         exchange_name = await get_name()
         account_info = await get_account(exchange)
         start_up = f"🗿 {version}\n🕸️ {ip}\n🏓 {ping}\n💱 {exchange_name}\n🪪 {account_info}"
-    except Exception as e:
+    except Exception:
         start_up = f"🗿 {version}\n"
     return start_up
 
@@ -299,6 +304,7 @@ async def account_position_command():
 async def trading_switch_command():
     settings.trading_enabled = not settings.trading_enabled
     return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
+
 
 async def restart_command():
     # Restart bot
