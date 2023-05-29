@@ -6,8 +6,8 @@ __version__ = "1.8.0"
 import os
 import sys
 import asyncio
-import uvicorn
 import socket
+import uvicorn
 import ping3
 from fastapi import FastAPI
 
