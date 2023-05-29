@@ -61,7 +61,8 @@ async def test_toggle_trading_active():
 
 
 @pytest.mark.asyncio
-async def test_get_account(exchange):
+async def test_get_account():
+    exchange = DexSwap()
     account = await get_account(exchange)
     print(account)
     assert account is not None
