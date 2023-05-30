@@ -6,7 +6,7 @@
 [![Logo](https://i.imgur.io/Q7iDDyB_d.webp?maxwidth=640&shape=thumb&fidelity=medium)](https://github.com/mraniki/tt)
  </tr>
 <details>
-<summary><h2>Let's Start !</h2></summary>
+<summary><h2>Quick start</h2></summary>
 
 
  <h3>Install</h3>
