@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v1.8.2 (2023-05-31)
+### Fix
+* 💬 readme update ([`c81371f`](https://github.com/mraniki/tt/commit/c81371fdcb47b0f49dac5d09d44c163c37e6d665))
+
+### Other
+* Merge pull request #418 from mraniki/dev ([`6a5e21b`](https://github.com/mraniki/tt/commit/6a5e21ba6d70f53ab1126f825a85a7bb90ae5e67))
+* Update pyproject.toml ([`d965697`](https://github.com/mraniki/tt/commit/d965697d1db0d546444d5fd76936648acacfad1d))
+* :arrow_up: Update dxsp and findmyorder versions in pyproject.toml ([`9e1d7bb`](https://github.com/mraniki/tt/commit/9e1d7bbc52c09c245120ae3f01316daf0da1c444))
+* Merge branch 'main' into dev ([`ee52ca3`](https://github.com/mraniki/tt/commit/ee52ca3fa8b139abb9b8c7e855f76866ac68b202))
+* Update README.md ([`35bd5ad`](https://github.com/mraniki/tt/commit/35bd5ad5c63770567bbbdc1e07dcb6892f417b83))
+* Merge branch 'main' into dev ([`a5a7460`](https://github.com/mraniki/tt/commit/a5a74602989babcdc75b09ef7102320ce17af64a))
+* Update README.md ([`ec97635`](https://github.com/mraniki/tt/commit/ec97635431cac7c5fbeada3a1e792da22213ca0b))
+
 ## v1.8.1 (2023-05-29)
 ### Fix
 * 🎨 code format ([`0b1dd0b`](https://github.com/mraniki/tt/commit/0b1dd0b966c8f2dc736947908f347ff92ab66aa3))
