@@ -131,51 +131,60 @@ async def load_exchange():
 
 
 async def execute_order(order_params):
-    """execute_order."""
-    if order_params is None:
-        await notify("⚠️ Missing params")
-        return
+    """Execute order."""
+
     action = order_params.get('action')
     instrument = order_params.get('instrument')
     quantity = order_params.get('quantity', settings.trading_risk_amount)
+
     try:
-        if action is None or instrument is None:
+        if not action or not instrument:
             return
-        trade_confirmation = (
-            f"⬇️ {instrument}" if (action == "SELL")
-            else f"⬆️ {instrument}\n")
+
         if isinstance(exchange, DexSwap):
             trade = await exchange.execute_order(order_params)
-            if trade:
-                trade_confirmation += trade['confirmation']
-            else:
+            if not trade:
                 return
+
+            trade_confirmation = f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
+            trade_confirmation += trade['confirmation']
+
         else:
             if await get_account_balance() == "No Balance":
                 await notify("⚠️ Check Balance")
                 return
-            asset_out_quote = float(exchange.fetchTicker(f'{instrument}')
-                                    .get('last'))
+
+            asset_out_quote = float(exchange.fetchTicker(f'{instrument}').get('last'))
             asset_out_balance = await get_trading_asset_balance()
+
             if not asset_out_balance:
                 return
-            transaction_amount = ((asset_out_balance)*(float(quantity)/100)
-                                  / asset_out_quote)
-            if trade := exchange.create_order(
-                instrument, settings.cex_ordertype, action, transaction_amount
-            ):
-                trade_confirmation += f"➕ Size: {round(trade['amount'],4)}\n"
-                trade_confirmation += f"⚫️ Entry: {round(trade['price'],4)}\n"
-                trade_confirmation += f"ℹ️ {trade['id']}\n"
-                trade_confirmation += f"🗓️ {trade['datetime']}"
-            else:
+
+            transaction_amount = (asset_out_balance * (float(quantity) / 100) / asset_out_quote)
+
+            trade = exchange.create_order(
+                instrument,
+                settings.cex_ordertype,
+                action,
+                transaction_amount
+            )
+
+            if not trade:
                 return
+
+            trade_confirmation = f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
+            trade_confirmation += f"➕ Size: {round(trade['amount'], 4)}\n"
+            trade_confirmation += f"⚫️ Entry: {round(trade['price'], 4)}\n"
+            trade_confirmation += f"ℹ️ {trade['id']}\n"
+            trade_confirmation += f"🗓️ {trade['datetime']}"
+
         return trade_confirmation
 
     except Exception as e:
         logger.warning("execute_order: %s", e)
         await notify(f"⚠️ order execution: {e}")
         return
+
 
 
 async def get_quote(symbol):

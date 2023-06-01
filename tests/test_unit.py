@@ -86,3 +86,38 @@ async def test_execute_order():
     # Test case when both action and instrument are None
     order_params = {'action': None, 'instrument': None}
     assert await execute_order(order_params) is None
+
+
+# @pytest.mark.asyncio
+# async def test_execute_order_missing_params():
+#     """Test execute_order with missing params."""
+#     result = await execute_order()
+#     assert result == "⚠️ Missing params"
+
+@pytest.mark.asyncio
+async def test_execute_order_missing_action_or_instrument():
+    """Test execute_order with missing action or instrument."""
+    result = await execute_order({'quantity': 10})
+    assert result is None
+
+# @pytest.mark.asyncio
+# async def test_execute_order_sell_order():
+#     """Test execute_order with a sell order."""
+#     order_params = {
+#         'action': 'SELL',
+#         'instrument': 'BTC/USDT',
+#         'quantity': 10
+#     }
+#     result = await execute_order(order_params)
+#     assert "⬇️ BTC/USDT" in result
+
+# @pytest.mark.asyncio
+# async def test_execute_order_buy_order():
+#     """Test execute_order with a buy order."""
+#     order_params = {
+#         'action': 'BUY',
+#         'instrument': 'BTC/USDT',
+#         'quantity': 10
+#     }
+#     result = await execute_order(order_params)
+#     assert "⬆️ BTC/USDT" in result
