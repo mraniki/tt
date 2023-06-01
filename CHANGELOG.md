@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.8.3 (2023-06-01)
+### Fix
+* ✅ unit test ([`a280af0`](https://github.com/mraniki/tt/commit/a280af02a6a73f7402eef03bb304265ff0a7a106))
+* ⬆️ dependencies ([`3a7d575`](https://github.com/mraniki/tt/commit/3a7d5751e41ac566456c5913b60f72abdb0e4da7))
+
+### Other
+* Merge pull request #420 from mraniki/dev ([`51bd15c`](https://github.com/mraniki/tt/commit/51bd15c88e554b19e61e96f1b8e50bc4772b6f67))
+* Merge pull request #419 from mraniki/dev ([`01060f5`](https://github.com/mraniki/tt/commit/01060f525655a36259b87e3a6853de2505b8b59d))
+
 ## v1.8.2 (2023-05-31)
 ### Fix
 * 💬 readme update ([`c81371f`](https://github.com/mraniki/tt/commit/c81371fdcb47b0f49dac5d09d44c163c37e6d665))

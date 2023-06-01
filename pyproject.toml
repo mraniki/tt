@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tt"
-version = "1.8.2"
+version = "1.8.3"
 description = "CEX & DEX integration with multi messaging platform support."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"
