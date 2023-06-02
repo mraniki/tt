@@ -2,12 +2,13 @@
  TT test
 """
 import pytest
+from unittest.mock import AsyncMock, MagicMock
 from dxsp import DexSwap
 from config import settings, logger
 
 # from findmyorder import FindMyOrder
 from bot import (
-    parse_message, load_exchange, execute_order,
+    parse_message, listener, load_exchange, execute_order,
     get_account, get_name,
     trading_switch_command, get_quote)
 
@@ -121,3 +122,20 @@ async def test_execute_order_missing_action_or_instrument():
 #     }
 #     result = await execute_order(order_params)
 #     assert "⬆️ BTC/USDT" in result
+
+
+@pytest.mark.asyncio
+async def test_listener():
+    # Set up the test data
+    settings = MagicMock()
+    settings.discord_webhook_id = "test_discord_webhook_id"
+    settings.matrix_hostname = None
+    settings.telethon_api_id = None
+    settings.bot_token = "test_bot_token"
+
+    load_exchange_mock = AsyncMock()
+    parse_message_mock = AsyncMock()
+    post_init_mock = AsyncMock()
+
+    # Call the function to be tested
+    await listener()
