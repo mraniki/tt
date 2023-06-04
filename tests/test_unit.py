@@ -1,7 +1,7 @@
 """
  TT test
 """
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 
 from dxsp import DexSwap
@@ -45,17 +45,35 @@ def mock_settings_dex():
     return Settings()
 
 @pytest.fixture
-def mock_listener():
+def mock_discord():
     """Fixture to create an listener object for testing."""
-    with patch("config.settings", autospec=True):
+    class Settings:
         settings.discord_webhook_id = "12345678901"
         settings.discord_webhook_token = "1234567890"
-        settings.matrix_hostname = None
-        settings.telethon_api_id = None
         settings.bot_token = "test_bot_token"
         settings.bot_channel_id = "1234567890"
-        settings.bot_msg_help = "this is help"
-        return Listener()
+    return Settings()
+
+@pytest.fixture
+def mock_telegram():
+    """Fixture to create an listener object for testing."""
+    class Settings:
+        settings.telethon_api_id = "123456789"
+        settings.telethon_api_hash = "123456789"
+        settings.bot_token = "test_bot_token"
+        settings.bot_channel_id = "1234567890"
+    return Settings()
+
+@pytest.fixture
+def mock_matrix_():
+    """Fixture to create an listener object for testing."""
+    class Settings:
+        settings.matrix_hostname = "https://matrix.org"
+        settings.matrix_user = "@thismock:matrix.org"
+        settings.matrix_pass = "1234"
+        settings.bot_token = "token_123435"
+        settings.bot_channel_id = "1234567890"
+    return Settings()
 
 @pytest.fixture
 def message():
@@ -69,22 +87,46 @@ def command_message():
 def order_message():
     return "buy EURUSD"
 
-# @pytest.mark.asyncio
-# async def test_parse_message(command_message):
-#     """Test that the parse_message function returns a non-None value."""
-#     notify_mock = AsyncMock()
-#     with patch('bot.notify', notify_mock):
-#         output = await parse_message(command_message)
-#         assert output is not None, "The output should not be None"
+@pytest.mark.asyncio
+@pytest.mark.parametrize('msg, expected_output', [
+    ('/help', 'help message'),
+])
+async def test_parse_message(msg, expected_output, mocker):
+    """Test that the parse_message function returns a non-None value."""
+    notify_mock = mocker.patch('bot.notify')
+    await parse_message(msg)
+    if msg == '/help':
+        init_mock = mocker.patch('bot.init_message', return_value='help message')
+        expected_output = f'help message\nhelp init message'
+        await parse_message(msg)
+        assert '🏦' in notify_mock.call_args[0][0]
 
 
-# @pytest.mark.asyncio
-# async def test_notify():
-#     """Test that the notify function returns a non-None value."""
-#     notify_mock = AsyncMock()
-#     with patch('bot.notify', notify_mock):
-#         output = await notify("test")
-#         assert output is not None, "The output should not be None"
+@pytest.mark.asyncio
+async def test_notify(mock_discord):
+    """Test that the notify function returns a non-None value."""
+    # Mock Apprise class and its methods
+    apprise_mock = MagicMock()
+    apprise_instance_mock = AsyncMock()
+    apprise_instance_mock.async_notify.return_value = True
+    apprise_mock.return_value = apprise_instance_mock
+
+    # Test message
+    message = '<code>test message</code>'
+
+    # Test with Discord webhook
+    with patch('apprise.Apprise', apprise_mock):
+        with patch('config.settings', mock_discord):
+            output = await notify(message)
+            apprise_mock.assert_called_once()
+            apprise_instance_mock.add.assert_called_with(
+                'discord://12345678901/1234567890')
+            apprise_instance_mock.async_notify.assert_called_with(
+                body='`test message`', body_format='html')
+    
+    # Test with empty message
+    output = await notify(None)
+    assert output is None
 
 @pytest.mark.asyncio
 async def test_get_host_ip():
@@ -199,18 +241,19 @@ async def test_toggle_trading_active():
 
 
 @pytest.mark.asyncio
-async def test_listener(mock_listener):
-    with patch("config.settings", autospec=True):
-        print(mock_listener)
-        assert mock_listener is not None
+async def test_listener(mock_discord):
+    listener = Listener()
+    print(listener)
+    assert listener is not None
 
 
 @pytest.mark.asyncio
-async def test_message_listener(mock_listener, message):
-    print(mock_listener)
-    assert mock_listener is not None
-    await mock_listener.handle_message(message)
+async def test_message_listener(mock_telegram, message):
+    listener = Listener()
+    print(listener)
+    assert listener is not None
+    await listener.handle_message(message)
     # Call the function to be tested
-    msg = await mock_listener.get_latest_message()
+    msg = await listener.get_latest_message()
     print(msg)
     assert msg == "hello"
