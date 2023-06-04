@@ -9,7 +9,7 @@ from .config import settings, logger
 
 # from findmyorder import FindMyOrder
 from bot import (
-    parse_message, listener, load_exchange, execute_order,
+    parse_message, load_exchange, execute_order,
     get_account, get_name,
     trading_switch_command, get_quote)
 
@@ -134,14 +134,15 @@ async def test_execute_order_missing_action_or_instrument():
 
 
 @pytest.mark.asyncio
-async def test_listener():
+async def test_listener(listener):
     # Set up the test data
     settings = MagicMock()
     settings.discord_webhook_id = "test_discord_webhook_id"
+    settings.discord_webhook_token = "1234567890"
     settings.matrix_hostname = None
     settings.telethon_api_id = None
     settings.bot_token = "test_bot_token"
-
+    settings.bot_channel_id = "1234567890"
     load_exchange_mock = AsyncMock()
     parse_message_mock = AsyncMock()
     post_init_mock = AsyncMock()
