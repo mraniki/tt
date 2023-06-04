@@ -84,8 +84,14 @@ def command_message():
     return "/help"
 
 @pytest.fixture
-def order_message():
-    return "buy EURUSD"
+def order_params():
+    """Return a dictionary object with order parameters."""
+    return {
+        'action': 'BUY',
+        'instrument': 'EURUSD',
+        'quantity': 1,
+        # other order parameters
+    }
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize('msg, expected_output', [
@@ -149,13 +155,11 @@ async def test_load_exchange(mock_settings_dex):
     print(exchange)
     assert exchange is not None
 
-
-# @pytest.mark.asyncio
-# async def test_execute_order(mock_settings_dex):
-#     """Test that the execute_order function returns a non-None value."""
-#     output = await execute_order(order_message)
-#     print(output)
-#     assert output is not None
+@pytest.mark.asyncio
+async def test_failed_execute_order(caplog, order_params,mock_settings_dex):
+    exchange = await load_exchange()
+    trade_confirmation = await execute_order(order_params)
+    assert 'Order execution failed' in caplog.text
 
 
 @pytest.mark.asyncio
