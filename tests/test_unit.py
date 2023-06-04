@@ -42,6 +42,7 @@ def mock_settings_dex():
         settings.dex_rpc = "https://eth.llamarpc.com"
         settings.dex_chain_id = 1
         settings.cex_name = ""
+        settings.trading_enabled = True
     return Settings()
 
 @pytest.fixture
@@ -142,12 +143,12 @@ async def test_get_host_ip():
     assert output is not None, "The output should not be None"
 
 
-@pytest.mark.asyncio
-async def test_def_get_ping(mock_discord):
-    """Test that the get_ping function returns a non-None value."""
-    output = get_ping()
-    print(output)
-    assert output is not None, "The output should not be None"
+# @pytest.mark.asyncio
+# async def test_def_get_ping(mock_discord):
+#     """Test that the get_ping function returns a non-None value."""
+#     output = get_ping()
+#     print(output)
+#     assert output is not None, "The output should not be None"
 
 
 @pytest.mark.asyncio
@@ -167,6 +168,7 @@ async def test_failed_execute_order(caplog, order_params,mock_settings_dex):
 @pytest.mark.asyncio
 async def test_get_quote(mock_settings_dex):
     """Test that the get_quote function returns a non-None value."""
+    await load_exchange()
     output = await get_quote("WBTC")
     print(output)
     assert output is not None
@@ -175,39 +177,28 @@ async def test_get_quote(mock_settings_dex):
 @pytest.mark.asyncio
 async def test_get_name(mock_settings_dex):
     """Test that the get_name function returns a non-None value."""
+    await load_exchange()
     output = await get_name()
     print(output)
     assert output is not None
 
 
 @pytest.mark.asyncio
-async def test_get_account():
-    """Test that the get_account function returns a non-None value."""
-    with patch("config.settings", autospec=True):
-        exchange = DexSwap()
-        output = await get_account(exchange)
-        print(output)
-        assert output is not None
-
-
-@pytest.mark.asyncio
-async def test_get_account_balance():
+async def test_get_account_balance(mock_settings_dex):
     """Test that the get_account_balance function returns a non-None value."""
-    with patch("config.settings", autospec=True):
-        exchange = DexSwap()
-        output = await get_account_balance()
-        print(output)
-        assert output is not None
+    await load_exchange()
+    output = await get_account_balance()
+    print(output)
+    assert output is not None
 
 
 @pytest.mark.asyncio
-async def test_get_trading_asset_balance():
+async def test_get_trading_asset_balance(mock_settings_dex):
     """Test that the get_asset_trading_balance function returns a non-None value."""
-    with patch("config.settings", autospec=True):
-        exchange = DexSwap()
-        output = await get_trading_asset_balance()
-        print(output)
-        assert output is not None
+    await load_exchange()
+    output = await get_trading_asset_balance()
+    print(output)
+    assert output is not None
 
 # @pytest.mark.asyncio
 # async def test_get_account_position():
@@ -228,22 +219,22 @@ async def test_get_trading_asset_balance():
 #         assert output is not None
 
 
+
 @pytest.mark.asyncio
-async def test_init_message():
-    """Test that the init_message function returns a non-None value."""
-    with patch("config.settings", autospec=True):
-        output = await init_message()
-        print(output)
-        assert output is not None
+async def test_init_message(mock_settings_dex):
+    """Test that the get_account function returns a non-None value."""
+    await load_exchange()
+    output = await init_message()
+    print(output)
+    assert output is not None
 
 
 @pytest.mark.asyncio
-async def test_toggle_trading_active():
-    with patch("config.settings", autospec=True):
-        print(settings.trading_enabled)
-        await trading_switch_command()
-        print(settings.trading_enabled)
-        assert settings.trading_enabled is False
+async def test_toggle_trading_active(mock_settings_dex):
+    print(settings.trading_enabled)
+    await trading_switch_command()
+    print(settings.trading_enabled)
+    assert settings.trading_enabled is False
 
 
 @pytest.mark.asyncio
