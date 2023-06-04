@@ -5,7 +5,7 @@ import pytest
 from unittest.mock import AsyncMock, MagicMock
 from dxsp import DexSwap
 from iamlistening import Listener
-from .config import settings, logger
+from config import settings, logger
 
 # from findmyorder import FindMyOrder
 from bot import (
@@ -134,7 +134,7 @@ async def test_execute_order_missing_action_or_instrument():
 
 
 @pytest.mark.asyncio
-async def test_listener(listener):
+async def test_settings_listener(listener):
     # Set up the test data
     settings = MagicMock()
     settings.discord_webhook_id = "test_discord_webhook_id"
