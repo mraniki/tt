@@ -4,7 +4,8 @@
 import pytest
 from unittest.mock import AsyncMock, MagicMock
 from dxsp import DexSwap
-from config import settings, logger
+from iamlistening import Listener
+from .config import settings, logger
 
 # from findmyorder import FindMyOrder
 from bot import (
@@ -17,6 +18,11 @@ from bot import (
 def exchange():
     """Fixture to create an exchange object for testing."""
     return DexSwap()
+
+@pytest.fixture
+def listener():
+    """Fixture to create an listener object for testing."""
+    return Listener()
 
 
 # @pytest.mark.asyncio
@@ -36,6 +42,9 @@ def exchange():
         #await parse_message(msg)
         #assert '🏦' in caplog.text
 
+@pytest.mark.asyncio
+async def test_listener(listener):
+    assert listener is not None
 
 @pytest.mark.asyncio
 async def test_load_exchange():
