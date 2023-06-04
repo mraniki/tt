@@ -14,6 +14,7 @@ from fastapi import FastAPI
 import ccxt
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
+from iamlistening import Listener
 
 import apprise
 from apprise import NotifyFormat
@@ -36,22 +37,23 @@ async def parse_message(msg):
             return
         # Check bot command
         if msg.startswith(settings.bot_prefix):
+            message = None
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_help:
-                await notify(settings.bot_msg_help)
-                await notify(await init_message())
+                message = f"{settings.bot_msg_help}\n{await init_message()}"
             elif command == settings.bot_command_trading:
-                await notify(await trading_switch_command())
+                message = await trading_switch_command()
             elif command == settings.bot_command_quote:
                 symbol = msg.split(" ")[1]
-                await notify(await get_quote(symbol))
+                await get_quote(symbol)
             elif command == settings.bot_command_bal:
-                await notify(await account_balance_command())
+                await account_balance_command()
             elif command == settings.bot_command_pos:
-                await notify(await account_position_command())
+                await account_position_command()
             elif command == settings.bot_command_restart:
                 await restart_command()
-            return
+            if message is not None:
+                await notify(message)
 
         # Order Process
         if settings.trading_enabled and await fmo.search(msg):
@@ -63,7 +65,6 @@ async def parse_message(msg):
 
     except Exception as e:
         logger.error(e)
-
 
 async def notify(msg):
     """💬 MESSAGING """
@@ -89,7 +90,6 @@ async def notify(msg):
     except Exception as e:
         logger.error("%s not sent: %s", msg, e)
 
-
 def get_host_ip() -> str:
     """Returns host IP address."""
     try:
@@ -101,7 +101,6 @@ def get_host_ip() -> str:
     except Exception:
         pass
 
-
 def get_ping(host: str = settings.ping) -> float:
     """Returns  ping """
     response_time = ping3.ping(host, unit='ms')
@@ -112,7 +111,7 @@ async def load_exchange():
     """load_exchange."""
     global exchange
     try:
-        if settings.cex_name != '':
+        if settings.cex_name:
             client = getattr(ccxt, settings.cex_name)
             exchange = client({
                 'apiKey': settings.cex_api,
@@ -124,8 +123,9 @@ async def load_exchange():
                             }})
             if settings.cex_testmode:
                 exchange.set_sandbox_mode('enabled')
-        elif settings.dex_chain_id != '':
+        elif settings.dex_chain_id:
             exchange = DexSwap()
+        return exchange
     except Exception as e:
         logger.warning("exchange: %s", e)
 
