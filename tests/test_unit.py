@@ -117,7 +117,6 @@ async def test_notify(mock_discord):
     apprise_mock = MagicMock()
     apprise_instance_mock = AsyncMock()
     apprise_instance_mock.async_notify.return_value = True
-    apprise_mock.return_value = apprise_instance_mock
 
     # Test message
     message = '<code>test message</code>'
@@ -125,6 +124,7 @@ async def test_notify(mock_discord):
     # Test with Discord webhook
     with patch('apprise.Apprise', apprise_mock):
         with patch('config.settings', mock_discord):
+            apprise_mock.return_value = apprise_instance_mock
             output = await notify(message)
             apprise_mock.assert_called_once()
             apprise_instance_mock.add.assert_called_with(
