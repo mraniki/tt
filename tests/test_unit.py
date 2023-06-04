@@ -219,10 +219,9 @@ async def test_get_trading_asset_balance(mock_settings_dex):
 #         assert output is not None
 
 
-
 @pytest.mark.asyncio
 async def test_init_message(mock_settings_dex):
-    """Test that the get_account function returns a non-None value."""
+    """Test test_init_message."""
     await load_exchange()
     output = await init_message()
     print(output)
@@ -242,7 +241,6 @@ async def test_listener(mock_discord):
     listener = Listener()
     print(listener)
     assert listener is not None
-
 
 @pytest.mark.asyncio
 async def test_message_listener(mock_telegram, message):
