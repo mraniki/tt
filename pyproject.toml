@@ -19,7 +19,7 @@ pytest-asyncio = "*"
 pytest-mock = "*"
 dxsp = "^2.6.6"
 findmyorder = "^1.3.21"
-iamlistening = "^0.1.0"
+iamlistening = "^0.1.7"
 uvicorn = "*"
 ping3 = "*"
 fastapi = "*"
@@ -44,6 +44,7 @@ log_level = "DEBUG"
 [tool.coverage.run]
 omit = [
     "tests/*",
+    "src/config.py"
 ]
 
 [build-system]
