@@ -52,6 +52,7 @@ def mock_discord():
         settings.discord_webhook_token = "1234567890"
         settings.bot_token = "test_bot_token"
         settings.bot_channel_id = "1234567890"
+        settings.ping = "8.8.8.8"
     return Settings()
 
 @pytest.fixture
@@ -142,9 +143,10 @@ async def test_get_host_ip():
 
 
 @pytest.mark.asyncio
-async def test_def_get_ping():
+async def test_def_get_ping(mock_discord):
     """Test that the get_ping function returns a non-None value."""
     output = get_ping()
+    print(output)
     assert output is not None, "The output should not be None"
 
 
