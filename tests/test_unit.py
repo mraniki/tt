@@ -10,9 +10,9 @@ from findmyorder import FindMyOrder
 
 import sys
 sys.path.append("./src")
-from src.config import settings, logger
+from config import settings, logger
 
-from src.bot import (
+from bot import (
     load_exchange, parse_message,
     execute_order, trading_switch_command,
     init_message, post_init, notify,
@@ -52,7 +52,7 @@ def order_message():
 async def test_parse_message(command_message):
     """Test that the parse_message function returns a non-None value."""
     notify_mock = AsyncMock()
-    with patch('src.bot.notify', notify_mock):
+    with patch('bot.notify', notify_mock):
         output = await parse_message(command_message)
         assert output is not None, "The output should not be None"
 
@@ -61,7 +61,7 @@ async def test_parse_message(command_message):
 async def test_notify():
     """Test that the notify function returns a non-None value."""
     notify_mock = AsyncMock()
-    with patch('src.bot.notify', notify_mock):
+    with patch('bot.notify', notify_mock):
         output = await notify("test")
         assert output is not None, "The output should not be None"
 
