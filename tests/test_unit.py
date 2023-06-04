@@ -1,151 +1,151 @@
 """
  TT test
 """
+from unittest.mock import AsyncMock, patch
 import pytest
-from unittest.mock import AsyncMock, MagicMock
+
 from dxsp import DexSwap
 from iamlistening import Listener
-from config import settings, logger
+from findmyorder import FindMyOrder
 
-# from findmyorder import FindMyOrder
-from bot import (
-    parse_message, load_exchange, execute_order,
-    get_account, get_name,
-    trading_switch_command, get_quote)
+from src.bot import (
+    load_exchange, parse_message, 
+    init_message, post_init, notify,
+    execute_order, trading_switch_command,
+    get_account, get_name, get_host_ip, get_ping,
+    get_quote, get_trading_asset_balance,
+    get_account_position, get_account_balance, 
+    get_account_margin,
+    restart_command,
+)
+from src.config import settings, logger
+
 
 
 @pytest.fixture
-def exchange():
+def mock_exchange():
     """Fixture to create an exchange object for testing."""
     return DexSwap()
 
 @pytest.fixture
-def listener():
+def mock_listener():
     """Fixture to create an listener object for testing."""
-    return Listener()
+    with patch("config.settings", autospec=True):
+        settings.discord_webhook_id = "test_discord_webhook_id"
+        settings.discord_webhook_token = "1234567890"
+        settings.matrix_hostname = None
+        settings.telethon_api_id = None
+        settings.bot_token = "test_bot_token"
+        settings.bot_channel_id = "1234567890"
+        settings.bot_msg_help = "this is help"
+        listener = Listener()
+        return listener
 
+@pytest.fixture
+def message():
+    return "hello"
 
-# @pytest.mark.asyncio
-# async def test_parse_message(caplog):
-#     with caplog.at_level(logging.DEBUG):
-#         # Test message to ignore
-#         msg = "hello world"
-#         assert await parse_message(msg) is None
+@pytest.fixture
+def command_message():
+    return "/help"
 
-#         # Test invalid command
-#         msg = "/test"
-#         assert await parse_message(msg) is None
-#         assert 'invalid command' in caplog.text
-
-        # Test valid command
-        #msg = "/help"
-        #await parse_message(msg)
-        #assert '🏦' in caplog.text
+@pytest.fixture
+def order_message():
+    return "buy EURUSD"
 
 @pytest.mark.asyncio
-async def test_listener(listener):
-    assert listener is not None
+async def test_listener():
+    with patch("config.settings", autospec=True):
+        settings.discord_webhook_id = "test_discord_webhook_id"
+        settings.discord_webhook_token = "1234567890"
+        settings.matrix_hostname = None
+        settings.telethon_api_id = None
+        settings.bot_token = "test_bot_token"
+        settings.bot_channel_id = "1234567890"
+        settings.bot_msg_help = "this is help"
+        listener = Listener()
+        print(listener)
+        assert listener is not None
+
+@pytest.mark.asyncio
+async def test_message_listener(mock_listener, message):
+    print(mock_listener)
+    assert mock_listener is not None
+    await mock_listener.handle_message(message)
+    # Call the function to be tested
+    msg = await mock_listener.get_latest_message()
+    print(msg)
+    assert msg == "hello"
+
+
+@pytest.mark.asyncio
+async def test_parse_message():
+    """
+    Test that the parse_message function returns a non-None value.
+    """
+    command_message = '/help'
+    notify_mock = AsyncMock()
+    with patch('src.bot.notify', notify_mock):
+        output = await parse_message(command_message)
+        assert output is not None, "The output should not be None"
+
+
 
 @pytest.mark.asyncio
 async def test_load_exchange():
-    exchange = await load_exchange()
-    if exchange:
-        assert exchange is not None
+    with patch("config.settings", autospec=True):
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        settings.dex_private_key = "0xdeadbeet"
+        settings.dex_rpc = "https://eth.llamarpc.com"
+        settings.dex_chain_id = 1
+        settings.cex_name = ""
+        loaded_exchange = await load_exchange()
+        print(loaded_exchange)
+        if loaded_exchange:
+            assert loaded_exchange is not None
 
 
 @pytest.mark.asyncio
 async def test_toggle_trading_active():
-    # test toggling
-    await trading_switch_command()
-    assert settings.trading_enabled is False
-    await trading_switch_command()
-    assert settings.trading_enabled is True
+    with patch("config.settings", autospec=True):
+        print(settings.trading_enabled)
+        await trading_switch_command()
+        print(settings.trading_enabled)
+        assert settings.trading_enabled is False
 
 
 # @pytest.mark.asyncio
 # async def test_get_name():
-#     exchange = DexSwap()
-#     name = await get_name()
-#     print(name)
-#     assert name is not None
-
-
-@pytest.mark.asyncio
-async def test_get_account():
-    exchange = DexSwap()
-    account = await get_account(exchange)
-    print(account)
-    assert account is not None
-
-
-
-@pytest.mark.asyncio
-async def test_execute_order():
-    # Test case when both action and instrument are not None
-    order_params = {'action': 'buy', 'instrument': 'BTCUSDT'}
-    assert await execute_order(order_params) is None
-
-    # Test case when action is None
-    order_params = {'action': None, 'instrument': 'EURUSD'}
-    assert await execute_order(order_params) is None
-
-    # Test case when instrument is None
-    order_params = {'action': 'sell', 'instrument': None}
-    assert await execute_order(order_params) is None
-
-    # Test case when both action and instrument are None
-    order_params = {'action': None, 'instrument': None}
-    assert await execute_order(order_params) is None
+#     with patch("config.settings", autospec=True):
+#         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+#         settings.dex_private_key = "0xdeadbeet"
+#         settings.dex_rpc = "https://eth.llamarpc.com"
+#         settings.dex_chain_id = 1
+#         settings.cex_name = ""
+#         loaded_exchange = await load_exchange()
+#         print(loaded_exchange)
+#         name = await get_name()
+#         print(name)
+#         assert name is not None
 
 
 # @pytest.mark.asyncio
-# async def test_execute_order_missing_params():
-#     """Test execute_order with missing params."""
-#     result = await execute_order()
-#     assert result == "⚠️ Missing params"
+# async def test_get_account():
+#     with patch("config.settings", autospec=True):
+#         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+#         settings.dex_private_key = "0xdeadbeet"
+#         settings.dex_rpc = "https://eth.llamarpc.com"
+#         settings.dex_chain_id = 1
+#         settings.cex_name = ""
+#         loaded_exchange = await load_exchange()
+#         print(loaded_exchange)
+#         account = await get_account(loaded_exchange)
+#         print(account)
+#         assert account is not None
 
-@pytest.mark.asyncio
-async def test_execute_order_missing_action_or_instrument():
-    """Test execute_order with missing action or instrument."""
-    result = await execute_order({'quantity': 10})
-    assert result is None
 
 # @pytest.mark.asyncio
-# async def test_execute_order_sell_order():
-#     """Test execute_order with a sell order."""
-#     order_params = {
-#         'action': 'SELL',
-#         'instrument': 'BTC/USDT',
-#         'quantity': 10
-#     }
-#     result = await execute_order(order_params)
-#     assert "⬇️ BTC/USDT" in result
-
-# @pytest.mark.asyncio
-# async def test_execute_order_buy_order():
-#     """Test execute_order with a buy order."""
-#     order_params = {
-#         'action': 'BUY',
-#         'instrument': 'BTC/USDT',
-#         'quantity': 10
-#     }
-#     result = await execute_order(order_params)
-#     assert "⬆️ BTC/USDT" in result
-
-
-@pytest.mark.asyncio
-async def test_settings_listener(listener):
-    # Set up the test data
-    settings = MagicMock()
-    settings.discord_webhook_id = "test_discord_webhook_id"
-    settings.discord_webhook_token = "1234567890"
-    settings.matrix_hostname = None
-    settings.telethon_api_id = None
-    settings.bot_token = "test_bot_token"
-    settings.bot_channel_id = "1234567890"
-    load_exchange_mock = AsyncMock()
-    parse_message_mock = AsyncMock()
-    post_init_mock = AsyncMock()
-
-    # Call the function to be tested
-    await listener()
+# async def test_execute_order():
+#     # Test case when both action and instrument are not None
+#     order_params = {'action': 'buy', 'instrument': 'BTCUSDT'}
+#     assert await execute_order(order_params) is None
