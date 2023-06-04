@@ -25,7 +25,15 @@ from src.config import settings, logger
 @pytest.fixture
 def mock_exchange():
     """Fixture to create an exchange object for testing."""
-    return DexSwap()
+    with patch("config.settings", autospec=True):
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        settings.dex_private_key = "0xdeadbeet"
+        settings.dex_rpc = "https://eth.llamarpc.com"
+        settings.dex_chain_id = 1
+        settings.cex_name = ""
+        loaded_exchange = await load_exchange()
+        print(load_exchange)
+        return loaded_exchange
 
 @pytest.fixture
 def mock_listener():
@@ -54,18 +62,10 @@ def order_message():
     return "buy EURUSD"
 
 @pytest.mark.asyncio
-async def test_listener():
+async def test_listener(mock_listener):
     with patch("config.settings", autospec=True):
-        settings.discord_webhook_id = "test_discord_webhook_id"
-        settings.discord_webhook_token = "1234567890"
-        settings.matrix_hostname = None
-        settings.telethon_api_id = None
-        settings.bot_token = "test_bot_token"
-        settings.bot_channel_id = "1234567890"
-        settings.bot_msg_help = "this is help"
-        listener = Listener()
-        print(listener)
-        assert listener is not None
+        print(mock_listener)
+        assert mock_listener is not None
 
 @pytest.mark.asyncio
 async def test_message_listener(mock_listener, message):
@@ -80,9 +80,7 @@ async def test_message_listener(mock_listener, message):
 
 @pytest.mark.asyncio
 async def test_parse_message():
-    """
-    Test that the parse_message function returns a non-None value.
-    """
+    """Test that the parse_message function returns a non-None value."""
     command_message = '/help'
     notify_mock = AsyncMock()
     with patch('src.bot.notify', notify_mock):
@@ -90,19 +88,11 @@ async def test_parse_message():
         assert output is not None, "The output should not be None"
 
 
-
 @pytest.mark.asyncio
-async def test_load_exchange():
-    with patch("config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-        settings.dex_private_key = "0xdeadbeet"
-        settings.dex_rpc = "https://eth.llamarpc.com"
-        settings.dex_chain_id = 1
-        settings.cex_name = ""
-        loaded_exchange = await load_exchange()
-        print(loaded_exchange)
-        if loaded_exchange:
-            assert loaded_exchange is not None
+async def test_load_exchange(mock_exchange):
+    print(mock_exchange)
+    if mock_exchange:
+        assert mock_exchange is not None
 
 
 @pytest.mark.asyncio
@@ -114,38 +104,3 @@ async def test_toggle_trading_active():
         assert settings.trading_enabled is False
 
 
-# @pytest.mark.asyncio
-# async def test_get_name():
-#     with patch("config.settings", autospec=True):
-#         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-#         settings.dex_private_key = "0xdeadbeet"
-#         settings.dex_rpc = "https://eth.llamarpc.com"
-#         settings.dex_chain_id = 1
-#         settings.cex_name = ""
-#         loaded_exchange = await load_exchange()
-#         print(loaded_exchange)
-#         name = await get_name()
-#         print(name)
-#         assert name is not None
-
-
-# @pytest.mark.asyncio
-# async def test_get_account():
-#     with patch("config.settings", autospec=True):
-#         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-#         settings.dex_private_key = "0xdeadbeet"
-#         settings.dex_rpc = "https://eth.llamarpc.com"
-#         settings.dex_chain_id = 1
-#         settings.cex_name = ""
-#         loaded_exchange = await load_exchange()
-#         print(loaded_exchange)
-#         account = await get_account(loaded_exchange)
-#         print(account)
-#         assert account is not None
-
-
-# @pytest.mark.asyncio
-# async def test_execute_order():
-#     # Test case when both action and instrument are not None
-#     order_params = {'action': 'buy', 'instrument': 'BTCUSDT'}
-#     assert await execute_order(order_params) is None
