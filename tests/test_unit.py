@@ -34,8 +34,7 @@ def mock_listener():
         settings.bot_token = "test_bot_token"
         settings.bot_channel_id = "1234567890"
         settings.bot_msg_help = "this is help"
-        listener = Listener()
-        return listener
+        return Listener()
 
 @pytest.fixture
 def message():
