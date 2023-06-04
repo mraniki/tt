@@ -18,9 +18,6 @@ from iamlistening import Listener
 
 import apprise
 from apprise import NotifyFormat
-from telethon import TelegramClient, events
-import discord
-import simplematrixbotlib as botlib
 
 from config import settings, logger
 
@@ -186,7 +183,6 @@ async def execute_order(order_params):
         return
 
 
-
 async def get_quote(symbol):
     """return quote"""
     try:
@@ -323,7 +319,7 @@ async def restart_command():
 
 
 async def talky():
-    """Launch Bot Listener"""
+    """Launch Listener"""
     try:
         await load_exchange()
     except Exception as e:
