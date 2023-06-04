@@ -2,6 +2,32 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.0 (2023-06-04)
+### Feature
+* 🥚prepping listener integration ([`f8654cc`](https://github.com/mraniki/tt/commit/f8654ccc75e65e92bd14f3ad86b5aa1bb8d45ca9))
+
+### Fix
+* 🐛 fixing unit test ([`fc5ee6a`](https://github.com/mraniki/tt/commit/fc5ee6ad4061727aa3827e4ea63935eedb5ee6fa))
+* ✅ unit test ([`30c4f5e`](https://github.com/mraniki/tt/commit/30c4f5e5681e75ac6cf2d72420069b279230610e))
+* ✅ unit test ([`4185449`](https://github.com/mraniki/tt/commit/41854496933f2a3437a7abf4819e9faf4704f440))
+* ✅ unit test ([`f965f54`](https://github.com/mraniki/tt/commit/f965f547d5d85074b5b09517a40e8a2b9b5261f5))
+* ✅ unit test completed ([`4f0e9b1`](https://github.com/mraniki/tt/commit/4f0e9b1545b6f9d6f9a13e043e69858b15d967ab))
+* ✅ unit test ([`42b385d`](https://github.com/mraniki/tt/commit/42b385d6866b2a47381dd532a08199f8ade04637))
+* ✅ unit test ([`f4f3529`](https://github.com/mraniki/tt/commit/f4f3529010344cae5915994b7549504d8ea104be))
+* ✅ unit test ([`bb9bc88`](https://github.com/mraniki/tt/commit/bb9bc8866a450838eaf8a4dac334e211b317a41f))
+* ✅ unit test ([`4ef100f`](https://github.com/mraniki/tt/commit/4ef100f61f4a1d0bda3a0e9685cc88a4d7c937a5))
+* ✅ unit test ([`5e8f7d9`](https://github.com/mraniki/tt/commit/5e8f7d9ee0431935b8f9aa4c338ad5d4631011a5))
+* ✅ unit test ([`510a01f`](https://github.com/mraniki/tt/commit/510a01fc828d144a7d3723634e8d72bc22d67677))
+* ✅ unit test ([`8061656`](https://github.com/mraniki/tt/commit/8061656c309a314b404f744de55a57b6ab1377f6))
+* ♻️ refactor ([`917a060`](https://github.com/mraniki/tt/commit/917a0601a80b60a9c463cc719c04a4cdbc1a5f9d))
+* ✅ unit test ([`8360049`](https://github.com/mraniki/tt/commit/83600490b15a1143877cd3e16f28a06a564447a1))
+* ✅ unit test ([`b097dd4`](https://github.com/mraniki/tt/commit/b097dd42ab0a950dd7898c4a73d00281037b3d55))
+
+### Other
+* Merge pull request #421 from mraniki/dev ([`99486eb`](https://github.com/mraniki/tt/commit/99486eb7953a393df9cb837100a8bef98272a9e2))
+* :white_check_mark: unit test ([`f9a0e85`](https://github.com/mraniki/tt/commit/f9a0e85240c1f5cf79e0ded1fd2020eb1282e7f3))
+* :white_check_mark: unit test ([`43483a0`](https://github.com/mraniki/tt/commit/43483a0083c0d2a2149dfd454a760216f1d259c0))
+
 ## v1.8.3 (2023-06-01)
 ### Fix
 * ✅ unit test ([`a280af0`](https://github.com/mraniki/tt/commit/a280af02a6a73f7402eef03bb304265ff0a7a106))
