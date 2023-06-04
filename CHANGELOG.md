@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.0 (2023-06-04)
+### Fix
+* 🎨 code format ([`1318037`](https://github.com/mraniki/tt/commit/13180371bfdd773403ca1650d6caabe699c3d579))
+* ♻️ refactor ([`5bec9ee`](https://github.com/mraniki/tt/commit/5bec9ee4a1c899a5c3bb777156d389b93bd5e20f))
+* ♻️ refactor ([`6dabb36`](https://github.com/mraniki/tt/commit/6dabb365c80820aefef866fe78f8d9aa35e711c4))
+* ✅ coverage ([`6bdf7fc`](https://github.com/mraniki/tt/commit/6bdf7fc287c8e71b803d9047c1f690da5f17eb78))
+
+### Breaking
+* 💥 new module for messaging platform ([`9b88124`](https://github.com/mraniki/tt/commit/9b881241e2aa48e3e090c9f0ffeea92e1db3ecb3))
+* 💥 new module for messaging platform ([`9b88124`](https://github.com/mraniki/tt/commit/9b881241e2aa48e3e090c9f0ffeea92e1db3ecb3))
+
+### Other
+* Merge pull request #423 from mraniki/dev ([`faf9514`](https://github.com/mraniki/tt/commit/faf9514d4c2ff76244c761a771933ecd82575c4d))
+
 ## v1.9.0 (2023-06-04)
 ### Feature
 * 🥚prepping listener integration ([`f8654cc`](https://github.com/mraniki/tt/commit/f8654ccc75e65e92bd14f3ad86b5aa1bb8d45ca9))
