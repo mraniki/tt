@@ -4,9 +4,7 @@
 from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 
-from dxsp import DexSwap
 from iamlistening import Listener
-from findmyorder import FindMyOrder
 
 from config import settings, logger
 
@@ -105,7 +103,7 @@ async def test_parse_message(msg, expected_output, mocker):
     await parse_message(msg)
     if msg == '/help':
         init_mock = mocker.patch('bot.init_message', return_value='help message')
-        expected_output = f'help message\nhelp init message'
+        expected_output = 'help message\nhelp init message'
         await parse_message(msg)
         assert '🏦' in notify_mock.call_args[0][0]
 
@@ -131,7 +129,6 @@ async def test_notify(mock_discord):
                 'discord://12345678901/1234567890')
             apprise_instance_mock.async_notify.assert_called_with(
                 body='`test message`', body_format='html')
-    
     # Test with empty message
     output = await notify(None)
     assert output is None
