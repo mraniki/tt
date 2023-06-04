@@ -113,7 +113,7 @@ async def load_exchange():
     """load_exchange."""
     global exchange
     try:
-        if settings.cex_name != '':
+        if settings.cex_name:
             client = getattr(ccxt, settings.cex_name)
             exchange = client({
                 'apiKey': settings.cex_api,
@@ -125,8 +125,9 @@ async def load_exchange():
                             }})
             if settings.cex_testmode:
                 exchange.set_sandbox_mode('enabled')
-        elif settings.dex_chain_id != '':
+        elif settings.dex_chain_id:
             exchange = DexSwap()
+        return exchange
     except Exception as e:
         logger.warning("exchange: %s", e)
 
