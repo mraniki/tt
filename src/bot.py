@@ -336,7 +336,6 @@ async def talky():
             print(error)
     await task
 
-
 # ⛓️API
 app = FastAPI(title="TALKYTRADER",)
 
