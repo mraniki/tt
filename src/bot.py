@@ -331,7 +331,7 @@ async def talky():
         try:
             msg = await listener.get_latest_message()
             if msg:
-                parse_message(msg)
+                await parse_message(msg)
         except Exception as error:
             print(error)
     await task
