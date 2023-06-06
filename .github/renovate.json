@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "config:base",
+    ":semanticCommitTypeAll(⬆️)"
+  ],
+  "pip_requirements": {
+    "fileMatch": [
+      "(^|/)([\\w-]*)requirements\\.(txt|pip)$"
+    ]
+  }
+}
