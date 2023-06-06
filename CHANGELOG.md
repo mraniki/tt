@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.2 (2023-06-06)
+### Fix
+* ⬆️ Create renovate.json ([`537fd02`](https://github.com/mraniki/tt/commit/537fd027c15dcf236bcaa556d4cedef9ab741b60))
+
+### Other
+* Delete renovate.json ([`8d0d518`](https://github.com/mraniki/tt/commit/8d0d51825e88aeea415546dc8eec54582c1e1da5))
+
 ## v2.0.1 (2023-06-06)
 ### Fix
 * ⬆️   Update and rename renovate.json to .github/renovate.json ([`03966d8`](https://github.com/mraniki/tt/commit/03966d8373550133ffcb2035c7d8a14278b4d9db))
