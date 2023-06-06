@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.1 (2023-06-06)
+### Fix
+* ⬆️   Update and rename renovate.json to .github/renovate.json ([`03966d8`](https://github.com/mraniki/tt/commit/03966d8373550133ffcb2035c7d8a14278b4d9db))
+
+### Other
+* Merge pull request #425 from mraniki/renovate/configure ([`3f20f19`](https://github.com/mraniki/tt/commit/3f20f19972ab9ec0d04ad3e8add4dee7925c6748))
+* Add renovate.json ([`f1023f8`](https://github.com/mraniki/tt/commit/f1023f8bc92ecfd01996e4222998c0ff20358a64))
+* Delete renovate.json ([`7133f37`](https://github.com/mraniki/tt/commit/7133f375a087909a2a2e4c4c92a129ecfa1d5a16))
+* Merge pull request #424 from mraniki/dev ([`03012f7`](https://github.com/mraniki/tt/commit/03012f7501b10ab6131a18eec75af893a56f1e9c))
+* :arrow_up: dep ([`7c9bc00`](https://github.com/mraniki/tt/commit/7c9bc00312ca118f985242b821acbe4c1640a6a8))
+
 ## v2.0.0 (2023-06-04)
 ### Fix
 * 🎨 code format ([`1318037`](https://github.com/mraniki/tt/commit/13180371bfdd773403ca1650d6caabe699c3d579))
