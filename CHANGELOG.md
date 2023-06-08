@@ -2,6 +2,23 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.0 (2023-06-08)
+
+### Feature
+
+* Update ✨Flow.yml ([`372dbd0`](https://github.com/mraniki/tt/commit/372dbd08d3e416a31c02966cddf7778cb1443fc0))
+
+### Fix
+
+* 👷 CI Change ([`43e8340`](https://github.com/mraniki/tt/commit/43e8340f036eca23b6c3a7522d9463a4ef7d58e5))
+* 👷 CI Change ([`544c616`](https://github.com/mraniki/tt/commit/544c616dff0677d3d59508bd34d5b236645da458))
+
+### Other
+
+* :arrow_up:Added talkytrend library to requirements.txt file. ([`fcf77a5`](https://github.com/mraniki/tt/commit/fcf77a5aa0f98cd09b904aa8f7972df77ed12908))
+* Update renovate.json ([`56760b1`](https://github.com/mraniki/tt/commit/56760b14a2e628897ec3aeeb873bcfa9ded0c829))
+* Update renovate.json ([`a00dd63`](https://github.com/mraniki/tt/commit/a00dd633214c1494bb390f52c4606ae26a2d5b62))
+
 ## v2.0.2 (2023-06-06)
 ### Fix
 * ⬆️ Create renovate.json ([`537fd02`](https://github.com/mraniki/tt/commit/537fd027c15dcf236bcaa556d4cedef9ab741b60))
