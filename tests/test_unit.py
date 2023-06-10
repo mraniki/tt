@@ -212,12 +212,13 @@ async def test_get_account_balance(mock_settings_dex):
 
 @pytest.mark.asyncio
 async def test_get_trading_asset_balance(mock_settings_dex):
-    """Test get_asset_trading_balance function returns a non-None value."""
+    """Test get_asset_trading_balance."""
     await load_exchange()
     output = await get_trading_asset_balance()
     print(output)
     assert output is not None
 
+    
 @pytest.mark.asyncio
 async def test_get_account_position(mock_settings_dex):
     """Test get_account_positions."""
@@ -278,7 +279,7 @@ def test_read_main():
     assert response.status_code == 200
     #assert response.json() == {"msg": "Hello World"}
 
-i@pytest.mark
+#@pytest.mark
 def test_webhook_with_valid_payload():
     client = TestClient(app)
     payload = {"key": "my_secret_key", "data": "my_data"}
