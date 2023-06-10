@@ -4,6 +4,7 @@ TalkyTrader 🪙🗿
 __version__ = "2.1.2"
 
 import http
+import time
 import os
 import sys
 import asyncio
@@ -18,8 +19,7 @@ from findmyorder import FindMyOrder
 from iamlistening import Listener
 from talkytrend import TalkyTrend
 
-import apprise
-from apprise import NotifyFormat
+from apprise import Apprise, NotifyFormat
 
 from .config import settings, logger
 
@@ -70,7 +70,7 @@ async def notify(msg):
     """💬 MESSAGING """
     if not msg:
         return
-    apobj = apprise.Apprise()
+    apobj = Apprise()
     if settings.discord_webhook_id:
         url = (f"discord://{str(settings.discord_webhook_id)}/"
                f"{str(settings.discord_webhook_token)}")
@@ -104,6 +104,7 @@ def get_host_ip() -> str:
 def get_ping(host: str = settings.ping) -> float:
     """Returns  ping """
     response_time = ping3.ping(host, unit='ms')
+    time.sleep(1)
     return round(response_time, 3)
 
 
@@ -259,8 +260,8 @@ async def get_account_position():
         else:
             open_positions = exchange.fetch_positions()
             open_positions = [p for p in open_positions if p['type'] == 'open']
-        position += open_positions
-        position += await get_account_margin()
+        position += str(open_positions)
+        position += str(await get_account_margin())
         return position
     except Exception as e:
         logger.warning("account_position: %s", e)
@@ -270,11 +271,11 @@ async def get_account_margin():
     try:
         margin = "\n🪙 margin\n"
         if isinstance(exchange, DexSwap):
-            margin += 0
+            margin += str(0)
         else:
-            margin += await exchange.fetch_balance({
+            margin += str(await exchange.fetch_balance({
                 'type': 'margin',
-                })
+                }))
         return margin
     except Exception as e:
         logger.warning("account_margin: %s", e)
@@ -380,8 +381,10 @@ async def health_check():
 @app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
 async def webhook(request: Request):
     payload = await request.body()
+    print(payload)
     if payload["key"] == settings.webhook_secret:
-        await notify(payload)
+        return await notify(payload)
+    
 
 # 🙊TALKYTRADER
 

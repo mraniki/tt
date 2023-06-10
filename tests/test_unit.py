@@ -113,9 +113,9 @@ async def test_parse_message(msg, expected_output, mocker):
 
 
 @pytest.mark.asyncio
-async def test_parse_bal(mocker, mock_settings_dex):
+async def test_parse_bal(mock_settings_dex):
     """Test parse_message balance """
-    notify_mock = mocker.patch('src.bot.notify')
+    notify_mock = AsyncMock()
     with patch('src.bot.notify',notify_mock):
         await load_exchange()
         await parse_message('/bal')
@@ -135,7 +135,7 @@ async def test_parse_trading(mock_settings_dex):
 @pytest.mark.asyncio
 async def test_notify(mock_discord):
     """Test notify function"""
-    # Mock Apprise class and its methods
+    # Mock Apprise class 
     apprise_mock = MagicMock()
     apprise_instance_mock = AsyncMock()
     apprise_instance_mock.async_notify.return_value = True
@@ -144,7 +144,7 @@ async def test_notify(mock_discord):
     message = '<code>test message</code>'
 
     # Test with Discord webhook
-    with patch('apprise.Apprise', apprise_mock):
+    with patch('Apprise', apprise_mock):
         with patch('src.config.settings', mock_discord):
             apprise_mock.return_value = apprise_instance_mock
             output = await notify(message)
