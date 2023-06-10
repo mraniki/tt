@@ -133,7 +133,7 @@ async def test_parse_trading(mock_settings_dex):
 
 
 @pytest.mark.asyncio
-async def test_notify(mock_discord):
+async def test_notify(caplog, mock_discord):
     """Test notify function"""
     notify_mock = AsyncMock()
     with patch('src.bot.notify',notify_mock):
@@ -142,17 +142,9 @@ async def test_notify(mock_discord):
 
         output = await notify(message)
         print(output)
-        assert output is not None
-         #apprise_mock.assert_called_once()
-            #apprise_instance_mock.add.assert_called_with(
-                #'discord://12345678901/1234567890')
-            #apprise_instance_mock.async_notify.assert_called_with(
-                #body='`test message`', body_format='html')
-    # Test with empty message
-    #output = await notify(None)
-    #assert output is None
+        assert 'https://discord.com/api/webhooks/12345678901/1234567890' in caplog.text
 
-    
+
 @pytest.mark.asyncio
 async def test_get_host_ip():
     """Test get_host_ip """
@@ -278,7 +270,7 @@ def test_read_main():
     assert response.status_code == 200
     #assert response.json() == {"msg": "Hello World"}
 
-#@pytest.mark
+
 def test_webhook_with_valid_payload():
     client = TestClient(app)
     payload = {"key": "my_secret_key", "data": "my_data"}
