@@ -254,13 +254,12 @@ async def get_trading_asset_balance():
 async def get_account_position():
     """return account position."""
     try:
-        position = "📊 Position\n"
         if isinstance(exchange, DexSwap):
             open_positions = await exchange.get_account_position()
         else:
             open_positions = exchange.fetch_positions()
             open_positions = [p for p in open_positions if p['type'] == 'open']
-        position += str(open_positions)
+        position = "📊 Position\n" + str(open_positions)
         position += str(await get_account_margin())
         return position
     except Exception as e:
@@ -269,14 +268,17 @@ async def get_account_position():
 
 async def get_account_margin():
     try:
-        margin = "\n🪙 margin\n"
-        if isinstance(exchange, DexSwap):
-            margin += str(0)
-        else:
-            margin += str(await exchange.fetch_balance({
-                'type': 'margin',
-                }))
-        return margin
+        return "\n🪙 margin\n" + (
+            str(0)
+            if isinstance(exchange, DexSwap)
+            else str(
+                await exchange.fetch_balance(
+                    {
+                        'type': 'margin',
+                    }
+                )
+            )
+        )
     except Exception as e:
         logger.warning("account_margin: %s", e)
 
