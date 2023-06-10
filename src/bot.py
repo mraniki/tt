@@ -10,7 +10,7 @@ import asyncio
 import socket
 import uvicorn
 import ping3
-from fastapi import FastAPI, Header, HTTPException, request
+from fastapi import FastAPI, Request
 
 import ccxt
 from dxsp import DexSwap
@@ -303,7 +303,7 @@ async def account_balance_command():
 
 
 async def account_position_command():
-    # Return account position
+    """Return account position"""
     return await get_account_position()
 
 
@@ -374,7 +374,7 @@ async def health_check():
 
 
 @app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
-async def webhook():
+async def webhook(request: Request):
     payload = await request.body()
     if payload["key"] == settings.webhook_secret:
         await notify(payload)
