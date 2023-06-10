@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.2 (2023-06-10)
+
+### Fix
+
+* ⬆️(deps): update actions/checkout action to v3.5.3 ([`796e96c`](https://github.com/mraniki/tt/commit/796e96c9df08d7e93072c51a6f3f6d576c6f9649))
+
 ## v2.1.1 (2023-06-08)
 
 ### Fix
