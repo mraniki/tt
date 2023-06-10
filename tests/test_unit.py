@@ -144,7 +144,7 @@ async def test_notify(mock_discord):
     message = '<code>test message</code>'
 
     # Test with Discord webhook
-    with patch('Apprise', apprise_mock):
+    with patch('apprise.Apprise', apprise_mock):
         with patch('src.config.settings', mock_discord):
             apprise_mock.return_value = apprise_instance_mock
             output = await notify(message)
@@ -168,7 +168,7 @@ async def test_get_host_ip():
 @pytest.mark.asyncio
 async def test_def_get_ping(mock_discord):
     """Test get_ping function """
-    output = get_ping()
+    output = get_ping(host=8.8.8.8)
     print(output)
     assert output is not None
 

@@ -104,6 +104,7 @@ def get_host_ip() -> str:
 def get_ping(host: str = settings.ping) -> float:
     """Returns  ping """
     response_time = ping3.ping(host, unit='ms')
+    print(response_time)
     time.sleep(1)
     return round(response_time, 3)
 
@@ -384,8 +385,8 @@ async def health_check():
 async def webhook(request: Request):
     payload = await request.body()
     print(payload)
-    if payload["key"] == settings.webhook_secret:
-        return await notify(payload)
+    #if payload["key"] == settings.webhook_secret:
+    return await notify(payload)
     
 
 # 🙊TALKYTRADER
