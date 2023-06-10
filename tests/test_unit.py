@@ -249,3 +249,22 @@ async def test_message_listener(mock_telegram, message):
     msg = await listener.get_latest_message()
     print(msg)
     assert msg == "hello"
+
+
+# import json
+# from http import HTTPStatus
+# from fastapi.testclient import TestClient
+# from app.main import app
+
+# client = TestClient(app)
+
+# def test_webhook_with_valid_payload():
+#     payload = {"key": "my_secret_key", "data": "my_data"}
+#     response = client.post("/webhook", json=payload)
+#     assert response.status_code == HTTPStatus.ACCEPTED
+
+# def test_webhook_with_invalid_payload():
+#     payload = {"key": "wrong_key", "data": "my_data"}
+#     response = client.post("/webhook", json=payload)
+#     assert response.status_code == HTTPStatus.OK
+#     assert response.json() == {"message": "Key is incorrect"}
