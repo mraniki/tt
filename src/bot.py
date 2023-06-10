@@ -3,23 +3,25 @@ TalkyTrader 🪙🗿
 """
 __version__ = "2.1.2"
 
+import http
+import time
 import os
 import sys
 import asyncio
 import socket
 import uvicorn
 import ping3
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 
 import ccxt
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 from iamlistening import Listener
+from talkytrend import TalkyTrend
 
-import apprise
-from apprise import NotifyFormat
+from apprise import Apprise, NotifyFormat
 
-from config import settings, logger
+from .config import settings, logger
 
 
 async def parse_message(msg):
@@ -42,20 +44,21 @@ async def parse_message(msg):
                 message = await trading_switch_command()
             elif command == settings.bot_command_quote:
                 symbol = msg.split(" ")[1]
-                await get_quote(symbol)
+                message = await get_quote(symbol)
             elif command == settings.bot_command_bal:
                 await account_balance_command()
             elif command == settings.bot_command_pos:
-                await account_position_command()
+                message = await account_position_command()
             elif command == settings.bot_command_restart:
                 await restart_command()
             if message is not None:
                 await notify(message)
 
-        # Order Process
+        # Order found
         if settings.trading_enabled and await fmo.search(msg):
-            # Order found
+            # Order parsing and default value 
             order = await fmo.get_order(msg)
+            # Order execution
             order = await execute_order(order)
             if order:
                 await notify(order)
@@ -67,7 +70,7 @@ async def notify(msg):
     """💬 MESSAGING """
     if not msg:
         return
-    apobj = apprise.Apprise()
+    apobj = Apprise()
     if settings.discord_webhook_id:
         url = (f"discord://{str(settings.discord_webhook_id)}/"
                f"{str(settings.discord_webhook_token)}")
@@ -101,6 +104,8 @@ def get_host_ip() -> str:
 def get_ping(host: str = settings.ping) -> float:
     """Returns  ping """
     response_time = ping3.ping(host, unit='ms')
+    print(response_time)
+    time.sleep(1)
     return round(response_time, 3)
 
 
@@ -250,14 +255,13 @@ async def get_trading_asset_balance():
 async def get_account_position():
     """return account position."""
     try:
-        position = "📊 Position\n"
         if isinstance(exchange, DexSwap):
             open_positions = await exchange.get_account_position()
         else:
             open_positions = exchange.fetch_positions()
             open_positions = [p for p in open_positions if p['type'] == 'open']
-        position += open_positions
-        position += await get_account_margin()
+        position = "📊 Position\n" + str(open_positions)
+        position += str(await get_account_margin())
         return position
     except Exception as e:
         logger.warning("account_position: %s", e)
@@ -265,14 +269,17 @@ async def get_account_position():
 
 async def get_account_margin():
     try:
-        margin = "\n🪙 margin\n"
-        if isinstance(exchange, DexSwap):
-            margin += 0
-        else:
-            margin += await exchange.fetch_balance({
-                'type': 'margin',
-                })
-        return margin
+        return "\n🪙 margin\n" + (
+            str(0)
+            if isinstance(exchange, DexSwap)
+            else str(
+                await exchange.fetch_balance(
+                    {
+                        'type': 'margin',
+                    }
+                )
+            )
+        )
     except Exception as e:
         logger.warning("account_margin: %s", e)
 
@@ -302,7 +309,7 @@ async def account_balance_command():
 
 
 async def account_position_command():
-    # Return account position
+    """Return account position"""
     return await get_account_position()
 
 
@@ -318,7 +325,7 @@ async def restart_command():
 # 🤖BOT
 
 
-async def talky():
+async def listener():
     """Launch Listener"""
     try:
         await load_exchange()
@@ -327,6 +334,8 @@ async def talky():
 
     listener = Listener()
     task = asyncio.create_task(listener.run_forever())
+    trend = TalkyTrend()
+    
     while True:
         try:
             msg = await listener.get_latest_message()
@@ -345,7 +354,7 @@ def startup_event():
     """fastapi startup"""
     loop = asyncio.get_event_loop()
     try:
-        loop.create_task(talky())
+        loop.create_task(listener())
         logger.info("started")
     except Exception as e:
         loop.stop()
@@ -371,6 +380,14 @@ async def health_check():
     """fastapi health"""
     return await init_message()
 
+
+@app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
+async def webhook(request: Request):
+    payload = await request.body()
+    print(payload)
+    #if payload["key"] == settings.webhook_secret:
+    return await notify(payload)
+    
 
 # 🙊TALKYTRADER
 

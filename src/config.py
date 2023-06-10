@@ -18,6 +18,7 @@ settings = Dynaconf(
     default_env="default",
 )
 
+
 #  🧐LOGGING
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",

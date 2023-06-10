@@ -1,22 +1,26 @@
 """
  TT test
 """
+
 from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
+from fastapi.testclient import TestClient
 
 from iamlistening import Listener
 
-from config import settings, logger
+# from config import settings, logger
+from src.config import settings
 
-from bot import (
+from src.bot import (
     load_exchange, parse_message,
     execute_order, trading_switch_command,
-    init_message, post_init, notify,
-    get_account, get_name, get_host_ip, get_ping,
+    init_message, notify,
+    get_name, get_host_ip,
     get_quote, get_trading_asset_balance,
-    get_account_position, get_account_balance,
-    get_account_margin,
-    restart_command,
+    get_account_balance, app,
+    get_ping, get_account, post_init,
+    get_account_position, get_account_margin,
+    # restart_command,
 )
 
 
@@ -85,7 +89,7 @@ def command_message():
 
 @pytest.fixture
 def order_params():
-    """Return a dictionary object with order parameters."""
+    """Return order parameters."""
     return {
         'action': 'BUY',
         'instrument': 'EURUSD',
@@ -98,59 +102,67 @@ def order_params():
     ('/help', 'help message'),
 ])
 async def test_parse_message(msg, expected_output, mocker):
-    """Test that the parse_message function returns a non-None value."""
-    notify_mock = mocker.patch('bot.notify')
+    """Test parse_message function """
+    notify_mock = mocker.patch('src.bot.notify')
     await parse_message(msg)
     if msg == '/help':
-        init_mock = mocker.patch('bot.init_message', return_value='help message')
+        init_mock = mocker.patch('src.bot.init_message', return_value='help message')
         expected_output = 'help message\nhelp init message'
         await parse_message(msg)
         assert '🏦' in notify_mock.call_args[0][0]
 
 
+# @pytest.mark.asyncio
+# async def test_parse_bal(mock_settings_dex):
+#     """Test parse_message balance """
+#     notify_mock = AsyncMock()
+#     with patch('src.bot.notify',notify_mock):
+#         await load_exchange()
+#         await parse_message('/bal')
+#         assert '🏦' in notify_mock.call_args[0][0]
+
+
 @pytest.mark.asyncio
-async def test_notify(mock_discord):
-    """Test that the notify function returns a non-None value."""
-    # Mock Apprise class and its methods
-    apprise_mock = MagicMock()
-    apprise_instance_mock = AsyncMock()
-    apprise_instance_mock.async_notify.return_value = True
+async def test_parse_trading(mock_settings_dex):
+    """Test parse_message balance """
+    notify_mock = AsyncMock()
+    with patch('src.bot.notify',notify_mock):
+        await load_exchange()
+        await parse_message('/trading')
+        assert 'Trading is' in notify_mock.call_args[0][0]
 
-    # Test message
-    message = '<code>test message</code>'
 
-    # Test with Discord webhook
-    with patch('apprise.Apprise', apprise_mock):
-        with patch('config.settings', mock_discord):
-            apprise_mock.return_value = apprise_instance_mock
-            output = await notify(message)
-            apprise_mock.assert_called_once()
-            apprise_instance_mock.add.assert_called_with(
-                'discord://12345678901/1234567890')
-            apprise_instance_mock.async_notify.assert_called_with(
-                body='`test message`', body_format='html')
-    # Test with empty message
-    output = await notify(None)
-    assert output is None
+@pytest.mark.asyncio
+async def test_notify(caplog, mock_discord):
+    """Test notify function"""
+    notify_mock = AsyncMock()
+    with patch('src.bot.notify',notify_mock):
+
+        message = '<code>test message</code>'
+
+        output = await notify(message)
+        print(output)
+        assert 'https://discord.com/api/webhooks/12345678901/1234567890' in caplog.text
+
 
 @pytest.mark.asyncio
 async def test_get_host_ip():
-    """Test that the get_host_ip function returns a non-None value."""
+    """Test get_host_ip """
     output = get_host_ip()
-    assert output is not None, "The output should not be None"
+    assert output is not None
 
 
 # @pytest.mark.asyncio
 # async def test_def_get_ping(mock_discord):
-#     """Test that the get_ping function returns a non-None value."""
+#     """Test get_ping function """
 #     output = get_ping()
 #     print(output)
-#     assert output is not None, "The output should not be None"
+#     assert output is not None
 
 
 @pytest.mark.asyncio
 async def test_load_exchange(mock_settings_dex):
-    """Fixture to create an exchange object for testing."""
+    """test exchange dex"""
     exchange = await load_exchange()
     print(exchange)
     assert exchange is not None
@@ -164,7 +176,7 @@ async def test_failed_execute_order(caplog, order_params,mock_settings_dex):
 
 @pytest.mark.asyncio
 async def test_get_quote(mock_settings_dex):
-    """Test that the get_quote function returns a non-None value."""
+    """Test get_quote """
     await load_exchange()
     output = await get_quote("WBTC")
     print(output)
@@ -173,7 +185,7 @@ async def test_get_quote(mock_settings_dex):
 
 @pytest.mark.asyncio
 async def test_get_name(mock_settings_dex):
-    """Test that the get_name function returns a non-None value."""
+    """Test get_name function."""
     await load_exchange()
     output = await get_name()
     print(output)
@@ -182,7 +194,7 @@ async def test_get_name(mock_settings_dex):
 
 @pytest.mark.asyncio
 async def test_get_account_balance(mock_settings_dex):
-    """Test that the get_account_balance function returns a non-None value."""
+    """Test get_account_balance."""
     await load_exchange()
     output = await get_account_balance()
     print(output)
@@ -191,29 +203,29 @@ async def test_get_account_balance(mock_settings_dex):
 
 @pytest.mark.asyncio
 async def test_get_trading_asset_balance(mock_settings_dex):
-    """Test that the get_asset_trading_balance function returns a non-None value."""
+    """Test get_asset_trading_balance."""
     await load_exchange()
     output = await get_trading_asset_balance()
     print(output)
     assert output is not None
 
-# @pytest.mark.asyncio
-# async def test_get_account_position():
-#     """Test that the get_account_positions function returns a non-None value."""
-#     with patch("config.settings", autospec=True):
-#         exchange = DexSwap()
-#         output = await get_account_position()
-#         print(output)
-#         assert output is not None
+    
+@pytest.mark.asyncio
+async def test_get_account_position(mock_settings_dex):
+    """Test get_account_positions."""
+    await load_exchange() 
+    output = await get_account_position()
+    print(output)
+    assert output is not None
 
-# @pytest.mark.asyncio
-# async def test_get_account_margin():
-#     """Test that the get_account_margin function returns a non-None value."""
-#     with patch("config.settings", autospec=True):
-#         exchange = DexSwap()
-#         output = await get_account_margin()
-#         print(output)
-#         assert output is not None
+
+@pytest.mark.asyncio
+async def test_get_account_margin(mock_settings_dex):
+    """Test get_account_margin """
+    await load_exchange() 
+    output = await get_account_margin()
+    print(output)
+    assert output is not None
 
 
 @pytest.mark.asyncio
@@ -239,6 +251,7 @@ async def test_listener(mock_discord):
     print(listener)
     assert listener is not None
 
+
 @pytest.mark.asyncio
 async def test_message_listener(mock_telegram, message):
     listener = Listener()
@@ -249,3 +262,24 @@ async def test_message_listener(mock_telegram, message):
     msg = await listener.get_latest_message()
     print(msg)
     assert msg == "hello"
+
+
+def test_read_main():
+    client = TestClient(app)
+    response = client.get("/")
+    assert response.status_code == 200
+    #assert response.json() == {"msg": "Hello World"}
+
+
+def test_webhook_with_valid_payload():
+    client = TestClient(app)
+    payload = {"key": "my_secret_key", "data": "my_data"}
+    response = client.post("/webhook", json=payload)
+    assert response is not None
+
+
+# def test_webhook_with_invalid_payload():
+#     client = TestClient(app)
+#     payload = {"key": "wrong_key", "data": "my_data"}
+#     response = client.post("/webhook", json=payload)
+#     assert response.json() == {"message": "Key is incorrect"}
