@@ -3,6 +3,7 @@ loglevel = "INFO"
 host = "0.0.0.0"
 port = 8080
 ping = "8.8.8.8"
+webhook_secret = "123abc"
 bot_prefix = "/"
 bot_command_help = "help"
 bot_command_bal = "bal"

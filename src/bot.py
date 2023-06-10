@@ -3,13 +3,14 @@ TalkyTrader 🪙🗿
 """
 __version__ = "2.1.1"
 
+import http
 import os
 import sys
 import asyncio
 import socket
 import uvicorn
 import ping3
-from fastapi import FastAPI
+from fastapi import FastAPI, Header, HTTPException, request
 
 import ccxt
 from dxsp import DexSwap
@@ -371,6 +372,12 @@ async def health_check():
     """fastapi health"""
     return await init_message()
 
+
+@app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
+async def webhook(request: Request)
+    payload = await request.body()
+    if payload["key"] == settings.webhook_secret:
+        await notify(data)
 
 # 🙊TALKYTRADER
 
