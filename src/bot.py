@@ -377,7 +377,7 @@ async def health_check():
 async def webhook():
     payload = await request.body()
     if payload["key"] == settings.webhook_secret:
-        await notify(data)
+        await notify(payload)
 
 # 🙊TALKYTRADER
 
