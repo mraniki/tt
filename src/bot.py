@@ -330,7 +330,7 @@ async def listener():
 
     listener = Listener()
     task = asyncio.create_task(listener.run_forever())
-    #talkyscanner = TalkyTrend()
+    trend = TalkyTrend()
     
     while True:
         try:

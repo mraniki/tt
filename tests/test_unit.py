@@ -115,7 +115,7 @@ async def test_parse_message(msg, expected_output, mocker):
 @pytest.mark.asyncio
 async def test_parse_bal():
     """Test parse_message balance """
-    with path('src.bot.notify',notify_mock):
+    with patch('src.bot.notify',notify_mock):
         await parse_message('/bal')
         assert '🏦' in notify_mock.call_args[0][0]
 
@@ -123,7 +123,7 @@ async def test_parse_bal():
 @pytest.mark.asyncio
 async def test_parse_trading():
     """Test parse_message balance """
-    with path('src.bot.notify',notify_mock):
+    with patch('src.bot.notify',notify_mock):
         await parse_message('/trading')
         assert 'Trading is' in notify_mock.call_args[0][0]
 
