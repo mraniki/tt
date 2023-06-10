@@ -44,20 +44,21 @@ async def parse_message(msg):
                 message = await trading_switch_command()
             elif command == settings.bot_command_quote:
                 symbol = msg.split(" ")[1]
-                await get_quote(symbol)
+                message = await get_quote(symbol)
             elif command == settings.bot_command_bal:
                 await account_balance_command()
             elif command == settings.bot_command_pos:
-                await account_position_command()
+                message = await account_position_command()
             elif command == settings.bot_command_restart:
                 await restart_command()
             if message is not None:
                 await notify(message)
 
-        # Order Process
+        # Order found
         if settings.trading_enabled and await fmo.search(msg):
-            # Order found
+            # Order parsing and default value 
             order = await fmo.get_order(msg)
+            # Order execution
             order = await execute_order(order)
             if order:
                 await notify(order)
@@ -320,7 +321,7 @@ async def restart_command():
 # 🤖BOT
 
 
-async def talky():
+async def listener():
     """Launch Listener"""
     try:
         await load_exchange()
@@ -329,6 +330,8 @@ async def talky():
 
     listener = Listener()
     task = asyncio.create_task(listener.run_forever())
+    #talkyscanner = TalkyTrend()
+    
     while True:
         try:
             msg = await listener.get_latest_message()
@@ -347,7 +350,7 @@ def startup_event():
     """fastapi startup"""
     loop = asyncio.get_event_loop()
     try:
-        loop.create_task(talky())
+        loop.create_task(listener())
         logger.info("started")
     except Exception as e:
         loop.stop()

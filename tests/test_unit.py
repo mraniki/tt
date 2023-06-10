@@ -91,7 +91,7 @@ def command_message():
 
 @pytest.fixture
 def order_params():
-    """Return a dictionary object with order parameters."""
+    """Return order parameters."""
     return {
         'action': 'BUY',
         'instrument': 'EURUSD',
@@ -104,7 +104,7 @@ def order_params():
     ('/help', 'help message'),
 ])
 async def test_parse_message(msg, expected_output, mocker):
-    """Test that the parse_message function returns a non-None value."""
+    """Test parse_message function """
     notify_mock = mocker.patch('src.bot.notify')
     await parse_message(msg)
     if msg == '/help':
@@ -115,8 +115,24 @@ async def test_parse_message(msg, expected_output, mocker):
 
 
 @pytest.mark.asyncio
+async def test_parse_bal():
+    """Test parse_message balance """
+    notify_mock = mocker.patch('src.bot.notify')
+    await parse_message('/bal')
+    assert '🏦' in notify_mock.call_args[0][0]
+
+
+@pytest.mark.asyncio
+async def test_parse_trading():
+    """Test parse_message balance """
+    notify_mock = mocker.patch('src.bot.notify')
+    await parse_message('/trading')
+    assert 'Trading is' in notify_mock.call_args[0][0]
+
+
+@pytest.mark.asyncio
 async def test_notify(mock_discord):
-    """Test that the notify function returns a non-None value."""
+    """Test notify function"""
     # Mock Apprise class and its methods
     apprise_mock = MagicMock()
     apprise_instance_mock = AsyncMock()
@@ -139,24 +155,25 @@ async def test_notify(mock_discord):
     output = await notify(None)
     assert output is None
 
+    
 @pytest.mark.asyncio
 async def test_get_host_ip():
-    """Test that the get_host_ip function returns a non-None value."""
+    """Test get_host_ip """
     output = get_host_ip()
-    assert output is not None, "The output should not be None"
+    assert output is not None
 
 
-# @pytest.mark.asyncio
-# async def test_def_get_ping(mock_discord):
-#     """Test that the get_ping function returns a non-None value."""
-#     output = get_ping()
-#     print(output)
-#     assert output is not None, "The output should not be None"
+@pytest.mark.asyncio
+async def test_def_get_ping(mock_discord):
+    """Test get_ping function """
+    output = get_ping()
+    print(output)
+    assert output is not None
 
 
 @pytest.mark.asyncio
 async def test_load_exchange(mock_settings_dex):
-    """Fixture to create an exchange object for testing."""
+    """test exchange dex"""
     exchange = await load_exchange()
     print(exchange)
     assert exchange is not None
@@ -170,7 +187,7 @@ async def test_failed_execute_order(caplog, order_params,mock_settings_dex):
 
 @pytest.mark.asyncio
 async def test_get_quote(mock_settings_dex):
-    """Test that the get_quote function returns a non-None value."""
+    """Test get_quote """
     await load_exchange()
     output = await get_quote("WBTC")
     print(output)
@@ -179,7 +196,7 @@ async def test_get_quote(mock_settings_dex):
 
 @pytest.mark.asyncio
 async def test_get_name(mock_settings_dex):
-    """Test that the get_name function returns a non-None value."""
+    """Test get_name function."""
     await load_exchange()
     output = await get_name()
     print(output)
@@ -188,7 +205,7 @@ async def test_get_name(mock_settings_dex):
 
 @pytest.mark.asyncio
 async def test_get_account_balance(mock_settings_dex):
-    """Test that the get_account_balance function returns a non-None value."""
+    """Test get_account_balance."""
     await load_exchange()
     output = await get_account_balance()
     print(output)
@@ -197,29 +214,29 @@ async def test_get_account_balance(mock_settings_dex):
 
 @pytest.mark.asyncio
 async def test_get_trading_asset_balance(mock_settings_dex):
-    """Test that the get_asset_trading_balance function returns a non-None value."""
+    """Test get_asset_trading_balance function returns a non-None value."""
     await load_exchange()
     output = await get_trading_asset_balance()
     print(output)
     assert output is not None
 
-# @pytest.mark.asyncio
-# async def test_get_account_position():
-#     """Test that the get_account_positions function returns a non-None value."""
-#     with patch("src.config.settings", autospec=True):
-#         exchange = DexSwap()
-#         output = await get_account_position()
-#         print(output)
-#         assert output is not None
+@pytest.mark.asyncio
+async def test_get_account_position(mock_settings_dex):
+    """Test get_account_positions."""
+    await load_exchange() 
+    output = await get_account_position()
+    print(output)
+    assert output is not None
 
-# @pytest.mark.asyncio
-# async def test_get_account_margin():
-#     """Test that the get_account_margin function returns a non-None value."""
-#     with patch("src.config.settings", autospec=True):
-#         exchange = DexSwap()
-#         output = await get_account_margin()
-#         print(output)
-#         assert output is not None
+
+@pytest.mark.asyncio
+async def test_get_account_margin():
+    """Test get_account_margin """
+    with patch("src.config.settings", autospec=True):
+        exchange = DexSwap()
+        output = await get_account_margin()
+        print(output)
+        assert output is not None
 
 
 @pytest.mark.asyncio
@@ -257,12 +274,19 @@ async def test_message_listener(mock_telegram, message):
     print(msg)
     assert msg == "hello"
 
-# @pytest.mark
-# def test_webhook_with_valid_payload():
-#     client = TestClient(app)
-#     payload = {"key": "my_secret_key", "data": "my_data"}
-#     response = client.post("/webhook", json=payload)
-#     assert response is not None
+
+def test_read_main():
+    client = TestClient(app)
+    response = client.get("/")
+    assert response.status_code == 200
+    #assert response.json() == {"msg": "Hello World"}
+
+i@pytest.mark
+def test_webhook_with_valid_payload():
+    client = TestClient(app)
+    payload = {"key": "my_secret_key", "data": "my_data"}
+    response = client.post("/webhook", json=payload)
+    assert response is not None
 
 
 # def test_webhook_with_invalid_payload():
