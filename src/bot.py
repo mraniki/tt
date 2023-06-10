@@ -20,7 +20,7 @@ from iamlistening import Listener
 import apprise
 from apprise import NotifyFormat
 
-from config import settings, logger
+from .config import settings, logger
 
 
 async def parse_message(msg):
