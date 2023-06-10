@@ -2,7 +2,6 @@
  TT test
 """
 
-import json
 from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from fastapi.testclient import TestClient
@@ -10,14 +9,17 @@ from fastapi.testclient import TestClient
 from iamlistening import Listener
 
 # from config import settings, logger
+from src.config import settings
 
-from bot import (
+from src.bot import (
     load_exchange, parse_message,
     execute_order, trading_switch_command,
-    init_message, post_init, notify,
-    get_account, get_name, get_host_ip, get_ping,
+    init_message, notify,
+    get_name, get_host_ip,
     get_quote, get_trading_asset_balance,
     get_account_balance, app,
+    # get_ping, get_account
+    # post_init,
     # get_account_position,
     # get_account_margin,
     # restart_command,
