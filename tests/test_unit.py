@@ -113,7 +113,7 @@ async def test_parse_message(msg, expected_output, mocker):
 
 
 @pytest.mark.asyncio
-async def test_parse_bal():
+async def test_parse_bal(mocker):
     """Test parse_message balance """
     notify_mock = mocker.patch('src.bot.notify')
     with patch('src.bot.notify',notify_mock):
