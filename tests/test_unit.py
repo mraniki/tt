@@ -9,7 +9,7 @@ from fastapi.testclient import TestClient
 
 from iamlistening import Listener
 
-from config import settings, logger
+# from config import settings, logger
 
 from bot import (
     load_exchange, parse_message,
