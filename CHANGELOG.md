@@ -2,6 +2,54 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.0 (2023-06-10)
+
+### Feature
+
+* 🥚 webhook ([`90ddf0b`](https://github.com/mraniki/tt/commit/90ddf0b5b2ec2cefb8d0c358fb5162489c389afe))
+
+### Fix
+
+* ✅ unit test ([`5469bea`](https://github.com/mraniki/tt/commit/5469bea3ee49fc2ad64bbc13e3f8d3c70407af71))
+* ✅ unit test ([`ce670dc`](https://github.com/mraniki/tt/commit/ce670dc330891c482bd4d6d246f7c195f45a45f6))
+* ♻️ refactor ([`dcc6d07`](https://github.com/mraniki/tt/commit/dcc6d072270fe83fed7d53afa3796bc8e05ae15c))
+* 🔧 config ([`53ba48e`](https://github.com/mraniki/tt/commit/53ba48e9660b64b167cb524b71292c3cdeaebd93))
+* 🚑 hot fix   httpx import ([`15189aa`](https://github.com/mraniki/tt/commit/15189aad57bf2af7597dd0d3b741f74f6d97c677))
+* 🔥 remove code ([`3cd7b4e`](https://github.com/mraniki/tt/commit/3cd7b4e18e974294a5951154404b75bb8d20d742))
+* ♻️ refactor ([`baf0190`](https://github.com/mraniki/tt/commit/baf0190e04c09fdba364fe535f17ee4ae1da03c2))
+* 🐛 bug ([`ac366d0`](https://github.com/mraniki/tt/commit/ac366d0017c40638e22e0c3b2c86c396b9bd9874))
+* ✅ unit test ([`4bfceea`](https://github.com/mraniki/tt/commit/4bfceea1d90f781a6c9a5522d3bc75001aba7292))
+* 🐛 bug ([`b68f26e`](https://github.com/mraniki/tt/commit/b68f26eb47a005951f4494d4b8fb7d1aee8fa64f))
+* 🐛 bug webhook ([`fe86ba8`](https://github.com/mraniki/tt/commit/fe86ba831ffd889633c131f7cf0923b6c596fae4))
+* ⬆️ dependencies ([`84f2787`](https://github.com/mraniki/tt/commit/84f2787fb0d8ed0aed19c2ee9d3bc9bbf8fac3e4))
+
+### Other
+
+* :white_check_mark: unit test ([`4624171`](https://github.com/mraniki/tt/commit/46241718d001bf4dbf3d44ee0313dd9ef3364db3))
+* :white_check_mark: unit test ([`22c7485`](https://github.com/mraniki/tt/commit/22c7485dfd67e68d4df9c275263e2833c46783e6))
+* :white_check_mark: unit test ([`6919a9e`](https://github.com/mraniki/tt/commit/6919a9effbcdc78c4c393eb325832cb5fd0dbb20))
+* Remove test_parse_bal function in test_unit.py file. ([`163c366`](https://github.com/mraniki/tt/commit/163c3666f031682121f26d514a9842ecf4d7c457))
+* :bug: Fix get_ping host parameter in test_unit.py ([`3beeb53`](https://github.com/mraniki/tt/commit/3beeb53522911a7313715a1a8bfec7f01abb99bc))
+* :white_check_mark: unit test ([`a0b1264`](https://github.com/mraniki/tt/commit/a0b1264dbc0ba253aafd3ac001fddbcf790ad51f))
+* :bug: Update FastAPI version to 0.96.0 ([`21381ea`](https://github.com/mraniki/tt/commit/21381ea199a4d66fd1e4249d208a8d583bf583c0))
+* :arrow_up: Refactor import in test_unit.py ([`a559f6b`](https://github.com/mraniki/tt/commit/a559f6b29a9cf87750f82d6be71cd3ec95676aad))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`ecc2429`](https://github.com/mraniki/tt/commit/ecc24295f707de66de6013395354ffa4fb1f0c3f))
+* :white_check_mark: unit test ([`0b71891`](https://github.com/mraniki/tt/commit/0b718911d331f47f702b0476dc6100dd31ad79fc))
+* 'Refactored by Sourcery' ([`bf927b4`](https://github.com/mraniki/tt/commit/bf927b44b3b7545d074aa215c5013835d33b070f))
+* :zap: Update dependencies and fix imports in bot.py ([`08a2bba`](https://github.com/mraniki/tt/commit/08a2bba70165d9f6c57f64d3e1be20d2997fdc90))
+* :white_check_mark: unit test ([`52044b0`](https://github.com/mraniki/tt/commit/52044b043470c74ccb39c449e04b24884e95bf3c))
+* :white_check_mark: unit test ([`d762bef`](https://github.com/mraniki/tt/commit/d762bef2c6eac1144b7535addc834088b0a48ce9))
+* :white_check_mark: unit test ([`6793763`](https://github.com/mraniki/tt/commit/6793763d42f7d2d4e28d8cea6d06504b2a0eafff))
+* :white_check_mark: unit test ([`21326f3`](https://github.com/mraniki/tt/commit/21326f30296e19028e8039f091aab0cbd83c65c7))
+* :recycle:  Refactor test_unit.py: get_asset_trading_balance function and remove pytest mark. ([`b5032ee`](https://github.com/mraniki/tt/commit/b5032eef2dfc6583916abdcfe7fab042e93e6272))
+* :white_check_mark: unit test ([`5e744f2`](https://github.com/mraniki/tt/commit/5e744f2ea980e15944d619afc8d8cd6fd7acb37c))
+* :bug:  missed import ([`8385fea`](https://github.com/mraniki/tt/commit/8385fea444e59aba88c988a11edefe5a9104bd31))
+* :white_check_mark: unit test and some fixes ([`303b5e0`](https://github.com/mraniki/tt/commit/303b5e02dfa72c42ba78d129f6cafcb04d85204f))
+* :white_check_mark: Update bot init message import in test_unit.py ([`b95ae30`](https://github.com/mraniki/tt/commit/b95ae308ffe1b620af6e82d4398eeb76837fb1cc))
+* :white_check_mark: unit test ([`5c9e124`](https://github.com/mraniki/tt/commit/5c9e124e812e1dfdab4bb45f1e342cd09679b5b3))
+* Talkytrend ([`eb4e18d`](https://github.com/mraniki/tt/commit/eb4e18d9b987dc486f1c07755d80d75a9ea15924))
+* Merge branch 'main' into dev ([`5694f76`](https://github.com/mraniki/tt/commit/5694f76f9d87c294a91dc8bdac6432cfe9571a1a))
+
 ## v2.1.2 (2023-06-10)
 
 ### Fix

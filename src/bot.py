@@ -1,7 +1,7 @@
 """
 TalkyTrader 🪙🗿
 """
-__version__ = "2.1.2"
+__version__ = "2.2.0"
 
 import http
 import time
