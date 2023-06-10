@@ -16,6 +16,7 @@ import ccxt
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 from iamlistening import Listener
+from talkytrend import TalkyTrend
 
 import apprise
 from apprise import NotifyFormat
