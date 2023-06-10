@@ -18,10 +18,8 @@ from src.bot import (
     get_name, get_host_ip,
     get_quote, get_trading_asset_balance,
     get_account_balance, app,
-    # get_ping, get_account
-    # post_init,
-    # get_account_position,
-    # get_account_margin,
+    get_ping, get_account, post_init,
+    get_account_position, get_account_margin,
     # restart_command,
 )
 
