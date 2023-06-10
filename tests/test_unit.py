@@ -127,7 +127,7 @@ async def test_notify(mock_discord):
 
     # Test with Discord webhook
     with patch('apprise.Apprise', apprise_mock):
-        with patch('config.settings', mock_discord):
+        with patch('src.config.settings', mock_discord):
             apprise_mock.return_value = apprise_instance_mock
             output = await notify(message)
             apprise_mock.assert_called_once()
@@ -206,7 +206,7 @@ async def test_get_trading_asset_balance(mock_settings_dex):
 # @pytest.mark.asyncio
 # async def test_get_account_position():
 #     """Test that the get_account_positions function returns a non-None value."""
-#     with patch("config.settings", autospec=True):
+#     with patch("src.config.settings", autospec=True):
 #         exchange = DexSwap()
 #         output = await get_account_position()
 #         print(output)
@@ -215,7 +215,7 @@ async def test_get_trading_asset_balance(mock_settings_dex):
 # @pytest.mark.asyncio
 # async def test_get_account_margin():
 #     """Test that the get_account_margin function returns a non-None value."""
-#     with patch("config.settings", autospec=True):
+#     with patch("src.config.settings", autospec=True):
 #         exchange = DexSwap()
 #         output = await get_account_margin()
 #         print(output)
