@@ -168,7 +168,7 @@ async def test_get_host_ip():
 @pytest.mark.asyncio
 async def test_def_get_ping(mock_discord):
     """Test get_ping function """
-    output = get_ping(host=8.8.8.8)
+    output = get_ping(host='8.8.8.8')
     print(output)
     assert output is not None
 
