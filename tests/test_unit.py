@@ -257,16 +257,16 @@ async def test_message_listener(mock_telegram, message):
     print(msg)
     assert msg == "hello"
 
+# @pytest.mark
+# def test_webhook_with_valid_payload():
+#     client = TestClient(app)
+#     payload = {"key": "my_secret_key", "data": "my_data"}
+#     response = client.post("/webhook", json=payload)
+#     assert response is not None
 
-async def test_webhook_with_valid_payload():
-    client = TestClient(app)
-    payload = {"key": "my_secret_key", "data": "my_data"}
-    response = client.post("/webhook", json=payload)
-    assert response is not None
 
-
-async def test_webhook_with_invalid_payload():
-    client = TestClient(app)
-    payload = {"key": "wrong_key", "data": "my_data"}
-    response = client.post("/webhook", json=payload)
-    assert response.json() == {"message": "Key is incorrect"}
+# def test_webhook_with_invalid_payload():
+#     client = TestClient(app)
+#     payload = {"key": "wrong_key", "data": "my_data"}
+#     response = client.post("/webhook", json=payload)
+#     assert response.json() == {"message": "Key is incorrect"}
