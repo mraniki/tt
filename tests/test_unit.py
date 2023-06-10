@@ -115,17 +115,17 @@ async def test_parse_message(msg, expected_output, mocker):
 @pytest.mark.asyncio
 async def test_parse_bal():
     """Test parse_message balance """
-    notify_mock = mocker.patch('src.bot.notify')
-    await parse_message('/bal')
-    assert '🏦' in notify_mock.call_args[0][0]
+    with path('src.bot.notify',notify_mock):
+        await parse_message('/bal')
+        assert '🏦' in notify_mock.call_args[0][0]
 
 
 @pytest.mark.asyncio
 async def test_parse_trading():
     """Test parse_message balance """
-    notify_mock = mocker.patch('src.bot.notify')
-    await parse_message('/trading')
-    assert 'Trading is' in notify_mock.call_args[0][0]
+    with path('src.bot.notify',notify_mock):
+        await parse_message('/trading')
+        assert 'Trading is' in notify_mock.call_args[0][0]
 
 
 @pytest.mark.asyncio
@@ -228,13 +228,12 @@ async def test_get_account_position(mock_settings_dex):
 
 
 @pytest.mark.asyncio
-async def test_get_account_margin():
+async def test_get_account_margin(mock_settings_dex):
     """Test get_account_margin """
-    with patch("src.config.settings", autospec=True):
-        exchange = DexSwap()
-        output = await get_account_margin()
-        print(output)
-        assert output is not None
+    await load_exchange() 
+    output = await get_account_margin()
+    print(output)
+    assert output is not None
 
 
 @pytest.mark.asyncio
