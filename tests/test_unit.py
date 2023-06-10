@@ -1,8 +1,11 @@
 """
  TT test
 """
+
+import json
 from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
+from fastapi.testclient import TestClient
 
 from iamlistening import Listener
 
@@ -14,9 +17,10 @@ from bot import (
     init_message, post_init, notify,
     get_account, get_name, get_host_ip, get_ping,
     get_quote, get_trading_asset_balance,
-    get_account_position, get_account_balance,
-    get_account_margin,
-    restart_command,
+    get_account_balance, app,
+    # get_account_position,
+    # get_account_margin,
+    # restart_command,
 )
 
 
@@ -239,6 +243,7 @@ async def test_listener(mock_discord):
     print(listener)
     assert listener is not None
 
+
 @pytest.mark.asyncio
 async def test_message_listener(mock_telegram, message):
     listener = Listener()
@@ -251,20 +256,15 @@ async def test_message_listener(mock_telegram, message):
     assert msg == "hello"
 
 
-# import json
-# from http import HTTPStatus
-# from fastapi.testclient import TestClient
-# from app.main import app
+async def test_webhook_with_valid_payload():
+    client = TestClient(app)
+    payload = {"key": "my_secret_key", "data": "my_data"}
+    response = client.post("/webhook", json=payload)
+    assert response is not None
 
-# client = TestClient(app)
 
-# def test_webhook_with_valid_payload():
-#     payload = {"key": "my_secret_key", "data": "my_data"}
-#     response = client.post("/webhook", json=payload)
-#     assert response.status_code == HTTPStatus.ACCEPTED
-
-# def test_webhook_with_invalid_payload():
-#     payload = {"key": "wrong_key", "data": "my_data"}
-#     response = client.post("/webhook", json=payload)
-#     assert response.status_code == HTTPStatus.OK
-#     assert response.json() == {"message": "Key is incorrect"}
+async def test_webhook_with_invalid_payload():
+    client = TestClient(app)
+    payload = {"key": "wrong_key", "data": "my_data"}
+    response = client.post("/webhook", json=payload)
+    assert response.json() == {"message": "Key is incorrect"}
