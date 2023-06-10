@@ -105,10 +105,10 @@ def order_params():
 ])
 async def test_parse_message(msg, expected_output, mocker):
     """Test that the parse_message function returns a non-None value."""
-    notify_mock = mocker.patch('bot.notify')
+    notify_mock = mocker.patch('src.bot.notify')
     await parse_message(msg)
     if msg == '/help':
-        init_mock = mocker.patch('bot.init_message', return_value='help message')
+        init_mock = mocker.patch('stc.bot.init_message', return_value='help message')
         expected_output = 'help message\nhelp init message'
         await parse_message(msg)
         assert '🏦' in notify_mock.call_args[0][0]
