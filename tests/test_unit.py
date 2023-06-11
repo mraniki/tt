@@ -1,6 +1,8 @@
 """
  TT test
 """
+import sys
+sys.path.insert(0,"..")
 
 from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
@@ -9,8 +11,7 @@ from fastapi.testclient import TestClient
 from iamlistening import Listener
 
 # from config import settings, logger
-from src.config import settings
-
+from src.config import settings, logger
 from src.bot import (
     load_exchange, parse_message,
     execute_order, trading_switch_command,
@@ -19,7 +20,8 @@ from src.bot import (
     get_quote, get_trading_asset_balance,
     get_account_balance, app,
     get_ping, get_account, post_init,
-    get_account_position, get_account_margin,
+    get_account_position,
+    get_account_margin,
     # restart_command,
 )
 
