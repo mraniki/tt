@@ -366,7 +366,7 @@ async def startup_event():
     loop = asyncio.get_event_loop()
     try:
         loop.create_task(listener())
-        if settings.talkytrend_status:
+        if settings.talkytrend_enabled:
             loop.create_task(load_trend())
         logger.info("Application started successfully")
     except Exception as e:

@@ -3,14 +3,10 @@
 """
 import sys
 sys.path.insert(0,"..")
-
-from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
-from fastapi.testclient import TestClient
-
 from iamlistening import Listener
-
-# from config import settings, logger
+from fastapi.testclient import TestClient
+from unittest.mock import AsyncMock, MagicMock, patch
 from src.config import settings, logger
 from src.bot import (
     parse_message, notify,
@@ -21,8 +17,8 @@ from src.bot import (
     get_account_position,get_account_margin,
     trading_switch_command,
     # restart_command,
-    init_message, post_init, app
-)
+    init_message, post_init, app)
+
 
 @pytest.fixture
 def mock_settings_cex():
