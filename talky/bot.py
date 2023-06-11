@@ -18,9 +18,9 @@ from apprise import Apprise, NotifyFormat
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 from iamlistening import Listener
-from talkytrend import TalkyTrend
+# from talkytrend import TalkyTrend
 
-from config import settings, logger
+from talky.config import settings, logger, PluginManager
 
 
 async def parse_message(msg):
@@ -50,8 +50,8 @@ async def parse_message(msg):
                 message = await account_position_command()
             elif command == settings.bot_command_restart:
                 await restart_command()
-            elif command == settings.bot_command_news:
-                return trend.live_tv()
+            # elif command == settings.bot_command_news:
+            #     return trend.live_tv()
             if message is not None:
                 await notify(message)
 
@@ -133,18 +133,18 @@ async def load_exchange():
         logger.warning("exchange: %s", e)
 
 
-async def load_trend():
-    """TalkyTrend load"""
-    global trend
-    while True:
-        try:
-            trend = TalkyTrend()
-            event = await trend.scanner()
-            if event:
-                await notify(event)
-        except Exception as e:
-            logger.exception(e)
-        await asyncio.sleep(10)
+# async def load_trend():
+#     """TalkyTrend load"""
+#     global trend
+#     while True:
+#         try:
+#             trend = TalkyTrend()
+#             event = await trend.scanner()
+#             if event:
+#                 await notify(event)
+#         except Exception as e:
+#             logger.exception(e)
+#         await asyncio.sleep(10)
 
 
 async def execute_order(order_params):
@@ -366,8 +366,23 @@ async def startup_event():
     loop = asyncio.get_event_loop()
     try:
         loop.create_task(listener())
-        if settings.talkytrend_enabled:
-            loop.create_task(load_trend())
+
+        plugin_manager = PluginManager()
+        # Load plugins from the "talky.plugins" package
+        plugin_manager.load_plugins("talky.plugins")
+        # Start the TalkyTrend plugin
+        await plugin_manager.start_plugin("TalkyTrendPlugin")
+
+        # # Start plugins
+        # for plugin_name in settings.plugins:
+        #     plugin = plugin_manager.get_plugin(plugin_name)
+        #     if plugin:
+        #         plugin_manager.start_plugin(plugin)
+        #     else:
+        #         print(f"Plugin {plugin_name} not found.")
+
+        # if settings.talkytrend_enabled:
+        #     loop.create_task(load_trend())
         logger.info("Application started successfully")
     except Exception as e:
         loop.stop()
