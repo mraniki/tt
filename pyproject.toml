@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "talky"
+name = "tt"
 version = "2.2.2"
 description = "CEX & DEX integration with multi messaging platform support and plugin support."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
@@ -7,7 +7,7 @@ license = "MIT License"
 readme = "README.md"
 keywords = ["finance", "trading", "bot"]
 packages = [
-    {include = "talky"}
+    {include = "tt"}
 ]
 
 [tool.poetry.urls]
