@@ -48,16 +48,15 @@ class PluginManager:
         for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
             try:
                 module = importlib.import_module(f"{package_name}.{plugin_name}")
-                if plugin_class := next(
-                    (
-                        obj
-                        for name, obj in module.__dict__.items()
-                        if isinstance(obj, type)
-                        and issubclass(obj, BasePlugin)
-                        and obj is not BasePlugin
-                    ),
-                    None,
-                ):
+                plugin_class = None
+
+                # Find the plugin class in the module
+                for name, obj in module.__dict__.items():
+                    if isinstance(obj, type) and issubclass(obj, BasePlugin) and obj is not BasePlugin:
+                        plugin_class = obj
+                        break
+
+                if plugin_class:
                     plugin_instance = plugin_class()
                     self.plugins[plugin_name] = plugin_instance
                     print(f"Plugin loaded: {plugin_name}")
@@ -66,6 +65,13 @@ class PluginManager:
 
             except Exception as e:
                 print(f"Error loading plugin: {plugin_name}, {e}")
+
+    async def start_plugin(self, plugin_name):
+        if plugin_name in self.plugins:
+            plugin_instance = self.plugins[plugin_name]
+            await plugin_instance.start()
+        else:
+            print(f"Plugin not found: {plugin_name}")
 
 class BasePlugin:
     def start(self):
