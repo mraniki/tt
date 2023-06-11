@@ -57,7 +57,7 @@ async def parse_message(msg):
 
         # Order found
         if settings.trading_enabled and await fmo.search(msg):
-            # Order parsing and default value 
+            # Order parsing 
             order = await fmo.get_order(msg)
             # Order execution
             order = await execute_order(order)
@@ -92,7 +92,7 @@ async def notify(msg):
         logger.error("%s not sent: %s", msg, e)
 
 def get_host_ip() -> str:
-    """Returns host IP address."""
+    """Returns host IP """
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect((settings.ping, 80))
@@ -103,7 +103,7 @@ def get_host_ip() -> str:
         pass
 
 def get_ping(host: str = settings.ping) -> float:
-    """Returns  ping """
+    """Returnsping """
     response_time = ping3.ping(host, unit='ms')
     print(response_time)
     time.sleep(1)
@@ -138,8 +138,8 @@ async def load_trend():
     global trend
     while True:
         try:
-            talky = TalkyTrend()
-            event = await talky.scanner()
+            trend = TalkyTrend()
+            event = await trend.scanner()
             if event:
                 await notify(event)
         except Exception as e:
