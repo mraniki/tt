@@ -135,6 +135,7 @@ async def load_exchange():
 
 async def load_trend():
     """TalkyTrend load"""
+    global trend
     while True:
         try:
             talky = TalkyTrend()
