@@ -369,7 +369,7 @@ async def startup_event():
 
         plugin_manager = PluginManager()
         # Load plugins from the "talky.plugins" package
-        plugin_manager.load_plugins("talky.plugins")
+        plugin_manager.load_plugins("tt.plugins")
         # Start the TalkyTrend plugin
         await plugin_manager.start_plugin("TalkyTrendPlugin")
 

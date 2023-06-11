@@ -1,4 +1,4 @@
-# talky/plugin.py
+
 
 from abc import ABC, abstractmethod
 import importlib
