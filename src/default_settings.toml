@@ -30,3 +30,6 @@ trading_asset = "USDT"
 trading_risk_amount = 10
 trading_stop_loss = 1000
 trading_take_profit = 1000
+
+#TREND
+talkytrend_status = true
