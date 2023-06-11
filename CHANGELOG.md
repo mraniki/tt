@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.2 (2023-06-11)
+
+### Fix
+
+* :memo: Update default_settings.toml with bot message help. ([`590c9e6`](https://github.com/mraniki/tt/commit/590c9e6d9bde087bcb62bd5aa55d4838c221105f))
+* :recycle: Add example.env and example_settings.toml ([`643ed1b`](https://github.com/mraniki/tt/commit/643ed1b62db9af3ea2d046748242fbbe0ad6d000))
+* :arrow_up: import fix ([`6d45dea`](https://github.com/mraniki/tt/commit/6d45dea901f939c3458526b436e26277b28f4b4e))
+
 ## v2.2.1 (2023-06-11)
 
 ### Fix
