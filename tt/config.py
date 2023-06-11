@@ -48,15 +48,16 @@ class PluginManager:
         for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
             try:
                 module = importlib.import_module(f"{package_name}.{plugin_name}")
-                plugin_class = None
-
-                # Find the plugin class in the module
-                for name, obj in module.__dict__.items():
-                    if isinstance(obj, type) and issubclass(obj, BasePlugin) and obj is not BasePlugin:
-                        plugin_class = obj
-                        break
-
-                if plugin_class:
+                if plugin_class := next(
+                    (
+                        obj
+                        for name, obj in module.__dict__.items()
+                        if isinstance(obj, type)
+                        and issubclass(obj, BasePlugin)
+                        and obj is not BasePlugin
+                    ),
+                    None,
+                ):
                     plugin_instance = plugin_class()
                     self.plugins[plugin_name] = plugin_instance
                     print(f"Plugin loaded: {plugin_name}")
