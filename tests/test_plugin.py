@@ -36,7 +36,9 @@ class TestPluginManager:
         mock_module = MagicMock()
         mock_module.__name__ = "mock_package"
         mock_module.mock_plugin = MockPlugin()
-        pkgutil_mock.import_module.return_value = MockPackage()
+        mock_package = MagicMock()
+        mock_package.mock_plugin = MockPlugin()
+        pkgutil_mock.import_module.return_value = mock_package
         plugin_manager.plugins = {}
         plugin_manager._importlib = importlib_mock
         plugin_manager._pkgutil = pkgutil_mock
@@ -48,10 +50,10 @@ class TestPluginManager:
         assert len(plugin_manager.plugins) == 1
         assert "mock_plugin" in plugin_manager.plugins
 
+
     def test_start_plugin(self, plugin_manager):
         # Mock the plugin and start method
         mock_plugin = MagicMock()
-        mock_plugin.start.return_value = None
         plugin_manager.plugins = {"mock_plugin": mock_plugin}
 
         # Start the mock plugin
@@ -60,10 +62,10 @@ class TestPluginManager:
         # Check that the plugin was started correctly
         mock_plugin.start.assert_called_once()
 
+
     def test_stop_plugin(self, plugin_manager):
         # Mock the plugin and stop method
         mock_plugin = MagicMock()
-        mock_plugin.stop.return_value = None
         plugin_manager.plugins = {"mock_plugin": mock_plugin}
 
         # Stop the mock plugin
