@@ -62,4 +62,4 @@ commit_parser = "semantic_release.history.emoji_parser"
 use_textual_changelog_sections = true
 major_emoji = "💥"
 minor_emoji = "🥚,🚀,💄,✨"
-patch_emoji = "🎨,🐛,🚑,⚡,🔥,🚨,♻️,🔧,⬆️,🩹,👷,📝,🔒,👽,💬,🥅,✅,🐳,🙈,⚗️,🧐,🔇,🔊"
+patch_emoji = "fix,🎨,🐛,:bug:,🚑,⚡,:zap:,🔥,🚨,♻️,:recycle:,🔧,⬆️,:arrow_up:,🩹,👷,📝,🔒,👽,💬,🥅,✅,:white_check_mark:,🐳,🙈,⚗️,🧐,🔇,🔊,Update"
