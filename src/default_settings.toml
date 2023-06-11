@@ -7,10 +7,11 @@ webhook_secret = "123abc"
 bot_prefix = "/"
 bot_command_help = "help"
 bot_command_bal = "bal"
+bot_command_quote = "q"
 bot_command_pos = "pos"
 bot_command_trading = "trading"
+bot_command_news = "live"
 bot_command_restart = "restart"
-bot_command_quote = "q"
 bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
 
@@ -29,3 +30,9 @@ trading_asset = "USDT"
 trading_risk_amount = 10
 trading_stop_loss = 1000
 trading_take_profit = 1000
+
+#plugin
+dxsp_enabled = true
+findmyorder_enabled = true
+iamlistening_enabled = true
+talkytrend_enabled = true

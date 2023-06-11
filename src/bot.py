@@ -14,12 +14,11 @@ import ping3
 from fastapi import FastAPI, Request
 
 import ccxt
+from apprise import Apprise, NotifyFormat
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 from iamlistening import Listener
 from talkytrend import TalkyTrend
-
-from apprise import Apprise, NotifyFormat
 
 from config import settings, logger
 
@@ -51,12 +50,14 @@ async def parse_message(msg):
                 message = await account_position_command()
             elif command == settings.bot_command_restart:
                 await restart_command()
+            elif command == settings.bot_command_news:
+                return trend.live_tv()
             if message is not None:
                 await notify(message)
 
         # Order found
         if settings.trading_enabled and await fmo.search(msg):
-            # Order parsing and default value 
+            # Order parsing 
             order = await fmo.get_order(msg)
             # Order execution
             order = await execute_order(order)
@@ -91,7 +92,7 @@ async def notify(msg):
         logger.error("%s not sent: %s", msg, e)
 
 def get_host_ip() -> str:
-    """Returns host IP address."""
+    """Returns host IP """
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect((settings.ping, 80))
@@ -102,7 +103,7 @@ def get_host_ip() -> str:
         pass
 
 def get_ping(host: str = settings.ping) -> float:
-    """Returns  ping """
+    """Returnsping """
     response_time = ping3.ping(host, unit='ms')
     print(response_time)
     time.sleep(1)
@@ -130,6 +131,20 @@ async def load_exchange():
         return exchange
     except Exception as e:
         logger.warning("exchange: %s", e)
+
+
+async def load_trend():
+    """TalkyTrend load"""
+    global trend
+    while True:
+        try:
+            trend = TalkyTrend()
+            event = await trend.scanner()
+            if event:
+                await notify(event)
+        except Exception as e:
+            logger.exception(e)
+        await asyncio.sleep(10)
 
 
 async def execute_order(order_params):
@@ -323,22 +338,18 @@ async def restart_command():
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
 # 🤖BOT
-
-
 async def listener():
     """Launch Listener"""
     try:
         await load_exchange()
     except Exception as e:
         logger.error("exchange: %s", e)
+    bot_listener = Listener()
+    task = asyncio.create_task(bot_listener.run_forever())
 
-    listener = Listener()
-    task = asyncio.create_task(listener.run_forever())
-    trend = TalkyTrend()
-    
     while True:
         try:
-            msg = await listener.get_latest_message()
+            msg = await bot_listener.get_latest_message()
             if msg:
                 await parse_message(msg)
         except Exception as error:
@@ -350,15 +361,17 @@ app = FastAPI(title="TALKYTRADER",)
 
 
 @app.on_event("startup")
-def startup_event():
-    """fastapi startup"""
+async def startup_event():
+    """Starts the FastAPI application"""
     loop = asyncio.get_event_loop()
     try:
         loop.create_task(listener())
-        logger.info("started")
+        if settings.talkytrend_enabled:
+            loop.create_task(load_trend())
+        logger.info("Application started successfully")
     except Exception as e:
         loop.stop()
-        logger.error("Bot KO: %s", e)
+        logger.error(f"Application failed to start: {e}")
 
 
 @app.on_event('shutdown')
