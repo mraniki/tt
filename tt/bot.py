@@ -20,8 +20,8 @@ from findmyorder import FindMyOrder
 from iamlistening import Listener
 # from talkytrend import TalkyTrend
 
-from tt.config import settings, logger
-from tt.plugin import PluginManager
+from config import settings, logger
+from plugin import PluginManager
 
 async def parse_message(msg):
     """main parser"""
