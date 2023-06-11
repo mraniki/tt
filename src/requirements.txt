@@ -4,7 +4,7 @@ uvicorn>=0.21.0
 apprise>=1.3.0
 ccxt>=3.0.75
 ping3>=4.0.4
-findmyorder
-dxsp
-iamlistening
-talkytrend
+dxsp >= 2.6.8
+findmyorder >= 1.4.1
+iamlistening >= 0.1.10
+talkytrend >= 1.1.1

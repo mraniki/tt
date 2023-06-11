@@ -14,22 +14,7 @@ bot_command_quote = "q"
 bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
 
-# ----BOT------------
-
-bot_token = ""
-bot_channel_id = ""
-
-telethon_api_id = ""
-telethon_api_hash = ""
-
-matrix_hostname = ""
-matrix_user = ""
-matrix_pass = ""
-
-discord_webhook_id = ""
-discord_webhook_token = ""
-
-# CEX config for CeFi
+# CEX config
 cex_name = ""
 cex_api = ""
 cex_secret = ""
@@ -37,16 +22,6 @@ cex_password = ""
 cex_testmode = true
 cex_defaulttype = "SPOT"
 cex_ordertype = "MARKET"
-
-#MT/IB config for CeFi
-# cex_host = ""
-# cex_account = ""
-
-#DXSP config for DEFI
-dex_chain_id = 1
-dex_wallet_address = ""
-dex_private_key = ""
-dex_trading_slippage = 2
 
 # TRADING
 trading_enabled = true #bool
