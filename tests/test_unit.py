@@ -13,18 +13,16 @@ from iamlistening import Listener
 # from config import settings, logger
 from src.config import settings, logger
 from src.bot import (
-    load_exchange, parse_message,
-    execute_order, trading_switch_command,
-    init_message, notify,
-    get_name, get_host_ip,
-    get_quote, get_trading_asset_balance,
-    get_account_balance, app,
-    get_ping, get_account, post_init,
-    get_account_position,
-    get_account_margin,
+    parse_message, notify,
+    get_host_ip, get_ping,
+    load_exchange, load_trend, execute_order,
+    get_name, get_quote, get_trading_asset_balance,
+    get_account, get_account_balance, 
+    get_account_position,get_account_margin,
+    trading_switch_command,
     # restart_command,
+    init_message, post_init, app
 )
-
 
 @pytest.fixture
 def mock_settings_cex():

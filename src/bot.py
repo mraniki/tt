@@ -22,7 +22,6 @@ from talkytrend import TalkyTrend
 
 from config import settings, logger
 
-trend = TalkyTrend()
 
 async def parse_message(msg):
     """main parser"""
@@ -132,6 +131,19 @@ async def load_exchange():
         return exchange
     except Exception as e:
         logger.warning("exchange: %s", e)
+
+
+async def load_trend():
+    """TalkyTrend load"""
+    while True:
+        try:
+            talky = TalkyTrend()
+            event = await talky.scanner()
+            if event:
+                await notify(event)
+        except Exception as e:
+            logger.exception(e)
+        await asyncio.sleep(10)
 
 
 async def execute_order(order_params):
@@ -325,21 +337,18 @@ async def restart_command():
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
 # 🤖BOT
-
-
 async def listener():
     """Launch Listener"""
     try:
         await load_exchange()
     except Exception as e:
         logger.error("exchange: %s", e)
-
-    listener = Listener()
-    task = asyncio.create_task(listener.run_forever())
+    bot_listener = Listener()
+    task = asyncio.create_task(bot_listener.run_forever())
 
     while True:
         try:
-            msg = await listener.get_latest_message()
+            msg = await bot_listener.get_latest_message()
             if msg:
                 await parse_message(msg)
         except Exception as error:
@@ -351,15 +360,16 @@ app = FastAPI(title="TALKYTRADER",)
 
 
 @app.on_event("startup")
-def startup_event():
-    """fastapi startup"""
+async def startup_event():
+    """Starts the FastAPI application"""
     loop = asyncio.get_event_loop()
     try:
         loop.create_task(listener())
-        logger.info("started")
+        loop.create_task(load_trend())
+        logger.info("Application started successfully")
     except Exception as e:
         loop.stop()
-        logger.error("Bot KO: %s", e)
+        logger.error(f"Application failed to start: {e}")
 
 
 @app.on_event('shutdown')
