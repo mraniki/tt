@@ -21,7 +21,7 @@ from iamlistening import Listener
 # from talkytrend import TalkyTrend
 
 from config import settings, logger
-from plugin import PluginManager
+from plugin_manager import PluginManager
 
 async def parse_message(msg):
     """main parser"""

@@ -1,7 +1,7 @@
 import asyncio
 import logging
-from tt.plugin import Plugin, register_plugin
-from tt.config import settings
+from .plugin import Plugin, register_plugin
+from .config import settings
 from talkytrend import TalkyTrend
 
 class TalkyTrendPlugin(Plugin):
