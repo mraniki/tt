@@ -41,30 +41,22 @@ class PluginManager:
         self.plugins = {}
 
     def load_plugins(self, package_name):
-        print(f"Loading plugins from package: {package_name}")
-        package = importlib.import_module(package_name)
-        print(f"Package loaded: {package}")
+    print(f"Loading plugins from package: {package_name}")
+    package = importlib.import_module(package_name)
+    print(f"Package loaded: {package}")
 
-        for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
-            try:
-                module = importlib.import_module(f"{package_name}.{plugin_name}")
-                plugin_class = None
+    for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
+        try:
+            module = importlib.import_module(f"{package_name}.{plugin_name}")
 
-                # Find the plugin class in the module
-                for name, obj in module.__dict__.items():
-                    if isinstance(obj, type) and issubclass(obj, BasePlugin) and obj is not BasePlugin:
-                        plugin_class = obj
-                        break
-
-                if plugin_class:
-                    plugin_instance = plugin_class()
+            for name, obj in module.__dict__.items():
+                if isinstance(obj, type) and issubclass(obj, BasePlugin) and obj is not BasePlugin:
+                    plugin_instance = obj()
                     self.plugins[plugin_name] = plugin_instance
                     print(f"Plugin loaded: {plugin_name}")
-                else:
-                    print(f"No plugin class found in module: {plugin_name}")
 
-            except Exception as e:
-                print(f"Error loading plugin: {plugin_name}, {e}")
+        except Exception as e:
+            print(f"Error loading plugin: {plugin_name}, {e}")
 
     async def start_plugin(self, plugin_name):
         if plugin_name in self.plugins:
