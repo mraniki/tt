@@ -27,7 +27,7 @@ apprise= "^1.4.0"
 dxsp = "^2.6.8"
 findmyorder = "^1.4.1"
 iamlistening = "^0.1.10"
-talkytrend = "^1.1.1"
+talkytrend = "^1.1.2"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "^7.34.3"
