@@ -32,6 +32,8 @@ def test_load_plugins():
             mock_iter_modules.return_value = [("", "plugin1", False), ("", "plugin2", False)]
 
             # Set up the mock return values for importlib.import_module
+            module1 = object()
+            module2 = object()
             mock_import_module.side_effect = [module1, module2]
 
             # Call the load_plugins method
