@@ -7,4 +7,4 @@ ping3>=4.0.4
 dxsp >= 2.6.8
 findmyorder >= 1.4.1
 iamlistening >= 0.1.10
-talkytrend >= 1.1.2
+talkytrend >= 1.1.3
