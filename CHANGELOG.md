@@ -2,6 +2,22 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.1 (2023-06-11)
+
+### Fix
+
+* :arrow_up: Update semantic in pyproject.toml ([`31c15db`](https://github.com/mraniki/tt/commit/31c15dbe6dbb98fdaa440195338d3bbe67c4e100))
+* :bug: Add version and import statements to __init__.py ([`a516b1a`](https://github.com/mraniki/tt/commit/a516b1ab9080b834e00dcc969ee9f76c2468e4d9))
+* :bug:  Refactor bot.py import statements ([`97d1464`](https://github.com/mraniki/tt/commit/97d1464fb559fed1e02cc402bfb625266b311dd4))
+* :arrow_up: Update dependencies in pyproject.toml ([`557ce9a`](https://github.com/mraniki/tt/commit/557ce9a4285b22ef56a8fce35774521059524202))
+* :arrow_up: Update dependencies in pyproject.toml ([`56d36ca`](https://github.com/mraniki/tt/commit/56d36ca4bf65803c05c0d73925e27f0cc0391cb2))
+* :arrow_up: Update Python version to 3.11.0 and remove invalid package from requirements.txt. ([`04e18be`](https://github.com/mraniki/tt/commit/04e18bea5ecda2de33bad08398b36b782016fffa))
+
+### Other
+
+* :ambulance: Refactor import statements in bot.py ([`e6abcf9`](https://github.com/mraniki/tt/commit/e6abcf9277625cd2eebbfe44afac956db2571839))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`9230853`](https://github.com/mraniki/tt/commit/9230853c33375a919d4b58f09ceb87bc155d2979))
+
 ## v2.2.0 (2023-06-10)
 
 ### Feature
