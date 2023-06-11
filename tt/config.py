@@ -37,6 +37,9 @@ if settings.loglevel == "DEBUG":
 
 
 
+import importlib
+import pkgutil
+
 class PluginManager:
     def __init__(self):
         self.plugins = {}
@@ -54,14 +57,6 @@ class PluginManager:
                     print(f"Plugin loaded: {plugin_name}")
             except Exception as e:
                 print(f"Error loading plugin: {plugin_name}, {e}")
-
-    async def start_plugin(self, plugin_name):
-        if plugin_name in self.plugins:
-            plugin_instance = self.plugins[plugin_name]
-            plugin_instance.start()
-            await plugin_instance.listen()
-        else:
-            print(f"Plugin '{plugin_name}' not found.")
 
 class BasePlugin:
     def start(self):
