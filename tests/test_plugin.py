@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from tt.config import PluginManager, BasePlugin
 
 # Sample plugin for testing
@@ -21,8 +21,10 @@ def test_load_plugins():
 
     # Mocking the package and modules
     mock_package = "tt.plugins"
-    mock_module1 = "tt.plugins.plugin1"
-    mock_module2 = "tt.plugins.plugin2"
+    mock_module1 = MagicMock()
+    mock_module1.__path__ = ["path/to/plugin1"]
+    mock_module2 = MagicMock()
+    mock_module2.__path__ = ["path/to/plugin2"]
 
     # Mocking the importlib.import_module function
     with patch("importlib.import_module") as mock_import_module:
@@ -32,9 +34,7 @@ def test_load_plugins():
             mock_iter_modules.return_value = [("", "plugin1", False), ("", "plugin2", False)]
 
             # Set up the mock return values for importlib.import_module
-            module1 = object()
-            module2 = object()
-            mock_import_module.side_effect = [module1, module2]
+            mock_import_module.side_effect = [mock_module1, mock_module2]
 
             # Call the load_plugins method
             plugin_manager.load_plugins(mock_package)

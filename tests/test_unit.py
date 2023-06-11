@@ -99,10 +99,10 @@ def order_params():
 ])
 async def test_parse_message(msg, expected_output, mocker):
     """Test parse_message function """
-    notify_mock = mocker.patch('talky.bot.notify')
+    notify_mock = mocker.patch('tt.bot.notify')
     await parse_message(msg)
     if msg == '/help':
-        init_mock = mocker.patch('talky.bot.init_message', return_value='help message')
+        init_mock = mocker.patch('tt.bot.init_message', return_value='help message')
         expected_output = 'help message\nhelp init message'
         await parse_message(msg)
         assert '🏦' in notify_mock.call_args[0][0]
@@ -112,7 +112,7 @@ async def test_parse_message(msg, expected_output, mocker):
 # async def test_parse_bal(mock_settings_dex):
 #     """Test parse_message balance """
 #     notify_mock = AsyncMock()
-#     with patch('talky.bot.notify',notify_mock):
+#     with patch('tt.bot.notify',notify_mock):
 #         await load_exchange()
 #         await parse_message('/bal')
 #         assert '🏦' in notify_mock.call_args[0][0]
@@ -122,7 +122,7 @@ async def test_parse_message(msg, expected_output, mocker):
 async def test_parse_trading(mock_settings_dex):
     """Test parse_message balance """
     notify_mock = AsyncMock()
-    with patch('talky.bot.notify',notify_mock):
+    with patch('tt.bot.notify',notify_mock):
         await load_exchange()
         await parse_message('/trading')
         assert 'Trading is' in notify_mock.call_args[0][0]
@@ -132,7 +132,7 @@ async def test_parse_trading(mock_settings_dex):
 async def test_notify(caplog, mock_discord):
     """Test notify function"""
     notify_mock = AsyncMock()
-    with patch('talky.bot.notify',notify_mock):
+    with patch('tt.bot.notify',notify_mock):
 
         message = '<code>test message</code>'
 
