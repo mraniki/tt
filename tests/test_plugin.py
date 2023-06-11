@@ -16,6 +16,7 @@ from tt.config import PluginManager, BasePlugin
 #     async def notify(self, message):
 #         pass
 
+@pytest.mark.asyncio
 async def test_load_plugins():
     plugin_manager = PluginManager()
     plugin_manager.load_plugins("tt.plugins")
