@@ -14,15 +14,15 @@ import ping3
 from fastapi import FastAPI, Request
 
 import ccxt
+from apprise import Apprise, NotifyFormat
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 from iamlistening import Listener
 from talkytrend import TalkyTrend
 
-from apprise import Apprise, NotifyFormat
-
 from config import settings, logger
 
+trend = TalkyTrend()
 
 async def parse_message(msg):
     """main parser"""
@@ -51,6 +51,8 @@ async def parse_message(msg):
                 message = await account_position_command()
             elif command == settings.bot_command_restart:
                 await restart_command()
+            elif command == settings.bot_command_news:
+                return trend.live_tv()
             if message is not None:
                 await notify(message)
 
@@ -334,8 +336,7 @@ async def listener():
 
     listener = Listener()
     task = asyncio.create_task(listener.run_forever())
-    trend = TalkyTrend()
-    
+
     while True:
         try:
             msg = await listener.get_latest_message()
