@@ -21,7 +21,7 @@ from talkytrend import TalkyTrend
 
 from apprise import Apprise, NotifyFormat
 
-from src.config import settings, logger
+from .config import settings, logger
 
 
 async def parse_message(msg):
