@@ -1,7 +1,7 @@
 from unittest.mock import MagicMock
 import pytest
 
-from talky.plugin_manager import PluginManager
+from talky.config import settings, logger, PluginManager
 
 class TestPluginManager:
     @pytest.fixture
