@@ -8,7 +8,7 @@ sys.path.insert(0,"..")
 
 from iamlistening import Listener
 from fastapi.testclient import TestClient
-from talky.bot import (
+from tt.bot import (
     parse_message, notify,
     get_host_ip, get_ping,
     load_exchange, execute_order,
@@ -18,7 +18,7 @@ from talky.bot import (
     trading_switch_command,
     # restart_command,
     init_message, post_init, app)
-from talky.config import settings, logger, PluginManager
+from tt.config import settings, logger, PluginManager
 
 @pytest.fixture
 def mock_settings_cex():
