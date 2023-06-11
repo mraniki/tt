@@ -18,10 +18,8 @@ from apprise import Apprise, NotifyFormat
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 from iamlistening import Listener
-# from talkytrend import TalkyTrend
 
-from config import settings, logger
-from plugin_manager import PluginManager
+from config import settings, logger, PluginManager
 
 async def parse_message(msg):
     """main parser"""

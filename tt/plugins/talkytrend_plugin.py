@@ -1,12 +1,13 @@
 import asyncio
 import logging
-from .plugin import Plugin, register_plugin
-from .config import settings
+from tt.config import settings
 from talkytrend import TalkyTrend
+from tt.config import PluginManager, BasePlugin
 
-class TalkyTrendPlugin(Plugin):
+class TalkyTrendPlugin(BasePlugin):
     def __init__(self):
         self.talky_trend = None
+        self.logger = None
 
     async def start(self):
         self.logger = logging.getLogger(name="TalkyTrend")
@@ -31,13 +32,5 @@ class TalkyTrendPlugin(Plugin):
                 self.logger.info(f"Key news: {news['title']}")
             await asyncio.sleep(settings.scanner_frequency)
 
-@register_plugin
-class TalkyTrendPluginWrapper:
-    def __init__(self):
-        self.plugin = TalkyTrendPlugin()
-
-    async def start(self):
-        await self.plugin.start()
-
-    async def stop(self):
-        await self.plugin.stop()
+# Register the plugin with the PluginManager
+PluginManager.register_plugin(TalkyTrendPlugin)

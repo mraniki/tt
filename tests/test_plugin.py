@@ -1,47 +1,61 @@
 import pytest
-from types import ModuleType
-import unittest.mock as mock
-from talky.config import PluginManager, Plugin
+from unittest.mock import patch
+from tt.config import PluginManager, BasePlugin
 
-
-class MockPlugin(Plugin):
-    is_plugin = True
-
-    def process(self, message):
-        pass
+# Sample plugin for testing
+class TestPlugin(BasePlugin):
     def start(self):
         pass
+
     def stop(self):
         pass
 
-@pytest.fixture
-def mock_plugin():
-    return MockPlugin()
+    async def listen(self):
+        pass
 
-@pytest.fixture
-def mock_package(mock_plugin):
-    class MockPackage(ModuleType):
-        mock_plugin = mock_plugin
+    async def notify(self, message):
+        pass
 
-        @staticmethod
-        def __getattr__(name):
-            if name == "mock_plugin":
-                return mock_plugin
-            raise AttributeError(f"module {__name__} has no attribute {name}")
-    return MockPackage
+def test_load_plugins():
+    plugin_manager = PluginManager()
 
-class TestPluginManager:
-    def test_load_plugins(self):
-        # Create a PluginManager instance
-        plugin_manager = PluginManager()
-        plugin_manager.plugins = {}
+    # Mocking the package and modules
+    mock_package = "tt.plugins"
+    mock_module1 = "tt.plugins.plugin1"
+    mock_module2 = "tt.plugins.plugin2"
 
-        # Load plugins from the talky.plugins package
-        plugin_manager.load_plugins("talky.plugins")
+    # Mocking the importlib.import_module function
+    with patch("importlib.import_module") as mock_import_module:
+        # Mocking the pkgutil.iter_modules function
+        with patch("pkgutil.iter_modules") as mock_iter_modules:
+            # Set up the mock return values for pkgutil.iter_modules
+            mock_iter_modules.return_value = [("", "plugin1", False), ("", "plugin2", False)]
 
-        # Load plugins from the tests package
-        # plugin_manager.load_plugins("tests")
+            # Set up the mock return values for importlib.import_module
+            mock_import_module.side_effect = [module1, module2]
 
-        # Check that the plugin was loaded correctly
-        assert len(plugin_manager.plugins) == 1
+            # Call the load_plugins method
+            plugin_manager.load_plugins(mock_package)
 
+    # Assertions
+    assert len(plugin_manager.plugins) == 2
+    assert "plugin1" in plugin_manager.plugins
+    assert "plugin2" in plugin_manager.plugins
+
+def test_start_plugin():
+    plugin_manager = PluginManager()
+
+    # Mocking the plugin instance
+    plugin_instance = TestPlugin()
+    plugin_manager.plugins["test_plugin"] = plugin_instance
+
+    # Mocking the start and listen methods
+    with patch.object(plugin_instance, "start") as mock_start, \
+         patch.object(plugin_instance, "listen") as mock_listen:
+        
+        # Call the start_plugin method
+        plugin_manager.start_plugin("test_plugin")
+
+    # Assertions
+    mock_start.assert_called_once()
+    mock_listen.assert_awaited_once()
