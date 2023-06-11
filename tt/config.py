@@ -36,10 +36,6 @@ if settings.loglevel == "DEBUG":
     #logging.getLogger("ccxt").setLevel(logging.WARNING)
 
 
-
-import importlib
-import pkgutil
-
 class PluginManager:
     def __init__(self):
         self.plugins = {}
@@ -48,13 +44,25 @@ class PluginManager:
         print(f"Loading plugins from package: {package_name}")
         package = importlib.import_module(package_name)
         print(f"Package loaded: {package}")
+
         for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
             try:
                 module = importlib.import_module(f"{package_name}.{plugin_name}")
-                plugin_class = getattr(module, plugin_name)
-                if issubclass(plugin_class, BasePlugin) and plugin_class is not BasePlugin:
-                    self.plugins[plugin_name] = plugin_class()
+                plugin_class = None
+
+                # Find the plugin class in the module
+                for name, obj in module.__dict__.items():
+                    if isinstance(obj, type) and issubclass(obj, BasePlugin) and obj is not BasePlugin:
+                        plugin_class = obj
+                        break
+
+                if plugin_class:
+                    plugin_instance = plugin_class()
+                    self.plugins[plugin_name] = plugin_instance
                     print(f"Plugin loaded: {plugin_name}")
+                else:
+                    print(f"No plugin class found in module: {plugin_name}")
+
             except Exception as e:
                 print(f"Error loading plugin: {plugin_name}, {e}")
 
