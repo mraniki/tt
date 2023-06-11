@@ -19,7 +19,7 @@ from dxsp import DexSwap
 from findmyorder import FindMyOrder
 from iamlistening import Listener
 
-from config import settings, logger, PluginManager
+from tt.config import settings, logger, PluginManager
 
 async def parse_message(msg):
     """main parser"""
