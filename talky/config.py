@@ -49,15 +49,13 @@ class PluginManager:
                     self.plugins[attr_name] = attr()
 
     async def start_plugin(self, plugin_name):
-        plugin = self.plugins.get(plugin_name)
-        if plugin:
+        if plugin := self.plugins.get(plugin_name):
             await plugin.start()
         else:
             print(f"Plugin {plugin_name} not found.")
 
     async def stop_plugin(self, plugin_name):
-        plugin = self.plugins.get(plugin_name)
-        if plugin:
+        if plugin := self.plugins.get(plugin_name):
             await plugin.stop()
         else:
             print(f"Plugin {plugin_name} not found.")
