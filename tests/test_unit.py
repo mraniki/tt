@@ -8,6 +8,7 @@ sys.path.insert(0,"..")
 
 from iamlistening import Listener
 from fastapi.testclient import TestClient
+from tt.bot import app
 from tt.utils import (
     parse_message, notify,
     get_host_ip, get_ping,
@@ -17,9 +18,8 @@ from tt.utils import (
     get_account_position,get_account_margin,
     trading_switch_command,
     # restart_command,
-    init_message, post_init, )
-from tt.bot.py import app
-from tt.config import settings, logger, PluginManager
+    init_message, post_init, PluginManager)
+from tt.config import settings, logger
 
 @pytest.fixture
 def mock_settings_cex():
