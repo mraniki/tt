@@ -2,6 +2,78 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.0 (2023-06-12)
+
+### Feature
+
+* 💄 finalizing the new structure ([`9618ccc`](https://github.com/mraniki/tt/commit/9618ccc5f5f61fce803cb829ac8c62a4c35d3b5e))
+* ✨ creating utlis with listener/notify and pluginmanager ([`161d939`](https://github.com/mraniki/tt/commit/161d93908cf69e03191ae50f07575958396c13c1))
+
+### Fix
+
+* ✅ unit test ([`4f3e2f4`](https://github.com/mraniki/tt/commit/4f3e2f4f10c3218bb052255f9a77d78873d5d25d))
+* ✅ unit test ([`c74fd62`](https://github.com/mraniki/tt/commit/c74fd62ed33471d96d2ae30c347cfce213c4d678))
+* ✅ unit test ([`d074e9e`](https://github.com/mraniki/tt/commit/d074e9e0a7012dda03e7e14effd738c1220e647d))
+* ✅ unit test update ([`d868f0c`](https://github.com/mraniki/tt/commit/d868f0c9b707f6de1c4f64a1ae62ff511fe5bf14))
+* 🙈 release preparation ([`51c5b95`](https://github.com/mraniki/tt/commit/51c5b953862c366c2302c31a0e46baa1f9c39144))
+* 🎨 code format ([`ee871e1`](https://github.com/mraniki/tt/commit/ee871e1f64af32916abf346b52327f695a00239c))
+* ♻️ refactor for plugin ([`ac0c19f`](https://github.com/mraniki/tt/commit/ac0c19f63f3694d00785d4977a76004ebf355159))
+* ⚗️ pluugin update ([`695297f`](https://github.com/mraniki/tt/commit/695297f15e012c9ddef002b804b47da238112483))
+* Update talkytrend_plugin.py ([`5041063`](https://github.com/mraniki/tt/commit/5041063810574759584a21f5af41ccfb211d28b0))
+* Update talkytrend_plugin.py ([`51b34ed`](https://github.com/mraniki/tt/commit/51b34edc807e629e34739999ebf7903dbfe76af8))
+* Delete 🐳AdhocDocker.yml ([`8747296`](https://github.com/mraniki/tt/commit/8747296608fbdc92ed11ab050e7961cc85dc3ba6))
+* Update talkytrend_plugin.py ([`202fdd1`](https://github.com/mraniki/tt/commit/202fdd1f74369bbcec01fac5adddc77eeb23e08a))
+* Update pyproject.toml ([`945c63a`](https://github.com/mraniki/tt/commit/945c63a755e85f79141eac5a9649f7b25eb8f9b4))
+* Update test_plugin.py ([`6e89e24`](https://github.com/mraniki/tt/commit/6e89e243b8ea935274d54c7cad898287bd5f407f))
+* Update pyproject.toml ([`dcc6c30`](https://github.com/mraniki/tt/commit/dcc6c3090fa890845e173ecdaaed0ead6a05a9ef))
+* Update pyproject.toml ([`e42e7ac`](https://github.com/mraniki/tt/commit/e42e7ac9d9d5491ec5f41c2ca4a800aba9a99606))
+* Update test_plugin.py ([`db73440`](https://github.com/mraniki/tt/commit/db73440cfe6d70779408679bfee3daa93bf05c79))
+* :bug:  indent ([`a6c5b61`](https://github.com/mraniki/tt/commit/a6c5b61021063a7dbafd678cf8a060b6e6e6f2e2))
+* :recycle: Refactor plugin class search logic in PluginManager ([`6eeef2f`](https://github.com/mraniki/tt/commit/6eeef2fd0b223616f816eaf89f3021c12a0cd1d3))
+* :recycle: Refactor plugin class search logic in PluginManager ([`331e289`](https://github.com/mraniki/tt/commit/331e28969d9223a9ecbba60523c120a10c2a6a97))
+* :white_check_mark: Refactor test_plugin.py to use async functions ([`74f090a`](https://github.com/mraniki/tt/commit/74f090a4b6cb63993997c624653298855c8999f1))
+* :white_check_mark: Refactor test_plugin.py to use async functions ([`5f8283f`](https://github.com/mraniki/tt/commit/5f8283f6001fe8181d0fb27eb35c5bf1763ff1f0))
+* :recycle: Refactor plugin start method and add imports ([`cd24e6a`](https://github.com/mraniki/tt/commit/cd24e6ab0cf9ef0ab77328f07cb881daa610c3f9))
+* :recycle: Refactor plugin start method and add imports ([`d0456b0`](https://github.com/mraniki/tt/commit/d0456b0fcfedb9dddded692d6e1d8b25f4456efc))
+* :white_check_mark:  Refactor bot.py import statements ([`1660e7e`](https://github.com/mraniki/tt/commit/1660e7e19095e583ea642b5dc71bce3b03bdb802))
+* :white_check_mark:  Refactor bot.py import statements ([`dbeb467`](https://github.com/mraniki/tt/commit/dbeb467433a252703cec7b57c87681a31b61544e))
+* :white_check_mark: unit test  for plugin ([`8cd0086`](https://github.com/mraniki/tt/commit/8cd0086948e5bbad327983ff8d9e9acc7226b9da))
+* :white_check_mark: unit test  for plugin ([`a8e97f8`](https://github.com/mraniki/tt/commit/a8e97f817cf2ce752011d1bb48f13837088636bd))
+* :white_check_mark: unit test  and refactor ([`0f83a8c`](https://github.com/mraniki/tt/commit/0f83a8c21ea759f9ed61f9a04b93eda05e138c71))
+* 🔊 add logs ([`6ac5414`](https://github.com/mraniki/tt/commit/6ac5414adda2a87e853f11c153a9823503bf41b6))
+* 🐛 bug ([`8c1eaa2`](https://github.com/mraniki/tt/commit/8c1eaa230810b6f9828b7dd56bf2c46f4a4867e3))
+* ⬆️ fix import ([`79f2cfc`](https://github.com/mraniki/tt/commit/79f2cfc580081ae5d18688bbf6657446372c511c))
+* ✅ unit test  and refactor ([`03442f3`](https://github.com/mraniki/tt/commit/03442f36bc79bd2b85d66a87a17f7bdb4ecc6c14))
+* ✅ unit test  for plugin ([`d84279c`](https://github.com/mraniki/tt/commit/d84279c291af203e03b837226a8121ce0b710cf3))
+* ✅ unit test ([`e0ecfb3`](https://github.com/mraniki/tt/commit/e0ecfb3fad60788427c641d859780b3ac838103d))
+* ✅ unit test ([`c879a9d`](https://github.com/mraniki/tt/commit/c879a9dc30b2dfbc23b232d5cc4d285b78de3fd6))
+* ✅ unit test  for plugin ([`f4b85f5`](https://github.com/mraniki/tt/commit/f4b85f5833214917cb4e22290f7dc9dccf2367bb))
+* :white_check_mark: Update plugin test ([`8fd339c`](https://github.com/mraniki/tt/commit/8fd339c24968e04676e939e1d2d5fb067dcbeee1))
+* 🎨 code format ([`8a30daf`](https://github.com/mraniki/tt/commit/8a30daff3167ae8abb0701bbacaec3e7338841e8))
+* :zap: trend var ([`27d6e25`](https://github.com/mraniki/tt/commit/27d6e259b0783a2208a70dfb67360d7338bfeb81))
+* :zap: trend var ([`88b6993`](https://github.com/mraniki/tt/commit/88b69936ae0b94cdc7907fb4577548c2605f1d07))
+* 🔧 config ([`da6c8ed`](https://github.com/mraniki/tt/commit/da6c8edfe5bccbc7fa107da00acda4eadcfb0cee))
+* 👷 CI Change ([`a077978`](https://github.com/mraniki/tt/commit/a077978e0afd0c7792364d683d68cd94aec00188))
+* 🔧 config ([`e6d5e3a`](https://github.com/mraniki/tt/commit/e6d5e3a5440122ca74e7db07abb01548d24c5a63))
+* ♻️ refactor ([`14b15a4`](https://github.com/mraniki/tt/commit/14b15a4dd39edda16a3bfe127da4ab9856b4d15d))
+* :white_check_mark: Update iamlistening and talkytrend dependencies ([`20a4811`](https://github.com/mraniki/tt/commit/20a48111c1a6796cd60217e082851aec43b9901f))
+* :white_check_mark: Refactor unit tests and imports in test_unit.py ([`bc81b32`](https://github.com/mraniki/tt/commit/bc81b3298327302d6403b0aa4f13ce190566b2e4))
+* ♻️ refactor talkytrend ([`b13eb89`](https://github.com/mraniki/tt/commit/b13eb89b0914269fb8c4e872ce462a1799b7b100))
+* :arrow_up: import fix ([`364a363`](https://github.com/mraniki/tt/commit/364a36359050e2b2fbde59804e23d1cd00927c96))
+
+### Breaking
+
+* 💥 plugin structure and package approach ([`3e8ee4d`](https://github.com/mraniki/tt/commit/3e8ee4dc6abbb47689a3e4f0c0af89f2a0c0da02))
+* 💥 plugin structure and package approach ([`3e8ee4d`](https://github.com/mraniki/tt/commit/3e8ee4dc6abbb47689a3e4f0c0af89f2a0c0da02))
+
+### Other
+
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`4405e66`](https://github.com/mraniki/tt/commit/4405e665d8e686dd12d9b4a2f69fbd94cc63c68f))
+* 'Refactored by Sourcery' ([`3e8ad0e`](https://github.com/mraniki/tt/commit/3e8ad0ee98c7bf11ab02e03a31d239746a365699))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`e9be419`](https://github.com/mraniki/tt/commit/e9be4193427b1f392d55540e34fc3b54e1c02ef8))
+* 'Refactored by Sourcery' ([`3bf37f1`](https://github.com/mraniki/tt/commit/3bf37f1facc6ad08e3032997dd20d72dc3ebf638))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`6b418dc`](https://github.com/mraniki/tt/commit/6b418dccc41012179defabf8b6686d80b2b33dd3))
+
 ## v2.2.2 (2023-06-11)
 
 ### Fix
