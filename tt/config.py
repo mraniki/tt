@@ -65,6 +65,11 @@ class PluginManager:
         else:
             print(f"Plugin not found: {plugin_name}")
 
+    async def start_all_plugins(self):
+        for plugin_instance in self.plugins.values():
+            await plugin_instance.start()
+
+
 class BasePlugin:
     def start(self):
         pass

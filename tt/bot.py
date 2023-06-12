@@ -368,19 +368,9 @@ async def startup_event():
         plugin_manager = PluginManager()
         # Load plugins from the "talky.plugins" package
         plugin_manager.load_plugins("tt.plugins")
-        # Start the TalkyTrend plugin
-        await plugin_manager.start_plugin("TalkyTrendPlugin")
+        # Start all loaded plugins
+        await plugin_manager.start_all_plugins()
 
-        # # Start plugins
-        # for plugin_name in settings.plugins:
-        #     plugin = plugin_manager.get_plugin(plugin_name)
-        #     if plugin:
-        #         plugin_manager.start_plugin(plugin)
-        #     else:
-        #         print(f"Plugin {plugin_name} not found.")
-
-        # if settings.talkytrend_enabled:
-        #     loop.create_task(load_trend())
         logger.info("Application started successfully")
     except Exception as e:
         loop.stop()

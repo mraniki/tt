@@ -163,6 +163,29 @@ async def test_load_exchange(mock_settings_dex):
     print(exchange)
     assert exchange is not None
 
+
+@pytest.mark.asyncio
+async def test_successful_execute_order(caplog, order_params, mock_settings_dex):
+    exchange = await load_exchange()
+    dex_execute_mock = AsyncMock()
+    with patch('dxsp.execute_order',dex_execute_mock):
+        trade_confirmation = await execute_order(order_params)
+
+        # Assert that no warning is logged
+        assert "execute_order:" not in caplog.text
+        # Assert that no notification is sent
+        assert "⚠️ order execution:" not in caplog.text
+        # Assert that the trade confirmation is returned
+        assert isinstance(trade_confirmation, str)
+        # Add more specific assertions for the trade confirmation if needed
+        assert "⬇️" in trade_confirmation or "⬆️" in trade_confirmation
+        assert "Size:" in trade_confirmation
+        assert "Entry:" in trade_confirmation
+        assert "ℹ️" in trade_confirmation
+        assert "🗓️" in trade_confirmation
+
+
+
 @pytest.mark.asyncio
 async def test_failed_execute_order(caplog, order_params,mock_settings_dex):
     exchange = await load_exchange()
