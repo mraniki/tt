@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.3 (2023-06-12)
+
+### Fix
+
+* Update utils.py ([`363ce8d`](https://github.com/mraniki/tt/commit/363ce8d68e29bbce073ac106bf10574da95557a7))
+* Update Dockerfile ([`c109e4b`](https://github.com/mraniki/tt/commit/c109e4be1e8e9ce7bc81f890a037b3b1e5e2b7bb))
+* Update bot.py ([`fca3635`](https://github.com/mraniki/tt/commit/fca3635c3920c7613866fa3915f59ef29a8b4625))
+
 ## v3.0.2 (2023-06-12)
 
 ### Fix
