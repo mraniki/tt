@@ -17,8 +17,7 @@ async def listener(plugin_manager):
         try:
             msg = await bot_listener.get_latest_message()
             if msg:
-                # Process the message by passing it to the listen() method
-                # of each loaded plugin
+                # Process the message to each loaded plugin
                 for plugin_instance in plugin_manager.plugins.values():
                     await plugin_instance.listen(msg)
         except Exception as error:

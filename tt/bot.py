@@ -15,9 +15,52 @@ from fastapi import FastAPI, Request
 
 import ccxt
 from dxsp import DexSwap
-
+from findmyorder import FindMyOrder
 from tt.config import settings, logger
 from tt.utils import listener, notify, PluginManager
+
+
+async def parse_message(msg):
+    """main parser"""
+
+    try:
+        # Initialize FindMyOrder
+        fmo = FindMyOrder()
+
+        # Check ignore
+        if msg.startswith(settings.bot_ignore):
+            return
+        # Check bot command
+        if msg.startswith(settings.bot_prefix):
+            message = None
+            command = (msg.split(" ")[0])[1:]
+            if command == settings.bot_command_help:
+                message = f"{settings.bot_msg_help}\n{await init_message()}"
+            elif command == settings.bot_command_trading:
+                message = await trading_switch_command()
+            elif command == settings.bot_command_quote:
+                symbol = msg.split(" ")[1]
+                message = await get_quote(symbol)
+            elif command == settings.bot_command_bal:
+                await account_balance_command()
+            elif command == settings.bot_command_pos:
+                message = await account_position_command()
+            elif command == settings.bot_command_restart:
+                await restart_command()
+            if message is not None:
+                await notify(message)
+
+        # Order found
+        if settings.trading_enabled and await fmo.search(msg):
+            # Order parsing 
+            order = await fmo.get_order(msg)
+            # Order execution
+            order = await execute_order(order)
+            if order:
+                await notify(order)
+
+    except Exception as e:
+        logger.error(e)
 
 
 def get_host_ip() -> str:
