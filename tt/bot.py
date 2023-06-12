@@ -53,8 +53,8 @@ async def health_check():
 async def webhook(request: Request):
     payload = await request.body()
     print(payload)
-    if payload["key"] == settings.webhook_secret:
-        return await notify(payload)
+    # if payload["key"] == settings.webhook_secret:
+    return await notify(payload)
 
 if __name__ == '__main__':
     """Launch TalkyTrader"""

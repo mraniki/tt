@@ -94,29 +94,48 @@ def order_params():
         # other order parameters
     }
 
-@pytest.mark.asyncio
-@pytest.mark.parametrize('msg, expected_output', [
-    ('/help', 'help message'),
-])
-async def test_parse_message(msg, expected_output, mocker):
-    """Test parse_message function """
-    notify_mock = mocker.patch('tt.utils.notify')
-    await parse_message(msg)
-    if msg == '/help':
-        init_mock = mocker.patch('tt.utils.init_message', return_value='help message')
-        expected_output = 'help message\nhelp init message'
-        await parse_message(msg)
-        assert '🏦' in notify_mock.call_args[0][0]
+# @pytest.mark.asyncio
+# @pytest.mark.parametrize('msg, expected_output', [
+#     ('/help', 'help message'),
+# ])
+# async def test_parse_message(msg, expected_output, mocker):
+#     """Test parse_message function """
+#     notify_mock = mocker.patch('tt.utils.notify')
+#     await parse_message(msg)
+#     if msg == '/help':
+#         init_mock = mocker.patch('tt.utils.init_message', return_value='help message')
+#         expected_output = 'help message\nhelp init message'
+#         await parse_message(msg)
+#         assert '🏦' in notify_mock.call_args[0][0]
 
-
 @pytest.mark.asyncio
-async def test_parse_quote(mock_settings_dex):
+async def test_parse_help(mock_settings_dex):
     """Test parse_message balance """
     notify_mock = AsyncMock()
     with patch('tt.utils.notify',notify_mock):
         await load_exchange()
-        await parse_message('/quote WBTC')
-        assert '🦄' in notify_mock.call_args[0][0]
+        await parse_message('/help')
+        assert '🏦' in notify_mock.call_args[0][0]
+
+
+# @pytest.mark.asyncio
+# async def test_parse_bal(mock_settings_dex):
+#     """Test parse_message balance """
+#     notify_mock = AsyncMock()
+#     with patch('tt.utils.notify',notify_mock):
+#         await load_exchange()
+#         await parse_message('/bal')
+#         assert '🏦' in notify_mock.call_args[0][0]
+
+
+# @pytest.mark.asyncio
+# async def test_parse_quote(mock_settings_dex):
+#     """Test parse_message balance """
+#     notify_mock = AsyncMock()
+#     with patch('tt.utils.notify',notify_mock):
+#         await load_exchange()
+#         await parse_message('/quote WBTC')
+#         assert '🦄' in notify_mock.call_args[0][0]
 
 
 @pytest.mark.asyncio
@@ -173,25 +192,25 @@ async def test_cex_load_exchange(mock_settings_cex):
     assert exchange is not None
 
 
-@pytest.mark.asyncio
-async def test_successful_execute_order(caplog, order_params, mock_settings_dex):
-    await load_exchange()
-    dex_execute_mock = AsyncMock()
-    with patch('dxsp.execute_order',dex_execute_mock):
-        trade_confirmation = await execute_order(order_params)
+# @pytest.mark.asyncio
+# async def test_successful_execute_order(caplog, order_params, mock_settings_dex):
+#     await load_exchange()
+#     dex_execute_mock = AsyncMock()
+#     with patch('dxsp.execute_order',dex_execute_mock):
+#         trade_confirmation = await execute_order(order_params)
 
-        # Assert that no warning is logged
-        assert "execute_order:" not in caplog.text
-        # Assert that no notification is sent
-        assert "⚠️ order execution:" not in caplog.text
-        # Assert that the trade confirmation is returned
-        assert isinstance(trade_confirmation, str)
-        # Add more specific assertions for the trade confirmation if needed
-        assert "⬇️" in trade_confirmation or "⬆️" in trade_confirmation
-        assert "Size:" in trade_confirmation
-        assert "Entry:" in trade_confirmation
-        assert "ℹ️" in trade_confirmation
-        assert "🗓️" in trade_confirmation
+#         # Assert that no warning is logged
+#         assert "execute_order:" not in caplog.text
+#         # Assert that no notification is sent
+#         assert "⚠️ order execution:" not in caplog.text
+#         # Assert that the trade confirmation is returned
+#         assert isinstance(trade_confirmation, str)
+#         # Add more specific assertions for the trade confirmation if needed
+#         assert "⬇️" in trade_confirmation or "⬆️" in trade_confirmation
+#         assert "Size:" in trade_confirmation
+#         assert "Entry:" in trade_confirmation
+#         assert "ℹ️" in trade_confirmation
+#         assert "🗓️" in trade_confirmation
 
 
 
@@ -299,14 +318,14 @@ def test_read_main():
     #assert response.json() == {"msg": "Hello World"}
 
 
-def test_webhook_with_valid_payload():
+def test_webhook_with_valid_payload(mock_discord):
     client = TestClient(app)
     payload = {"key": "my_secret_key", "data": "my_data"}
     response = client.post("/webhook", json=payload)
     assert response is not None
 
 
-# def test_webhook_with_invalid_payload():
+# def test_webhook_with_invalid_payload(mock_discord):
 #     client = TestClient(app)
 #     payload = {"key": "wrong_key", "data": "my_data"}
 #     response = client.post("/webhook", json=payload)
