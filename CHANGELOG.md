@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.5 (2023-06-12)
+
+### Fix
+
+* 🐳 docker file update ([`f805d42`](https://github.com/mraniki/tt/commit/f805d42361b8200201684a865a7fa9606bf9a87d))
+
 ## v3.0.4 (2023-06-12)
 
 ### Fix
