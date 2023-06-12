@@ -3,6 +3,6 @@ COPY tt/ /tt/
 RUN ls --recursive /tt/
 #WORKDIR /tt
 # COPY ./tt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r tt/requirements.txt
 EXPOSE 8080
 CMD [ "python", "tt/bot.py" ]
