@@ -1,9 +1,9 @@
 import asyncio
 import logging
-from tt.config import settings
+from tt.config import BasePlugin
 from talkytrend import TalkyTrend
 
-class TalkyTrendPlugin:
+class TalkyTrendPlugin(BasePlugin):
     def __init__(self):
         self.logger = logging.getLogger(name="TalkyTrend")
         self.talky_trend = None
@@ -28,4 +28,4 @@ class TalkyTrendPlugin:
             news = await self.talky_trend.fetch_key_news()
             if news:
                 self.logger.info(f"Key news: {news['title']}")
-                await asyncio.sleep(settings.scanner_frequency)
+            await asyncio.sleep(settings.scanner_frequency)
