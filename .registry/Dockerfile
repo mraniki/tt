@@ -1,8 +1,6 @@
 FROM python:3.11
 COPY tt/ /tt/
-RUN ls --recursive /tt/
-#WORKDIR /tt
-# COPY ./tt .
-RUN pip install --no-cache-dir -r tt/requirements.txt
+WORKDIR /tt
+RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8080
-CMD [ "python", "tt/bot.py" ]
+CMD [ "python", "-m", "tt.bot" ]
