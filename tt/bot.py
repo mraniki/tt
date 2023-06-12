@@ -1,23 +1,22 @@
 """
 TalkyTrader 🪙🗿
 """
-__version__ = "2.2.2"
 
 import http
 import asyncio
-
 import uvicorn
 from fastapi import FastAPI, Request
 
 from tt.config import settings, logger
 from tt.utils import listener, notify, load_exchange, init_message, PluginManager
 
-# ⛓️🤖BOT
+
+# ⛓️🤖🙊BOT
 app = FastAPI(title="TALKYTRADER",)
 
 @app.on_event("startup")
 async def startup_event():
-    """Starts the FastAPI application"""
+    """Starts the bot"""
     loop = asyncio.get_event_loop()
     try:
         plugin_manager = PluginManager()
@@ -26,9 +25,10 @@ async def startup_event():
         plugin_manager.load_plugins("tt.plugins")
         await plugin_manager.start_all_plugins()
 
-        logger.info("Application started successfully")
-    except Exception as e:
-        logger.error(f"Application failed to start: {e}")
+        logger.info("bot started successfully")
+    except Exception as error:
+        logger.error("bot startup failed: %s",error)
+
 
 @app.on_event('shutdown')
 async def shutdown_event():
@@ -53,12 +53,9 @@ async def health_check():
 async def webhook(request: Request):
     payload = await request.body()
     print(payload)
-    #if payload["key"] == settings.webhook_secret:
-    return await notify(payload)
-
-
-# 🙊TALKYTRADER
+    if payload["key"] == settings.webhook_secret:
+        return await notify(payload)
 
 if __name__ == '__main__':
-    """Launch Talky"""
+    """Launch TalkyTrader"""
     uvicorn.run(app, host=settings.host, port=int(settings.port))

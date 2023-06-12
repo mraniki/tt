@@ -1,3 +1,4 @@
+__version__ = "2.2.2"
 
 import asyncio
 import importlib
