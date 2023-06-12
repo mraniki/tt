@@ -8,7 +8,7 @@ sys.path.insert(0,"..")
 
 from iamlistening import Listener
 from fastapi.testclient import TestClient
-from tt.bot import (
+from tt.utils import (
     parse_message, notify,
     get_host_ip, get_ping,
     load_exchange, execute_order,
@@ -17,7 +17,8 @@ from tt.bot import (
     get_account_position,get_account_margin,
     trading_switch_command,
     # restart_command,
-    init_message, post_init, app)
+    init_message, post_init, )
+from tt.bot.py import app
 from tt.config import settings, logger, PluginManager
 
 @pytest.fixture
