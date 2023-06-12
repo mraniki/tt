@@ -14,80 +14,11 @@ import ping3
 from fastapi import FastAPI, Request
 
 import ccxt
-from apprise import Apprise, NotifyFormat
 from dxsp import DexSwap
-from findmyorder import FindMyOrder
-from iamlistening import Listener
 
-from tt.config import settings, logger, PluginManager
+from tt.config import settings, logger
+from tt.utils import listener, notify, PluginManager
 
-async def parse_message(msg):
-    """main parser"""
-
-    try:
-        # Initialize FindMyOrder
-        fmo = FindMyOrder()
-
-        # Check ignore
-        if msg.startswith(settings.bot_ignore):
-            return
-        # Check bot command
-        if msg.startswith(settings.bot_prefix):
-            message = None
-            command = (msg.split(" ")[0])[1:]
-            if command == settings.bot_command_help:
-                message = f"{settings.bot_msg_help}\n{await init_message()}"
-            elif command == settings.bot_command_trading:
-                message = await trading_switch_command()
-            elif command == settings.bot_command_quote:
-                symbol = msg.split(" ")[1]
-                message = await get_quote(symbol)
-            elif command == settings.bot_command_bal:
-                await account_balance_command()
-            elif command == settings.bot_command_pos:
-                message = await account_position_command()
-            elif command == settings.bot_command_restart:
-                await restart_command()
-            # elif command == settings.bot_command_news:
-            #     return trend.live_tv()
-            if message is not None:
-                await notify(message)
-
-        # Order found
-        if settings.trading_enabled and await fmo.search(msg):
-            # Order parsing 
-            order = await fmo.get_order(msg)
-            # Order execution
-            order = await execute_order(order)
-            if order:
-                await notify(order)
-
-    except Exception as e:
-        logger.error(e)
-
-async def notify(msg):
-    """💬 MESSAGING """
-    if not msg:
-        return
-    apobj = Apprise()
-    if settings.discord_webhook_id:
-        url = (f"discord://{str(settings.discord_webhook_id)}/"
-               f"{str(settings.discord_webhook_token)}")
-        if isinstance(msg, str):
-            msg = msg.replace("<code>", "`")
-            msg = msg.replace("</code>", "`")
-    elif settings.matrix_hostname:
-        url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
-               f"{settings.matrix_hostname[8:]}:443/"
-               f"{str(settings.bot_channel_id)}")
-    else:
-        url = (f"tgram://{str(settings.bot_token)}/"
-               f"{str(settings.bot_channel_id)}")
-    try:
-        apobj.add(url)
-        await apobj.async_notify(body=str(msg), body_format=NotifyFormat.HTML)
-    except Exception as e:
-        logger.error("%s not sent: %s", msg, e)
 
 def get_host_ip() -> str:
     """Returns host IP """
@@ -129,20 +60,6 @@ async def load_exchange():
         return exchange
     except Exception as e:
         logger.warning("exchange: %s", e)
-
-
-# async def load_trend():
-#     """TalkyTrend load"""
-#     global trend
-#     while True:
-#         try:
-#             trend = TalkyTrend()
-#             event = await trend.scanner()
-#             if event:
-#                 await notify(event)
-#         except Exception as e:
-#             logger.exception(e)
-#         await asyncio.sleep(10)
 
 
 async def execute_order(order_params):
@@ -336,52 +253,34 @@ async def restart_command():
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
 # 🤖BOT
-async def listener():
-    """Launch Listener"""
-    try:
-        await load_exchange()
-    except Exception as e:
-        logger.error("exchange: %s", e)
-    bot_listener = Listener()
-    task = asyncio.create_task(bot_listener.run_forever())
-
-    while True:
-        try:
-            msg = await bot_listener.get_latest_message()
-            if msg:
-                await parse_message(msg)
-        except Exception as error:
-            print(error)
-    await task
-
 # ⛓️API
 app = FastAPI(title="TALKYTRADER",)
-
 
 @app.on_event("startup")
 async def startup_event():
     """Starts the FastAPI application"""
     loop = asyncio.get_event_loop()
     try:
-        loop.create_task(listener())
 
         plugin_manager = PluginManager()
+        loop.create_task(listener(plugin_manager))
         # Load plugins from the "talky.plugins" package
+
         plugin_manager.load_plugins("tt.plugins")
         # Start all loaded plugins
         await plugin_manager.start_all_plugins()
 
         logger.info("Application started successfully")
     except Exception as e:
-        loop.stop()
+        # loop.stop()
         logger.error(f"Application failed to start: {e}")
 
 
 @app.on_event('shutdown')
 async def shutdown_event():
     """fastapi shutdown"""
-    global uvicorn
     logger.info("shutting down")
+    # self.uvicorn_server.keep_running = False
     uvicorn.keep_running = False
 
 

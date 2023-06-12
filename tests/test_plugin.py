@@ -1,5 +1,5 @@
 import pytest
-from tt.config import PluginManager
+from tt.utils import PluginManager
 
 @pytest.mark.asyncio
 async def test_load_plugins():

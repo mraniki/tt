@@ -1,6 +1,7 @@
 import asyncio
 import logging
-from tt.config import BasePlugin, settings
+from tt.config import settings
+from tt.utils import listener, notify, BasePlugin
 from talkytrend import TalkyTrend
 
 class TalkyTrendPlugin(BasePlugin):

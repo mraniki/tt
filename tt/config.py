@@ -3,8 +3,6 @@ import os
 import logging
 from dynaconf import Dynaconf
 
-import importlib
-import pkgutil
 
 ROOT = os.path.dirname(__file__)
 
@@ -34,51 +32,3 @@ if settings.loglevel == "DEBUG":
     logging.getLogger("telethon").setLevel(logging.WARNING)
     logging.getLogger("urllib3").setLevel(logging.WARNING)
     #logging.getLogger("ccxt").setLevel(logging.WARNING)
-
-
-class PluginManager:
-    def __init__(self):
-        self.plugins = {}
-
-    def load_plugins(self, package_name):
-        print(f"Loading plugins from package: {package_name}")
-        package = importlib.import_module(package_name)
-        print(f"Package loaded: {package}")
-    
-        for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
-            try:
-                module = importlib.import_module(f"{package_name}.{plugin_name}")
-    
-                for name, obj in module.__dict__.items():
-                    if isinstance(obj, type) and issubclass(obj, BasePlugin) and obj is not BasePlugin:
-                        plugin_instance = obj()
-                        self.plugins[plugin_name] = plugin_instance
-                        print(f"Plugin loaded: {plugin_name}")
-    
-            except Exception as e:
-                print(f"Error loading plugin: {plugin_name}, {e}")
-
-    async def start_plugin(self, plugin_name):
-        if plugin_name in self.plugins:
-            plugin_instance = self.plugins[plugin_name]
-            await plugin_instance.start()
-        else:
-            print(f"Plugin not found: {plugin_name}")
-
-    async def start_all_plugins(self):
-        for plugin_instance in self.plugins.values():
-            await plugin_instance.start()
-
-
-class BasePlugin:
-    def start(self):
-        pass
-
-    def stop(self):
-        pass
-
-    async def listen(self):
-        pass
-
-    async def notify(self, message):
-        pass
