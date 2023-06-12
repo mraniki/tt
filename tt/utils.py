@@ -1,26 +1,61 @@
-"""
-TalkyTrader 🪙🗿
-"""
 __version__ = "2.2.2"
 
-import http
+import asyncio
+import importlib
+import pkgutil
+from apprise import Apprise, NotifyFormat
 import time
 import os
 import sys
-import asyncio
 import socket
-import uvicorn
-import ping3
-from fastapi import FastAPI, Request
 
+import ping3
 import ccxt
-from apprise import Apprise, NotifyFormat
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 from iamlistening import Listener
-from talkytrend import TalkyTrend
+from tt.config import settings, logger
 
-from config import settings, logger
+
+async def listener():
+    """Launch Listener"""
+
+    bot_listener = Listener()
+    task = asyncio.create_task(bot_listener.run_forever())
+
+    while True:
+        try:
+            msg = await bot_listener.get_latest_message()
+            if msg:
+                await parse_message(msg)
+        except Exception as error:
+            print(error)
+    await task
+
+
+async def notify(msg):
+    """💬 MESSAGING """
+    if not msg:
+        return
+    apobj = Apprise()
+    if settings.discord_webhook_id:
+        url = (f"discord://{str(settings.discord_webhook_id)}/"
+               f"{str(settings.discord_webhook_token)}")
+        if isinstance(msg, str):
+            msg = msg.replace("<code>", "`")
+            msg = msg.replace("</code>", "`")
+    elif settings.matrix_hostname:
+        url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
+               f"{settings.matrix_hostname[8:]}:443/"
+               f"{str(settings.bot_channel_id)}")
+    else:
+        url = (f"tgram://{str(settings.bot_token)}/"
+               f"{str(settings.bot_channel_id)}")
+    try:
+        apobj.add(url)
+        await apobj.async_notify(body=str(msg), body_format=NotifyFormat.HTML)
+    except Exception as e:
+        logger.error("%s not sent: %s", msg, e)
 
 
 async def parse_message(msg):
@@ -50,8 +85,6 @@ async def parse_message(msg):
                 message = await account_position_command()
             elif command == settings.bot_command_restart:
                 await restart_command()
-            elif command == settings.bot_command_news:
-                return trend.live_tv()
             if message is not None:
                 await notify(message)
 
@@ -66,49 +99,6 @@ async def parse_message(msg):
 
     except Exception as e:
         logger.error(e)
-
-async def notify(msg):
-    """💬 MESSAGING """
-    if not msg:
-        return
-    apobj = Apprise()
-    if settings.discord_webhook_id:
-        url = (f"discord://{str(settings.discord_webhook_id)}/"
-               f"{str(settings.discord_webhook_token)}")
-        if isinstance(msg, str):
-            msg = msg.replace("<code>", "`")
-            msg = msg.replace("</code>", "`")
-    elif settings.matrix_hostname:
-        url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
-               f"{settings.matrix_hostname[8:]}:443/"
-               f"{str(settings.bot_channel_id)}")
-    else:
-        url = (f"tgram://{str(settings.bot_token)}/"
-               f"{str(settings.bot_channel_id)}")
-    try:
-        apobj.add(url)
-        await apobj.async_notify(body=str(msg), body_format=NotifyFormat.HTML)
-    except Exception as e:
-        logger.error("%s not sent: %s", msg, e)
-
-def get_host_ip() -> str:
-    """Returns host IP """
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect((settings.ping, 80))
-        ip_address = s.getsockname()[0]
-        s.close()
-        return ip_address
-    except Exception:
-        pass
-
-def get_ping(host: str = settings.ping) -> float:
-    """Returnsping """
-    response_time = ping3.ping(host, unit='ms')
-    print(response_time)
-    time.sleep(1)
-    return round(response_time, 3)
-
 
 async def load_exchange():
     """load_exchange."""
@@ -133,18 +123,25 @@ async def load_exchange():
         logger.warning("exchange: %s", e)
 
 
-async def load_trend():
-    """TalkyTrend load"""
-    global trend
-    while True:
-        try:
-            trend = TalkyTrend()
-            event = await trend.scanner()
-            if event:
-                await notify(event)
-        except Exception as e:
-            logger.exception(e)
-        await asyncio.sleep(10)
+def get_host_ip() -> str:
+    """Returns host IP """
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect((settings.ping, 80))
+        ip_address = s.getsockname()[0]
+        s.close()
+        return ip_address
+    except Exception:
+        pass
+
+def get_ping(host: str = settings.ping) -> float:
+    """Returnsping """
+    response_time = ping3.ping(host, unit='ms')
+    print(response_time)
+    time.sleep(1)
+    return round(response_time, 3)
+
+
 
 
 async def execute_order(order_params):
@@ -301,7 +298,8 @@ async def get_account_margin():
 
 # 🦾BOT ACTIONS
 async def init_message():
-    version = __version__
+    # version = __version__
+    version = "2.2.2"
     try:
         ip = get_host_ip()
         ping = get_ping()
@@ -337,74 +335,50 @@ async def restart_command():
     # Restart bot
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
-# 🤖BOT
-async def listener():
-    """Launch Listener"""
-    try:
-        await load_exchange()
-    except Exception as e:
-        logger.error("exchange: %s", e)
-    bot_listener = Listener()
-    task = asyncio.create_task(bot_listener.run_forever())
 
-    while True:
-        try:
-            msg = await bot_listener.get_latest_message()
-            if msg:
-                await parse_message(msg)
-        except Exception as error:
-            print(error)
-    await task
+class PluginManager:
+    def __init__(self):
+        self.plugins = {}
 
-# ⛓️API
-app = FastAPI(title="TALKYTRADER",)
-
-
-@app.on_event("startup")
-async def startup_event():
-    """Starts the FastAPI application"""
-    loop = asyncio.get_event_loop()
-    try:
-        loop.create_task(listener())
-        if settings.talkytrend_enabled:
-            loop.create_task(load_trend())
-        logger.info("Application started successfully")
-    except Exception as e:
-        loop.stop()
-        logger.error(f"Application failed to start: {e}")
-
-
-@app.on_event('shutdown')
-async def shutdown_event():
-    """fastapi shutdown"""
-    global uvicorn
-    logger.info("shutting down")
-    uvicorn.keep_running = False
-
-
-@app.get("/")
-async def root():
-    """fastapi root"""
-    return await init_message()
-
-
-@app.get("/health")
-async def health_check():
-    """fastapi health"""
-    return await init_message()
-
-
-@app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
-async def webhook(request: Request):
-    payload = await request.body()
-    print(payload)
-    #if payload["key"] == settings.webhook_secret:
-    return await notify(payload)
+    def load_plugins(self, package_name):
+        print(f"Loading plugins from package: {package_name}")
+        package = importlib.import_module(package_name)
+        print(f"Package loaded: {package}")
     
+        for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
+            try:
+                module = importlib.import_module(f"{package_name}.{plugin_name}")
+    
+                for name, obj in module.__dict__.items():
+                    if isinstance(obj, type) and issubclass(obj, BasePlugin) and obj is not BasePlugin:
+                        plugin_instance = obj()
+                        self.plugins[plugin_name] = plugin_instance
+                        print(f"Plugin loaded: {plugin_name}")
+    
+            except Exception as e:
+                print(f"Error loading plugin: {plugin_name}, {e}")
 
-# 🙊TALKYTRADER
+    async def start_plugin(self, plugin_name):
+        if plugin_name in self.plugins:
+            plugin_instance = self.plugins[plugin_name]
+            await plugin_instance.start()
+        else:
+            print(f"Plugin not found: {plugin_name}")
+
+    async def start_all_plugins(self):
+        for plugin_instance in self.plugins.values():
+            await plugin_instance.start()
 
 
-if __name__ == '__main__':
-    """Launch Talky"""
-    uvicorn.run(app, host=settings.host, port=int(settings.port))
+class BasePlugin:
+    def start(self):
+        pass
+
+    def stop(self):
+        pass
+
+    async def listen(self):
+        pass
+
+    async def notify(self, message):
+        pass

@@ -1,27 +1,28 @@
 """
  TT test
 """
+from unittest.mock import AsyncMock, MagicMock, patch
+import pytest
 import sys
 sys.path.insert(0,"..")
-import pytest
+
 from iamlistening import Listener
 from fastapi.testclient import TestClient
-from unittest.mock import AsyncMock, MagicMock, patch
-from src.config import settings, logger
-from src.bot import (
+from tt.bot import app
+from tt.utils import (
     parse_message, notify,
     get_host_ip, get_ping,
-    load_exchange, load_trend, execute_order,
+    load_exchange, execute_order,
     get_name, get_quote, get_trading_asset_balance,
     get_account, get_account_balance, 
     get_account_position,get_account_margin,
     trading_switch_command,
     # restart_command,
-    init_message, post_init, app)
+    init_message, post_init, PluginManager)
+from tt.config import settings, logger
 
-
-@pytest.fixture
-def mock_settings_cex():
+@pytest.fixture(name="mock_settings_cex")
+def mock_settings_cex_fixture():
     class Settings:
         cex_name = 'binance'
         cex_api = 'api_key'
@@ -32,8 +33,8 @@ def mock_settings_cex():
         dex_chain_id = ''
     return Settings()
 
-@pytest.fixture
-def mock_settings_dex():
+@pytest.fixture(name="mock_settings_dex")
+def mock_settings_dex_fixture():
     class Settings:
         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
         settings.dex_private_key = "0xdeadbeet"
@@ -43,8 +44,8 @@ def mock_settings_dex():
         settings.trading_enabled = True
     return Settings()
 
-@pytest.fixture
-def mock_discord():
+@pytest.fixture(name="mock_discord")
+def mock_discord_fixture():
     """Fixture to create an listener object for testing."""
     class Settings:
         settings.discord_webhook_id = "12345678901"
@@ -54,8 +55,8 @@ def mock_discord():
         settings.ping = "8.8.8.8"
     return Settings()
 
-@pytest.fixture
-def mock_telegram():
+@pytest.fixture(name="mock_telegram")
+def mock_telegram_fixture():
     """Fixture to create an listener object for testing."""
     class Settings:
         settings.telethon_api_id = "123456789"
@@ -64,8 +65,8 @@ def mock_telegram():
         settings.bot_channel_id = "1234567890"
     return Settings()
 
-@pytest.fixture
-def mock_matrix_():
+@pytest.fixture(name="mock_matrix_")
+def mock_matrix_fixture():
     """Fixture to create an listener object for testing."""
     class Settings:
         settings.matrix_hostname = "https://matrix.org"
@@ -75,8 +76,8 @@ def mock_matrix_():
         settings.bot_channel_id = "1234567890"
     return Settings()
 
-@pytest.fixture
-def message():
+@pytest.fixture(name="message")
+def message_fixture():
     return "hello"
 
 @pytest.fixture
@@ -93,18 +94,27 @@ def order_params():
         # other order parameters
     }
 
+# @pytest.mark.asyncio
+# @pytest.mark.parametrize('msg, expected_output', [
+#     ('/help', 'help message'),
+# ])
+# async def test_parse_message(msg, expected_output, mocker):
+#     """Test parse_message function """
+#     notify_mock = mocker.patch('tt.utils.notify')
+#     await parse_message(msg)
+#     if msg == '/help':
+#         init_mock = mocker.patch('tt.utils.init_message', return_value='help message')
+#         expected_output = 'help message\nhelp init message'
+#         await parse_message(msg)
+#         assert '🏦' in notify_mock.call_args[0][0]
+
 @pytest.mark.asyncio
-@pytest.mark.parametrize('msg, expected_output', [
-    ('/help', 'help message'),
-])
-async def test_parse_message(msg, expected_output, mocker):
-    """Test parse_message function """
-    notify_mock = mocker.patch('src.bot.notify')
-    await parse_message(msg)
-    if msg == '/help':
-        init_mock = mocker.patch('src.bot.init_message', return_value='help message')
-        expected_output = 'help message\nhelp init message'
-        await parse_message(msg)
+async def test_parse_help(mock_settings_dex):
+    """Test parse_message balance """
+    notify_mock = AsyncMock()
+    with patch('tt.utils.notify',notify_mock):
+        await load_exchange()
+        await parse_message('/help')
         assert '🏦' in notify_mock.call_args[0][0]
 
 
@@ -112,17 +122,27 @@ async def test_parse_message(msg, expected_output, mocker):
 # async def test_parse_bal(mock_settings_dex):
 #     """Test parse_message balance """
 #     notify_mock = AsyncMock()
-#     with patch('src.bot.notify',notify_mock):
+#     with patch('tt.utils.notify',notify_mock):
 #         await load_exchange()
 #         await parse_message('/bal')
 #         assert '🏦' in notify_mock.call_args[0][0]
+
+
+# @pytest.mark.asyncio
+# async def test_parse_quote(mock_settings_dex):
+#     """Test parse_message balance """
+#     notify_mock = AsyncMock()
+#     with patch('tt.utils.notify',notify_mock):
+#         await load_exchange()
+#         await parse_message('/quote WBTC')
+#         assert '🦄' in notify_mock.call_args[0][0]
 
 
 @pytest.mark.asyncio
 async def test_parse_trading(mock_settings_dex):
     """Test parse_message balance """
     notify_mock = AsyncMock()
-    with patch('src.bot.notify',notify_mock):
+    with patch('tt.utils.notify',notify_mock):
         await load_exchange()
         await parse_message('/trading')
         assert 'Trading is' in notify_mock.call_args[0][0]
@@ -132,7 +152,7 @@ async def test_parse_trading(mock_settings_dex):
 async def test_notify(caplog, mock_discord):
     """Test notify function"""
     notify_mock = AsyncMock()
-    with patch('src.bot.notify',notify_mock):
+    with patch('tt.utils.notify',notify_mock):
 
         message = '<code>test message</code>'
 
@@ -157,15 +177,46 @@ async def test_get_host_ip():
 
 
 @pytest.mark.asyncio
-async def test_load_exchange(mock_settings_dex):
+async def test_dex_load_exchange(mock_settings_dex):
     """test exchange dex"""
     exchange = await load_exchange()
     print(exchange)
     assert exchange is not None
 
+
+@pytest.mark.asyncio
+async def test_cex_load_exchange(mock_settings_cex):
+    """test exchange cex"""
+    exchange = await load_exchange()
+    print(exchange)
+    assert exchange is not None
+
+
+# @pytest.mark.asyncio
+# async def test_successful_execute_order(caplog, order_params, mock_settings_dex):
+#     await load_exchange()
+#     dex_execute_mock = AsyncMock()
+#     with patch('dxsp.execute_order',dex_execute_mock):
+#         trade_confirmation = await execute_order(order_params)
+
+#         # Assert that no warning is logged
+#         assert "execute_order:" not in caplog.text
+#         # Assert that no notification is sent
+#         assert "⚠️ order execution:" not in caplog.text
+#         # Assert that the trade confirmation is returned
+#         assert isinstance(trade_confirmation, str)
+#         # Add more specific assertions for the trade confirmation if needed
+#         assert "⬇️" in trade_confirmation or "⬆️" in trade_confirmation
+#         assert "Size:" in trade_confirmation
+#         assert "Entry:" in trade_confirmation
+#         assert "ℹ️" in trade_confirmation
+#         assert "🗓️" in trade_confirmation
+
+
+
 @pytest.mark.asyncio
 async def test_failed_execute_order(caplog, order_params,mock_settings_dex):
-    exchange = await load_exchange()
+    await load_exchange()
     trade_confirmation = await execute_order(order_params)
     assert 'Order execution failed' in caplog.text
 
@@ -267,14 +318,14 @@ def test_read_main():
     #assert response.json() == {"msg": "Hello World"}
 
 
-def test_webhook_with_valid_payload():
+def test_webhook_with_valid_payload(mock_discord):
     client = TestClient(app)
     payload = {"key": "my_secret_key", "data": "my_data"}
     response = client.post("/webhook", json=payload)
     assert response is not None
 
 
-# def test_webhook_with_invalid_payload():
+# def test_webhook_with_invalid_payload(mock_discord):
 #     client = TestClient(app)
 #     payload = {"key": "wrong_key", "data": "my_data"}
 #     response = client.post("/webhook", json=payload)
