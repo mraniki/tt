@@ -16,8 +16,9 @@ from fastapi import FastAPI, Request
 import ccxt
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
+from iamlistening import Listener
 from tt.config import settings, logger
-from tt.utils import listener, notify, PluginManager
+from tt.utils import notify, PluginManager
 
 
 async def parse_message(msg):
@@ -295,29 +296,67 @@ async def restart_command():
     # Restart bot
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
+async def listener():
+    """Launch Listener"""
+    try:
+        await load_exchange()
+    except Exception as e:
+        logger.error("exchange: %s", e)
+    bot_listener = Listener()
+    task = asyncio.create_task(bot_listener.run_forever())
+
+    while True:
+        try:
+            msg = await bot_listener.get_latest_message()
+            if msg:
+                await parse_message(msg)
+        except Exception as error:
+            print(error)
+    await task
+
+
+
 # 🤖BOT
 # ⛓️API
 app = FastAPI(title="TALKYTRADER",)
 
+# @app.on_event("startup")
+# async def startup_event():
+#     """Starts the FastAPI application"""
+#     loop = asyncio.get_event_loop()
+#     try:
+
+#         plugin_manager = PluginManager()
+#         loop.create_task(listener(plugin_manager))
+#         # Load plugins from the "talky.plugins" package
+
+#         plugin_manager.load_plugins("tt.plugins")
+#         # Start all loaded plugins
+#         await plugin_manager.start_all_plugins()
+
+#         logger.info("Application started successfully")
+#     except Exception as e:
+#         # loop.stop()
+#         logger.error(f"Application failed to start: {e}")
 @app.on_event("startup")
 async def startup_event():
     """Starts the FastAPI application"""
     loop = asyncio.get_event_loop()
     try:
-
         plugin_manager = PluginManager()
-        loop.create_task(listener(plugin_manager))
-        # Load plugins from the "talky.plugins" package
-
+        loop.create_task(listener())
         plugin_manager.load_plugins("tt.plugins")
-        # Start all loaded plugins
         await plugin_manager.start_all_plugins()
+
+        # Create an event for pausing/resuming the scanner
+        # pause_event = asyncio.Event()
+
+        # Start the listener task
+        # loop.create_task(listener(plugin_manager, pause_event))
 
         logger.info("Application started successfully")
     except Exception as e:
-        # loop.stop()
         logger.error(f"Application failed to start: {e}")
-
 
 @app.on_event('shutdown')
 async def shutdown_event():

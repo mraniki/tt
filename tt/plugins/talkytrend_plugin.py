@@ -1,5 +1,5 @@
 from tt.config import settings
-from tt.utils import notify, listener, BasePlugin
+from tt.utils import notify, BasePlugin
 from talkytrend import TalkyTrend
 
 class TalkyTrendPlugin(BasePlugin):
@@ -17,7 +17,7 @@ class TalkyTrendPlugin(BasePlugin):
         # Perform any necessary cleanup or shutdown tasks
         pass
 
-    async def listen(self):
+    async def listen(self, message):
         """Listens for incoming messages or events"""
         # This plugin doesn't require listening for messages or events
         pass

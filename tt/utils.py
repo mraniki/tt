@@ -8,23 +8,47 @@ import importlib
 import pkgutil
 from typing import Dict, Optional
 
-async def listener(plugin_manager):
-    """Launch Listener"""
-    bot_listener = Listener()
-    task = asyncio.create_task(bot_listener.run_forever())
+# async def listener(plugin_manager):
+#     """Launch Listener"""
+#     bot_listener = Listener()
+#     task = asyncio.create_task(bot_listener.run_forever())
 
-    while True:
-        try:
-            msg = await bot_listener.get_latest_message()
-            if msg:
-                # Process the message to each loaded plugin
-                for plugin_instance in plugin_manager.plugins.values():
-                    await plugin_instance.listen(msg)
-        except Exception as error:
-            logger.error("Error in listener: %s", error)
+#     while True:
+#         try:
+#             msg = await bot_listener.get_latest_message()
+#             if msg:
+#                 # Process the message to each loaded plugin
+#                 for plugin_instance in plugin_manager.plugins.values():
+#                     await plugin_instance.listen(msg)
+#         except Exception as error:
+#             logger.error("Error in listener: %s", error)
 
-    await task
+#     await task
 
+# async def listener(plugin_manager):
+#     """Launch Listener"""
+#     bot_listener = Listener()
+#     task = asyncio.create_task(bot_listener.run_forever())
+
+#     pause_event = asyncio.Event()  # Create an event for pausing/resuming the scanner
+
+#     while True:
+#         try:
+#             msg = await bot_listener.get_latest_message()
+#             if msg:
+#                 # Process the message to each loaded plugin
+#                 for plugin_instance in plugin_manager.plugins.values():
+#                     await plugin_instance.listen(msg)
+
+#                 # Check if the scanner needs to be paused or resumed
+#                 if "pause scanner" in msg.lower():
+#                     pause_event.clear()  # Pause the scanner
+#                 elif "resume scanner" in msg.lower():
+#                     pause_event.set()  # Resume the scanner
+#         except Exception as error:
+#             logger.error("Error in listener: %s", error)
+
+    # await task
 async def notify(msg):
     """💬 MESSAGING """
     if not msg:
