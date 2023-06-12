@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.1 (2023-06-12)
+
+### Fix
+
+* :arrow_up: dependencies ([`6b2391b`](https://github.com/mraniki/tt/commit/6b2391bd2113db529533736c3796536d79add53f))
+* Update README.md with improved messaging platform support ([`3912281`](https://github.com/mraniki/tt/commit/39122816f644ea8091d0b863d5999f5dd60ff557))
+* ⬆️ dependencies ([`301d37a`](https://github.com/mraniki/tt/commit/301d37a049fde32686052fafd311dc0467b07e77))
+* ⬆️ dependencies ([`2f81eac`](https://github.com/mraniki/tt/commit/2f81eac447849fccacb03162abaf395676328395))
+* 🐳 docker update and unit test, settings updates ([`d9151ae`](https://github.com/mraniki/tt/commit/d9151aecdd25b2758a3ada7d30768314ba6a61ab))
+
 ## v3.0.0 (2023-06-12)
 
 ### Feature
