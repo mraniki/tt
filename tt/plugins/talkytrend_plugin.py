@@ -1,5 +1,4 @@
-from tt.config import settings
-from tt.utils import notify, BasePlugin
+from tt.utils import notify, listener, BasePlugin
 from talkytrend import TalkyTrend
 
 class TalkyTrendPlugin(BasePlugin):

@@ -305,7 +305,6 @@ async def test_message_listener(mock_telegram, message):
     print(listener)
     assert listener is not None
     await listener.handle_message(message)
-    # Call the function to be tested
     msg = await listener.get_latest_message()
     print(msg)
     assert msg == "hello"
@@ -315,18 +314,14 @@ def test_read_main():
     client = TestClient(app)
     response = client.get("/")
     assert response.status_code == 200
-    #assert response.json() == {"msg": "Hello World"}
 
+def test_read_health():
+    client = TestClient(app)
+    response = client.get("/health")
+    assert response.status_code == 200
 
 def test_webhook_with_valid_payload(mock_discord):
     client = TestClient(app)
     payload = {"key": "my_secret_key", "data": "my_data"}
     response = client.post("/webhook", json=payload)
     assert response is not None
-
-
-# def test_webhook_with_invalid_payload(mock_discord):
-#     client = TestClient(app)
-#     payload = {"key": "wrong_key", "data": "my_data"}
-#     response = client.post("/webhook", json=payload)
-#     assert response.json() == {"message": "Key is incorrect"}

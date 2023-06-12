@@ -298,8 +298,8 @@ async def get_account_margin():
 
 # 🦾BOT ACTIONS
 async def init_message():
-    # version = __version__
-    version = "2.2.2"
+    version = __version__
+    # version = "2.2.2"
     try:
         ip = get_host_ip()
         ping = get_ping()
