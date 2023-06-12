@@ -14,7 +14,7 @@ import ccxt
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 from iamlistening import Listener
-from tt.config import settings, logger
+from .config import settings, logger
 
 
 async def listener():
