@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.2 (2023-06-12)
+
+### Fix
+
+* Update bot.py ([`1860321`](https://github.com/mraniki/tt/commit/186032188f4057eb9aaf33cbc9e1b4ed02fd6824))
+* Update utils.py ([`3cc04a2`](https://github.com/mraniki/tt/commit/3cc04a204c62501b4b449d3b3235c10642e03f6b))
+
 ## v3.0.1 (2023-06-12)
 
 ### Fix
