@@ -7,8 +7,8 @@ import asyncio
 import uvicorn
 from fastapi import FastAPI, Request
 
-from .config import settings, logger
-from .utils import listener, notify, load_exchange, init_message, PluginManager
+from tt.config import settings, logger
+from tt.utils import listener, notify, load_exchange, init_message, PluginManager
 
 
 # ⛓️🤖🙊BOT
