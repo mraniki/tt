@@ -341,7 +341,7 @@ class PluginManager:
         self.plugins = {}
 
     def load_plugins(self, package_name):
-        logger.info("Loading plugin from package loaded:  %s", package)
+        logger.info("Loading plugin from package loaded:  %s", package_name)
         package = importlib.import_module(package_name)
         logger.info("Package loaded:  %s", package)
     
