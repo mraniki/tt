@@ -2,6 +2,7 @@ FROM python:3.11-slim
 WORKDIR /app
 #COPY tt/ /app/tt/
 COPY . /app
+#RUN pip install /app
 WORKDIR /app/tt/
 RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8080
