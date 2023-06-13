@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.12 (2023-06-13)
+
+### Fix
+
+* Update Dockerfile ([`297488a`](https://github.com/mraniki/tt/commit/297488abce517664e45bc70ca59e1a238a93abf3))
+
 ## v3.0.11 (2023-06-13)
 
 ### Fix
