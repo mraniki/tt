@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.21 (2023-06-13)
+
+### Fix
+
+* 🐳 docker file improvement and reusability approach ([`31f385d`](https://github.com/mraniki/tt/commit/31f385db718ab734424acb16ff829529cc3b0691))
+* 🐳 dockerignore file ([`c964403`](https://github.com/mraniki/tt/commit/c96440366f2131a29b7d48b13edeb5310ba5922c))
+* 🐳 docker ([`2092b8a`](https://github.com/mraniki/tt/commit/2092b8a3e4cfd796d119c17c999e846d0e0d1e08))
+* 🐛 bug await self.trend.scanner() missing ([`db85b7f`](https://github.com/mraniki/tt/commit/db85b7f94bf6f8971af9f32015b45f72bd49a708))
+
 ## v3.0.20 (2023-06-13)
 
 ### Fix
