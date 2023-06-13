@@ -1,6 +1,5 @@
 FROM python:3.11
 
-COPY tt/pyproject.toml .
 COPY tt/ /tt/
 RUN pip install -e tt
 WORKDIR /tt
