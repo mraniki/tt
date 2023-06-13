@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.10 (2023-06-13)
+
+### Fix
+
+* Update Dockerfile for tt bot ([`1acdf1a`](https://github.com/mraniki/tt/commit/1acdf1ad7e44941e9da2149ca56b3ffc483b5e71))
+
+### Other
+
+* Merge branch 'dev' into main ([`5db4617`](https://github.com/mraniki/tt/commit/5db4617e36dcca1879a959174f8577df7d681e3a))
+
 ## v3.0.9 (2023-06-13)
 
 ### Fix
