@@ -22,3 +22,17 @@ CMD [ "python", "/app/tt/bot.py" ]
 
 # Run the application:
 #CMD . /opt/venv/bin/activate && exec python /app/tt/bot.py
+
+
+#
+#ENV VIRTUAL_ENV=/opt/venv
+#RUN python3 -m venv $VIRTUAL_ENV
+#ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# Install dependencies:
+#COPY requirements.txt .
+#RUN pip install -r requirements.txt
+
+# Run the application:
+#COPY myapp.py .
+#CMD ["python", "myapp.py"]
