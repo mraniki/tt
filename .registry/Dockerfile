@@ -1,6 +1,8 @@
 FROM python:3.11
-COPY tt/ /tt/
+WORKDIR /app
+COPY tt/ tt/
 COPY pyproject.toml .
+RUN ls --recursive .
 RUN pip install -e tt
 WORKDIR /tt
 RUN pip install --no-cache-dir -r requirements.txt
