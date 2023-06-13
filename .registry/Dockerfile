@@ -1,11 +1,8 @@
 FROM python:3.11
 WORKDIR /app
-COPY pyproject.toml .
-COPY tt/ /tt/
-RUN ls --recursive .
-RUN pip install -e tt
+COPY tt/ /app/tt/
 WORKDIR /tt
 RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8080
-CMD [ "python", "bot.py" ]
-
+ENV PYTHONPATH /app
+CMD [ "python", "/tt/bot.py" ]
