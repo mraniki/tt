@@ -341,9 +341,9 @@ class PluginManager:
         self.plugins = {}
 
     def load_plugins(self, package_name):
-        print(f"Loading plugins from package: {package_name}")
+        logger.info("Loading plugin from package loaded:  %s", package)
         package = importlib.import_module(package_name)
-        print(f"Package loaded: {package}")
+        logger.info("Package loaded:  %s", package)
     
         for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
             try:
@@ -353,17 +353,17 @@ class PluginManager:
                     if isinstance(obj, type) and issubclass(obj, BasePlugin) and obj is not BasePlugin:
                         plugin_instance = obj()
                         self.plugins[plugin_name] = plugin_instance
-                        print(f"Plugin loaded: {plugin_name}")
+                        logger.info("Plugin loaded:  %s", plugin_name)
     
             except Exception as e:
-                print(f"Error loading plugin: {plugin_name}, {e}")
+                logger.warning("error loading plugin:  %s", plugin_name)
 
     async def start_plugin(self, plugin_name):
         if plugin_name in self.plugins:
             plugin_instance = self.plugins[plugin_name]
             await plugin_instance.start()
         else:
-            print(f"Plugin not found: {plugin_name}")
+            logger.warning("Plugin not found:  %s", plugin_name)
 
     async def start_all_plugins(self):
         for plugin_instance in self.plugins.values():
