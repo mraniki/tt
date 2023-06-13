@@ -5,4 +5,4 @@ WORKDIR /app/tt/
 RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8080
 ENV PYTHONPATH /app
-CMD [ "python", "/tt/bot.py" ]
+CMD [ "python", "/app/tt/bot.py" ]
