@@ -8,7 +8,7 @@ class TalkyTrendPlugin(BasePlugin):
     async def start(self):
         """Starts the TalkyTrend plugin"""
         while True:
-            async for message in self.trend.scanner():
+            async for message in await self.trend.scanner():
                 await self.notify(message)
 
     async def stop(self):
