@@ -1,5 +1,4 @@
 FROM python:3.11
-WORKDIR /app
 COPY tt/ tt/
 COPY pyproject.toml .
 RUN ls --recursive .
