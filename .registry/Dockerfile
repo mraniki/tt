@@ -1,6 +1,7 @@
 FROM python:3.11
-COPY tt/ tt/
+WORKDIR /app
 COPY pyproject.toml .
+COPY tt/ /tt/
 RUN ls --recursive .
 RUN pip install -e tt
 WORKDIR /tt
