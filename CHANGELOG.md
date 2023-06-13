@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.22 (2023-06-13)
+
+### Fix
+
+* :arrow_up: Update Dockerfile and dependencies, change log level to DEBUG ([`d2ae744`](https://github.com/mraniki/tt/commit/d2ae74478e9d7c05899b02cb5ecabf99944243f3))
+
 ## v3.0.21 (2023-06-13)
 
 ### Fix
