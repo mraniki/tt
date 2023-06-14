@@ -3,9 +3,11 @@ WORKDIR /app
 #COPY tt/ /app/tt/
 COPY . /app
 #RUN pip install /app
-WORKDIR /app/tt/
-RUN pip install --no-cache-dir -r requirements.txt
+#WORKDIR /app/tt/
+#RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir install /app
 EXPOSE 8080
+
 ENV PYTHONPATH /app
 CMD [ "python", "/app/tt/bot.py" ]
 
