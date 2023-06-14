@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.27 (2023-06-14)
+
+### Fix
+
+* 🐛 bug json hook ([`ce50136`](https://github.com/mraniki/tt/commit/ce501366aeb582e2bc418a5c59edb255d0855233))
+* 👷 CI Change ([`ea09139`](https://github.com/mraniki/tt/commit/ea09139bcf1fdd6ca4108e503704971b008f389f))
+* 🎨 code format for webhook ([`d4758b4`](https://github.com/mraniki/tt/commit/d4758b43d59ea4345d6553235fb8ed3d6b7baee2))
+* 🐳 using pyproject..toml for docker install ([`d126e3d`](https://github.com/mraniki/tt/commit/d126e3d3bb2f2be7914ff11095f8838e20976a50))
+
 ## v3.0.26 (2023-06-14)
 
 ### Fix
