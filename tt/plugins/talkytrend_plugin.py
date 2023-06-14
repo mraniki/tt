@@ -6,16 +6,18 @@ class TalkyTrendPlugin(BasePlugin):
     def __init__(self):
         try:
             self.trend = TalkyTrend()
+            logger.debug("plugin init TalkyTrend")
         except Exception as e:
-            logger.warning("plugin init %s",e)
+            logger.warning("talkytrend init %s",e)
     async def start(self):
         """Starts the TalkyTrend plugin"""
+        logger.debug("talkytrend start TalkyTrend")
         try:
             while True:
                 async for message in await self.trend.scanner():
                     await self.notify(message)
         except Exception as e:
-            logger.warning("plugin start %s",e)
+            logger.warning("talkytrend start %s",e)
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
@@ -32,4 +34,4 @@ class TalkyTrendPlugin(BasePlugin):
         try:
             await notify(message)
         except Exception as e:
-            logger.warning("plugin notify %s",e)
+            logger.warning("talkytrend notify %s",e)
