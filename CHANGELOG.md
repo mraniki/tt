@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.30 (2023-06-14)
+
+### Fix
+
+* :bug: Remove unnecessary await keyword in TalkyTrendPlugin ([`0586b35`](https://github.com/mraniki/tt/commit/0586b351a93651425e10b7d0d5b15246ff313f73))
+
 ## v3.0.29 (2023-06-14)
 
 ### Fix
