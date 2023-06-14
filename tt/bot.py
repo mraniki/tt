@@ -52,7 +52,7 @@ async def health_check():
 @app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
 async def webhook(request: Request):
     data = await request.body()
-    logger.info("payload: %s",data.json())
+    logger.info("payload: %s",request.json())
     # if data["key"] == settings.webhook_secret:
     await notify(data)
     return {"status": "OK"}
