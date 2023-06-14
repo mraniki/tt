@@ -28,10 +28,10 @@ fastapi = "^0.97.0"
 ccxt = "^3.1.33"
 dynaconf = "^3.1.12"
 apprise= "^1.4.0"
-dxsp = "^2.6.9"
-findmyorder = "^1.4.2"
+dxsp = "^2.6.10"
+findmyorder = "^1.4.3"
 iamlistening = "^0.1.11"
-talkytrend = "^1.1.8"
+talkytrend = "^1.1.9"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "^7.34.3"
@@ -53,7 +53,6 @@ omit = [
     "tests/*",
     "examples/*",
     "tt/config.py"
-    # "src/config.py"
 ]
 
 [build-system]
