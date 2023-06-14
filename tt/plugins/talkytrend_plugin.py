@@ -1,5 +1,5 @@
 from tt.utils import notify, listener, BasePlugin
-from tt.config import logger
+from tt.config import logger, settings
 from talkytrend import TalkyTrend
 
 class TalkyTrendPlugin(BasePlugin):
@@ -24,10 +24,19 @@ class TalkyTrendPlugin(BasePlugin):
         # Perform any necessary cleanup or shutdown tasks
         pass
 
+
     async def listen(self, message):
         """Listens for incoming messages or events"""
-        # This plugin doesn't require listening for messages or events
-        pass
+        if message.text == settings.bot_command_news:
+            if self.trend.live_tv:
+                await self.notify(f"Live TV: {self.trend.live_tv}")
+            else:
+                await self.notify("Live TV is not available.")
+        elif message.text == settings.bot_command_help:
+            # Send a help message
+            help_message = f"Available commands:\n{settings.bot_command_news} - Shows the live TV URL."
+            await self.notify(help_message)
+
 
     async def notify(self, message):
         """Sends a notification"""
