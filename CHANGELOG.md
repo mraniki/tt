@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.28 (2023-06-14)
+
+### Fix
+
+* 🐳 docker  virtual env ([`e66c4ab`](https://github.com/mraniki/tt/commit/e66c4abd35b52afbf4792b12a50beea5a754e62e))
+
+### Other
+
+* Rename requirements.txt to requirements.txt ([`1a8d251`](https://github.com/mraniki/tt/commit/1a8d2510431dafc5701b1e49026a46fa64057eec))
+
 ## v3.0.27 (2023-06-14)
 
 ### Fix
