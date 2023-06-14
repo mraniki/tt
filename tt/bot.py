@@ -51,10 +51,11 @@ async def health_check():
 
 @app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
 async def webhook(request: Request):
-    payload = await request.body()
-    print(payload)
-    # if payload["key"] == settings.webhook_secret:
-    return await notify(payload)
+    data = await request.body()
+    logger.info("payload: %s",data.json())
+    # if data["key"] == settings.webhook_secret:
+    await notify(data)
+    return {"status": "OK"}
 
 if __name__ == '__main__':
     """Launch TalkyTrader"""
