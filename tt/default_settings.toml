@@ -1,5 +1,5 @@
 [default]
-loglevel = "DEBUG"
+loglevel = "INFO"
 host = "0.0.0.0"
 port = 8080
 ping = "8.8.8.8"
@@ -32,7 +32,79 @@ trading_stop_loss = 1000
 trading_take_profit = 1000
 
 #plugin
-dxsp_enabled = true
-findmyorder_enabled = true
+#iamlistening_enabled
 iamlistening_enabled = true
+bot_token = ""
+bot_channel_id = ""
+telethon_api_id = ""
+telethon_api_hash = ""
+matrix_hostname = ""
+matrix_user = ""
+matrix_pass = ""
+discord_webhook_id = ""
+discord_webhook_token = ""
+
+#findmyorder
+findmyorder_enabled = true
+action_identifier = "BUY SELL LONG SHORT"
+stop_loss_identifier = "sl="
+take_profit_identifier = 'tp='
+quantity_identifier = 'q='
+order_type_identifier = "spot future margin"
+leverage_type_identifier = "cross isolated"
+comment_identifier = "comment="
+stop_loss = 1000
+take_profit = 1000
+quantity = 1
+
+#talkytrend_enabled
 talkytrend_enabled = true
+scanner_frequency = 7200
+assets = [
+    { id ="EURUSD", exchange='FX_IDC',screener="forex", interval = "4h" },
+    { id ="BTCUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
+    #use https://tvdb.brianthe.dev/ to get details
+    # { id ="GOLD",exchange="TVC",screener="cfd", interval = "4h"},
+    # { id ="USOIL",exchange="FX",screener="cfd", interval = "4h"},
+    # { id ="ETHUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
+]
+economic_calendar = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
+news_url="https://gnews.io/api/v4/top-headlines?category=business&lang=en&country=us&max=2&apikey="
+news_api_key = ""
+live_tv_url = "http://sc2022.stream-link.org/list.php?id=e007"
+
+#dxsp
+dxsp_enabled = true
+loglevel = "INFO"
+headers = {User-Agent= 'Mozilla/5.0'}
+#📝tokenlist
+token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
+token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
+token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+#📝trading setup
+trading_asset = "USDT"
+trading_risk_amount = 10 # 10% of the position
+dex_trading_slippage = 2 # 2 % slippage
+#user settings
+dex_wallet_address = "0x1234567890123456789012345678901234567890" #this is an example
+dex_private_key = "0xdeadbeef" #this is an example
+#chain_1 #see below for other chain ids or use https://chainlist.org to overwrite settings
+dex_chain_id = 1
+dex_protocol_type = "uniswap_v2" #0x | 1inch | uniswap_v3
+dex_rpc = "https://rpc.ankr.com/eth"
+dex_block_explorer_url = "https://api.etherscan.io/api?"
+dex_block_explorer_api =  "798437294880920392"  #this is an example
+dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" #UNI_V2
+dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
+dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+# dex_router_contract_addr = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45" #UNI_V3
+dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e" #UNI_V3_QUOTERV2
+dex_quoter_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v3/quoter.abi"
+#protocol specific
+#🦄1inch
+dex_1inch_url = "https://api.1inch.exchange/v5.0/"
+dex_1inch_limit_url = "https://limit-orders.1inch.io/v3.0/"
+#0️⃣0x
+dex_0x_url = "https://api.0x.org/mainnet"
+dex_0x_api_key = "" 
+
