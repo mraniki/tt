@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.29 (2023-06-14)
+
+### Fix
+
+* 🎨 code cleanup ([`e918375`](https://github.com/mraniki/tt/commit/e918375e9d8f2d5b805de48b32d48aa98b60364a))
+* ⬆️ dependencies ([`ebb36e1`](https://github.com/mraniki/tt/commit/ebb36e17ae0a6fa648243a49119b366fa57dd38a))
+
+### Other
+
+* Merge branch 'main' into dev ([`225e8f4`](https://github.com/mraniki/tt/commit/225e8f43feacedbeb71fa85917306ecd7a4fd456))
+
 ## v3.0.28 (2023-06-14)
 
 ### Fix
