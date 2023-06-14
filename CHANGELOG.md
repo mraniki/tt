@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.26 (2023-06-14)
+
+### Fix
+
+* Update talkytrend_plugin.py ([`5831f23`](https://github.com/mraniki/tt/commit/5831f23cd9c6bbd58c093b20d8f19abe9329d1be))
+
 ## v3.0.25 (2023-06-14)
 
 ### Fix
