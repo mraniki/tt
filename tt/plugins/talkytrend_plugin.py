@@ -14,7 +14,7 @@ class TalkyTrendPlugin(BasePlugin):
         logger.debug("talkytrend start TalkyTrend")
         try:
             while True:
-                async for message in await self.trend.scanner():
+                async for message in self.trend.scanner():
                     await self.notify(message)
         except Exception as e:
             logger.warning("talkytrend start %s",e)
