@@ -366,8 +366,11 @@ class PluginManager:
             logger.warning("Plugin not found:  %s", plugin_name)
 
     async def start_all_plugins(self):
-        for plugin_instance in self.plugins.values():
-            await plugin_instance.start()
+        try:
+            for plugin_instance in self.plugins.values():
+                await plugin_instance.start()
+        except Exception as e:
+            logger.warning("error start_all_plugins")
 
 
 class BasePlugin:
