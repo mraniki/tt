@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.23 (2023-06-14)
+
+### Fix
+
+* Update talkytrend_plugin.py ([`cb5a143`](https://github.com/mraniki/tt/commit/cb5a1439a6843d759462a1848a7609568a952851))
+* Update utils.py ([`db95314`](https://github.com/mraniki/tt/commit/db953143f001bcf6144cbc41961ab278f62cfb58))
+
+### Other
+
+* :rotating_light: Refactor plugin package name logging in PluginManager class. ([`22c2460`](https://github.com/mraniki/tt/commit/22c24603def58518a66f06798cd4457ce67bd376))
+* :whale:  linter ([`95b3371`](https://github.com/mraniki/tt/commit/95b337119454800f4f40fb2ee912588f5b0e8bf1))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`b94ed6c`](https://github.com/mraniki/tt/commit/b94ed6cb194766561f754ae11433ef3699516c69))
+* :loud_sound::whale: Refactor Dockerfile and add logging to PluginManager class ([`4925238`](https://github.com/mraniki/tt/commit/49252386d7af8d82f9d2eb48049c7ffddb129de7))
+
 ## v3.0.22 (2023-06-13)
 
 ### Fix
