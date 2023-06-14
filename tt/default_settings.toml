@@ -81,8 +81,6 @@ token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/a
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 #📝trading setup
-trading_asset = "USDT"
-trading_risk_amount = 10 # 10% of the position
 dex_trading_slippage = 2 # 2 % slippage
 #user settings
 dex_wallet_address = "0x1234567890123456789012345678901234567890" #this is an example
