@@ -1,5 +1,5 @@
 FROM python:3.11-slim
-WORKDIR /app
+#WORKDIR /app
 #COPY tt/ /app/tt/
 COPY . /app
 #RUN pip install /app
