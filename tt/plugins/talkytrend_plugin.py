@@ -1,15 +1,21 @@
 from tt.utils import notify, listener, BasePlugin
+from tt.config import settings, logger
 from talkytrend import TalkyTrend
 
 class TalkyTrendPlugin(BasePlugin):
     def __init__(self):
-        self.trend = TalkyTrend()
-
+        try:
+            self.trend = TalkyTrend()
+        except Exception as e:
+            logger.warning(e)
     async def start(self):
         """Starts the TalkyTrend plugin"""
-        while True:
-            async for message in await self.trend.scanner():
-                await self.notify(message)
+        try:
+            while True:
+                async for message in await self.trend.scanner():
+                    await self.notify(message)
+        except Exception as e:
+            logger.warning(e)
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
@@ -23,4 +29,7 @@ class TalkyTrendPlugin(BasePlugin):
 
     async def notify(self, message):
         """Sends a notification"""
-        await notify(message)
+        try:
+            await notify(message)
+        except Exception as e:
+            logger.warning(e)
