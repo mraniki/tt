@@ -28,9 +28,7 @@ class TalkyTrendPlugin(BasePlugin):
     async def listen(self, message):
         """Listens for incoming messages or events"""
         if message.text == settings.bot_command_news:
-            # Trigger the plugin behavior
-            tvi = self.trend.live_tv
-            if tvi:
+            if tvi := self.trend.live_tv:
                 await self.notify(f"Live TV: {tvi}")
             else:
                 await self.notify("Live TV is not available.")
