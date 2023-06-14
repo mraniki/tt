@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.25 (2023-06-14)
+
+### Fix
+
+* Update default_settings.toml ([`c2c8b4c`](https://github.com/mraniki/tt/commit/c2c8b4c50ce36737b65c7d53a3240b5da515d5a9))
+* Update default_settings.toml ([`05356b0`](https://github.com/mraniki/tt/commit/05356b0bc7c57a8f4ceea9e40553df7fd119750e))
+* Update default_settings.toml ([`aa245f5`](https://github.com/mraniki/tt/commit/aa245f5f3df9903fbebd01b0f718c342939ca40e))
+
 ## v3.0.24 (2023-06-14)
 
 ### Fix
