@@ -75,7 +75,6 @@ live_tv_url = "http://sc2022.stream-link.org/list.php?id=e007"
 
 #dxsp
 dxsp_enabled = true
-loglevel = "INFO"
 headers = {User-Agent= 'Mozilla/5.0'}
 #📝tokenlist
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
