@@ -10,7 +10,7 @@ from iamlistening import Listener
 from fastapi.testclient import TestClient
 from tt.bot import app
 from tt.utils import (
-    parse_message, notify,
+    parse_message, send_notification,
     get_host_ip, get_ping,
     load_exchange, execute_order,
     get_name, get_quote, get_trading_asset_balance,
@@ -18,7 +18,7 @@ from tt.utils import (
     get_account_position,get_account_margin,
     trading_switch_command,
     # restart_command,
-    init_message, post_init, PluginManager)
+    init_message, post_init)
 from tt.config import settings, logger
 
 @pytest.fixture(name="mock_settings_cex")
@@ -100,63 +100,63 @@ def order_params():
 # ])
 # async def test_parse_message(msg, expected_output, mocker):
 #     """Test parse_message function """
-#     notify_mock = mocker.patch('tt.utils.notify')
+#     send_notification_mock = mocker.patch('tt.utils.send_notification')
 #     await parse_message(msg)
 #     if msg == '/help':
 #         init_mock = mocker.patch('tt.utils.init_message', return_value='help message')
 #         expected_output = 'help message\nhelp init message'
 #         await parse_message(msg)
-#         assert '🏦' in notify_mock.call_args[0][0]
+#         assert '🏦' in send_notification_mock.call_args[0][0]
 
 @pytest.mark.asyncio
 async def test_parse_help(mock_settings_dex):
     """Test parse_message balance """
-    notify_mock = AsyncMock()
-    with patch('tt.utils.notify',notify_mock):
+    send_notification_mock = AsyncMock()
+    with patch('tt.utils.send_notification',send_notification_mock):
         await load_exchange()
         await parse_message('/help')
-        assert '🏦' in notify_mock.call_args[0][0]
+        assert '🏦' in send_notification_mock.call_args[0][0]
 
 
 # @pytest.mark.asyncio
 # async def test_parse_bal(mock_settings_dex):
 #     """Test parse_message balance """
-#     notify_mock = AsyncMock()
-#     with patch('tt.utils.notify',notify_mock):
+#     send_notification_mock = AsyncMock()
+#     with patch('tt.utils.send_notification',send_notification_mock):
 #         await load_exchange()
 #         await parse_message('/bal')
-#         assert '🏦' in notify_mock.call_args[0][0]
+#         assert '🏦' in send_notification_mock.call_args[0][0]
 
 
 # @pytest.mark.asyncio
 # async def test_parse_quote(mock_settings_dex):
 #     """Test parse_message balance """
-#     notify_mock = AsyncMock()
-#     with patch('tt.utils.notify',notify_mock):
+#     send_notification_mock = AsyncMock()
+#     with patch('tt.utils.send_notification',send_notification_mock):
 #         await load_exchange()
 #         await parse_message('/quote WBTC')
-#         assert '🦄' in notify_mock.call_args[0][0]
+#         assert '🦄' in send_notification_mock.call_args[0][0]
 
 
 @pytest.mark.asyncio
 async def test_parse_trading(mock_settings_dex):
     """Test parse_message balance """
-    notify_mock = AsyncMock()
-    with patch('tt.utils.notify',notify_mock):
+    send_notification_mock = AsyncMock()
+    with patch('tt.utils.send_notification',send_notification_mock):
         await load_exchange()
         await parse_message('/trading')
-        assert 'Trading is' in notify_mock.call_args[0][0]
+        assert 'Trading is' in send_notification_mock.call_args[0][0]
 
 
 @pytest.mark.asyncio
-async def test_notify(caplog, mock_discord):
-    """Test notify function"""
-    notify_mock = AsyncMock()
-    with patch('tt.utils.notify',notify_mock):
+async def test_send_notification(caplog, mock_discord):
+    """Test send_notification function"""
+    send_notification_mock = AsyncMock()
+    with patch('tt.utils.send_notification',send_notification_mock):
 
         message = '<code>test message</code>'
 
-        output = await notify(message)
+        output = await send_notification(message)
         print(output)
         assert 'https://discord.com/api/webhooks/12345678901/1234567890' in caplog.text
 
