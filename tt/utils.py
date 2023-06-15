@@ -17,17 +17,17 @@ from iamlistening import Listener
 from tt.config import settings, logger
 
 
-async def start_message_listener():
+async def listener():
     """Launch Listener"""
 
     bot_listener = Listener()
     task = asyncio.create_task(bot_listener.run_forever())
     message_processor = MessageProcessor()
     message_processor.load_plugins("plugins")
-    try:
-        await message_processor.start_all_plugins()
-    except Exception as error:
-        logger.error("plugin start failed: %s", error)
+
+    loop = asyncio.get_running_loop()
+    loop.create_task(start_plugins(message_processor))
+
     while True:
         try:
             msg = await bot_listener.get_latest_message()
@@ -35,8 +35,15 @@ async def start_message_listener():
                 await parse_message(msg)
                 await message_processor.process_message(msg)
         except Exception as error:
-            logger.error("listener processing: %s", error)
+            logger.error("listener: %s", error)
     await task
+
+
+async def start_plugins(message_processor):
+    try:
+        await message_processor.start_all_plugins()
+    except Exception as error:
+        logger.error("plugins start: %s", error)
 
 
 async def send_notification(msg):
@@ -47,19 +54,23 @@ async def send_notification(msg):
     if settings.discord_webhook_id:
         url = (f"discord://{str(settings.discord_webhook_id)}/"
                f"{str(settings.discord_webhook_token)}")
+        format=NotifyFormat.MARKDOWN
         if isinstance(msg, str):
             msg = msg.replace("<code>", "`")
             msg = msg.replace("</code>", "`")
+            msg = msg.replace("/n", "<br>")
     elif settings.matrix_hostname:
         url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
                f"{settings.matrix_hostname[8:]}:443/"
                f"{str(settings.bot_channel_id)}")
+        format=NotifyFormat.HTML
     else:
         url = (f"tgram://{str(settings.bot_token)}/"
                f"{str(settings.bot_channel_id)}")
+        format=NotifyFormat.HTML
     try:
         apobj.add(url)
-        await apobj.async_notify(body=str(msg), body_format=NotifyFormat.HTML)
+        await apobj.async_notify(body=str(msg), body_format=format)
     except Exception as e:
         logger.error("%s not sent: %s", msg, e)
 
@@ -79,7 +90,7 @@ async def parse_message(msg):
             message = None
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_help:
-                message = f"{settings.bot_msg_help}\n{await init_message()}"
+                message = f"{await init_message()}\n{settings.bot_msg_help}"
             elif command == settings.bot_command_trading:
                 message = await trading_switch_command()
             elif command == settings.bot_command_quote:
@@ -96,7 +107,7 @@ async def parse_message(msg):
 
         # Order found
         if settings.trading_enabled and await fmo.search(msg):
-            # Order parsing 
+            # Order parsing
             order = await fmo.get_order(msg)
             # Order execution
             order = await execute_order(order)
@@ -143,7 +154,6 @@ def get_host_ip() -> str:
 def get_ping(host: str = settings.ping) -> float:
     """Returnsping """
     response_time = ping3.ping(host, unit='ms')
-    print(response_time)
     time.sleep(1)
     return round(response_time, 3)
 
@@ -304,7 +314,6 @@ async def get_account_margin():
 # 🦾BOT ACTIONS
 async def init_message():
     version = __version__
-    # version = "2.2.2"
     try:
         ip = get_host_ip()
         ping = get_ping()
@@ -343,27 +352,27 @@ async def restart_command():
 
 class MessageProcessor:
     def __init__(self):
-        self.plugins = {}
+        self.plugins = []
+        self.plugin_tasks = []
 
     def load_plugins(self, package_name):
-        logger.info("Loading plugin from package loaded:  %s", package_name)
+        logger.info("Loading plugins from package: %s", package_name)
         package = importlib.import_module(package_name)
-        logger.info("Package loaded:  %s", package)
+        logger.debug("Package loaded: %s", package)
 
         for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
             try:
                 module = importlib.import_module(f"{package_name}.{plugin_name}")
+                logger.debug("Module loaded: %s", module)
 
                 for name, obj in module.__dict__.items():
                     if isinstance(obj, type) and issubclass(obj, BasePlugin) and obj is not BasePlugin:
                         plugin_instance = obj()
-                        self.plugins[plugin_name] = plugin_instance
-                        logger.info("Plugin loaded:  %s", plugin_name)
+                        self.plugins.append(plugin_instance)
+                        logger.info("Plugin loaded: %s", plugin_name)
 
             except Exception as e:
-                logger.warning(
-                    "error loading plugin:  %s error: %s",
-                    plugin_name, e)
+                logger.warning("Error loading plugin %s: %s", plugin_name, e)
 
     async def start_plugin(self, plugin_name):
         if plugin_name in self.plugins:
@@ -374,28 +383,35 @@ class MessageProcessor:
 
     async def start_all_plugins(self):
         try:
-            for plugin_instance in self.plugins.values():
-                await plugin_instance.start()
+            for plugin in self.plugins:
+                task = asyncio.create_task(plugin.start())
+                self.plugin_tasks.append(task)
+            await asyncio.gather(*self.plugin_tasks)
         except Exception as e:
             logger.warning("error starting all plugins %s", e)
 
     async def process_message(self, message):
-        for plugin_instance in self.plugins.values():
-            if plugin_instance.listening_for(message):
-                await plugin_instance.on_message_received(message)
+        plugin_dict = {plugin.name: plugin for plugin in self.plugins}
+        for plugin in plugin_dict.values():
+            if plugin.should_handle(message):
+                await plugin.handle_message(message)
+
 
 
 
 class BasePlugin:
-    def start(self):
+    async def start(self):
         pass
 
-    def stop(self):
-        pass
-
-    async def on_message_received(self, msg):
+    async def stop(self):
         pass
 
     async def send_notification(self, message):
+        pass
+
+    def should_handle(self, message):
+        pass
+
+    async def handle_message(self, msg):
         pass
 

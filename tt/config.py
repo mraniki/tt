@@ -1,4 +1,6 @@
-
+"""
+ talky  Config
+"""
 import os
 import logging
 from dynaconf import Dynaconf
@@ -11,12 +13,14 @@ settings = Dynaconf(
     root_path=os.path.dirname(ROOT),
     load_dotenv=True,
     settings_files=[
-        os.path.join(ROOT, "default_settings.toml"),
-        'settings.toml',
+        os.path.join(ROOT, "talky_settings.toml"), #load talky default
+        "default_settings.toml",#load plugin/ lib
+        'settings.toml', #load user default
         '.secrets.toml'
         ],
     environments=True,
-    merge=True,
+    merge_enabled=True,
+    # merge=True,
     default_env="default",
 )
 
@@ -28,7 +32,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger("TalkyTrader")
 if settings.loglevel == "DEBUG":
-    logging.getLogger("discord").setLevel(logging.WARNING)
-    logging.getLogger("telethon").setLevel(logging.WARNING)
-    logging.getLogger("urllib3").setLevel(logging.WARNING)
+    logging.getLogger("discord").setLevel(logging.ERROR)
+    logging.getLogger("telethon").setLevel(logging.ERROR)
+    logging.getLogger("urllib3").setLevel(logging.ERROR)
+    # logging.getLogger("apprise").setLevel(logging.ERROR)
     #logging.getLogger("ccxt").setLevel(logging.WARNING)
