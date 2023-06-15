@@ -11,8 +11,9 @@ settings = Dynaconf(
     root_path=os.path.dirname(ROOT),
     load_dotenv=True,
     settings_files=[
-        os.path.join(ROOT, "default_settings.toml"),
-        'settings.toml',
+        "default_settings.toml",#load plugin/ lib
+        os.path.join(ROOT, "talky_settings.toml"), #load talky default
+        'settings.toml', #load user default
         '.secrets.toml'
         ],
     environments=True,
