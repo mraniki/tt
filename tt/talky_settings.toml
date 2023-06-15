@@ -110,3 +110,5 @@ dex_1inch_limit_url = "https://limit-orders.1inch.io/v3.0/"
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
 
+example_plugin_enabled = true
+
