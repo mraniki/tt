@@ -17,23 +17,29 @@ from iamlistening import Listener
 from tt.config import settings, logger
 
 
-async def listener():
+async def start_message_listener():
     """Launch Listener"""
 
     bot_listener = Listener()
     task = asyncio.create_task(bot_listener.run_forever())
-
+    message_processor = MessageProcessor()
+    message_processor.load_plugins("plugins")
+    try:
+        await message_processor.start_all_plugins()
+    except Exception as error:
+        logger.error("plugin start failed: %s", error)
     while True:
         try:
             msg = await bot_listener.get_latest_message()
             if msg:
                 await parse_message(msg)
+                await message_processor.process_message(msg)
         except Exception as error:
-            print(error)
+            logger.error("listener processing: %s", error)
     await task
 
 
-async def notify(msg):
+async def send_notification(msg):
     """💬 MESSAGING """
     if not msg:
         return
@@ -86,7 +92,7 @@ async def parse_message(msg):
             elif command == settings.bot_command_restart:
                 await restart_command()
             if message is not None:
-                await notify(message)
+                await send_notification(message)
 
         # Order found
         if settings.trading_enabled and await fmo.search(msg):
@@ -95,7 +101,7 @@ async def parse_message(msg):
             # Order execution
             order = await execute_order(order)
             if order:
-                await notify(order)
+                await send_notification(order)
 
     except Exception as e:
         logger.error(e)
@@ -143,7 +149,6 @@ def get_ping(host: str = settings.ping) -> float:
 
 
 
-
 async def execute_order(order_params):
     """Execute order."""
 
@@ -165,7 +170,7 @@ async def execute_order(order_params):
 
         else:
             if await get_account_balance() == "No Balance":
-                await notify("⚠️ Check Balance")
+                await send_notification("⚠️ Check Balance")
                 return
 
             asset_out_quote = float(exchange.fetchTicker(f'{instrument}').get('last'))
@@ -196,7 +201,7 @@ async def execute_order(order_params):
 
     except Exception as e:
         logger.warning("execute_order: %s", e)
-        await notify(f"⚠️ order execution: {e}")
+        await send_notification(f"⚠️ order execution: {e}")
         return
 
 
@@ -261,7 +266,7 @@ async def get_trading_asset_balance():
         else:
             return exchange.fetchBalance()[f"{settings.trading_asset}"]["free"]
     except Exception as e:
-        await notify(f"⚠️ Check balance {settings.trading_asset}: {e}")
+        await send_notification(f"⚠️ Check balance {settings.trading_asset}: {e}")
 
 
 async def get_account_position():
@@ -313,7 +318,7 @@ async def init_message():
 
 async def post_init():
     # Notify bot startup
-    await notify(await init_message())
+    await send_notification(await init_message())
 
 
 async def account_balance_command():
@@ -336,7 +341,7 @@ async def restart_command():
     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
 
-class PluginManager:
+class MessageProcessor:
     def __init__(self):
         self.plugins = {}
 
@@ -344,19 +349,21 @@ class PluginManager:
         logger.info("Loading plugin from package loaded:  %s", package_name)
         package = importlib.import_module(package_name)
         logger.info("Package loaded:  %s", package)
-    
+
         for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
             try:
                 module = importlib.import_module(f"{package_name}.{plugin_name}")
-    
+
                 for name, obj in module.__dict__.items():
                     if isinstance(obj, type) and issubclass(obj, BasePlugin) and obj is not BasePlugin:
                         plugin_instance = obj()
                         self.plugins[plugin_name] = plugin_instance
                         logger.info("Plugin loaded:  %s", plugin_name)
-    
+
             except Exception as e:
-                logger.warning("error loading plugin:  %s", plugin_name)
+                logger.warning(
+                    "error loading plugin:  %s error: %s",
+                    plugin_name, e)
 
     async def start_plugin(self, plugin_name):
         if plugin_name in self.plugins:
@@ -370,7 +377,13 @@ class PluginManager:
             for plugin_instance in self.plugins.values():
                 await plugin_instance.start()
         except Exception as e:
-            logger.warning("error start_all_plugins")
+            logger.warning("error starting all plugins %s", e)
+
+    async def process_message(self, message):
+        for plugin_instance in self.plugins.values():
+            if plugin_instance.listening_for(message):
+                await plugin_instance.on_message_received(message)
+
 
 
 class BasePlugin:
@@ -380,8 +393,9 @@ class BasePlugin:
     def stop(self):
         pass
 
-    async def listen(self):
+    async def on_message_received(self, msg):
         pass
 
-    async def notify(self, message):
+    async def send_notification(self, message):
         pass
+
