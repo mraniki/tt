@@ -8,7 +8,9 @@ import uvicorn
 from fastapi import FastAPI, Request
 
 from tt.config import settings, logger
-from tt.utils import listener, notify, load_exchange, init_message, PluginManager
+from tt.utils import (
+    start_message_listener, send_notification,
+    load_exchange, init_message)
 
 
 # ⛓️🤖🙊BOT
@@ -19,12 +21,8 @@ async def startup_event():
     """Starts the bot"""
     loop = asyncio.get_event_loop()
     try:
-        plugin_manager = PluginManager()
-        loop.create_task(listener())
+        loop.create_task(start_message_listener())
         await load_exchange()
-        plugin_manager.load_plugins("tt.plugins")
-        await plugin_manager.start_all_plugins()
-
         logger.info("bot started successfully")
     except Exception as error:
         logger.error("bot startup failed: %s",error)
@@ -54,7 +52,7 @@ async def webhook(request: Request):
     data = await request.body()
     logger.info("payload: %s",request.json())
     # if data["key"] == settings.webhook_secret:
-    await notify(data)
+    await send_notification(data)
     return {"status": "OK"}
 
 if __name__ == '__main__':
