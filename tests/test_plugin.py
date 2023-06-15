@@ -1,4 +1,5 @@
 import pytest
+import asyncio
 from tt.utils import MessageProcessor
 
 @pytest.mark.asyncio
