@@ -58,24 +58,25 @@ stop_loss = 1000
 take_profit = 1000
 quantity = 1
 
-#talkytrend_enabled
+#talkytrend
 talkytrend_enabled = true
-scanner_frequency = 7200
-enable_signals = true
-assets = [
-    { id ="EURUSD", exchange='FX_IDC',screener="forex", interval = "4h" },
-    { id ="BTCUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
-    #use https://tvdb.brianthe.dev/ to get details
-    # { id ="GOLD",exchange="TVC",screener="cfd", interval = "4h"},
-    # { id ="USOIL",exchange="FX",screener="cfd", interval = "4h"},
-    # { id ="ETHUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
-]
+# scanner_frequency = 86400
+enable_signals = false
+# assets = [
+#     { id ="EURUSD", exchange='FX_IDC',screener="forex", interval = "4h" },
+#     { id ="BTCUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
+#     #use https://tvdb.brianthe.dev/ to get details
+#     # { id ="GOLD",exchange="TVC",screener="cfd", interval = "4h"},
+#     # { id ="USOIL",exchange="FX",screener="cfd", interval = "4h"},
+#     # { id ="ETHUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
+# ]
 enable_events = true
-economic_calendar = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
-enable_news = true
-news_url="https://gnews.io/api/v4/top-headlines?category=business&lang=en&country=us&max=2&apikey="
-news_api_key = ""
-live_tv_url = "http://sc2022.stream-link.org/list.php?id=e007"
+# economic_calendar = ""
+enable_news = false
+# news_url= ""
+# news_api_key = ""
+# live_tv_url = ""
+
 
 #dxsp
 dxsp_enabled = true

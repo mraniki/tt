@@ -9,10 +9,10 @@ from fastapi import FastAPI, Request
 
 from tt.config import settings, logger
 from tt.utils import (
-    start_message_listener,
+    listener,
     send_notification,
     load_exchange,
-    init_message,
+    init_message, post_init
 )
 
 
@@ -23,13 +23,12 @@ app = FastAPI(
 
 
 @app.on_event("startup")
-async def startup_event():
-    """Starts the bot"""
-    loop = asyncio.get_event_loop()
+async def start_bot():
+    event_loop = asyncio.get_event_loop()
     try:
-        loop.create_task(start_message_listener())
+        event_loop.create_task(listener())
         await load_exchange()
-        logger.info("bot started successfully")
+        await post_init()
     except Exception as error:
         logger.error("bot startup failed: %s", error)
 
@@ -55,6 +54,9 @@ async def health_check():
 
 @app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
 async def webhook(request: Request):
+    """
+    FastAPI handles POST requests to the '/webhook' endpoint.
+    """
     data = await request.body()
     logger.info("payload: %s", request.json())
     # if data["key"] == settings.webhook_secret:
@@ -63,5 +65,4 @@ async def webhook(request: Request):
 
 
 if __name__ == "__main__":
-    """Launch TalkyTrader"""
     uvicorn.run(app, host=settings.host, port=int(settings.port))
