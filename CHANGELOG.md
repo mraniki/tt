@@ -2,6 +2,22 @@
 
 <!--next-version-placeholder-->
 
+## v3.2.0 (2023-06-15)
+
+### Feature
+
+* 💄 MessageProcessor, start_message_listener and send_notification ([`7de3d91`](https://github.com/mraniki/tt/commit/7de3d912ff08696a17915720cd4a75b537dff155))
+
+### Fix
+
+* ✅ unit test update ([`4a65593`](https://github.com/mraniki/tt/commit/4a65593f357c30808efeb18784c6a1f321e1cb92))
+* 🎨 code format ([`fe40309`](https://github.com/mraniki/tt/commit/fe403094034a89aa68511861d3d965c2b127a639))
+
+### Other
+
+* Merge branch 'main' into dev ([`6a8a004`](https://github.com/mraniki/tt/commit/6a8a004925734771b7c26a8cbaa6c28486b00763))
+* Fix #iamlistening setting name in default_settings.toml file. ([`5524ec3`](https://github.com/mraniki/tt/commit/5524ec39f60be7d64c9db7eb926600c2d120c930))
+
 ## v3.1.0 (2023-06-15)
 
 ### Feature
