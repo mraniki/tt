@@ -72,7 +72,7 @@ assets = [
 ]
 enable_events = true
 economic_calendar = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
-enable_news = false
+enable_news = true
 news_url="https://gnews.io/api/v4/top-headlines?category=business&lang=en&country=us&max=2&apikey="
 news_api_key = ""
 live_tv_url = "http://sc2022.stream-link.org/list.php?id=e007"
