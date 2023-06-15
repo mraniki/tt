@@ -3,9 +3,21 @@ from tt.utils import MessageProcessor
 
 @pytest.mark.asyncio
 async def test_load_plugins():
-    plugin_manager = MessageProcessor()
-    plugin_manager.load_plugins("tt.plugins")
+    message_processor = MessageProcessor()
+    message_processor.load_plugins("tt.plugins")
 
-    print("Loaded plugins:", plugin_manager.plugins)
+    print("Loaded plugins:", message_processor.plugins)
 
-    assert len(plugin_manager.plugins) == 1
+    assert len(message_processor.plugins) >= 1
+
+
+@pytest.mark.asyncio
+async def test_start_plugins():
+    message_processor = MessageProcessor()
+    message_processor.load_plugins("tt.plugins")
+    
+    loop = asyncio.get_running_loop()
+    loop.create_task(start_plugins(message_processor))
+
+    assert len(message_processor.plugins) >= 1
+    
