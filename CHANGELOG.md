@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v3.2.1 (2023-06-15)
+
+### Fix
+
+* ♻️ refactor for the plugin support and 🔧 config ([`a73d362`](https://github.com/mraniki/tt/commit/a73d362be5a707a508f3c867c5bbb074ab2f1cc2))
+* 🔧 improve config structure config ([`1b693cd`](https://github.com/mraniki/tt/commit/1b693cd888a7d340780aff1f96c3fb1320fe7112))
+
 ## v3.2.0 (2023-06-15)
 
 ### Feature
