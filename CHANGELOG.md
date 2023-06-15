@@ -2,6 +2,23 @@
 
 <!--next-version-placeholder-->
 
+## v3.1.0 (2023-06-15)
+
+### Feature
+
+* ✨ listen capability for TalkyTrendPlugin ([`10729ac`](https://github.com/mraniki/tt/commit/10729acc0873f30ea7f8d1e2058e485af88a67c4))
+
+### Fix
+
+* Update pyproject.toml ([`a325002`](https://github.com/mraniki/tt/commit/a325002e2d7c2741d30a25ced5ecb1576ddd5173))
+* Update default_settings.toml ([`07aea5a`](https://github.com/mraniki/tt/commit/07aea5a4ac2e9ac11ae9345b8ffe1d2f7a58ad98))
+* :recycle: Refactor TalkyTrendPlugin notify method for readability ([`5c5b127`](https://github.com/mraniki/tt/commit/5c5b1274bcc9a5e538c71b5d621182da36d823a8))
+* Update pyproject.toml ([`73901dc`](https://github.com/mraniki/tt/commit/73901dc3daf23dd15a4fe3ff791b15566e1ee995))
+
+### Other
+
+* 'Refactored by Sourcery' ([`774b90d`](https://github.com/mraniki/tt/commit/774b90d7c7107553b7766a5ce8f629a43757a232))
+
 ## v3.0.30 (2023-06-14)
 
 ### Fix
