@@ -269,8 +269,6 @@ async def test_cex_load_exchange(mock_cex):
         assert isinstance(result, ccxt.binance)
 
 
-
-
 # @pytest.mark.asyncio
 # async def test_successful_execute_order(caplog, order_params, mock_dex):
 #     await load_exchange()
@@ -308,14 +306,6 @@ async def test_get_quote(mock_dex):
     print(output)
     assert output is not None
 
-
-@pytest.mark.asyncio
-async def test_get_name(mock_cex):
-    """Test get_name function."""
-    await load_exchange()
-    output = await get_name()
-    print(output)
-    assert output is not None
 
 @pytest.mark.asyncio
 async def test_get_name(mock_cex):
