@@ -24,7 +24,7 @@ async def listener():
     task = asyncio.create_task(bot_listener.run_forever())
     message_processor = MessageProcessor()
     if settings.plugin_enabled:
-        message_processor.load_plugins("plugins")
+        message_processor.load_plugins("tt.plugins")
         loop = asyncio.get_running_loop()
         loop.create_task(start_plugins(message_processor))
 

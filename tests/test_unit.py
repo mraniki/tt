@@ -1,14 +1,13 @@
 """
  TT test
 """
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch, call
+import asyncio
 import pytest
-import sys
-sys.path.insert(0,"..")
 
 from iamlistening import Listener
 from fastapi.testclient import TestClient
-from tt.bot import app
+from tt.bot import app, start_bot
 from tt.utils import (
     listener, parse_message, send_notification,
     get_host_ip, get_ping,
@@ -18,8 +17,15 @@ from tt.utils import (
     get_account_position,get_account_margin,
     trading_switch_command,
     # restart_command,
-    init_message, post_init)
+    init_message, post_init,
+    MessageProcessor, start_plugins)
 from tt.config import settings, logger
+from tt.plugins.example_plugin import ExamplePlugin
+
+
+
+
+
 
 @pytest.fixture(name="mock_settings_cex")
 def mock_settings_cex_fixture():
@@ -65,7 +71,7 @@ def mock_telegram_fixture():
         settings.bot_channel_id = "1234567890"
     return Settings()
 
-@pytest.fixture(name="mock_matrix_")
+@pytest.fixture(name="mock_matrix")
 def mock_matrix_fixture():
     """Fixture to create an listener object for testing."""
     class Settings:
@@ -75,6 +81,38 @@ def mock_matrix_fixture():
         settings.bot_token = "token_123435"
         settings.bot_channel_id = "1234567890"
     return Settings()
+
+
+@pytest.fixture(name="plugin_enabled")
+def plugin_enabled():
+    class Settings:
+        settings.plugin_enabled = 'true'
+    return Settings()
+
+
+@pytest.fixture
+def mock_start_plugins():
+    return AsyncMock()
+
+@pytest.fixture
+async def test_listener(plugin_enabled):
+    bot_listener = Listener()
+    task = asyncio.create_task(bot_listener.run_forever())
+    message_processor = MessageProcessor()
+    if settings.plugin_enabled:
+        message_processor.load_plugins("tt.plugins")
+        loop = asyncio.get_running_loop()
+        loop.create_task(start_plugins(message_processor))
+    task = asyncio.create_task(bot_listener.run_forever())
+
+    yield bot_listener
+
+    await bot_listener.stop()
+    task.cancel()
+
+@pytest.fixture
+def message_processor():
+    return MessageProcessor()
 
 @pytest.fixture(name="message")
 def message_fixture():
@@ -94,12 +132,29 @@ def order_params():
         # other order parameters
     }
 
+async def listener_mock():
+    pass
+
+async def load_exchange_mock():
+    pass
+
+async def post_init_mock():
+    pass
+
 @pytest.mark.asyncio
-async def test_listener(mock_discord):
+async def test_start_bot():
+    # Arrange
+    asyncio.create_task = MagicMock()
+    asyncio.get_event_loop = MagicMock()
+    await start_bot()
+    asyncio.get_event_loop.assert_called_once()
+
+
+@pytest.mark.asyncio
+async def test_listener_simple(mock_discord):
     listener = Listener()
     print(listener)
     assert listener is not None
-
 
 @pytest.mark.asyncio
 async def test_message_listener(mock_telegram, message):
@@ -110,6 +165,18 @@ async def test_message_listener(mock_telegram, message):
     msg = await listener.get_latest_message()
     print(msg)
     assert msg == "hello"
+
+@pytest.mark.asyncio
+async def test_listener_simple(mock_matrix):
+    listener = Listener()
+    print(listener)
+    assert listener is not None
+
+#@pytest.mark.asyncio
+#async def test_listener_full(test_listener, message_processor):
+#    await asyncio.sleep(0.1)  
+#    test_listener.run_forever()
+#    test_listener.run_forever.assert_awaited_once()
 
 
 @pytest.mark.asyncio
