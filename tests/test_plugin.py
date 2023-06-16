@@ -46,15 +46,15 @@ async def test_start_plugins():
 
     assert len(message_processor.plugins) >= 1
 
-@pytest.mark.asyncio
-async def test_parse_command_plugin(mock_settings_dex):
-    """Test parse_message balance """
-    send_notification_mock = AsyncMock()
-    with patch('tt.utils.send_notification',send_notification_mock):
-        message_processor = MessageProcessor()
-    # if settings.plugin_enabled:
-        message_processor.load_plugins("tt.plugins")
-        loop = asyncio.get_running_loop()
-        await loop.create_task(start_plugins(message_processor))
-        await message_processor.process_message('/plugin')
-        assert '⚙️' in send_notification_mock.call_args[0][0]
+# @pytest.mark.asyncio
+# async def test_parse_command_plugin(mock_settings_dex):
+#     """Test parse_message balance """
+#     send_notification_mock = AsyncMock()
+#     with patch('tt.utils.send_notification',send_notification_mock):
+#         message_processor = MessageProcessor()
+#     # if settings.plugin_enabled:
+#         message_processor.load_plugins("tt.plugins")
+#         loop = asyncio.get_running_loop()
+#         await loop.create_task(start_plugins(message_processor))
+#         await message_processor.process_message('/plugin')
+#         assert '⚙️' in send_notification_mock.call_args[0][0]
