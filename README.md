@@ -1,5 +1,5 @@
 # Talky Trader
-![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=100&size=13&pause=1000&color=027CF9&multiline=true&repeat=false&width=500&height=70&lines=CEX+%26+DEX+integration+with+messaging+platform+and+plugin+support.;Place+order+for+CEFI+or+DEFI+exchanges+and+query+balance.;Deploy+it+via+docker+on+selfhosted+platform+or+PaaS.)
+![CEX & DEX integration with messaging platform and plugin support.](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=100&size=13&pause=1000&color=027CF9&multiline=true&repeat=false&width=550&height=80&lines=CEX+%26+DEX+integration+with+messaging+platform+and+plugin+support.;Place+order+for+CEFI+or+DEFI+exchanges%2C;+query+balance+and+much+more+via+plugins.;Deploy+it+via+docker+on+selfhosted+platform+or+PaaS.)
 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)<br> [![wiki](https://img.shields.io/badge/🪙🗿-wiki-0080ff)](https://talkytrader.gitbook.io/talky/)
 

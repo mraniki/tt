@@ -33,6 +33,8 @@ trading_stop_loss = 1000
 trading_take_profit = 1000
 
 #plugin
+plugin_enabled = true
+plugin_menu = "plugin"
 #iamlistening
 iamlistening_enabled = true
 bot_token = ""
@@ -109,4 +111,6 @@ dex_1inch_limit_url = "https://limit-orders.1inch.io/v3.0/"
 #0️⃣0x
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
+
+example_plugin_enabled = true
 
