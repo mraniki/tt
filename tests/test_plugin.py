@@ -1,6 +1,6 @@
 import pytest
 import asyncio
-from tt.utils import MessageProcessor
+from tt.utils import MessageProcessor, start_plugins
 
 @pytest.mark.asyncio
 async def test_load_plugins():
