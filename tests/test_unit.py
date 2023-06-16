@@ -151,13 +151,13 @@ async def test_start_bot():
 
 
 @pytest.mark.asyncio
-async def test_listener_simple(mock_discord):
+async def test_listener_discord(mock_discord):
     listener = Listener()
     print(listener)
     assert listener is not None
 
 @pytest.mark.asyncio
-async def test_message_listener(mock_telegram, message):
+async def test_listener_telegram(mock_telegram, message):
     listener = Listener()
     print(listener)
     assert listener is not None
@@ -167,7 +167,7 @@ async def test_message_listener(mock_telegram, message):
     assert msg == "hello"
 
 @pytest.mark.asyncio
-async def test_listener_simple(mock_matrix):
+async def test_listener_matrix(mock_matrix):
     listener = Listener()
     print(listener)
     assert listener is not None
