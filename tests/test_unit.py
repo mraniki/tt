@@ -10,7 +10,7 @@ from iamlistening import Listener
 from fastapi.testclient import TestClient
 from tt.bot import app
 from tt.utils import (
-    parse_message, send_notification,
+    listener, parse_message, send_notification,
     get_host_ip, get_ping,
     load_exchange, execute_order,
     get_name, get_quote, get_trading_asset_balance,
@@ -93,6 +93,12 @@ def order_params():
         'quantity': 1,
         # other order parameters
     }
+
+@pytest.mark.asyncio
+async def test_listener(mock_settings_dex):
+    """Test parse_message balance """
+    bot_listener = Listener()
+    assert bot_listener is not None
 
 
 @pytest.mark.asyncio
