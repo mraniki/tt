@@ -88,8 +88,10 @@ async def parse_message(msg):
             return
         # Check bot command
         if msg.startswith(settings.bot_prefix):
+            logger.debug("bot_prefix: %s", msg)
             message = None
             command = (msg.split(" ")[0])[1:]
+            logger.debug("command: %s", command)
             if command == settings.bot_command_help:
                 message = f"{await init_message()}\n{settings.bot_msg_help}"
             elif command == settings.bot_command_trading:
@@ -219,6 +221,7 @@ async def execute_order(order_params):
 async def get_quote(symbol):
     """return quote"""
     try:
+        logger.debug("get_quote: %s", symbol)
         if isinstance(exchange, DexSwap):
             return (await exchange.get_quote(symbol))
         else:

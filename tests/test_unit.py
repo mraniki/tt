@@ -4,7 +4,7 @@
 from unittest.mock import AsyncMock, MagicMock, patch, call
 import asyncio
 import pytest
-
+import ccxt
 from iamlistening import Listener
 from fastapi.testclient import TestClient
 from tt.bot import app, start_bot
@@ -27,67 +27,69 @@ from tt.plugins.example_plugin import ExamplePlugin
 
 
 
-@pytest.fixture(name="mock_settings_cex")
+@pytest.fixture(name="mock_cex")
 def mock_settings_cex_fixture():
-    class Settings:
-        cex_name = 'binance'
-        cex_api = 'api_key'
-        cex_secret = 'secret_key'
-        cex_password = 'password'
-        cex_defaulttype = 'spot'
-        cex_testmode = False
-        dex_chain_id = ''
-    return Settings()
+    with patch("tt.config.settings", autospec=True):
+        settings.cex_name = 'binance'
+        settings.cex_api = 'api_key'
+        settings.cex_secret = 'secret_key'
+        settings.cex_password = 'password'
+        settings.cex_defaulttype = 'spot'
+        settings.cex_testmode = True
+        settings.dex_chain_id = ""
+        return settings
 
-@pytest.fixture(name="mock_settings_dex")
-def mock_settings_dex_fixture():
-    class Settings:
+
+@pytest.fixture(name="mock_dex")
+def mock_dex_fixture():
+    with patch("tt.config.settings", autospec=True):
         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
         settings.dex_private_key = "0xdeadbeet"
         settings.dex_rpc = "https://eth.llamarpc.com"
         settings.dex_chain_id = 1
+        settings.dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
         settings.cex_name = ""
         settings.trading_enabled = True
-    return Settings()
+        return settings
 
 @pytest.fixture(name="mock_discord")
 def mock_discord_fixture():
     """Fixture to create an listener object for testing."""
-    class Settings:
+    with patch("tt.config.settings", autospec=True):
         settings.discord_webhook_id = "12345678901"
         settings.discord_webhook_token = "1234567890"
         settings.bot_token = "test_bot_token"
         settings.bot_channel_id = "1234567890"
         settings.ping = "8.8.8.8"
-    return Settings()
+        return settings
 
 @pytest.fixture(name="mock_telegram")
 def mock_telegram_fixture():
     """Fixture to create an listener object for testing."""
-    class Settings:
+    with patch("tt.config.settings", autospec=True):
         settings.telethon_api_id = "123456789"
         settings.telethon_api_hash = "123456789"
         settings.bot_token = "test_bot_token"
         settings.bot_channel_id = "1234567890"
-    return Settings()
+        return settings
 
 @pytest.fixture(name="mock_matrix")
 def mock_matrix_fixture():
     """Fixture to create an listener object for testing."""
-    class Settings:
+    with patch("tt.config.settings", autospec=True):
         settings.matrix_hostname = "https://matrix.org"
         settings.matrix_user = "@thismock:matrix.org"
         settings.matrix_pass = "1234"
         settings.bot_token = "token_123435"
         settings.bot_channel_id = "1234567890"
-    return Settings()
+        return settings
 
 
 @pytest.fixture(name="plugin_enabled")
 def plugin_enabled():
-    class Settings:
-        settings.plugin_enabled = 'true'
-    return Settings()
+    with patch("tt.config.settings", autospec=True):
+        settings.plugin_enabled = True
+        return settings
 
 
 @pytest.fixture
@@ -172,15 +174,9 @@ async def test_listener_matrix(mock_matrix):
     print(listener)
     assert listener is not None
 
-#@pytest.mark.asyncio
-#async def test_listener_full(test_listener, message_processor):
-#    await asyncio.sleep(0.1)  
-#    test_listener.run_forever()
-#    test_listener.run_forever.assert_awaited_once()
-
 
 @pytest.mark.asyncio
-async def test_parse_help(mock_settings_dex):
+async def test_parse_help(mock_dex):
     """Test parse_message balance """
     send_notification_mock = AsyncMock()
     with patch('tt.utils.send_notification',send_notification_mock):
@@ -190,7 +186,7 @@ async def test_parse_help(mock_settings_dex):
 
 
 # @pytest.mark.asyncio
-# async def test_parse_bal(mock_settings_dex):
+# async def test_parse_bal(mock_dex):
 #     """Test parse_message balance """
 #     send_notification_mock = AsyncMock()
 #     with patch('tt.utils.send_notification',send_notification_mock):
@@ -200,17 +196,19 @@ async def test_parse_help(mock_settings_dex):
 
 
 # @pytest.mark.asyncio
-# async def test_parse_quote(mock_settings_dex):
+# async def test_parse_quote(mock_dex):
 #     """Test parse_message balance """
 #     send_notification_mock = AsyncMock()
+#     get_quote_mock = AsyncMock(return_value={'symbol': 'WBTC'})
 #     with patch('tt.utils.send_notification',send_notification_mock):
-#         await load_exchange()
-#         await parse_message('/quote WBTC')
-#         assert '🦄' in send_notification_mock.call_args[0][0]
+#         with patch('tt.utils.get_quote',get_quote_mock):
+#             await load_exchange()
+#             result = await parse_message('/quote WBTC')
+#             get_quote_mock.assert_called_once_with('WBTC')
 
 
 @pytest.mark.asyncio
-async def test_parse_trading(mock_settings_dex):
+async def test_parse_trading(mock_dex):
     """Test parse_message balance """
     send_notification_mock = AsyncMock()
     with patch('tt.utils.send_notification',send_notification_mock):
@@ -248,7 +246,7 @@ async def test_get_host_ip():
 
 
 @pytest.mark.asyncio
-async def test_dex_load_exchange(mock_settings_dex):
+async def test_dex_load_exchange(mock_dex):
     """test exchange dex"""
     exchange = await load_exchange()
     print(exchange)
@@ -256,15 +254,25 @@ async def test_dex_load_exchange(mock_settings_dex):
 
 
 @pytest.mark.asyncio
-async def test_cex_load_exchange(mock_settings_cex):
+async def test_cex_load_exchange(mock_cex):
     """test exchange cex"""
-    exchange = await load_exchange()
-    print(exchange)
-    assert exchange is not None
+    mock_ccxt = MagicMock()
+    mock_ccxt.cex_client = MagicMock()
+    mock_exchange = MagicMock()
+    with patch.dict("sys.modules", ccxt=mock_ccxt):
+        mock_ccxt.cex_client.return_value = mock_exchange
+        mock_self = AsyncMock()
+        result = await load_exchange()
+        name = await get_name()
+        assert result is not None
+        assert name == 'binance'
+        assert isinstance(result, ccxt.binance)
+
+
 
 
 # @pytest.mark.asyncio
-# async def test_successful_execute_order(caplog, order_params, mock_settings_dex):
+# async def test_successful_execute_order(caplog, order_params, mock_dex):
 #     await load_exchange()
 #     dex_execute_mock = AsyncMock()
 #     with patch('dxsp.execute_order',dex_execute_mock):
@@ -286,14 +294,14 @@ async def test_cex_load_exchange(mock_settings_cex):
 
 
 @pytest.mark.asyncio
-async def test_failed_execute_order(caplog, order_params,mock_settings_dex):
+async def test_failed_execute_order(caplog, order_params,mock_dex):
     await load_exchange()
     trade_confirmation = await execute_order(order_params)
     assert 'Order execution failed' in caplog.text
 
 
 @pytest.mark.asyncio
-async def test_get_quote(mock_settings_dex):
+async def test_get_quote(mock_dex):
     """Test get_quote """
     await load_exchange()
     output = await get_quote("WBTC")
@@ -302,16 +310,23 @@ async def test_get_quote(mock_settings_dex):
 
 
 @pytest.mark.asyncio
-async def test_get_name(mock_settings_dex):
+async def test_get_name(mock_cex):
     """Test get_name function."""
     await load_exchange()
     output = await get_name()
     print(output)
     assert output is not None
 
+@pytest.mark.asyncio
+async def test_get_name(mock_cex):
+    """Test get_name function."""
+    await load_exchange()
+    output = await get_name()
+    print(output)
+    assert output is not None
 
 @pytest.mark.asyncio
-async def test_get_account_balance(mock_settings_dex):
+async def test_get_account_balance(mock_dex):
     """Test get_account_balance."""
     await load_exchange()
     output = await get_account_balance()
@@ -320,7 +335,7 @@ async def test_get_account_balance(mock_settings_dex):
 
 
 @pytest.mark.asyncio
-async def test_get_trading_asset_balance(mock_settings_dex):
+async def test_get_trading_asset_balance(mock_dex):
     """Test get_asset_trading_balance."""
     await load_exchange()
     output = await get_trading_asset_balance()
@@ -329,7 +344,7 @@ async def test_get_trading_asset_balance(mock_settings_dex):
 
     
 @pytest.mark.asyncio
-async def test_get_account_position(mock_settings_dex):
+async def test_get_account_position(mock_dex):
     """Test get_account_positions."""
     await load_exchange() 
     output = await get_account_position()
@@ -338,7 +353,7 @@ async def test_get_account_position(mock_settings_dex):
 
 
 @pytest.mark.asyncio
-async def test_get_account_margin(mock_settings_dex):
+async def test_get_account_margin(mock_dex):
     """Test get_account_margin """
     await load_exchange() 
     output = await get_account_margin()
@@ -347,7 +362,7 @@ async def test_get_account_margin(mock_settings_dex):
 
 
 @pytest.mark.asyncio
-async def test_init_message(mock_settings_dex):
+async def test_init_message(mock_dex):
     """Test test_init_message."""
     await load_exchange()
     output = await init_message()
@@ -356,7 +371,7 @@ async def test_init_message(mock_settings_dex):
 
 
 @pytest.mark.asyncio
-async def test_toggle_trading_active(mock_settings_dex):
+async def test_toggle_trading_active(mock_dex):
     print(settings.trading_enabled)
     await trading_switch_command()
     print(settings.trading_enabled)
