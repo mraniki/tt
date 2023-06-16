@@ -54,6 +54,7 @@ async def test_parse_command_plugin(mock_settings_dex):
         message_processor = MessageProcessor()
     # if settings.plugin_enabled:
         message_processor.load_plugins("tt.plugins")
-        await message_processor.start_plugin('example_plugin')
+        loop = asyncio.get_running_loop()
+        loop.create_task(start_plugins(message_processor))
         await message_processor.process_message('/plugin')
         assert '⚙️' in send_notification_mock.call_args[0][0]
