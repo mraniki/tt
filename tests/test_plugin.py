@@ -35,28 +35,28 @@ async def test_load_plugins():
     assert len(message_processor.plugins) >= 1
 
 
-# @pytest.mark.asyncio
-# async def test_start_plugins():
-#     message_processor = MessageProcessor()
-#     message_processor.load_plugins("tt.plugins")
+@pytest.mark.asyncio
+async def test_start_plugins():
+    message_processor = MessageProcessor()
+    message_processor.load_plugins("tt.plugins")
     
-#     loop = asyncio.get_running_loop()
-#     loop.create_task(start_plugins(message_processor))
+    loop = asyncio.get_running_loop()
+    loop.create_task(start_plugins(message_processor))
 
-#     assert len(message_processor.plugins) >= 1
+    assert len(message_processor.plugins) >= 1
 
 
-# @pytest.mark.asyncio
-# async def test_example_plugin(example_plugin_enabled):
-#     # Arrange
-#     plugin = ExamplePlugin()
+@pytest.mark.asyncio
+async def test_example_plugin(example_plugin_enabled):
+    # Arrange
+    plugin = ExamplePlugin()
 
-#     # Act
-#     await plugin.start()
-#     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
-#     await plugin.handle_message(f"{settings.bot_prefix}{settings.plugin_menu}")
-#     await plugin.stop()
-#     assert plugin.should_handle("any message") is True
+    # Act
+    await plugin.start()
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.plugin_menu}")
+    await plugin.stop()
+    assert plugin.should_handle("any message") is True
 
 
 # @pytest.mark.asyncio
