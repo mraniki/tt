@@ -89,3 +89,32 @@ async def test_example_plugin(example_plugin_enabled):
 
 
 
+@pytest.fixture(name="plugin_enabled")
+def plugin_enabled():
+    with patch("tt.config.settings", autospec=True):
+        settings.plugin_enabled = True
+        return settings
+
+@pytest.fixture
+def mock_start_plugins():
+    return AsyncMock()
+
+# @pytest.fixture
+# async def test_listener(plugin_enabled):
+#     bot_listener = Listener()
+#     task = asyncio.create_task(bot_listener.run_forever())
+#     message_processor = MessageProcessor()
+#     if settings.plugin_enabled:
+#         message_processor.load_plugins("tt.plugins")
+#         loop = asyncio.get_running_loop()
+#         loop.create_task(start_plugins(message_processor))
+#     task = asyncio.create_task(bot_listener.run_forever())
+
+#     yield bot_listener
+
+#     await bot_listener.stop()
+#     task.cancel()
+
+# @pytest.fixture
+# def message_processor():
+#     return MessageProcessor()

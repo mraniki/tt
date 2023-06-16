@@ -57,7 +57,7 @@ def mock_dex_fixture():
 
 @pytest.fixture(name="mock_discord")
 def mock_discord_fixture():
-    """Fixture to create an listener object for testing."""
+    """Fixture to test discord."""
     with patch("tt.config.settings", autospec=True):
         settings.discord_webhook_id = "12345678901"
         settings.discord_webhook_token = "1234567890"
@@ -68,7 +68,7 @@ def mock_discord_fixture():
 
 @pytest.fixture(name="mock_telegram")
 def mock_telegram_fixture():
-    """Fixture to create an listener object for testing."""
+    """Fixture to test telegram."""
     with patch("tt.config.settings", autospec=True):
         settings.telethon_api_id = "123456789"
         settings.telethon_api_hash = "123456789"
@@ -78,7 +78,7 @@ def mock_telegram_fixture():
 
 @pytest.fixture(name="mock_matrix")
 def mock_matrix_fixture():
-    """Fixture to create an listener object for testing."""
+    """Fixture to test matrix."""
     with patch("tt.config.settings", autospec=True):
         settings.matrix_hostname = "https://matrix.org"
         settings.matrix_user = "@thismock:matrix.org"
@@ -87,37 +87,6 @@ def mock_matrix_fixture():
         settings.bot_channel_id = "1234567890"
         return settings
 
-
-@pytest.fixture(name="plugin_enabled")
-def plugin_enabled():
-    with patch("tt.config.settings", autospec=True):
-        settings.plugin_enabled = True
-        return settings
-
-
-@pytest.fixture
-def mock_start_plugins():
-    return AsyncMock()
-
-@pytest.fixture
-async def test_listener(plugin_enabled):
-    bot_listener = Listener()
-    task = asyncio.create_task(bot_listener.run_forever())
-    message_processor = MessageProcessor()
-    if settings.plugin_enabled:
-        message_processor.load_plugins("tt.plugins")
-        loop = asyncio.get_running_loop()
-        loop.create_task(start_plugins(message_processor))
-    task = asyncio.create_task(bot_listener.run_forever())
-
-    yield bot_listener
-
-    await bot_listener.stop()
-    task.cancel()
-
-@pytest.fixture
-def message_processor():
-    return MessageProcessor()
 
 @pytest.fixture(name="message")
 def message_fixture():
@@ -238,14 +207,6 @@ async def test_get_host_ip():
     """Test get_host_ip """
     output = get_host_ip()
     assert output is not None
-
-
-# @pytest.mark.asyncio
-# async def test_def_get_ping(mock_discord):
-#     """Test get_ping function """
-#     output = get_ping()
-#     print(output)
-#     assert output is not None
 
 
 @pytest.mark.asyncio
@@ -369,8 +330,6 @@ async def test_toggle_trading_active(mock_dex):
     await trading_switch_command()
     print(settings.trading_enabled)
     assert settings.trading_enabled is False
-
-
 
 def test_read_main():
     client = TestClient(app)
