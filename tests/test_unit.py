@@ -10,22 +10,25 @@ from fastapi.testclient import TestClient
 from tt.bot import app, start_bot
 from tt.utils import (
     listener, parse_message, send_notification,
-    get_host_ip, get_ping,
     load_exchange, execute_order,
-    get_name, get_quote, get_trading_asset_balance,
-    get_account, get_account_balance, 
-    get_account_position,get_account_margin,
-    trading_switch_command,
-    # restart_command,
     init_message, post_init,
-    MessageProcessor, start_plugins)
+    MessageProcessor, start_plugins,
+    trading_switch_command, get_name, get_quote, get_trading_asset_balance,
+    get_account, get_account_balance,
+    get_account_position,
+    get_account_margin,
+    get_host_ip, get_ping,)
 from tt.config import settings, logger
 from tt.plugins.example_plugin import ExamplePlugin
 
 
 
+@pytest.fixture(scope="session", autouse=True)
+def set_test_settings():
+    settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
 
-
+def test_dynaconf_is_in_testing_env():
+    assert settings.VALUE == "On Testing"
 
 @pytest.fixture(name="mock_cex")
 def mock_settings_cex_fixture():

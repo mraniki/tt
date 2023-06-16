@@ -114,3 +114,7 @@ dex_0x_api_key = ""
 
 example_plugin_enabled = true
 
+VALUE = "On Default"
+
+[testing]
+VALUE = "On Testing"
