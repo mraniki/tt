@@ -94,19 +94,6 @@ def order_params():
         # other order parameters
     }
 
-# @pytest.mark.asyncio
-# @pytest.mark.parametrize('msg, expected_output', [
-#     ('/help', 'help message'),
-# ])
-# async def test_parse_message(msg, expected_output, mocker):
-#     """Test parse_message function """
-#     send_notification_mock = mocker.patch('tt.utils.send_notification')
-#     await parse_message(msg)
-#     if msg == '/help':
-#         init_mock = mocker.patch('tt.utils.init_message', return_value='help message')
-#         expected_output = 'help message\nhelp init message'
-#         await parse_message(msg)
-#         assert '🏦' in send_notification_mock.call_args[0][0]
 
 @pytest.mark.asyncio
 async def test_parse_help(mock_settings_dex):
@@ -137,6 +124,14 @@ async def test_parse_help(mock_settings_dex):
 #         await parse_message('/quote WBTC')
 #         assert '🦄' in send_notification_mock.call_args[0][0]
 
+@pytest.mark.asyncio
+async def test_parse_command_plugin(mock_settings_dex):
+    """Test parse_message balance """
+    send_notification_mock = AsyncMock()
+    with patch('tt.utils.send_notification',send_notification_mock):
+        await load_exchange()
+        await parse_message('/plugin')
+        assert '⚙️' in send_notification_mock.call_args[0][0]
 
 @pytest.mark.asyncio
 async def test_parse_trading(mock_settings_dex):

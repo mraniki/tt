@@ -33,7 +33,8 @@ trading_stop_loss = 1000
 trading_take_profit = 1000
 
 #plugin
-plugin_allowed = true
+plugin_enabled = true
+plugin_menu = "plugin"
 #iamlistening
 iamlistening_enabled = true
 bot_token = ""

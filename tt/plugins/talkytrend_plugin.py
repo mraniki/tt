@@ -47,3 +47,6 @@ class TalkyTrendPlugin(BasePlugin):
         elif msg == f"{settings.bot_prefix}{settings.bot_command_help}":
             help_message = f"📺:\n{settings.bot_prefix}{settings.bot_command_news}"
             await self.send_notification(help_message)
+        elif msg == f"{settings.bot_prefix}{settings.plugin_menu}":
+            plugin_menu_message = f"⚙️:\n{settings.bot_prefix}{settings.plugin_menu}"
+            await self.send_notification(plugin_menu_message)

@@ -23,17 +23,18 @@ async def listener():
     bot_listener = Listener()
     task = asyncio.create_task(bot_listener.run_forever())
     message_processor = MessageProcessor()
-    message_processor.load_plugins("plugins")
-
-    loop = asyncio.get_running_loop()
-    loop.create_task(start_plugins(message_processor))
+    if settings.plugin_enabled:
+        message_processor.load_plugins("plugins")
+        loop = asyncio.get_running_loop()
+        loop.create_task(start_plugins(message_processor))
 
     while True:
         try:
             msg = await bot_listener.get_latest_message()
             if msg:
                 await parse_message(msg)
-                await message_processor.process_message(msg)
+                if settings.plugin_enabled:
+                    await message_processor.process_message(msg)
         except Exception as error:
             logger.error("listener: %s", error)
     await task
@@ -58,7 +59,7 @@ async def send_notification(msg):
         if isinstance(msg, str):
             msg = msg.replace("<code>", "`")
             msg = msg.replace("</code>", "`")
-            msg = msg.replace("/n", "<br>")
+            # msg = msg.replace("/n", "<br>")
     elif settings.matrix_hostname:
         url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
                f"{settings.matrix_hostname[8:]}:443/"
