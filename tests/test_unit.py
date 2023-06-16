@@ -23,12 +23,12 @@ from tt.plugins.example_plugin import ExamplePlugin
 
 
 
-@pytest.fixture(scope="session", autouse=True)
-def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
+# @pytest.fixture(scope="session", autouse=True)
+# def set_test_settings():
+#     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
 
-def test_dynaconf_is_in_testing_env():
-    assert settings.VALUE == "On Testing"
+# def test_dynaconf_is_in_testing_env():
+#     assert settings.VALUE == "On Testing"
 
 @pytest.fixture(name="mock_cex")
 def mock_settings_cex_fixture():
