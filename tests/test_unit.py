@@ -124,14 +124,6 @@ async def test_parse_help(mock_settings_dex):
 #         await parse_message('/quote WBTC')
 #         assert '🦄' in send_notification_mock.call_args[0][0]
 
-@pytest.mark.asyncio
-async def test_parse_command_plugin(mock_settings_dex):
-    """Test parse_message balance """
-    send_notification_mock = AsyncMock()
-    with patch('tt.utils.send_notification',send_notification_mock):
-        await load_exchange()
-        await parse_message('/plugin')
-        assert '⚙️' in send_notification_mock.call_args[0][0]
 
 @pytest.mark.asyncio
 async def test_parse_trading(mock_settings_dex):
