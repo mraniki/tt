@@ -2,6 +2,31 @@
 
 <!--next-version-placeholder-->
 
+## v3.3.0 (2023-06-16)
+
+### Feature
+
+* 🥚option to disable plugin process completly ([`c3e7a76`](https://github.com/mraniki/tt/commit/c3e7a767dd97d582adf7720e326235c603e1da28))
+
+### Fix
+
+* :white_check_mark: ([`ec89bf7`](https://github.com/mraniki/tt/commit/ec89bf724cfed5971ffb10dad311ae93def2298d))
+* :white_check_mark: ([`b8f5b70`](https://github.com/mraniki/tt/commit/b8f5b70d42d634fdd927354bb4b8ca2e1e21df1d))
+* :white_check_mark: unit test for plugin command parsing ([`759c7c1`](https://github.com/mraniki/tt/commit/759c7c1515887ce1abaeb1b3f2038e76a79b0a92))
+* :white_check_mark: unit test for plugin command parsing ([`b4e57e2`](https://github.com/mraniki/tt/commit/b4e57e214d1ff0ef5fabbab3bc46a22d1927405a))
+* :white_check_mark: unit test for plugin command parsing ([`fe18754`](https://github.com/mraniki/tt/commit/fe187544b35297c5f2f5bfbb2e7dbcf58f4535bf))
+* 💬 doc ([`cb88b89`](https://github.com/mraniki/tt/commit/cb88b896adf10619b2dd57b606185b022b2f4fba))
+* ✅ unit test for plugin command parsing ([`53a87f8`](https://github.com/mraniki/tt/commit/53a87f87009bfd3f08f5cb2c96b88011a1e4ebcf))
+* ✅ unit test ([`a415343`](https://github.com/mraniki/tt/commit/a415343941f019398f826fd73ee20b954d52dd26))
+* :white_check_mark: unit test update ([`a0f3161`](https://github.com/mraniki/tt/commit/a0f3161410243b4799aa540f269ff99151a7a3c9))
+* :white_check_mark: unit test update ([`487615a`](https://github.com/mraniki/tt/commit/487615a5798a15d4e9bcb91f3a1c3a6216981863))
+* :arrow_up: Update plugin and dependencies, allow plugin use ([`49c3b44`](https://github.com/mraniki/tt/commit/49c3b445e518252b361ef31af17b0aa2f9cb3f4e))
+
+### Other
+
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`effd0ea`](https://github.com/mraniki/tt/commit/effd0ea7e248469c19f773ada91672b97de6bc60))
+* :memo: Add example_plugin to the project ([`caac535`](https://github.com/mraniki/tt/commit/caac53547d08064f57e93570ee1f2d3a71699343))
+
 ## v3.2.1 (2023-06-15)
 
 ### Fix
