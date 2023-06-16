@@ -95,10 +95,21 @@ def order_params():
     }
 
 @pytest.mark.asyncio
-async def test_listener(mock_settings_dex):
-    """Test parse_message balance """
-    bot_listener = Listener()
-    assert bot_listener is not None
+async def test_listener(mock_discord):
+    listener = Listener()
+    print(listener)
+    assert listener is not None
+
+
+@pytest.mark.asyncio
+async def test_message_listener(mock_telegram, message):
+    listener = Listener()
+    print(listener)
+    assert listener is not None
+    await listener.handle_message(message)
+    msg = await listener.get_latest_message()
+    print(msg)
+    assert msg == "hello"
 
 
 @pytest.mark.asyncio
@@ -284,23 +295,6 @@ async def test_toggle_trading_active(mock_settings_dex):
     print(settings.trading_enabled)
     assert settings.trading_enabled is False
 
-
-@pytest.mark.asyncio
-async def test_listener(mock_discord):
-    listener = Listener()
-    print(listener)
-    assert listener is not None
-
-
-@pytest.mark.asyncio
-async def test_message_listener(mock_telegram, message):
-    listener = Listener()
-    print(listener)
-    assert listener is not None
-    await listener.handle_message(message)
-    msg = await listener.get_latest_message()
-    print(msg)
-    assert msg == "hello"
 
 
 def test_read_main():

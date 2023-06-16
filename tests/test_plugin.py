@@ -3,6 +3,11 @@ import asyncio
 from unittest.mock import AsyncMock, MagicMock, patch
 from tt.utils import MessageProcessor, start_plugins
 from tt.config import settings, logger
+from tt.plugins.example_plugin import ExamplePlugin
+
+@pytest.fixture
+def message_processor():
+    return MessageProcessor()
 
 @pytest.fixture(name="mock_settings_dex")
 def mock_settings_dex_fixture():
@@ -46,6 +51,29 @@ async def test_start_plugins():
 
     assert len(message_processor.plugins) >= 1
 
+
+
+@pytest.fixture
+def example_plugin_enabled():
+    settings.example_plugin_enabled = True
+    yield
+    settings.example_plugin_enabled = False
+
+@pytest.mark.asyncio
+async def test_example_plugin(example_plugin_enabled):
+    # Arrange
+    plugin = ExamplePlugin()
+
+    # Act
+    await plugin.start()
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.plugin_menu}")
+    await plugin.stop()
+
+    # Assert
+    assert plugin.should_handle("any message") is True
+
+
 # @pytest.mark.asyncio
 # async def test_parse_command_plugin(mock_settings_dex):
 #     """Test parse_message balance """
@@ -58,3 +86,6 @@ async def test_start_plugins():
 #         await loop.create_task(start_plugins(message_processor))
 #         await message_processor.process_message('/plugin')
 #         assert '⚙️' in send_notification_mock.call_args[0][0]
+
+
+
