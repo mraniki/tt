@@ -106,21 +106,6 @@ def order_params():
         # other order parameters
     }
 
-async def listener_mock():
-    pass
-
-async def load_exchange_mock():
-    pass
-
-async def post_init_mock():
-    pass
-
-# @pytest.mark.asyncio
-# async def test_start_bot():
-#     asyncio.create_task = MagicMock()
-#     asyncio.get_event_loop = MagicMock()
-#     await start_bot()
-#     asyncio.get_event_loop.assert_called_once()
 
 
 @pytest.mark.asyncio
