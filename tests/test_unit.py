@@ -248,11 +248,11 @@ async def test_get_account_margin():
 
 @pytest.mark.asyncio
 async def test_init_message():
-    """Test test_init_message."""
+    """Test the initialization message."""
     await load_exchange()
     output = await init_message()
-    print(output)
     assert output is not None
+    assert all(symbol in output for symbol in ["🕸️", "🏓", "💱", "🪪"])
 
 @pytest.mark.asyncio
 async def test_trading_switch():
