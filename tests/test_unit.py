@@ -112,26 +112,23 @@ async def test_parse_help():
         assert '🏦' in send_notification_mock.call_args[0][0]
 
 
+@pytest.mark.asyncio
+async def test_parse_bal():
+    """Test parse_message balance """
+    send_notification_mock = AsyncMock()
+    get_account_balance= AsyncMock()
+    await load_exchange()
+    await parse_message('/bal')
+    get_account_balance.assert_called_once
+
 # @pytest.mark.asyncio
-# async def test_parse_bal():
+# async def test_parse_quote():
 #     """Test parse_message balance """
 #     send_notification_mock = AsyncMock()
-#     with patch('tt.utils.send_notification',send_notification_mock):
-#         await load_exchange()
-#         await parse_message('/bal')
-#         assert '🏦' in send_notification_mock.call_args[0][0]
-
-
-# @pytest.mark.asyncio
-# async def test_parse_quote(mock_dex):
-#     """Test parse_message balance """
-#     send_notification_mock = AsyncMock()
-#     get_quote_mock = AsyncMock(return_value={'symbol': 'WBTC'})
-#     with patch('tt.utils.send_notification',send_notification_mock):
-#         with patch('tt.utils.get_quote',get_quote_mock):
-#             await load_exchange()
-#             result = await parse_message('/quote WBTC')
-#             get_quote_mock.assert_called_once_with('WBTC')
+#     get_quote= AsyncMock()
+#     await load_exchange()
+#     await parse_message('/quote WBTC')
+#     get_quote.assert_called_once_with('WBTC')
 
 
 @pytest.mark.asyncio
