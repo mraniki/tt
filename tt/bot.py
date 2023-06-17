@@ -27,8 +27,8 @@ async def start_bot():
     event_loop = asyncio.get_event_loop()
     try:
         event_loop.create_task(listener())
+         ## load exchange as plugin
         await load_exchange()
-        # await post_init()
     except Exception as error:
         logger.error("bot startup failed: %s", error)
 
@@ -57,11 +57,13 @@ async def webhook(request: Request):
     """
     FastAPI handles POST requests to the '/webhook' endpoint.
     """
-    data = await request.body()
-    logger.info("payload: %s", request.json())
-    # if data["key"] == settings.webhook_secret:
-    await send_notification(data)
-    return {"status": "OK"}
+    data = await request.json()
+    logger.debug("payload: %s", request.json())
+    if data["key"] == settings.webhook_secret:
+        await send_notification(data)
+        return {"status": "OK"}
+    else:
+        return {"status": "ERROR"}
 
 
 if __name__ == "__main__":

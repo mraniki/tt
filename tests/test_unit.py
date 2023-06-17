@@ -4,17 +4,18 @@
 from unittest.mock import AsyncMock, MagicMock, patch, call
 import pytest
 import ccxt
+import dxsp
+import iamlistening
 from iamlistening import Listener
 from fastapi.testclient import TestClient
 from tt.bot import app
 from tt.utils import (parse_message, send_notification,
     load_exchange, execute_order,
-    init_message,
-    trading_switch_command, get_name, get_quote, get_trading_asset_balance,
+    init_message, get_name, get_quote, get_trading_asset_balance,
     get_account, get_account_balance,
     get_account_position,
     get_account_margin,
-    get_host_ip, get_ping,)
+    get_host_ip, get_ping)
 from tt.config import settings
 
 
@@ -158,8 +159,11 @@ async def test_get_ping():
 async def test_dex_load_exchange():
     """test exchange dex"""
     exchange = await load_exchange()
+    account = await get_account(exchange)
     print(exchange)
     assert exchange is not None
+    assert account == "1 - 34567890"
+    assert isinstance(exchange, dxsp.DexSwap)
 
 
 @pytest.mark.asyncio
@@ -170,11 +174,11 @@ async def test_cex_load_exchange(settings_cex):
     mock_exchange = MagicMock()
     with patch.dict("sys.modules", ccxt=mock_ccxt):
         mock_ccxt.cex_client.return_value = mock_exchange
-        result = await load_exchange()
+        exchange = await load_exchange()
         name = await get_name()
-        assert result is not None
+        assert exchange is not None
         assert name == 'binance'
-        assert isinstance(result, ccxt.binance)
+        assert isinstance(exchange, ccxt.binance)
 
 
 @pytest.mark.asyncio
@@ -265,8 +269,17 @@ def test_read_health():
     response = client.get("/health")
     assert response.status_code == 200
 
-def test_webhook_with_valid_payload():
+def test_webhook_with_valid_auth():
     client = TestClient(app)
-    payload = {"key": "my_secret_key", "data": "my_data"}
+    payload = {"key": "123abc", "data": "buy BTC"}
     response = client.post("/webhook", json=payload)
+    print(response)
     assert response is not None
+    assert response.content.decode('utf-8') == '{"status":"OK"}'
+
+def test_webhook_with_invalid_auth():
+    client = TestClient(app)
+    payload = {"key": "abc123", "data": "my_data"}
+    print(payload)
+    response = client.post("/webhook", json=payload)
+    assert response.content.decode('utf-8') == '{"status":"ERROR"}'

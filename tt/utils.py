@@ -89,17 +89,14 @@ async def parse_message(msg):
             return
         # Check bot command
         if msg.startswith(settings.bot_prefix):
-            logger.debug("bot_prefix: %s", msg)
             message = None
             command = (msg.split(" ")[0])[1:]
-            logger.debug("command: %s", command)
             if command == settings.bot_command_help:
                 message = f"{await init_message()}\n{settings.bot_msg_help}"
             elif command == settings.bot_command_trading:
                 message = await trading_switch_command()
             elif command == settings.bot_command_quote:
                 symbol = msg.split(" ")[1]
-                logger.debug("bot_command_quote symbol: %s", symbol)
                 message = await get_quote(symbol)
             elif command == settings.bot_command_bal:
                 await account_balance_command()
@@ -219,7 +216,6 @@ async def execute_order(order_params):
         return f"⚠️ order execution: {e}"
         
 
-
 async def get_quote(symbol):
     """return quote"""
     try:
@@ -331,11 +327,6 @@ async def init_message():
     return start_up
 
 
-# async def post_init():
-#     # Notify bot startup
-#     await send_notification(await init_message())
-
-
 async def account_balance_command():
     # Return account balance
     return await get_account_balance()
@@ -364,12 +355,12 @@ class MessageProcessor:
     def load_plugins(self, package_name):
         logger.info("Loading plugins from package: %s", package_name)
         package = importlib.import_module(package_name)
-        logger.debug("Package loaded: %s", package)
+        logger.info("Package loaded: %s", package)
 
         for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
             try:
                 module = importlib.import_module(f"{package_name}.{plugin_name}")
-                logger.debug("Module loaded: %s", module)
+                logger.info("Module loaded: %s", module)
 
                 for name, obj in module.__dict__.items():
                     if isinstance(obj, type) and issubclass(obj, BasePlugin) and obj is not BasePlugin:
