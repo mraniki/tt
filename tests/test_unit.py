@@ -11,8 +11,8 @@ from tt.bot import app
 from tt.utils import (
     listener, parse_message, send_notification,
     load_exchange, execute_order,
-    init_message, post_init,
-    MessageProcessor, start_plugins,
+    init_message,
+    start_plugins,
     trading_switch_command, get_name, get_quote, get_trading_asset_balance,
     get_account, get_account_balance,
     get_account_position,
