@@ -1,7 +1,7 @@
 """
  TT test
 """
-from unittest.mock import AsyncMock, MagicMock, patch, call
+from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 import ccxt
 import dxsp
