@@ -42,8 +42,6 @@ class TalkyTrendPlugin(BasePlugin):
         if msg == f"{settings.bot_prefix}{settings.bot_command_news}":
             if self.trend.live_tv:
                 await self.send_notification(f"📺: {self.trend.live_tv}")
-            else:
-                await self.send_notification("Not available.")
         elif msg == f"{settings.bot_prefix}{settings.bot_command_help}":
             help_message = f"📺:\n{settings.bot_prefix}{settings.bot_command_news}"
             await self.send_notification(help_message)
