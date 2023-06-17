@@ -72,9 +72,12 @@ async def send_notification(msg):
             format=NotifyFormat.HTML
 
             apobj.add(url)
+        try:
             await apobj.async_notify(body=str(msg), body_format=format)
+        except Exception as e:
+            logger.error("%s not sent: %s", msg, e)
     except Exception as e:
-        logger.error("%s not sent: %s", msg, e)
+        logger.error("url: %s", e)
 
 
 async def parse_message(msg):

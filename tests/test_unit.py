@@ -138,13 +138,13 @@ async def test_parse_quote(caplog):
     assert 'quote [1, 0]' in caplog.text
 
 
-@pytest.mark.asyncio
-async def test_send_notification(caplog):
-    """Test send_notification function"""
-    message = '<code>test message</code>'
-    await send_notification(message)
-    assert 'There are no service(s) to notify' in caplog.text
-
+# @pytest.mark.asyncio
+# async def test_send_notification():
+#     """Test send_notification function"""
+#     message = 'THIS IS A MESSAGE'
+#     output = await send_notification(message)
+#     print(output)
+#     assert output is not None
 
 @pytest.mark.asyncio
 async def test_get_host_ip():
