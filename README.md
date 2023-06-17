@@ -1,7 +1,7 @@
 # Talky Trader
-![CEX & DEX integration with messaging platform and plugin support.](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=100&size=13&pause=1000&color=027CF9&multiline=true&repeat=false&width=550&height=80&lines=CEX+%26+DEX+integration+with+messaging+platform+and+plugin+support.;Place+order+for+CEFI+or+DEFI+exchanges%2C;+query+balance+and+much+more+via+plugins.;Deploy+it+via+docker+on+selfhosted+platform+or+PaaS.)
+![CEX & DEX integration with messaging platform and plugin support.](https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=2000&pause=100&color=027CF9&multiline=true&repeat=false&width=600&height=60&lines=Seamlessly+connect+CEX+and+DEX+exchanges+across+multi+messaging+platforms.;Place+order%2C+inquire+your+balance+and+more+through+plugins.;Easily+deploy+via+Docker+on+self-hosted+platforms+or+PaaS.)
 
-[![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)<br> [![wiki](https://img.shields.io/badge/🪙🗿-wiki-0080ff)](https://talkytrader.gitbook.io/talky/)
+[![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)<br> [![wiki](https://img.shields.io/badge/🪙🗿-wiki-027CF9)](https://talkytrader.gitbook.io/talky/)
 
 [![Logo](https://i.imgur.io/Q7iDDyB_d.webp?maxwidth=640&shape=thumb&fidelity=medium)](https://github.com/mraniki/tt)
  </tr>
