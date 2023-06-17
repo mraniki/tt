@@ -60,26 +60,6 @@ stop_loss = 1000
 take_profit = 1000
 quantity = 1
 
-#talkytrend
-talkytrend_enabled = true
-# scanner_frequency = 86400
-enable_signals = false
-# assets = [
-#     { id ="EURUSD", exchange='FX_IDC',screener="forex", interval = "4h" },
-#     { id ="BTCUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
-#     #use https://tvdb.brianthe.dev/ to get details
-#     # { id ="GOLD",exchange="TVC",screener="cfd", interval = "4h"},
-#     # { id ="USOIL",exchange="FX",screener="cfd", interval = "4h"},
-#     # { id ="ETHUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
-# ]
-enable_events = true
-# economic_calendar = ""
-enable_news = false
-# news_url= ""
-# news_api_key = ""
-# live_tv_url = ""
-
-
 #dxsp
 dxsp_enabled = true
 headers = {User-Agent= 'Mozilla/5.0'}
@@ -113,6 +93,25 @@ dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
 
 example_plugin_enabled = true
+
+#talkytrend
+talkytrend_enabled = true
+# scanner_frequency = 86400
+enable_signals = false
+# assets = [
+#     { id ="EURUSD", exchange='FX_IDC',screener="forex", interval = "4h" },
+#     { id ="BTCUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
+#     #use https://tvdb.brianthe.dev/ to get details
+#     # { id ="GOLD",exchange="TVC",screener="cfd", interval = "4h"},
+#     # { id ="USOIL",exchange="FX",screener="cfd", interval = "4h"},
+#     # { id ="ETHUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
+# ]
+enable_events = true
+# economic_calendar = ""
+enable_news = false
+# news_url= ""
+# news_api_key = ""
+live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
 
 VALUE = "On Default"
 
