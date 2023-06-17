@@ -178,7 +178,7 @@ async def test_cex_load_exchange(settings_cex):
 
 
 @pytest.mark.asyncio
-async def test_failed_execute_order(caplog, order):
+async def test_execute_order(caplog, order):
     await load_exchange()
     execute_mock = AsyncMock()
     with patch('tt.utils.execute_order',execute_mock):
@@ -186,11 +186,11 @@ async def test_failed_execute_order(caplog, order):
         assert "⚠️ order execution:" not in caplog.text
 
 
-# @pytest.mark.asyncio
-# async def test_failed_execute_order(caplog, order):
-#     await load_exchange()
-#     trade_confirmation = await execute_order(order)
-#     assert 'Order execution failed' in caplog.text
+@pytest.mark.asyncio
+async def test_failed_execute_order(caplog, order):
+    await load_exchange()
+    trade_confirmation = await execute_order(order)
+    assert 'Order execution failed' in caplog.text
 
 
 @pytest.mark.asyncio
