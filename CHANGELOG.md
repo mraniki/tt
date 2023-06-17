@@ -2,6 +2,26 @@
 
 <!--next-version-placeholder-->
 
+## v3.3.1 (2023-06-17)
+
+### Fix
+
+* :white_check_mark: ([`cd28382`](https://github.com/mraniki/tt/commit/cd283827197046731b8b53f96a33afc373a03f60))
+* :white_check_mark: ([`0b1b48b`](https://github.com/mraniki/tt/commit/0b1b48bb2a8ec0ef0522b885338bbd23fcf4c159))
+* :white_check_mark: ([`89ae31c`](https://github.com/mraniki/tt/commit/89ae31ce2e5d7f6d8a4df65826a835d967a01169))
+* :white_check_mark: ([`d0c632b`](https://github.com/mraniki/tt/commit/d0c632b9be78520b334b16439091e9a95a700a8b))
+* :white_check_mark: ([`8df8a88`](https://github.com/mraniki/tt/commit/8df8a882e8970c92e19180fbd49743e2bee593af))
+* :white_check_mark: ([`4cc8112`](https://github.com/mraniki/tt/commit/4cc811265552e2fd9ea1a73a68be8b1de6e382ce))
+* :white_check_mark: ([`bbaef5b`](https://github.com/mraniki/tt/commit/bbaef5bb153142e814d1a74300eb0d4d6dedf755))
+* :white_check_mark: ([`ba860d4`](https://github.com/mraniki/tt/commit/ba860d4cb4515d10e7a911fa6b86db31f34c24a0))
+* :white_check_mark: Dynaconf ([`03f965f`](https://github.com/mraniki/tt/commit/03f965f00f3412df05a7428da1c0cbe3e5bf92ca))
+* :white_check_mark: ([`1b59841`](https://github.com/mraniki/tt/commit/1b59841e8ce9d31d7501f08865001fc3dff53223))
+* ✅ unit test ([`bfcf5b6`](https://github.com/mraniki/tt/commit/bfcf5b68edf4e386056bd500aa3108f451629f76))
+* ✅ unit test ([`9ed198a`](https://github.com/mraniki/tt/commit/9ed198a20606e2433e1fd74c059b9c1962169a3e))
+* ✅ unit test ([`a999633`](https://github.com/mraniki/tt/commit/a99963397e1796eb598d71b309e06c4a0e10d2d7))
+* ✅ unit test ([`2df7e8f`](https://github.com/mraniki/tt/commit/2df7e8f792ff9bf6142404c5d6a00f2d1c74b6f7))
+* ✅ unit test ([`de18d2d`](https://github.com/mraniki/tt/commit/de18d2df8914332815b12af6ddbf80ba0e8b5b43))
+
 ## v3.3.0 (2023-06-16)
 
 ### Feature
