@@ -59,11 +59,10 @@ async def webhook(request: Request):
     """
     data = await request.json()
     logger.debug("payload: %s", request.json())
-    if data["key"] == settings.webhook_secret:
-        await send_notification(data)
-        return {"status": "OK"}
-    else:
+    if data["key"] != settings.webhook_secret:
         return {"status": "ERROR"}
+    await send_notification(data)
+    return {"status": "OK"}
 
 
 if __name__ == "__main__":
