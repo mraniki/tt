@@ -77,7 +77,7 @@ def wrong_order():
     """Return order parameters."""
     return {
         'action': 'BUY',
-        'instrument': 'NOTATHING',
+        'instrument': 'UNI',
         'quantity': 1,
     }
 
@@ -199,11 +199,11 @@ async def test_cex_load_exchange(settings_cex):
 #         assert "⚠️ order execution:" not in caplog.text
 
 
-# @pytest.mark.asyncio
-# async def test_failed_execute_order(caplog, wrong_order):
-#     await load_exchange()
-#     trade_confirmation = await execute_order(wrong_order)
-#     assert '⚠️ order execution' in caplog.text
+@pytest.mark.asyncio
+async def test_failed_execute_order(caplog, wrong_order):
+    await load_exchange()
+    trade_confirmation = await execute_order(wrong_order)
+    assert '⚠️ order execution' in caplog.text
 
 
 @pytest.mark.asyncio
