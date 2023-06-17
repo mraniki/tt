@@ -176,15 +176,14 @@ async def execute_order(order_params):
         if isinstance(exchange, DexSwap):
             trade = await exchange.execute_order(order_params)
             if not trade:
-                return
+                return f"⚠️ order execution failed"
 
             trade_confirmation = f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
             trade_confirmation += trade['confirmation']
 
         else:
             if await get_account_balance() == "No Balance":
-                await send_notification("⚠️ Check Balance")
-                return
+                return f"⚠️ Check Balance"
 
             asset_out_quote = float(exchange.fetchTicker(f'{instrument}').get('last'))
             asset_out_balance = await get_trading_asset_balance()

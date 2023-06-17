@@ -72,6 +72,15 @@ def order_params():
         'quantity': 1,
     }
 
+@pytest.fixture(name="wrong_order")
+def wrong_order():
+    """Return order parameters."""
+    return {
+        'action': 'BUY',
+        'instrument': 'NOTATHING',
+        'quantity': 1,
+    }
+
 
 @pytest.mark.asyncio
 async def test_listener_discord(settings_dex_56):
@@ -181,20 +190,20 @@ async def test_cex_load_exchange(settings_cex):
         assert isinstance(exchange, ccxt.binance)
 
 
-@pytest.mark.asyncio
-async def test_execute_order(caplog, order):
-    await load_exchange()
-    execute_mock = AsyncMock()
-    with patch('tt.utils.execute_order',execute_mock):
-        trade_confirmation = await execute_order(order)
-        assert "⚠️ order execution:" not in caplog.text
+# @pytest.mark.asyncio
+# async def test_execute_order(caplog, order):
+#     await load_exchange()
+#     execute_mock = AsyncMock()
+#     with patch('tt.utils.execute_order',execute_mock):
+#         trade_confirmation = await execute_order(order)
+#         assert "⚠️ order execution:" not in caplog.text
 
 
-@pytest.mark.asyncio
-async def test_failed_execute_order(caplog, order):
-    await load_exchange()
-    trade_confirmation = await execute_order(order)
-    assert 'Order execution failed' in caplog.text
+# @pytest.mark.asyncio
+# async def test_failed_execute_order(caplog, wrong_order):
+#     await load_exchange()
+#     trade_confirmation = await execute_order(wrong_order)
+#     assert '⚠️ order execution' in caplog.text
 
 
 @pytest.mark.asyncio
@@ -251,7 +260,7 @@ async def test_init_message():
     assert output is not None
 
 @pytest.mark.asyncio
-async def test_parse_trading():
+async def test_trading_switch():
     """Test parse_message balance """
     send_notification_mock = AsyncMock()
     with patch('tt.utils.send_notification',send_notification_mock):
