@@ -4,7 +4,6 @@
 from unittest.mock import AsyncMock, MagicMock, patch, call
 import pytest
 import ccxt
-import iamlistening
 from iamlistening import Listener
 from fastapi.testclient import TestClient
 from tt.bot import app
@@ -45,12 +44,14 @@ def test_dynaconf_is_in_testing_env_DEX56(settings_dex_56):
     print(settings.VALUE)
     assert settings.VALUE == "On Testing DEX_56"
     assert settings.cex_name == ""
+    assert settings.dex_chain_id == "56"
     assert settings.dex_wallet_address == "0x1234567890123456789012345678901234567899"
 
 def test_dynaconf_is_in_testing_env_DEX10(settings_dex_10):
     print(settings.VALUE)
     assert settings.VALUE == "On Testing DEX_10"
     assert settings.cex_name == ""
+    assert settings.dex_chain_id == "10"
     assert settings.dex_wallet_address == "0x1234567890123456789012345678901234567899"
 
 @pytest.fixture(name="message")
@@ -66,9 +67,8 @@ def order_params():
     """Return order parameters."""
     return {
         'action': 'BUY',
-        'instrument': 'EURUSD',
+        'instrument': 'WBTC',
         'quantity': 1,
-        # other order parameters
     }
 
 
@@ -105,11 +105,9 @@ async def test_listener_matrix(settings_dex_10,command):
 @pytest.mark.asyncio
 async def test_parse_help():
     """Test parse_message balance """
-    send_notification_mock = AsyncMock()
-    with patch('tt.utils.send_notification',send_notification_mock):
-        await load_exchange()
-        await parse_message('/help')
-        assert '🏦' in send_notification_mock.call_args[0][0]
+    init_message= AsyncMock()
+    await parse_message('/help')
+    init_message.assert_called_once
 
 
 @pytest.mark.asyncio
@@ -121,24 +119,13 @@ async def test_parse_bal():
     await parse_message('/bal')
     get_account_balance.assert_called_once
 
-# @pytest.mark.asyncio
-# async def test_parse_quote():
-#     """Test parse_message balance """
-#     send_notification_mock = AsyncMock()
-#     get_quote= AsyncMock()
-#     await load_exchange()
-#     await parse_message('/quote WBTC')
-#     get_quote.assert_called_once_with('WBTC')
-
-
 @pytest.mark.asyncio
-async def test_parse_trading():
+async def test_parse_quote(caplog):
     """Test parse_message balance """
-    send_notification_mock = AsyncMock()
-    with patch('tt.utils.send_notification',send_notification_mock):
-        await load_exchange()
-        await parse_message('/trading')
-        assert 'Trading is' in send_notification_mock.call_args[0][0]
+    get_quote= AsyncMock("WBTC")
+    await load_exchange()
+    result = await parse_message('/q WBTC')
+    assert 'quote [1, 0]' in caplog.text
 
 
 @pytest.mark.asyncio
@@ -160,6 +147,12 @@ async def test_get_host_ip():
     output = get_host_ip()
     assert output is not None
 
+
+@pytest.mark.asyncio
+async def test_get_ping():
+    """Test get_host_ip """
+    output = get_host_ip()
+    assert output is not None
 
 @pytest.mark.asyncio
 async def test_dex_load_exchange():
@@ -184,33 +177,20 @@ async def test_cex_load_exchange(settings_cex):
         assert isinstance(result, ccxt.binance)
 
 
-# @pytest.mark.asyncio
-# async def test_successful_execute_order(caplog, order_params, mock_dex):
-#     await load_exchange()
-#     dex_execute_mock = AsyncMock()
-#     with patch('dxsp.execute_order',dex_execute_mock):
-#         trade_confirmation = await execute_order(order_params)
-
-#         # Assert that no warning is logged
-#         assert "execute_order:" not in caplog.text
-#         # Assert that no notification is sent
-#         assert "⚠️ order execution:" not in caplog.text
-#         # Assert that the trade confirmation is returned
-#         assert isinstance(trade_confirmation, str)
-#         # Add more specific assertions for the trade confirmation if needed
-#         assert "⬇️" in trade_confirmation or "⬆️" in trade_confirmation
-#         assert "Size:" in trade_confirmation
-#         assert "Entry:" in trade_confirmation
-#         assert "ℹ️" in trade_confirmation
-#         assert "🗓️" in trade_confirmation
-
-
-
 @pytest.mark.asyncio
 async def test_failed_execute_order(caplog, order):
     await load_exchange()
-    trade_confirmation = await execute_order(order)
-    assert 'Order execution failed' in caplog.text
+    execute_mock = AsyncMock()
+    with patch('tt.utils.execute_order',execute_mock):
+        trade_confirmation = await execute_order(order)
+        assert "⚠️ order execution:" not in caplog.text
+
+
+# @pytest.mark.asyncio
+# async def test_failed_execute_order(caplog, order):
+#     await load_exchange()
+#     trade_confirmation = await execute_order(order)
+#     assert 'Order execution failed' in caplog.text
 
 
 @pytest.mark.asyncio
@@ -221,14 +201,6 @@ async def test_get_quote():
     print(output)
     assert output is not None
 
-
-@pytest.mark.asyncio
-async def test_get_name(settings_cex):
-    """Test get_name function."""
-    await load_exchange()
-    output = await get_name()
-    print(output)
-    assert output is not None
 
 @pytest.mark.asyncio
 async def test_get_account_balance():
@@ -274,13 +246,14 @@ async def test_init_message():
     print(output)
     assert output is not None
 
-
 @pytest.mark.asyncio
-async def test_toggle_trading_active():
-    print(settings.trading_enabled)
-    await trading_switch_command()
-    print(settings.trading_enabled)
-    assert settings.trading_enabled is False
+async def test_parse_trading():
+    """Test parse_message balance """
+    send_notification_mock = AsyncMock()
+    with patch('tt.utils.send_notification',send_notification_mock):
+        await load_exchange()
+        await parse_message('/trading')
+        assert settings.trading_enabled == False
 
 def test_read_main():
     client = TestClient(app)

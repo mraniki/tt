@@ -22,6 +22,7 @@ async def listener():
 
     bot_listener = Listener()
     task = asyncio.create_task(bot_listener.run_forever())
+    await init_message()
     message_processor = MessageProcessor()
     if settings.plugin_enabled:
         message_processor.load_plugins("tt.plugins")
@@ -49,28 +50,29 @@ async def start_plugins(message_processor):
 
 async def send_notification(msg):
     """💬 MESSAGING """
-    if not msg:
-        return
-    apobj = Apprise()
-    if settings.discord_webhook_id:
-        url = (f"discord://{str(settings.discord_webhook_id)}/"
-               f"{str(settings.discord_webhook_token)}")
-        format=NotifyFormat.MARKDOWN
-        if isinstance(msg, str):
-            msg = msg.replace("<code>", "`")
-            msg = msg.replace("</code>", "`")
-    elif settings.matrix_hostname:
-        url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
-               f"{settings.matrix_hostname[8:]}:443/"
-               f"{str(settings.bot_channel_id)}")
-        format=NotifyFormat.HTML
-    else:
-        url = (f"tgram://{str(settings.bot_token)}/"
-               f"{str(settings.bot_channel_id)}")
-        format=NotifyFormat.HTML
     try:
-        apobj.add(url)
-        await apobj.async_notify(body=str(msg), body_format=format)
+        if not msg:
+            return
+        apobj = Apprise()
+        if settings.discord_webhook_id:
+            url = (f"discord://{str(settings.discord_webhook_id)}/"
+                f"{str(settings.discord_webhook_token)}")
+            format=NotifyFormat.MARKDOWN
+            if isinstance(msg, str):
+                msg = msg.replace("<code>", "`")
+                msg = msg.replace("</code>", "`")
+        elif settings.matrix_hostname:
+            url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
+                f"{settings.matrix_hostname[8:]}:443/"
+                f"{str(settings.bot_channel_id)}")
+            format=NotifyFormat.HTML
+        else:
+            url = (f"tgram://{str(settings.bot_token)}/"
+                f"{str(settings.bot_channel_id)}")
+            format=NotifyFormat.HTML
+
+            apobj.add(url)
+            await apobj.async_notify(body=str(msg), body_format=format)
     except Exception as e:
         logger.error("%s not sent: %s", msg, e)
 
@@ -97,6 +99,7 @@ async def parse_message(msg):
                 message = await trading_switch_command()
             elif command == settings.bot_command_quote:
                 symbol = msg.split(" ")[1]
+                logger.debug("bot_command_quote symbol: %s", symbol)
                 message = await get_quote(symbol)
             elif command == settings.bot_command_bal:
                 await account_balance_command()
@@ -140,6 +143,7 @@ async def load_exchange():
         return exchange
     except Exception as e:
         logger.warning("exchange: %s", e)
+        return "Exchange not loaded"
 
 
 def get_host_ip() -> str:
@@ -212,9 +216,8 @@ async def execute_order(order_params):
         return trade_confirmation
 
     except Exception as e:
-        logger.warning("execute_order: %s", e)
-        await send_notification(f"⚠️ order execution: {e}")
-        return
+        return f"⚠️ order execution: {e}"
+        
 
 
 async def get_quote(symbol):
@@ -226,7 +229,7 @@ async def get_quote(symbol):
         else:
             return f"🏦 {await exchange.fetchTicker (symbol)}"
     except Exception as e:
-        logger.warning("get_quote: %s", e)
+        return f"⚠️ quote: {e}"
 
 
 async def get_name():
@@ -237,7 +240,7 @@ async def get_name():
             if isinstance(exchange, DexSwap)
             else exchange.id)
     except Exception as e:
-        logger.warning("Failed to get exchange: %s", e)
+        return f"⚠️ exchange name: {e}"
 
 
 async def get_account(exchange):
@@ -247,7 +250,7 @@ async def get_account(exchange):
                 if isinstance(exchange, DexSwap)
                 else str(exchange.uid))
     except Exception as e:
-        logger.warning("Failed to get account: %s", e)
+        return f"⚠️ account: {e}"
 
 
 async def get_account_balance():
@@ -268,7 +271,7 @@ async def get_account_balance():
                 balance += "No Balance"
         return balance
     except Exception as e:
-        logger.warning("get_account_balance: %s", e)
+        return f"⚠️ account_balance: {e}"
 
 
 async def get_trading_asset_balance():
@@ -279,7 +282,7 @@ async def get_trading_asset_balance():
         else:
             return exchange.fetchBalance()[f"{settings.trading_asset}"]["free"]
     except Exception as e:
-        await send_notification(f"⚠️ Check balance {settings.trading_asset}: {e}")
+        return f"⚠️ Check balance {settings.trading_asset}: {e}"
 
 
 async def get_account_position():
@@ -294,7 +297,7 @@ async def get_account_position():
         position += str(await get_account_margin())
         return position
     except Exception as e:
-        logger.warning("account_position: %s", e)
+        return f"⚠️ account_position: {e}"
 
 
 async def get_account_margin():
@@ -328,9 +331,9 @@ async def init_message():
     return start_up
 
 
-async def post_init():
-    # Notify bot startup
-    await send_notification(await init_message())
+# async def post_init():
+#     # Notify bot startup
+#     await send_notification(await init_message())
 
 
 async def account_balance_command():

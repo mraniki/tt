@@ -12,7 +12,7 @@ from tt.utils import (
     listener,
     send_notification,
     load_exchange,
-    init_message, post_init
+    init_message
 )
 
 
@@ -28,7 +28,7 @@ async def start_bot():
     try:
         event_loop.create_task(listener())
         await load_exchange()
-        await post_init()
+        # await post_init()
     except Exception as error:
         logger.error("bot startup failed: %s", error)
 
