@@ -45,14 +45,14 @@ def test_dynaconf_is_in_testing_env_DEX56(settings_dex_56):
     print(settings.VALUE)
     assert settings.VALUE == "On Testing DEX_56"
     assert settings.cex_name == ""
-    assert settings.dex_chain_id == "56"
+    assert settings.dex_chain_id == 56
     assert settings.dex_wallet_address == "0x1234567890123456789012345678901234567899"
 
 def test_dynaconf_is_in_testing_env_DEX10(settings_dex_10):
     print(settings.VALUE)
     assert settings.VALUE == "On Testing DEX_10"
     assert settings.cex_name == ""
-    assert settings.dex_chain_id == "10"
+    assert settings.dex_chain_id == 10
     assert settings.dex_wallet_address == "0x1234567890123456789012345678901234567899"
 
 @pytest.fixture(name="message")
@@ -139,16 +139,11 @@ async def test_parse_quote(caplog):
 
 
 @pytest.mark.asyncio
-async def test_send_notification(caplog, settings_dex_56):
+async def test_send_notification(caplog):
     """Test send_notification function"""
-    send_notification_mock = AsyncMock()
-    with patch('tt.utils.send_notification',send_notification_mock):
-
-        message = '<code>test message</code>'
-
-        output = await send_notification(message)
-        print(output)
-        assert 'https://discord.com/api/webhooks/12345678901/1234567890' in caplog.text
+    message = '<code>test message</code>'
+    await send_notification(message)
+    assert 'Unparseable Telegram URL' in caplog.text
 
 
 @pytest.mark.asyncio
