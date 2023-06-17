@@ -8,19 +8,15 @@ import iamlistening
 from iamlistening import Listener
 from fastapi.testclient import TestClient
 from tt.bot import app
-from tt.utils import (
-    listener, parse_message, send_notification,
+from tt.utils import (parse_message, send_notification,
     load_exchange, execute_order,
     init_message,
-    start_plugins,
     trading_switch_command, get_name, get_quote, get_trading_asset_balance,
     get_account, get_account_balance,
     get_account_position,
     get_account_margin,
     get_host_ip, get_ping,)
-from tt.config import settings, logger
-from tt.plugins.example_plugin import ExamplePlugin
-
+from tt.config import settings
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -96,11 +92,15 @@ async def test_listener_telegram(message):
     assert msg == "hello"
 
 @pytest.mark.asyncio
-async def test_listener_matrix(settings_dex_10):
+async def test_listener_matrix(settings_dex_10,command):
     listener = Listener()
     print(listener)
+    await listener.handle_message(command)
+    msg = await listener.get_latest_message()
+    print(msg)
     assert listener is not None
     assert isinstance(listener, iamlistening.main.Listener)
+    assert msg == command
 
 @pytest.mark.asyncio
 async def test_parse_help():
