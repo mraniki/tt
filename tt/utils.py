@@ -59,7 +59,6 @@ async def send_notification(msg):
         if isinstance(msg, str):
             msg = msg.replace("<code>", "`")
             msg = msg.replace("</code>", "`")
-            # msg = msg.replace("/n", "<br>")
     elif settings.matrix_hostname:
         url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
                f"{settings.matrix_hostname[8:]}:443/"
@@ -312,7 +311,7 @@ async def get_account_margin():
             )
         )
     except Exception as e:
-        logger.warning("account_margin: %s", e)
+        return f"⚠️ account_margin: {e}"
 
 
 # 🦾BOT ACTIONS
