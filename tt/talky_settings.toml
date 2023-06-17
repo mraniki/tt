@@ -118,3 +118,84 @@ VALUE = "On Default"
 
 [testing]
 VALUE = "On Testing"
+cex_name = ""
+trading_enabled = true
+telethon_api_id = "123456789"
+telethon_api_hash = "123456789"
+bot_token = "test_bot_token"
+bot_channel_id = "1234567890"
+dxsp_enabled = true
+headers = {User-Agent= 'Mozilla/5.0'}
+#📝tokenlist
+token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
+token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
+token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+#📝trading setup
+dex_trading_slippage = 2 # 2 % slippage
+#user settings
+dex_wallet_address = "0x1234567890123456789012345678901234567890" #this is an example
+dex_private_key = "0xdeadbeef" #this is an example
+#chain_1 #see below for other chain ids or use https://chainlist.org to overwrite settings
+dex_chain_id = 1
+dex_protocol_type = "uniswap_v2" #0x | 1inch | uniswap_v3
+dex_rpc = "https://rpc.ankr.com/eth"
+dex_block_explorer_url = "https://api.etherscan.io/api?"
+dex_block_explorer_api =  "798437294880920392"  #this is an example
+dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" #UNI_V2
+dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
+dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+# dex_router_contract_addr = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45" #UNI_V3
+dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e" #UNI_V3_QUOTERV2
+dex_quoter_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v3/quoter.abi"
+webhook_secret = "123abc"
+bot_prefix = "/"
+bot_command_help = "help"
+bot_command_bal = "bal"
+bot_command_quote = "q"
+bot_command_pos = "pos"
+bot_command_trading = "trading"
+bot_command_news = "live"
+bot_command_restart = "restart"
+bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
+bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
+
+[testing_cex]
+VALUE = "On Testing CEX_binance"
+cex_name = 'binance'
+cex_api = 'api_key'
+cex_secret = 'secret_key'
+cex_password = 'password'
+cex_defaulttype = 'spot'
+cex_testmode = true
+dex_chain_id = ""
+
+[testing_dex_56]
+VALUE = "On Testing DEX_56"
+cex_name = ""
+dex_wallet_address = "0x1234567890123456789012345678901234567899"
+dex_private_key = "0xdeadbeet"
+dex_rpc = "https://eth.llamarpc.com"
+dex_chain_id = 56
+dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+trading_enabled = true
+discord_webhook_id = "12345678901"
+discord_webhook_token = "1234567890"
+bot_token = "test_bot_token"
+bot_channel_id = "1234567890"
+ping = "8.8.8.8"
+
+[testing_dex_10]
+VALUE = "On Testing DEX_10"
+cex_name = ""
+dex_wallet_address = "0x1234567890123456789012345678901234567899"
+dex_private_key = "0xdeadbeet"
+dex_rpc = "https://eth.llamarpc.com"
+dex_chain_id = 10
+dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+trading_enabled = true
+matrix_hostname = "https://matrix.org"
+matrix_user = "@thismock:matrix.org"
+matrix_pass = "1234"
+bot_token = "token_123435"
+bot_channel_id = "1234567890"
+ping = "8.8.8.8"
