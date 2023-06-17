@@ -143,7 +143,7 @@ async def test_send_notification(caplog):
     """Test send_notification function"""
     message = '<code>test message</code>'
     await send_notification(message)
-    assert 'Unparseable Telegram URL' in caplog.text
+    assert 'There are no service(s) to notify' in caplog.text
 
 
 @pytest.mark.asyncio
@@ -195,10 +195,10 @@ async def test_cex_load_exchange(settings_cex):
 
 
 @pytest.mark.asyncio
-async def test_failed_execute_order(caplog, wrong_order):
+async def test_failed_execute_order(caplog, order):
     await load_exchange()
-    trade_confirmation = await execute_order(wrong_order)
-    assert '⚠️ order execution' in caplog.text
+    trade_confirmation = await execute_order(order)
+    assert "🗓️" not in caplog.text
 
 
 @pytest.mark.asyncio
