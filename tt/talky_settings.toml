@@ -125,16 +125,12 @@ bot_token = "test_bot_token"
 bot_channel_id = "1234567890"
 dxsp_enabled = true
 headers = {User-Agent= 'Mozilla/5.0'}
-#📝tokenlist
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-#📝trading setup
 dex_trading_slippage = 2 # 2 % slippage
-#user settings
 dex_wallet_address = "0x1234567890123456789012345678901234567890" #this is an example
-dex_private_key = "0xdeadbeef" #this is an example
-#chain_1 #see below for other chain ids or use https://chainlist.org to overwrite settings
+dex_private_key = "0xdeadbeef" 
 dex_chain_id = 1
 dex_protocol_type = "uniswap_v2" #0x | 1inch | uniswap_v3
 dex_rpc = "https://rpc.ankr.com/eth"
@@ -143,8 +139,7 @@ dex_block_explorer_api =  "798437294880920392"  #this is an example
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" #UNI_V2
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-# dex_router_contract_addr = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45" #UNI_V3
-dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e" #UNI_V3_QUOTERV2
+dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e" 
 dex_quoter_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v3/quoter.abi"
 webhook_secret = "123abc"
 bot_prefix = "/"
