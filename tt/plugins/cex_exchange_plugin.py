@@ -33,16 +33,14 @@ class CexExchangePlugin(BasePlugin):
     async def start(self):
         """Starts the exchange_plugin plugin"""
         try:
-            if self.enabled:
-                pass
+            pass
         except Exception as error:
             logger.warning(error)
 
     async def stop(self):
         """Stops the exchange_plugin plugin"""
         try:
-            if self.enabled:
-                pass
+            pass
         except Exception as error:
             logger.warning(error)
 

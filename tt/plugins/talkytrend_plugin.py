@@ -25,9 +25,8 @@ class TalkyTrendPlugin(BasePlugin):
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
-        try:           
-            if self.enabled:
-                pass
+        try:       
+            pass
         except Exception as error:
             logger.warning(error)
 

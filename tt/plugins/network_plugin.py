@@ -16,17 +16,15 @@ class NetworkPlugin(BasePlugin):
 
     async def start(self):
         """Starts the plugin"""
-        try:           
-            if self.enabled:
-                pass
+        try:       
+            pass
         except Exception as error:
             logger.warning(error)
     
     async def stop(self):
         """Stops the plugin"""
-        try:           
-            if self.enabled:
-                pass
+        try:       
+            pass
         except Exception as error:
             logger.warning(error)
 
@@ -44,9 +42,8 @@ class NetworkPlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        try:           
-            if self.enabled:
-                pass
+        try:       
+            pass
         except Exception as error:
             logger.warning(error)
         # if self.enabled:

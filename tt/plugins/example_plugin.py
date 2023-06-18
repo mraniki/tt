@@ -26,9 +26,8 @@ class ExamplePlugin(BasePlugin):
 
     async def stop(self):
         """Stops the plugin"""
-        try:           
-            if self.enabled:
-                pass
+        try:       
+            pass
         except Exception as error:
             logger.warning(error)
 
