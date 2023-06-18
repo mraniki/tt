@@ -8,17 +8,17 @@ class ExamplePlugin(BasePlugin):
     def __init__(self):
         try:
             if settings.example_plugin_enabled:
-                logger.info("example_plugin initialized")
+                logger.info("plugin initialized")
         except Exception as e:
-            logger.warning("example init %s",e)
+            logger.warning("init %s",e)
 
     async def start(self):
         """Starts the plugin"""
         try:           
             if settings.example_plugin_enabled:
-                logger.info("example_plugin started")
+                logger.info("plugin started")
         except Exception as e:
-            logger.warning("example start %s",e)
+            logger.warning("start %s",e)
 
     async def stop(self):
         """Stops the plugin"""

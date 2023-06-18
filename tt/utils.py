@@ -145,7 +145,7 @@ async def load_exchange():
         logger.warning("exchange: %s", e)
         return "Exchange not loaded"
 
-
+# Move get ip and ping in a network type plugin
 def get_host_ip() -> str:
     """Returns host IP """
     try:
@@ -158,7 +158,7 @@ def get_host_ip() -> str:
         pass
 
 def get_ping(host: str = settings.ping) -> float:
-    """Returnsping """
+    """Returns latency """
     response_time = ping3.ping(host, unit='ms')
     time.sleep(1)
     return round(response_time, 3)
