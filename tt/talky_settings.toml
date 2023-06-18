@@ -1,9 +1,20 @@
 [default]
+#settings env check
+VALUE = "Production - Default"
+#LOG LEVEL
 loglevel = "INFO"
+#FASTAPI config
 host = "0.0.0.0"
 port = 8080
-ping = "8.8.8.8"
 webhook_secret = "123abc"
+
+#plugin
+plugin_enabled = true
+plugin_menu = "plugin"
+example_plugin_enabled = false
+
+
+#BOTCOMMAND
 bot_prefix = "/"
 bot_command_help = "help"
 bot_command_bal = "bal"
@@ -11,30 +22,11 @@ bot_command_quote = "q"
 bot_command_pos = "pos"
 bot_command_trading = "trading"
 bot_command_news = "live"
-
 bot_command_restart = "restart"
+
 bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
 
-# CEX config
-cex_name = ""
-cex_api = ""
-cex_secret = ""
-cex_password = ""
-cex_testmode = true
-cex_defaulttype = "SPOT"
-cex_ordertype = "MARKET"
-
-# TRADING
-trading_enabled = true #bool
-trading_asset = "USDT"
-trading_risk_amount = 10
-trading_stop_loss = 1000
-trading_take_profit = 1000
-
-#plugin
-plugin_enabled = true
-plugin_menu = "plugin"
 #iamlistening
 iamlistening_enabled = true
 bot_token = ""
@@ -60,6 +52,27 @@ stop_loss = 1000
 take_profit = 1000
 quantity = 1
 
+#exchange
+exchange_enabled = true
+
+# TRADING
+trading_enabled = true #bool
+trading_asset = "USDT"
+trading_risk_amount = 10
+trading_stop_loss = 1000
+trading_take_profit = 1000
+
+
+# CEX config
+cex_name = ""
+cex_api = ""
+cex_secret = ""
+cex_password = ""
+cex_testmode = true
+cex_defaulttype = "SPOT"
+cex_ordertype = "MARKET"
+
+# DEX config
 #dxsp
 dxsp_enabled = true
 headers = {User-Agent= 'Mozilla/5.0'}
@@ -92,8 +105,6 @@ dex_1inch_limit_url = "https://limit-orders.1inch.io/v3.0/"
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
 
-example_plugin_enabled = true
-
 #talkytrend
 talkytrend_enabled = true
 # scanner_frequency = 86400
@@ -113,7 +124,12 @@ enable_news = false
 # news_api_key = ""
 live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
 
-VALUE = "On Default"
+
+#network
+network_enabled = true
+ping = "8.8.8.8"
+
+
 
 [testing]
 VALUE = "On Testing"
@@ -152,6 +168,7 @@ bot_command_news = "live"
 bot_command_restart = "restart"
 bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
+example_plugin_enabled = true
 
 [testing_cex]
 VALUE = "On Testing CEX_binance"

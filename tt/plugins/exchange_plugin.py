@@ -6,27 +6,28 @@ from tt.config import logger, settings
 class ExchangePlugin(BasePlugin):
     name = "exchange_plugin"
     def __init__(self):
-        pass
-        # try:
-        #     if settings.trading_enabled:
-        #         if settings.cex_name:
-        #             client = getattr(ccxt, settings.cex_name)
-        #             self.exchange = client({
-        #                 'apiKey': settings.cex_api,
-        #                 'secret': settings.cex_secret,
-        #                 'password': (settings.cex_password or ''),
-        #                 'enableRateLimit': True,
-        #                 'options': {
-        #                     'defaultType': settings.cex_defaulttype,
-        #                             }})
-        #             if settings.cex_testmode:
-        #                 self.exchange.set_sandbox_mode('enabled')
-        #         elif settings.dex_chain_id:
-        #             self.exchange = DexSwap()
-        #         print(self.exchange)
-        # except Exception as e:
-        #     logger.warning("exchange: %s", e)
-        #     return "Exchange not loaded"
+        try:
+            if settings.exchange_enabled:
+                logger.info("exchange_plugin: init")
+                if settings.cex_name:
+                    logger.info("WIP CEX SETUP")
+                #     client = getattr(ccxt, settings.cex_name)
+                #     self.exchange = client({
+                #         'apiKey': settings.cex_api,
+                #         'secret': settings.cex_secret,
+                #         'password': (settings.cex_password or ''),
+                #         'enableRateLimit': True,
+                #         'options': {
+                #             'defaultType': settings.cex_defaulttype,
+                #                     }})
+                #     if settings.cex_testmode:
+                #         self.exchange.set_sandbox_mode('enabled')
+                elif settings.dex_chain_id:
+                    logger.info("WIP DEX SETUP")
+                #     self.exchange = DexSwap()
+        except Exception as e:
+            logger.warning("exchange: %s", e)
+            return "Exchange not loaded"
 
     async def start(self):
         """Starts the exchange_plugin plugin"""
@@ -48,7 +49,7 @@ class ExchangePlugin(BasePlugin):
 
     def should_handle(self, message):
         """Returns True if the plugin should handle the message"""
-        return True
+        return False
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
@@ -66,8 +67,6 @@ class ExchangePlugin(BasePlugin):
         #     await account_balance_command()
         # elif command == settings.bot_command_pos:
         #     message = await account_position_command()
-
-
 
     # async def execute_order(order_params):
     #     """Execute order."""
