@@ -8,17 +8,11 @@ import uvicorn
 from fastapi import FastAPI, Request
 
 from tt.config import settings, logger
-from tt.utils import (
-    listener,
-    send_notification,
-    init_message
-)
+from tt.utils import listener, send_notification, init_message
 
 
 # ⛓️🤖🙊BOT
-app = FastAPI(
-    title="TALKYTRADER",
-)
+app = FastAPI(title="TALKYTRADER")
 
 
 @app.on_event("startup")

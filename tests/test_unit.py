@@ -128,8 +128,6 @@ async def test_listener_matrix(settings_dex_10,command):
 #     assert output is not None
 
 
-
-
 # @pytest.mark.asyncio
 # async def test_init_message():
 #     """Test the initialization message."""
