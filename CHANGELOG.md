@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v3.5.0 (2023-06-18)
+
+### Feature
+
+* ✨ improve plugin structure. test for exchange as plugin ([`7170c93`](https://github.com/mraniki/tt/commit/7170c937b441cd8d109f132a75ab23ff68da8c50))
+
+### Fix
+
+* ♻️ refactor with CEX plugin and DEX plugin for clarity ([`0eb31c0`](https://github.com/mraniki/tt/commit/0eb31c002efc36b00adbc2197ae47601f8e9b24e))
+* ♻️ refactor ([`8bb7488`](https://github.com/mraniki/tt/commit/8bb74882a787dfc77cfd7e95af416633ae3f74a2))
+* 🐛 missing init message ([`1862287`](https://github.com/mraniki/tt/commit/1862287866698924c89dea8eb6f96e8f4fb3a0c7))
+* 🩹 non critical plugin ([`5bdf83d`](https://github.com/mraniki/tt/commit/5bdf83d3074be8d1e75b4404c665730cd975423d))
+
 ## v3.4.0 (2023-06-18)
 
 ### Feature
