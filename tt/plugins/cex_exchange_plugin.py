@@ -132,8 +132,8 @@ class CexExchangePlugin(BasePlugin):
             if not balance:
                 balance += "No Balance"
             return balance
-        except Exception as e:
-            return f"⚠️ account_balance: {e}"
+        except Exception as error:
+            logger.warning(error)
 
     async def get_account_position(self):
         """return account position."""
@@ -149,23 +149,23 @@ class CexExchangePlugin(BasePlugin):
     async def get_name(self):
         """Return exchange name"""
         try:
-            return  self.exchange.id
-        except Exception as e:
-            return f"⚠️ exchange name: {e}"
+            return self.exchange.id
+        except Exception as error:
+            logger.warning(error)
 
     async def get_trading_asset_balance(self):
         """return main asset balance."""
         try:
             return self.exchange.fetchBalance()[f"{settings.trading_asset}"]["free"]
-        except Exception as e:
-            return f"⚠️ Check balance {settings.trading_asset}: {e}"
+        except Exception as error:
+            logger.warning(error)
 
     async def get_account(self):
         """Return exchange account"""
         try:
             return self.exchange.uid
-        except Exception as e:
-            return f"⚠️ account: {e}"
+        except Exception as error:
+            logger.warning(error)
 
 
 

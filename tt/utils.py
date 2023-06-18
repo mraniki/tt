@@ -4,12 +4,9 @@ import asyncio
 import importlib
 import pkgutil
 from apprise import Apprise, NotifyFormat
-import time
 import os
 import sys
-import socket
 
-import ping3
 from iamlistening import Listener
 from tt.config import settings, logger
 
@@ -79,10 +76,7 @@ async def send_notification(msg):
 
 async def parse_message(msg):
     """main parser"""
-
     try:
-        # Initialize FindMyOrder
-        # fmo = FindMyOrder()
 
         # Check ignore
         if msg.startswith(settings.bot_ignore):
@@ -93,49 +87,9 @@ async def parse_message(msg):
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_help:
                 await send_notification(f"{await init_message()}\n{settings.bot_msg_help}")
-            # elif command == settings.bot_command_trading:
-            #     message = await trading_switch_command()
-            # elif command == settings.bot_command_quote:
-            #     symbol = msg.split(" ")[1]
-            #     message = await get_quote(symbol)
-            # elif command == settings.bot_command_bal:
-            #     await account_balance_command()
-            # elif command == settings.bot_command_pos:
-            #     message = await account_position_command()
-            # elif command == settings.bot_command_restart:
-            #     await restart_command()
-            # if message is not None:
-            #     message = await get_quote(symbol)
-            #     await send_notification(message)
-
-        # # Order found
-        # if settings.trading_enabled and await fmo.search(msg):
-        #     # Order parsing
-        #     order = await fmo.get_order(msg)
-        #     # Order execution
-        #     order = await execute_order(order)
-        #     if order:
-        #         await send_notification(order)
 
     except Exception as e:
         logger.error(e)
-
-def get_host_ip() -> str:
-    """Returns host IP """
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect((settings.ping, 80))
-        ip_address = s.getsockname()[0]
-        s.close()
-        return ip_address
-    except Exception:
-        pass
-
-def get_ping(host: str = settings.ping) -> float:
-    """Returns latency """
-    response_time = ping3.ping(host, unit='ms')
-    time.sleep(1)
-    return round(response_time, 3)
 
 
 # 🦾BOT ACTIONS
