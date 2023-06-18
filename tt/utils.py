@@ -170,4 +170,3 @@ class BasePlugin:
 
     async def handle_message(self, msg):
         pass
-

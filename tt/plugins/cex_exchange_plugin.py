@@ -65,7 +65,8 @@ class CexExchangePlugin(BasePlugin):
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_quote:
                 symbol = msg.split(" ")[1]
-                await self.send_notification(f"🏦 {await self.exchange.fetchTicker(symbol)}")
+                await self.send_notification(
+                    f"🏦 {await self.exchange.fetchTicker(symbol)}")
             elif command == settings.bot_command_bal:
                 await self.send_notification(f"{await self.get_account_balance()}")
             elif command == settings.bot_command_pos:

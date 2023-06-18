@@ -55,7 +55,8 @@ class DexExchangePlugin(BasePlugin):
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_quote:
                 symbol = msg.split(" ")[1]
-                await self.send_notification(f"{await self.exchange.get_quote(symbol)}")
+                await self.send_notification(
+                    f"{await self.exchange.get_quote(symbol)}")
             elif command == settings.bot_command_bal:
                 await self.send_notification(f"{await self.get_account_balance()}")
             elif command == settings.bot_command_pos:
@@ -76,7 +77,8 @@ class DexExchangePlugin(BasePlugin):
                 if not trade:
                     return "⚠️ order execution failed"
 
-                trade_confirmation = f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
+                trade_confirmation = (
+                    f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n")
                 trade_confirmation += trade['confirmation']
 
             return trade_confirmation

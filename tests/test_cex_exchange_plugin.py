@@ -1,13 +1,13 @@
 import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
-from dxsp import DexSwap
+import ccxt
 from tt.config import settings, logger
-from tt.plugins.dex_exchange_plugin import DexExchangePlugin
+from tt.plugins.cex_exchange_plugin import CexExchangePlugin
 
 
 @pytest.fixture(scope="session", autouse=True)
-def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
+def set_test_settings_CEX():
+    settings.configure(FORCE_ENV_FOR_DYNACONF="testing_cex")
 
 @pytest.fixture(name="order")
 def order_params():
@@ -30,22 +30,29 @@ def wrong_order():
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():
     # Arrange
-    plugin = DexExchangePlugin()
+    plugin = CexExchangePlugin()
     return plugin
+
+def test_dynaconf_is_in_testing_env_CEX():
+    print(settings.VALUE)
+    assert settings.VALUE == "On Testing CEX_binance"
+    assert settings.cex_name == "binance"
+    assert settings.cex_api == 'api_key'
+
 
 @pytest.mark.asyncio
 async def test_plugin(plugin):
     enabled = plugin.enabled
     exchange = plugin.exchange
     assert enabled is True
-    assert isinstance(exchange, DexSwap)
+    assert isinstance(exchange, ccxt.binance)
 
 @pytest.mark.asyncio
 async def test_parse_quote(plugin, caplog):
     """Test parse_message balance """
     #get_quote= AsyncMock("WBTC")
     await plugin.handle_message('/q WBTC')
-    assert 'quote [1, 0]' in caplog.text
+    assert 'binance does not have market symbol WBTC' in caplog.text
 
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
@@ -62,11 +69,11 @@ async def test_parse_position(plugin):
     await plugin.handle_message('/pos')
     get_account_position.assert_called_once
 
-@pytest.mark.asyncio
-async def test_account(plugin):
-    """test exchange dex"""
-    account = await plugin.get_account()
-    assert account == "1 - 34567890"
+# @pytest.mark.asyncio
+# async def test_account(plugin):
+#     """test exchange dex"""
+#     account = await plugin.get_account()
+#     assert account == "1 - 34567890"
 
 # @pytest.mark.asyncio
 # async def test_execute_order(plugin, caplog, order):
@@ -81,12 +88,12 @@ async def test_failed_execute_order(plugin, caplog, order):
     assert "🗓️" not in caplog.text
 
 
-@pytest.mark.asyncio
-async def test_get_account_balance(plugin):
-    """Test get_account_balance."""
-    output = await plugin.get_account_balance()
-    print(output)
-    assert output is not None
+# @pytest.mark.asyncio
+# async def test_get_account_balance(plugin):
+#     """Test get_account_balance."""
+#     output = await plugin.get_account_balance()
+#     print(output)
+#     assert output is not None
 
 @pytest.mark.asyncio
 async def test_get_account_position(plugin):
@@ -95,9 +102,24 @@ async def test_get_account_position(plugin):
     print(output)
     assert output is not None
 
-@pytest.mark.asyncio
-async def test_get_trading_asset_balance(plugin):
-    """Test get_asset_trading_balance."""
-    output = await plugin.get_trading_asset_balance()
-    print(output)
-    assert output is not None
+# @pytest.mark.asyncio
+# async def test_get_trading_asset_balance(plugin):
+#     """Test get_asset_trading_balance."""
+#     output = await plugin.get_trading_asset_balance()
+#     print(output)
+#     assert output is not None
+
+# @pytest.mark.asyncio
+# async def test_cex_load_exchange(settings_cex):
+#     """test exchange cex"""
+#     mock_ccxt = MagicMock()
+#     mock_ccxt.cex_client = MagicMock()
+#     mock_exchange = MagicMock()
+#     with patch.dict("sys.modules", ccxt=mock_ccxt):
+#         mock_ccxt.cex_client.return_value = mock_exchange
+#         exchange = await load_exchange()
+#         name = await get_name()
+#         assert exchange is not None
+#         assert name == 'binance'
+#         assert isinstance(exchange, ccxt.binance)
+

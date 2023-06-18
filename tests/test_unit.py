@@ -129,20 +129,6 @@ async def test_listener_matrix(settings_dex_10,command):
 
 
 
-# @pytest.mark.asyncio
-# async def test_cex_load_exchange(settings_cex):
-#     """test exchange cex"""
-#     mock_ccxt = MagicMock()
-#     mock_ccxt.cex_client = MagicMock()
-#     mock_exchange = MagicMock()
-#     with patch.dict("sys.modules", ccxt=mock_ccxt):
-#         mock_ccxt.cex_client.return_value = mock_exchange
-#         exchange = await load_exchange()
-#         name = await get_name()
-#         assert exchange is not None
-#         assert name == 'binance'
-#         assert isinstance(exchange, ccxt.binance)
-
 
 # @pytest.mark.asyncio
 # async def test_init_message():
