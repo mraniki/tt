@@ -29,9 +29,7 @@ def wrong_order():
 
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():
-    # Arrange
-    plugin = CexExchangePlugin()
-    return plugin
+    return CexExchangePlugin()
 
 def test_dynaconf_is_in_testing_env_CEX():
     print(settings.VALUE)

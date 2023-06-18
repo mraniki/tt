@@ -29,9 +29,7 @@ def wrong_order():
 
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():
-    # Arrange
-    plugin = DexExchangePlugin()
-    return plugin
+    return DexExchangePlugin()
 
 @pytest.mark.asyncio
 async def test_plugin(plugin):
