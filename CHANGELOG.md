@@ -2,6 +2,21 @@
 
 <!--next-version-placeholder-->
 
+## v3.4.0 (2023-06-18)
+
+### Feature
+
+* 🥚 exchange as a plugin ([`99ce283`](https://github.com/mraniki/tt/commit/99ce283f3f8d60a270393066cbd942cb96de029c))
+
+### Fix
+
+* 🐛 bug ([`d0f5629`](https://github.com/mraniki/tt/commit/d0f562980aaa33907e7f205a3034be73e481cfac))
+* 👷 CI Change 🐳 docker ([`40cade0`](https://github.com/mraniki/tt/commit/40cade03d20eb46a637a3b94cb83ec9af3510a0d))
+* 🔧 config update for readibility ([`048f465`](https://github.com/mraniki/tt/commit/048f465f9a6b35c0dcbaca4f23b436e5bbfa0c66))
+* 🔧 config disabling exchange and network for now ([`37963a9`](https://github.com/mraniki/tt/commit/37963a9ad7f4602f482af158e511bb3df0eb412e))
+* 🎨 plugins and settings update for exchange/network ([`466f3fd`](https://github.com/mraniki/tt/commit/466f3fd07ead97be3e12754057ca767b605a8ad1))
+* ⚗️ experiment ([`f805ac4`](https://github.com/mraniki/tt/commit/f805ac4896558e6362cc32ff431440831cfe8aee))
+
 ## v3.3.3 (2023-06-18)
 
 ### Fix
