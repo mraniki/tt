@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v3.3.3 (2023-06-18)
+
+### Fix
+
+* 🐛 bug broken logo ([`4fef5c0`](https://github.com/mraniki/tt/commit/4fef5c01d5992ad6b5ba633d474e9db22a129156))
+* ✅ unit test ([`8d89d11`](https://github.com/mraniki/tt/commit/8d89d1132a46ae34af1b588aa2fddbb16960f952))
+* ✅ unit test ([`88ff3cc`](https://github.com/mraniki/tt/commit/88ff3cc6dcf080e0825a07c24b98a0eb75ceb477))
+* 💬 doc ([`831cf80`](https://github.com/mraniki/tt/commit/831cf8085646086ad9b3441b48460c69c5491e07))
+
+### Other
+
+* Merge branch 'main' into dev ([`4452cb2`](https://github.com/mraniki/tt/commit/4452cb2bc45fc851bfd5f958723bfed279fcf44a))
+* :arrow_up: dependencies ([`d5aa2af`](https://github.com/mraniki/tt/commit/d5aa2af7a260f7dd05298f4a6fc7f647b5e98f11))
+
 ## v3.3.2 (2023-06-18)
 
 ### Fix
