@@ -9,13 +9,14 @@ import iamlistening
 from iamlistening import Listener
 from fastapi.testclient import TestClient
 from tt.bot import app
-from tt.utils import (parse_message, send_notification,
-    load_exchange, execute_order,
-    init_message, get_name, get_quote, get_trading_asset_balance,
-    get_account, get_account_balance,
-    get_account_position,
+from tt.utils import (
+    parse_message,execute_order,
+    init_message, get_host_ip, 
+    load_exchange, get_name, get_quote,
+    get_trading_asset_balance, get_account,
+    get_account_balance, get_account_position,
     get_account_margin,
-    get_host_ip, get_ping)
+    )
 from tt.config import settings
 
 
@@ -77,7 +78,7 @@ def wrong_order():
     """Return order parameters."""
     return {
         'action': 'BUY',
-        'instrument': 'UNI',
+        'instrument': 'NOTATHING',
         'quantity': 1,
     }
 
@@ -138,26 +139,12 @@ async def test_parse_quote(caplog):
     assert 'quote [1, 0]' in caplog.text
 
 
-# @pytest.mark.asyncio
-# async def test_send_notification():
-#     """Test send_notification function"""
-#     message = 'THIS IS A MESSAGE'
-#     output = await send_notification(message)
-#     print(output)
-#     assert output is not None
-
 @pytest.mark.asyncio
 async def test_get_host_ip():
     """Test get_host_ip """
     output = get_host_ip()
     assert output is not None
 
-
-@pytest.mark.asyncio
-async def test_get_ping():
-    """Test get_host_ip """
-    output = get_host_ip()
-    assert output is not None
 
 @pytest.mark.asyncio
 async def test_dex_load_exchange():
