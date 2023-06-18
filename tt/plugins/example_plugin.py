@@ -38,7 +38,7 @@ class ExamplePlugin(BasePlugin):
     async def handle_message(self, msg):
         """Handles incoming messages"""
         if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
-            await self.send_notification("this is an example")
+            await self.send_notification("this is an example from the example_plugin")
         elif msg == f"{settings.bot_prefix}{settings.plugin_menu}":
             plugin_menu_message = f"⚙️:\n{settings.bot_prefix}{settings.plugin_menu}"
             await self.send_notification(plugin_menu_message)
