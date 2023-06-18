@@ -28,7 +28,7 @@ async def start_bot():
     try:
         event_loop.create_task(listener())
          ## load exchange as plugin
-        await load_exchange()
+        #await load_exchange()
     except Exception as error:
         logger.error("bot startup failed: %s", error)
 

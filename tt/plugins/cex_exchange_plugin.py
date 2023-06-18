@@ -11,7 +11,6 @@ class CexExchangePlugin(BasePlugin):
         try:
             self.enabled = settings.cex_enabled
             if self.enabled:
-                logger.info("exchange_plugin: init")
                 self.fmo = FindMyOrder()
                 if settings.cex_name:
                     logger.info("WIP CEX SETUP")
