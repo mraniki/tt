@@ -2,6 +2,37 @@
 
 <!--next-version-placeholder-->
 
+## v3.3.2 (2023-06-18)
+
+### Fix
+
+* 🔥 remove code ([`54e5b35`](https://github.com/mraniki/tt/commit/54e5b35abcf4c206ff844712af89545892f43042))
+* ✅ unit test ([`16ff5b9`](https://github.com/mraniki/tt/commit/16ff5b9b4a57f1086d97c555d607e00eb0d2cca3))
+* ✅ unit test ([`379a377`](https://github.com/mraniki/tt/commit/379a37795d74f137701284a14d671bb6e9368fed))
+* ✅ unit test ([`8e580b6`](https://github.com/mraniki/tt/commit/8e580b63963a33d06028e80ecd36eef202ef1659))
+* 📝 doc ([`d9d6027`](https://github.com/mraniki/tt/commit/d9d6027f8c696bb3d437fea2505f866348a768af))
+* ✅ unit test ([`8214102`](https://github.com/mraniki/tt/commit/821410283151e1bf66cbb0ae5367196189a9a244))
+* ✅ unit test ([`615fc8b`](https://github.com/mraniki/tt/commit/615fc8b4efef6a3fccbfda3a3b48df2467b35650))
+* ✅ unit test ([`dbb1fd2`](https://github.com/mraniki/tt/commit/dbb1fd260bc12520accee3147fe7a8bacb900f88))
+* ✅ unit test ([`c5bfdda`](https://github.com/mraniki/tt/commit/c5bfdda74753cbbedd08e5e4a5d6d0231b5565ea))
+* ✅ unit test ([`990040e`](https://github.com/mraniki/tt/commit/990040ec257f920661d8638abeca20a1c2699d5d))
+* ✅ unit test ([`8b52635`](https://github.com/mraniki/tt/commit/8b5263558a32cf730c8021d7a533ca3b1056782c))
+* ✅ unit test ([`ba395f1`](https://github.com/mraniki/tt/commit/ba395f171fbbb72253f1af112305e14b0158e921))
+* ✅ unit test ([`19a4715`](https://github.com/mraniki/tt/commit/19a4715e6f13d0690cea763ca1c37a8e244f2731))
+* ♻️ refactor ✅ unit test  and refactor ([`8f1df6f`](https://github.com/mraniki/tt/commit/8f1df6f2377b11426c71b723d48c0655bbacfb66))
+* ✅ unit test ([`b88390e`](https://github.com/mraniki/tt/commit/b88390e23c34b12c3b9b9cd2f404cc3b2d8895e4))
+* ✅ unit test ([`e4dc66c`](https://github.com/mraniki/tt/commit/e4dc66c4214f6280bb836ddbf21bb57bf629a12d))
+* ✅ unit test ([`fd3091a`](https://github.com/mraniki/tt/commit/fd3091a533f13103efab7a5a0642b11135b1d907))
+* ✅ unit test ([`f336ebd`](https://github.com/mraniki/tt/commit/f336ebd48e117791ee7f3b51658bbdf4314da64e))
+* ✅ unit test ([`7fce9c3`](https://github.com/mraniki/tt/commit/7fce9c397b596eff48ab54935a2a2f8147bcf902))
+* ✅ unit test ([`79598d6`](https://github.com/mraniki/tt/commit/79598d6564882488fd2ba2101658c4592c0138ee))
+* ✅ unit test ([`ee6e005`](https://github.com/mraniki/tt/commit/ee6e0051571c01637ecff0521a3351701c09c605))
+
+### Other
+
+* ⬆️ dependencies ([`e35b08e`](https://github.com/mraniki/tt/commit/e35b08e78bd8ecb03eec7586af7b38fcc743aaf9))
+* 'Refactored by Sourcery' ([`8047028`](https://github.com/mraniki/tt/commit/8047028b71623f2e7077aa5a43888eb158df6978))
+
 ## v3.3.1 (2023-06-17)
 
 ### Fix
