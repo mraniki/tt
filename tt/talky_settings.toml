@@ -157,12 +157,13 @@ ping = "8.8.8.8"
 ## FOR TEST ##
 ##############
 VALUE = "On Testing"
-cex_name = ""
-trading_enabled = true
 telethon_api_id = "123456789"
 telethon_api_hash = "123456789"
 bot_token = "test_bot_token"
 bot_channel_id = "1234567890"
+exchange_enabled = true
+trading_enabled = true
+cex_name = ""
 dxsp_enabled = true
 headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
@@ -199,6 +200,8 @@ example_plugin_enabled = true
 ## SETTINGS ##
 ## FOR TEST ##
 ##############
+exchange_enabled = true
+cex_enabled = true
 VALUE = "On Testing CEX_binance"
 cex_name = 'binance'
 cex_api = 'api_key'

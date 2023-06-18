@@ -8,18 +8,11 @@ import uvicorn
 from fastapi import FastAPI, Request
 
 from tt.config import settings, logger
-from tt.utils import (
-    listener,
-    send_notification,
-    load_exchange,
-    init_message
-)
+from tt.utils import listener, send_notification, init_message
 
 
 # ⛓️🤖🙊BOT
-app = FastAPI(
-    title="TALKYTRADER",
-)
+app = FastAPI(title="TALKYTRADER")
 
 
 @app.on_event("startup")
@@ -27,8 +20,6 @@ async def start_bot():
     event_loop = asyncio.get_event_loop()
     try:
         event_loop.create_task(listener())
-         ## load exchange as plugin
-        await load_exchange()
     except Exception as error:
         logger.error("bot startup failed: %s", error)
 
