@@ -75,7 +75,7 @@ quantity = 1
 ##############
 ## EXCHANGE ##
 ##############
-exchange_enabled = false
+exchange_enabled = true
 
 # CEX config
 cex_name = ""
