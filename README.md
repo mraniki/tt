@@ -3,7 +3,7 @@
 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)<br> [![wiki](https://img.shields.io/badge/🪙🗿-wiki-027CF9)](https://talkytrader.gitbook.io/talky/)
 
-[![Logo](https://i.imgur.io/Q7iDDyB_d.webp?maxwidth=640&shape=thumb&fidelity=medium)](https://github.com/mraniki/tt)
+[![Logo](https://i.imgur.com/Q7iDDyB.jpg)](https://github.com/mraniki/tt)
  </tr>
 <details>
 <summary><h2>Quick start</h2></summary>
