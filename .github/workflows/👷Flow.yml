@@ -19,6 +19,11 @@ jobs:
     needs: [lint]
     uses: mraniki/coding_toolset/.github/workflows/🔏Security.yml@main
     secrets: inherit
+  nightly:
+    needs: [lint]
+    if: ${{ github.ref == 'refs/heads/dev'}}
+    uses: mraniki/coding_toolset/.github/workflows/🐳Docker.yml@main
+    secrets: inherit
   # build:
   #   needs: [lint]
   #   uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main
@@ -27,6 +32,7 @@ jobs:
     uses: mraniki/coding_toolset/.github/workflows/📦Release.yml@main
     secrets: inherit
   docker:
+    if: ${{ github.ref == 'refs/heads/main'}}
     needs: [test]
     uses: mraniki/coding_toolset/.github/workflows/🐳Docker.yml@main
     secrets: inherit
