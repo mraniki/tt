@@ -81,6 +81,7 @@ class ExchangePlugin(BasePlugin):
 
     async def execute_order(self, order_params):
         """Execute order."""
+        logger.debug("exchange plugin processing")
         action = order_params.get('action')
         instrument = order_params.get('instrument')
         # quantity = order_params.get('quantity', settings.trading_risk_amount)

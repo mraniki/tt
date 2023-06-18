@@ -47,6 +47,7 @@ class TalkyTrendPlugin(BasePlugin):
         """Handles incoming messages"""
         try:
             if self.enabled:
+                #move the below as part of the library
                 if msg == f"{settings.bot_prefix}{settings.bot_command_news}":
                     if self.trend.live_tv:
                         await self.send_notification(f"📺: {self.trend.live_tv}")
