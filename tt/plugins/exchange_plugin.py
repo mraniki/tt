@@ -1,14 +1,18 @@
-import ccxt
-from dxsp import DexSwap
+import os
 from tt.utils import BasePlugin, send_notification
 from tt.config import logger, settings
+import ccxt
+from dxsp import DexSwap
+from findmyorder import FindMyOrder
 
 class ExchangePlugin(BasePlugin):
-    name = "exchange_plugin"
+    name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
         try:
-            if settings.exchange_enabled:
+            self.enabled = settings.exchange_enabled
+            if self.enabled:
                 logger.info("exchange_plugin: init")
+                self.fmo = FindMyOrder()
                 if settings.cex_name:
                     logger.info("WIP CEX SETUP")
                 #     client = getattr(ccxt, settings.cex_name)
@@ -24,101 +28,127 @@ class ExchangePlugin(BasePlugin):
                 #         self.exchange.set_sandbox_mode('enabled')
                 elif settings.dex_chain_id:
                     logger.info("WIP DEX SETUP")
-                #     self.exchange = DexSwap()
-        except Exception as e:
-            logger.warning("exchange: %s", e)
+                    self.exchange = DexSwap()
+                    print(self.exchange)
+        except Exception as error:
+            logger.warning(error)
 
     async def start(self):
         """Starts the exchange_plugin plugin"""
         try:           
-            pass
-        except Exception as e:
-            logger.warning("exchange_plugin start %s",e)
+            if self.enabled:
+                pass
+        except Exception as error:
+            logger.warning(error)
 
     async def stop(self):
         """Stops the exchange_plugin plugin"""
-        pass
+        try:           
+            if self.enabled:
+                pass
+        except Exception as error:
+            logger.warning(error)
 
     async def send_notification(self, message):
         """Sends a notification"""
-        try:
-            await send_notification(message)
-        except Exception as e:
-            logger.warning("exchange_plugin send_notification %s",e)
+        try:           
+            if self.enabled:
+                await send_notification(message)
+        except Exception as error:
+            logger.warning(error)
 
     def should_handle(self, message):
         """Returns True if the plugin should handle the message"""
-        return False
+        return self.enabled
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        # if settings.trading_enabled and await fmo.search(msg):
-        #     # Order parsing
-        #     order = await fmo.get_order(msg)
-        #     # Order execution
-        #     order = await execute_order(order)
-        #     if order:
-        #         await send_notification(order)
-    #     elif command == settings.bot_command_quote:
+        try:           
+            if self.enabled and await self.fmo.search(msg):
+                order = await self.fmo.get_order(msg)
+                trade = await self.execute_order(order)
+                if trade:
+                    await send_notification(trade)
+            # elif command == settings.bot_command_quote
             # symbol = msg.split(" ")[1]
             # message = await get_quote(symbol)
         # elif command == settings.bot_command_bal:
         #     await account_balance_command()
         # elif command == settings.bot_command_pos:
         #     message = await account_position_command()
+        except Exception as error:
+            logger.warning(error)
 
-    # async def execute_order(order_params):
-    #     """Execute order."""
+    async def execute_order(self, order_params):
+        """Execute order."""
+        action = order_params.get('action')
+        instrument = order_params.get('instrument')
+        # quantity = order_params.get('quantity', settings.trading_risk_amount)
 
-    #     action = order_params.get('action')
-    #     instrument = order_params.get('instrument')
-    #     quantity = order_params.get('quantity', settings.trading_risk_amount)
+        try:
+            if not action or not instrument:
+                return
 
-    #     try:
-    #         if not action or not instrument:
-    #             return
+            if isinstance(self.exchange, DexSwap):
+                trade = await self.exchange.execute_order(order_params)
+                if not trade:
+                    return "⚠️ order execution failed"
 
-    #         if isinstance(exchange, DexSwap):
-    #             trade = await exchange.execute_order(order_params)
-    #             if not trade:
-    #                 return "⚠️ order execution failed"
+                trade_confirmation = f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
+                trade_confirmation += trade['confirmation']
 
-    #             trade_confirmation = f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
-    #             trade_confirmation += trade['confirmation']
+            # else:
+            #     if await self.get_account_balance() == "No Balance":
+            #         return "⚠️ Check Balance"
 
-    #         else:
-    #             if await get_account_balance() == "No Balance":
-    #                 return "⚠️ Check Balance"
+            #     asset_out_quote = float(self.exchange.fetchTicker(f'{instrument}').get('last'))
+            #     asset_out_balance = await self.get_trading_asset_balance()
 
-    #             asset_out_quote = float(exchange.fetchTicker(f'{instrument}').get('last'))
-    #             asset_out_balance = await get_trading_asset_balance()
+            #     if not asset_out_balance:
+            #         return
 
-    #             if not asset_out_balance:
-    #                 return
+            #     transaction_amount = (asset_out_balance * (float(quantity) / 100) / asset_out_quote)
 
-    #             transaction_amount = (asset_out_balance * (float(quantity) / 100) / asset_out_quote)
+            #     trade = self.exchange.create_order(
+            #         instrument,
+            #         settings.cex_ordertype,
+            #         action,
+            #         transaction_amount
+            #     )
 
-    #             trade = exchange.create_order(
-    #                 instrument,
-    #                 settings.cex_ordertype,
-    #                 action,
-    #                 transaction_amount
-    #             )
+            #     if not trade:
+            #         return
 
-    #             if not trade:
-    #                 return
+            #     trade_confirmation = f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
+            #     trade_confirmation += f"➕ Size: {round(trade['amount'], 4)}\n"
+            #     trade_confirmation += f"⚫️ Entry: {round(trade['price'], 4)}\n"
+            #     trade_confirmation += f"ℹ️ {trade['id']}\n"
+            #     trade_confirmation += f"🗓️ {trade['datetime']}"
 
-    #             trade_confirmation = f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
-    #             trade_confirmation += f"➕ Size: {round(trade['amount'], 4)}\n"
-    #             trade_confirmation += f"⚫️ Entry: {round(trade['price'], 4)}\n"
-    #             trade_confirmation += f"ℹ️ {trade['id']}\n"
-    #             trade_confirmation += f"🗓️ {trade['datetime']}"
+            return trade_confirmation
 
-    #         return trade_confirmation
-
-    #     except Exception as e:
-    #         return f"⚠️ order execution: {e}"
-        
+        except Exception as e:
+            return f"⚠️ order execution: {e}"
+    
+    async def get_account_balance(self):
+        """return account balance."""
+        balance = "🏦 Balance\n"
+        try:
+            if isinstance(self.exchange, DexSwap):
+                balance += str(await self.exchange.get_account_balance())
+            # else:
+            #     raw_balance = self.exchange.fetch_free_balance()
+            #     filtered_balance = {k: v for k, v in
+            #                         raw_balance.items()
+            #                         if v is not None and v > 0}
+            #     balance += "".join(f"{iterator}: {value} \n" for
+            #                     iterator, value in
+            #                     filtered_balance.items())
+            #     if not balance:
+            #         balance += "No Balance"
+            return balance
+        except Exception as e:
+            return f"⚠️ account_balance: {e}"
 
     # async def get_quote(symbol):
     #     """return quote"""
@@ -151,28 +181,6 @@ class ExchangePlugin(BasePlugin):
     #                 else str(exchange.uid))
     #     except Exception as e:
     #         return f"⚠️ account: {e}"
-
-
-    # async def get_account_balance():
-    #     """return account balance."""
-    #     balance = "🏦 Balance\n"
-    #     try:
-    #         if isinstance(exchange, DexSwap):
-    #             balance += str(await exchange.get_account_balance())
-    #         else:
-    #             raw_balance = exchange.fetch_free_balance()
-    #             filtered_balance = {k: v for k, v in
-    #                                 raw_balance.items()
-    #                                 if v is not None and v > 0}
-    #             balance += "".join(f"{iterator}: {value} \n" for
-    #                             iterator, value in
-    #                             filtered_balance.items())
-    #             if not balance:
-    #                 balance += "No Balance"
-    #         return balance
-    #     except Exception as e:
-    #         return f"⚠️ account_balance: {e}"
-
 
     # async def get_trading_asset_balance():
     #     """return main asset balance."""

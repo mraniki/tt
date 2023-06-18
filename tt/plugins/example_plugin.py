@@ -1,43 +1,52 @@
-#import your lib
+import os
 from tt.utils import BasePlugin, send_notification
 from tt.config import logger, settings
-
+#add your lib
 
 class ExamplePlugin(BasePlugin):
-    name = "example_plugin"
+    """Example Plugin"""
+    name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
         try:
-            if settings.example_plugin_enabled:
-                logger.info("plugin initialized")
-        except Exception as e:
-            logger.warning("init %s",e)
+            self.enabled = settings.example_plugin_enabled
+            if self.enabled:
+                logger.debug("plugin initialized")
+                #init your plugin
+        except Exception as error:
+            logger.warning(error)
 
     async def start(self):
         """Starts the plugin"""
         try:           
-            if settings.example_plugin_enabled:
-                logger.info("plugin started")
-        except Exception as e:
-            logger.warning("start %s",e)
+            if self.enabled:
+                logger.debug("plugin started")
+                #start your plugin 
+        except Exception as error:
+            logger.warning(error)
 
     async def stop(self):
         """Stops the plugin"""
-        pass
+        try:           
+            if self.enabled:
+                pass
+        except Exception as error:
+            logger.warning(error)
 
     async def send_notification(self, message):
         """Sends a notification"""
         try:
-            await send_notification(message)
-        except Exception as e:
-            logger.warning("plugin send_notification %s",e)
+            if self.enabled:
+                await send_notification(message)
+        except Exception as error:
+            logger.warning(error)
 
     def should_handle(self, message):
-        """Returns True if the plugin should handle incoming message"""
-        return False
+        """Returns plugin state"""
+        return self.enabled
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if settings.example_plugin_enabled:
+        if self.enabled:
             if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
                 await self.send_notification("this is an example")
             elif msg == f"{settings.bot_prefix}{settings.plugin_menu}":
