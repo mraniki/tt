@@ -156,7 +156,7 @@ async def test_get_host_ip():
 @pytest.mark.asyncio
 async def test_get_ping():
     """Test get_host_ip """
-    output = get_host_ip()
+    output = get_ping()
     assert output is not None
 
 @pytest.mark.asyncio
