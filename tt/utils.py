@@ -108,6 +108,7 @@ async def parse_message(msg):
             elif command == settings.bot_command_restart:
                 await restart_command()
             if message is not None:
+                message = await get_quote(symbol)
                 await send_notification(message)
 
         # Order found

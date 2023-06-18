@@ -1,39 +1,55 @@
-import socket
-import ping3
+import os
 from tt.utils import BasePlugin, send_notification
 from tt.config import logger, settings
-
+import socket
+import ping3
 
 class NetworkPlugin(BasePlugin):
-    name = "network_plugin"
+    name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
         try:
-            if settings.network_enabled:
+            self.enabled = settings.network_enabled
+            if self.enabled:
                 logger.info("network_plugin initialized")
-        except Exception as e:
-            logger.warning("network_plugin init %s",e)
+        except Exception as error:
+            logger.warning(error)
 
     async def start(self):
         """Starts the plugin"""
-        pass
-
+        try:           
+            if self.enabled:
+                pass
+        except Exception as error:
+            logger.warning(error)
+    
     async def stop(self):
         """Stops the plugin"""
-        pass
+        try:           
+            if self.enabled:
+                pass
+        except Exception as error:
+            logger.warning(error)
 
     async def send_notification(self, message):
         """Sends a notification"""
-        try:
-            await send_notification(message)
-        except Exception as e:
-            logger.warning("plugin send_notification %s",e)
+        try:           
+            if self.enabled:
+                await send_notification(message)
+        except Exception as error:
+            logger.warning(error)
 
     def should_handle(self, message):
         """Returns True if the plugin should handle incoming message"""
-        return False
+        return self.enabled
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
+        try:           
+            if self.enabled:
+                pass
+        except Exception as error:
+            logger.warning(error)
+        # if self.enabled:
         # if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
         #     await self.send_notification("this is an example from the example_plugin")
         # elif msg == f"{settings.bot_prefix}{settings.plugin_menu}":

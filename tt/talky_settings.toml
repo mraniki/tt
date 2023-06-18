@@ -78,6 +78,7 @@ quantity = 1
 exchange_enabled = true
 
 # CEX config
+cex_enabled = false
 cex_name = ""
 cex_api = ""
 cex_secret = ""
