@@ -2,6 +2,26 @@
 
 <!--next-version-placeholder-->
 
+## v3.5.1 (2023-06-18)
+
+### Fix
+
+* ♻️ refactor ([`81c9b20`](https://github.com/mraniki/tt/commit/81c9b203d9f8f4548865f58ea4326831cdecd0c0))
+* ✅ unit test ([`f7e59e4`](https://github.com/mraniki/tt/commit/f7e59e46733b2fdf4493cb17eeb4101191ef7c4f))
+* :white_check_mark: Add new tests for DexExchangePlugin ([`c4cd5b1`](https://github.com/mraniki/tt/commit/c4cd5b1858cf60a6c7f7737cd31516725ec756d9))
+* :white_check_mark: Add new tests for DexExchangePlugin ([`4ee21b3`](https://github.com/mraniki/tt/commit/4ee21b3a249390b7c6e33ba9eafe99ae8296bd40))
+* :recycle: refactor test ([`975fb37`](https://github.com/mraniki/tt/commit/975fb3742be4ea9a92732788831f0b3d8f926fb5))
+* ♻️ refactor of the utils functions ([`a87fcfd`](https://github.com/mraniki/tt/commit/a87fcfd18e778d4f91aefd17ec0122ed65eb30b0))
+* 🐛 bug self missing in dex/cex ([`c38012d`](https://github.com/mraniki/tt/commit/c38012dfacbd25294d8285b9df0138a5c80ae92f))
+* :recycle: Refactor exchange plugin and bot start function ([`fc4b68d`](https://github.com/mraniki/tt/commit/fc4b68d509bac08db37b0b63e644f10ffaefba08))
+* ♻️ refactor ([`8c50dc2`](https://github.com/mraniki/tt/commit/8c50dc2871c4033acf6fdd9cff3f7e5eec544398))
+
+### Other
+
+* 'Refactored by Sourcery' ([`d2955e3`](https://github.com/mraniki/tt/commit/d2955e39a7f6d1bc786cd83e5effc19d83abef33))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`8d1ec97`](https://github.com/mraniki/tt/commit/8d1ec9714c41acac5df73e69b3f3bae18492ff45))
+* 'Refactored by Sourcery' ([`5bf9dca`](https://github.com/mraniki/tt/commit/5bf9dca95a6b3abee4b339e204f6b5b7b0da1547))
+
 ## v3.5.0 (2023-06-18)
 
 ### Feature
