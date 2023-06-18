@@ -1,4 +1,9 @@
 [default]
+##############
+## DEFAULT  ##
+## SETTINGS ##
+##############
+
 #settings env check
 VALUE = "Production - Default"
 #LOG LEVEL
@@ -8,10 +13,25 @@ host = "0.0.0.0"
 port = 8080
 webhook_secret = "123abc"
 
-#plugin
+##############
+### PLUGIN ###
+##############
+
 plugin_enabled = true
 plugin_menu = "plugin"
 example_plugin_enabled = false
+
+#iamlistening
+iamlistening_enabled = true
+bot_token = ""
+bot_channel_id = ""
+telethon_api_id = ""
+telethon_api_hash = ""
+matrix_hostname = ""
+matrix_user = ""
+matrix_pass = ""
+discord_webhook_id = ""
+discord_webhook_token = ""
 
 
 #BOTCOMMAND
@@ -27,17 +47,17 @@ bot_command_restart = "restart"
 bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
 
-#iamlistening
-iamlistening_enabled = true
-bot_token = ""
-bot_channel_id = ""
-telethon_api_id = ""
-telethon_api_hash = ""
-matrix_hostname = ""
-matrix_user = ""
-matrix_pass = ""
-discord_webhook_id = ""
-discord_webhook_token = ""
+
+##############
+## TRADING  ##
+##############
+
+# TRADING
+trading_enabled = true #bool
+trading_asset = "USDT"
+trading_risk_amount = 10
+trading_stop_loss = 1000
+trading_take_profit = 1000
 
 #findmyorder
 findmyorder_enabled = true
@@ -52,16 +72,10 @@ stop_loss = 1000
 take_profit = 1000
 quantity = 1
 
-#exchange
+##############
+## EXCHANGE ##
+##############
 exchange_enabled = false
-
-# TRADING
-trading_enabled = true #bool
-trading_asset = "USDT"
-trading_risk_amount = 10
-trading_stop_loss = 1000
-trading_take_profit = 1000
-
 
 # CEX config
 cex_name = ""
@@ -105,6 +119,10 @@ dex_1inch_limit_url = "https://limit-orders.1inch.io/v3.0/"
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
 
+##############
+### OTHERS ###
+##############
+
 #talkytrend
 talkytrend_enabled = true
 # scanner_frequency = 86400
@@ -124,14 +142,19 @@ enable_news = false
 # news_api_key = ""
 live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
 
-
 #network
 network_enabled = false
 ping = "8.8.8.8"
 
 
 
+
+
 [testing]
+##############
+## SETTINGS ##
+## FOR TEST ##
+##############
 VALUE = "On Testing"
 cex_name = ""
 trading_enabled = true
@@ -171,6 +194,10 @@ bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>
 example_plugin_enabled = true
 
 [testing_cex]
+##############
+## SETTINGS ##
+## FOR TEST ##
+##############
 VALUE = "On Testing CEX_binance"
 cex_name = 'binance'
 cex_api = 'api_key'
@@ -181,6 +208,10 @@ cex_testmode = true
 dex_chain_id = ""
 
 [testing_dex_56]
+##############
+## SETTINGS ##
+## FOR TEST ##
+##############
 VALUE = "On Testing DEX_56"
 cex_name = ""
 dex_wallet_address = "0x1234567890123456789012345678901234567899"
@@ -196,6 +227,10 @@ bot_channel_id = "1234567890"
 ping = "8.8.8.8"
 
 [testing_dex_10]
+##############
+## SETTINGS ##
+## FOR TEST ##
+##############
 VALUE = "On Testing DEX_10"
 cex_name = ""
 dex_wallet_address = "0x1234567890123456789012345678901234567899"
