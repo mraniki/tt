@@ -17,14 +17,14 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10.0"
-pytest = "^7.3.1"
+pytest = "*"
 pytest-cov = "*"
 pytest-asyncio = "*"
 pytest-mock = "*"
 httpx = "*"
-ping3 = "^4.0.4"
-uvicorn = "^0.22.0"
-fastapi = "^0.97.0"
+ping3 = "*"
+uvicorn = "*"
+fastapi = "*"
 ccxt = "^3.1.33"
 dynaconf = "^3.1.12"
 apprise= "^1.4.0"
