@@ -33,12 +33,13 @@ class ExamplePlugin(BasePlugin):
 
     def should_handle(self, message):
         """Returns True if the plugin should handle incoming message"""
-        return True
+        return False
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
-            await self.send_notification("this is an example")
-        elif msg == f"{settings.bot_prefix}{settings.plugin_menu}":
-            plugin_menu_message = f"⚙️:\n{settings.bot_prefix}{settings.plugin_menu}"
-            await self.send_notification(plugin_menu_message)
+        if settings.example_plugin_enabled:
+            if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
+                await self.send_notification("this is an example")
+            elif msg == f"{settings.bot_prefix}{settings.plugin_menu}":
+                plugin_menu_message = f"⚙️:\n{settings.bot_prefix}{settings.plugin_menu}"
+                await self.send_notification(plugin_menu_message)

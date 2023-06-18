@@ -22,7 +22,7 @@ async def listener():
 
     bot_listener = Listener()
     task = asyncio.create_task(bot_listener.run_forever())
-    await init_message()
+    await send_notification(await init_message())
     message_processor = MessageProcessor()
     if settings.plugin_enabled:
         message_processor.load_plugins("tt.plugins")

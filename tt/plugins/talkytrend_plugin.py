@@ -39,12 +39,13 @@ class TalkyTrendPlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if msg == f"{settings.bot_prefix}{settings.bot_command_news}":
-            if self.trend.live_tv:
-                await self.send_notification(f"📺: {self.trend.live_tv}")
-        elif msg == f"{settings.bot_prefix}{settings.bot_command_help}":
-            help_message = f"📺:\n{settings.bot_prefix}{settings.bot_command_news}"
-            await self.send_notification(help_message)
-        elif msg == f"{settings.bot_prefix}{settings.plugin_menu}":
-            plugin_menu_message = f"⚙️:\n{settings.bot_prefix}{settings.plugin_menu}"
-            await self.send_notification(plugin_menu_message)
+        if settings.talkytrend_enabled:
+            if msg == f"{settings.bot_prefix}{settings.bot_command_news}":
+                if self.trend.live_tv:
+                    await self.send_notification(f"📺: {self.trend.live_tv}")
+            elif msg == f"{settings.bot_prefix}{settings.bot_command_help}":
+                help_message = f"📺:\n{settings.bot_prefix}{settings.bot_command_news}"
+                await self.send_notification(help_message)
+            elif msg == f"{settings.bot_prefix}{settings.plugin_menu}":
+                plugin_menu_message = f"⚙️:\n{settings.bot_prefix}{settings.plugin_menu}"
+                await self.send_notification(plugin_menu_message)
