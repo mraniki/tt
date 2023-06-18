@@ -27,7 +27,6 @@ class ExchangePlugin(BasePlugin):
                 #     self.exchange = DexSwap()
         except Exception as e:
             logger.warning("exchange: %s", e)
-            return "Exchange not loaded"
 
     async def start(self):
         """Starts the exchange_plugin plugin"""
