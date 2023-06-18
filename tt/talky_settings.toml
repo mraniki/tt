@@ -53,7 +53,7 @@ take_profit = 1000
 quantity = 1
 
 #exchange
-exchange_enabled = true
+exchange_enabled = false
 
 # TRADING
 trading_enabled = true #bool
@@ -126,7 +126,7 @@ live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
 
 
 #network
-network_enabled = true
+network_enabled = false
 ping = "8.8.8.8"
 
 
