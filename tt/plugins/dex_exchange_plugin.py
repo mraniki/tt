@@ -11,7 +11,6 @@ class DexExchangePlugin(BasePlugin):
         try:
             self.enabled = settings.dxsp_enabled
             if self.enabled:
-                logger.info("exchange_plugin: init")
                 self.fmo = FindMyOrder()
                 if settings.dex_chain_id:
                     self.exchange = DexSwap()
