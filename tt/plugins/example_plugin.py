@@ -7,11 +7,11 @@ class ExamplePlugin(BasePlugin):
     """Example Plugin"""
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
+        """Plugin Initialization"""
         try:
             self.enabled = settings.example_plugin_enabled
             if self.enabled:
                 logger.debug("plugin initialized")
-                #init your plugin
         except Exception as error:
             logger.warning(error)
 
@@ -48,7 +48,8 @@ class ExamplePlugin(BasePlugin):
         """Handles incoming messages"""
         if self.enabled:
             if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
-                await self.send_notification("this is an example")
+                await self.send_notification(
+                    "this is an example")
             elif msg == f"{settings.bot_prefix}{settings.plugin_menu}":
                 plugin_menu_message = f"⚙️:\n{settings.bot_prefix}{settings.plugin_menu}"
                 await self.send_notification(plugin_menu_message)
