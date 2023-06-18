@@ -13,7 +13,6 @@ class CexExchangePlugin(BasePlugin):
             if self.enabled:
                 self.fmo = FindMyOrder()
                 if settings.cex_name:
-                    logger.info("WIP CEX SETUP")
                     client = getattr(ccxt, settings.cex_name)
                     self.exchange = client({
                         'apiKey': settings.cex_api,
@@ -32,16 +31,14 @@ class CexExchangePlugin(BasePlugin):
     async def start(self):
         """Starts the exchange_plugin plugin"""
         try:
-            if self.enabled:
-                pass
+            pass
         except Exception as error:
             logger.warning(error)
 
     async def stop(self):
         """Stops the exchange_plugin plugin"""
         try:
-            if self.enabled:
-                pass
+            pass
         except Exception as error:
             logger.warning(error)
 
@@ -68,11 +65,11 @@ class CexExchangePlugin(BasePlugin):
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_quote:
                 symbol = msg.split(" ")[1]
-                await send_notification(f"{await self.get_quote(symbol)}")
+                await self.send_notification(f"🏦 {await self.exchange.fetchTicker(symbol)}")
             elif command == settings.bot_command_bal:
-                await send_notification(f"{await self.get_account_balance()}")
+                await self.send_notification(f"{await self.get_account_balance()}")
             elif command == settings.bot_command_pos:
-                await send_notification(f"{await self.get_account_position()}")
+                await self.send_notification(f"{await self.get_account_position()}")
         except Exception as error:
             logger.warning(error)
 
@@ -95,7 +92,8 @@ class CexExchangePlugin(BasePlugin):
             if not asset_out_balance:
                 return
 
-            transaction_amount = (asset_out_balance * (float(quantity) / 100) / asset_out_quote)
+            transaction_amount = (
+                asset_out_balance * (float(quantity) / 100) / asset_out_quote)
 
             trade = self.exchange.create_order(
                 instrument,
@@ -132,16 +130,8 @@ class CexExchangePlugin(BasePlugin):
             if not balance:
                 balance += "No Balance"
             return balance
-        except Exception as e:
-            return f"⚠️ account_balance: {e}"
-
-    async def get_quote(self, symbol):
-        """return quote"""
-        try:
-            logger.debug("get_quote: %s", symbol)
-            return f"🏦 {await self.exchange.fetchTicker (symbol)}"
-        except Exception as e:
-            return f"⚠️ quote: {e}"
+        except Exception as error:
+            logger.warning(error)
 
     async def get_account_position(self):
         """return account position."""
@@ -149,39 +139,31 @@ class CexExchangePlugin(BasePlugin):
             open_positions = self.exchange.fetch_positions()
             open_positions = [p for p in open_positions if p['type'] == 'open']
             position = "📊 Position\n" + str(open_positions)
-            position += str(await self.get_account_margin())
+            position += str(await self.exchange.fetch_balance({'type': 'margin',}))
             return position
         except Exception as e:
             return f"⚠️ account_position: {e}"
 
-    async def get_account_margin(self):
-        try:
-            await self.exchange.fetch_balance({'type': 'margin',})
-        except Exception as e:
-            return f"⚠️ account_margin: {e}"
-
     async def get_name(self):
         """Return exchange name"""
         try:
-            return  self.exchange.id
-        except Exception as e:
-            return f"⚠️ exchange name: {e}"
+            return self.exchange.id
+        except Exception as error:
+            logger.warning(error)
 
     async def get_trading_asset_balance(self):
         """return main asset balance."""
         try:
             return self.exchange.fetchBalance()[f"{settings.trading_asset}"]["free"]
-        except Exception as e:
-            return f"⚠️ Check balance {settings.trading_asset}: {e}"
+        except Exception as error:
+            logger.warning(error)
 
-    # async def get_account(exchange):
-    #     """Return exchange account"""
-    #     try:
-    #         return (exchange.account
-    #                 if isinstance(exchange, DexSwap)
-    #                 else str(exchange.uid))
-    #     except Exception as e:
-    #         return f"⚠️ account: {e}"
+    async def get_account(self):
+        """Return exchange account"""
+        try:
+            return self.exchange.uid
+        except Exception as error:
+            logger.warning(error)
 
 
 

@@ -21,16 +21,14 @@ class DexExchangePlugin(BasePlugin):
     async def start(self):
         """Starts the exchange_plugin plugin"""
         try:
-            if self.enabled:
-                pass
+            pass
         except Exception as error:
             logger.warning(error)
 
     async def stop(self):
         """Stops the exchange_plugin plugin"""
         try:
-            if self.enabled:
-                pass
+            pass
         except Exception as error:
             logger.warning(error)
 
@@ -57,11 +55,11 @@ class DexExchangePlugin(BasePlugin):
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_quote:
                 symbol = msg.split(" ")[1]
-                await self.send_notification(f"{await self.get_quote(symbol)}")
+                await self.send_notification(f"{await self.exchange.get_quote(symbol)}")
             elif command == settings.bot_command_bal:
                 await self.send_notification(f"{await self.get_account_balance()}")
             elif command == settings.bot_command_pos:
-                await send_notification(f"{await self.get_account_position()}")
+                await self.send_notification(f"{await self.get_account_position()}")
         except Exception as error:
             logger.warning(error)
 
@@ -90,19 +88,9 @@ class DexExchangePlugin(BasePlugin):
         """return account balance."""
         balance = "🏦 Balance\n"
         try:
-            if isinstance(self.exchange, DexSwap):
-                return str(await self.exchange.get_account_balance())
+            return "🏦 Balance\n" + str(await self.exchange.get_account_balance())
         except Exception as e:
             return f"⚠️ account_balance: {e}"
-
-    async def get_quote(self, symbol):
-        """return quote"""
-        try:
-            logger.debug("get_quote: %s", symbol)
-            if isinstance(self.exchange, DexSwap):
-                return (await self.exchange.get_quote(symbol))
-        except Exception as e:
-            return f"⚠️ quote: {e}"
 
     async def get_account_position(self):
         """return account position."""
@@ -110,18 +98,10 @@ class DexExchangePlugin(BasePlugin):
             if isinstance(self.exchange, DexSwap):
                 open_positions = await self.exchange.get_account_position()
                 position = "📊 Position\n" + str(open_positions)
-                position += str(await self.get_account_margin())
+                position += str(await self.exchange.get_account_margin())
                 return position
         except Exception as e:
             return f"⚠️ account_position: {e}"
-
-    async def get_account_margin(self):
-        try:
-            if isinstance(self.exchange, DexSwap):
-                return "\n🪙 margin\n" + (
-                    str(await self.exchange.get_account_margin()))
-        except Exception as e:
-            return f"⚠️ account_margin: {e}"
 
     async def get_name(self):
         """Return exchange name"""
@@ -130,24 +110,20 @@ class DexExchangePlugin(BasePlugin):
         except Exception as e:
             return f"⚠️ exchange name: {e}"
 
-    # async def get_account(exchange):
-    #     """Return exchange account"""
-    #     try:
-    #         return (exchange.account
-    #                 if isinstance(exchange, DexSwap)
-    #                 else str(exchange.uid))
-    #     except Exception as e:
-    #         return f"⚠️ account: {e}"
+    async def get_account(self):
+        """Return exchange account"""
+        try:
+            return self.exchange.account
 
-    # async def get_trading_asset_balance():
-    #     """return main asset balance."""
-    #     try:
-    #         if isinstance(exchange, DexSwap):
-    #             return await exchange.get_trading_asset_balance()
-    #         else:
-    #             return exchange.fetchBalance()[f"{settings.trading_asset}"]["free"]
-    #     except Exception as e:
-    #         return f"⚠️ Check balance {settings.trading_asset}: {e}"
+        except Exception as e:
+            return f"⚠️ account: {e}"
+
+    async def get_trading_asset_balance(self):
+        """return main asset balance."""
+        try:
+            return await self.exchange.get_trading_asset_balance()
+        except Exception as e:
+            return f"⚠️ Check balance {settings.trading_asset}: {e}"
 
 
 
