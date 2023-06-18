@@ -33,7 +33,7 @@ class ExamplePlugin(BasePlugin):
 
     def should_handle(self, message):
         """Returns True if the plugin should handle incoming message"""
-        return True
+        return False
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
