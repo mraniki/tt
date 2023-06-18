@@ -26,18 +26,18 @@ def wrong_order():
         'quantity': 1,
         }
 
-@pytest.fixture(name="dex")
+@pytest.fixture(name="exchange")
 @pytest.mark.asyncio
 async def test_dex_exchange():
     # Arrange
-    plugin = DexExchangePlugin()
-    return plugin
+    exchange = DexExchangePlugin()
+    return exchange
 
 @pytest.mark.asyncio
-async def test_dex_exchange_plugin(dex):
+async def test_dex_exchange_plugin(exchange):
     # Arrange
-    assert dex is not None
-    assert isinstance(dex, dxsp.DexSwap)
+    assert exchange is not None
+    assert isinstance(exchange, dxsp.DexSwap)
     # Act
     #await plugin.start()
     # await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
@@ -46,93 +46,72 @@ async def test_dex_exchange_plugin(dex):
     # assert plugin.should_handle("any message") is True
 
 @pytest.mark.asyncio
-async def test_dex_quote(dex, caplog):
+async def test_quote(exchange, caplog):
     """Test parse_message balance """
     #get_quote= AsyncMock("WBTC")
     await dex.handle_message('/q WBTC')
     assert 'quote [1, 0]' in caplog.text
 
 @pytest.mark.asyncio
-async def test_dex_balance(dex):
+async def test_balance(exchange):
     """Test balance """
     #send_notification_mock = AsyncMock()
     get_account_balance= AsyncMock()
-    await dex.handle_message('/bal')
+    await exchange.handle_message('/bal')
     get_account_balance.assert_called_once
 
 @pytest.mark.asyncio
-async def test_dex_position(dex):
+async def test_dex_position(exchange):
     """Test balance """
     get_account_position= AsyncMock()
-    await dex.handle_message('/pos')
+    await exchange.handle_message('/pos')
     get_account_position.assert_called_once
 
 @pytest.mark.asyncio
-async def test_dex_load_exchange(dex):
+async def test_dex_load_exchange(exchange):
     """test exchange dex"""
-    account = await dex.get_account()
+    account = await exchange.get_account()
     assert account == "1 - 34567890"
 
+# @pytest.mark.asyncio
+# async def test_execute_order(exchange, caplog, order):
+#     execute_mock = AsyncMock()
+#     with patch('tt.plugins.dex_exchange_plugin.execute_order',execute_mock):
+#         trade_confirmation = await dex.execute_order(order)
+#         assert "⚠️ order execution:" in caplog.text
+
+
 @pytest.mark.asyncio
-async def test_failure_execute_order(dex, caplog, order):
-    execute_mock = AsyncMock()
-    with patch('tt.plugins.dex_exchange_plugin.execute_order',execute_mock):
-        trade_confirmation = await dex.execute_order(order)
-        assert "⚠️ order execution:" in caplog.text
+async def test_failed_execute_order(exchange, caplog, order):
+    trade_confirmation = await exchange.execute_order(order)
+    assert "🗓️" not in caplog.text
 
+@pytest.mark.asyncio
+async def test_get_quote(exchange):
+    """Test get_quote """
+    output = await get_quote("WBTC")
+    print(output)
+    assert output is not None
 
+@pytest.mark.asyncio
+async def test_get_account_balance(exchange):
+    """Test get_account_balance."""
+    output = await exchange.get_account_balance()
+    print(output)
+    assert output is not None
 
-
-
-
-# @pytest.mark.asyncio
-# async def test_failed_execute_order(caplog, order):
-#     await load_exchange()
-#     trade_confirmation = await execute_order(order)
-#     assert "🗓️" not in caplog.text
-
-
-# @pytest.mark.asyncio
-# async def test_get_quote():
-#     """Test get_quote """
-#     await load_exchange()
-#     output = await get_quote("WBTC")
-#     print(output)
-#     assert output is not None
-
-
-# @pytest.mark.asyncio
-# async def test_get_account_balance():
-#     """Test get_account_balance."""
-#     await load_exchange()
-#     output = await get_account_balance()
-#     print(output)
-#     assert output is not None
-
+@pytest.mark.asyncio
+async def test_get_account_position(exchange):
+    """Test get_account_positions."""
+    output = await exchange.get_account_position()
+    print(output)
+    assert output is not None
 
 # @pytest.mark.asyncio
 # async def test_get_trading_asset_balance():
 #     """Test get_asset_trading_balance."""
 #     await load_exchange()
 #     output = await get_trading_asset_balance()
-#     print(output)
-#     assert output is not None
-
-    
-# @pytest.mark.asyncio
-# async def test_get_account_position():
-#     """Test get_account_positions."""
-#     await load_exchange() 
-#     output = await get_account_position()
-#     print(output)
-#     assert output is not None
-
-
-# @pytest.mark.asyncio
-# async def test_get_account_margin():
-#     """Test get_account_margin """
-#     await load_exchange() 
-#     output = await get_account_margin()
 #     print(output)
 #     assert output is not None
 
