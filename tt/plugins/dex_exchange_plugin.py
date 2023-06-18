@@ -21,16 +21,14 @@ class DexExchangePlugin(BasePlugin):
     async def start(self):
         """Starts the exchange_plugin plugin"""
         try:
-            if self.enabled:
-                pass
+            pass
         except Exception as error:
             logger.warning(error)
 
     async def stop(self):
         """Stops the exchange_plugin plugin"""
         try:
-            if self.enabled:
-                pass
+            pass
         except Exception as error:
             logger.warning(error)
 
@@ -90,9 +88,7 @@ class DexExchangePlugin(BasePlugin):
         """return account balance."""
         balance = "🏦 Balance\n"
         try:
-            balance = "🏦 Balance\n"
-            balance += str(await self.exchange.get_account_balance())
-            return balance
+            return "🏦 Balance\n" + str(await self.exchange.get_account_balance())
         except Exception as e:
             return f"⚠️ account_balance: {e}"
 

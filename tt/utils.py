@@ -95,15 +95,7 @@ async def parse_message(msg):
 # 🦾BOT ACTIONS
 async def init_message():
     version = __version__
-    # try:
-    #     ip = get_host_ip()
-    #     ping = get_ping()
-    #     exchange_name = await get_name()
-    #     account_info = await get_account(exchange)
-    #     start_up = f"🗿 {version}\n🕸️ {ip}\n🏓 {ping}\n💱 {exchange_name}\n🪪 {account_info}"
-    # except Exception:
-    start_up = f"🗿 {version}\n"
-    return start_up
+    return f"🗿 {version}\n"
 
 
 async def trading_switch_command():
