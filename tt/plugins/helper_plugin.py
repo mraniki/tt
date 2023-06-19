@@ -53,6 +53,11 @@ class HelperPlugin(BasePlugin):
                 if self.enabled:
                     await self.send_notification(
                         self.version+self.help_message)
+    #     ip = get_host_ip()
+    #     ping = get_ping()
+    #     exchange_name = await get_name()
+    #     account_info = await get_account(exchange)
+    #     start_up = f"🗿 {version}\n🕸️ {ip}\n🏓 {ping}\n💱 {exchange_name}\n🪪 {account_info}"
                 
         except Exception as error:
             logger.warning(error)
@@ -74,6 +79,9 @@ class HelperPlugin(BasePlugin):
         # if msg.startswith(settings.bot_prefix):
         #     # message = None
         #     command = (msg.split(" ")[0])[1:] 
+        
+    
+        
     async def trading_switch_command(self):
         settings.trading_enabled = not settings.trading_enabled
         return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
