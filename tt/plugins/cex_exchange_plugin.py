@@ -43,26 +43,27 @@ class CexExchangePlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if self.enabled:
-            if msg.startswith(settings.bot_ignore):
-                return
-            if await self.fmo.search(msg):
-                order = await self.fmo.get_order(msg)
-                trade = await self.execute_order(order)
-                if trade:
-                    await send_notification(trade)
-            if msg.startswith(settings.bot_prefix):
-                command = (msg.split(" ")[0])[1:]
-                if command == settings.bot_command_quote:
-                    symbol = msg.split(" ")[1]
-                    await self.send_notification(
-                    f"🏦 {await self.exchange.fetchTicker(symbol)}")
-                elif command == settings.bot_command_bal:
-                    await self.send_notification(f"{await self.get_account_balance()}")
-                elif command == settings.bot_command_pos:
-                    await self.send_notification(f"{await self.get_account_position()}")
-                elif command == settings.bot_command_help:
-                    await self.send_notification(self.info_message())
+        if not self.enabled:
+            return
+        if msg.startswith(settings.bot_ignore):
+            return
+        if await self.fmo.search(msg):
+            order = await self.fmo.get_order(msg)
+            trade = await self.execute_order(order)
+            if trade:
+                await send_notification(trade)
+        if msg.startswith(settings.bot_prefix):
+            command = (msg.split(" ")[0])[1:]
+            if command == settings.bot_command_quote:
+                symbol = msg.split(" ")[1]
+                await self.send_notification(
+                f"🏦 {await self.exchange.fetchTicker(symbol)}")
+            elif command == settings.bot_command_bal:
+                await self.send_notification(f"{await self.get_account_balance()}")
+            elif command == settings.bot_command_pos:
+                await self.send_notification(f"{await self.get_account_position()}")
+            elif command == settings.bot_command_help:
+                await self.send_notification(self.info_message())
 
     def info_message(self):
         """info_message"""    
@@ -120,14 +121,14 @@ class CexExchangePlugin(BasePlugin):
 
     async def get_account_balance(self):
         """return account balance."""
-        balance = "🏦 Balance\n"
         raw_balance = self.exchange.fetch_free_balance()
         filtered_balance = {k: v for k, v in
                             raw_balance.items()
                             if v is not None and v > 0}
-        balance += "".join(f"{iterator}: {value} \n" for
-                        iterator, value in
-                        filtered_balance.items())
+        balance = "🏦 Balance\n" + "".join(
+            f"{iterator}: {value} \n"
+            for iterator, value in filtered_balance.items()
+        )
         if not balance:
             balance += "No Balance"
         return balance

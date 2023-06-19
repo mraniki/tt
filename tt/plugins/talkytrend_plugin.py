@@ -20,9 +20,7 @@ class TalkyTrendPlugin(BasePlugin):
 
 
     async def stop(self):
-        """Stops the TalkyTrend plugin"""          
-        if self.enabled:
-            pass
+        """Stops the TalkyTrend plugin"""
 
     async def send_notification(self, message):
         """Sends a notification"""
@@ -36,15 +34,16 @@ class TalkyTrendPlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if self.enabled:
-            if msg.startswith(settings.bot_ignore):
-                return
-            if msg.startswith(settings.bot_prefix):
-                command = (msg.split(" ")[0])[1:]
-                if command == settings.bot_command_news:
-                    if self.trend.live_tv:
-                        await self.send_notification(f"📺: {self.trend.live_tv}")
-                elif command == settings.bot_command_help:
-                    help_message = f"📺:\n{settings.bot_prefix}{settings.bot_command_news}"
-                    await self.send_notification(help_message)
+        if not self.enabled:
+            return
+        if msg.startswith(settings.bot_ignore):
+            return
+        if msg.startswith(settings.bot_prefix):
+            command = (msg.split(" ")[0])[1:]
+            if command == settings.bot_command_news:
+                if self.trend.live_tv:
+                    await self.send_notification(f"📺: {self.trend.live_tv}")
+            elif command == settings.bot_command_help:
+                help_message = f"📺:\n{settings.bot_prefix}{settings.bot_command_news}"
+                await self.send_notification(help_message)
 

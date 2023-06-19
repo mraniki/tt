@@ -34,26 +34,27 @@ class DexExchangePlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if self.enabled:
-            if msg.startswith(settings.bot_ignore):
-                return
-            if await self.fmo.search(msg):
-                order = await self.fmo.get_order(msg)
-                trade = await self.execute_order(order)
-                if trade:
-                    await send_notification(trade)
-            if msg.startswith(settings.bot_prefix):
-                command = (msg.split(" ")[0])[1:]
-                if command == settings.bot_command_quote:
-                    symbol = msg.split(" ")[1]
-                    await self.send_notification(
-                        f"{await self.exchange.get_quote(symbol)}")
-                elif command == settings.bot_command_bal:
-                    await self.send_notification(f"{await self.get_account_balance()}")
-                elif command == settings.bot_command_pos:
-                    await self.send_notification(f"{await self.get_account_position()}")
-                elif command == settings.bot_command_help:
-                    await self.send_notification(await self.info_message())
+        if not self.enabled:
+            return
+        if msg.startswith(settings.bot_ignore):
+            return
+        if await self.fmo.search(msg):
+            order = await self.fmo.get_order(msg)
+            trade = await self.execute_order(order)
+            if trade:
+                await send_notification(trade)
+        if msg.startswith(settings.bot_prefix):
+            command = (msg.split(" ")[0])[1:]
+            if command == settings.bot_command_quote:
+                symbol = msg.split(" ")[1]
+                await self.send_notification(
+                    f"{await self.exchange.get_quote(symbol)}")
+            elif command == settings.bot_command_bal:
+                await self.send_notification(f"{await self.get_account_balance()}")
+            elif command == settings.bot_command_pos:
+                await self.send_notification(f"{await self.get_account_position()}")
+            elif command == settings.bot_command_help:
+                await self.send_notification(await self.info_message())
 
     async def info_message(self):
         """info_message"""    
