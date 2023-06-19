@@ -54,5 +54,6 @@ async def test_example_plugin():
 async def test_trading_switch():
     """Test switch """
     plugin = HelperPlugin()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_trading}")
+    #await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_trading}")
+    await plugin.trading_switch_command()
     assert settings.trading_enabled == False
