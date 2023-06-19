@@ -22,16 +22,14 @@ class HelperPlugin(BasePlugin):
     async def start(self):
         """Starts the plugin"""
         try:
-            if self.enabled:
-                pass
+            pass
         except Exception as error:
             logger.warning(error)
 
     async def stop(self):
         """Stops the plugin"""
         try:
-            if self.enabled:
-                pass
+            pass
         except Exception as error:
             logger.warning(error)
 
@@ -50,8 +48,8 @@ class HelperPlugin(BasePlugin):
     async def handle_message(self, msg):
         """Handles incoming messages"""
         try:
-            if self.enabled:
-                if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
+            if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
+                if self.enabled:
                     await self.send_notification(
                         self.version+self.help_message)
         except Exception as error:

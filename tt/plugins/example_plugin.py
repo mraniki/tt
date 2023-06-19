@@ -26,9 +26,8 @@ class ExamplePlugin(BasePlugin):
 
     async def stop(self):
         """Stops the plugin"""
-        try:           
-            if self.enabled:
-                pass
+        try:       
+            pass
         except Exception as error:
             logger.warning(error)
 
@@ -46,7 +45,7 @@ class ExamplePlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if self.enabled:
-            if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
+        if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
+            if self.enabled:
                 await self.send_notification(
                     "this is an example")
