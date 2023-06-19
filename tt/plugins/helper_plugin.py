@@ -48,7 +48,7 @@ class HelperPlugin(BasePlugin):
     
     def help_command(self):
         """Help Message"""
-        return (f"🗿 {self.version}\n"
+        return (f"{self.version}\n"
                 f"🕸️ {self.host_ip}\n"
                 f"🏓 {round(ping3.ping(settings.ping, unit='ms'), 3)}\n"
                 f"{self.help_message}")
