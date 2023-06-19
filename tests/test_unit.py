@@ -1,22 +1,12 @@
 """
  TT test
 """
-from unittest.mock import AsyncMock, MagicMock, patch
+
 import pytest
-import ccxt
-import dxsp
 import iamlistening
 from iamlistening import Listener
 from fastapi.testclient import TestClient
 from tt.bot import app
-# from tt.utils import (
-#     parse_message,,
-#     init_message, get_host_ip, 
-#     execute_order, get_name, get_quote,
-#     get_trading_asset_balance, get_account,
-#     get_account_balance, get_account_position,
-#     get_account_margin,
-#     )
 from tt.config import settings
 
 
@@ -112,31 +102,6 @@ async def test_listener_matrix(settings_dex_10,command):
     assert listener is not None
     assert isinstance(listener, iamlistening.main.Listener)
     assert msg == command
-
-
-
-# @pytest.mark.asyncio
-# async def test_help():
-#     """Test switch """
-#     await message_processor.process_message('/help')
-#     assert settings.trading_enabled == False
-
-# @pytest.mark.asyncio
-# async def test_get_host_ip():
-#     """Test get_host_ip """
-#     output = get_host_ip()
-#     assert output is not None
-
-
-# @pytest.mark.asyncio
-# async def test_init_message():
-#     """Test the initialization message."""
-#     await load_exchange()
-#     output = await init_message()
-#     assert output is not None
-#     print(output)
-#     # assert "🏓️" in output
-#     # assert all(symbol in output for symbol in ["🕸️", "🏓", "💱", "🪪"])
 
 
 def test_read_main():

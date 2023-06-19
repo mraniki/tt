@@ -20,7 +20,7 @@ class ExamplePlugin(BasePlugin):
 
 
     async def stop(self):
-        """Stops the plugin"""     
+        """Stops the plugin"""
 
     async def send_notification(self, message):
         """Sends a notification"""

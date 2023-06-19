@@ -48,7 +48,6 @@ async def test_parse_quote(plugin, caplog):
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
     """Test balance """
-    #send_notification_mock = AsyncMock()
     get_account_balance= AsyncMock()
     await plugin.handle_message('/bal')
     get_account_balance.assert_called_once
