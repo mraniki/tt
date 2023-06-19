@@ -5,6 +5,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 from tt.utils import MessageProcessor, start_plugins
 from tt.config import settings, logger
 from tt.plugins.example_plugin import ExamplePlugin
+from tt.plugins.helper_plugin import HelperPlugin
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
@@ -49,3 +50,9 @@ async def test_example_plugin():
     await plugin.stop()
     assert plugin.should_handle("any message") is True
 
+@pytest.mark.asyncio
+async def test_trading_switch():
+    """Test switch """
+    plugin = HelperPlugin()
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_trading}")
+    assert settings.trading_enabled == False

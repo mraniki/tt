@@ -113,13 +113,13 @@ async def test_listener_matrix(settings_dex_10,command):
     assert isinstance(listener, iamlistening.main.Listener)
     assert msg == command
 
-# @pytest.mark.asyncio
-# async def test_parse_help():
-#     """Test parse_message balance """
-#     init_message= AsyncMock()
-#     await parse_message('/help')
-#     init_message.assert_called_once
 
+
+# @pytest.mark.asyncio
+# async def test_help():
+#     """Test switch """
+#     await message_processor.process_message('/help')
+#     assert settings.trading_enabled == False
 
 # @pytest.mark.asyncio
 # async def test_get_host_ip():
@@ -138,14 +138,6 @@ async def test_listener_matrix(settings_dex_10,command):
 #     # assert "🏓️" in output
 #     # assert all(symbol in output for symbol in ["🕸️", "🏓", "💱", "🪪"])
 
-# @pytest.mark.asyncio
-# async def test_trading_switch():
-#     """Test parse_message balance """
-#     send_notification_mock = AsyncMock()
-#     with patch('tt.utils.send_notification',send_notification_mock):
-#         await load_exchange()
-#         await parse_message('/trading')
-#         assert settings.trading_enabled == False
 
 def test_read_main():
     client = TestClient(app)
