@@ -52,6 +52,7 @@ class HelperPlugin(BasePlugin):
                 if self.enabled:
                     await self.send_notification(
                         self.version+self.help_message)
+                
         except Exception as error:
             logger.warning(error)
 
@@ -65,3 +66,17 @@ class HelperPlugin(BasePlugin):
             return ip_address
         except Exception:
             pass
+
+        # if msg.startswith(settings.bot_ignore):
+        #     return
+        # # Check bot command
+        # if msg.startswith(settings.bot_prefix):
+        #     # message = None
+        #     command = (msg.split(" ")[0])[1:] 
+    async def trading_switch_command(self):
+        settings.trading_enabled = not settings.trading_enabled
+        return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
+    
+    async def restart_command(self):
+        # Restart bot
+        os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])

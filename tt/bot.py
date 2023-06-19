@@ -8,7 +8,7 @@ import uvicorn
 from fastapi import FastAPI, Request
 
 from tt.config import settings, logger
-from tt.utils import listener, send_notification, init_message
+from tt.utils import listener, send_notification
 
 
 # ⛓️🤖🙊BOT
@@ -21,7 +21,7 @@ async def start_bot():
     try:
         event_loop.create_task(listener())
     except Exception as error:
-        logger.error("bot startup failed: %s", error)
+        logger.error("startup failed: %s", error)
 
 
 @app.on_event("shutdown")
@@ -46,7 +46,7 @@ async def health_check():
 @app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
 async def webhook(request: Request):
     """
-    FastAPI handles POST requests to the '/webhook' endpoint.
+    FastAPI handles to '/webhook' endpoint.
     """
     data = await request.json()
     logger.debug("payload: %s", request.json())

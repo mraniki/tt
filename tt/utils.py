@@ -15,7 +15,7 @@ async def listener():
 
     bot_listener = Listener()
     task = asyncio.create_task(bot_listener.run_forever())
-    await send_notification(await init_message())
+    await send_notification(f"🗿online\n{__version__}")
     message_processor = MessageProcessor()
     if settings.plugin_enabled:
         message_processor.load_plugins("tt.plugins")
@@ -71,40 +71,6 @@ async def send_notification(msg):
             logger.error("%s not sent: %s", msg, e)
     except Exception as e:
         logger.error("url: %s", e)
-
-
-# async def parse_message(msg):
-#     """main parser"""
-#     try:
-
-#         # Check ignore
-#         if msg.startswith(settings.bot_ignore):
-#             return
-#         # Check bot command
-#         if msg.startswith(settings.bot_prefix):
-#             # message = None
-#             command = (msg.split(" ")[0])[1:]
-#             if command == settings.bot_command_help:
-#                 await send_notification(f"{await init_message()}\n{settings.bot_msg_help}")
-
-#     except Exception as e:
-#         logger.error(e)
-
-
-# 🦾BOT ACTIONS
-async def init_message():
-    version = __version__
-    return f"🗿 {version}\n"
-
-
-async def trading_switch_command():
-    settings.trading_enabled = not settings.trading_enabled
-    return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
-
-
-async def restart_command():
-    # Restart bot
-    os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
 
 class MessageProcessor:

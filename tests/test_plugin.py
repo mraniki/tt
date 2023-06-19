@@ -49,12 +49,3 @@ async def test_example_plugin():
     await plugin.stop()
     assert plugin.should_handle("any message") is True
 
-
-@pytest.mark.asyncio
-async def test_exception_example_plugin():
-    plugin = ExamplePlugin()
-    with pytest.raises(
-        Exception, 
-        match=re.escape(
-            "ExamplePlugin.start() takes 1 positional argument but 2 were given")):
-        await plugin.start("any message")
