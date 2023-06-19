@@ -8,35 +8,24 @@ class ExamplePlugin(BasePlugin):
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
         """Plugin Initialization"""
-        try:
-            self.enabled = settings.example_plugin_enabled
-            if self.enabled:
-                logger.debug("plugin initialized")
-        except Exception as error:
-            logger.warning(error)
+        self.enabled = settings.example_plugin_enabled
+        if self.enabled:
+            logger.debug("plugin initialized")
+
 
     async def start(self):
-        """Starts the plugin"""
-        try:           
-            if self.enabled:
-                logger.debug("plugin started")
-        except Exception as error:
-            logger.warning(error)
+        """Starts the plugin"""       
+        if self.enabled:
+            logger.debug("plugin started")
+
 
     async def stop(self):
         """Stops the plugin"""
-        try:       
-            pass
-        except Exception as error:
-            logger.warning(error)
 
     async def send_notification(self, message):
         """Sends a notification"""
-        try:
-            if self.enabled:
-                await send_notification(message)
-        except Exception as error:
-            logger.warning(error)
+        if self.enabled:
+            await send_notification(message)
 
     def should_handle(self, message):
         """Returns plugin state"""
@@ -44,7 +33,10 @@ class ExamplePlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
-            if self.enabled:
-                await self.send_notification(
-                    "this is an example")
+        if self.enabled:
+            if msg.startswith(settings.bot_ignore):
+                return
+            if msg.startswith(settings.bot_prefix):
+                command = (msg.split(" ")[0])[1:]
+                if command == settings.bot_command_help:
+                    await self.send_notification("this is an example")

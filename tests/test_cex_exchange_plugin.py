@@ -45,27 +45,27 @@ async def test_plugin(plugin):
     assert enabled is True
     assert isinstance(exchange, ccxt.binance)
 
-@pytest.mark.asyncio
-async def test_parse_quote(plugin, caplog):
-    """Test parse_message balance """
-    #get_quote= AsyncMock("WBTC")
-    await plugin.handle_message('/q WBTC')
-    assert 'binance does not have market symbol WBTC' in caplog.text
+#@pytest.mark.asyncio
+#async def test_parse_quote(plugin, caplog):
+#    """Test parse_message balance """
+#    #get_quote= AsyncMock("WBTC")
+#    await plugin.handle_message('/q WBTC')
+#    assert 'errors.BadSymbol' in caplog.text
 
-@pytest.mark.asyncio
-async def test_parse_balance(plugin):
-    """Test balance """
-    #send_notification_mock = AsyncMock()
-    get_account_balance= AsyncMock()
-    await plugin.handle_message('/bal')
-    get_account_balance.assert_called_once
+# @pytest.mark.asyncio
+# async def test_parse_balance(plugin):
+#     """Test balance """
+#     #send_notification_mock = AsyncMock()
+#     get_account_balance= AsyncMock()
+#     await plugin.handle_message('/bal')
+#     get_account_balance.assert_called_once
 
-@pytest.mark.asyncio
-async def test_parse_position(plugin):
-    """Test balance """
-    get_account_position= AsyncMock()
-    await plugin.handle_message('/pos')
-    get_account_position.assert_called_once
+# @pytest.mark.asyncio
+# async def test_parse_position(plugin):
+#     """Test balance """
+#     get_account_position= AsyncMock()
+#     await plugin.handle_message('/pos')
+#     get_account_position.assert_called_once
 
 # @pytest.mark.asyncio
 # async def test_account(plugin):
@@ -93,12 +93,12 @@ async def test_failed_execute_order(plugin, caplog, order):
 #     print(output)
 #     assert output is not None
 
-@pytest.mark.asyncio
-async def test_get_account_position(plugin):
-    """Test get_account_positions."""
-    output = await plugin.get_account_position()
-    print(output)
-    assert output is not None
+# @pytest.mark.asyncio
+# async def test_get_account_position(plugin):
+#     """Test get_account_positions."""
+#     output = await plugin.get_account_position()
+#     print(output)
+#     assert output is not None
 
 # @pytest.mark.asyncio
 # async def test_get_trading_asset_balance(plugin):

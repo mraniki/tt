@@ -3,8 +3,6 @@ __version__ = "3.6.2"
 import asyncio
 import importlib
 import pkgutil
-import os
-import sys
 from apprise import Apprise, NotifyFormat
 from iamlistening import Listener
 from tt.config import settings, logger
@@ -14,19 +12,16 @@ async def listener():
     """Launch Listener"""
     bot_listener = Listener()
     task = asyncio.create_task(bot_listener.run_forever())
-    await send_notification(f"🗿online\n{__version__}")
     message_processor = MessageProcessor()
     if settings.plugin_enabled:
         message_processor.load_plugins("tt.plugins")
         loop = asyncio.get_running_loop()
         loop.create_task(start_plugins(message_processor))
-        #loop.create_task(await message_processor.start_all_plugins())
 
     while True:
         try:
             msg = await bot_listener.get_latest_message()
             if msg:
-                # await parse_message(msg)
                 if settings.plugin_enabled:
                     await message_processor.process_message(msg)
         except Exception as error:
