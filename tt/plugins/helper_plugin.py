@@ -49,10 +49,14 @@ class HelperPlugin(BasePlugin):
     async def handle_message(self, msg):
         """Handles incoming messages"""
         try:
-            if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
-                if self.enabled:
+            if self.enabled:
+                if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
+                
                     await self.send_notification(
                         self.version+self.help_message)
+                elif msg == f"{settings.bot_prefix}{settings.bot_command_help}":
+                    await self.send_notification(
+                    self.trading_switch_command())
     #     ip = get_host_ip()
     #     ping = get_ping()
     #     exchange_name = await get_name()
