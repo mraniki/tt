@@ -1,4 +1,5 @@
 import os
+import sys
 import socket
 import ping3
 from tt.utils import BasePlugin, send_notification, __version__
@@ -48,10 +49,20 @@ class HelperPlugin(BasePlugin):
     async def handle_message(self, msg):
         """Handles incoming messages"""
         try:
-            if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
-                if self.enabled:
+            if self.enabled:
+                if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
+                
                     await self.send_notification(
                         self.version+self.help_message)
+                elif msg == f"{settings.bot_prefix}{settings.bot_command_help}":
+                    await self.send_notification(
+                    self.trading_switch_command())
+    #     ip = get_host_ip()
+    #     ping = get_ping()
+    #     exchange_name = await get_name()
+    #     account_info = await get_account(exchange)
+    #     start_up = f"🗿 {version}\n🕸️ {ip}\n🏓 {ping}\n💱 {exchange_name}\n🪪 {account_info}"
+                
         except Exception as error:
             logger.warning(error)
 
@@ -65,3 +76,20 @@ class HelperPlugin(BasePlugin):
             return ip_address
         except Exception:
             pass
+
+        # if msg.startswith(settings.bot_ignore):
+        #     return
+        # # Check bot command
+        # if msg.startswith(settings.bot_prefix):
+        #     # message = None
+        #     command = (msg.split(" ")[0])[1:] 
+        
+    
+        
+    async def trading_switch_command(self):
+        settings.trading_enabled = not settings.trading_enabled
+        return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
+    
+    async def restart_command(self):
+        # Restart bot
+        os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])

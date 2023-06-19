@@ -12,15 +12,15 @@ from tt.config import settings, logger
 
 async def listener():
     """Launch Listener"""
-
     bot_listener = Listener()
     task = asyncio.create_task(bot_listener.run_forever())
-    await send_notification(await init_message())
+    await send_notification(f"🗿online\n{__version__}")
     message_processor = MessageProcessor()
     if settings.plugin_enabled:
         message_processor.load_plugins("tt.plugins")
         loop = asyncio.get_running_loop()
-        loop.create_task(start_plugins(message_processor))
+        #loop.create_task(start_plugins(message_processor))
+        loop.create_task(await message_processor.start_all_plugins())
 
     while True:
         try:
@@ -73,40 +73,6 @@ async def send_notification(msg):
         logger.error("url: %s", e)
 
 
-# async def parse_message(msg):
-#     """main parser"""
-#     try:
-
-#         # Check ignore
-#         if msg.startswith(settings.bot_ignore):
-#             return
-#         # Check bot command
-#         if msg.startswith(settings.bot_prefix):
-#             # message = None
-#             command = (msg.split(" ")[0])[1:]
-#             if command == settings.bot_command_help:
-#                 await send_notification(f"{await init_message()}\n{settings.bot_msg_help}")
-
-#     except Exception as e:
-#         logger.error(e)
-
-
-# 🦾BOT ACTIONS
-async def init_message():
-    version = __version__
-    return f"🗿 {version}\n"
-
-
-async def trading_switch_command():
-    settings.trading_enabled = not settings.trading_enabled
-    return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
-
-
-async def restart_command():
-    # Restart bot
-    os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
-
-
 class MessageProcessor:
     def __init__(self):
         self.plugins = []
@@ -152,6 +118,20 @@ class MessageProcessor:
         for plugin in plugin_dict.values():
             if plugin.should_handle(message):
                 await plugin.handle_message(message)
+    
+    # async def process_message(self, message):
+    #     plugin_dict = {plugin.name: plugin for plugin in self.plugins}
+    #     replies = []
+    
+    #     for plugin in plugin_dict.values():
+    #         if plugin.should_handle(message):
+    #             reply = await plugin.handle_message(message)
+    #             if reply:
+    #                 replies.append(reply)
+    
+    #     consolidated_reply = '\n'.join(replies)  # Combine the replies into a single string
+    #     if consolidated_reply:
+    #         await send_notification(consolidated_reply)
 
 
 class BasePlugin:
