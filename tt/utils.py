@@ -152,6 +152,20 @@ class MessageProcessor:
         for plugin in plugin_dict.values():
             if plugin.should_handle(message):
                 await plugin.handle_message(message)
+    
+    # async def process_message(self, message):
+    #     plugin_dict = {plugin.name: plugin for plugin in self.plugins}
+    #     replies = []
+    
+    #     for plugin in plugin_dict.values():
+    #         if plugin.should_handle(message):
+    #             reply = await plugin.handle_message(message)
+    #             if reply:
+    #                 replies.append(reply)
+    
+    #     consolidated_reply = '\n'.join(replies)  # Combine the replies into a single string
+    #     if consolidated_reply:
+    #         await send_notification(consolidated_reply)
 
 
 class BasePlugin:
