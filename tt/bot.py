@@ -21,14 +21,14 @@ async def start_bot():
     try:
         event_loop.create_task(listener())
     except Exception as error:
-        logger.error("startup failed: %s", error)
+        logger.error(error)
 
 
-@app.on_event("shutdown")
-async def shutdown_event():
-    """fastapi shutdown"""
-    logger.info("shutting down")
-    uvicorn.keep_running = False
+# @app.on_event("shutdown")
+# async def shutdown_event():
+#     """fastapi shutdown"""
+#     logger.info("shutting down")
+#     uvicorn.keep_running = False
 
 
 @app.get("/")
@@ -49,7 +49,6 @@ async def webhook(request: Request):
     FastAPI '/webhook' endpoint.
     """
     data = await request.json()
-    logger.debug("payload: %s", request.json())
     if data["key"] != settings.webhook_secret:
         return {"status": "ERROR"}
     await send_notification(data)
