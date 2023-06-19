@@ -3,10 +3,9 @@ __version__ = "3.5.1"
 import asyncio
 import importlib
 import pkgutil
-from apprise import Apprise, NotifyFormat
 import os
 import sys
-
+from apprise import Apprise, NotifyFormat
 from iamlistening import Listener
 from tt.config import settings, logger
 
