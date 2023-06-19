@@ -1,10 +1,14 @@
 
 import unittest
-from helper_plugin import HelperPlugin  # Replace with the actual module and class names
+import ping3
+from tt.utils import BasePlugin, send_notification, __version__
+from tt.config import logger, settings
+
+from helper_plugin import HelperPlugin  
 
 class TestHelpCommand(unittest.TestCase):
     def setUp(self):
-        self.instance = HelperPlugin()  # Replace with the actual class instantiation
+        self.instance = HelperPlugin()  
 
     def test_help_command_output(self):
         output = self.instance.help_command()
