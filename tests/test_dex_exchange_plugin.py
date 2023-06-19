@@ -61,10 +61,10 @@ async def test_parse_position(plugin):
     get_account_position.assert_called_once
 
 @pytest.mark.asyncio
-async def test_account(plugin):
+async def test_info_message(plugin):
     """test exchange dex"""
-    account = await plugin.get_account()
-    assert account == "1 - 34567890"
+    info = await plugin.info_message()
+    assert info is not None 
 
 # @pytest.mark.asyncio
 # async def test_execute_order(plugin, caplog, order):

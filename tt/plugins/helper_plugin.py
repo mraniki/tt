@@ -44,7 +44,7 @@ class HelperPlugin(BasePlugin):
                 elif command == settings.bot_command_trading:
                     await self.send_notification(self.trading_switch_command())
                 elif command == settings.bot_command_restart:
-                    await self.send_notification(self.restart_command())
+                    os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
     
     def help_command(self):
         """Help Message"""
@@ -57,10 +57,7 @@ class HelperPlugin(BasePlugin):
         """Trading switch command"""
         settings.trading_enabled = not settings.trading_enabled
         return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
-    
-    def restart_command(self):
-        """Restart"""
-        os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
+
 
     def get_host_ip(self):
         """Returns host IP """
