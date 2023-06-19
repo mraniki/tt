@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v3.6.1 (2023-06-19)
+
+### Fix
+
+* :white_check_mark: unit test ([`dff6aef`](https://github.com/mraniki/tt/commit/dff6aefdee27efa2cf7447fe57a30e687f05255a))
+* :white_check_mark: unit test ([`d25c89e`](https://github.com/mraniki/tt/commit/d25c89e91686dc36608588e3dc66a1e5b30a52a0))
+* :white_check_mark: unit test ([`36bae71`](https://github.com/mraniki/tt/commit/36bae7143467838e175aa846fb661095314a74e2))
+* :bug: bug init message ([`2baf05b`](https://github.com/mraniki/tt/commit/2baf05b006245f0df51f46d69fc25cb74098109d))
+* :recycle: refactor ([`030db05`](https://github.com/mraniki/tt/commit/030db05202ba2bfc029f60a9a2ee7210489723da))
+* :zap: Add new methods to HelperPlugin ([`e65f812`](https://github.com/mraniki/tt/commit/e65f812d8a57a0965b6737706733ca89b5a94789))
+* :bug: bug ([`fd2c690`](https://github.com/mraniki/tt/commit/fd2c690ff59ae8c57705d4a156d83db6b8ce560b))
+* :recycle: refactor ([`21b6c23`](https://github.com/mraniki/tt/commit/21b6c235e2d7b18c4a167f95eb391267d286c390))
+* :recycle: Update dependabot.yml and remove Deployment_Staging.yml.archive ([`1bb1d35`](https://github.com/mraniki/tt/commit/1bb1d350fbc2b49c07bcbb7f656c2cd89cc77678))
+
 ## v3.6.0 (2023-06-19)
 
 ### Feature
