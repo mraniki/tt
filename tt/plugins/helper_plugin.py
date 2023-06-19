@@ -1,4 +1,5 @@
 import os
+import sys
 import socket
 import ping3
 from tt.utils import BasePlugin, send_notification, __version__

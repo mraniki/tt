@@ -12,7 +12,6 @@ from tt.config import settings, logger
 
 async def listener():
     """Launch Listener"""
-
     bot_listener = Listener()
     task = asyncio.create_task(bot_listener.run_forever())
     await send_notification(f"🗿online\n{__version__}")
