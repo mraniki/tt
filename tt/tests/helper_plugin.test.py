@@ -1,12 +1,10 @@
-To write a test for the changes in the `help_command` function, you can create a test function that checks if the output of `help_command` has the expected format. Here's a Python test using the `unittest` library:
 
-```python
 import unittest
-from your_module import YourClass  # Replace with the actual module and class names
+from helper_plugin import HelperPlugin  # Replace with the actual module and class names
 
 class TestHelpCommand(unittest.TestCase):
     def setUp(self):
-        self.instance = YourClass()  # Replace with the actual class instantiation
+        self.instance = HelperPlugin()  # Replace with the actual class instantiation
 
     def test_help_command_output(self):
         output = self.instance.help_command()
@@ -21,6 +19,3 @@ class TestHelpCommand(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-```
-
-This test checks if the output of the `help_command` function starts with the expected version string and contains the expected host IP, ping, and help message strings. Replace the module and class names with the actual ones in your code.
