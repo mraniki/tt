@@ -61,6 +61,9 @@ class DexExchangePlugin(BasePlugin):
                 await self.send_notification(f"{await self.get_account_balance()}")
             elif command == settings.bot_command_pos:
                 await self.send_notification(f"{await self.get_account_position()}")
+#exchange_name = await get_name()
+#     account_info = await get_account(exchange)
+#💱 {exchange_name}\n🪪 {account_info}"
         except Exception as error:
             logger.warning(error)
 
