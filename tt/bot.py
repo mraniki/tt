@@ -46,7 +46,7 @@ async def health_check():
 @app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
 async def webhook(request: Request):
     """
-    FastAPI handles to '/webhook' endpoint.
+    FastAPI '/webhook' endpoint.
     """
     data = await request.json()
     logger.debug("payload: %s", request.json())

@@ -19,7 +19,8 @@ async def listener():
     if settings.plugin_enabled:
         message_processor.load_plugins("tt.plugins")
         loop = asyncio.get_running_loop()
-        loop.create_task(start_plugins(message_processor))
+        #loop.create_task(start_plugins(message_processor))
+        loop.create_task(await message_processor.start_all_plugins())
 
     while True:
         try:
