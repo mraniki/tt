@@ -13,7 +13,7 @@ class HelperPlugin(BasePlugin):
             self.enabled = settings.helper_enabled
             if self.enabled:
                 self.version = f"🗿 {__version__}\n"
-                self.latency = ping3.ping(settings.ping, unit='ms')
+                #self.latency = ping3.ping(settings.ping, unit='ms')
                 #round(response_time, 3)
                 self.host_ip = self.get_host_ip()
                 self.help_message = settings.bot_msg_help
@@ -43,7 +43,7 @@ class HelperPlugin(BasePlugin):
             logger.warning(error)
 
     def should_handle(self, message):
-        """Returns True if the plugin should handle incoming message"""
+        """Returns plugin status"""
         return self.enabled
 
     async def handle_message(self, msg):
@@ -51,18 +51,10 @@ class HelperPlugin(BasePlugin):
         try:
             if self.enabled:
                 if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
-                
-                    await self.send_notification(
-                        self.version+self.help_message)
-                elif msg == f"{settings.bot_prefix}{settings.bot_command_help}":
-                    await self.send_notification(
-                    self.trading_switch_command())
-    #     ip = get_host_ip()
-    #     ping = get_ping()
-    #     exchange_name = await get_name()
-    #     account_info = await get_account(exchange)
-    #     start_up = f"🗿 {version}\n🕸️ {ip}\n🏓 {ping}\n💱 {exchange_name}\n🪪 {account_info}"
-                
+                    msg = f"{self.version}\n🕸️ {self.host_ip}\n🏓 {ping3.ping(settings.ping, unit='ms')}\n{self.help_message}"
+                    await self.send_notification(msg)
+                elif msg == f"{settings.bot_prefix}{settings.bot_command_trading}":
+                    await self.send_notification(self.trading_switch_command())
         except Exception as error:
             logger.warning(error)
 
