@@ -2,6 +2,21 @@
 
 <!--next-version-placeholder-->
 
+## v3.6.0 (2023-06-19)
+
+### Feature
+
+* 💄 helper and help message as plugin ([`0ada492`](https://github.com/mraniki/tt/commit/0ada492c45147e5efb0aa3e06af1cfc33fbc97e1))
+
+### Fix
+
+* 🎨 code format ([`83813e0`](https://github.com/mraniki/tt/commit/83813e0dfdbea099a07539ee843d56614805ad96))
+* ✅ unit test ([`912731c`](https://github.com/mraniki/tt/commit/912731c02016bb71ff5dae8000562c7c49a15ea7))
+
+### Other
+
+* 'Refactored by Sourcery' ([`40eb0a7`](https://github.com/mraniki/tt/commit/40eb0a7c5e7195632df9a9bbbd6d2619bcfd0d8a))
+
 ## v3.5.1 (2023-06-18)
 
 ### Fix
