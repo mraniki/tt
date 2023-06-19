@@ -20,7 +20,6 @@ class ExamplePlugin(BasePlugin):
         try:           
             if self.enabled:
                 logger.debug("plugin started")
-                #start your plugin 
         except Exception as error:
             logger.warning(error)
 
