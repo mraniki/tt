@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v3.6.3 (2023-06-19)
+
+### Fix
+
+* ✅ unit test ([`70e9870`](https://github.com/mraniki/tt/commit/70e987059a0ad9ccabfa1a79e979dd9ca1cfe98f))
+* :white_check_mark: Refactor tests for CEX exchange plugin. ([`aa3e589`](https://github.com/mraniki/tt/commit/aa3e589ae1a68fefb6ce44297e6a66260ebe3001))
+* ♻️ plugin cleanup ([`49d4e52`](https://github.com/mraniki/tt/commit/49d4e52d6315fd0f02978178e0747fc880352d99))
+
+### Other
+
+* 'Refactored by Sourcery' ([`ed6e0bc`](https://github.com/mraniki/tt/commit/ed6e0bcdd11b00cbb6aad103a3f8af9ecab9262e))
+
 ## v3.6.2 (2023-06-19)
 
 ### Fix
