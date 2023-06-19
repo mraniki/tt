@@ -35,6 +35,7 @@ discord_webhook_token = ""
 
 
 #BOTCOMMAND
+helper_enabled = true
 bot_prefix = "/"
 bot_command_help = "help"
 bot_command_bal = "bal"
@@ -161,6 +162,7 @@ telethon_api_id = "123456789"
 telethon_api_hash = "123456789"
 bot_token = "test_bot_token"
 bot_channel_id = "1234567890"
+helper_enabled = true
 exchange_enabled = true
 trading_enabled = true
 cex_name = ""
@@ -194,6 +196,7 @@ bot_command_restart = "restart"
 bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
 example_plugin_enabled = true
+ping = "8.8.8.8"
 
 [testing_cex]
 ##############
@@ -202,6 +205,7 @@ example_plugin_enabled = true
 ##############
 exchange_enabled = true
 cex_enabled = true
+helper_enabled = true
 VALUE = "On Testing CEX_binance"
 cex_name = 'binance'
 cex_api = 'api_key'
@@ -217,6 +221,7 @@ dex_chain_id = ""
 ## FOR TEST ##
 ##############
 VALUE = "On Testing DEX_56"
+helper_enabled = true
 cex_name = ""
 dex_wallet_address = "0x1234567890123456789012345678901234567899"
 dex_private_key = "0xdeadbeet"
@@ -236,6 +241,7 @@ ping = "8.8.8.8"
 ## FOR TEST ##
 ##############
 VALUE = "On Testing DEX_10"
+helper_enabled = true
 cex_name = ""
 dex_wallet_address = "0x1234567890123456789012345678901234567899"
 dex_private_key = "0xdeadbeet"

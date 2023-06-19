@@ -27,7 +27,7 @@ async def listener():
         try:
             msg = await bot_listener.get_latest_message()
             if msg:
-                await parse_message(msg)
+                # await parse_message(msg)
                 if settings.plugin_enabled:
                     await message_processor.process_message(msg)
         except Exception as error:
@@ -74,22 +74,22 @@ async def send_notification(msg):
         logger.error("url: %s", e)
 
 
-async def parse_message(msg):
-    """main parser"""
-    try:
+# async def parse_message(msg):
+#     """main parser"""
+#     try:
 
-        # Check ignore
-        if msg.startswith(settings.bot_ignore):
-            return
-        # Check bot command
-        if msg.startswith(settings.bot_prefix):
-            # message = None
-            command = (msg.split(" ")[0])[1:]
-            if command == settings.bot_command_help:
-                await send_notification(f"{await init_message()}\n{settings.bot_msg_help}")
+#         # Check ignore
+#         if msg.startswith(settings.bot_ignore):
+#             return
+#         # Check bot command
+#         if msg.startswith(settings.bot_prefix):
+#             # message = None
+#             command = (msg.split(" ")[0])[1:]
+#             if command == settings.bot_command_help:
+#                 await send_notification(f"{await init_message()}\n{settings.bot_msg_help}")
 
-    except Exception as e:
-        logger.error(e)
+#     except Exception as e:
+#         logger.error(e)
 
 
 # 🦾BOT ACTIONS

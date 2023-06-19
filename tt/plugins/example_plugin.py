@@ -50,6 +50,3 @@ class ExamplePlugin(BasePlugin):
             if msg == f"{settings.bot_prefix}{settings.bot_command_help}":
                 await self.send_notification(
                     "this is an example")
-            elif msg == f"{settings.bot_prefix}{settings.plugin_menu}":
-                plugin_menu_message = f"⚙️:\n{settings.bot_prefix}{settings.plugin_menu}"
-                await self.send_notification(plugin_menu_message)

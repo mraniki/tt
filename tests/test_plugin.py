@@ -58,17 +58,3 @@ async def test_exception_example_plugin():
         match=re.escape(
             "ExamplePlugin.start() takes 1 positional argument but 2 were given")):
         await plugin.start("any message")
-
-
-# @pytest.mark.asyncio
-# async def test_handle_message_plugin(mock_settings_dex):
-#     """Test parse_message balance """
-#     send_notification_mock = AsyncMock()
-#     with patch('tt.utils.send_notification',send_notification_mock):
-#         message_processor = MessageProcessor()
-#     # if settings.plugin_enabled:
-#         message_processor.load_plugins("tt.plugins")
-#         loop = asyncio.get_running_loop()
-#         await loop.create_task(start_plugins(message_processor))
-#         await message_processor.process_message('/plugin')
-#         assert '⚙️' in send_notification_mock.call_args[0][0]
