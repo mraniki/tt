@@ -8,7 +8,7 @@ import uvicorn
 from fastapi import FastAPI, Request
 
 from tt.config import settings, logger
-from tt.utils import listener, send_notification
+from tt.utils import listener, send_notification, __version__
 
 
 # ⛓️🤖🙊BOT
@@ -34,13 +34,13 @@ async def shutdown_event():
 @app.get("/")
 async def root():
     """fastapi root"""
-    return await init_message()
+    return __version__
 
 
 @app.get("/health")
 async def health_check():
     """fastapi health"""
-    return await init_message()
+    return __version__
 
 
 @app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
