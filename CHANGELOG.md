@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v3.6.2 (2023-06-19)
+
+### Fix
+
+* :recycle: minor update for helper ([`44e3ed1`](https://github.com/mraniki/tt/commit/44e3ed15d1373f9525df8361e927dd1c5549dee0))
+
+### Other
+
+* Add DexExchangePlugin with get_name and get_account methods ([`d25d903`](https://github.com/mraniki/tt/commit/d25d903de70cc4ccb5815917eb1d32e0c1a40685))
+* :ambulance: broken message processing ([`06f8c34`](https://github.com/mraniki/tt/commit/06f8c341e77dfa0a9ca2fa023918f37808793d35))
+
 ## v3.6.1 (2023-06-19)
 
 ### Fix
