@@ -1,13 +1,15 @@
 """
  TT test
 """
-
+import asyncio
 import pytest
 import iamlistening
 from iamlistening import Listener
+from unittest.mock import MagicMock, AsyncMock
 from fastapi.testclient import TestClient
-from tt.bot import app
-from tt.config import settings
+from tt.bot import app, start_bot
+from tt.utils import MessageProcessor, listener
+from tt.config import settings, logger
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -73,6 +75,8 @@ def wrong_order():
     }
 
 
+
+
 @pytest.mark.asyncio
 async def test_listener_discord(settings_dex_56):
     print(settings.VALUE)
@@ -128,3 +132,4 @@ def test_webhook_with_invalid_auth():
     print(payload)
     response = client.post("/webhook", json=payload)
     assert response.content.decode('utf-8') == '{"status":"ERROR"}'
+
