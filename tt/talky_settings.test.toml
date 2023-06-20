@@ -1,0 +1,19 @@
+Since the changes in the git output are related to the removal of 1inch URLs and the addition of a `reporting_enabled` variable, we can write a test to check if the removed URLs are not present and the new variable is set to `false`. Assuming this is a Python project, you can use the following test:
+
+```python
+import unittest
+import config
+
+class TestConfigChanges(unittest.TestCase):
+    def test_removed_1inch_urls(self):
+        self.assertNotIn("dex_1inch_url", dir(config))
+        self.assertNotIn("dex_1inch_limit_url", dir(config))
+
+    def test_reporting_enabled(self):
+        self.assertFalse(config.reporting_enabled)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+This test checks if the removed 1inch URLs are not present in the `config` module and if the `reporting_enabled` variable is set to `false`.
