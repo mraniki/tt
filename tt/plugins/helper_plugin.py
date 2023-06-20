@@ -2,6 +2,8 @@ import os
 import sys
 import socket
 import ping3
+from datetime import datetime
+# import schedule
 from tt.utils import BasePlugin, send_notification, __version__
 from tt.config import logger, settings
 
@@ -18,6 +20,11 @@ class HelperPlugin(BasePlugin):
     async def start(self):
         """Starts the plugin"""
         await self.send_notification(self.help_command())
+
+        # schedule.every().saturday.at("09:00").do()
+        # while True:
+        #     schedule.run_pending()
+        #     time.sleep(1)
 
     async def stop(self):
         """Stops the plugin"""
@@ -66,3 +73,5 @@ class HelperPlugin(BasePlugin):
         ip_address = s.getsockname()[0]
         s.close()
         return ip_address
+
+

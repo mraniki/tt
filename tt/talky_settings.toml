@@ -114,9 +114,6 @@ dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c
 dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e" #UNI_V3_QUOTERV2
 dex_quoter_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v3/quoter.abi"
 #protocol specific
-#🦄1inch
-dex_1inch_url = "https://api.1inch.exchange/v5.0/"
-dex_1inch_limit_url = "https://limit-orders.1inch.io/v3.0/"
 #0️⃣0x
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
@@ -149,7 +146,7 @@ network_enabled = false
 ping = "8.8.8.8"
 
 
-
+reporting_enabled = false
 
 
 [testing]
