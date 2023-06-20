@@ -8,34 +8,6 @@ from iamlistening import Listener
 from tt.config import settings, logger
 
 
-async def listener():
-    """Launch Listener"""
-    bot_listener = Listener()
-    task = asyncio.create_task(bot_listener.run_forever())
-    message_processor = MessageProcessor()
-    if settings.plugin_enabled:
-        message_processor.load_plugins("tt.plugins")
-        loop = asyncio.get_running_loop()
-        loop.create_task(start_plugins(message_processor))
-
-    while True:
-        try:
-            msg = await bot_listener.get_latest_message()
-            if msg:
-                if settings.plugin_enabled:
-                    await message_processor.process_message(msg)
-        except Exception as error:
-            logger.error("listener: %s", error)
-    await task
-
-
-async def start_plugins(message_processor):
-    try:
-        await message_processor.start_all_plugins()
-    except Exception as error:
-        logger.error("plugins start: %s", error)
-
-
 async def send_notification(msg):
     """💬 MESSAGING """
     try:
@@ -66,6 +38,34 @@ async def send_notification(msg):
             logger.error("%s not sent: %s", msg, e)
     except Exception as e:
         logger.error("url: %s", e)
+
+
+async def listener():
+    """Launch Listener"""
+    bot_listener = Listener()
+    task = asyncio.create_task(bot_listener.run_forever())
+    message_processor = MessageProcessor()
+    if settings.plugin_enabled:
+        message_processor.load_plugins("tt.plugins")
+        loop = asyncio.get_running_loop()
+        loop.create_task(start_plugins(message_processor))
+
+    while True:
+        try:
+            msg = await bot_listener.get_latest_message()
+            if msg:
+                if settings.plugin_enabled:
+                    await message_processor.process_message(msg)
+        except Exception as error:
+            logger.error("listener: %s", error)
+    await task
+
+
+async def start_plugins(message_processor):
+    try:
+        await message_processor.start_all_plugins()
+    except Exception as error:
+        logger.error("plugins start: %s", error)
 
 
 class MessageProcessor:

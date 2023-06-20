@@ -37,6 +37,8 @@
 
 [![codecov](https://codecov.io/gh/mraniki/tt/branch/main/graph/badge.svg?token=ILJTC0F4K1)](https://codecov.io/gh/mraniki/tt)
 
+[![codebeat badge](https://codebeat.co/badges/94b328d7-777c-4d54-a0d9-ff4625c5e05d)](https://codebeat.co/projects/github-com-mraniki-tt-main)
+
 [![👷Flow](https://github.com/mraniki/tt/actions/workflows/%F0%9F%91%B7Flow.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/%F0%9F%91%B7Flow.yml)
 
 
