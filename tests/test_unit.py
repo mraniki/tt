@@ -1,7 +1,6 @@
 """
  TT test
 """
-
 import pytest
 import iamlistening
 from iamlistening import Listener
@@ -73,34 +72,36 @@ def wrong_order():
     }
 
 
+
+
 @pytest.mark.asyncio
 async def test_listener_discord(settings_dex_56):
     print(settings.VALUE)
-    listener = Listener()
-    print(listener)
-    assert listener is not None
-    assert isinstance(listener, iamlistening.main.Listener)
+    listener_test = Listener()
+    print(listener_test)
+    assert listener_test is not None
+    assert isinstance(listener_test, iamlistening.main.Listener)
 
 @pytest.mark.asyncio
 async def test_listener_telegram(message):
-    listener = Listener()
-    print(listener)
-    assert listener is not None
-    assert isinstance(listener, iamlistening.main.Listener)
-    await listener.handle_message(message)
-    msg = await listener.get_latest_message()
+    listener_test = Listener()
+    print(listener_test)
+    assert listener_test is not None
+    assert isinstance(listener_test, iamlistening.main.Listener)
+    await listener_test.handle_message(message)
+    msg = await listener_test.get_latest_message()
     print(msg)
     assert msg == "hello"
 
 @pytest.mark.asyncio
 async def test_listener_matrix(settings_dex_10,command):
-    listener = Listener()
-    print(listener)
-    await listener.handle_message(command)
-    msg = await listener.get_latest_message()
+    listener_test = Listener()
+    print(listener_test)
+    await listener_test.handle_message(command)
+    msg = await listener_test.get_latest_message()
     print(msg)
-    assert listener is not None
-    assert isinstance(listener, iamlistening.main.Listener)
+    assert listener_test is not None
+    assert isinstance(listener_test, iamlistening.main.Listener)
     assert msg == command
 
 
@@ -128,3 +129,4 @@ def test_webhook_with_invalid_auth():
     print(payload)
     response = client.post("/webhook", json=payload)
     assert response.content.decode('utf-8') == '{"status":"ERROR"}'
+
