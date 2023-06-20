@@ -1,6 +1,6 @@
 import os
 from tt.utils import BasePlugin, send_notification
-from tt.config import logger, settings
+from tt.config import settings
 from talkytrend import TalkyTrend
 
 class TalkyTrendPlugin(BasePlugin):

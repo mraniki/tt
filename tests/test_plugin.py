@@ -1,9 +1,8 @@
 import pytest
 import asyncio
 import ping3
-from unittest.mock import AsyncMock, MagicMock, patch
 from tt.utils import MessageProcessor, start_plugins
-from tt.config import settings, logger
+from tt.config import settings
 from tt.plugins.example_plugin import ExamplePlugin
 from tt.plugins.helper_plugin import HelperPlugin
 
