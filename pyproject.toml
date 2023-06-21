@@ -29,7 +29,7 @@ ccxt = "^3.1.33"
 dynaconf = "^3.1.12"
 apprise= "^1.4.0"
 dxsp = "^2.6.13"
-findmyorder = "^1.1.4"
+findmyorder = "^1.4.5"
 iamlistening = "^0.1.14"
 talkytrend = "^1.3.2"
 
