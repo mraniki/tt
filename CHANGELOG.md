@@ -2,6 +2,61 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.0 (2023-06-21)
+
+### Feature
+
+* 🥚apprise simplification usage ([`ab5b591`](https://github.com/mraniki/tt/commit/ab5b5918f9133c11eb97a9719f40649cf80fcd3d))
+
+### Fix
+
+* 🚨 linter ([`282f2a5`](https://github.com/mraniki/tt/commit/282f2a5fcfd058dbb623e3ac804a7ddfc076d482))
+* ✅ unit test ([`75ae94a`](https://github.com/mraniki/tt/commit/75ae94ad04c9ca4ec5505dab2964859fe92b6c1f))
+* 🎨 code format ([`5f232ef`](https://github.com/mraniki/tt/commit/5f232ef3d04a02de088327d472c03e3c211b5e26))
+* 🔧 config ([`22c95fb`](https://github.com/mraniki/tt/commit/22c95fb517f33bcb6c2df141fb140c9a38bfb8b3))
+* 🚨 dotenv linter ([`c6521a9`](https://github.com/mraniki/tt/commit/c6521a9b3e41130bab1acceaf174ea7bed25af4e))
+* 🚨 dotenv linter ([`d5a9c1c`](https://github.com/mraniki/tt/commit/d5a9c1c852c4a9c571d70b6f9d7fb54843b422a6))
+* 🚨 linter for env example ([`d7c060a`](https://github.com/mraniki/tt/commit/d7c060adb552ef71cf3a15f5fdabbaeaa7858d27))
+* :rotating_light: linter ([`c036536`](https://github.com/mraniki/tt/commit/c036536d7f4f4d163a3f71dbd7179ebdecde934d))
+* ⚡perf ([`a748d21`](https://github.com/mraniki/tt/commit/a748d21b9b9a44c3a3c6f5875df2384e3cf830d7))
+* 🎨 code format ([`379290e`](https://github.com/mraniki/tt/commit/379290eb78d1ef302a13d86939a6ddb00539d9de))
+* ✅ unit test ([`a518016`](https://github.com/mraniki/tt/commit/a5180162983e92212ac92fb8201e4e043a82b870))
+* ♻️ refactor ([`4887665`](https://github.com/mraniki/tt/commit/4887665c6f4d6c5a9c1a807c7b7147bbecb72296))
+* 🔧 config ([`aa55380`](https://github.com/mraniki/tt/commit/aa55380a3118e721fbc0115c71984832021ef164))
+* :fire: remove code ([`547f1b4`](https://github.com/mraniki/tt/commit/547f1b44e880048d50eeeed4b9615ebf5f9d5f06))
+* 🔥 remove code ([`88bab41`](https://github.com/mraniki/tt/commit/88bab413cf078ef14b99635b5f4b77080f6819dd))
+* ♻️ refactor ([`95e05be`](https://github.com/mraniki/tt/commit/95e05be79b4c84df6078e082fc6ab1f72b76b90f))
+* :fire: Remove unnecessary test files ([`fa480b1`](https://github.com/mraniki/tt/commit/fa480b1fa8817b5e54ebf88ddf3e0aec4e9cc2bf))
+* ✅ unit test ([`f810a28`](https://github.com/mraniki/tt/commit/f810a286e2ab8d0fcba28c189ce1558e8ff390f1))
+* :white_check_mark: ([`a3b56b2`](https://github.com/mraniki/tt/commit/a3b56b2fd20c3e579a2a520bacac80807730deef))
+* ✅ Update and rename helper_plugin.test.py to helper_plugin.test.py ([`9e719d5`](https://github.com/mraniki/tt/commit/9e719d5954b86639a0482f6abe36dfcc16fb7be0))
+* :recycle: Refactor bot.py and utils.py ([`4bf7c68`](https://github.com/mraniki/tt/commit/4bf7c68c620a65093fed70405a4afde49a35ed3b))
+* :art: version ([`ea69b65`](https://github.com/mraniki/tt/commit/ea69b655c83c8c536552e2413464b71cc0339d46))
+
+### Other
+
+* Merge pull request #496 from mraniki/dev ([`c1971a2`](https://github.com/mraniki/tt/commit/c1971a2b2dd66bc739ce6c15a3cd5d126d2dcae5))
+* Merge pull request #495 from mraniki/main ([`ee70cf4`](https://github.com/mraniki/tt/commit/ee70cf4da5fb8b2b53351012df17fa558b9c28b8))
+* Merge pull request #492 from mraniki/dev ([`547c0fc`](https://github.com/mraniki/tt/commit/547c0fc03ced3907cb93be1e89e85d907de1ca4d))
+* Add tests for tt/talky_settings.toml ([`97e9e30`](https://github.com/mraniki/tt/commit/97e9e30cfd3e941868cd6713b896bfa1cc5da852))
+* Add tests for tt/plugins/helper_plugin.py ([`072193e`](https://github.com/mraniki/tt/commit/072193e4d1ec5a8e85f0128453c3241242f0a7d3))
+* Add tests for tests/utils.test.py ([`92866e9`](https://github.com/mraniki/tt/commit/92866e9f0cdca1408447a019f0ef339583f1a8ca))
+* Add tests for tests/bot.test.py ([`5d251c5`](https://github.com/mraniki/tt/commit/5d251c5984c18e5a714186499dbb14c292b5a9ad))
+* Add tests for tt/utils.test.py ([`c82744c`](https://github.com/mraniki/tt/commit/c82744c749c7f4145659a0316041a8aab2a03098))
+* Add tests for tt/plugins/helper_plugin.test.py ([`80a64a0`](https://github.com/mraniki/tt/commit/80a64a0e8ecc5768482f238545781ec0532cb8f6))
+* Add tests for tt/bot.test.py ([`2f713a2`](https://github.com/mraniki/tt/commit/2f713a2b1e93d8fe849fad21546036d8500ddca8))
+* Add tests for tests/helper_plugin.test.test.py ([`a260e1f`](https://github.com/mraniki/tt/commit/a260e1fedd2666c9db5f0117a61a702ad84ed61b))
+* Merge branch 'main' into dev ([`74bf323`](https://github.com/mraniki/tt/commit/74bf32306209f0a56b8d18267de2f8c676bb9858))
+* Add tests for tt/utils.py ([`47d8c2c`](https://github.com/mraniki/tt/commit/47d8c2c3dba051f2525a914677a221561adeca04))
+* Add tests for tt/plugins/helper_plugin.py ([`ca97f48`](https://github.com/mraniki/tt/commit/ca97f485591db349bccd5b264f604a8e3f942ad0))
+* Add tests for tt/bot.py ([`9b53e59`](https://github.com/mraniki/tt/commit/9b53e590e9bea2a4c2f6f2d43de547f966e572b7))
+* Add tests for tests/helper_plugin.test.py ([`fc2f0d1`](https://github.com/mraniki/tt/commit/fc2f0d1f628478bcbe2009722081e9d80bfde625))
+* Merge pull request #490 from mraniki/main ([`f7f8cc2`](https://github.com/mraniki/tt/commit/f7f8cc21ba26d05493f6402d5f7082e512dee737))
+* Merge pull request #489 from mraniki/dev ([`b626acf`](https://github.com/mraniki/tt/commit/b626acf48fc0154b62e93f760a527407b59a6579))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`ae543c0`](https://github.com/mraniki/tt/commit/ae543c04224999063a4f51cd54c01599bc898f98))
+* :memo: Add codebeat badge to README.md ([`6883bd6`](https://github.com/mraniki/tt/commit/6883bd6b67586ea1ebc583baf71b69be70fa9014))
+* Add tests for tt/plugins/helper_plugin.py ([`9c21c9f`](https://github.com/mraniki/tt/commit/9c21c9ffbf0e48578be8db7b30c4a797dc43e975))
+
 ## v3.6.3 (2023-06-19)
 
 ### Fix
