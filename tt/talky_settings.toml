@@ -41,8 +41,7 @@ telethon_api_hash = ""
 matrix_hostname = ""
 matrix_user = ""
 matrix_pass = ""
-discord_webhook_id = "" # to be removed
-discord_webhook_token = ""# to be removed
+
 
 # BOTCOMMAND #####
 bot_prefix = "/"
