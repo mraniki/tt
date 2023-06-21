@@ -3,7 +3,7 @@ __version__ = "3.6.3"
 import asyncio
 import importlib
 import pkgutil
-from apprise import Apprise
+from apprise import Apprise, NotifyFormat
 from iamlistening import Listener
 from tt.config import settings, logger
 
@@ -48,11 +48,11 @@ async def send_notification(msg):
         aobj.add(settings.apprise_config)
     elif settings.apprise_url:
         aobj.add(settings.apprise_url)
-    aobj.notify("TT", msg)
+    aobj.notify(body=msg, body_format=NotifyFormat.HTML)
 
 
 async def listener():
-    """Launch Listener"""
+    """👂 Launch Listener"""
     bot_listener = Listener()
     task = asyncio.create_task(bot_listener.run_forever())
     message_processor = MessageProcessor()
@@ -80,11 +80,13 @@ async def start_plugins(message_processor):
 
 
 class MessageProcessor:
+    """👂 Message Processor for plugin """
     def __init__(self):
         self.plugins = []
         self.plugin_tasks = []
 
     def load_plugins(self, package_name):
+        """ Load plugins from package """
         logger.info("Loading plugins from package: %s", package_name)
         package = importlib.import_module(package_name)
         logger.info("Package loaded: %s", package)
@@ -104,6 +106,7 @@ class MessageProcessor:
                 logger.warning("Error loading plugin %s: %s", plugin_name, e)
 
     async def start_plugin(self, plugin_name):
+        """ Start plugin """
         if plugin_name in self.plugins:
             plugin_instance = self.plugins[plugin_name]
             await plugin_instance.start()
@@ -111,6 +114,7 @@ class MessageProcessor:
             logger.warning("Plugin not found:  %s", plugin_name)
 
     async def start_all_plugins(self):
+        """ Start all plugins """
         try:
             for plugin in self.plugins:
                 task = asyncio.create_task(plugin.start())
@@ -120,6 +124,7 @@ class MessageProcessor:
             logger.warning("error starting all plugins %s", e)
 
     async def process_message(self, message):
+        """ Process message from the plugin """
         plugin_dict = {plugin.name: plugin for plugin in self.plugins}
         # replies = []
         for plugin in plugin_dict.values():
@@ -134,6 +139,7 @@ class MessageProcessor:
 
 
 class BasePlugin:
+    """⚡ Base Plugin"""
     async def start(self):
         pass
 
