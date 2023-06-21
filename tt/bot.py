@@ -6,34 +6,26 @@ import asyncio
 import uvicorn
 from fastapi import FastAPI, Request
 
-from tt.config import settings, logger
+from tt.config import settings
 from tt.utils import listener, send_notification, __version__
 
-
-# ⛓️🤖🙊BOT
 app = FastAPI(title="TALKYTRADER")
-
 
 @app.on_event("startup")
 async def start_bot():
+    """⛓️🤖🙊BOT"""
     event_loop = asyncio.get_event_loop()
-    try:
-        event_loop.create_task(listener())
-    except Exception as error:
-        logger.error(error)
-
+    event_loop.create_task(listener())
 
 @app.get("/")
 async def root():
     """fastapi root"""
     return __version__
 
-
 @app.get("/health")
 async def health_check():
     """fastapi health"""
     return __version__
-
 
 @app.post("/webhook", status_code=202)
 async def webhook(request: Request):
