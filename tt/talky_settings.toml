@@ -1,6 +1,15 @@
-################
-### SETTINGS ###
-################
+
+###############################################################################
+###                           DEFAULT SETTINGS                              ###
+###############################################################################
+
+# Any of those settings can be overwritten by the user.
+# To overwrite a setting, create a settings.toml
+# or load the settings from .env file.
+# As an example, to overwrite the port:
+# settings.toml
+# [default]
+# port = 8081
 
 [default]
 VALUE = "Production - Default"
@@ -121,9 +130,19 @@ enable_events = true
 
 
 
-################
-### TESTING  ###
-################
+###############################################################################
+###                           TESTING SETTINGS                              ###
+###############################################################################
+
+# Any of those settings are used as part of the testing environment.
+# It can be ignored. If you required to support multiple environments in 
+# your application, you can create a part like this:
+# [mycexconfig1]
+# VALUE = "MYCEX details"
+# [mycexconfig2]
+# VALUE = "MYCEX2 details"
+
+
 [testing]
 VALUE = "On Testing"
 telethon_api_id = "123456789"
