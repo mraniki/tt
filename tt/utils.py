@@ -48,7 +48,7 @@ async def send_notification(msg):
         aobj.add(settings.apprise_config)
     elif settings.apprise_url:
         aobj.add(settings.apprise_url)
-    aobj.notify(body=msg, body_format=NotifyFormat.HTML)
+    aobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
 
 
 async def listener():
