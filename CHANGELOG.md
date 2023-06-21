@@ -2,6 +2,21 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.1 (2023-06-21)
+
+### Fix
+
+* 💬 doc ([`cc8c876`](https://github.com/mraniki/tt/commit/cc8c876e840b339874ad3a118487d887fea68d33))
+* 🚨 dotenv linter ([`79b27e9`](https://github.com/mraniki/tt/commit/79b27e9710932da15fbd5a1243841bd32a3f6408))
+* 🔧 config reorg ([`b2eb9af`](https://github.com/mraniki/tt/commit/b2eb9afab73a51e89b9b92d84095ef31261aec49))
+* 🐛 bug async notify bug and better settings readibility ([`d39276b`](https://github.com/mraniki/tt/commit/d39276b18eec3d4ba3a472802cf00db33d0a794d))
+* Update requirements.txt ([`4972573`](https://github.com/mraniki/tt/commit/49725736a733559d9f1818c9d5ecb1ae9af5ca4f))
+
+### Other
+
+* Merge pull request #497 from mraniki/dev ([`87e768d`](https://github.com/mraniki/tt/commit/87e768de085779b1ff7f04ebbec06cdf01f92a20))
+* Merge branch 'main' into dev ([`83facf9`](https://github.com/mraniki/tt/commit/83facf9457be6b49cdb8ced01c1f79c280c8320d))
+
 ## v3.7.0 (2023-06-21)
 
 ### Feature
