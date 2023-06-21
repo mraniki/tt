@@ -2,7 +2,6 @@
 TalkyTrader 🪙🗿
 """
 
-import http
 import asyncio
 import uvicorn
 from fastapi import FastAPI, Request
@@ -24,13 +23,6 @@ async def start_bot():
         logger.error(error)
 
 
-# @app.on_event("shutdown")
-# async def shutdown_event():
-#     """fastapi shutdown"""
-#     logger.info("shutting down")
-#     uvicorn.keep_running = False
-
-
 @app.get("/")
 async def root():
     """fastapi root"""
@@ -43,7 +35,7 @@ async def health_check():
     return __version__
 
 
-@app.post("/webhook", status_code=http.HTTPStatus.ACCEPTED)
+@app.post("/webhook", status_code=202)
 async def webhook(request: Request):
     """
     FastAPI '/webhook' endpoint.

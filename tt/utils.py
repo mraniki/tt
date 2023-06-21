@@ -3,41 +3,51 @@ __version__ = "3.6.3"
 import asyncio
 import importlib
 import pkgutil
-from apprise import Apprise, NotifyFormat
+from apprise import Apprise
 from iamlistening import Listener
 from tt.config import settings, logger
 
 
-async def send_notification(msg):
-    """💬 MESSAGING """
-    try:
-        if not msg:
-            return
-        apobj = Apprise()
-        if settings.discord_webhook_id:
-            url = (f"discord://{str(settings.discord_webhook_id)}/"
-                f"{str(settings.discord_webhook_token)}")
-            format=NotifyFormat.MARKDOWN
-            if isinstance(msg, str):
-                msg = msg.replace("<code>", "`")
-                msg = msg.replace("</code>", "`")
-        elif settings.matrix_hostname:
-            url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
-                f"{settings.matrix_hostname[8:]}:443/"
-                f"{str(settings.bot_channel_id)}")
-            format=NotifyFormat.HTML
-        else:
-            url = (f"tgram://{str(settings.bot_token)}/"
-                f"{str(settings.bot_channel_id)}")
-            format=NotifyFormat.HTML
+# async def send_notification_old(msg):
+#     """💬 MESSAGING """
+#     try:
+#         if not msg:
+#             return
+#         apobj = Apprise()
+#         if settings.discord_webhook_id:
+#             url = (f"discord://{str(settings.discord_webhook_id)}/"
+#                 f"{str(settings.discord_webhook_token)}")
+#             format=NotifyFormat.MARKDOWN
+#             if isinstance(msg, str):
+#                 msg = msg.replace("<code>", "`")
+#                 msg = msg.replace("</code>", "`")
+#         elif settings.matrix_hostname:
+#             url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
+#                 f"{settings.matrix_hostname[8:]}:443/"
+#                 f"{str(settings.bot_channel_id)}")
+#             format=NotifyFormat.HTML
+#         else:
+#             url = (f"tgram://{str(settings.bot_token)}/"
+#                 f"{str(settings.bot_channel_id)}")
+#             format=NotifyFormat.HTML
 
-            apobj.add(url)
-        try:
-            await apobj.async_notify(body=str(msg), body_format=format)
-        except Exception as e:
-            logger.error("%s not sent: %s", msg, e)
-    except Exception as e:
-        logger.error("url: %s", e)
+#             apobj.add(url)
+#         try:
+#             await apobj.async_notify(body=str(msg), body_format=format)
+#         except Exception as e:
+#             logger.error("%s not sent: %s", msg, e)
+#     except Exception as e:
+#         logger.error("url: %s", e)
+
+async def send_notification(msg):
+    aobj = Apprise()
+    if settings.apprise_api_endpoint:
+        aobj.add(settings.apprise_api_endpoint)
+    if settings.apprise_config:
+        aobj.add(settings.apprise_config)
+    if settings.apprise_url:
+        aobj.add(settings.apprise_url)
+    aobj.notify("TT", msg)
 
 
 async def listener():
