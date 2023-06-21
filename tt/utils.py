@@ -142,15 +142,11 @@ class BasePlugin:
     """⚡ Base Plugin"""
     async def start(self):
         pass
-
     async def stop(self):
         pass
-
     async def send_notification(self, message):
         pass
-
     def should_handle(self, message):
         pass
-
     async def handle_message(self, msg):
         pass

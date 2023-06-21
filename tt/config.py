@@ -35,4 +35,3 @@ if settings.loglevel == "DEBUG":
     logging.getLogger("discord").setLevel(logging.ERROR)
     logging.getLogger("telethon").setLevel(logging.ERROR)
     logging.getLogger("urllib3").setLevel(logging.ERROR)
-
