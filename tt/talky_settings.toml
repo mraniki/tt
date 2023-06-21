@@ -1,27 +1,29 @@
-[default]
-##############
-## DEFAULT  ##
-## SETTINGS ##
-##############
+################
+### SETTINGS ###
+################
 
-#settings env check
+[default]
 VALUE = "Production - Default"
-#LOG LEVEL
+
+# FASTAPI #######
 loglevel = "INFO"
-#FASTAPI config
 host = "0.0.0.0"
 port = 8080
 webhook_secret = "123abc"
 
-##############
-### PLUGIN ###
-##############
+# APPRISE #######
+apprise_api_endpoint = ""
+apprise_config = ""
+apprise_url = "json://localhost"
+#tgram://TOKEN/CHAT_ID
+
+# PLUGIN ########
 
 plugin_enabled = true
 plugin_menu = "plugin"
 example_plugin_enabled = false
 
-#iamlistening
+# IAMLISTENING ##
 iamlistening_enabled = true
 bot_token = ""
 bot_channel_id = ""
@@ -33,18 +35,7 @@ matrix_pass = ""
 discord_webhook_id = ""
 discord_webhook_token = ""
 
-#APPRISE
-apprise_api_endpoint = ""
-#"http://localhost:8000/notify"
-#"https://apprise:8000/notify"
-apprise_config = ""
-#"http://localhost/apprise/"
-apprise_url = "json://localhost"
-#tgram://TOKEN/CHAT_ID
-#refer to https://github.com/caronc/apprise
-
-#BOTCOMMAND
-helper_enabled = true
+# BOTCOMMAND #####
 bot_prefix = "/"
 bot_command_help = "help"
 bot_command_bal = "bal"
@@ -53,23 +44,23 @@ bot_command_pos = "pos"
 bot_command_trading = "trading"
 bot_command_news = "live"
 bot_command_restart = "restart"
-
 bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
+
+# HELPER #########
+helper_enabled = true
 bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
+ping = "8.8.8.8"
+reporting_enabled = false
 
-
-##############
-## TRADING  ##
-##############
-
-# TRADING
-trading_enabled = true #bool
+# TRADING ########
+trading_enabled = true
 trading_asset = "USDT"
 trading_risk_amount = 10
 trading_stop_loss = 1000
 trading_take_profit = 1000
+exchange_enabled = true
 
-#findmyorder
+# FINDMYORDER #####
 findmyorder_enabled = true
 action_identifier = "BUY SELL LONG SHORT"
 stop_loss_identifier = "sl="
@@ -82,12 +73,7 @@ stop_loss = 1000
 take_profit = 1000
 quantity = 1
 
-##############
-## EXCHANGE ##
-##############
-exchange_enabled = true
-
-# CEX config
+# CEX #############
 cex_enabled = false
 cex_name = ""
 cex_api = ""
@@ -97,72 +83,48 @@ cex_testmode = true
 cex_defaulttype = "SPOT"
 cex_ordertype = "MARKET"
 
-# DEX config
-#dxsp
+# DEX #############
 dxsp_enabled = true
 headers = {User-Agent= 'Mozilla/5.0'}
-#📝tokenlist
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-#📝trading setup
 dex_trading_slippage = 2 # 2 % slippage
-#user settings
-dex_wallet_address = "0x1234567890123456789012345678901234567890" #this is an example
-dex_private_key = "0xdeadbeef" #this is an example
-#chain_1 #see below for other chain ids or use https://chainlist.org to overwrite settings
+dex_wallet_address = "0x1234567890123456789012345678901234567890"
+dex_private_key = "0xdeadbeef"
 dex_chain_id = 1
-dex_protocol_type = "uniswap_v2" #0x | 1inch | uniswap_v3
+dex_protocol_type = "uniswap_v2" #0x 
 dex_rpc = "https://rpc.ankr.com/eth"
 dex_block_explorer_url = "https://api.etherscan.io/api?"
-dex_block_explorer_api =  "798437294880920392"  #this is an example
+dex_block_explorer_api =  "11111111111111111"
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" #UNI_V2
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-# dex_router_contract_addr = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45" #UNI_V3
 dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e" #UNI_V3_QUOTERV2
 dex_quoter_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v3/quoter.abi"
-#protocol specific
-#0️⃣0x
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
 
-##############
-### OTHERS ###
-##############
-
-#talkytrend
+# TALKYTREND #######
 talkytrend_enabled = true
-# scanner_frequency = 86400
+scanner_frequency = 86400
 enable_signals = false
-# assets = [
-#     { id ="EURUSD", exchange='FX_IDC',screener="forex", interval = "4h" },
-#     { id ="BTCUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
-#     #use https://tvdb.brianthe.dev/ to get details
-#     # { id ="GOLD",exchange="TVC",screener="cfd", interval = "4h"},
-#     # { id ="USOIL",exchange="FX",screener="cfd", interval = "4h"},
-#     # { id ="ETHUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
-# ]
+assets = [
+    { id ="EURUSD", exchange='FX_IDC',screener="forex", interval = "4h" },
+    { id ="BTCUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
+]
 enable_events = true
-# economic_calendar = ""
-enable_news = false
+# enable_news = false
 # news_url= ""
 # news_api_key = ""
-live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
-
-#network
-network_enabled = false
-ping = "8.8.8.8"
+# live_tv_url = ""
 
 
-reporting_enabled = false
 
-
+################
+### TESTING  ###
+################
 [testing]
-##############
-## SETTINGS ##
-## FOR TEST ##
-##############
 VALUE = "On Testing"
 telethon_api_id = "123456789"
 telethon_api_hash = "123456789"
@@ -177,14 +139,14 @@ headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-dex_trading_slippage = 2 # 2 % slippage
-dex_wallet_address = "0x1234567890123456789012345678901234567890" #this is an example
+dex_trading_slippage = 2 
+dex_wallet_address = "0x1234567890123456789012345678901234567890"
 dex_private_key = "0xdeadbeef" 
 dex_chain_id = 1
-dex_protocol_type = "uniswap_v2" #0x | 1inch | uniswap_v3
+dex_protocol_type = "uniswap_v2"
 dex_rpc = "https://rpc.ankr.com/eth"
 dex_block_explorer_url = "https://api.etherscan.io/api?"
-dex_block_explorer_api =  "798437294880920392"  #this is an example
+dex_block_explorer_api =  "798437294880920392" 
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" #UNI_V2
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
@@ -205,10 +167,6 @@ example_plugin_enabled = true
 ping = "8.8.8.8"
 
 [testing_cex]
-##############
-## SETTINGS ##
-## FOR TEST ##
-##############
 exchange_enabled = true
 cex_enabled = true
 helper_enabled = true
@@ -222,10 +180,6 @@ cex_testmode = true
 dex_chain_id = ""
 
 [testing_dex_56]
-##############
-## SETTINGS ##
-## FOR TEST ##
-##############
 VALUE = "On Testing DEX_56"
 helper_enabled = true
 cex_name = ""
@@ -242,10 +196,6 @@ bot_channel_id = "1234567890"
 ping = "8.8.8.8"
 
 [testing_dex_10]
-##############
-## SETTINGS ##
-## FOR TEST ##
-##############
 VALUE = "On Testing DEX_10"
 helper_enabled = true
 cex_name = ""
@@ -253,6 +203,24 @@ dex_wallet_address = "0x1234567890123456789012345678901234567899"
 dex_private_key = "0xdeadbeet"
 dex_rpc = "https://eth.llamarpc.com"
 dex_chain_id = 10
+dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+trading_enabled = true
+matrix_hostname = "https://matrix.org"
+matrix_user = "@thismock:matrix.org"
+matrix_pass = "1234"
+bot_token = "token_123435"
+bot_channel_id = "1234567890"
+ping = "8.8.8.8"
+
+[testing_0x]
+VALUE = "On Testing 0x_DEX_1"
+helper_enabled = true
+cex_name = ""
+dex_wallet_address = "0x1234567890123456789012345678901234567899"
+dex_private_key = "0xdeadbeet"
+dex_rpc = "https://eth.llamarpc.com"
+dex_chain_id = 1
+dex_protocol_type = "0x"
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 trading_enabled = true
 matrix_hostname = "https://matrix.org"

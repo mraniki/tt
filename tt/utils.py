@@ -48,7 +48,7 @@ async def send_notification(msg):
         aobj.add(settings.apprise_config)
     elif settings.apprise_url:
         aobj.add(settings.apprise_url)
-    aobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
+    await aobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
 
 
 async def listener():
@@ -101,7 +101,7 @@ class MessageProcessor:
                         plugin_instance = obj()
                         self.plugins.append(plugin_instance)
                         logger.info("Plugin loaded: %s", plugin_name)
-
+    
             except Exception as e:
                 logger.warning("Error loading plugin %s: %s", plugin_name, e)
 

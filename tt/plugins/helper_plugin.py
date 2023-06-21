@@ -2,19 +2,18 @@ import os
 import sys
 import socket
 import ping3
-from datetime import datetime
-# import schedule
 from tt.utils import BasePlugin, send_notification, __version__
-from tt.config import logger, settings
+from tt.config import settings
 
 
 class HelperPlugin(BasePlugin):
+    """ Helper Plugin """
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
         self.enabled = settings.helper_enabled
         if self.enabled:
-            self.version = f"🗿 {__version__}\n"
-            self.host_ip = self.get_host_ip()
+            self.version = f"🗿 {__version__}"
+            self.host_ip = f"🕸 {self.get_host_ip()}"
             self.help_message = settings.bot_msg_help
 
     async def start(self):
@@ -28,7 +27,6 @@ class HelperPlugin(BasePlugin):
 
     async def stop(self):
         """Stops the plugin"""
-        pass
 
     async def send_notification(self, message):
         """Sends a notification"""
@@ -56,8 +54,8 @@ class HelperPlugin(BasePlugin):
     def help_command(self):
         """Help Message"""
         return (f"{self.version}\n"
-                f"🕸️ {self.host_ip}\n"
-                f"🏓 {round(ping3.ping(settings.ping, unit='ms'), 3)}\n"
+                f"️{self.host_ip}\n"
+                f"🏓 {round(ping3.ping(settings.ping, unit='ms'), 2)}\n"
                 f"{self.help_message}")
 
     def trading_switch_command(self):
