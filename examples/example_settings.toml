@@ -5,6 +5,7 @@ bot_token = '1212121212121'
 bot_channel_id = '-112121212121'
 telethon_api_id = '1212121212912'
 telethon_api_hash = '121212121212121' 
+apprise_url = 'tgram://1212121212121/-112121212121'
 cex_name = 'binance' 
 cex_api = 'abcabcabcabcabcabc' 
 cex_secret = 'abcabcabcabcabcabc' 
@@ -15,63 +16,8 @@ cex_secret = 'abcabcabcabcabcabc'
 bot_token = '1212121212121'
 bot_channel_id = '121212121212'
 discord_webhook_id = '423423423' 
-discord_webhook_token = '32423423' 
+discord_webhook_token = '32423423'
+apprise_url = 'discord://1212121212121/121212121212'
 dex_wallet_address = '0x1234567890123456789012345678901234567890'
 dex_private_key = '0xdeadbeef'
 dex_block_explorer_api = '42342342342'
-
-
-#example to modify predefined config for TT
-# bot_command_help = "taimako"
-# bot_command_bal = "balas"
-# bot_command_pos = "wuri"
-# #example to modify predefined message
-# bot_msg_help = "🏦 <code>/baki</code> 📦 <code>kununua BTCUSDT</code> 🔀 <code>/biashara</code>"
-
-#example to modify predefined config for DXSP
-# headers = {User-Agent= 'Mozilla/5.0'}
-# #📝tokenlist
-# token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
-# token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
-# token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-# #📝trading setup
-# trading_asset = "USDT"
-# trading_risk_amount = 10 # 10% of the position
-# dex_trading_slippage = 2 # 2 % slippage
-# #user settings
-# dex_wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" #this is an example
-# dex_private_key = "0x111111111117dc0aaaaaa0fa6a738034aaaa302" #this is an example
-# #chain_1 #see below for other chain ids or use https://chainlist.org to overwrite settings
-# dex_chain_id = 1
-# dex_protocol_type = "uniswap_v2" #0x | 1inch | uniswap_v3
-# dex_rpc = "https://rpc.ankr.com/eth"
-# dex_block_explorer_url = "https://api.etherscan.io/api?"
-# dex_block_explorer_api =  "798437294880920392"  #this is an example
-# dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" 
-# #protocol specific
-# #🦄1inch
-# dex_1inch_url = "https://api.1inch.exchange/v5.0/"
-# dex_1inch_limit_url = "https://limit-orders.1inch.io/v3.0/"
-# #0️⃣0x
-# dex_0x_url = "https://api.0x.org/mainnet/"
-# dex_0x_api_key = "" 
-# #🪐apollo
-# dex_apollo_url = "https://fapi.apollox.finance/"
-# dex_apollo_spot_api_key = ""
-# dex_apollo_spot_api_secret = ""
-# dex_apollo_future_api_key = ""
-# dex_apollo_future_api_secret = ""
-# talkytrend_enabled = true
-# scanner_frequency = 7200
-# assets = [
-#     { id ="EURUSD", exchange='FX_IDC',screener="forex", interval = "4h" },
-#     # { id ="BTCUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
-#     #use https://tvdb.brianthe.dev/ to get details
-#     # { id ="GOLD",exchange="TVC",screener="cfd", interval = "4h"},
-#     # { id ="USOIL",exchange="FX",screener="cfd", interval = "4h"},
-#     # { id ="ETHUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
-# ]
-# economic_calendar = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
-# news_url="https://gnews.io/api/v4/top-headlines?category=general&lang=en&max=2&apikey="
-# news_api_key = ""
-# live_tv_url = "http://sc2022.stream-link.org/list.php?id=e007"

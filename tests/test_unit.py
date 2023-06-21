@@ -3,8 +3,10 @@
 """
 import pytest
 import iamlistening
+import json
 from iamlistening import Listener
 from fastapi.testclient import TestClient
+from tt.utils import send_notification
 from tt.bot import app
 from tt.config import settings
 
@@ -130,3 +132,9 @@ def test_webhook_with_invalid_auth():
     response = client.post("/webhook", json=payload)
     assert response.content.decode('utf-8') == '{"status":"ERROR"}'
 
+
+@pytest.mark.asyncio
+async def test_send_notification(caplog):
+    await send_notification("Test message")
+    assert "json://localhost/" in caplog.text
+    

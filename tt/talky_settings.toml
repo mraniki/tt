@@ -33,6 +33,15 @@ matrix_pass = ""
 discord_webhook_id = ""
 discord_webhook_token = ""
 
+#APPRISE
+apprise_api_endpoint = ""
+#"http://localhost:8000/notify"
+#"https://apprise:8000/notify"
+apprise_config = ""
+#"http://localhost/apprise/"
+apprise_url = "json://localhost"
+#tgram://TOKEN/CHAT_ID
+#refer to https://github.com/caronc/apprise
 
 #BOTCOMMAND
 helper_enabled = true

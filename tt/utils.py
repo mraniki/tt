@@ -8,40 +8,51 @@ from iamlistening import Listener
 from tt.config import settings, logger
 
 
-async def send_notification(msg):
-    """💬 MESSAGING """
-    try:
-        if not msg:
-            return
-        apobj = Apprise()
-        if settings.discord_webhook_id:
-            url = (f"discord://{str(settings.discord_webhook_id)}/"
-                f"{str(settings.discord_webhook_token)}")
-            format=NotifyFormat.MARKDOWN
-            if isinstance(msg, str):
-                msg = msg.replace("<code>", "`")
-                msg = msg.replace("</code>", "`")
-        elif settings.matrix_hostname:
-            url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
-                f"{settings.matrix_hostname[8:]}:443/"
-                f"{str(settings.bot_channel_id)}")
-            format=NotifyFormat.HTML
-        else:
-            url = (f"tgram://{str(settings.bot_token)}/"
-                f"{str(settings.bot_channel_id)}")
-            format=NotifyFormat.HTML
+# async def send_notification_old(msg):
+#     """💬 MESSAGING """
+#     try:
+#         if not msg:
+#             return
+#         apobj = Apprise()
+#         if settings.discord_webhook_id:
+#             url = (f"discord://{str(settings.discord_webhook_id)}/"
+#                 f"{str(settings.discord_webhook_token)}")
+#             format=NotifyFormat.MARKDOWN
+#             if isinstance(msg, str):
+#                 msg = msg.replace("<code>", "`")
+#                 msg = msg.replace("</code>", "`")
+#         elif settings.matrix_hostname:
+#             url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
+#                 f"{settings.matrix_hostname[8:]}:443/"
+#                 f"{str(settings.bot_channel_id)}")
+#             format=NotifyFormat.HTML
+#         else:
+#             url = (f"tgram://{str(settings.bot_token)}/"
+#                 f"{str(settings.bot_channel_id)}")
+#             format=NotifyFormat.HTML
 
-            apobj.add(url)
-        try:
-            await apobj.async_notify(body=str(msg), body_format=format)
-        except Exception as e:
-            logger.error("%s not sent: %s", msg, e)
-    except Exception as e:
-        logger.error("url: %s", e)
+#             apobj.add(url)
+#         try:
+#             await apobj.async_notify(body=str(msg), body_format=format)
+#         except Exception as e:
+#             logger.error("%s not sent: %s", msg, e)
+#     except Exception as e:
+#         logger.error("url: %s", e)
+
+async def send_notification(msg):
+    """💬 Notification via Apprise """
+    aobj = Apprise()
+    if settings.apprise_api_endpoint:
+        aobj.add(settings.apprise_api_endpoint)
+    elif settings.apprise_config:
+        aobj.add(settings.apprise_config)
+    elif settings.apprise_url:
+        aobj.add(settings.apprise_url)
+    aobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
 
 
 async def listener():
-    """Launch Listener"""
+    """👂 Launch Listener"""
     bot_listener = Listener()
     task = asyncio.create_task(bot_listener.run_forever())
     message_processor = MessageProcessor()
@@ -69,11 +80,13 @@ async def start_plugins(message_processor):
 
 
 class MessageProcessor:
+    """👂 Message Processor for plugin """
     def __init__(self):
         self.plugins = []
         self.plugin_tasks = []
 
     def load_plugins(self, package_name):
+        """ Load plugins from package """
         logger.info("Loading plugins from package: %s", package_name)
         package = importlib.import_module(package_name)
         logger.info("Package loaded: %s", package)
@@ -93,6 +106,7 @@ class MessageProcessor:
                 logger.warning("Error loading plugin %s: %s", plugin_name, e)
 
     async def start_plugin(self, plugin_name):
+        """ Start plugin """
         if plugin_name in self.plugins:
             plugin_instance = self.plugins[plugin_name]
             await plugin_instance.start()
@@ -100,6 +114,7 @@ class MessageProcessor:
             logger.warning("Plugin not found:  %s", plugin_name)
 
     async def start_all_plugins(self):
+        """ Start all plugins """
         try:
             for plugin in self.plugins:
                 task = asyncio.create_task(plugin.start())
@@ -109,38 +124,29 @@ class MessageProcessor:
             logger.warning("error starting all plugins %s", e)
 
     async def process_message(self, message):
+        """ Process message from the plugin """
         plugin_dict = {plugin.name: plugin for plugin in self.plugins}
+        # replies = []
         for plugin in plugin_dict.values():
             if plugin.should_handle(message):
                 await plugin.handle_message(message)
-    
-    # async def process_message(self, message):
-    #     plugin_dict = {plugin.name: plugin for plugin in self.plugins}
-    #     replies = []
-    
-    #     for plugin in plugin_dict.values():
-    #         if plugin.should_handle(message):
-    #             reply = await plugin.handle_message(message)
-    #             if reply:
-    #                 replies.append(reply)
-    
-    #     consolidated_reply = '\n'.join(replies)  # Combine the replies into a single string
-    #     if consolidated_reply:
-    #         await send_notification(consolidated_reply)
+                # reply = await plugin.handle_message(message)
+                # if reply:
+                #     replies.append(reply)
+            # consolidated_reply = '\n'.join(replies)  # Combine the replies into a single string
+            # if consolidated_reply:
+            #     await send_notification(consolidated_reply)
 
 
 class BasePlugin:
+    """⚡ Base Plugin"""
     async def start(self):
         pass
-
     async def stop(self):
         pass
-
     async def send_notification(self, message):
         pass
-
     def should_handle(self, message):
         pass
-
     async def handle_message(self, msg):
         pass
