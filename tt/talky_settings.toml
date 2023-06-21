@@ -165,6 +165,7 @@ bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
 example_plugin_enabled = true
 ping = "8.8.8.8"
+apprise_url = "json://localhost"
 
 [testing_cex]
 exchange_enabled = true
@@ -178,6 +179,7 @@ cex_password = 'password'
 cex_defaulttype = 'spot'
 cex_testmode = true
 dex_chain_id = ""
+apprise_url = "json://localhost"
 
 [testing_dex_56]
 VALUE = "On Testing DEX_56"
@@ -194,6 +196,7 @@ discord_webhook_token = "1234567890"
 bot_token = "test_bot_token"
 bot_channel_id = "1234567890"
 ping = "8.8.8.8"
+apprise_url = "json://localhost"
 
 [testing_dex_10]
 VALUE = "On Testing DEX_10"
@@ -211,6 +214,7 @@ matrix_pass = "1234"
 bot_token = "token_123435"
 bot_channel_id = "1234567890"
 ping = "8.8.8.8"
+apprise_url = "json://localhost"
 
 [testing_0x]
 VALUE = "On Testing 0x_DEX_1"
@@ -229,3 +233,4 @@ matrix_pass = "1234"
 bot_token = "token_123435"
 bot_channel_id = "1234567890"
 ping = "8.8.8.8"
+apprise_url = "json://localhost"
