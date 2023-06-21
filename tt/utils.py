@@ -40,12 +40,13 @@ from tt.config import settings, logger
 #         logger.error("url: %s", e)
 
 async def send_notification(msg):
+    """💬 Notification via Apprise """
     aobj = Apprise()
     if settings.apprise_api_endpoint:
         aobj.add(settings.apprise_api_endpoint)
-    if settings.apprise_config:
+    elif settings.apprise_config:
         aobj.add(settings.apprise_config)
-    if settings.apprise_url:
+    elif settings.apprise_url:
         aobj.add(settings.apprise_url)
     aobj.notify("TT", msg)
 
@@ -120,23 +121,16 @@ class MessageProcessor:
 
     async def process_message(self, message):
         plugin_dict = {plugin.name: plugin for plugin in self.plugins}
+        # replies = []
         for plugin in plugin_dict.values():
             if plugin.should_handle(message):
                 await plugin.handle_message(message)
-    
-    # async def process_message(self, message):
-    #     plugin_dict = {plugin.name: plugin for plugin in self.plugins}
-    #     replies = []
-    
-    #     for plugin in plugin_dict.values():
-    #         if plugin.should_handle(message):
-    #             reply = await plugin.handle_message(message)
-    #             if reply:
-    #                 replies.append(reply)
-    
-    #     consolidated_reply = '\n'.join(replies)  # Combine the replies into a single string
-    #     if consolidated_reply:
-    #         await send_notification(consolidated_reply)
+                # reply = await plugin.handle_message(message)
+                # if reply:
+                #     replies.append(reply)
+            # consolidated_reply = '\n'.join(replies)  # Combine the replies into a single string
+            # if consolidated_reply:
+            #     await send_notification(consolidated_reply)
 
 
 class BasePlugin:

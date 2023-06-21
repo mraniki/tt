@@ -41,8 +41,7 @@ apprise_config = ""
 #"http://localhost/apprise/"
 apprise_url = "json://localhost"
 #tgram://TOKEN/CHAT_ID
-#discord://WebhookID/WebhookToken/
-#matrixs://user:pass@hostname:port/!room_id
+#refer to https://github.com/caronc/apprise
 
 #BOTCOMMAND
 helper_enabled = true
