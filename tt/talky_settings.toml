@@ -33,15 +33,16 @@ matrix_pass = ""
 discord_webhook_id = ""
 discord_webhook_token = ""
 
-#apprise
-apprise_api_endpoint = "http://localhost:8000/notify"
+#APPRISE
+apprise_api_endpoint = ""
+#"http://localhost:8000/notify"
 #"https://apprise:8000/notify"
-
 apprise_config = ""
 #"http://localhost/apprise/"
-apprise_url = ""
-#"tgram://TOKEN/CHAT_ID" #
-# discord://WebhookID/WebhookToken/
+apprise_url = "json://localhost"
+#tgram://TOKEN/CHAT_ID
+#discord://WebhookID/WebhookToken/
+#matrixs://user:pass@hostname:port/!room_id
 
 #BOTCOMMAND
 helper_enabled = true
