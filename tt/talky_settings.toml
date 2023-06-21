@@ -41,8 +41,8 @@ telethon_api_hash = ""
 matrix_hostname = ""
 matrix_user = ""
 matrix_pass = ""
-discord_webhook_id = ""
-discord_webhook_token = ""
+discord_webhook_id = "" # to be removed
+discord_webhook_token = ""# to be removed
 
 # BOTCOMMAND #####
 bot_prefix = "/"
@@ -210,8 +210,8 @@ dex_rpc = "https://eth.llamarpc.com"
 dex_chain_id = 56
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 trading_enabled = true
-discord_webhook_id = "12345678901"
-discord_webhook_token = "1234567890"
+discord_webhook_id = "12345678901" # to be removed
+discord_webhook_token = "1234567890" # to be removed
 bot_token = "test_bot_token"
 bot_channel_id = "1234567890"
 ping = "8.8.8.8"
