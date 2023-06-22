@@ -8,37 +8,6 @@ from iamlistening import Listener
 from tt.config import settings, logger
 
 
-# async def send_notification_old(msg):
-#     """💬 MESSAGING """
-#     try:
-#         if not msg:
-#             return
-#         apobj = Apprise()
-#         if settings.discord_webhook_id:
-#             url = (f"discord://{str(settings.discord_webhook_id)}/"
-#                 f"{str(settings.discord_webhook_token)}")
-#             format=NotifyFormat.MARKDOWN
-#             if isinstance(msg, str):
-#                 msg = msg.replace("<code>", "`")
-#                 msg = msg.replace("</code>", "`")
-#         elif settings.matrix_hostname:
-#             url = (f"matrixs://{settings.matrix_user}:{settings.matrix_pass}@"
-#                 f"{settings.matrix_hostname[8:]}:443/"
-#                 f"{str(settings.bot_channel_id)}")
-#             format=NotifyFormat.HTML
-#         else:
-#             url = (f"tgram://{str(settings.bot_token)}/"
-#                 f"{str(settings.bot_channel_id)}")
-#             format=NotifyFormat.HTML
-
-#             apobj.add(url)
-#         try:
-#             await apobj.async_notify(body=str(msg), body_format=format)
-#         except Exception as e:
-#             logger.error("%s not sent: %s", msg, e)
-#     except Exception as e:
-#         logger.error("url: %s", e)
-
 async def send_notification(msg):
     """💬 Notification via Apprise """
     aobj = Apprise()
@@ -101,7 +70,7 @@ class MessageProcessor:
                         plugin_instance = obj()
                         self.plugins.append(plugin_instance)
                         logger.info("Plugin loaded: %s", plugin_name)
-    
+
             except Exception as e:
                 logger.warning("Error loading plugin %s: %s", plugin_name, e)
 

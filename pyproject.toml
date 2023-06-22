@@ -16,26 +16,25 @@ packages = [
 "Issues" =  "https://github.com/mraniki/tt/issues"
 
 [tool.poetry.dependencies]
-python = "^3.10.0"
-pytest = "*"
-pytest-cov = "*"
-pytest-asyncio = "*"
-pytest-mock = "*"
-httpx = "*"
-ping3 = "*"
-uvicorn = "*"
-fastapi = "*"
-ccxt = "^3.1.33"
+python = "^3.10"
 dynaconf = "^3.1.12"
 apprise= "^1.4.0"
+httpx = "^0.24.1"
+uvicorn = "^0.22.0"
+fastapi = "^0.97"
+ping3 = "^4.0.4"
+ccxt = "^3.1.33"
 dxsp = "^2.6.13"
 findmyorder = "^1.4.5"
-iamlistening = "^0.1.14"
+iamlistening = "^0.1.15"
 talkytrend = "^1.3.2"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "^7.34.3"
-
+pytest = "^7.0"
+pytest-cov = "^4.1"
+pytest-asyncio = "^0.21.0"
+pytest-mock = "^3.11.1"
 
 [tool.pytest.ini_options]
 pythonpath = "."
@@ -47,13 +46,18 @@ filterwarnings = [
     " ignore:.*U.*mode is deprecated:DeprecationWarning",
 ]
 
-
 [tool.coverage.run]
 omit = [
     "tests/*",
     "examples/*",
-    "tt/config.py"
+    "docs/*",
+    "*/config.py"
 ]
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.0.1"
+sphinx-autoapi = "^2.1.0"
+furo = "^2023.5.20"
 
 [build-system]
 requires = ["poetry-core"]
@@ -70,4 +74,4 @@ commit_parser = "semantic_release.history.emoji_parser"
 use_textual_changelog_sections = true
 major_emoji = "BREAKING,💥,:boom:"
 minor_emoji = "feat,🥚,:egg:,🚀,:rocket:,💄,:lipstick:,✨,:sparkles:"
-patch_emoji = "fix,Update,🎨,:art:,🐛,:bug:,🚑,⚡,:zap:,🔥,:fire:,🚨,:rotating_light:,♻️,:recycle:,🔧,:wrench:,⬆️|:arrow_up:,🩹,👷,📝,🔒,👽,💬,🥅,✅,:white_check_mark:,🐳,🙈,⚗️,🧐,🔇,🔊"
+patch_emoji = "fix,bump,Update,🎨,:art:,🐛,:bug:,🚑,:ambulance:,⚡,:zap:,🔥,:fire:,🚨,:rotating_light:,♻️,:recycle:,🔧,:wrench:,⬆️,:arrow_up:,🩹,:adhesive_bandage:,👷,:construction_worker:,📝,:memo:,🔒,:lock:,👽,:alien:,💬,:speech_balloon:,🥅,:goal_net:,✅,:white_check_mark:,🐳,:whale:,🙈,:see_no_evil:,⚗️,:alembic:,🧐,:monocle_face:,🔇,:mute:,🔊:volume:"

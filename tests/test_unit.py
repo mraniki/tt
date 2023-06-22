@@ -3,7 +3,6 @@
 """
 import pytest
 import iamlistening
-import json
 from iamlistening import Listener
 from fastapi.testclient import TestClient
 from tt.utils import send_notification
