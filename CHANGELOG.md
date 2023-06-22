@@ -2,6 +2,29 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.2 (2023-06-22)
+
+### Fix
+
+* 📝 doc ([`92fca1b`](https://github.com/mraniki/tt/commit/92fca1b63a44a8607597ab9e8a5ebb574b0bd16a))
+* :memo: readthedocs ([`5a937e0`](https://github.com/mraniki/tt/commit/5a937e05b49140985eab37e00dbdcbec79ac5ae2))
+* :memo: docs ([`19f17bb`](https://github.com/mraniki/tt/commit/19f17bb2c418f10b64ac25595d7555e6ed63f810))
+* :arrow_up: dep update ([`bd0dffa`](https://github.com/mraniki/tt/commit/bd0dffa85f5080d2bf07066131d5fd5a604409dd))
+* :arrow_up:dep update ([`ef7adc3`](https://github.com/mraniki/tt/commit/ef7adc3e1e0dcd86b307545f4519d92865d063fa))
+* Update talky_settings.toml ([`0a88908`](https://github.com/mraniki/tt/commit/0a88908b00f853ee14e27b3b40e87041bce30a6d))
+* Update pyproject.toml ([`0e34e45`](https://github.com/mraniki/tt/commit/0e34e45f3c03471ef46a1b0cbedacae51377e418))
+* 🔧 config ([`24ca635`](https://github.com/mraniki/tt/commit/24ca63544ffe73adc6fb64ff7a884c5c1bc57e11))
+* ✅ unit test ([`9bf9db3`](https://github.com/mraniki/tt/commit/9bf9db3205c93be38a75c63ac7c141e485b57fa3))
+* ⬆️ dependencies ([`5bda161`](https://github.com/mraniki/tt/commit/5bda161adba201423a3699a1f3e5498a9bdab88a))
+* ⬆️ dependencies ([`ffd8405`](https://github.com/mraniki/tt/commit/ffd8405abffa8f674129983570b9cba8f2ea5e88))
+
+### Other
+
+* Merge pull request #500 from mraniki/dev ([`fdff122`](https://github.com/mraniki/tt/commit/fdff12201dde3a4814295b7354e2758520141c0f))
+* :loud_sound: 🔉Change log level to DEBUG in pyproject.toml ([`77061c4`](https://github.com/mraniki/tt/commit/77061c4970ea91ffb0f77bb454c1798664edd318))
+* [NORTHFLANK] updated Dockerfile contents ([`0a28c29`](https://github.com/mraniki/tt/commit/0a28c29d1ab1f4645eb3fc20641752569e25ff18))
+* Merge pull request #499 from mraniki/dev ([`ee23172`](https://github.com/mraniki/tt/commit/ee2317213cb8e2e7f1853405e9f88e8154671477))
+
 ## v3.7.1 (2023-06-21)
 
 ### Fix
