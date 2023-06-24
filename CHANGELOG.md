@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.3 (2023-06-24)
+
+### Fix
+
+* :arrow_up: Update fastapi requirement from ^0.97 to ^0.98 ([`3544c88`](https://github.com/mraniki/tt/commit/3544c887db8d409537ba78cb0a634ae01cf7ac99))
+
+### Other
+
+* Merge pull request #502 from mraniki/dependabot/pip/fastapi-tw-0.98 ([`5f21651`](https://github.com/mraniki/tt/commit/5f2165107cdcc778547792feaa2443180d60c5e8))
+
 ## v3.7.2 (2023-06-22)
 
 ### Fix
