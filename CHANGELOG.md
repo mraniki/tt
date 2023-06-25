@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.4 (2023-06-25)
+
+### Fix
+
+* Update 👷Flow.yml ([`19aa42b`](https://github.com/mraniki/tt/commit/19aa42b40dd087bd69266c04a4a50a6382e1c639))
+* Update dependabot.yml ([`3023fbe`](https://github.com/mraniki/tt/commit/3023fbe5f1eef01f34fa86794fdc16bc4176af64))
+
 ## v3.7.3 (2023-06-24)
 
 ### Fix
