@@ -26,7 +26,7 @@ ping3 = "^4.0.4"
 ccxt = "^3.1.33"
 dxsp = "^2.6.13"
 findmyorder = "^1.4.5"
-iamlistening = "^0.1.15"
+iamlistening = "^0.2.0"
 talkytrend = "^1.3.2"
 
 [tool.poetry.dev-dependencies]
