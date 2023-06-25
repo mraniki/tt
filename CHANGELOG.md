@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.5 (2023-06-25)
+
+### Fix
+
+* :arrow_up: Dep: Update iamlistening requirement from ^0.1.15 to ^0.2.0 ([`6c97ff2`](https://github.com/mraniki/tt/commit/6c97ff257292cc37c7d2fc6ea10e95e3aaaa875d))
+* Update dependabot.yml ([`1f5a27f`](https://github.com/mraniki/tt/commit/1f5a27f0273d34d5df3b1c41dad0de212f3ddf14))
+
+### Other
+
+* Merge pull request #503 from mraniki/dependabot/pip/iamlistening-tw-0.2.0 ([`d9f9d68`](https://github.com/mraniki/tt/commit/d9f9d687bd987888301f418382b4d113f6c1473c))
+
 ## v3.7.4 (2023-06-25)
 
 ### Fix
