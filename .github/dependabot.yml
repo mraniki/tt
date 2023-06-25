@@ -6,9 +6,29 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: "⬆️ Dep"
 
-  # Maintain dependencies for npm
-  - package-ecosystem: "pip"
+  # Maintain dependencies for poetry
+  - package-ecosystem: "poetry"
     directory: "/"
     schedule:
       interval: "daily"
+    commit-message:
+      prefix: "⬆️ Dep"
+
+  # Maintain dependencies for pip
+  - package-ecosystem: "pip"
+    directory: "/.requirements/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "⬆️ Dep"
+
+  # Maintain dependencies for pip
+  - package-ecosystem: "docker"
+    directory: "/.registry/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "⬆️ Dep"
