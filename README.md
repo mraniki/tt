@@ -30,7 +30,7 @@
 
 5) Start your container or if deployed locally use `python3 bot.py` to start
 
-6) More details in [Wiki](https://github.com/mraniki/tt/wiki)
+6) More details in [Wiki](https://talkytrader.gitbook.io/talky/)
 
 
  <h3>Build status</h3>
@@ -40,9 +40,6 @@
 [![codebeat badge](https://codebeat.co/badges/94b328d7-777c-4d54-a0d9-ff4625c5e05d)](https://codebeat.co/projects/github-com-mraniki-tt-main)
 
 [![👷Flow](https://github.com/mraniki/tt/actions/workflows/%F0%9F%91%B7Flow.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/%F0%9F%91%B7Flow.yml)
-
-
-![Alt](https://repobeats.axiom.co/api/embed/a2d03eaf66dab33c82d52170d8ebfb0c479590a9.svg "Repobeats analytics image")
 
  
 <h3> Libraries </h3>
@@ -57,5 +54,4 @@
 [![apprise](https://badgen.net/badge/icon/apprise/black?icon=libraries&label)](https://github.com/caronc/apprise) [![FastAPI](https://badgen.net/badge/icon/fastapi/black?icon=libraries&label)](https://github.com/tiangolo/fastapi)
 </details> 
 
-<h3><a href="https://github.com/mraniki/tt/wiki/Screenshots">📷 Screenshots</a></h3>
 <img width="194" alt="222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3" src="https://github.com/mraniki/tt/assets/8766259/14cb1653-f6b4-44e7-b07c-d930060c7363">
