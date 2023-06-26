@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.6 (2023-06-26)
+
+### Fix
+
+* Update README.md ([`ea9eca8`](https://github.com/mraniki/tt/commit/ea9eca86dc6690a0415592cb7c0283c1bbcb3068))
+
 ## v3.7.5 (2023-06-25)
 
 ### Fix
