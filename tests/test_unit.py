@@ -118,18 +118,18 @@ def test_read_health():
 
 def test_webhook_with_valid_auth():
     client = TestClient(app)
-    payload = {"key": "123abc", "data": "buy BTC"}
-    response = client.post("/webhook", json=payload)
+    payload = {"data": "buy BTC"}
+    response = client.post("/webhook/123abc", json=payload)
     print(response)
     assert response is not None
     assert response.content.decode('utf-8') == '{"status":"OK"}'
 
 def test_webhook_with_invalid_auth():
     client = TestClient(app)
-    payload = {"key": "abc123", "data": "my_data"}
+    payload = {"data": "my_data"}
     print(payload)
-    response = client.post("/webhook", json=payload)
-    assert response.content.decode('utf-8') == '{"status":"ERROR"}'
+    response = client.post("/webhook/abc123", json=payload)
+    assert response.content.decode('utf-8') == '{"detail":"Not Found"}'
 
 
 @pytest.mark.asyncio
