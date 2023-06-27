@@ -72,21 +72,12 @@ class DexExchangePlugin(BasePlugin):
                 return
             if isinstance(self.exchange, DexSwap):
                 trade = await self.exchange.execute_order(order_params)
-                if not trade:
-                    return "⚠️ order execution failed"
-
-                trade_confirmation = (
-                    f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n")
-                trade_confirmation += trade['confirmation']
-
-            return trade_confirmation
-
+                return "⚠️ order execution failed" if not trade else trade
         except Exception as e:
             return f"⚠️ order execution: {e}"
 
     async def get_account_balance(self):
         """return account balance."""
-        balance = "🏦 Balance\n"
         try:
             return "🏦 Balance\n" + str(await self.exchange.get_account_balance())
         except Exception as e:
