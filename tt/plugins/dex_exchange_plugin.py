@@ -72,10 +72,7 @@ class DexExchangePlugin(BasePlugin):
                 return
             if isinstance(self.exchange, DexSwap):
                 trade = await self.exchange.execute_order(order_params)
-                if not trade:
-                    return "⚠️ order execution failed"
-                return trade
-
+                return "⚠️ order execution failed" if not trade else trade
         except Exception as e:
             return f"⚠️ order execution: {e}"
 
