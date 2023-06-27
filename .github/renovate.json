@@ -4,5 +4,6 @@
     "config:base",
     ":semanticCommitTypeAll(⬆️)"
   ],
-  "semanticCommits": "enabled"
+  "semanticCommits": "enabled",
+  "schedule": ["every day at 19:00"]
   }
