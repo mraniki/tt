@@ -77,7 +77,7 @@ class DexExchangePlugin(BasePlugin):
 
                 trade_confirmation = (
                     f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n")
-                trade_confirmation += trade['confirmation']
+                trade_confirmation += trade
 
             return trade_confirmation
 
