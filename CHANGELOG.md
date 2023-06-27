@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.8 (2023-06-27)
+
+### Fix
+
+* 🐛 bug webhook body ([`ebd5d3d`](https://github.com/mraniki/tt/commit/ebd5d3d4a05c43d15ccfbfa64a8b9f8b232d70f7))
+
+### Other
+
+* Merge pull request #509 from mraniki/dev ([`1f0f8c0`](https://github.com/mraniki/tt/commit/1f0f8c0547278eb24224ed44ca6c4d94711a2826))
+
 ## v3.7.7 (2023-06-27)
 
 ### Fix
