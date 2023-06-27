@@ -2,6 +2,25 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.7 (2023-06-27)
+
+### Fix
+
+* ✅ unit test ([`824ebfa`](https://github.com/mraniki/tt/commit/824ebfa09be57e14b523f7dade506c05d979e06f))
+* ⬆️ dependencies ([`9164c20`](https://github.com/mraniki/tt/commit/9164c201f8f252fe524808bfd17e2a16c558238a))
+* ⚡ webhook secret in the end point ([`36e5ac3`](https://github.com/mraniki/tt/commit/36e5ac325ec949d8bd43122de9e82f5d4d5ba7a7))
+* 💬 doc ([`4c56b91`](https://github.com/mraniki/tt/commit/4c56b91e4b8e368c3f4cf899d8582b17a38bdd2e))
+
+### Other
+
+* Merge pull request #508 from mraniki/dev ([`cbcf369`](https://github.com/mraniki/tt/commit/cbcf3698e133e1c4bac864010041e62289c82b6a))
+* Merge branch 'main' into dev ([`82402c4`](https://github.com/mraniki/tt/commit/82402c434d7aea2abe5f097c16feb04b25a333f4))
+* Merge pull request #507 from mraniki/dev ([`30f5d11`](https://github.com/mraniki/tt/commit/30f5d11d53091f1358b4e8825950381680a152f6))
+* Merge pull request #506 from mraniki/dev ([`dbe1473`](https://github.com/mraniki/tt/commit/dbe147365259cf1cfaf380938c676bcc8bc16e03))
+* Merge pull request #505 from mraniki/main ([`be5304d`](https://github.com/mraniki/tt/commit/be5304d9bff68bd29967d1bb9bfb230491b31405))
+* Merge pull request #504 from mraniki/dev ([`29dacbf`](https://github.com/mraniki/tt/commit/29dacbf1c61f33dac85136805fca770eb468697d))
+* Merge branch 'main' into dev ([`b15ba34`](https://github.com/mraniki/tt/commit/b15ba3450d378865803594a03276c693f4dc5287))
+
 ## v3.7.6 (2023-06-26)
 
 ### Fix
