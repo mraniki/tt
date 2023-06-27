@@ -32,7 +32,7 @@ async def webhook(request: Request):
     """
     FastAPI '/webhook' endpoint.
     """
-    data = await request.json()
+    data = await request.body()
     await send_notification(data)
     return {"status": "OK"}
 
