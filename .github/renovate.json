@@ -2,8 +2,8 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
-    ":semanticCommitTypeAll(⬆️)"
+    ":semanticCommitTypeAll(⬆️ 🤖)",
+    "schedule:daily"
   ],
-  "semanticCommits": "enabled",
-  "schedule": ["every day at 19:00"]
+  "semanticCommits": "enabled"
   }
