@@ -81,7 +81,6 @@ class DexExchangePlugin(BasePlugin):
 
     async def get_account_balance(self):
         """return account balance."""
-        balance = "🏦 Balance\n"
         try:
             return "🏦 Balance\n" + str(await self.exchange.get_account_balance())
         except Exception as e:
