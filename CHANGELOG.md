@@ -2,6 +2,23 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.9 (2023-06-27)
+
+### Fix
+
+* 👷 CI Change ([`2f0d58b`](https://github.com/mraniki/tt/commit/2f0d58bf80498b812c3540cf5ae6b78916f9128a))
+* ⬆️ dependencies ([`ef3c40c`](https://github.com/mraniki/tt/commit/ef3c40c02a03f965351be8e11106f36bd17eafd2))
+* 🔥 dex plugin ([`3eceacb`](https://github.com/mraniki/tt/commit/3eceacb9e1ad4f75b6ab075f8f19215a36736203))
+* ⚡perf moving the DEX confirm logic out of the plugin ([`31dbee4`](https://github.com/mraniki/tt/commit/31dbee4903815cdc685fa35b090cca02909a4bdc))
+* 🐛 bug dex plugin confirm ([`fcc322f`](https://github.com/mraniki/tt/commit/fcc322f2a1e38563d3217c11178d4e4b582c5cfd))
+
+### Other
+
+* Merge pull request #512 from mraniki/dev ([`f57e85f`](https://github.com/mraniki/tt/commit/f57e85fa78cd7c0d44bc0105c7e056ad62d1170c))
+* Merge pull request #510 from mraniki/dev ([`45807f7`](https://github.com/mraniki/tt/commit/45807f7b478f38387a302dc833198b1b309a6af8))
+* Merge pull request #511 from mraniki/sourcery/dev ([`25eeda6`](https://github.com/mraniki/tt/commit/25eeda6c5699c7045150dd175d27f0c122455e44))
+* 'Refactored by Sourcery' ([`9fbb337`](https://github.com/mraniki/tt/commit/9fbb337e23d9f9f6e0d5c3c8b81658df103bbbb9))
+
 ## v3.7.8 (2023-06-27)
 
 ### Fix
