@@ -74,12 +74,7 @@ class DexExchangePlugin(BasePlugin):
                 trade = await self.exchange.execute_order(order_params)
                 if not trade:
                     return "⚠️ order execution failed"
-
-                trade_confirmation = (
-                    f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n")
-                trade_confirmation += trade
-
-            return trade_confirmation
+                return trade
 
         except Exception as e:
             return f"⚠️ order execution: {e}"
