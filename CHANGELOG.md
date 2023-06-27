@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.10 (2023-06-27)
+
+### Fix
+
+* 👷 CI Change ([`b93b23a`](https://github.com/mraniki/tt/commit/b93b23a81a1ddbbd4af82412c4ff2afd8760aa90))
+
+### Other
+
+* Merge pull request #513 from mraniki/dev ([`e056ce0`](https://github.com/mraniki/tt/commit/e056ce0a9d8b2067761e9ad0a67374ba4441a010))
+
 ## v3.7.9 (2023-06-27)
 
 ### Fix
