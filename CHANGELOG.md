@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.11 (2023-06-28)
+
+### Fix
+
+* ⚡perf ([`009d48a`](https://github.com/mraniki/tt/commit/009d48a90dc255db2193ca2ca52f1c74d858d367))
+
+### Other
+
+* Merge pull request #514 from mraniki/dev ([`6aa4110`](https://github.com/mraniki/tt/commit/6aa4110cd0354a30948e39ac0180b0887b67176b))
+
 ## v3.7.10 (2023-06-27)
 
 ### Fix
