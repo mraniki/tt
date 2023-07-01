@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.12 (2023-07-01)
+
+### Fix
+
+* ⬆️ 🤖(deps): update dependency fastapi to ^0.99.0 ([`95735e2`](https://github.com/mraniki/tt/commit/95735e2fbf3a146d4148146e5afb9a1185ad8c86))
+
+### Other
+
+* Merge pull request #501 from mraniki/renovate/fastapi-0.x ([`7fa67e3`](https://github.com/mraniki/tt/commit/7fa67e37762daa425abe422b7b230c82c0404161))
+
 ## v3.7.11 (2023-06-28)
 
 ### Fix
