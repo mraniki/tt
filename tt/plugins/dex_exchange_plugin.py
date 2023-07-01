@@ -98,10 +98,3 @@ class DexExchangePlugin(BasePlugin):
     async def get_trading_asset_balance(self):
         """return main asset balance."""
         return await self.exchange.get_trading_asset_balance()
-
-
-
-
-
-
-

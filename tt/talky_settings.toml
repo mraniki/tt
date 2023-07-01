@@ -13,9 +13,9 @@
 
 [default]
 VALUE = "Production - Default"
+loglevel = "INFO"
 
 # FASTAPI #######
-loglevel = "INFO"
 host = "0.0.0.0"
 port = 8080
 webhook_secret = "123abc"
@@ -23,11 +23,10 @@ webhook_secret = "123abc"
 # APPRISE #######
 apprise_api_endpoint = ""
 apprise_config = ""
-apprise_url = "json://localhost"
+apprise_url = "json://localhost" 
 #tgram://TOKEN/CHAT_ID
 
 # PLUGIN ########
-
 plugin_enabled = true
 plugin_menu = "plugin"
 example_plugin_enabled = false
@@ -56,13 +55,14 @@ bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 
 # HELPER #########
 helper_enabled = true
-bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
+bot_msg_help = "🏦<code>/bal</code> 🎯<code>buy BTCUSDT</code> 🏷️<code>/q BTCB</code> 🔀<code>/trading</code>"
 ping = "8.8.8.8"
 reporting_enabled = false
 
 # TRADING ########
 trading_enabled = true
 trading_asset = "USDT"
+trading_risk_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10
 trading_stop_loss = 1000
 trading_take_profit = 1000
@@ -93,11 +93,6 @@ cex_ordertype = "MARKET"
 
 # DEX #############
 dxsp_enabled = true
-headers = {User-Agent= 'Mozilla/5.0'}
-token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
-token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
-token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-dex_trading_slippage = 2 # 2 % slippage
 dex_wallet_address = "0x1234567890123456789012345678901234567890"
 dex_private_key = "0xdeadbeef"
 dex_chain_id = 1
@@ -112,6 +107,11 @@ dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e" #UNI_V3_
 dex_quoter_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v3/quoter.abi"
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
+headers = {User-Agent= 'Mozilla/5.0'}
+token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
+token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
+token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+dex_trading_slippage = 2 # 2 % slippage
 
 # TALKYTREND #######
 talkytrend_enabled = true
@@ -129,9 +129,9 @@ enable_events = true
 
 
 
-###############################################################################
-###                           TESTING SETTINGS                              ###
-###############################################################################
+###############################
+###      TESTING SETTINGS   ###
+###############################
 
 # Any of those settings are used as part of the testing environment.
 # It can be ignored. If you required to support multiple environments in 
