@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.13 (2023-07-01)
+
+### Fix
+
+* Update README.md ([`5798c55`](https://github.com/mraniki/tt/commit/5798c558d098c5df60d39fa8cb010ea99c213d28))
+* :arrow_up: Update dxsp version to 3.0.0 ([`c9a381c`](https://github.com/mraniki/tt/commit/c9a381ce893df5b0a8627424d6477441f0081a45))
+
+### Other
+
+* Merge pull request #515 from mraniki/dev ([`b598615`](https://github.com/mraniki/tt/commit/b598615e8d4ae651e31ca978c220f54d3d9e4c86))
+* Merge branch 'main' into dev ([`6a0cd8b`](https://github.com/mraniki/tt/commit/6a0cd8b62e6b9ff6148577924b56e92d1a2e9f81))
+* Merge branch 'main' into dev ([`36398f6`](https://github.com/mraniki/tt/commit/36398f6bb3a682f2a1f7cfeacd45dee727a87217))
+
 ## v3.7.12 (2023-07-01)
 
 ### Fix
