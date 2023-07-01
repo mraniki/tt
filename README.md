@@ -25,7 +25,7 @@
 3) Create your config [/app/settings.toml](src/example_settings.toml)
 
 4) Deploy via:
-    - docker `docker push mraniki/tt:latest` or `docker pull ghcr.io/mraniki/tt:latest`
+    - docker `docker pull mraniki/tt:latest` or `docker pull ghcr.io/mraniki/tt:latest`
     - locally `git clone https://github.com/mraniki/tt:main` && `pip install -r requirements.txt`
 
 5) Start your container or if deployed locally use `python3 bot.py` to start
