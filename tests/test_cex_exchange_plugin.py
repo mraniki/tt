@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock, patch
 import ccxt
 from tt.config import settings, logger
 from tt.plugins.cex_exchange_plugin import CexExchangePlugin
@@ -17,7 +16,6 @@ def order_params():
         'instrument': 'BTCUSDT',
         'quantity': 10,
     }
-
 
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():
@@ -39,32 +37,18 @@ async def test_plugin(plugin):
 
 @pytest.mark.asyncio
 async def test_parse_quote(plugin, caplog):
-   """Test parse_message balance """
-   enabled = plugin.enabled
-   exchange = plugin.exchange
-   await plugin.handle_message('/q BTCUSDT')
-   assert "🏦" in caplog.text
+    """Test parse_message balance """
+    enabled = plugin.enabled
+    exchange = plugin.exchange
+    print(exchange.id)
+    await plugin.handle_message('/q BTCUSDT')
+    assert "🏦" in caplog.text
 
-
-# @pytest.mark.asyncio
-# async def test_parse_balance(plugin):
-#     """Test balance """
-#     get_account_balance= AsyncMock()
-#     await plugin.handle_message('/bal')
-#     get_account_balance.assert_called_once
-
-# @pytest.mark.asyncio
-# async def test_parse_position(plugin):
-#     """Test balance """
-#     get_account_position= AsyncMock()
-#     await plugin.handle_message('/pos')
-#     get_account_position.assert_called_once
-
-# @pytest.mark.asyncio
-# async def test_info_message(plugin):
-#     """test exchange cex"""
-#     output = await plugin.info_message()
-#     assert output is not None 
+@pytest.mark.asyncio
+async def test_info_message(plugin):
+    """test exchange cex"""
+    output = plugin.info_message()
+    assert output is not None
 
 # @pytest.mark.asyncio
 # async def test_execute_order(plugin, caplog, order):
@@ -74,37 +58,15 @@ async def test_parse_quote(plugin, caplog):
 
 
 # @pytest.mark.asyncio
-# async def test_get_account_balance(plugin):
-#     """Test get_account_balance."""
-#     output = await plugin.get_account_balance()
-#     print(output)
-#     assert output is not None
+# async def test_parse_balance(plugin):
+#     """Test balance """
+#     # get_account_balance= AsyncMock()
+#     await plugin.handle_message('/bal')
+#     get_account_balance.assert_called_once
 
 # @pytest.mark.asyncio
-# async def test_get_account_position(plugin):
-#     """Test get_account_positions."""
-#     output = await plugin.get_account_position()
-#     print(output)
-#     assert output is not None
-
-# @pytest.mark.asyncio
-# async def test_get_trading_asset_balance(plugin):
-#     """Test get_asset_trading_balance."""
-#     output = await plugin.get_trading_asset_balance()
-#     print(output)
-#     assert output is not None
-
-# @pytest.mark.asyncio
-# async def test_cex_load_exchange(settings_cex):
-#     """test exchange cex"""
-#     mock_ccxt = MagicMock()
-#     mock_ccxt.cex_client = MagicMock()
-#     mock_exchange = MagicMock()
-#     with patch.dict("sys.modules", ccxt=mock_ccxt):
-#         mock_ccxt.cex_client.return_value = mock_exchange
-#         exchange = await load_exchange()
-#         name = await get_name()
-#         assert exchange is not None
-#         assert name == 'binance'
-#         assert isinstance(exchange, ccxt.binance)
-
+# async def test_parse_position(plugin):
+#     """Test position """
+#     get_account_position= AsyncMock()
+#     await plugin.handle_message('/pos')
+#     get_account_position.assert_called_once

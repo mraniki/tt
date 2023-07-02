@@ -57,7 +57,7 @@ class CexExchangePlugin(BasePlugin):
             if command == settings.bot_command_quote:
                 symbol = msg.split(" ")[1]
                 await self.send_notification(
-                f"🏦 {await self.exchange.fetchTicker(symbol)}")
+                f"🏦 {self.exchange.fetchTicker(symbol).get('last')}")
             elif command == settings.bot_command_bal:
                 await self.send_notification(f"{await self.get_account_balance()}")
             elif command == settings.bot_command_pos:
@@ -73,7 +73,6 @@ class CexExchangePlugin(BasePlugin):
 
     async def execute_order(self, order_params):
         """Execute order."""
-        logger.debug("exchange plugin processing")
         action = order_params.get('action')
         instrument = order_params.get('instrument')
         quantity = order_params.get('quantity', settings.trading_risk_amount)
