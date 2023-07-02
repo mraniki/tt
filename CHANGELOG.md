@@ -2,6 +2,34 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.14 (2023-07-02)
+
+### Fix
+
+* :whale: docker env test ([`d5889bb`](https://github.com/mraniki/tt/commit/d5889bb17a14b87ee8e2d991a16634d95e806c2d))
+* 🐳 docker env test ([`ef49ae1`](https://github.com/mraniki/tt/commit/ef49ae10f63014decf28ba1541ac7ddc5d41f39f))
+* 🐳 docker ([`765021a`](https://github.com/mraniki/tt/commit/765021a7515c9853c11f8abae0e165cc73f0690e))
+* 🚑 hot fix  fix CEX quote and unit test ([`d33300e`](https://github.com/mraniki/tt/commit/d33300e9592b1ed0597c6b9632467ecaa7d11b7b))
+* :white_check_mark: unit test ([`0e3dd33`](https://github.com/mraniki/tt/commit/0e3dd33ea7da13bfb5f5aa4a277796e180f57224))
+* :white_check_mark: Remove unnecessary test functions and update comments ([`9e78bfa`](https://github.com/mraniki/tt/commit/9e78bfa476795e37adc85817e4cdbf2976610802))
+* ✅ unit test ([`2bd1383`](https://github.com/mraniki/tt/commit/2bd1383142efe08109e7cbaad4cb4afc501ef519))
+* :arrow_up: Update pyproject.toml and test_cex_exchange_plugin.py ([`1eec146`](https://github.com/mraniki/tt/commit/1eec146e07206a7ed807ce1b631e4ac16adf046c))
+* :recycle: Refactor DexExchangePlugin ([`bafc036`](https://github.com/mraniki/tt/commit/bafc0364b4603ec4408f5171fcbd4b2b51be8d95))
+* :recycle: Refactor DexExchangePlugin error handling ([`ca854f1`](https://github.com/mraniki/tt/commit/ca854f1e1c6ef435182dadc61dfd822f2b39e4ad))
+* :recycle: Refactor DexExchangePlugin error handling ([`af4be5a`](https://github.com/mraniki/tt/commit/af4be5a921c7e9c271311bba54f816ab94326200))
+* :recycle: Refactor DexExchangePlugin error handling ([`ea39321`](https://github.com/mraniki/tt/commit/ea39321f10daf29b8c33c0249dc071102fbcad88))
+* :white_check_mark: Refactor test_dex_exchange_plugin.py ([`1ee39cc`](https://github.com/mraniki/tt/commit/1ee39ccae5451d8ba57c75207a4f2022ba84311b))
+* :white_check_mark: Refactor test_dex_exchange_plugin.py ([`bf2d132`](https://github.com/mraniki/tt/commit/bf2d1325b225b7b621c26b415717491fac1baff5))
+* :recycle: Refactor DexExchangePlugin error handling ([`6f6e59d`](https://github.com/mraniki/tt/commit/6f6e59d6c6ac27735cc8107ec61da917c05e7696))
+* :white_check_mark: Refactor test_dex_exchange_plugin.py ([`5b188fd`](https://github.com/mraniki/tt/commit/5b188fd78a7b6b94f28d343bdf29739bb4cda469))
+* :arrow_up: Update dxsp version to 3.1.0 ([`5bdb53a`](https://github.com/mraniki/tt/commit/5bdb53a608c5edf92ee33427aef1671beca2dc85))
+* :wrench: Update example.env and talky_settings.toml ([`b133fa4`](https://github.com/mraniki/tt/commit/b133fa4851cfd14bc04bfaa914d1872d2322d141))
+
+### Other
+
+* Merge pull request #517 from mraniki/dev ([`01b2806`](https://github.com/mraniki/tt/commit/01b2806669367d2dfa08f9f19493847ed8fdfddf))
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`bf1255c`](https://github.com/mraniki/tt/commit/bf1255c85f82a718aeb22c3bfe092ee97b781ea4))
+
 ## v3.7.13 (2023-07-01)
 
 ### Fix
