@@ -64,10 +64,10 @@ class DexExchangePlugin(BasePlugin):
 
     async def execute_order(self, order_params):
         """Execute order."""
-        action = order_params.get('action')
-        instrument = order_params.get('instrument')
-        if not action or not instrument:
-                return
+        # action = order_params.get('action')
+        # instrument = order_params.get('instrument')
+        # if not action or not instrument:
+        #         return
         return await self.exchange.execute_order(order_params)
 
     async def get_account_balance(self):
@@ -77,15 +77,7 @@ class DexExchangePlugin(BasePlugin):
 
     async def get_account_position(self):
         """return account position."""
-        try:
-            if isinstance(self.exchange, DexSwap):
-                open_positions = await self.exchange.get_account_position()
-                position = "📊 Position\n" + str(open_positions)
-                position += str(await self.exchange.get_account_margin())
-                return position
-        except Exception as e:
-            return f"⚠️ account_position: {e}"
-
+        return await self.exchange.get_account_position()
 
     async def get_trading_asset_balance(self):
         """return main asset balance."""
