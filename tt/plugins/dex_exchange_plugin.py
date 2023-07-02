@@ -72,8 +72,7 @@ class DexExchangePlugin(BasePlugin):
 
     async def get_account_balance(self):
         """return account balance."""
-        return await self.exchange.get_account_balance())
-
+        return await self.exchange.get_account_balance()
 
     async def get_account_position(self):
         """return account position."""
