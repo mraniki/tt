@@ -40,11 +40,10 @@ async def test_plugin(plugin):
 @pytest.mark.asyncio
 async def test_parse_quote(plugin, caplog):
    """Test parse_message balance """
-   #get_quote= AsyncMock("WBTC")
-    enabled = plugin.enabled
-    exchange = plugin.exchange
-    await plugin.handle_message('/q BTC')
-    assert "🏦" in caplog.text
+   enabled = plugin.enabled
+   exchange = plugin.exchange
+   await plugin.handle_message('/q BTCUSDT')
+   assert "🏦" in caplog.text
 
 
 @pytest.mark.asyncio
