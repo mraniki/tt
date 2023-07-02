@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.16 (2023-07-02)
+
+### Fix
+
+* ⬆️ dependencies ([`e815a3a`](https://github.com/mraniki/tt/commit/e815a3ab59476d4964d88785118a8e93390da2f1))
+
+### Other
+
+* Merge pull request #519 from mraniki/dev ([`7226c29`](https://github.com/mraniki/tt/commit/7226c29a1a8b09ff043d333072cc32f9a7dcd2c3))
+
 ## v3.7.15 (2023-07-02)
 
 ### Fix

@@ -1,4 +1,4 @@
-__version__ = "3.7.15"
+__version__ = "3.7.16"
 
 import asyncio
 import importlib
