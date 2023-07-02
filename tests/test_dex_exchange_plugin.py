@@ -59,18 +59,13 @@ async def test_info_message(plugin):
     output = await plugin.info_message()
     assert output is not None 
 
-# @pytest.mark.asyncio
-# async def test_execute_order(plugin, caplog, order):
-#     execute_mock = AsyncMock()
-#     with patch('tt.plugins.dex_exchange_plugin.execute_order',execute_mock):
-#         trade_confirmation = await dex.execute_order(order)
-#         assert "⚠️ order execution:" in caplog.text
 
-# @pytest.mark.asyncio
-# async def test_failed_execute_order(plugin, caplog, order):
-#     output = await plugin.execute_order(order)
-#     assert "⚠️" in caplog.text
-
+@pytest.mark.asyncio
+async def test_execute_order(plugin, caplog, order):
+    output = await plugin.execute_order(order)
+    #assert "⚠️" in caplog.text
+    print(output)
+    assert output is not None
 
 @pytest.mark.asyncio
 async def test_get_account_balance(plugin):
