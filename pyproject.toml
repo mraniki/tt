@@ -27,7 +27,7 @@ ccxt = "^4.0.0"
 dxsp = "^3.1.1"
 findmyorder = "^1.5.2"
 iamlistening = "^0.2.3"
-talkytrend = "^1.5.2"
+talkytrend = "^1.5.4"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "^7.34.3"
