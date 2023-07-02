@@ -71,10 +71,9 @@ class DexExchangePlugin(BasePlugin):
             if not action or not instrument:
                 return
             if isinstance(self.exchange, DexSwap):
-                trade = await self.exchange.execute_order(order_params)
-                return "⚠️ order execution failed" if not trade else trade
+                return await self.exchange.execute_order(order_params)
         except Exception as e:
-            return f"⚠️ order execution: {e}"
+            return e
 
     async def get_account_balance(self):
         """return account balance."""

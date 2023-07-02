@@ -42,8 +42,12 @@ async def test_plugin(plugin):
 async def test_parse_quote(plugin, caplog):
     """Test parse_message balance """
     #get_quote= AsyncMock("WBTC")
+    enabled = plugin.enabled
+    exchange = plugin.exchange
+    assert enabled is True
+    assert isinstance(exchange, DexSwap)
     await plugin.handle_message('/q WBTC')
-    assert 'quote [1, 0]' in caplog.text
+    assert "🦄" in caplog.text
 
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
@@ -75,7 +79,7 @@ async def test_info_message(plugin):
 @pytest.mark.asyncio
 async def test_failed_execute_order(plugin, caplog, order):
     trade_confirmation = await plugin.execute_order(order)
-    assert "🗓️" not in caplog.text
+    assert "⚠️" in caplog.text
 
 
 @pytest.mark.asyncio
