@@ -64,7 +64,6 @@ class DexExchangePlugin(BasePlugin):
 
     async def execute_order(self, order_params):
         """Execute order."""
-        logger.debug("exchange plugin processing")
         action = order_params.get('action')
         instrument = order_params.get('instrument')
         try:
@@ -72,8 +71,8 @@ class DexExchangePlugin(BasePlugin):
                 return
             if isinstance(self.exchange, DexSwap):
                 return await self.exchange.execute_order(order_params)
-        except Exception as e:
-            return e
+        except Exception as error:
+            return error
 
     async def get_account_balance(self):
         """return account balance."""
