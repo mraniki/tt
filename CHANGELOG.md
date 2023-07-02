@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.15 (2023-07-02)
+
+### Fix
+
+* ⬆️ dependencies ([`522a4e6`](https://github.com/mraniki/tt/commit/522a4e6c012a7d256e04fa7469473ee1a8b5eee7))
+* 🔧 config ([`d1ac03c`](https://github.com/mraniki/tt/commit/d1ac03c7cef539117aa01f681d3332c0f45ca9cb))
+* :arrow_up: talkytrend ([`b03c4dd`](https://github.com/mraniki/tt/commit/b03c4ddd30efe0ca3c7a0536bea5d2dea651a3b1))
+* :whale:  Update example.env file with factory addresses ([`f7aa08a`](https://github.com/mraniki/tt/commit/f7aa08aa2840db393310880ba0329383da400e22))
+
+### Other
+
+* Merge pull request #518 from mraniki/dev ([`6b47fa0`](https://github.com/mraniki/tt/commit/6b47fa080c8a1b43cf3a46391303f0b2b4928acb))
+
 ## v3.7.14 (2023-07-02)
 
 ### Fix
