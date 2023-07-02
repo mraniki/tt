@@ -66,8 +66,8 @@ async def test_parse_position(plugin):
 @pytest.mark.asyncio
 async def test_info_message(plugin):
     """test exchange dex"""
-    info = await plugin.info_message()
-    assert info is not None 
+    output = await plugin.info_message()
+    assert output is not None 
 
 # @pytest.mark.asyncio
 # async def test_execute_order(plugin, caplog, order):
@@ -78,7 +78,7 @@ async def test_info_message(plugin):
 
 @pytest.mark.asyncio
 async def test_failed_execute_order(plugin, caplog, order):
-    trade_confirmation = await plugin.execute_order(order)
+    output = await plugin.execute_order(order)
     assert "⚠️" in caplog.text
 
 
