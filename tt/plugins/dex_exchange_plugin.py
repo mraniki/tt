@@ -15,15 +15,15 @@ class DexExchangePlugin(BasePlugin):
                 self.exchange = DexSwap()
 
     async def start(self):
-        """Starts the exchange_plugin plugin"""
+        """Starts the plugin"""
 
 
     async def stop(self):
-        """Stops the exchange_plugin plugin"""
+        """Stops the plugin"""
 
 
     async def send_notification(self, message):
-        """Sends a notification"""
+        """Sends notification"""
         if self.enabled:
             await send_notification(message)
 
@@ -38,8 +38,8 @@ class DexExchangePlugin(BasePlugin):
             return
         if msg.startswith(settings.bot_ignore):
             return
-        if await self.fmo.search(msg):
-            order = await self.fmo.get_order(msg)
+        order = await self.fmo.get_order(msg)
+        if order:
             trade = await self.execute_order(order)
             if trade:
                 await send_notification(trade)
@@ -61,6 +61,7 @@ class DexExchangePlugin(BasePlugin):
         exchange_name = await self.exchange.get_name()
         account_info = self.exchange.account
         return f"💱 {exchange_name}\n🪪 {account_info}"
+        #return await self.exchange.get_info()
 
     async def execute_order(self, order_params):
         """Execute order."""
