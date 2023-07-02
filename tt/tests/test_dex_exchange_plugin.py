@@ -1,13 +1,14 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, patch
 from dxsp import DexSwap
-from tt.config import settings, logger
+from tt.config import settings
 from tt.plugins.dex_exchange_plugin import DexExchangePlugin
 
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
+
 
 @pytest.fixture(name="order")
 def order_params():
