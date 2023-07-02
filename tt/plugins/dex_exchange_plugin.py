@@ -58,10 +58,10 @@ class DexExchangePlugin(BasePlugin):
 
     async def info_message(self):
         """info_message"""    
-        exchange_name = await self.exchange.get_name()
-        account_info = self.exchange.account
-        return f"💱 {exchange_name}\n🪪 {account_info}"
-        #return await self.exchange.get_info()
+        #exchange_name = await self.exchange.get_name()
+        #account_info = self.exchange.account
+        #return f"💱 {exchange_name}\n🪪 {account_info}"
+        return await self.exchange.get_info()
 
     async def execute_order(self, order_params):
         """Execute order."""

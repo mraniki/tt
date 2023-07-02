@@ -63,7 +63,6 @@ async def test_info_message(plugin):
 @pytest.mark.asyncio
 async def test_execute_order(plugin, caplog, order):
     output = await plugin.execute_order(order)
-    #assert "⚠️" in caplog.text
     print(output)
     assert output is not None
 
