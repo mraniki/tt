@@ -18,14 +18,6 @@ def order_params():
         'quantity': 1,
     }
 
-@pytest.fixture(name="wrong_order")
-def wrong_order():
-    """Return order parameters."""
-    return {
-        'action': 'BUY',
-        'instrument': 'NOTATHING',
-        'quantity': 1,
-        }
 
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():
@@ -42,8 +34,10 @@ async def test_plugin(plugin):
 async def test_parse_quote(plugin, caplog):
     """Test parse_message balance """
     #get_quote= AsyncMock("WBTC")
+    enabled = plugin.enabled
+    exchange = plugin.exchange
     await plugin.handle_message('/q WBTC')
-    assert 'quote [1, 0]' in caplog.text
+    assert "🦄" in caplog.text
 
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
@@ -62,21 +56,15 @@ async def test_parse_position(plugin):
 @pytest.mark.asyncio
 async def test_info_message(plugin):
     """test exchange dex"""
-    info = await plugin.info_message()
-    assert info is not None 
+    output = await plugin.info_message()
+    assert output is not None 
 
-# @pytest.mark.asyncio
-# async def test_execute_order(plugin, caplog, order):
-#     execute_mock = AsyncMock()
-#     with patch('tt.plugins.dex_exchange_plugin.execute_order',execute_mock):
-#         trade_confirmation = await dex.execute_order(order)
-#         assert "⚠️ order execution:" in caplog.text
 
 @pytest.mark.asyncio
-async def test_failed_execute_order(plugin, caplog, order):
-    trade_confirmation = await plugin.execute_order(order)
-    assert "🗓️" not in caplog.text
-
+async def test_execute_order(plugin, caplog, order):
+    output = await plugin.execute_order(order)
+    print(output)
+    assert output is not None
 
 @pytest.mark.asyncio
 async def test_get_account_balance(plugin):

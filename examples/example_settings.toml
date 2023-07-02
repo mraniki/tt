@@ -1,23 +1,21 @@
-[CEX01] #CEX Minimum config
+ #CEX Minimum config
 # TELEGRAM BOT for Binance
-# ENV_FOR_DYNACONF="CEX01" # 
-bot_token = '1212121212121'
-bot_channel_id = '-112121212121'
-telethon_api_id = '1212121212912'
-telethon_api_hash = '121212121212121' 
-apprise_url = 'tgram://1212121212121/-112121212121'
-cex_name = 'binance' 
-cex_api = 'abcabcabcabcabcabc' 
-cex_secret = 'abcabcabcabcabcabc' 
+    # bot_token = '1212121212121'
+    # bot_channel_id = '-112121212121'
+    # telethon_api_id = '1212121212912'
+    # telethon_api_hash = '121212121212121' 
+    # apprise_url = 'tgram://1212121212121/-112121212121'
+    # cex_name = 'binance' 
+    # cex_api = 'abcabcabcabcabcabc' 
+    # cex_secret = 'abcabcabcabcabcabc' 
 
-[DEX01] #DEX Minimum config
+#DEX Minimum config
 #DISCORD BOT on ethereum chain using uniswap v2 router and protocol
-# ENV_FOR_DYNACONF="DEX01" # 
-bot_token = '1212121212121'
-bot_channel_id = '121212121212'
-discord_webhook_id = '423423423' 
-discord_webhook_token = '32423423'
-apprise_url = 'discord://1212121212121/121212121212'
-dex_wallet_address = '0x1234567890123456789012345678901234567890'
-dex_private_key = '0xdeadbeef'
-dex_block_explorer_api = '42342342342'
+    # bot_token = '1212121212121'
+    # bot_channel_id = '121212121212'
+    # discord_webhook_id = '423423423' 
+    # discord_webhook_token = '32423423'
+    # apprise_url = 'discord://1212121212121/121212121212'
+    # dex_wallet_address = '0x1234567890123456789012345678901234567890'
+    # dex_private_key = '0xdeadbeef'
+    # dex_block_explorer_api = '42342342342'

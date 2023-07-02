@@ -22,7 +22,7 @@
     - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or
     - DEX wallet address and private key
 
-3) Create your config [/app/settings.toml](src/example_settings.toml)
+3) Create your config [/app/settings.toml](src/example_settings.toml) or prepare your env variable
 
 4) Deploy via:
     - docker `docker pull mraniki/tt:latest` or `docker pull ghcr.io/mraniki/tt:latest`
@@ -30,7 +30,7 @@
 
 5) Start your container or if deployed locally use `python3 bot.py` to start
 
-6) More details in [Wiki](https://talkytrader.gitbook.io/talky/)
+6) Documentation available on [Wiki](https://talkytrader.gitbook.io/talky/)
 
 
  <h3>Build status</h3>
