@@ -55,7 +55,7 @@ class CexExchangePlugin(BasePlugin):
         if msg.startswith(settings.bot_prefix):
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_quote:
-                symbol = str(msg.split(" ")[1])
+                symbol = msg.split(" ")[1]
                 await self.send_notification(
                 f"🏦 {await self.exchange.fetchTicker(symbol)}")
             elif command == settings.bot_command_bal:
