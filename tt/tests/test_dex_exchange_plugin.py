@@ -1,6 +1,7 @@
 import pytest
 from unittest.mock import AsyncMock
 from dxsp import DexSwap
+import iamlistening
 from iamlistening import Listener
 from tt.config import settings
 from tt.plugins.dex_exchange_plugin import DexExchangePlugin
@@ -40,7 +41,6 @@ async def test_listener_discord(bsc):
     print(listener_test)
     assert listener_test is not None
     assert isinstance(listener_test, iamlistening.main.Listener)
-
 
 
 @pytest.mark.asyncio
@@ -114,4 +114,3 @@ async def test_get_trading_asset_balance(plugin):
     output = await plugin.get_trading_asset_balance()
     print(output)
     assert output is not None
-
