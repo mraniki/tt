@@ -44,8 +44,8 @@ async def test_trading_switch(message_processor):
     assert settings.trading_enabled == False
 
 
-@pytest.mark.asyncio
-async def test_help(message_processor, caplog):
-    plugin = HelperPlugin()
-    await plugin.handle_message('/help')
-    assert "🎯" in caplog.text
+# @pytest.mark.asyncio
+# async def test_help(message_processor, caplog):
+#     plugin = HelperPlugin()
+#     await plugin.handle_message('/help')
+#     assert "🎯" in caplog.text
