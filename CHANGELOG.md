@@ -2,6 +2,33 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.17 (2023-07-03)
+
+### Fix
+
+* ✅  unit test and integration of DXSP improvement ([`0a8f886`](https://github.com/mraniki/tt/commit/0a8f886d9c36dc8f79199417a11c0b96ebe3f99c))
+* :white_check_mark:  Remove test_help function ([`efc66be`](https://github.com/mraniki/tt/commit/efc66be9b68e0fb74baf83c00df52791eefe0ca6))
+* :wrench:  testing config ([`4ed8bf3`](https://github.com/mraniki/tt/commit/4ed8bf39e30231bcae23fbd7c383fee402423d0d))
+* :white_check_mark:  Refactor test_help function in test_plugin.py ([`0bbcf99`](https://github.com/mraniki/tt/commit/0bbcf99319763f1aeee1779a67d6db9b4a4aa954))
+* :alien: dxsp dep ([`8e8b24e`](https://github.com/mraniki/tt/commit/8e8b24e7fad161443388e848216604902b501812))
+* :rotating_light: linter ([`37f743c`](https://github.com/mraniki/tt/commit/37f743cf31b93c8133a9aa9a623f51dc0fe56263))
+* 🔧 settings udpate ([`2f6bafb`](https://github.com/mraniki/tt/commit/2f6bafb6feae6b3414b564bdc3bd3fcb4774480c))
+* 🔧  config  update ([`330116a`](https://github.com/mraniki/tt/commit/330116a067654ef6357f2701879e3176a85c06bb))
+* ✅ unit test ([`6c913b3`](https://github.com/mraniki/tt/commit/6c913b33e8e7aa83ed80331545d89957ce74051a))
+* 🔧 config cleanup ([`c63122b`](https://github.com/mraniki/tt/commit/c63122bd62ed4e656cda47d9934e1ee375512c69))
+* ✅  unit test ([`c8bea3e`](https://github.com/mraniki/tt/commit/c8bea3e6f8ca975d8e0022fb21eefe8047952dfc))
+* ✅ unit test cleanup ([`b5a9360`](https://github.com/mraniki/tt/commit/b5a9360b5608b4f241adb2176acc28057652e243))
+* :alien: dxsp dep ([`021b92f`](https://github.com/mraniki/tt/commit/021b92f3807289aa14f2ea123988439959546957))
+* 👽 removing chain_id in dxsp ([`164e767`](https://github.com/mraniki/tt/commit/164e7677670bfa24b5c866db6ff9edc3e3c2e14f))
+* ✅ improving unit test ([`fab8f5b`](https://github.com/mraniki/tt/commit/fab8f5bacecaac10f015b66521812ae99dbfbd86))
+* 🔧 config ([`be39405`](https://github.com/mraniki/tt/commit/be394056f6612255a5761aface04e95de9d71b71))
+* :arrow_up:  dep ([`de1e8b4`](https://github.com/mraniki/tt/commit/de1e8b4de596ef3c95c686f59350d311aca1455d))
+* ✅  unit test ([`1dc6aa8`](https://github.com/mraniki/tt/commit/1dc6aa8090944dacd771341026d45f2ae42bc578))
+
+### Other
+
+* Merge branch 'dev' of git@github.com:mraniki/tt ([`1f7eeb8`](https://github.com/mraniki/tt/commit/1f7eeb88aca8050d24ab4a8fd383bf552c87b413))
+
 ## v3.7.16 (2023-07-02)
 
 ### Fix
