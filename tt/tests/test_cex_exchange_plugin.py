@@ -6,7 +6,7 @@ from tt.plugins.cex_exchange_plugin import CexExchangePlugin
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings_CEX():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="testing_cex")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="cex")
 
 
 @pytest.fixture(name="order")

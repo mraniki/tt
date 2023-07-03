@@ -8,7 +8,7 @@ from tt.plugins.dex_exchange_plugin import DexExchangePlugin
 
 @pytest.fixture(name="settings_dex_56")
 def set_test_settings_DEX56():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="testing_dex_56")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="bsc")
 
 
 def test_dynaconf_is_in_testing_env_DEX56(settings_dex_56):
