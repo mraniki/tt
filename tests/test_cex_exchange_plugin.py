@@ -1,12 +1,13 @@
 import pytest
 import ccxt
-from tt.config import settings, logger
+from tt.config import settings
 from tt.plugins.cex_exchange_plugin import CexExchangePlugin
 
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings_CEX():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="testing_cex")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="cex")
+
 
 @pytest.fixture(name="order")
 def order_params():
@@ -17,9 +18,11 @@ def order_params():
         'quantity': 10,
     }
 
+
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():
     return CexExchangePlugin()
+
 
 def test_dynaconf_is_in_testing_env_CEX():
     print(settings.VALUE)

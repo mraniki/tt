@@ -1,15 +1,16 @@
-
-###############################################################################
-###                           DEFAULT SETTINGS                              ###
-###############################################################################
-
-# Any of those settings can be overwritten by the user.
+###########################################
+###             DEFAULT SETTINGS        ###
+###########################################
+# Any of those settings can be overwritten 
+# by the user.
 # To overwrite a setting, create a settings.toml
-# or load the settings from .env file.
-# As an example, to overwrite the port:
+# or load the settings from .env file or vars.
+# As an example, to change the port settings:
 # settings.toml
 # [default]
 # port = 8081
+# or via ENVVARS 
+# export TT_PORT=8081
 
 [default]
 VALUE = "Production - Default"
@@ -91,12 +92,12 @@ cex_testmode = true
 cex_defaulttype = "SPOT"
 cex_ordertype = "MARKET"
 
-# DEX #############
+# DXSP ############
 dxsp_enabled = true
 dex_wallet_address = "0x1234567890123456789012345678901234567890"
 dex_private_key = "0xdeadbeef"
-dex_chain_id = 1
-dex_protocol_type = "uniswap_v2" #0x 
+dex_protocol_type = "uniswap" #0x 
+dex_protocol_version = 2
 dex_rpc = "https://rpc.ankr.com/eth"
 dex_block_explorer_url = "https://api.etherscan.io/api?"
 dex_block_explorer_api =  "11111111111111111"
@@ -104,8 +105,6 @@ dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" #UNI_V2
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e" #UNI_V3_QUOTERV2
-dex_quoter_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v3/quoter.abi"
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
 headers = {User-Agent= 'Mozilla/5.0'}
@@ -161,7 +160,6 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 dex_trading_slippage = 2 
 dex_wallet_address = "0x1234567890123456789012345678901234567890"
 dex_private_key = "0xdeadbeef" 
-dex_chain_id = 1
 dex_protocol_type = "uniswap_v2"
 dex_rpc = "https://rpc.ankr.com/eth"
 dex_block_explorer_url = "https://api.etherscan.io/api?"
@@ -170,8 +168,6 @@ dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" #UNI_V2
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e" 
-dex_quoter_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v3/quoter.abi"
 webhook_secret = "123abc"
 bot_prefix = "/"
 bot_command_help = "help"
@@ -182,12 +178,12 @@ bot_command_trading = "trading"
 bot_command_news = "live"
 bot_command_restart = "restart"
 bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
-bot_msg_help = "🏦 <code>/bal</code> 📦 <code>buy BTCUSDT</code> 🔀 <code>/trading</code>"
+bot_msg_help = "🏦<code>/bal</code> 🎯<code>buy BTCUSDT</code> 🏷️<code>/q BTCB</code> 🔀<code>/trading</code>"
 example_plugin_enabled = true
 ping = "8.8.8.8"
 apprise_url = "json://localhost"
 
-[testing_cex]
+[cex]
 exchange_enabled = true
 cex_enabled = true
 helper_enabled = true
@@ -201,59 +197,37 @@ cex_testmode = true
 dex_chain_id = ""
 apprise_url = "json://localhost"
 
-[testing_dex_56]
+[bsc]
 VALUE = "On Testing DEX_56"
 helper_enabled = true
 cex_name = ""
 dex_wallet_address = "0x1234567890123456789012345678901234567899"
 dex_private_key = "0xdeadbeet"
 dex_rpc = "https://eth.llamarpc.com"
-dex_chain_id = 56
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 dex_factory_contract_addr = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
 trading_enabled = true
-discord_webhook_id = "12345678901" # to be removed
-discord_webhook_token = "1234567890" # to be removed
 bot_token = "test_bot_token"
 bot_channel_id = "1234567890"
 ping = "8.8.8.8"
 apprise_url = "json://localhost"
 
-[testing_dex_10]
-VALUE = "On Testing DEX_10"
-helper_enabled = true
-cex_name = ""
-dex_wallet_address = "0x1234567890123456789012345678901234567899"
-dex_private_key = "0xdeadbeet"
-dex_rpc = "https://eth.llamarpc.com"
-dex_chain_id = 10
-dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
-dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
-trading_enabled = true
-matrix_hostname = "https://matrix.org"
-matrix_user = "@thismock:matrix.org"
-matrix_pass = "1234"
-bot_token = "token_123435"
-bot_channel_id = "1234567890"
-ping = "8.8.8.8"
-apprise_url = "json://localhost"
 
-[testing_0x]
-VALUE = "On Testing 0x_DEX_1"
-helper_enabled = true
-cex_name = ""
-dex_wallet_address = "0x1234567890123456789012345678901234567899"
-dex_private_key = "0xdeadbeet"
-dex_rpc = "https://eth.llamarpc.com"
-dex_chain_id = 1
-dex_protocol_type = "0x"
-dex_router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
-dex_factory_contract_addr = ""
-trading_enabled = true
-matrix_hostname = "https://matrix.org"
-matrix_user = "@thismock:matrix.org"
-matrix_pass = "1234"
-bot_token = "token_123435"
-bot_channel_id = "1234567890"
-ping = "8.8.8.8"
-apprise_url = "json://localhost"
+# [zerox]
+# VALUE = "On Testing 0x_DEX_1"
+# helper_enabled = true
+# cex_name = ""
+# dex_wallet_address = "0x1234567890123456789012345678901234567899"
+# dex_private_key = "0xdeadbeet"
+# dex_rpc = "https://eth.llamarpc.com"
+# dex_protocol_type = "0x"
+# dex_router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
+# dex_factory_contract_addr = ""
+# trading_enabled = true
+# matrix_hostname = "https://matrix.org"
+# matrix_user = "@thismock:matrix.org"
+# matrix_pass = "1234"
+# bot_token = "token_123435"
+# bot_channel_id = "1234567890"
+# ping = "8.8.8.8"
+# apprise_url = "json://localhost"

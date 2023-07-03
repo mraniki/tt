@@ -11,7 +11,7 @@ class DexExchangePlugin(BasePlugin):
         self.enabled = settings.dxsp_enabled
         if self.enabled:
             self.fmo = FindMyOrder()
-            if settings.dex_chain_id:
+            if settings.dex_wallet_address:
                 self.exchange = DexSwap()
 
     async def start(self):

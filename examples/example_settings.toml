@@ -13,8 +13,6 @@
 #DISCORD BOT on ethereum chain using uniswap v2 router and protocol
     # bot_token = '1212121212121'
     # bot_channel_id = '121212121212'
-    # discord_webhook_id = '423423423' 
-    # discord_webhook_token = '32423423'
     # apprise_url = 'discord://1212121212121/121212121212'
     # dex_wallet_address = '0x1234567890123456789012345678901234567890'
     # dex_private_key = '0xdeadbeef'
