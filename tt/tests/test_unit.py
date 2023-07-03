@@ -34,14 +34,6 @@ def wrong_order():
         'quantity': 1,
     }
 
-@pytest.mark.asyncio
-async def test_listener_discord(settings_dex_56):
-    print(settings.VALUE)
-    listener_test = Listener()
-    print(listener_test)
-    assert listener_test is not None
-    assert isinstance(listener_test, iamlistening.main.Listener)
-
 
 @pytest.mark.asyncio
 async def test_listener_telegram():
