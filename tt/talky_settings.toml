@@ -81,6 +81,13 @@ comment_identifier = "comment="
 stop_loss = 1000
 take_profit = 1000
 quantity = 1
+instrument_mapping = true
+mapping = [
+    { id = "GOLD", alt = "XAUUSD" },
+    { id = "SILVER", alt = "XAGUSD" },
+    { id = "BTC", alt = "WBTC" },
+    { id = "ETH", alt = "WETH" },
+]
 
 # CEX #############
 cex_enabled = false
