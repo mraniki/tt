@@ -5,6 +5,7 @@ from tt.config import settings
 from tt.plugins.example_plugin import ExamplePlugin
 from tt.plugins.helper_plugin import HelperPlugin
 
+
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")

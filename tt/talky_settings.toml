@@ -95,8 +95,9 @@ cex_ordertype = "MARKET"
 dxsp_enabled = true
 dex_wallet_address = "0x1234567890123456789012345678901234567890"
 dex_private_key = "0xdeadbeef"
-dex_chain_id = 1
-dex_protocol_type = "uniswap_v2" #0x 
+# dex_chain_id = 1
+dex_protocol_type = "uniswap" #0x 
+dex_protocol_version = 2
 dex_rpc = "https://rpc.ankr.com/eth"
 dex_block_explorer_url = "https://api.etherscan.io/api?"
 dex_block_explorer_api =  "11111111111111111"
@@ -219,26 +220,8 @@ bot_channel_id = "1234567890"
 ping = "8.8.8.8"
 apprise_url = "json://localhost"
 
-[testing_dex_10]
-VALUE = "On Testing DEX_10"
-helper_enabled = true
-cex_name = ""
-dex_wallet_address = "0x1234567890123456789012345678901234567899"
-dex_private_key = "0xdeadbeet"
-dex_rpc = "https://eth.llamarpc.com"
-dex_chain_id = 10
-dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
-dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
-trading_enabled = true
-matrix_hostname = "https://matrix.org"
-matrix_user = "@thismock:matrix.org"
-matrix_pass = "1234"
-bot_token = "token_123435"
-bot_channel_id = "1234567890"
-ping = "8.8.8.8"
-apprise_url = "json://localhost"
 
-[testing_0x]
+[zerox]
 VALUE = "On Testing 0x_DEX_1"
 helper_enabled = true
 cex_name = ""

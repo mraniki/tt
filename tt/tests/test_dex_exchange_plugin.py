@@ -5,10 +5,17 @@ from tt.config import settings
 from tt.plugins.dex_exchange_plugin import DexExchangePlugin
 
 
-@pytest.fixture(scope="session", autouse=True)
-def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
 
+@pytest.fixture(name="settings_dex_56")
+def set_test_settings_DEX56():
+    settings.configure(FORCE_ENV_FOR_DYNACONF="testing_dex_56")
+
+
+def test_dynaconf_is_in_testing_env_DEX56(settings_dex_56):
+    print(settings.VALUE)
+    assert settings.VALUE == "On Testing DEX_56"
+    assert settings.cex_name == ""
+    assert settings.dex_wallet_address == "0x1234567890123456789012345678901234567899"
 
 @pytest.fixture(name="order")
 def order_params():
@@ -24,12 +31,16 @@ def order_params():
 def test_fixture_plugin():
     return DexExchangePlugin()
 
+
 @pytest.mark.asyncio
 async def test_plugin(plugin):
     enabled = plugin.enabled
     exchange = plugin.exchange
+    print(exchange.account)
     assert enabled is True
     assert isinstance(exchange, DexSwap)
+    assert exchange.account is not None
+    
 
 @pytest.mark.asyncio
 async def test_parse_quote(plugin, caplog):
