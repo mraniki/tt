@@ -48,4 +48,4 @@ async def test_trading_switch(message_processor):
 async def test_help(message_processor, caplog):
     plugin = HelperPlugin()
     await plugin.handle_message('/help')
-    assert "🗿" in caplog.text
+    assert "🎯" in caplog.text
