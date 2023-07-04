@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.18 (2023-07-04)
+
+### Fix
+
+* Update README.md ([`0079a31`](https://github.com/mraniki/tt/commit/0079a31a09a75079fec0618b2eecb061c9beea84))
+* Update README.md ([`dc394d4`](https://github.com/mraniki/tt/commit/dc394d42d18e3718e0062f32cdfccb006b9c716a))
+
 ## v3.7.17 (2023-07-03)
 
 ### Fix
