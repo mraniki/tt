@@ -3,7 +3,7 @@
 
 [![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)<br> [![wiki](https://img.shields.io/badge/🪙🗿-wiki-027CF9)](https://talkytrader.gitbook.io/talky/)
 
-[![Logo](https://i.imgur.com/Q7iDDyB.jpg)](https://github.com/mraniki/tt)
+[![Logo](https://i.imgur.com/Q7iDDyB.jpg)](https://talkytrader.github.io/wiki/)
  </tr>
 <details>
 <summary><h2>Quick start</h2></summary>
@@ -30,7 +30,7 @@
 
 5) Start your container or if deployed locally use `python3 bot.py` to start
 
-6) Documentation available on [Wiki](https://talkytrader.gitbook.io/talky/)
+6) Documentation available on [Wiki](https://talkytrader.github.io/wiki/)
 
 
  <h3>Build status</h3>
