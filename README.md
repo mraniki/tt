@@ -30,7 +30,7 @@
 
 5) Start your container or if deployed locally use `python3 bot.py` to start
 
-6) Documentation available on [Wiki](https://talkytrader.gitbook.io/talky/)
+6) Documentation available on [Wiki](https://talkytrader.github.io/TalkyUniverse/)
 
 
  <h3>Build status</h3>
