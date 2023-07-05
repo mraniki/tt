@@ -2,6 +2,22 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.19 (2023-07-05)
+
+### Fix
+
+* 📝  added config example ([`f39c9a3`](https://github.com/mraniki/tt/commit/f39c9a330e937d70e63e11620162a8ff4b6cc447))
+* :wrench:  config update ([`0b9bb57`](https://github.com/mraniki/tt/commit/0b9bb572d3fba2b27a65b20476b09003d0629b67))
+* ✅ added mapping from FMO ([`1f6c76c`](https://github.com/mraniki/tt/commit/1f6c76c3b5d2d397f851270589651da261608daa))
+* 📝  Doc config ([`dcb6e43`](https://github.com/mraniki/tt/commit/dcb6e431b2d60aee08c19d96871fbd9858918762))
+* 👷 CI Change ([`05af52d`](https://github.com/mraniki/tt/commit/05af52dfcce6b7550ddea9a12dd7155f6cabb330))
+
+### Other
+
+* Merge pull request #521 from mraniki/dev ([`cb8a128`](https://github.com/mraniki/tt/commit/cb8a128401349c84fa6a596f3512da6a62bf85fc))
+* Merge branch 'main' into dev ([`a48ee28`](https://github.com/mraniki/tt/commit/a48ee28ed26d0fff49796167297cc6de9ca69eca))
+* Merge branch 'main' into dev ([`a9bf5cb`](https://github.com/mraniki/tt/commit/a9bf5cbe87dc2c2b190b5e79c3f55fead555abf3))
+
 ## v3.7.18 (2023-07-04)
 
 ### Fix
