@@ -81,6 +81,13 @@ comment_identifier = "comment="
 stop_loss = 1000
 take_profit = 1000
 quantity = 1
+instrument_mapping = true
+mapping = [
+    { id = "GOLD", alt = "XAUUSD" },
+    { id = "SILVER", alt = "XAGUSD" },
+    { id = "BTC", alt = "WBTC" },
+    { id = "ETH", alt = "WETH" },
+]
 
 # CEX #############
 cex_enabled = false
@@ -207,6 +214,8 @@ dex_rpc = "https://eth.llamarpc.com"
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 dex_factory_contract_addr = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
 trading_enabled = true
+trading_asset = "BUSD"
+trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
 bot_token = "test_bot_token"
 bot_channel_id = "1234567890"
 ping = "8.8.8.8"
