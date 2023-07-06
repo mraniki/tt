@@ -90,8 +90,8 @@ html_theme = "bootstrap"
 html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 # (Optional) Logo. Should be small enough to fit the navbar (ideally 24x24).
 # Path should be relative to the ``_static`` files directory.
-html_logo = "_static/logo-white.png"
-html_favicon = "_static/favicon.png"
+# html_logo = "_static/logo-white.png"
+# html_favicon = "_static/favicon.png"
 
 html_copy_source = False
 html_show_sourcelink = False
