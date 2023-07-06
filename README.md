@@ -37,8 +37,8 @@ Easily deploy via Docker on self-hosted platform or Paas.<br>
 </ul></li>
 <li>Get your
 <ul>
-<li>DEX wallet address and private key</li>
-<li>CEX API Keys supported by <a href="https://github.com/ccxt/ccxt">CCXT</a></li>
+<li><a href="https://support.metamask.io/hc/en-us/articles/360015289632-How-to-export-an-account-s-private-key">DEX wallet address and private key</a></li>
+<li><a href="https://github.com/ccxt/ccxt">CEX API Keys</a></li>
 </ul></li>
 <li>Create your config file settings.toml or use env variables</li>
 
