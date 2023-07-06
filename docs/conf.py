@@ -5,7 +5,6 @@
 
 # -- Path setup --------------------------------------------------------------
 
-import datetime
 import sys
 from os.path import abspath, dirname
 
@@ -18,7 +17,6 @@ import sphinx_bootstrap_theme
 
 path = dirname(abspath(__file__))
 sys.path.append(path)
-
 
 
 # -- Project information -----------------------------------------------------
@@ -48,7 +46,6 @@ extensions = [
 ]
 
 source_suffix = ['.rst', '.md']
-
 
 
 # -- Napoleon Settings -----------------------------------------------------
@@ -124,31 +121,15 @@ html_theme_options = {
             ("TalkyTrader", "index"),
             ("_divider", ),
             ("_menu", "Installation", "home/installation", [
-                ("Installing Plex Meta Manager", "home/installation"),
-                ("_divider", ),
                 ("Local Walkthrough", "home/guides/local"),
                 ("Docker Walkthrough", "home/guides/docker"),
             ]),
-            ("Run Commands & Environment Variables", "home/environmental"),
+            ("Environment Variables", "home/environmental"),
             ("Knowledgebase/FAQ", "home/kb"),
             ]),
-            ("_divider", ),
-            ("Config  Guide", "home/guides/yaml"),
-            ("_divider", ),
-            ("Feature Requests", "https://features.talkytrader.wiki/"),
-            ("Bugs/Issues", "https://github.com/mraniki/tt/issues"),
-            ("User Configs Repository", "https://github.com/meisnate12/Plex-Meta-Manager-Configs"),
+        ("_divider", ),
+        ("Bugs/Issues", "https://github.com/mraniki/tt/issues"),
         ],
-        ("_menu", "Config", [
-            ("Config File", "config/configuration"),
-            ("_divider", ),
-            ("Talky", "config/libraries"),
-            ("FindMyOrder", "config/playlists"),
-            ("DXSP", "config/paths"),
-            ("IamListening", "config/settings"),
-            ("TalkyTrend", "config/webhooks"),
-        ])
-
 
     # Render the next and previous page links in navbar. (Default: true)
     'navbar_sidebarrel': False,
@@ -211,6 +192,7 @@ html_css_files = [
     "custom.css",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
 ]
+
 
 def setup(app):
     app.add_css_file("custom.css")
