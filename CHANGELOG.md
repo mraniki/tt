@@ -2,6 +2,33 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.23 (2023-07-06)
+
+### Fix
+
+* :rotating_light: linter ([`5edb754`](https://github.com/mraniki/tt/commit/5edb7541c2da79d8a389ada8b61be4a4283364a8))
+* :memo:  docs ([`1d055eb`](https://github.com/mraniki/tt/commit/1d055eba0defd33017cdb9fa6eb8de21bca3f09f))
+* 📝 Docs ([`f5c851b`](https://github.com/mraniki/tt/commit/f5c851bdfabaf09c39b6242734df81ed3a2ab5bc))
+* ⬆️ version change for sphinx ([`10a88fc`](https://github.com/mraniki/tt/commit/10a88fc862c665894fb98037281c6b1f1ada4507))
+* 🚨 linter ([`de361de`](https://github.com/mraniki/tt/commit/de361defa4cdc243021525caa89499f0ea11aed1))
+* 📝 Docs ([`8a3eb44`](https://github.com/mraniki/tt/commit/8a3eb44da0564d057cc3704246b888ae631075a6))
+* 📝 Docs ([`ab67035`](https://github.com/mraniki/tt/commit/ab670351582b741f960fb739da8b6a9529d4dc80))
+* :bug: Update box-shadow color in custom.css ([`494afa6`](https://github.com/mraniki/tt/commit/494afa6f3488620a691bc9bd03fa7874ef7fe43f))
+* :bug: Update box-shadow color in custom.css ([`90b18f5`](https://github.com/mraniki/tt/commit/90b18f5fccd461ce18d42fa2aa2b7a6141d0077f))
+* 📝 ([`d1cab09`](https://github.com/mraniki/tt/commit/d1cab097771633fd2392baac13c614ddfc530272))
+* 📝 documentation ([`80087d1`](https://github.com/mraniki/tt/commit/80087d14a857de2633a694144acf1f24199bdeea))
+* 📝 Documentation ([`9150fc2`](https://github.com/mraniki/tt/commit/9150fc2ed1ef0f20cb9e74e9f672210110f6c3b0))
+* 📝  documentation ([`145e035`](https://github.com/mraniki/tt/commit/145e03530a7d96a0efd05af95221785483c033f2))
+
+### Other
+
+* Merge pull request #525 from mraniki/dev ([`0d10c49`](https://github.com/mraniki/tt/commit/0d10c49a7f1863b89b33b528cb1d467300f2dbbc))
+* Merge pull request #524 from mraniki/dev ([`7110f96`](https://github.com/mraniki/tt/commit/7110f969ff7a4bab46439d2c9b322318683b3caf))
+* Merge branch 'main' into dev ([`67bca66`](https://github.com/mraniki/tt/commit/67bca6650e218f97f521bc994308e5a8ada35df0))
+* Docs ([`140faf9`](https://github.com/mraniki/tt/commit/140faf91d7798a9f7071f34da031d5e53b913eef))
+* Merge pull request #523 from mraniki/dev ([`ef29a03`](https://github.com/mraniki/tt/commit/ef29a038bd5bed85a94374a2e02f9f0237525272))
+* Merge pull request #522 from mraniki/dev ([`ff5d24d`](https://github.com/mraniki/tt/commit/ff5d24decb5978ecd63c991ac9aba8f1ac82c402))
+
 ## v3.7.22 (2023-07-06)
 
 ### Fix
