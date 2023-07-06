@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.20 (2023-07-06)
+
+### Fix
+
+* Update README.md ([`c2cab31`](https://github.com/mraniki/tt/commit/c2cab31d92246cc0479c6e17db318b42b0d291cd))
+
 ## v3.7.19 (2023-07-05)
 
 ### Fix
