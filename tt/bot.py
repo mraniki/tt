@@ -1,5 +1,7 @@
 """
 TalkyTrader 🪙🗿
+====================================
+Bot Launcher and API
 """
 
 import asyncio

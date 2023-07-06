@@ -55,9 +55,9 @@ omit = [
 ]
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "^7.0.1"
-sphinx-autoapi = "^2.1.0"
-furo = "^2023.5.20"
+sphinx = "^6.0.0"
+sphinx-autoapi = "*"
+furo = "*"
 myst-parser = "*"
 sphinx_bootstrap_theme = "*"
 sphinx_inline_tabs= "*"

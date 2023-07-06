@@ -1,3 +1,6 @@
+"""
+ talky Utils
+"""
 __version__ = "3.7.22"
 
 import asyncio
@@ -62,11 +65,14 @@ class MessageProcessor:
 
         for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
             try:
-                module = importlib.import_module(f"{package_name}.{plugin_name}")
+                module = importlib.import_module(
+                    f"{package_name}.{plugin_name}")
                 logger.info("Module loaded: %s", module)
 
                 for name, obj in module.__dict__.items():
-                    if isinstance(obj, type) and issubclass(obj, BasePlugin) and obj is not BasePlugin:
+                    if (isinstance(obj, type)
+                            and issubclass(obj, BasePlugin)
+                            and obj is not BasePlugin):
                         plugin_instance = obj()
                         self.plugins.append(plugin_instance)
                         logger.info("Plugin loaded: %s", plugin_name)
@@ -102,7 +108,8 @@ class MessageProcessor:
                 # reply = await plugin.handle_message(message)
                 # if reply:
                 #     replies.append(reply)
-            # consolidated_reply = '\n'.join(replies)  # Combine the replies into a single string
+            # Combine the replies into a single string
+            # consolidated_reply = '\n'.join(replies)
             # if consolidated_reply:
             #     await send_notification(consolidated_reply)
 
@@ -111,11 +118,15 @@ class BasePlugin:
     """⚡ Base Plugin"""
     async def start(self):
         pass
+
     async def stop(self):
         pass
+
     async def send_notification(self, message):
         pass
+
     def should_handle(self, message):
         pass
+
     async def handle_message(self, msg):
         pass
