@@ -1,57 +1,97 @@
-# Talky Trader
-![CEX & DEX integration with messaging platform and plugin support.](https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=2000&pause=100&color=027CF9&multiline=true&repeat=false&width=600&height=60&lines=Connect+CEX+and+DEX+exchanges+across+multi+messaging+platforms.;Place+order%2C+inquire+your+balance+and+more+through+plugins.;Easily+deploy+via+Docker+on+self-hosted+platforms+or+PaaS.)
+<br>
+<br>
 
-[![Docker Pulls](https://badgen.net/docker/pulls/mraniki/tt)](https://hub.docker.com/r/mraniki/tt)<br> [![wiki](https://img.shields.io/badge/🪙🗿-wiki-027CF9)](https://talkytrader.gitbook.io/talky/)
+<img  alt="logo" src="https://i.imgur.com/Q7iDDyB.jpg" align="right" alt="talky" width="200" height="200">
+<div align="left">
+<!-- <a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/github/stars/mraniki/tt?style=for-the-badge"></a>-->
+<!-- <a href="https://github.com/mraniki/tt/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/mraniki/tt?style=for-the-badge&color=blue"></a> -->
+Connect CEX and DEX exchanges across multi messaging platforms.<br>
+Place order, inquire your balance and more through plugins.<br>
+Easily deploy via Docker on self-hosted platform or Paas.<br>
+<br>
+<p align="left">
+<a href="https://talkytrader.github.io/wiki/"><img src="https://img.shields.io/badge/Wiki-%23000000.svg?style=for-the-badge&logo=wikipedia&logoColor=white"></a><br>
+<a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/badge/github-%23000000.svg?style=for-the-badge&logo=github&logoColor=white"></a>
+<a href="https://hub.docker.com/r/mraniki/tt"><img src="https://img.shields.io/docker/pulls/mraniki/tt?style=for-the-badge"></a><br>
+<a href="https://coindrop.to/mraniki"><img src="https://img.shields.io/badge/tips-000000?style=for-the-badge&logo=buymeacoffee&logoColor=white"></a>
+<a href="https://t.me/TTTalkyTraderChat/1"><img src="https://img.shields.io/badge/talky-blue?style=for-the-badge&logo=telegram&logoColor=white"></a>
+<a href="https://discord.gg/gMNERs5M9"><img src="https://img.shields.io/discord/1049307055867035648?style=for-the-badge&logo=discord&logoColor=white&label=%20%20&color=blue"></a>
+<br><br>
+</p>
 
-[![Logo](https://i.imgur.com/Q7iDDyB.jpg)](https://talkytrader.github.io/wiki/)
- </tr>
-<details>
-<summary><h2>Quick start</h2></summary>
+<img align="right" width="194" alt="screenshot" src="https://github.com/mraniki/tt/assets/8766259/14cb1653-f6b4-44e7-b07c-d930060c7363">
+
+<details close>
+<summary>Get started</summary>
+
+<ol>
+<li>Create your channel/room and your platform bot
+<ul>
+<li>Telegram via <a href="https://core.telegram.org/bots/tutorial">Telegram @BotFather</a> and <a href="https://docs.telethon.dev/en/stable/basic/signing-in.html">create an API key</a> </li>
+<li>Discord via <a href="https://discord.com/developers/docs/intro">Discord Dev portal</a></li>
+<li>Matrix via <a href="https://turt2live.github.io/matrix-bot-sdk/index.html">Matrix.org</a></li>
+</ul></li>
+<li>Get your
+<ul>
+<li>DEX wallet address and private key</li>
+<li>CEX API Keys supported by <a href="https://github.com/ccxt/ccxt">CCXT</a></li>
+</ul></li>
+<li>Create your config file settings.toml or use env variables</li>
+
+<details close>
+<summary>settings example</summary>
+   
+https://github.com/mraniki/tt/blob/4a3e51032802ede12bd20cee12ed4a4396337575/examples/example_settings.toml#L2-L54
+
+<!-- <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fmraniki%2Ftt%2Fblob%2Fmain%2Fexamples%2Fexample_settings.toml&style=nnfx-dark&type=code&showBorder=on&showLineNumbers=on&showFullPath=on&showCopy=on"></script>-->
+
+</details>
+
+<li>Deploy via:
+   <ul> 
+<li>docker 
+          <code>docker pull mraniki/tt:latest</code> or <code>docker pull ghcr.io/mraniki/tt:latest</code></li>
+<li>locally 
+          <code>git clone https://github.com/mraniki/tt:main</code> && <code>pip install -r requirements.txt</code> </li>
+</ul></li>
+<li>Start your container or if deployed locally use <code>python3 bot.py</code> to start </li>
+<li>Try it now</li>
+<a href="https://app.koyeb.com/deploy?type=docker&image=docker.io/mraniki/tt&name=tt-demo"><img src="https://img.shields.io/badge/Deploy%20on%20Koyeb-blue?style=for-the-badge&logo=koyeb"></a>
+</ol>
+
+</details>
+
+<br>
+
+<details close>
+<summary>Config</summary>
 
 
- <h3>Install</h3>
+https://github.com/mraniki/tt/blob/4a3e51032802ede12bd20cee12ed4a4396337575/examples/example.env#L1-L114
 
-1) Create your channel/room and your platform bot
+<!-- <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fmraniki%2Ftt%2Fblob%2F4a3e51032802ede12bd20cee12ed4a4396337575%2Fexamples%2Fexample.env&style=nnfx-dark&type=code&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script>-->
 
-    - Telegram via [Telegram @BotFather](https://core.telegram.org/bots/tutorial) and [create an API key](https://docs.telethon.dev/en/stable/basic/signing-in.html) 
-    - Discord via [Discord Dev portal](https://discord.com/developers/docs/intro)
-    - Matrix via [Matrix.org](https://turt2live.github.io/matrix-bot-sdk/index.html)
-
-2) Get your
-
-    - CEX API Keys supported by [CCXT](https://github.com/ccxt/ccxt) or
-    - DEX wallet address and private key
-
-3) Create your config [/app/settings.toml](src/example_settings.toml) or prepare your env variable
-
-4) Deploy via:
-    - docker `docker pull mraniki/tt:latest` or `docker pull ghcr.io/mraniki/tt:latest`
-    - locally `git clone https://github.com/mraniki/tt:main` && `pip install -r requirements.txt`
-
-5) Start your container or if deployed locally use `python3 bot.py` to start
-
-6) Documentation available on [Wiki](https://talkytrader.github.io/wiki/)
+</details>
 
 
- <h3>Build status</h3>
 
-[![codecov](https://codecov.io/gh/mraniki/tt/branch/main/graph/badge.svg?token=ILJTC0F4K1)](https://codecov.io/gh/mraniki/tt)
+<br>
 
-[![codebeat badge](https://codebeat.co/badges/94b328d7-777c-4d54-a0d9-ff4625c5e05d)](https://codebeat.co/projects/github-com-mraniki-tt-main)
 
-[![👷Flow](https://github.com/mraniki/tt/actions/workflows/%F0%9F%91%B7Flow.yml/badge.svg)](https://github.com/mraniki/tt/actions/workflows/%F0%9F%91%B7Flow.yml)
 
- 
-<h3> Libraries </h3>
+<br><br>
+<img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"><br>
+<img src="https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi">
+<img src="https://img.shields.io/badge/uvicorn-005571?style=for-the-badge&logo=fastapi">
+<img src="https://img.shields.io/badge/apprise-005571?style=for-the-badge&logo=chatbot"><br>
+<img src="https://img.shields.io/badge/CCXT-black?style=for-the-badge&logo=librariesdotio&logoColor=white">
+<img src="https://img.shields.io/badge/dxsp-black?style=for-the-badge&logo=librariesdotio&logoColor=white"><br>
+<img src="https://img.shields.io/badge/findmyorder-black?style=for-the-badge&logo=librariesdotio&logoColor=white">
+<img src="https://img.shields.io/badge/iamlistening-black?style=for-the-badge&logo=librariesdotio&logoColor=white"><br>
+<img src="https://img.shields.io/badge/talkytrend-black?style=for-the-badge&logo=librariesdotio&logoColor=white">
+<br><br>
 
-[![python3.10](https://badgen.net/badge/icon/3.10/black?icon=pypi&label)](https://www.python.org/downloads/release/python-3100/)
-[![ccxt](https://badgen.net/badge/icon/ccxt/black?icon=libraries&label)](https://github.com/ccxt/ccxt)
-[![dxsp](https://badgen.net/badge/icon/dxsp?icon=pypi&label)](https://pypi.org/project/dxsp/)
-[![findmyorder](https://badgen.net/badge/icon/findmyorder?icon=pypi&label)](https://pypi.org/project/findmyorder/)
-[![iamlistening](https://badgen.net/badge/icon/iamlistening?icon=pypi&label)](https://pypi.org/project/iamlistening/)
-[![talkytrend](https://badgen.net/badge/icon/talkytrend?icon=pypi&label)](https://pypi.org/project/talkytrend/)
+<HR>
+⚠️ <em>This is an education tool and should not be considered professional financial investment system nor financial advice.<br>Use a testnet account or USE AT YOUR OWN RISK. Never share your private keys or API secrets.<br>Never use your main account for automatic trade.<br>DYOR.</em>
 
-[![apprise](https://badgen.net/badge/icon/apprise/black?icon=libraries&label)](https://github.com/caronc/apprise) [![FastAPI](https://badgen.net/badge/icon/fastapi/black?icon=libraries&label)](https://github.com/tiangolo/fastapi)
-</details> 
-
-<img width="194" alt="222953459-0aaf024b-4d7b-4a57-b31b-7cab08f3c0d3" src="https://github.com/mraniki/tt/assets/8766259/14cb1653-f6b4-44e7-b07c-d930060c7363">
+</div>
