@@ -37,12 +37,13 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
+    'sphinx_copybutton',
     'myst_parser',
     # 'sphinx_inline_tabs',
-    'sphinx_copybutton',
     # 'sphinx_reredirects',
     # 'sphinx_design',
     'notfound.extension'
+
 ]
 
 source_suffix = ['.rst', '.md']
