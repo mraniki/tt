@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.36 (2023-07-07)
+
+### Fix
+
+* ⬆️ bump talkytrend ([`0b74fb9`](https://github.com/mraniki/tt/commit/0b74fb9da4aae5d03109c3f376a173c7e64b00bc))
+
 ## v3.7.35 (2023-07-07)
 
 ### Fix
