@@ -5,16 +5,25 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "tt"
 version = "3.7.32"
-description = "CEX & DEX integration with multi messaging platform support and plugin support."
+description = "Connect CEX & DEX across multi messaging platforms with plugin support."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"
 readme = "README.md"
-keywords = ["finance", "trading", "bot", "chat","DEFI","CEFI","DEX"]
+keywords = ["finance", "trading", "bot", "chat","DEFI","CEFI","DEX", "CEX", "0x", "Uniswap"]
 packages = [
     {include = "tt"}
 ]
 classifiers = [
-    "Topic :: Trading",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Information Technology",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+	"Programming Language :: Python :: 3.10",
+	"Programming Language :: Python :: 3.11",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Communications :: Chat"
 ]
 
 [tool.poetry.urls]
@@ -38,8 +47,6 @@ talkytrend = "^1.5.9"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^7.34.3"
-sphinx = "^6.0.0"
-sphinx_bootstrap_theme = "^0.8.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
@@ -47,15 +54,19 @@ pytest-cov = "^4.1"
 pytest-asyncio = "^0.21.0"
 pytest-mock = "^3.11.1"
 
+[tool.poetry.group.docs]
+optional = true
+
 [tool.poetry.group.docs.dependencies]
+sphinx = "^6.0.0"
+sphinx_bootstrap_theme = "^0.8.1"
 sphinx-autoapi = "^2.1.1"
-furo = "2023.5.20"
-myst-parser = "^2.0.0"
-sphinx_inline_tabs= "^2023.4.21"
 sphinx-copybutton= "^0.5.2"
-sphinx-reredirects = "*"
-sphinx_design = "*"
+myst-parser = "^2.0.0"
 sphinx-notfound-page = "*"
+# sphinx_inline_tabs= "^2023.4.21"
+# sphinx-reredirects = "*"
+# sphinx_design = "*"
 
 [tool.pytest.ini_options]
 pythonpath = "."
@@ -74,7 +85,6 @@ omit = [
     "docs/*",
     "*/config.py"
 ]
-
 
 [tool.semantic_release]
 version_variable = ["pyproject.toml:version","tt/utils.py:__version__"]
