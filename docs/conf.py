@@ -13,7 +13,7 @@ from os.path import abspath, dirname
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 # import os
-# import sphinx_bootstrap_theme
+import sphinx_bootstrap_theme
 
 path = dirname(abspath(__file__))
 sys.path.append(path)
@@ -78,7 +78,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = "furo"
+# html_theme = "furo"
 # html_static_path = ['_static']
 # -- Options for HTML output -------------------------------------------------
 
@@ -86,7 +86,7 @@ html_theme = "furo"
 # a list of builtin themes.
 #
 # html_theme = "nature"
-# html_theme = "bootstrap"
+html_theme = "bootstrap"
 html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 # (Optional) Logo. Should be small enough to fit the navbar (ideally 24x24).
 # Path should be relative to the ``_static`` files directory.
