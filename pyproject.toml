@@ -1,3 +1,7 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "tt"
 version = "3.7.31"
@@ -12,7 +16,6 @@ packages = [
 classifiers = [
     "Topic :: Trading",
 ]
-
 
 [tool.poetry.urls]
 "Changelog" =  "https://github.com/mraniki/tt/blob/dev/CHANGELOG.rst"
@@ -35,6 +38,7 @@ talkytrend = "^1.5.9"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^7.34.3"
+sphinx = "^6.0.0"
 sphinx_bootstrap_theme = "^0.8.1"
 
 [tool.poetry.group.test.dependencies]
@@ -44,17 +48,14 @@ pytest-asyncio = "^0.21.0"
 pytest-mock = "^3.11.1"
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "^6.0.0"
 sphinx-autoapi = "^2.1.1"
 furo = "2023.5.20"
 myst-parser = "^2.0.0"
-sphinx_inline_tabs= "*"
-sphinx-copybutton= "*"
+sphinx_inline_tabs= "^2023.4.21"
+sphinx-copybutton= "^0.5.2"
 sphinx-reredirects = "*"
 sphinx_design = "*"
-sphinx-reload = "*"
 sphinx-notfound-page = "*"
-
 
 [tool.pytest.ini_options]
 pythonpath = "."
@@ -74,9 +75,6 @@ omit = [
     "*/config.py"
 ]
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
 version_variable = ["pyproject.toml:version","tt/utils.py:__version__"]
