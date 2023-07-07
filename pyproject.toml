@@ -55,7 +55,7 @@ omit = [
 ]
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "^6.0.0"
+sphinx = "^7.0.0"
 sphinx-autoapi = "*"
 furo = "*"
 myst-parser = "*"
