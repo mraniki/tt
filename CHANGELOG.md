@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.27 (2023-07-07)
+
+### Fix
+
+* Update pyproject.toml ([`b084e76`](https://github.com/mraniki/tt/commit/b084e76d312d2e1ec1cba7eb3d8877ad03f8875b))
+
 ## v3.7.26 (2023-07-07)
 
 ### Fix
