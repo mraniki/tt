@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.25 (2023-07-07)
+
+### Fix
+
+* Update 👷Flow.yml ([`f84f570`](https://github.com/mraniki/tt/commit/f84f570aca8af6462b691e446aea0a692e3307de))
+* Update pyproject.toml ([`a890682`](https://github.com/mraniki/tt/commit/a890682cec3791b0dfc427965862a8b8255a181a))
+* :zap: Add optional test and docs dependencies, and update changelog sections ([`06c5fad`](https://github.com/mraniki/tt/commit/06c5fadccb35e845220af180a136efc1a4e66f29))
+* Update .readthedocs.yaml ([`05ccc42`](https://github.com/mraniki/tt/commit/05ccc42158425c70029cb30c27c7e6645cac3ced))
+* Update requirements.txt ([`a2d3b88`](https://github.com/mraniki/tt/commit/a2d3b88459d74aeea8867b78787a79ae0412de93))
+* Update conf.py ([`912e9a1`](https://github.com/mraniki/tt/commit/912e9a168886e8ea96f663b7a35ae3cb4b8d2bf3))
+* Update pyproject.toml ([`0c246a9`](https://github.com/mraniki/tt/commit/0c246a988f344e3b640c6d8c8766c3b2c25bc32c))
+* Update index.md ([`3cd3f22`](https://github.com/mraniki/tt/commit/3cd3f22cd6b79312427c8577e0d9a3579900cf0d))
+
 ## v3.7.24 (2023-07-07)
 
 ### Fix
