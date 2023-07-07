@@ -39,7 +39,7 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx_copybutton',
     'myst_parser',
-    'sphinx_inline_tabs',
+    # 'sphinx_inline_tabs',
     # 'sphinx_reredirects',
     # 'sphinx_design',
     'notfound.extension'
