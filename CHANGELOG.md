@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.34 (2023-07-07)
+
+### Fix
+
+* 📝 Docs ([`2fdef73`](https://github.com/mraniki/tt/commit/2fdef73b621f1816ab470000ca67b8609a9ffd89))
+* 📝 Docs ([`203bea0`](https://github.com/mraniki/tt/commit/203bea0cd9eb9b1ca67a16e3f3b7b302a53c9c53))
+* 📝  Docs ([`48fd353`](https://github.com/mraniki/tt/commit/48fd35394f778f78ef74ade4269e930cbd1c1fb6))
+
 ## v3.7.33 (2023-07-07)
 
 ### Fix
