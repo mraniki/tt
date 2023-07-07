@@ -191,6 +191,7 @@ html_static_path = ["_static"]
 
 html_css_files = [
     "custom.css",
+    "https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/darkly/bootstrap.min.css"
     #"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
 ]
 
