@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.30 (2023-07-07)
+
+### Fix
+
+* Update conf.py ([`294cdf0`](https://github.com/mraniki/tt/commit/294cdf0f8c529f58c11cc55588f2c1d5ce384ca9))
+* Update custom.css ([`fb81fc1`](https://github.com/mraniki/tt/commit/fb81fc1842d86e9ee38945782fd63baea4270fec))
+* Update .readthedocs.yaml ([`0bc780a`](https://github.com/mraniki/tt/commit/0bc780a7b41bfd9fbb1d3976fbc83fe903f4c6d3))
+
 ## v3.7.29 (2023-07-07)
 
 ### Fix
