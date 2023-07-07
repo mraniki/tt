@@ -35,6 +35,8 @@ talkytrend = "^1.5.9"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^7.34.3"
+
+[tool.poetry.group.test.dependencies]
 pytest = "^7.0"
 pytest-cov = "^4.1"
 pytest-asyncio = "^0.21.0"
@@ -42,9 +44,9 @@ pytest-mock = "^3.11.1"
 
 [tool.poetry.group.docs.dependencies]
 sphinx = "^6.0.0"
-sphinx-autoapi = "*"
+sphinx-autoapi = "^2.1.1"
 furo = "2023.5.20"
-myst-parser = "*"
+myst-parser = "^2.0.0"
 sphinx_bootstrap_theme = "^0.8.1"
 sphinx_inline_tabs= "*"
 sphinx-copybutton= "*"
