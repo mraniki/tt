@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.33 (2023-07-07)
+
+### Fix
+
+* 📝 pyproject toml update for documentation ([`1837916`](https://github.com/mraniki/tt/commit/183791611e3db532688f171e28c86bb3e404ad1f))
+* Update conf.py ([`76fb1b5`](https://github.com/mraniki/tt/commit/76fb1b581f840cc4d6a5f184a95f02594acadee8))
+
 ## v3.7.32 (2023-07-07)
 
 ### Fix
