@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.35 (2023-07-07)
+
+### Fix
+
+* Update .readthedocs.yaml ([`72f694d`](https://github.com/mraniki/tt/commit/72f694dd691820b24533cc0edc61e024cc3d6759))
+
 ## v3.7.34 (2023-07-07)
 
 ### Fix
