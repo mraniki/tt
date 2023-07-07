@@ -10,11 +10,11 @@ build:
   tools:
     python: "3.11"
 
-# Optionally declare the Python requirements required to build your docs
+sphinx:
+  configuration: docs/conf.py
+  
 python:
   install:
     - method: pip
-      path: .
-      extra_requirements:
-        - docs
-  system_packages: true
+      path: package
+
