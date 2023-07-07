@@ -38,10 +38,10 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'myst_parser',
-    'sphinx_inline_tabs',
+    # 'sphinx_inline_tabs',
     'sphinx_copybutton',
-    'sphinx_reredirects',
-    'sphinx_design',
+    # 'sphinx_reredirects',
+    # 'sphinx_design',
     'notfound.extension'
 ]
 
