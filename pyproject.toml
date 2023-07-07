@@ -40,14 +40,12 @@ pytest-cov = "^4.1"
 pytest-asyncio = "^0.21.0"
 pytest-mock = "^3.11.1"
 
-[tool.poetry.group.docs]
-optional = true
 [tool.poetry.group.docs.dependencies]
 sphinx = "^6.0.0"
 sphinx-autoapi = "*"
 furo = "2023.5.20"
 myst-parser = "*"
-sphinx_bootstrap_theme = "*"
+sphinx_bootstrap_theme = "^0.8.1"
 sphinx_inline_tabs= "*"
 sphinx-copybutton= "*"
 sphinx-reredirects = "*"
