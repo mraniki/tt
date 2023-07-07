@@ -13,7 +13,7 @@ from os.path import abspath, dirname
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 # import os
-import sphinx_bootstrap_theme
+# import sphinx_bootstrap_theme
 
 path = dirname(abspath(__file__))
 sys.path.append(path)
