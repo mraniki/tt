@@ -100,7 +100,7 @@ html_show_sourcelink = False
 
 # Redirect URLs
 # "<source>": "<target>"
-redirects = {}
+#redirects = {}
 
 
 # Theme options are theme-specific and customize the look and feel of a
