@@ -5,10 +5,14 @@ description = "CEX & DEX integration with multi messaging platform support and p
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"
 readme = "README.md"
-keywords = ["finance", "trading", "bot"]
+keywords = ["finance", "trading", "bot", "chat","DEFI","CEFI","DEX"]
 packages = [
     {include = "tt"}
 ]
+classifiers = [
+    "Topic :: Trading",
+]
+
 
 [tool.poetry.urls]
 "Changelog" =  "https://github.com/mraniki/tt/blob/dev/CHANGELOG.rst"
@@ -29,16 +33,28 @@ findmyorder = "^1.5.2"
 iamlistening = "^0.2.3"
 talkytrend = "^1.5.5"
 
-
-[tool.poetry.group.test.dependencies]
-optional = true
-
-[tool.poetry.group.test]
+[tool.poetry.group.dev.dependencies]
 python-semantic-release = "^7.34.3"
 pytest = "^7.0"
 pytest-cov = "^4.1"
 pytest-asyncio = "^0.21.0"
 pytest-mock = "^3.11.1"
+
+[tool.poetry.group.docs]
+optional = true
+[tool.poetry.group.docs.dependencies]
+sphinx = "^6.0.0"
+sphinx-autoapi = "*"
+furo = "2023.5.20"
+myst-parser = "*"
+sphinx_bootstrap_theme = "*"
+sphinx_inline_tabs= "*"
+sphinx-copybutton= "*"
+sphinx-reredirects = "*"
+sphinx_design = "*"
+sphinx-reload = "*"
+sphinx-notfound-page = "*"
+
 
 [tool.pytest.ini_options]
 pythonpath = "."
@@ -57,22 +73,6 @@ omit = [
     "docs/*",
     "*/config.py"
 ]
-
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-sphinx = "^6.0.0"
-sphinx-autoapi = "*"
-furo = "2023.5.20"
-myst-parser = "*"
-sphinx_bootstrap_theme = "*"
-sphinx_inline_tabs= "*"
-sphinx-copybutton= "*"
-sphinx-reredirects = "*"
-sphinx_design = "*"
-sphinx-reload = "*"
-sphinx-notfound-page = "*"
 
 [build-system]
 requires = ["poetry-core"]
