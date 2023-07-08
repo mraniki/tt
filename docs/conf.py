@@ -79,8 +79,6 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-# html_theme = "furo"
-# html_static_path = ['_static']
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -184,6 +182,7 @@ html_theme_options = {
     'bootstrap_version': "3",
 }
 
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
@@ -194,6 +193,23 @@ html_css_files = [
     "https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/darkly/bootstrap.min.css"
     #"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
 ]
+
+
+intersphinx_mapping = {
+    "talkytrader": ("https://talky.readthedocs.io", None),
+    "findmyorder": ("https://findmyorder.readthedocs.io", None),
+    "dxsp": ("https://dxsp.readthedocs.io", None),
+    "iamlistening": ("https://iamlistening.readthedocs.io", None),
+    "talkytrend": ("https://talkytrend.readthedocs.io", None),
+}
+
+# We recommend adding the following config value.
+# Sphinx defaults to automatically resolve *unresolved* labels using all your Intersphinx mappings.
+# This behavior has unintended side-effects, namely that documentations local references can
+# suddenly resolve to an external location.
+# See also:
+# https://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.html#confval-intersphinx_disabled_reftypes
+intersphinx_disabled_reftypes = ["*"]
 
 
 def setup(app):
