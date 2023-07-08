@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.38 (2023-07-08)
+
+### Fix
+
+* :memo:  docs update ([`16493ff`](https://github.com/mraniki/tt/commit/16493ff29db84c1f74bfc44c2bf8b991438b8207))
+
 ## v3.7.37 (2023-07-08)
 
 ### Fix
