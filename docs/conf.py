@@ -124,7 +124,7 @@ html_theme_options = {
             #     ("Local Walkthrough", "home/guides/local"),
             #     ("Docker Walkthrough", "home/guides/docker"),
             ("FindMyOrder", "findmyorder"),
-            ]),
+           # ]),
             # ("Environment Variables", "home/environmental"),
             # ("Knowledgebase/FAQ", "home/kb"),
             ]),
