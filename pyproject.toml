@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "tt"
-version = "3.7.37"
+version = "3.7.42"
 description = "Connect CEX & DEX across multi messaging platforms with plugin support."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"
@@ -64,7 +64,8 @@ sphinx_bootstrap_theme = "^0.8.1"
 sphinx-autoapi = "^2.1.1"
 sphinx-copybutton= "^0.5.2"
 myst-parser = "^2.0.0"
-sphinx-notfound-page = "*"
+sphinx-notfound-page = "^0.8.3"
+#seed_intersphinx_mapping = "^1.2.1"
 # sphinx_inline_tabs= "^2023.4.21"
 # sphinx-reredirects = "*"
 # sphinx_design = "*"

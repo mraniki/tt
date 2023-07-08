@@ -10,11 +10,6 @@ Place order, inquire your balance and more through plugins.<br>
 Easily deploy via Docker on self-hosted platform or Paas.<br>
 <br>
 
-- {ref}`talkytrader:ref-role`
-- {ref}`:ref: role <talkytrader:ref-role>`
-- {doc}`talkytrader:usage/extensions/intersphinx`
-- {doc}`Intersphinx <talkytrader:usage/extensions/intersphinx>`
-
 <p align="left">
 <a href="https://talkytrader.github.io/wiki/"><img src="https://img.shields.io/badge/Wiki-%23000000.svg?style=for-the-badge&logo=wikipedia&logoColor=white"></a><br>
 <a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/badge/github-%23000000.svg?style=for-the-badge&logo=github&logoColor=white"></a>

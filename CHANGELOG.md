@@ -2,6 +2,38 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.42 (2023-07-08)
+
+### Fix
+
+* Update conf.py ([`2cd4c8f`](https://github.com/mraniki/tt/commit/2cd4c8f8ed99fc720f957a7f851912d2c0dfded8))
+* Update index.md ([`7adeeca`](https://github.com/mraniki/tt/commit/7adeeca21ae5c1b9f0a4ee4d84496ab5411efc3f))
+
+## v3.7.41 (2023-07-08)
+
+### Fix
+
+* Update conf.py ([`c2a75ff`](https://github.com/mraniki/tt/commit/c2a75ffd16a1fb84b4d7ef6b4073b26b4df42008))
+
+## v3.7.40 (2023-07-08)
+
+### Fix
+
+* Update pyproject.toml ([`19e0ffd`](https://github.com/mraniki/tt/commit/19e0ffd66c09bad30d171249ee45329d332a46cb))
+* Update conf.py ([`977a87e`](https://github.com/mraniki/tt/commit/977a87ea46a8a0e2773f9ba26da24b8d481e9fee))
+
+## v3.7.39 (2023-07-08)
+
+### Fix
+
+* Update pyproject.toml ([`280f697`](https://github.com/mraniki/tt/commit/280f6976ddeaa036f604e4b899194c154558a82e))
+
+## v3.7.38 (2023-07-08)
+
+### Fix
+
+* :memo:  docs update ([`16493ff`](https://github.com/mraniki/tt/commit/16493ff29db84c1f74bfc44c2bf8b991438b8207))
+
 ## v3.7.37 (2023-07-08)
 
 ### Fix
