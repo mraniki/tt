@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "tt"
-version = "3.7.41"
+version = "3.7.42"
 description = "Connect CEX & DEX across multi messaging platforms with plugin support."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"

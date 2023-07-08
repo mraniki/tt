@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.42 (2023-07-08)
+
+### Fix
+
+* Update conf.py ([`2cd4c8f`](https://github.com/mraniki/tt/commit/2cd4c8f8ed99fc720f957a7f851912d2c0dfded8))
+* Update index.md ([`7adeeca`](https://github.com/mraniki/tt/commit/7adeeca21ae5c1b9f0a4ee4d84496ab5411efc3f))
+
 ## v3.7.41 (2023-07-08)
 
 ### Fix
