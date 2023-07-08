@@ -116,21 +116,21 @@ html_theme_options = {
     #    (name, "http://example.com", True) # arbitrary absolute url
     # Note the "1" or "True" value above as the third argument to indicate
     # an arbitrary url.
-    'navbar_links': [
-        ("_menu", "Essentials", [
-            ("TalkyTrader", "index"),
-            ("_divider", ),
-            # ("_menu", "Installation", "home/installation", [
-            #     ("Local Walkthrough", "home/guides/local"),
-            #     ("Docker Walkthrough", "home/guides/docker"),
-            ("FindMyOrder", "findmyorder"),
-           # ]),
-            # ("Environment Variables", "home/environmental"),
-            # ("Knowledgebase/FAQ", "home/kb"),
-            ]),
-        ("_divider", ),
-        ("Bugs/Issues", "https://github.com/mraniki/tt/issues"),
-        ],
+    # 'navbar_links': [
+    #     ("_menu", "Essentials", [
+    #         ("TalkyTrader", "index"),
+    #         ("_divider", ),
+    #         # ("_menu", "Installation", "home/installation", [
+    #         #     ("Local Walkthrough", "home/guides/local"),
+    #         #     ("Docker Walkthrough", "home/guides/docker"),
+    #         ("FindMyOrder", "findmyorder"),
+    #        # ]),
+    #         # ("Environment Variables", "home/environmental"),
+    #         # ("Knowledgebase/FAQ", "home/kb"),
+    #         ]),
+    #     ("_divider", ),
+    #     ("Bugs/Issues", "https://github.com/mraniki/tt/issues"),
+    #     ],
 
     # Render the next and previous page links in navbar. (Default: true)
     'navbar_sidebarrel': False,
