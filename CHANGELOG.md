@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v3.7.37 (2023-07-08)
+
+### Fix
+
+* :memo:  docs ([`40bdeb4`](https://github.com/mraniki/tt/commit/40bdeb48e270be6ac7197bf674d0f074ac504998))
+* :memo:  docs ([`a58ca82`](https://github.com/mraniki/tt/commit/a58ca82b4f7d173c62893d1b5abc43b7d4a7a089))
+* :memo:  docs ([`4d323ad`](https://github.com/mraniki/tt/commit/4d323ad3dca48894df13b5f67214825fdf218339))
+* :rotating_light: linter ([`befcb85`](https://github.com/mraniki/tt/commit/befcb8568a00d047fa6a3ca34c6178b5ed92cd2f))
+* :memo:  docs update ([`d8ba61b`](https://github.com/mraniki/tt/commit/d8ba61be4c68226e85dcda3121525e289293c627))
+* :memo:  docs update ([`c21fbb9`](https://github.com/mraniki/tt/commit/c21fbb9abf0b4fe487e0e5f391166363670dc686))
+* :memo: pyproject doc related update ([`87e071d`](https://github.com/mraniki/tt/commit/87e071d210a3cfda150611cd51146644efd0cc91))
+* :arrow_up: bump talkytrend ([`16bc48d`](https://github.com/mraniki/tt/commit/16bc48d13fdf54f8bd97d783bb4205aae7d455b9))
+
 ## v3.7.36 (2023-07-07)
 
 ### Fix
