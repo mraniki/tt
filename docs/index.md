@@ -9,6 +9,12 @@ Connect CEX and DEX exchanges across multi messaging platforms.<br>
 Place order, inquire your balance and more through plugins.<br>
 Easily deploy via Docker on self-hosted platform or Paas.<br>
 <br>
+
+- {ref}`talkytrader:ref-role`
+- {ref}`:ref: role <talkytrader:ref-role>`
+- {doc}`talkytrader:usage/extensions/intersphinx`
+- {doc}`Intersphinx <talkytrader:usage/extensions/intersphinx>`
+
 <p align="left">
 <a href="https://talkytrader.github.io/wiki/"><img src="https://img.shields.io/badge/Wiki-%23000000.svg?style=for-the-badge&logo=wikipedia&logoColor=white"></a><br>
 <a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/badge/github-%23000000.svg?style=for-the-badge&logo=github&logoColor=white"></a>
@@ -68,7 +74,7 @@ Easily deploy via Docker on self-hosted platform or Paas.<br>
 
 <details close>
 <summary>env vars list</summary>
-
+<br><br>
 <!-- https://github.com/mraniki/tt/blob/4a3e51032802ede12bd20cee12ed4a4396337575/examples/example.env#L2-->
 
 <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fmraniki%2Ftt%2Fblob%2F4a3e51032802ede12bd20cee12ed4a4396337575%2Fexamples%2Fexample.env&style=nnfx-dark&type=code&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script>

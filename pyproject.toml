@@ -31,19 +31,20 @@ classifiers = [
 "Support" =  "https://github.com/mraniki/tt/discussions"
 "Issues" =  "https://github.com/mraniki/tt/issues"
 
+
 [tool.poetry.dependencies]
 python = "^3.10"
 dynaconf = "^3.1.12"
 apprise= "^1.4.0"
 httpx = "^0.24.1"
 uvicorn = "^0.22.0"
-fastapi = "^0.99.0"
+fastapi = "^0.100.0"
 ping3 = "^4.0.4"
 ccxt = "^4.0.0"
 dxsp = "^3.2.0"
 findmyorder = "^1.5.4"
 iamlistening = "^0.2.7"
-talkytrend = "^1.5.10"
+talkytrend = "^1.6.0"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^7.34.3"
@@ -58,7 +59,7 @@ pytest-mock = "^3.11.1"
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "^6.0.0"
+sphinx = "^7.0.0"
 sphinx_bootstrap_theme = "^0.8.1"
 sphinx-autoapi = "^2.1.1"
 sphinx-copybutton= "^0.5.2"
