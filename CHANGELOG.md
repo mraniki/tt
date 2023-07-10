@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v3.8.0 (2023-07-10)
+
+### Feature
+
+* ✨  ⬆️ talkytrend + new settings for feeds ([`3cd18ce`](https://github.com/mraniki/tt/commit/3cd18ce4db81cd7713516ef011d8d7df714bcbf9))
+
+### Fix
+
+* Update example.env ([`88cd199`](https://github.com/mraniki/tt/commit/88cd199890c4d19a0b746bfbe16b479066f9229f))
+* Update pyproject.toml ([`2e7858a`](https://github.com/mraniki/tt/commit/2e7858aa8b6d4b47b2d8963353181595a8259987))
+* ⬆️  dep ([`f9d7bd0`](https://github.com/mraniki/tt/commit/f9d7bd0b72dee7ae43e6f573c56360a20acc344e))
+* :arrow_up: Update pyproject.toml ([`0065b74`](https://github.com/mraniki/tt/commit/0065b74c5e07d7d0f2a14c95aa10b3f6765f900f))
+* :memo:  docs update ([`5de1cc9`](https://github.com/mraniki/tt/commit/5de1cc9194276a9db296fdb1d45c04de9547ac4d))
+
 ## v3.7.42 (2023-07-08)
 
 ### Fix
