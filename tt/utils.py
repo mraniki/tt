@@ -98,20 +98,21 @@ class MessageProcessor:
         except Exception as e:
             logger.warning("error starting all plugins %s", e)
 
+
     async def process_message(self, message):
         """ Process message from the plugin """
         plugin_dict = {plugin.name: plugin for plugin in self.plugins}
-        # replies = []
+        replies = []
         for plugin in plugin_dict.values():
             if plugin.should_handle(message):
-                await plugin.handle_message(message)
-                # reply = await plugin.handle_message(message)
-                # if reply:
-                #     replies.append(reply)
-            # Combine the replies into a single string
-            # consolidated_reply = '\n'.join(replies)
-            # if consolidated_reply:
-            #     await send_notification(consolidated_reply)
+                reply = await plugin.handle_message(message)
+                if reply:
+                    replies.append(reply)
+        # Combine the replies into a single string
+        consolidated_reply = '\n'.join(replies)
+        if consolidated_reply:
+            await self.send_notification(consolidated_reply)
+
 
 
 class BasePlugin:
