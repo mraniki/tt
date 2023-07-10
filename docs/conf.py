@@ -36,7 +36,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
-   # 'seed_intersphinx_mapping',
+    #'seed_intersphinx_mapping',
     'sphinx.ext.todo',
     'sphinx_copybutton',
     'myst_parser',
