@@ -98,7 +98,6 @@ class MessageProcessor:
         except Exception as e:
             logger.warning("error starting all plugins %s", e)
 
-
     async def process_message(self, message):
         """ Process message from the plugin """
         plugin_dict = {plugin.name: plugin for plugin in self.plugins}
