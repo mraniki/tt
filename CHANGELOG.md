@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.8.3 (2023-07-10)
+
+### Fix
+
+* Update index.md ([`0796000`](https://github.com/mraniki/tt/commit/0796000b6d9858289878603d0146decd0695cabb))
+
 ## v3.8.2 (2023-07-10)
 
 ### Fix
