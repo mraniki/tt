@@ -107,9 +107,7 @@ class MessageProcessor:
                 reply = await plugin.handle_message(message)
                 if reply:
                     replies.append(reply)
-        # Combine the replies into a single string
-        consolidated_reply = '\n'.join(replies)
-        if consolidated_reply:
+        if consolidated_reply := '\n'.join(replies):
             await self.send_notification(consolidated_reply)
 
 
