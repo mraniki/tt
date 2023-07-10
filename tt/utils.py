@@ -108,7 +108,7 @@ class MessageProcessor:
                 if reply:
                     replies.append(reply)
         if consolidated_reply := '\n'.join(replies):
-            await self.send_notification(consolidated_reply)
+            await send_notification(consolidated_reply)
 
 
 
