@@ -129,10 +129,12 @@ assets = [
     { id ="BTCUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
 ]
 enable_events = true
-# enable_news = false
-# news_url= ""
-# news_api_key = ""
-# live_tv_url = ""
+enable_news = false
+news_url= ""
+news_api_key = ""
+enable_feed = true
+news_feed="http://feeds.feedburner.com/zerohedge/feed"
+live_tv_url = ""
 
 
 
