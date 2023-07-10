@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v3.9.0 (2023-07-10)
+
+### Feature
+
+* ✨ adding combine replying plugin capability ([`abaac8d`](https://github.com/mraniki/tt/commit/abaac8d2d07be98f87258617612eecdc1df08e02))
+
+### Fix
+
+* Update utils.py ([`4578001`](https://github.com/mraniki/tt/commit/457800186ddd7062793301eea6493cc99e8e1b05))
+* 🎨 ([`90aca66`](https://github.com/mraniki/tt/commit/90aca661370013a8c4f8b2829026736797d3f4cb))
+
 ## v3.8.3 (2023-07-10)
 
 ### Fix
