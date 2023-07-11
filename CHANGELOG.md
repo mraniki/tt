@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.9.2 (2023-07-11)
+
+### Fix
+
+* :recycle: DEX plugin troubleshoot for help/info ([`eaed6ab`](https://github.com/mraniki/tt/commit/eaed6abe8c8f3ac166bd3ea7e99e0f913083f1de))
+
 ## v3.9.1 (2023-07-11)
 
 ### Fix
