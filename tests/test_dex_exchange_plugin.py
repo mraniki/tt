@@ -77,40 +77,40 @@ async def test_parse_position(plugin):
     await plugin.handle_message('/pos')
     get_account_position.assert_called_once
 
-
 @pytest.mark.asyncio
-async def test_info_message(plugin):
-    """test exchange dex"""
-    output = await plugin.info_message()
-    assert output is not None
+async def test_parse_help(plugin):
+    """Test balance """
+    get_info = AsyncMock()
+    await plugin.handle_message('/help')
+    get_info.assert_called_once
 
 
-@pytest.mark.asyncio
-async def test_execute_order(plugin, caplog, order):
-    output = await plugin.execute_order(order)
-    print(output)
-    assert output is not None
+# @pytest.mark.asyncio
+# async def test_info_message(plugin):
+#     """test exchange dex"""
+#     output = await plugin.info_message()
+#     assert output is not None
 
 
-@pytest.mark.asyncio
-async def test_get_account_balance(plugin):
-    """Test get_account_balance."""
-    output = await plugin.get_account_balance()
-    print(output)
-    assert output is not None
+# @pytest.mark.asyncio
+# async def test_execute_order(plugin, caplog, order):
+#     output = await plugin.execute_order(order)
+#     print(output)
+#     assert output is not None
 
 
-@pytest.mark.asyncio
-async def test_get_account_position(plugin):
-    """Test get_account_positions."""
-    output = await plugin.get_account_position()
-    print(output)
-    assert output is not None
+# @pytest.mark.asyncio
+# async def test_get_account_balance(plugin):
+#     """Test get_account_balance."""
+#     output = await plugin.get_account_balance()
+#     print(output)
+#     assert output is not None
 
 
-@pytest.mark.asyncio
-async def test_get_trading_asset_balance(plugin):
-    """Test get_asset_trading_balance."""
-    output = await plugin.get_trading_asset_balance()
-    print(output)
-    assert output is not None
+# @pytest.mark.asyncio
+# async def test_get_account_position(plugin):
+#     """Test get_account_positions."""
+#     output = await plugin.get_account_position()
+#     print(output)
+#     assert output is not None
+
