@@ -1,6 +1,6 @@
 import os
 from tt.utils import BasePlugin, send_notification
-from tt.config import logger, settings
+from tt.config import settings
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 
@@ -53,8 +53,8 @@ class DexExchangePlugin(BasePlugin):
                 await self.send_notification(f"{await self.get_account_balance()}")
             elif command == settings.bot_command_pos:
                 await self.send_notification(f"{await self.get_account_position()}")
-            elif command == settings.bot_command_help:
-                await self.send_notification(await self.info_message())
+            # elif command == settings.bot_command_help:
+            #     await self.send_notification(await self.info_message())
 
     async def info_message(self):
         """info_message"""    
@@ -62,10 +62,6 @@ class DexExchangePlugin(BasePlugin):
 
     async def execute_order(self, order_params):
         """Execute order."""
-        # action = order_params.get('action')
-        # instrument = order_params.get('instrument')
-        # if not action or not instrument:
-        #         return
         return await self.exchange.execute_order(order_params)
 
     async def get_account_balance(self):
