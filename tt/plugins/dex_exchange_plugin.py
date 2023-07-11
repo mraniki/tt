@@ -53,12 +53,12 @@ class DexExchangePlugin(BasePlugin):
                 await self.send_notification(f"{await self.get_account_balance()}")
             elif command == settings.bot_command_pos:
                 await self.send_notification(f"{await self.get_account_position()}")
-            # elif command == settings.bot_command_help:
-            #     await self.send_notification(await self.info_message())
+            elif command == settings.bot_command_help:
+                await self.send_notification(await self.exchange.get_info())
 
-    async def info_message(self):
-        """info_message"""    
-        return await self.exchange.get_info()
+    # async def info_message(self):
+    #     """info_message"""    
+    #     return await self.exchange.get_info()
 
     async def execute_order(self, order_params):
         """Execute order."""
