@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.9.1 (2023-07-11)
+
+### Fix
+
+* ♻️ DEX plugin troubleshoot for help/info ([`162d2d4`](https://github.com/mraniki/tt/commit/162d2d4bc6b38ec918e22d163f65ed3a47258c84))
+
 ## v3.9.0 (2023-07-10)
 
 ### Feature
