@@ -10,14 +10,12 @@ class TalkyTrendPlugin(BasePlugin):
         if self.enabled:
             self.trend = TalkyTrend()
 
-
     async def start(self):
         """Starts the TalkyTrend plugin"""        
         if self.enabled:
             while True:
                 async for message in self.trend.scanner():
                     await self.send_notification(message)
-
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
@@ -26,7 +24,6 @@ class TalkyTrendPlugin(BasePlugin):
         """Sends a notification"""
         if self.enabled:
             await send_notification(message)
-
 
     def should_handle(self, message):
         """Returns plugin status"""
@@ -44,6 +41,5 @@ class TalkyTrendPlugin(BasePlugin):
                 if self.trend.live_tv:
                     await self.send_notification(f"📺: {self.trend.live_tv}")
             elif command == settings.bot_command_help:
-                help_message = f"📺:\n{settings.bot_prefix}{settings.bot_command_news}"
-                await self.send_notification(help_message)
-
+                await self.send_notification(
+                    await self.exchange.get_info())
