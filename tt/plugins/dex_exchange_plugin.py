@@ -56,6 +56,9 @@ class DexExchangePlugin(BasePlugin):
             elif command == settings.bot_command_pos:
                 await self.send_notification(
                     f"{await self.exchange.get_account_position()}")
+            elif command == settings.bot_command_pnl_daily:
+                await self.send_notification(
+                    f"{await self.exchange.get_account_pnl()}")
             elif command == settings.bot_command_help:
                 try:
                     await self.send_notification(

@@ -45,14 +45,15 @@ matrix_pass = ""
 
 # BOTCOMMAND #####
 bot_prefix = "/"
+bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_command_help = "help"
 bot_command_bal = "bal"
-bot_command_quote = "q"
 bot_command_pos = "pos"
 bot_command_trading = "trading"
-bot_command_news = "live"
 bot_command_restart = "restart"
-bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
+bot_command_pnl_daily = "d"
+bot_command_quote = "q"
+bot_command_news = "live"
 
 # HELPER #########
 helper_enabled = true
