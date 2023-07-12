@@ -40,8 +40,9 @@ async def test_plugin_notification(plugin):
 async def test_trading_switch(plugin):
     """Test switch """
     plugin.trading_switch_command = AsyncMock()
-    with patch('plugins.example_plugin.send_notification'):
-        await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_trading}")
+    with patch('plugins.example_plugin.trading_switch_command'):
+        await plugin.handle_message(
+            f"{settings.bot_prefix}{settings.bot_command_trading}")
         plugin.trading_switch_command.assert_called_once
         assert settings.trading_enabled is False
 

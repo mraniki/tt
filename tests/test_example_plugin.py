@@ -1,6 +1,6 @@
 import pytest
 import asyncio
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, patch
 from tt.utils import MessageProcessor, start_plugins
 from tt.config import settings
 from tt.plugins.example_plugin import ExamplePlugin
