@@ -40,6 +40,9 @@ def wrong_order():
 def listener():
     return Listener()
 
+@pytest.fixture
+def message():
+    return "Test message"
 
 @pytest.mark.asyncio
 async def test_listener_telegram():
