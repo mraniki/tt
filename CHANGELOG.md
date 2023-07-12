@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.10.2 (2023-07-12)
+
+### Fix
+
+* ✅ update the async called to assert_awaited_once ([`b1297b3`](https://github.com/mraniki/tt/commit/b1297b30455fb67dc8be5a3129d114f3af33a1d2))
+* ✅ improve unit test ([`a462fb8`](https://github.com/mraniki/tt/commit/a462fb8a53399e60bf24c139ba0e4a818921e27a))
+* ✅ caplog issue ([`d563c84`](https://github.com/mraniki/tt/commit/d563c84925f58684bdd3c74a278b375440d49366))
+* ✅ expanded test case for CEX ([`fdc673f`](https://github.com/mraniki/tt/commit/fdc673f3ad19006cab163de8e2d6b8ffaa7192aa))
+* 🐛 missing prod setting: example_plugin_schedule_enabled ([`6117772`](https://github.com/mraniki/tt/commit/61177728b7c8823331e95cbd44cab6039a7e3b92))
+
 ## v3.10.1 (2023-07-12)
 
 ### Fix
