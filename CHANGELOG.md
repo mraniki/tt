@@ -2,6 +2,22 @@
 
 <!--next-version-placeholder-->
 
+## v3.10.0 (2023-07-12)
+
+### Feature
+
+* ✨ adding pnl capability for dex plugin and scheduling for helper ([`d483ace`](https://github.com/mraniki/tt/commit/d483ace72b8ced5d14c79d12998ab1390f0a890f))
+* 🥚fmo ignore_instrument setting ([`2fa0d71`](https://github.com/mraniki/tt/commit/2fa0d71de06676ddf44a3c457aad6b36ba151b40))
+
+### Fix
+
+* 🐛 pyproejct dep update ([`415ec8e`](https://github.com/mraniki/tt/commit/415ec8e6c6a95f0f8b6c3421d730717a7c0489a8))
+* :arrow_up: fmo, dxsp and trend ([`8e99bb6`](https://github.com/mraniki/tt/commit/8e99bb6718b219e221d8eab9a65d081ad0a90c64))
+* :zap: dxsp invalid token config notification ([`61f09d2`](https://github.com/mraniki/tt/commit/61f09d2bf25f4829a18d70c9f0f9e064b2f65469))
+* ✅ ([`06544c7`](https://github.com/mraniki/tt/commit/06544c7ceadbe8bebfe9cc3951ae1310e9a4535c))
+* ♻️ plugin  refactor ([`2ec2e73`](https://github.com/mraniki/tt/commit/2ec2e739d0eabe1014f329f72bfe81793b9e1428))
+* ⚡ DEX/TREND plugin improvement ([`65fd1ac`](https://github.com/mraniki/tt/commit/65fd1acbeaf69a3950dbcdcb7f966ee6ad003db9))
+
 ## v3.9.2 (2023-07-11)
 
 ### Fix
