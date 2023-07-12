@@ -37,7 +37,7 @@ async def test_plugin_notification(plugin):
 async def test_trading_switch(plugin):
     """Test switch """
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_trading}")
-    assert settings.trading_enabled == False
+    assert settings.trading_enabled is False
 
 
 # @pytest.mark.asyncio
