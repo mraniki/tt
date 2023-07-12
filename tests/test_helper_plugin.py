@@ -46,8 +46,12 @@ async def test_trading_switch(plugin):
         plugin.trading_switch_command.assert_called_once
         assert settings.trading_enabled is False
 
-# @pytest.mark.asyncio
-# async def test_help(message_processor, caplog):
-#     plugin = HelperPlugin()
-#     await plugin.handle_message('/help')
-#     assert "🎯" in caplog.text
+
+@pytest.mark.asyncio
+async def test_help(plugin):
+    """Test switch """
+    plugin.get_info = AsyncMock()
+    with patch('plugins.example_plugin.get_info'):
+        await plugin.handle_message(
+            f"{settings.bot_prefix}{settings.bot_command_help}")
+        plugin.get_info.assert_called_once
