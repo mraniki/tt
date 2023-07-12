@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock
 import ccxt
 from tt.config import settings
 from tt.plugins.cex_exchange_plugin import CexExchangePlugin
@@ -48,17 +48,19 @@ async def test_parse_quote(plugin, caplog):
     await plugin.handle_message('/q BTCUSDT')
     assert "🏦" in caplog.text
 
+
 @pytest.mark.asyncio
 async def test_info_message(plugin):
     """test exchange cex"""
     output = plugin.info_message()
     assert output is not None
 
-# @pytest.mark.asyncio
-# async def test_execute_order(plugin, caplog, order):
-#     output = await plugin.execute_order(order)
-#     print(output)
-#     assert output is not None
+
+@pytest.mark.asyncio
+async def test_execute_order(plugin, order):
+    plugin.exchange.execute_order = AsyncMock()
+    await plugin.handle_message(order)
+    plugin.exchange.execute_order.assert_called_once()
 
 
 # @pytest.mark.asyncio

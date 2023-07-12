@@ -1,6 +1,6 @@
 import pytest
 # from unittest.mock import AsyncMock, 
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock
 from dxsp import DexSwap
 import iamlistening
 from findmyorder import FindMyOrder
