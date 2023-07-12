@@ -1,6 +1,8 @@
+import asyncio
 import os
 from tt.utils import BasePlugin, send_notification
 from tt.config import logger, settings
+import schedule
 #add your lib
 
 class ExamplePlugin(BasePlugin):
@@ -9,6 +11,7 @@ class ExamplePlugin(BasePlugin):
     def __init__(self):
         """Plugin Initialization"""
         self.enabled = settings.example_plugin_enabled
+        self.schedule_enabled = settings.example_plugin_schedule_enabled
         if self.enabled:
             logger.debug("plugin initialized")
 
@@ -16,6 +19,8 @@ class ExamplePlugin(BasePlugin):
         """Starts the plugin"""       
         if self.enabled:
             logger.debug("plugin started")
+            if self.schedule_enabled:
+                self.schedule_notifications()
 
     async def stop(self):
         """Stops the plugin"""
@@ -38,3 +43,15 @@ class ExamplePlugin(BasePlugin):
                 command = (msg.split(" ")[0])[1:]
                 if command == settings.bot_command_help:
                     await self.send_notification("this is an example")
+
+    def schedule_notifications(self):
+        loop = asyncio.get_event_loop()
+        loop.create_task(self.run_schedule())
+
+    async def run_schedule(self):
+        schedule.every().hour.do(
+                lambda: asyncio.run(self.send_notification(
+                    "this is a schedule example")))
+        while True:
+            schedule.run_pending()
+            await asyncio.sleep(1)

@@ -1,9 +1,8 @@
-import asyncio
 import os
 import sys
 import socket
 import ping3
-import schedule
+
 from tt.utils import BasePlugin, send_notification, __version__
 from tt.config import settings
 
@@ -21,7 +20,6 @@ class HelperPlugin(BasePlugin):
     async def start(self):
         """Starts the plugin"""
         await self.send_notification(self.get_info())
-        self.schedule_notifications()
 
     async def stop(self):
         """Stops the plugin"""
@@ -48,17 +46,6 @@ class HelperPlugin(BasePlugin):
                     await self.send_notification(self.trading_switch_command())
                 elif command == settings.bot_command_restart:
                     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
-
-    def schedule_notifications(self):
-        loop = asyncio.get_event_loop()
-        loop.create_task(self.run_schedule())
-
-    async def run_schedule(self):
-        schedule.every().hour.do(
-                lambda: asyncio.run(self.send_notification(self.get_info())))
-        while True:
-            schedule.run_pending()
-            await asyncio.sleep(1)
 
     def get_info(self):
         """Help Message"""
