@@ -9,6 +9,7 @@ from tt.config import settings
 from tt.plugins.dex_exchange_plugin import DexExchangePlugin
 
 
+
 @pytest.fixture(name="bsc")
 def set_test_settings_DEX56():
     settings.configure(FORCE_ENV_FOR_DYNACONF="bsc")
@@ -82,7 +83,7 @@ async def test_parse_balance(plugin):
 
 @pytest.mark.asyncio
 async def test_parse_position(plugin):
-    """Test balance """
+    """Test position """
     plugin.exchange.get_account_position = AsyncMock()
     await plugin.handle_message('/pos')
     plugin.exchange.get_account_position.assert_called()

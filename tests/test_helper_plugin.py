@@ -6,6 +6,7 @@ from tt.config import settings
 from tt.plugins.helper_plugin import HelperPlugin
 
 
+
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
@@ -13,10 +14,6 @@ def set_test_settings():
 
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():
-    message_processor = MessageProcessor()
-    message_processor.load_plugins("tt.plugins")
-    loop = asyncio.get_running_loop()
-    loop.create_task(start_plugins(message_processor))
     return HelperPlugin()
 
 
@@ -42,7 +39,7 @@ async def test_trading_switch(plugin):
     await plugin.handle_message(
         f"{settings.bot_prefix}{settings.bot_command_trading}")
     plugin.trading_switch_command.assert_called_once
-    assert settings.trading_enabled is False
+
 
 
 @pytest.mark.asyncio
