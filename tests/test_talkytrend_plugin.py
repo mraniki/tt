@@ -26,7 +26,7 @@ async def test_plugin_notification(plugin):
     """Test notification """
     plugin.send_notification = AsyncMock()
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
-    plugin.send_notification.assert_called_once
+    plugin.send_notification.assert_awaited_once
     
 
 # @pytest.mark.asyncio

@@ -60,9 +60,9 @@ async def test_parse_valid_order(plugin, order_message):
     plugin.fmo.get_order = AsyncMock()
     plugin.exchange.execute_order = AsyncMock()
     await plugin.handle_message(order_message)
-    plugin.fmo.search.assert_called_once
-    plugin.fmo.get_order.assert_called_once
-    plugin.exchange.execute_order.assert_called_once
+    plugin.fmo.search.assert_awaited_once
+    plugin.fmo.get_order.assert_awaited_once
+    plugin.exchange.execute_order.assert_awaited_once
 
 
 @pytest.mark.asyncio
@@ -70,7 +70,7 @@ async def test_parse_quote(plugin, caplog):
     """Test parse_message balance """
     plugin.exchange.get_quote = AsyncMock()
     await plugin.handle_message('/q WBTC')
-    plugin.exchange.get_quote.assert_called_once_with('WBTC')
+    plugin.exchange.get_quote.assert_awaited_once_with('WBTC')
 
 
 @pytest.mark.asyncio
@@ -78,7 +78,7 @@ async def test_parse_balance(plugin):
     """Test balance """
     plugin.exchange.get_account_balance = AsyncMock()
     await plugin.handle_message('/bal')
-    plugin.exchange.get_account_balance.assert_called()
+    plugin.exchange.get_account_balance.assert_awaited_once()
 
 
 @pytest.mark.asyncio
@@ -86,7 +86,7 @@ async def test_parse_position(plugin):
     """Test position """
     plugin.exchange.get_account_position = AsyncMock()
     await plugin.handle_message('/pos')
-    plugin.exchange.get_account_position.assert_called()
+    plugin.exchange.get_account_position.assert_awaited_once()
 
 
 @pytest.mark.asyncio
@@ -94,7 +94,7 @@ async def test_parse_pnl(plugin):
     """Test balance """
     plugin.exchange.get_account_pnl = AsyncMock()
     await plugin.handle_message('/d')
-    plugin.exchange.get_account_pnl.assert_called_once()
+    plugin.exchange.get_account_pnl.assert_awaited_once()
 
 
 @pytest.mark.asyncio
@@ -102,4 +102,4 @@ async def test_parse_help(plugin):
     """Test help """
     plugin.exchange.get_info = AsyncMock()
     await plugin.handle_message('/help')
-    plugin.exchange.get_info.assert_called_once()
+    plugin.exchange.get_info.assert_awaited_once()

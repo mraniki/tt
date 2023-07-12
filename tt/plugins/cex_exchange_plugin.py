@@ -60,10 +60,13 @@ class CexExchangePlugin(BasePlugin):
                 await self.send_notification(f"{await self.get_account_balance()}")
             elif command == settings.bot_command_pos:
                 await self.send_notification(f"{await self.get_account_position()}")
+            elif command == settings.bot_command_pnl_daily:
+                await self.send_notification(
+                    f"{await self.exchange.get_account_pnl()}")
             elif command == settings.bot_command_help:
-                await self.send_notification(self.info_message())
+                await self.send_notification(self.get_info())
 
-    def info_message(self):
+    def get_info(self):
         """info_message"""    
         exchange_name = self.exchange.id
         account_info = self.exchange.uid
