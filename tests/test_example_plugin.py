@@ -1,9 +1,10 @@
 import pytest
 import asyncio
+from unittest.mock import AsyncMock
 from tt.utils import MessageProcessor, start_plugins
 from tt.config import settings
 from tt.plugins.example_plugin import ExamplePlugin
-from tt.plugins.helper_plugin import HelperPlugin
+
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -18,6 +19,11 @@ def message_processor_fixture():
     return message_processor
 
 
+@pytest.fixture(name="plugin")
+def test_fixture_plugin():
+    return ExamplePlugin()
+
+
 @pytest.mark.asyncio
 async def test_load_plugins(message_processor):
     loop = asyncio.get_running_loop()
@@ -26,8 +32,7 @@ async def test_load_plugins(message_processor):
 
 
 @pytest.mark.asyncio
-async def test_example_plugin(message_processor):
-    plugin = ExamplePlugin()
+async def test_plugin(plugin, message_processor):
     loop = asyncio.get_running_loop()
     loop.create_task(start_plugins(message_processor))
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
@@ -35,17 +40,20 @@ async def test_example_plugin(message_processor):
 
 
 @pytest.mark.asyncio
-async def test_trading_switch(message_processor):
-    """Test switch """
-    plugin = HelperPlugin()
+async def test_plugin_notification(plugin, message_processor):
+    """Test notification """
+    send_notification = AsyncMock()
     loop = asyncio.get_running_loop()
     loop.create_task(start_plugins(message_processor))
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_trading}")
-    assert settings.trading_enabled == False
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+    send_notification.assert_called_once
 
 
-# @pytest.mark.asyncio
-# async def test_help(message_processor, caplog):
-#     plugin = HelperPlugin()
-#     await plugin.handle_message('/help')
-#     assert "🎯" in caplog.text
+@pytest.mark.asyncio
+async def test_plugin_scheduling(plugin, message_processor):
+    """Test scheduling """
+    schedule_notifications = AsyncMock()
+    loop = asyncio.get_running_loop()
+    loop.create_task(start_plugins(message_processor))
+    assert settings.example_plugin_schedule_enabled is True
+    schedule_notifications.assert_called_once

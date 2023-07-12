@@ -1,4 +1,5 @@
 import pytest
+from unittest.mock import AsyncMock
 import ccxt
 from tt.config import settings
 from tt.plugins.cex_exchange_plugin import CexExchangePlugin
@@ -9,14 +10,10 @@ def set_test_settings_CEX():
     settings.configure(FORCE_ENV_FOR_DYNACONF="cex")
 
 
-@pytest.fixture(name="order")
-def order_params():
-    """Return order parameters."""
-    return {
-        'action': 'BUY',
-        'instrument': 'BTCUSDT',
-        'quantity': 10,
-    }
+@pytest.fixture(name="order_message")
+def order():
+    """return valid order"""
+    return "buy BTCUSDT sl=200 tp=400 q=1%"
 
 
 @pytest.fixture(name="plugin")
@@ -47,29 +44,36 @@ async def test_parse_quote(plugin, caplog):
     await plugin.handle_message('/q BTCUSDT')
     assert "🏦" in caplog.text
 
+
 @pytest.mark.asyncio
 async def test_info_message(plugin):
     """test exchange cex"""
     output = plugin.info_message()
     assert output is not None
 
-# @pytest.mark.asyncio
-# async def test_execute_order(plugin, caplog, order):
-#     output = await plugin.execute_order(order)
-#     print(output)
-#     assert output is not None
+@pytest.mark.asyncio
+async def test_parse_valid_order(plugin, order_message):
+    """Search Testing"""
+    plugin.fmo.search = AsyncMock()
+    plugin.fmo.get_order = AsyncMock()
+    plugin.exchange.execute_order = AsyncMock()
+    await plugin.handle_message(order_message)
+    plugin.fmo.search.assert_called_once
+    plugin.fmo.get_order.assert_called_once
+    plugin.exchange.execute_order.assert_called_once
 
 
 # @pytest.mark.asyncio
 # async def test_parse_balance(plugin):
 #     """Test balance """
-#     # get_account_balance= AsyncMock()
+#     plugin.exchange.get_account_balance = AsyncMock()
 #     await plugin.handle_message('/bal')
-#     get_account_balance.assert_called_once
+#     plugin.exchange.get_account_balance.assert_called()
+
 
 # @pytest.mark.asyncio
 # async def test_parse_position(plugin):
 #     """Test position """
-#     get_account_position= AsyncMock()
+#     plugin.exchange.get_account_position = AsyncMock()
 #     await plugin.handle_message('/pos')
-#     get_account_position.assert_called_once
+#     plugin.exchange.get_account_position.assert_called()

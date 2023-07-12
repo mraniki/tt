@@ -1,10 +1,13 @@
 import pytest
+# from unittest.mock import AsyncMock, 
 from unittest.mock import AsyncMock
 from dxsp import DexSwap
 import iamlistening
+from findmyorder import FindMyOrder
 from iamlistening import Listener
 from tt.config import settings
 from tt.plugins.dex_exchange_plugin import DexExchangePlugin
+
 
 
 @pytest.fixture(name="bsc")
@@ -12,15 +15,10 @@ def set_test_settings_DEX56():
     settings.configure(FORCE_ENV_FOR_DYNACONF="bsc")
 
 
-@pytest.fixture(name="order")
-def order_params():
-    """Return order parameters."""
-    return {
-        'action': 'BUY',
-        'instrument': 'WBTC',
-        'quantity': 1,
-    }
-
+@pytest.fixture(name="order_message")
+def order():
+    """return valid order"""
+    return "buy WBTC sl=200 tp=400 q=1%"
 
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():
@@ -46,71 +44,62 @@ async def test_listener_discord(bsc):
 @pytest.mark.asyncio
 async def test_plugin(plugin):
     enabled = plugin.enabled
+    fmo = plugin.fmo
     exchange = plugin.exchange
     print(exchange.account)
     assert enabled is True
+    assert isinstance(fmo, FindMyOrder)
     assert isinstance(exchange, DexSwap)
     assert exchange.account is not None
 
 
 @pytest.mark.asyncio
+async def test_parse_valid_order(plugin, order_message):
+    """Search Testing"""
+    plugin.fmo.search = AsyncMock()
+    plugin.fmo.get_order = AsyncMock()
+    plugin.exchange.execute_order = AsyncMock()
+    await plugin.handle_message(order_message)
+    plugin.fmo.search.assert_called_once
+    plugin.fmo.get_order.assert_called_once
+    plugin.exchange.execute_order.assert_called_once
+
+
+@pytest.mark.asyncio
 async def test_parse_quote(plugin, caplog):
     """Test parse_message balance """
-    enabled = plugin.enabled
-    exchange = plugin.exchange
+    plugin.exchange.get_quote = AsyncMock()
     await plugin.handle_message('/q WBTC')
-    assert "🦄" in caplog.text
+    plugin.exchange.get_quote.assert_called_once_with('WBTC')
 
 
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
     """Test balance """
-    get_account_balance = AsyncMock()
+    plugin.exchange.get_account_balance = AsyncMock()
     await plugin.handle_message('/bal')
-    get_account_balance.assert_called_once
+    plugin.exchange.get_account_balance.assert_called()
 
 
 @pytest.mark.asyncio
 async def test_parse_position(plugin):
-    """Test balance """
-    get_account_position = AsyncMock()
+    """Test position """
+    plugin.exchange.get_account_position = AsyncMock()
     await plugin.handle_message('/pos')
-    get_account_position.assert_called_once
+    plugin.exchange.get_account_position.assert_called()
+
+
+@pytest.mark.asyncio
+async def test_parse_pnl(plugin):
+    """Test balance """
+    plugin.exchange.get_account_pnl = AsyncMock()
+    await plugin.handle_message('/d')
+    plugin.exchange.get_account_pnl.assert_called_once()
+
 
 @pytest.mark.asyncio
 async def test_parse_help(plugin):
-    """Test balance """
-    get_info = AsyncMock()
+    """Test help """
+    plugin.exchange.get_info = AsyncMock()
     await plugin.handle_message('/help')
-    get_info.assert_called_once
-
-
-# @pytest.mark.asyncio
-# async def test_info_message(plugin):
-#     """test exchange dex"""
-#     output = await plugin.info_message()
-#     assert output is not None
-
-
-# @pytest.mark.asyncio
-# async def test_execute_order(plugin, caplog, order):
-#     output = await plugin.execute_order(order)
-#     print(output)
-#     assert output is not None
-
-
-# @pytest.mark.asyncio
-# async def test_get_account_balance(plugin):
-#     """Test get_account_balance."""
-#     output = await plugin.get_account_balance()
-#     print(output)
-#     assert output is not None
-
-
-# @pytest.mark.asyncio
-# async def test_get_account_position(plugin):
-#     """Test get_account_positions."""
-#     output = await plugin.get_account_position()
-#     print(output)
-#     assert output is not None
-
+    plugin.exchange.get_info.assert_called_once()

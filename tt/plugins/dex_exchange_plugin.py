@@ -4,6 +4,7 @@ from tt.config import settings
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 
+
 class DexExchangePlugin(BasePlugin):
     """DEX Plugin"""
     name = os.path.splitext(os.path.basename(__file__))[0]
@@ -17,21 +18,17 @@ class DexExchangePlugin(BasePlugin):
     async def start(self):
         """Starts the plugin"""
 
-
     async def stop(self):
         """Stops the plugin"""
-
 
     async def send_notification(self, message):
         """Sends notification"""
         if self.enabled:
             await send_notification(message)
 
-
     def should_handle(self, message):
         """Returns True if the plugin should handle the message"""
         return self.enabled
-
 
     async def handle_message(self, msg):
         """Handles incoming messages"""

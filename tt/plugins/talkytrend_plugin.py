@@ -42,4 +42,4 @@ class TalkyTrendPlugin(BasePlugin):
                     await self.send_notification(f"📺: {self.trend.live_tv}")
             elif command == settings.bot_command_help:
                 await self.send_notification(
-                    await self.exchange.get_info())
+                    await self.trend.get_info())
