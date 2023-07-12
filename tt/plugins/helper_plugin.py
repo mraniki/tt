@@ -50,11 +50,7 @@ class HelperPlugin(BasePlugin):
     def get_info(self):
         """Help Message"""
         ping_result = ping3.ping(settings.ping, unit='ms')
-        if ping_result is not None:
-            ping_result = round(ping_result, 2)
-        else:
-            ping_result = 0
-
+        ping_result = round(ping_result, 2) if ping_result is not None else 0
         return (f"{self.version}\n"
                 f"️{self.host_ip}\n"
                 f"🏓 {ping_result}\n"
