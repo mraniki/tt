@@ -49,7 +49,7 @@ async def test_parse_quote(plugin, caplog):
 @pytest.mark.asyncio
 async def test_info_message(plugin):
     """test exchange cex"""
-    output = plugin.info_message()
+    output = plugin.get_info()
     assert output is not None
 
 
@@ -60,16 +60,16 @@ async def test_parse_valid_order(plugin, order_message):
     plugin.fmo.get_order = AsyncMock()
     plugin.exchange.execute_order = AsyncMock()
     await plugin.handle_message(order_message)
-    plugin.fmo.search.assert_called_once
-    plugin.fmo.get_order.assert_called_once
-    plugin.exchange.execute_order.assert_called_once
+    plugin.fmo.search.assert_awaited_once
+    plugin.fmo.get_order.assert_awaited_once
+    plugin.exchange.execute_order.assert_awaited_once
 
 
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
     """Test balance """
     with pytest.raises(AuthenticationError):
-        plugin.exchange.get_account_balance = AsyncMock()
+        plugin.exchange.assert_awaited_once = AsyncMock()
         await plugin.handle_message('/bal')
         # plugin.exchange.get_account_balance.assert_called()
 
