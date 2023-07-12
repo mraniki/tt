@@ -1,5 +1,6 @@
 import pytest
 import asyncio
+import unittest.mock as AsyncMock, patch
 from tt.utils import MessageProcessor, start_plugins
 from tt.config import settings
 from tt.plugins.example_plugin import ExamplePlugin
@@ -39,15 +40,20 @@ async def test_plugin(plugin, message_processor):
 
 @pytest.mark.asyncio
 async def test_plugin_notification(plugin, message_processor):
-    """Test switch """
+    """Test notification """
+    send_notification = AsyncMock()
     loop = asyncio.get_running_loop()
     loop.create_task(start_plugins(message_processor))
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
-    plugin.send_notification.assert_called_once
+    with patch('plugins.example_plugin.send_notification'):
+        await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+        send_notification.assert_called_once
+
 
 @pytest.mark.asyncio
 async def test_plugin_scheduling(plugin, message_processor):
-    """Test switch """
+    """Test scheduling """
     loop = asyncio.get_running_loop()
     loop.create_task(start_plugins(message_processor))
-    plugin.run_schedule.assert_called_once
+    plugin.run_schedule = AsyncMock()
+    with patch('plugins.example_plugin.run_schedule'):
+        plugin.run_schedule.assert_called_once

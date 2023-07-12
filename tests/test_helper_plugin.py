@@ -1,5 +1,6 @@
 import pytest
 import asyncio
+import unittest.mock as AsyncMock, patch
 from tt.utils import MessageProcessor, start_plugins
 from tt.config import settings
 from tt.plugins.helper_plugin import HelperPlugin
@@ -29,16 +30,20 @@ async def test_plugin(plugin):
 @pytest.mark.asyncio
 async def test_plugin_notification(plugin):
     """Test notification """
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
-    plugin.send_notification.assert_called_once
+    plugin.send_notification = AsyncMock()
+    with patch('plugins.example_plugin.send_notification'):
+        await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+        plugin.send_notification.assert_called_once
     
 
 @pytest.mark.asyncio
 async def test_trading_switch(plugin):
     """Test switch """
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_trading}")
-    assert settings.trading_enabled is False
-
+    plugin.trading_switch_command = AsyncMock()
+    with patch('plugins.example_plugin.send_notification'):
+        await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_trading}")
+        plugin.trading_switch_command.assert_called_once
+        assert settings.trading_enabled is False
 
 # @pytest.mark.asyncio
 # async def test_help(message_processor, caplog):

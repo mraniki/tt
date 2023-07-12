@@ -1,5 +1,6 @@
 import pytest
-# from unittest.mock import AsyncMock
+# from unittest.mock import AsyncMock, 
+import unittest.mock as AsyncMock, patch
 from dxsp import DexSwap
 import iamlistening
 from findmyorder import FindMyOrder
@@ -77,12 +78,13 @@ async def test_parse_quote(plugin, caplog):
     # exchange = plugin.exchange
     await plugin.handle_message('/q WBTC')
     assert "🦄" in caplog.text
+    plugin.exchange.get_quote.assert_called_once_with('WBTC')
 
 
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
     """Test balance """
-    # get_account_balance = AsyncMock()
+    get_account_balance = AsyncMock()
     await plugin.handle_message('/bal')
     plugin.exchange.get_account_balance.assert_called_once
 
@@ -90,7 +92,7 @@ async def test_parse_balance(plugin):
 @pytest.mark.asyncio
 async def test_parse_position(plugin):
     """Test balance """
-    # get_account_position = AsyncMock()
+    get_account_position = AsyncMock()
     await plugin.handle_message('/pos')
     plugin.exchange.get_account_position.assert_called_once
 
@@ -106,6 +108,7 @@ async def test_parse_pnl(plugin):
 @pytest.mark.asyncio
 async def test_parse_help(plugin):
     """Test balance """
-    # get_info = AsyncMock()
-    await plugin.handle_message('/help')
-    plugin.get_info.assert_called_once
+    plugin.get_info = AsyncMock()
+    with patch('plugins.dex_exchange_plugin.get_info'):
+        await plugin.handle_message('/help')
+        plugin.get_info.assert_called_once
