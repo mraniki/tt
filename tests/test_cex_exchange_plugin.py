@@ -64,7 +64,7 @@ async def test_parse_valid_order(plugin, order_message):
     plugin.exchange.execute_order.assert_called_once
 
 @pytest.mark.asyncio
-async def test_parse_balance(plugin, caplog):
+async def test_parse_balance(plugin):
     """Test balance """
     with pytest.raises(AuthenticationError):
         plugin.exchange.get_account_balance = AsyncMock()
@@ -73,7 +73,7 @@ async def test_parse_balance(plugin, caplog):
 
 
 @pytest.mark.asyncio
-async def test_parse_position(plugin):
+async def test_parse_position(plugin, caplog):
     """Test position """
     with pytest.raises(AuthenticationError):
         plugin.exchange.get_account_position = AsyncMock()
