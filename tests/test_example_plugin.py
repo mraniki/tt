@@ -42,19 +42,17 @@ async def test_plugin(plugin, message_processor):
 async def test_plugin_notification(plugin, message_processor):
     """Test notification """
     send_notification = AsyncMock()
-    with patch('tt.plugins.example_plugin.send_notification'):
-        loop = asyncio.get_running_loop()
-        loop.create_task(start_plugins(message_processor))
-        await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
-        send_notification.assert_called_once
+    loop = asyncio.get_running_loop()
+    loop.create_task(start_plugins(message_processor))
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+    send_notification.assert_called_once
 
 
 @pytest.mark.asyncio
 async def test_plugin_scheduling(plugin, message_processor):
     """Test scheduling """
     schedule_notifications = AsyncMock()
-    with patch('tt.plugins.example_plugin.schedule_notifications'):
-        loop = asyncio.get_running_loop()
-        loop.create_task(start_plugins(message_processor))
-        assert settings.example_plugin_schedule_enabled is True
-        schedule_notifications.assert_called_once
+    loop = asyncio.get_running_loop()
+    loop.create_task(start_plugins(message_processor))
+    assert settings.example_plugin_schedule_enabled is True
+    schedule_notifications.assert_called_once

@@ -31,27 +31,24 @@ async def test_plugin(plugin):
 async def test_plugin_notification(plugin):
     """Test notification """
     plugin.send_notification = AsyncMock()
-    with patch('plugins.example_plugin.send_notification'):
-        await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
-        plugin.send_notification.assert_called_once
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+    plugin.send_notification.assert_called_once
     
 
 @pytest.mark.asyncio
 async def test_trading_switch(plugin):
     """Test switch """
     plugin.trading_switch_command = AsyncMock()
-    with patch('plugins.example_plugin.trading_switch_command'):
-        await plugin.handle_message(
-            f"{settings.bot_prefix}{settings.bot_command_trading}")
-        plugin.trading_switch_command.assert_called_once
-        assert settings.trading_enabled is False
+    await plugin.handle_message(
+        f"{settings.bot_prefix}{settings.bot_command_trading}")
+    plugin.trading_switch_command.assert_called_once
+    assert settings.trading_enabled is False
 
 
 @pytest.mark.asyncio
 async def test_help(plugin):
     """Test switch """
     plugin.get_info = AsyncMock()
-    with patch('plugins.example_plugin.get_info'):
-        await plugin.handle_message(
-            f"{settings.bot_prefix}{settings.bot_command_help}")
-        plugin.get_info.assert_called_once
+    await plugin.handle_message(
+        f"{settings.bot_prefix}{settings.bot_command_help}")
+    plugin.get_info.assert_called_once()
