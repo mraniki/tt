@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.10.3 (2023-07-12)
+
+### Fix
+
+* ⬆️ dep up ([`6250e89`](https://github.com/mraniki/tt/commit/6250e89ba9c5cf86376dfe5b0a47c5be82d51787))
+
 ## v3.10.2 (2023-07-12)
 
 ### Fix
