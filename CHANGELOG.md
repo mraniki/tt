@@ -2,6 +2,26 @@
 
 <!--next-version-placeholder-->
 
+## v3.10.1 (2023-07-12)
+
+### Fix
+
+* ✅ unit test for talktrend plugin ([`e618d86`](https://github.com/mraniki/tt/commit/e618d86f00d96de98c6405977b1b1d272b520983))
+* 🐛 ✅  added missed fixture ([`db118b6`](https://github.com/mraniki/tt/commit/db118b6010e7bad3c786427f45267c3d6bba8d33))
+* ♻️  refactor ([`ff76969`](https://github.com/mraniki/tt/commit/ff76969ca243bb49dc60bcadda48962190d574cc))
+* ✅  unit test ([`a865fec`](https://github.com/mraniki/tt/commit/a865fec9ef1f50d671e5e9abeb642d361b2af829))
+* ✅ unit test increase ([`902c251`](https://github.com/mraniki/tt/commit/902c251b5c0550bfa2fbda8e2b2dd938332fd782))
+* ✅  unit testing dust off ([`bab68c2`](https://github.com/mraniki/tt/commit/bab68c250d003ad98680005626169353966732d3))
+* ✅ unit test ([`f47703b`](https://github.com/mraniki/tt/commit/f47703babb672a8be44ec0e8e63e69e7ca3c9c0e))
+* ✅ unit test ([`816dc29`](https://github.com/mraniki/tt/commit/816dc29dce2f19695bb6d7c2a114823e198f246d))
+* ✅ unit test ([`143be33`](https://github.com/mraniki/tt/commit/143be3334483cac090bd4fa69627301c9a9fc19a))
+* ✅  unit test update ([`f3a558e`](https://github.com/mraniki/tt/commit/f3a558e86369a15684090d3d6d0428b73b6666b7))
+* ✅  unit test update ([`7c7a240`](https://github.com/mraniki/tt/commit/7c7a24080d920d37c0a2fbb9dc1511494ebfe46a))
+* ✅ revised mocked setup ([`654a242`](https://github.com/mraniki/tt/commit/654a242b49bfff4cad481bfe21b8ab7b5c8b34f6))
+* 🚨 linter ([`b7e3aa6`](https://github.com/mraniki/tt/commit/b7e3aa611f9bfb5a4cbe5fcfe673fb8cbe31f08b))
+* ♻️ refactor scheduleing and unit test for example and helper ([`4a993b1`](https://github.com/mraniki/tt/commit/4a993b141c4f76cea6f1bface64fe589f92fbcf6))
+* ✅  DEX plugin unit test increased ([`2ab3c2b`](https://github.com/mraniki/tt/commit/2ab3c2bcb048e96b291e0a8a572a5f0cef3edf40))
+
 ## v3.10.0 (2023-07-12)
 
 ### Feature
