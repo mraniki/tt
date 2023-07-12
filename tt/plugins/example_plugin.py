@@ -20,7 +20,7 @@ class ExamplePlugin(BasePlugin):
         if self.enabled:
             logger.debug("plugin started")
             if self.schedule_enabled:
-                self.schedule_notifications()
+               await self.schedule_notifications()
 
     async def stop(self):
         """Stops the plugin"""
@@ -44,7 +44,7 @@ class ExamplePlugin(BasePlugin):
                 if command == settings.bot_command_help:
                     await self.send_notification("this is an example")
 
-    def schedule_notifications(self):
+    async def schedule_notifications(self):
         loop = asyncio.get_event_loop()
         loop.create_task(self.run_schedule())
 

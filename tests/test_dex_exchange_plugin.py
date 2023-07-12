@@ -1,6 +1,6 @@
 import pytest
 # from unittest.mock import AsyncMock, 
-import unittest.mock as AsyncMock, patch
+from unittest.mock import AsyncMock, patch
 from dxsp import DexSwap
 import iamlistening
 from findmyorder import FindMyOrder
@@ -74,41 +74,44 @@ async def test_parse_valid_order(plugin, crypto_order):
 @pytest.mark.asyncio
 async def test_parse_quote(plugin, caplog):
     """Test parse_message balance """
-    # enabled = plugin.enabled
-    # exchange = plugin.exchange
-    await plugin.handle_message('/q WBTC')
-    assert "🦄" in caplog.text
-    plugin.exchange.get_quote.assert_called_once_with('WBTC')
+    plugin.exchange.get_quote = AsyncMock()
+    with patch('tt.plugins.dex_exchange_plugin.exchange.get_quote'):
+        await plugin.handle_message('/q WBTC')
+        assert "🦄" in caplog.text
+        plugin.exchange.get_quote.assert_called_once_with('WBTC')
 
 
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
     """Test balance """
-    get_account_balance = AsyncMock()
-    await plugin.handle_message('/bal')
-    plugin.exchange.get_account_balance.assert_called_once
+    plugin.exchange.get_account_balance = AsyncMock()
+    with patch('tt.plugins.dex_exchange_plugin.exchange.get_account_balance'):
+        await plugin.handle_message('/bal')
+        plugin.exchange.get_account_balance.assert_called_once
 
 
 @pytest.mark.asyncio
 async def test_parse_position(plugin):
     """Test balance """
-    get_account_position = AsyncMock()
-    await plugin.handle_message('/pos')
-    plugin.exchange.get_account_position.assert_called_once
+    plugin.exchange.get_account_position = AsyncMock()
+    with patch('tt.plugins.dex_exchange_plugin.exchange.get_account_position'):
+        await plugin.handle_message('/pos')
+        plugin.exchange.get_account_position.assert_called_once
 
 
 @pytest.mark.asyncio
 async def test_parse_pnl(plugin):
     """Test balance """
-    # get_account_position = AsyncMock()
-    await plugin.handle_message('/d')
-    plugin.exchange.get_account_pnl.assert_called_once
+    plugin.exchange.get_account_pnl = AsyncMock()
+    with patch('tt.plugins.dex_exchange_plugin.exchange.get_account_pnl'):
+        await plugin.handle_message('/d')
+        plugin.exchange.get_account_pnl.assert_called_once
 
 
 @pytest.mark.asyncio
 async def test_parse_help(plugin):
     """Test balance """
-    plugin.get_info = AsyncMock()
-    with patch('plugins.dex_exchange_plugin.get_info'):
+    plugin.exchange.get_info = AsyncMock()
+    with patch('plugins.dex_exchange_plugin.exchange.get_info'):
         await plugin.handle_message('/help')
         plugin.get_info.assert_called_once

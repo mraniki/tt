@@ -1,6 +1,6 @@
 import pytest
 import asyncio
-import unittest.mock as AsyncMock, patch
+from unittest.mock import AsyncMock, patch
 from tt.utils import MessageProcessor, start_plugins
 from tt.config import settings
 from tt.plugins.helper_plugin import HelperPlugin

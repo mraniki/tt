@@ -4,6 +4,7 @@ from tt.config import settings
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 
+
 class DexExchangePlugin(BasePlugin):
     """DEX Plugin"""
     name = os.path.splitext(os.path.basename(__file__))[0]
