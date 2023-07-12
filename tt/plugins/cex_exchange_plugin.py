@@ -138,3 +138,7 @@ class CexExchangePlugin(BasePlugin):
         position = "📊 Position\n" + str(open_positions)
         position += str(await self.exchange.fetch_balance({'type': 'margin',}))
         return position
+
+    async def get_account_pnl(self):
+        """return account pnl."""
+        return 0
