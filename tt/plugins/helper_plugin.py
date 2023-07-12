@@ -1,7 +1,9 @@
+import asyncio
 import os
 import sys
 import socket
 import ping3
+import schedule
 from tt.utils import BasePlugin, send_notification, __version__
 from tt.config import settings
 
@@ -18,12 +20,8 @@ class HelperPlugin(BasePlugin):
 
     async def start(self):
         """Starts the plugin"""
-        await self.send_notification(self.help_command())
-
-        # schedule.every().saturday.at("09:00").do()
-        # while True:
-        #     schedule.run_pending()
-        #     time.sleep(1)
+        await self.send_notification(self.get_info())
+        self.schedule_notifications()
 
     async def stop(self):
         """Stops the plugin"""
@@ -45,13 +43,24 @@ class HelperPlugin(BasePlugin):
             if msg.startswith(settings.bot_prefix):
                 command = (msg.split(" ")[0])[1:]
                 if command == settings.bot_command_help:
-                    await self.send_notification(self.help_command())
+                    await self.send_notification(self.get_info())
                 elif command == settings.bot_command_trading:
                     await self.send_notification(self.trading_switch_command())
                 elif command == settings.bot_command_restart:
                     os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
-    
-    def help_command(self):
+
+    def schedule_notifications(self):
+        loop = asyncio.get_event_loop()
+        loop.create_task(self.run_schedule())
+
+    async def run_schedule(self):
+        schedule.every().hour.do(
+                lambda: asyncio.run(self.send_notification(self.get_info())))
+        while True:
+            schedule.run_pending()
+            await asyncio.sleep(1)
+
+    def get_info(self):
         """Help Message"""
         return (f"{self.version}\n"
                 f"️{self.host_ip}\n"
@@ -63,7 +72,6 @@ class HelperPlugin(BasePlugin):
         settings.trading_enabled = not settings.trading_enabled
         return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
 
-
     def get_host_ip(self):
         """Returns host IP """
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -71,5 +79,3 @@ class HelperPlugin(BasePlugin):
         ip_address = s.getsockname()[0]
         s.close()
         return ip_address
-
-

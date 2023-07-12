@@ -12,12 +12,10 @@ class ExamplePlugin(BasePlugin):
         if self.enabled:
             logger.debug("plugin initialized")
 
-
     async def start(self):
         """Starts the plugin"""       
         if self.enabled:
             logger.debug("plugin started")
-
 
     async def stop(self):
         """Stops the plugin"""

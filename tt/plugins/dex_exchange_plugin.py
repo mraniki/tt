@@ -32,6 +32,7 @@ class DexExchangePlugin(BasePlugin):
         """Returns True if the plugin should handle the message"""
         return self.enabled
 
+
     async def handle_message(self, msg):
         """Handles incoming messages"""
         if not self.enabled:
@@ -40,7 +41,7 @@ class DexExchangePlugin(BasePlugin):
             return
         if await self.fmo.search(msg):
             order = await self.fmo.get_order(msg)
-            trade = await self.execute_order(order)
+            trade = await self.exchange.execute_order(order)
             if trade:
                 await send_notification(trade)
         if msg.startswith(settings.bot_prefix):
@@ -50,28 +51,17 @@ class DexExchangePlugin(BasePlugin):
                 await self.send_notification(
                     f"{await self.exchange.get_quote(symbol)}")
             elif command == settings.bot_command_bal:
-                await self.send_notification(f"{await self.get_account_balance()}")
+                await self.send_notification(
+                    f"{await self.exchange.get_account_balance()}")
             elif command == settings.bot_command_pos:
-                await self.send_notification(f"{await self.get_account_position()}")
+                await self.send_notification(
+                    f"{await self.exchange.get_account_position()}")
+            elif command == settings.bot_command_pnl_daily:
+                await self.send_notification(
+                    f"{await self.exchange.get_account_pnl()}")
             elif command == settings.bot_command_help:
-                await self.send_notification(await self.exchange.get_info())
-
-    # async def info_message(self):
-    #     """info_message"""    
-    #     return await self.exchange.get_info()
-
-    async def execute_order(self, order_params):
-        """Execute order."""
-        return await self.exchange.execute_order(order_params)
-
-    async def get_account_balance(self):
-        """return account balance."""
-        return await self.exchange.get_account_balance()
-
-    async def get_account_position(self):
-        """return account position."""
-        return await self.exchange.get_account_position()
-
-    async def get_trading_asset_balance(self):
-        """return main asset balance."""
-        return await self.exchange.get_trading_asset_balance()
+                try:
+                    await self.send_notification(
+                        await self.exchange.get_info())
+                except Exception as error:
+                    print(error)

@@ -45,14 +45,15 @@ matrix_pass = ""
 
 # BOTCOMMAND #####
 bot_prefix = "/"
+bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_command_help = "help"
 bot_command_bal = "bal"
-bot_command_quote = "q"
 bot_command_pos = "pos"
 bot_command_trading = "trading"
-bot_command_news = "live"
 bot_command_restart = "restart"
-bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
+bot_command_pnl_daily = "d"
+bot_command_quote = "q"
+bot_command_news = "live"
 
 # HELPER #########
 helper_enabled = true
@@ -88,6 +89,7 @@ mapping = [
     { id = "BTC", alt = "WBTC" },
     { id = "ETH", alt = "WETH" },
 ]
+ignore_instrument = "US500 USTEC DOGE"
 
 # CEX #############
 cex_enabled = false
@@ -114,6 +116,7 @@ dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
+dex_notify_invalid_token = true
 headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
