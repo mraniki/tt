@@ -36,10 +36,10 @@ async def test_plugin(plugin):
     assert enabled is True
     assert isinstance(exchange, ccxt.binance)
 
+
 @pytest.mark.asyncio
 async def test_parse_quote(plugin, caplog):
     """Test parse_message balance """
-    enabled = plugin.enabled
     exchange = plugin.exchange
     print(exchange.id)
     await plugin.handle_message('/q BTCUSDT')
@@ -52,6 +52,7 @@ async def test_info_message(plugin):
     output = plugin.info_message()
     assert output is not None
 
+
 @pytest.mark.asyncio
 async def test_parse_valid_order(plugin, order_message):
     """Search Testing"""
@@ -62,6 +63,7 @@ async def test_parse_valid_order(plugin, order_message):
     plugin.fmo.search.assert_called_once
     plugin.fmo.get_order.assert_called_once
     plugin.exchange.execute_order.assert_called_once
+
 
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
