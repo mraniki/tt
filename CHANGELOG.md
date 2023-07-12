@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.10.5 (2023-07-12)
+
+### Fix
+
+* Update README.md code maintainability badge ([`12014b3`](https://github.com/mraniki/tt/commit/12014b30495afdc0d42f0ea07edc2e6f05535f68))
+
 ## v3.10.4 (2023-07-12)
 
 ### Fix
