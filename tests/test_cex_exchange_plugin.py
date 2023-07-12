@@ -1,6 +1,7 @@
 import pytest
 from unittest.mock import AsyncMock
 import ccxt
+from ccxt.base.errors import AuthenticationError
 from tt.config import settings
 from tt.plugins.cex_exchange_plugin import CexExchangePlugin
 
@@ -62,18 +63,28 @@ async def test_parse_valid_order(plugin, order_message):
     plugin.fmo.get_order.assert_called_once
     plugin.exchange.execute_order.assert_called_once
 
+@pytest.mark.asyncio
+async def test_parse_balance(plugin, caplog):
+    """Test balance """
+    with pytest.raises(AuthenticationError):
+        plugin.exchange.get_account_balance = AsyncMock()
+        await plugin.handle_message('/bal')
+        # plugin.exchange.get_account_balance.assert_called()
 
-# @pytest.mark.asyncio
-# async def test_parse_balance(plugin):
-#     """Test balance """
-#     plugin.exchange.get_account_balance = AsyncMock()
-#     await plugin.handle_message('/bal')
-#     plugin.exchange.get_account_balance.assert_called()
+
+@pytest.mark.asyncio
+async def test_parse_position(plugin):
+    """Test position """
+    with pytest.raises(AuthenticationError):
+        plugin.exchange.get_account_position = AsyncMock()
+        await plugin.handle_message('/pos')
+        assert "API-key format invalid" in caplog
+        # plugin.exchange.get_account_position.assert_called()
 
 
-# @pytest.mark.asyncio
-# async def test_parse_position(plugin):
-#     """Test position """
-#     plugin.exchange.get_account_position = AsyncMock()
-#     await plugin.handle_message('/pos')
-#     plugin.exchange.get_account_position.assert_called()
+@pytest.mark.asyncio
+async def test_get_account_pnl(plugin):
+    """Test pnl """
+    plugin.exchange.get_account_pnl = AsyncMock()
+    await plugin.handle_message('/d')
+    plugin.exchange.get_account_pnl.assert_called()
