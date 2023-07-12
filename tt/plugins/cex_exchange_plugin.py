@@ -1,6 +1,6 @@
 import os
 from tt.utils import BasePlugin, send_notification
-from tt.config import logger, settings
+from tt.config import settings
 import ccxt
 from findmyorder import FindMyOrder
 
@@ -24,13 +24,11 @@ class CexExchangePlugin(BasePlugin):
                 if settings.cex_testmode:
                     self.exchange.set_sandbox_mode('enabled')
 
-
     async def start(self):
         """Starts the exchange_plugin plugin"""
 
     async def stop(self):
         """Stops the exchange_plugin plugin"""
-
 
     async def send_notification(self, message):
         """Sends a notification"""
@@ -83,7 +81,8 @@ class CexExchangePlugin(BasePlugin):
             if await self.get_account_balance() == "No Balance":
                 return "⚠️ Check Balance"
 
-            asset_out_quote = float(self.exchange.fetchTicker(f'{instrument}').get('last'))
+            asset_out_quote = float(
+                self.exchange.fetchTicker(f'{instrument}').get('last'))
             asset_out_balance = await self.get_trading_asset_balance()
 
             if not asset_out_balance:
@@ -102,7 +101,8 @@ class CexExchangePlugin(BasePlugin):
             if not trade:
                 return
 
-            trade_confirmation = f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
+            trade_confirmation = (f"⬇️ {instrument}"
+            if (action == "SELL") else f"⬆️ {instrument}\n")
             trade_confirmation += f"➕ Size: {round(trade['amount'], 4)}\n"
             trade_confirmation += f"⚫️ Entry: {round(trade['price'], 4)}\n"
             trade_confirmation += f"ℹ️ {trade['id']}\n"
@@ -116,7 +116,6 @@ class CexExchangePlugin(BasePlugin):
     async def get_trading_asset_balance(self):
         """return main asset balance."""
         return self.exchange.fetchBalance()[f"{settings.trading_asset}"]["free"]
-
 
     async def get_account_balance(self):
         """return account balance."""
@@ -132,7 +131,6 @@ class CexExchangePlugin(BasePlugin):
             balance += "No Balance"
         return balance
 
-
     async def get_account_position(self):
         """return account position."""
         open_positions = self.exchange.fetch_positions()
@@ -140,13 +138,3 @@ class CexExchangePlugin(BasePlugin):
         position = "📊 Position\n" + str(open_positions)
         position += str(await self.exchange.fetch_balance({'type': 'margin',}))
         return position
-
-
-
-
-
-
-
-
-
-
