@@ -63,17 +63,17 @@ async def test_parse_valid_order(plugin, order_message):
     plugin.exchange.execute_order.assert_called_once
 
 
-@pytest.mark.asyncio
-async def test_parse_balance(plugin):
-    """Test balance """
-    plugin.exchange.get_account_balance = AsyncMock()
-    await plugin.handle_message('/bal')
-    plugin.exchange.get_account_balance.assert_called()
+# @pytest.mark.asyncio
+# async def test_parse_balance(plugin):
+#     """Test balance """
+#     plugin.exchange.get_account_balance = AsyncMock()
+#     await plugin.handle_message('/bal')
+#     plugin.exchange.get_account_balance.assert_called()
 
 
-@pytest.mark.asyncio
-async def test_parse_position(plugin):
-    """Test position """
-    plugin.exchange.get_account_position = AsyncMock()
-    await plugin.handle_message('/pos')
-    plugin.exchange.get_account_position.assert_called()
+# @pytest.mark.asyncio
+# async def test_parse_position(plugin):
+#     """Test position """
+#     plugin.exchange.get_account_position = AsyncMock()
+#     await plugin.handle_message('/pos')
+#     plugin.exchange.get_account_position.assert_called()

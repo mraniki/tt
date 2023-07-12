@@ -49,9 +49,15 @@ class HelperPlugin(BasePlugin):
 
     def get_info(self):
         """Help Message"""
+        ping_result = ping3.ping(settings.ping, unit='ms')
+        if ping_result is not None:
+            ping_result = round(ping_result, 2)
+        else:
+            ping_result = 0
+
         return (f"{self.version}\n"
                 f"️{self.host_ip}\n"
-                f"🏓 {round(ping3.ping(settings.ping, unit='ms'), 2)}\n"
+                f"🏓 {ping_result}\n"
                 f"{self.help_message}")
 
     def trading_switch_command(self):
