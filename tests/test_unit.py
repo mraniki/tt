@@ -36,6 +36,11 @@ def wrong_order():
     }
 
 
+@pytest.fixture(name="frasier")
+def listener():
+    return Listener()
+
+
 @pytest.mark.asyncio
 async def test_listener_telegram():
     listener_test = Listener()
@@ -46,6 +51,12 @@ async def test_listener_telegram():
     msg = await listener_test.get_latest_message()
     print(msg)
     assert msg == "hello"
+
+
+@pytest.mark.asyncio
+async def test_get_latest_message(frasier, message):
+    await frasier.handle_message(message)
+    assert await frasier.get_latest_message() == message
 
 
 def test_read_main():
