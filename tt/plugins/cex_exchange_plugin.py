@@ -65,7 +65,8 @@ class CexExchangePlugin(BasePlugin):
                 await self.send_notification(
                     f"{await self.exchange.get_account_pnl()}")
             elif command == settings.bot_command_help:
-                await self.send_notification(self.get_info())
+                await self.send_notification(
+                    f"{await self.get_info()}")
 
     def get_info(self):
         """info_message"""    

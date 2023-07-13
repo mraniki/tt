@@ -58,8 +58,5 @@ class DexExchangePlugin(BasePlugin):
                 await self.send_notification(
                     f"{await self.exchange.get_account_pnl()}")
             elif command == settings.bot_command_help:
-                try:
-                    await self.send_notification(
-                        await self.exchange.get_info())
-                except Exception as error:
-                    print(error)
+                await self.send_notification(
+                    f"{await self.exchange.get_info()}")
