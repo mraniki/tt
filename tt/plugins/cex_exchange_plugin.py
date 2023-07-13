@@ -47,9 +47,10 @@ class CexExchangePlugin(BasePlugin):
             return
         if await self.fmo.search(msg):
             order = await self.fmo.get_order(msg)
-            trade = await self.execute_order(order)
-            if trade:
-                await send_notification(trade)
+            if order:
+                trade = await self.execute_order(order)
+                if trade:
+                    await send_notification(trade)
         if msg.startswith(settings.bot_prefix):
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_quote:
@@ -64,7 +65,8 @@ class CexExchangePlugin(BasePlugin):
                 await self.send_notification(
                     f"{await self.exchange.get_account_pnl()}")
             elif command == settings.bot_command_help:
-                await self.send_notification(self.get_info())
+                await self.send_notification(
+                    f"{await self.get_info()}")
 
     def get_info(self):
         """info_message"""    
