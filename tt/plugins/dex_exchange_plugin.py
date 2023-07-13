@@ -38,9 +38,10 @@ class DexExchangePlugin(BasePlugin):
             return
         if await self.fmo.search(msg):
             order = await self.fmo.get_order(msg)
-            trade = await self.exchange.execute_order(order)
-            if trade:
-                await send_notification(trade)
+            if order:
+                trade = await self.exchange.execute_order(order)
+                if trade:
+                    await send_notification(trade)
         if msg.startswith(settings.bot_prefix):
             command = (msg.split(" ")[0])[1:]
             if command == settings.bot_command_quote:
