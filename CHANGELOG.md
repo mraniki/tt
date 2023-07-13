@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v3.10.6 (2023-07-13)
+
+### Fix
+
+* 🐛 help not string formated ([`850d5c9`](https://github.com/mraniki/tt/commit/850d5c963fb48eb88bb7840d77fba8d02719ec9f))
+* 🐛 an order is identified but instrument is on the ignore list. ([`f450ada`](https://github.com/mraniki/tt/commit/f450ada6cb3b6759e0c652c161f96b0c83b89bc5))
+
 ## v3.10.5 (2023-07-12)
 
 ### Fix
