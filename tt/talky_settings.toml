@@ -136,7 +136,7 @@ enable_news = false
 news_url= ""
 news_api_key = ""
 enable_feed = true
-news_feed="http://feeds.feedburner.com/zerohedge/feed"
+news_feed=""
 live_tv_url = ""
 
 

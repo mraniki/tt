@@ -39,7 +39,8 @@ class HelperPlugin(BasePlugin):
             if msg.startswith(settings.bot_ignore):
                 return
             if msg.startswith(settings.bot_prefix):
-                command = (msg.split(" ")[0])[1:]
+                command, *args = msg.split(" ")
+                command = command[1:]
                 if command == settings.bot_command_help:
                     await self.send_notification(self.get_info())
                 elif command == settings.bot_command_trading:
