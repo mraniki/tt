@@ -77,7 +77,7 @@ class CexExchangePlugin(BasePlugin):
         if await self.fmo.search(msg):
             order = await self.fmo.get_order(msg)
             if order:
-                trade = await self.exchange.execute_order(order)
+                trade = await self.execute_order(order)
                 if trade:
                     await send_notification(trade)
 
@@ -86,11 +86,11 @@ class CexExchangePlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_quote: lambda: self.exchange.get_quote(args[0]),
-                settings.bot_command_bal: self.exchange.get_account_balance,
-                settings.bot_command_pos: self.exchange.get_account_position,
-                settings.bot_command_pnl_daily: self.exchange.get_account_pnl,
-                settings.bot_command_help: self.exchange.get_info,
+                settings.bot_command_quote: lambda: self.get_quote(args[0]),
+                settings.bot_command_bal: self.get_account_balance,
+                settings.bot_command_pos: self.get_account_position,
+                settings.bot_command_pnl_daily: self.get_account_pnl,
+                settings.bot_command_help: self.get_info,
             }
 
             if command in command_mapping:
