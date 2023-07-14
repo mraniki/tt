@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.10.7 (2023-07-14)
+
+### Fix
+
+* :arrow_up:dxsp up ([`17618fe`](https://github.com/mraniki/tt/commit/17618fe0e31f31c89e49eac6dc963fb0e70691db))
+* :white_check_mark:  cex ([`1eaf199`](https://github.com/mraniki/tt/commit/1eaf1994cf5c465a7765bc0913103288470718dd))
+* ♻️ trading_asset symbol deprecated to use only address ([`ca2a419`](https://github.com/mraniki/tt/commit/ca2a419cfbf7093e042620d4e91cf2b20ff21721))
+* :white_check_mark:  fix CEX test ([`0316a7a`](https://github.com/mraniki/tt/commit/0316a7a10ee5acbc2b401e1d0b609406850fad3f))
+* ♻️  dex/cex plugin ([`a4b2153`](https://github.com/mraniki/tt/commit/a4b21530f84b6b92420834a9af47fa623e375eb5))
+
 ## v3.10.6 (2023-07-13)
 
 ### Fix
