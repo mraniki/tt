@@ -87,6 +87,6 @@ async def test_parse_position(plugin, caplog):
 @pytest.mark.asyncio
 async def test_get_account_pnl(plugin):
     """Test pnl """
-    plugin.exchange.get_account_pnl = AsyncMock()
+    plugin.get_account_pnl = AsyncMock()
     await plugin.handle_message('/d')
-    plugin.exchange.get_account_pnl.assert_called()
+    plugin.get_account_pnl.assert_awaited_once()
