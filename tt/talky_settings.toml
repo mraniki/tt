@@ -64,7 +64,6 @@ reporting_enabled = false
 
 # TRADING ########
 trading_enabled = true
-trading_asset = "USDT"
 trading_risk_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10
 trading_stop_loss = 1000
