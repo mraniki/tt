@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v3.10.9 (2023-07-14)
+
+### Fix
+
+* :arrow_up:talky dep ([`35abfdb`](https://github.com/mraniki/tt/commit/35abfdb1de3a2ba255f480ae3d6934bcfc7ba425))
+* :bug: help info ([`e428688`](https://github.com/mraniki/tt/commit/e42868831b7e2ff649d30b2ca83653b4376a816d))
+
 ## v3.10.8 (2023-07-14)
 
 ### Fix
