@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.10.10 (2023-07-14)
+
+### Fix
+
+* :bug:help message ([`dbaa83f`](https://github.com/mraniki/tt/commit/dbaa83f4a9aef7083ff34867d73b4185a2ce1310))
+
 ## v3.10.9 (2023-07-14)
 
 ### Fix
