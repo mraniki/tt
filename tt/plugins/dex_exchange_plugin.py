@@ -34,29 +34,30 @@ class DexExchangePlugin(BasePlugin):
         """Handles incoming messages"""
         if not self.enabled:
             return
+
         if msg.startswith(settings.bot_ignore):
             return
+
         if await self.fmo.search(msg):
             order = await self.fmo.get_order(msg)
             if order:
                 trade = await self.exchange.execute_order(order)
                 if trade:
                     await send_notification(trade)
+
         if msg.startswith(settings.bot_prefix):
-            command = (msg.split(" ")[0])[1:]
-            if command == settings.bot_command_quote:
-                symbol = msg.split(" ")[1]
-                await self.send_notification(
-                    f"{await self.exchange.get_quote(symbol)}")
-            elif command == settings.bot_command_bal:
-                await self.send_notification(
-                    f"{await self.exchange.get_account_balance()}")
-            elif command == settings.bot_command_pos:
-                await self.send_notification(
-                    f"{await self.exchange.get_account_position()}")
-            elif command == settings.bot_command_pnl_daily:
-                await self.send_notification(
-                    f"{await self.exchange.get_account_pnl()}")
-            elif command == settings.bot_command_help:
-                await self.send_notification(
-                    f"{await self.exchange.get_info()}")
+            command, *args = msg.split(" ")
+            command = command[1:]
+
+            command_mapping = {
+                settings.bot_command_quote: lambda: self.exchange.get_quote(args[0]),
+                settings.bot_command_bal: self.exchange.get_account_balance,
+                settings.bot_command_pos: self.exchange.get_account_position,
+                settings.bot_command_pnl_daily: self.exchange.get_account_pnl,
+                settings.bot_command_help: self.exchange.get_info,
+            }
+
+            if command in command_mapping:
+                function = command_mapping[command]
+                await self.send_notification(f"{await function()}")
+
