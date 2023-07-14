@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.10.8 (2023-07-14)
+
+### Fix
+
+* ♻️ process_message simplication ([`6999b5f`](https://github.com/mraniki/tt/commit/6999b5fe8df07f936161214d6d8bf300d70441ee))
+
 ## v3.10.7 (2023-07-14)
 
 ### Fix
