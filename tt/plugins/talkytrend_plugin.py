@@ -36,10 +36,11 @@ class TalkyTrendPlugin(BasePlugin):
         if msg.startswith(settings.bot_ignore):
             return
         if msg.startswith(settings.bot_prefix):
-            command = (msg.split(" ")[0])[1:]
+            command, *args = msg.split(" ")
+            command = command[1:]
             if command == settings.bot_command_news:
                 if self.trend.live_tv:
                     await self.send_notification(f"📺: {self.trend.live_tv}")
             elif command == settings.bot_command_help:
-                await self.send_notification(
-                    await self.trend.get_info())
+                await self.send_notification("echo")
+                    #await #self.trend.get_info())
