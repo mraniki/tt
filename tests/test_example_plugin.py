@@ -33,8 +33,6 @@ async def test_load_plugins(message_processor):
 
 @pytest.mark.asyncio
 async def test_plugin(plugin, message_processor):
-    loop = asyncio.get_running_loop()
-    loop.create_task(start_plugins(message_processor))
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
     assert plugin.should_handle("any message") is True
 
@@ -43,8 +41,6 @@ async def test_plugin(plugin, message_processor):
 async def test_plugin_notification(plugin, message_processor):
     """Test notification """
     send_notification = AsyncMock()
-    loop = asyncio.get_running_loop()
-    loop.create_task(start_plugins(message_processor))
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
     send_notification.assert_awaited_once
 
@@ -52,8 +48,10 @@ async def test_plugin_notification(plugin, message_processor):
 @pytest.mark.asyncio
 async def test_plugin_scheduling(plugin, message_processor):
     """Test scheduling """
-    schedule_notifications = AsyncMock()
-    loop = asyncio.get_running_loop()
-    loop.create_task(start_plugins(message_processor))
+    schedule_manager = AsyncMock()
+    schedule_manager.schedule_example_hourly = AsyncMock()
+    schedule_manager.schedule_example_every_8_hours = AsyncMock()
     assert settings.example_plugin_schedule_enabled is True
-    schedule_notifications.assert_awaited_once
+    schedule_manager.assert_awaited_once
+    schedule_manager.schedule_example_hourly.assert_awaited_once
+    schedule_manager.schedule_example_every_8_hours.assert_awaited_once

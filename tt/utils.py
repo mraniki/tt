@@ -6,6 +6,7 @@ __version__ = "3.10.11"
 import asyncio
 import importlib
 import pkgutil
+import schedule
 from apprise import Apprise, NotifyFormat
 from iamlistening import Listener
 from tt.config import settings, logger
@@ -50,7 +51,7 @@ async def start_plugins(message_processor):
     except Exception as error:
         logger.error("plugins start: %s", error)
 
-
+ 
 class MessageProcessor:
     """👂 Message Processor for plugin """
     def __init__(self):
@@ -98,17 +99,6 @@ class MessageProcessor:
         except Exception as e:
             logger.warning("error starting all plugins %s", e)
 
-    # async def process_message(self, message):
-    #     """ Process message from the plugin """
-    #     plugin_dict = {plugin.name: plugin for plugin in self.plugins}
-    #     replies = []
-    #     for plugin in plugin_dict.values():
-    #         if plugin.should_handle(message):
-    #             reply = await plugin.handle_message(message)
-    #             if reply:
-    #                 replies.append(reply)
-    #     if consolidated_reply := '\n'.join(replies):
-    #         await send_notification(consolidated_reply)
     async def process_message(self, message):
         """ Process message from the plugin """
         plugin_dict = {plugin.name: plugin for plugin in self.plugins}
@@ -134,3 +124,83 @@ class BasePlugin:
 
     async def handle_message(self, msg):
         pass
+    # PREPARING TO IMPLEMENT COMMANDS MAPPING ACROSS PLUGINS
+    # ON HOLD FOR NOW
+    # async def handle_message(self, msg):
+    #     """
+    #     Handles incoming messages.
+
+    #     Args:
+    #         msg (str): The incoming message.
+    #     """
+    #     if not self.enabled:
+    #         return
+
+    #     if msg.startswith(settings.bot_ignore):
+    #         return
+
+    #     if self.supports_fmo_search():
+    #         if await self.fmo.search(msg):
+    #             order = await self.fmo.get_order(msg)
+    #             if order:
+    #                 trade = await self.exchange.execute_order(order)
+    #                 if trade:
+    #                     await send_notification(trade)
+
+    #     if msg.startswith(settings.bot_prefix):
+    #         command, *args = msg.split(" ")
+    #         command = command[1:]
+
+    #         command_mapping = self.get_command_mapping()
+
+    #         if command in command_mapping:
+    #             function = command_mapping[command]
+    #             await self.send_notification(f"{await function()}")
+
+    # def get_command_mapping(self):
+    #         """
+    #         Returns the command mapping for the plugin.
+
+    #         Override this method in subclasses to define the command mapping
+    #         specific to that plugin.
+
+    #         Returns:
+    #             dict: The command mapping.
+    #         """
+    #         return {
+    #             settings.bot_command_help: self.exchange.get_info,
+    #             settings.bot_command_quote: lambda: self.exchange.get_quote(args[0]),
+    #             settings.bot_command_bal: self.exchange.get_account_balance,
+    #             settings.bot_command_pos: self.exchange.get_account_position,
+    #             settings.bot_command_pnl_daily: self.exchange.get_account_pnl,
+    #         }
+
+
+
+class ScheduleManager:
+    """
+        ⚡ Base Schedule Manager
+    if a plugin need to be scheduled
+    you can use the following code
+    refer to example_plugin.py
+    """
+    def __init__(self, plugin):
+        self.plugin = plugin
+
+
+    def schedule_example(self,function):
+        # Define the schedule example task
+        schedule.every().day.at("10:00").do(function)
+
+    def schedule_example_hourly(self,function):
+        # Define the schedule example hourly task
+        schedule.every().hour.do(function)
+
+    def schedule_example_every_8_hours(self,function):
+        # Define the schedule example every 8 hours task
+        schedule.every(8).hours.do(function)
+
+    async def run_schedule(self):
+        while True:
+            schedule.run_pending()
+            await asyncio.sleep(10)

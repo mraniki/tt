@@ -35,30 +35,33 @@ class HelperPlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if self.enabled:
-            if msg.startswith(settings.bot_ignore):
-                return
-            if msg.startswith(settings.bot_prefix):
-                command, *args = msg.split(" ")
-                command = command[1:]
-                if command == settings.bot_command_help:
-                    await self.send_notification(self.get_info())
-                elif command == settings.bot_command_trading:
-                    await self.send_notification(self.trading_switch_command())
-                elif command == settings.bot_command_restart:
-                    os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
+        if not self.enabled:
+            return
+        if msg.startswith(settings.bot_ignore):
+            return
+        if msg.startswith(settings.bot_prefix):
+            command, *args = msg.split(" ")
+            command = command[1:]
 
-    def get_info(self):
+            command_mapping = {
+                settings.bot_command_help: self.get_info,
+                settings.bot_command_trading: self.trading_switch_command,
+                settings.bot_command_restart: self.restart,
+            }
+            if command in command_mapping:
+                function = command_mapping[command]
+                await self.send_notification(f"{await function()}")
+
+    async def get_info(self):
         """Help Message"""
-        return self.version
-        # ping_result = ping3.ping(settings.ping, unit='ms')
-        # ping_result = round(ping_result, 2) if ping_result is not None else 0
-        # return (f"{self.version}\n"
-        #         f"️{self.host_ip}\n"
-        #         f"🏓 {ping_result}\n"
-        #         f"{self.help_message}")
+        ping_result = ping3.ping(settings.ping, unit='ms')
+        ping_result = round(ping_result, 2) if ping_result is not None else 0
+        return (f"{self.version}\n"
+                f"️{self.host_ip}\n"
+                f"🏓 {ping_result}\n"
+                f"{self.help_message}")
 
-    def trading_switch_command(self):
+    async def trading_switch_command(self):
         """Trading switch command"""
         settings.trading_enabled = not settings.trading_enabled
         return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
@@ -70,3 +73,7 @@ class HelperPlugin(BasePlugin):
         ip_address = s.getsockname()[0]
         s.close()
         return ip_address
+
+    async def restart(self):
+        """Restart Bot """
+        os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
