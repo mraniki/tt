@@ -2,7 +2,6 @@
  TT test
 """
 import pytest
-# from unittest.mock import AsyncMock
 import iamlistening
 from iamlistening import Listener
 from fastapi.testclient import TestClient

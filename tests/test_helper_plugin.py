@@ -1,8 +1,7 @@
 import pytest
 from unittest.mock import AsyncMock
 from tt.config import settings
-from tt.plugins.helper_plugin import HelperPlugin
-
+from tt.plugins.default_plugins.helper_plugin import HelperPlugin
 
 
 @pytest.fixture(scope="session", autouse=True)

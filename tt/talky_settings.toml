@@ -29,7 +29,7 @@ apprise_url = "json://localhost"
 
 # PLUGIN ########
 plugin_enabled = true
-plugin_menu = "plugin"
+plugin_directory = "tt.plugins.default_plugins"
 example_plugin_enabled = false
 example_plugin_schedule_enabled = false
 
@@ -195,6 +195,7 @@ bot_command_restart = "restart"
 bot_command_trend = "trend"
 bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_msg_help = "🏦<code>/bal</code> 🎯<code>buy BTCUSDT</code> 🏷️<code>/q BTCB</code> 🔀<code>/trading</code>"
+plugin_directory = "tt.plugins.default_plugins"
 example_plugin_enabled = true
 example_plugin_schedule_enabled = true
 ping = "8.8.8.8"
@@ -204,6 +205,7 @@ apprise_url = "json://localhost"
 exchange_enabled = true
 cex_enabled = true
 helper_enabled = true
+plugin_directory = "tt.plugins.default_plugins"
 VALUE = "On Testing CEX_binance"
 cex_name = 'binance'
 cex_api = 'api_key'
@@ -217,6 +219,7 @@ apprise_url = "json://localhost"
 [bsc]
 VALUE = "On Testing DEX_56"
 helper_enabled = true
+plugin_directory = "tt.plugins.default_plugins"
 cex_name = ""
 dex_wallet_address = "0x1234567890123456789012345678901234567899"
 dex_private_key = "0xdeadbeet"

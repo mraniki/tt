@@ -31,7 +31,6 @@ class ExamplePlugin(BasePlugin):
         """Starts the plugin"""
         if self.enabled:
             logger.debug("plugin started")
-
             if self.schedule_enabled:
                 # Start the schedule manager
                 asyncio.create_task(self.schedule_manager.run_schedule())
