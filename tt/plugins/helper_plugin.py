@@ -46,8 +46,7 @@ class HelperPlugin(BasePlugin):
             command_mapping = {
                 settings.bot_command_help: self.get_info,
                 settings.bot_command_trading: self.trading_switch_command,
-                settings.bot_command_restart: os.execl(
-                    sys.executable, os.path.abspath(__file__), sys.argv[0]),
+                settings.bot_command_restart: self.restart,
             }
             if command in command_mapping:
                 function = command_mapping[command]
@@ -74,3 +73,7 @@ class HelperPlugin(BasePlugin):
         ip_address = s.getsockname()[0]
         s.close()
         return ip_address
+
+    async def restart(self):
+        """Restart Bot """
+        os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
