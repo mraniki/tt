@@ -63,7 +63,7 @@ class HelperPlugin(BasePlugin):
                 f"🏓 {ping_result}\n"
                 f"{self.help_message}")
 
-    def trading_switch_command(self):
+    async def trading_switch_command(self):
         """Trading switch command"""
         settings.trading_enabled = not settings.trading_enabled
         return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
