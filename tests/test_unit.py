@@ -1,11 +1,16 @@
 """
  TT test
 """
+
+import asyncio
+from unittest.mock import Mock
 import pytest
+
 import iamlistening
 from iamlistening import Listener
 from fastapi.testclient import TestClient
-from tt.utils import send_notification
+
+from tt.utils import send_notification, listener
 from tt.bot import app
 from tt.config import settings
 
@@ -36,7 +41,7 @@ def wrong_order():
 
 
 @pytest.fixture(name="frasier")
-def listener():
+def listener_test():
     return Listener()
 
 @pytest.fixture
@@ -94,3 +99,11 @@ def test_webhook_with_invalid_auth():
 async def test_send_notification(caplog):
     await send_notification("Test message")
     assert "json://localhost/" in caplog.text
+
+
+@pytest.mark.asyncio
+async def test_listener(monkeypatch):
+    monkeypatch.setattr("settings.plugin_enabled", True)
+    monkeypatch.setattr("logger.error", Mock())
+
+    await listener()

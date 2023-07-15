@@ -41,13 +41,16 @@ async def test_load_one_plugin():
     assert isinstance(plugin_manager.plugins[0], ExamplePlugin)
 
 @pytest.mark.asyncio
-async def test_load_plugins():
+async def test_load_plugins(caplog):
     plugin_manager = PluginManager()
     print(plugin_manager)
     assert plugin_manager is not None
     plugin_manager.load_plugins()
     print(plugin_manager.plugins)
     assert plugin_manager.plugins is not None
+    await plugin_manager.start_all_plugins()
+    assert 'plugin started' in caplog.text
+    assert 'plugin enabled' in caplog.text
     # assert len(plugin_manager.plugins) > 1
 
 @pytest.mark.asyncio
@@ -66,9 +69,10 @@ async def test_start_plugin(caplog):
 
 @pytest.mark.asyncio
 async def test_plugin(plugin, plugin_manager):
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+    handle_message = AsyncMock()
+    await plugin_manager.process_message(f"{settings.bot_prefix}{settings.bot_command_help}")
     assert plugin.should_handle("any message") is True
-
+    handle_message.assert_awaited_once
 
 @pytest.mark.asyncio
 async def test_plugin_notification(plugin, plugin_manager):
