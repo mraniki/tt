@@ -49,7 +49,7 @@ async def test_parse_quote(plugin, caplog):
 @pytest.mark.asyncio
 async def test_info_message(plugin):
     """test exchange cex"""
-    output = plugin.get_info()
+    output = await plugin.get_info()
     assert output is not None
 
 
