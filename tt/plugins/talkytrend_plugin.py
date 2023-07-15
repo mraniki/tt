@@ -41,7 +41,7 @@ class TalkyTrendPlugin(BasePlugin):
 
             command_mapping = {
                 settings.bot_command_help: self.trend.get_info,
-                settings.bot_command_news: self.trend.get_tv
+                settings.bot_command_news: self.trend.get_tv,
             }
 
             if command in command_mapping:

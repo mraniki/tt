@@ -62,13 +62,13 @@ async def test_get_latest_message(frasier, message):
     assert await frasier.get_latest_message() == message
 
 
-def test_read_main():
+def test_app_endpoint_main():
     client = TestClient(app)
     response = client.get("/")
     assert response.status_code == 200
 
 
-def test_read_health():
+def test_app_health():
     client = TestClient(app)
     response = client.get("/health")
     assert response.status_code == 200
