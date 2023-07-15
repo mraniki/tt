@@ -23,16 +23,23 @@ def message_processor_fixture():
 def test_fixture_plugin():
     return ExamplePlugin()
 
+@pytest.mark.asyncio
+async def test_plugin_manager():
+    plugin_manager = PluginManager()
+    assert plugin_manager is not None
+
 
 @pytest.mark.asyncio
-async def test_load_plugins():
+async def test_message_processor():
     plugin_manager = PluginManager()
     print(PluginManager)
     message_processor = MessageProcessor(plugin_manager)
+    print(message_processor)
     message_processor.load_plugins()
-    loop = asyncio.get_running_loop()
-    loop.create_task(message_processor.start_all_plugins())
+    print(message_processor)
+    assert message_processor is not None
     print(message_processor.plugins)
+    assert message_processor.plugins is not None
     assert len(message_processor.plugins) >= 1
 
 

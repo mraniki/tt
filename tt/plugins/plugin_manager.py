@@ -35,6 +35,8 @@ class PluginManager:
 
             except Exception as e:
                 logger.warning("Error loading plugin %s: %s", plugin_name, e)
+        
+        self.plugins = self.plugins
 
 class BasePlugin:
     """
