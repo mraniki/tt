@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v3.11.0 (2023-07-15)
+
+### Feature
+
+* ✨ feature for plugin scheduling revised ([`2131e94`](https://github.com/mraniki/tt/commit/2131e94cfb647a3d7d238a2c204042e91c146738))
+
+### Fix
+
+* ♻️ restart function adhoc created ([`e32e8ff`](https://github.com/mraniki/tt/commit/e32e8ff693985de326417e94565419a8ebdba3d6))
+* Update pyproject.toml ([`cc96437`](https://github.com/mraniki/tt/commit/cc9643731271dd2f0fcef06f3b2c89163344a289))
+* Update helper_plugin.py ([`95d1cc6`](https://github.com/mraniki/tt/commit/95d1cc6b8506ee0164f97bae902251cd265ff328))
+* 🐛 fix the await missing for help and refactor the plugin command handling ([`7fbce76`](https://github.com/mraniki/tt/commit/7fbce760a8c9ef22346afdf7d3cf5326cbe0c6c1))
+
 ## v3.10.11 (2023-07-15)
 
 ### Fix
