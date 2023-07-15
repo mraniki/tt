@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.11.1 (2023-07-15)
+
+### Fix
+
+* 🚑 missed starting info message ([`386cf25`](https://github.com/mraniki/tt/commit/386cf253d5c880dfdfb3490fbca24367d17c1cb5))
+
 ## v3.11.0 (2023-07-15)
 
 ### Feature
