@@ -48,7 +48,7 @@ async def test_load_plugins():
     plugin_manager.load_plugins()
     print(plugin_manager.plugins)
     assert plugin_manager.plugins is not None
-    assert len(plugin_manager.plugins) >= 1
+    assert len(plugin_manager.plugins) > 1
 
 @pytest.mark.asyncio
 async def test_start_plugin(caplog):
