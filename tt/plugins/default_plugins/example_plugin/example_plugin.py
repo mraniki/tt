@@ -2,7 +2,7 @@ import asyncio
 import os
 from tt.config import logger, settings
 from tt.utils import send_notification, __version__
-from tt.plugins.plugin_manager import BasePlugin, ScheduleManager
+from tt.plugins.plugin_manager import BasePlugin
 
 #from myclass import MyClass
 
@@ -19,23 +19,24 @@ class ExamplePlugin(BasePlugin):
         if self.enabled:
             logger.debug("plugin initialized")
             # self.myclass = MyClass()
-        self.schedule_enabled = settings.example_plugin_schedule_enabled
-        if self.schedule_enabled:
-                self.schedule_manager = ScheduleManager(self)
-                self.schedule_manager.schedule_example(
-                    self.myadhocfunction)
-                self.schedule_manager.schedule_example_hourly(
-                    self.myadhocfunction)
-                self.schedule_manager.schedule_example_every_8_hours(
-                    self.myadhocfunction)
+        # self.schedule_enabled = settings.example_plugin_schedule_enabled
+        # if self.schedule_enabled:
+        #         self.schedule_manager = ScheduleManager(self)
+        #         self.schedule_manager.schedule_example(
+        #             self.myadhocfunction)
+        #         self.schedule_manager.schedule_example_hourly(
+        #             self.myadhocfunction)
+        #         self.schedule_manager.schedule_example_every_8_hours(
+        #             self.myadhocfunction)
 
     async def start(self):
         """Starts the plugin"""
+        logger.debug("plugin started")
         if self.enabled:
-            logger.debug("plugin started")
-            if self.schedule_enabled:
+            logger.debug("plugin enabled")
+            # if self.schedule_enabled:
                 # Start the schedule manager
-                asyncio.create_task(self.schedule_manager.run_schedule())
+                # asyncio.create_task(self.schedule_manager.run_schedule())
 
     async def stop(self):
         """Stops the plugin"""

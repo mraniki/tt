@@ -1,9 +1,9 @@
 import pytest
-import asyncio
+import importlib
+import os
 from unittest.mock import AsyncMock
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
-from tt.plugins.message_processor import MessageProcessor
 from tt.plugins.default_plugins.example_plugin.example_plugin import ExamplePlugin
 
 @pytest.fixture(scope="session", autouse=True)
@@ -11,12 +11,11 @@ def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
 
 
-@pytest.fixture(name="message_processor")
+@pytest.fixture(name="plugin_manager")
 def message_processor_fixture():
     plugin_manager = PluginManager()
-    message_processor = MessageProcessor(plugin_manager)
-    message_processor.load_plugins()
-    return message_processor
+    plugin_manager.load_plugins()
+    return plugin_manager
 
 
 @pytest.fixture(name="plugin")
@@ -28,29 +27,51 @@ async def test_plugin_manager():
     plugin_manager = PluginManager()
     assert plugin_manager is not None
 
-
 @pytest.mark.asyncio
-async def test_message_processor():
+async def test_load_one_plugin():
+    plugin_module = importlib.import_module(
+        'tt.plugins.default_plugins.example_plugin.example_plugin')
     plugin_manager = PluginManager()
-    print(PluginManager)
-    message_processor = MessageProcessor(plugin_manager)
-    print(message_processor)
-    message_processor.load_plugins()
-    print(message_processor)
-    assert message_processor is not None
-    print(message_processor.plugins)
-    assert message_processor.plugins is not None
-    assert len(message_processor.plugins) >= 1
-
+    print(plugin_manager)
+    assert plugin_manager is not None
+    plugin_manager.load_plugin(plugin_module,'example_plugin')
+    print(plugin_manager.plugins)
+    assert plugin_manager.plugins is not None
+    assert len(plugin_manager.plugins) >= 1
+    assert isinstance(plugin_manager.plugins[0], ExamplePlugin)
 
 @pytest.mark.asyncio
-async def test_plugin(plugin, message_processor):
+async def test_load_plugins():
+    plugin_manager = PluginManager()
+    print(plugin_manager)
+    assert plugin_manager is not None
+    plugin_manager.load_plugins()
+    print(plugin_manager.plugins)
+    assert plugin_manager.plugins is not None
+    assert len(plugin_manager.plugins) >= 1
+
+@pytest.mark.asyncio
+async def test_start_plugin(caplog):
+    plugin_module = importlib.import_module(
+        'tt.plugins.default_plugins.example_plugin.example_plugin')
+    plugin_manager = PluginManager()
+    print(plugin_manager)
+    assert plugin_manager is not None
+    plugin_manager.load_plugin(plugin_module,'example_plugin')
+    example_plugin = ExamplePlugin()
+    await plugin_manager.start_plugin(example_plugin)
+    print(caplog.text)
+    assert 'plugin started' in caplog.text
+    assert 'plugin enabled' in caplog.text
+
+@pytest.mark.asyncio
+async def test_plugin(plugin, plugin_manager):
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
     assert plugin.should_handle("any message") is True
 
 
 @pytest.mark.asyncio
-async def test_plugin_notification(plugin, message_processor):
+async def test_plugin_notification(plugin, plugin_manager):
     """Test notification """
     send_notification = AsyncMock()
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
@@ -58,7 +79,7 @@ async def test_plugin_notification(plugin, message_processor):
 
 
 @pytest.mark.asyncio
-async def test_plugin_scheduling(plugin, message_processor):
+async def test_plugin_scheduling(plugin, plugin_manager):
     """Test scheduling """
     schedule_manager = AsyncMock()
     schedule_manager.schedule_example_hourly = AsyncMock()

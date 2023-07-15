@@ -8,7 +8,6 @@ from apprise import Apprise, NotifyFormat
 from iamlistening import Listener
 from tt.config import settings, logger
 from tt.plugins.plugin_manager import PluginManager
-from tt.plugins.message_processor import MessageProcessor
 
 async def send_notification(msg):
     """
@@ -32,10 +31,9 @@ async def listener():
     task = asyncio.create_task(bot_listener.run_forever())
     if settings.plugin_enabled:
         plugin_manager = PluginManager()
-        message_processor = MessageProcessor(plugin_manager)
-        message_processor.load_plugins()
+        plugin_manager.load_plugins()
         loop = asyncio.get_running_loop()
-        loop.create_task(message_processor.start_all_plugins())
+        loop.create_task(plugin_manager.start_all_plugins())
 
     while True:
         try:
@@ -43,7 +41,7 @@ async def listener():
             print(msg)
             if msg:
                 if settings.plugin_enabled:
-                    for plugin in message_processor.plugins:
+                    for plugin in plugin_manager.plugins:
                         try:
                             await plugin.process_message(msg)
                         except Exception as plugin_error:

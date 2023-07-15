@@ -1,19 +1,14 @@
-"""
- talky Utils
-"""
-__version__ = "3.11.3"
-
 import asyncio
 import importlib
 import pkgutil
-import schedule
 from tt.config import settings, logger
+import schedule
 
 
 class PluginManager:
     """🔌 Plugin Manager for dynamically loading plugins """
-    def __init__(self):
-        self.plugin_directory = settings.plugin_directory
+    def __init__(self, plugin_directory=None):
+        self.plugin_directory = plugin_directory or settings.plugin_directory
         self.plugins = []
 
     def load_plugins(self):
@@ -24,24 +19,43 @@ class PluginManager:
             try:
                 module = importlib.import_module(f"{plugin_name}")
                 logger.info("Module loaded: %s", module)
-
-                for name, obj in module.__dict__.items():
-                    if (isinstance(obj, type)
-                            and issubclass(obj, BasePlugin)
-                            and obj is not BasePlugin):
-                        plugin_instance = obj()
-                        self.plugins.append(plugin_instance)
-                        logger.info("Plugin loaded: %s", plugin_name)
-
+                self.load_plugin(module, plugin_name)
             except Exception as e:
                 logger.warning("Error loading plugin %s: %s", plugin_name, e)
-        
-        self.plugins = self.plugins
+
+    async def start_all_plugins(self):
+        """ Start all plugins """
+        try:
+            for plugin in self.plugins:
+                await self.start_plugin(plugin)
+        except Exception as error:
+            logger.error("Error starting plugins: %s", error)
+
+    def load_plugin(self, module, plugin_name):
+        """ Load a plugin from a module """
+        for name, obj in module.__dict__.items():
+            if (isinstance(obj, type)
+                    and issubclass(obj, BasePlugin)
+                    and obj is not BasePlugin):
+                plugin_instance = obj()
+                self.plugins.append(plugin_instance)
+                logger.info("Plugin loaded: %s", plugin_name)
+
+    async def start_plugin(self, plugin):
+        """ Start a plugin """
+        await plugin.start()
+
+    async def process_message(self, message):
+        """ Process message from the plugin """
+        for plugin in self.plugins:
+            if plugin.should_handle(message):
+                await plugin.handle_message(message)
+
 
 class BasePlugin:
     """
     ⚡ Base Plugin Class
-    
+
     """
     async def start(self):
         pass
@@ -57,27 +71,16 @@ class BasePlugin:
 
     async def handle_message(self, msg):
         pass
- 
-class ScheduleManager:
-    """
-        ⚡ Base Schedule Manager
-    if a plugin need to be scheduled
-    you can use the following code
-    refer to example_plugin.py
-    """
-    def __init__(self, plugin):
-        self.plugin = plugin
 
-
-    def schedule_example(self,function):
+    def schedule_example(self, function):
         # Define the schedule example task
         schedule.every().day.at("10:00").do(function)
 
-    def schedule_example_hourly(self,function):
+    def schedule_example_hourly(self, function):
         # Define the schedule example hourly task
         schedule.every().hour.do(function)
 
-    def schedule_example_every_8_hours(self,function):
+    def schedule_example_every_8_hours(self, function):
         # Define the schedule example every 8 hours task
         schedule.every(8).hours.do(function)
 
