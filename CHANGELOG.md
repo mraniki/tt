@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.10.11 (2023-07-15)
+
+### Fix
+
+* Update talky_settings.toml ([`e7e64a7`](https://github.com/mraniki/tt/commit/e7e64a78b1c632b8c6bcc8be1806e2bcb8a3524a))
+
 ## v3.10.10 (2023-07-14)
 
 ### Fix
