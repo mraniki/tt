@@ -27,4 +27,3 @@ class MessageProcessor:
         for plugin in self.plugins:
             if plugin.should_handle(message):
                 await plugin.handle_message(message)
-

@@ -6,7 +6,7 @@ import iamlistening
 from findmyorder import FindMyOrder
 from iamlistening import Listener
 from tt.config import settings
-from tt.plugins.default_plugins.dex_exchange_plugin import DexExchangePlugin
+from tt.plugins.default_plugins.dex_exchange_plugin.dex_exchange_plugin import DexExchangePlugin
 
 
 

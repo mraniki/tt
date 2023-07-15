@@ -4,7 +4,7 @@ from unittest.mock import AsyncMock
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
 from tt.plugins.message_processor import MessageProcessor
-from tt.plugins.default_plugins.example_plugin import ExamplePlugin
+from tt.plugins.default_plugins.example_plugin.example_plugin import ExamplePlugin
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
@@ -25,9 +25,14 @@ def test_fixture_plugin():
 
 
 @pytest.mark.asyncio
-async def test_load_plugins(message_processor):
+async def test_load_plugins():
+    plugin_manager = PluginManager()
+    print(PluginManager)
+    message_processor = MessageProcessor(plugin_manager)
+    message_processor.load_plugins()
     loop = asyncio.get_running_loop()
     loop.create_task(message_processor.start_all_plugins())
+    print(message_processor.plugins)
     assert len(message_processor.plugins) >= 1
 
 
