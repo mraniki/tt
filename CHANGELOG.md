@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v3.11.3 (2023-07-15)
+
+### Fix
+
+* ✅  fixed unit test ([`e5627b0`](https://github.com/mraniki/tt/commit/e5627b09a6e2608809d79be97ecba72b322086cc))
+* ⬆️ dep ([`6eb32c8`](https://github.com/mraniki/tt/commit/6eb32c84f6fbdad4c889f0801fd88d7d8375d493))
+* 🐛 info help function ([`c717f45`](https://github.com/mraniki/tt/commit/c717f456aabaa60681c39015a01a0e556af5974c))
+
 ## v3.11.2 (2023-07-15)
 
 ### Fix
