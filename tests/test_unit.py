@@ -104,7 +104,7 @@ async def test_send_notification(caplog):
 @pytest.mark.asyncio
 @pytest.mark.timeout(5)
 async def test_listener(monkeypatch):
-    monkeypatch.setattr("settings.plugin_enabled", True)
+    #monkeypatch.setattr("settings.plugin_enabled", True)
     monkeypatch.setattr("logger.error", Mock())
 
     await listener()

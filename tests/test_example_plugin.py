@@ -32,10 +32,8 @@ async def test_load_one_plugin():
     plugin_module = importlib.import_module(
         'tt.plugins.default_plugins.example_plugin.example_plugin')
     plugin_manager = PluginManager()
-    print(plugin_manager)
     assert plugin_manager is not None
     plugin_manager.load_plugin(plugin_module,'example_plugin')
-    print(plugin_manager.plugins)
     assert plugin_manager.plugins is not None
     assert len(plugin_manager.plugins) >= 1
     assert isinstance(plugin_manager.plugins[0], ExamplePlugin)
