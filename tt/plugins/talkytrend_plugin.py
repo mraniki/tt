@@ -12,10 +12,10 @@ class TalkyTrendPlugin(BasePlugin):
 
     async def start(self):
         """Starts the TalkyTrend plugin"""        
-        if self.enabled:
-            while True:
-                async for message in self.trend.scanner():
-                    await self.send_notification(message)
+        # if self.enabled:
+        #     while True:
+        #         async for message in self.trend.scanner():
+        #             await self.send_notification(message)
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
@@ -40,8 +40,9 @@ class TalkyTrendPlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_help: self.trend.get_info,
+                settings.bot_command_help: self.trend.get_talkytrend_info,
                 settings.bot_command_news: self.trend.get_tv,
+                settings.bot_command_trend: self.trend.check_signal,
             }
 
             if command in command_mapping:
