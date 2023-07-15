@@ -1,6 +1,7 @@
 import os
-from tt.utils import BasePlugin, send_notification
+from tt.utils import send_notification
 from tt.config import settings
+from tt.plugins.plugin_manager import BasePlugin
 import ccxt
 from findmyorder import FindMyOrder
 
