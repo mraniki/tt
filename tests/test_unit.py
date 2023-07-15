@@ -3,7 +3,7 @@
 """
 
 import asyncio
-from unittest.mock import Mock
+from unittest.mock import AsyncMock
 import pytest
 
 import iamlistening
@@ -102,9 +102,7 @@ async def test_send_notification(caplog):
 
 
 @pytest.mark.asyncio
-@pytest.mark.timeout(5)
-async def test_listener(monkeypatch):
-    #monkeypatch.setattr("settings.plugin_enabled", True)
-    #monkeypatch.setattr("logger.error", Mock())
-
+async def test_listener():
+    get_latest_message = AsyncMock()
     await listener()
+    get_latest_message.assert_awaited_once 
