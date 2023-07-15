@@ -37,6 +37,7 @@ async def listener():
     while True:
         try:
             msg = await bot_listener.get_latest_message()
+            print(msg)
             if msg:
                 if settings.plugin_enabled:
                     await message_processor.process_message(msg)

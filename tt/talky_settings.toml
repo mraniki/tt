@@ -140,6 +140,7 @@ news_api_key = ""
 enable_feed = true
 news_feed="https://www.financialjuice.com/feed.ashx?xy=rss"
 live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
+bot_command_trend = "trend"
 
 
 
@@ -191,6 +192,7 @@ bot_command_pos = "pos"
 bot_command_trading = "trading"
 bot_command_news = "live"
 bot_command_restart = "restart"
+bot_command_trend = "trend"
 bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_msg_help = "🏦<code>/bal</code> 🎯<code>buy BTCUSDT</code> 🏷️<code>/q BTCB</code> 🔀<code>/trading</code>"
 example_plugin_enabled = true
