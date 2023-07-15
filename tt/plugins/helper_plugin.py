@@ -19,7 +19,7 @@ class HelperPlugin(BasePlugin):
 
     async def start(self):
         """Starts the plugin"""
-        await self.send_notification(self.get_info())
+        await self.send_notification(await self.get_info())
 
     async def stop(self):
         """Stops the plugin"""
