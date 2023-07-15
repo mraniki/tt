@@ -132,12 +132,14 @@ assets = [
     { id ="BTCUSD",exchange="BINANCE",screener="crypto", interval = "4h"},
 ]
 enable_events = true
+# economic_calendar = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
+fomc_decision_date = ["2023-09-20","2023-11-01","2023-12-13"]
 enable_news = false
 news_url= ""
 news_api_key = ""
 enable_feed = true
-news_feed=""
-live_tv_url = ""
+news_feed="https://www.financialjuice.com/feed.ashx?xy=rss"
+live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
 
 
 
