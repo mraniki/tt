@@ -107,7 +107,7 @@ async def test_listener():
     mock_listener.run_forever = AsyncMock()
     mock_listener.get_latest_message = AsyncMock(return_value="example message")
 
-    with patch("listener.Listener", return_value=mock_listener):
+    with patch("listener", return_value=mock_listener):
         await listener()
 
     mock_listener.run_forever.assert_called_once()
