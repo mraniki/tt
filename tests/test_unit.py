@@ -81,13 +81,12 @@ async def test_start_plugins():
 
 @pytest.mark.asyncio
 async def test_start_bot():
+    start_listener= AsyncMock()
+    plugin_manager = AsyncMock()
     get_latest_message = AsyncMock(return_value="Test message")
-    listener, listener_task = await start_listener(max_iterations=1)
-    plugin_manager = PluginManager()
-    await start_plugins(plugin_manager)
-    msg = await listener.get_latest_message()
-    await plugin_manager.process_message(msg)
+    await start_bot()
 
     get_latest_message.assert_called_once()
-    assert msg == "Test message"
+    start_listener.assert_called_once()
+    get_latest_message.assert_called_once()
     plugin_manager.process_message.assert_called_once_with("Test message")

@@ -27,6 +27,7 @@ async def start_listener(max_iterations=None):
     Start the chat listener.
     """
     bot_listener = Listener()
+    logger.debug("👂 bot_listener: %s", bot_listener)
     task = asyncio.create_task(bot_listener.run_forever(max_iterations))
     return bot_listener, task
 
@@ -47,11 +48,13 @@ async def start_bot():
     """
     listener, listener_task = await start_listener()
     plugin_manager = PluginManager()
+    logger.debug("plugin_manager: %s", plugin_manager)
     await start_plugins(plugin_manager)
 
     while True:
         try:
             msg = await listener.get_latest_message()
+            logger.debug("👂 msg: %s", msg)
             if msg and settings.plugin_enabled:
                 await plugin_manager.process_message(msg)
         except Exception as error:

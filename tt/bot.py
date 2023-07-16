@@ -20,7 +20,6 @@ async def start_bot_task():
     event_loop = asyncio.get_event_loop()
     event_loop.create_task(start_bot())
 
-
 @app.get("/")
 async def root():
     """fastapi root"""
