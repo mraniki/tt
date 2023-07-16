@@ -22,10 +22,9 @@ async def send_notification(msg):
         aobj.add(settings.apprise_url)
     await aobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
 
-
-async def listener():
+async def start_listener():
     """
-    👂 Chat Listener via iamlistening 
+    Start the chat listener.
     """
     bot_listener = Listener()
     task = asyncio.create_task(bot_listener.run_forever())
@@ -34,10 +33,16 @@ async def listener():
         plugin_manager.load_plugins()
         loop = asyncio.get_running_loop()
         loop.create_task(plugin_manager.start_all_plugins())
+    await handle_messages(bot_listener, plugin_manager)
+    await task
 
+async def handle_messages(listener, plugin_manager):
+    """
+    Handle incoming messages from the listener.
+    """
     while True:
         try:
-            msg = await bot_listener.get_latest_message()
+            msg = await listener.get_latest_message()
             print(msg)
             if msg:
                 if settings.plugin_enabled:
@@ -51,4 +56,3 @@ async def listener():
                                 plugin_error)
         except Exception as error:
             logger.error("👂 listener: %s", error)
-    await task

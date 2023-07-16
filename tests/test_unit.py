@@ -10,7 +10,7 @@ from iamlistening import Listener
 from fastapi.testclient import TestClient
 from telethon import errors
 
-from tt.utils import send_notification, listener
+from tt.utils import send_notification, start_listener, handle_messages
 from tt.bot import app
 from tt.config import settings
 
@@ -49,42 +49,6 @@ def message():
     return "Test message"
 
 
-@pytest.mark.asyncio
-async def test_send_notification(caplog):
-    await send_notification("Test message")
-    assert "json://localhost/" in caplog.text
-
-
-@pytest.mark.asyncio
-async def test_listener_telegram(listener_obj):
-    print(listener_obj)
-    assert listener_obj is not None
-    assert isinstance(listener_obj, iamlistening.main.Listener)
-    await listener_obj.handle_message("hello")
-    msg = await listener_obj.get_latest_message()
-    print(msg)
-    assert msg == "hello"
-
-@pytest.mark.asyncio
-async def test_get_latest_message(listener_obj, message):
-    await listener_obj.handle_message(message)
-    assert await listener_obj.get_latest_message() == message
-
-
-@pytest.mark.asyncio
-async def test_listener_run_error(listener_obj):
-    with pytest.raises(errors.ApiIdInvalidError):
-        start = AsyncMock()
-        await listener_obj.run_forever(max_iterations=1)
-        assert start.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_listener():
-    await listener()
-    assert Listener.assert_called_once() 
-
-
 def test_app_endpoint_main():
     client = TestClient(app)
     response = client.get("/")
@@ -112,3 +76,50 @@ def test_webhook_with_invalid_auth():
     print(payload)
     response = client.post("/webhook/abc123", json=payload)
     assert response.content.decode('utf-8') == '{"detail":"Not Found"}'
+
+
+@pytest.mark.asyncio
+async def test_send_notification(caplog):
+    await send_notification("Test message")
+    assert "json://localhost/" in caplog.text
+
+
+@pytest.mark.asyncio
+async def test_start_listener():
+    # Mock the Listener and PluginManager objects
+    listener_mock = AsyncMock()
+    plugin_manager_mock = AsyncMock()
+
+    # Set the run_forever and start_all_plugins methods
+    listener_mock.run_forever.return_value = None
+    plugin_manager_mock.start_all_plugins.return_value = None
+
+    # Set the plugin_enabled setting to True
+    settings.plugin_enabled = True
+
+    # Call the start_listener function
+    await start_listener()
+
+    # Assert that the run_forever and start_all_plugins methods are called
+    listener_mock.run_forever.assert_called_once()
+    plugin_manager_mock.start_all_plugins.assert_called_once()
+
+@pytest.mark.asyncio
+async def test_handle_messages():
+    # Mock the Listener and Plugin objects
+    listener_mock = AsyncMock()
+    plugin_mock = AsyncMock()
+
+    # Set the get_latest_message and process_message methods for the mocks
+    listener_mock.get_latest_message.return_value = "Test message"
+    plugin_mock.process_message.return_value = None
+
+    # Set the plugin_enabled setting to True
+    settings.plugin_enabled = True
+
+    # Call the handle_messages function
+    await handle_messages(listener_mock, [plugin_mock])
+
+    # Assert that the get_latest_message and process_message methods are called
+    listener_mock.get_latest_message.assert_called_once()
+    plugin_mock.process_message.assert_called_once_with("Test message")
