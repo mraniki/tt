@@ -1,7 +1,7 @@
 """
  talky Utils
 """
-__version__ = "3.11.3"
+__version__ = "3.11.4"
 
 import asyncio
 from apprise import Apprise, NotifyFormat

@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.11.4 (2023-07-16)
+
+### Fix
+
+* ⬆️ 🤖(deps): update dependency uvicorn to ^0.23.0 ([`2556fe9`](https://github.com/mraniki/tt/commit/2556fe946bfdaaf1d1edefea08773bea2e34d691))
+
 ## v3.11.3 (2023-07-15)
 
 ### Fix
