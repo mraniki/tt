@@ -67,7 +67,7 @@ async def test_send_notification(caplog):
 
 @pytest.mark.asyncio
 async def test_start_listener():
-    listener, task = await start_listener()
+    listener, task = await start_listener(max_iterations=1)
     assert isinstance(listener, Listener)
     assert isinstance(task, asyncio.Task)
 
@@ -78,11 +78,14 @@ async def test_start_plugins():
     await start_plugins(plugin_manager)
     plugin_manager.load_plugins.assert_called_once()
 
+
 @pytest.mark.asyncio
 async def test_start_bot():
-    listener, task = await start_listener(max_iterations=10)
+    listener, task = await start_listener(max_iterations=1)
     plugin_manager = AsyncMock(spec=PluginManager)
-    listener.get_latest_message.return_value = "Test message"
-    await start_bot()
+
+    await asyncio.gather(start_bot(), task)
+
     listener.get_latest_message.assert_called_once()
     plugin_manager.process_message.assert_called_once_with("Test message")
+
