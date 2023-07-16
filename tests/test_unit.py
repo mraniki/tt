@@ -40,7 +40,7 @@ def wrong_order():
     }
 
 
-@pytest.fixture(name="listener")
+@pytest.fixture(name="listener_obj")
 def listener_test():
     return Listener()
 
@@ -48,28 +48,41 @@ def listener_test():
 def message():
     return "Test message"
 
+
 @pytest.mark.asyncio
-async def test_listener_telegram(listener):
-    print(listener)
-    assert listener is not None
-    assert isinstance(listener, iamlistening.main.Listener)
-    await listener.handle_message("hello")
-    msg = await listener.get_latest_message()
+async def test_send_notification(caplog):
+    await send_notification("Test message")
+    assert "json://localhost/" in caplog.text
+
+
+@pytest.mark.asyncio
+async def test_listener_telegram(listener_obj):
+    print(listener_obj)
+    assert listener_obj is not None
+    assert isinstance(listener_obj, iamlistening.main.Listener)
+    await listener_obj.handle_message("hello")
+    msg = await listener_obj.get_latest_message()
     print(msg)
     assert msg == "hello"
 
 @pytest.mark.asyncio
-async def test_get_latest_message(listener, message):
-    await listener.handle_message(message)
-    assert await listener.get_latest_message() == message
+async def test_get_latest_message(listener_obj, message):
+    await listener_obj.handle_message(message)
+    assert await listener_obj.get_latest_message() == message
 
 
 @pytest.mark.asyncio
-async def test_listener_run_error(listener):
+async def test_listener_run_error(listener_obj):
     with pytest.raises(errors.ApiIdInvalidError):
         start = AsyncMock()
-        await listener.run_forever(max_iterations=1)
+        await listener_obj.run_forever(max_iterations=1)
         assert start.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_listener():
+    await listener()
+    assert Listener.assert_called_once() 
 
 
 def test_app_endpoint_main():
@@ -99,9 +112,3 @@ def test_webhook_with_invalid_auth():
     print(payload)
     response = client.post("/webhook/abc123", json=payload)
     assert response.content.decode('utf-8') == '{"detail":"Not Found"}'
-
-
-@pytest.mark.asyncio
-async def test_send_notification(caplog):
-    await send_notification("Test message")
-    assert "json://localhost/" in caplog.text
