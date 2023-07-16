@@ -50,7 +50,6 @@ async def start_bot(listener, plugin_manager):
     while True:
         try:
             msg = await listener.get_latest_message()
-            logger.debug("👂 msg: %s", msg)
             if msg and settings.plugin_enabled:
                 await plugin_manager.process_message(msg)
         except Exception as error:
@@ -63,5 +62,4 @@ async def run_bot(max_iterations=None):
     listener, task = await start_listener(max_iterations)
     plugin_manager = PluginManager()
     await start_plugins(plugin_manager)
-
     await asyncio.gather(start_bot(listener, plugin_manager), task)
