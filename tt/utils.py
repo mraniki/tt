@@ -34,6 +34,7 @@ async def start_listener(max_iterations=None):
     task = asyncio.create_task(bot_listener.run_forever(max_iterations))
     return bot_listener, task
 
+
 async def start_plugins(plugin_manager):
     """
     Start all plugins.
@@ -42,6 +43,7 @@ async def start_plugins(plugin_manager):
         plugin_manager.load_plugins()
         loop = asyncio.get_running_loop()
         loop.create_task(plugin_manager.start_all_plugins())
+
 
 async def start_bot(listener, plugin_manager):
     """
