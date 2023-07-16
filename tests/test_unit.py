@@ -103,6 +103,12 @@ async def test_send_notification(caplog):
 
 @pytest.mark.asyncio
 async def test_listener():
-    get_latest_message = AsyncMock()
-    await listener()
-    get_latest_message.assert_awaited_once 
+    mock_listener = AsyncMock()
+    mock_listener.run_forever = AsyncMock()
+    mock_listener.get_latest_message = AsyncMock(return_value="example message")
+
+    with patch("listener.Listener", return_value=mock_listener):
+        await listener()
+
+    mock_listener.run_forever.assert_called_once()
+    mock_listener.get_latest_message.assert_called_once()
