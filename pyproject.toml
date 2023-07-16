@@ -44,7 +44,7 @@ schedule = "^1.2.0"
 ccxt = "^4.0.0"
 dxsp = "^4.0.0"
 findmyorder = "^1.6.0"
-iamlistening = "^1.0.1"
+iamlistening = "^1.0.2"
 talkytrend = "^1.8.1"
 
 [tool.poetry.group.dev.dependencies]

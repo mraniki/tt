@@ -2,13 +2,13 @@
  TT test
 """
 
-import asyncio
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock
 import pytest
 
 import iamlistening
 from iamlistening import Listener
 from fastapi.testclient import TestClient
+from telethon import errors
 
 from tt.utils import send_notification, listener
 from tt.bot import app
@@ -40,7 +40,7 @@ def wrong_order():
     }
 
 
-@pytest.fixture(name="frasier")
+@pytest.fixture(name="listener")
 def listener_test():
     return Listener()
 
@@ -49,21 +49,27 @@ def message():
     return "Test message"
 
 @pytest.mark.asyncio
-async def test_listener_telegram():
-    listener_test = Listener()
-    print(listener_test)
-    assert listener_test is not None
-    assert isinstance(listener_test, iamlistening.main.Listener)
-    await listener_test.handle_message("hello")
-    msg = await listener_test.get_latest_message()
+async def test_listener_telegram(listener):
+    print(listener)
+    assert listener is not None
+    assert isinstance(listener, iamlistening.main.Listener)
+    await listener.handle_message("hello")
+    msg = await listener.get_latest_message()
     print(msg)
     assert msg == "hello"
 
-
 @pytest.mark.asyncio
 async def test_get_latest_message(frasier, message):
-    await frasier.handle_message(message)
-    assert await frasier.get_latest_message() == message
+    await listener.handle_message(message)
+    assert await listener.get_latest_message() == message
+
+
+@pytest.mark.asyncio
+async def test_listener_run_error(listener):
+    with pytest.raises(errors.ApiIdInvalidError):
+        start = AsyncMock()
+        await listener.run_forever(max_iterations=1)
+        assert start.assert_awaited_once()
 
 
 def test_app_endpoint_main():
@@ -99,16 +105,3 @@ def test_webhook_with_invalid_auth():
 async def test_send_notification(caplog):
     await send_notification("Test message")
     assert "json://localhost/" in caplog.text
-
-
-@pytest.mark.asyncio
-async def test_listener():
-    mock_listener = AsyncMock()
-    mock_listener.run_forever = AsyncMock()
-    mock_listener.get_latest_message = AsyncMock(return_value="example message")
-
-    with patch("tt.utils.listener", return_value=mock_listener):
-        await listener()
-
-    mock_listener.run_forever.assert_called_once()
-    mock_listener.get_latest_message.assert_called_once()
