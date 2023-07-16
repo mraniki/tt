@@ -9,7 +9,7 @@ import uvicorn
 from fastapi import FastAPI, Request
 
 from tt.config import settings
-from tt.utils import listener, send_notification, __version__
+from tt.utils import start_listener, send_notification, __version__
 
 app = FastAPI(title="TALKYTRADER")
 
@@ -18,7 +18,7 @@ app = FastAPI(title="TALKYTRADER")
 async def start_bot():
     """⛓️🤖🙊BOT"""
     event_loop = asyncio.get_event_loop()
-    event_loop.create_task(listener())
+    event_loop.create_task(start_listener())
 
 
 @app.get("/")
