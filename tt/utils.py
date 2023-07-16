@@ -50,6 +50,7 @@ async def start_bot(listener, plugin_manager):
     while True:
         try:
             msg = await listener.get_latest_message()
+            logger.error("👂 msg: %s", msg)
             if msg and settings.plugin_enabled:
                 await plugin_manager.process_message(msg)
         except Exception as error:
