@@ -84,8 +84,7 @@ async def test_start_bot():
     listener, task = await start_listener(max_iterations=1)
     plugin_manager = AsyncMock(spec=PluginManager)
 
-    await asyncio.gather(start_bot(), task)
+    await asyncio.gather(start_bot(), asyncio.sleep(0.1))
 
     listener.get_latest_message.assert_called_once()
     plugin_manager.process_message.assert_called_once_with("Test message")
-
