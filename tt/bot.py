@@ -28,15 +28,13 @@ async def root():
 
 @app.get("/health")
 async def health_check():
-    """fastapi health"""
+    """ health check"""
     return __version__
 
 
 @app.post(f"/webhook/{settings.webhook_secret}", status_code=202)
 async def webhook(request: Request):
-    """
-    FastAPI '/webhook' endpoint.
-    """
+    """ webhook endpoint """
     data = await request.body()
     await send_notification(data)
     return {"status": "OK"}

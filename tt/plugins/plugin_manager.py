@@ -1,10 +1,10 @@
 import asyncio
+import httpimport
 import importlib
 import pkgutil
 import schedule
 from tt.config import settings, logger
 
-  
 
 class PluginManager:
     """🔌 Plugin Manager for loading plugins """
@@ -24,6 +24,20 @@ class PluginManager:
                 self.load_plugin(module, plugin_name)
             except Exception as e:
                 logger.warning("Error loading plugin %s: %s", plugin_name, e)
+        # if settings.user_plugins_allowed:
+        #     with httpimport.github_repo('mraniki', 'tt_plugins', ref='main'):
+        #         from user_plugins import example_user_plugin
+        #         user_package = importlib.import_module(example_user_plugin)
+        #         logger.debug("Loading plugins from: %s", user_package)
+        #         for _, plugin_name, _ in pkgutil.iter_modules(user_package.__path__):
+        #             try:
+        #                 module = importlib.import_module(
+        #                     f"{example_user_plugin.__name__}.{plugin_name}")
+        #                 logger.debug("Module loaded: %s", module)
+        #                 self.load_plugin(module, plugin_name)
+        #             except Exception as e:
+        #                 logger.warning("Error loading user plugin %s: %s", plugin_name, e)
+
 
     def load_plugin(self, module, plugin_name):
         """ Load a plugin from a module """
@@ -55,6 +69,7 @@ class PluginManager:
 
                 logger.error("process %s: %s", plugin, error)
                 continue
+
 
 
 class BasePlugin:

@@ -43,9 +43,6 @@ async def start_plugins(plugin_manager):
         plugin_manager.load_plugins()
         loop = asyncio.get_running_loop()
         loop.create_task(plugin_manager.start_all_plugins())
-    # if settings.user_plugins_allowed:
-    #     with httpimport.github_repo('mraniki', 'tt_plugins', ref='main'):
-    #         import tt_plugins as tt_user_plugins
 
 async def start_bot(listener, plugin_manager):
     """
