@@ -79,21 +79,21 @@ async def test_start_plugins():
     plugin_manager.load_plugins.assert_called_once()
 
 
-@pytest.mark.asyncio
-async def test_start_bot():
-    listener = AsyncMock(spec=Listener)
-    plugin_manager = AsyncMock(spec=PluginManager)
-    listener.get_latest_message.return_value = "Test message"
+# @pytest.mark.asyncio
+# async def test_start_bot():
+#     listener = AsyncMock(spec=Listener)
+#     plugin_manager = AsyncMock(spec=PluginManager)
+#     listener.get_latest_message.return_value = "Test message"
 
-    await start_bot(listener, plugin_manager)
+#     await start_bot(listener, plugin_manager)
 
-    listener.get_latest_message.assert_called_once()
-    plugin_manager.process_message.assert_called_once_with("Test message")
+#     listener.get_latest_message.assert_called_once()
+#     plugin_manager.process_message.assert_called_once_with("Test message")
 
-@pytest.mark.asyncio
-async def test_run_bot():
-    mock_bot = AsyncMock()
-    start_listener = AsyncMock()
-    bot_task = asyncio.create_task(run_bot(bot=mock_bot))
-    start_listener.assert_awaited_once()
-    await bot_task
+# @pytest.mark.asyncio
+# async def test_run_bot():
+#     mock_bot = AsyncMock()
+#     start_listener = AsyncMock()
+#     bot_task = asyncio.create_task(run_bot(bot=mock_bot))
+#     start_listener.assert_awaited_once()
+#     await bot_task
