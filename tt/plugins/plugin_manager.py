@@ -45,10 +45,21 @@ class PluginManager:
         await plugin.start()
 
     async def process_message(self, message):
-        """ Process message from the plugin """
+        """ Send message to plugins """
         for plugin in self.plugins:
-            if plugin.should_handle(message):
-                await plugin.handle_message(message)
+            try:
+                if plugin.should_handle(message):
+                    await plugin.handle_message(message)
+            except Exception as e:
+
+                logger.error("process %s: %s", plugin_name, error)
+                continue
+
+    # async def process_message(self, message):
+    #     """ Process message from the plugin """
+    #     for plugin in self.plugins:
+    #         if plugin.should_handle(message):
+    #             await plugin.handle_message(message)
 
 
 class BasePlugin:
