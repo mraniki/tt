@@ -56,21 +56,6 @@ pytest-cov = "^4.1"
 pytest-asyncio = "^0.21.0"
 pytest-mock = "^3.11.1"
 
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-sphinx = "^7.0.0"
-sphinx_bootstrap_theme = "^0.8.1"
-sphinx-autoapi = "^2.1.1"
-sphinx-copybutton= "^0.5.2"
-myst-parser = "^2.0.0"
-sphinx-notfound-page = "^0.8.3"
-#seed_intersphinx_mapping = "^1.2.1"
-# sphinx_inline_tabs= "^2023.4.21"
-# sphinx-reredirects = "*"
-# sphinx_design = "*"
-
 [tool.pytest.ini_options]
 pythonpath = ". tt"
 testpaths = "tests"
@@ -87,6 +72,28 @@ omit = [
     "examples/*",
     "docs/*",
     "*/config.py"
+]
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.0.0"
+sphinx_bootstrap_theme = "^0.8.1"
+sphinx-autoapi = "^2.1.1"
+sphinx-copybutton= "^0.5.2"
+myst-parser = "^2.0.0"
+sphinx-notfound-page = "^0.8.3"
+#seed_intersphinx_mapping = "^1.2.1"
+# sphinx_inline_tabs= "^2023.4.21"
+# sphinx-reredirects = "*"
+# sphinx_design = "*"
+
+[tool.pylint.exceptions]
+overgeneral-exceptions = [
+    "builtins.BaseException",
+    "builtins.Exception",
+    "builtins.RuntimeError",
 ]
 
 [tool.semantic_release]

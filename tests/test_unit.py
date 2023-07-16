@@ -2,7 +2,7 @@
  TT test
 """
 
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, patch
 import pytest
 import asyncio
 
@@ -72,19 +72,22 @@ async def test_start_listener():
     assert isinstance(task, asyncio.Task)
 
 
-# @pytest.mark.asyncio
-# async def test_start_plugins():
-#     plugin_manager = AsyncMock(spec=PluginManager)
-#     await start_plugins(plugin_manager)
-#     plugin_manager.load_plugins.assert_called_once()
+@pytest.mark.asyncio
+async def test_start_plugins():
+    plugin_manager = AsyncMock(spec=PluginManager)
+    await start_plugins(plugin_manager)
+    plugin_manager.load_plugins.assert_called_once()
 
 
 @pytest.mark.asyncio
 async def test_start_bot():
-    listener, task = await start_listener(max_iterations=1)
-    plugin_manager = AsyncMock(spec=PluginManager)
+    get_latest_message = AsyncMock(return_value="Test message")
+    listener, listener_task = await start_listener(max_iterations=1)
+    plugin_manager = PluginManager()
+    await start_plugins(plugin_manager)
+    msg = await listener.get_latest_message()
+    await plugin_manager.process_message(msg)
 
-    await asyncio.gather(start_bot(), asyncio.sleep(0.1))
-
-    listener.get_latest_message.assert_called_once()
+    get_latest_message.assert_called_once()
+    assert msg == "Test message"
     plugin_manager.process_message.assert_called_once_with("Test message")
