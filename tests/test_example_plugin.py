@@ -30,7 +30,7 @@ async def test_plugin_manager():
 @pytest.mark.asyncio
 async def test_load_one_plugin():
     plugin_module = importlib.import_module(
-        'tt.plugins.default_plugins.example_plugin.example_plugin')
+        'tt.plugins.default_plugins.example_plugin')
     plugin_manager = PluginManager()
     assert plugin_manager is not None
     plugin_manager.load_plugin(plugin_module,'example_plugin')
@@ -54,7 +54,7 @@ async def test_load_plugins(caplog):
 @pytest.mark.asyncio
 async def test_start_plugin(caplog):
     plugin_module = importlib.import_module(
-        'tt.plugins.default_plugins.example_plugin.example_plugin')
+        'tt.plugins.default_plugins.example_plugin')
     plugin_manager = PluginManager()
     print(plugin_manager)
     assert plugin_manager is not None
