@@ -5,7 +5,6 @@
 from unittest.mock import AsyncMock
 import pytest
 
-import iamlistening
 from iamlistening import Listener
 from fastapi.testclient import TestClient
 from telethon import errors
@@ -18,26 +17,6 @@ from tt.config import settings
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
-
-
-@pytest.fixture(name="order")
-def order_params():
-    """Return order parameters."""
-    return {
-        'action': 'BUY',
-        'instrument': 'WBTC',
-        'quantity': 1,
-    }
-
-
-@pytest.fixture(name="wrong_order")
-def wrong_order():
-    """Return order parameters."""
-    return {
-        'action': 'BUY',
-        'instrument': 'NOTATHING',
-        'quantity': 1,
-    }
 
 
 @pytest.fixture(name="listener_obj")
@@ -94,9 +73,6 @@ async def test_start_listener():
     listener_mock.run_forever.return_value = None
     plugin_manager_mock.start_all_plugins.return_value = None
 
-    # Set the plugin_enabled setting to True
-    settings.plugin_enabled = True
-
     # Call the start_listener function
     await start_listener()
 
@@ -114,12 +90,18 @@ async def test_handle_messages():
     listener_mock.get_latest_message.return_value = "Test message"
     plugin_mock.process_message.return_value = None
 
-    # Set the plugin_enabled setting to True
-    settings.plugin_enabled = True
-
     # Call the handle_messages function
     await handle_messages(listener_mock, [plugin_mock])
 
     # Assert that the get_latest_message and process_message methods are called
     listener_mock.get_latest_message.assert_called_once()
     plugin_mock.process_message.assert_called_once_with("Test message")
+
+
+@pytest.mark.asyncio
+async def test_listener_run_error():
+    with pytest.raises(errors.ApiIdInvalidError):
+        start = AsyncMock()
+        listener_test = Listener()
+        await listener_test.run_forever(max_iterations=1)
+        assert start.assert_awaited_once()
