@@ -51,6 +51,7 @@ class PluginManager:
         """ Process message from the plugin """
         logger.debug("message being process by plugin %s", message)
         for plugin in self.plugins:
+            logger.debug("process_message plugin: %s", plugin)
             if plugin.should_handle(message):
                 await plugin.handle_message(message)
 
