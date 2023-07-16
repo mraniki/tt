@@ -4,14 +4,16 @@
 
 from unittest.mock import AsyncMock
 import pytest
+import asyncio
 
 from iamlistening import Listener
 from fastapi.testclient import TestClient
-from telethon import errors
 
-from tt.utils import send_notification, start_listener, handle_messages
-from tt.bot import app
 from tt.config import settings
+from tt.bot import app
+from tt.utils import send_notification, start_bot, start_listener, start_plugins
+from tt.plugins.plugin_manager import PluginManager
+
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -65,6 +67,22 @@ async def test_send_notification(caplog):
 
 @pytest.mark.asyncio
 async def test_start_listener():
-    run_forever = AsyncMock(max_iterations=1)
-    await start_listener()
-    assert run_forever.assert_called_once()
+    listener, task = await start_listener()
+    assert isinstance(listener, Listener)
+    assert isinstance(task, asyncio.Task)
+
+
+@pytest.mark.asyncio
+async def test_start_plugins():
+    plugin_manager = AsyncMock(spec=PluginManager)
+    await start_plugins(plugin_manager)
+    plugin_manager.load_plugins.assert_called_once()
+
+@pytest.mark.asyncio
+async def test_start_bot():
+    listener, task = await start_listener(max_iterations=10)
+    plugin_manager = AsyncMock(spec=PluginManager)
+    listener.get_latest_message.return_value = "Test message"
+    await start_bot()
+    listener.get_latest_message.assert_called_once()
+    plugin_manager.process_message.assert_called_once_with("Test message")

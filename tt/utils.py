@@ -22,37 +22,41 @@ async def send_notification(msg):
         aobj.add(settings.apprise_url)
     await aobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
 
-async def start_listener():
+async def start_listener(max_iterations=None):
     """
     Start the chat listener.
     """
     bot_listener = Listener()
-    task = asyncio.create_task(bot_listener.run_forever())
+    task = asyncio.create_task(bot_listener.run_forever(max_iterations))
+    return bot_listener, task
+
+
+async def start_plugins(plugin_manager):
+    """
+    Start all plugins.
+    """
     if settings.plugin_enabled:
-        plugin_manager = PluginManager()
         plugin_manager.load_plugins()
         loop = asyncio.get_running_loop()
         loop.create_task(plugin_manager.start_all_plugins())
-    await handle_messages(bot_listener, plugin_manager)
-    await task
 
-async def handle_messages(listener, plugin_manager):
+
+async def start_bot():
     """
-    Handle incoming messages from the listener.
+    Start the chat listener and plugins.
     """
+    listener, listener_task = await start_listener()
+    plugin_manager = PluginManager()
+    await start_plugins(plugin_manager)
+
     while True:
         try:
             msg = await listener.get_latest_message()
-            print(msg)
-            if msg:
-                if settings.plugin_enabled:
-                    for plugin in plugin_manager.plugins:
-                        try:
-                            await plugin.process_message(msg)
-                        except Exception as plugin_error:
-                            logger.error(
-                                "Error processing message with plugin %s: %s",
-                                plugin,
-                                plugin_error)
+            if msg and settings.plugin_enabled:
+                await plugin_manager.process_message(msg)
         except Exception as error:
             logger.error("👂 listener: %s", error)
+
+        await asyncio.sleep(1)
+
+    await listener_task

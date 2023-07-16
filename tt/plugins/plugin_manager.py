@@ -30,7 +30,7 @@ class PluginManager:
                 await self.start_plugin(plugin)
         except Exception as error:
             logger.error("Error starting plugins: %s", error)
-
+ 
     def load_plugin(self, module, plugin_name):
         """ Load a plugin from a module """
         for name, obj in module.__dict__.items():
