@@ -14,14 +14,26 @@ class PluginManager:
     def load_plugins(self):
         """ Load plugins from the specified directory """
         logger.info("Loading plugins from directory: %s", self.plugin_directory)
-
-        for _, plugin_name, _ in pkgutil.iter_modules([self.plugin_directory]):
+        logger.debug("Plugin directory: %s", self.plugin_directory)
+        for plugin_name in pkgutil.iter_modules(path=[self.plugin_directory]):
+            logger.debug("plugin_name: %s", plugin_name)
             try:
                 module = importlib.import_module(f"{plugin_name}")
                 logger.info("Module loaded: %s", module)
                 self.load_plugin(module, plugin_name)
             except Exception as e:
                 logger.warning("Error loading plugin %s: %s", plugin_name, e)
+
+    def load_plugin(self, module, plugin_name):
+        """ Load a plugin from a module """
+        logger.debug("plugin_name: %s", plugin_name)
+        for name, obj in module.__dict__.items():
+            if (isinstance(obj, type)
+                    and issubclass(obj, BasePlugin)
+                    and obj is not BasePlugin):
+                plugin_instance = obj()
+                self.plugins.append(plugin_instance)
+                logger.info("Plugin loaded: %s", plugin_name)
 
     async def start_all_plugins(self):
         """ Start all plugins """
@@ -31,22 +43,13 @@ class PluginManager:
         except Exception as error:
             logger.error("Error starting plugins: %s", error)
  
-    def load_plugin(self, module, plugin_name):
-        """ Load a plugin from a module """
-        for name, obj in module.__dict__.items():
-            if (isinstance(obj, type)
-                    and issubclass(obj, BasePlugin)
-                    and obj is not BasePlugin):
-                plugin_instance = obj()
-                self.plugins.append(plugin_instance)
-                logger.info("Plugin loaded: %s", plugin_name)
-
     async def start_plugin(self, plugin):
         """ Start a plugin """
         await plugin.start()
 
     async def process_message(self, message):
         """ Process message from the plugin """
+        self.logger.debug("message being process by plugin %s", message)
         for plugin in self.plugins:
             if plugin.should_handle(message):
                 await plugin.handle_message(message)
