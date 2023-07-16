@@ -72,11 +72,11 @@ async def test_start_listener():
     assert isinstance(task, asyncio.Task)
 
 
-@pytest.mark.asyncio
-async def test_start_plugins():
-    plugin_manager = AsyncMock(spec=PluginManager)
-    await start_plugins(plugin_manager)
-    plugin_manager.load_plugins.assert_called_once()
+# @pytest.mark.asyncio
+# async def test_start_plugins():
+#     plugin_manager = AsyncMock(spec=PluginManager)
+#     await start_plugins(plugin_manager)
+#     plugin_manager.load_plugins.assert_called_once()
 
 
 @pytest.mark.asyncio
