@@ -49,7 +49,7 @@ class PluginManager:
 
     async def process_message(self, message):
         """ Process message from the plugin """
-        self.logger.debug("message being process by plugin %s", message)
+        logger.debug("message being process by plugin %s", message)
         for plugin in self.plugins:
             if plugin.should_handle(message):
                 await plugin.handle_message(message)
@@ -75,15 +75,15 @@ class BasePlugin:
     async def handle_message(self, msg):
         pass
 
-    def schedule_example(self, function):
+    def schedule_at_time(self, function):
         # Define the schedule example task
         schedule.every().day.at("10:00").do(function)
 
-    def schedule_example_hourly(self, function):
+    def schedule_hourly(self, function):
         # Define the schedule example hourly task
         schedule.every().hour.do(function)
 
-    def schedule_example_every_8_hours(self, function):
+    def schedule_every_8_hours(self, function):
         # Define the schedule example every 8 hours task
         schedule.every(8).hours.do(function)
 
