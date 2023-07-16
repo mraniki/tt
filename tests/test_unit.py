@@ -59,7 +59,7 @@ async def test_listener_telegram(listener):
     assert msg == "hello"
 
 @pytest.mark.asyncio
-async def test_get_latest_message(frasier, message):
+async def test_get_latest_message(listener, message):
     await listener.handle_message(message)
     assert await listener.get_latest_message() == message
 
