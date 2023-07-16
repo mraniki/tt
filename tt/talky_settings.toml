@@ -59,7 +59,7 @@ bot_command_news = "live"
 
 # HELPER #########
 helper_enabled = true
-bot_msg_help = "🏦<code>/bal</code> 🎯<code>buy BTCUSDT</code> 🏷️<code>/q BTCB</code> 🔀<code>/trading</code>"
+bot_msg_help = "🏦<code>/bal</code>\n🎯<code>buy BTCUSDT</code>\n🏷️<code>/q BTCB</code>\n🔀<code>/trading</code>"
 ping = "8.8.8.8"
 reporting_enabled = false
 
