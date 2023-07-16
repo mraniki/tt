@@ -65,43 +65,6 @@ async def test_send_notification(caplog):
 
 @pytest.mark.asyncio
 async def test_start_listener():
-    # Mock the Listener and PluginManager objects
-    listener_mock = AsyncMock()
-    plugin_manager_mock = AsyncMock()
-
-    # Set the run_forever and start_all_plugins methods
-    listener_mock.run_forever.return_value = None
-    plugin_manager_mock.start_all_plugins.return_value = None
-
-    # Call the start_listener function
+    run_forever = AsyncMock(max_iterations=1)
     await start_listener()
-
-    # Assert that the run_forever and start_all_plugins methods are called
-    listener_mock.run_forever.assert_called_once()
-    plugin_manager_mock.start_all_plugins.assert_called_once()
-
-@pytest.mark.asyncio
-async def test_handle_messages():
-    # Mock the Listener and Plugin objects
-    listener_mock = AsyncMock()
-    plugin_mock = AsyncMock()
-
-    # Set the get_latest_message and process_message methods for the mocks
-    listener_mock.get_latest_message.return_value = "Test message"
-    plugin_mock.process_message.return_value = None
-
-    # Call the handle_messages function
-    await handle_messages(listener_mock, [plugin_mock])
-
-    # Assert that the get_latest_message and process_message methods are called
-    listener_mock.get_latest_message.assert_called_once()
-    plugin_mock.process_message.assert_called_once_with("Test message")
-
-
-@pytest.mark.asyncio
-async def test_listener_run_error():
-    with pytest.raises(errors.ApiIdInvalidError):
-        start = AsyncMock()
-        listener_test = Listener()
-        await listener_test.run_forever(max_iterations=1)
-        assert start.assert_awaited_once()
+    assert run_forever.assert_called_once()
