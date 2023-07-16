@@ -5,9 +5,11 @@ __version__ = "3.11.4"
 
 import asyncio
 from apprise import Apprise, NotifyFormat
-from iamlistening import Listener
 from tt.config import settings, logger
 from tt.plugins.plugin_manager import PluginManager
+from iamlistening import Listener
+
+
 
 async def send_notification(msg):
     """
@@ -22,6 +24,7 @@ async def send_notification(msg):
         aobj.add(settings.apprise_url)
     await aobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
 
+
 async def start_listener(max_iterations=None):
     """
     Start the chat listener.
@@ -30,7 +33,6 @@ async def start_listener(max_iterations=None):
     logger.debug("👂 bot_listener: %s", bot_listener)
     task = asyncio.create_task(bot_listener.run_forever(max_iterations))
     return bot_listener, task
-
 
 async def start_plugins(plugin_manager):
     """
@@ -41,20 +43,13 @@ async def start_plugins(plugin_manager):
         loop = asyncio.get_running_loop()
         loop.create_task(plugin_manager.start_all_plugins())
 
-
-async def start_bot():
+async def start_bot(listener, plugin_manager):
     """
-    Start the chat listener and plugins.
+    Start the chat bot.
     """
-    listener, listener_task = await start_listener()
-    plugin_manager = PluginManager()
-    logger.debug("plugin_manager: %s", plugin_manager)
-    await start_plugins(plugin_manager)
-
     while True:
         try:
             msg = await listener.get_latest_message()
-            logger.debug("👂 msg: %s", msg)
             if msg and settings.plugin_enabled:
                 await plugin_manager.process_message(msg)
         except Exception as error:
@@ -62,4 +57,10 @@ async def start_bot():
 
         await asyncio.sleep(1)
 
-    await listener_task
+
+async def run_bot(max_iterations=None):
+    listener, task = await start_listener(max_iterations)
+    plugin_manager = PluginManager()
+    await start_plugins(plugin_manager)
+
+    await asyncio.gather(start_bot(listener, plugin_manager), task)

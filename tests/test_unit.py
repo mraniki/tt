@@ -2,7 +2,7 @@
  TT test
 """
 
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock
 import pytest
 import asyncio
 
@@ -11,7 +11,7 @@ from fastapi.testclient import TestClient
 
 from tt.config import settings
 from tt.bot import app
-from tt.utils import send_notification, start_bot, start_listener, start_plugins
+from tt.utils import send_notification, start_bot, start_listener, start_plugins, run_bot
 from tt.plugins.plugin_manager import PluginManager
 
 
@@ -81,12 +81,19 @@ async def test_start_plugins():
 
 @pytest.mark.asyncio
 async def test_start_bot():
-    start_listener= AsyncMock()
-    plugin_manager = AsyncMock()
-    get_latest_message = AsyncMock(return_value="Test message")
-    await start_bot()
+    listener = AsyncMock(spec=Listener)
+    plugin_manager = AsyncMock(spec=PluginManager)
+    listener.get_latest_message.return_value = "Test message"
 
-    get_latest_message.assert_called_once()
-    start_listener.assert_called_once()
-    get_latest_message.assert_called_once()
+    await start_bot(listener, plugin_manager)
+
+    listener.get_latest_message.assert_called_once()
     plugin_manager.process_message.assert_called_once_with("Test message")
+
+@pytest.mark.asyncio
+async def test_run_bot():
+    mock_bot = AsyncMock()
+    start_listener = AsyncMock()
+    bot_task = asyncio.create_task(run_bot(bot=mock_bot))
+    start_listener.assert_awaited_once()
+    await bot_task
