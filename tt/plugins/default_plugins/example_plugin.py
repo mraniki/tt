@@ -1,7 +1,7 @@
-import asyncio
+
 import os
 from tt.config import logger, settings
-from tt.utils import send_notification, __version__
+from tt.utils import send_notification
 from tt.plugins.plugin_manager import BasePlugin
 
 #from myclass import MyClass

@@ -11,7 +11,7 @@ from fastapi.testclient import TestClient
 
 from tt.config import settings
 from tt.bot import app
-from tt.utils import send_notification, start_bot, start_listener, start_plugins, run_bot
+from tt.utils import send_notification, start_listener, start_plugins, start_bot, run_bot
 from tt.plugins.plugin_manager import PluginManager
 
 

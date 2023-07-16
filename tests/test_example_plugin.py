@@ -4,7 +4,7 @@ import os
 from unittest.mock import AsyncMock
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
-from tt.plugins.default_plugins.example_plugin.example_plugin import ExamplePlugin
+from tt.plugins.default_plugins.example_plugin import ExamplePlugin
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():

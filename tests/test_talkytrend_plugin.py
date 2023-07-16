@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import AsyncMock
 from tt.config import settings
-from tt.plugins.default_plugins.talkytrend_plugin.talkytrend_plugin import TalkyTrendPlugin
+from tt.plugins.default_plugins.talkytrend_plugin import TalkyTrendPlugin
 
 
 @pytest.fixture(scope="session", autouse=True)
