@@ -49,6 +49,25 @@ talkytrend = "^1.8.1"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^7.34.3"
+ruff = "^0.0.278"
+
+[tool.pylint.exceptions]
+overgeneral-exceptions = [
+    "builtins.BaseException",
+    "builtins.Exception",
+    "builtins.RuntimeError",
+]
+
+# [tool.ruff]
+# select = [
+#   "E",  # pycodestyle
+#   "F",  # pyflakes
+#   "I",  # isort
+# ]
+# exclude = [
+#   ".github/*",
+# ]
+
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
@@ -88,13 +107,6 @@ sphinx-notfound-page = "^0.8.3"
 # sphinx_inline_tabs= "^2023.4.21"
 # sphinx-reredirects = "*"
 # sphinx_design = "*"
-
-[tool.pylint.exceptions]
-overgeneral-exceptions = [
-    "builtins.BaseException",
-    "builtins.Exception",
-    "builtins.RuntimeError",
-]
 
 [tool.semantic_release]
 version_variable = ["pyproject.toml:version","tt/utils.py:__version__"]
