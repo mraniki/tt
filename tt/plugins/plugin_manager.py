@@ -50,9 +50,9 @@ class PluginManager:
             try:
                 if plugin.should_handle(message):
                     await plugin.handle_message(message)
-            except Exception as e:
+            except Exception as error:
 
-                logger.error("process %s: %s", plugin_name, error)
+                logger.error("process %s: %s", plugin, error)
                 continue
 
     # async def process_message(self, message):
