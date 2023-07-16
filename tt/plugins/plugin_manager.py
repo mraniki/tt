@@ -6,13 +6,13 @@ import schedule
 
 
 class PluginManager:
-    """🔌 Plugin Manager for dynamically loading plugins """
+    """🔌 Plugin Manager for loading plugins """
     def __init__(self, plugin_directory=None):
         self.plugin_directory = plugin_directory or settings.plugin_directory
         self.plugins = []
 
     def load_plugins(self):
-        """ Load plugins from the specified directory """
+        """ Load plugins from directory """
         package = importlib.import_module(self.plugin_directory)
         logger.debug("Loading plugins from: %s", package)
         for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
@@ -55,12 +55,6 @@ class PluginManager:
                 logger.error("process %s: %s", plugin, error)
                 continue
 
-    # async def process_message(self, message):
-    #     """ Process message from the plugin """
-    #     for plugin in self.plugins:
-    #         if plugin.should_handle(message):
-    #             await plugin.handle_message(message)
-
 
 class BasePlugin:
     """
@@ -83,15 +77,15 @@ class BasePlugin:
         pass
 
     def schedule_at_time(self, function):
-        # Define the schedule example task
-        schedule.every().day.at("10:00").do(function)
+        # Define at specific time schedule
+        schedule.every().day.at("18:00").do(function)
 
     def schedule_hourly(self, function):
-        # Define the schedule example hourly task
+        # Define hourly schedule
         schedule.every().hour.do(function)
 
     def schedule_every_8_hours(self, function):
-        # Define the schedule example every 8 hours task
+        # Define every 8 hours schedule
         schedule.every(8).hours.do(function)
 
     async def run_schedule(self):
