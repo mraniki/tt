@@ -49,7 +49,7 @@ iamlistening = "^1.1.0"
 talkytrend = "^1.8.1"
 
 [tool.poetry.group.dev.dependencies]
-python-semantic-release = "^7.34.3"
+python-semantic-release = "^8.0.0"
 ruff = "^0.0.278"
 
 [tool.pylint.exceptions]
