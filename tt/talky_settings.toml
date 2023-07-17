@@ -145,19 +145,23 @@ bot_command_trend = "trend"
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 ###############################
 ###      TESTING SETTINGS   ###
 ###############################
-
-# Any of those settings are used as part of the testing environment.
-# It can be ignored. If you required to support multiple environments in 
-# your application, you can create a part like this:
-# [mycexconfig1]
-# VALUE = "MYCEX details"
-# [mycexconfig2]
-# VALUE = "MYCEX2 details"
-
-
+# Any of those settings are used 
+# for testing purpose.
+# It can be ignored. 
 [testing]
 VALUE = "On Testing"
 telethon_api_id = "123456789"
