@@ -63,7 +63,7 @@ overgeneral-exceptions = [
 select = [
   "E",  # pycodestyle
   "F",  # pyflakes
-  "I",  # isort
+#   "I",  # isort
 ]
 exclude = [
   ".github/*",

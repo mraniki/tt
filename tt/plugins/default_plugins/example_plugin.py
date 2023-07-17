@@ -19,24 +19,12 @@ class ExamplePlugin(BasePlugin):
         if self.enabled:
             logger.debug("plugin initialized")
             # self.myclass = MyClass()
-        # self.schedule_enabled = settings.example_plugin_schedule_enabled
-        # if self.schedule_enabled:
-        #         self.schedule_manager = ScheduleManager(self)
-        #         self.schedule_manager.schedule_example(
-        #             self.myadhocfunction)
-        #         self.schedule_manager.schedule_example_hourly(
-        #             self.myadhocfunction)
-        #         self.schedule_manager.schedule_example_every_8_hours(
-        #             self.myadhocfunction)
 
     async def start(self):
         """Starts the plugin"""
         logger.debug("plugin started")
         if self.enabled:
             logger.debug("plugin enabled")
-            # if self.schedule_enabled:
-                # Start the schedule manager
-                # asyncio.create_task(self.schedule_manager.run_schedule())
 
     async def stop(self):
         """Stops the plugin"""
@@ -82,19 +70,3 @@ class ExamplePlugin(BasePlugin):
         your functions fro MyClass
         """
         return "this is an example"
-
-
-    # NOT READY
-    # def get_command_mapping(self):
-    #     """
-    #     Returns the command mapping for the plugin.
-
-    #     Override this method to define the command mapping specific to this plugin.
-
-    #     Returns:
-    #         dict: The command mapping.
-    #     """
-    #     return {
-    #         settings.bot_command_custom1: self.custom_function1,
-    #         settings.bot_command_custom2: self.custom_function2,
-    #     }
