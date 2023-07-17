@@ -1,38 +1,59 @@
-###########################################
-###             DEFAULT SETTINGS        ###
-###########################################
+########################################
+###          DEFAULT SETTINGS        ###
+########################################
 # Any of those settings can be overwritten 
 # by the user.
 # To overwrite a setting, create a settings.toml
-# or load the settings from .env file or vars.
-# As an example, to change the port settings:
+# or load the settings from .env file or env vars.
+# As an example, to change the application port:
 # settings.toml
 # [default]
 # port = 8081
-# or via ENVVARS 
+#
+# or via .env 
 # export TT_PORT=8081
 
-[default]
-VALUE = "Production - Default"
-loglevel = "INFO"
 
-# FASTAPI #######
+#################
+##  DYNACONF  ###
+#################
+
+[default]
+# ENV_FOR_DYNACONF=DEFAULT
+
+# settings used to verify 
+# test vs prod
+VALUE = "Production - Default"
+
+###############
+##  PYTHON  ###
+###############
+loglevel = "INFO"
+# TT_LOGLEVEL=INFO
+
+################
+##  FASTAPI  ###
+################
 host = "0.0.0.0"
 port = 8080
 webhook_secret = "123abc"
 
-# APPRISE #######
+################
+##  APPRISE  ###
+################
 apprise_api_endpoint = ""
 apprise_config = ""
 apprise_url = "json://localhost" 
-#tgram://TOKEN/CHAT_ID
+# TT_APPRISE_URL='tgram://TOKEN/CHAT_ID'
 
-# PLUGIN ########
+################
+##  PLUGINS  ###
+################
 plugin_enabled = true
 plugin_directory = "tt.plugins.default_plugins"
 example_plugin_enabled = false
 example_plugin_schedule_enabled = false
-user_plugins_allowed = true
+user_plugins_allowed = false
 
 # IAMLISTENING ##
 iamlistening_enabled = true
