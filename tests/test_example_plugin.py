@@ -1,6 +1,5 @@
 import pytest
 import importlib
-import os
 from unittest.mock import AsyncMock
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
@@ -67,7 +66,8 @@ async def test_start_plugin(caplog):
 @pytest.mark.asyncio
 async def test_plugin(plugin, plugin_manager):
     handle_message = AsyncMock()
-    await plugin_manager.process_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+    await plugin_manager.process_message(
+        f"{settings.bot_prefix}{settings.bot_command_help}")
     assert plugin.should_handle("any message") is True
     handle_message.assert_awaited_once
 
