@@ -25,18 +25,19 @@ class PluginManager:
             except Exception as e:
                 logger.warning("Error loading plugin %s: %s", plugin_name, e)
         # if settings.user_plugins_allowed:
-        #     with httpimport.github_repo('mraniki', 'tt_plugins', ref='main'):
-        #         from user_plugins import example_user_plugin
-        #         user_package = importlib.import_module(example_user_plugin)
+        #     with httpimport.github_repo('mraniki', 'tt_plugins'):
+        #         import user_plugins
+        #         user_package = importlib.import_module(user_plugins)
         #         logger.debug("Loading plugins from: %s", user_package)
-        #         for _, plugin_name, _ in pkgutil.iter_modules(user_package.__path__):
+        #         for _, plugin_name, _ in pkgutil.iter_modules(user_plugins):
         #             try:
         #                 module = importlib.import_module(
-        #                     f"{example_user_plugin.__name__}.{plugin_name}")
+        #                     f"{user_plugins.__name__}.{plugin_name}")
         #                 logger.debug("Module loaded: %s", module)
         #                 self.load_plugin(module, plugin_name)
         #             except Exception as e:
-        #                 logger.warning("Error loading user plugin %s: %s", plugin_name, e)
+        #                 logger.warning("Error loading user plugin %s: %s",
+        # plugin_name, e)
 
 
     def load_plugin(self, module, plugin_name):
