@@ -14,10 +14,10 @@ class TalkyTrendPlugin(BasePlugin):
     async def start(self):
         """Starts the TalkyTrend plugin"""  
         # TODO create a scheduler 
-        # if self.enabled:
-        #     while True:
-        #         async for message in self.trend.scanner():
-        #             await self.send_notification(message)
+        if self.enabled:
+            while True:
+                async for message in self.trend.scanner():
+                    await self.send_notification(message)
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
