@@ -2,6 +2,74 @@
 
 <!--next-version-placeholder-->
 
+## v4.0.0 (2023-07-17)
+
+### Breaking
+
+* 💥 breaking: code reorg for better plugin support ([`2d61cd0`](https://github.com/mraniki/tt/commit/2d61cd0f11c8e981eea1e6973d08fce4a3eec1cc))
+* 💥 breaking: code reorg for better plugin support ([`2d61cd0`](https://github.com/mraniki/tt/commit/2d61cd0f11c8e981eea1e6973d08fce4a3eec1cc))
+
+### Feature
+
+* 🥚 user based plugin import capability ([`3472abf`](https://github.com/mraniki/tt/commit/3472abf11af61b8a2108ebc12f659126eb9c3e03))
+
+### Fix
+
+* 🚨  linter various fix ([`22ea39a`](https://github.com/mraniki/tt/commit/22ea39a487776cac3a8edb72879552f5a1cdf1e1))
+* 🔧 reviewed config for talkytrend_enabled ([`99dc04a`](https://github.com/mraniki/tt/commit/99dc04a65fee6eb9ffc8215eef7a3d4c14f6e33c))
+* ⬆️ dep ([`35c97cf`](https://github.com/mraniki/tt/commit/35c97cf1eaa0638ffcf540b31c4aa227c3050d2d))
+* :wrench: Add news feed to testing settings ([`f020068`](https://github.com/mraniki/tt/commit/f020068c10da59a787e78f19df6a84152883c4c0))
+* ⬆️ semantic ([`c82d95d`](https://github.com/mraniki/tt/commit/c82d95d790459a059f033ed21635566275d46efa))
+* ⚡ ignore::DeprecationWarning ([`7961392`](https://github.com/mraniki/tt/commit/7961392a7b0a83c55258c878522961eb4b496c9a))
+* 🎨 ([`24c682e`](https://github.com/mraniki/tt/commit/24c682e2c0c29849603e98d315b9d08d3ece02b3))
+* :art: help message with multilines ([`360c2e7`](https://github.com/mraniki/tt/commit/360c2e7260735ab92f2016e3825f1a548d33cc4a))
+* ♻️  cleanup and user plugin setup prepared ([`35d9fa3`](https://github.com/mraniki/tt/commit/35d9fa37b3b7f1d8e49975af88185887a5e77c05))
+* :arrow_up: dep for dxsp ([`31f5bad`](https://github.com/mraniki/tt/commit/31f5badad1b703d5215d2c7f26ba9dae689cf3ae))
+* :arrow_up: dep for dxsp ([`58bc8b5`](https://github.com/mraniki/tt/commit/58bc8b51d3b78f262af436bda031c30dac4e9701))
+* :arrow_up: dep for dxsp ([`b336afc`](https://github.com/mraniki/tt/commit/b336afcdbe35e3c9cbf60246139b151ef99df8f4))
+* 🎨 cleanup ([`fc82bde`](https://github.com/mraniki/tt/commit/fc82bde6989acefad5e8246df99faa09f3b44ebc))
+* 🚨 lint ([`4794787`](https://github.com/mraniki/tt/commit/47947870beed0dc0f67727fa3c3b0a6694dd1400))
+* 🚨 name ([`7f4d6e8`](https://github.com/mraniki/tt/commit/7f4d6e86ba890012cdc588908877504e82c2a1a2))
+* :recycle: plugin manager process message ([`e4f7b15`](https://github.com/mraniki/tt/commit/e4f7b159bf592086fc2073e2f469744f4fc68f0c))
+* :bug: plugin directory in example plugin unit test ([`7e286bf`](https://github.com/mraniki/tt/commit/7e286bf9e3587fc95caedf4636ebb311b830629c))
+* ✅  updated import for unit test ([`a4885a1`](https://github.com/mraniki/tt/commit/a4885a1d175817e2b92e5b4b36c3018a9f20cf3f))
+* 🚑 Fix the plugin manager plugin loading function ([`44d9964`](https://github.com/mraniki/tt/commit/44d9964b04cec215f2cd1756c780165eec930701))
+* 🐛 plugin directory in settings. ([`0bb0ae9`](https://github.com/mraniki/tt/commit/0bb0ae97c0b6cf3524949666dd4a8dc1198ff7d7))
+* 👷 CI Change - prerelease remove as not required ([`2e57afb`](https://github.com/mraniki/tt/commit/2e57afb0349f28f36a743194f6ddbda6b200a3f5))
+* 🐛 plugin directory ([`e077f4f`](https://github.com/mraniki/tt/commit/e077f4f1331239107ef00876149a92b323252acf))
+* 🚨 logger error ([`982ecb6`](https://github.com/mraniki/tt/commit/982ecb62688318f2599cfc562cc1831bf64dabb8))
+* 🔥 ✅  remove start/run bot unit test ([`8ca5f06`](https://github.com/mraniki/tt/commit/8ca5f068c91eb92c289c07e82254c433049933ff))
+* ✅ unit test udpate added run_bot function ([`1469703`](https://github.com/mraniki/tt/commit/1469703ba685543c37d26292e9a0b8c3c5247f75))
+* ✅ test_start_bot ([`9721da0`](https://github.com/mraniki/tt/commit/9721da0bbd76eda6663b1b884073ab5bf65911b2))
+* ✅ ([`c8fad84`](https://github.com/mraniki/tt/commit/c8fad8494e17a08c4d6011977c830aec2dca230d))
+* ✅ test_start_bot ([`a432299`](https://github.com/mraniki/tt/commit/a432299403a8c5d28cfcf2918fbf4552080557be))
+* ✅ ♻️  listener ([`174f391`](https://github.com/mraniki/tt/commit/174f391563c567dedf272a4b34e41257bbcba24d))
+* 🚨 function name duplication ([`8b2608a`](https://github.com/mraniki/tt/commit/8b2608aaacb776c053e6c0130f80821ed9b462e6))
+* ♻️ refactor utils.py ([`ee7431d`](https://github.com/mraniki/tt/commit/ee7431d3316a26e2e6326f5f509929a3f88fbc99))
+* :white_check_mark:  start_listener ([`2041df9`](https://github.com/mraniki/tt/commit/2041df98ab55750add12b1002ffcf1e7583b375b))
+* :recycle: refactor listener and unit test ([`983285b`](https://github.com/mraniki/tt/commit/983285b902ded91d24e40049720421ec26f81a86))
+* ♻️ start_listener ([`2fbaebd`](https://github.com/mraniki/tt/commit/2fbaebd7883c8568623b09b2a973a97400323381))
+* ♻️ refactor listener and unit test ([`20c1e84`](https://github.com/mraniki/tt/commit/20c1e8446108fad23b64e437c666b02b2349f6f0))
+* ✅ ([`8f52386`](https://github.com/mraniki/tt/commit/8f523864b0ed4da814dfffdce636be040789f83d))
+* :white_check_mark:  listener unit test ([`cf270b4`](https://github.com/mraniki/tt/commit/cf270b47ef64c06397cb0b21c0c8baaf00a025b2))
+* :arrow_up:  dep ([`91c3267`](https://github.com/mraniki/tt/commit/91c32671dd9892071f272b3838b79fcd4c98823d))
+* ⬆️  dep ([`45c2f24`](https://github.com/mraniki/tt/commit/45c2f240335a6c750c3efa7308643438ea6ee77d))
+* :white_check_mark:  listener unit test ([`9828c4d`](https://github.com/mraniki/tt/commit/9828c4d3c8c94278aec0b3874c8a9217bd91b5cb))
+* :white_check_mark:  listener unit test ([`8daa69e`](https://github.com/mraniki/tt/commit/8daa69e490f28a5b03a5e301c5db127544e2eafa))
+* :rotating_light:linter ([`90fa55c`](https://github.com/mraniki/tt/commit/90fa55c1408d10416887d2453d27f60ec786ee12))
+* ✅  listener unit test ([`13188b9`](https://github.com/mraniki/tt/commit/13188b9a258f4875850ce636f53163c66b73c56c))
+* :white_check_mark:  unit test ([`57a63f4`](https://github.com/mraniki/tt/commit/57a63f497a22a8840ca6fea476789430ac4a09aa))
+* :white_check_mark:  unit test ([`621d73a`](https://github.com/mraniki/tt/commit/621d73a0c3e77f4e1e2168b6fc8c6b5b82386121))
+* :white_check_mark: testing settings ([`d8bf40b`](https://github.com/mraniki/tt/commit/d8bf40be7144783cdbd7070c564431f84322f297))
+* ✅ @pytest.mark.timeout(5) ([`285a271`](https://github.com/mraniki/tt/commit/285a27191ccd3a464d131d57c275bc924474b403))
+* ✅ listener unit test ([`3ef4258`](https://github.com/mraniki/tt/commit/3ef425871708da1d49dc19f8db383a773bba7ae5))
+* ✅  no len check ([`1c8477b`](https://github.com/mraniki/tt/commit/1c8477b0a33ad777a41e87b624a7b09801e6a376))
+* ✅ load_plugins ([`f553c72`](https://github.com/mraniki/tt/commit/f553c729d0366a40206665a119694d46a74747e4))
+* 🔥 remove message_processor and revampl plugin manager ([`028dd68`](https://github.com/mraniki/tt/commit/028dd68e5bbae78cdddfabd1f5ed9c67a66e931f))
+* ✅ further test update ([`f15faec`](https://github.com/mraniki/tt/commit/f15faeca3604e56ab6ce0f592bce174faec42463))
+* ✅ unit test ([`54bb779`](https://github.com/mraniki/tt/commit/54bb779890cf40e98d00f7b6138c4f5f37c50639))
+* :bug: plugin import ([`018e97e`](https://github.com/mraniki/tt/commit/018e97e50451e3be01b4505efc87d9e62a839358))
+
 ## v3.11.5 (2023-07-17)
 
 ### Fix
