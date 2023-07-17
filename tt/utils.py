@@ -29,7 +29,6 @@ async def start_listener(max_iterations=None):
     Start the chat listener.
     """
     bot_listener = Listener()
-    logger.debug("👂 bot_listener: %s", bot_listener)
     task = asyncio.create_task(bot_listener.run_forever(max_iterations))
     return bot_listener, task
 

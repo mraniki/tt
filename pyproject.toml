@@ -67,6 +67,7 @@ overgeneral-exceptions = [
 # ]
 # exclude = [
 #   ".github/*",
+#   "docs/*",
 # ]
 
 
