@@ -338,6 +338,7 @@ VALUE = "On Testing CEX_binance"
 apprise_url = "json://localhost"
 apprise_format = "NotifyFormat.MARKDOWN"
 plugin_directory = "tt.plugins.default_plugins"
+cex_enabled = true
 cex_name = 'binance'
 cex_api = 'api_key'
 cex_secret = 'secret_key'
