@@ -60,16 +60,17 @@ overgeneral-exceptions = [
 ]
 
 [tool.ruff]
-# select = [
-#   "E",  # pycodestyle
-#   "F",  # pyflakes
-#   "I",  # isort
-# ]
+select = [
+  "E",  # pycodestyle
+  "F",  # pyflakes
+  "I",  # isort
+]
 exclude = [
   ".github/*",
   "docs/*",
 ]
 ignore = ["E401"]
+format = "github"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
