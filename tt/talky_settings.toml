@@ -139,7 +139,7 @@ enable_news = false
 news_url= ""
 news_api_key = ""
 enable_feed = true
-news_feed = "https://www.financialjuice.com/feed.ashx?xy=rss"
+news_feed="https://www.dailyfx.com/feeds/market-news"
 live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
 bot_command_trend = "trend"
 
@@ -203,8 +203,8 @@ talkytrend_enabled = false
 ping = "8.8.8.8"
 apprise_url = "json://localhost"
 enable_feed = true
-news_feed="https://www.financialjuice.com/feed.ashx?xy=rss"
-#http://feeds.feedburner.com/zerohedge/feed
+news_feed="https://www.dailyfx.com/feeds/market-news"
+
 
 [cex]
 exchange_enabled = true
