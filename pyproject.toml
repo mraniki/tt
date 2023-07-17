@@ -59,17 +59,17 @@ overgeneral-exceptions = [
     "builtins.RuntimeError",
 ]
 
-# [tool.ruff]
+[tool.ruff]
 # select = [
 #   "E",  # pycodestyle
 #   "F",  # pyflakes
 #   "I",  # isort
 # ]
-# exclude = [
-#   ".github/*",
-#   "docs/*",
-# ]
-
+exclude = [
+  ".github/*",
+  "docs/*",
+]
+ignore = ["E401"]
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
