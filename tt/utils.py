@@ -21,7 +21,9 @@ async def send_notification(msg):
         aobj.add(settings.apprise_config)
     elif settings.apprise_url:
         aobj.add(settings.apprise_url)
-    await aobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
+    await aobj.async_notify(
+        body=msg,
+        body_format=settings.apprise_format)
 
 
 async def start_listener(max_iterations=None):

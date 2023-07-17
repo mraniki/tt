@@ -49,7 +49,8 @@ webhook_secret = "123abc"
 
 apprise_api_endpoint = ""
 apprise_config = ""
-apprise_url = "json://localhost" 
+apprise_url = "json://localhost"
+apprise_format = "NotifyFormat.MARKDOWN"
 # TT_APPRISE_URL='tgram://TOKEN/CHAT_ID'
 
 
