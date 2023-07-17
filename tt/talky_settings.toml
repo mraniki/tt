@@ -201,6 +201,9 @@ example_plugin_enabled = true
 example_plugin_schedule_enabled = true
 ping = "8.8.8.8"
 apprise_url = "json://localhost"
+enable_feed = true
+news_feed="https://www.financialjuice.com/feed.ashx?xy=rss"
+#http://feeds.feedburner.com/zerohedge/feed
 
 [cex]
 exchange_enabled = true
