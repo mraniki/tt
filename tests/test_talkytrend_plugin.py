@@ -1,12 +1,12 @@
 import pytest
 from unittest.mock import AsyncMock
 from tt.config import settings
-from tt.plugins.talkytrend_plugin import TalkyTrendPlugin
+from tt.plugins.default_plugins.talkytrend_plugin import TalkyTrendPlugin
 
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="bsc")
 
 
 @pytest.fixture(name="plugin")

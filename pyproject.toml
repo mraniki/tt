@@ -40,21 +40,60 @@ httpx = "^0.24.1"
 uvicorn = "^0.23.0"
 fastapi = "^0.100.0"
 ping3 = "^4.0.4"
+httpimport = "^1.3.0"
 schedule = "^1.2.0"
 ccxt = "^4.0.0"
-dxsp = "^4.0.0"
+dxsp = "^4.0.5"
 findmyorder = "^1.6.0"
-iamlistening = "^1.0.1"
-talkytrend = "^1.8.1"
+iamlistening = "^1.1.0"
+talkytrend = "^1.8.2"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^8.0.0"
+ruff = "^0.0.278"
+
+[tool.pylint.exceptions]
+overgeneral-exceptions = [
+    "builtins.BaseException",
+    "builtins.Exception",
+    "builtins.RuntimeError",
+]
+
+# [tool.ruff]
+# select = [
+#   "E",  # pycodestyle
+#   "F",  # pyflakes
+#   "I",  # isort
+# ]
+# exclude = [
+#   ".github/*",
+# ]
+
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
 pytest-cov = "^4.1"
 pytest-asyncio = "^0.21.0"
 pytest-mock = "^3.11.1"
+
+[tool.pytest.ini_options]
+pythonpath = ". tt"
+testpaths = "tests"
+python_classes = "Test*"
+log_format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
+log_level = "DEBUG"
+filterwarnings = [
+    " ignore:.*U.*mode is deprecated:DeprecationWarning",
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+omit = [
+    "tests/*",
+    "examples/*",
+    "docs/*",
+    "*/config.py"
+]
 
 [tool.poetry.group.docs]
 optional = true
@@ -70,24 +109,6 @@ sphinx-notfound-page = "^0.8.3"
 # sphinx_inline_tabs= "^2023.4.21"
 # sphinx-reredirects = "*"
 # sphinx_design = "*"
-
-[tool.pytest.ini_options]
-pythonpath = "."
-testpaths = "tests"
-python_classes = "Test*"
-log_format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
-log_level = "DEBUG"
-filterwarnings = [
-    " ignore:.*U.*mode is deprecated:DeprecationWarning",
-]
-
-[tool.coverage.run]
-omit = [
-    "tests/*",
-    "examples/*",
-    "docs/*",
-    "*/config.py"
-]
 
 [tool.semantic_release]
 version_variable = ["pyproject.toml:version","tt/utils.py:__version__"]

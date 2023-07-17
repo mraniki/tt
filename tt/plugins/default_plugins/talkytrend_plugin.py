@@ -1,6 +1,7 @@
 import os
-from tt.utils import BasePlugin, send_notification
 from tt.config import settings
+from tt.utils import send_notification
+from tt.plugins.plugin_manager import BasePlugin
 from talkytrend import TalkyTrend
 
 class TalkyTrendPlugin(BasePlugin):
@@ -11,11 +12,12 @@ class TalkyTrendPlugin(BasePlugin):
             self.trend = TalkyTrend()
 
     async def start(self):
-        """Starts the TalkyTrend plugin"""        
-        # if self.enabled:
-        #     while True:
-        #         async for message in self.trend.scanner():
-        #             await self.send_notification(message)
+        """Starts the TalkyTrend plugin"""  
+        # TODO create a scheduler 
+        if self.enabled:
+            while True:
+                async for message in self.trend.scanner():
+                    await self.send_notification(message)
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""

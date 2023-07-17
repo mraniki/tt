@@ -9,17 +9,16 @@ import uvicorn
 from fastapi import FastAPI, Request
 
 from tt.config import settings
-from tt.utils import listener, send_notification, __version__
+from tt.utils import run_bot, send_notification, __version__
 
 app = FastAPI(title="TALKYTRADER")
 
 
 @app.on_event("startup")
-async def start_bot():
+async def start_bot_task():
     """⛓️🤖🙊BOT"""
     event_loop = asyncio.get_event_loop()
-    event_loop.create_task(listener())
-
+    event_loop.create_task(run_bot())
 
 @app.get("/")
 async def root():
@@ -29,15 +28,13 @@ async def root():
 
 @app.get("/health")
 async def health_check():
-    """fastapi health"""
+    """ health check"""
     return __version__
 
 
 @app.post(f"/webhook/{settings.webhook_secret}", status_code=202)
 async def webhook(request: Request):
-    """
-    FastAPI '/webhook' endpoint.
-    """
+    """ webhook endpoint """
     data = await request.body()
     await send_notification(data)
     return {"status": "OK"}

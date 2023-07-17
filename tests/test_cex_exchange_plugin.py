@@ -3,7 +3,7 @@ from unittest.mock import AsyncMock
 import ccxt
 from ccxt.base.errors import AuthenticationError
 from tt.config import settings
-from tt.plugins.cex_exchange_plugin import CexExchangePlugin
+from tt.plugins.default_plugins.cex_exchange_plugin import CexExchangePlugin
 
 
 @pytest.fixture(scope="session", autouse=True)

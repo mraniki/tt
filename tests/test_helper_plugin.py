@@ -1,8 +1,7 @@
 import pytest
 from unittest.mock import AsyncMock
 from tt.config import settings
-from tt.plugins.helper_plugin import HelperPlugin
-
+from tt.plugins.default_plugins.helper_plugin import HelperPlugin
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -41,9 +40,10 @@ async def test_trading_switch(plugin):
 
 
 @pytest.mark.asyncio
-async def test_help(plugin):
+async def test_help(plugin,caplog):
     """Test switch """
     plugin.get_helper_info = AsyncMock()
     await plugin.handle_message(
         f"{settings.bot_prefix}{settings.bot_command_help}")
+    print(caplog.text)
     plugin.get_helper_info.assert_awaited_once()
