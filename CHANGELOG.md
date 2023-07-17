@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.11.5 (2023-07-17)
+
+### Fix
+
+* ⬆️ 🤖(deps): update dependency python-semantic-release to v8 ([`d4a816c`](https://github.com/mraniki/tt/commit/d4a816c6fbd66299b1237055c4301d506d3f9a74))
+
 ## v3.11.4 (2023-07-16)
 
 ### Fix
