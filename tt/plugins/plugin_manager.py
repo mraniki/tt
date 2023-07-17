@@ -36,7 +36,8 @@ class PluginManager:
         #                 logger.debug("Module loaded: %s", module)
         #                 self.load_plugin(module, plugin_name)
         #             except Exception as e:
-        #                 logger.warning("Error loading user plugin %s: %s", plugin_name, e)
+        #                 logger.warning("Error loading user plugin %s: %s",
+        # plugin_name, e)
 
 
     def load_plugin(self, module, plugin_name):
