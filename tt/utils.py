@@ -3,6 +3,7 @@
 """
 __version__ = "4.0.0"
 
+
 import asyncio
 from apprise import Apprise, NotifyFormat
 from tt.config import settings, logger
