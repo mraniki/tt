@@ -27,7 +27,6 @@
     # dex_factory_contract_addr = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
     # dex_block_explorer_url = 'https://api.bscscan.com/api'
     # dex_block_explorer_api = '42342342342'
-    # trading_asset = "BUSD"
     # trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
     # action_identifier = "PUMP DUMP"
     # mapping = [
@@ -50,5 +49,4 @@
     # dex_router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
     # dex_block_explorer_url = 'https://api.polygonscan.com/api'
     # dex_block_explorer_api = '42342342342'
-    # trading_asset = "USDT"
     # trading_asset_address = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
