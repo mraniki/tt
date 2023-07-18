@@ -10,7 +10,6 @@ from tt.plugins.plugin_manager import PluginManager
 from iamlistening import Listener
 
 
-
 async def send_notification(msg):
     """
     💬 Notification via Apprise 
@@ -22,7 +21,9 @@ async def send_notification(msg):
         aobj.add(settings.apprise_config)
     elif settings.apprise_url:
         aobj.add(settings.apprise_url)
-    await aobj.async_notify(body=msg, body_format=NotifyFormat.HTML)
+    await aobj.async_notify(
+        body=msg,
+        body_format=settings.apprise_format)
 
 
 async def start_listener(max_iterations=None):
@@ -30,7 +31,6 @@ async def start_listener(max_iterations=None):
     Start the chat listener.
     """
     bot_listener = Listener()
-    logger.debug("👂 bot_listener: %s", bot_listener)
     task = asyncio.create_task(bot_listener.run_forever(max_iterations))
     return bot_listener, task
 
@@ -46,7 +46,8 @@ async def start_plugins(plugin_manager):
 
 async def start_bot(listener, plugin_manager):
     """
-    Start the chat bot.
+    Listen to the message in the bot channel
+    and dispatch to plugins
     """
     while True:
         try:
@@ -60,6 +61,9 @@ async def start_bot(listener, plugin_manager):
 
 
 async def run_bot(max_iterations=None):
+    """
+    Run the chat bot & the plugins.
+    """
     listener, task = await start_listener(max_iterations)
     plugin_manager = PluginManager()
     await start_plugins(plugin_manager)

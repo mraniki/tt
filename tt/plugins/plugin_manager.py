@@ -1,5 +1,5 @@
 import asyncio
-import httpimport
+# import httpimport
 import importlib
 import pkgutil
 import schedule
@@ -99,13 +99,24 @@ class BasePlugin:
 
     def schedule_hourly(self, function):
         # Define hourly schedule
-        schedule.every().hour.do(function)
+        def wrapper(*args, **kwargs):
+            schedule.every().hour.do(function, *args, **kwargs)
+        return wrapper
 
     def schedule_every_8_hours(self, function):
         # Define every 8 hours schedule
-        schedule.every(8).hours.do(function)
+        def wrapper(*args, **kwargs):
+            schedule.every(8).hours.do(function, *args, **kwargs)
+        return wrapper
 
     async def run_schedule(self):
         while True:
             schedule.run_pending()
             await asyncio.sleep(10)
+
+    @staticmethod
+    def notify_hourly(function):
+        # Define hourly schedule for sending notifications
+        def wrapper(self):
+            self.schedule_hourly(self.send_notification(function))
+        return wrapper

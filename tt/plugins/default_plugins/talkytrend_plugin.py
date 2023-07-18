@@ -50,3 +50,8 @@ class TalkyTrendPlugin(BasePlugin):
             if command in command_mapping:
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
+
+    @BasePlugin.notify_hourly
+    async def scheduled_function(self):
+        """Hourly fetch the latest news"""
+        await self.trend.fetch_key_feed()

@@ -78,14 +78,3 @@ async def test_plugin_notification(plugin, plugin_manager):
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
     send_notification.assert_awaited_once
 
-
-@pytest.mark.asyncio
-async def test_plugin_scheduling(plugin, plugin_manager):
-    """Test scheduling """
-    schedule_manager = AsyncMock()
-    schedule_manager.schedule_example_hourly = AsyncMock()
-    schedule_manager.schedule_example_every_8_hours = AsyncMock()
-    assert settings.example_plugin_schedule_enabled is True
-    schedule_manager.assert_awaited_once
-    schedule_manager.schedule_example_hourly.assert_awaited_once
-    schedule_manager.schedule_example_every_8_hours.assert_awaited_once

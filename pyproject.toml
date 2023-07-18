@@ -46,7 +46,7 @@ ccxt = "^4.0.0"
 dxsp = "^4.0.5"
 findmyorder = "^1.6.0"
 iamlistening = "^1.1.0"
-talkytrend = "^1.8.2"
+talkytrend = "^1.9.0"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^8.0.0"
@@ -59,16 +59,18 @@ overgeneral-exceptions = [
     "builtins.RuntimeError",
 ]
 
-# [tool.ruff]
-# select = [
-#   "E",  # pycodestyle
-#   "F",  # pyflakes
+[tool.ruff]
+select = [
+  "E",  # pycodestyle
+  "F",  # pyflakes
 #   "I",  # isort
-# ]
-# exclude = [
-#   ".github/*",
-# ]
-
+]
+exclude = [
+  ".github/*",
+  "docs/*",
+]
+ignore = ["E401","F401"]
+format = "github"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
