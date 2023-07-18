@@ -1,9 +1,12 @@
 import asyncio
+
 # import httpimport
 import importlib
 import pkgutil
+
 import schedule
-from tt.config import settings, logger
+
+from tt.config import logger, settings
 
 
 class PluginManager:

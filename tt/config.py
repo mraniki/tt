@@ -1,10 +1,10 @@
 """
  talky  Config
 """
-import os
 import logging
-from dynaconf import Dynaconf
+import os
 
+from dynaconf import Dynaconf
 
 ROOT = os.path.dirname(__file__)
 
