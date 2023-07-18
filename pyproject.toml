@@ -48,9 +48,23 @@ findmyorder = "^1.6.0"
 iamlistening = "^1.1.0"
 talkytrend = "^1.9.0"
 
+
 [tool.poetry.group.dev.dependencies]
-python-semantic-release = "^8.0.0"
+python-semantic-release = "^8.0.1"
 ruff = "^0.0.278"
+
+[tool.ruff]
+select = [
+  "E",  # pycodestyle
+  "F",  # pyflakes
+  "I",  # isort
+]
+exclude = [
+  ".github/*",
+  "docs/*",
+]
+ignore = ["E401","F401","F811"]
+format = "github"
 
 [tool.pylint.exceptions]
 overgeneral-exceptions = [
@@ -58,19 +72,6 @@ overgeneral-exceptions = [
     "builtins.Exception",
     "builtins.RuntimeError",
 ]
-
-[tool.ruff]
-select = [
-  "E",  # pycodestyle
-  "F",  # pyflakes
-#   "I",  # isort
-]
-exclude = [
-  ".github/*",
-  "docs/*",
-]
-ignore = ["E401","F401"]
-format = "github"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
@@ -107,10 +108,6 @@ sphinx-autoapi = "^2.1.1"
 sphinx-copybutton= "^0.5.2"
 myst-parser = "^2.0.0"
 sphinx-notfound-page = "^0.8.3"
-#seed_intersphinx_mapping = "^1.2.1"
-# sphinx_inline_tabs= "^2023.4.21"
-# sphinx-reredirects = "*"
-# sphinx_design = "*"
 
 [tool.semantic_release]
 version_variable = ["pyproject.toml:version","tt/utils.py:__version__"]
