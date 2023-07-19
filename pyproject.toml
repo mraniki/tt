@@ -113,7 +113,7 @@ omit = [
 [tool.semantic_release]
 upload_to_vcs_release = false
 version_variables = ["pyproject.toml:version","tt/utils.py:__version__"]
-build_command = "pip install poetry && poetry build"
+# build_command = "pip install poetry && poetry build"
 commit_parser = "emoji"
 major_tags = [
     "BREAKING",
