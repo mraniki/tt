@@ -199,7 +199,9 @@ news_feed="https://www.dailyfx.com/feeds/market-news"
 enable_news = false
 news_url= ""
 news_api_key = ""
-
+finnhub_api_key=""
+alphavantage_api_key = ""
+twelvedata_api_key = ""
 
 ########################################
 ###     END OF DEFAULT SETTINGS      ###
@@ -331,7 +333,9 @@ news_feed="https://www.dailyfx.com/feeds/market-news"
 enable_news = false
 news_url= ""
 news_api_key = ""
-
+finnhub_api_key=""
+alphavantage_api_key = "demo"
+twelvedata_api_key = ""
 
 [cex]
 VALUE = "On Testing CEX_binance"
