@@ -1,11 +1,17 @@
+########################################
+###          EXAMPLE SETTINGS        ###
+#######################################
 
-#DISCORD BOT on ethereum chain using uniswap v2 router
-    # bot_token = '1212121212121'
-    # bot_channel_id = '121212121212'
-    # apprise_url = 'discord://1212121212121/121212121212'
-    # dex_wallet_address = '0x1234567890123456789012345678901234567890'
-    # dex_private_key = '0xdeadbeef'
-    # dex_block_explorer_api = '42342342342'
+
+# DISCORD BOT on ethereum chain using 
+# uniswap v2 router
+
+# bot_token = '1212121212121'
+# bot_channel_id = '121212121212'
+# apprise_url = 'discord://1212121212121/121212121212'
+# dex_wallet_address = '0x1234567890123456789012345678901234567890'
+# dex_private_key = '0xdeadbeef'
+# dex_block_explorer_api = '42342342342'
 
 # TELEGRAM BOT on CEX Binance
     # bot_token = '1212121212121'
