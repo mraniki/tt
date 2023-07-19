@@ -50,7 +50,7 @@ talkytrend = "^1.9.0"
 
 
 [tool.poetry.group.dev.dependencies]
-python-semantic-release = "^8.0.1"
+python-semantic-release = "^8.0.2"
 ruff = "^0.0.278"
 
 [tool.ruff]
@@ -63,7 +63,7 @@ exclude = [
   ".github/*",
   "docs/*",
 ]
-ignore = ["E401","F401","F811"]
+ignore = ["E401","F401"]
 format = "github"
 fixable = ["ALL"]
 
