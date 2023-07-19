@@ -147,7 +147,8 @@ class CexExchange():
                 instrument,
                 settings.cex_ordertype,
                 action,
-                transaction_amount
+                transaction_amount,
+                # price=None
             )
 
             if not trade:
