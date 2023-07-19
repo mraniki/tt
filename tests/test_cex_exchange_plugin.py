@@ -1,7 +1,6 @@
 from unittest.mock import AsyncMock
 
 import pytest
-from ccxt.base import errors
 
 import tt.plugins.default_plugins.cex_exchange_plugin
 from tt.config import settings
