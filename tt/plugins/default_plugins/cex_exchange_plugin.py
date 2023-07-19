@@ -15,18 +15,7 @@ class CexExchangePlugin(BasePlugin):
         self.enabled = settings.cex_enabled
         if self.enabled:
             self.fmo = FindMyOrder()
-            if settings.cex_name:
-                client = getattr(ccxt, settings.cex_name)
-                self.exchange = client({
-                    'apiKey': settings.cex_api,
-                    'secret': settings.cex_secret,
-                    'password': (settings.cex_password or ''),
-                    'enableRateLimit': True,
-                    'options': {
-                        'defaultType': settings.cex_defaulttype,
-                                }})
-                if settings.cex_testmode:
-                    self.exchange.set_sandbox_mode('enabled')
+            self.exchange = CexExchange()
 
     async def start(self):
         """Starts the exchange_plugin plugin"""
@@ -54,7 +43,7 @@ class CexExchangePlugin(BasePlugin):
         if await self.fmo.search(msg):
             order = await self.fmo.get_order(msg)
             if order and settings.trading_enabled:
-                trade = await self.execute_order(order)
+                trade = await self.exchange.execute_order(order)
                 if trade:
                     await send_notification(trade)
 
@@ -63,34 +52,52 @@ class CexExchangePlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_help: self.get_info,
-                settings.bot_command_quote: lambda: self.get_quote(args[0]),
-                settings.bot_command_bal: self.get_account_balance,
-                settings.bot_command_pos: self.get_account_position,
-                settings.bot_command_pnl_daily: self.get_account_pnl,
+                settings.bot_command_help: self.exchange.get_info,
+                settings.bot_command_quote: lambda: self.exchange.get_quote(args[0]),
+                settings.bot_command_bal: self.exchange.get_account_balance,
+                settings.bot_command_pos: self.exchange.get_account_position,
+                settings.bot_command_pnl_daily: self.exchange.get_account_pnl,
             }
 
             if command in command_mapping:
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
+
+
+
+class CexExchange():
+    """CEX Object"""
+    def __init__(self):
+        if settings.cex_name:
+            client = getattr(ccxt, settings.cex_name)
+            self.cex = client({
+                'apiKey': settings.cex_api,
+                'secret': settings.cex_secret,
+                'password': (settings.cex_password or ''),
+                'enableRateLimit': True,
+                'options': {
+                    'defaultType': settings.cex_defaulttype,
+                            }})
+            if settings.cex_testmode:
+                self.cex.set_sandbox_mode('enabled')
     async def get_info(self):
         """info_message"""    
-        exchange_name = self.exchange.id
-        account_info = self.exchange.uid
+        exchange_name = self.cex.id
+        account_info = self.cex.uid
         return f"💱 {exchange_name}\n🪪 {account_info}"
 
     async def get_quote(self, symbol):
         """return main asset balance."""
-        return f"🏦 {self.exchange.fetchTicker(symbol).get('last')}"
+        return f"🏦 {self.cex.fetchTicker(symbol).get('last')}"
 
     async def get_trading_asset_balance(self):
         """return main asset balance."""
-        return self.exchange.fetchBalance()[f"{settings.trading_asset}"]["free"]
+        return self.cex.fetchBalance()[f"{settings.trading_asset}"]["free"]
 
     async def get_account_balance(self):
         """return account balance."""
-        raw_balance = self.exchange.fetch_free_balance()
+        raw_balance = self.cex.fetch_free_balance()
         filtered_balance = {k: v for k, v in
                             raw_balance.items()
                             if v is not None and v > 0}
@@ -104,10 +111,10 @@ class CexExchangePlugin(BasePlugin):
 
     async def get_account_position(self):
         """return account position."""
-        open_positions = self.exchange.fetch_positions()
+        open_positions = self.cex.fetch_positions()
         open_positions = [p for p in open_positions if p['type'] == 'open']
         position = "📊 Position\n" + str(open_positions)
-        position += str(await self.exchange.fetch_balance({'type': 'margin',}))
+        position += str(await self.cex.fetch_balance({'type': 'margin',}))
         return position
 
     async def get_account_pnl(self):
@@ -127,7 +134,7 @@ class CexExchangePlugin(BasePlugin):
                 return "⚠️ Check Balance"
 
             asset_out_quote = float(
-                self.exchange.fetchTicker(f'{instrument}').get('last'))
+                self.cex.fetchTicker(f'{instrument}').get('last'))
             asset_out_balance = await self.get_trading_asset_balance()
 
             if not asset_out_balance:
@@ -136,11 +143,12 @@ class CexExchangePlugin(BasePlugin):
             transaction_amount = (
                 asset_out_balance * (float(quantity) / 100) / asset_out_quote)
 
-            trade = self.exchange.create_order(
+            trade = self.cex.create_order(
                 instrument,
                 settings.cex_ordertype,
                 action,
-                transaction_amount
+                transaction_amount,
+                # price=None
             )
 
             if not trade:

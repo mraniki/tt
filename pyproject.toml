@@ -63,7 +63,7 @@ exclude = [
   ".github/*",
   "docs/*",
 ]
-ignore = ["E401","F401"]
+# ignore = ["E401","F401"]
 format = "github"
 fixable = ["ALL"]
 
@@ -113,8 +113,11 @@ omit = [
 [tool.semantic_release]
 upload_to_vcs_release = false
 version_variables = ["pyproject.toml:version","tt/utils.py:__version__"]
-# build_command = "pip install poetry && poetry build"
+build_command = "pip install poetry && poetry build"
 commit_parser = "emoji"
+
+
+[tool.semantic_release.commit_parser_options]
 major_tags = [
     "BREAKING",
     "💥",
