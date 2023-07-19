@@ -5,7 +5,7 @@ import pytest
 
 from tt.config import settings
 from tt.plugins.default_plugins.example_plugin import ExamplePlugin
-from tt.plugins.plugin_manager import PluginManager
+from tt.plugins.plugin_manager import BasePlugin, PluginManager
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -28,6 +28,14 @@ def test_fixture_plugin():
 async def test_plugin_manager():
     plugin_manager = PluginManager()
     assert plugin_manager is not None
+
+
+@pytest.mark.asyncio
+async def test_baseplugin():
+    plugin = BasePlugin()
+    await plugin.start()
+    assert plugin is not None
+
 
 @pytest.mark.asyncio
 async def test_load_one_plugin():
@@ -80,4 +88,3 @@ async def test_plugin_notification(plugin, plugin_manager):
     send_notification = AsyncMock()
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
     send_notification.assert_awaited_once
-
