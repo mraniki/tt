@@ -35,10 +35,19 @@ async def test_plugin(plugin):
     enabled = plugin.enabled
     exchange = plugin.exchange
     print(type(exchange))
+    result = (await plugin.exchange.get_info())
+    assert "🪪" in result
+    assert "💱 binance" in result
     assert enabled is True
     assert exchange is not None
     assert isinstance(exchange,
     tt.plugins.default_plugins.cex_exchange_plugin.CexExchange)
+
+@pytest.mark.asyncio
+async def test_position(plugin):
+    with pytest.raises(Exception):
+        await plugin.exchange.get_account_position()
+        # assert "📊 Position" in result
 
 
 @pytest.mark.asyncio
