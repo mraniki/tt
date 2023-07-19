@@ -1,9 +1,9 @@
 from unittest.mock import AsyncMock
 
-import ccxt
 import pytest
-from ccxt.base.errors import AuthenticationError
+from ccxt.base import errors
 
+import tt.plugins.default_plugins.cex_exchange_plugin
 from tt.config import settings
 from tt.plugins.default_plugins.cex_exchange_plugin import CexExchangePlugin
 
@@ -35,8 +35,11 @@ def test_dynaconf_is_in_testing_env_CEX():
 async def test_plugin(plugin):
     enabled = plugin.enabled
     exchange = plugin.exchange
+    print(type(exchange))
     assert enabled is True
-    assert isinstance(exchange, ccxt.binance)
+    assert exchange is not None
+    assert isinstance(exchange,
+    tt.plugins.default_plugins.cex_exchange_plugin.CexExchange)
 
 
 @pytest.mark.asyncio
@@ -71,7 +74,7 @@ async def test_parse_valid_order(plugin, order_message):
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
     """Test balance """
-    with pytest.raises(AuthenticationError):
+    with pytest.raises(errors):
         plugin.exchange.assert_awaited_once = AsyncMock()
         await plugin.handle_message('/bal')
         # plugin.exchange.get_account_balance.assert_called()
@@ -80,16 +83,14 @@ async def test_parse_balance(plugin):
 @pytest.mark.asyncio
 async def test_parse_position(plugin, caplog):
     """Test position """
-    with pytest.raises(AuthenticationError):
-        plugin.exchange.get_account_position = AsyncMock()
-        await plugin.handle_message('/pos')
-        assert "API-key format invalid" in caplog
-        # plugin.exchange.get_account_position.assert_called()
+    plugin.exchange.get_account_position = AsyncMock()
+    await plugin.handle_message('/pos')
+    plugin.exchange.get_account_position.assert_awaited_once()
 
 
 @pytest.mark.asyncio
 async def test_get_account_pnl(plugin):
     """Test pnl """
-    plugin.get_account_pnl = AsyncMock()
+    plugin.exchange.get_account_pnl = AsyncMock()
     await plugin.handle_message('/d')
     plugin.exchange.get_account_pnl.assert_awaited_once()
