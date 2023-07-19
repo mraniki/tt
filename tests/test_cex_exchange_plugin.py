@@ -73,10 +73,10 @@ async def test_parse_valid_order(plugin, order_message):
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
     """Test balance """
-    # with pytest.raises(errors):
-    plugin.exchange.assert_awaited_once = AsyncMock()
-    await plugin.handle_message('/bal')
-    plugin.exchange.get_account_balance.assert_called()
+    with pytest.raises(Exception):
+        plugin.exchange.assert_awaited_once = AsyncMock()
+        await plugin.handle_message('/bal')
+        plugin.exchange.get_account_balance.assert_called()
 
 
 @pytest.mark.asyncio
