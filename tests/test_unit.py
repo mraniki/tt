@@ -2,20 +2,19 @@
  TT test
 """
 
-from unittest.mock import AsyncMock
-import pytest
 import asyncio
+from unittest.mock import AsyncMock
 
-from iamlistening import Listener
+import pytest
 from fastapi.testclient import TestClient
+from iamlistening import Listener
 
-from tt.config import settings
 from tt.bot import app
-from tt.utils import send_notification, start_listener, start_plugins
-#start_bot, run_bot
+from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
+from tt.utils import send_notification, start_listener, start_plugins
 
-
+#start_bot, run_bot
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():

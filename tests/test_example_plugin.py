@@ -1,9 +1,12 @@
-import pytest
 import importlib
 from unittest.mock import AsyncMock
+
+import pytest
+
 from tt.config import settings
-from tt.plugins.plugin_manager import PluginManager
 from tt.plugins.default_plugins.example_plugin import ExamplePlugin
+from tt.plugins.plugin_manager import PluginManager
+
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():

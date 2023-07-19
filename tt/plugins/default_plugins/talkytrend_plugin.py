@@ -1,8 +1,11 @@
 import os
-from tt.config import settings
-from tt.utils import send_notification
-from tt.plugins.plugin_manager import BasePlugin
+
 from talkytrend import TalkyTrend
+
+from tt.config import settings
+from tt.plugins.plugin_manager import BasePlugin
+from tt.utils import send_notification
+
 
 class TalkyTrendPlugin(BasePlugin):
     name = os.path.splitext(os.path.basename(__file__))[0]

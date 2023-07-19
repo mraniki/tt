@@ -1,11 +1,12 @@
 import os
-import sys
 import socket
+import sys
+
 import ping3
 
 from tt.config import settings
-from tt.utils import send_notification, __version__
 from tt.plugins.plugin_manager import BasePlugin
+from tt.utils import __version__, send_notification
 
 
 class HelperPlugin(BasePlugin):
