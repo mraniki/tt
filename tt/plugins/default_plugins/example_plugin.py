@@ -1,8 +1,9 @@
 
 import os
+
 from tt.config import logger, settings
-from tt.utils import send_notification
 from tt.plugins.plugin_manager import BasePlugin
+from tt.utils import send_notification
 
 #from myclass import MyClass
 

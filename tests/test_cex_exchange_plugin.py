@@ -1,7 +1,9 @@
-import pytest
 from unittest.mock import AsyncMock
+
 import ccxt
+import pytest
 from ccxt.base.errors import AuthenticationError
+
 from tt.config import settings
 from tt.plugins.default_plugins.cex_exchange_plugin import CexExchangePlugin
 

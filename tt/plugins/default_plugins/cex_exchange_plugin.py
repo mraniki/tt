@@ -1,9 +1,12 @@
 import os
-from tt.utils import send_notification
-from tt.config import settings
-from tt.plugins.plugin_manager import BasePlugin
+
 import ccxt
 from findmyorder import FindMyOrder
+
+from tt.config import settings
+from tt.plugins.plugin_manager import BasePlugin
+from tt.utils import send_notification
+
 
 class CexExchangePlugin(BasePlugin):
     """CEX Plugin"""

@@ -5,11 +5,12 @@ Bot Launcher and API
 """
 
 import asyncio
+
 import uvicorn
 from fastapi import FastAPI, Request
 
 from tt.config import settings
-from tt.utils import run_bot, send_notification, __version__
+from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
 

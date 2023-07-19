@@ -1,13 +1,14 @@
-import pytest
-# from unittest.mock import AsyncMock, 
+
 from unittest.mock import AsyncMock
-from dxsp import DexSwap
+
 import iamlistening
+import pytest
+from dxsp import DexSwap
 from findmyorder import FindMyOrder
 from iamlistening import Listener
+
 from tt.config import settings
 from tt.plugins.default_plugins.dex_exchange_plugin import DexExchangePlugin
-
 
 
 @pytest.fixture(name="bsc")

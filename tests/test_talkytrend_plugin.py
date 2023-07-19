@@ -1,5 +1,7 @@
-import pytest
 from unittest.mock import AsyncMock
+
+import pytest
+
 from tt.config import settings
 from tt.plugins.default_plugins.talkytrend_plugin import TalkyTrendPlugin
 

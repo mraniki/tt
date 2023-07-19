@@ -1,9 +1,11 @@
 import os
-from tt.config import settings
-from tt.utils import send_notification
-from tt.plugins.plugin_manager import BasePlugin
+
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
+
+from tt.config import settings
+from tt.plugins.plugin_manager import BasePlugin
+from tt.utils import send_notification
 
 
 class DexExchangePlugin(BasePlugin):

@@ -74,9 +74,9 @@ https://github.com/mraniki/tt/blob/efaa4e85643e5e2de1f2d8a3616d21a71df45241/exam
 <details close>
 <summary>Config</summary>
 
-https://github.com/mraniki/tt/blob/efaa4e85643e5e2de1f2d8a3616d21a71df45241/tt/talky_settings.toml#L1-L367
+https://github.com/mraniki/tt/blob/b0e72f68345271c00cf1eed4c6506b8b00ca0b4a/tt/talky_settings.toml#L1-L367
 
-<!-- <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fmraniki%2Ftt%2Fblob%efaa4e85643e5e2de1f2d8a3616d21a71df45241%2Ftt%2Ftalky_settings.toml&style=nnfx-dark&type=code&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script>-->
+<!-- <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fmraniki%2Ftt%2Fblob%2Fmain%2Ftt%2Ftalky_settings.toml&style=nnfx-dark&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script> -->
 
 </details>
 

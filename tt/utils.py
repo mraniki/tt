@@ -5,10 +5,12 @@ __version__ = "4.0.0"
 
 
 import asyncio
+
 from apprise import Apprise, NotifyFormat
-from tt.config import settings, logger
-from tt.plugins.plugin_manager import PluginManager
 from iamlistening import Listener
+
+from tt.config import logger, settings
+from tt.plugins.plugin_manager import PluginManager
 
 
 async def send_notification(msg):
@@ -22,9 +24,10 @@ async def send_notification(msg):
         aobj.add(settings.apprise_config)
     elif settings.apprise_url:
         aobj.add(settings.apprise_url)
+    msg_format = settings.apprise_format or NotifyFormat.MARKDOWN
     await aobj.async_notify(
         body=msg,
-        body_format=settings.apprise_format)
+        body_format=msg_format)
 
 
 async def start_listener(max_iterations=None):
