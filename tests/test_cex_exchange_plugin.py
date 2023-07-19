@@ -42,17 +42,18 @@ async def test_plugin(plugin):
 @pytest.mark.asyncio
 async def test_parse_quote(plugin, caplog):
     """Test parse_message balance """
-    exchange = plugin.exchange
-    print(exchange.id)
+    # exchange = plugin.exchange
     await plugin.handle_message('/q BTCUSDT')
     assert "🏦" in caplog.text
 
 
 @pytest.mark.asyncio
-async def test_info_message(plugin):
-    """test exchange cex"""
-    output = await plugin.get_info()
-    assert output is not None
+async def test_parse_help(plugin):
+    """Test help """
+    plugin.exchange.get_info = AsyncMock()
+    await plugin.handle_message('/help')
+    plugin.exchange.get_info.assert_awaited_once()
+
 
 
 @pytest.mark.asyncio
@@ -91,4 +92,4 @@ async def test_get_account_pnl(plugin):
     """Test pnl """
     plugin.get_account_pnl = AsyncMock()
     await plugin.handle_message('/d')
-    plugin.get_account_pnl.assert_awaited_once()
+    plugin.exchange.get_account_pnl.assert_awaited_once()
