@@ -2,6 +2,21 @@
 
 <!--next-version-placeholder-->
 
+## v4.2.0 (2023-07-20)
+
+### Feature
+
+* 🥚 adding command add module level ([`5a139c2`](https://github.com/mraniki/tt/commit/5a139c22af187d93a377dfd51188578581bc5ea6))
+
+### Fix
+
+* Update Requirements ([`2bd0fd1`](https://github.com/mraniki/tt/commit/2bd0fd17393227f347c04ee631fd459d8f8aa0d0))
+* ⬆️ dep ([`4f32a3b`](https://github.com/mraniki/tt/commit/4f32a3b0943c2fda2567f248e61906ac94e02736))
+* ✅ unit test update ([`3c7d0cd`](https://github.com/mraniki/tt/commit/3c7d0cd9ea0e14d724d67461704d9fb19c0f5b56))
+* ✅ updating unit test ([`2052efc`](https://github.com/mraniki/tt/commit/2052efc5791dc87ea04299e2552db0bbe3410a55))
+* Update Requirements ([`5239598`](https://github.com/mraniki/tt/commit/5239598a85d882b7273955cceb930eb0bea0da94))
+* 🔧  config alignment ([`d38a7a2`](https://github.com/mraniki/tt/commit/d38a7a29046a50f3442dbbf767a9f5ebfaed648c))
+
 ## v4.1.0 (2023-07-20)
 
 ### Feature
