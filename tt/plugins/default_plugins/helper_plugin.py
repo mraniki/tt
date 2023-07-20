@@ -15,7 +15,7 @@ class HelperPlugin(BasePlugin):
     def __init__(self):
         self.enabled = settings.helper_enabled
         if self.enabled:
-            self.version = f"🗿 {__version__}"
+            self.version = f"🗿TalkyTrader v{__version__}"
             self.host_ip = f"🕸 {self.get_host_ip()}"
             self.help_message = settings.helper_commands
 
