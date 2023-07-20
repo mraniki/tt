@@ -48,7 +48,7 @@ findmyorder = "^1.6.0"
 iamlistening = "^1.1.0"
 talkytrend = "^1.9.0"
 
-
+ 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^8.0.2"
 ruff = "^0.0.278"
@@ -110,48 +110,63 @@ omit = [
     "*/config.py"
 ]
 
+
 [tool.semantic_release]
-upload_to_vcs_release = false
-version_variables = ["pyproject.toml:version","tt/utils.py:__version__"]
-build_command = "pip install poetry && poetry build"
-commit_parser = "emoji"
+version_variable = ["pyproject.toml:version","tt/utils.py:__version__"]
+branch = "main"
+upload_to_pypi = false
+upload_to_release = false
+build_command = false
+remove_dist = false
+commit_parser = "semantic_release.history.emoji_parser"
+use_textual_changelog_sections = true
+changelog_sections = "breaking, feature, fix, documentation"
+major_emoji = "BREAKING,💥,:boom:"
+minor_emoji = "feat,🥚,:egg:,🚀,:rocket:,💄,:lipstick:,✨,:sparkles:"
+patch_emoji = "fix,bump,Update,🎨,:art:,🐛,:bug:,🚑,:ambulance:,⚡,:zap:,🔥,:fire:,🚨,:rotating_light:,♻️,:recycle:,🔧,:wrench:,⬆️,:arrow_up:,🩹,:adhesive_bandage:,👷,:construction_worker:,📝,:memo:,🔒,:lock:,👽,:alien:,💬,:speech_balloon:,🥅,:goal_net:,✅,:white_check_mark:,🐳,:whale:,🙈,:see_no_evil:,⚗️,:alembic:,🧐,:monocle_face:,🔇,:mute:,🔊:volume:"
+
+# [tool.semantic_release]
+# upload_to_vcs_release = false
+# version_variables = ["pyproject.toml:version","tt/utils.py:__version__"]
+# build_command = "pip install poetry && poetry build"
+# commit_parser = "emoji"
 
 
-[tool.semantic_release.commit_parser_options]
-major_tags = [
-    "BREAKING",
-    "💥",
-    ":boom:",
-  ]
-minor_tags = ["feat",
-    "🥚",":egg:",
-    "🚀",":rocket:",
-    "💄",":lipstick:",
-    "✨",":sparkles:",
-]
+# [tool.semantic_release.commit_parser_options]
+# major_tags = [
+#     "BREAKING",
+#     "💥",
+#     ":boom:",
+#   ]
+# minor_tags = ["feat",
+#     "🥚",":egg:",
+#     "🚀",":rocket:",
+#     "💄",":lipstick:",
+#     "✨",":sparkles:",
+# ]
 
-patch_tags = ["fix","bump","Update",
-    "🎨",":art:",
-    "🐛",":bug:",
-    "🚑",":ambulance:",
-    "⚡",":zap:",
-    "🔥",":fire:",
-    "🚨",":rotating_light:",
-    "♻️",":recycle:",
-    "🔧",":wrench:",
-    "⬆️",":arrow_up:",
-    "🩹",":adhesive_bandage:",
-    "👷",":construction_worker:",
-    "📝",":memo:",
-    "🔒",":lock:",
-    "👽",":alien:",
-    "💬",":speech_balloon:",
-    "🥅",":goal_net:",
-    "✅",":white_check_mark:",
-    "🐳",":whale:",
-    "🙈",":see_no_evil:",
-    "⚗️",":alembic:",
-    "🧐",":monocle_face:",
-    "🔇",":mute:",
-    "🔊",":volume:",
-]
+# patch_tags = ["fix","bump","Update",
+#     "🎨",":art:",
+#     "🐛",":bug:",
+#     "🚑",":ambulance:",
+#     "⚡",":zap:",
+#     "🔥",":fire:",
+#     "🚨",":rotating_light:",
+#     "♻️",":recycle:",
+#     "🔧",":wrench:",
+#     "⬆️",":arrow_up:",
+#     "🩹",":adhesive_bandage:",
+#     "👷",":construction_worker:",
+#     "📝",":memo:",
+#     "🔒",":lock:",
+#     "👽",":alien:",
+#     "💬",":speech_balloon:",
+#     "🥅",":goal_net:",
+#     "✅",":white_check_mark:",
+#     "🐳",":whale:",
+#     "🙈",":see_no_evil:",
+#     "⚗️",":alembic:",
+#     "🧐",":monocle_face:",
+#     "🔇",":mute:",
+#     "🔊",":volume:",
+# ]
