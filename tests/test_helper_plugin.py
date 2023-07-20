@@ -68,7 +68,7 @@ async def test_parsing_trading_switch(plugin):
 
 
 @pytest.mark.asyncio
-async def test__help(plugin):
+async def test_help(plugin):
     """Test help """
     result = await plugin.get_helper_help() 
     assert result is not None
@@ -86,3 +86,11 @@ async def test_network(plugin):
     """Test help """
     result = await plugin.get_helper_network()
     assert result is not None
+
+
+@pytest.mark.asyncio
+async def test_trading_switch(plugin):
+    """Test help """
+    result = await plugin.trading_switch_command()
+    assert result is not None
+    assert "Trading" in result
