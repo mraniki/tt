@@ -61,7 +61,7 @@ async def test_parse_quote(plugin, caplog):
 @pytest.mark.asyncio
 async def test_parse_help(plugin):
     """Test help """
-    plugin.exchange.get_info = AsyncMock()
+    plugin.exchange.get_help = AsyncMock()
     await plugin.handle_message('/help')
     plugin.exchange.get_help.assert_awaited_once()
 
