@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v4.2.1 (2023-07-20)
+
+### Fix
+
+* ✅ unit test ([`e1e4536`](https://github.com/mraniki/tt/commit/e1e4536eca531dbb58ac381e86b1dd1b83d844aa))
+* :white_check_mark:  unit test for helper ([`94514c3`](https://github.com/mraniki/tt/commit/94514c3627b4fe872716803c7fcc3bdb195a2cdc))
+* :zap:helper info message without network ([`76b4263`](https://github.com/mraniki/tt/commit/76b4263c34a26f95da299c8a2c2d4d8c67451e24))
+* :white_check_mark:  unit test for helper ([`0fd9c97`](https://github.com/mraniki/tt/commit/0fd9c97bd74feea4edaae8afb3d628f10535f8f6))
+* ✅ additional unit test coverage ([`5d98155`](https://github.com/mraniki/tt/commit/5d98155fe9033e16dbf9f8d1f54a97cbe46c6dae))
+
 ## v4.2.0 (2023-07-20)
 
 ### Feature
