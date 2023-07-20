@@ -32,6 +32,13 @@ async def test_plugin_notification(plugin):
 
 
 @pytest.mark.asyncio
+async def test_bot_ignore(plugin):
+    msg = "⚠️"
+    result =  await plugin.handle_message(msg)
+    assert result is None
+
+
+@pytest.mark.asyncio
 async def test_parsing_help(plugin):
     """Test help """
     plugin.get_helper_help = AsyncMock()
@@ -94,3 +101,4 @@ async def test_trading_switch(plugin):
     result = await plugin.trading_switch_command()
     assert result is not None
     assert "Trading" in result
+    assert settings.trading_enabled is False

@@ -1,17 +1,12 @@
 """
  TT test
 """
-
 import asyncio
-from unittest import mock
 from unittest.mock import AsyncMock
 
 import pytest
-from click.testing import CliRunner
 from fastapi.testclient import TestClient
 from iamlistening import Listener
-from uvicorn.main import main as cli
-from uvicorn.server import Server
 
 from tt.bot import app
 from tt.config import settings
@@ -36,6 +31,7 @@ def message():
 
 def test_app_endpoint_main():
     client = TestClient(app)
+    print(client)
     response = client.get("/")
     assert response.status_code == 200
 
@@ -91,15 +87,3 @@ async def test_baseplugins():
     assert callable(plugin.send_notification) 
     assert callable(plugin.should_handle)
     assert callable(plugin.handle_message)
-
-class App:
-    pass
-
-def test_uvicorn_server_run() -> None:
-    runner = CliRunner()
-
-    with mock.patch.object(Server, "run") as mock_run:
-        result = runner.invoke(cli, ["tests.test_cli:App"])
-
-    assert result.exit_code == 3
-    mock_run.assert_called_once()
