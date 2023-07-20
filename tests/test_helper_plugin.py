@@ -42,10 +42,18 @@ async def test_trading_switch(plugin):
 
 
 @pytest.mark.asyncio
-async def test_help(plugin,caplog):
+async def test_help(plugin):
+    """Test switch """
+    plugin.get_helper_help = AsyncMock()
+    await plugin.handle_message(
+        f"{settings.bot_prefix}{settings.bot_command_help}")
+    plugin.get_helper_help.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_info(plugin):
     """Test switch """
     plugin.get_helper_info = AsyncMock()
     await plugin.handle_message(
-        f"{settings.bot_prefix}{settings.bot_command_help}")
-    print(caplog.text)
+        f"{settings.bot_prefix}{settings.bot_command_info}")
     plugin.get_helper_info.assert_awaited_once()

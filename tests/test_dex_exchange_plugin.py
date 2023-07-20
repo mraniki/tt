@@ -101,6 +101,13 @@ async def test_parse_pnl(plugin):
 @pytest.mark.asyncio
 async def test_parse_help(plugin):
     """Test help """
-    plugin.exchange.get_info = AsyncMock()
+    plugin.exchange.get_help = AsyncMock()
     await plugin.handle_message('/help')
+    plugin.exchange.get_help.assert_awaited_once()
+
+@pytest.mark.asyncio
+async def test_parse_info(plugin):
+    """Test help """
+    plugin.exchange.get_info = AsyncMock()
+    await plugin.handle_message('/info')
     plugin.exchange.get_info.assert_awaited_once()
