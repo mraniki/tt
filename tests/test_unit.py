@@ -3,15 +3,19 @@
 """
 
 import asyncio
+from unittest import mock
 from unittest.mock import AsyncMock
 
 import pytest
+from click.testing import CliRunner
 from fastapi.testclient import TestClient
 from iamlistening import Listener
+from uvicorn.main import main as cli
+from uvicorn.server import Server
 
 from tt.bot import app
 from tt.config import settings
-from tt.plugins.plugin_manager import PluginManager
+from tt.plugins.plugin_manager import BasePlugin, PluginManager
 from tt.utils import send_notification, start_listener, start_plugins
 
 #start_bot, run_bot
@@ -79,21 +83,23 @@ async def test_start_plugins():
     plugin_manager.load_plugins.assert_called_once()
 
 
-# @pytest.mark.asyncio
-# async def test_start_bot():
-#     listener = AsyncMock(spec=Listener)
-#     plugin_manager = AsyncMock(spec=PluginManager)
-#     listener.get_latest_message.return_value = "Test message"
+@pytest.mark.asyncio
+async def test_baseplugins():
+    plugin = BasePlugin
+    assert callable(plugin.start) 
+    assert callable(plugin.stop)
+    assert callable(plugin.send_notification) 
+    assert callable(plugin.should_handle)
+    assert callable(plugin.handle_message)
 
-#     await start_bot(listener, plugin_manager)
+class App:
+    pass
 
-#     listener.get_latest_message.assert_called_once()
-#     plugin_manager.process_message.assert_called_once_with("Test message")
+def test_uvicorn_server_run() -> None:
+    runner = CliRunner()
 
-# @pytest.mark.asyncio
-# async def test_run_bot():
-#     mock_bot = AsyncMock()
-#     start_listener = AsyncMock()
-#     bot_task = asyncio.create_task(run_bot(bot=mock_bot))
-#     start_listener.assert_awaited_once()
-#     await bot_task
+    with mock.patch.object(Server, "run") as mock_run:
+        result = runner.invoke(cli, ["tests.test_cli:App"])
+
+    assert result.exit_code == 3
+    mock_run.assert_called_once()

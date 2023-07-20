@@ -1,3 +1,4 @@
+from datetime import datetime
 from unittest.mock import AsyncMock
 
 import pytest
@@ -16,6 +17,21 @@ def set_test_settings_CEX():
 def order():
     """return valid order"""
     return "buy BTCUSDT sl=200 tp=400 q=1%"
+
+@pytest.fixture(name="order_parsed")
+def result_order():
+    """return standard expected results"""
+    return {
+        "action": "BUY",
+        "instrument": "EURUSD",
+        "stop_loss": 200,
+        "take_profit": 400,
+        "quantity": 2,
+        "order_type": None,
+        "leverage_type": None,
+        "comment": None,
+        "timestamp": datetime.now()
+    }
 
 
 @pytest.fixture(name="plugin")
@@ -42,6 +58,9 @@ async def test_plugin(plugin):
     assert exchange is not None
     assert isinstance(exchange,
     tt.plugins.default_plugins.cex_exchange_plugin.CexExchange)
+    assert callable(plugin.exchange.get_account_balance)
+    assert callable(plugin.exchange.get_account_position)
+    assert callable(plugin.exchange.execute_order)
 
 @pytest.mark.asyncio
 async def test_position(plugin):
@@ -107,3 +126,19 @@ async def test_get_account_pnl(plugin):
     plugin.exchange.get_account_pnl = AsyncMock()
     await plugin.handle_message('/d')
     plugin.exchange.get_account_pnl.assert_awaited_once()
+
+@pytest.mark.asyncio
+async def test_get_help(plugin):
+    result = await plugin.exchange.get_help()
+    print(result)
+    assert result is not None
+    assert "🎯" in result
+    assert "🏦" in result
+
+
+@pytest.mark.asyncio
+async def test_execute_order(plugin, order_parsed):
+    result = await plugin.exchange.execute_order(order_parsed)
+    print(result)
+    assert result is not None
+    assert "⚠️ order execution" in result

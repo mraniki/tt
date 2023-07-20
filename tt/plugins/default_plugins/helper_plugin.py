@@ -48,6 +48,7 @@ class HelperPlugin(BasePlugin):
             command_mapping = {
                 settings.bot_command_help: self.get_helper_help,
                 settings.bot_command_info: self.get_helper_info,
+                settings.bot_command_network: self.get_helper_network,
                 settings.bot_command_trading: self.trading_switch_command,
                 settings.bot_command_restart: self.restart,
             }
@@ -61,16 +62,23 @@ class HelperPlugin(BasePlugin):
 
     async def get_helper_info(self):
         """Help Message"""
+        return self.version
+
+    async def get_helper_network(self):
+        """Help Message"""
         ping_result = ping3.ping(settings.ping, unit='ms')
         ping_result = round(ping_result, 2) if ping_result is not None else 0
-        return (f"{self.version}\n"
-                f"️{self.host_ip}\n"
+        return (f"️{self.host_ip}\n"
                 f"🏓 {ping_result}\n")
 
     async def trading_switch_command(self):
         """Trading switch command"""
         settings.trading_enabled = not settings.trading_enabled
         return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
+
+    async def restart(self):
+        """Restart Bot """
+        os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
     def get_host_ip(self):
         """Returns host IP """
@@ -79,7 +87,3 @@ class HelperPlugin(BasePlugin):
         ip_address = s.getsockname()[0]
         s.close()
         return ip_address
-
-    async def restart(self):
-        """Restart Bot """
-        os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])

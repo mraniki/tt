@@ -116,7 +116,7 @@ class BasePlugin:
         while True:
             schedule.run_pending()
             await asyncio.sleep(10)
-
+ 
     @staticmethod
     def notify_hourly(function):
         # Define hourly schedule for sending notifications
