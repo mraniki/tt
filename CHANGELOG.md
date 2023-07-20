@@ -2,6 +2,68 @@
 
 <!--next-version-placeholder-->
 
+## v4.1.0 (2023-07-20)
+
+### Feature
+
+* 💄 Add apprise format as settings (HTML/MARKDOWN) ([`04226b6`](https://github.com/mraniki/tt/commit/04226b68e1794c2eff8da91286220f46115c671e))
+* ✨ scheduler decorator for plugin ([`2d4b9dc`](https://github.com/mraniki/tt/commit/2d4b9dce17b5b7183aa48d4e6fb75114e5b423db))
+* 💄 reintroduce missing trading_enabled settings ([`500865c`](https://github.com/mraniki/tt/commit/500865c2a7ad37bec658bfcd1229a811ff997b07))
+
+### Fix
+
+* Update Requirements ([`ef31852`](https://github.com/mraniki/tt/commit/ef3185232a7311a4d532570cbdc864aade1af9b6))
+* 👷 CI Change revert to v7 semantic ([`5822016`](https://github.com/mraniki/tt/commit/582201609b6e9ac1fa273102937ee504b803281b))
+* Update Requirements ([`372a9cd`](https://github.com/mraniki/tt/commit/372a9cd19d2927a9b51c464d21d0449700f20c60))
+* ✅ unit test ([`5140ed0`](https://github.com/mraniki/tt/commit/5140ed03593630c785ced79c65ed173b91ee80a2))
+* Update Requirements ([`b5b432d`](https://github.com/mraniki/tt/commit/b5b432d9f57e5691660c0601097d8e2119a25e41))
+* Update Requirements ([`e6416a9`](https://github.com/mraniki/tt/commit/e6416a9887d85c9639147b54a832a3af3f7b5f3b))
+* ✅ increase unit test ([`ff7eaf6`](https://github.com/mraniki/tt/commit/ff7eaf6e013353acb14970d2a1913c312ab81fcb))
+* ✅  unit test ([`df673fe`](https://github.com/mraniki/tt/commit/df673fe65298fb7b8965298e3c78c1e8448bebbd))
+* 🚨 import ([`7474577`](https://github.com/mraniki/tt/commit/7474577e5aa6c122bc3e57d89baee3d9cf434a25))
+* ✅ unit test fix ([`3604645`](https://github.com/mraniki/tt/commit/3604645253af2a3bbb65e9f6316a5e1b33f26605))
+* ✅ unit test for CEX fixed ([`d8e1ffc`](https://github.com/mraniki/tt/commit/d8e1ffc1349133ceca70a0e9076653f906578e82))
+* Update Requirements ([`431115d`](https://github.com/mraniki/tt/commit/431115de0e04985e1621474713e9aafd2c2a848d))
+* 👷 CI Change for semantic ([`10d0a58`](https://github.com/mraniki/tt/commit/10d0a5866f16d83040b233ec099b6ef7c8ff58ee))
+* ⚗️ ([`81ee0dc`](https://github.com/mraniki/tt/commit/81ee0dc847e213c2fb3a74311bf440b56b554296))
+* ✅ updated CEX unit test ([`93b30ab`](https://github.com/mraniki/tt/commit/93b30ab06b974be3c53cf993b6ad3a6c999c742e))
+* ⚗️ testing limit ([`f349248`](https://github.com/mraniki/tt/commit/f3492484cf714212ba549a4410dbb0875ae57b91))
+* ♻️ CEX plugin to extract CEX exchange class for future ([`3e97f92`](https://github.com/mraniki/tt/commit/3e97f92b9265351a1be0c674c3583ade1f5ee58c))
+* 👷 CI Change ([`16db050`](https://github.com/mraniki/tt/commit/16db0504bf4bdd61d0cbc13e8988689277a6df43))
+* 🐛 remove the build command for semantic ([`2bac075`](https://github.com/mraniki/tt/commit/2bac075f9869970023b37f4f9c4fb3f5802aa70d))
+* 📝 updateing example formatting ([`82f0762`](https://github.com/mraniki/tt/commit/82f076208991b86122f23180d3286b9af947abc6))
+* ⬆️ semantic upgrade ([`4a980db`](https://github.com/mraniki/tt/commit/4a980db96b11c1bf81fd6cbaaa61c76dd30b969a))
+* Update Requirements ([`c5d395c`](https://github.com/mraniki/tt/commit/c5d395c03e5c2029e684021df6b01f3faf65a680))
+* ⬆️ semantic check ([`7b36ab2`](https://github.com/mraniki/tt/commit/7b36ab272708013cc4c8be601794ae3e02fb8df6))
+* ⬆️ semantic verification ([`73cd925`](https://github.com/mraniki/tt/commit/73cd92518834a5456d05991230854cb48aeb64e9))
+* Update Requirements ([`91d5b79`](https://github.com/mraniki/tt/commit/91d5b790b4fa294364b50292f70f7d7ad78913ab))
+* Update Requirements ([`6c2d04b`](https://github.com/mraniki/tt/commit/6c2d04b7d6860e1666e4235c3d62f3641f948479))
+* ⬆️ renovate exclude req ([`7f10748`](https://github.com/mraniki/tt/commit/7f107482432cc005a96805f38fd6b199eacc10c6))
+* Update Requirements ([`414c279`](https://github.com/mraniki/tt/commit/414c279bb1723ceae6309e3bbc9820a83c1009d9))
+* 🚨 linter sorting ([`136fd92`](https://github.com/mraniki/tt/commit/136fd92abd6737adc0e78875f676734f4f010cfe))
+* 🚨 linter config ([`c3206a8`](https://github.com/mraniki/tt/commit/c3206a875e8edb8c70a6cf1f86ab89fbdc6b06d0))
+* ⬆️ 👷 CI Change ([`7c38e62`](https://github.com/mraniki/tt/commit/7c38e62e10b24dba03af2cd75adbdc82a40863fe))
+* 🚨 linter ([`7483f0d`](https://github.com/mraniki/tt/commit/7483f0d495916909430ea5636955be4cd64fb91d))
+* 👷 CI Change in pytoml + ruff ([`b5d6ffc`](https://github.com/mraniki/tt/commit/b5d6ffc9e9fbf073133b14ad02b86a1690ebdabe))
+* :whale: Remove TODO to import .env example file ([`99aaab5`](https://github.com/mraniki/tt/commit/99aaab5372a24656e3ac77a35e9446175e483874))
+* :wrench:  Update CI ([`f8ac60c`](https://github.com/mraniki/tt/commit/f8ac60c095c0fe7c25245559bcf1cde4b9c97e4a))
+* Update README.md ([`198f1ce`](https://github.com/mraniki/tt/commit/198f1cec7dafe1c3e6565ad199994fbdf3c0f98c))
+* Update example_settings.toml ([`e313162`](https://github.com/mraniki/tt/commit/e3131625ca41607618d660d7b50f9fdda620a306))
+* Update README.md ([`f9cb6b5`](https://github.com/mraniki/tt/commit/f9cb6b50d6492039e263f193c90737af8b7fc2cc))
+* :wrench:  config update ([`1857547`](https://github.com/mraniki/tt/commit/18575478e3b204347c2291e0d3e742cd841132fb))
+* ✅ unit test ([`383e7b5`](https://github.com/mraniki/tt/commit/383e7b5b2e867f7091935f3e9c685d18399a0eaa))
+* 🔧 testing config ([`5d7d8fc`](https://github.com/mraniki/tt/commit/5d7d8fc133b68c659e264572c61e1eef0530449a))
+* 🚨 ruff ([`c8d6a87`](https://github.com/mraniki/tt/commit/c8d6a87280369245972d92e4960512859bec3167))
+* 🎨 🔧  improve structure for the main setting file ([`42f6718`](https://github.com/mraniki/tt/commit/42f6718887ee5fd4227f051ca124c8cf5e0f0393))
+* :rotating_light:  linter ([`009101c`](https://github.com/mraniki/tt/commit/009101cb3473803bf82e68d7d31dfee0d82cf9f5))
+* 🔧 ruff settings ([`3b40989`](https://github.com/mraniki/tt/commit/3b409893267690a95e660c5af8faabd5cb2e704a))
+* :art:  setting cleanup ([`de1d630`](https://github.com/mraniki/tt/commit/de1d63022cfe43951d39b1044d87d309ea2759c9))
+* 🔧 testing setting ([`fb4f180`](https://github.com/mraniki/tt/commit/fb4f1800fa44f2843ae7a6a37c7fec8e9addcc2f))
+* 🚨 updated linter ([`fc59e42`](https://github.com/mraniki/tt/commit/fc59e420eb78e4d36eef6c3f20d885e433dc3381))
+* 🔧 feed config update ([`2296559`](https://github.com/mraniki/tt/commit/229655905b570db31548d092d03c8870565a2199))
+* 🚨 ruff linter ([`33018ab`](https://github.com/mraniki/tt/commit/33018abe27e99b458d47c36fb7b0f494f452800b))
+* 🎨  cleanup ([`80947f4`](https://github.com/mraniki/tt/commit/80947f4e5350738a2461ff987c57c38ba3ade8c5))
+
 ## v4.0.0 (2023-07-17)
 
 ### Breaking
