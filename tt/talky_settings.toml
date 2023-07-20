@@ -106,11 +106,11 @@ user_plugins_allowed = false
 ########################################
 
 helper_enabled = true
-helper_commands = "🔀/trading\n🔁 /restart"
+helper_commands = "🔀/trading\n🔁 /restart\n🕸️ /network"
 bot_command_trading = "trading"
+bot_command_network = "network"
 bot_command_restart = "restart"
 ping = "8.8.8.8"
-bot_msg_help = "🆘\n"
 
 
 ########################################
@@ -275,7 +275,6 @@ helper_commands = "🔀/trading\n🔁 /restart"
 bot_command_trading = "trading"
 bot_command_restart = "restart"
 ping = "8.8.8.8"
-bot_msg_help = "🆘\n"
 findmyorder_enabled = true
 action_identifier = "BUY SELL LONG SHORT"
 stop_loss_identifier = "sl="
@@ -368,7 +367,6 @@ helper_commands = "🔀/trading\n🔁 /restart"
 bot_command_trading = "trading"
 bot_command_restart = "restart"
 ping = "8.8.8.8"
-bot_msg_help = "🆘\n"
 talkytrend_enabled = true
 talkytrend_commands = "📺 /live\n📰 /news\n📊 /trend"
 bot_command_trend = "trend"
@@ -388,7 +386,6 @@ helper_commands = "🔀/trading\n🔁 /restart"
 bot_command_trading = "trading"
 bot_command_restart = "restart"
 ping = "8.8.8.8"
-bot_msg_help = "🆘\n"
 dxsp_enabled = true
 dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
 dex_wallet_address = "0x1234567890123456789012345678901234567899"
