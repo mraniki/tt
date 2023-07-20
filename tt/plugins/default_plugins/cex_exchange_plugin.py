@@ -52,7 +52,8 @@ class CexExchangePlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_help: self.exchange.get_info,
+                settings.bot_command_help: self.exchange.get_help,
+                settings.bot_command_info: self.exchange.get_info,
                 settings.bot_command_quote: lambda: self.exchange.get_quote(args[0]),
                 settings.bot_command_bal: self.exchange.get_account_balance,
                 settings.bot_command_pos: self.exchange.get_account_position,
@@ -81,11 +82,16 @@ class CexExchange():
                             }})
             if settings.cex_testmode:
                 self.cex.set_sandbox_mode('enabled')
+            self.commands = settings.ccxt_commands
+
     async def get_info(self):
         """info_message"""    
         exchange_name = self.cex.id
         account_info = self.cex.uid
         return f"💱 {exchange_name}\n🪪 {account_info}"
+
+    async def get_help(self):
+        return (f"{self.commands}\n")
 
     async def get_quote(self, symbol):
         """return main asset balance."""

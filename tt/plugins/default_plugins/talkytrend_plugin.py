@@ -45,9 +45,11 @@ class TalkyTrendPlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_help: self.trend.get_talkytrend_info,
-                settings.bot_command_news: self.trend.get_tv,
+                settings.bot_command_help: self.trend.get_talkytrend_help,
+                settings.bot_command_info: self.trend.get_talkytrend_info,
+                settings.bot_command_tv: self.trend.get_tv,
                 settings.bot_command_trend: self.trend.check_signal,
+                settings.bot_command_news: self.trend.fetch_key_feed,
             }
 
             if command in command_mapping:
@@ -57,4 +59,4 @@ class TalkyTrendPlugin(BasePlugin):
     @BasePlugin.notify_hourly
     async def scheduled_function(self):
         """Hourly fetch the latest news"""
-        await self.trend.fetch_key_feed()
+        await self.trend.fetch_key_feed() 

@@ -17,7 +17,7 @@ class HelperPlugin(BasePlugin):
         if self.enabled:
             self.version = f"🗿 {__version__}"
             self.host_ip = f"🕸 {self.get_host_ip()}"
-            self.help_message = settings.bot_msg_help
+            self.help_message = settings.helper_commands
 
     async def start(self):
         """Starts the plugin"""
@@ -46,7 +46,8 @@ class HelperPlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_help: self.get_helper_info,
+                settings.bot_command_help: self.get_helper_help,
+                settings.bot_command_info: self.get_helper_info,
                 settings.bot_command_trading: self.trading_switch_command,
                 settings.bot_command_restart: self.restart,
             }
@@ -54,14 +55,17 @@ class HelperPlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
+    async def get_helper_help(self):
+        """Help Message"""
+        return f"{self.help_message}"
+
     async def get_helper_info(self):
         """Help Message"""
         ping_result = ping3.ping(settings.ping, unit='ms')
         ping_result = round(ping_result, 2) if ping_result is not None else 0
         return (f"{self.version}\n"
                 f"️{self.host_ip}\n"
-                f"🏓 {ping_result}\n"
-                f"{self.help_message}")
+                f"🏓 {ping_result}\n")
 
     async def trading_switch_command(self):
         """Trading switch command"""
