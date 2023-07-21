@@ -66,7 +66,10 @@ telethon_api_hash = ""
 matrix_hostname = ""
 matrix_user = ""
 matrix_pass = ""
-iamlistening_commands = "/help"
+rocket_chat_server = ""
+rocket_chat_user_id = ""
+rocket_chat_auth_token = ""
+
 
 ########################################
 ###   COMMON BOT COMMAND SETTINGS    ###
@@ -97,7 +100,6 @@ trading_risk_amount = 10
 plugin_enabled = true
 plugin_directory = "tt.plugins.default_plugins"
 example_plugin_enabled = false
-example_plugin_schedule_enabled = false
 user_plugins_allowed = false
 
 
@@ -248,7 +250,6 @@ apprise_config = ""
 apprise_url = "json://localhost"
 apprise_format = "NotifyFormat.MARKDOWN"
 iamlistening_enabled = true
-iamlistening_commands = "/help"
 bot_token = ""
 bot_channel_id = ""
 telethon_api_id = ""
@@ -256,6 +257,9 @@ telethon_api_hash = ""
 matrix_hostname = ""
 matrix_user = ""
 matrix_pass = ""
+rocket_chat_server = ""
+rocket_chat_user_id = ""
+rocket_chat_auth_token = ""
 bot_prefix = "/"
 bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
 bot_command_help = "help"
