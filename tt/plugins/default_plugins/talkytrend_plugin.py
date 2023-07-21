@@ -13,7 +13,7 @@ class TalkyTrendPlugin(BasePlugin):
         self.enabled = settings.talkytrend_enabled
         if self.enabled:
             self.trend = TalkyTrend()
-            self.run_schedule() 
+            await self.run_schedule() 
 
     async def start(self):
         """Starts the TalkyTrend plugin"""  
