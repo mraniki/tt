@@ -74,7 +74,7 @@ class PluginManager:
                 logger.error("process %s: %s", plugin, error)
                 continue
 
-
+ 
 
 class BasePlugin:
     """

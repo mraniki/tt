@@ -13,6 +13,7 @@ class TalkyTrendPlugin(BasePlugin):
         self.enabled = settings.talkytrend_enabled
         if self.enabled:
             self.trend = TalkyTrend()
+            self.run_schedule() 
 
     async def start(self):
         """Starts the TalkyTrend plugin"""  
@@ -58,4 +59,4 @@ class TalkyTrendPlugin(BasePlugin):
     @BasePlugin.notify_hourly
     async def scheduled_function(self):
         """Hourly fetch the latest news"""
-        await self.trend.fetch_key_feed() 
+        await self.trend.fetch_key_feed()  
