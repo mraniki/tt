@@ -1,7 +1,7 @@
 import os
 import time
 
-from schedule import every, repeat, run_pending
+from schedule import every, run_pending
 from talkytrend import TalkyTrend
 
 from tt.config import logger, settings
@@ -21,7 +21,7 @@ class TalkyTrendPlugin(BasePlugin):
     async def start(self):
         """Starts the TalkyTrend plugin"""  
         if self.enabled:
-            every(4).minutes.do(await self.run_schedule())
+            every(4).minutes.do(f"{await self.run_schedule()}")
             while True:
                 logger.debug("scheduler setup")
                 run_pending()
