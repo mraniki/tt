@@ -54,7 +54,7 @@ talkytrend = "^1.10.0"
 
  
 [tool.poetry.group.dev.dependencies]
-python-semantic-release = "^8.0.2"
+#python-semantic-release = "^8.0.3"
 ruff = "^0.0.280"
 
 [tool.ruff]
