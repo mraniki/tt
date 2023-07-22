@@ -18,8 +18,8 @@ class TalkyTrendPlugin(BasePlugin):
     async def start(self):
         """Starts the TalkyTrend plugin"""  
         if self.enabled:
-            self.has_scheduled_jobs= True
             await self.run_schedule()
+            self.has_scheduled_jobs= True
             while True:
                 async for message in self.trend.scanner():
                     await self.send_notification(message)
