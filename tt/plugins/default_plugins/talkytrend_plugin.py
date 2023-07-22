@@ -10,17 +10,18 @@ from tt.utils import send_notification
 class TalkyTrendPlugin(BasePlugin):
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
-        self.enabled = settings.talkytrend_enabled
-        if self.enabled:
-            self.trend = TalkyTrend()
-            self.has_scheduled_jobs = False 
+            super().__init__()  # Call the base class's __init__ method
+
+            self.enabled = settings.talkytrend_enabled
+            if self.enabled:
+                self.trend = TalkyTrend()
+                self.has_scheduled_jobs = True
             
 
     async def start(self):
         """Starts the TalkyTrend plugin"""  
         if self.enabled:
             await self.run_schedule()
-            self.has_scheduled_jobs= True
             while True:
                 async for message in self.trend.scanner():
                     await self.send_notification(message)
