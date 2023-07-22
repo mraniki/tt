@@ -136,6 +136,7 @@ class BasePlugin:
         # Define daily schedule for sending notifications at a given time
         def decorator(function):
             async def wrapper(self):
-                await self.schedule_daily(await self.send_notification(function), time_str)
+                await self.schedule_daily(
+                    await self.send_notification(function), time_str)
             return wrapper
             return decorator
