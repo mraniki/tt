@@ -105,6 +105,7 @@ class BasePlugin:
 
     def schedule_hourly(self, function):
         # Define hourly schedule
+        logger.debug("run hourly")
         def wrapper(*args, **kwargs):
             schedule.every().hour.do(function, *args, **kwargs)
         self.has_scheduled_jobs = True
@@ -127,7 +128,7 @@ class BasePlugin:
     def notify_hourly(function):
         # Define hourly schedule for sending notifications
         def wrapper(self):
-            self.schedule_hourly(self.send_notification(function))
+            self.schedule_hourly(await self.send_notification(function))
         return wrapper
 
     @staticmethod
@@ -135,6 +136,6 @@ class BasePlugin:
         # Define daily schedule for sending notifications at a given time
         def decorator(function):
             def wrapper(self):
-                self.schedule_daily(self.send_notification(function), time_str)
+                self.schedule_daily(await self.send_notification(function), time_str)
             return wrapper
             return decorator
