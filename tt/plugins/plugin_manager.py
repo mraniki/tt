@@ -63,14 +63,14 @@ class PluginManager:
 
  
 
-
-
 class BasePlugin:
     """
     ⚡ Base Plugin Class
     """
     def __init__(self):
         self.scheduler = AsyncIOScheduler()
+        self.enabled = False  # Default value
+
 
     async def start(self):
         self.scheduler.start()
@@ -89,3 +89,26 @@ class BasePlugin:
 
     async def plugin_schedule_task(self):
         pass
+
+    # def should_handle(self, message):
+    #     if not self.enabled:
+    #         return False
+    #     if message.startswith(settings.bot_ignore):
+    #         return False
+    #     return True
+
+    # async def handle_message(self, msg):
+    #     if not self.should_handle(msg):
+    #         return
+
+    #     command, *args = msg.split(" ")
+    #     command = command[1:]
+
+    #     command_mapping = self.get_command_mapping()
+
+    #     if command in command_mapping:
+    #         function = command_mapping[command]
+    #         await self.send_notification(f"{await function()}")
+
+    # def get_command_mapping(self):
+    #     return {}

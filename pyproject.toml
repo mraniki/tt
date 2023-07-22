@@ -48,7 +48,7 @@ ping3 = "^4.0.4"
 asyncz = "^1.2.0"
 ccxt = "^4.0.0"
 dxsp = "^4.1.0"
-findmyorder = "^0.4.0"
+findmyorder = "^1.6.1"
 iamlistening = "^1.1.7"
 talkytrend = "^1.10.0"
 
