@@ -1,8 +1,8 @@
 import asyncio
-
-# import httpimport
 import importlib
 import pkgutil
+
+from asyncz.schedulers.asyncio import AsyncIOScheduler
 
 from tt.config import logger, settings
 
@@ -12,6 +12,7 @@ class PluginManager:
     def __init__(self, plugin_directory=None):
         self.plugin_directory = plugin_directory or settings.plugin_directory
         self.plugins = []
+        self.scheduler = None
 
     def load_plugins(self):
         """ Load plugins from directory """
@@ -25,20 +26,7 @@ class PluginManager:
                 self.load_plugin(module, plugin_name)
             except Exception as e:
                 logger.warning("Error loading plugin %s: %s", plugin_name, e)
-        # if settings.user_plugins_allowed:
-        #     with httpimport.github_repo('mraniki', 'tt_plugins'):
-        #         import user_plugins
-        #         user_package = importlib.import_module(user_plugins)
-        #         logger.debug("Loading plugins from: %s", user_package)
-        #         for _, plugin_name, _ in pkgutil.iter_modules(user_plugins):
-        #             try:
-        #                 module = importlib.import_module(
-        #                     f"{user_plugins.__name__}.{plugin_name}")
-        #                 logger.debug("Module loaded: %s", module)
-        #                 self.load_plugin(module, plugin_name)
-        #             except Exception as e:
-        #                 logger.warning("Error loading user plugin %s: %s",
-        # plugin_name, e)
+
 
 
     def load_plugin(self, module, plugin_name):
@@ -54,6 +42,7 @@ class PluginManager:
 
     async def start_all_plugins(self):
         """ Start all plugins """
+    
         for plugin in self.plugins:
             await self.start_plugin(plugin)
 
@@ -82,12 +71,10 @@ class BasePlugin:
     ⚡ Base Plugin Class
     """
     def __init__(self):
-        self.has_scheduled_jobs = False
+        self.scheduler = AsyncIOScheduler()
 
     async def start(self):
-        # Start the scheduling loop as a separate task if there are scheduled jobs
-        if self.has_scheduled_jobs:
-            asyncio.create_task(self.run_schedule())
+        self.scheduler.start()
 
     async def stop(self):
         pass
@@ -101,16 +88,5 @@ class BasePlugin:
     async def handle_message(self, msg):
         pass
 
-    # async def run_schedule(self):
-    #     while self.has_scheduled_jobs:
-    #         logger.debug("run schedule")
-    #         run_pending()
-    #         await asyncio.sleep(10)
-
-
-    # async def notify_hourly(function):
-    #     # Define hourly schedule for sending notifications
-    #     async def wrapper(self):
-    #         logger.debug("notify hourly")
-    #         await self.send_notification(function)
-    #     return wrapper
+    async def plugin_schedule_task(self):
+        pass

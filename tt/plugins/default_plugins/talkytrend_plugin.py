@@ -1,10 +1,9 @@
 import os
-import time
 
-from schedule import every, run_pending
+from asyncz.triggers import IntervalTrigger
 from talkytrend import TalkyTrend
 
-from tt.config import logger, settings
+from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
 from tt.utils import send_notification
 
@@ -12,20 +11,21 @@ from tt.utils import send_notification
 class TalkyTrendPlugin(BasePlugin):
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
+        super().__init__()
         self.enabled = settings.talkytrend_enabled
         if self.enabled:
             self.trend = TalkyTrend()
-            # self.has_scheduled_jobs = True
             
 
     async def start(self):
         """Starts the TalkyTrend plugin"""  
         if self.enabled:
-            every(4).minutes.do(self.run_schedule_wrapper)
-            while True:
-                logger.debug("scheduler setup")
-                run_pending()
-                time.sleep(10)
+            await self.plugin_schedule_task()
+
+            # while True:
+            #     logger.debug("scheduler setup")
+            #     run_pending()
+            #     time.sleep(10)
                 # async for message in self.trend.scanner():
                 #     await self.send_notification(message)
 
@@ -63,11 +63,11 @@ class TalkyTrendPlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
-    async def run_schedule(self):
-        """Hourly fetch the latest news"""
-        logger.debug("plugin scheduled_function")
-        await self.trend.fetch_key_feed()
-
-    async def run_schedule_wrapper(self):
-        """Wrapper function for running the schedule"""
-        await self.run_schedule()
+    async def plugin_schedule_task(self):
+            self.scheduler.add_task(
+                fn=self.trend.fetch_key_feed,
+                trigger=IntervalTrigger(minutes=4),
+                max_instances=1,
+                replace_existing=True,
+                coalesce=False,
+            )
