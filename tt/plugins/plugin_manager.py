@@ -28,7 +28,6 @@ class PluginManager:
                 logger.warning("Error loading plugin %s: %s", plugin_name, e)
 
 
-
     def load_plugin(self, module, plugin_name):
         """ Load a plugin from a module """
         logger.debug("plugin_name: %s", plugin_name)
