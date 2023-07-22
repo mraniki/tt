@@ -21,7 +21,7 @@ class TalkyTrendPlugin(BasePlugin):
     async def start(self):
         """Starts the TalkyTrend plugin"""  
         if self.enabled:
-            every(4).minutes.do(f"{await self.run_schedule()}")
+            every(4).minutes.do(self.run_schedule_wrapper)
             while True:
                 logger.debug("scheduler setup")
                 run_pending()
@@ -63,8 +63,11 @@ class TalkyTrendPlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
-   # @repeat(every(5).minutes)
     async def run_schedule(self):
         """Hourly fetch the latest news"""
         logger.debug("plugin scheduled_function")
-        await self.trend.fetch_key_feed()  
+        await self.trend.fetch_key_feed()
+
+    async def run_schedule_wrapper(self):
+        """Wrapper function for running the schedule"""
+        await self.run_schedule()
