@@ -22,9 +22,9 @@ class TalkyTrendPlugin(BasePlugin):
         """Starts the TalkyTrend plugin"""  
         if self.enabled:
             await self.run_schedule()
-            while True:
-                async for message in self.trend.scanner():
-                    await self.send_notification(message)
+            # while True:
+            #     async for message in self.trend.scanner():
+            #         await self.send_notification(message)
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
@@ -63,4 +63,5 @@ class TalkyTrendPlugin(BasePlugin):
     @BasePlugin.notify_hourly
     async def scheduled_function(self):
         """Hourly fetch the latest news"""
+        self.logger.debug("plugin scheduled_function")
         await self.trend.fetch_key_feed()  

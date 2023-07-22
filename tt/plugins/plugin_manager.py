@@ -105,9 +105,10 @@ class BasePlugin:
 
     async def schedule_hourly(self, function):
         # Define hourly schedule
-        logger.debug("run hourly")
+        logger.debug("schedule_hourly")
         async def wrapper(*args, **kwargs):
-            schedule.every().hour.do(function, *args, **kwargs)
+            # schedule.every().hour.do(function, *args, **kwargs)
+            schedule.every(10).minutes.do(function, *args, **kwargs)
         self.has_scheduled_jobs = True
         return wrapper
 
@@ -128,6 +129,7 @@ class BasePlugin:
     async def notify_hourly(function):
         # Define hourly schedule for sending notifications
         async def wrapper(self):
+            logger.debug("notify hourly")
             await self.schedule_hourly(await self.send_notification(function))
         return wrapper
 
