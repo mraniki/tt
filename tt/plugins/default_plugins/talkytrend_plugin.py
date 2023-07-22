@@ -4,7 +4,7 @@ import time
 from schedule import every, repeat, run_pending
 from talkytrend import TalkyTrend
 
-from tt.config import settings
+from tt.config import logger, settings
 from tt.plugins.plugin_manager import BasePlugin
 from tt.utils import send_notification
 
@@ -23,7 +23,7 @@ class TalkyTrendPlugin(BasePlugin):
         if self.enabled:
             await self.run_schedule()
             while True:
-                self.logger.debug("scheduler setup")
+                logger.debug("scheduler setup")
                 run_pending()
                 time.sleep(10)
                 # async for message in self.trend.scanner():
@@ -66,5 +66,5 @@ class TalkyTrendPlugin(BasePlugin):
     @repeat(every(5).minutes)
     async def run_schedule(self):
         """Hourly fetch the latest news"""
-        self.logger.debug("plugin scheduled_function")
+        logger.debug("plugin scheduled_function")
         await self.trend.fetch_key_feed()  
