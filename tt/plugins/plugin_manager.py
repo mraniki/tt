@@ -58,6 +58,7 @@ class PluginManager:
         """ Start all plugins """
         for plugin in self.plugins:
             await self.start_plugin(plugin)
+
  
     async def start_plugin(self, plugin):
         """ Start a plugin """
@@ -76,13 +77,19 @@ class PluginManager:
 
  
 
+
+
 class BasePlugin:
     """
     ⚡ Base Plugin Class
-
     """
+    def __init__(self):
+        self.has_scheduled_jobs = False
+
     async def start(self):
-        pass
+        # Start the scheduling loop as a separate task if there are scheduled jobs
+        if self.has_scheduled_jobs:
+            asyncio.create_task(self.run_schedule())
 
     async def stop(self):
         pass
@@ -96,30 +103,37 @@ class BasePlugin:
     async def handle_message(self, msg):
         pass
 
-    def schedule_at_time(self, function):
-        # Define at specific time schedule
-        schedule.every().day.at("18:00").do(function)
-
     def schedule_hourly(self, function):
         # Define hourly schedule
         def wrapper(*args, **kwargs):
             schedule.every().hour.do(function, *args, **kwargs)
+        self.has_scheduled_jobs = True
         return wrapper
 
-    def schedule_every_8_hours(self, function):
-        # Define every 8 hours schedule
+    def schedule_daily(self, function, time_str):
+        # Define daily schedule at a given time
         def wrapper(*args, **kwargs):
-            schedule.every(8).hours.do(function, *args, **kwargs)
+            schedule.every().day.at(time_str).do(function, *args, **kwargs)
+        self.has_scheduled_jobs = True
         return wrapper
 
     async def run_schedule(self):
-        while True:
+        while self.has_scheduled_jobs:
             schedule.run_pending()
             await asyncio.sleep(10)
- 
+
     @staticmethod
     def notify_hourly(function):
         # Define hourly schedule for sending notifications
         def wrapper(self):
             self.schedule_hourly(self.send_notification(function))
         return wrapper
+
+    @staticmethod
+    def notify_daily(time_str):
+        # Define daily schedule for sending notifications at a given time
+        def decorator(function):
+            def wrapper(self):
+                self.schedule_daily(self.send_notification(function), time_str)
+            return wrapper
+            return decorator
