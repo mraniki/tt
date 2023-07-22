@@ -13,6 +13,7 @@ class TalkyTrendPlugin(BasePlugin):
         self.enabled = settings.talkytrend_enabled
         if self.enabled:
             self.trend = TalkyTrend()
+            self.has_scheduled_jobs = False 
             
 
     async def start(self):
