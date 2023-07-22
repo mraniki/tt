@@ -10,7 +10,7 @@ from tt.config import logger, settings
 
 
 class PluginManager:
-    """🔌 Plugin Manager for loading plugins """
+    """🔌 Plugin Manager """
     def __init__(self, plugin_directory=None):
         self.plugin_directory = plugin_directory or settings.plugin_directory
         self.plugins = []
@@ -52,7 +52,7 @@ class PluginManager:
                     and obj is not BasePlugin):
                 plugin_instance = obj()
                 self.plugins.append(plugin_instance)
-                logger.debug("Plugin loaded: %s", name)
+                logger.info("Plugin loaded: %s", name)
 
     async def start_all_plugins(self):
         """ Start all plugins """

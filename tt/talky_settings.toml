@@ -108,7 +108,7 @@ user_plugins_allowed = false
 ########################################
 
 helper_enabled = true
-helper_commands = "🔀/trading\n🔁 /restart\n🕸️ /network"
+helper_commands = "🔀 /trading\n🔁 /restart\n🕸️ /network"
 bot_command_trading = "trading"
 bot_command_network = "network"
 bot_command_restart = "restart"
@@ -204,12 +204,7 @@ fomc_decision_date = ["2023-09-20","2023-11-01","2023-12-13"]
 live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
 enable_feed = true
 news_feed="https://www.dailyfx.com/feeds/market-news"
-enable_news = false
-news_url= ""
-news_api_key = ""
-finnhub_api_key=""
-alphavantage_api_key = ""
-twelvedata_api_key = ""
+
 
 ########################################
 ###     END OF DEFAULT SETTINGS      ###
@@ -346,12 +341,7 @@ fomc_decision_date = ["2023-09-20","2023-11-01","2023-12-13"]
 live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
 enable_feed = true
 news_feed="https://www.dailyfx.com/feeds/market-news"
-enable_news = false
-news_url= ""
-news_api_key = ""
-finnhub_api_key=""
-alphavantage_api_key = "demo"
-twelvedata_api_key = ""
+
 
 [cex]
 VALUE = "On Testing CEX_binance"
