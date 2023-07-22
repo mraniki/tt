@@ -4,8 +4,6 @@ import asyncio
 import importlib
 import pkgutil
 
-import schedule
-
 from tt.config import logger, settings
 
 
@@ -103,42 +101,16 @@ class BasePlugin:
     async def handle_message(self, msg):
         pass
 
-    async def schedule_hourly(self, function):
-        # Define hourly schedule
-        logger.debug("schedule_hourly")
-        # async def wrapper(*args, **kwargs):
-        #     # schedule.every().hour.do(function, *args, **kwargs)
-        schedule.every(10).minutes.do(function)
-        self.has_scheduled_jobs = True
-        # return wrapper
+    # async def run_schedule(self):
+    #     while self.has_scheduled_jobs:
+    #         logger.debug("run schedule")
+    #         run_pending()
+    #         await asyncio.sleep(10)
 
-    async def schedule_daily(self, function, time_str):
-        # Define daily schedule at a given time
-        async def wrapper(*args, **kwargs):
-            schedule.every().day.at(time_str).do(function, *args, **kwargs)
-        self.has_scheduled_jobs = True
-        return wrapper
 
-    async def run_schedule(self):
-        while self.has_scheduled_jobs:
-            logger.debug("run schedule")
-            schedule.run_pending()
-            await asyncio.sleep(10)
-
-    @staticmethod
-    async def notify_hourly(function):
-        # Define hourly schedule for sending notifications
-        async def wrapper(self):
-            logger.debug("notify hourly")
-            await self.schedule_hourly(await self.send_notification(function))
-        return wrapper
-
-    @staticmethod
-    def notify_daily(time_str):
-        # Define daily schedule for sending notifications at a given time
-        def decorator(function):
-            async def wrapper(self):
-                await self.schedule_daily(
-                    await self.send_notification(function), time_str)
-            return wrapper
-            return decorator
+    # async def notify_hourly(function):
+    #     # Define hourly schedule for sending notifications
+    #     async def wrapper(self):
+    #         logger.debug("notify hourly")
+    #         await self.send_notification(function)
+    #     return wrapper

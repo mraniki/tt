@@ -1,5 +1,7 @@
 import os
+import time
 
+from schedule import every, repeat, run_pending
 from talkytrend import TalkyTrend
 
 from tt.config import settings
@@ -10,21 +12,21 @@ from tt.utils import send_notification
 class TalkyTrendPlugin(BasePlugin):
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
-            super().__init__()  # Call the base class's __init__ method
-
-            self.enabled = settings.talkytrend_enabled
-            if self.enabled:
-                self.trend = TalkyTrend()
-                self.has_scheduled_jobs = True
+        self.enabled = settings.talkytrend_enabled
+        if self.enabled:
+            self.trend = TalkyTrend()
+            # self.has_scheduled_jobs = True
             
 
     async def start(self):
         """Starts the TalkyTrend plugin"""  
         if self.enabled:
-            await self.run_schedule()
-            # while True:
-            #     async for message in self.trend.scanner():
-            #         await self.send_notification(message)
+            # await self.run_schedule()
+            while True:
+                run_pending()
+                time.sleep(10)
+                # async for message in self.trend.scanner():
+                #     await self.send_notification(message)
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
@@ -60,7 +62,7 @@ class TalkyTrendPlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
-    @BasePlugin.notify_hourly
+    @repeat(every(5).minutes)
     async def scheduled_function(self):
         """Hourly fetch the latest news"""
         self.logger.debug("plugin scheduled_function")
