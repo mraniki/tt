@@ -119,6 +119,7 @@ class BasePlugin:
 
     async def run_schedule(self):
         while self.has_scheduled_jobs:
+            logger.debug("run schedule")
             schedule.run_pending()
             await asyncio.sleep(10)
 
