@@ -66,8 +66,7 @@ class TalkyTrendPlugin(BasePlugin):
         """Handles task scheduling"""
 
         self.scheduler.add_task(
-            fn=await self.send_notification(
-                await self.trend.fetch_key_feed()),
+        fn=self.trend.fetch_key_feed,
             trigger=IntervalTrigger(minutes=4),
             max_instances=1,
             replace_existing=True,
