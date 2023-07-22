@@ -106,11 +106,11 @@ class BasePlugin:
     async def schedule_hourly(self, function):
         # Define hourly schedule
         logger.debug("schedule_hourly")
-        async def wrapper(*args, **kwargs):
-            # schedule.every().hour.do(function, *args, **kwargs)
-            schedule.every(10).minutes.do(function, *args, **kwargs)
+        # async def wrapper(*args, **kwargs):
+        #     # schedule.every().hour.do(function, *args, **kwargs)
+        schedule.every(10).minutes.do(function)
         self.has_scheduled_jobs = True
-        return wrapper
+        # return wrapper
 
     async def schedule_daily(self, function, time_str):
         # Define daily schedule at a given time
