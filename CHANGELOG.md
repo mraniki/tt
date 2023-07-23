@@ -2,6 +2,49 @@
 
 <!--next-version-placeholder-->
 
+## v4.2.2 (2023-07-23)
+
+### Fix
+
+* 🐛 Fix the pyproject semantic structure for v7 ([`982bb7d`](https://github.com/mraniki/tt/commit/982bb7d2a6a3b817024f79f912fa85a95dbc16ca))
+* Update Requirements ([`c9ab13c`](https://github.com/mraniki/tt/commit/c9ab13cfbddf72be51d679d3457fc07798b3a30b))
+* :wrench:updating interval for scheduler test ([`5adfb55`](https://github.com/mraniki/tt/commit/5adfb55e17a253d276ba1664d2cda7d05b295815))
+* :recycle: Refactor CexExchange and TalkyTrendPlugin classes ([`91ee4b9`](https://github.com/mraniki/tt/commit/91ee4b91cfac75ddf45c424d477ab34231f7d2c3))
+* :recycle: Refactor CexExchange and TalkyTrendPlugin classes ([`34751f7`](https://github.com/mraniki/tt/commit/34751f72b512e78fc2a03f52175049a8b1112414))
+* ♻️ refactor BasePlugin and updated helper, talkytrend and example ([`98efb49`](https://github.com/mraniki/tt/commit/98efb4934a01a3e66ef5642f59424b059bdd0f83))
+* Update Requirements ([`99f0936`](https://github.com/mraniki/tt/commit/99f093654de3995b56edca3aaaf06dcb81a81c46))
+* ⬆️  updated Dep ([`9602808`](https://github.com/mraniki/tt/commit/9602808f4c9a88be9c8359e007c8a217dce99661))
+* ⚗️ Scheduling test for Talkytrend ([`159ab79`](https://github.com/mraniki/tt/commit/159ab79513e2cff25b706a60e224c43674732f0e))
+* Update Requirements ([`59c3c58`](https://github.com/mraniki/tt/commit/59c3c58f47a66839a73be8c3e1e79fdd254f39b1))
+* :bug:  dep error ([`2593e9f`](https://github.com/mraniki/tt/commit/2593e9f4f8eddcf3e11de4a1b2f990439cbb21b9))
+* :bug:  add schedule ([`c99bab1`](https://github.com/mraniki/tt/commit/c99bab1cc2d7db93b27c6699ac0dfd3f09bf0c75))
+* 🐛 version in pyproject ([`1dfad2e`](https://github.com/mraniki/tt/commit/1dfad2e7030442916a26a3f19f98ac56fe7f8fd0))
+* 🐛 ([`f6a85bd`](https://github.com/mraniki/tt/commit/f6a85bdf9dd3329e05929e8c876425b6cf89fded))
+* ⚡ ([`fc8810d`](https://github.com/mraniki/tt/commit/fc8810d50cc2e81a0124f140a19208613465a8e2))
+* 🚨 ([`f696d52`](https://github.com/mraniki/tt/commit/f696d522ba7b0824ba37e343ab20f23cd89cd88c))
+* 🚨  linter ([`f322a3b`](https://github.com/mraniki/tt/commit/f322a3b07698e2958a3324c1e3c54922d2dbb55c))
+* ♻️ changing to asyncz scheduling lib ([`3192357`](https://github.com/mraniki/tt/commit/31923575dc8862ad3ad673d0c749d3d43fd39880))
+* 🐛 scheduler ([`66aa093`](https://github.com/mraniki/tt/commit/66aa093f6288899d2b98f5ed328a886d2dfebc98))
+* :bug: scheduler ([`0b8b047`](https://github.com/mraniki/tt/commit/0b8b0475375ee1ee4a54ce6b0f716afb595bb59e))
+* :bug: scheduler ([`3e3a22b`](https://github.com/mraniki/tt/commit/3e3a22b376a232b4351b587cfcf0eabec2b50a42))
+* :rotating_light: ([`3ccf0b9`](https://github.com/mraniki/tt/commit/3ccf0b94ddfe53e31b4ffcff1bba0b9121650ac3))
+* 🐛 scheduler ([`5d2b3a1`](https://github.com/mraniki/tt/commit/5d2b3a145fc95154eb86e0e582cf7dc42835fa3d))
+* 🐛 schedule simplification ([`f8cbf38`](https://github.com/mraniki/tt/commit/f8cbf38626cdc9f35f69e5961ac469c6adb283bb))
+* 🐛 troubleshoot for schedule ([`7bec96d`](https://github.com/mraniki/tt/commit/7bec96dbf0ca60caa6b5a80a23159c4ceaa42bba))
+* 🐛 schedule troubleshoot ([`5f7978b`](https://github.com/mraniki/tt/commit/5f7978bd28f51502569d94b53e8cdcb49bc853c4))
+* 🚨 ([`3256556`](https://github.com/mraniki/tt/commit/3256556bbb46f1351ad654609060c6d476208105))
+* 🐛 hourly schedule ([`ba26d2a`](https://github.com/mraniki/tt/commit/ba26d2ac9f7d3327e5f7aad69357f387c58d6abe))
+* 🐛 self.has_scheduled_jobs = False ([`f4da8e2`](https://github.com/mraniki/tt/commit/f4da8e2c30d478cf94a1768ea16adca1fb7f2ad1))
+* 🐛 hoursly schedule ([`09ed21b`](https://github.com/mraniki/tt/commit/09ed21b75c30d0f75a926a5c45de7eec87216a07))
+* :bug: Add debug log for running schedule ([`87e81de`](https://github.com/mraniki/tt/commit/87e81de6de22193d3f57076acaff3ea49eb009f4))
+* :bug: Add debug log for running schedule ([`a00c7f5`](https://github.com/mraniki/tt/commit/a00c7f537658cf1fdc46117313b97b5fd10f3a28))
+* :bug: fix the hourly schedule ([`07577bb`](https://github.com/mraniki/tt/commit/07577bb3b99b791308e421ee9bf3dba1edda8e97))
+* :wrench:settings cleanup ([`877e8a9`](https://github.com/mraniki/tt/commit/877e8a9d075ed2a72474b6a68650f8581a9349bc))
+* :bug: fix the hourly schedule ([`694c30e`](https://github.com/mraniki/tt/commit/694c30eb2065108cec3a1a41ef318d669e158f86))
+* :bug: fix the hourly schedule ([`2151d44`](https://github.com/mraniki/tt/commit/2151d446b1e740f736aee415e130786822ee0e56))
+* 🐛 fix the hourly schedule ([`b4406c6`](https://github.com/mraniki/tt/commit/b4406c65376182c2b42db5dab70fdec12929e066))
+* 🔧 config cleanup ([`7c77620`](https://github.com/mraniki/tt/commit/7c77620550f56831be0c4b849cb33895378f4bcd))
+
 ## v4.2.1 (2023-07-20)
 
 ### Fix
