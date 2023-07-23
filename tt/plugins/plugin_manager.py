@@ -2,8 +2,6 @@
 import importlib
 import pkgutil
 
-from asyncz.schedulers.asyncio import AsyncIOScheduler
-
 from tt.config import logger, settings
 
 
@@ -12,7 +10,6 @@ class PluginManager:
     def __init__(self, plugin_directory=None):
         self.plugin_directory = plugin_directory or settings.plugin_directory
         self.plugins = []
-        self.scheduler = None
 
     def load_plugins(self):
         """ Load plugins from directory """
@@ -68,12 +65,10 @@ class BasePlugin:
     ⚡ Base Plugin Class
     """
     def __init__(self):
-        self.scheduler = AsyncIOScheduler()
         self.enabled = False  # Default value
 
-
     async def start(self):
-        self.scheduler.start()
+        pass
 
     async def stop(self):
         pass
@@ -82,20 +77,18 @@ class BasePlugin:
         pass
 
     def should_handle(self, message):
-        pass
-
-    async def handle_message(self, msg):
-        pass
+        if not self.enabled:
+            return False
+        if message.startswith(settings.bot_ignore):
+            return False
+        return True
 
     async def plugin_schedule_task(self):
         pass
 
-    # def should_handle(self, message):
-    #     if not self.enabled:
-    #         return False
-    #     if message.startswith(settings.bot_ignore):
-    #         return False
-    #     return True
+
+    async def handle_message(self, msg):
+        pass
 
     # async def handle_message(self, msg):
     #     if not self.should_handle(msg):
@@ -109,6 +102,3 @@ class BasePlugin:
     #     if command in command_mapping:
     #         function = command_mapping[command]
     #         await self.send_notification(f"{await function()}")
-
-    # def get_command_mapping(self):
-    #     return {}

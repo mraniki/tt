@@ -1,5 +1,6 @@
 import os
 
+from asyncz.schedulers.asyncio import AsyncIOScheduler
 from asyncz.triggers import IntervalTrigger
 from talkytrend import TalkyTrend
 
@@ -14,19 +15,14 @@ class TalkyTrendPlugin(BasePlugin):
         super().__init__()
         self.enabled = settings.talkytrend_enabled
         if self.enabled:
+            self.scheduler = AsyncIOScheduler()
             self.trend = TalkyTrend()
             
     async def start(self):
         """Starts the TalkyTrend plugin"""  
         if self.enabled:
             await self.plugin_schedule_task()
-
-            # while True:
-            #     logger.debug("scheduler setup")
-            #     run_pending()
-            #     time.sleep(10)
-                # async for message in self.trend.scanner():
-                #     await self.send_notification(message)
+            self.scheduler.start()
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
@@ -36,15 +32,13 @@ class TalkyTrendPlugin(BasePlugin):
         if self.enabled:
             await send_notification(message)
 
-    def should_handle(self, message):
-        """Returns plugin status"""
-        return self.enabled
-
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if not self.enabled:
-            return
-        if msg.startswith(settings.bot_ignore):
+        # if not self.enabled:
+        #     return
+        # if msg.startswith(settings.bot_ignore):
+        #     return
+        if not self.should_handle(msg):
             return
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
@@ -62,13 +56,18 @@ class TalkyTrendPlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
+    async def send_news(self):
+        """News"""
+        await self.send_notification(f"{await self.trend.fetch_key_feed()}")
+
     async def plugin_schedule_task(self):
         """Handles task scheduling"""
 
         self.scheduler.add_task(
-        fn=self.trend.fetch_key_feed,
-            trigger=IntervalTrigger(minutes=4),
+            fn=self.send_news,
+            trigger=IntervalTrigger(minutes=60),
             max_instances=1,
             replace_existing=True,
-            coalesce=False,
+            coalesce=True,
+            is_enabled=True
         )
