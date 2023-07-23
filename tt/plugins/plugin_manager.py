@@ -77,11 +77,7 @@ class BasePlugin:
         pass
 
     def should_handle(self, message):
-        if not self.enabled:
-            return False
-        if message.startswith(settings.bot_ignore):
-            return False
-        return True
+        return not message.startswith(settings.bot_ignore) if self.enabled else False
 
     async def plugin_schedule_task(self):
         pass
