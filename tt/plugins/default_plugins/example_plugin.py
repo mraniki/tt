@@ -35,10 +35,6 @@ class ExamplePlugin(BasePlugin):
         if self.enabled:
             await send_notification(message)
 
-    def should_handle(self, message):
-        """Returns plugin state"""
-        return self.enabled
-
     async def handle_message(self, msg):
         """
         Handles incoming messages.
@@ -46,22 +42,21 @@ class ExamplePlugin(BasePlugin):
         Args:
             msg (str): The incoming message.
         """
-        if self.enabled:
-            if msg.startswith(settings.bot_ignore):
-                return
-            if msg.startswith(settings.bot_prefix):
-                command, *args = msg.split(" ")
-                command = command[1:]
+        if not self.should_handle(msg):
+            return
+        if msg.startswith(settings.bot_prefix):
+            command, *args = msg.split(" ")
+            command = command[1:]
 
-                # Mapping of commands to functions
-                command_mapping = {
-                    settings.bot_command_help: self.myadhocfunction,
-                    # settings.bot_command_myownfunction: self.myclass.myownfunction,
-                }
+            # Mapping of commands to functions
+            command_mapping = {
+                settings.bot_command_help: self.myadhocfunction,
+                # settings.bot_command_myownfunction: self.myclass.myownfunction,
+            }
 
-                if command in command_mapping:
-                    function = command_mapping[command]
-                    await self.send_notification(f"{await function()}")
+            if command in command_mapping:
+                function = command_mapping[command]
+                await self.send_notification(f"{await function()}")
 
     async def myadhocfunction(self):
         """

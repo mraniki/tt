@@ -24,7 +24,6 @@ class PluginManager:
             except Exception as e:
                 logger.warning("Error loading plugin %s: %s", plugin_name, e)
 
-
     def load_plugin(self, module, plugin_name):
         """ Load a plugin from a module """
         logger.debug("plugin_name: %s", plugin_name)
@@ -42,7 +41,6 @@ class PluginManager:
         for plugin in self.plugins:
             await self.start_plugin(plugin)
 
- 
     async def start_plugin(self, plugin):
         """ Start a plugin """
         await plugin.start()
@@ -58,14 +56,13 @@ class PluginManager:
                 logger.error("process %s: %s", plugin, error)
                 continue
 
- 
 
 class BasePlugin:
     """
     ⚡ Base Plugin Class
     """
     def __init__(self):
-        self.enabled = False  # Default value
+        self.enabled = False
 
     async def start(self):
         pass
@@ -77,24 +74,22 @@ class BasePlugin:
         pass
 
     def should_handle(self, message):
-        return not message.startswith(settings.bot_ignore) if self.enabled else False
+        return (not message.startswith(settings.bot_ignore)
+         if self.enabled else False)
 
     async def plugin_schedule_task(self):
         pass
 
-
     async def handle_message(self, msg):
         pass
+        # if not self.should_handle(msg):
+        #     return
 
-    # async def handle_message(self, msg):
-    #     if not self.should_handle(msg):
-    #         return
+        # command, *args = msg.split(" ")
+        # command = command[1:]
 
-    #     command, *args = msg.split(" ")
-    #     command = command[1:]
+        # command_mapping = self.get_command_mapping()
 
-    #     command_mapping = self.get_command_mapping()
-
-    #     if command in command_mapping:
-    #         function = command_mapping[command]
-    #         await self.send_notification(f"{await function()}")
+        # if command in command_mapping:
+        #     function = command_mapping[command]
+        #     await self.send_notification(f"{await function()}")
