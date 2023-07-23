@@ -53,29 +53,14 @@ class TalkyTrendPlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
-    # async def send_news(self):
-    #     """News"""
-    #     await self.send_notification(f"{await self.trend.fetch_key_feed()}")
-
-    # async def plugin_schedule_task(self):
-    #     """Handles task scheduling"""
-
-    #     self.scheduler.add_task(
-    #         fn=self.send_news,
-    #         trigger=IntervalTrigger(minutes=60),
-    #         max_instances=1,
-    #         replace_existing=True,
-    #         coalesce=True,
-    #         is_enabled=True
-    #     )
     async def plugin_schedule_task(self):
         """Handles task scheduling"""
     
         feed_data = await self.trend.fetch_key_feed()
         self.scheduler.add_task(
             fn=self.send_notification,
-            args=[feed_data],  # Pass the result of fetch_key_feed as a positional argument
-            trigger=IntervalTrigger(minutes=5),
+            args=[feed_data],
+            trigger=IntervalTrigger(minutes=60),
             max_instances=1,
             replace_existing=True,
             coalesce=True,
