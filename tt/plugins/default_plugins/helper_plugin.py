@@ -31,15 +31,9 @@ class HelperPlugin(BasePlugin):
         if self.enabled:
             await send_notification(message)
 
-    def should_handle(self, message):
-        """Returns plugin status"""
-        return self.enabled
-
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if not self.enabled:
-            return
-        if msg.startswith(settings.bot_ignore):
+        if not self.should_handle(msg):
             return
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
