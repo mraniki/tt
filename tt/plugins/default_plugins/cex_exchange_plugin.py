@@ -87,7 +87,7 @@ class CexExchange():
     async def get_info(self):
         """info_message"""    
         exchange_name = self.cex.id
-        account_info = self.cex.uid
+        account_info = self.cex.fetchAccounts().get('main')
         return f"💱 {exchange_name}\n🪪 {account_info}"
 
     async def get_help(self):
