@@ -53,7 +53,7 @@ def loguru_setup():
     log.remove()
     # log.configure(**config)
     log.add(
-        sink=sys.stderr,
+        sink=sys.stdout,
         level=settings.loglevel,
     )
 
