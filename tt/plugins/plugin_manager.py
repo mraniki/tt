@@ -16,26 +16,26 @@ class PluginManager:
     def load_plugins(self):
         """ Load plugins from directory """
         package = importlib.import_module(self.plugin_directory)
-        logger.debug("Loading plugins from: %s", package)
+        logger.debug("Loading plugins from: {}", package)
         for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
             try:
                 module = importlib.import_module(
                     f"{self.plugin_directory}.{plugin_name}")
-                logger.debug("Module loaded: %s", module)
+                logger.debug("Module loaded: {}", module)
                 self.load_plugin(module, plugin_name)
             except Exception as e:
-                logger.warning("Error loading plugin %s: %s", plugin_name, e)
+                logger.warning("Error loading plugin {}: {}", plugin_name, e)
 
     def load_plugin(self, module, plugin_name):
         """ Load a plugin from a module """
-        logger.debug("plugin_name: %s", plugin_name)
+        logger.debug("plugin_name: {}", plugin_name)
         for name, obj in module.__dict__.items():
             if (isinstance(obj, type)
                     and issubclass(obj, BasePlugin)
                     and obj is not BasePlugin):
                 plugin_instance = obj()
                 self.plugins.append(plugin_instance)
-                logger.info("Plugin loaded: %s", name)
+                logger.info("Plugin loaded: {}", name)
 
     async def start_all_plugins(self):
         """ Start all plugins """
@@ -56,7 +56,7 @@ class PluginManager:
                     await plugin.handle_message(message)
             except Exception as error:
 
-                logger.error("process %s: %s", plugin, error)
+                logger.error("process {}: {}", plugin, error)
                 continue
 
 

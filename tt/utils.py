@@ -59,7 +59,7 @@ async def start_bot(listener, plugin_manager):
             if msg and settings.plugin_enabled:
                 await plugin_manager.process_message(msg)
         except Exception as error:
-            logger.error("👂 listener: %s", error)
+            logger.error("👂 listener: {}", error)
 
         await asyncio.sleep(1)
  
