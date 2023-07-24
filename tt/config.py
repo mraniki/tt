@@ -1,11 +1,22 @@
 """
  talky  Config
+ Used to define 
+ dynaconf setting import, 
+ logging setup and 
+ scheduler
+
 """
 import logging
 import os
 
-from asyncz.schedulers.asyncio import AsyncIOScheduler  # noqa: F401
+from asyncz.schedulers.asyncio import AsyncIOScheduler
 from dynaconf import Dynaconf
+
+# from loguru import logger
+
+########################################
+###            ⚙️ Settings            ###
+########################################
 
 ROOT = os.path.dirname(__file__)
 
@@ -26,12 +37,17 @@ settings = Dynaconf(
 )
 
 
-#  🧐LOGGING
+########################################
+###           🧐 Logging             ###
+########################################
+
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=settings.loglevel
 )
+
 logger = logging.getLogger("TalkyTrader")
+
 if settings.loglevel == "DEBUG":
     logging.getLogger("discord").setLevel(logging.ERROR)
     logging.getLogger("telethon").setLevel(logging.ERROR)
@@ -40,21 +56,30 @@ if settings.loglevel == "DEBUG":
     logging.getLogger("web3").setLevel(logging.ERROR)
 
 
+# def configure_logger() -> None:
+#     logging.basicConfig(
+#     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+#     level=settings.loglevel
+#     )
+#     logger = logging.getLogger("TalkyTrader")
+#     # logger.remove()
+#     # logger.add(
+#     #     sys.stderr,
+#     #     level=settings.loglevel or "INFO",
+#     #     colorize=True,
+#     #     format="<level>{message}</level>",
+#     # )
+#     logging.getLogger("discord").setLevel(logging.INFO)
+#     logging.getLogger("telethon").setLevel(logging.INFO)
+#     logging.getLogger("urllib3").setLevel(logging.INFO)
+#     logging.getLogger("apprise").setLevel(logging.INFO)
+#     logging.getLogger("web3").setLevel(logging.INFO)
 
+# logger = configure_logger()
 
-# # Define the scheduler
-# scheduler = AsyncIOScheduler(
-#     {
-#         "asyncz.stores.mongo": {"type": "mongodb"},
-#         "asyncz.stores.default": {"type": "redis", "database": "0"},
-#         "asyncz.executors.threadpool": {
-#             "max_workers": "20",
-#             "class": "asyncz.executors.threadpool:ThreadPoolExecutor",
-#         },
-#         "asyncz.executors.default": {
-# "class": "asyncz.executors.asyncio::AsyncIOExecutor"},
-#         "asyncz.task_defaults.coalesce": "false",
-#         "asyncz.task_defaults.max_instances": "3",
-#         "asyncz.task_defaults.timezone": "UTC",
-#     },
-# )
+########################################
+###          ⏱️ Scheduling           ###
+########################################
+
+scheduler = AsyncIOScheduler()
+

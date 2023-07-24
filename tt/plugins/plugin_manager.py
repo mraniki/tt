@@ -4,7 +4,7 @@ import pkgutil
 
 from asyncz.triggers import CronTrigger, IntervalTrigger
 
-from tt.config import logger, settings
+from tt.config import logger, scheduler, settings
 
 
 class PluginManager:
@@ -42,6 +42,7 @@ class PluginManager:
     
         for plugin in self.plugins:
             await self.start_plugin(plugin)
+        scheduler.start()
 
     async def start_plugin(self, plugin):
         """ Start a plugin """
@@ -65,6 +66,7 @@ class BasePlugin:
     """
     def __init__(self):
         self.enabled = False
+        self.scheduler = scheduler
 
     async def start(self):
         pass

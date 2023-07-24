@@ -3,7 +3,6 @@ import socket
 import sys
 
 import ping3
-from asyncz.schedulers.asyncio import AsyncIOScheduler
 
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
@@ -14,9 +13,9 @@ class HelperPlugin(BasePlugin):
     """ Helper Plugin """
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
+        super().__init__()
         self.enabled = settings.helper_enabled
         if self.enabled:
-            self.scheduler = AsyncIOScheduler()
             self.version = f"🗿TalkyTrader v{__version__}"
             self.host_ip = f"🕸 {self.get_host_ip()}"
             self.help_message = settings.helper_commands
@@ -24,10 +23,7 @@ class HelperPlugin(BasePlugin):
     async def start(self):
         """Starts the plugin"""
         await self.send_notification(await self.get_helper_info())
-        await self.plugin_notify_cron_task(
-                user_name="helper",
-                function=self.get_helper_info)
-        self.scheduler.start()
+
 
     async def stop(self):
         """Stops the plugin"""

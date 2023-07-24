@@ -16,6 +16,7 @@ class ExamplePlugin(BasePlugin):
 
     def __init__(self):
         """Plugin Initialization"""
+        super().__init__()
         self.enabled = settings.example_plugin_enabled
         if self.enabled:
             logger.debug("plugin initialized")
@@ -26,6 +27,12 @@ class ExamplePlugin(BasePlugin):
         logger.debug("example plugin started")
         if self.enabled:
             logger.debug("example plugin enabled")
+            # await self.plugin_notify_schedule_task(
+            #     user_name="myadhocfunction",
+            #     function=self.myadhocfunction)
+            # await self.plugin_notify_cron_task(
+            #     user_name="talky_signal",
+            #     function=self.myadhocfunction)
 
     async def stop(self):
         """Stops the plugin"""

@@ -1,6 +1,5 @@
 import os
 
-from asyncz.schedulers.asyncio import AsyncIOScheduler
 from talkytrend import TalkyTrend
 
 from tt.config import settings
@@ -14,7 +13,6 @@ class TalkyTrendPlugin(BasePlugin):
         super().__init__()
         self.enabled = settings.talkytrend_enabled
         if self.enabled:
-            self.scheduler = AsyncIOScheduler()
             self.trend = TalkyTrend()
             
     async def start(self):
@@ -26,7 +24,6 @@ class TalkyTrendPlugin(BasePlugin):
             await self.plugin_notify_cron_task(
                 user_name="talky_signal",
                 function=self.trend.check_signal)
-            self.scheduler.start()
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
