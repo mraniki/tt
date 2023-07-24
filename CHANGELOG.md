@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v4.4.0 (2023-07-24)
+
+### Feature
+
+* 🥚 🔊 loguru implementation ([`056eab0`](https://github.com/mraniki/tt/commit/056eab021c176ff5fbbcc8b5b4f0347b538ca979))
+
+### Fix
+
+* Update Requirements ([`1720c86`](https://github.com/mraniki/tt/commit/1720c866e55b2fafd1b006bf4200af8bec5587fb))
+
 ## v4.3.0 (2023-07-24)
 
 ### Feature
