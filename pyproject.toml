@@ -50,7 +50,7 @@ ping3 = "^4.0.4"
 ccxt = "^4.0.0"
 dxsp = "^4.1.0"
 findmyorder = "^1.6.1"
-iamlistening = "^2.0.0"
+iamlistening = "^2.1.0"
 talkytrend = "^1.10.0"
 
  
