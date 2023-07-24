@@ -1,7 +1,5 @@
 import os
 
-from asyncz.schedulers.asyncio import AsyncIOScheduler
-from asyncz.triggers import IntervalTrigger
 from talkytrend import TalkyTrend
 
 from tt.config import settings
@@ -15,14 +13,17 @@ class TalkyTrendPlugin(BasePlugin):
         super().__init__()
         self.enabled = settings.talkytrend_enabled
         if self.enabled:
-            self.scheduler = AsyncIOScheduler()
             self.trend = TalkyTrend()
             
     async def start(self):
         """Starts the TalkyTrend plugin"""  
         if self.enabled:
-            await self.plugin_schedule_task()
-            self.scheduler.start()
+            await self.plugin_notify_schedule_task(
+                user_name="talky_feed",
+                function=self.trend.fetch_key_feed)
+            await self.plugin_notify_cron_task(
+                user_name="talky_signal",
+                function=self.trend.check_signal)
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
@@ -53,16 +54,3 @@ class TalkyTrendPlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
-    async def plugin_schedule_task(self):
-        """Handles task scheduling"""
-        
-        feed_data = await self.trend.fetch_key_feed()
-        self.scheduler.add_task(
-            fn=self.send_notification,
-            args=[feed_data],
-            trigger=IntervalTrigger(hours=8),
-            max_instances=1,
-            replace_existing=True,
-            coalesce=True,
-            is_enabled=True
-            )

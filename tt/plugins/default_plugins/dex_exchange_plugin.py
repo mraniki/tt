@@ -12,6 +12,7 @@ class DexExchangePlugin(BasePlugin):
     """DEX Plugin"""
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
+        super().__init__()
         self.enabled = settings.dxsp_enabled
         if self.enabled:
             self.fmo = FindMyOrder()

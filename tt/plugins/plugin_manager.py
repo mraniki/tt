@@ -2,7 +2,9 @@
 import importlib
 import pkgutil
 
-from tt.config import logger, settings
+from asyncz.triggers import CronTrigger, IntervalTrigger
+
+from tt.config import logger, scheduler, settings
 
 
 class PluginManager:
@@ -40,6 +42,7 @@ class PluginManager:
     
         for plugin in self.plugins:
             await self.start_plugin(plugin)
+        scheduler.start()
 
     async def start_plugin(self, plugin):
         """ Start a plugin """
@@ -63,6 +66,7 @@ class BasePlugin:
     """
     def __init__(self):
         self.enabled = False
+        self.scheduler = scheduler
 
     async def start(self):
         pass
@@ -77,8 +81,42 @@ class BasePlugin:
         return (not message.startswith(settings.bot_ignore)
          if self.enabled else False)
 
-    async def plugin_schedule_task(self):
-        pass
+    async def plugin_notify_schedule_task(
+        self,
+        user_name=None,
+        frequency=8,
+        function=None):
+        """Handles task notification 
+        every X hours. Defaulted to 8 hours"""
+        if function:
+            self.scheduler.add_task(
+                name=user_name,
+                fn=self.send_notification,
+                args=[f"{await function()}"],
+                trigger=IntervalTrigger(hours=frequency),
+                is_enabled=True
+                )
+
+    async def plugin_notify_cron_task(
+        self,
+        user_name=None,
+        user_day_of_week="mon-fri",
+        user_hours="8,12,16",
+        user_timezone="UTC",
+        function=None): 
+        """Handles task cron scheduling for notification 
+        monday to Friday at 8AM, 12PM and 4PM with time being UTC based"""
+        if function:
+            self.scheduler.add_task(
+                name=user_name,
+                fn=self.send_notification,
+                args=[f"{await function()}"],
+                trigger=CronTrigger(
+                    day_of_week=user_day_of_week,
+                    hour=user_hours,
+                    timezone=user_timezone),
+                is_enabled=True
+                )
 
     async def handle_message(self, msg):
         pass

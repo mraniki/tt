@@ -13,6 +13,7 @@ class HelperPlugin(BasePlugin):
     """ Helper Plugin """
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
+        super().__init__()
         self.enabled = settings.helper_enabled
         if self.enabled:
             self.version = f"🗿TalkyTrader v{__version__}"
@@ -22,6 +23,7 @@ class HelperPlugin(BasePlugin):
     async def start(self):
         """Starts the plugin"""
         await self.send_notification(await self.get_helper_info())
+
 
     async def stop(self):
         """Stops the plugin"""
