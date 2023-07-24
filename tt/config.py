@@ -8,11 +8,11 @@
 """
 import logging
 import os
+import sys
 
 from asyncz.schedulers.asyncio import AsyncIOScheduler
 from dynaconf import Dynaconf
-
-# from loguru import logger
+from loguru import logger as log
 
 ########################################
 ###            ⚙️ Settings            ###
@@ -41,12 +41,25 @@ settings = Dynaconf(
 ###           🧐 Logging             ###
 ########################################
 
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    level=settings.loglevel
-)
+# logging.basicConfig(
+#     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+#     level=settings.loglevel
+# )
 
-logger = logging.getLogger("TalkyTrader")
+# logger = logging.getLogger("TalkyTrader")
+
+
+def loguru_setup():
+    log.remove()
+    # log.configure(**config)
+    log.add(
+        sink=sys.stderr,
+        level=settings.loglevel,
+    )
+
+    return log
+
+logger = loguru_setup()
 
 if settings.loglevel == "DEBUG":
     logging.getLogger("discord").setLevel(logging.ERROR)
@@ -54,28 +67,6 @@ if settings.loglevel == "DEBUG":
     logging.getLogger("urllib3").setLevel(logging.ERROR)
     logging.getLogger("apprise").setLevel(logging.ERROR)
     logging.getLogger("web3").setLevel(logging.ERROR)
-
-
-# def configure_logger() -> None:
-#     logging.basicConfig(
-#     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-#     level=settings.loglevel
-#     )
-#     logger = logging.getLogger("TalkyTrader")
-#     # logger.remove()
-#     # logger.add(
-#     #     sys.stderr,
-#     #     level=settings.loglevel or "INFO",
-#     #     colorize=True,
-#     #     format="<level>{message}</level>",
-#     # )
-#     logging.getLogger("discord").setLevel(logging.INFO)
-#     logging.getLogger("telethon").setLevel(logging.INFO)
-#     logging.getLogger("urllib3").setLevel(logging.INFO)
-#     logging.getLogger("apprise").setLevel(logging.INFO)
-#     logging.getLogger("web3").setLevel(logging.INFO)
-
-# logger = configure_logger()
 
 ########################################
 ###          ⏱️ Scheduling           ###
