@@ -24,6 +24,9 @@ class TalkyTrendPlugin(BasePlugin):
             await self.plugin_notify_cron_task(
                 user_name="talky_signal",
                 function=self.trend.check_signal)
+            await self.plugin_notify_cron_task(
+                user_name="talky_events",
+                function=self.trend.fetch_key_events)
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
