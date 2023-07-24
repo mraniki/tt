@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v4.2.3 (2023-07-24)
+
+### Fix
+
+* Update Requirements ([`146b506`](https://github.com/mraniki/tt/commit/146b506a40ec182f7a8d7ef2ef51f197609ca774))
+* ♻️ Added scheduler setup in config and init in baseplugin ([`5a345c3`](https://github.com/mraniki/tt/commit/5a345c38e8d78b37f3c2122ddcefc2424347664f))
+* ⚡ Improve scheduling with cron and interval based in the baseplugin ([`0eaab5c`](https://github.com/mraniki/tt/commit/0eaab5c48ae330dd673a3c8e3a7429705e70241b))
+
 ## v4.2.2 (2023-07-23)
 
 ### Fix
