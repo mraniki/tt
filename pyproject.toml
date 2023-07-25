@@ -50,7 +50,7 @@ ping3 = "^4.0.4"
 ccxt = "^4.0.0"
 dxsp = "^4.1.0"
 findmyorder = "^1.6.1"
-iamlistening = "^3.0.1"
+iamlistening = "^3.0.2"
 talkytrend = "^1.12.1"
 
  
@@ -72,6 +72,12 @@ exclude = [
 # ignore = ["E401","F401"]
 format = "github"
 fixable = ["ALL"]
+
+[tool.black]
+target-version = ['py39', 'py310', 'py311']
+line-length = 88
+# exclude = "((.eggs | .git | .pytype | .pytest_cache | build | dist))"
+
 
 [tool.pylint.exceptions]
 overgeneral-exceptions = [

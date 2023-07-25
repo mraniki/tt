@@ -119,8 +119,12 @@ async def test_start_bot(listener_obj, plugin_manager_obj):
 @pytest.mark.asyncio
 async def test_bot(ial_test, plugin_manager_obj):
     start_bot = AsyncMock()
+    ial_test.start = AsyncMock()
+    start_plugins = AsyncMock(plugin_manager_obj)
     task = asyncio.create_task(run_bot())
     start_bot.assert_awaited
+    ial_test.start.assert_awaited
+    start_plugins.assert_awaited
     await ial_test.handler.handle_message("hello")
     msg = await ial_test.handler.get_latest_message()
     print(msg)
