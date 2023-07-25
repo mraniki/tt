@@ -97,6 +97,7 @@ async def test_start_plugins():
 
 @pytest.mark.asyncio
 async def test_run_bot():
+    listener_instance = Listener()
     start_bot = AsyncMock(side_effect=[listener_instance])
     with patch('tt.utils.start_bot', start_bot):
         task = asyncio.create_task(run_bot())
