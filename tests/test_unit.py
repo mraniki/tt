@@ -101,7 +101,7 @@ async def test_run_bot():
     start_bot = AsyncMock(side_effect=[listener_instance])
     with patch('tt.utils.start_bot', start_bot):
         task = asyncio.create_task(run_bot())
-        await asyncio.sleep(1)
+        await asyncio.gather(task, asyncio.sleep(2))
         start_bot.assert_awaited
         listener_created = listener_instance
         assert isinstance(listener_created, Listener) 
