@@ -78,6 +78,7 @@ async def test_start_plugins():
     await start_plugins(plugin_manager)
     plugin_manager.load_plugins.assert_called_once()
 
+
 @pytest.mark.asyncio
 async def test_start_bot(listener_obj, plugin_manager_obj):
     start = AsyncMock()
@@ -101,9 +102,9 @@ async def test_run_bot(caplog):
 @pytest.mark.asyncio
 async def test_get_latest_message(message):
     listener = Listener()
+    await listener.start()
     assert listener is not None
     assert settings.VALUE == "On Testing"
-    await listener.start()
     await listener.handler.handle_message(message)
     assert await listener.handler.get_latest_message() == message
 
@@ -129,4 +130,3 @@ async def test_baseplugins():
     assert callable(plugin.send_notification) 
     assert callable(plugin.should_handle)
     assert callable(plugin.handle_message)
-
