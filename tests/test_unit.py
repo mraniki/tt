@@ -118,7 +118,19 @@ async def test_start_bot(listener_obj, plugin_manager_obj):
         task.cancel()
         with pytest.raises(asyncio.CancelledError):
             await task
+# listener_mock = AsyncMock()
+#     plugin_manager_mock = AsyncMock()
 
+#     with patch('your_module.Listener', listener_mock), \
+#          patch('your_module.PluginManager', plugin_manager_mock):
+#         await start_bot(None, None)
+
+#     listener_mock.start.assert_awaited_once()  # Ensure listener.start() method was awaited once
+#     plugin_manager_mock.start_plugins.assert_awaited_once()  # Ensure start_plugins method was awaited once
+#     listener_mock.handler.get_latest_message.assert_awaited()  # Ensure get_latest_message was awaited
+#     plugin_manager_mock.process_message.assert_awaited()  # Ensure process_message was awaited
+#     asyncio.sleep.assert_awaited_with(1)  # Ensure asyncio.sleep was awaited with 1 second
+    
 
 @pytest.mark.asyncio
 async def test_bot(ial_test, plugin_manager_obj):
