@@ -6,7 +6,8 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 from fastapi.testclient import TestClient
-from iamlistening import Listener
+from iamlistening import ChatManager, Listener
+from iamlistening.platform import TelegramHandler
 
 from tt.bot import app
 from tt.config import settings
@@ -27,6 +28,12 @@ def message_test():
 def listener_test():
     return Listener()
 
+@pytest.fixture(name="ial_test")
+def ial_test():
+    listener = Listener()
+    listener.handler = TelegramHandler()
+    return listener
+
 @pytest.fixture(name="plugin_manager_obj")
 def pluginmngr_test():
     return PluginManager()
@@ -35,6 +42,15 @@ def pluginmngr_test():
 def message():
     return "Test message"
 
+@pytest.fixture
+def mock_listener():
+   mock_listener = AsyncMock(spec=Listener)
+   mock_listener.handler = AsyncMock(spec=ChatManager)
+   return mock_listener
+
+@pytest.fixture
+def mock_plugin_manager():
+   return AsyncMock(spec=PluginManager)
 
 def test_app_endpoint_main():
     client = TestClient(app)
@@ -101,37 +117,17 @@ async def test_start_bot(listener_obj, plugin_manager_obj):
 
 
 @pytest.mark.asyncio
-async def test_start_plugin_start_bot(listener_obj, plugin_manager_obj):
-    with patch.object(start_plugins) as start_plugins_mock:
-        task = asyncio.create_task(start_bot(listener_obj, plugin_manager_obj))
-        start_plugins_mock.assert_awaited
-        task.cancel()
-        with pytest.raises(asyncio.CancelledError):
-            await task
-
-
-# @pytest.mark.asyncio
-# async def test_get_latest_message(message):
-#     listener = Listener()
-#     await listener.start()
-#     assert listener is not None
-#     assert settings.VALUE == "On Testing"
-#     await listener.handler.handle_message(message)
-#     assert await listener.handler.get_latest_message() == message
-
-
-# @pytest.mark.asyncio
-# async def test_listener_handler():
-#     listener_test = Listener()
-#     print(listener_test)
-#     assert listener_test is not None
-#     assert isinstance(listener_test, Listener)
-#     await listener_test.start()
-#     await listener_test.handler.handle_message("hello")
-#     msg = await listener_test.handler.get_latest_message()
-#     print(msg)
-#     assert msg == "hello"
-
+async def test_bot(ial_test, plugin_manager_obj):
+    start_bot = AsyncMock()
+    task = asyncio.create_task(run_bot())
+    start_bot.assert_awaited
+    await ial_test.handler.handle_message("hello")
+    msg = await ial_test.handler.get_latest_message()
+    print(msg)
+    assert msg == "hello"
+    task.cancel()
+    with pytest.raises(asyncio.CancelledError):
+        await task
 
 @pytest.mark.asyncio
 async def test_baseplugins():
