@@ -87,11 +87,6 @@ async def test_start_bot(listener_obj, plugin_manager_obj):
         start.assert_awaited
         await task
 
-@pytest.mark.asyncio
-async def test_get_latest_message(listener_obj, message):
-    await listener_obj.start()
-    await listener_obj.handler.handle_message(message)
-    assert await listener_obj.handler.get_latest_message() == message
 
 @pytest.mark.asyncio
 async def test_run_bot(caplog):
@@ -104,7 +99,17 @@ async def test_run_bot(caplog):
 
 
 @pytest.mark.asyncio
-async def test_listener_telegram():
+async def test_get_latest_message(message):
+    listener = Listener()
+    assert listener is not None
+    assert settings.VALUE == "On Testing"
+    await listener.start()
+    await listener.handler.handle_message(message)
+    assert await listener.handler.get_latest_message() == message
+
+
+@pytest.mark.asyncio
+async def test_listener_handler():
     listener_test = Listener()
     print(listener_test)
     assert listener_test is not None
