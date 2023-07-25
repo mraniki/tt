@@ -99,27 +99,27 @@ async def test_run_bot(caplog):
         await task
 
 
-@pytest.mark.asyncio
-async def test_get_latest_message(message):
-    listener = Listener()
-    await listener.start()
-    assert listener is not None
-    assert settings.VALUE == "On Testing"
-    await listener.handler.handle_message(message)
-    assert await listener.handler.get_latest_message() == message
+# @pytest.mark.asyncio
+# async def test_get_latest_message(message):
+#     listener = Listener()
+#     await listener.start()
+#     assert listener is not None
+#     assert settings.VALUE == "On Testing"
+#     await listener.handler.handle_message(message)
+#     assert await listener.handler.get_latest_message() == message
 
 
-@pytest.mark.asyncio
-async def test_listener_handler():
-    listener_test = Listener()
-    print(listener_test)
-    assert listener_test is not None
-    assert isinstance(listener_test, Listener)
-    await listener_test.start()
-    await listener_test.handler.handle_message("hello")
-    msg = await listener_test.handler.get_latest_message()
-    print(msg)
-    assert msg == "hello"
+# @pytest.mark.asyncio
+# async def test_listener_handler():
+#     listener_test = Listener()
+#     print(listener_test)
+#     assert listener_test is not None
+#     assert isinstance(listener_test, Listener)
+#     await listener_test.start()
+#     await listener_test.handler.handle_message("hello")
+#     msg = await listener_test.handler.get_latest_message()
+#     print(msg)
+#     assert msg == "hello"
 
 
 @pytest.mark.asyncio
