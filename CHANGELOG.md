@@ -2,6 +2,37 @@
 
 <!--next-version-placeholder-->
 
+## v4.5.0 (2023-07-25)
+
+### Feature
+
+* :lipstick: Add TalkyTrendPlugin cron task for fetching key events. ([`c75836e`](https://github.com/mraniki/tt/commit/c75836ee9e0dc19da2962cd42e2503bb5af7497c))
+
+### Fix
+
+* ✅ ([`8f4aed7`](https://github.com/mraniki/tt/commit/8f4aed764235e642b130966d6b85c39c0709f497))
+* ♻️ refactor to simplify utils.py and apprise ([`a94a541`](https://github.com/mraniki/tt/commit/a94a5414c10e6182e63dc3820473e09ee4062358))
+* 🐛 ✅ ([`e8e4b8f`](https://github.com/mraniki/tt/commit/e8e4b8f90382e7f133bc413abf511d057d617317))
+* ✅ added listener test ([`90ab01e`](https://github.com/mraniki/tt/commit/90ab01ef87419cf0719d4894f3d07dd40232c71e))
+* 🚨 ([`6bc9006`](https://github.com/mraniki/tt/commit/6bc9006cd32862fb1904cb795b7ee9121012a75c))
+* ✅ unit test increase ([`a27b6fe`](https://github.com/mraniki/tt/commit/a27b6fe732600caad66ba36eb4167fba3ee163ea))
+* Update Requirements ([`e780c99`](https://github.com/mraniki/tt/commit/e780c9992d8b985c1861698e8c4a2aa04bf35107))
+* ✅ start and run unit test ([`82f9233`](https://github.com/mraniki/tt/commit/82f92331ef08f9ac2bc1fdebf2642a847baec070))
+* ✅ ([`70a1519`](https://github.com/mraniki/tt/commit/70a1519ed2feb9214f1c4ac1ab5f3652921f4864))
+* ✅ unit test ([`2207b4c`](https://github.com/mraniki/tt/commit/2207b4cb3ea0db494f5d78b9ef0075ecbec83679))
+* ✅ ([`9361851`](https://github.com/mraniki/tt/commit/9361851a7296b5b1e8671a15f881c009b41c869c))
+* ✅ runbot unit test case ([`2590b47`](https://github.com/mraniki/tt/commit/2590b47fcac1a73ad88ccab56b00ae3ae98fb89f))
+* ✅ Updating unit test ([`d8284e1`](https://github.com/mraniki/tt/commit/d8284e10128188cdf9bf8b771d6d2e39fcdcf454))
+* Update Requirements ([`56c5522`](https://github.com/mraniki/tt/commit/56c5522a82848db7023df408a5e7dd9eda6f4557))
+* ⬆️ dep ([`9428b7a`](https://github.com/mraniki/tt/commit/9428b7a0cd1e010f6b1e23a6449a3d4ef98e1366))
+* 🔧 ([`46fbf97`](https://github.com/mraniki/tt/commit/46fbf97233009b4bb169e3f631da765d73baf798))
+* Update Requirements ([`4f75cc7`](https://github.com/mraniki/tt/commit/4f75cc75fe63df88685474eec2b024b671608738))
+* ⬆️ Update for talkytrend changes ([`97a25b5`](https://github.com/mraniki/tt/commit/97a25b57bf4b06c5a1ba49c61d19b8d1fcfa62cd))
+* Update Requirements ([`1319796`](https://github.com/mraniki/tt/commit/1319796dc4039e7a1958b342cb18ee6137069f22))
+* ⬆️ dep ([`ca9635e`](https://github.com/mraniki/tt/commit/ca9635ead7869978086732bb87c328a46a712c59))
+* ✅ pytest-loguru ([`44767ee`](https://github.com/mraniki/tt/commit/44767ee4414460f4e0beb2a795099b746b000216))
+* ⬆️ pytest-loguru = "^0.2.0" ([`fc756f2`](https://github.com/mraniki/tt/commit/fc756f2283f8802e5277cfa7d685a248e4f14cd8))
+
 ## v4.4.0 (2023-07-24)
 
 ### Feature
