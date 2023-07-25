@@ -19,6 +19,10 @@ def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
 
 
+@pytest.fixture(name="message")
+def message():
+    return "Test message"
+
 @pytest.fixture(name="listener_obj")
 def listener_test():
     return Listener()
@@ -83,6 +87,11 @@ async def test_start_bot(listener_obj, plugin_manager_obj):
         start.assert_awaited
         await task
 
+@pytest.mark.asyncio
+async def test_get_latest_message(listener_obj, message):
+    await listener_obj.start()
+    await listener_obj.handler.handle_message(message)
+    assert await listener_obj.handler.get_latest_message() == message
 
 @pytest.mark.asyncio
 async def test_run_bot(caplog):
@@ -95,6 +104,19 @@ async def test_run_bot(caplog):
 
 
 @pytest.mark.asyncio
+async def test_listener_telegram():
+    listener_test = Listener()
+    print(listener_test)
+    assert listener_test is not None
+    assert isinstance(listener_test, Listener)
+    await listener_test.start()
+    await listener_test.handler.handle_message("hello")
+    msg = await listener_test.handler.get_latest_message()
+    print(msg)
+    assert msg == "hello"
+
+
+@pytest.mark.asyncio
 async def test_baseplugins():
     plugin = BasePlugin
     assert callable(plugin.start) 
@@ -102,3 +124,4 @@ async def test_baseplugins():
     assert callable(plugin.send_notification) 
     assert callable(plugin.should_handle)
     assert callable(plugin.handle_message)
+
