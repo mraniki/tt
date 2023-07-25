@@ -2,7 +2,7 @@
  TT test
 """
 import asyncio
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, patch
 
 import pytest
 from fastapi.testclient import TestClient
@@ -79,15 +79,6 @@ async def test_start_plugins():
     plugin_manager.load_plugins.assert_called_once()
 
 
-@pytest.mark.asyncio
-async def test_start_bot(listener_obj, plugin_manager_obj):
-    start = AsyncMock()
-    task = asyncio.create_task(start_bot(listener_obj, plugin_manager_obj))
-    task.cancel()
-    with pytest.raises(asyncio.CancelledError):
-        start.assert_awaited
-        await task
-
 
 @pytest.mark.asyncio
 async def test_run_bot(caplog):
@@ -97,6 +88,26 @@ async def test_run_bot(caplog):
     task.cancel()
     with pytest.raises(asyncio.CancelledError):
         await task
+
+
+@pytest.mark.asyncio
+async def test_start_bot(listener_obj, plugin_manager_obj):
+    with patch.object(Listener, "start") as start_mock:
+        task = asyncio.create_task(start_bot(listener_obj, plugin_manager_obj))
+        start_mock.assert_awaited
+        task.cancel()
+        with pytest.raises(asyncio.CancelledError):
+            await task
+
+
+@pytest.mark.asyncio
+async def test_start_plugin_start_bot(listener_obj, plugin_manager_obj):
+    with patch.object(start_plugins) as start_plugins_mock:
+        task = asyncio.create_task(start_bot(listener_obj, plugin_manager_obj))
+        start_plugins_mock.assert_awaited
+        task.cancel()
+        with pytest.raises(asyncio.CancelledError):
+            await task
 
 
 # @pytest.mark.asyncio
