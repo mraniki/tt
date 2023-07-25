@@ -65,4 +65,3 @@ class DexExchangePlugin(BasePlugin):
             if command in command_mapping:
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
-

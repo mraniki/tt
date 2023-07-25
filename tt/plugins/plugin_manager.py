@@ -105,7 +105,7 @@ class BasePlugin:
         user_timezone="UTC",
         function=None): 
         """Handles task cron scheduling for notification 
-        monday to Friday at 8AM, 12PM and 4PM with time being UTC based"""
+        monday to Friday at 8AM, 12PM and 4PM UTC based"""
         if function:
             self.scheduler.add_task(
                 name=user_name,
