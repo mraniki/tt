@@ -18,12 +18,9 @@ class TalkyTrendPlugin(BasePlugin):
     async def start(self):
         """Starts the TalkyTrend plugin"""  
         if self.enabled:
-            await self.plugin_notify_schedule_task(
-                user_name="talky_feed",
-                function=self.trend.fetch_key_feed)
             await self.plugin_notify_cron_task(
-                user_name="talky_signal",
-                function=self.trend.check_signal)
+                user_name="talky_monitor",
+                function=self.trend.monitor)
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""
@@ -46,11 +43,10 @@ class TalkyTrendPlugin(BasePlugin):
                 settings.bot_command_help: self.trend.get_talkytrend_help,
                 settings.bot_command_info: self.trend.get_talkytrend_info,
                 settings.bot_command_tv: self.trend.get_tv,
-                settings.bot_command_trend: self.trend.check_signal,
-                settings.bot_command_news: self.trend.fetch_key_feed,
+                settings.bot_command_trend: self.trend.fetch_signal,
+                settings.bot_command_news: self.trend.fetch_feed,
             }
 
             if command in command_mapping:
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
-

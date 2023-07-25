@@ -47,8 +47,6 @@ webhook_secret = "123abc"
 ###        APPRISE SETTINGS          ###
 ########################################
 
-apprise_api_endpoint = ""
-apprise_config = ""
 apprise_url = "json://localhost"
 apprise_format = "NotifyFormat.MARKDOWN"
 # TT_APPRISE_URL='tgram://TOKEN/CHAT_ID'
@@ -192,7 +190,6 @@ talkytrend_commands = "📺 /live\n📰 /news\n📊 /trend"
 bot_command_tv = "live"
 bot_command_trend = "trend"
 bot_command_news = "news"
-scanner_frequency = 86400
 enable_signals = true
 assets = [
     { id ="EURUSD", exchange='FX_IDC',screener="forex"},
@@ -240,15 +237,13 @@ loglevel = "DEBUG"
 host = "0.0.0.0"
 port = 8080
 webhook_secret = "123abc"
-apprise_api_endpoint = ""
-apprise_config = ""
 apprise_url = "json://localhost"
 apprise_format = "NotifyFormat.MARKDOWN"
 iamlistening_enabled = true
-bot_token = ""
-bot_channel_id = ""
-telethon_api_id = ""
-telethon_api_hash = ""
+bot_token = "1234556"
+bot_channel_id = "1234556"
+telethon_api_id = "1234556"
+telethon_api_hash = "1234556"
 matrix_hostname = ""
 matrix_user = ""
 matrix_pass = ""
@@ -329,7 +324,7 @@ talkytrend_commands = "📺 /live\n📰 /news\n📊 /trend"
 bot_command_tv = "live"
 bot_command_trend = "trend"
 bot_command_news = "news"
-scanner_frequency = 86400
+
 enable_signals = true
 assets = [
     { id ="EURUSD", exchange='FX_IDC',screener="forex"},

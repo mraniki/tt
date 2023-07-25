@@ -52,14 +52,14 @@ async def test_plugin_tv(plugin):
 @pytest.mark.asyncio
 async def test_plugin_trend(plugin):
     """Test notification """
-    plugin.check_signal = AsyncMock()
+    plugin.fetch_signal = AsyncMock()
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_trend}")
-    plugin.check_signal.assert_awaited_once
+    plugin.fetch_signal.assert_awaited_once
 
 
 @pytest.mark.asyncio
 async def test_plugin_news(plugin):
     """Test notification """
-    plugin.fetch_key_feed = AsyncMock()
+    plugin.fetch_feed = AsyncMock()
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_news}")
-    plugin.fetch_key_feed.assert_awaited_once
+    plugin.fetch_feed.assert_awaited_once

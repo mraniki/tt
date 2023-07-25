@@ -11,18 +11,25 @@ from iamlistening import Listener
 from tt.bot import app
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin, PluginManager
-from tt.utils import send_notification, start_listener, start_plugins
+from tt.utils import run_bot, send_notification, start_bot, start_plugins
 
-#start_bot, run_bot
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
 
 
+@pytest.fixture(name="message")
+def message_test():
+    return "Test message"
+
 @pytest.fixture(name="listener_obj")
 def listener_test():
     return Listener()
+
+@pytest.fixture(name="plugin_manager_obj")
+def pluginmngr_test():
+    return PluginManager()
 
 @pytest.fixture
 def message():
@@ -66,17 +73,53 @@ async def test_send_notification(caplog):
 
 
 @pytest.mark.asyncio
-async def test_start_listener():
-    listener, task = await start_listener(max_iterations=1)
-    assert isinstance(listener, Listener)
-    assert isinstance(task, asyncio.Task)
-
-
-@pytest.mark.asyncio
 async def test_start_plugins():
     plugin_manager = AsyncMock(spec=PluginManager)
     await start_plugins(plugin_manager)
     plugin_manager.load_plugins.assert_called_once()
+
+
+@pytest.mark.asyncio
+async def test_start_bot(listener_obj, plugin_manager_obj):
+    start = AsyncMock()
+    task = asyncio.create_task(start_bot(listener_obj, plugin_manager_obj))
+    task.cancel()
+    with pytest.raises(asyncio.CancelledError):
+        start.assert_awaited
+        await task
+
+
+@pytest.mark.asyncio
+async def test_run_bot(caplog):
+    start_bot = AsyncMock()
+    task = asyncio.create_task(run_bot())
+    start_bot.assert_awaited
+    task.cancel()
+    with pytest.raises(asyncio.CancelledError):
+        await task
+
+
+# @pytest.mark.asyncio
+# async def test_get_latest_message(message):
+#     listener = Listener()
+#     await listener.start()
+#     assert listener is not None
+#     assert settings.VALUE == "On Testing"
+#     await listener.handler.handle_message(message)
+#     assert await listener.handler.get_latest_message() == message
+
+
+# @pytest.mark.asyncio
+# async def test_listener_handler():
+#     listener_test = Listener()
+#     print(listener_test)
+#     assert listener_test is not None
+#     assert isinstance(listener_test, Listener)
+#     await listener_test.start()
+#     await listener_test.handler.handle_message("hello")
+#     msg = await listener_test.handler.get_latest_message()
+#     print(msg)
+#     assert msg == "hello"
 
 
 @pytest.mark.asyncio

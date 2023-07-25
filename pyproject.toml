@@ -50,8 +50,8 @@ ping3 = "^4.0.4"
 ccxt = "^4.0.0"
 dxsp = "^4.1.0"
 findmyorder = "^1.6.1"
-iamlistening = "^2.0.0"
-talkytrend = "^1.10.0"
+iamlistening = "^3.0.1"
+talkytrend = "^1.12.1"
 
  
 [tool.poetry.group.dev.dependencies]
@@ -85,6 +85,7 @@ pytest = "^7.0"
 pytest-cov = "^4.1"
 pytest-asyncio = "^0.21.0"
 pytest-mock = "^3.11.1"
+pytest-loguru = "^0.2.0"
 
 [tool.poetry.group.docs]
 optional = true
