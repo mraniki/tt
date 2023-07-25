@@ -76,7 +76,9 @@ async def test_start_plugins():
 
 
 @pytest.mark.asyncio
-async def test_run_bot(listener_obj, plugin_manager_obj):
+async def test_run_bot(listener_obj, plugin_manager_obj, caplog):
+    plugin_manager_obj.start_plugins = AsyncMock()
+    plugin_manager_obj.start_all_plugins = AsyncMock()
     assert isinstance(listener_obj, Listener)  
     assert isinstance(plugin_manager_obj, PluginManager)  
     task = asyncio.create_task(start_bot(listener_obj, plugin_manager_obj))
@@ -84,6 +86,8 @@ async def test_run_bot(listener_obj, plugin_manager_obj):
     print(task)
     assert task is not None
     assert start_bot is not None
+    # plugin_manager_obj.start_plugins.assert_awaited_once()
+    # assert any("Plugin loaded" in record.message for record in caplog.records)
     task.cancel()
     with pytest.raises(asyncio.CancelledError):
         await task
