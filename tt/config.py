@@ -71,7 +71,7 @@ def loguru_setup():
         }
     logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
     loguru_logger.add(
-        sink=sys.stderr,
+        sink=sys.stdout,
         level=settings.loglevel,
         filter=log_filters,
     )
