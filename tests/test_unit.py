@@ -98,12 +98,13 @@ async def test_start_plugins():
 @pytest.mark.asyncio
 async def test_run_bot(caplog):
     start_bot = AsyncMock()
-    with patch('tt.utils.start_bot', start_bot)
+    with patch('tt.utils.start_bot', start_bot):
         task = asyncio.create_task(run_bot())
         start_bot.assert_awaited
         task.cancel()
         with pytest.raises(asyncio.CancelledError):
             await task
+        assert isinstance(task.get_coro().__wrapped__().__wrapped__.listener, Listener)
 
 
 @pytest.mark.asyncio
