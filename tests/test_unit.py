@@ -20,7 +20,7 @@ def set_test_settings():
 
 
 @pytest.fixture(name="message")
-def message():
+def message_test():
     return "Test message"
 
 @pytest.fixture(name="listener_obj")
