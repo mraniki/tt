@@ -103,7 +103,7 @@ async def test_run_bot():
         task = asyncio.create_task(run_bot())
         await asyncio.sleep(1)
         start_bot.assert_awaited
-        listener_created = task.get_coro().cr_frame.f_locals['listener']
+        listener_created = asyncio.current_task().get_coro().cr_frame.f_locals['listener']
 
         assert isinstance(listener_created, Listener) 
         task.cancel()
