@@ -24,7 +24,7 @@ async def send_notification(msg):
         body_format=msg_format)
 
 
-async def run_bot(max_iterations=None):
+async def run_bot():
     """
     🤖 Run the chat bot & the plugins.
     """
