@@ -11,7 +11,7 @@ from iamlistening import Listener
 from tt.bot import app
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin, PluginManager
-from tt.utils import run_bot, send_notification, start_bot, start_plugins
+from tt.utils import send_notification, start_bot, start_plugins
 
 
 @pytest.fixture(scope="session", autouse=True)
