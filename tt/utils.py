@@ -45,7 +45,7 @@ async def start_plugins(plugin_manager):
  
 async def start_bot(listener, plugin_manager):
     """
-    👂 Listen to the bot and dispatch to plugins
+    👂 Start the chat listener and dispatch to plugins
     """
     await listener.start()
     await start_plugins(plugin_manager)
