@@ -11,9 +11,8 @@ from iamlistening import Listener
 from tt.bot import app
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin, PluginManager
-from tt.utils import send_notification, start_listener, start_plugins
+from tt.utils import run_bot, send_notification, start_bot, start_plugins
 
-#start_bot, run_bot
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
@@ -23,6 +22,10 @@ def set_test_settings():
 @pytest.fixture(name="listener_obj")
 def listener_test():
     return Listener()
+
+@pytest.fixture(name="plugin_manager_obj")
+def pluginmngr_test():
+    return PluginManager()
 
 @pytest.fixture
 def message():
@@ -66,17 +69,22 @@ async def test_send_notification(caplog):
 
 
 @pytest.mark.asyncio
-async def test_start_listener():
-    listener, task = await start_listener(max_iterations=1)
-    assert isinstance(listener, Listener)
-    assert isinstance(task, asyncio.Task)
-
-
-@pytest.mark.asyncio
 async def test_start_plugins():
     plugin_manager = AsyncMock(spec=PluginManager)
     await start_plugins(plugin_manager)
     plugin_manager.load_plugins.assert_called_once()
+
+
+@pytest.mark.asyncio
+async def test_start_bot(listener_obj,plugin_manager_obj):
+    bot = await start_bot(listener_obj,plugin_manager_obj)
+    assert isinstance(bot, asyncio.Task)
+
+
+@pytest.mark.asyncio
+async def test_run_bot():
+    bot = await run_bot()
+    assert isinstance(bot, asyncio.Task)
 
 
 @pytest.mark.asyncio

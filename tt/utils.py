@@ -30,15 +30,6 @@ async def send_notification(msg):
         body_format=msg_format)
 
 
-async def start_listener(max_iterations=None):
-    """
-    Start the chat listener.
-    """
-    bot_listener = Listener()
-    task = asyncio.create_task(bot_listener.run_forever(max_iterations))
-    return bot_listener, task
-
-
 async def start_plugins(plugin_manager):
     """
     Start all plugins.
@@ -48,15 +39,19 @@ async def start_plugins(plugin_manager):
         loop = asyncio.get_running_loop()
         loop.create_task(plugin_manager.start_all_plugins())
 
+
 async def start_bot(listener, plugin_manager):
     """
     Listen to the message in the bot channel
     and dispatch to plugins
     """
+    await listener.start()
+    await start_plugins(plugin_manager)
     while True:
         try:
-            msg = await listener.get_latest_message()
+            msg = await listener.handler.get_latest_message()
             if msg and settings.plugin_enabled:
+                logger.debug("👂 listener: {}", msg)
                 await plugin_manager.process_message(msg)
         except Exception as error:
             logger.error("👂 listener: {}", error)
@@ -68,7 +63,6 @@ async def run_bot(max_iterations=None):
     """
     Run the chat bot & the plugins.
     """
-    listener, task = await start_listener(max_iterations)
+    listener = Listener()
     plugin_manager = PluginManager()
-    await start_plugins(plugin_manager)
-    await asyncio.gather(start_bot(listener, plugin_manager), task)
+    await asyncio.gather(start_bot(listener, plugin_manager))
