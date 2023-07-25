@@ -39,7 +39,7 @@ async def start_plugins(plugin_manager):
         loop = asyncio.get_running_loop()
         loop.create_task(plugin_manager.start_all_plugins())
 
-
+ 
 async def start_bot(listener, plugin_manager):
     """
     Listen to the message in the bot channel

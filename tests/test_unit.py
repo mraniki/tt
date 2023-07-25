@@ -7,12 +7,11 @@ from unittest.mock import AsyncMock
 import pytest
 from fastapi.testclient import TestClient
 from iamlistening import Listener
-from loguru import logger
 
 from tt.bot import app
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin, PluginManager
-from tt.utils import run_bot, send_notification, start_plugins
+from tt.utils import run_bot, send_notification, start_bot, start_plugins
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -75,18 +74,23 @@ async def test_start_plugins():
     await start_plugins(plugin_manager)
     plugin_manager.load_plugins.assert_called_once()
 
+@pytest.mark.asyncio
+async def test_start_bot(listener_obj, plugin_manager_obj):
+    start = AsyncMock()
+    task = asyncio.create_task(start_bot(listener_obj, plugin_manager_obj))
+    task.cancel()
+    with pytest.raises(asyncio.CancelledError):
+        start.assert_awaited
+        await task
+
 
 @pytest.mark.asyncio
 async def test_run_bot(caplog):
+    start_bot = AsyncMock()
     task = asyncio.create_task(run_bot())
-    print(run_bot)
-    print(task)
-    assert task is not None
-    assert run_bot is not None
-    # assert any("Plugin loaded" in record.message for record in caplog.records)
+    start_bot.assert_awaited
     task.cancel()
     with pytest.raises(asyncio.CancelledError):
-        # assert task is not None
         await task
 
 
