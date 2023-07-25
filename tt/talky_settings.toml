@@ -192,7 +192,6 @@ talkytrend_commands = "📺 /live\n📰 /news\n📊 /trend"
 bot_command_tv = "live"
 bot_command_trend = "trend"
 bot_command_news = "news"
-scanner_frequency = 86400
 enable_signals = true
 assets = [
     { id ="EURUSD", exchange='FX_IDC',screener="forex"},
@@ -329,7 +328,7 @@ talkytrend_commands = "📺 /live\n📰 /news\n📊 /trend"
 bot_command_tv = "live"
 bot_command_trend = "trend"
 bot_command_news = "news"
-scanner_frequency = 86400
+
 enable_signals = true
 assets = [
     { id ="EURUSD", exchange='FX_IDC',screener="forex"},
