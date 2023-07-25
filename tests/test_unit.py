@@ -100,11 +100,15 @@ async def test_run_bot(caplog):
     start_bot = AsyncMock()
     with patch('tt.utils.start_bot', start_bot):
         task = asyncio.create_task(run_bot())
-        start_bot.assert_awaited
+        await asyncio.sleep(0)
+        assert start_bot.await_count == 1
+        start_bot.assert_awaited_with()  
+        listener_created = task.get_coro().cr_frame.f_locals['listener']
+
+        assert isinstance(listener_created, Listener) 
         task.cancel()
         with pytest.raises(asyncio.CancelledError):
             await task
-        assert isinstance(task.get_coro().__wrapped__().__wrapped__.listener, Listener)
 
 
 @pytest.mark.asyncio
