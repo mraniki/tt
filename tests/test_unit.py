@@ -95,15 +95,15 @@ async def test_start_plugins():
     plugin_manager.load_plugins.assert_called_once()
 
 
-
 @pytest.mark.asyncio
 async def test_run_bot(caplog):
     start_bot = AsyncMock()
-    task = asyncio.create_task(run_bot())
-    start_bot.assert_awaited
-    task.cancel()
-    with pytest.raises(asyncio.CancelledError):
-        await task
+    with patch('tt.utils.start_bot', start_bot)
+        task = asyncio.create_task(run_bot())
+        start_bot.assert_awaited
+        task.cancel()
+        with pytest.raises(asyncio.CancelledError):
+            await task
 
 
 @pytest.mark.asyncio
@@ -132,6 +132,7 @@ async def test_bot(ial_test, plugin_manager_obj):
     task.cancel()
     with pytest.raises(asyncio.CancelledError):
         await task
+
 
 @pytest.mark.asyncio
 async def test_baseplugins():
