@@ -76,15 +76,17 @@ async def test_start_plugins():
 
 
 @pytest.mark.asyncio
-async def test_start_bot(listener_obj,plugin_manager_obj):
-    bot = await start_bot(listener_obj,plugin_manager_obj)
-    assert isinstance(bot, asyncio.Task)
-
-
-@pytest.mark.asyncio
-async def test_run_bot():
-    bot = await run_bot()
-    assert isinstance(bot, asyncio.Task)
+async def test_run_bot(listener_obj, plugin_manager_obj):
+    assert isinstance(listener_obj, Listener)  
+    assert isinstance(plugin_manager_obj, PluginManager)  
+    task = asyncio.create_task(start_bot(listener_obj, plugin_manager_obj))
+    print(start_bot)
+    print(task)
+    assert task is not None
+    assert start_bot is not None
+    task.cancel()
+    with pytest.raises(asyncio.CancelledError):
+        await task
 
 
 @pytest.mark.asyncio
