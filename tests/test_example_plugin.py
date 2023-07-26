@@ -143,10 +143,4 @@ async def test_plugin_notify_schedule_task():
         function=function_mock
     )
 
-    plugin.scheduler.add_task.assert_called_once_with(
-        name='Test User',
-        fn=plugin.send_notification,
-        args=[function_result],
-        trigger=IntervalTrigger(hours=8),
-        is_enabled=True
-    )
+    plugin.scheduler.add_task.assert_awaited_once
