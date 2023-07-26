@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v4.5.2 (2023-07-26)
+
+### Fix
+
+* Update Requirements ([`00b2ed4`](https://github.com/mraniki/tt/commit/00b2ed4bd24f02a7c47842ec46219665d9ae04c6))
+* ⚡ for iteration ([`8e550ee`](https://github.com/mraniki/tt/commit/8e550ee091f0329d55cbb0f3c8d78780ed7711d5))
+* 🚑 for start_bot iteration ([`e3bb3e2`](https://github.com/mraniki/tt/commit/e3bb3e2c7f3c3d687f6a1d03ea082f4ddadfd29c))
+* ✅ Unit Test ([`0c87afa`](https://github.com/mraniki/tt/commit/0c87afa1203ad1055ed46489d4a292498623f471))
+
 ## v4.5.1 (2023-07-26)
 
 ### Fix
