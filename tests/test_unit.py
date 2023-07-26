@@ -113,14 +113,13 @@ async def test_start_bot():
     listener_instance = Listener()
     listener_instance.handler = AsyncMock(spec=ChatManager)
     plugin_manager_instance = PluginManager()
-    async def side_effect():
-            yield True
-            yield False
-    # with patch('tt.config.settings.BOT_RUNNING', side_effect=side_effect()):
     with patch('iamlistening.Listener', listener_instance):
         with patch('tt.plugins.plugin_manager', plugin_manager_instance):
             task = asyncio.create_task(
-            await start_bot(listener_instance, plugin_manager_instance))
+            await start_bot(
+                listener_instance, 
+                plugin_manager_instance,
+                max_iterations=1))
             listener_instance.start.assert_awaited()
             plugin_manager_instance.start_plugins.assert_awaited() 
             listener_instance.handler.get_latest_message.assert_awaited_once() 

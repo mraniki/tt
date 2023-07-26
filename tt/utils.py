@@ -43,15 +43,17 @@ async def start_plugins(plugin_manager):
         loop.create_task(plugin_manager.start_all_plugins())
 
  
-async def start_bot(listener, plugin_manager):
+async def start_bot(listener, plugin_manager, max_iterations=None):
     """
     👂 Start the chat listener and dispatch to plugins
     """
     await listener.start()
     await start_plugins(plugin_manager)
-    while settings.bot_running:
+    iteration = 0
+    while not max_iterations or iteration < max_iterations:
         msg = await listener.handler.get_latest_message()
         if msg and settings.plugin_enabled:
             await plugin_manager.process_message(msg)
 
     await asyncio.sleep(1)
+    iteration += 1
