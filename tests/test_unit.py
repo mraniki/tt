@@ -132,6 +132,7 @@ async def test_start_bot():
         plugin_manager,
         max_iterations=1)
     listener.start.assert_awaited_once()
+    listener.handler.get_latest_message.assert_awaited_once()
     #plugin_manager.start_plugins.assert_awaited() 
     #asyncio.sleep.assert_awaited_with(1)
 
