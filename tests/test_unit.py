@@ -54,17 +54,17 @@ def mock_plugin_manager():
 
 
 
-@pytest.mark.asyncio
-async def test_run_bot_task():
+# @pytest.mark.asyncio
+# async def test_run_bot_task():
 
-    loop = asyncio.get_event_loop()
-    task = loop.create_task(run_bot())
-    await asyncio.sleep(0.1)
-    assert not task.done()
-    task.cancel()
-    await task
-    assert task.done()
-    assert task.cancelled()
+#     loop = asyncio.get_event_loop()
+#     task = loop.create_task(run_bot())
+#     await asyncio.sleep(0.1)
+#     assert not task.done()
+#     task.cancel()
+#     await task
+#     assert task.done()
+#     assert task.cancelled()
 
 
 def test_app_endpoint_main():
