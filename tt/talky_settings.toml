@@ -24,6 +24,7 @@
 # ENV_FOR_DYNACONF=DEFAULT
 VALUE = "Production - Default"
 
+
 ########################################
 ###         PYTHON SETTINGS          ###
 ########################################
@@ -42,6 +43,7 @@ port = 8080
 # trade alert directly to your
 # bot.
 webhook_secret = "123abc"
+
 
 ########################################
 ###        APPRISE SETTINGS          ###

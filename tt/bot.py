@@ -43,4 +43,9 @@ async def webhook(request: Request):
 
 
 if __name__ == "__main__":
+    """ This line runs the Uvicorn server with the specified host and port.
+    The `app` variable is an instance of the FastAPI application, 
+    and the `settings.host` and `settings.port` variables 
+    are the host and port to run the server on, respectively
+    """ 
     uvicorn.run(app, host=settings.host, port=int(settings.port))
