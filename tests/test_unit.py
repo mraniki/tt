@@ -126,6 +126,7 @@ async def test_start_bot():
     listener = AsyncMock(spec=Listener)
     listener.handler = AsyncMock(spec=ChatManager)
     plugin_manager = AsyncMock(spec=PluginManager)
+    plugin_manager.start_plugins = AsyncMock(side_effect=[plugin_manager])
     await start_bot(
         listener, 
         plugin_manager,
