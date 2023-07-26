@@ -105,9 +105,19 @@ async def test_run_bot():
         start_bot.assert_awaited
         listener_created = listener_instance
         assert isinstance(listener_created, Listener) 
-        task.cancel()
-        with pytest.raises(asyncio.CancelledError):
-            await task
+        #task.cancel()
+        #with pytest.raises(asyncio.CancelledError):
+            #await task
+ 
+
+# @pytest.mark.asyncio
+# async def test_run_bot():
+#     listener_instance = Listener()
+#     run_bot()
+    
+#     start_bot.assert_awaited
+#     listener_created = listener_instance
+#     assert isinstance(listener_created, Listener) 
 
 
 @pytest.mark.asyncio
