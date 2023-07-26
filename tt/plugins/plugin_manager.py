@@ -101,11 +101,11 @@ class BasePlugin:
         self,
         user_name=None,
         user_day_of_week="mon-fri",
-        user_hours="8,12,16",
+        user_hours="6,12,18",
         user_timezone="UTC",
         function=None): 
         """Handles task cron scheduling for notification 
-        monday to Friday at 8AM, 12PM and 4PM UTC based"""
+        Monday to Friday at 6AM, 12PM and 6PM UTC"""
         if function:
             self.scheduler.add_task(
                 name=user_name,

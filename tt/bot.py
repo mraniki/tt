@@ -17,7 +17,7 @@ app = FastAPI(title="TALKYTRADER")
 
 @app.on_event("startup")
 async def start_bot_task():
-    """⛓️🤖🙊BOT"""
+    """⛓️🤖BOT"""
     event_loop = asyncio.get_event_loop()
     event_loop.create_task(run_bot())
 
@@ -41,6 +41,11 @@ async def webhook(request: Request):
     return {"status": "OK"}
 
 
-if __name__ == "__main__":
-    uvicorn.run(app, host=settings.host, port=int(settings.port))
 
+if __name__ == "__main__":
+    """ This line runs the Uvicorn server with the specified host and port.
+    The `app` variable is an instance of the FastAPI application, 
+    and the `settings.host` and `settings.port` variables 
+    are the host and port to run the server on, respectively
+    """ 
+    uvicorn.run(app, host=settings.host, port=int(settings.port))

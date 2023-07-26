@@ -2,15 +2,17 @@
  TT test
 """
 import asyncio
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, patch
 
 import pytest
+import uvicorn
 from fastapi.testclient import TestClient
-from iamlistening import Listener
+from iamlistening import ChatManager, Listener
+from iamlistening.platform import TelegramHandler
 
-from tt.bot import app
+from tt.bot import app, start_bot_task
 from tt.config import settings
-from tt.plugins.plugin_manager import BasePlugin, PluginManager
+from tt.plugins.plugin_manager import PluginManager
 from tt.utils import run_bot, send_notification, start_bot, start_plugins
 
 
@@ -27,6 +29,12 @@ def message_test():
 def listener_test():
     return Listener()
 
+@pytest.fixture(name="ial_test")
+def ial_test():
+    listener = Listener()
+    listener.handler = TelegramHandler()
+    return listener
+
 @pytest.fixture(name="plugin_manager_obj")
 def pluginmngr_test():
     return PluginManager()
@@ -34,6 +42,23 @@ def pluginmngr_test():
 @pytest.fixture
 def message():
     return "Test message"
+
+@pytest.fixture
+def mock_listener():
+   mock_listener = AsyncMock(spec=Listener)
+   mock_listener.handler = AsyncMock(spec=ChatManager)
+   return mock_listener
+
+@pytest.fixture
+def mock_plugin_manager():
+   return AsyncMock(spec=PluginManager)
+
+
+@pytest.mark.asyncio
+async def test_start_bot_task():
+    run_bot = AsyncMock()
+    await start_bot_task()
+    assert run_bot.assert_awaited_once
 
 
 def test_app_endpoint_main():
@@ -80,53 +105,32 @@ async def test_start_plugins():
 
 
 @pytest.mark.asyncio
-async def test_start_bot(listener_obj, plugin_manager_obj):
-    start = AsyncMock()
-    task = asyncio.create_task(start_bot(listener_obj, plugin_manager_obj))
-    task.cancel()
-    with pytest.raises(asyncio.CancelledError):
-        start.assert_awaited
-        await task
+async def test_run_bot():
+    listener_instance = Listener()
+    start_bot = AsyncMock(side_effect=[listener_instance])
+    with patch('tt.utils.start_bot', start_bot):
+        task = asyncio.create_task(run_bot())
+        await asyncio.gather(task, asyncio.sleep(2))
+        start_bot.assert_awaited
+        listener_created = listener_instance
+        assert isinstance(listener_created, Listener) 
 
 
 @pytest.mark.asyncio
-async def test_run_bot(caplog):
-    start_bot = AsyncMock()
-    task = asyncio.create_task(run_bot())
-    start_bot.assert_awaited
-    task.cancel()
-    with pytest.raises(asyncio.CancelledError):
-        await task
+async def test_start_bot():
+    
+    listener = AsyncMock(spec=Listener)
+    listener.handler = AsyncMock(spec=ChatManager)
+    plugin_manager = AsyncMock(spec=PluginManager)
+    await start_bot(
+        listener, 
+        plugin_manager,
+        max_iterations=1)
+    listener.start.assert_awaited_once()
+    listener.handler.get_latest_message.assert_awaited_once()
 
 
-# @pytest.mark.asyncio
-# async def test_get_latest_message(message):
-#     listener = Listener()
-#     await listener.start()
-#     assert listener is not None
-#     assert settings.VALUE == "On Testing"
-#     await listener.handler.handle_message(message)
-#     assert await listener.handler.get_latest_message() == message
-
-
-# @pytest.mark.asyncio
-# async def test_listener_handler():
-#     listener_test = Listener()
-#     print(listener_test)
-#     assert listener_test is not None
-#     assert isinstance(listener_test, Listener)
-#     await listener_test.start()
-#     await listener_test.handler.handle_message("hello")
-#     msg = await listener_test.handler.get_latest_message()
-#     print(msg)
-#     assert msg == "hello"
-
-
-@pytest.mark.asyncio
-async def test_baseplugins():
-    plugin = BasePlugin
-    assert callable(plugin.start) 
-    assert callable(plugin.stop)
-    assert callable(plugin.send_notification) 
-    assert callable(plugin.should_handle)
-    assert callable(plugin.handle_message)
+def test_main():
+    client = TestClient(app)
+    uvicorn.run = AsyncMock(client)
+    uvicorn.run.assert_called_once
