@@ -51,7 +51,7 @@ ccxt = "^4.0.0"
 dxsp = "^4.1.0"
 findmyorder = "^1.6.1"
 iamlistening = "^3.0.2"
-talkytrend = "^1.12.1"
+talkytrend = "^1.12.3"
 
  
 [tool.poetry.group.dev.dependencies]
