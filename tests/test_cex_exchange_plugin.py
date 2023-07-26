@@ -1,11 +1,14 @@
 from datetime import datetime
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, patch
 
 import pytest
 
 import tt.plugins.default_plugins.cex_exchange_plugin
 from tt.config import settings
-from tt.plugins.default_plugins.cex_exchange_plugin import CexExchangePlugin
+from tt.plugins.default_plugins.cex_exchange_plugin import (
+    CexExchange,
+    CexExchangePlugin,
+)
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -142,3 +145,43 @@ async def test_execute_order(plugin, order_parsed):
     print(result)
     assert result is not None
     assert "⚠️ order execution" in result
+
+
+# @pytest.mark.asyncio
+# async def test_cex_exchange():
+#     exchange_instance = CexExchange()
+#     ccxt_client_mock = AsyncMock()
+#     ccxt_client_mock.uid = '12345'
+#     ccxt_client_mock.fetchTicker.side_effect = lambda symbol: {'last': 5000}
+#     ccxt_client_mock.fetchBalance = AsyncMock(return_value={'BTC': {'free': 1}})
+#     ccxt_client_mock.create_order = AsyncMock(
+#         return_value={
+#             'id': '12345',
+#             'amount': 1,
+#             'price': 5000,
+#             'datetime': '2022-01-01 00:00:00'})
+#     exchange_instance.cex = ccxt_client_mock
+
+#     with patch('ccxt.binance', return_value=ccxt_client_mock):
+
+#         result = await exchange_instance.get_info()
+
+#         assert result is not None
+#         assert '💱' in result
+#         assert '🪪' in result
+
+#         order_params = {
+#             'action': 'BUY',
+#             'instrument': 'BTCUSDT',
+#             'quantity': 100
+#         }
+
+#         result = await ccxt_client_mock.execute_order(order_params)
+#         print(result)
+#         assert result is not None
+#         assert '⬆️ BTC/USD' in result
+
+#         ccxt_client_mock.fetchTicker.assert_awaited_once_with('BTCUSDT')
+#         ccxt_client_mock.fetchBalance.assert_awaited_once()
+#         ccxt_client_mock.create_order.assert_awaited_once_with(
+#             'BTCUSDT', settings.cex_ordertype, 'BUY', 0.02, price=None)
