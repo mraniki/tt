@@ -2,7 +2,7 @@ import importlib
 from unittest.mock import AsyncMock
 
 import pytest
-from asyncz.triggers import CronTrigger, IntervalTrigger
+from asyncz.triggers import CronTrigger
 
 from tt.config import settings
 from tt.plugins.default_plugins.example_plugin import ExamplePlugin
