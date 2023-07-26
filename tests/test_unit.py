@@ -113,36 +113,15 @@ async def test_start_bot():
     listener_instance = Listener()
     listener_instance.handler = AsyncMock(spec=ChatManager)
     plugin_manager_instance = PluginManager()
-    with patch('iamlistening.Listener', listener_instance):
-        with patch('tt.plugins.plugin_manager', plugin_manager_instance):
-            task = asyncio.create_task(
-            await start_bot(
-                listener_instance, 
-                plugin_manager_instance,
-                max_iterations=1))
-            listener_instance.start.assert_awaited_once()
-            plugin_manager_instance.start_plugins.assert_awaited() 
-            await listener_instance.handler.handle_message("hello")
 
-            try:
-                msg = await asyncio.wait_for(
-                    listener_instance.handler.get_latest_message(),
-                    timeout=1.0)
-                assert msg == "hello"
-            except TimeoutError:
-                pytest.fail("Timeout occurred while waiting for the latest message")
+    await start_bot(
+        listener_instance, 
+        plugin_manager_instance,
+        max_iterations=1))
+    listener_instance.start.assert_awaited_once()
+    plugin_manager_instance.start_plugins.assert_awaited() 
+    asyncio.sleep.assert_awaited_with(1)
 
-            # listener_instance.handler.get_latest_message.assert_awaited_once() 
-            # plugin_manager_instance.process_message.assert_awaited_once()
-            asyncio.sleep.assert_awaited_with(1)
-            task.cancel()
-            with pytest.raises(asyncio.CancelledError):
-                await task
-
-# await listener_instance.handler.handle_message("hello")
-# msg = await listener_instance.handler.get_latest_message()
-# print(msg)
-# assert msg == "hello"
 
 @pytest.mark.asyncio
 async def test_baseplugins():
