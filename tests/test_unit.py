@@ -52,6 +52,21 @@ def mock_listener():
 def mock_plugin_manager():
    return AsyncMock(spec=PluginManager)
 
+
+
+@pytest.mark.asyncio
+async def test_run_bot_task():
+    async with pytest.AsyncioFixture(None) as loop:
+
+        task = loop.create_task(run_bot())
+        await asyncio.sleep(0.1)
+        assert not task.done()
+        task.cancel()
+        await task
+        assert task.done()
+        assert task.cancelled()
+
+
 def test_app_endpoint_main():
     client = TestClient(app)
     print(client)
@@ -105,19 +120,6 @@ async def test_run_bot():
         start_bot.assert_awaited
         listener_created = listener_instance
         assert isinstance(listener_created, Listener) 
-        #task.cancel()
-        #with pytest.raises(asyncio.CancelledError):
-            #await task
- 
-
-# @pytest.mark.asyncio
-# async def test_run_bot():
-#     listener_instance = Listener()
-#     run_bot()
-    
-#     start_bot.assert_awaited
-#     listener_created = listener_instance
-#     assert isinstance(listener_created, Listener) 
 
 
 @pytest.mark.asyncio
@@ -126,15 +128,12 @@ async def test_start_bot():
     listener = AsyncMock(spec=Listener)
     listener.handler = AsyncMock(spec=ChatManager)
     plugin_manager = AsyncMock(spec=PluginManager)
-    #plugin_manager.start_plugins = AsyncMock(side_effect=[plugin_manager])
     await start_bot(
         listener, 
         plugin_manager,
         max_iterations=1)
     listener.start.assert_awaited_once()
     listener.handler.get_latest_message.assert_awaited_once()
-    #plugin_manager.start_plugins.assert_awaited() 
-    #asyncio.sleep.assert_awaited_with(1)
 
 
 @pytest.mark.asyncio
