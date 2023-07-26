@@ -122,17 +122,17 @@ async def test_run_bot():
 
 @pytest.mark.asyncio
 async def test_start_bot():
-    with pytest.raises(asyncio.CancelledError):
-        listener_instance = Listener()
-        listener_instance.handler = AsyncMock(spec=ChatManager)
-        plugin_manager_instance = PluginManager()
-        await start_bot(
-            listener_instance, 
-            plugin_manager_instance,
-            max_iterations=1)
-        listener_instance.start.assert_awaited_once()
-        plugin_manager_instance.start_plugins.assert_awaited() 
-        asyncio.sleep.assert_awaited_with(1)
+    
+    listener_instance = Listener()
+    listener_instance.handler = AsyncMock(spec=ChatManager)
+    plugin_manager_instance = PluginManager()
+    await start_bot(
+        listener_instance, 
+        plugin_manager_instance,
+        max_iterations=1)
+    listener_instance.start.assert_awaited_once()
+    plugin_manager_instance.start_plugins.assert_awaited() 
+    asyncio.sleep.assert_awaited_with(1)
 
 
 @pytest.mark.asyncio

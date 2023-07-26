@@ -50,10 +50,11 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
     await listener.start()
     await start_plugins(plugin_manager)
     iteration = 0
-    while not max_iterations or iteration < max_iterations:
+    while iteration < max_iterations:
         msg = await listener.handler.get_latest_message()
         if msg and settings.plugin_enabled:
             await plugin_manager.process_message(msg)
+        iteration += 1
 
     await asyncio.sleep(1)
-    iteration += 1
+    
