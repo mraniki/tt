@@ -54,7 +54,6 @@ def mock_plugin_manager():
    return AsyncMock(spec=PluginManager)
 
 
-
 @pytest.mark.asyncio
 async def test_start_bot_task():
     run_bot = AsyncMock()
