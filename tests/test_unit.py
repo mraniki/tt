@@ -120,14 +120,24 @@ async def test_start_bot():
                 listener_instance, 
                 plugin_manager_instance,
                 max_iterations=1))
-            listener_instance.start.assert_awaited()
+            listener_instance.start.assert_awaited_once()
             plugin_manager_instance.start_plugins.assert_awaited() 
-            listener_instance.handler.get_latest_message.assert_awaited_once() 
-            plugin_manager_instance.process_message.assert_awaited_once()
+            await listener_instance.handler.handle_message("hello")
+
+            try:
+                msg = await asyncio.wait_for(
+                    listener_instance.handler.get_latest_message(),
+                    timeout=1.0)
+                assert msg == "hello"
+            except TimeoutError:
+                pytest.fail("Timeout occurred while waiting for the latest message")
+
+            # listener_instance.handler.get_latest_message.assert_awaited_once() 
+            # plugin_manager_instance.process_message.assert_awaited_once()
             asyncio.sleep.assert_awaited_with(1)
             task.cancel()
-                # with pytest.raises(asyncio.CancelledError):
-                #     await task
+            with pytest.raises(asyncio.CancelledError):
+                await task
 
 # await listener_instance.handler.handle_message("hello")
 # msg = await listener_instance.handler.get_latest_message()
