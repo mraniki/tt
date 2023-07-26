@@ -11,7 +11,7 @@ from iamlistening.platform import TelegramHandler
 
 from tt.bot import app
 from tt.config import settings
-from tt.plugins.plugin_manager import BasePlugin, PluginManager
+from tt.plugins.plugin_manager import PluginManager
 from tt.utils import run_bot, send_notification, start_bot, start_plugins
 
 
@@ -122,12 +122,3 @@ async def test_start_bot():
     listener.start.assert_awaited_once()
     listener.handler.get_latest_message.assert_awaited_once()
 
-
-@pytest.mark.asyncio
-async def test_baseplugins():
-    plugin = BasePlugin
-    assert callable(plugin.start) 
-    assert callable(plugin.stop)
-    assert callable(plugin.send_notification) 
-    assert callable(plugin.should_handle)
-    assert callable(plugin.handle_message)

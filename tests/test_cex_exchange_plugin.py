@@ -1,14 +1,11 @@
 from datetime import datetime
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock
 
 import pytest
 
 import tt.plugins.default_plugins.cex_exchange_plugin
 from tt.config import settings
-from tt.plugins.default_plugins.cex_exchange_plugin import (
-    CexExchange,
-    CexExchangePlugin,
-)
+from tt.plugins.default_plugins.cex_exchange_plugin import CexExchangePlugin
 
 
 @pytest.fixture(scope="session", autouse=True)

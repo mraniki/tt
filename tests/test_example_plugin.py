@@ -2,6 +2,7 @@ import importlib
 from unittest.mock import AsyncMock
 
 import pytest
+from asyncz.triggers import CronTrigger, IntervalTrigger
 
 from tt.config import settings
 from tt.plugins.default_plugins.example_plugin import ExamplePlugin
@@ -88,3 +89,64 @@ async def test_plugin_notification(plugin, plugin_manager):
     send_notification = AsyncMock()
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
     send_notification.assert_awaited_once
+
+
+@pytest.mark.asyncio
+async def test_baseplugins():
+    plugin = BasePlugin
+    assert callable(plugin.start) 
+    assert callable(plugin.stop)
+    assert callable(plugin.send_notification)
+    assert callable(plugin.send_notification) 
+    assert callable(plugin.should_handle)
+    assert callable(plugin.handle_message)
+
+
+@pytest.mark.asyncio
+async def test_plugin_notify_cron_task():
+    plugin = BasePlugin()
+    plugin.scheduler = AsyncMock()
+    plugin.send_notification = AsyncMock()
+    function_result = 'Test Result'
+    function_mock = AsyncMock(return_value=function_result)
+
+    await plugin.plugin_notify_cron_task(
+        user_name='Test User',
+        user_day_of_week='mon-fri',
+        user_hours='6,12,18',
+        user_timezone='UTC',
+        function=function_mock
+    )
+
+    plugin.scheduler.add_task.assert_called_once_with(
+        name='Test User',
+        fn=plugin.send_notification,
+        args=[function_result],
+        trigger=CronTrigger(
+            day_of_week='mon-fri',
+            hour='6,12,18',
+            timezone='UTC'
+        ),
+        is_enabled=True
+    )
+
+@pytest.mark.asyncio
+async def test_plugin_notify_schedule_task():
+    plugin = BasePlugin()
+    plugin.scheduler = AsyncMock()
+    plugin.send_notification = AsyncMock()
+    function_result = 'Test Result'
+    function_mock = AsyncMock(return_value=function_result)
+    await plugin.plugin_notify_schedule_task(
+        user_name='Test User',
+        frequency=8,
+        function=function_mock
+    )
+
+    plugin.scheduler.add_task.assert_called_once_with(
+        name='Test User',
+        fn=plugin.send_notification,
+        args=[function_result],
+        trigger=IntervalTrigger(hours=8),
+        is_enabled=True
+    )
