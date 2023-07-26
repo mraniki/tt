@@ -39,7 +39,8 @@ async def test_baseplugin_class():
     assert callable(plugin.send_notification)
     assert callable(plugin.should_handle)
     assert callable(plugin.handle_message)
-
+    assert callable(plugin.plugin_notify_cron_task) 
+    assert callable(plugin.plugin_notify_schedule_task) 
 
 @pytest.mark.asyncio
 async def test_baseplugin():
