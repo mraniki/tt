@@ -5,6 +5,7 @@ import asyncio
 from unittest.mock import AsyncMock, patch
 
 import pytest
+import uvicorn
 from fastapi.testclient import TestClient
 from iamlistening import ChatManager, Listener
 from iamlistening.platform import TelegramHandler
@@ -128,3 +129,9 @@ async def test_start_bot():
         max_iterations=1)
     listener.start.assert_awaited_once()
     listener.handler.get_latest_message.assert_awaited_once()
+
+
+def test_main():
+    client = TestClient(app)
+    uvicorn.run = AsyncMock(client)
+    uvicorn.run.assert_called_once
