@@ -9,7 +9,7 @@ from fastapi.testclient import TestClient
 from iamlistening import ChatManager, Listener
 from iamlistening.platform import TelegramHandler
 
-from tt.bot import app
+from tt.bot import app, start_bot_task
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
 from tt.utils import run_bot, send_notification, start_bot, start_plugins
@@ -52,6 +52,13 @@ def mock_listener():
 def mock_plugin_manager():
    return AsyncMock(spec=PluginManager)
 
+
+
+@pytest.mark.asyncio
+async def test_start_bot_task():
+    run_bot = AsyncMock()
+    await start_bot_task()
+    assert run_bot.assert_awaited_once
 
 
 def test_app_endpoint_main():
@@ -121,4 +128,3 @@ async def test_start_bot():
         max_iterations=1)
     listener.start.assert_awaited_once()
     listener.handler.get_latest_message.assert_awaited_once()
-
