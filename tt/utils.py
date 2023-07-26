@@ -57,5 +57,5 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
         iteration += 1
         if max_iterations is not None and iteration >= max_iterations:
             break
-        
+
     await asyncio.sleep(1)
