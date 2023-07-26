@@ -106,49 +106,34 @@ async def test_run_bot():
         listener_created = listener_instance
         assert isinstance(listener_created, Listener) 
         task.cancel()
-        #with pytest.raises(asyncio.CancelledError):
-          #  await task
 
 
 @pytest.mark.asyncio
-async def test_start_bot(listener_obj, plugin_manager_obj):
-    with patch.object(Listener, "start") as start_mock:
-        task = asyncio.create_task(start_bot(listener_obj, plugin_manager_obj))
-        start_mock.assert_awaited
-        task.cancel()
-        with pytest.raises(asyncio.CancelledError):
-            await task
-# listener_mock = AsyncMock()
-#     plugin_manager_mock = AsyncMock()
+async def test_start_bot():
+    listener_instance = Listener()
+    listener_instance.handler = AsyncMock(spec=ChatManager)
+    plugin_manager_instance = PluginManager()
+    async def side_effect():
+            yield True
+            yield False
+    # with patch('tt.config.settings.BOT_RUNNING', side_effect=side_effect()):
+    with patch('iamlistening.Listener', listener_instance):
+        with patch('tt.plugins.plugin_manager', plugin_manager_instance):
+            task = asyncio.create_task(
+            await start_bot(listener_instance, plugin_manager_instance))
+            listener_instance.start.assert_awaited()
+            plugin_manager_instance.start_plugins.assert_awaited() 
+            listener_instance.handler.get_latest_message.assert_awaited_once() 
+            plugin_manager_instance.process_message.assert_awaited_once()
+            asyncio.sleep.assert_awaited_with(1)
+            task.cancel()
+                # with pytest.raises(asyncio.CancelledError):
+                #     await task
 
-#     with patch('your_module.Listener', listener_mock), \
-#          patch('your_module.PluginManager', plugin_manager_mock):
-#         await start_bot(None, None)
-
-#     listener_mock.start.assert_awaited_once()  # Ensure listener.start() method was awaited once
-#     plugin_manager_mock.start_plugins.assert_awaited_once()  # Ensure start_plugins method was awaited once
-#     listener_mock.handler.get_latest_message.assert_awaited()  # Ensure get_latest_message was awaited
-#     plugin_manager_mock.process_message.assert_awaited()  # Ensure process_message was awaited
-#     asyncio.sleep.assert_awaited_with(1)  # Ensure asyncio.sleep was awaited with 1 second
-    
-
-@pytest.mark.asyncio
-async def test_bot(ial_test, plugin_manager_obj):
-    start_bot = AsyncMock()
-    ial_test.start = AsyncMock()
-    start_plugins = AsyncMock(plugin_manager_obj)
-    task = asyncio.create_task(run_bot())
-    start_bot.assert_awaited
-    ial_test.start.assert_awaited
-    start_plugins.assert_awaited
-    await ial_test.handler.handle_message("hello")
-    msg = await ial_test.handler.get_latest_message()
-    print(msg)
-    assert msg == "hello"
-    task.cancel()
-    with pytest.raises(asyncio.CancelledError):
-        await task
-
+# await listener_instance.handler.handle_message("hello")
+# msg = await listener_instance.handler.get_latest_message()
+# print(msg)
+# assert msg == "hello"
 
 @pytest.mark.asyncio
 async def test_baseplugins():

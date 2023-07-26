@@ -49,7 +49,7 @@ async def start_bot(listener, plugin_manager):
     """
     await listener.start()
     await start_plugins(plugin_manager)
-    while True:
+    while settings.bot_running:
         msg = await listener.handler.get_latest_message()
         if msg and settings.plugin_enabled:
             await plugin_manager.process_message(msg)
