@@ -7,8 +7,7 @@ from unittest.mock import AsyncMock, patch
 import pytest
 import uvicorn
 from fastapi.testclient import TestClient
-from iamlistening import ChatManager, Listener
-from iamlistening.platform import TelegramHandler
+from iamlistening import Listener
 
 from tt.bot import app, start_bot_task
 from tt.config import settings
@@ -32,7 +31,7 @@ def listener_test():
 @pytest.fixture(name="ial_test")
 def ial_test():
     listener = Listener()
-    listener.handler = TelegramHandler()
+    listener.handler = AsyncMock()
     return listener
 
 @pytest.fixture(name="plugin_manager_obj")
@@ -46,7 +45,7 @@ def message():
 @pytest.fixture
 def mock_listener():
    mock_listener = AsyncMock(spec=Listener)
-   mock_listener.handler = AsyncMock(spec=ChatManager)
+   mock_listener.handler = AsyncMock()
    return mock_listener
 
 @pytest.fixture
@@ -120,7 +119,7 @@ async def test_run_bot():
 async def test_start_bot():
     
     listener = AsyncMock(spec=Listener)
-    listener.handler = AsyncMock(spec=ChatManager)
+    listener.handler = AsyncMock()
     plugin_manager = AsyncMock(spec=PluginManager)
     await start_bot(
         listener, 
