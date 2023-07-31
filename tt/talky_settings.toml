@@ -71,6 +71,14 @@ rocket_chat_server = ""
 rocket_chat_user_id = ""
 rocket_chat_auth_token = ""
 
+chat_platform=""
+iteration_limit = -1
+bot_api_id = ""
+bot_api_hash = ""
+bot_hostname = ""
+bot_user = ""
+bot_pass = ""
+bot_auth_token = ""
 
 ########################################
 ###   COMMON BOT COMMAND SETTINGS    ###
