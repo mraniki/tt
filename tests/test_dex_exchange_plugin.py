@@ -13,7 +13,7 @@ from tt.plugins.default_plugins.dex_exchange_plugin import DexExchangePlugin
 
 @pytest.fixture(name="bsc")
 def set_test_settings_DEX56():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="bsc")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="testingbsc")
 
 
 @pytest.fixture(name="order_message")
