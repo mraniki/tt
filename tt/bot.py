@@ -44,9 +44,7 @@ async def webhook(request: Request):
     await send_notification(data)
 
     if settings.forwarder:
-
-        response = requests.post(settings.forwarder_url, data)
-        response.raise_for_status()
+        requests.post(settings.forwarder_url, data)
 
     return {"status": "OK"}
 
