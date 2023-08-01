@@ -2,6 +2,27 @@
 
 <!--next-version-placeholder-->
 
+## v4.6.0 (2023-08-01)
+
+### Feature
+
+* ✨ feature: forwarder capability ([`81625c7`](https://github.com/mraniki/tt/commit/81625c784be763f5d578c24211fe6081eb763e18))
+
+### Fix
+
+* ✅ Unit Test ([`47a93f5`](https://github.com/mraniki/tt/commit/47a93f5b98b6fb3bd9604676b071c54f9978d11f))
+* ✅ Unit Test ([`cce0da9`](https://github.com/mraniki/tt/commit/cce0da984147700cc1e62d7f1fef86c2f66060a1))
+* ✅ Unit Test ([`81c5470`](https://github.com/mraniki/tt/commit/81c5470eb67972a1ba77c1c889e2a3b55e61c351))
+* ⬆️ ruff ([`72303da`](https://github.com/mraniki/tt/commit/72303da91da3af9cf4d65954327bb6084a5a22a0))
+* ✅ Unit Test ([`5fd3eb1`](https://github.com/mraniki/tt/commit/5fd3eb11e25fd1f39a3f6304fca8d49002c0cf91))
+* Update Requirements ([`2b7318e`](https://github.com/mraniki/tt/commit/2b7318e9f9f2e7bb93f759f62bee0f86762928d3))
+* ✅ Unit Test update ([`24f8c4e`](https://github.com/mraniki/tt/commit/24f8c4e1ff4563a02ae545e93e8c7564bb6ec978))
+* 🔧 ial v4 ([`a370e89`](https://github.com/mraniki/tt/commit/a370e8908426efb12664efb9816fc257cb87a6b7))
+* Update Requirements ([`34a0a77`](https://github.com/mraniki/tt/commit/34a0a7796f0e34f8a9982ded7b6886e1c2ce3ce8))
+* 🔒 adding onepassword client in dockerfile ([`439f89d`](https://github.com/mraniki/tt/commit/439f89d160cfd38a1dd9fa07a5667fd0fc4ff1b0))
+* ✅ Unit Test ([`c3ecf94`](https://github.com/mraniki/tt/commit/c3ecf94e377acd18312dc73cb5563d5ae07d0d74))
+* 📝 cleanup ([`3990200`](https://github.com/mraniki/tt/commit/399020094abd1f5437f0e8dc94aefd29bc522d5e))
+
 ## v4.5.2 (2023-07-26)
 
 ### Fix
