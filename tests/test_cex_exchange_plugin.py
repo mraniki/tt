@@ -10,7 +10,7 @@ from tt.plugins.default_plugins.cex_exchange_plugin import CexExchangePlugin
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings_CEX():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="cex")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="testingbinancecex")
 
 
 @pytest.fixture(name="order_message")
