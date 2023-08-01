@@ -2,7 +2,7 @@
  TT test
 """
 import asyncio
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 import uvicorn
@@ -78,8 +78,12 @@ def test_webhook_with_valid_auth():
     payload = {"data": "buy BTC"}
     response = client.post("/webhook/123abc", json=payload)
     print(response)
+    post = MagicMock()
+    assert settings.forwarder is True
     assert response is not None
     assert response.content.decode('utf-8') == '{"status":"OK"}'
+    assert post.assert_called
+
 
 
 def test_webhook_with_invalid_auth():
