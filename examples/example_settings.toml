@@ -16,8 +16,8 @@
 # TELEGRAM BOT on CEX Binance
     # bot_token = '1212121212121'
     # bot_channel_id = '-112121212121'
-    # telethon_api_id = '1212121212912'
-    # telethon_api_hash = '121212121212121' 
+    # bot_api_id = '1212121212912'
+    # bot_api_hash = '121212121212121' 
     # apprise_url = 'tgram://1212121212121/-112121212121'
     # cex_name = 'binance' 
     # cex_api = 'abcabcabcabcabcabc' 
@@ -43,9 +43,9 @@
 #MATRIX BOT on Polygon chain using zerox protocol
     # bot_token = '1212121212121'
     # bot_channel_id = '121212121212'
-    # matrix_hostname='matrix.org'
-    # matrix_user='itsme'
-    # matrix_pass='mario'
+    # bot_hostname='matrix.org'
+    # bot_user='itsme'
+    # bot_pass='mario'
     # apprise_url = 'discord://1212121212121/121212121212'
     # dex_wallet_address = '0x1234567890123456789012345678901234567890'
     # dex_private_key = '0xdeadbeef'
