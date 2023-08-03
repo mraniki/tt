@@ -2,6 +2,21 @@
 
 <!--next-version-placeholder-->
 
+## v4.6.1 (2023-08-03)
+
+### Fix
+
+* :memo: ([`a4d3acf`](https://github.com/mraniki/tt/commit/a4d3acf04183d2554cbd99d005ea6e348f32f211))
+* :memo: RTD ([`1ffd758`](https://github.com/mraniki/tt/commit/1ffd758e6509d9bf240d2f1d48131365899cc52b))
+* 📝 ([`f529eb3`](https://github.com/mraniki/tt/commit/f529eb334c0863493688e47dcf458b1c9cccec65))
+* 📝 RTD ([`18790a5`](https://github.com/mraniki/tt/commit/18790a5721b50f0aca4c7b2c730a59e28dc5a300))
+* Update Requirements ([`5612391`](https://github.com/mraniki/tt/commit/5612391df4a428ebfe215944c5b1145a6f62196e))
+* 📝 RTD update ([`47e4b6d`](https://github.com/mraniki/tt/commit/47e4b6df3eff23e58a9c44d68e75967913b5bb83))
+* 📝 RTD initial release ([`f3216fa`](https://github.com/mraniki/tt/commit/f3216faa66302f254d4dfa023c9c476f63d472cf))
+* Update Requirements ([`49920e2`](https://github.com/mraniki/tt/commit/49920e23ca572c2ba2c74f243d12eb66cc1a5036))
+* 🐳 ([`a15d4a1`](https://github.com/mraniki/tt/commit/a15d4a1f792934f9517713e7a92593e2a6cbffde))
+* 🔧 ([`2aaf5aa`](https://github.com/mraniki/tt/commit/2aaf5aae0d1343f6ecf10f66f3b6d5f900cd4439))
+
 ## v4.6.0 (2023-08-01)
 
 ### Feature
