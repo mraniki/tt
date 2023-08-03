@@ -4,6 +4,7 @@ RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ENV ENV_FOR_DYNACONF=default
 
+ENV OP_SERVICE_ACCOUNT_TOKEN=NONE
 COPY --from=1password/op:2 /usr/local/bin/op /usr/local/bin/op
 
 COPY . /app

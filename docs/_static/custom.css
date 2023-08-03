@@ -1,22 +1,27 @@
-/* body {
-    font-size: 18px;
-    color: #dfe1f2;
-    background-color: #121212;
-  }
-  
-  div.body {
-    max-width: 1000px;
-  }
-  
-  pre {
-      background-color: #0d0d0d;
-      color: #a9abba;
-      box-shadow: none;
-      display: block;
-      border-color: transparent;
-  }
-  
-  ul, ol {
-      font-size: 17x;
-  }
+/* 
+#073BD9
+#05C7F2
+#05F2F2
+#F2DA63
+#F2E6A7
 */
+
+
+:root {
+  --body-bg: #292929;
+  --body-color: #E2E8E4;
+  }
+  
+  .navbar-inverse, .navbar-collapse,  .navbar-brand:hover, .navbar-default, .navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+      background-color: #222222;
+    }
+  
+    a {
+      color: #ffcc00;
+    }
+    a:hover {
+      color: #ffcc00; ;
+    }
+  
+  
+  
