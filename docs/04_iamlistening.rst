@@ -1,5 +1,5 @@
-============
-iamlistening
-============
 
-link to iamlistening
+
+Refer to `IamListening`_ documentation.
+
+.. _`IamListening`: https://iamlistening.rtfd.io/

@@ -1,5 +1,0 @@
-==========
-Talkytrend
-==========
-
-link to talkytrend

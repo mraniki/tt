@@ -21,6 +21,12 @@ TalkyTrader
    01_start
    02_config
    03_module
+   04_iamlistening
+   05_findmyorder
+   plugins/helper
+   plugins/dex
+   plugins/cex
+   plugins/talkytrend
 
 
 
