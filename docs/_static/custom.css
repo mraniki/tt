@@ -8,19 +8,20 @@
 
 
 :root {
---body-bg: #292929;
---body-color: #E2E8E4;
---nav-bg-color: #212529;
-
-}
-
-.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-    background-color: #222222;
+  --body-bg: #292929;
+  --body-color: #E2E8E4;
   }
-
-  a {
-    color: #ffcc00;
-  }
-  a:hover {
-    color: #ffcc00; ;
-  }
+  
+  .navbar-inverse, .navbar-collapse,  .navbar-brand:hover, .navbar-default, .navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+      background-color: #222222;
+    }
+  
+    a {
+      color: #ffcc00;
+    }
+    a:hover {
+      color: #ffcc00; ;
+    }
+  
+  
+  
