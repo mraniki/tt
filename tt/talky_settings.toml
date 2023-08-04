@@ -60,18 +60,9 @@ apprise_format = "NotifyFormat.MARKDOWN"
 ########################################
 
 iamlistening_enabled = true
+chat_platform=""
 bot_token = ""
 bot_channel_id = ""
-telethon_api_id = ""
-telethon_api_hash = ""
-matrix_hostname = ""
-matrix_user = ""
-matrix_pass = ""
-rocket_chat_server = ""
-rocket_chat_user_id = ""
-rocket_chat_auth_token = ""
-
-chat_platform=""
 iteration_enabled = false
 iteration_limit = -1
 bot_api_id = ""
