@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v4.6.5 (2023-08-04)
+
+### Fix
+
+* Update Requirements ([`298a5eb`](https://github.com/mraniki/tt/commit/298a5ebf809ff4cbc9aed7049b6474e05b6ac49b))
+* ⬆️(deps): update dependency fastapi to ^0.101.0 ([`afad46d`](https://github.com/mraniki/tt/commit/afad46de20b39da3b6b8e8a3abf8af075c67057a))
+
 ## v4.6.4 (2023-08-04)
 
 ### Fix
