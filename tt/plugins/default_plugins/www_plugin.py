@@ -62,9 +62,9 @@ class WwwPlugin(BasePlugin):
         Gets the screenshot 
         """
         firefox = playwright.firefox
-        self.browser = await firefox.launch()
-        page = await self.browser.new_page()
+        browser = await firefox.launch()
+        page = await browser.new_page()
         await page.goto(settings.www_url)
         scr = await page.screenshot()
-        await self.browser.close()
+        await browser.close()
         return scr
