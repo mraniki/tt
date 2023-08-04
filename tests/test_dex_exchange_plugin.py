@@ -11,7 +11,7 @@ from tt.config import settings
 from tt.plugins.default_plugins.dex_exchange_plugin import DexExchangePlugin
 
 
-@pytest.fixture(name="bsc")
+@pytest.fixture(scope="session", autouse=True)
 def set_test_settings_DEX56():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testingbsc")
 
