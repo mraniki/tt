@@ -115,6 +115,15 @@ bot_command_network = "network"
 bot_command_restart = "restart"
 ping = "8.8.8.8"
 
+########################################
+###           WWW SETTINGS           ###
+########################################
+
+www_enabled = true
+www_commands = "📷 /src\n"
+bot_command_screenshot = "scr"
+www_url = "https://apod.nasa.gov/apod/astropix.html"
+
 
 ########################################
 ###        FINDMYORDER SETTINGS      ###
