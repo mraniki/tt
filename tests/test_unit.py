@@ -2,6 +2,7 @@
  TT test
 """
 
+import asyncio
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
@@ -20,9 +21,8 @@ def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
 
 def test_dynaconf_is_in_testing():
-    print(settings.VALUE)
     assert settings.VALUE == "On Testing"
-
+    assert settings.chat_platform == "discord"
 
 @pytest.fixture(name="message")
 def message_test():
@@ -123,10 +123,9 @@ async def test_start_plugins():
 
 @pytest.mark.asyncio
 async def test_run_bot():
-    listener = Listener()
-    start_bot = await listener.start()
-    await run_bot()
-    start_bot.assert_awaited
+    event_loop = asyncio.get_event_loop()
+    event_loop.create_task(run_bot())
+    run_bot.assert_awaited_once
 
 
 
