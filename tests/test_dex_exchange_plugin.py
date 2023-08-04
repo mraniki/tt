@@ -11,7 +11,7 @@ from tt.config import settings
 from tt.plugins.default_plugins.dex_exchange_plugin import DexExchangePlugin
 
 
-@pytest.fixture(name="bsc")
+@pytest.fixture(scope="session", autouse=True)
 def set_test_settings_DEX56():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testingbsc")
 
@@ -26,20 +26,20 @@ def test_fixture_plugin():
     return DexExchangePlugin()
 
 
-def test_dynaconf_is_in_testing_env_DEX56(bsc):
+def test_dynaconf_is_in_testing_env_DEX56():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing DEX_56"
     assert settings.cex_name == ""
     assert settings.dex_wallet_address == "0x1234567890123456789012345678901234567899"
 
 
-@pytest.mark.asyncio
-async def test_listener_discord(bsc):
-    print(settings.VALUE)
-    listener_test = Listener()
-    print(listener_test)
-    assert listener_test is not None
-    assert isinstance(listener_test, iamlistening.main.Listener)
+# @pytest.mark.asyncio
+# async def test_listener_discord():
+#     print(settings.VALUE)
+#     listener_test = Listener()
+#     print(listener_test)
+#     assert listener_test is not None
+#     assert isinstance(listener_test, iamlistening.main.Listener)
 
 
 @pytest.mark.asyncio

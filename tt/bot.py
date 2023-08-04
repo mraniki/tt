@@ -56,4 +56,8 @@ if __name__ == "__main__":
     and the `settings.host` and `settings.port` variables 
     are the host and port to run the server on, respectively
     """ 
-    uvicorn.run(app, host=settings.host, port=int(settings.port))
+    uvicorn.run(
+        app,
+        host=settings.host,
+        port=int(settings.port),
+        log_level="CRITICAL")
