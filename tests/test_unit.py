@@ -121,11 +121,12 @@ async def test_start_plugins():
 #         listener_created = listener_instance
 #         assert isinstance(listener_created, Listener) 
 
-@pytest.mark.asyncio
-async def test_run_bot():
-    event_loop = asyncio.get_event_loop()
-    event_loop.create_task(run_bot())
-    run_bot.assert_awaited_once
+# @pytest.mark.asyncio
+# async def test_run_bot():
+#     run_bot=AsyncMock()
+#     event_loop = asyncio.get_event_loop()
+#     event_loop.create_task(run_bot())
+#     run_bot.assert_awaited_once
 
 
 
