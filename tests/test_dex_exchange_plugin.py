@@ -26,7 +26,7 @@ def test_fixture_plugin():
     return DexExchangePlugin()
 
 
-def test_dynaconf_is_in_testing_env_DEX56(bsc):
+def test_dynaconf_is_in_testing_env_DEX56():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing DEX_56"
     assert settings.cex_name == ""
@@ -34,7 +34,7 @@ def test_dynaconf_is_in_testing_env_DEX56(bsc):
 
 
 @pytest.mark.asyncio
-async def test_listener_discord(bsc):
+async def test_listener_discord():
     print(settings.VALUE)
     listener_test = Listener()
     print(listener_test)
