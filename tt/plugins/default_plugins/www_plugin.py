@@ -18,15 +18,11 @@ class WwwPlugin(BasePlugin):
         super().__init__()
         self.enabled = settings.www_enabled
         if self.enabled:
-            firefox = playwright.firefox
-            self.browser = await firefox.launch()
-            self.version = f"🎭 {self.browser.version}"
+            self.version = "🎭"
             self.help_message = settings.www_commands
 
     async def start(self):
         """Starts the plugin"""
-        await self.send_notification(await self.get_www_info())
-
 
     async def stop(self):
         """Stops the plugin"""
@@ -58,13 +54,15 @@ class WwwPlugin(BasePlugin):
         return f"{self.help_message}"
 
     async def get_www_info(self):
-        """Help Message"""
+        """info Message"""
         return self.version
 
     async def get_www_run(self):
         """ 
-        Gets the screenshot from the browser
+        Gets the screenshot 
         """
+        firefox = playwright.firefox
+        self.browser = await firefox.launch()
         page = await self.browser.new_page()
         await page.goto(settings.www_url)
         scr = await page.screenshot()

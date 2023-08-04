@@ -41,28 +41,28 @@ async def test_bot_ignore(plugin):
 @pytest.mark.asyncio
 async def test_parsing_help(plugin):
     """Test help """
-    plugin.get_helper_help = AsyncMock()
+    plugin.get_www_help = AsyncMock()
     await plugin.handle_message(
         f"{settings.bot_prefix}{settings.bot_command_help}")
-    plugin.get_helper_help.assert_awaited_once()
+    plugin.get_www_help.assert_awaited_once()
 
 
 @pytest.mark.asyncio
 async def test_parsing_info(plugin):
     """Test info """
-    plugin.get_helper_info = AsyncMock()
+    plugin.get_www_info = AsyncMock()
     await plugin.handle_message(
         f"{settings.bot_prefix}{settings.bot_command_info}")
-    plugin.get_helper_info.assert_awaited_once()
+    plugin.get_www_info.assert_awaited_once()
 
 
 @pytest.mark.asyncio
-async def test_parsing_network(plugin):
-    """Test network """
-    plugin.get_helper_network = AsyncMock()
+async def test_parsing_scr(plugin):
+    """Test scr """
+    plugin.get_www_run = AsyncMock()
     await plugin.handle_message(
         f"{settings.bot_prefix}{settings.bot_command_screenshot}")
-    plugin.get_helper_network.assert_awaited_once()
+    plugin.get_www_run.assert_awaited_once()
 
 
 @pytest.mark.asyncio
