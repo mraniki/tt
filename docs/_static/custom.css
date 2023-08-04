@@ -14,8 +14,12 @@
   
   .navbar-inverse, .navbar-collapse,  .navbar-brand:hover, .navbar-default, .navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
       background-color: #222222;
+      
     }
-  
+    .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+      color: #ffcc00;
+  }
+    
     a {
       color: #ffcc00;
     }
@@ -23,5 +27,13 @@
       color: #ffcc00; ;
     }
   
-  
-  
+    a:hover code {
+      color: #ffcc00;
+    }
+
+    dt:target, span.highlighted {
+background-color: transparent;
+      
+    }
+
+    
