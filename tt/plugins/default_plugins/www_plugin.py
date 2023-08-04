@@ -62,7 +62,7 @@ class WwwPlugin(BasePlugin):
         Gets the screenshot 
         """
         async with async_playwright() as p:
-            browser = await p.firefox.launch()
+            browser = await p.chromium.launch()
             page = await browser.new_page()
             await page.goto(settings.www_url)
             logger.debug(await page.title())
