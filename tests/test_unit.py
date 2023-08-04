@@ -19,6 +19,10 @@ from tt.utils import run_bot, send_notification, start_bot, start_plugins
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
 
+def test_dynaconf_is_in_testing():
+    print(settings.VALUE)
+    assert settings.VALUE == "On Testing"
+
 
 @pytest.fixture(name="message")
 def message_test():
