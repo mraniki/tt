@@ -4,9 +4,9 @@
 """
 import os
 
-from playwright.async_api import async_playwright as playwright
+from playwright.async_api import async_playwright
 
-from tt.config import settings
+from tt.config import logger, settings
 from tt.plugins.plugin_manager import BasePlugin
 from tt.utils import send_notification
 
@@ -61,10 +61,11 @@ class WwwPlugin(BasePlugin):
         """ 
         Gets the screenshot 
         """
-        firefox = playwright.firefox
-        browser = await firefox.launch()
+        async with async_playwright() as p:
+        browser = await p.firefox.launch()
         page = await browser.new_page()
         await page.goto(settings.www_url)
+        logger.debug(await page.title())
         scr = await page.screenshot()
         await browser.close()
         return scr
