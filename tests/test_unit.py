@@ -106,16 +106,24 @@ async def test_start_plugins():
     plugin_manager.load_plugins.assert_called_once()
 
 
+# @pytest.mark.asyncio
+# async def test_run_bot():
+#     listener_instance = Listener(chat_platform="discord")
+#     start_bot = AsyncMock(side_effect=[listener_instance])
+#     with patch('tt.utils.start_bot', start_bot):
+#         task = asyncio.create_task(run_bot())
+#         await asyncio.gather(task, asyncio.sleep(2))
+#         start_bot.assert_awaited
+#         listener_created = listener_instance
+#         assert isinstance(listener_created, Listener) 
+
 @pytest.mark.asyncio
 async def test_run_bot():
-    listener_instance = Listener(chat_platform="discord")
-    start_bot = AsyncMock(side_effect=[listener_instance])
-    with patch('tt.utils.start_bot', start_bot):
-        task = asyncio.create_task(run_bot())
-        await asyncio.gather(task, asyncio.sleep(2))
-        start_bot.assert_awaited
-        listener_created = listener_instance
-        assert isinstance(listener_created, Listener) 
+    listener = Listener()
+    start_bot = await listener.start()
+    await run_bot()
+    start_bot.assert_awaited
+
 
 
 @pytest.mark.asyncio
