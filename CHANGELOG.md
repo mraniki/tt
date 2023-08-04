@@ -2,6 +2,22 @@
 
 <!--next-version-placeholder-->
 
+## v4.6.4 (2023-08-04)
+
+### Fix
+
+* Update Requirements ([`cad74a3`](https://github.com/mraniki/tt/commit/cad74a33817aa23388cab56239db5f626bdb4c06))
+* ✅ Unit Test ([`a1cd5e0`](https://github.com/mraniki/tt/commit/a1cd5e0d964a91bc71dc246caab22ef36e801729))
+* ✅ Unit Test ([`b7d9ecb`](https://github.com/mraniki/tt/commit/b7d9ecb603c469c82aefbc092817cd6245fa86da))
+* ✅ Unit Test ([`828f661`](https://github.com/mraniki/tt/commit/828f6614f8f8c09a633f18f6e6a5286233bb9426))
+* ✅ Unit Test ([`9020c37`](https://github.com/mraniki/tt/commit/9020c379d6b56136e6b54abbf2f551612322909a))
+* Update Requirements ([`c42bef5`](https://github.com/mraniki/tt/commit/c42bef5cc2b398248ce6bf2e913ac0f20cb9ff1d))
+* ✅ Unit Test ([`ce9f86b`](https://github.com/mraniki/tt/commit/ce9f86bf444b6d83b59a04d1d5c89f137b54cebe))
+* 🔧 ([`a93cb21`](https://github.com/mraniki/tt/commit/a93cb21b28cf588ff412f7177fe5a5666ad33e4c))
+* ✅ Unit Test updated ([`b9f3ccb`](https://github.com/mraniki/tt/commit/b9f3ccb4f1a7b91b7fcaa700bee40916a2e7baae))
+* 📝 ([`afa04da`](https://github.com/mraniki/tt/commit/afa04dace8358f41a5591711e66b15928062c776))
+* 📝 RTD update ([`93fe820`](https://github.com/mraniki/tt/commit/93fe82029ede6ab269d818cd854cfff860514297))
+
 ## v4.6.3 (2023-08-04)
 
 ### Fix
