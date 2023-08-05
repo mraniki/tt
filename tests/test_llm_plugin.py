@@ -3,7 +3,7 @@ from unittest.mock import AsyncMock
 import pytest
 
 from tt.config import settings
-from tt.plugins.default_plugins.llm_plugin import LlmwPlugin
+from tt.plugins.default_plugins.llm_plugin import LlmPlugin
 
 
 @pytest.fixture(scope="session", autouse=True)
