@@ -8,7 +8,7 @@ RUN apt-get update && \
 apt-get -y install chromium && \
   pip install -U pip && \
   pip install playwright && \
-  playwright install && playwright install-deps && \
+  playwright install chromium && playwright install-deps && \
   rm -rf /var/lib/apt/lists/*
 
 ENV OP_SERVICE_ACCOUNT_TOKEN=NONE
