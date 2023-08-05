@@ -13,7 +13,7 @@ from tt.utils import send_notification
 
 
 class LlmPlugin(BasePlugin):
-    """ www_plugin Plugin """
+    """ llm_plugin Plugin """
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
         super().__init__()
