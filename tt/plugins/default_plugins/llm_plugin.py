@@ -48,7 +48,7 @@ class LlmPlugin(BasePlugin):
             command_mapping = {
                 settings.bot_command_help: self.get_llm_help,
                 settings.bot_command_info: self.get_llm_info,
-                settings.bot_command_llm: self.get_llm_run(args[0]),
+                settings.bot_command_llm: self.get_llm_run(args),
             }
             if command in command_mapping:
                 function = command_mapping[command]
