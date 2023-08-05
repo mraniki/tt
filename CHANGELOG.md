@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.1 (2023-08-05)
+
+### Fix
+
+* Update Dockerfile ([`64efa44`](https://github.com/mraniki/tt/commit/64efa444ed88145ccd2e847f2fc2d37d12d84627))
+
 ## v4.8.0 (2023-08-05)
 
 ### Feature
