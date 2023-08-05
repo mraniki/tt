@@ -16,6 +16,15 @@ from tt.plugins.plugin_manager import PluginManager
 async def send_notification(msg):
     """
     💬 Notification via Apprise 
+
+    Args:
+        msg (str): Message
+
+    Returns:
+        None
+
+    Refer to Apprise documentation for more information
+
     """
     aobj = Apprise(settings.apprise_url)
     msg_format = settings.apprise_format or NotifyFormat.MARKDOWN
@@ -27,6 +36,7 @@ async def send_notification(msg):
 async def run_bot():
     """
     🤖 Run the chat bot & the plugins.
+
     """
     listener = Listener()
     plugin_manager = PluginManager()

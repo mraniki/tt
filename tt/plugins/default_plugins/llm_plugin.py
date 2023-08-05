@@ -4,10 +4,9 @@
 """
 import os
 
-from myllm import MyLLM
+from myllm import MyLLM, version
 
-
-from tt.config import logger, settings
+from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
 from tt.utils import send_notification
 
@@ -19,7 +18,7 @@ class LlmPlugin(BasePlugin):
         super().__init__()
         self.enabled = settings.llm_enabled
         if self.enabled:
-            self.version = "🦾"
+            self.version = f"MyLLM v{version}"
             self.help_message = settings.llm_commands
             self.llm= MyLLM()
 
@@ -48,6 +47,7 @@ class LlmPlugin(BasePlugin):
                 settings.bot_command_help: self.get_llm_help,
                 settings.bot_command_info: self.get_llm_info,
                 settings.bot_command_question: lambda: self.get_llm_run(args),
+                settings.bot_command_topic: lambda: self.get_llm_chain(args),
             }
             if command in command_mapping:
                 function = command_mapping[command]
@@ -61,13 +61,18 @@ class LlmPlugin(BasePlugin):
         """info Message"""
         return self.version
 
-    async def get_llm_run(self,llm_request):
+    async def get_llm_run(self,prompt):
         """ 
         Gets the llm prompts response
         """
         
-        return await self.llm.talk(llm_request)
+        return await self.llm.talk(prompt)
 
-
+    async def get_llm_chain(self,prompt):
+        """ 
+        Gets the llm prompts chain response
+        """
+        
+        pass
 
 
