@@ -17,7 +17,7 @@ from tt.plugins.plugin_manager import BasePlugin
 from tt.utils import send_notification
 
 
-class WwwPlugin(BasePlugin):
+class LlmPlugin(BasePlugin):
     """ www_plugin Plugin """
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
