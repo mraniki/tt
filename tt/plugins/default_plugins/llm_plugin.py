@@ -70,7 +70,9 @@ class LlmPlugin(BasePlugin):
         return g4f.ChatCompletion.create(
             model=g4f.Model.gpt_4, 
             messages=[{"role": "user", "content": llm_request}],
-            stream=false
+            stream=False
             )
 
-        
+
+
+
