@@ -5,11 +5,6 @@
 import os
 
 from g4f import Provider, Model
-from langchain.llms.base import LLM
-from langchain import PromptTemplate
-from langchain.chains import LLMChain, SimpleSequentialChain
-
-from langchain_g4f import G4FLLM
 
 
 from tt.config import logger, settings
@@ -26,9 +21,10 @@ class LlmPlugin(BasePlugin):
         if self.enabled:
             self.version = "🦾"
             self.help_message = settings.llm_commands
-            self.llm = G4FLLM(
-            model=Model.gpt_35_turbo,
-            provider=Provider.Aichat,)
+            # self.llm = Client(
+            # model=Model.gpt_35_turbo,
+            # provider=Provider.Aichat,)
+
 
     async def start(self):
         """Starts the plugin"""
@@ -68,8 +64,12 @@ class LlmPlugin(BasePlugin):
 
     async def get_llm_run(self,llm_request="hello"):
         """ 
-        Gets the prompts 
+        Gets the llm prompts response
         """
-    
-        return self.llm(llm_request)
+        
+        return g4f.ChatCompletion.create(
+            model=g4f.Model.gpt_4, 
+            messages=[{"role": "user", "content": llm_request}]
+            )
+
         
