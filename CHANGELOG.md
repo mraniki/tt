@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.4 (2023-08-05)
+
+### Fix
+
+* :ambulance: Update bot.py ([`9bd750f`](https://github.com/mraniki/tt/commit/9bd750f95697e2363f9deef9fed80364d67903b2))
+
 ## v4.8.3 (2023-08-05)
 
 ### Fix
