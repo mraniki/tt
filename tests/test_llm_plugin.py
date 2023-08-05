@@ -56,13 +56,13 @@ async def test_parsing_info(plugin):
     plugin.get_llm_info.assert_awaited_once()
 
 
-# @pytest.mark.asyncio
-# async def test_parsing_llm(plugin):
-#     """Test scr """
-#     plugin.get_llm_run = AsyncMock()
-#     await plugin.handle_message(
-#         f"{settings.bot_prefix}{settings.bot_command_llm} hello")
-#     plugin.get_llm_run.assert_awaited_once()
+@pytest.mark.asyncio
+async def test_parsing_llm(plugin):
+    """Test scr """
+    plugin.get_llm_run = AsyncMock()
+    await plugin.handle_message(
+        f"{settings.bot_prefix}{settings.bot_command_question} hello")
+    plugin.get_llm_run.assert_awaited_once()
 
 
 @pytest.mark.asyncio
