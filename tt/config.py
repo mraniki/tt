@@ -72,8 +72,8 @@ def loguru_setup():
     loguru_logger.remove()
     # log.configure(**config)
     log_filters = {
-    "discord": "INFO",
-    "telethon": "INFO",
+    "discord": "ERROR",
+    "telethon": "ERROR",
     "web3": "INFO",
     "apprise": "INFO",
     "urllib3": "INFO",
