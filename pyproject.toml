@@ -55,7 +55,7 @@ iamlistening = "^3.1.0"
 talkytrend = "^1.12.3"
 g4f = "^0.0.1"
 langchain ="^0.0.252"
-langchain_g4f = "^1.0.0"
+
 
 [tool.poetry.group.dev.dependencies]
 # python-semantic-release = "^8.0.3"
