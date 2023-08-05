@@ -4,7 +4,7 @@
 """
 import os
 
-from g4f import Provider, Model
+import g4f
 
 
 from tt.config import logger, settings
