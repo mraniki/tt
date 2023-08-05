@@ -126,6 +126,20 @@ www_url = "https://apod.nasa.gov/apod/astropix.html"
 
 
 ########################################
+###           LLM SETTINGS           ###
+########################################
+
+llm_enabled = true
+llm_model = "gpt-4"
+llm_provider = "g4f.Provider.Providers.ChatgptAi"
+llm_host = ""
+llm_auth_token = ""
+llm_default_prompt = "write a tiny story"
+llm_commands = "🦾 /qq\n"
+bot_command_question = "qq"
+
+
+########################################
 ###        FINDMYORDER SETTINGS      ###
 ########################################
 

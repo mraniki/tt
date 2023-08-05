@@ -53,8 +53,9 @@ dxsp = "^4.2.3"
 findmyorder = "^1.6.1"
 iamlistening = "^3.1.0"
 talkytrend = "^1.12.3"
+myllm = "^1.0.0"
 
- 
+
 [tool.poetry.group.dev.dependencies]
 # python-semantic-release = "^8.0.3"
 python-semantic-release = "^7.34.6"
