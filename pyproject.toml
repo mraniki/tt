@@ -53,7 +53,7 @@ dxsp = "^4.2.3"
 findmyorder = "^1.6.1"
 iamlistening = "^3.1.0"
 talkytrend = "^1.12.3"
-g4f = "^0.0.1"
+myllm = "^1.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
