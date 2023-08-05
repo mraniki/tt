@@ -119,7 +119,7 @@ ping = "8.8.8.8"
 ###           WWW SETTINGS           ###
 ########################################
 
-www_enabled = true
+www_enabled = false
 www_commands = "📷 /src\n"
 bot_command_screenshot = "scr"
 www_url = "https://apod.nasa.gov/apod/astropix.html"

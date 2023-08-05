@@ -4,9 +4,8 @@
 """
 import os
 
-from playwright.async_api import async_playwright
-
-from tt.config import logger, settings
+# from playwright.async_api import async_playwright
+from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
 from tt.utils import send_notification
 
@@ -61,11 +60,12 @@ class WwwPlugin(BasePlugin):
         """ 
         Gets the screenshot 
         """
-        async with async_playwright() as p:
-            browser = await p.chromium.launch()
-            page = await browser.new_page()
-            await page.goto(settings.www_url)
-            logger.debug(await page.title())
-            scr = await page.screenshot()
-            await browser.close()
-            return scr
+        pass
+        # async with async_playwright() as p:
+        #     browser = await p.chromium.launch()
+        #     page = await browser.new_page()
+        #     await page.goto(settings.www_url)
+        #     logger.debug(await page.title())
+        #     scr = await page.screenshot()
+        #     await browser.close()
+        #     return scr?image=Yes

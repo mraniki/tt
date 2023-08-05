@@ -74,9 +74,10 @@ def loguru_setup():
     log_filters = {
     "discord": "ERROR",
     "telethon": "ERROR",
-    "web3": "INFO",
-    "apprise": "INFO",
-    "urllib3": "INFO",
+    # "web3": "ERROR",
+    # "apprise": "ERROR",
+    # "urllib3": "ERROR",
+    "asyncz": "ERROR",
         }
     logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
     loguru_logger.add(
