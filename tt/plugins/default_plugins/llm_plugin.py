@@ -4,7 +4,12 @@
 """
 import os
 
-from langchain.llms import OpenLLM
+from g4f import Provider, Model
+from langchain.llms.base import LLM
+from langchain import PromptTemplate
+from langchain.chains import LLMChain, SimpleSequentialChain
+
+from langchain_g4f import G4FLLM
 
 
 from tt.config import logger, settings
@@ -21,7 +26,9 @@ class WwwPlugin(BasePlugin):
         if self.enabled:
             self.version = "🦾"
             self.help_message = settings.llm_commands
-            self.llm = OpenLLM(model_name="llama", model_id='meta-llama/Llama-2-7b-hf')
+            self.llm = G4FLLM(
+            model=Model.gpt_35_turbo,
+            provider=Provider.Aichat,)
 
     async def start(self):
         """Starts the plugin"""
@@ -45,7 +52,7 @@ class WwwPlugin(BasePlugin):
             command_mapping = {
                 settings.bot_command_help: self.get_llm_help,
                 settings.bot_command_info: self.get_llm_info,
-                settings.bot_command_screenshot: self.get_llm_run,
+                settings.bot_command_llm: self.get_llm_run(args[0]),
             }
             if command in command_mapping:
                 function = command_mapping[command]
@@ -59,10 +66,10 @@ class WwwPlugin(BasePlugin):
         """info Message"""
         return self.version
 
-    async def get_llm_run(self):
+    async def get_llm_run(self,llm_request="hello"):
         """ 
         Gets the prompts 
         """
+    
+        return self.llm(llm_request)
         
-        logger.info(self.llm("What is the difference between a duck and a goose? And why there are so many Goose in Canada?"))
-      
