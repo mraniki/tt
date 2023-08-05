@@ -4,7 +4,7 @@
 """
 import os
 
-import openllm
+from langchain.llms import OpenLLM
 
 
 from tt.config import logger, settings
@@ -21,7 +21,7 @@ class WwwPlugin(BasePlugin):
         if self.enabled:
             self.version = "🦾"
             self.help_message = settings.llm_commands
-            self.client = openllm.client.HTTPClient("http://localhost:3000")
+            self.llm = OpenLLM(model_name="llama", model_id='meta-llama/Llama-2-7b-hf')
 
     async def start(self):
         """Starts the plugin"""
@@ -63,6 +63,6 @@ class WwwPlugin(BasePlugin):
         """ 
         Gets the prompts 
         """
-
-        self.client.query('Explain to me the difference between "further" and "farther"')
+        
+        logger.info(self.llm("What is the difference between a duck and a goose? And why there are so many Goose in Canada?"))
       
