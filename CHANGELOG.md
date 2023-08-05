@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.3 (2023-08-05)
+
+### Fix
+
+* 🐛 ([`49f948f`](https://github.com/mraniki/tt/commit/49f948f8deb833e53e8005a17a87ea6d7a51e36c))
+
 ## v4.8.2 (2023-08-05)
 
 ### Fix
