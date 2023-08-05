@@ -126,6 +126,17 @@ www_url = "https://apod.nasa.gov/apod/astropix.html"
 
 
 ########################################
+###           LLM SETTINGS           ###
+########################################
+
+llm_enabled = true
+llm_commands = "🦾 /qq\n"
+bot_command_llm = "qq"
+llm_model = ""
+llm_provider = ""
+
+
+########################################
 ###        FINDMYORDER SETTINGS      ###
 ########################################
 
