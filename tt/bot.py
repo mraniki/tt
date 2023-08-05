@@ -59,5 +59,5 @@ if __name__ == "__main__":
     uvicorn.run(
         app,
         host=settings.host,
-        port=int(settings.port),
-        log_level="CRITICAL")
+        port=int(settings.port),)
+
