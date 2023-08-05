@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.5 (2023-08-05)
+
+### Fix
+
+* Update bot.py ([`8530a60`](https://github.com/mraniki/tt/commit/8530a60114a09e68d5b0ee0afa74fdd7cec85c77))
+
 ## v4.8.4 (2023-08-05)
 
 ### Fix
