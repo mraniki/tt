@@ -2,6 +2,26 @@
 
 <!--next-version-placeholder-->
 
+## v4.7.0 (2023-08-05)
+
+### Feature
+
+* ✨ Gets the screenshot from a webpage (plugin) ([`f639bf8`](https://github.com/mraniki/tt/commit/f639bf89873785ebbbd139cd2d6407188a97508e))
+
+### Fix
+
+* 👷 CI Change ([`d631cb8`](https://github.com/mraniki/tt/commit/d631cb8af575624b03cd1f188fd6052e8c5a2e3a))
+* ✅ Unit Test ([`5ee50f9`](https://github.com/mraniki/tt/commit/5ee50f96ea787ccb109565e68fd0e1739fdb5f89))
+* 👷 CI Change ([`eac225d`](https://github.com/mraniki/tt/commit/eac225dc12329485e79582856b41ac66faa92589))
+* 🐳 ([`15db668`](https://github.com/mraniki/tt/commit/15db6686baf07512af43123c09e540e132e01e47))
+* :bug: Refactor browser launch method ([`889c904`](https://github.com/mraniki/tt/commit/889c904260e9629db9156e50fec6b20d7bc2f074))
+* :bug: run ([`99e4853`](https://github.com/mraniki/tt/commit/99e4853ab709fbfa9910770ae92b03ab15965a20))
+* :bug: run ([`017174a`](https://github.com/mraniki/tt/commit/017174ae91d43c1d254b6189f54ea42e7bdae002))
+* :bug: run ([`11531fc`](https://github.com/mraniki/tt/commit/11531fc39585b0aae8712cd1f116442ac7945a00))
+* :bug: init ([`5de543b`](https://github.com/mraniki/tt/commit/5de543be47565f0faeb418b7f4d17bec45c4b595))
+* ✅ Unit Test ([`9bcbb5c`](https://github.com/mraniki/tt/commit/9bcbb5c29c76c60c15dedcab8383a4e4564aa62c))
+* Update Requirements ([`8ca89c0`](https://github.com/mraniki/tt/commit/8ca89c0ce9c010475ba13cc7db6c58e2c8261308))
+
 ## v4.6.5 (2023-08-04)
 
 ### Fix
