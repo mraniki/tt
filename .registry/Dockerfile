@@ -5,7 +5,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ENV ENV_FOR_DYNACONF=default
 
 RUN apt-get update && \
-# apt-get -y install chromium firefox-esr && \
+apt-get -y install chromium firefox-esr && \
   pip install -U pip && \
   pip install playwright && \
   playwright install && playwright install-deps && \
