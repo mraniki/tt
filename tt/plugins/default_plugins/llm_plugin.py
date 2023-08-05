@@ -22,9 +22,7 @@ class LlmPlugin(BasePlugin):
             self.version = "🦾"
             self.help_message = settings.llm_commands
             self.llm= MyLLM()
-            # self.llm = Client(
-            # model=Model.gpt_35_turbo,
-            # provider=Provider.Aichat,)
+
 
 
     async def start(self):
@@ -49,7 +47,7 @@ class LlmPlugin(BasePlugin):
             command_mapping = {
                 settings.bot_command_help: self.get_llm_help,
                 settings.bot_command_info: self.get_llm_info,
-                settings.bot_command_llm: lambda: self.get_llm_run(args),
+                settings.bot_command_question: lambda: self.get_llm_run(args),
             }
             if command in command_mapping:
                 function = command_mapping[command]
