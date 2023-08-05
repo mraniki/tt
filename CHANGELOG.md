@@ -2,6 +2,42 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.0 (2023-08-05)
+
+### Feature
+
+* Merge pull request #624 from mraniki/💄-588-plugin-ai ([`de942d5`](https://github.com/mraniki/tt/commit/de942d5f8e2fcb573bfbf75b5615f319d3758417))
+* :egg:  test_llm_plugin.py ([`caae5ff`](https://github.com/mraniki/tt/commit/caae5ff8736ad8eb988934b02d62a5d239d9b8cf))
+
+### Fix
+
+* Update Requirements ([`d556970`](https://github.com/mraniki/tt/commit/d5569706fd907c29f72be2863aba4bf02dc33e32))
+* :white_check_mark: Refactor LlmPlugin class and update bot command in llm_plugin.py ([`8f159f1`](https://github.com/mraniki/tt/commit/8f159f17d144d80de84f5a94558e7f72e31362d4))
+* :white_check_mark: Refactor LlmPlugin class and update bot command in llm_plugin.py ([`39137dd`](https://github.com/mraniki/tt/commit/39137dd1239ea25cafbc8c3e2817d6180cf94dc0))
+* :wrench:  config for llm ([`e14fb5f`](https://github.com/mraniki/tt/commit/e14fb5f08406587380da9546e8d5e84e0b5aa511))
+* Update llm_plugin.py ([`a1bdc5e`](https://github.com/mraniki/tt/commit/a1bdc5e0ced752f6eaa1a422f60c65ba21895468))
+* Update Requirements ([`e400be5`](https://github.com/mraniki/tt/commit/e400be546b9e0fc0ef64ff4f7dbc9befd149b415))
+* Update pyproject.toml ([`645e2df`](https://github.com/mraniki/tt/commit/645e2df4d2a8e71326615d7f61860136c57634a6))
+* Update llm_plugin.py ([`7be9a85`](https://github.com/mraniki/tt/commit/7be9a85aea2dc02dcd79ed7ac375e7868f167235))
+* Update llm_plugin.py ([`f189762`](https://github.com/mraniki/tt/commit/f189762fe28406174d6452d48bc1cefa4ec28f17))
+* Update test_llm_plugin.py ([`fb42095`](https://github.com/mraniki/tt/commit/fb42095843d6d939d3d59068a6c8d648c26fe44b))
+* Update test_llm_plugin.py ([`2869488`](https://github.com/mraniki/tt/commit/286948889ddac4d3ed7034ae3713058303166849))
+* Update llm_plugin.py ([`6750b15`](https://github.com/mraniki/tt/commit/6750b15ad778dbd354aee1b48eb96d41aab67f4f))
+* Update llm_plugin.py ([`948a221`](https://github.com/mraniki/tt/commit/948a221c7352b0ffdf4c367c52e5379d8f3bf623))
+* Update test_llm_plugin.py ([`d925eba`](https://github.com/mraniki/tt/commit/d925eba4dc1c8c1ec42b813708031956ade85138))
+* Update Requirements ([`db832d2`](https://github.com/mraniki/tt/commit/db832d22f6ae96c823060903171773c8984364ec))
+* Update llm_plugin.py ([`19b2010`](https://github.com/mraniki/tt/commit/19b201083b60de826a26cf525b1f1b9cf00003bb))
+* Update llm_plugin.py ([`0c51358`](https://github.com/mraniki/tt/commit/0c513580d39b017ef4cf674a699513806f907165))
+* Update pyproject.toml ([`398f6fd`](https://github.com/mraniki/tt/commit/398f6fd78c5dc6dfc88450986e22cabfe3fb2ecb))
+* Update llm_plugin.py ([`b1389a4`](https://github.com/mraniki/tt/commit/b1389a4a45d612eea8ff468cc192dbb199a1bc03))
+* Update pyproject.toml ([`38179d0`](https://github.com/mraniki/tt/commit/38179d0bd9b180b1ecde7c952a6ba23f708b5e88))
+* Update test_llm_plugin.py ([`4ab36f8`](https://github.com/mraniki/tt/commit/4ab36f80fa2da89ac00f041c34fd4e74c2a0a822))
+* Update llm_plugin.py ([`c0e0f79`](https://github.com/mraniki/tt/commit/c0e0f7962f924794d2887778576efdb155ff8595))
+* Update pyproject.toml ([`061213f`](https://github.com/mraniki/tt/commit/061213f0be00b1c90dbf28a8b687b4b46b79a008))
+* Update talky_settings.toml ([`631b129`](https://github.com/mraniki/tt/commit/631b129233bbf46758f0cc5a111db10c2ca1e57b))
+* Update  llm_plugin.py ([`d105a60`](https://github.com/mraniki/tt/commit/d105a605bc1761a9fbb0d11b9adb59ea9afeaf3f))
+* Update llm_plugin.py ([`f6c107e`](https://github.com/mraniki/tt/commit/f6c107e0a2cec9a616cd90000ec51551fcdc8209))
+
 ## v4.7.0 (2023-08-05)
 
 ### Feature
