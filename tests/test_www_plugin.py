@@ -84,3 +84,4 @@ async def test_screenshot(plugin):
     """Test screenshot """
     result = await plugin.get_www_run()
     assert result is not None
+
