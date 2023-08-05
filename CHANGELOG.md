@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.6 (2023-08-05)
+
+### Fix
+
+* ♻️ ([`7c8492d`](https://github.com/mraniki/tt/commit/7c8492d245272654348dec060b6225586788f555))
+* 🔧 ([`ebd3fbf`](https://github.com/mraniki/tt/commit/ebd3fbf2c0d0c40f8edf3e94f16b93fef2c2f8d9))
+* 🚑 uvi ([`a1a8848`](https://github.com/mraniki/tt/commit/a1a88489142806a2bdb66146fa4ea977e43c2348))
+* 💬 ([`da0d259`](https://github.com/mraniki/tt/commit/da0d259393f54ebf4360ff3c2fa55c8ca32f4c7a))
+
 ## v4.8.5 (2023-08-05)
 
 ### Fix
