@@ -18,7 +18,7 @@ class LlmPlugin(BasePlugin):
         super().__init__()
         self.enabled = settings.llm_enabled
         if self.enabled:
-            self.version = f"MyLLM v{version}"
+            self.version = "MyLLM"
             self.help_message = settings.llm_commands
             self.llm= MyLLM()
 

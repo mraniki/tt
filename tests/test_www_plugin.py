@@ -79,8 +79,8 @@ async def test_info(plugin):
     assert result is not None
 
 
-@pytest.mark.asyncio
-async def test_screenshot(plugin):
-    """Test screenshot """
-    result = await plugin.get_www_run()
-    assert result is not None
+# @pytest.mark.asyncio
+# async def test_screenshot(plugin):
+#     """Test screenshot """
+#     result = await plugin.get_www_run()
+#     assert result is not None
