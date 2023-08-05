@@ -4,7 +4,7 @@
 """
 import os
 
-import g4f
+from myllm import MyLLM
 
 
 from tt.config import logger, settings
@@ -21,6 +21,7 @@ class LlmPlugin(BasePlugin):
         if self.enabled:
             self.version = "🦾"
             self.help_message = settings.llm_commands
+            self.llm= MyLLM()
             # self.llm = Client(
             # model=Model.gpt_35_turbo,
             # provider=Provider.Aichat,)
@@ -62,16 +63,12 @@ class LlmPlugin(BasePlugin):
         """info Message"""
         return self.version
 
-    async def get_llm_run(self,llm_request="hello"):
+    async def get_llm_run(self,llm_request):
         """ 
         Gets the llm prompts response
         """
         
-        return g4f.ChatCompletion.create(
-            model=g4f.Model.gpt_4, 
-            messages=[{"role": "user", "content": llm_request}],
-            stream=False
-            )
+        return await self.llm.talk(llm_request)
 
 
 
