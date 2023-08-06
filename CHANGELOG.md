@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.10 (2023-08-06)
+
+### Fix
+
+* Update README.md ([`1b17705`](https://github.com/mraniki/tt/commit/1b17705980e7ffc9d6f4a34569870426c785f28b))
+
 ## v4.8.9 (2023-08-06)
 
 ### Fix
