@@ -36,7 +36,6 @@ Modules
    plugins/cex
    plugins/talkytrend
    plugins/myllm
-   :doc:`sphinx:usage/extensions/intersphinx`
 
 
 .. raw:: html
