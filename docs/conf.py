@@ -30,6 +30,8 @@ extensions = [
     'sphinx.ext.viewcode',  
     "sphinx.ext.intersphinx",
     "hoverxref.extension",
+    "sphinx.ext.extlinks",
+    
 ]
 
 
