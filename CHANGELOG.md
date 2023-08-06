@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.14 (2023-08-06)
+
+### Fix
+
+* 📝 intersphinx setup ([`0c3a70a`](https://github.com/mraniki/tt/commit/0c3a70a2050d48707c0305cb22c1be1058693a58))
+* Update Requirements ([`a9a7665`](https://github.com/mraniki/tt/commit/a9a7665e0adaffc5977d2c29d8f8a09caf42278a))
+
 ## v4.8.13 (2023-08-06)
 
 ### Fix
