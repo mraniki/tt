@@ -3,8 +3,7 @@
 
 <img  alt="logo" src="https://i.imgur.com/Q7iDDyB.jpg" align="right" alt="talky" width="200" height="200">
 <div align="left">
-<!-- <a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/github/stars/mraniki/tt?style=for-the-badge"></a>-->
-<!-- <a href="https://github.com/mraniki/tt/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/mraniki/tt?style=for-the-badge&color=blue"></a> -->
+
 Connect CEX and DEX exchanges across multi messaging platforms.<br>
 Place order, inquire your balance and more through plugins.<br>
 Easily deploy via Docker on self-hosted platform or Paas.<br>
@@ -48,9 +47,7 @@ Easily deploy via Docker on self-hosted platform or Paas.<br>
 <details close>
 <summary>settings example</summary>
    
-   https://raw.githubusercontent.com/mraniki/tt/main/examples/example_settings.toml
-
-<!-- <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fmraniki%2Ftt%2Fblob%2Fmain%2Fexamples%2Fexample_settings.toml&style=nnfx-dark&type=code&showBorder=on&showLineNumbers=on&showFullPath=on&showCopy=on"></script>-->
+refer to https://talky.readthedocs.io/en/latest/01_start.html#create-your-config-file-settings-toml-or-use-env-variables
 
 </details>
 
@@ -73,9 +70,7 @@ Easily deploy via Docker on self-hosted platform or Paas.<br>
 <details close>
 <summary>Config</summary>
 
-   https://raw.githubusercontent.com/mraniki/tt/main/tt/talky_settings.toml#L1-L367
-
-<!-- <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fmraniki%2Ftt%2Fblob%2Fmain%2Ftt%2Ftalky_settings.toml&style=nnfx-dark&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script> -->
+   refer to https://talky.readthedocs.io/en/latest/02_config.html
 
 </details>
 
