@@ -1,11 +1,12 @@
 ===========
-findmyorder
+iamlistening
 ===========
 
 
-| Refer to `IamListening`_ documentation.
+| Refer to `iamlistening`_ documentation.
 
-.. _`IamListening`: https://iamlistening.readthedocs.io/
+.. _`iamlistening`: https://iamlistening.readthedocs.io/
 
+- :doc:`sphinx:usage/extensions/intersphinx`
 
-- :doc:`imalistening <imalistening:index>`
+- :doc:`iamlistening <iamlistening:index>`
