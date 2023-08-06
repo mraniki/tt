@@ -49,6 +49,7 @@ Settings.toml or .env can be located in /app/settings.toml or /app/.env
 
    docker pull mraniki/tt:latest
 or
+
 .. code:: console
 
    docker pull ghcr.io/mraniki/tt:latest
