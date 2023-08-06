@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.11 (2023-08-06)
+
+### Fix
+
+* Update conf.py ([`45550f5`](https://github.com/mraniki/tt/commit/45550f5e13b2f4cd7ddcd8c95af49139c543bf2d))
+* Update 02_config.rst ([`d418682`](https://github.com/mraniki/tt/commit/d418682fb591f377216dde4878775f89d39bd53c))
+* Update 01_start.rst ([`42eb71b`](https://github.com/mraniki/tt/commit/42eb71b4fc337ad07caf1de3e2da4d3ede8f096f))
+
 ## v4.8.10 (2023-08-06)
 
 ### Fix
