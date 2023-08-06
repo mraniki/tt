@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.7 (2023-08-06)
+
+### Fix
+
+* :recycle: Refactor test_www_plugin.py and llm_plugin.py ([`75d36b0`](https://github.com/mraniki/tt/commit/75d36b00e434f78dc337f362eeb760cdf9a5f851))
+* Update Requirements ([`2bb5477`](https://github.com/mraniki/tt/commit/2bb54773bba06bf348334657e9ec496eadbea938))
+
 ## v4.8.6 (2023-08-05)
 
 ### Fix
