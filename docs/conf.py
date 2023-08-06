@@ -75,25 +75,25 @@ html_theme_options = {
     'bootswatch_theme': "darkly",
     'bootstrap_version': "3",
 
-    'navbar_links': [
-        ("TalkyTrader", "https://talkytrader.github.io/wiki/",True),
-        ("_menu",  "🗿 Talky",[
-            ("🪙 Get started",  "https://talky.rtfd.io/01_start",True),
-            ("⚙️ Config",  "https://talky.rtfd.io/02_config",True),
-        ]),
-        ("_menu",  "🔌 Plugins",[
-            ("👂 IamListening",  "https://iamlistening.rtfd.io/", True),
-            ("🔎 FindMyOrder",  "https://findmyorder.rtfd.io/", True),
-            ("⛓️ DXSP", "https://dxsp.rtfd.io/00_index_dxsp", True),
-            ("💱 CEX",  "index",True),
-            ("💁 Helper",  "index",True),
-            ("📰 Talkytrend",  "https://talkytrend.rtfd.io/", True),
-        ]),
-        ("_menu",  "➕ More",[
-            ("🆕 What's new?",  "https://github.com/mraniki/tt",True),
-            ("💬 Connect",  "https://talky.rtfd.io",True),
-        ]),
-    ]
+    # 'navbar_links': [
+    #     ("TalkyTrader", "https://talkytrader.github.io/wiki/",True),
+    #     ("_menu",  "🗿 Talky",[
+    #         ("🪙 Get started",  "https://talky.rtfd.io/01_start",True),
+    #         ("⚙️ Config",  "https://talky.rtfd.io/02_config",True),
+    #     ]),
+    #     ("_menu",  "🔌 Plugins",[
+    #         ("👂 IamListening",  "https://iamlistening.rtfd.io/", True),
+    #         ("🔎 FindMyOrder",  "https://findmyorder.rtfd.io/", True),
+    #         ("⛓️ DXSP", "https://dxsp.rtfd.io/00_index_dxsp", True),
+    #         ("💱 CEX",  "index",True),
+    #         ("💁 Helper",  "index",True),
+    #         ("📰 Talkytrend",  "https://talkytrend.rtfd.io/", True),
+    #     ]),
+    #     ("_menu",  "➕ More",[
+    #         ("🆕 What's new?",  "https://github.com/mraniki/tt",True),
+    #         ("💬 Connect",  "https://talky.rtfd.io",True),
+    #     ]),
+    # ]
 
 }
 
