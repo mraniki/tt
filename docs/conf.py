@@ -42,9 +42,10 @@ intersphinx_mapping = {
     # - :doc:`sphinx:usage/extensions/intersphinx`
     "dynaconf": ("https://www.dynaconf.com", None),
     "python": ("https://docs.python.org/3", None),
-    "talky": ("https://talky.readthedocs.io/en/latest/", None),
+    "talky": ("https://talky.readthedocs.io/en/latest", None),
     "talky-dev": ("https://talky.readthedocs.io/en/dev/", None),
-    "findmyorder": ("https://talky.readthedocs.io/projects/findmyorder/en/latest", None),
+    "findmyorder": (
+        "https://talky.readthedocs.io/projects/findmyorder/en/latest", None),
     "dxsp": ("https://talky.readthedocs.io/projects/dxsp/en/latest", None),
     "iamlistening": (
         "https://iamlistening.readthedocs.io/en/latest", None),
@@ -53,11 +54,21 @@ intersphinx_mapping = {
 }
 
 intersphinx_disabled_reftypes = ["*"]
- 
+
+
+# -- hoverxref ----------------
+
 hoverxref_intersphinx = [
     'readthedocs',
     'sphinx',
     'python',
+    'talky',
+    'findmyorder',
+    'dxsp',
+    'iamlistening',
+    'talkytrend',
+    'myllm',
+
 ]
 
 napoleon_google_docstring = True
