@@ -15,6 +15,8 @@ TalkyTrader
 | Easily deploy via Docker on self-hosted platform or Paas.
 
 
+QuickStart
+==========
 
 .. toctree::
    :maxdepth: 2
@@ -29,14 +31,7 @@ Modules
 
 .. toctree::
    :maxdepth: 3
-   03_module
-   04_iamlistening
-   05_findmyorder
-   plugins/helper
-   plugins/dex
-   plugins/cex
-   plugins/talkytrend
-   plugins/myllm
+
 
 
 
