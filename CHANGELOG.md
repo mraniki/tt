@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.12 (2023-08-06)
+
+### Fix
+
+* :memo: docs/01_start.rst: Add example_settings.toml ([`ead9e37`](https://github.com/mraniki/tt/commit/ead9e37ed0c44a443df68a66314aa658f8d795a4))
+* Update 02_config.rst ([`061fe43`](https://github.com/mraniki/tt/commit/061fe43a410a717a0ab7feb7be49fd2fd830b959))
+* Update 02_config.rst ([`8bef3ec`](https://github.com/mraniki/tt/commit/8bef3ec7edf130cfdac5167d9d5c78483141ea38))
+
 ## v4.8.11 (2023-08-06)
 
 ### Fix
