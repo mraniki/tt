@@ -58,7 +58,6 @@ hoverxref_intersphinx = [
     'readthedocs',
     'sphinx',
     'python',
-    'dynaconf',
 ]
 
 napoleon_google_docstring = True
