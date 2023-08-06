@@ -42,14 +42,7 @@ Easily deploy via Docker on self-hosted platform or Paas.<br>
 <li><a href="https://support.metamask.io/hc/en-us/articles/360015289632-How-to-export-an-account-s-private-key">DEX wallet address and private key</a></li>
 <li><a href="https://github.com/ccxt/ccxt">CEX API Keys</a></li>
 </ul></li>
-<li>Create your config file settings.toml or use env variables</li>
-
-<details close>
-<summary>settings example</summary>
-   
-refer to https://talky.readthedocs.io/en/latest/01_start.html#create-your-config-file-settings-toml-or-use-env-variables
-
-</details>
+<li>Create <a href="https://talky.readthedocs.io/en/latest/01_start.html#create-your-config-file-settings-toml-or-use-env-variables">your config file settings.toml or use env variables</a></li>
 
 <li>Deploy via:
    <ul> 
@@ -67,12 +60,9 @@ refer to https://talky.readthedocs.io/en/latest/01_start.html#create-your-config
 
 <br>
 
-<details close>
-<summary>Config</summary>
+<h5>Documentation</h5>
+<a href="https://talky.readthedocs.io/"><img src="https://img.shields.io/badge/Documentation-000000?style=for-the-badge&logo=readthedocs&logoColor=white"></a><br>
 
-   refer to https://talky.readthedocs.io/en/latest/02_config.html
-
-</details>
 
 <br>
 <HR>

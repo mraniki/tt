@@ -28,11 +28,27 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',  
-    'sphinxext.remoteliteralinclude',
+    "sphinx.ext.intersphinx",
 ]
 
 
 # -- Extension configuration ---------------------------------------------------
+
+intersphinx_mapping = {
+    "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
+    # - :doc:`sphinx:usage/extensions/intersphinx`
+    "dynaconf": ("https://www.dynaconf.com", None),
+    "python": ("https://docs.python.org/3", None),
+    "talky": ("https://talky.readthedocs.io/en/latest/", None),
+    "talky-dev": ("https://talky.readthedocs.io/en/dev/", None),
+    "findmyorder": ("https://talky.readthedocs.io/projects/findmyorder/en/latest", None),
+    "dxsp": ("https://talky.readthedocs.io/projects/dxsp/en/latest", None),
+    "iamlistening": ("https://talky.readthedocs.io/projects/iamlistening/en/latest", None),
+    "talkytrend": ("https://talky.readthedocs.io/projects/talkytrend/en/latest", None),
+    "myllm": ("https://talky.readthedocs.io/projects/myllm/en/latest", None),
+}
+
+intersphinx_disabled_reftypes = ["*"]
 
 napoleon_google_docstring = True
 autosummary_generate = True
