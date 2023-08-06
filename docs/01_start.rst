@@ -28,12 +28,14 @@ Settings.toml
 -------------
 
 example:
+
 .. literalinclude:: ../examples/example_settings.toml
 
 .env or ENV VARS
 ------------------
 
 place the .env at
+
 .. literalinclude:: ../examples/example.env
 
 Deployment
@@ -44,9 +46,11 @@ Docker Deployment
 Settings.toml or .env can be located in /app/settings.toml or /app/.env
 
 .. code:: console
+
    docker pull mraniki/tt:latest
 or
 .. code:: console
+
    docker pull ghcr.io/mraniki/tt:latest
 
 
@@ -60,7 +64,9 @@ place your settings.toml or .env in /tt
    pip install -r .requirements/requirements.txt
 
 then start your bot:
+
 .. code:: console
+
    python3 bot.py
 
 
