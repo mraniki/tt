@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.8 (2023-08-06)
+
+### Fix
+
+* Update llm_plugin.py ([`f568807`](https://github.com/mraniki/tt/commit/f5688072f126f1212f02902e79138a4bae30f6c4))
+
 ## v4.8.7 (2023-08-06)
 
 ### Fix
