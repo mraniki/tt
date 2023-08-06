@@ -26,6 +26,7 @@ TalkyTrader
 Modules
 =======
 
+
 .. toctree::
    :maxdepth: 3
    03_module
@@ -36,6 +37,9 @@ Modules
    plugins/cex
    plugins/talkytrend
    plugins/myllm
+
+
+
 
 
 .. raw:: html
