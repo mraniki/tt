@@ -21,6 +21,13 @@ TalkyTrader
    
    01_start
    02_config
+
+
+Modules
+=======
+
+.. toctree::
+   :maxdepth: 3
    03_module
    04_iamlistening
    05_findmyorder
