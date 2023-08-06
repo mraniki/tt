@@ -27,8 +27,11 @@ Create your config file `settings.toml` or use env variables
 -----------------------------------------------------------
 
 Settings example:
+
+
 .. rli:: https://raw.githubusercontent.com/mraniki/tt/main/examples/example_settings.toml
    :language: toml
+
 
 Deploy via:
 -----------
