@@ -76,7 +76,11 @@ Modules
     <br><br>
 
     <HR>
-    ⚠️ <em>This is an education tool and should not be considered professional financial investment system nor financial advice.<br>Use a testnet account or USE AT YOUR OWN RISK. Never share your private keys or API secrets.<br>Never use your main account for automatic trade.<br>DYOR.</em>
-    </div>
+    ⚠️ <em>This is an education tool and should not be considered professional financial investment system nor financial advice.<br>
+    Use a testnet account or USE AT YOUR OWN RISK. Never share your private keys or API secrets.<br
+    >Never use your main account for automatic trade.<br>
+    DYOR.</em>
+   <br><br>
+   <br><br>
 
-    <br><br>
+
