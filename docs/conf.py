@@ -47,7 +47,7 @@ intersphinx_mapping = {
     "findmyorder": ("https://talky.readthedocs.io/projects/findmyorder/en/latest", None),
     "dxsp": ("https://talky.readthedocs.io/projects/dxsp/en/latest", None),
     "iamlistening": (
-        "https://iamlistening.readthedocs.io", None),
+        "https://iamlistening.readthedocs.io/en/latest", None),
     "talkytrend": ("https://talky.readthedocs.io/projects/talkytrend/en/latest", None),
     "myllm": ("https://talky.readthedocs.io/projects/myllm/en/latest", None),
 }
