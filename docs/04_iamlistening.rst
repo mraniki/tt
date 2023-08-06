@@ -9,6 +9,9 @@ iamlistening
 
 - :doc:`sphinx:usage/extensions/intersphinx`
 
-- :doc:`dynaconf:index`
 
 - :doc:`iamlistening:index`
+
+- :doc:`iamlistening:_iamlistening_index`
+
+- :doc:`iamlistening:01_start`
