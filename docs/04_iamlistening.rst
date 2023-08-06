@@ -3,7 +3,7 @@ iamlistening
 ===========
 
 
-| Refer to :hoverxref:`iamlistening`_ documentation.
+| Refer to `iamlistening`_ documentation.
 
 .. _`iamlistening`: https://iamlistening.readthedocs.io/
 

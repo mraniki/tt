@@ -46,18 +46,19 @@ intersphinx_mapping = {
     "talky-dev": ("https://talky.readthedocs.io/en/dev/", None),
     "findmyorder": ("https://talky.readthedocs.io/projects/findmyorder/en/latest", None),
     "dxsp": ("https://talky.readthedocs.io/projects/dxsp/en/latest", None),
-    "iamlistening": ("https://talky.readthedocs.io/projects/iamlistening/en/latest", None),
+    "iamlistening": (
+        "https://iamlistening.readthedocs.io", None),
     "talkytrend": ("https://talky.readthedocs.io/projects/talkytrend/en/latest", None),
     "myllm": ("https://talky.readthedocs.io/projects/myllm/en/latest", None),
 }
 
 intersphinx_disabled_reftypes = ["*"]
-
-hoverxref_auto_ref = True
+ 
 hoverxref_intersphinx = [
     'readthedocs',
     'sphinx',
     'python',
+    'dynaconf',
 ]
 
 napoleon_google_docstring = True
