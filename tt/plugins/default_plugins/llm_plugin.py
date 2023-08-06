@@ -4,7 +4,7 @@
 """
 import os
 
-from myllm import MyLLM, version
+from myllm import MyLLM
 
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
