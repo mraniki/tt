@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.9 (2023-08-06)
+
+### Fix
+
+* Update test_llm_plugin.py ([`15c7e3c`](https://github.com/mraniki/tt/commit/15c7e3c18f733435be1d11370af656ff6c3afbe2))
+
 ## v4.8.8 (2023-08-06)
 
 ### Fix
