@@ -82,6 +82,6 @@ async def test_info(plugin):
 @pytest.mark.asyncio
 async def test_llm_request(plugin):
     """Test llm """
-    result = await plugin.get_llm_run(llm_request="tell me a story")
+    result = await plugin.get_llm_run(prompt="tell me a story")
     print(result)
     assert result is not None
