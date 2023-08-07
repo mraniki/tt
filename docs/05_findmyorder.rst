@@ -2,13 +2,6 @@
 findmyorder
 ===========
 
-
-Order Example
-=============
-
-
-
-
 Module Reference
 ================
 

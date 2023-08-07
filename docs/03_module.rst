@@ -1,6 +1,6 @@
-======
-Module
-======
+==================
+TalkyTrader Module
+==================
 
 .. autosummary::
    :toctree: _autosummary
