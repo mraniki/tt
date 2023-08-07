@@ -15,34 +15,24 @@ Create your channel/room and your platform bot:
 Exchange Credentials
 ====================
 
-- DEX wallet address and private key
-- CEX API Keys
+- DEX wallet address and private key: :doc:`plugins/dex`
+- CEX API Keys: :doc:`plugins/cex`
 
 Setup your config
 =================
 Create your config file settings.toml or use env variables. 
-Refer to 02_config for more details.
-
-Settings.toml
--------------
+Refer to  :doc:`talky:02_config` for details.
 
 example:
 
 .. literalinclude:: ../examples/example_settings.toml
 
-.env or ENV VARS
-------------------
-
-place the .env at
-
-.. literalinclude:: ../examples/example.env
 
 Deployment
 ==========
 
 Docker Deployment
 -----------------
-Settings.toml or .env can be located in /app/settings.toml or /app/.env
 
 .. code:: console
 
@@ -56,7 +46,6 @@ or
 
 Local Deployment
 -----------------
-place your settings.toml or .env in /tt
 
 .. code:: console
    
@@ -68,8 +57,6 @@ then start your bot:
 .. code:: console
 
    python3 bot.py
-
-
 
 
 .. raw:: html

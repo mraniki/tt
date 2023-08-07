@@ -74,6 +74,7 @@ hoverxref_intersphinx = [
     'iamlistening',
     'talkytrend',
     'myllm',
+    'community'
 
 ]
 
@@ -131,6 +132,7 @@ html_show_sphinx = False
 html_show_copyright = False
 html_theme = "pydata_sphinx_theme"
 html_theme_options = {
+    "header_links_before_dropdown": 2,
     "secondary_sidebar_items": ["page-toc"],
     "logo": {
         "link": "https://talky.readthedocs.io",
