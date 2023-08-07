@@ -8,9 +8,8 @@ Chat Platform Credentials
 
 Create your channel/room and your platform bot:
 
-   :doc:`talky:04_iamlistening`
+:doc:`iamlistening:index`
 
-   :doc:`iamlistening:index`
 
 Exchange Credentials
 ====================

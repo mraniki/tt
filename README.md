@@ -10,12 +10,11 @@ Easily deploy via Docker on self-hosted platform or Paas.<br>
 <br>
 <p align="left">
 <a href="https://talkytrader.github.io/wiki/"><img src="https://img.shields.io/badge/Wiki-%23000000.svg?style=for-the-badge&logo=wikipedia&logoColor=white"></a>
-<a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/badge/github-%23000000.svg?style=for-the-badge&logo=github&logoColor=white"></a>
-<a href="https://coindrop.to/mraniki"><img src="https://img.shields.io/badge/tips-000000?style=for-the-badge&logo=buymeacoffee&logoColor=white"></a><br>
+<a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/badge/github-%23000000.svg?style=for-the-badge&logo=github&logoColor=white"></a><br>
 <a href="https://hub.docker.com/r/mraniki/tt"><img src="https://img.shields.io/docker/pulls/mraniki/tt?style=for-the-badge"></a>
-<a href="https://t.me/TTTalkyTraderChat/1"><img src="https://img.shields.io/badge/talky-blue?style=for-the-badge&logo=telegram&logoColor=white"></a><br>
-<br>
-   
+<br><br>
+   <img align="right" width="194" alt="screenshot" src="https://github.com/mraniki/tt/assets/8766259/14cb1653-f6b4-44e7-b07c-d930060c7363">
+   <br>
    <img src="https://img.shields.io/github/v/release/mraniki/tt?style=for-the-badge"><br>
    <a href="https://talkytrader.github.io/wiki/"><img src="https://img.shields.io/github/actions/workflow/status/mraniki/tt/%F0%9F%91%B7Flow.yml?style=for-the-badge&logo=GitHub&logoColor=white"></a><br>
 <a href="https://talky.readthedocs.io"><img src="https://readthedocs.org/projects/talky/badge/?version=latest&style=for-the-badge"></a><br>
@@ -25,49 +24,10 @@ Easily deploy via Docker on self-hosted platform or Paas.<br>
 <br><br>
 </p>
 
-<img align="right" width="194" alt="screenshot" src="https://github.com/mraniki/tt/assets/8766259/14cb1653-f6b4-44e7-b07c-d930060c7363">
-
-<details close>
-<summary>Get started</summary>
-
-<ol>
-<li>Create your channel/room and your platform bot
-<ul>
-<li>Telegram via <a href="https://core.telegram.org/bots/tutorial">Telegram @BotFather</a> and <a href="https://docs.telethon.dev/en/stable/basic/signing-in.html">create an API key</a> </li>
-<li>Discord via <a href="https://discord.com/developers/docs/intro">Discord Dev portal</a></li>
-<li>Matrix via <a href="https://turt2live.github.io/matrix-bot-sdk/index.html">Matrix.org</a></li>
-</ul></li>
-<li>Get your
-<ul>
-<li><a href="https://support.metamask.io/hc/en-us/articles/360015289632-How-to-export-an-account-s-private-key">DEX wallet address and private key</a></li>
-<li><a href="https://github.com/ccxt/ccxt">CEX API Keys</a></li>
-</ul></li>
-<li>Create <a href="https://talky.readthedocs.io/en/latest/01_start.html#create-your-config-file-settings-toml-or-use-env-variables">your config file settings.toml or use env variables</a></li>
-
-<li>Deploy via:
-   <ul> 
-<li>docker 
-          <code>docker pull mraniki/tt:latest</code> or <code>docker pull ghcr.io/mraniki/tt:latest</code></li>
-<li>locally 
-          <code>git clone https://github.com/mraniki/tt:main</code> && <code>pip install -r requirements.txt</code> </li>
-</ul></li>
-<li>Start your container or if deployed locally use <code>python3 bot.py</code> to start </li>
-<li>Try it now</li>
-<a href="https://app.koyeb.com/deploy?type=docker&image=docker.io/mraniki/tt&name=tt-demo"><img src="https://img.shields.io/badge/Deploy%20on%20Koyeb-blue?style=for-the-badge&logo=koyeb"></a>
-</ol>
-
-</details>
-
-<br>
-
 <h5>Documentation</h5>
 <a href="https://talky.readthedocs.io/"><img src="https://img.shields.io/badge/Documentation-000000?style=for-the-badge&logo=readthedocs&logoColor=white"></a><br>
 
-
 <br>
 <HR>
+<br>
 </div>
-
-
-<div style="text-align: left; font-size: x-small; font-style:italic;">
-⚠️ <p > This is an education tool and should not be considered professional financial investment system nor financial advice.<br>Use a testnet account or USE AT YOUR OWN RISK. Never share your private keys or API secrets.<br>Never use your main account for automatic trade.<br>DYOR.</p></div>

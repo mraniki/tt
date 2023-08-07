@@ -23,6 +23,15 @@ TalkyTrader
    </p>
 
 
+
+|  
+
+.. image:: ../docs/_static/screenshot.png
+  :width: 200
+  :alt: logo
+  :align: right
+
+
 User Guide
 ==========
 
