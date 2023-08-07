@@ -23,7 +23,10 @@ TalkyTrader
    </p>
 
 
-.. image:: https://github.com/mraniki/tt/assets/8766259/14cb1653-f6b4-44e7-b07c-d930060c7363
+
+|  
+
+.. image:: ../docs/_static/screenshot.png
   :width: 200
   :alt: logo
   :align: right
