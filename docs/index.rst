@@ -16,19 +16,14 @@ TalkyTrader
 
 .. raw:: html
 
-   <br><br>
    <br>
-  <p align="left">
-  <a href="https://talkytrader.github.io/wiki/"><img src="https://img.shields.io/badge/Wiki-%23000000.svg?style=for-the-badge&logo=wikipedia&logoColor=white"></a>
-  <a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/badge/github-%23000000.svg?style=for-the-badge&logo=github&logoColor=white"></a>
-  <a href="https://coindrop.to/mraniki"><img src="https://img.shields.io/badge/tips-000000?style=for-the-badge&logo=buymeacoffee&logoColor=white"></a><br>
-  <a href="https://hub.docker.com/r/mraniki/tt"><img src="https://img.shields.io/docker/pulls/mraniki/tt?style=for-the-badge"></a>
-  <a href="https://t.me/TTTalkyTraderChat/1"><img src="https://img.shields.io/badge/talky-blue?style=for-the-badge&logo=telegram&logoColor=white"></a><br>
-  <br><br>
-  </p>
+   <p align="left">
+   <a href="https://hub.docker.com/r/mraniki/tt"><img src="https://img.shields.io/docker/pulls/mraniki/tt?style=for-the-badge"></a>
+   <br>
+   </p>
 
 
-Quickstart
+User Guide
 ==========
 
 .. toctree::
@@ -38,14 +33,19 @@ Quickstart
    02_config
 
 
-Modules
-=======
+Module Reference
+================
 
 
 .. toctree::
    :maxdepth: 3
 
    03_module
+
+
+Plugins Reference
+================
+
    04_iamlistening
    05_findmyorder
    plugins/helper
@@ -53,8 +53,6 @@ Modules
    plugins/cex
    plugins/talkytrend
    plugins/myllm
-
-
 
 
 
@@ -82,5 +80,3 @@ Modules
     DYOR.</em>
    <br><br>
    <br><br>
-
-

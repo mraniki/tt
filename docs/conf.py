@@ -1,25 +1,25 @@
 # Configuration file for the Sphinx documentation builder.
-#
-# For the full list of built-in configuration values, see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
+
 
 # -- Path setup --------------------------------------------------------------
 
 import os
 import sys
+from pathlib import Path
+from typing import Any, Dict
 
-import sphinx_bootstrap_theme
+import pydata_sphinx_theme
+from sphinx.application import Sphinx
 
 sys.path.insert(0, os.path.abspath('../'))
 
 
 # -- Project information -----------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Talky Trader'
-copyright = '2022'
+copyright = '2022, mraniki'
 author = 'mraniki'
-
+language = "en"
 
 # -- General configuration ---------------------------------------------------
 
@@ -27,15 +27,20 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.napoleon',
-    'sphinx.ext.viewcode',  
+    'sphinx.ext.viewcode',
     "sphinx.ext.intersphinx",
     "hoverxref.extension",
     "sphinx.ext.extlinks",
-    
+    "sphinx_design",
+    "myst_parser",
+    "sphinx_copybutton",
+    "notfound.extension",
+    # "autoapi.extension",
 ]
 
-
 # -- Extension configuration ---------------------------------------------------
+
+# -- intersphinx ------------
 
 intersphinx_mapping = {
     "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
@@ -51,6 +56,7 @@ intersphinx_mapping = {
         "https://iamlistening.readthedocs.io/en/latest", None),
     "talkytrend": ("https://talky.readthedocs.io/projects/talkytrend/en/latest", None),
     "myllm": ("https://talky.readthedocs.io/projects/myllm/en/latest", None),
+    "community": ("https://talky.readthedocs.io/projects/tt-plugins/en/latest", None),
 }
 
 intersphinx_disabled_reftypes = ["*"]
@@ -71,51 +77,90 @@ hoverxref_intersphinx = [
 
 ]
 
-napoleon_google_docstring = True
-autosummary_generate = True
+# -- autodoc --------------------
+
 autoclass_content = 'both'
 autodoc_inherit_docstrings = True 
 set_type_checking_flag = True 
 autodoc_member_order = 'bysource'
 add_module_names = True
 
+# -- autoapi -------------------
+
+# autoapi_type = "python"
+# autoapi_dirs = ['../iamlistening']
+# autoapi_keep_files = True
+# autoapi_root = "api"
+# autoapi_member_order = "groupwise"
+
+
+# -- napoleon -------------------
+
+napoleon_google_docstring = True
+
+# -- MyST options -----------------
+
+# This allows us to use ::: to denote directives, useful for admonitions
+myst_enable_extensions = ["colon_fence", "linkify", "substitution"]
+myst_heading_anchors = 2
+myst_substitutions = {"rtd": "[Read the Docs](https://readthedocs.org/)"}
+
 master_doc = 'index'
 source_suffix = ['.rst', '.md']
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
+# -- Sitemap ----------------------
 
-# -- Options for HTML output -------------------------------------------------
+# ReadTheDocs has its own way of generating sitemaps, etc.
+if not os.environ.get("READTHEDOCS"):
+    extensions += ["sphinx_sitemap"]
+
+    html_baseurl = os.environ.get("SITEMAP_URL_BASE", "http://127.0.0.1:8000/")
+    sitemap_locales = [None]
+    sitemap_url_scheme = "{link}"
 
 
-html_theme = "bootstrap"
+# -- Options for HTML output --------
 
-html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 html_static_path = ["_static"]
-html_logo = '_static/favicon.png'
+html_css_files = ["custom.css"]
+html_logo = '_static/logo.png'
 html_favicon = '_static/favicon.ico'
-html_css_files = [
-    "custom.css",
-]
 html_show_sphinx = False
+html_show_copyright = False
+html_theme = "pydata_sphinx_theme"
 html_theme_options = {
-    'navbar_title': " ",
-    'navbar_site_name': "Talky",
-    'navbar_sidebarrel': False,
-    'navbar_pagenav': False,
-    'globaltoc_depth': 4,
-    'globaltoc_includehidden': "true",
-    'navbar_class': "navbar",
-    'navbar_fixed_top': "true",
-    'source_link_position': "none",
-
-    'bootswatch_theme': "darkly",
-    'bootstrap_version': "3",
+    "secondary_sidebar_items": ["page-toc"],
+    "logo": {
+        "link": "https://talky.readthedocs.io",
+    },
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/mraniki/tt/",
+            "icon": "fa-brands fa-github",
+            "type": "fontawesome",
+        },
+        {
+            "name": "Telegram",
+            "url": "https://t.me/TTTalkyTraderChat/1",
+            "icon": "fa-brands fa-telegram",
+        },
+        {
+            "name": "Mastodon",
+            "url": "https://mastodon.social/@MrAniki",
+            "icon": "fa-brands fa-mastodon",
+        },
+        {
+            "name": "Tips",
+            "url": "https://coindrop.to/mraniki",
+            "icon": "fa-solid fa-burger",
+        },
+        ],
 
 }
+html_context = {
+   "default_mode": "dark",
 
-
-
-
-def setup(app):
-    app.add_css_file("custom.css")
+}

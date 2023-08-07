@@ -7,11 +7,10 @@ Chat Platform Credentials
 =========================
 
 Create your channel/room and your platform bot:
-- Telegram via Telegram @BotFather and Telegram portal to create an API key
-- Discord via Discord Dev portal
-- Matrix via Matrix.org
-- Guilded via Guilded portal
-- Mastodon
+
+   :doc:`talky:04_iamlistening`
+
+   :doc:`iamlistening:index`
 
 Exchange Credentials
 ====================
