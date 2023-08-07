@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.20 (2023-08-07)
+
+### Fix
+
+* 📝 conf update for intersphinx ([`b71d87c`](https://github.com/mraniki/tt/commit/b71d87c530827dfaecb5c55c3b88434f67dbe66e))
+
 ## v4.8.19 (2023-08-07)
 
 ### Fix
