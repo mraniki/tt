@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.18 (2023-08-07)
+
+### Fix
+
+* 📝 ([`eb0066f`](https://github.com/mraniki/tt/commit/eb0066f2851b031f2e67d303bfc4b39aa5ea9795))
+* 📝 readme update ([`801b3e7`](https://github.com/mraniki/tt/commit/801b3e79a87bb7b13d40245288f5070c3e59ad36))
+* 📝 ([`54c7d2b`](https://github.com/mraniki/tt/commit/54c7d2bffb0be7ac148ae0b55251e9ab4a4e1cad))
+* :memo: ([`c17e857`](https://github.com/mraniki/tt/commit/c17e857a87cbbf4db2bcfe7c674327d1c878959c))
+* 📝 ([`1ed15d2`](https://github.com/mraniki/tt/commit/1ed15d2d6d2a812870e684c2c4813edfa4f52ea5))
+* 📝 ([`e9db8b6`](https://github.com/mraniki/tt/commit/e9db8b6a14d85f564ab7c31d92d0eb29a2d960a2))
+* 📝 update ([`6fe3826`](https://github.com/mraniki/tt/commit/6fe3826b16ee86ba2146f02b375ece9a91f92cca))
+* Update Requirements ([`68477be`](https://github.com/mraniki/tt/commit/68477be0802e860581d09a0b0107e9ee1d6d15b6))
+
 ## v4.8.17 (2023-08-07)
 
 ### Fix
