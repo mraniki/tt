@@ -7,7 +7,7 @@
 */
 
 
-:root {
+/* :root {
   --body-bg: #292929;
   --body-color: #E2E8E4;
   }
@@ -34,6 +34,8 @@
     dt:target, span.highlighted {
 background-color: transparent;
       
-    }
+    } */
 
-    
+    .bd-footer {
+      display: none;
+  }

@@ -5,7 +5,7 @@
 TalkyTrader
 ===========
 
-.. image:: /docs/_static/logo-full.png
+.. image:: ../docs/_static/logo-full.png
   :width: 200
   :alt: logo
   :align: right
@@ -14,14 +14,38 @@ TalkyTrader
 | Place order, inquire your balance and more through plugins.
 | Easily deploy via Docker on self-hosted platform or Paas.
 
+.. raw:: html
 
+   <br>
+   <p align="left">
+   <a href="https://hub.docker.com/r/mraniki/tt"><img src="https://img.shields.io/docker/pulls/mraniki/tt?style=for-the-badge"></a>
+   <br>
+   </p>
+
+
+User Guide
+==========
 
 .. toctree::
    :maxdepth: 2
    
    01_start
    02_config
+
+
+Module Reference
+================
+
+
+.. toctree::
+   :maxdepth: 3
+
    03_module
+
+
+Plugins Reference
+================
+
    04_iamlistening
    05_findmyorder
    plugins/helper
@@ -29,21 +53,11 @@ TalkyTrader
    plugins/cex
    plugins/talkytrend
    plugins/myllm
-   :doc:`sphinx:usage/extensions/intersphinx`
+
 
 
 .. raw:: html
 
-   <br><br>
-   <br>
-  <p align="left">
-  <a href="https://talkytrader.github.io/wiki/"><img src="https://img.shields.io/badge/Wiki-%23000000.svg?style=for-the-badge&logo=wikipedia&logoColor=white"></a>
-  <a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/badge/github-%23000000.svg?style=for-the-badge&logo=github&logoColor=white"></a>
-  <a href="https://coindrop.to/mraniki"><img src="https://img.shields.io/badge/tips-000000?style=for-the-badge&logo=buymeacoffee&logoColor=white"></a><br>
-  <a href="https://hub.docker.com/r/mraniki/tt"><img src="https://img.shields.io/docker/pulls/mraniki/tt?style=for-the-badge"></a>
-  <a href="https://t.me/TTTalkyTraderChat/1"><img src="https://img.shields.io/badge/talky-blue?style=for-the-badge&logo=telegram&logoColor=white"></a><br>
-  <br><br>
-  </p>
     <br><br>
 
     <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54">
@@ -60,7 +74,9 @@ TalkyTrader
     <br><br>
 
     <HR>
-    ⚠️ <em>This is an education tool and should not be considered professional financial investment system nor financial advice.<br>Use a testnet account or USE AT YOUR OWN RISK. Never share your private keys or API secrets.<br>Never use your main account for automatic trade.<br>DYOR.</em>
-    </div>
-
-    <br><br>
+    ⚠️ <em>This is an education tool and should not be considered professional financial investment system nor financial advice.<br>
+    Use a testnet account or USE AT YOUR OWN RISK. Never share your private keys or API secrets.<br
+    >Never use your main account for automatic trade.<br>
+    DYOR.</em>
+   <br><br>
+   <br><br>

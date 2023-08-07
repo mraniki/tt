@@ -2,6 +2,8 @@
 Talkytrend
 ==========
 
-Refer to `Talkytrend`_ documentation.
+Module Reference
+================
 
-.. _`Talkytrend`: https://talkytrend.rtfd.io/
+
+:doc:`talkytrend:index`

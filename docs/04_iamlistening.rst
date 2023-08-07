@@ -1,8 +1,38 @@
+===========
+iamlistening
+===========
 
 
-Refer to `IamListening`_ documentation.
+Chat Platform Credentials
+=========================
 
-.. _`IamListening`: https://iamlistening.rtfd.io/
 
 
-- :doc:`imalistening <imalistening:index>`
+Telegram
+--------
+
+- Create your bot token via Telegram @BotFather 
+- Telegram portal to create an API key
+
+
+Discord
+-------
+
+
+Matrix
+------
+
+
+Guilded
+-------
+
+
+Mastodon
+--------
+
+
+
+Module Reference
+================
+
+:doc:`iamlistening:index`
