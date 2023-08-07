@@ -2,6 +2,34 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.15 (2023-08-07)
+
+### Fix
+
+* 📝 updating docs template and sphinx ([`0c32e4b`](https://github.com/mraniki/tt/commit/0c32e4b77926b83ddff5640e3a1cd71df2dc8a46))
+* 📝 ([`17cc75d`](https://github.com/mraniki/tt/commit/17cc75d12586c0eb8077055b0a9ac63b624bf5e5))
+* 📝 ([`d4a6208`](https://github.com/mraniki/tt/commit/d4a6208c76ff37ff607643abe11c6b1a8f53c490))
+* 📝 updated intersphinx mapping ([`b1cdda8`](https://github.com/mraniki/tt/commit/b1cdda8eb9a85fc89754bdc58d3a9bb5ace3646e))
+* 📝 intersphinx test ([`4d4b6fc`](https://github.com/mraniki/tt/commit/4d4b6fc6d5ce5293b2e5b7cc8a6a6c640454b53f))
+* 📝 intersphinx fix ([`f608ca1`](https://github.com/mraniki/tt/commit/f608ca1b50376e881a64734fc53b52c327fb9f81))
+* 📝 ([`7a7d399`](https://github.com/mraniki/tt/commit/7a7d399617b35acbacc7818ec4c485206a4dee8e))
+* 📝 ([`bae0e7c`](https://github.com/mraniki/tt/commit/bae0e7cf8c6f1bd4754e00af5d75ac624e2ee6b6))
+* 📝 ([`5a921cb`](https://github.com/mraniki/tt/commit/5a921cb9eab4554f484afeafe29585db3db31a34))
+* 📝 ([`42843ce`](https://github.com/mraniki/tt/commit/42843ce5a0f5a748bd440288dfeccaad946a505e))
+* 📝 ([`3bcd558`](https://github.com/mraniki/tt/commit/3bcd558e975c6ac5c7ae440a800a28db3d3c8eb7))
+* Update Requirements ([`407ca4f`](https://github.com/mraniki/tt/commit/407ca4f4fb5af44c0d5387d8c1f0b1478c6db6ba))
+* 📝 ([`5d1fe2c`](https://github.com/mraniki/tt/commit/5d1fe2c11b33c35d09fdf84233bef32e42da47de))
+* 📝 :hoverxref: ([`537e4d4`](https://github.com/mraniki/tt/commit/537e4d42cb12d7399fda16ea9750e8b83f2212aa))
+* 🐛 typo for docs ([`31f66b3`](https://github.com/mraniki/tt/commit/31f66b3989996bbd08bf2ffab0c29a9b9077f54a))
+* 📝 ([`bad7d4d`](https://github.com/mraniki/tt/commit/bad7d4d9222636684d5712435b5ce1a8d8659038))
+* 🐛 ([`2c980fb`](https://github.com/mraniki/tt/commit/2c980fb091953562493e42c54cfc940eec3f6d13))
+* Update Requirements ([`a4aa0c9`](https://github.com/mraniki/tt/commit/a4aa0c92b81578cc8f5bcc264058799e60dc0f03))
+* 📝  sphinx.ext.extlinks ([`dd527c0`](https://github.com/mraniki/tt/commit/dd527c031a575d53b9e095749523bf1ab129f618))
+* 🎨 logo ([`77fb3df`](https://github.com/mraniki/tt/commit/77fb3df74f8588e64ca1d4986ea81cfc83bcc142))
+* 🎨 x link test ([`373f65a`](https://github.com/mraniki/tt/commit/373f65a518ef9238dd63137a1a9a2bc77f8397a2))
+* 🎨 improve docs with hovering ([`13a9b28`](https://github.com/mraniki/tt/commit/13a9b288032a2e152b43ccee8b24f0bdc90e6d5f))
+* 📝 rtd udpate ([`105e241`](https://github.com/mraniki/tt/commit/105e2418af8240a6d82600ca2276217cb6510701))
+
 ## v4.8.14 (2023-08-06)
 
 ### Fix
