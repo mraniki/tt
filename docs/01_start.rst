@@ -14,11 +14,13 @@ Create your channel/room and your platform bot:
 Exchange Credentials
 ====================
 
-- DEX wallet address and private key: :doc:`plugins/dex`
-- CEX API Keys: :doc:`plugins/cex`
+Get your DEX or CEX credentials:
+- DEX wallet address and private key: :doc:`talky:plugins/dex`
+- CEX API Keys: :doc:`talky:plugins/cex`
 
 Setup your config
 =================
+
 Create your config file settings.toml or use env variables. 
 Refer to  :doc:`talky:02_config` for details.
 

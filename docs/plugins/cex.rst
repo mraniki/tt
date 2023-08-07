@@ -2,30 +2,12 @@
 CEX
 ===
 
-
 User Guide
 ==========
-- CEX API Keys
-
-SPOT
-----
-
-
-LIMIT ORDER 
------------
-
-
-MARGIN ORDER 
-------------
-
-
-FUTURE ORDER 
-------------
+- Retrieve your CEX API Keys
 
 
 Module Reference
 ================
 
-
-
-:doc:`cex:index`
+.. automodule::tt.plugins.default_plugins.cex_exchange_plugin
