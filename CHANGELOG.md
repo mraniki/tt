@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.19 (2023-08-07)
+
+### Fix
+
+* ⬆️(deps): update dependency pytest-playwright to ^0.4.0 ([`ce326ae`](https://github.com/mraniki/tt/commit/ce326ae6a0bb3863b95022d53ed3f857b0dc9b69))
+
 ## v4.8.18 (2023-08-07)
 
 ### Fix
