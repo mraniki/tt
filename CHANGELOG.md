@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.22 (2023-08-07)
+
+### Fix
+
+* Update Requirements ([`fb06f6c`](https://github.com/mraniki/tt/commit/fb06f6c22fa5bdca75d82adcdb4bf51f382cdc97))
+* :arrow_up: dep ([`77354b3`](https://github.com/mraniki/tt/commit/77354b3302bcfb47d56370a892eda17e8afb0a97))
+* 📝 updated docstring ([`4a59d9d`](https://github.com/mraniki/tt/commit/4a59d9d07e9aae81090b8c2fe7dbb5c5b17bb1ae))
+
 ## v4.8.21 (2023-08-07)
 
 ### Fix
