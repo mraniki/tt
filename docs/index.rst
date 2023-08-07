@@ -46,6 +46,9 @@ Module Reference
 Plugins Reference
 ================
 
+.. toctree::
+   :maxdepth: 3
+
    04_iamlistening
    05_findmyorder
    plugins/helper
@@ -54,6 +57,15 @@ Plugins Reference
    plugins/talkytrend
    plugins/myllm
 
+
+Development Reference
+=====================
+
+
+.. toctree::
+   :maxdepth: 3
+
+   development/index
 
 
 .. raw:: html
