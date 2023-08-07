@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.21 (2023-08-07)
+
+### Fix
+
+* 📝 Docs ([`cce447a`](https://github.com/mraniki/tt/commit/cce447a11d0b2052ca0a92d7aaf7011d5ad1694d))
+
 ## v4.8.20 (2023-08-07)
 
 ### Fix
