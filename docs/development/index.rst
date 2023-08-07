@@ -6,10 +6,10 @@ You can fork this repo or you can use the current repo and add your own plugins
 Build Plugin
 ============
 
-.. literalinclude:: ../tt/plugins//default_plugins/example_plugin.py
+.. literalinclude:: ../tt/plugins/default_plugins/example_plugin.py
 
 
-Add your Plugin
+Use your Plugin
 ===============
 
-WIP
+:doc:`community:index`

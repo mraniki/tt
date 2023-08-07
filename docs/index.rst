@@ -33,16 +33,6 @@ User Guide
    02_config
 
 
-Module Reference
-================
-
-
-.. toctree::
-   :maxdepth: 3
-
-   03_module
-
-
 Plugins Reference
 ================
 
@@ -58,9 +48,17 @@ Plugins Reference
    plugins/myllm
 
 
+TalkyTrader Module
+==================
+
+.. toctree::
+   :maxdepth: 3
+
+   03_module
+
+
 Development Reference
 =====================
-
 
 .. toctree::
    :maxdepth: 3
