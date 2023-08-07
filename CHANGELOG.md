@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.17 (2023-08-07)
+
+### Fix
+
+* 📝 rtd docs update ([`fbf7372`](https://github.com/mraniki/tt/commit/fbf7372bf8ad2ed414c37030a3c16dbc128cdab5))
+* 📝 ([`422fd16`](https://github.com/mraniki/tt/commit/422fd1664af9923e8053d5f38216192b670d9d1d))
+* Update Requirements ([`17223fe`](https://github.com/mraniki/tt/commit/17223fed32ca00e481a768c98dd247c36fc1734c))
+
 ## v4.8.16 (2023-08-07)
 
 ### Fix
