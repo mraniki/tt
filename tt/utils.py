@@ -37,6 +37,11 @@ async def run_bot():
     """
     🤖 Run the chat bot & the plugins.
 
+    Returns:
+        None
+
+    Refer to iamlistening documentation for more information
+
     """
     listener = Listener()
     plugin_manager = PluginManager()
@@ -46,6 +51,12 @@ async def run_bot():
 async def start_plugins(plugin_manager):
     """
     🔌 Start all plugins.
+
+    Returns:
+        None
+
+    Refer to chat manager for the pl
+
     """
     if settings.plugin_enabled:
         plugin_manager.load_plugins()
@@ -55,7 +66,17 @@ async def start_plugins(plugin_manager):
  
 async def start_bot(listener, plugin_manager, max_iterations=None):
     """
-    👂 Start the chat listener and dispatch to plugins
+    👂 Start the chat listener and 
+    dispatch messages to plugins
+
+    Args:
+        listener (Listener): Listener
+        plugin_manager (PluginManager): PluginManager
+        max_iterations (int): Max iterations
+
+    Returns:
+        None
+
     """
     await listener.start()
     await start_plugins(plugin_manager)

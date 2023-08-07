@@ -8,13 +8,34 @@ from tt.config import logger, scheduler, settings
 
 
 class PluginManager:
-    """🔌 Plugin Manager """
+    """
+    🔌 Plugin Manager use to load, start and 
+    dispatch message to the plugins
+    
+    Args:
+        plugin_directory (str): Directory of plugins
+
+    Returns:
+        None
+
+    """
+
     def __init__(self, plugin_directory=None):
         self.plugin_directory = plugin_directory or settings.plugin_directory
         self.plugins = []
 
     def load_plugins(self):
-        """ Load plugins from directory """
+        """ 
+        🔌Load plugins from directory 
+        
+        Returns:
+            None
+
+        Raises:
+            Exception
+
+
+        """
         package = importlib.import_module(self.plugin_directory)
         logger.debug("Loading plugins from: {}", package)
         for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
@@ -27,7 +48,17 @@ class PluginManager:
                 logger.warning("Error loading plugin {}: {}", plugin_name, e)
 
     def load_plugin(self, module, plugin_name):
-        """ Load a plugin from a module """
+        """ 
+        Load a plugin from a module 
+        
+        Args:
+            module (Module): Module
+            plugin_name (str): Plugin name
+        
+        Returns:
+            None
+
+        """
         logger.debug("plugin_name: {}", plugin_name)
         for name, obj in module.__dict__.items():
             if (isinstance(obj, type)
@@ -38,18 +69,44 @@ class PluginManager:
                 logger.debug("Plugin loaded: {}", name)
 
     async def start_all_plugins(self):
-        """ Start all plugins """
+        """
+        Start all plugins
+        Start the scheduler
+        
+        Returns:
+            None
+
+        
+        """
     
         for plugin in self.plugins:
             await self.start_plugin(plugin)
         scheduler.start()
 
     async def start_plugin(self, plugin):
-        """ Start a plugin """
+        """ 
+        Start a plugin
+        
+        Args:
+            plugin (Plugin): Plugin
+        
+        Returns:
+            None
+        
+        """
         await plugin.start()
 
     async def process_message(self, message):
-        """ Send message to plugins """
+        """
+        Send message to plugins
+        
+        Args:
+            message (str): Message
+        
+        Returns:
+            None
+
+        """
         for plugin in self.plugins:
             try:
                 if plugin.should_handle(message):
@@ -63,6 +120,18 @@ class PluginManager:
 class BasePlugin:
     """
     ⚡ Base Plugin Class
+    use to be inherited by Talky Plugins
+    especially the scheduling, notification and
+    message handling.
+
+    Args:
+        None
+
+    Returns:
+        None
+
+
+
     """
     def __init__(self):
         self.enabled = False
@@ -78,6 +147,16 @@ class BasePlugin:
         pass
 
     def should_handle(self, message):
+        """
+        Returns True if the plugin should handle the message
+        
+        Args:
+            message (str): Message
+
+        Returns:
+            bool
+        
+        """
         return (not message.startswith(settings.bot_ignore)
          if self.enabled else False)
 
@@ -86,8 +165,19 @@ class BasePlugin:
         user_name=None,
         frequency=8,
         function=None):
-        """Handles task notification 
-        every X hours. Defaulted to 8 hours"""
+        """
+        Handles task notification 
+        every X hours. Defaulted to 8 hours
+        
+        Args:
+            user_name (str): User name
+            frequency (int): Frequency
+            function (function): Function
+        
+        Returns:
+            None
+        """
+
         if function:
             self.scheduler.add_task(
                 name=user_name,
@@ -104,8 +194,21 @@ class BasePlugin:
         user_hours="6,12,18",
         user_timezone="UTC",
         function=None): 
-        """Handles task cron scheduling for notification 
-        Monday to Friday at 6AM, 12PM and 6PM UTC"""
+        """
+        Handles task cron scheduling for notification 
+        Monday to Friday at 6AM, 12PM and 6PM UTC
+        
+        Args:
+            user_name (str): User name
+            user_day_of_week (str): Day of week
+            user_hours (str): Hours
+            user_timezone (str): Timezone
+            function (function): Function
+
+        Returns:
+            None
+
+        """
         if function:
             self.scheduler.add_task(
                 name=user_name,
