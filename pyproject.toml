@@ -49,11 +49,11 @@ fastapi = "^0.101.0"
 ping3 = "^4.0.4"
 playwright = "^1.36.0"
 ccxt = "^4.0.0"
-dxsp = "^4.2.3"
-findmyorder = "^1.6.1"
-iamlistening = "^3.1.0"
-talkytrend = "^1.12.3"
-myllm = "^1.0.0"
+dxsp = "^4.2.10"
+findmyorder = "^1.7.11"
+iamlistening = "^3.2.0"
+talkytrend = "^1.12.11"
+myllm = "^1.2.8"
 
 
 [tool.poetry.group.dev.dependencies]

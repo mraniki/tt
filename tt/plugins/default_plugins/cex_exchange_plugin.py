@@ -9,7 +9,16 @@ from tt.utils import send_notification
  
 
 class CexExchangePlugin(BasePlugin):
-    """CEX Plugin"""
+    """
+    Class CexExchangePlugin to support CEX Exchange
+
+    Args:
+        None
+    
+    Returns:
+        None
+
+    """
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
         super().__init__()
@@ -34,7 +43,17 @@ class CexExchangePlugin(BasePlugin):
         return self.enabled
 
     async def handle_message(self, msg):
-        """Handles incoming messages"""
+        """
+        Handles incoming messages
+        to route to the respective function
+        
+        Args:
+            msg (str): The incoming message
+
+        Returns:
+            None
+        
+        """
         if not self.enabled:
             return
 
@@ -69,7 +88,18 @@ class CexExchangePlugin(BasePlugin):
 
 
 class CexExchange():
-    """CEX Object"""
+    """
+    CEX Object to support CEX
+    via CCXT library to be reviewed 
+    to be stored in different file/package
+    
+    Args:
+        None
+
+    Returns:
+        None
+    
+    """
     def __init__(self):
         if settings.cex_name:
             client = getattr(ccxt, settings.cex_name)
@@ -86,25 +116,61 @@ class CexExchange():
             self.commands = settings.ccxt_commands
 
     async def get_info(self):
-        """info_message"""    
+        """
+        info_message
+        
+        """    
         exchange_name = self.cex.id
         account_info = self.cex.uid
-        #account_info = self.cex.fetchAccounts().get('main')
+        # account_info = self.cex.fetchAccounts().get('main')
+        # method not implemented yet
         return f"💱 {exchange_name}\n🪪 {account_info}"
 
     async def get_help(self):
+        """
+        Get the help information for the current instance.
+        
+        Returns:
+            A string containing the available commands.
+        """
         return (f"{self.commands}\n")
 
     async def get_quote(self, symbol):
-        """return main asset balance."""
+        """
+        return main asset balance.
+
+        Args:
+            symbol
+
+        Returns:
+            quote
+        """
+
         return f"🏦 {self.cex.fetchTicker(symbol).get('last')}"
 
     async def get_trading_asset_balance(self):
-        """return main asset balance."""
+        """
+        return main asset balance.
+
+        Args:
+            None
+
+        Returns:
+            balance
+        """
         return self.cex.fetchBalance()[f"{settings.trading_asset}"]["free"]
 
     async def get_account_balance(self):
-        """return account balance."""
+        """
+        return account balance.
+        
+        Args:
+            None
+
+        Returns:
+            balance
+        
+        """
         raw_balance = self.cex.fetch_free_balance()
         filtered_balance = {k: v for k, v in
                             raw_balance.items()
@@ -118,7 +184,16 @@ class CexExchange():
         return balance
 
     async def get_account_position(self):
-        """return account position."""
+        """
+        return account position.
+        
+        Args:
+            None
+
+        Returns:
+            position
+        
+        """
         open_positions = self.cex.fetch_positions()
         open_positions = [p for p in open_positions if p['type'] == 'open']
         position = "📊 Position\n" + str(open_positions)
@@ -126,11 +201,33 @@ class CexExchange():
         return position
 
     async def get_account_pnl(self):
-        """return account pnl."""
+        """
+        return account pnl.
+
+        Args:
+            None
+        
+        Returns:
+            pnl
+        """
+
         return 0
 
     async def execute_order(self, order_params):
-        """Execute order."""
+        """
+        Execute order
+        
+        Args:
+            order_params (dict):
+                action(str)
+                instrument(str)
+                quantity(int)
+        
+        Returns:
+            trade_confirmation(dict)
+
+        """
+
         action = order_params.get('action')
         instrument = order_params.get('instrument')
         quantity = order_params.get('quantity', settings.trading_risk_amount)
