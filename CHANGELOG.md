@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.16 (2023-08-07)
+
+### Fix
+
+* 📝 add dev ([`4e0d01b`](https://github.com/mraniki/tt/commit/4e0d01b8aad6ce474a6fa947d899329bf3f9f714))
+* Update Requirements ([`3bc5f73`](https://github.com/mraniki/tt/commit/3bc5f7320bef6ec5ccdfa12ff16f6c29200185e3))
+
 ## v4.8.15 (2023-08-07)
 
 ### Fix
