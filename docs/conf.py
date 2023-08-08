@@ -50,13 +50,13 @@ intersphinx_mapping = {
     "talky": ("https://talky.readthedocs.io/en/latest", None),
     "talky-dev": ("https://talky.readthedocs.io/en/dev/", None),
     "findmyorder": (
-        "https://talky.readthedocs.io/projects/findmyorder/en/latest", None),
-    "dxsp": ("https://talky.readthedocs.io/projects/dxsp/en/latest", None),
+        "https://findmyorder.readthedocs.io/en/latest", None),
+    "dxsp": ("https://dxsp.readthedocs.io/en/latest", None),
     "iamlistening": (
         "https://iamlistening.readthedocs.io/en/latest", None),
-    "talkytrend": ("https://talky.readthedocs.io/projects/talkytrend/en/latest", None),
-    "myllm": ("https://talky.readthedocs.io/projects/myllm/en/latest", None),
-    "community": ("https://talky.readthedocs.io/projects/tt-plugins/en/latest", None),
+    "talkytrend": ("https://talkytrend.readthedocs.io/en/latest", None),
+    "myllm": ("https://myllm.readthedocs.io/en/latest", None),
+    "community": ("https://tt-plugins.readthedocs.io/en/latest", None),
 }
 
 intersphinx_disabled_reftypes = ["*"]
