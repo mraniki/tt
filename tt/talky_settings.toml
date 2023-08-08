@@ -21,46 +21,75 @@
 ########################################
 
 [default]
-# ENV_FOR_DYNACONF=DEFAULT
+# Dynaconf settings verification
 VALUE = "Production - Default"
-
 
 ########################################
 ###         PYTHON SETTINGS          ###
 ########################################
 
+# Log level
+# set to "DEBUG" if you need 
+# to troubleshoot
 loglevel = "INFO"
-# TT_LOGLEVEL=DEBUG
 
 ########################################
 ###         FASTAPI SETTINGS         ###
 ########################################
 
+# Uvicorn Server settings
 host = "0.0.0.0"
 port = 8080
 
 # Your webhook secret to send
-# trade alert directly to your
-# bot.
+# trade alert directly to your chat.
+# If you use Trading view, the webhook
+# to be set in the trading view notification
+# will be https://0.0.0.0/webhook/123abc
+# as per the above and below data
+
 webhook_secret = "123abc"
+
+# Forward the webhook data 
+# to another endpoint like another bot
+# or webhook service.
+
+# Forwarded  Enable/Disable
 forwarder = false
+# Forwarder URL
 forwarder_url = ""
 
 ########################################
 ###        APPRISE SETTINGS          ###
 ########################################
 
-apprise_url = "json://localhost"
-apprise_format = "NotifyFormat.MARKDOWN"
-# TT_APPRISE_URL='tgram://TOKEN/CHAT_ID'
+# Refer to 
+# https://github.com/caronc/apprise/wiki
+# Apprise endpoint URL can be a URL 
+# for the chat, a URL to an Apprise config
+# or a URL to the Apprise API endpoint
 
+apprise_url = "json://localhost"
+
+#Format of the notification. Format can be
+# NotifyFormat.MARKDOWN 
+# or NotifyFormat.HTML
+apprise_format = "NotifyFormat.MARKDOWN"
 
 ########################################
 ###      IAMLISTENING SETTINGS       ###
 ########################################
 
+# Module Enable/Disable
 iamlistening_enabled = true
-chat_platform=""
+
+# chat_platform is used to launch 
+# the specific handler
+# for the chat platform. Value can be
+# telegram, discord, matrix, etc.
+chat_platform = ""
+
+# bot credentials
 bot_token = ""
 bot_channel_id = ""
 bot_api_id = ""
@@ -69,6 +98,17 @@ bot_hostname = ""
 bot_user = ""
 bot_pass = ""
 bot_auth_token = ""
+
+# Iteration settings used for testing
+# if you need the bot to run 
+# for a long time
+# set iteration_enabled to false
+# if you need the bot to run 
+# for a short time
+# set iteration_enabled to true
+# iteration_limit is the number 
+# of iterations
+# the bot will run for.
 iteration_enabled = false
 iteration_limit = -1
 
@@ -76,187 +116,290 @@ iteration_limit = -1
 ###   COMMON BOT COMMAND SETTINGS    ###
 ########################################
 
+# Bot Prefix 
 bot_prefix = "/"
+# Specific data that should be ignore by
+# the parser
 bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
+# Command for help
 bot_command_help = "help"
+# Command for info
 bot_command_info = "info"
+# Command for user balance
 bot_command_bal = "bal"
+# Command for user position
 bot_command_pos = "pos"
+# Command for daily pnl
 bot_command_pnl_daily = "d"
+# Command for instrument quote
 bot_command_quote = "q"
-
 
 ########################################
 ###         TRADING SETTINGS         ###
 ########################################
 
+# Trading Enable/Disable
 trading_enabled = true
-trading_risk_amount = 10
 
+# Trading % of your position to risk per order
+# 10 = 10% of the position
+trading_risk_amount = 10
 
 ########################################
 ###         PLUGINS SETTINGS         ###
 ########################################
 
+# Plugins Enable/Disable
 plugin_enabled = true
+# Plugins Locations
 plugin_directory = "tt.plugins.default_plugins"
+# Example plugin for test purpose
 example_plugin_enabled = false
+# User Plugin Enable/Disable
+# Not yet implemented
 user_plugins_allowed = false
-
 
 ########################################
 ###          HELPER SETTINGS         ###
 ########################################
 
+# Helper Enable/Disable
 helper_enabled = true
+# Help Message
 helper_commands = "🔀 /trading\n🔁 /restart\n🕸️ /network"
+# Command for switch trading on or off
 bot_command_trading = "trading"
+# Command to retrieve network info
+# such as latency ping and IP address of
+# the bot
 bot_command_network = "network"
+# Command to restart the bot
 bot_command_restart = "restart"
+# URL endpoint for the latency 
+# ping. Used for testping testing
 ping = "8.8.8.8"
 
 ########################################
 ###           WWW SETTINGS           ###
 ########################################
 
+# WWW Plugin Enable/Disable
 www_enabled = false
+# Help Message
 www_commands = "📷 /src\n"
+# Command to get screenshot
 bot_command_screenshot = "scr"
 www_url = "https://apod.nasa.gov/apod/astropix.html"
-
 
 ########################################
 ###           LLM SETTINGS           ###
 ########################################
 
+# Module Enable/Disable
 llm_enabled = true
+# LLM Model to use
 llm_model = "gpt-4"
+# LLM Provider
 llm_provider = "g4f.Provider.Providers.ChatgptAi"
+# LLM Host
 llm_host = ""
+# LLM Auth Token
 llm_auth_token = ""
+# SERP API Key 
+llm_serpapi-key = ""
+#default prompt if prompt is not given
 llm_default_prompt = "write a tiny story"
-llm_commands = "🦾 /qq\n /tq"
+# help message listing the commands
+# available
+llm_commands = "🦾 /qq\n"
+# command for questions
 bot_command_question = "qq"
+# command for topic/conversation
 bot_command_topic = "tq"
 
 ########################################
 ###        FINDMYORDER SETTINGS      ###
 ########################################
 
+# Module Enable/Disable
 findmyorder_enabled = true
+
+# Keyword to be use to identify an order
 action_identifier = "BUY SELL LONG SHORT"
+# Keyword identifier for stoploss
 stop_loss_identifier = "sl="
+# Keyword identifier for take-profit
 take_profit_identifier = 'tp='
+# Keyword identifier for quantity
 quantity_identifier = 'q='
+# Keyword identifier for order type
 order_type_identifier = "spot future margin"
+# Keyword identifier for leverage
 leverage_type_identifier = "cross isolated"
+# Keyword identifier for comments
 comment_identifier = "comment="
+
+# Stoploss default value is none is provided
 stop_loss = 1000
+# Take-Profit default value is none is provided
 take_profit = 1000
+# Quantity default value is none is provided
 quantity = 1
+
+# Settings to enable or disable
+# instrument mapping
 instrument_mapping = true
+# instrument mapping to use and alternative 
+#  symbol when generating the order
 mapping = [
     { id = "GOLD", alt = "XAUUSD" },
     { id = "SILVER", alt = "XAGUSD" },
     { id = "BTC", alt = "WBTC" },
     { id = "ETH", alt = "WETH" },
 ]
-ignore_instrument = "US500 USTEC DOGE"
 
+# Instrument to be ignored
+# when generating an order
+ignore_instrument = "US500 USTEC DOGE"
 
 ########################################
 ###           CCXT SETTINGS          ###
 ########################################
 
+# Module Enable/Disable
 cex_enabled = false
+# Help Message
 ccxt_commands = "🎯 BUY BTCUSDT\n🎯 /q BTCUSDT\n🏦 /bal\n🏦 /pos\n"
+# CCXT Parameters to connect with 
+# the exchange
 cex_name = ""
 cex_api = ""
 cex_secret = ""
 cex_password = ""
 cex_testmode = true
-cex_defaulttype = "SPOT"
-cex_ordertype = "MARKET"
 
+# Default type: SPOT, FUTURE, etc.
+cex_defaulttype = "SPOT"
+# Order type: Market, Limit, etc.
+cex_ordertype = "MARKET"
 
 ########################################
 ###           DXSP SETTINGS          ###
 ########################################
 
+# Module Enable/Disable
 dxsp_enabled = true
+
+# Help Message
 dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
+
+# Your public wallet address
 dex_wallet_address = "0x1234567890123456789012345678901234567890"
-dex_private_key = "0xdeadbeef"
-dex_protocol_type = "uniswap" #0x 
+# Your private wallet key
+dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+
+# Protocol used option are uniswap, 0x and 1inch
+dex_protocol_type = "uniswap"
+# Version of the protocol
 dex_protocol_version = 2
+
+# RPC connectivity
 dex_rpc = "https://rpc.ankr.com/eth"
+
+# 0x API required only if
+# dex_protocol_type = "0x"
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
-trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-dex_trading_slippage = 2
-dex_block_explorer_url = "https://api.etherscan.io/api?"
-dex_block_explorer_api =  "11111111111111111"
-dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" 
+
+# DEX router address to use
+dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+# DEX ABI to use in case you have no explorer setup
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
+# DEX factory address to use
 dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+# DEX ABI to use in case you have no explorer setup
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-dex_notify_invalid_token = true
+
+# Block Explorer API for ABI search 
+dex_block_explorer_url = "https://api.etherscan.io/api?"
+dex_block_explorer_api =  "798437294880920392"
 headers = {User-Agent= 'Mozilla/5.0'}
+
+# token list using uniswap tokenlist format
+# https://github.com/mraniki/tokenlist
+# this can be used to avoid using coingecko
+# or be used for niche token not listed anywhere
+# or for testnet
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
+# Address of your trading asset for your trading - USDT
+trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+
+# Slippage %
+# 2 = 2% slippage
+dex_trading_slippage = 2
+
+# Toggle to remove notification if 
+# a token doesn't exist in the token list
+# or in coingecko
+dex_notify_invalid_token = true
 
 ########################################
 ###        TALKYTREND SETTINGS       ###
 ########################################
 
+# Module Enable/Disable
 talkytrend_enabled = true
+
+# help message listing the commands available
 talkytrend_commands = "📺 /live\n📰 /news\n📊 /trend"
+
+# bot command for tv feed
 bot_command_tv = "live"
+# bot command for trading view trend
 bot_command_trend = "trend"
+# bot command for news feeds
 bot_command_news = "news"
+
+# Signals Enable/Disable
 enable_signals = true
+# instrument monitored under trend
+# use https://tvdb.brianthe.dev
+# to update the list for your instrument
 assets = [
     { id ="EURUSD", exchange='FX_IDC',screener="forex"},
-    { id ="BTCUSD",exchange="BINANCE",screener="crypto"},
+    { id ="BTCUSD", exchange='BINANCE',screener="crypto"},
 ]
-enable_events = true
-economic_calendar = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
-fomc_decision_date = ["2023-09-20","2023-11-01","2023-12-13"]
-live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
-enable_feed = true
-news_feed="https://www.dailyfx.com/feeds/market-news"
 
+enable_yfinance = true
+# yahoo finance ticker reference
+# to retrieve company news
+ticker_reference = "MSFT"
+
+# Events Enable/Disable
+enable_events = true
+# Events calendar
+economic_calendar = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
+# Adhoc date to add in event tracker
+fomc_decision_date = ["2023-09-20","2023-11-01","2023-12-13"]
+
+# TV url
+live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
+
+# Feeds Enable/Disable
+enable_feed = true
+# Feeds RSS url
+news_feed = "https://www.dailyfx.com/feeds/market-news"
+
+# News Enable/Disable
+enable_news = false
+# News API key
+news_api_key = ""
+# News API endpoint
+news_url="https://gnews.io/api/v4/top-headlines?category=business&lang=en&max=2&apikey="
 
 ########################################
 ###     END OF DEFAULT SETTINGS      ###
 ########################################
-
-
-
-
-
-                                        
-# _   _                           _   ___  
-#| | | |                         | | |__ \ 
-#| |_| |__   ___    ___ _ __   __| |    )|
-#| __| '_ \ / _ \  / _ \ '_ \ / _` |   / / 
-#| |_| | | |  __/ |  __/ | | | (_| |  |_|  
-# \__|_| |_|\___|  \___|_| |_|\__,_|  (_)  
-########################################     
-#
-#
-#
-#
-#         __     __       
-#         \ \   / /       
-#          \ \_/ /__  ___ 
-#           \   / _ \/ __|
-#            | |  __/\__ \
-#            |_|\___||___/
-#
-#
-#
-#                   
-########################################     
