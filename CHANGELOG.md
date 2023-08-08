@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.23 (2023-08-08)
+
+### Fix
+
+* 📝 corrected intersphinx ([`728dba0`](https://github.com/mraniki/tt/commit/728dba0945e09f4cf4be24b86ebdaae64f5c0ee1))
+* 📝 remove pyscript test ([`09ad5ea`](https://github.com/mraniki/tt/commit/09ad5eaf7d11033fc550b06b0fd7f3fbd71d1bbb))
+* ⚗️ pyscript test ([`56edece`](https://github.com/mraniki/tt/commit/56edecedc4b0b3130ec257b8f50cf53ccb40ce5e))
+
 ## v4.8.22 (2023-08-07)
 
 ### Fix
