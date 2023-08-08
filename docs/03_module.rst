@@ -12,7 +12,7 @@ iamlistening
 
 :doc:`iamlistening:index`
 
-.. automodule:: iamlistening.main
+.. autoclass:: iamlistening.main.Listener
     :members:
     :undoc-members:
 
@@ -41,6 +41,7 @@ are used to interact with the trading platform.
 TalkyTrader Module
 ==================
 
+
 .. autosummary::
    :toctree: _autosummary
    :template: custom-module-template.rst
@@ -48,6 +49,7 @@ TalkyTrader Module
 
    tt
    
+
    
    
 
