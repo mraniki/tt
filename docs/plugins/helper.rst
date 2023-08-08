@@ -5,12 +5,6 @@ helper
 Provide multiple function such as giving the list of 
 available command, network ping or restarting the bot
 
-.. toctree::
-   :maxdepth: 2
-   
-   plugins/helper
-
-
 Function
 =====
 
@@ -38,4 +32,7 @@ Restart
 Module Reference
 ================
 
-.. automodule::tt.plugins.default_plugins.helper_plugin
+.. automodule:: tt.plugins.default_plugins.helper_plugin
+    :members:
+    :undoc-members:
+    
