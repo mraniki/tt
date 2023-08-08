@@ -10,7 +10,14 @@ from tt.utils import __version__, send_notification
 
 
 class HelperPlugin(BasePlugin):
-    """ Helper Plugin """
+    """ 
+    Helper Plugin 
+    Provide multiple function 
+    such as giving the list of 
+    available command, network ping 
+    or restarting the bot
+    
+    """
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
         super().__init__()
@@ -53,31 +60,53 @@ class HelperPlugin(BasePlugin):
                 await self.send_notification(f"{await function()}")
 
     async def get_helper_help(self):
-        """Help Message"""
+        """
+        Help Message
+        :file:`/help` command to 
+        return the list of 
+        available command
+        """
         return f"{self.help_message}"
 
     async def get_helper_info(self):
-        """Help Message"""
+        """
+        return 
+        TalkyTrader version
+        """
         return self.version
 
     async def get_helper_network(self):
-        """Help Message"""
+        """
+        :file:`/network` command to retrieve the network 
+        ping latency and 
+        the bot IP address
+        """
         ping_result = ping3.ping(settings.ping, unit='ms')
         ping_result = round(ping_result, 2) if ping_result is not None else 0
         return (f"️{self.host_ip}\n"
                 f"🏓 {ping_result}\n")
 
     async def trading_switch_command(self):
-        """Trading switch command"""
+        """
+        Trading switch command
+        :file:`/trading` command 
+        to turn off or on the 
+        trading capability
+        """
         settings.trading_enabled = not settings.trading_enabled
         return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
 
     async def restart(self):
-        """Restart Bot """
+        """
+        :file:`/restart` command 
+        to restart the bot
+        """
         os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
     def get_host_ip(self):
-        """Returns host IP """
+        """
+        Returns bot IP 
+        """
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect((settings.ping, 80))
         ip_address = s.getsockname()[0]

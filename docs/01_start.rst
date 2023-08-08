@@ -27,7 +27,6 @@ Setup your config
 Create your config file settings.toml or use env variables. 
 Refer to  :doc:`talky:02_config` for details.
 
-example:
 
 .. literalinclude:: ../examples/example_settings.toml
 

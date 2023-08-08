@@ -26,8 +26,8 @@ Config will load:
     - user secrets: .secrets.toml
 
 Your settings should be setup in settings.toml, .secrets.toml, .env or environment variable.
-Settings.toml or .env can be located in :file:`/app/settings.toml` or :file:`/app/.env` for docker.
-If deployed locally, place your file in :file:`/tt/` folder.
+    Settings.toml or .env can be located in :file:`/app/settings.toml` or :file:`/app/.env` for docker.
+    If deployed locally, place your file in :file:`/tt/` folder.
 
 
 Talky Settings
@@ -45,7 +45,6 @@ Settings Example
 
 Settings.toml
 -------------
-example:
 
 .. literalinclude:: ../examples/example_settings.toml
    :linenos:
@@ -53,8 +52,6 @@ example:
 
 .env or ENV VARS
 ------------------
-
-place the .env at
 
 .. literalinclude:: ../examples/example.env
    :linenos:
