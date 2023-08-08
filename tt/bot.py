@@ -3,9 +3,11 @@ TalkyTrader 🪙🗿
 ================
 
 Bot Launcher and API
+
 Talky Trader is an app 
 built with FastAPI 
 https://fastapi.tiangolo.com
+
 It allows you to connect 
 to a messaging chat platform 
 to interact with trading module.
