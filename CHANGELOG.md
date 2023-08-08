@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.24 (2023-08-08)
+
+### Fix
+
+* :memo: improve documentation ([`8581b46`](https://github.com/mraniki/tt/commit/8581b46bd30beca2eb01fe95a2020aa2d8fe9abf))
+* :memo: ([`3754910`](https://github.com/mraniki/tt/commit/3754910eb550884cc575fbb458ad1d0facdca083))
+* :bug: :white_check_mark: Unit Test ([`3488c4b`](https://github.com/mraniki/tt/commit/3488c4ba60bb105db3ae48bd59413dc0fb44e0ed))
+* Update Requirements ([`9949972`](https://github.com/mraniki/tt/commit/9949972e9290acb39754ef67add78fb6d4cdfa12))
+* 🐛 ✅ Unit Test ([`77ee435`](https://github.com/mraniki/tt/commit/77ee43585c1794e3975191411e5cdc4616f09a96))
+* Update Requirements ([`d02ad0b`](https://github.com/mraniki/tt/commit/d02ad0b8a721b8f22168421a6eb116a133286a96))
+* 📝 Updated Settings documentation ([`af99d90`](https://github.com/mraniki/tt/commit/af99d90150206fc33087076056ebb9fb8a47450c))
+* Update Requirements ([`ddeee64`](https://github.com/mraniki/tt/commit/ddeee6417a96f969f874d4b822a92c04006ed5ba))
+* Update Requirements ([`2e5cc76`](https://github.com/mraniki/tt/commit/2e5cc768880ddb608151af337a1d3074aca552a7))
+
 ## v4.8.23 (2023-08-08)
 
 ### Fix
