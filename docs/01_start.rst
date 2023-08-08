@@ -60,6 +60,3 @@ then start your bot:
    python3 bot.py
 
 
-.. raw:: html
-
-   <br>
