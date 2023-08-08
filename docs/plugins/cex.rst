@@ -11,5 +11,7 @@ User Guide
 Module Reference
 ================
 
-:doc:`tt.plugins.default_plugins.cex_exchange_plugin`
+.. automodule:: tt.plugins.default_plugins.cex_exchange_plugin
+    :members:
+    :undoc-members:
 
