@@ -35,7 +35,8 @@ async def send_notification(msg):
 
 async def run_bot():
     """
-    🤖 Run the chat bot & the plugins.
+    🤖 Run the chat bot & the plugins
+    via an asyncio loop.
 
     Returns:
         None
@@ -55,7 +56,7 @@ async def start_plugins(plugin_manager):
     Returns:
         None
 
-    Refer to chat manager for the pl
+    Refer to chat manager for plugin info
 
     """
     if settings.plugin_enabled:

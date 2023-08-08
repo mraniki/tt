@@ -7,17 +7,12 @@ Community Plugins
 
 
 Build Your Plugin
-================
+=================
 
 Plugin example:
 
+
 .. literalinclude:: ../tt/plugins/default_plugins/example_plugin.py
+   :linenos:
 
-
-
-Use your Plugin
-===============
-
-
-:doc:`community:index`
 
