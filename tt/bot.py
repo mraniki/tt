@@ -18,7 +18,13 @@ app = FastAPI(title="TALKYTRADER")
 
 @app.on_event("startup")
 async def start_bot_task():
-    """⛓️🤖BOT"""
+    """
+    ⛓️🤖BOT
+
+    Run the talky bot on startup
+    asynchronously
+
+    """
     event_loop = asyncio.get_event_loop()
     event_loop.create_task(run_bot())
 

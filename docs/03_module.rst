@@ -2,6 +2,11 @@
 TalkyTrader
 ===========
 
+.. automodule:: tt.bot
+    :members:
+    :undoc-members:
+    
+
 API EndPoint
 ============
 
@@ -52,11 +57,9 @@ Plugins are the core of Talky Trader, they are loaded at startup and
 are used to interact with the trading platform.
 
 
-.. toctree::
-   :maxdepth: 2
-   
-   plugins
-
+.. automodule:: tt.plugins
+    :members:
+    :undoc-members:
 
 
 TalkyTrader Module Reference
@@ -68,3 +71,6 @@ TalkyTrader Module Reference
    :recursive:
 
    tt
+   
+  
+   
