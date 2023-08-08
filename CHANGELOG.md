@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.25 (2023-08-08)
+
+### Fix
+
+* ⬆️(deps): update dependency ruff to ^0.0.283 ([`c0e5f7c`](https://github.com/mraniki/tt/commit/c0e5f7c6ff6006a9c72f13760bae7245e9fa72c1))
+
 ## v4.8.24 (2023-08-08)
 
 ### Fix
