@@ -15,8 +15,11 @@ Exchange Credentials
 ====================
 
 Get your DEX or CEX credentials:
+
 - DEX wallet address and private key: :doc:`talky:plugins/dex`
+
 - CEX API Keys: :doc:`talky:plugins/cex`
+
 
 Setup your config
 =================
