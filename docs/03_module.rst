@@ -5,7 +5,6 @@ TalkyTrader
 .. automodule:: tt.bot
     :members:
     :undoc-members:
-    
 
 
 iamlistening
@@ -13,11 +12,18 @@ iamlistening
 
 :doc:`iamlistening:index`
 
+.. automodule:: iamlistening.main
+    :members:
+    :undoc-members:
 
 FindMyOrder
 ===========
 
 :doc:`findmyorder:index`
+
+.. autoclass:: findmyorder.main.FindMyOrder
+    :members:
+    :undoc-members:
 
 
 Plugins
@@ -42,5 +48,6 @@ TalkyTrader Module
 
    tt
    
-  
    
+   
+
