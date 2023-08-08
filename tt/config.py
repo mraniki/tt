@@ -1,7 +1,9 @@
 """
- TalkyTrader  Config
-    Used for Logging, Scheduleing and Settings
+TalkyTrader Config
+Used for Logging, 
+Scheduleing and Settings
     🧐⏱️⚙️
+
 """
 
 import logging
@@ -13,7 +15,7 @@ from dynaconf import Dynaconf
 from loguru import logger as loguru_logger
 
 ########################################
-###            ⚙️ Settings            ###
+###           ⚙️ Settings            ###
 ########################################
 
 ROOT = os.path.dirname(__file__)

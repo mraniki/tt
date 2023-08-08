@@ -1,7 +1,17 @@
 """
 TalkyTrader 🪙🗿
-====================
+================
+
 Bot Launcher and API
+
+Talky Trader is an app 
+built with FastAPI 
+https://fastapi.tiangolo.com
+
+It allows you to connect 
+to a messaging chat platform 
+to interact with trading module.
+
 """
 
 import asyncio
@@ -36,7 +46,10 @@ async def root():
 
 @app.get("/health")
 async def health_check():
-    """ health check """
+    """ 
+    End point to know if 
+    the API is up and running
+    """
     return __version__
 
 
@@ -45,6 +58,14 @@ async def webhook(request: Request):
     """ 
     Webhook endpoint to receive webhook requests
     with option to forward the data to another endpoint.
+    Webhook endpoint to 
+    send order signal generated 
+    via http://tradingview.com 
+    or anyother platform. 
+    Endpoint is 
+    :file:`/webhook/{settings.webhook_secret}` 
+    so in trading view you can add: 
+    https://YOURIPorDOMAIN/webhook/123456
     """
     data = await request.body()
     await send_notification(data)

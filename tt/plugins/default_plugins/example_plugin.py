@@ -7,7 +7,7 @@ from tt.utils import send_notification
 
 #from myclass import MyClass
 
-
+ 
 class ExamplePlugin(BasePlugin):
     """Example Plugin
     Initialization of imported class MyClass
