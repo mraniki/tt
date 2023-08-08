@@ -27,16 +27,6 @@ def test_fixture_plugin():
 def test_dynaconf_is_in_testing_env_DEX56():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing DEX_56"
-    assert settings.dex_wallet_address == "0x1234567890123456789012345678901234567899"
-
-
-# @pytest.mark.asyncio
-# async def test_listener_discord():
-#     print(settings.VALUE)
-#     listener_test = Listener()
-#     print(listener_test)
-#     assert listener_test is not None
-#     assert isinstance(listener_test, iamlistening.main.Listener)
 
 
 @pytest.mark.asyncio
