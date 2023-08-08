@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v4.8.26 (2023-08-08)
+
+### Fix
+
+* Update Requirements ([`99ab038`](https://github.com/mraniki/tt/commit/99ab038929cbf5b059c135152f6cf2c66a9aca75))
+* :rotating_light:linter ([`8b9b680`](https://github.com/mraniki/tt/commit/8b9b680eef4b2f533d7c97c8ef06cffa25cabb5b))
+* :memo: improve documentation ([`e0e6101`](https://github.com/mraniki/tt/commit/e0e61014b420cb5b5bc777def9a60b31e1a42422))
+* :memo: improve documentation ([`43c75c1`](https://github.com/mraniki/tt/commit/43c75c1303777c69463a0b98bec28db6174bb9e9))
+* :memo: improve documentation ([`ba3abdf`](https://github.com/mraniki/tt/commit/ba3abdf7f8f8ba3300d92055437b97a7b1e95947))
+* :memo: improve documentation ([`2f83a0b`](https://github.com/mraniki/tt/commit/2f83a0b6471dc9407a64b5fba2c3168446c2c1d2))
+* :memo: improve documentation ([`ed80ac7`](https://github.com/mraniki/tt/commit/ed80ac74ada5cffbfd31f42d7f192200e2768eed))
+* Update Requirements ([`25f6d20`](https://github.com/mraniki/tt/commit/25f6d20a170a5385374ac15a6317e58c8f00eec9))
+* :bug: typo in docs ([`9e377ac`](https://github.com/mraniki/tt/commit/9e377ac6687bad121b7d40f71157a9bde94c7ebd))
+
 ## v4.8.25 (2023-08-08)
 
 ### Fix
