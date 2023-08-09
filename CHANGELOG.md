@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.3 (2023-08-09)
+
+### Fix
+
+* Update Requirements ([`2d0059b`](https://github.com/mraniki/tt/commit/2d0059b76911d189cfb2dd3bbe3952891205ac0b))
+* ⬆️(deps): update dependency ruff to ^0.0.284 ([`a403557`](https://github.com/mraniki/tt/commit/a40355705a0b72f58e4332e2b6bb25b9b6693f01))
+
 ## v4.9.2 (2023-08-09)
 
 ### Fix
