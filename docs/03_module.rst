@@ -22,7 +22,7 @@ TalkyTrader Module
 ==================
 
 
-.. automodule:: tt
+.. automodule:: tt.utils
     :members:
     :undoc-members:
    
