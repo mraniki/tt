@@ -57,6 +57,7 @@ intersphinx_mapping = {
     "talkytrend": ("https://talkytrend.readthedocs.io/en/latest", None),
     "myllm": ("https://myllm.readthedocs.io/en/latest", None),
     "community": ("https://tt-plugins.readthedocs.io/en/latest", None),
+    "cefi": ("https://cefi.readthedocs.io/en/latest", None),
 }
 
 intersphinx_disabled_reftypes = ["*"]
@@ -71,6 +72,7 @@ hoverxref_intersphinx = [
     'talky',
     'findmyorder',
     'dxsp',
+    'cefi',
     'iamlistening',
     'talkytrend',
     'myllm',
