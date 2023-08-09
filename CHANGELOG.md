@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.4 (2023-08-09)
+
+### Fix
+
+* Update Requirements ([`a95efa4`](https://github.com/mraniki/tt/commit/a95efa4ba8d937a056975fdccf1d1155a208ce3b))
+* :white_check_mark: Refactor test_send_notification function ([`567f240`](https://github.com/mraniki/tt/commit/567f2402a2d541f3c26a131736bc2ce4857650fa))
+* Update Requirements ([`c06fb40`](https://github.com/mraniki/tt/commit/c06fb40dbab9b389a8a723f8b3bc9e9ad84e1f2e))
+* :wrench: formatting and sorting ([`3e5ade1`](https://github.com/mraniki/tt/commit/3e5ade199624d6191ff3b0b6f754da45442cc0a4))
+
 ## v4.9.3 (2023-08-09)
 
 ### Fix
