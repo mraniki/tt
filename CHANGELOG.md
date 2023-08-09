@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.2 (2023-08-09)
+
+### Fix
+
+* :white_check_mark::memo: ([`d657731`](https://github.com/mraniki/tt/commit/d6577317f29a3d5c2e3b493892e672da77d6b9f7))
+* Update Requirements ([`9622428`](https://github.com/mraniki/tt/commit/96224289b5339444b0e63602a17b7c4ae0084a10))
+* :memo: docs ([`f434462`](https://github.com/mraniki/tt/commit/f434462d82e110b11746d1b77419e4c11ccdca0a))
+* 🚨 ([`6ab1b94`](https://github.com/mraniki/tt/commit/6ab1b94da91071cd9af7f76b99f69a8d00f0cf69))
+* 🔧 ([`b3a8595`](https://github.com/mraniki/tt/commit/b3a8595085455b30186e71627dbbaf5c77bdbc7a))
+
 ## v4.9.1 (2023-08-09)
 
 ### Fix
