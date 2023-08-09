@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.1 (2023-08-09)
+
+### Fix
+
+* Update Requirements ([`1d177ae`](https://github.com/mraniki/tt/commit/1d177ae55c336a4101d7914859ddafdd9f7da465))
+* :memo: docs ([`beaaaa4`](https://github.com/mraniki/tt/commit/beaaaa465d9bb76fd87bb4bf8abd2da781f19984))
+
 ## v4.9.0 (2023-08-09)
 
 ### Feature
