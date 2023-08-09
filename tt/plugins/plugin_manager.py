@@ -9,11 +9,20 @@ from tt.config import logger, scheduler, settings
 
 class PluginManager:
     """
-    🔌 Plugin Manager use to load, start and 
-    dispatch message to the plugins
+    🔌 Plugins are 
+    the core of Talky Trader, 
+    they are loaded at startup,
+    to interact with the 
+    trading platform.
+    
+    Plugin Manager is used 
+    to load, start and 
+    dispatch message 
+    to the plugins
     
     Args:
-        plugin_directory (str): Directory of plugins
+        plugin_directory (str): Directory 
+        of plugins
 
     Returns:
         None
@@ -120,8 +129,10 @@ class PluginManager:
 class BasePlugin:
     """
     ⚡ Base Plugin Class
-    use to be inherited by Talky Plugins
-    especially the scheduling, notification and
+    use to be inherited by 
+    Talky Plugins
+    especially the scheduling, 
+    notification and
     message handling.
 
     Args:
@@ -130,9 +141,8 @@ class BasePlugin:
     Returns:
         None
 
-
-
     """
+ 
     def __init__(self):
         self.enabled = False
         self.scheduler = scheduler
@@ -195,8 +205,11 @@ class BasePlugin:
         user_timezone="UTC",
         function=None): 
         """
-        Handles task cron scheduling for notification 
-        Monday to Friday at 6AM, 12PM and 6PM UTC
+        Handles task cron scheduling 
+        for notification 
+        default set to 
+        Monday to Friday 
+        at 6AM, 12PM and 6PM UTC
         
         Args:
             user_name (str): User name
