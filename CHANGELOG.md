@@ -2,6 +2,21 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.0 (2023-08-09)
+
+### Feature
+
+* :sparkles:adding cefi module ([`3c3f410`](https://github.com/mraniki/tt/commit/3c3f4102df6967314d075a4fe81304acb07b52c0))
+
+### Fix
+
+* ✅ Unit Test ([`c159c08`](https://github.com/mraniki/tt/commit/c159c082b1e6eea9a7a3aef3f4f5ddf7d2053d5f))
+* Update Requirements ([`c262e8e`](https://github.com/mraniki/tt/commit/c262e8e48e68eeaa34d4a358544de22083b45782))
+* ✅ Unit Test ([`4774af5`](https://github.com/mraniki/tt/commit/4774af5fdcf8545e08262c8c58e4ca8e25d896b7))
+* Update Requirements ([`0523f05`](https://github.com/mraniki/tt/commit/0523f0519dc93e4fba0f7b145866d1e13e9ff70f))
+* 📝 ✅ Unit Test  and docs ([`92f173b`](https://github.com/mraniki/tt/commit/92f173bf5fb35d90305294af3fc5e34c0b8f8514))
+* Update Requirements ([`3f42f28`](https://github.com/mraniki/tt/commit/3f42f2847351d5d5353dae8885d98bee9d3838cd))
+
 ## v4.8.26 (2023-08-08)
 
 ### Fix
