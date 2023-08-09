@@ -1,5 +1,6 @@
 #Dynaconf
 settings.toml
+settings.local.toml
 .secrets.*
 
 #old db config
