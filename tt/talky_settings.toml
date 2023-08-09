@@ -159,63 +159,6 @@ example_plugin_enabled = false
 # Not yet implemented
 user_plugins_allowed = false
 
-########################################
-###          HELPER SETTINGS         ###
-########################################
-
-# Helper Enable/Disable
-helper_enabled = true
-# Help Message
-helper_commands = "🔀 /trading\n🔁 /restart\n🕸️ /network"
-# Command for switch trading on or off
-bot_command_trading = "trading"
-# Command to retrieve network info
-# such as latency ping and IP address of
-# the bot
-bot_command_network = "network"
-# Command to restart the bot
-bot_command_restart = "restart"
-# URL endpoint for the latency 
-# ping. Used for testping testing
-ping = "8.8.8.8"
-
-########################################
-###           WWW SETTINGS           ###
-########################################
-
-# WWW Plugin Enable/Disable
-www_enabled = false
-# Help Message
-www_commands = "📷 /src\n"
-# Command to get screenshot
-bot_command_screenshot = "scr"
-www_url = "https://apod.nasa.gov/apod/astropix.html"
-
-########################################
-###           LLM SETTINGS           ###
-########################################
-
-# Module Enable/Disable
-llm_enabled = true
-# LLM Model to use
-llm_model = "gpt-4"
-# LLM Provider
-llm_provider = "g4f.Provider.Providers.ChatgptAi"
-# LLM Host
-llm_host = ""
-# LLM Auth Token
-llm_auth_token = ""
-# SERP API Key 
-llm_serpapi-key = ""
-#default prompt if prompt is not given
-llm_default_prompt = "write a tiny story"
-# help message listing the commands
-# available
-llm_commands = "🦾 /qq\n"
-# command for questions
-bot_command_question = "qq"
-# command for topic/conversation
-bot_command_topic = "tq"
 
 ########################################
 ###        FINDMYORDER SETTINGS      ###
@@ -282,6 +225,8 @@ cex_testmode = true
 cex_defaulttype = "SPOT"
 # Order type: Market, Limit, etc.
 cex_ordertype = "MARKET"
+# Quote based asset for trading
+trading_asset = "USDT"
 
 ########################################
 ###           DXSP SETTINGS          ###
@@ -347,6 +292,64 @@ dex_trading_slippage = 2
 dex_notify_invalid_token = true
 
 ########################################
+###          HELPER SETTINGS         ###
+########################################
+
+# Helper Enable/Disable
+helper_enabled = true
+# Help Message
+helper_commands = "🔀 /trading\n🔁 /restart\n🕸️ /network"
+# Command for switch trading on or off
+bot_command_trading = "trading"
+# Command to retrieve network info
+# such as latency ping and IP address of
+# the bot
+bot_command_network = "network"
+# Command to restart the bot
+bot_command_restart = "restart"
+# URL endpoint for the latency 
+# ping. Used for testping testing
+ping = "8.8.8.8"
+
+########################################
+###           WWW SETTINGS           ###
+########################################
+
+# WWW Plugin Enable/Disable
+www_enabled = false
+# Help Message
+www_commands = "📷 /src\n"
+# Command to get screenshot
+bot_command_screenshot = "scr"
+www_url = "https://apod.nasa.gov/apod/astropix.html"
+
+########################################
+###           LLM SETTINGS           ###
+########################################
+
+# Module Enable/Disable
+llm_enabled = true
+# LLM Model to use
+llm_model = "gpt-4"
+# LLM Provider
+llm_provider = "g4f.Provider.Providers.ChatgptAi"
+# LLM Host
+llm_host = ""
+# LLM Auth Token
+llm_auth_token = ""
+# SERP API Key 
+llm_serpapi-key = ""
+#default prompt if prompt is not given
+llm_default_prompt = "write a tiny story"
+# help message listing the commands
+# available
+llm_commands = "🦾 /qq\n"
+# command for questions
+bot_command_question = "qq"
+# command for topic/conversation
+bot_command_topic = "tq"
+
+########################################
 ###        TALKYTREND SETTINGS       ###
 ########################################
 
@@ -376,7 +379,8 @@ assets = [
 enable_yfinance = true
 # yahoo finance ticker reference
 # to retrieve company news
-ticker_reference = "MSFT"
+# or index news
+ticker_reference = "^GSPC"
 
 # Events Enable/Disable
 enable_events = true
