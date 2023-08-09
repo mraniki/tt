@@ -12,7 +12,7 @@ User Guide
 Plugin Reference
 ================
 
-.. automodule:: tt.plugins.default_plugins.myllm_plugin
+.. automodule:: tt.plugins.default_plugins.llm_plugin
     :members:
     :undoc-members:
 
