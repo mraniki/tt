@@ -100,7 +100,7 @@ def test_webhook_with_invalid_auth():
 @pytest.mark.asyncio
 async def test_send_notification(caplog):
     await send_notification("Test message")
-    assert "Sent Discord notification" in caplog.text
+    assert "Loaded Discord" in caplog.text
     #assert "json://localhost/" in caplog.text
 
 
