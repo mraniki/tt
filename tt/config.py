@@ -25,15 +25,15 @@ settings = Dynaconf(
     root_path=os.path.dirname(ROOT),
     load_dotenv=True,
     settings_files=[
-        #load talky default
+        # load talky default
         os.path.join(ROOT, "talky_settings.toml"),
-        #load default from library in case not in talky default
+        # load default from library in case not in talky default
         "default_settings.toml",
-        #load user default
-        'settings.toml',
-        #load user secret
-        '.secrets.toml'
-        ],
+        # load user default
+        "settings.toml",
+        # load user secret
+        ".secrets.toml",
+    ],
     environments=True,
     merge_enabled=True,
     # merge=True,
@@ -52,6 +52,7 @@ scheduler = AsyncIOScheduler()
 ###           🧐 Logging             ###
 ########################################
 
+
 class InterceptHandler(logging.Handler):
     def emit(self, record):
         # Get corresponding Loguru level if it exists.
@@ -66,21 +67,22 @@ class InterceptHandler(logging.Handler):
             frame = frame.f_back
             depth += 1
 
-        logger.opt(
-            depth=depth, exception=record.exc_info).log(
-                level, record.getMessage())
+        logger.opt(depth=depth, exception=record.exc_info).log(
+            level, record.getMessage()
+        )
+
 
 def loguru_setup():
     loguru_logger.remove()
     # log.configure(**config)
     log_filters = {
-    "discord": "ERROR",
-    "telethon": "ERROR",
-    # "web3": "ERROR",
-    # "apprise": "ERROR",
-    # "urllib3": "ERROR",
-    "asyncz": "ERROR",
-        }
+        "discord": "ERROR",
+        "telethon": "ERROR",
+        # "web3": "ERROR",
+        # "apprise": "ERROR",
+        # "urllib3": "ERROR",
+        "asyncz": "ERROR",
+    }
     logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
     loguru_logger.add(
         sink=sys.stdout,
@@ -90,5 +92,5 @@ def loguru_setup():
 
     return loguru_logger
 
-logger = loguru_setup()
 
+logger = loguru_setup()

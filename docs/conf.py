@@ -85,9 +85,13 @@ hoverxref_intersphinx = [
 autoclass_content = 'both'
 autodoc_inherit_docstrings = True 
 set_type_checking_flag = True 
-autodoc_member_order = 'bysource'
 add_module_names = True
-
+autodoc_default_options = {
+    'members': True,
+    'member-order': 'bysource',
+    'special-members': '__init__',
+    'undoc-members': True
+    }
 # -- autoapi -------------------
 
 # autoapi_type = "python"
