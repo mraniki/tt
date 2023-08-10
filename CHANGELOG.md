@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.7 (2023-08-10)
+
+### Fix
+
+* ✅ Unit Test ([`d743a61`](https://github.com/mraniki/tt/commit/d743a61092421c1af1e450ab7bf9ffdf6bf7cca2))
+* ✅ Unit Test ([`9577dd2`](https://github.com/mraniki/tt/commit/9577dd2402df6316561a23fe1eea6acf66eecbcd))
+* Update Requirements ([`92f6bbc`](https://github.com/mraniki/tt/commit/92f6bbc288c7c1b9e115216a3fefa73810f826a8))
+* ✅ Unit Test ([`a42c046`](https://github.com/mraniki/tt/commit/a42c0466e3fca0b82fe1fa6c1101e30924d5f636))
+* 🎨 ([`1b9c749`](https://github.com/mraniki/tt/commit/1b9c749e2d1152e4f8d6892d6050993dde81b8ac))
+* 🎨 Moving example and www to user based plugins ([`67983fb`](https://github.com/mraniki/tt/commit/67983fb1228aae47be5463c886ad2a535a9e47a5))
+* 📝 docs ([`1acf11a`](https://github.com/mraniki/tt/commit/1acf11a036a5e162f64882750641ac786117d0f5))
+
 ## v4.9.6 (2023-08-10)
 
 ### Fix
