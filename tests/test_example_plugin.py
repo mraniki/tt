@@ -5,9 +5,8 @@ import pytest
 from asyncz.triggers import CronTrigger
 
 from tt.config import settings
+from tt.plugins.default_plugins.example_plugin import ExamplePlugin
 from tt.plugins.plugin_manager import BasePlugin, PluginManager
-
-from .example_plugin import ExamplePlugin
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -26,7 +25,6 @@ def message_processor_fixture():
 def test_fixture_plugin():
     return ExamplePlugin()
 
-
 @pytest.mark.asyncio
 async def test_plugin_manager():
     plugin_manager = PluginManager()
@@ -36,14 +34,13 @@ async def test_plugin_manager():
 @pytest.mark.asyncio
 async def test_baseplugin_class():
     plugin = BasePlugin()
-    assert callable(plugin.start)
+    assert callable(plugin.start) 
     assert callable(plugin.stop)
     assert callable(plugin.send_notification)
     assert callable(plugin.should_handle)
     assert callable(plugin.handle_message)
-    assert callable(plugin.plugin_notify_cron_task)
-    assert callable(plugin.plugin_notify_schedule_task)
-
+    assert callable(plugin.plugin_notify_cron_task) 
+    assert callable(plugin.plugin_notify_schedule_task) 
 
 @pytest.mark.asyncio
 async def test_baseplugin():
@@ -56,10 +53,11 @@ async def test_baseplugin():
 
 @pytest.mark.asyncio
 async def test_load_one_plugin():
-    plugin_module = importlib.import_module("tt.plugins.default_plugins.example_plugin")
+    plugin_module = importlib.import_module(
+        'tt.plugins.default_plugins.example_plugin')
     plugin_manager = PluginManager()
     assert plugin_manager is not None
-    plugin_manager.load_plugin(plugin_module, "example_plugin")
+    plugin_manager.load_plugin(plugin_module,'example_plugin')
     assert plugin_manager.plugins is not None
     assert len(plugin_manager.plugins) >= 1
     assert isinstance(plugin_manager.plugins[0], ExamplePlugin)
@@ -75,36 +73,36 @@ async def test_load_plugins(caplog):
     print(plugin_manager.plugins)
     assert plugin_manager.plugins is not None
     await plugin_manager.start_all_plugins()
-    assert "Loading plugins from" in caplog.text
+    assert 'Loading plugins from' in caplog.text
 
 
 @pytest.mark.asyncio
 async def test_start_plugin(caplog):
-    plugin_module = importlib.import_module("tt.plugins.default_plugins.example_plugin")
+    plugin_module = importlib.import_module(
+        'tt.plugins.default_plugins.example_plugin')
     plugin_manager = PluginManager()
     print(plugin_manager)
     assert plugin_manager is not None
-    plugin_manager.load_plugin(plugin_module, "example_plugin")
+    plugin_manager.load_plugin(plugin_module,'example_plugin')
     example_plugin = ExamplePlugin()
     await plugin_manager.start_plugin(example_plugin)
     print(caplog.text)
-    assert "plugin started" in caplog.text
-    assert "plugin enabled" in caplog.text
+    assert 'plugin started' in caplog.text
+    assert 'plugin enabled' in caplog.text
 
 
 @pytest.mark.asyncio
 async def test_plugin(plugin, plugin_manager):
     handle_message = AsyncMock()
     await plugin_manager.process_message(
-        f"{settings.bot_prefix}{settings.bot_command_help}"
-    )
+        f"{settings.bot_prefix}{settings.bot_command_help}")
     assert plugin.should_handle("any message") is True
     handle_message.assert_awaited_once
 
 
 @pytest.mark.asyncio
 async def test_plugin_notification(plugin, plugin_manager):
-    """Test notification"""
+    """Test notification """
     send_notification = AsyncMock()
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
     send_notification.assert_awaited_once
@@ -115,23 +113,27 @@ async def test_plugin_notify_cron_task():
     plugin = BasePlugin()
     plugin.scheduler = AsyncMock()
     plugin.send_notification = AsyncMock()
-    function_result = "Test Result"
+    function_result = 'Test Result'
     function_mock = AsyncMock(return_value=function_result)
 
     await plugin.plugin_notify_cron_task(
-        user_name="Test User",
-        user_day_of_week="mon-fri",
-        user_hours="6,12,18",
-        user_timezone="UTC",
-        function=function_mock,
+        user_name='Test User',
+        user_day_of_week='mon-fri',
+        user_hours='6,12,18',
+        user_timezone='UTC',
+        function=function_mock
     )
 
     plugin.scheduler.add_task.assert_called_once_with(
-        name="Test User",
+        name='Test User',
         fn=plugin.send_notification,
         args=[function_result],
-        trigger=CronTrigger(day_of_week="mon-fri", hour="6,12,18", timezone="UTC"),
-        is_enabled=True,
+        trigger=CronTrigger(
+            day_of_week='mon-fri',
+            hour='6,12,18',
+            timezone='UTC'
+        ),
+        is_enabled=True
     )
 
 
@@ -140,10 +142,13 @@ async def test_plugin_notify_schedule_task():
     plugin = BasePlugin()
     plugin.scheduler = AsyncMock()
     plugin.send_notification = AsyncMock()
-    function_result = "Test Result"
+    function_result = 'Test Result'
     function_mock = AsyncMock(return_value=function_result)
     await plugin.plugin_notify_schedule_task(
-        user_name="Test User", frequency=8, function=function_mock
+        user_name='Test User',
+        frequency=8,
+        function=function_mock
     )
 
     plugin.scheduler.add_task.assert_awaited_once
+
