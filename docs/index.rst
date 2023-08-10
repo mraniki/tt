@@ -1,6 +1,5 @@
 .. _talky_index:
 
-
 ===========
 TalkyTrader
 ===========
@@ -21,8 +20,6 @@ TalkyTrader
    <a href="https://hub.docker.com/r/mraniki/tt"><img src="https://img.shields.io/docker/pulls/mraniki/tt?style=for-the-badge"></a>
    <br>
    </p>
-
-
 
 |  
 
@@ -84,7 +81,7 @@ Development Reference
     <a href="https://github.com/caronc/apprise"><img src="https://img.shields.io/badge/💬apprise-005571?style=for-the-badge&logo=none"></a>
     <a href="https://fastapi.tiangolo.com"><img src="https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi"></a>
     <a href="https://www.uvicorn.org"><img src="https://img.shields.io/badge/uvicorn-005571?style=for-the-badge&logo=fastapi"></a><br>
-    <a href="https://github.com/ccxt/ccxt"><img src="https://img.shields.io/badge/CCXT-black?style=for-the-badge&logo=librariesdotio&logoColor=white"></a>
+    <a href="https://github.com/mraniki/cefi"><img src="https://img.shields.io/badge/cefi-black?style=for-the-badge&logo=librariesdotio&logoColor=white"></a>
     <a href="https://github.com/mraniki/dxsp"><img src="https://img.shields.io/badge/dxsp-black?style=for-the-badge&logo=librariesdotio&logoColor=white"></a>
     <a href="https://github.com/mraniki/findmyorder"><img src="https://img.shields.io/badge/findmyorder-black?style=for-the-badge&logo=librariesdotio&logoColor=white"></a>
     <a href="https://github.com/mraniki/iamlistening"><img src="https://img.shields.io/badge/iamlistening-black?style=for-the-badge&logo=librariesdotio&logoColor=white"></a>
@@ -92,10 +89,18 @@ Development Reference
     
     <br><br>
 
-    <HR>
-    ⚠️ <em>This is an education tool and should not be considered professional financial investment system nor financial advice.<br>
-    Use a testnet account or USE AT YOUR OWN RISK. Never share your private keys or API secrets.<br
-    >Never use your main account for automatic trade.<br>
-    DYOR.</em>
-   <br><br>
-   <br><br>
+.. note::
+
+   Why build the tool? 
+   
+   "so happy I spent $200 on trading signals" said no trader ever.
+
+.. warning::
+
+   This is an education tool and should not be considered professional financial investment system nor financial advice.
+
+   Use a testnet account or USE AT YOUR OWN RISK. Never share your private keys or API secrets.
+
+   Never use your main account for automatic trade.
+
+   DYOR.
