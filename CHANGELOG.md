@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.8 (2023-08-10)
+
+### Fix
+
+* Update Requirements ([`085d212`](https://github.com/mraniki/tt/commit/085d21237a247c9548b2ffeb666d87c9b9a85f40))
+* :arrow_up: ([`bb6ac86`](https://github.com/mraniki/tt/commit/bb6ac866fa31b76321b44193852127aedabb61aa))
+* Update Requirements ([`3963bf5`](https://github.com/mraniki/tt/commit/3963bf59c9dc129c441d952c19da74935f5ba471))
+* :wrench::memo: ([`e179936`](https://github.com/mraniki/tt/commit/e179936e36dad44bb1d39eef7d288be677277468))
+
 ## v4.9.7 (2023-08-10)
 
 ### Fix
