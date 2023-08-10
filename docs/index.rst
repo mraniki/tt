@@ -21,12 +21,31 @@ TalkyTrader
    <br>
    </p>
 
-|  
+| 
 
 .. image:: ../docs/_static/screenshot.png
   :width: 200
   :alt: logo
   :align: right
+
+
+.. note::
+
+   What is the rationale behind building TalkyTrader?
+   
+   "so happy I spent $200 on trading signals" said no trader ever.
+
+
+.. warning::
+
+   This is an education tool and should not be considered professional financial investment system nor financial advice.
+
+   Use a testnet account or USE AT YOUR OWN RISK. Never share your private keys or API secrets.
+
+   Never use your main account for automatic trade.
+
+   DYOR.
+
 
 
 User Guide
@@ -86,21 +105,6 @@ Development Reference
     <a href="https://github.com/mraniki/findmyorder"><img src="https://img.shields.io/badge/findmyorder-black?style=for-the-badge&logo=librariesdotio&logoColor=white"></a>
     <a href="https://github.com/mraniki/iamlistening"><img src="https://img.shields.io/badge/iamlistening-black?style=for-the-badge&logo=librariesdotio&logoColor=white"></a>
     <a href="https://github.com/mraniki/talkytrend"><img src="https://img.shields.io/badge/talkytrend-black?style=for-the-badge&logo=librariesdotio&logoColor=white"></a><br>
-    
+    <a href="https://asyncz.tarsild.io"><img src="https://img.shields.io/badge/asyncz-black?style=for-the-badge&logo=librariesdotio&logoColor=white"></a><br>
     <br><br>
 
-.. note::
-
-   Why build the tool? 
-   
-   "so happy I spent $200 on trading signals" said no trader ever.
-
-.. warning::
-
-   This is an education tool and should not be considered professional financial investment system nor financial advice.
-
-   Use a testnet account or USE AT YOUR OWN RISK. Never share your private keys or API secrets.
-
-   Never use your main account for automatic trade.
-
-   DYOR.

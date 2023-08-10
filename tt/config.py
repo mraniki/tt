@@ -75,19 +75,19 @@ class InterceptHandler(logging.Handler):
 def loguru_setup():
     loguru_logger.remove()
     # log.configure(**config)
-    log_filters = {
-        "discord": "ERROR",
-        "telethon": "ERROR",
-        # "web3": "ERROR",
-        # "apprise": "ERROR",
-        # "urllib3": "ERROR",
-        "asyncz": "ERROR",
-    }
+    # log_filters = {
+    #     "discord": "ERROR",
+    #     "telethon": "ERROR",
+    #     "web3": "ERROR",
+    #     # "apprise": "ERROR",
+    #     # "urllib3": "ERROR",
+    #     "asyncz": "ERROR",
+    # }
     logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
     loguru_logger.add(
         sink=sys.stdout,
         level=settings.loglevel,
-        filter=log_filters,
+        #filter=log_filters,
     )
 
     return loguru_logger
