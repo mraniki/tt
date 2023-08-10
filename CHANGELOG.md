@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.6 (2023-08-10)
+
+### Fix
+
+* Update Requirements ([`e79e048`](https://github.com/mraniki/tt/commit/e79e048bf97050598062b174ebc927fbf600755b))
+* 🥅 adding error message for apprise ([`a2c75b9`](https://github.com/mraniki/tt/commit/a2c75b922b73c960ebfd05b96621a89466c51f2d))
+* 👷 CI Change ([`385e415`](https://github.com/mraniki/tt/commit/385e4151dbceda59900c0e0a05a1422cc02159dc))
+
 ## v4.9.5 (2023-08-10)
 
 ### Fix
