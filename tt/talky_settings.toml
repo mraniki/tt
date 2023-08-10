@@ -68,7 +68,8 @@ forwarder_url = ""
 # Apprise endpoint URL can be a URL 
 # for the chat, a URL to an Apprise config
 # or a URL to the Apprise API endpoint
-
+# apprise_url = "tgram://BOTTOKEN/CHANNEL"
+# apprise_url = "discord://token1/channel"
 apprise_url = "json://localhost"
 
 #Format of the notification. Format can be

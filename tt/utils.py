@@ -15,7 +15,12 @@ from tt.plugins.plugin_manager import PluginManager
 
 async def send_notification(msg):
     """
-    💬 Notification via Apprise 
+    💬 Notification via Apprise.
+    Apprise endpoint URL can be a URL 
+    for the chat, a URL to an Apprise config
+    or a URL to the Apprise API endpoint
+    apprise_url = "tgram://BOTTOKEN/CHANNEL"
+    apprise_url = "discord://token1/channel"
 
     Args:
         msg (str): Message
@@ -24,6 +29,7 @@ async def send_notification(msg):
         None
 
     Refer to Apprise documentation for more information
+    https://github.com/caronc/apprise/wiki
 
     """
     aobj = Apprise(settings.apprise_url)
