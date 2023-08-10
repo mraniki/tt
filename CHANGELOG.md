@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.5 (2023-08-10)
+
+### Fix
+
+* Update utils.py ([`64adc30`](https://github.com/mraniki/tt/commit/64adc30314a8fbd2048d5bfb3c8d3a9e593c31fb))
+* Update talky_settings.toml ([`285b340`](https://github.com/mraniki/tt/commit/285b340dab80db53c44fa2e8d6664fdbfe5fc3eb))
+
 ## v4.9.4 (2023-08-09)
 
 ### Fix
