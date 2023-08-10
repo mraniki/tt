@@ -9,7 +9,7 @@ import asyncio
 from apprise import Apprise, NotifyFormat
 from iamlistening import Listener
 
-from tt.config import settings
+from tt.config import logger, settings
 from tt.plugins.plugin_manager import PluginManager
 
 
@@ -34,10 +34,12 @@ async def send_notification(msg):
     """
     aobj = Apprise(settings.apprise_url)
     msg_format = settings.apprise_format or NotifyFormat.MARKDOWN
-    await aobj.async_notify(
-        body=msg,
-        body_format=msg_format)
-
+    try:
+        await aobj.async_notify(
+            body=msg,
+            body_format=msg_format)
+    except Exception as error:
+        logger.error("Verify Apprise URL: ", error)
 
 async def run_bot():
     """
