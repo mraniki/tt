@@ -88,7 +88,6 @@ def test_webhook_with_valid_auth():
     assert post.assert_called
 
 
-
 def test_webhook_with_invalid_auth():
     client = TestClient(app)
     payload = {"data": "my_data"}
@@ -101,7 +100,6 @@ def test_webhook_with_invalid_auth():
 async def test_send_notification(caplog):
     await send_notification("Test message")
     assert "Loaded Discord" in caplog.text
-    #assert "json://localhost/" in caplog.text
 
 
 @pytest.mark.asyncio
@@ -109,26 +107,6 @@ async def test_start_plugins():
     plugin_manager = AsyncMock(spec=PluginManager)
     await start_plugins(plugin_manager)
     plugin_manager.load_plugins.assert_called_once()
-
-
-# @pytest.mark.asyncio
-# async def test_run_bot():
-#     listener_instance = Listener(chat_platform="discord")
-#     start_bot = AsyncMock(side_effect=[listener_instance])
-#     with patch('tt.utils.start_bot', start_bot):
-#         task = asyncio.create_task(run_bot())
-#         await asyncio.gather(task, asyncio.sleep(2))
-#         start_bot.assert_awaited
-#         listener_created = listener_instance
-#         assert isinstance(listener_created, Listener) 
-
-# @pytest.mark.asyncio
-# async def test_run_bot():
-#     run_bot=AsyncMock()
-#     event_loop = asyncio.get_event_loop()
-#     event_loop.create_task(run_bot())
-#     run_bot.assert_awaited_once
-
 
 
 @pytest.mark.asyncio
