@@ -28,7 +28,7 @@ async def send_notification(msg):
     Returns:
         None
 
-    Refer to Apprise documentation for more information
+    More info
     https://github.com/caronc/apprise/wiki
 
     """
@@ -49,7 +49,7 @@ async def run_bot():
     Returns:
         None
 
-    Refer to iamlistening documentation for more information
+    More info: https://github.com/mraniki/iamlistening
 
     """
     listener = Listener()

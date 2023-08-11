@@ -11,7 +11,12 @@ from tt.utils import send_notification
 class CexExchangePlugin(BasePlugin):
     """
     Class CexExchangePlugin 
-    to support CEX Exchange
+    to support CEX Exchange 
+    built via Cefi lib
+    More info: https://github.com/mraniki/cefi
+    Order are identified and parsed
+    using Findmyorder lib
+    More info: https://github.com/mraniki/findmyorder
 
     Args:
         None

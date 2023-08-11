@@ -9,7 +9,22 @@ from tt.utils import send_notification
 
 
 class DexExchangePlugin(BasePlugin):
-    """DEX Plugin"""
+    """
+    Class DexExchangePlugin 
+    to support DexSwap object
+    built via DXSP lib
+    More info: https://github.com/mraniki/dxsp
+    Order are identified and parsed
+    using Findmyorder lib
+    More info: https://github.com/mraniki/findmyorder
+
+    Args:
+        None
+    
+    Returns:
+        None
+    
+    """
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
         super().__init__()
