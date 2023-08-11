@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.16 (2023-08-11)
+
+### Fix
+
+* Update Requirements ([`15187de`](https://github.com/mraniki/tt/commit/15187de02360042cdb9a1d156ffcb933c9491f07))
+* :arrow_up: ([`926a7d4`](https://github.com/mraniki/tt/commit/926a7d4885cea80cc91bd46dc9a819cbc4b8727a))
+* :recycle:example plugin ([`8e0d244`](https://github.com/mraniki/tt/commit/8e0d244810b58021531ec6e719ad483167819dec))
+* 🔧 ([`1f3d09f`](https://github.com/mraniki/tt/commit/1f3d09fafef4cc30c1d4718614cc3c6ec5c40836))
+
 ## v4.9.15 (2023-08-11)
 
 ### Fix
