@@ -207,7 +207,7 @@ mapping = [
 ignore_instrument = "US500 USTEC DOGE"
 
 ########################################
-###           CCXT SETTINGS          ###
+###           CEFI SETTINGS          ###
 ########################################
 
 # Module Enable/Disable
