@@ -6,7 +6,7 @@ Bot Launcher and API
 
 Talky Trader is an app 
 built with FastAPI 
-https://fastapi.tiangolo.com
+https://github.com/tiangolo/fastapi
 
 It allows you to connect 
 to a messaging chat platform 
@@ -82,6 +82,7 @@ if __name__ == "__main__":
     The `app` variable is an instance of the FastAPI application, 
     and the `settings.host` and `settings.port` variables 
     are the host and port to run the server on, respectively
+    More Info https://github.com/encode/uvicorn
     """ 
     uvicorn.run(
         app,

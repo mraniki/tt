@@ -134,6 +134,9 @@ class BasePlugin:
     especially the scheduling, 
     notification and
     message handling.
+    
+    Scheduling is manage via asyncz lib
+    More info: https://github.com/tarsil/asyncz
 
     Args:
         None

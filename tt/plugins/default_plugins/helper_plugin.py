@@ -17,6 +17,9 @@ class HelperPlugin(BasePlugin):
     available command, network ping 
     or restarting the bot
     
+    network ping is using Ping3 lib
+    more info: https://github.com/kyan001/ping3
+    
     """
     name = os.path.splitext(os.path.basename(__file__))[0]
     def __init__(self):
