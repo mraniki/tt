@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.13 (2023-08-11)
+
+### Fix
+
+* Update Requirements ([`c941899`](https://github.com/mraniki/tt/commit/c9418994b5f5e6ba24217e05432d3c2f74b17c4b))
+* 📝 🩹 docs and dxsp fix ([`3132e26`](https://github.com/mraniki/tt/commit/3132e26d8c8c15075e122332956d4a7f1ffe3d99))
+* Update Requirements ([`f61daa5`](https://github.com/mraniki/tt/commit/f61daa525206700c821f2d40761ff1882d28ad20))
+* Update pyproject.toml ([`dd24cd8`](https://github.com/mraniki/tt/commit/dd24cd84402c38e80b4ff0c94a149596d45a735b))
+* Update Requirements ([`bf094ac`](https://github.com/mraniki/tt/commit/bf094ac97c642a0255bbde66fa080be18c7a1279))
+* :memo: ([`3693bf3`](https://github.com/mraniki/tt/commit/3693bf344bcbfb7e4fb2460c5718c576e6c91576))
+
 ## v4.9.12 (2023-08-11)
 
 ### Fix
