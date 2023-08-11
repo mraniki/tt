@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.10 (2023-08-11)
+
+### Fix
+
+* Update Requirements ([`2d79be6`](https://github.com/mraniki/tt/commit/2d79be6075b0c065c92c29659c6f45707a46fa94))
+* ⬆️ ([`97a86e3`](https://github.com/mraniki/tt/commit/97a86e379490eb5e15f6e287607eeec0d6ac37ca))
+* :art: ([`f696fa5`](https://github.com/mraniki/tt/commit/f696fa522c6858f0cb75e82eb966b0c1a539753f))
+
 ## v4.9.9 (2023-08-11)
 
 ### Fix
