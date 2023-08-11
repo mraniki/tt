@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.11 (2023-08-11)
+
+### Fix
+
+* :ambulance: Update pyproject.toml with latest dxsp hotfix ([`ee4c773`](https://github.com/mraniki/tt/commit/ee4c773c97bf99a83ba50a1cf80fa2a3e58522f2))
+
 ## v4.9.10 (2023-08-11)
 
 ### Fix
