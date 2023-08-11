@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.15 (2023-08-11)
+
+### Fix
+
+* Update Requirements ([`e9b2bc0`](https://github.com/mraniki/tt/commit/e9b2bc0a64a944703ad4474ba786d1e247f479b4))
+* :arrow_up: ([`97ab23e`](https://github.com/mraniki/tt/commit/97ab23e16e53fa650009b239e5a0b91e570b0f29))
+* Update  log level for 3rd party ([`ce13f1e`](https://github.com/mraniki/tt/commit/ce13f1e16ee56c9500ea1a1bd8f9ef6182cc4775))
+
 ## v4.9.14 (2023-08-11)
 
 ### Fix
