@@ -276,7 +276,7 @@ headers = {User-Agent= 'Mozilla/5.0'}
 # this can be used to avoid using coingecko
 # or be used for niche token not listed anywhere
 # or for testnet
-token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
+token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
