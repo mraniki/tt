@@ -121,7 +121,7 @@ iteration_limit = -1
 bot_prefix = "/"
 # Specific data that should be ignore by
 # the parser
-bot_ignore = "🗿 ⚠️ 📊 🏦 ⬇️ ⬆️"
+bot_ignore = "🗿 🦄 ⚠️ 📊 🏦 ⬇️ ⬆️"
 # Command for help
 bot_command_help = "help"
 # Command for info
@@ -207,7 +207,7 @@ mapping = [
 ignore_instrument = "US500 USTEC DOGE"
 
 ########################################
-###           CCXT SETTINGS          ###
+###           CEFI SETTINGS          ###
 ########################################
 
 # Module Enable/Disable

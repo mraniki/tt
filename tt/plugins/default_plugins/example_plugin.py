@@ -21,9 +21,8 @@ class ExamplePlugin(BasePlugin):
 
     async def start(self):
         """Starts the plugin"""
-        logger.debug("example plugin started")
         if self.enabled:
-            logger.debug("example plugin enabled")
+            logger.debug("example plugin started")
 
     async def stop(self):
         """Stops the plugin"""
