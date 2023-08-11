@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.14 (2023-08-11)
+
+### Fix
+
+* Update Requirements ([`9cb7c47`](https://github.com/mraniki/tt/commit/9cb7c47d2d7c8d75f04e3457071f11e6e49430f7))
+* ⬆️ ([`ce8bf47`](https://github.com/mraniki/tt/commit/ce8bf4769a5d056bbd972dcbc3eaa9a185e12393))
+
 ## v4.9.13 (2023-08-11)
 
 ### Fix
