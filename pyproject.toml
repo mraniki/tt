@@ -47,12 +47,12 @@ httpx = "^0.24.1"
 uvicorn = "^0.23.0"
 fastapi = "^0.101.0"
 ping3 = "^4.0.4"
-cefi = "^1.1.12"
-dxsp = "^4.2.22"
+cefi = "^1.1.13"
+dxsp = "^4.2.23"
 findmyorder = "^1.7.16"
-iamlistening = "^3.3.3"
+iamlistening = "^3.3.4"
 talkytrend = "^1.13.1"
-myllm = "^1.2.10"
+myllm = "^1.2.11"
 
 
 [tool.poetry.group.dev.dependencies]
