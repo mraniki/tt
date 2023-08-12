@@ -1,7 +1,7 @@
 
-======
-Config
-======
+==========
+⚙️ Config
+==========
 
 .. toctree::
    :maxdepth: 3

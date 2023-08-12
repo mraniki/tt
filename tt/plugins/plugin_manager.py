@@ -51,7 +51,6 @@ class PluginManager:
             try:
                 module = importlib.import_module(
                     f"{self.plugin_directory}.{plugin_name}")
-                #logger.debug("Module loaded: {}", module)
                 self.load_plugin(module, plugin_name)
             except Exception as e:
                 logger.warning("Error loading plugin {}: {}", plugin_name, e)
