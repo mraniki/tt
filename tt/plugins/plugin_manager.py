@@ -46,6 +46,7 @@ class PluginManager:
 
         """
         package = importlib.import_module(self.plugin_directory)
+        logger.debug("Loading plugins from: {}", package)
         for _, plugin_name, _ in pkgutil.iter_modules(package.__path__):
             try:
                 module = importlib.import_module(
