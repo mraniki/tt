@@ -2,6 +2,28 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.17 (2023-08-12)
+
+### Fix
+
+* Update Requirements ([`773bc2c`](https://github.com/mraniki/tt/commit/773bc2ce8ec72ac70a210bad65f95416107b7bbd))
+* :memo: ([`414671f`](https://github.com/mraniki/tt/commit/414671fe1328cf9fa62a6b709e7bc4d25b0ed8d8))
+* :arrow_up:dxsp ([`64420e3`](https://github.com/mraniki/tt/commit/64420e34001234a4a938463d1a67a51ed9c954a0))
+* :white_check_mark:logger ([`0db2b0b`](https://github.com/mraniki/tt/commit/0db2b0bdc9ea50db36ca2c77a6537c02cdeef40d))
+* Update Requirements ([`6c073b7`](https://github.com/mraniki/tt/commit/6c073b7bcc11f62adfd269d2a5017d2bffcb472d))
+* :memo: ([`8e98d45`](https://github.com/mraniki/tt/commit/8e98d45f089f541b126fd3e8a80819eb06e96860))
+* :memo: ([`6de82fb`](https://github.com/mraniki/tt/commit/6de82fb09a88793d0deec2a174eed89f934074ff))
+* :memo: ([`3e9e892`](https://github.com/mraniki/tt/commit/3e9e8926a83531301ff69911bf4f338b8df715af))
+* ✅ Unit Test ([`a96ae89`](https://github.com/mraniki/tt/commit/a96ae89491915ece0d0b44364491c611966918e0))
+* :memo: ([`b90e8e1`](https://github.com/mraniki/tt/commit/b90e8e1f7dd52e4733d0239f5fd9dc33b4938965))
+* 🔧 ([`4744925`](https://github.com/mraniki/tt/commit/47449254d2830839a1c38c61eb3735b2671a92fb))
+* 📝 ([`0aa025e`](https://github.com/mraniki/tt/commit/0aa025e7411aec2f117cad8338ca20bb0f5724dc))
+* :memo: ([`dc92fc6`](https://github.com/mraniki/tt/commit/dc92fc61ea964a7e75f883df569e8103a5ef8924))
+* :bug: issue with large json ([`acbe3b9`](https://github.com/mraniki/tt/commit/acbe3b95117e4728fd1a1c90009ab564b625eb31))
+* :wrench: ([`56d19b2`](https://github.com/mraniki/tt/commit/56d19b27a3034394983c5bdd8f5c1d391a9b0483))
+* Update  logger ([`01755a7`](https://github.com/mraniki/tt/commit/01755a7c45d49217921cc266bbec261fb0386cf5))
+* :art: ([`54f4f9a`](https://github.com/mraniki/tt/commit/54f4f9a4d1a6da46f163348c3dc51b97801b2cd1))
+
 ## v4.9.16 (2023-08-11)
 
 ### Fix
