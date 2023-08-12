@@ -280,7 +280,8 @@ token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/T
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
-# Address of your trading asset for your trading - USDT
+# Address of your trading asset for your trading
+# example: USDT
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 
 # Slippage %
@@ -290,7 +291,7 @@ dex_trading_slippage = 2
 # Toggle to remove notification if 
 # a token doesn't exist in the token list
 # or in coingecko
-dex_notify_invalid_token = true
+# dex_notify_invalid_token = true
 
 ########################################
 ###          HELPER SETTINGS         ###
