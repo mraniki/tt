@@ -79,7 +79,7 @@ PAAS instance
 
     <a href="https://app.koyeb.com/deploy?type=docker&image=docker.io/mraniki/tt&name=tt-demo"><img src="https://img.shields.io/badge/Deploy%20on%20Koyeb-blue?style=for-the-badge&logo=koyeb"></a><br>
     
-    <a href="https://railway.app/new/template/ZVM0QG?referralCode=gxeoRu"><img src="https://railway.app/button.svg" alt="Deploy on Railway" /></a><br>
+    <a href="https://railway.app/new/template/ZVM0QG?referralCode=gxeoRu"><img src="https://img.shields.io/badge/Deploy%20on%20RailWay-black?style=for-the-badge&logo=Railway">
 
     
 
