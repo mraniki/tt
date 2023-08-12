@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.21 (2023-08-12)
+
+### Fix
+
+* 📝 ([`f650a2e`](https://github.com/mraniki/tt/commit/f650a2e5fe7f0cbbbff4ec7aaa165e6cf8086c2c))
+* 🎨 ([`725db94`](https://github.com/mraniki/tt/commit/725db9475efc4bc8cf236f8e6341e54ff03a977c))
+* 📝 Improve Docs ([`8553f45`](https://github.com/mraniki/tt/commit/8553f452c9bf8071fbd98350d439b542ecd83588))
+
 ## v4.9.20 (2023-08-12)
 
 ### Fix
