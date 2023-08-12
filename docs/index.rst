@@ -19,7 +19,6 @@ TalkyTrader
    <p align="left">
    <a href="https://hub.docker.com/r/mraniki/tt"><img src="https://img.shields.io/docker/pulls/mraniki/tt?style=for-the-badge"></a><br>
    </p>
-   <br>
 
 .. image:: ../docs/_static/screenshot.png
   :width: 200
@@ -35,7 +34,7 @@ TalkyTrader
 
    Never use your main account for automatic trade.
 
-   Do Your Own Research (DYOR).
+   Do Your Own Research (DYOR). Past performance does not guarantee future results.
 
 
 .. note::
