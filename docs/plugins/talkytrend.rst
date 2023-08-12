@@ -1,12 +1,11 @@
-==========
-Talkytrend
-==========
+=============
+📰 Talkytrend
+=============
 
 User Guide
 ==========
 
-Refer to :doc:`talkytrend:index` for the detailed setup.
-
+Refer to :doc:`talkytrend:index` for more information.
 
 
 Plugin Reference

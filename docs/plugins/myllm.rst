@@ -1,12 +1,11 @@
-=====
-MyLLM
-=====
-
+========
+🦾 MyLLM
+========
 
 User Guide
 ==========
 
-- Refer to :doc:`myllm:index` for the detailed setup.
+- Refer to :doc:`myllm:index` for more information.
 
 
 Plugin Reference

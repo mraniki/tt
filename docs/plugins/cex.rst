@@ -1,11 +1,11 @@
-===
-CEX
-===
+======
+🏦 CEX
+======
 
 User Guide
 ==========
 
-- Refer to :doc:`cefi:index` to the cefi detailed setup
+- Refer to :doc:`cefi:index` for more information.
 
 
 
