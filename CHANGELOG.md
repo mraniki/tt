@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v4.9.18 (2023-08-12)
+
+### Fix
+
+* Update Requirements ([`7c739d5`](https://github.com/mraniki/tt/commit/7c739d557b73a6c855efa7661976357e4789bdf9))
+* 🔥 remove playwright ([`fd314cc`](https://github.com/mraniki/tt/commit/fd314cc032a334130cdefc253d31fd360c2c6c13))
+* 📝 ([`03da115`](https://github.com/mraniki/tt/commit/03da1154d39965f0ae3db6fcbd8229e8b7efe9cd))
+* :memo: ([`fcf023e`](https://github.com/mraniki/tt/commit/fcf023eab4859e632beb88141234d7a0931e3311))
+* ⬆️ ([`f959867`](https://github.com/mraniki/tt/commit/f959867bff14f861c9866dd4bbca2cc74ce26319))
+
 ## v4.9.17 (2023-08-12)
 
 ### Fix
