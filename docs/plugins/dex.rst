@@ -1,11 +1,11 @@
-===
-DEX
-===
+======
+🦄 DEX
+======
 
 User Guide
 ==========
 
-- Refer to :doc:`dxsp:index` for the detailed setup
+- Refer to :doc:`dxsp:index` for more information.
 
 
 Plugin Reference

@@ -15,9 +15,9 @@ Dynaconf
 .. image:: https://img.shields.io/badge/⚙️dynaconf-005571?style=for-the-badge&logo=settings&logoColor=ffdd54
   :align: left
 
-Dynaconf https://github.com/dynaconf/dynaconf is a powerful and easy-to-use configuration management library for Python.
-Talky settings are based on Dynaconf. it support toml settings file, .env file or environment variable 
-Refer to Dynaconf for more information.
+Dynaconf is a powerful and easy-to-use configuration management library for Python.
+Talky settings are based on Dynaconf. It supports TOML settings file, .env file or environment variable , and other types.
+Refer to https://github.com/dynaconf/dynaconf for more information.
 
 
 Settings Structure

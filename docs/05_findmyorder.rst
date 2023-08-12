@@ -1,6 +1,6 @@
-===========
-FindMyOrder
-===========
+==============
+🔎 FindMyOrder
+==============
 
 
 .. autoclass:: findmyorder.main.FindMyOrder
