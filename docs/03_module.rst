@@ -1,6 +1,6 @@
-===========
-TalkyTrader
-===========
+==================
+TalkyTrader Module
+==================
 
 .. automodule:: tt.bot
     :members:
