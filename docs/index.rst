@@ -17,15 +17,13 @@ TalkyTrader
 
    <br>
    <p align="left">
+   <a href="https://hub.docker.com/r/mraniki/tt"><img src="https://img.shields.io/docker/pulls/mraniki/tt?style=for-the-badge"></a><br>
    <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"><br>
-    <a href="https://hub.docker.com/r/mraniki/tt"><img src="https://img.shields.io/docker/pulls/mraniki/tt?style=for-the-badge"></a>
-    <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge"></a>
-    <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/badge/linter-ruff-261230.svg?style=for-the-badge"></a>
-    <a href="https://semver.org"><img src="https://img.shields.io/badge/release-semantic-e10079.svg?style=for-the-badge"></a>
-
-
-   <br>
+   <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/badge/linter-ruff-261230.svg?style=for-the-badge"></a><br>
+   <a href="https://semver.org"><img src="https://img.shields.io/badge/release-semantic-e10079.svg?style=for-the-badge"></a>
+   <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge"></a><br>
    </p>
+   <br>
 
 |
 
@@ -33,16 +31,6 @@ TalkyTrader
   :width: 200
   :alt: logo
   :align: right
-
-
-.. note::
-
-    What is the rationale for building TalkyTrader?
-    - create an open source platform to allow trading on DEX and CEX on any type of messaging platform
-    - "so happy I spent $200 on trading signals" said no trader ever.
-
-    Aren't there already projects that do this?
-    - project available usually focused on a given messaging platform (eg telegram), a given type of exchange (usually CeX binance) or given type of trading (snipping DEX shitcoin, scalping CEX).
 
 .. warning::
 
@@ -53,6 +41,19 @@ TalkyTrader
    Never use your main account for automatic trade.
 
    DYOR.
+
+
+.. note::
+
+    What is the rationale for building TalkyTrader?
+    - Create an open source platform to allow trading on DEX and CEX on any type of messaging platform.
+
+    - "so happy I spent $200 on trading signals" said no trader ever.
+
+    Aren't there already projects that do this?
+    - Project available usually focused on a given messaging platform (eg telegram), a given type of exchange (usually CeX binance) or given type of trading (snipping DEX shitcoin, scalping CEX).
+
+
 
 
 User Guide
