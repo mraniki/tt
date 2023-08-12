@@ -43,7 +43,7 @@ TalkyTrader
     
     - Create an open source platform to allow trading on DEX and CEX on any messaging platform and empower trader with trading tools regardless of the instrument type. Key focus on DEX capability as priority.
 
-    - "so happy I spent $200 on trading signals" said no trader ever. This is a tool to enable trader. This is not signal platform and not a trading strategy tool. Assumption is you have a strategy. https://www.investopedia.com/beginner-trading-strategies-4689644
+    - "so happy I spent $200 on trading signals" said no trader ever. This is a tool to enable trader. This is not a signal platform and not a trading strategy tool. Assumption is you have a strategy. https://www.investopedia.com/beginner-trading-strategies-4689644
 
     Aren't there already projects that do this?
     
