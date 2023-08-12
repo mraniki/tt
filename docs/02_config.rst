@@ -13,7 +13,8 @@ Dynaconf
 ========
 
 .. image:: https://img.shields.io/badge/⚙️dynaconf-005571?style=for-the-badge&logo=settings&logoColor=ffdd54
-  :align: left
+  :align: right
+
 
 Dynaconf is a powerful and easy-to-use configuration management library for Python.
 Talky settings are based on Dynaconf. It supports TOML settings file, .env file or environment variable , and other types.
@@ -37,7 +38,8 @@ Your settings should be setup in settings.toml, .secrets.toml, .env or environme
 Talky Settings
 ==============
 
-More than 100 settings customizable via settings.toml or .env
+More than 100 settings customizable via settings.toml or .env.
+Most of them are predefined and you only need to update the credentials realted to your exchange and chat platform
 
 
 .. literalinclude:: ../tt/talky_settings.toml

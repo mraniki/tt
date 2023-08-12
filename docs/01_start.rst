@@ -27,6 +27,12 @@ Get your DEX or CEX credentials:
 Create your config file settings.toml or use env variables. 
 Refer to  :doc:`talky:02_config` for details.
 
+.. warning::
+
+   Use a testnet account or USE AT YOUR OWN RISK. Never share your private keys or API secrets.
+
+   Never use your main account for automatic trade.
+
 
 .. literalinclude:: ../examples/example_settings.toml
 
@@ -61,25 +67,15 @@ then start your bot:
 
 .. code:: console
 
-python3 bot.py
+   python3 bot.py
 
 
 ☁️ Try it 
 =========
 
-Demo Instance
--------------
-
-TBD
-
-PAAS instance
--------------
-
 .. raw:: html
 
-    <a href="https://app.koyeb.com/deploy?type=docker&image=docker.io/mraniki/tt&name=tt-demo"><img src="https://img.shields.io/badge/Deploy%20on%20Koyeb-blue?style=for-the-badge&logo=koyeb"></a><br>
+   <br><a href="https://app.koyeb.com/deploy?type=docker&image=docker.io/mraniki/tt&name=tt-demo"><img src="https://img.shields.io/badge/Deploy%20on%20Koyeb-blue?style=for-the-badge&logo=koyeb"></a><br><br>
     
-    <a href="https://railway.app/new/template/ZVM0QG?referralCode=gxeoRu"><img src="https://img.shields.io/badge/Deploy%20on%20RailWay-black?style=for-the-badge&logo=Railway">
-
-    
+   <a href="https://railway.app/new/template/ZVM0QG?referralCode=gxeoRu"><img src="https://img.shields.io/badge/Deploy%20on%20RailWay-black?style=for-the-badge&logo=Railway">
 
