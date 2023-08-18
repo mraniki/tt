@@ -2,6 +2,21 @@
 
 <!--next-version-placeholder-->
 
+## v4.10.0 (2023-08-18)
+
+### Feature
+
+* :rocket: chat history for llm ([`650047c`](https://github.com/mraniki/tt/commit/650047c09b558b1c04efe665c1176c15c4f329c6))
+
+### Fix
+
+* Update Requirements ([`41aaddf`](https://github.com/mraniki/tt/commit/41aaddf55ed40e1d332ad0a1768c14f39b8d5e01))
+* :recycle: Refactor llm plugin tests and update llm method calls ([`065618e`](https://github.com/mraniki/tt/commit/065618e278be273e5a4f22db57947cb917875d57))
+* Update Requirements ([`f89e30a`](https://github.com/mraniki/tt/commit/f89e30a48220ebb81ae870f5114eab11f22064de))
+* Update pyproject.toml ([`ac1f119`](https://github.com/mraniki/tt/commit/ac1f11946bc82f73c877a5e1fc7ae631ecf2cbeb))
+* :recycle::arrow_up:dep downgrade ([`07d67ff`](https://github.com/mraniki/tt/commit/07d67ff568cb1f2c0284770ee68be3f385d66102))
+* :bug: typo ([`57dc99a`](https://github.com/mraniki/tt/commit/57dc99a55b5909d38cb04802bb6c2e2720e97867))
+
 ## v4.9.21 (2023-08-12)
 
 ### Fix
