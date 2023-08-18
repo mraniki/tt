@@ -18,11 +18,8 @@ class LlmPlugin(BasePlugin):
         super().__init__()
         self.enabled = settings.llm_enabled
         if self.enabled:
-            self.version = "MyLLM"
             self.help_message = settings.llm_commands
             self.llm= MyLLM()
-
-
 
     async def start(self):
         """Starts the plugin"""
@@ -39,6 +36,8 @@ class LlmPlugin(BasePlugin):
         """Handles incoming messages"""
         if not self.should_handle(msg):
             return
+        if self.llm.continous_mode:
+            await self.llm.continous_mode(msg)
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
             command = command[1:]
@@ -46,6 +45,7 @@ class LlmPlugin(BasePlugin):
             command_mapping = {
                 settings.bot_command_help: self.get_llm_help,
                 settings.bot_command_info: self.get_llm_info,
+                settings.bot_command_info: self.llm.clear_chat_history,
                 settings.bot_command_question: lambda: self.llm.talk(args),
                 settings.bot_command_topic: lambda: self.llm.chat(args),
             }
@@ -59,6 +59,6 @@ class LlmPlugin(BasePlugin):
 
     async def get_llm_info(self):
         """info Message"""
-        return self.version
+        return self.llm.get_myllm_info()
 
 

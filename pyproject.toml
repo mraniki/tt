@@ -40,7 +40,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.10"
 dynaconf = "^3.1.12"
-loguru = "^0.6.0"
+loguru = "0.6.0"
 asyncz = "^0.3.1"
 apprise= "^1.4.0"
 httpx = "^0.24.1"
@@ -52,7 +52,7 @@ dxsp = "^4.2.25"
 findmyorder = "^1.7.16"
 iamlistening = "^3.3.5"
 talkytrend = "^1.13.2"
-myllm = "^1.2.15"
+myllm = "^1.2.18"
 
 
 [tool.poetry.group.dev.dependencies]
