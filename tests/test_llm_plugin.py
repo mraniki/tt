@@ -50,12 +50,12 @@ async def test_parsing_help(plugin):
 @pytest.mark.asyncio
 async def test_parsing_info(plugin):
     """Test info """
-    plugin.get_llm_info = AsyncMock()
+    plugin.llm.get_myllm_info = AsyncMock()
     await plugin.handle_message(
         f"{settings.bot_prefix}{settings.bot_command_info}")
-    plugin.get_llm_info.assert_awaited_once()
+    plugin.llm.get_llm_info.assert_awaited_once()
 
-
+ 
 @pytest.mark.asyncio
 async def test_parsing_llm(plugin):
     """Test scr """

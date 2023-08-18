@@ -44,7 +44,7 @@ class LlmPlugin(BasePlugin):
 
             command_mapping = {
                 settings.bot_command_help: self.get_llm_help,
-                settings.bot_command_info: self.get_llm_info,
+                settings.bot_command_info: self.llm.get_myllm_info,
                 settings.bot_command_info: self.llm.clear_chat_history,
                 settings.bot_command_question: lambda: self.llm.talk(args),
                 settings.bot_command_topic: lambda: self.llm.chat(args),
@@ -56,9 +56,4 @@ class LlmPlugin(BasePlugin):
     async def get_llm_help(self):
         """Help Message"""
         return f"{self.help_message}"
-
-    async def get_llm_info(self):
-        """info Message"""
-        return self.llm.get_myllm_info()
-
 
