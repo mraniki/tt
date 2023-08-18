@@ -59,10 +59,10 @@ async def test_parsing_info(plugin):
 @pytest.mark.asyncio
 async def test_parsing_llm(plugin):
     """Test scr """
-    plugin.get_llm_run = AsyncMock()
+    plugin.llm.talk = AsyncMock()
     await plugin.handle_message(
         f"{settings.bot_prefix}{settings.bot_command_question} hello")
-    plugin.get_llm_run.assert_awaited_once()
+    plugin.llm.talk.assert_awaited_once()
 
 
 @pytest.mark.asyncio
@@ -82,6 +82,6 @@ async def test_info(plugin):
 @pytest.mark.asyncio
 async def test_llm_request(plugin):
     """Test llm """
-    result = await plugin.get_llm_run(prompt="tell me a story")
+    result = await plugin.llm.chat(prompt="tell me a story")
     print(result)
     assert result is not None

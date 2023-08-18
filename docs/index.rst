@@ -45,7 +45,7 @@ TalkyTrader
 
    * **Aren't there already projects that do this?**
       
-      Project available usually focused on a given messaging platform (e.g. telegram), a given type of exchange (usually binance), a given type of trading (snipping DEX https://github.com/Nafidinara/bot-pancakeswap or CEXX) or full suite trading with CEX focus (https://github.com/Drakkar-Software/OctoBot, https://github.com/freqtrade/freqtrade https://github.com/hummingbot/hummingbot).
+      Project available usually focused on a given messaging platform (e.g. telegram), a given type of exchange (usually binance), a given type of trading (snipping DEX https://github.com/Nafidinara/bot-pancakeswap or CEX) or full suite trading with CEX focus (https://github.com/Drakkar-Software/OctoBot, https://github.com/freqtrade/freqtrade https://github.com/hummingbot/hummingbot).
 
 
 User Guide
