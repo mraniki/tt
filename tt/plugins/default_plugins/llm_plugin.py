@@ -46,8 +46,8 @@ class LlmPlugin(BasePlugin):
             command_mapping = {
                 settings.bot_command_help: self.get_llm_help,
                 settings.bot_command_info: self.get_llm_info,
-                settings.bot_command_question: lambda: self.get_llm_run(args),
-                settings.bot_command_topic: lambda: self.get_llm_chain(args),
+                settings.bot_command_question: lambda: self.llm.talk(args),
+                settings.bot_command_topic: lambda: self.llm.chat(args),
             }
             if command in command_mapping:
                 function = command_mapping[command]
@@ -60,19 +60,5 @@ class LlmPlugin(BasePlugin):
     async def get_llm_info(self):
         """info Message"""
         return self.version
-
-    async def get_llm_run(self,prompt):
-        """ 
-        Gets the llm prompts response
-        """
-        
-        return await self.llm.talk(prompt)
-
-    async def get_llm_chain(self,prompt):
-        """ 
-        Gets the llm prompts chain response
-        """
-        
-        pass
 
 
