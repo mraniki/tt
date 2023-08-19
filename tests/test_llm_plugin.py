@@ -41,10 +41,10 @@ async def test_bot_ignore(plugin):
 @pytest.mark.asyncio
 async def test_parsing_help(plugin):
     """Test help """
-    plugin.get_llm_help = AsyncMock()
+    plugin.llm.get_myllm_help = AsyncMock()
     await plugin.handle_message(
         f"{settings.bot_prefix}{settings.bot_command_help}")
-    plugin.get_llm_help.assert_awaited_once()
+    plugin.llm.get_myllm_help.assert_awaited_once()
 
 
 @pytest.mark.asyncio
@@ -53,7 +53,7 @@ async def test_parsing_info(plugin):
     plugin.llm.get_myllm_info = AsyncMock()
     await plugin.handle_message(
         f"{settings.bot_prefix}{settings.bot_command_info}")
-    plugin.llm.get_llm_info.assert_awaited_once()
+    plugin.llm.get_myllm_info.assert_awaited_once()
 
  
 @pytest.mark.asyncio
@@ -68,14 +68,14 @@ async def test_parsing_llm(plugin):
 @pytest.mark.asyncio
 async def test_help(plugin):
     """Test help """
-    result = await plugin.get_llm_help() 
+    result = await plugin.llm.get_myllm_help() 
     assert result is not None
 
 
 @pytest.mark.asyncio
 async def test_info(plugin):
     """Test info """
-    result = await plugin.get_llm_info() 
+    result = await plugin.llm.get_myllm_info() 
     assert result is not None
 
 
