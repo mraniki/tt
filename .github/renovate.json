@@ -22,7 +22,7 @@
       "matchUpdateTypes": ["major"],
       "automerge": false,
       "matchBaseBranches": ["dev"],
-      "minimumReleaseAge": "30 days"
+      "minimumReleaseAge": "60 days"
     }
   ]
 }
