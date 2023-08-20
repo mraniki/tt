@@ -40,7 +40,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.10"
 dynaconf = "^3.1.12"
-loguru = "^0.6.0"
+loguru = "0.6.0"
 asyncz = "^0.3.1"
 apprise= "^1.4.0"
 httpx = "^0.24.1"
@@ -52,7 +52,7 @@ dxsp = "^4.2.25"
 findmyorder = "^1.7.16"
 iamlistening = "^3.3.5"
 talkytrend = "^1.13.2"
-myllm = "^1.2.15"
+myllm = "^1.2.25"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -99,7 +99,7 @@ pytest-playwright = "^0.4.0"
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "^7.0.0"
+sphinx = "7.1.0"
 pydata-sphinx-theme = "^0.13.3"
 sphinx-hoverxref = "^1.3.0"
 sphinx-notfound-page = "^0.8.3"
@@ -129,62 +129,62 @@ omit = [
 ]
 
 
-[tool.semantic_release]
-version_variable = ["pyproject.toml:version","tt/utils.py:__version__"]
-branch = "main"
-upload_to_pypi = false
-upload_to_release = false
-build_command = false
-remove_dist = false
-commit_parser = "semantic_release.history.emoji_parser"
-use_textual_changelog_sections = true
-changelog_sections = "breaking, feature, fix, documentation"
-major_emoji = "BREAKING,💥,:boom:"
-minor_emoji = "feat,🥚,:egg:,🚀,:rocket:,💄,:lipstick:,✨,:sparkles:"
-patch_emoji = "fix,bump,Update,🎨,:art:,🐛,:bug:,🚑,:ambulance:,⚡,:zap:,🔥,:fire:,🚨,:rotating_light:,♻️,:recycle:,🔧,:wrench:,⬆️,:arrow_up:,🩹,:adhesive_bandage:,👷,:construction_worker:,📝,:memo:,🔒,:lock:,👽,:alien:,💬,:speech_balloon:,🥅,:goal_net:,✅,:white_check_mark:,🐳,:whale:,🙈,:see_no_evil:,⚗️,:alembic:,🧐,:monocle_face:,🔇,:mute:,🔊:volume:"
-
 # [tool.semantic_release]
-# upload_to_vcs_release = false
-# version_variables = ["pyproject.toml:version","tt/utils.py:__version__"]
-# build_command = "pip install poetry && poetry build"
-# commit_parser = "emoji"
+# version_variable = ["pyproject.toml:version","tt/utils.py:__version__"]
+# branch = "main"
+# upload_to_pypi = false
+# upload_to_release = false
+# build_command = false
+# remove_dist = false
+# commit_parser = "semantic_release.history.emoji_parser"
+# use_textual_changelog_sections = true
+# changelog_sections = "breaking, feature, fix, documentation"
+# major_emoji = "BREAKING,💥,:boom:"
+# minor_emoji = "feat,🥚,:egg:,🚀,:rocket:,💄,:lipstick:,✨,:sparkles:"
+# patch_emoji = "fix,bump,Update,🎨,:art:,🐛,:bug:,🚑,:ambulance:,⚡,:zap:,🔥,:fire:,🚨,:rotating_light:,♻️,:recycle:,🔧,:wrench:,⬆️,:arrow_up:,🩹,:adhesive_bandage:,👷,:construction_worker:,📝,:memo:,🔒,:lock:,👽,:alien:,💬,:speech_balloon:,🥅,:goal_net:,✅,:white_check_mark:,🐳,:whale:,🙈,:see_no_evil:,⚗️,:alembic:,🧐,:monocle_face:,🔇,:mute:,🔊:volume:"
+
+[tool.semantic_release]
+upload_to_vcs_release = false
+version_variables = ["pyproject.toml:version","tt/utils.py:__version__"]
+build_command = "pip install poetry && poetry build"
+commit_parser = "emoji"
 
 
-# [tool.semantic_release.commit_parser_options]
-# major_tags = [
-#     "BREAKING",
-#     "💥",
-#     ":boom:",
-#   ]
-# minor_tags = ["feat",
-#     "🥚",":egg:",
-#     "💄",":lipstick:",
-#     "🚀",":rocket:",
-#     "✨",":sparkles:",
-# ]
+[tool.semantic_release.commit_parser_options]
+major_tags = [
+    "BREAKING",
+    "💥",
+    ":boom:",
+  ]
+minor_tags = ["feat",
+    "🥚",":egg:",
+    "💄",":lipstick:",
+    "🚀",":rocket:",
+    "✨",":sparkles:",
+]
 
-# patch_tags = ["fix","bump","Update",
-#     "🎨",":art:",
-#     "🐛",":bug:",
-#     "🚑",":ambulance:",
-#     "⚡",":zap:",
-#     "🔥",":fire:",
-#     "🚨",":rotating_light:",
-#     "♻️",":recycle:",
-#     "🔧",":wrench:",
-#     "⬆️",":arrow_up:",
-#     "🩹",":adhesive_bandage:",
-#     "👷",":construction_worker:",
-#     "📝",":memo:",
-#     "🔒",":lock:",
-#     "👽",":alien:",
-#     "💬",":speech_balloon:",
-#     "🥅",":goal_net:",
-#     "✅",":white_check_mark:",
-#     "🐳",":whale:",
-#     "🙈",":see_no_evil:",
-#     "⚗️",":alembic:",
-#     "🧐",":monocle_face:",
-#     "🔇",":mute:",
-#     "🔊",":volume:",
-# ]
+patch_tags = ["fix","bump","Update",
+    "🎨",":art:",
+    "🐛",":bug:",
+    "🚑",":ambulance:",
+    "⚡",":zap:",
+    "🔥",":fire:",
+    "🚨",":rotating_light:",
+    "♻️",":recycle:",
+    "🔧",":wrench:",
+    "⬆️",":arrow_up:",
+    "🩹",":adhesive_bandage:",
+    "👷",":construction_worker:",
+    "📝",":memo:",
+    "🔒",":lock:",
+    "👽",":alien:",
+    "💬",":speech_balloon:",
+    "🥅",":goal_net:",
+    "✅",":white_check_mark:",
+    "🐳",":whale:",
+    "🙈",":see_no_evil:",
+    "⚗️",":alembic:",
+    "🧐",":monocle_face:",
+    "🔇",":mute:",
+    "🔊",":volume:",
+]

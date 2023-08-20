@@ -345,11 +345,46 @@ llm_serpapi-key = ""
 llm_default_prompt = "write a tiny story"
 # help message listing the commands
 # available
-llm_commands = "🦾 /qq\n"
+llm_commands = """
+🦾 /qq\n
+💬 /ai\n
+➰ /aimode\n
+🧽 /clearai\n
+"""
 # command for questions
 bot_command_question = "qq"
 # command for topic/conversation
-bot_command_topic = "tq"
+bot_command_topic = "ai"
+# command for reset chat
+bot_command_clearai = "clearai"
+
+# command to activate or deactivate aimode
+bot_command_aimode = "aimode"
+llm_continous = false
+llm_continous_context = """
+You operate within the following constraints:
+Your task is to devise up to 5 highly effective goals
+and an appropriate role-based name (_GPT) 
+for an autonomous agent, ensuring that the goals 
+are optimally aligned with the successful
+completion of its assigned task.
+
+The user will provide the task, 
+you will provide only the output 
+in the exact format specified below
+with no explanation or conversation.
+
+Example input:
+Help me with a trading monitoring for EURUSD
+
+Example output:
+- Query current trend via /trend
+- Access realtime data via /indicator
+- Query news via /news
+- Advise on a low timeframe and high timeframe trading positioning
+- Place an order if suitable and wait for user confirmation
+
+"""
 
 ########################################
 ###        TALKYTREND SETTINGS       ###

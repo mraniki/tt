@@ -15,14 +15,15 @@
     {
       "matchUpdateTypes": ["minor", "patch"],
       "matchCurrentVersion": "!/^0/",
-      "automerge": true,
-      "minimumReleaseAge": "8 hours"
+      "automerge": false,
+      "matchBaseBranches": ["dev"],
+      "minimumReleaseAge": "15 days"
     },
     {
       "matchUpdateTypes": ["major"],
       "automerge": false,
       "matchBaseBranches": ["dev"],
-      "minimumReleaseAge": "30 days"
+      "minimumReleaseAge": "60 days"
     }
   ]
 }
