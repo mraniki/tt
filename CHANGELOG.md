@@ -2,6 +2,19 @@
 
 
 
+## v4.10.3 (2023-08-20)
+
+### Other
+
+* Merge pull request #675 from mraniki/dev
+
+👷CI change ([`a7c775d`](https://github.com/mraniki/tt/commit/a7c775d97829a4718a6e9520951608d10f9cf644))
+
+### Update
+
+* Update README.md ([`691f869`](https://github.com/mraniki/tt/commit/691f869099893580e2e354e90c95f4236251a30a))
+
+
 ## v4.10.2 (2023-08-20)
 
 ### Other
