@@ -345,7 +345,7 @@ llm_serpapi-key = ""
 llm_default_prompt = "write a tiny story"
 # help message listing the commands
 # available
-llm_commands = "🦾 /qq\n/ai"
+# llm_commands = "🦾 /qq\n/ai"
 # command for questions
 bot_command_question = "qq"
 # command for conversation
