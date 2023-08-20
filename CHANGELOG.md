@@ -2,6 +2,21 @@
 
 
 
+## v4.10.2 (2023-08-20)
+
+### Other
+
+* Merge pull request #674 from mraniki/dev
+
+⬆️ Update python-semantic-release version ([`042bc35`](https://github.com/mraniki/tt/commit/042bc35e7c552a423122945a8d4af0981f6485b2))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`23b126a`](https://github.com/mraniki/tt/commit/23b126a0097f631e1898788283b02be98ca205ec))
+
+### Update
+
+* :arrow_up: Update python-semantic-release version ([`6186897`](https://github.com/mraniki/tt/commit/6186897e9a0c1ad6675815ec42e4b20c24072bcd))
+
+
 ## v4.10.1 (2023-08-20)
 
 ### :fire:
