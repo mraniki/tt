@@ -16,7 +16,7 @@
       "matchUpdateTypes": ["minor", "patch"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true,
-      "minimumReleaseAge": "8 hours"
+      "minimumReleaseAge": "15 days"
     },
     {
       "matchUpdateTypes": ["major"],
