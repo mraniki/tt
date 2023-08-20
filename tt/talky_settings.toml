@@ -23,6 +23,7 @@
 [default]
 # Dynaconf settings verification
 VALUE = "Production - Default"
+# dynaconf_include = ["path/to/file.toml"]
 
 ########################################
 ###         PYTHON SETTINGS          ###
