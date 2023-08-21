@@ -2,6 +2,15 @@
 
 
 
+## v4.10.7 (2023-08-21)
+
+### Other
+
+* Merge pull request #676 from mraniki/dependabot/pip/fastapi-tw-0.101.1
+
+⬆️ Dep: Update fastapi requirement from ^0.99.0 to ^0.101.1 ([`fd049f4`](https://github.com/mraniki/tt/commit/fd049f464badc5691e0930e63f8be505ba087559))
+
+
 ## v4.10.6 (2023-08-21)
 
 ### Update
@@ -21,6 +30,22 @@
 ### Update
 
 * Update pyproject.toml ([`e66b067`](https://github.com/mraniki/tt/commit/e66b067081fa19d98244734a8184d6fbc81bfc49))
+
+* Update Requirements ([`02edfaa`](https://github.com/mraniki/tt/commit/02edfaaf0e2ca2c37820a5f7ab215ebfa7bfc858))
+
+* :arrow_up: Dep: Update fastapi requirement from ^0.99.0 to ^0.101.1
+
+Updates the requirements on [fastapi](https://github.com/tiangolo/fastapi) to permit the latest version.
+- [Release notes](https://github.com/tiangolo/fastapi/releases)
+- [Commits](https://github.com/tiangolo/fastapi/compare/0.99.0...0.101.1)
+
+---
+updated-dependencies:
+- dependency-name: fastapi
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`85972a5`](https://github.com/mraniki/tt/commit/85972a5cfd594764fe45124eda8791ca1c476dc1))
 
 
 ## v4.10.3 (2023-08-20)
