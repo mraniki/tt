@@ -2,6 +2,29 @@
 
 
 
+## v4.10.8 (2023-08-21)
+
+### Other
+
+* Merge pull request #677 from mraniki/dev ([`5635337`](https://github.com/mraniki/tt/commit/56353376310b7f82469252563ccabd56a116c63d))
+
+### Update
+
+* Update Requirements ([`fc3a2c3`](https://github.com/mraniki/tt/commit/fc3a2c3ee1b39f53357167b88bfc6e4dd8cdae7d))
+
+### ⚗️
+
+* ⚗️ continous test ([`24287c0`](https://github.com/mraniki/tt/commit/24287c0784db47992cd821f0575eb24ddb500979))
+
+### 📝
+
+* 📝 ([`520295e`](https://github.com/mraniki/tt/commit/520295ee597ed0940a49e2324a26aaba3af01576))
+
+* 📝 doc update ([`847cd3c`](https://github.com/mraniki/tt/commit/847cd3c62754b614685420cf93d599c18a34483e))
+
+* 📝  improve docs ([`a041659`](https://github.com/mraniki/tt/commit/a041659609a70101dd1234289814b94d011454a7))
+
+
 ## v4.10.7 (2023-08-21)
 
 ### Other
