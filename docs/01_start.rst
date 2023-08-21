@@ -3,8 +3,8 @@
 👋 Getting Started
 ==================
 
-.. note:: First time, use a testnet account, create a sandbox account on Binance https://testnet.binance.org/.
-   You can copy/paste the below for quick start via the discord platform. You will need to replace the values with your own.
+.. note:: First time, use a testnet account and create a sandbox account on Binance https://testnet.binance.org/.
+   You can copy/paste the below for quick start using discord platform. You will need to replace the values with your own.
    
    Copy the content to :file:`settings.toml`
 
@@ -26,6 +26,7 @@
       cex_defaulttype = "spot"
       cex_ordertype = "market"
 
+
    or use the following for your .env or env variables:
 
    .. code:: console
@@ -41,9 +42,9 @@
       TT_CEX_NAME = 'binance' 
       TT_CEX_API = 'your_binance_api_sandbox_key' 
       TT_CEX_SECRET = 'your_binance_api_sandbox_secret'
-      TT_CEX_testmode = true
-      TT_CEX_defaulttype = "spot"
-      TT_CEX_ordertype = "market"
+      TT_CEX_TESTMODE = true
+      TT_CEX_DEFAULTTYPE = "spot"
+      TT_CEX_ORDERTYPE = "market"
 
 
 💬 Chat Platform Credentials
