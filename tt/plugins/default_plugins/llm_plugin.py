@@ -12,14 +12,16 @@ from tt.utils import send_notification
 
 
 class LlmPlugin(BasePlugin):
-    """ llm_plugin Plugin """
+    """llm_plugin Plugin"""
+
     name = os.path.splitext(os.path.basename(__file__))[0]
+
     def __init__(self):
         super().__init__()
         self.enabled = settings.llm_enabled
         if self.enabled:
             self.help_message = settings.llm_commands
-            self.llm= MyLLM()
+            self.llm = MyLLM()
 
     async def start(self):
         """Starts the plugin"""
@@ -37,13 +39,13 @@ class LlmPlugin(BasePlugin):
         if not self.should_handle(msg):
             return
         if self.llm.continous_mode:
-            await self.llm.continous_mode(msg)
+            await self.send_notification(f"{await self.llm.continous_mode(msg)}")
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_help: self.get_llm_help,
+                settings.bot_command_help: self.llm.get_myllm_help,
                 settings.bot_command_info: self.llm.get_myllm_info,
                 settings.bot_command_aimode: self.llm.switch_continous_mode,
                 settings.bot_command_info: self.llm.clear_chat_history,
@@ -53,8 +55,3 @@ class LlmPlugin(BasePlugin):
             if command in command_mapping:
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
-
-    async def get_llm_help(self):
-        """Help Message"""
-        return f"{self.help_message}"
-
