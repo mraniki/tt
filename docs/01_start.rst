@@ -3,8 +3,12 @@
 👋 Getting Started
 ==================
 
+💨 Quick Setup
+==============
+
 .. note:: First time, use a testnet account and create a sandbox account on Binance https://testnet.binance.org/.
    You can copy/paste the below for quick start using discord platform. You will need to replace the values with your own.
+   You might need to add test tokens in your dex wallet via https://faucetlink.to/goerli
    
    Copy the content to :file:`settings.toml`
 
@@ -18,6 +22,7 @@
       dex_private_key = '0xyour_private_key'
       dex_block_explorer_url = "https://api-goerli.etherscan.io/"
       dex_block_explorer_api = "your_blockscan_api_key"
+      trading_asset_address = "0xa3726f2e6423caF1824cD7721B543B29b621fB4f"
       cex_enabled = true
       cex_name = 'binance' 
       cex_api = 'your_binance_api_sandbox_key' 
@@ -38,6 +43,7 @@
       TT_DEX_PRIVATE_KEY = '0xyour_private_key'
       TT_DEX_BLOCK_EXPLORER_URL = "https://api-goerli.etherscan.io/"
       TT_DEX_BLOCK_EXPLORER_API = "your_blockscan_api_key"
+      TT_TRADING_ASSET_ADDRESS = "0xa3726f2e6423caF1824cD7721B543B29b621fB4f"
       TT_CEX_ENABLED = true
       TT_CEX_NAME = 'binance' 
       TT_CEX_API = 'your_binance_api_sandbox_key' 
