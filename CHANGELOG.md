@@ -2,6 +2,13 @@
 
 
 
+## v4.10.9 (2023-08-22)
+
+### :bug:
+
+* :bug: ([`f6c3029`](https://github.com/mraniki/tt/commit/f6c3029fb8354781182d513c12de22acba855953))
+
+
 ## v4.10.8 (2023-08-21)
 
 ### Other
