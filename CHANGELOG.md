@@ -2,6 +2,13 @@
 
 
 
+## v4.10.11 (2023-08-22)
+
+### :memo:
+
+* :memo: ([`7d33d12`](https://github.com/mraniki/tt/commit/7d33d128313a87d9d99393360279cfd924446491))
+
+
 ## v4.10.10 (2023-08-22)
 
 ### Update
