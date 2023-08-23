@@ -13,46 +13,47 @@
    Copy the content to :file:`settings.toml`
 
 
-.. code:: toml
-   [default]
-   bot_token = 'your_discord_bot_token'
-   bot_channel_id = 'your_discord_channel_id'
-   apprise_url = 'discord://your_discord_webhookid/your_discord_webhooktoken'
-   dex_rpc = "https://rpc.ankr.com/eth_goerli"
-   dex_wallet_address = '0xyour_private_key'
-   dex_private_key = '0xyour_private_key'
-   dex_block_explorer_url = "https://api-goerli.etherscan.io/"
-   dex_block_explorer_api = "your_blockscan_api_key"
-   trading_asset_address = "0xa3726f2e6423caF1824cD7721B543B29b621fB4f"
-   cex_enabled = true
-   cex_name = 'binance' 
-   cex_api = 'your_binance_api_sandbox_key' 
-   cex_secret = 'your_binance_api_sandbox_secret'
-   cex_testmode = true
-   cex_defaulttype = "spot"
-   cex_ordertype = "market"
-
-
-or use the following for your .env or env variables:
-
-
-.. code:: console
-   TT_BOT_TOKEN = 'your_discord_bot_token'
-   TT_BOT_CHANNEL_ID = 'your_discord_channel_id'
-   TT_APPRISE_URL = 'discord://your_discord_webhookid/your_discord_webhooktoken'
-   TT_DEX_RPC = "https://rpc.ankr.com/eth_goerli"
-   TT_DEX_WALLET_ADDRESS = '0xyour_wallet_address'
-   TT_DEX_PRIVATE_KEY = '0xyour_private_key'
-   TT_DEX_BLOCK_EXPLORER_URL = "https://api-goerli.etherscan.io/"
-   TT_DEX_BLOCK_EXPLORER_API = "your_blockscan_api_key"
-   TT_TRADING_ASSET_ADDRESS = "0xa3726f2e6423caF1824cD7721B543B29b621fB4f"
-   TT_CEX_ENABLED = true
-   TT_CEX_NAME = 'binance' 
-   TT_CEX_API = 'your_binance_api_sandbox_key' 
-   TT_CEX_SECRET = 'your_binance_api_sandbox_secret'
-   TT_CEX_TESTMODE = true
-   TT_CEX_DEFAULTTYPE = "spot"
-   TT_CEX_ORDERTYPE = "market"
+   .. code:: toml
+   
+      [default]
+      bot_token = 'your_discord_bot_token'
+      bot_channel_id = 'your_discord_channel_id'
+      apprise_url = 'discord://your_discord_webhookid/your_discord_webhooktoken'
+      dex_rpc = "https://rpc.ankr.com/eth_goerli"
+      dex_wallet_address = '0xyour_private_key'
+      dex_private_key = '0xyour_private_key'
+      dex_block_explorer_url = "https://api-goerli.etherscan.io/"
+      dex_block_explorer_api = "your_blockscan_api_key"
+      trading_asset_address = "0xa3726f2e6423caF1824cD7721B543B29b621fB4f"
+      cex_enabled = true
+      cex_name = 'binance' 
+      cex_api = 'your_binance_api_sandbox_key' 
+      cex_secret = 'your_binance_api_sandbox_secret'
+      cex_testmode = true
+      cex_defaulttype = "spot"
+      cex_ordertype = "market"
+   
+   
+   or use the following for your .env or env variables:
+   
+   .. code:: console
+   
+      TT_BOT_TOKEN = 'your_discord_bot_token'
+      TT_BOT_CHANNEL_ID = 'your_discord_channel_id'
+      TT_APPRISE_URL = 'discord://your_discord_webhookid/your_discord_webhooktoken'
+      TT_DEX_RPC = "https://rpc.ankr.com/eth_goerli"
+      TT_DEX_WALLET_ADDRESS = '0xyour_wallet_address'
+      TT_DEX_PRIVATE_KEY = '0xyour_private_key'
+      TT_DEX_BLOCK_EXPLORER_URL = "https://api-goerli.etherscan.io/"
+      TT_DEX_BLOCK_EXPLORER_API = "your_blockscan_api_key"
+      TT_TRADING_ASSET_ADDRESS = "0xa3726f2e6423caF1824cD7721B543B29b621fB4f"
+      TT_CEX_ENABLED = true
+      TT_CEX_NAME = 'binance' 
+      TT_CEX_API = 'your_binance_api_sandbox_key' 
+      TT_CEX_SECRET = 'your_binance_api_sandbox_secret'
+      TT_CEX_TESTMODE = true
+      TT_CEX_DEFAULTTYPE = "spot"
+      TT_CEX_ORDERTYPE = "market"
 
 
 
