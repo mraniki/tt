@@ -2,6 +2,13 @@
 
 
 
+## v4.10.12 (2023-08-23)
+
+### Update
+
+* Update 01_start.rst ([`9c3d537`](https://github.com/mraniki/tt/commit/9c3d537180e4dadb5cf904060dc6c541dc1aa150))
+
+
 ## v4.10.11 (2023-08-22)
 
 ### :memo:
