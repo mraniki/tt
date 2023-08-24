@@ -51,14 +51,13 @@ cefi = "^1.1.13"
 dxsp = "^4.2.25"
 findmyorder = "^1.7.16"
 iamlistening = "^3.3.5"
-talkytrend = "^1.13.2"
+talkytrend = "^1.14.4"
 myllm = "^1.2.31"
 
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^8.0.7"
-#python-semantic-release = "^7.34.6"
-ruff = "^0.0.284"
+ruff = "^0.0.285"
 
 [tool.ruff]
 select = [
@@ -88,18 +87,6 @@ overgeneral-exceptions = [
 ]
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
 pytest-cov = "^4.1"
@@ -107,17 +94,6 @@ pytest-asyncio = "^0.21.0"
 pytest-mock = "^3.11.1"
 pytest-loguru = "^0.2.0"
 pytest-playwright = "^0.4.0"
-
-
-
-
-
-
-
-
-
-
-
 
 
 
