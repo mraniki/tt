@@ -9,21 +9,3 @@ updates:
       interval: "daily"
     commit-message:
         prefix: "⬆️ 🤖 Dependencies"
-
-
-  # Maintain dependencies for GitHub Actions
-  # - package-ecosystem: "github-actions"
-  #   directory: "/"
-  #   #target-branch: "dev"
-  #   schedule:
-  #     interval: "weekly"
-  #   commit-message:
-  #     prefix: "⬆️ Dep"
-
-  # Maintain dependencies for pip
-  #- package-ecosystem: "pip"
-  #  directory: "/.requirements/"
-  #  schedule:
-  #    interval: "weekly"
-  #  commit-message:
-  #    prefix: "⬆️ Dep"
