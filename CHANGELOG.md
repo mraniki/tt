@@ -2,6 +2,13 @@
 
 
 
+## v4.10.17 (2023-08-24)
+
+### Update
+
+* Update pyproject.toml ([`bf9e9c7`](https://github.com/mraniki/tt/commit/bf9e9c70660bc26cb3101fd4207b5b060a47075b))
+
+
 ## v4.10.16 (2023-08-24)
 
 ### Other
