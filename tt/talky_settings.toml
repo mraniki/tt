@@ -417,7 +417,7 @@ enable_yfinance = true
 # yahoo finance ticker reference
 # to retrieve company news
 # or index news
-ticker_reference = "^GSPC"
+ticker_reference = "NVDA"
 
 # Events Enable/Disable
 enable_events = true
