@@ -2,6 +2,13 @@
 
 
 
+## v4.10.14 (2023-08-24)
+
+### Update
+
+* Update talky_settings.toml for ticker reference default value to NVDA ([`54256f7`](https://github.com/mraniki/tt/commit/54256f799ee27f7dc2424b66ad660f4de02230bf))
+
+
 ## v4.10.13 (2023-08-23)
 
 ### Update
