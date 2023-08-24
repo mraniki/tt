@@ -2,6 +2,13 @@
 
 
 
+## v4.10.15 (2023-08-24)
+
+### Update
+
+* Update pyproject.toml  :arrow_up: talkytrend and ruff ([`25ccefd`](https://github.com/mraniki/tt/commit/25ccefd00428fd8a75e34addd366dbaa24b35207))
+
+
 ## v4.10.14 (2023-08-24)
 
 ### Update
