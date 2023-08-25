@@ -2,7 +2,28 @@
 
 
 
+## v4.11.11 (2023-08-25)
+
+### Other
+
+* Merge pull request #692 from mraniki/dev
+
+⚗️ stylesheet test and vue script ([`555be53`](https://github.com/mraniki/tt/commit/555be535464fcc129d4dc100d133338665b51184))
+
+* Merge branch &#39;main&#39; into dev ([`d77ee25`](https://github.com/mraniki/tt/commit/d77ee254fe85a1f08456cb53dff1ddb168249b02))
+
+### ⚗️
+
+* ⚗️ testing vue ([`95bb1e6`](https://github.com/mraniki/tt/commit/95bb1e6540adf2c45b1cd7e94137bfc289711543))
+
+* ⚗️ stylesheet test ([`2ed6426`](https://github.com/mraniki/tt/commit/2ed64265ca2ece66acf395753bbde697732d24fa))
+
+
 ## v4.11.10 (2023-08-25)
+
+### Other
+
+* Merge branch &#39;main&#39; into dev ([`fb5f698`](https://github.com/mraniki/tt/commit/fb5f698a3ec7a56454ab4c7fd8f235ff7c101083))
 
 ### Update
 
@@ -11,12 +32,20 @@
 
 ## v4.11.9 (2023-08-25)
 
+### Other
+
+* Merge branch &#39;main&#39; into dev ([`60ea043`](https://github.com/mraniki/tt/commit/60ea043b93bef424f6dfd5f1d0acf8e396ccd059))
+
 ### Update
 
 * Update bot.py ([`4ac2a15`](https://github.com/mraniki/tt/commit/4ac2a15e3ab573c3f1c4e204d9eb6ff5fd5841f6))
 
 
 ## v4.11.8 (2023-08-25)
+
+### Other
+
+* Merge branch &#39;main&#39; into dev ([`b62016a`](https://github.com/mraniki/tt/commit/b62016a049d90689ea36420ada5d188d38d42b5b))
 
 ### Update
 
@@ -26,6 +55,10 @@
 
 
 ## v4.11.7 (2023-08-25)
+
+### Other
+
+* Merge branch &#39;main&#39; into dev ([`bbbf6af`](https://github.com/mraniki/tt/commit/bbbf6af5bfbf361fe08751178f80ecbb5c710d46))
 
 ### Update
 
@@ -45,6 +78,10 @@
 * Merge pull request #691 from mraniki/dev
 
 🐛 fix the path issue ([`52466af`](https://github.com/mraniki/tt/commit/52466af6fac006be7155c1fe1a0d9a0f742f2f7a))
+
+### Update
+
+* Update Requirements ([`9eb7b05`](https://github.com/mraniki/tt/commit/9eb7b05ecdf4fec66616764759a723c50e26a7dd))
 
 
 ## v4.11.5 (2023-08-25)
