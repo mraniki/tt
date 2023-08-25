@@ -2,6 +2,13 @@
 
 
 
+## v4.11.9 (2023-08-25)
+
+### Update
+
+* Update bot.py ([`4ac2a15`](https://github.com/mraniki/tt/commit/4ac2a15e3ab573c3f1c4e204d9eb6ff5fd5841f6))
+
+
 ## v4.11.8 (2023-08-25)
 
 ### Update
