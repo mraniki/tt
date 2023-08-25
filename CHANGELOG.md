@@ -2,6 +2,55 @@
 
 
 
+## v4.11.0 (2023-08-25)
+
+### Fix
+
+* ♻️ fix import ([`1d43491`](https://github.com/mraniki/tt/commit/1d4349152e7f5e2696c351e0aba70e825ffd7580))
+
+### Other
+
+* Merge pull request #689 from mraniki/dev
+
+💄 landing page test ([`4893d67`](https://github.com/mraniki/tt/commit/4893d678418a1b1f2362a7923c03dbc56da1e6a7))
+
+* Merge branch &#39;main&#39; into dev ([`578a8b3`](https://github.com/mraniki/tt/commit/578a8b34fdb7e037ab7a4d1b9053870b41c0f189))
+
+* Add files via upload ([`3733962`](https://github.com/mraniki/tt/commit/373396212e81949966fe00cf930725a03e3cc684))
+
+### Update
+
+* Update pyproject.toml ([`aad8174`](https://github.com/mraniki/tt/commit/aad8174f032a490d1e268137033cde2becc679d6))
+
+* Update test_llm_plugin.py ([`771dfcd`](https://github.com/mraniki/tt/commit/771dfcd4669b4ada9e587b17e5d0b52f8f7c3e9b))
+
+* Update Requirements ([`6efd529`](https://github.com/mraniki/tt/commit/6efd529749cb55579a9ace9b2b133c1036570249))
+
+* Update Requirements ([`c1d1697`](https://github.com/mraniki/tt/commit/c1d1697bb1751b3e5f601cb1bf0a876553ecb625))
+
+### ♻️
+
+* ♻️ ([`81ee8a0`](https://github.com/mraniki/tt/commit/81ee8a06bc11d9ae59ce1085e9c40038f36a2a66))
+
+### ⬆️
+
+* ⬆️ ([`9eef130`](https://github.com/mraniki/tt/commit/9eef130ca757a68f4fd6fc826b61c6981d1be3a1))
+
+### 🐛
+
+* 🐛 directory ([`621c985`](https://github.com/mraniki/tt/commit/621c98566e2a3c005a3776790dd5752843d5b311))
+
+### 💄
+
+* 💄 landing page test ([`3563141`](https://github.com/mraniki/tt/commit/35631418dc6517916321cadb067f2fce30b26e30))
+
+### 🔥
+
+* 🔥 cleanup ([`23f14bb`](https://github.com/mraniki/tt/commit/23f14bb56be78db4eda0c5d66259ede823f17620))
+
+* 🔥 ([`52065a7`](https://github.com/mraniki/tt/commit/52065a7f55054c146933e7951bf201cf315be3a3))
+
+
 ## v4.10.17 (2023-08-24)
 
 ### Update
