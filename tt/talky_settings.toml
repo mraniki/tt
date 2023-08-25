@@ -40,6 +40,8 @@ loglevel = "INFO"
 # Uvicorn Server settings
 host = "0.0.0.0"
 port = 8080
+template_directory = "templates"
+static_directory = "static"
 
 # Your webhook secret to send
 # trade alert directly to your chat.
