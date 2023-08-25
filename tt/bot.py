@@ -32,10 +32,10 @@ app = FastAPI(title="TALKYTRADER")
 templates = Jinja2Templates(os.path.join(
     os.path.dirname(__file__),
     'templates'))
-app.mount(
-    "/static",
-    StaticFiles(directory=os.path.join(
-    os.path.dirname(__file__),'static')))
+#app.mount(
+    #"/static",
+    #StaticFiles(directory=os.path.join(
+    #os.path.dirname(__file__),'static')))
 
 
 @app.on_event("startup")
