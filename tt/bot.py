@@ -18,13 +18,13 @@ import asyncio
 
 import requests
 import uvicorn
-from fastapi import FastAPI, Request, responses, staticfiles
+from fastapi import FastAPI, Request, responses
 
 from tt.config import settings
 from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
-app.mount("/", staticfiles.StaticFiles(directory="tt/ui"), name="static")
+# app.mount("/", staticfiles.StaticFiles(directory="tt/ui"), name="static")
 
 
 @app.on_event("startup")
@@ -48,7 +48,7 @@ async def root():
     :return: A RedirectResponse object
     that redirects to "/index.html".
     """
-    return responses.RedirectResponse(url="/index.html")
+    return responses.RedirectResponse(url="tt/ui/index.html")
 
 
 @app.get("/health")
