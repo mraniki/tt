@@ -2,6 +2,25 @@
 
 
 
+## v4.11.13 (2023-08-25)
+
+### Update
+
+* Update index.html ([`266e4d4`](https://github.com/mraniki/tt/commit/266e4d4bf64a90921a87cf6df2c6c1005b3e2a03))
+
+* Update index.html ([`1fc64fd`](https://github.com/mraniki/tt/commit/1fc64fd4f28227c2a314f2f02cd199fbfeb81c0e))
+
+* Update talky_settings.toml ([`8194dc1`](https://github.com/mraniki/tt/commit/8194dc1a73d358a474b241cd4a70fc183328e1e9))
+
+* Update bot.py ([`2dbef83`](https://github.com/mraniki/tt/commit/2dbef832ef91bc379158b06a019f70b06f19c904))
+
+* Update index.html ([`38e1381`](https://github.com/mraniki/tt/commit/38e1381f597269743c25a8d8d3deacdc14e75151))
+
+* Update index.html ([`fd3aa5d`](https://github.com/mraniki/tt/commit/fd3aa5d0254078ea1c1965f40177847d3ec6263e))
+
+* Update index.html ([`53302c6`](https://github.com/mraniki/tt/commit/53302c622ec25d4209e39f46891c4844b72eeacd))
+
+
 ## v4.11.12 (2023-08-25)
 
 ### Update
