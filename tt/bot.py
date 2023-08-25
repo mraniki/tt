@@ -15,6 +15,7 @@ to interact with trading module.
 """
 
 import asyncio
+import os
 
 import requests
 import uvicorn
@@ -27,8 +28,10 @@ from tt.config import settings
 from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
-templates = Jinja2Templates(directory="/templates")
-app.mount("/static", StaticFiles(directory="/static"), name="static")
+templates = Jinja2Templates(directory=f"{os.path.abspath('')}/templates")
+app.mount(
+    "/static", StaticFiles(directory=f"{os.path.abspath('')}/static"), name="static"
+)
 
 
 @app.on_event("startup")
@@ -52,8 +55,7 @@ async def root(request: Request):
     :return: A RedirectResponse object
     that redirects to "/index.html".
     """
-    return templates.TemplateResponse('index.html', {"request": request})
-
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get("/health")
