@@ -2,6 +2,15 @@
 
 
 
+## v4.11.7 (2023-08-25)
+
+### Update
+
+* Update bot.py ([`1e3403b`](https://github.com/mraniki/tt/commit/1e3403b3042663c638e596b5841d03507019ab68))
+
+* :ambulance: Update bot.py path for jinja template ([`9a56fae`](https://github.com/mraniki/tt/commit/9a56faefa6049eb1d7350b47abae20e1517c6f68))
+
+
 ## v4.11.6 (2023-08-25)
 
 ### Fix
