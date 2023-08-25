@@ -2,6 +2,19 @@
 
 
 
+## v4.11.6 (2023-08-25)
+
+### Fix
+
+* 🐛 fix the path issue ([`07283da`](https://github.com/mraniki/tt/commit/07283daee0df7600a55231245ce7148efa16a586))
+
+### Other
+
+* Merge pull request #691 from mraniki/dev
+
+🐛 fix the path issue ([`52466af`](https://github.com/mraniki/tt/commit/52466af6fac006be7155c1fe1a0d9a0f742f2f7a))
+
+
 ## v4.11.5 (2023-08-25)
 
 ### Update
