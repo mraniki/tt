@@ -18,7 +18,7 @@ import asyncio
 
 import requests
 import uvicorn
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request, responses
 
 from tt.config import settings
 from tt.utils import __version__, run_bot, send_notification
@@ -47,7 +47,7 @@ async def root():
     :return: A RedirectResponse object
     that redirects to "/index.html".
     """
-    return Response.RedirectResponse(url="tt/ui/index.html")
+    return responses.RedirectResponse(url="tt/ui/index.html")
 
 
 @app.get("/health")
