@@ -2,25 +2,24 @@
 <html>
 <head>
     <title>TalkyTrader</title>
-    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+    <link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/mraniki/tt/main/tt/static/style.css">
 </head>
 <body>
     <h1>TalkyTrader</h1>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-    <div id="app">{{ message }}</div>
+    <div id="app">{{ msg }}</div>
 
     <script>
-    const { createApp, ref } = Vue
-
-    createApp({
-        setup() {
-        const message = ref('Hello vue!')
-        return {
-            message
+      new Vue({
+        el: "#hello-world-app",
+        data() {
+          return {
+            msg: "Hello World!"
+          }
         }
-        }
-    }).mount('#app')
-</script>
+      });
+    </script>
+    
 </body>
 </html>
