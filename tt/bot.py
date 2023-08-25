@@ -35,8 +35,7 @@ templates = Jinja2Templates(os.path.join(
 app.mount(
     "/static",
     StaticFiles(directory=os.path.join(
-    os.path.dirname(__file__),'static'),
-    name="static"))
+    os.path.dirname(__file__),'static'))
 
 
 @app.on_event("startup")
