@@ -18,12 +18,17 @@ import asyncio
 
 import requests
 import uvicorn
-from fastapi import FastAPI, Request, responses
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 from tt.config import settings
 from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
+templates = Jinja2Templates(directory="tt/templates")
+app.mount("/static", StaticFiles(directory="tt/static"), name="static")
 
 
 @app.on_event("startup")
@@ -39,7 +44,7 @@ async def start_bot_task():
     event_loop.create_task(run_bot())
 
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 async def root():
     """
     Get the root endpoint.
@@ -47,7 +52,7 @@ async def root():
     :return: A RedirectResponse object
     that redirects to "/index.html".
     """
-    return responses.RedirectResponse(url="tt/ui/index.html")
+    return templates.TemplateResponse("index.html")
 
 
 @app.get("/health")
