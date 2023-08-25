@@ -18,7 +18,7 @@ import asyncio
 
 import requests
 import uvicorn
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, responses
 
 from tt.config import settings
 from tt.utils import __version__, run_bot, send_notification
@@ -38,16 +38,22 @@ async def start_bot_task():
     event_loop = asyncio.get_event_loop()
     event_loop.create_task(run_bot())
 
+
 @app.get("/")
 async def root():
-    """fastapi root"""
-    return __version__
+    """
+    Get the root endpoint.
+
+    :return: A RedirectResponse object
+    that redirects to "/index.html".
+    """
+    return responses.RedirectResponse(url="tt/ui/index.html")
 
 
 @app.get("/health")
 async def health_check():
-    """ 
-    End point to know if 
+    """
+    End point to know if
     the API is up and running
     """
     return __version__
@@ -55,16 +61,16 @@ async def health_check():
 
 @app.post(f"/webhook/{settings.webhook_secret}", status_code=202)
 async def webhook(request: Request):
-    """ 
+    """
     Webhook endpoint to receive webhook requests
     with option to forward the data to another endpoint.
-    Webhook endpoint to 
-    send order signal generated 
-    via http://tradingview.com 
-    or anyother platform. 
-    Endpoint is 
-    :file:`/webhook/{settings.webhook_secret}` 
-    so in trading view you can add: 
+    Webhook endpoint to
+    send order signal generated
+    via http://tradingview.com
+    or anyother platform.
+    Endpoint is
+    :file:`/webhook/{settings.webhook_secret}`
+    so in trading view you can add:
     https://YOURIPorDOMAIN/webhook/123456
     """
     data = await request.body()
@@ -77,15 +83,11 @@ async def webhook(request: Request):
 
 
 if __name__ == "__main__":
-    """ 
+    """
     This line runs the Uvicorn server with the specified host and port.
-    The `app` variable is an instance of the FastAPI application, 
-    and the `settings.host` and `settings.port` variables 
+    The `app` variable is an instance of the FastAPI application,
+    and the `settings.host` and `settings.port` variables
     are the host and port to run the server on, respectively
     More Info https://github.com/encode/uvicorn
-    """ 
-    uvicorn.run(
-        app,
-        host=settings.host,
-        port=int(settings.port),
-        log_level="critical")
+    """
+    uvicorn.run(app, host=settings.host, port=int(settings.port), log_level="critical")
