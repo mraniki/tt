@@ -2,6 +2,13 @@
 
 
 
+## v4.11.12 (2023-08-25)
+
+### Update
+
+* Update index.html ([`7513ab4`](https://github.com/mraniki/tt/commit/7513ab4154423d6b7d87338cd9188d6653fd4743))
+
+
 ## v4.11.11 (2023-08-25)
 
 ### Other
