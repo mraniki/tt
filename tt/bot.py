@@ -45,14 +45,15 @@ async def start_bot_task():
 
 
 @app.get("/", response_class=HTMLResponse)
-async def root():
+async def root(request: Request):
     """
     Get the root endpoint.
 
     :return: A RedirectResponse object
     that redirects to "/index.html".
     """
-    return templates.TemplateResponse("index.html")
+    return templates.TemplateResponse('index.html', {"request": request})
+
 
 
 @app.get("/health")
