@@ -2,6 +2,19 @@
 
 
 
+## v4.11.1 (2023-08-25)
+
+### Other
+
+* Merge pull request #690 from mraniki/dev
+
+♻️ ([`7dcc0ad`](https://github.com/mraniki/tt/commit/7dcc0ad07addf734e460f485498357f0a0b3ab96))
+
+### ♻️
+
+* ♻️ ([`607221f`](https://github.com/mraniki/tt/commit/607221fe30fe8b9811cab1e93dbebe2001fd67d2))
+
+
 ## v4.11.0 (2023-08-25)
 
 ### Fix
