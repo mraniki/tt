@@ -55,8 +55,9 @@ async def root(request: Request):
     :return: A RedirectResponse object
     that redirects to "/index.html".
     """
-    return templates.TemplateResponse("index.html", {"request": request})
-
+    if settings.ui_enabled:
+        return templates.TemplateResponse("index.html", {"request": request})
+    return __version__
 
 @app.get("/health")
 async def health_check():
