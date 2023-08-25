@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <meta>
-    <meta charset="UTF-8">
-    <title>TalkyTrader</title>
-    <link rel="stylesheet" type="text/css" href="/static/style.css">
-  </meta>
-
-  <body>
+	<head>
+  	<meta>
+	    <title>TalkyTrader</title>
+	    <link rel="stylesheet" type="text/css" href="/static/style.css">
+ 	</meta>
+	</head>
 	
-    <div id="hello-world-app">
-      <h1>{{ msg }}</h1>
-    </div>
-
-   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
-    <script>
-      new Vue({
-        el: "#hello-world-app",
-        data() {
-          return {
-            msg: "Hello World!"
-          }
-        }
-      });
-    </script>
+  	<body>
+		<div id="app">{{ message }}</div>
+	
+		<script type="module">
+		  import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+		
+		  createApp({
+		    setup() {
+		      const message = ref('Hello Vue!')
+		      return {
+		        message
+		      }
+		    }
+		  }).mount('#app')
+		</script>
     
-</body>
+	</body>
+	
 </html>
