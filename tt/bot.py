@@ -24,7 +24,7 @@ from tt.config import settings
 from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
-app.mount("/", staticfiles.StaticFiles(directory="ui"), name="static")
+app.mount("/", staticfiles.StaticFiles(directory="tt/ui"), name="static")
 
 
 @app.on_event("startup")
