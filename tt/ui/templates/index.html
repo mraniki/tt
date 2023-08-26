@@ -3,9 +3,9 @@
 	<head>
  
 	    <title>TalkyTrader</title>
-	    <link rel="stylesheet" type="text/css" href="./style.css">
-
-      <script src="./app.js" type="module"></script>
+	    <!-- <link rel="stylesheet" type="text/css" href="./style.css"> -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}"/>
+		<script src="{{ url_for('static', filename='/js/app.js') }}" type="module"></script>
 	</head>
 	
   	<body>

@@ -1,6 +1,9 @@
 # comment
-*/doc*
-*/examples*
-*/tests*
+/docs
+/examples
+/tests
 *.md
 *.gitignore
+<!-- pyproject.toml -->
+.md
+LICENSE

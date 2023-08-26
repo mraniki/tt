@@ -15,11 +15,11 @@ to interact with trading module.
 """
 
 import asyncio
-import os
 
+# import os
 import requests
 import uvicorn
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, StaticFiles
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
@@ -28,7 +28,8 @@ from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
 
-templates = Jinja2Templates(os.path.join(os.path.dirname(__file__), "ui"))
+templates = Jinja2Templates("./ui/templates")
+app.mount("./ui/static", StaticFiles(directory="static"), name="static")
 
 
 @app.on_event("startup")
