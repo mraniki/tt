@@ -29,8 +29,8 @@ from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
 
-
-templates = Jinja2Templates(os.path.join(os.path.dirname(__file__), "ui/templates"))
+#os.path.join(os.path.dirname(__file__), 
+templates = Jinja2Templates("./ui/templates")
 app.mount("/", StaticFiles(directory=os.path.dirname(__file__), html=True), name="/")
 
 @app.on_event("startup")
