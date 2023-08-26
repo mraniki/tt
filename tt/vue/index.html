@@ -3,15 +3,44 @@
 	<head>
  
 	    <title>TalkyTrader</title>
-	    <link rel="stylesheet" type="text/css" href="style.css">
-
+	    <link rel="stylesheet" type="text/css" href="@vue/style.css">
+      <script type="importmap">
+        {
+          "imports": {
+            "vue": "https://unpkg.com/vue@3.3.4/dist/vue.esm-browser.js",
+            "vue/server-renderer": "https://unpkg.com/@vue/server-renderer@3.3.4/dist/server-renderer.esm-browser.js"
+          }
+        }
+      </script>
 	</head>
 	
   	<body>
 		<h1> TalkyTrader </h1>
 
+
+    <script type="module">
+      import { createApp } from 'vue'
+      
+      createApp({
+        data() {
+          return {
+            message: 'Hello World!'
+          }
+        }
+      }).mount('#app')
+      </script>
+      
+      <div id="app">
+        <h2>{{ message }}</h2>
+      </div>
+  
+	</body>
+	
+</html>
+
+
 <!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
+<!-- <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
@@ -32,9 +61,5 @@
   "height": 400
 }
   </script>
-</div>
+</div> -->
 <!-- TradingView Widget END -->
-    
-	</body>
-	
-</html>

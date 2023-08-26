@@ -30,7 +30,7 @@ from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
 
-templates = Jinja2Templates(os.path.join(os.path.dirname(__file__), "templates"))
+templates = Jinja2Templates(os.path.join(os.path.dirname(__file__), "vue"))
 # app.mount("/static", "static")
 
 
