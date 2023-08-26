@@ -30,7 +30,7 @@ from tt.utils import __version__, run_bot, send_notification
 app = FastAPI(title="TALKYTRADER")
 
 templates = Jinja2Templates("./ui/templates")
-app.mount("/static", StaticFiles(directory="./ui/static"), name="static")
+app.mount("/static", StaticFiles(directory="tt/ui/static"), name="static")
 
 
 @app.on_event("startup")
