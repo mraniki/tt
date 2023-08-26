@@ -4,35 +4,28 @@
  
 	    <title>TalkyTrader</title>
 	    <link rel="stylesheet" type="text/css" href="@vue/style.css">
-      <script type="importmap">
-        {
-          "imports": {
-            "vue": "https://unpkg.com/vue@3.3.4/dist/vue.esm-browser.js",
-            "vue/server-renderer": "https://unpkg.com/@vue/server-renderer@3.3.4/dist/server-renderer.esm-browser.js"
-          }
-        }
-      </script>
+      <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+      <script src="@vue/app.js" type="module"></script>
 	</head>
 	
   	<body>
 		<h1> TalkyTrader </h1>
 
+    <div id="app">{{ message }}</div>
 
-    <script type="module">
-      import { createApp } from 'vue'
+    <!-- <script>
+      const { createApp } = Vue
       
       createApp({
         data() {
           return {
-            message: 'Hello World!'
+            message: 'Hello Vue!'
           }
         }
       }).mount('#app')
-      </script>
-      
-      <div id="app">
-        <h2>{{ message }}</h2>
-      </div>
+    </script>
+       -->
+
   
 	</body>
 	

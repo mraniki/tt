@@ -1,5 +1,9 @@
-// import { createApp } from 'vue'
-// // import the root component App from a single-file component.
-// import App from './App.vue'
+import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
-// const app = createApp(App)
+createApp({
+  data() {
+    return {
+      message: 'Hello World (via VueJS-CDN)'
+    }
+  }
+}).mount('#app')
