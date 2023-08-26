@@ -31,7 +31,7 @@ app = FastAPI(title="TALKYTRADER")
 
 #os.path.join(os.path.dirname(__file__), 
 templates = Jinja2Templates("./ui/templates")
-app.mount("/", StaticFiles(directory=os.path.dirname(__file__), html=True), name="/")
+app.mount("/", StaticFiles(directory=os.path.dirname(__file__)), name="/")
 
 @app.on_event("startup")
 async def start_bot_task():
