@@ -15,6 +15,7 @@ to interact with trading module.
 """
 
 import asyncio
+from pathlib import Path
 
 # import os
 import requests
@@ -29,7 +30,11 @@ from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
 templates = Jinja2Templates(directory="templates")
-# app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount(
+    "/static",
+    StaticFiles(directory=Path(__file__).absolute() / "static"),
+    name="static",
+)
 
 
 @app.on_event("startup")
