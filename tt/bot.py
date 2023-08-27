@@ -21,8 +21,7 @@ import requests
 import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-
-# from fastapi.staticfiles import StaticFiles
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from tt.config import settings
@@ -31,7 +30,12 @@ from tt.utils import __version__, run_bot, send_notification
 app = FastAPI(title="TALKYTRADER")
 
 templates = Jinja2Templates(os.path.join(os.path.dirname(__file__), "templates"))
-# app.mount("/static", "static")
+
+# app.mount(
+#     "/static",
+#     StaticFiles(directory=os.path.join(os.path.dirname(__file__), "ui")),
+#     name="static",
+# )
 
 
 @app.on_event("startup")
@@ -58,6 +62,7 @@ async def root(request: Request):
     if settings.ui_enabled:
         return templates.TemplateResponse("index.html", {"request": request})
     return __version__
+
 
 @app.get("/health")
 async def health_check():
