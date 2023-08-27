@@ -30,7 +30,7 @@ from tt.utils import __version__, run_bot, send_notification
 app = FastAPI(title="TALKYTRADER")
 
 templates = Jinja2Templates(os.path.join(os.path.dirname(__file__), "ui/templates"))
-app.mount("/static", StaticFiles(directory=os.path.dirname(__file__)), name="static")
+app.mount("/static", StaticFiles(directory=os.path.join(os.path.dirname(__file__), "ui/")), name="static")
 
 @app.on_event("startup")
 async def start_bot_task():
