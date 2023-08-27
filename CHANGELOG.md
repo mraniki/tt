@@ -2,6 +2,139 @@
 
 
 
+## v4.11.15 (2023-08-27)
+
+### :alembic:
+
+* :alembic:️  vue ([`dcbd4e6`](https://github.com/mraniki/tt/commit/dcbd4e63f897b793c692612e3b9bc8565cc3bd4e))
+
+### :recycle:
+
+* :recycle: ([`efcdbcb`](https://github.com/mraniki/tt/commit/efcdbcba03c6d14330d356dee404add5c65609a7))
+
+### Fix
+
+* 🐛 fix uvicorn https://stackoverflow.com/questions/73450371/url-for-is-using-http-instead-of-https-in-fastapi ([`5f33142`](https://github.com/mraniki/tt/commit/5f331422eca84297352b710618a73b37a13a767b))
+
+### Other
+
+* Merge pull request #696 from mraniki/dev
+
+✨ frontend UI framework ([`18236c0`](https://github.com/mraniki/tt/commit/18236c0b5b7878aaf55b5e8b7e844061b71dfa1e))
+
+* Refactor stylesheet link in index.html ([`21075e2`](https://github.com/mraniki/tt/commit/21075e2127466a2374258385509bfac5aecc45b4))
+
+* Refactor static file handling ([`0907eb3`](https://github.com/mraniki/tt/commit/0907eb3fbebdef64554049e5795677e56e6b480f))
+
+* Delete tt/static/js directory ([`0b3a3ad`](https://github.com/mraniki/tt/commit/0b3a3ad0fc86cc7d62b63c2e7a5faa005e1e1e84))
+
+* Rename tt/static/js/app.js to tt/static/app.js ([`de85f9b`](https://github.com/mraniki/tt/commit/de85f9b53a79dd9de700927a30108abb2e168838))
+
+* Delete tt/static/css directory ([`9a61bf0`](https://github.com/mraniki/tt/commit/9a61bf05c5a599b945233bac0b79098f56e93074))
+
+* Rename tt/static/css/style.css to tt/static/style.css ([`1998780`](https://github.com/mraniki/tt/commit/1998780442fb3418ffd514f1b7ea52b7aa29e5c8))
+
+### Update
+
+* Update Requirements ([`84fc1d0`](https://github.com/mraniki/tt/commit/84fc1d0cafc82613b73b4687bd527e8adca33d19))
+
+* Update delimiters in main.js file ([`6890de9`](https://github.com/mraniki/tt/commit/6890de96786a522d9700b9425585114319b6c9cc))
+
+* Update Requirements ([`5c0b149`](https://github.com/mraniki/tt/commit/5c0b149dbefb117c33d2171fd2e610d243c790dc))
+
+* Update bot.py and index.html files ([`42c1a3a`](https://github.com/mraniki/tt/commit/42c1a3a38e4232740e227303a51436b4406b11f6))
+
+* Update bot.py and index.html files ([`85cea7a`](https://github.com/mraniki/tt/commit/85cea7a426338413c4d621fcbbc996d0d13c4d8b))
+
+* Update bot.py ([`fc1624e`](https://github.com/mraniki/tt/commit/fc1624e09f32d2d3a0e9c6cadac4bb2a6d1dad3b))
+
+* Update index.html ([`292307d`](https://github.com/mraniki/tt/commit/292307d5f9e7097fb8e635f2e456308ac975c4aa))
+
+* Update bot.py ([`6360044`](https://github.com/mraniki/tt/commit/6360044a7238b4df86305362df0ab6c1a6193873))
+
+* Update Requirements ([`640c825`](https://github.com/mraniki/tt/commit/640c82593f420542e78c370c3d139003473bee75))
+
+* Update index.html ([`bba47ac`](https://github.com/mraniki/tt/commit/bba47ac1730f5a3f3bba68cd644f6ee510fdaeb5))
+
+* Update bot.py ([`7785961`](https://github.com/mraniki/tt/commit/7785961fd0c0ed1e360ba659f40d3c656e78228b))
+
+* Update bot.py ([`c963df5`](https://github.com/mraniki/tt/commit/c963df513ce4f136ed2a718f8e6b15d320532106))
+
+* Update bot.py ([`1818ea5`](https://github.com/mraniki/tt/commit/1818ea5019996602ee6eec43283e584457eb26c5))
+
+### ♻️
+
+* ♻️ ([`056f575`](https://github.com/mraniki/tt/commit/056f575b585ddf35627079b8860b108e79054e4c))
+
+* ♻️ ([`971deb1`](https://github.com/mraniki/tt/commit/971deb16b3b42066d8597e0688ec043e9478002c))
+
+* ♻️ ([`b8d154d`](https://github.com/mraniki/tt/commit/b8d154d8925dddd74f73b6bc01ae26395420ad9a))
+
+* ♻️ ([`2869600`](https://github.com/mraniki/tt/commit/286960037dec87e1b7ba86c1f516ad8d76d300dc))
+
+* ♻️ ([`d8eb17c`](https://github.com/mraniki/tt/commit/d8eb17c47a7dc99f921e60e5fb079b29b0c56196))
+
+* ♻️ ([`c2d898a`](https://github.com/mraniki/tt/commit/c2d898ad03fbaab779ab65b9c316ed1e0fe039e1))
+
+* ♻️ ([`5f9e2a2`](https://github.com/mraniki/tt/commit/5f9e2a2efcdca05ce6bf1ce794d03ee767367873))
+
+### ⚗️
+
+* ⚗️ ([`7b7eecf`](https://github.com/mraniki/tt/commit/7b7eecfbccc7c60ce55d516330a1b2ca5244e19a))
+
+* ⚗️ ([`fa8e3e2`](https://github.com/mraniki/tt/commit/fa8e3e2cde91834a675c924f8c672d9df1733da1))
+
+* ⚗️ ([`7e49eb4`](https://github.com/mraniki/tt/commit/7e49eb4712718a8539eb0cb6fa69b60d64308485))
+
+* ⚗️ helloworld.vue ([`0d995f7`](https://github.com/mraniki/tt/commit/0d995f7de65226fa2b5144b1dec3bf1f01d1683c))
+
+* ⚗️ ([`d0f1307`](https://github.com/mraniki/tt/commit/d0f13076a70dd17b5279810594a6e6f61dcca597))
+
+### 🎨
+
+* 🎨 ([`990aa4b`](https://github.com/mraniki/tt/commit/990aa4b6283996c1d7571c1b070722aac5bcbbdc))
+
+### 🐛
+
+* 🐛 ([`d29e658`](https://github.com/mraniki/tt/commit/d29e6583cdbdafdba967afde789e12d140141fc0))
+
+* 🐛 ([`a7f3b37`](https://github.com/mraniki/tt/commit/a7f3b370103c49e4e08ab40030d46f8866bf18f2))
+
+* 🐛 ([`4cf54d5`](https://github.com/mraniki/tt/commit/4cf54d5c4fa91ed6c6d2e3ffc701151305352b40))
+
+* 🐛 ([`23add2f`](https://github.com/mraniki/tt/commit/23add2f190ee03680cc7b60a4c60027009797fa2))
+
+* 🐛 ([`42e96fd`](https://github.com/mraniki/tt/commit/42e96fda24c00a566f84a5085b5ef93ee2ee20c9))
+
+* 🐛 ([`b763bdf`](https://github.com/mraniki/tt/commit/b763bdf725d075f836e599264d595605bd9d5881))
+
+* 🐛 ([`f0c01b3`](https://github.com/mraniki/tt/commit/f0c01b368526233bd59f12f628f5a3301c93c9ae))
+
+* 🐛 ([`78b5875`](https://github.com/mraniki/tt/commit/78b587565de8e4b805002bd42ce2a901d6c834db))
+
+* 🐛 ([`9e7fa44`](https://github.com/mraniki/tt/commit/9e7fa4407d01401ac2138f74636bd24323f8eee3))
+
+* 🐛 ([`2b52106`](https://github.com/mraniki/tt/commit/2b521061f70f596578ebf70f749a0c4686566b5a))
+
+* 🐛 ([`c21cb57`](https://github.com/mraniki/tt/commit/c21cb57b17117081623f0b50fac4467ad59c553f))
+
+### 🔊
+
+* 🔊 ([`a325f8c`](https://github.com/mraniki/tt/commit/a325f8c513c3df49fb1dde513fa750710a505bac))
+
+* 🔊 ([`a204603`](https://github.com/mraniki/tt/commit/a2046037b50af8f12d7f9605c90aea26913f8a92))
+
+### 🔥
+
+* 🔥 ([`56f657b`](https://github.com/mraniki/tt/commit/56f657b238b69ba7fb995aa01f92eb5305dd8efb))
+
+* 🔥 ([`6e60978`](https://github.com/mraniki/tt/commit/6e60978b6ac503098d057d5c7b09d7157204f3c6))
+
+### 🔧
+
+* 🔧 ([`dd75621`](https://github.com/mraniki/tt/commit/dd756210ef85b6b1c8f571c3f31eff225b022547))
+
+
 ## v4.11.14 (2023-08-27)
 
 ### :alembic:
