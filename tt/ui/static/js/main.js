@@ -6,3 +6,5 @@ import App from './App.vue'
 const app = createApp(App)
 app.config.compilerOptions.delimiters = ['[[', ']]']
 app.mount("#app")
+
+		<script src="{{ url_for('static', filename='js/main.js') }}" ></script>

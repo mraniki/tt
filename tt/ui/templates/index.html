@@ -3,7 +3,7 @@
 	<head>
 		<!-- <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css"> -->
 		<link rel="stylesheet" href="{{ url_for('static', path='/css/main.css') }}">
-		<script src="{{ url_for('static', filename='js/main.js') }}" ></script>
+
 	    <title>TalkyTrader</title>
 
 	</head>
@@ -16,9 +16,24 @@
 			<strong>JS needed</strong>
 		</noscript>
 		
-		<div id="app"></div>
 		
+		
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
+<div id="app">{{ message }}</div>
+
+<script>
+  const { createApp, ref } = Vue
+
+  createApp({
+    setup() {
+      const message = ref('Hello vue!')
+      return {
+        message
+      }
+    }
+  }).mount('#app')
+</script>
 
 	</body>
 	
