@@ -29,12 +29,12 @@ from tt.config import settings
 from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
-templates = Jinja2Templates(directory="templates")
-app.mount(
-    "/static",
-    StaticFiles(directory=Path(__file__).parent.parent.absolute() / "static"),
-    name="static",
-)
+templates = Jinja2Templates(directory="ui/templates")
+# app.mount(
+#     "/static",
+#     StaticFiles(directory=Path(__file__).parent.parent.absolute() / "static"),
+#     name="static",
+# )
 
 
 @app.on_event("startup")
