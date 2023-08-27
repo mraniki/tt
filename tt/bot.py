@@ -53,7 +53,7 @@ async def root(request: Request):
     """
     if settings.ui_enabled:
         templates = Jinja2Templates(directory="templates")
-        app.mount("/static", StaticFiles(directory="app/tt/static"), name="static")
+        app.mount("/static", StaticFiles(directory="static"), name="static")
         return templates.TemplateResponse("index.html", {"request": request})
     return __version__
 
