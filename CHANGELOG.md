@@ -2,6 +2,107 @@
 
 
 
+## v4.11.14 (2023-08-27)
+
+### :alembic:
+
+* :alembic:️ ([`b800438`](https://github.com/mraniki/tt/commit/b80043802bd11cb4e717b8013624db3f7d0f286f))
+
+* :alembic:️  tv widget ([`68e67d4`](https://github.com/mraniki/tt/commit/68e67d47f9b575630ae553c494672db06bb90521))
+
+* :alembic:️: Add index.html and app.js files ([`87275c9`](https://github.com/mraniki/tt/commit/87275c99fa0040be64c0ae2bea291011732be59a))
+
+### Fix
+
+* Refactor file paths in bot.py and fix stylesheet link in index.html ([`ed89725`](https://github.com/mraniki/tt/commit/ed89725fe90819b4cd47a2bae177d7a0b8af11de))
+
+### Other
+
+* Merge pull request #693 from mraniki/dev
+
+:alembic:️  Add index.html and app.js files ([`6c07c06`](https://github.com/mraniki/tt/commit/6c07c06464a6e3b7effe969a354e248abb62e2c2))
+
+* Refactor static file mounting in bot.py ([`28536cb`](https://github.com/mraniki/tt/commit/28536cb67eddca5b9d50a9002998e6dd62a13499))
+
+* Refactor static file serving in bot.py ([`fa6470d`](https://github.com/mraniki/tt/commit/fa6470d789d343da1bea3a1dded7e8033dc2e409))
+
+* Refactor static file paths in bot.py and index.html ([`82eb418`](https://github.com/mraniki/tt/commit/82eb4185bfe996ad46ccc648e50e23f3a7a94cd7))
+
+* Refactor app.mount() in bot.py ([`fc5a601`](https://github.com/mraniki/tt/commit/fc5a601ab4ea0033873ae31153d99fc87f07a26d))
+
+* Refactor template path in bot.py ([`cc4e021`](https://github.com/mraniki/tt/commit/cc4e0215abf45e90e9a1be3ac6518653cc90ebdc))
+
+* Refactor template path in bot.py ([`f0fdd08`](https://github.com/mraniki/tt/commit/f0fdd08089c429269acbdbb70e6122cf7a525ccb))
+
+* Refactor template path in bot.py ([`7250b2c`](https://github.com/mraniki/tt/commit/7250b2cb56f3bb9165d1f45d3fe0e585f741955f))
+
+* Add import os and remove commented out import statement ([`e49e1b6`](https://github.com/mraniki/tt/commit/e49e1b64b2edd2f16d271fabeb9441b0c71076c7))
+
+* Remove unnecessary CSS and JavaScript files ([`cf06c07`](https://github.com/mraniki/tt/commit/cf06c07efe97fb9c14c7f9d5eb9c05699f30cdcc))
+
+* Add style.css, app.js, and trading_view.js files ([`e6df82f`](https://github.com/mraniki/tt/commit/e6df82f132320d98569389af8a1839014b0b5237))
+
+* Refactor static file path in bot.py ([`74d8407`](https://github.com/mraniki/tt/commit/74d84077d13611d44f549abd28b4d0a432fbd083))
+
+* from fastapi.staticfiles import StaticFiles ([`0b37110`](https://github.com/mraniki/tt/commit/0b371107ed1ec2fe4607c9e36270a94b97f25ce4))
+
+* Remove static __init__.py and style.css, update index.html ([`97e89dc`](https://github.com/mraniki/tt/commit/97e89dc5695eb49754c2e2568ea59f5469988b60))
+
+### Update
+
+* Update template directory path ([`a1010bc`](https://github.com/mraniki/tt/commit/a1010bcb1c8a7e1bab24a5990e6c071bb7e9be8b))
+
+* Update index.html template ([`fd1cb4a`](https://github.com/mraniki/tt/commit/fd1cb4a33ee94486f3c0bb8b3eadd93e5b17257c))
+
+* Update bot.py and add index.html template ([`9b97fd3`](https://github.com/mraniki/tt/commit/9b97fd37102268fa1d023a38f328655c6dcf1ceb))
+
+* Update Jinja2Templates directory in bot.py and delete index.html file in tt/ui directory. ([`8e031f6`](https://github.com/mraniki/tt/commit/8e031f69017fffcf5c8e34b099ef75d4a83d4f64))
+
+* Update index.html with new heading ([`98de291`](https://github.com/mraniki/tt/commit/98de29114ab2a7898d2c44cc286dc4db9674ee57))
+
+* Update bot.py and index.html templates ([`206ca6e`](https://github.com/mraniki/tt/commit/206ca6ec21d396a7d1fef4301bc94f27dad0678a))
+
+* Update static files directory in bot.py ([`549ccd2`](https://github.com/mraniki/tt/commit/549ccd282ed674cb1bf4980787458e937b49bd94))
+
+* Update static file mount path in bot.py ([`308e9a5`](https://github.com/mraniki/tt/commit/308e9a5c96c6d44a01abb3fe0ebf2a0397846e9f))
+
+* Update static file directory in bot.py ([`262b4a2`](https://github.com/mraniki/tt/commit/262b4a2dd141deaa33ff55e65c9f41b9dc84f9bb))
+
+* Update static file directory path in bot.py ([`e2cdc54`](https://github.com/mraniki/tt/commit/e2cdc5433128fbcb865719d7f8b249818ca3f6a7))
+
+* Update static files directory in bot.py ([`0b81177`](https://github.com/mraniki/tt/commit/0b811776dbfcb11dda0e939ebe0771055e9790d1))
+
+* Update Requirements ([`392278a`](https://github.com/mraniki/tt/commit/392278a7d995addbcc6e8cef7f0d0a9c45bab7bb))
+
+### ♻️
+
+* ♻️ ([`5c622d7`](https://github.com/mraniki/tt/commit/5c622d7c1993882df6c499422598e15e910a58ea))
+
+### ⚗️
+
+* ⚗️ review jinka2 part ([`be8439d`](https://github.com/mraniki/tt/commit/be8439d6c9147c4c190e93660ff2dd38bab95442))
+
+* ⚗️ ([`1c9c27e`](https://github.com/mraniki/tt/commit/1c9c27ec4bedd484bdebcb23e9daef8361b8667c))
+
+* ⚗️ ([`88304d1`](https://github.com/mraniki/tt/commit/88304d1bb8dc3a07d59aba1127986668c50a7f8a))
+
+* ⚗️ ([`a35c3a2`](https://github.com/mraniki/tt/commit/a35c3a2e06bf0029809633a44faebbedf31f7431))
+
+* ⚗️ vue and js experiment ([`64dca2c`](https://github.com/mraniki/tt/commit/64dca2cfc0aab1f9b7c377a57bec8b8903c88cc0))
+
+* ⚗️ vue test ([`a401e52`](https://github.com/mraniki/tt/commit/a401e52f87b7cb7fab11299ed3c8da2f08a819f4))
+
+### 🐛
+
+* 🐛 ([`459ced7`](https://github.com/mraniki/tt/commit/459ced707eebb87be5e8f518fc351304870100cb))
+
+* 🐛 ([`b4c8adf`](https://github.com/mraniki/tt/commit/b4c8adff850ce8bbb91601029c80ee54a0b4e425))
+
+* 🐛 ([`87b5010`](https://github.com/mraniki/tt/commit/87b5010a2f7d6764a7b78dc81412f16466b4ff65))
+
+* 🐛 ([`2c67806`](https://github.com/mraniki/tt/commit/2c6780616c41fdd09d31820ce383bec97bf1c9da))
+
+
 ## v4.11.13 (2023-08-25)
 
 ### Update
