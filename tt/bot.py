@@ -21,6 +21,7 @@ import requests
 import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from tt.config import settings
@@ -29,13 +30,13 @@ from tt.utils import __version__, run_bot, send_notification
 app = FastAPI(title="TALKYTRADER")
 
 static_directory = os.path.join(os.path.dirname(__file__), "ui/static")
-print(os.path.exists(static_directory))
 
-# app.mount(
-#     "/static",
-#     StaticFiles(directory=static_directory),
-#     name="static",
-# )
+
+app.mount(
+    "/static",
+    StaticFiles(directory=static_directory),
+    name="static",
+)
 
 
 @app.on_event("startup")
