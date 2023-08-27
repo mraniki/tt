@@ -29,14 +29,6 @@ from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
 
-# templates = Jinja2Templates(
-#     directory=os.path.join(os.path.dirname(__file__), "templates")
-# )
-
-templates = Jinja2Templates(directory="templates")
-
-app.mount("/static", StaticFiles(directory="tt/static"), name="static")
-
 
 @app.on_event("startup")
 async def start_bot_task():
@@ -60,6 +52,8 @@ async def root(request: Request):
     that redirects to "/index.html".
     """
     if settings.ui_enabled:
+        templates = Jinja2Templates(directory="templates")
+        app.mount("/static", StaticFiles(directory="app/tt/static"), name="static")
         return templates.TemplateResponse("index.html", {"request": request})
     return __version__
 
