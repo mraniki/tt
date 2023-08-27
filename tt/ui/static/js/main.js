@@ -7,4 +7,4 @@ alert('Hello, World!');
 // const app = createApp(App)
 // app.mount('#app')
 
-{/* <script src="{{ url_for('static', filename='js/app.js') }}" ></script> */}
+{/* <script src="{{ url_for('static', filename='js/main.js') }}" ></script> */}
