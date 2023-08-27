@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 		<link href="{{ url_for('static', path='/css/main.css') }}" rel="stylesheet" />
 		<script src="{{ url_for('static', filename='js/app.js') }}"></script>
 	    <title>TalkyTrader</title>
@@ -11,10 +12,8 @@
 		<h1> TalkyTrader  </h1>
 
 		<p>  This is a test </p>
-		<noscript>
-			<strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-		  </noscript>
-		  <div id="app"></div>
+
+		<div id="app">{{ message }}</div>
 
 
 
