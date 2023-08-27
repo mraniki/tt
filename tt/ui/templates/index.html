@@ -3,7 +3,7 @@
 	<head>
 		<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 		<link href="{{ url_for('static', path='/css/main.css') }}" rel="stylesheet" />
-		<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
 	    <title>TalkyTrader</title>
 
 	</head>
@@ -13,8 +13,8 @@
 
 		<p>  This is a test </p>
 
-		<div id="app">{{ message }}</div>
-
+		<div id="app"></div>
+		<script src="{{ url_for('static', filename='js/app.js') }}" ></script>
 
 
 	</body>
