@@ -33,7 +33,13 @@ templates = Jinja2Templates(
     directory=os.path.join(os.path.dirname(__file__), "templates")
 )
 
-app.mount("/static", StaticFiles(directory="./static"), name="static")
+app.mount(
+    "/static", 
+    StaticFiles(
+        directory=os.path.join(os.path.dirname(__file__), 
+        "static"),
+    name="static")
+)
 # app.mount(
 #     "/static",
 #     StaticFiles(directory=os.path.join(os.path.dirname(__file__), "static")),
