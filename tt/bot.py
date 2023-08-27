@@ -30,7 +30,7 @@ from tt.utils import __version__, run_bot, send_notification
 app = FastAPI(title="TALKYTRADER")
 
 templates = Jinja2Templates(
-    directory=os.path.join(os.path.dirname(__file__), "/templates")
+    directory=os.path.join(os.path.dirname(__file__), "templates")
 )
 
 # app.mount(
