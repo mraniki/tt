@@ -1,18 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
- 
+		<!-- <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css"> -->
+		<link rel="stylesheet" href="{{ url_for('static', path='/css/main.css') }}">
+
 	    <title>TalkyTrader</title>
-	    <!-- <link rel="stylesheet" type="text/css" href="./style.css"> -->
-		<!-- <link rel="stylesheet" href="{{ url_for('static', filename='/css/styles.css') }}"/>
-		<script src="{{ url_for('static', filename='/js/app.js') }}" type="module"></script>  -->
+
 	</head>
 	
   	<body>
 		<h1> TalkyTrader  </h1>
 
-<!-- 	<div id="app"></div> -->
+		<p>  This is a test </p>
+		<noscript>
+			<strong>JS needed</strong>
+		</noscript>
+		
+		
+		
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
+<div id="app">{{ message }}</div>
+
+<script>
+  const { createApp, ref } = Vue
+
+  createApp({
+    setup() {
+      const message = ref('Hello vue!')
+      return {
+        message
+      }
+    }
+  }).mount('#app')
+</script>
 
 	</body>
 	
