@@ -106,4 +106,5 @@ if __name__ == "__main__":
     are the host and port to run the server on, respectively
     More Info https://github.com/encode/uvicorn
     """
-    uvicorn.run(app, host=settings.host, port=int(settings.port), log_level="critical")
+    uvicorn.run(app, host=settings.host, port=int(settings.port))
+    # log_level="critical")
