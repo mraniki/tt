@@ -26,14 +26,7 @@ Utils
 UI
 ==
 
-.. automodule:: tt.frontend
+.. automodule:: tt.frontend.main
     :members:
     :undoc-members:
 
-
-All
-===
-
-.. automodule:: tt
-    :members:
-    :undoc-members: 

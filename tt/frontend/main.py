@@ -27,7 +27,7 @@ def init(fastapi_app: FastAPI) -> None:
         FastAPI application with the provided `fastapi_app` instance.
     """
 
-    @ui.page("/show")  # , dark=True)
+    @ui.page("/show")
     def show():
         ui.add_head_html(f"<title>Talky Trader v{__version__}</title>")
         ui.add_head_html(
@@ -82,7 +82,7 @@ def init(fastapi_app: FastAPI) -> None:
             <br>
             <p align="left">
             <a href="https://talky.readthedocs.io/"><img src="https://img.shields.io/badge/Wiki-%23000000.svg?style=for-the-badge&logo=wikipedia&logoColor=white"></a>
-            <br><br><a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/badge/github-%23000000.svg?style=for-the-badge&logo=github&logoColor=white"></a><br>
+            <br><a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/badge/github-%23000000.svg?style=for-the-badge&logo=github&logoColor=white"></a><br>
             
             """
         )
