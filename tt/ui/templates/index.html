@@ -3,7 +3,13 @@
 	<head>
 		<!-- <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css"> -->
 		<link rel="stylesheet" href="{{ url_for('static', path='/css/main.css') }}">
-
+		<script type="importmap">
+			{
+			  "imports": {
+				"vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js"
+			  }
+			}
+		  </script>
 	    <title>TalkyTrader</title>
 
 	</head>
@@ -19,7 +25,7 @@
 		<div id="app">{{ message }}</div>
 
 		<script type="module">
-		import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+		import { createApp } from 'vue'
 
 		createApp({
 			data() {
