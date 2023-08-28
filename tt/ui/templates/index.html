@@ -22,7 +22,7 @@
 			<strong>JS needed</strong>
 		</noscript>
 
-		<div id="app">{{ message }}</div>
+		<div id="app"></div>
 
 		<script type="module">
 		import { createApp } from 'vue'
@@ -32,7 +32,10 @@
 			return {
 				message: 'Hello Vue!'
 			}
-			}
+			},
+  				template: `
+    			<div id="rendered">{{ message }}</div>
+  				`
 		}).mount('#app')
 		</script>
 
