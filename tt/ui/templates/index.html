@@ -9,12 +9,24 @@
 	
   	<body>
 		<h1> TalkyTrader  </h1>
-		<img src="https://github.com/mraniki/tt/blob/main/docs/_static/logo-live.gif?raw=true" alt="logo live" align="left">
+		<img src="https://github.com/mraniki/tt/blob/main/docs/_static/logo-live.gif?raw=true" alt="logo live" align="right" width="200" height="200">
 		<p align="left">
 			<a href="https://talkytrader.github.io/wiki/"><img src="https://img.shields.io/badge/Wiki-%23000000.svg?style=for-the-badge&logo=wikipedia&logoColor=white"></a>
 			<a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/badge/github-%23000000.svg?style=for-the-badge&logo=github&logoColor=white"></a><br>
 		<br><br>
 		</p>
+
+		<video-js id="my_video_1" class="vjs-default-skin" controls preload="auto" width="640" height="268">
+			<source src="https://bloomberg.com/media-manifest/streams/us.m3u8" type="application/x-mpegURL">
+		  </video-js>
+		  
+		  <script src="https://unpkg.com/video.js/dist/video.js"></script>
+		  <script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
+		  
+		  <script>
+			var player = videojs('my_video_1');
+		  </script>
+
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
 	<div class="tradingview-widget-container__widget"></div>
