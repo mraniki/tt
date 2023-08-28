@@ -15,25 +15,20 @@
 		<noscript>
 			<strong>JS needed</strong>
 		</noscript>
-		
-		
-		
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-<div id="app">{{ message }}</div>
+		<div id="app">{{ message }}</div>
 
-<script>
-  const { createApp, ref } = Vue
+		<script type="module">
+		import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
-  createApp({
-    setup() {
-      const message = ref('Hello vue!')
-      return {
-        message
-      }
-    }
-  }).mount('#app')
-</script>
+		createApp({
+			data() {
+			return {
+				message: 'Hello Vue!'
+			}
+			}
+		}).mount('#app')
+		</script>
 
 	</body>
 	
