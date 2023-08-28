@@ -58,7 +58,7 @@ myllm = "^1.2.33"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^8.0.7"
-ruff = "^0.0.285"
+ruff = "^0.0.286"
 
 [tool.ruff]
 select = [
