@@ -2,6 +2,69 @@
 
 
 
+## v4.11.17 (2023-08-28)
+
+### :alembic:
+
+* :alembic:️ nicegui xperiment ([`9f34b98`](https://github.com/mraniki/tt/commit/9f34b989f49ee6f5b84bb759244cdb6638def9ba))
+
+### :memo:
+
+* :memo: Remove index.html file ([`e55ddd3`](https://github.com/mraniki/tt/commit/e55ddd3f9f0fa13631200b2e63084b80da14247e))
+
+### :rotating_light:
+
+* :rotating_light: ([`728abb3`](https://github.com/mraniki/tt/commit/728abb3665cb3f4cf5eea235dd60b67618c26414))
+
+### Other
+
+* Merge pull request #702 from mraniki/dev
+
+:alembic:️ nicegui xperiment ([`71b066a`](https://github.com/mraniki/tt/commit/71b066a49b1ac13128653c33383932d93b64f6ad))
+
+* Merge pull request #703 from mraniki/sourcery/dev
+
+:alembic:️ nicegui xperiment (Sourcery refactored) ([`24c8d1e`](https://github.com/mraniki/tt/commit/24c8d1e87b174bf49739f1f1ca87c18feb4e258f))
+
+* &#39;Refactored by Sourcery&#39; ([`f83b4da`](https://github.com/mraniki/tt/commit/f83b4da1a47a7de725c1322fd914409147730bff))
+
+### Update
+
+* Update UI module in docs/03_module.rst ([`2b3a436`](https://github.com/mraniki/tt/commit/2b3a43607e9db5140c109115afb8565336b90e71))
+
+* :memo::art:Update module and plugin documentation ([`b52b3ea`](https://github.com/mraniki/tt/commit/b52b3eafa7d3de3c8f4acf86d9e450b2aba11655))
+
+* Update Requirements ([`f1b6de2`](https://github.com/mraniki/tt/commit/f1b6de2c7d31746a12d1a02597a45375828c0d7c))
+
+* Update Requirements ([`9325d84`](https://github.com/mraniki/tt/commit/9325d84614d06a91921c2dcc081e933def40809e))
+
+* Update dynaconf version and target Python versions ([`47a8b54`](https://github.com/mraniki/tt/commit/47a8b54d7ef50e1d2faaef031fc95fb88b942300))
+
+### ♻️
+
+* ♻️ css ([`d914ca4`](https://github.com/mraniki/tt/commit/d914ca4146202d81d80233e07cb2029f68bd0e38))
+
+* ♻️ frontend test ([`14ad239`](https://github.com/mraniki/tt/commit/14ad23960ff2a9f38ed4af6307d2558eb2a7fc71))
+
+### ⚗️
+
+* ⚗️ ([`fc70247`](https://github.com/mraniki/tt/commit/fc70247f0b5b7198e20a6a2a4d2dc574206d41e9))
+
+* ⚗️ rename bot.py to app.py and basic ui framework ([`6878422`](https://github.com/mraniki/tt/commit/6878422397457b8fb7a5048b086f4f97e09451e7))
+
+### 🎨
+
+* 🎨 frontend adj ([`71a19a4`](https://github.com/mraniki/tt/commit/71a19a450387d865079b730f2e87629342fc30f4))
+
+* 🎨 ([`1b66147`](https://github.com/mraniki/tt/commit/1b66147bfdb9028a6bbc989be387e982dce64d14))
+
+* 🎨 ([`6560788`](https://github.com/mraniki/tt/commit/6560788c316de7cfafd38e54e6ca119f3e32164e))
+
+### 🐛
+
+* 🐛 ([`2b72e5e`](https://github.com/mraniki/tt/commit/2b72e5e5e60be4b24a7ffadb9e4096241b998fc4))
+
+
 ## v4.11.16 (2023-08-28)
 
 ### Other
