@@ -28,6 +28,9 @@ def init(fastapi_app: FastAPI) -> None:
 
     @ui.page("/show", dark=True)
     def show():
+        ui.add_head_html(
+            '<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">'
+        )
         ui.label("Hello, you are using TT Talky Trader v" + __version__)
         ui.video(
             "https://liveprodusphoenixeast.global.ssl.fastly.net/USPhx-HD/Channel-TX-USPhx-AWS-virginia-1/Source-USPhx-16k-1-s6lk2-BP-07-03-0Yn1cQZHOtP_live.m3u8"  # noqa: E501
