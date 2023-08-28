@@ -9,7 +9,7 @@ import uvicorn
 from fastapi.testclient import TestClient
 from iamlistening import Listener
 
-from tt.bot import app, start_bot_task
+from tt.app import app, start_bot_task
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
 from tt.utils import send_notification, start_bot, start_plugins
@@ -73,10 +73,11 @@ async def test_start_bot_task():
 
 def test_app_endpoint_main():
     client = TestClient(app)
-    print(client)
     response = client.get("/")
+    init = MagicMock(client)
     # assert response.status_code == 200
     assert response.status_code is not None
+    assert init.assert_called
 
 
 def test_app_health():
@@ -89,7 +90,6 @@ def test_webhook_with_valid_auth():
     client = TestClient(app)
     payload = {"data": "buy BTC"}
     response = client.post("/webhook/123abc", json=payload)
-    print(response)
     post = MagicMock()
     assert response is not None
     assert response.content.decode("utf-8") == '{"status":"OK"}'
@@ -99,7 +99,6 @@ def test_webhook_with_valid_auth():
 def test_webhook_with_invalid_auth():
     client = TestClient(app)
     payload = {"data": "my_data"}
-    print(payload)
     response = client.post("/webhook/abc123", json=payload)
     assert response.content.decode("utf-8") == '{"detail":"Not Found"}'
 

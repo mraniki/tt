@@ -18,4 +18,4 @@ COPY . /app
 RUN pip install --no-cache-dir install /app
 EXPOSE 8080
 
-CMD [ "python", "/app/tt/bot.py" ]
+CMD [ "python", "/app/tt/app.py" ]

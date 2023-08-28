@@ -121,7 +121,7 @@ then start your bot:
 
 .. code:: console
 
-   python3 bot.py
+   python3 app.py
 
 
 ☁️ Try it 

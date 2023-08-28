@@ -15,7 +15,6 @@ to interact with trading module.
 """
 
 import asyncio
-import os
 
 import requests
 import uvicorn
