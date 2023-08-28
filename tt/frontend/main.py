@@ -77,21 +77,16 @@ def init(fastapi_app: FastAPI) -> None:
             <!-- TradingView Widget END -->
                      """  # noqa: E501
         ui.add_body_html(content)
-        with ui.row().classes("w-full items-center"):
-            result = ui.label().classes("mr-auto")
-            with ui.button(icon="menu"):
-                with ui.menu() as menu:
-                    ui.menu_item(
-                        "Wiki", lambda: result.set_text("https://talky.readthedocs.io")
-                    )
-                    ui.menu_item(
-                        "Github",
-                        lambda: result.set_text("https://github.com/mraniki/tt"),
-                    )
-                    ui.separator()
-                    ui.menu_item("Exchanges", lambda: result.set_text("Exchanges"))
-                    ui.menu_item("Chat Platform", lambda: result.set_text("Chat"))
-                    ui.menu_item("Settings", lambda: result.set_text("Settings"))
+        ui.html(
+            """
+            <br>
+            <p align="left">
+            <a href="https://talkytrader.github.io/wiki/"><img src="https://img.shields.io/badge/Wiki-%23000000.svg?style=for-the-badge&logo=wikipedia&logoColor=white"></a>
+            <a href="https://github.com/mraniki/tt/"><img src="https://img.shields.io/badge/github-%23000000.svg?style=for-the-badge&logo=github&logoColor=white"></a><br>
+            <a href="https://hub.docker.com/r/mraniki/tt"><img src="https://img.shields.io/docker/pulls/mraniki/tt?style=for-the-badge"></a>
+            <br><br>
+            """
+        )
 
     ui.run_with(
         fastapi_app,
