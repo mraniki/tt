@@ -21,7 +21,6 @@ import requests
 import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from tt.config import settings
@@ -52,12 +51,6 @@ async def root(request: Request):
     that redirects to "/index.html".
     """
     if settings.ui_enabled:
-        static_directory = os.path.join(os.path.dirname(__file__), "ui/static")
-        app.mount(
-            "/static",
-            StaticFiles(directory=static_directory),
-            name="static",
-        )
         templates = Jinja2Templates(
             os.path.join(os.path.dirname(__file__), "ui/templates")
         )
