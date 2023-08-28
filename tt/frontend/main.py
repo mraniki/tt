@@ -67,7 +67,7 @@ def init(fastapi_app: FastAPI) -> None:
             </div>
             <!-- TradingView Widget END -->
                      """  # noqa: E501
-        ui.html(content)
+        ui.add_body_html(content)
 
     ui.run_with(
         fastapi_app,
