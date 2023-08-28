@@ -29,7 +29,7 @@ def init(fastapi_app: FastAPI) -> None:
 
     @ui.page("/show")  # , dark=True)
     def show():
-        # ui.add_head_html(f"<title>Talky Trader v"__version__</title>)
+        ui.add_head_html(f"<title>Talky Trader v{__version__}</title>")
         ui.add_head_html(
             '<link href="https://raw.githubusercontent.com/mraniki/tt/main/docs/_static/favicon.ico" rel="shortcut icon">'  # noqa: E501
         )
