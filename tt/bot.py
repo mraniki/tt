@@ -21,9 +21,9 @@ import requests
 import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 
 from tt.config import settings
+from tt.frontend.main import init
 from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
@@ -51,11 +51,7 @@ async def root(request: Request):
     that redirects to "/index.html".
     """
     if settings.ui_enabled:
-        templates = Jinja2Templates(
-            os.path.join(os.path.dirname(__file__), "ui/templates")
-        )
-
-        return templates.TemplateResponse("index.html", {"request": request})
+        init(app)
     return __version__
 
 
