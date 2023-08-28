@@ -2,7 +2,7 @@
 🗿 TalkyTrader
 ==============
 
-.. automodule:: tt.bot
+.. automodule:: tt.app
     :members:
     :undoc-members:
 
@@ -15,11 +15,18 @@ Plugins
     :undoc-members:
 
 
-TalkyTrader Module
-==================
-
+Utils
+=====
 
 .. automodule:: tt.utils
     :members:
     :undoc-members:
+    
    
+UI
+==
+
+.. automodule:: tt.frontend.main
+    :members:
+    :undoc-members:
+

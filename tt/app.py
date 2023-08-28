@@ -15,15 +15,14 @@ to interact with trading module.
 """
 
 import asyncio
-import os
 
 import requests
 import uvicorn
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 from tt.config import settings
+from tt.frontend.main import init
 from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
@@ -47,15 +46,18 @@ async def root(request: Request):
     """
     Get the root endpoint.
 
-    :return: A RedirectResponse object
-    that redirects to "/index.html".
+    Returns:
+        HTMLResponse: The HTML response
+
+    Note:
+        If `settings.ui_enabled` is `True`, 
+        This function redirected to
+        `show` which is the fronted
+
     """
     if settings.ui_enabled:
-        templates = Jinja2Templates(
-            os.path.join(os.path.dirname(__file__), "ui/templates")
-        )
-
-        return templates.TemplateResponse("index.html", {"request": request})
+        init(app)
+        return RedirectResponse(url="/show")
     return __version__
 
 
