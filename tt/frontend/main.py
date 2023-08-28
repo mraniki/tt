@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from nicegui import ui
 
+from tt.config import settings
 from tt.utils import __version__
 
 
@@ -26,14 +27,19 @@ def init(fastapi_app: FastAPI) -> None:
         FastAPI application with the provided `fastapi_app` instance.
     """
 
-    @ui.page("/show", dark=True)
+    @ui.page("/show")  # , dark=True)
     def show():
+        # ui.add_head_html(f"<title>Talky Trader v"__version__</title>)
+        ui.add_head_html(
+            '<link href="https://raw.githubusercontent.com/mraniki/tt/main/docs/_static/favicon.ico" rel="shortcut icon">'  # noqa: E501
+        )
         ui.add_head_html(
             '<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">'
         )
-        ui.label(f"Hello, you are using TT Talky Trader v{__version__}")
+        ui.label(f"Talky Trader v{__version__}")
         ui.video(
-            "https://liveprodusphoenixeast.global.ssl.fastly.net/USPhx-HD/Channel-TX-USPhx-AWS-virginia-1/Source-USPhx-16k-1-s6lk2-BP-07-03-0Yn1cQZHOtP_live.m3u8"  # noqa: E501
+            src=settings.live_tv_url,
+            autoplay=True,
         )
         content = """
                     <!-- TradingView Widget BEGIN -->
@@ -71,6 +77,21 @@ def init(fastapi_app: FastAPI) -> None:
             <!-- TradingView Widget END -->
                      """  # noqa: E501
         ui.add_body_html(content)
+        with ui.row().classes("w-full items-center"):
+            result = ui.label().classes("mr-auto")
+            with ui.button(icon="menu"):
+                with ui.menu() as menu:
+                    ui.menu_item(
+                        "Wiki", lambda: result.set_text("https://talky.readthedocs.io")
+                    )
+                    ui.menu_item(
+                        "Github",
+                        lambda: result.set_text("https://github.com/mraniki/tt"),
+                    )
+                    ui.separator()
+                    ui.menu_item("Exchanges", lambda: result.set_text("Exchanges"))
+                    ui.menu_item("Chat Platform", lambda: result.set_text("Chat"))
+                    ui.menu_item("Settings", lambda: result.set_text("Settings"))
 
     ui.run_with(
         fastapi_app,

@@ -46,12 +46,18 @@ async def root(request: Request):
     """
     Get the root endpoint.
 
-    :return: A RedirectResponse object
-    that redirects to "/index.html".
+    Returns:
+        HTMLResponse: The HTML response
+
+    Note:
+        If `settings.ui_enabled` is `True`, 
+        This function redirected to
+        `show` which is the fronted
+
     """
     if settings.ui_enabled:
         init(app)
-        RedirectResponse(url="/show")
+        return RedirectResponse(url="/show")
     return __version__
 
 
