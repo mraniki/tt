@@ -19,7 +19,7 @@ import asyncio
 import requests
 import uvicorn
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 from tt.config import settings
 from tt.frontend.main import init
@@ -51,6 +51,7 @@ async def root(request: Request):
     """
     if settings.ui_enabled:
         init(app)
+        RedirectResponse(url="/show")
     return __version__
 
 
