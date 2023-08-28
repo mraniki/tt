@@ -7,6 +7,9 @@ from tt.utils import __version__
 
 def init(fastapi_app: FastAPI) -> None:
     """
+    Frontend component activated via `settings.ui_enabled = True`
+    and using https://github.com/zauberzeug/nicegui/
+    
     Initializes the UI for the provided `fastapi_app` instance.
 
     Parameters:
