@@ -34,7 +34,6 @@ extensions = [
     "sphinx_design",
     "myst_parser",
     "sphinx_copybutton",
-    "notfound.extension",
     # "autoapi.extension",
 ]
 
