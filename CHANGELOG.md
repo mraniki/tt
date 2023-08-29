@@ -2,6 +2,13 @@
 
 
 
+## v4.11.18 (2023-08-29)
+
+### Update
+
+* Update app.py ([`03bd64b`](https://github.com/mraniki/tt/commit/03bd64b6010683403b8425f829987ca2920a7342))
+
+
 ## v4.11.17 (2023-08-28)
 
 ### :alembic:

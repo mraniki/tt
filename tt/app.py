@@ -51,11 +51,10 @@ async def root(request: Request):
 
     Note:
         If `settings.ui_enabled` is `True`, 
-        This function redirected to
-        `show` which is the fronted
-        else it returns `__version__`
-
+        user will be redirected to
+        the UI frontend
     """
+    
     if settings.ui_enabled:
         init(app)
         return RedirectResponse(url="/show")
