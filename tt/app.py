@@ -53,6 +53,7 @@ async def root(request: Request):
         If `settings.ui_enabled` is `True`, 
         This function redirected to
         `show` which is the fronted
+        else it returns `__version__`
 
     """
     if settings.ui_enabled:
