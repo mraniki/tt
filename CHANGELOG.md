@@ -2,11 +2,36 @@
 
 
 
+## v4.11.19 (2023-08-29)
+
+### Other
+
+* Merge pull request #706 from mraniki/dev
+
+Merge pull request #705 from mraniki/main ([`7106540`](https://github.com/mraniki/tt/commit/710654084fea9a5f3c2bee686b93573fbf49efb6))
+
+* Merge branch &#39;main&#39; into dev ([`7afd5cc`](https://github.com/mraniki/tt/commit/7afd5cc44165bbd91df524e13804657aab4ff496))
+
+* Merge pull request #705 from mraniki/main
+
+Merge ([`cb9e7a3`](https://github.com/mraniki/tt/commit/cb9e7a3e43564aebf0aae45035f39dcfbe553295))
+
+* Merge branch &#39;dev&#39; into main ([`b69ce7e`](https://github.com/mraniki/tt/commit/b69ce7e5903c4a896d546a6d295f4c09a86a030a))
+
+### Update
+
+* Update Requirements ([`002604f`](https://github.com/mraniki/tt/commit/002604fb4179f40f7274de58c7f1824c52f3d6c0))
+
+
 ## v4.11.18 (2023-08-29)
 
 ### Update
 
 * Update app.py ([`03bd64b`](https://github.com/mraniki/tt/commit/03bd64b6010683403b8425f829987ca2920a7342))
+
+### 🎨
+
+* 🎨 ([`e7aa740`](https://github.com/mraniki/tt/commit/e7aa74048119a3df15826ca6b5973a3658e4aa52))
 
 
 ## v4.11.17 (2023-08-28)
