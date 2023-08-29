@@ -53,8 +53,8 @@ async def root(request: Request):
         If `settings.ui_enabled` is `True`, 
         user will be redirected to
         the UI frontend
-
     """
+    
     if settings.ui_enabled:
         init(app)
         return RedirectResponse(url="/show")
