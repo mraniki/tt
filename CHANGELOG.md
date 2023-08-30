@@ -2,6 +2,41 @@
 
 
 
+## v4.11.21 (2023-08-30)
+
+### Other
+
+* Merge pull request #708 from mraniki/dev
+
+🔊 improving log for debug readibility on app.py ([`bb8b9a2`](https://github.com/mraniki/tt/commit/bb8b9a2445de1151efc785f18019267380663e77))
+
+### Update
+
+* Update README.md with latest wiki url ([`e56abba`](https://github.com/mraniki/tt/commit/e56abba7743784af9d73b69c79cbb79345966b27))
+
+* Update Requirements ([`a4415e6`](https://github.com/mraniki/tt/commit/a4415e6f2c5c9248af712c84e9a31feaba4fc07b))
+
+* Update pyproject.toml ([`6c35c78`](https://github.com/mraniki/tt/commit/6c35c78e38823926ac8aebd600e5f8c129e48acd))
+
+### ⚗️
+
+* ⚗️ frame ([`fe76b84`](https://github.com/mraniki/tt/commit/fe76b845dde91f629e870073f9abc6d8e03a6898))
+
+### 🐛
+
+* 🐛 ([`eabadc1`](https://github.com/mraniki/tt/commit/eabadc1b7c618b40debb18a81dcddb2395ace311))
+
+* 🐛 ([`edd0210`](https://github.com/mraniki/tt/commit/edd0210972f632075221205d81bf83d6e6d48479))
+
+* 🐛 ([`3686ef9`](https://github.com/mraniki/tt/commit/3686ef97b6434f743a71050e0b29f60ef8698a45))
+
+* 🐛 favicon ([`5e7eb8c`](https://github.com/mraniki/tt/commit/5e7eb8c0054c56cf823f90ea6a95dda8f6a81039))
+
+### 🔊
+
+* 🔊 improving log for debug readibility on app.py ([`e5e8119`](https://github.com/mraniki/tt/commit/e5e8119cdd9e17fc48fb6007f28e842f67280257))
+
+
 ## v4.11.20 (2023-08-30)
 
 ### Other
