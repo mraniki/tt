@@ -35,7 +35,10 @@ def init(fastapi_app: FastAPI) -> None:
         ui.add_head_html(
             '<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">'
         )
-
+        with ui.left_drawer(top_corner=True, bottom_corner=True).style(
+            "background-color: #d7e3f4"
+        ):
+            ui.label("LEFT DRAWER")
         ui.label(f"Talky Trader v{__version__}")
         ui.video(
             src=settings.live_tv_url,
@@ -89,5 +92,5 @@ def init(fastapi_app: FastAPI) -> None:
     ui.run_with(
         fastapi_app,
         title=f"Talky Trader v{__version__}",
-        favicon="https://raw.githubusercontent.com/mraniki/tt/main/docs/_static/favicon.ico",
+        favicon="https://raw.githubusercontent.com/mraniki/tt/main/docs/_static/favicon.png",
     )
