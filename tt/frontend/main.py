@@ -30,7 +30,7 @@ def init(fastapi_app: FastAPI) -> None:
         FastAPI application with the provided `fastapi_app` instance.
     """
 
-    @ui.page("/show", favicon="https://raw.githubusercontent.com/mraniki/tt/main/docs/_static/favicon.ico")
+    @ui.page("/show")
     def show():
         ui.add_head_html(
             '<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">'
@@ -87,6 +87,5 @@ def init(fastapi_app: FastAPI) -> None:
         )
 
     ui.run_with(
-        fastapi_app,
-        title=f"Talky Trader v{__version__}"
+        fastapi_app, title=f"Talky Trader v{__version__}", favicon="./favicon.ico"
     )
