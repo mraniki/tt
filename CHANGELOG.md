@@ -2,6 +2,25 @@
 
 
 
+## v4.11.20 (2023-08-30)
+
+### Other
+
+* Merge pull request #707 from mraniki/dev
+
+🐛 minor ui fix ([`21224a4`](https://github.com/mraniki/tt/commit/21224a4b6151c0642a7dd08b28a22ba9e4cf41fd))
+
+* Delete old_index.html ([`de73eac`](https://github.com/mraniki/tt/commit/de73eac947dc867997ad4120fbb5d7797ecf4496))
+
+### 🎨
+
+* 🎨 ([`9d387aa`](https://github.com/mraniki/tt/commit/9d387aaefedeea3e84f54605cc70a9b52a8d4e4f))
+
+### 🐛
+
+* 🐛 favicon ([`b0d11a1`](https://github.com/mraniki/tt/commit/b0d11a1a5ee6faa8ddaff4678184e0c3b1e7b41b))
+
+
 ## v4.11.19 (2023-08-29)
 
 ### Other
