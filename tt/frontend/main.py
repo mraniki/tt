@@ -9,7 +9,7 @@ def init(fastapi_app: FastAPI) -> None:
     """
     Frontend component activated via `settings.ui_enabled = True`
     and using https://github.com/zauberzeug/nicegui/
-    
+
     Initializes the UI for the provided `fastapi_app` instance.
 
     Parameters:
@@ -32,13 +32,10 @@ def init(fastapi_app: FastAPI) -> None:
 
     @ui.page("/show")
     def show():
-        ui.add_head_html(f"<title>Talky Trader v{__version__}</title>")
-        ui.add_head_html(
-            '<link href="https://raw.githubusercontent.com/mraniki/tt/main/docs/_static/favicon.ico" rel="shortcut icon">'  # noqa: E501
-        )
         ui.add_head_html(
             '<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">'
         )
+
         ui.label(f"Talky Trader v{__version__}")
         ui.video(
             src=settings.live_tv_url,
@@ -48,7 +45,6 @@ def init(fastapi_app: FastAPI) -> None:
                     <!-- TradingView Widget BEGIN -->
             <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
-            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
             {
             "symbols": [
@@ -92,4 +88,6 @@ def init(fastapi_app: FastAPI) -> None:
 
     ui.run_with(
         fastapi_app,
+        title=f"Talky Trader v{__version__}",
+        favicon="https://raw.githubusercontent.com/mraniki/tt/main/docs/_static/favicon.ico",
     )
