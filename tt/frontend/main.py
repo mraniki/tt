@@ -87,5 +87,7 @@ def init(fastapi_app: FastAPI) -> None:
         )
 
     ui.run_with(
-        fastapi_app, title=f"Talky Trader v{__version__}", favicon="./favicon.ico"
+        fastapi_app,
+        title=f"Talky Trader v{__version__}",
+        favicon="https://github.com/mraniki/tt/blob/main/docs/_static/favicon.png?raw=true",
     )
