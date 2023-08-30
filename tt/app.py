@@ -21,7 +21,7 @@ import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
-from tt.config import settings
+from tt.config import logger, settings
 from tt.frontend.main import init
 from tt.utils import __version__, run_bot, send_notification
 
@@ -37,6 +37,7 @@ async def start_bot_task():
     asynchronously
 
     """
+    logger.debug("Starting...")
     event_loop = asyncio.get_event_loop()
     event_loop.create_task(run_bot())
 
@@ -50,11 +51,11 @@ async def root(request: Request):
         HTMLResponse: The HTML response
 
     Note:
-        If `settings.ui_enabled` is `True`, 
+        If `settings.ui_enabled` is `True`,
         user will be redirected to
         the UI frontend
     """
-    
+    logger.debug("FastAPI endpoint requested")
     if settings.ui_enabled:
         init(app)
         return RedirectResponse(url="/show")
@@ -85,9 +86,11 @@ async def webhook(request: Request):
     https://YOURIPorDOMAIN/webhook/123456
     """
     data = await request.body()
+    logger.debug("Webhook request received {}", data)
     await send_notification(data)
 
     if settings.forwarder:
+        logger.debug("Forwarding {} to {}", data, str(settings.forwarder_url))
         requests.post(settings.forwarder_url, data)
 
     return {"status": "OK"}
