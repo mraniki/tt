@@ -2,6 +2,15 @@
 
 
 
+## v4.11.24 (2023-08-31)
+
+### Other
+
+* Merge pull request #709 from mraniki/renovate/sphinx-7.x
+
+⬆️ 🛠️(deps): update dependency sphinx to v7.2.5 ([`0082c73`](https://github.com/mraniki/tt/commit/0082c73799d7afc76559e36e0bf70ecc048389ee))
+
+
 ## v4.11.23 (2023-08-31)
 
 ### Other
@@ -38,6 +47,12 @@
 ### Update
 
 * Update Requirements ([`e68d432`](https://github.com/mraniki/tt/commit/e68d4328fc843c822d1a298350a1229c21cf22f2))
+
+* Update Requirements ([`6ecfa42`](https://github.com/mraniki/tt/commit/6ecfa42de371491a3e6c7cfd451bf11c3dccb139))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.2.5 ([`691161a`](https://github.com/mraniki/tt/commit/691161a32c07a31dc92a2fabc260cd51a9ef4a56))
 
 ### 📝
 
