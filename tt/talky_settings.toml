@@ -122,7 +122,7 @@ iteration_limit = -1
 bot_prefix = "/"
 # Specific data that should be ignore by
 # the parser
-bot_ignore = "ℹ️ 🦄 ⚠️ 📊 🏦 📺 ⬆️"
+bot_ignore = "ℹ️ 🦄 ⚠️ 📊 🏦 📺 ⬆️ 💬"
 # Command for help
 bot_command_help = "help"
 # Command for info

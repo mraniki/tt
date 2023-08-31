@@ -3,6 +3,12 @@
 👋 Getting Started
 ==================
 
+Start
+=====
+
+:doc:`talky:00_base`
+
+
 💨 Quick Setup
 ==============
 
@@ -135,3 +141,4 @@ then start your bot:
    <a href="https://railway.app/new/template/ZVM0QG?referralCode=gxeoRu"><img src="https://img.shields.io/badge/Deploy%20on%20RailWay-black?style=for-the-badge&logo=Railway">
 
    <br>
+
