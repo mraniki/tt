@@ -2,6 +2,31 @@
 
 
 
+## v4.11.23 (2023-08-31)
+
+### Other
+
+* Merge pull request #712 from mraniki/dev
+
+🐛 forwarder adjustment ([`bfb7179`](https://github.com/mraniki/tt/commit/bfb7179a93145f2ebedc62c51923b5c237d42782))
+
+* Merge branch &#39;main&#39; into dev ([`17b59b8`](https://github.com/mraniki/tt/commit/17b59b8b92b8647f723ad569b8373496339e6d16))
+
+### 🎨
+
+* 🎨 ([`7944e0e`](https://github.com/mraniki/tt/commit/7944e0eb61044d12c411591fbd86fe0c946b44d3))
+
+### 🐛
+
+* 🐛 forwarder adjustment ([`8931708`](https://github.com/mraniki/tt/commit/89317083c56590001722349f20caff06a1785008))
+
+### 📝
+
+* 📝 ([`5b870b9`](https://github.com/mraniki/tt/commit/5b870b9e42174fbf1c33e55591164fa141129698))
+
+* 📝 ([`0ff7b59`](https://github.com/mraniki/tt/commit/0ff7b59fcb2090f61f90979b8f11566689d4213e))
+
+
 ## v4.11.22 (2023-08-31)
 
 ### Other
@@ -9,6 +34,10 @@
 * Merge pull request #711 from mraniki/dev
 
 🐤 101 Tutorial Resources Doc ([`2bea3af`](https://github.com/mraniki/tt/commit/2bea3af8fd531edce018d153eeb83df040d673a7))
+
+### Update
+
+* Update Requirements ([`e68d432`](https://github.com/mraniki/tt/commit/e68d4328fc843c822d1a298350a1229c21cf22f2))
 
 ### 📝
 
