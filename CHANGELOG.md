@@ -2,6 +2,21 @@
 
 
 
+## v4.11.22 (2023-08-31)
+
+### Other
+
+* Merge pull request #711 from mraniki/dev
+
+🐤 101 Tutorial Resources Doc ([`2bea3af`](https://github.com/mraniki/tt/commit/2bea3af8fd531edce018d153eeb83df040d673a7))
+
+### 📝
+
+* 📝 ([`9242c2c`](https://github.com/mraniki/tt/commit/9242c2cd155f5baa6ad240038241a185d3b9a80b))
+
+* 📝 101 tutorial space ([`56b84e6`](https://github.com/mraniki/tt/commit/56b84e6ad08d606244549131eabc77d3446c16e7))
+
+
 ## v4.11.21 (2023-08-30)
 
 ### Other
