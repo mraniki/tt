@@ -3,8 +3,8 @@
 👋 Getting Started
 ==================
 
-Start
-=====
+🐤 Start
+========
 
 :doc:`talky:00_base`
 
