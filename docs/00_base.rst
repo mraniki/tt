@@ -8,24 +8,17 @@ System
 Python
 ------
 
-   https://github.com/trekhleb/learn-python
-
-   https://www.w3schools.com/python/python_intro.asp
-
-   https://www.python.org/about/gettingstarted/
-
+   https://wiki.python.org/moin/BeginnersGuide
 
 Docker
 ------
 
    https://www.docker.com/101-tutorial/
 
-
 Webhook
 -------
 
    https://en.wikipedia.org/wiki/Webhook
-
 
 Trading
 ==========
@@ -34,7 +27,6 @@ Strategy
 --------
 
    https://www.investopedia.com/articles/active-trading/11/four-types-of-active-traders.asp
-
 
 AlgoTrading
 -----------
