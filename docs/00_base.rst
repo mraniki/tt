@@ -26,16 +26,17 @@ Webhook
 
    https://en.wikipedia.org/wiki/Webhook
 
-Investment
-==========
 
 Trading
--------
+==========
+
+Strategy
+--------
 
    https://www.investopedia.com/articles/active-trading/11/four-types-of-active-traders.asp
 
 
 AlgoTrading
--------
+-----------
 
    https://en.wikipedia.org/wiki/Algorithmic_trading
