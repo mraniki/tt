@@ -1,10 +1,12 @@
-======================
-101 Tutorial Resources
-======================
+=========================
+🐤 101 Tutorial Resources
+=========================
 
+System
+======
 
 Python
-======
+------
 
    https://github.com/trekhleb/learn-python
 
@@ -14,6 +16,26 @@ Python
 
 
 Docker
-======
+------
 
    https://www.docker.com/101-tutorial/
+
+
+Webhook
+-------
+
+   https://en.wikipedia.org/wiki/Webhook
+
+Investment
+==========
+
+Trading
+-------
+
+   https://www.investopedia.com/articles/active-trading/11/four-types-of-active-traders.asp
+
+
+AlgoTrading
+-------
+
+   https://en.wikipedia.org/wiki/Algorithmic_trading
