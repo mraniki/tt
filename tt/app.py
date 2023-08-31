@@ -91,7 +91,9 @@ async def webhook(request: Request):
 
     if settings.forwarder:
         logger.debug("Forwarding {} to {}", data, str(settings.forwarder_url))
-        requests.post(settings.forwarder_url, data)
+        requests.post(
+            settings.forwarder_url, data, headers={"Content-Type": "application/json"}
+        )
 
     return {"status": "OK"}
 
