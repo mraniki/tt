@@ -332,18 +332,15 @@ www_url = "https://apod.nasa.gov/apod/astropix.html"
 
 # Module Enable/Disable
 llm_enabled = true
+
 # LLM Model to use
-llm_model = "gpt-4"
+llm_model = "gpt-3.5-turbo"
+
 # LLM Provider
-llm_provider = "g4f.Provider.Providers.ChatgptAi"
-# LLM Host
-llm_host = ""
-# LLM Auth Token
-llm_auth_token = ""
-# SERP API Key 
-llm_serpapi-key = ""
-#default prompt if prompt is not given
-llm_default_prompt = "write a tiny story"
+# Refer to https://github.com/xtekky/gpt4free
+# for the list of supported provider
+llm_provider = "g4f.Provider.DeepAi"
+
 # help message listing the commands
 # available
 llm_commands = """
@@ -352,40 +349,15 @@ llm_commands = """
 ➰ /aimode\n
 🧽 /clearai\n
 """
-# command for questions
-bot_command_question = "qq"
 # command for topic/conversation
-bot_command_topic = "ai"
+bot_command_question = "qq"
 # command for reset chat
 bot_command_clearai = "clearai"
 
 # command to activate or deactivate aimode
+# not implemented
 bot_command_aimode = "aimode"
-llm_continous = false
-llm_continous_context = """
-You operate within the following constraints:
-Your task is to devise up to 5 highly effective goals
-and an appropriate role-based name (_GPT) 
-for an autonomous agent, ensuring that the goals 
-are optimally aligned with the successful
-completion of its assigned task.
-
-The user will provide the task, 
-you will provide only the output 
-in the exact format specified below
-with no explanation or conversation.
-
-Example input:
-Help me with a trading monitoring for EURUSD
-
-Example output:
-- Query current trend via /trend
-- Access realtime data via /indicator
-- Query news via /news
-- Advise on a low timeframe and high timeframe trading positioning
-- Place an order if suitable and wait for user confirmation
-
-"""
+llm_ai_mode = false
 
 ########################################
 ###        TALKYTREND SETTINGS       ###

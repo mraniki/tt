@@ -38,7 +38,7 @@ class LlmPlugin(BasePlugin):
         """Handles incoming messages"""
         if not self.should_handle(msg):
             return
-        # if self.llm.continous_mode:
+        # if self.llm.llm_ai_mode:
         #     await self.send_notification(f"{await self.llm.continous_mode(msg)}")
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
@@ -48,9 +48,8 @@ class LlmPlugin(BasePlugin):
                 settings.bot_command_help: self.llm.get_myllm_help,
                 settings.bot_command_info: self.llm.get_myllm_info,
                 settings.bot_command_aimode: self.llm.switch_continous_mode,
-                settings.bot_command_info: self.llm.clear_chat_history,
-                settings.bot_command_question: lambda: self.llm.talk(args),
-                settings.bot_command_topic: lambda: self.llm.chat(args),
+                settings.bot_command_info: self.llm.clear_chat_history, 
+                settings.bot_command_question: lambda: self.llm.chat(args),
             }
             if command in command_mapping:
                 function = command_mapping[command]
