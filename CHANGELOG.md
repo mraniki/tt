@@ -2,6 +2,15 @@
 
 
 
+## v4.12.1 (2023-09-07)
+
+### Other
+
+* Merge pull request #735 from mraniki/renovate/dxsp-4.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v4.2.37 ([`0972479`](https://github.com/mraniki/tt/commit/0972479bdbeda49edcab343c4591cdc77ed5e9b5))
+
+
 ## v4.12.0 (2023-09-07)
 
 ### Other
@@ -11,6 +20,8 @@
 ⬆️ ([`215004a`](https://github.com/mraniki/tt/commit/215004ad7502ef520ffa94a1f11063edc1c98b58))
 
 ### Update
+
+* Update Requirements ([`9d562be`](https://github.com/mraniki/tt/commit/9d562be9042506c978f0a4c9755521f4153d2b38))
 
 * Update Requirements ([`b5e06b4`](https://github.com/mraniki/tt/commit/b5e06b40bcb6050a52fdf22022fbd8e6b8d97525))
 
@@ -23,6 +34,8 @@
 * ✨ Updated LLM for conversation support ([`2a01dbc`](https://github.com/mraniki/tt/commit/2a01dbc3d3a92b2caba7c8a496f72afc550ada9f))
 
 ### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v4.2.37 ([`8fe4bc9`](https://github.com/mraniki/tt/commit/8fe4bc99aab948d342320b21b28aecab79e6a260))
 
 * ⬆️ ([`8b50410`](https://github.com/mraniki/tt/commit/8b504102f07fbf500f233ae6b7b17e847b4e3c5d))
 
