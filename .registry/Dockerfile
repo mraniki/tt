@@ -11,11 +11,11 @@ ENV ENV_FOR_DYNACONF=default
 #   playwright install chromium && playwright install-deps && \
 #   rm -rf /var/lib/apt/lists/*
 
-ENV OP_SERVICE_ACCOUNT_TOKEN=NONE
-COPY --from=1password/op:2 /usr/local/bin/op /usr/local/bin/op
+# ENV OP_SERVICE_ACCOUNT_TOKEN=NONE
+# COPY --from=1password/op:2 /usr/local/bin/op /usr/local/bin/op
 
 COPY . /app
-RUN pip install --no-cache-dir install /app
+RUN pip install --no-cache-dir /app
 EXPOSE 8080
 
 CMD [ "python", "/app/tt/app.py" ]
