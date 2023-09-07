@@ -6,6 +6,6 @@ updates:
     directory: "/"
     target-branch: "dev"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     commit-message:
         prefix: "⬆️ 🤖 Dependencies"
