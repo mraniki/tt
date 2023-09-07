@@ -22,7 +22,6 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 from tt.config import logger, settings
-from tt.frontend.main import init
 from tt.utils import __version__, run_bot, send_notification
 
 app = FastAPI(title="TALKYTRADER")
@@ -57,6 +56,8 @@ async def root(request: Request):
     """
     logger.debug("FastAPI endpoint requested")
     if settings.ui_enabled:
+        from tt.frontend.main import init
+
         init(app)
         return RedirectResponse(url="/show")
     return __version__
