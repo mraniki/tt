@@ -2,7 +2,34 @@
 
 
 
+## v4.11.28 (2023-09-07)
+
+### Other
+
+* Merge pull request #728 from mraniki/dev
+
+⬆️ 🤖 Dependencies Upgrade ([`67b5686`](https://github.com/mraniki/tt/commit/67b5686eb94fca4ee427f33347568e68236a5735))
+
+* Merge branch &#39;main&#39; into dev ([`3ae9c2f`](https://github.com/mraniki/tt/commit/3ae9c2f222c66e0903b57e7c4328cb753f662a18))
+
+### Update
+
+* Update Requirements ([`cbda734`](https://github.com/mraniki/tt/commit/cbda7348e7f4965fa8c3d60f4601dc423b175d89))
+
+### ⬆️
+
+* ⬆️ ([`90391c3`](https://github.com/mraniki/tt/commit/90391c383ae75fb3723dd603c65c59c962a7ec7b))
+
+* ⬆️ ([`fb7cf8f`](https://github.com/mraniki/tt/commit/fb7cf8fa3bb1b18d9f87f51b29cde65d590432c8))
+
+
 ## v4.11.27 (2023-09-06)
+
+### Other
+
+* Merge branch &#39;main&#39; into dev ([`879f52a`](https://github.com/mraniki/tt/commit/879f52a480b5b0ada7655c36e9a03635f8d5179d))
+
+* Merge branch &#39;main&#39; into dev ([`0602bda`](https://github.com/mraniki/tt/commit/0602bda4deaa353fb7bd98f14287c4c42b901998))
 
 ### Update
 
@@ -11,12 +38,24 @@
 
 ## v4.11.26 (2023-09-06)
 
+### Other
+
+* Merge branch &#39;main&#39; into dev ([`949aa7b`](https://github.com/mraniki/tt/commit/949aa7b8bf3771d98d3c32eb05f055426292d311))
+
 ### Update
 
 * Update pyproject.toml ([`67d5223`](https://github.com/mraniki/tt/commit/67d52235b1d6014b19246abb542d9af54329b603))
 
 
 ## v4.11.25 (2023-09-06)
+
+### Other
+
+* Merge branch &#39;main&#39; into dev ([`536f567`](https://github.com/mraniki/tt/commit/536f567c86592efc62ff78b79904da7aad33af87))
+
+* Merge pull request #710 from mraniki/dependabot/pip/dev/sphinx-7.2.5
+
+⬆️ 🤖 Dependencies: Update sphinx requirement from 7.2.4 to 7.2.5 ([`22e4f7b`](https://github.com/mraniki/tt/commit/22e4f7bd4f6c53875ea12420e533a4c5060b05d7))
 
 ### Update
 
@@ -70,6 +109,23 @@
 ### Update
 
 * Update Requirements ([`e68d432`](https://github.com/mraniki/tt/commit/e68d4328fc843c822d1a298350a1229c21cf22f2))
+
+* Update Requirements ([`4309f61`](https://github.com/mraniki/tt/commit/4309f61a76ff133ab688b8f15a2fb6b0ae9b10c6))
+
+* :arrow_up: 🤖 Dependencies: Update sphinx requirement from 7.2.4 to 7.2.5
+
+Updates the requirements on [sphinx](https://github.com/sphinx-doc/sphinx) to permit the latest version.
+- [Release notes](https://github.com/sphinx-doc/sphinx/releases)
+- [Changelog](https://github.com/sphinx-doc/sphinx/blob/master/CHANGES)
+- [Commits](https://github.com/sphinx-doc/sphinx/compare/v7.2.4...v7.2.5)
+
+---
+updated-dependencies:
+- dependency-name: sphinx
+  dependency-type: direct:development
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`b99d790`](https://github.com/mraniki/tt/commit/b99d7902e4936b0e41e928f26afc89d711d226a5))
 
 * Update Requirements ([`6ecfa42`](https://github.com/mraniki/tt/commit/6ecfa42de371491a3e6c7cfd451bf11c3dccb139))
 
