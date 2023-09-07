@@ -40,6 +40,12 @@ loglevel = "INFO"
 # Uvicorn Server settings
 host = "0.0.0.0"
 port = 8080
+
+# If set to true, the server will
+# provide a ui for the bot available at
+# http://0.0.0.0:8080/
+# refer to frontend documentation for
+# more details
 ui_enabled = false
 
 # Your webhook secret to send
