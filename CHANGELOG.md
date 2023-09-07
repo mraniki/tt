@@ -2,6 +2,31 @@
 
 
 
+## v4.12.0 (2023-09-07)
+
+### Other
+
+* Merge pull request #732 from mraniki/dev
+
+⬆️ ([`215004a`](https://github.com/mraniki/tt/commit/215004ad7502ef520ffa94a1f11063edc1c98b58))
+
+### Update
+
+* Update Requirements ([`b5e06b4`](https://github.com/mraniki/tt/commit/b5e06b40bcb6050a52fdf22022fbd8e6b8d97525))
+
+### ♻️
+
+* ♻️ ([`a243c88`](https://github.com/mraniki/tt/commit/a243c88be912fb415a8a90038db3c446483b6b14))
+
+### ✨
+
+* ✨ Updated LLM for conversation support ([`2a01dbc`](https://github.com/mraniki/tt/commit/2a01dbc3d3a92b2caba7c8a496f72afc550ada9f))
+
+### ⬆️
+
+* ⬆️ ([`8b50410`](https://github.com/mraniki/tt/commit/8b504102f07fbf500f233ae6b7b17e847b4e3c5d))
+
+
 ## v4.11.28 (2023-09-07)
 
 ### Other
