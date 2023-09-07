@@ -32,7 +32,7 @@ class PluginManager:
         self.plugin_directory = plugin_directory or settings.plugin_directory
         self.plugins = []
 
-    def load_plugins(self, plugin_names):
+    def load_plugins(self, plugin_names=None):
         """
         🔌Load plugins from directory
 

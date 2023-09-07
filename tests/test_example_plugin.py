@@ -17,7 +17,7 @@ def set_test_settings():
 @pytest.fixture(name="plugin_manager")
 def message_processor_fixture():
     plugin_manager = PluginManager()
-    plugin_manager.load_plugins()
+    plugin_manager.load_plugins() 
     return plugin_manager
 
 
