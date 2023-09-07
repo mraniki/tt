@@ -148,21 +148,6 @@ trading_enabled = true
 trading_risk_amount = 10
 
 ########################################
-###         PLUGINS SETTINGS         ###
-########################################
-
-# Plugins Enable/Disable
-plugin_enabled = true
-# Plugins Locations
-plugin_directory = "tt.plugins.default_plugins"
-# Example plugin for test purpose
-example_plugin_enabled = false
-# User Plugin Enable/Disable
-# Not yet implemented
-user_plugins_allowed = false
-
-
-########################################
 ###        FINDMYORDER SETTINGS      ###
 ########################################
 
@@ -205,14 +190,38 @@ mapping = [
 
 # Instrument to be ignored
 # when generating an order
-ignore_instrument = "US500 USTEC DOGE"
+ignore_instrument = "US500 DOGE"
 
+########################################
+###         PLUGINS SETTINGS         ###
+########################################
+
+# Plugins Enable/Disable
+plugin_enabled = true
+# Plugins Locations
+plugin_directory = "tt.plugins.default_plugins"
+
+# Plugins name list to load at the start
+# of the bot to allow a reduced memory 
+# usage and footprint if needed
+# if you want all the plugins to be loaded
+# at the start, set it to []
+# Here the value has been set for helper
+# and dex exchange plugins
+authorized_plugins = ['helper_plugin', 'dex_exchange_plugin']
+
+# Example plugin for test purpose
+example_plugin_enabled = false
+# User Plugin Enable/Disable
+# Not yet implemented
+user_plugins_allowed = false
+ 
 ########################################
 ###           CEFI SETTINGS          ###
 ########################################
 
 # Module Enable/Disable
-cex_enabled = false
+cex_enabled = true
 # Help Message
 ccxt_commands = "🎯 BUY BTCUSDT\n🎯 /q BTCUSDT\n🏦 /bal\n🏦 /pos\n"
 # CCXT Parameters to connect with 
@@ -315,18 +324,6 @@ bot_command_restart = "restart"
 ping = "8.8.8.8"
 
 ########################################
-###           WWW SETTINGS           ###
-########################################
-
-# WWW Plugin Enable/Disable
-www_enabled = false
-# Help Message
-www_commands = "📷 /src\n"
-# Command to get screenshot
-bot_command_screenshot = "scr"
-www_url = "https://apod.nasa.gov/apod/astropix.html"
-
-########################################
 ###           LLM SETTINGS           ###
 ########################################
 
@@ -406,13 +403,6 @@ live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
 enable_feed = true
 # Feeds RSS url
 news_feed = "https://www.dailyfx.com/feeds/market-news"
-
-# News Enable/Disable
-enable_news = false
-# News API key
-news_api_key = ""
-# News API endpoint
-news_url="https://gnews.io/api/v4/top-headlines?category=business&lang=en&max=2&apikey="
 
 ########################################
 ###     END OF DEFAULT SETTINGS      ###
