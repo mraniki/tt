@@ -59,10 +59,10 @@ async def test_bot_ignore(plugin):
 @pytest.mark.asyncio
 async def test_parsing_llm(plugin):
     """Test scr """
-    plugin.llm.talk = AsyncMock()
+    plugin.llm.chat = AsyncMock()
     await plugin.handle_message(
         f"{settings.bot_prefix}{settings.bot_command_question} hello")
-    plugin.llm.talk.assert_awaited_once()
+    plugin.llm.chat.assert_awaited_once()
 
 
 @pytest.mark.asyncio

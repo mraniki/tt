@@ -68,7 +68,7 @@ async def start_plugins(plugin_manager):
 
     """
     if settings.plugin_enabled:
-        plugin_manager.load_plugins()
+        plugin_manager.load_plugins(settings.authorized_plugins)
         loop = asyncio.get_running_loop()
         loop.create_task(plugin_manager.start_all_plugins())
 
