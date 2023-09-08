@@ -2,6 +2,65 @@
 
 
 
+## v4.13.0 (2023-09-08)
+
+### :arrow_up:
+
+* :arrow_up: ([`45a5122`](https://github.com/mraniki/tt/commit/45a512280696480a32ae34453c94d9698f7fa651))
+
+### :white_check_mark:
+
+* :white_check_mark: ([`48354dd`](https://github.com/mraniki/tt/commit/48354dd5d9af64f993c6112b0ae701883165a29b))
+
+### Other
+
+* Merge pull request #737 from mraniki/dev
+
+✨ Option to restrict plugin for memory efficiency. ([`faa9b6c`](https://github.com/mraniki/tt/commit/faa9b6c50d7baa803a1859caa519098e73ecc2a0))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`fd61919`](https://github.com/mraniki/tt/commit/fd61919085d4a1ddd1e097672363dafa5e036b35))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`fa06422`](https://github.com/mraniki/tt/commit/fa06422170e273ddd6a5ea7ee9c027175f98f078))
+
+* Refactor plugin loading method ([`9b6b2c1`](https://github.com/mraniki/tt/commit/9b6b2c193b3a4237692e81b9ed5c7671c9e2f6d2))
+
+* Merge pull request #736 from mraniki/dev
+
+🐳 ([`aac0fc9`](https://github.com/mraniki/tt/commit/aac0fc9636cd24ab3719b5afd3ebab795e805dbd))
+
+### Update
+
+* Update Requirements ([`10ea2fb`](https://github.com/mraniki/tt/commit/10ea2fb10b08c23d6dfda3a89f37b34f9b2af9ed))
+
+* Update Requirements ([`526864a`](https://github.com/mraniki/tt/commit/526864ac93ec959068c7f35002edb6f18cec1e01))
+
+* Update Requirements ([`e85978b`](https://github.com/mraniki/tt/commit/e85978bbf761dab7f1cfd4e32b2a79c960d21dbf))
+
+* Update Requirements ([`687514f`](https://github.com/mraniki/tt/commit/687514fee7ccb72ec242af2f7d221c9d57459c34))
+
+* Update Requirements ([`76c817c`](https://github.com/mraniki/tt/commit/76c817c70f2e2e9dc049638bd99cdae11f96bc65))
+
+* Update Requirements ([`3619383`](https://github.com/mraniki/tt/commit/361938368a8ce0fc3520b21a2cc8f8b8f240a05c))
+
+* Update Requirements ([`d4c29b8`](https://github.com/mraniki/tt/commit/d4c29b8016753575ddac33535fed311b0fc0f2d1))
+
+### ♻️
+
+* ♻️ importing front end only if activated and called. ([`e98ea54`](https://github.com/mraniki/tt/commit/e98ea54dd5356ab2a2c3df945b6b6bedd288b6b2))
+
+### ✨
+
+* ✨ Option to restrict plugin for memory efficiency. ([`4d4c792`](https://github.com/mraniki/tt/commit/4d4c79214170b8085b27d79d73e47d59ba195aa5))
+
+### 🐛
+
+* 🐛 added request as dep and updated settings. ([`14bbd8e`](https://github.com/mraniki/tt/commit/14bbd8e239eb05c99de84b636f86caf42c07a542))
+
+### 🐳
+
+* 🐳 ([`a1499fd`](https://github.com/mraniki/tt/commit/a1499fdbba231be405f99d0176c07fab88a4013e))
+
+
 ## v4.12.1 (2023-09-07)
 
 ### Other
