@@ -2,6 +2,37 @@
 
 
 
+## v4.13.4 (2023-09-09)
+
+### Other
+
+* Merge pull request #752 from mraniki/dev
+
+⬆️⚡️ ([`9e4f11f`](https://github.com/mraniki/tt/commit/9e4f11ff2bfbf0968cae6838142ea1f454861ebf))
+
+* Refactor config file path ([`9ca9400`](https://github.com/mraniki/tt/commit/9ca940069e7f5ff84118c59cc566a6f7d82999d6))
+
+* Merge pull request #750 from mraniki/renovate/iamlistening-3.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v3.4.4 ([`1d57126`](https://github.com/mraniki/tt/commit/1d5712631f1c3c84bf5381c1fd5682d2ebf04dcf))
+
+* Merge pull request #748 from mraniki/renovate/dxsp-4.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v4.2.41 ([`f98a9d6`](https://github.com/mraniki/tt/commit/f98a9d670bc69a7b48a15e0b5759306440e26d1e))
+
+### Update
+
+* Update Requirements ([`34ce894`](https://github.com/mraniki/tt/commit/34ce8945e8764fd49a4a8399db88d010b035f049))
+
+* Update Requirements ([`16b18c9`](https://github.com/mraniki/tt/commit/16b18c9cf7968c15ba0f549e409172d2551ac62c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v3.4.4 ([`26a40e1`](https://github.com/mraniki/tt/commit/26a40e158cb1aa468f7264980dfb732a54eb72e3))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v4.2.41 ([`2bc2abe`](https://github.com/mraniki/tt/commit/2bc2abe4ef2981ecfe27aaae47aefa571bbe94b8))
+
+
 ## v4.13.3 (2023-09-09)
 
 ### Other
