@@ -29,7 +29,7 @@ settings = Dynaconf(
         os.path.join(ROOT, "talky_settings.toml"),
         # load default from library in case not in talky default
         "default_settings.toml",
-        "myllm/myllm.toml",
+        #"myllm/myllm.toml",
         # load user default
         "settings.toml",
         # load user secret
