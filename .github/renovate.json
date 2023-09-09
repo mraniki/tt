@@ -7,6 +7,7 @@
   ],
   "semanticCommits": "enabled",
   "labels": ["dependencies"],
+  "baseBranches": ["dev"],
   "packageRules": [
     {
 			"matchManagers": ["pip_requirements"],
@@ -15,14 +16,11 @@
     {
       "matchUpdateTypes": ["minor", "patch"],
       "matchCurrentVersion": "!/^0/",
-      "automerge": true,
-      "matchBaseBranches": ["dev"],
-      "minimumReleaseAge": "15 days"
+      "automerge": true
     },
     {
       "matchUpdateTypes": ["major"],
       "automerge": false,
-      "matchBaseBranches": ["dev"],
       "minimumReleaseAge": "30 days"
     }
   ]
