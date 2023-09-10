@@ -2,6 +2,19 @@
 
 
 
+## v4.13.6 (2023-09-10)
+
+### Other
+
+* Merge pull request #756 from mraniki/dev
+
+Update mirror job configuration ([`1742999`](https://github.com/mraniki/tt/commit/1742999f5910f97a5dd16c3e904b7f7e25f2c04f))
+
+### Update
+
+* Update mirror job configuration ([`5685805`](https://github.com/mraniki/tt/commit/5685805b58fcbfc267f8c5aa600e22a330a97120))
+
+
 ## v4.13.5 (2023-09-10)
 
 ### Other
