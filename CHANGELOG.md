@@ -2,6 +2,27 @@
 
 
 
+## v4.13.5 (2023-09-10)
+
+### Other
+
+* Merge pull request #755 from mraniki/dev
+
+⬆️🪞 ([`367db23`](https://github.com/mraniki/tt/commit/367db231c291ebc84bf53bb9428f4be814212b03))
+
+* Add mirror job to workflows and update start.rst ([`13dcd17`](https://github.com/mraniki/tt/commit/13dcd17f0faafb3cf15dc28339651c2bdff82ae5))
+
+* Merge pull request #754 from mraniki/renovate/talkytrend-1.x
+
+⬆️ 🛠️(deps): update dependency talkytrend to v1.14.14 ([`a329ade`](https://github.com/mraniki/tt/commit/a329ade1f4c89b4e6c04722a757d61e1bff3636a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v2.0.8 ([`9cc2b39`](https://github.com/mraniki/tt/commit/9cc2b391f1d0579d0b0579ca170d7f0201686e68))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.14.14 ([`fb41d16`](https://github.com/mraniki/tt/commit/fb41d1615d019169f9d3c3db4f4387c554eea44a))
+
+
 ## v4.13.4 (2023-09-09)
 
 ### Other
