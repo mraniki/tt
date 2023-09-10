@@ -130,8 +130,8 @@ then start your bot:
    python3 app.py
 
 
-☁️ Try it 
-=========
+☁️ Deploy to cloud services
+==========================
 
 .. raw:: html
 
