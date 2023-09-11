@@ -2,6 +2,19 @@
 
 
 
+## v4.13.7 (2023-09-11)
+
+### Other
+
+* Merge pull request #759 from mraniki/dev
+
+💬 codacy code quality badge ([`d3d0306`](https://github.com/mraniki/tt/commit/d3d03060e24b2fcb971412dcd56173b5c8417379))
+
+### 💬
+
+* 💬 codacy code quality badge ([`681e9f0`](https://github.com/mraniki/tt/commit/681e9f065e22f2eaaaa2dd8112d770e3d3929656))
+
+
 ## v4.13.6 (2023-09-10)
 
 ### Other
