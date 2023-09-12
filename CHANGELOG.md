@@ -2,6 +2,21 @@
 
 
 
+## v4.13.8 (2023-09-12)
+
+### Other
+
+* Merge pull request #761 from mraniki/dev
+
+🚨 linter ([`a9965bf`](https://github.com/mraniki/tt/commit/a9965bf1ad36515136e04971788eac26de0bb698))
+
+### 🚨
+
+* 🚨 📝 ([`cea054a`](https://github.com/mraniki/tt/commit/cea054ae8e5dc4f28e44cfb762f09983061992c9))
+
+* 🚨 trailing spaces linter ([`0214c63`](https://github.com/mraniki/tt/commit/0214c6336d0434cf6b46ed5c023d28e094700415))
+
+
 ## v4.13.7 (2023-09-11)
 
 ### Other
