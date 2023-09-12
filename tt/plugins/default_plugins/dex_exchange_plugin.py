@@ -10,7 +10,7 @@ from tt.utils import send_notification
 
 class DexExchangePlugin(BasePlugin):
     """
-    Class DexExchangePlugin 
+    Class DexExchangePlugin
     to support DexSwap object
     built via DXSP lib
     More info: https://github.com/mraniki/dxsp
@@ -20,12 +20,14 @@ class DexExchangePlugin(BasePlugin):
 
     Args:
         None
-    
+
     Returns:
         None
-    
+
     """
+
     name = os.path.splitext(os.path.basename(__file__))[0]
+
     def __init__(self):
         super().__init__()
         self.enabled = settings.dxsp_enabled

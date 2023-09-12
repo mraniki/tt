@@ -9,18 +9,19 @@ from tt.utils import send_notification
 
 class TalkyTrendPlugin(BasePlugin):
     name = os.path.splitext(os.path.basename(__file__))[0]
+
     def __init__(self):
         super().__init__()
         self.enabled = settings.talkytrend_enabled
         if self.enabled:
             self.trend = TalkyTrend()
-            
+
     async def start(self):
-        """Starts the TalkyTrend plugin"""  
+        """Starts the TalkyTrend plugin"""
         if self.enabled:
             await self.plugin_notify_cron_task(
-                user_name="talky_monitor",
-                function=self.trend.monitor)
+                user_name="talky_monitor", function=self.trend.monitor
+            )
 
     async def stop(self):
         """Stops the TalkyTrend plugin"""

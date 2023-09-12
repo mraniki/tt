@@ -6,12 +6,12 @@ from findmyorder import FindMyOrder
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
 from tt.utils import send_notification
- 
+
 
 class CexExchangePlugin(BasePlugin):
     """
-    Class CexExchangePlugin 
-    to support CEX Exchange 
+    Class CexExchangePlugin
+    to support CEX Exchange
     built via Cefi lib
     More info: https://github.com/mraniki/cefi
     Order are identified and parsed
@@ -20,12 +20,14 @@ class CexExchangePlugin(BasePlugin):
 
     Args:
         None
-    
+
     Returns:
         None
 
     """
+
     name = os.path.splitext(os.path.basename(__file__))[0]
+
     def __init__(self):
         super().__init__()
         self.enabled = settings.cex_enabled
@@ -52,13 +54,13 @@ class CexExchangePlugin(BasePlugin):
         """
         Handles incoming messages
         to route to the respective function
-        
+
         Args:
             msg (str): The incoming message
 
         Returns:
             None
-        
+
         """
         if not self.enabled:
             return

@@ -5,29 +5,26 @@
 
 import os
 import sys
-from pathlib import Path
-from typing import Any, Dict
 
 import pydata_sphinx_theme
-from sphinx.application import Sphinx
 
-sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath("../"))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'Talky Trader'
-copyright = '2022, mraniki'
-author = 'mraniki'
+project = "Talky Trader"
+copyright = "2022, mraniki"
+author = "mraniki"
 language = "en"
 
 # -- General configuration ---------------------------------------------------
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.viewcode',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
     "sphinx.ext.intersphinx",
     "hoverxref.extension",
     "sphinx.ext.extlinks",
@@ -48,11 +45,9 @@ intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "talky": ("https://talky.readthedocs.io/en/latest", None),
     "talky-dev": ("https://talky.readthedocs.io/en/dev/", None),
-    "findmyorder": (
-        "https://findmyorder.readthedocs.io/en/latest", None),
+    "findmyorder": ("https://findmyorder.readthedocs.io/en/latest", None),
     "dxsp": ("https://dxsp.readthedocs.io/en/latest", None),
-    "iamlistening": (
-        "https://iamlistening.readthedocs.io/en/latest", None),
+    "iamlistening": ("https://iamlistening.readthedocs.io/en/latest", None),
     "talkytrend": ("https://talkytrend.readthedocs.io/en/latest", None),
     "myllm": ("https://myllm.readthedocs.io/en/latest", None),
     "community": ("https://tt-plugins.readthedocs.io/en/latest", None),
@@ -66,33 +61,32 @@ intersphinx_disabled_reftypes = ["*"]
 # -- hoverxref ----------------
 
 hoverxref_intersphinx = [
-    'readthedocs',
-    'sphinx',
-    'python',
-    'talky',
-    'findmyorder',
-    'dxsp',
-    'cefi',
-    'iamlistening',
-    'talkytrend',
-    'myllm',
-    'community',
-    'headlinehunt'
-
+    "readthedocs",
+    "sphinx",
+    "python",
+    "talky",
+    "findmyorder",
+    "dxsp",
+    "cefi",
+    "iamlistening",
+    "talkytrend",
+    "myllm",
+    "community",
+    "headlinehunt",
 ]
 
 # -- autodoc --------------------
 
-autoclass_content = 'both'
-autodoc_inherit_docstrings = True 
-set_type_checking_flag = True 
+autoclass_content = "both"
+autodoc_inherit_docstrings = True
+set_type_checking_flag = True
 add_module_names = True
 autodoc_default_options = {
-    'members': True,
-    'member-order': 'bysource',
-    'special-members': '__init__',
-    'undoc-members': True
-    }
+    "members": True,
+    "member-order": "bysource",
+    "special-members": "__init__",
+    "undoc-members": True,
+}
 # -- autoapi -------------------
 
 # autoapi_type = "python"
@@ -113,8 +107,8 @@ myst_enable_extensions = ["colon_fence", "linkify", "substitution"]
 myst_heading_anchors = 2
 myst_substitutions = {"rtd": "[Read the Docs](https://readthedocs.org/)"}
 
-master_doc = 'index'
-source_suffix = ['.rst', '.md']
+master_doc = "index"
+source_suffix = [".rst", ".md"]
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
@@ -133,8 +127,8 @@ if not os.environ.get("READTHEDOCS"):
 
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
-html_logo = '_static/logo.png'
-html_favicon = '_static/favicon.ico'
+html_logo = "_static/logo.png"
+html_favicon = "_static/favicon.ico"
 html_show_sphinx = False
 html_show_copyright = False
 html_theme = "pydata_sphinx_theme"
@@ -166,10 +160,8 @@ html_theme_options = {
             "url": "https://coindrop.to/mraniki",
             "icon": "fa-solid fa-burger",
         },
-        ],
-
+    ],
 }
 html_context = {
-   "default_mode": "dark",
-
+    "default_mode": "dark",
 }
