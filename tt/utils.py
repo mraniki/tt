@@ -16,7 +16,7 @@ from tt.plugins.plugin_manager import PluginManager
 async def send_notification(msg):
     """
     💬 Notification via Apprise.
-    Apprise endpoint URL can be a URL 
+    Apprise endpoint URL can be a URL
     for the chat, a URL to an Apprise config
     or a URL to the Apprise API endpoint
     apprise_url = "tgram://BOTTOKEN/CHANNEL"
@@ -35,11 +35,10 @@ async def send_notification(msg):
     aobj = Apprise(settings.apprise_url)
     msg_format = settings.apprise_format or NotifyFormat.MARKDOWN
     try:
-        await aobj.async_notify(
-            body=msg,
-            body_format=msg_format)
+        await aobj.async_notify(body=msg, body_format=msg_format)
     except Exception as error:
         logger.error("Verify Apprise URL: ", error)
+
 
 async def run_bot():
     """
@@ -72,10 +71,10 @@ async def start_plugins(plugin_manager):
         loop = asyncio.get_running_loop()
         loop.create_task(plugin_manager.start_all_plugins())
 
- 
+
 async def start_bot(listener, plugin_manager, max_iterations=None):
     """
-    👂 Start the chat listener and 
+    👂 Start the chat listener and
     dispatch messages to plugins
 
     Args:

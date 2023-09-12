@@ -1,6 +1,6 @@
 """
 TalkyTrader Config
-Used for Logging, 
+Used for Logging,
 Scheduleing and Settings
     🧐⏱️⚙️
 
@@ -29,7 +29,7 @@ settings = Dynaconf(
         os.path.join(ROOT, "talky_settings.toml"),
         # load default from library in case not in talky default
         "default_settings.toml",
-        #"myllm/myllm.toml",
+        # "myllm/myllm.toml",
         # load user default
         "settings.toml",
         # load user secret
@@ -80,9 +80,9 @@ def loguru_setup():
         "discord": "ERROR",
         "telethon": "ERROR",
         "web3": "ERROR",
-        #"apprise": "ERROR",
+        # "apprise": "ERROR",
         "urllib3": "ERROR",
-        #"asyncz": "ERROR",
+        # "asyncz": "ERROR",
     }
     logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
     loguru_logger.add(

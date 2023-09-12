@@ -10,18 +10,20 @@ from tt.utils import __version__, send_notification
 
 
 class HelperPlugin(BasePlugin):
-    """ 
-    Helper Plugin 
-    Provide multiple function 
-    such as giving the list of 
-    available command, network ping 
+    """
+    Helper Plugin
+    Provide multiple function
+    such as giving the list of
+    available command, network ping
     or restarting the bot
-    
+
     network ping is using Ping3 lib
     more info: https://github.com/kyan001/ping3
-    
+
     """
+
     name = os.path.splitext(os.path.basename(__file__))[0]
+
     def __init__(self):
         super().__init__()
         self.enabled = settings.helper_enabled
@@ -33,7 +35,6 @@ class HelperPlugin(BasePlugin):
     async def start(self):
         """Starts the plugin"""
         await self.send_notification(await self.get_helper_info())
-
 
     async def stop(self):
         """Stops the plugin"""
@@ -65,35 +66,34 @@ class HelperPlugin(BasePlugin):
     async def get_helper_help(self):
         """
         Help Message
-        :file:`/help` command to 
-        return the list of 
+        :file:`/help` command to
+        return the list of
         available command
         """
         return f"{self.help_message}"
 
     async def get_helper_info(self):
         """
-        return 
+        return
         TalkyTrader version
         """
         return self.version
 
     async def get_helper_network(self):
         """
-        :file:`/network` command to retrieve the network 
-        ping latency and 
+        :file:`/network` command to retrieve the network
+        ping latency and
         the bot IP address
         """
-        ping_result = ping3.ping(settings.ping, unit='ms')
+        ping_result = ping3.ping(settings.ping, unit="ms")
         ping_result = round(ping_result, 2) if ping_result is not None else 0
-        return (f"️{self.host_ip}\n"
-                f"🏓 {ping_result}\n")
+        return f"️{self.host_ip}\n" f"🏓 {ping_result}\n"
 
     async def trading_switch_command(self):
         """
         Trading switch command
-        :file:`/trading` command 
-        to turn off or on the 
+        :file:`/trading` command
+        to turn off or on the
         trading capability
         """
         settings.trading_enabled = not settings.trading_enabled
@@ -101,14 +101,14 @@ class HelperPlugin(BasePlugin):
 
     async def restart(self):
         """
-        :file:`/restart` command 
+        :file:`/restart` command
         to restart the bot
         """
         os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
 
     def get_host_ip(self):
         """
-        Returns bot IP 
+        Returns bot IP
         """
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect((settings.ping, 80))

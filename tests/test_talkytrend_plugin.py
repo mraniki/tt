@@ -18,14 +18,14 @@ def test_fixture_plugin():
 
 @pytest.mark.asyncio
 async def test_plugin(plugin):
-    """Test message handling """
+    """Test message handling"""
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
-    assert callable(plugin.plugin_notify_cron_task) 
+    assert callable(plugin.plugin_notify_cron_task)
 
 
 @pytest.mark.asyncio
 async def test_plugin_notification(plugin):
-    """Test notification """
+    """Test notification"""
     plugin.send_notification = AsyncMock()
     plugin.get_talkytrend_info = AsyncMock()
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
@@ -35,7 +35,7 @@ async def test_plugin_notification(plugin):
 
 @pytest.mark.asyncio
 async def test_plugin_info(plugin):
-    """Test notification """
+    """Test notification"""
     plugin.get_talkytrend_info = AsyncMock()
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_info}")
     plugin.get_talkytrend_info.assert_awaited_once
@@ -43,7 +43,7 @@ async def test_plugin_info(plugin):
 
 @pytest.mark.asyncio
 async def test_plugin_tv(plugin):
-    """Test notification """
+    """Test notification"""
     plugin.get_tv = AsyncMock()
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_tv}")
     plugin.get_tv.assert_awaited_once
@@ -51,7 +51,7 @@ async def test_plugin_tv(plugin):
 
 @pytest.mark.asyncio
 async def test_plugin_trend(plugin):
-    """Test notification """
+    """Test notification"""
     plugin.fetch_signal = AsyncMock()
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_trend}")
     plugin.fetch_signal.assert_awaited_once
@@ -59,7 +59,7 @@ async def test_plugin_trend(plugin):
 
 @pytest.mark.asyncio
 async def test_plugin_news(plugin):
-    """Test notification """
+    """Test notification"""
     plugin.fetch_feed = AsyncMock()
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_news}")
     plugin.fetch_feed.assert_awaited_once
