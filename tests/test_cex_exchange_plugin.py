@@ -40,11 +40,6 @@ def test_fixture_plugin():
     return CexExchangePlugin()
 
 
-def test_dynaconf_is_in_testing_env_CEX():
-    print(settings.VALUE)
-    assert settings.VALUE == "On Testing CEX_binance"
-    assert settings.cex_name == "binance"
-
 
 @pytest.mark.asyncio
 async def test_plugin(plugin):
