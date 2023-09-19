@@ -30,7 +30,7 @@ class DexExchangePlugin(BasePlugin):
 
     def __init__(self):
         super().__init__()
-        # self.enabled = settings.dxsp_enabled
+        self.enabled = settings.dxsp_enabled
         # if self.enabled:
         self.fmo = FindMyOrder()
         # if settings.dex_wallet_address:
@@ -44,7 +44,7 @@ class DexExchangePlugin(BasePlugin):
 
     async def send_notification(self, message):
         """Sends notification"""
-        #if self.enabled:
+        # if self.enabled:
         await send_notification(message)
 
     def should_handle(self, message):
@@ -53,8 +53,8 @@ class DexExchangePlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        #if not self.enabled:
-         #   return
+        # if not self.enabled:
+        #   return
 
         if msg.startswith(settings.bot_ignore):
             return
