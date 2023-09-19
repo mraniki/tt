@@ -2,13 +2,72 @@
 
 
 
+## v5.0.1 (2023-09-19)
+
+### :recycle:
+
+* :recycle: ([`8f95ba2`](https://github.com/mraniki/tt/commit/8f95ba22572e231e2ff37cab259ace658da27839))
+
+### :white_check_mark:
+
+* :white_check_mark: Unit Test ([`3d744d7`](https://github.com/mraniki/tt/commit/3d744d76dfb9dccd938c68a4d75b29f70e0e2686))
+
+### Other
+
+* Merge pull request #768 from mraniki/dev
+
+💥 breaking: Integrate DXSP v5 and CEFI v2 for multi exchange support ([`751e448`](https://github.com/mraniki/tt/commit/751e4484cd865a8a0b996f0053259201cfbae778))
+
+* Fix test_plugin assertion ([`5e61c0a`](https://github.com/mraniki/tt/commit/5e61c0a5dd404adb01592e7b597f671935a0c13e))
+
+* Merge pull request #771 from mraniki/renovate/iamlistening-3.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v3.4.5 ([`6089c6d`](https://github.com/mraniki/tt/commit/6089c6d3430150e45de94088168c0b8cd82182bf))
+
+* Merge branch &#39;main&#39; into dev ([`43b0526`](https://github.com/mraniki/tt/commit/43b052699d6bed5d5c1f2be08a5f9cf02c48ed1e))
+
+### ♻️
+
+* ♻️ ([`20e314f`](https://github.com/mraniki/tt/commit/20e314fdefcbd0628ac921d4be8511f9218facdd))
+
+### ✅
+
+* ✅ Unit Test ([`cd65239`](https://github.com/mraniki/tt/commit/cd652390a4c8ad7bd3d31262645971f7f1ef7711))
+
+* ✅ Unit Test ([`3958846`](https://github.com/mraniki/tt/commit/3958846f72cf5cfa93785818fcb14f8d1dfe99d5))
+
+* ✅ Unit Test ([`975ddf5`](https://github.com/mraniki/tt/commit/975ddf5187f6b7c05d1a71d3240bb94922a677cb))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v3.4.5 ([`4c54e14`](https://github.com/mraniki/tt/commit/4c54e142dd5ee14a5ab1c468cde3678f9a617da6))
+
+### 🔧
+
+* 🔧 ([`66c72bf`](https://github.com/mraniki/tt/commit/66c72bf32e8cbfb124d2184809289c21758eb097))
+
+
 ## v5.0.0 (2023-09-19)
 
 ### Other
 
+* Merge pull request #764 from mraniki/renovate/pydata-sphinx-theme-0.x
+
+⬆️ 🛠️(deps): update dependency pydata-sphinx-theme to ^0.14.0 ([`131db0e`](https://github.com/mraniki/tt/commit/131db0e6a4bd30839812049370a32315efff7dcb))
+
+* Merge pull request #770 from mraniki/renovate/cefi-2.x
+
+⬆️ 🛠️(deps): update dependency cefi to v2.0.1 ([`d465d4b`](https://github.com/mraniki/tt/commit/d465d4b6b0d7a8ceb2a94abeacb342211439541c))
+
+* Merge branch &#39;main&#39; into dev ([`721d5eb`](https://github.com/mraniki/tt/commit/721d5eb320df817bb58f8dbdda2546ed61dccb31))
+
 * Merge pull request #767 from mraniki/renovate/sphinx-7.x
 
 ⬆️ 🛠️(deps): update dependency sphinx to v7.2.6 ([`886aa02`](https://github.com/mraniki/tt/commit/886aa02c49ebd6dbdaa372ade5c5c1254c59293f))
+
+* Merge pull request #763 from mraniki/renovate/sphinx-7.x
+
+⬆️ 🛠️(deps): update dependency sphinx to v7.2.6 ([`b740264`](https://github.com/mraniki/tt/commit/b7402647c8815984ef058e2129601df994aaaaeb))
 
 * Merge pull request #757 from mraniki/dependabot/pip/dev/findmyorder-1.7.34
 
@@ -16,7 +75,13 @@
 
 ### ⬆️
 
+* ⬆️ 🛠️(deps): update dependency pydata-sphinx-theme to ^0.14.0 ([`643576a`](https://github.com/mraniki/tt/commit/643576aad2dbf87e479ea54020f2c252b13765d3))
+
 * ⬆️ 🛠️(deps): update dependency sphinx to v7.2.6 ([`8c5cd56`](https://github.com/mraniki/tt/commit/8c5cd569dcc933820a9a337add41360ee8b2d889))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v2.0.1 ([`595f01c`](https://github.com/mraniki/tt/commit/595f01c6e37959592d73632661e874cf7f367ef4))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.2.6 ([`44e5ac4`](https://github.com/mraniki/tt/commit/44e5ac4823fd0555b32c301a86abaed8f062a699))
 
 ### 💥
 
