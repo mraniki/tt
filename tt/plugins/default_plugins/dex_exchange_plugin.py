@@ -30,7 +30,7 @@ class DexExchangePlugin(BasePlugin):
 
     def __init__(self):
         super().__init__()
-        # self.enabled = settings.dxsp_enabled
+        self.enabled = settings.dxsp_enabled
         # if self.enabled:
         self.fmo = FindMyOrder()
         # if settings.dex_wallet_address:
