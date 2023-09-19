@@ -2,6 +2,29 @@
 
 
 
+## v5.0.2 (2023-09-19)
+
+### Other
+
+* Merge pull request #774 from mraniki/dev
+
+⬆️ 🛠️(deps): update dependency ([`47baaa0`](https://github.com/mraniki/tt/commit/47baaa06aeabdacec26033a24d665ed316dd18c0))
+
+* Merge pull request #773 from mraniki/renovate/myllm-2.x
+
+⬆️ 🛠️(deps): update dependency myllm to v2.0.9 ([`2769daa`](https://github.com/mraniki/tt/commit/2769daa179bd216627a157612f3e46572ec8db2e))
+
+* Merge pull request #772 from mraniki/renovate/cefi-2.x
+
+⬆️ 🛠️(deps): update dependency cefi to v2.0.2 ([`1aadcd6`](https://github.com/mraniki/tt/commit/1aadcd6aa907fa4fadf7f852e5433747dd85e726))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v2.0.9 ([`dc56be6`](https://github.com/mraniki/tt/commit/dc56be6389c30673ff4bfaf8d643c90b9bb6739d))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v2.0.2 ([`58fe95a`](https://github.com/mraniki/tt/commit/58fe95ae3e195c257fe20c028ce8313ea15f6001))
+
+
 ## v5.0.1 (2023-09-19)
 
 ### :recycle:
