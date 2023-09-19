@@ -2,6 +2,23 @@
 
 
 
+## v5.0.3 (2023-09-19)
+
+### Other
+
+* Merge pull request #775 from mraniki/dev
+
+🔧 Config format adjustment ([`38091ff`](https://github.com/mraniki/tt/commit/38091ff9b36268b1e3f833364f9b390374c2edc2))
+
+### ♻️
+
+* ♻️ ([`c0cf30b`](https://github.com/mraniki/tt/commit/c0cf30b52c1c1e31699cd7b562f4398d9d8138b6))
+
+### 🔧
+
+* 🔧 ([`c4c00b7`](https://github.com/mraniki/tt/commit/c4c00b741b35da88674bcd079e22f30f5724cd88))
+
+
 ## v5.0.2 (2023-09-19)
 
 ### Other
