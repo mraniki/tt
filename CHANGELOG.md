@@ -2,6 +2,27 @@
 
 
 
+## v5.0.0 (2023-09-19)
+
+### Other
+
+* Merge pull request #767 from mraniki/renovate/sphinx-7.x
+
+⬆️ 🛠️(deps): update dependency sphinx to v7.2.6 ([`886aa02`](https://github.com/mraniki/tt/commit/886aa02c49ebd6dbdaa372ade5c5c1254c59293f))
+
+* Merge pull request #757 from mraniki/dependabot/pip/dev/findmyorder-1.7.34
+
+⬆️ 🤖 Dependencies: Update findmyorder requirement from 1.7.33 to 1.7.34 ([`eae90d2`](https://github.com/mraniki/tt/commit/eae90d248d416c9330ca63d436da745c0e2d379a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.2.6 ([`8c5cd56`](https://github.com/mraniki/tt/commit/8c5cd569dcc933820a9a337add41360ee8b2d889))
+
+### 💥
+
+* 💥 breaking: Integrate DXSP v5 and CEFI v2 for multi exchange support ([`20bb820`](https://github.com/mraniki/tt/commit/20bb8208d18e48c932400ef8390b3fd93dbba27c))
+
+
 ## v4.13.9 (2023-09-13)
 
 ### Other
@@ -37,6 +58,23 @@ Update 👷Flow.yml to add Mirroring ([`76613a1`](https://github.com/mraniki/tt/
 * Merge pull request #759 from mraniki/dev
 
 💬 codacy code quality badge ([`d3d0306`](https://github.com/mraniki/tt/commit/d3d03060e24b2fcb971412dcd56173b5c8417379))
+
+### Update
+
+* :arrow_up: 🤖 Dependencies: Update findmyorder requirement
+
+Updates the requirements on [findmyorder](https://github.com/mraniki/findmyorder) to permit the latest version.
+- [Release notes](https://github.com/mraniki/findmyorder/releases)
+- [Changelog](https://github.com/mraniki/findmyorder/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/mraniki/findmyorder/compare/v1.7.33...v1.7.34)
+
+---
+updated-dependencies:
+- dependency-name: findmyorder
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`cdc1058`](https://github.com/mraniki/tt/commit/cdc10588a1de543d0d938adede541a1d1bd070e5))
 
 ### 💬
 
