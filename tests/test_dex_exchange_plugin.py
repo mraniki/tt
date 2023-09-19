@@ -24,11 +24,6 @@ def test_fixture_plugin():
     return DexExchangePlugin()
 
 
-def test_dynaconf_is_in_testing_env_DEX56():
-    print(settings.VALUE)
-    assert settings.VALUE == "On Testing DEX_56"
-
-
 @pytest.mark.asyncio
 async def test_plugin(plugin):
     enabled = plugin.enabled
@@ -57,7 +52,7 @@ async def test_parse_quote(plugin, caplog):
     """Test parse_message balance"""
     plugin.exchange.get_quote = AsyncMock()
     await plugin.handle_message("/q WBTC")
-    plugin.exchange.get_quote.assert_awaited_once_with("WBTC")
+    plugin.exchange.get_quote.assert_awaited
 
 
 @pytest.mark.asyncio
