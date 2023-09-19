@@ -1,6 +1,6 @@
 import os
 
-from cefi import CexExchange
+from cefi import CexTrader
 from findmyorder import FindMyOrder
 
 from tt.config import settings
@@ -33,7 +33,7 @@ class CexExchangePlugin(BasePlugin):
         self.enabled = settings.cex_enabled
         if self.enabled:
             self.fmo = FindMyOrder()
-            self.exchange = CexExchange()
+            self.exchange = CexTrader()
 
     async def start(self):
         """Starts the exchange_plugin plugin"""
@@ -82,9 +82,9 @@ class CexExchangePlugin(BasePlugin):
             command_mapping = {
                 settings.bot_command_help: self.exchange.get_help,
                 settings.bot_command_info: self.exchange.get_info,
-                settings.bot_command_quote: lambda: self.exchange.get_quote(args[0]),
-                settings.bot_command_bal: self.exchange.get_account_balance,
-                settings.bot_command_pos: self.exchange.get_account_position,
+                settings.bot_command_quote: lambda: self.exchange.get_quotes(args[0]),
+                settings.bot_command_bal: self.exchange.get_account_balances,
+                settings.bot_command_pos: self.exchange.get_account_positions,
                 settings.bot_command_pnl_daily: self.exchange.get_account_pnl,
             }
 

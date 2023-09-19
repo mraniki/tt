@@ -211,10 +211,14 @@ plugin_directory = "tt.plugins.default_plugins"
 # of the bot to allow a reduced memory 
 # usage and footprint if needed
 # if you want all the plugins to be loaded
-# at the start, set it to []
+# at the start, set it to
+# authorized_plugins = []
 # Here the value has been set for helper
-# and dex exchange plugins
-authorized_plugins = ['helper_plugin', 'dex_exchange_plugin']
+# and dex exchange plugins only
+authorized_plugins = [
+    'helper_plugin',
+    'dex_exchange_plugin'
+    ]
 
 # Example plugin for test purpose
 example_plugin_enabled = false
@@ -228,53 +232,59 @@ user_plugins_allowed = false
 
 # Module Enable/Disable
 cex_enabled = true
+
 # Help Message
-ccxt_commands = "🎯 BUY BTCUSDT\n🎯 /q BTCUSDT\n🏦 /bal\n🏦 /pos\n"
-# CCXT Parameters to connect with 
-# the exchange
+ccxt_commands = """
+🎯 BUY BTCUSDT
+🎯 /q BTCUSDT
+🏦 /bal
+🏦 /pos
+"""
+
+# CCXT Parameters to connect
+# to 1 or more exchanges
+[default.cex.main]
 cex_name = ""
-cex_api = ""
-cex_secret = ""
+cex_api= ""
+cex_secret= ""
 cex_password = ""
 cex_testmode = true
-
-# Default type: SPOT, FUTURE, etc.
-cex_defaulttype = "SPOT"
-# Order type: Market, Limit, etc.
-cex_ordertype = "MARKET"
-# Quote based asset for trading
+cex_defaulttype = ""
+cex_ordertype = ""
+trading_risk_amount = 10
 trading_asset = "USDT"
+trading_asset_separator = ""
+
+# second cex example
+# [default.cex.binance]
+# cex_name = "binance"
+# cex_api=""
+# cex_secret=""
+# cex_testmode = true
+# cex_defaulttype = "SPOT"
+# cex_ordertype = "MARKET"
+# trading_risk_amount = 10
+# trading_asset = "USDT"
+# trading_asset_separator = ""
+
 
 ########################################
 ###           DXSP SETTINGS          ###
 ########################################
 
-# Module Enable/Disable
+# Enable/Disable DXSP
 dxsp_enabled = true
 
-# Help Message
-dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
+# help message used in talky app
+dxsp_commands = """
+🎯 BUY WBTC
+🎯 /q WBTC
+🏦 /bal
+🏦 /pos
+"""
+# Header to use for retrieving urls content below
+headers = {User-Agent= 'Mozilla/5.0'}
 
-# Your public wallet address
-dex_wallet_address = "0x1234567890123456789012345678901234567890"
-# Your private wallet key
-dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
-
-# Protocol used option are uniswap, 0x and 1inch
-dex_protocol_type = "uniswap"
-# Version of the protocol
-dex_protocol_version = 2
-
-# RPC connectivity
-dex_rpc = "https://rpc.ankr.com/eth"
-
-# 0x API required only if
-# dex_protocol_type = "0x"
-dex_0x_url = "https://api.0x.org/mainnet"
-dex_0x_api_key = "" 
-
-# DEX router address to use
-dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 # DEX ABI to use in case you have no explorer setup
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 # DEX factory address to use
@@ -282,32 +292,68 @@ dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
 # DEX ABI to use in case you have no explorer setup
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
 
-# Block Explorer API for ABI search 
-dex_block_explorer_url = "https://api.etherscan.io/api?"
-dex_block_explorer_api =  "798437294880920392"
-headers = {User-Agent= 'Mozilla/5.0'}
-
 # token list using uniswap tokenlist format
 # https://github.com/mraniki/tokenlist
 # this can be used to avoid using coingecko
 # or be used for niche token not listed anywhere
 # or for testnet
-token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
-# Address of your trading asset for your trading
-# example: USDT
+# dex settings for 1 exchange based on chain 1 mainnet
+# and uniswap v2 protocol type and router uniswap
+[default.dex.eth]
+wallet_address = "0x1234567890123456789012345678901234567890"
+private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+rpc = "https://rpc.ankr.com/eth"
+protocol_type = "uniswap"
+protocol_version = 2
+api_endpoint = ''
+api_key = ""
+router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+trading_risk_amount = 10
+trading_slippage = 2
+block_explorer_url = "https://api.etherscan.io/api?"
+block_explorer_api = "798437294880920392"
 
-# Slippage %
-# 2 = 2% slippage
-dex_trading_slippage = 2
+# dex settings for 1 exchange based on chain 56 mainnet
+# and uniswap v2 protocol type and router pancakeswap
+[default.dex.bsc]
+wallet_address = "0x1234567890123456789012345678901234567890"
+private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+rpc = "https://rpc.ankr.com/bsc"
+protocol_type = "uniswap"
+protocol_version = 2
+api_endpoint = ''
+api_key = ""
+router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+factory_contract_addr = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
+trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+trading_risk_amount = 10
+trading_slippage = 2
+block_explorer_url = "https://api.bscscan.com/api?"
+block_explorer_api = "798437294880920392"
 
-# Toggle to remove notification if 
-# a token doesn't exist in the token list
-# or in coingecko
-# dex_notify_invalid_token = true
+# dex settings for 1 exchange based on polygon mainnet
+# and 0x protocol type and 0x router
+[default.dex.polygon]
+wallet_address = "0x1234567890123456789012345678901234567890"
+private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+rpc = "https://rpc.ankr.com/polygon"
+protocol_type = "0x"
+protocol_version = 4
+api_endpoint = "https://polygon.api.0x.org/"
+api_key = ""
+router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
+factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+trading_risk_amount = 10
+trading_slippage = 2
+block_explorer_url = "https://api.polygonscan.com/api?"
+block_explorer_api = "798437294880920392"
 
 ########################################
 ###          HELPER SETTINGS         ###
@@ -316,7 +362,11 @@ dex_trading_slippage = 2
 # Helper Enable/Disable
 helper_enabled = true
 # Help Message
-helper_commands = "🔀 /trading\n🔁 /restart\n🕸️ /network"
+helper_commands = """
+🔀 /trading
+🔁 /restart
+🕸️ /network
+"""
 # Command for switch trading on or off
 bot_command_trading = "trading"
 # Command to retrieve network info
