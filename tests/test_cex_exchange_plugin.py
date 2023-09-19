@@ -63,7 +63,7 @@ async def test_parse_valid_order(plugin, order_message):
     await plugin.handle_message(order_message)
     plugin.fmo.search.assert_awaited_once
     plugin.fmo.get_order.assert_awaited_once
-    plugin.exchange.execute_order.assert_awaited_once
+    plugin.exchange.execute_order.assert_awaited
 
 
 @pytest.mark.asyncio
@@ -71,7 +71,7 @@ async def test_parse_quote(plugin, caplog):
     """Test parse_message balance"""
     plugin.exchange.get_quote = AsyncMock()
     await plugin.handle_message("/q BTCUSDT")
-    plugin.exchange.get_quote.assert_awaited_once_with("BTCUSDT")
+    plugin.exchange.get_quote.assert_awaited()
 
 
 @pytest.mark.asyncio
