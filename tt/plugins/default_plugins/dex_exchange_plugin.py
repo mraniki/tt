@@ -30,11 +30,11 @@ class DexExchangePlugin(BasePlugin):
 
     def __init__(self):
         super().__init__()
-        #self.enabled = settings.dxsp_enabled
-        #if self.enabled:
+        # self.enabled = settings.dxsp_enabled
+        # if self.enabled:
         self.fmo = FindMyOrder()
-        if settings.dex_wallet_address:
-            self.exchange = DexSwap()
+        # if settings.dex_wallet_address:
+        self.exchange = DexSwap()
 
     async def start(self):
         """Starts the plugin"""
