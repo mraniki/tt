@@ -5,34 +5,39 @@
 
 # DISCORD BOT on ethereum chain using 
 # uniswap v2 router
-
+    #[default]
     # bot_token = '12122121'
     # bot_channel_id = '1221212'
     # apprise_url = 'discord://12121/121212'
-    # dex_wallet_address = '0x123458901234567890'
-    # dex_private_key = '0xdeadbeef'
-    # dex_block_explorer_api = '42342342342'
+    # [default.dex.uniswap]
+    # wallet_address = '0x123458901234567890'
+    # private_key = '0xdeadbeef'
+    # block_explorer_api = '42342342342'
 
 # TELEGRAM BOT on CEX Binance
+    #[default]
     # bot_token = '121212121'
     # bot_channel_id = '-1122121'
     # bot_api_id = '1212912'
     # bot_api_hash = '121212121' 
     # apprise_url = 'tgram://121221/-11211212121'
+    # [default.cex.binance]
     # cex_name = 'binance' 
     # cex_api = 'abcabccabc' 
     # cex_secret = 'abcacabcabc' 
 
 #DISCORD BOT on BSC chain using pancakeswap v2 router and custom plugin setup
+    #[default]
     # bot_token = '1212121212121'
     # bot_channel_id = '121212121212'
     # apprise_url = 'discord://121121/1212212'
-    # dex_wallet_address = '0x123467890'
-    # dex_private_key = '0xdeadbeef'
-    # dex_router_contract_addr = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
-    # dex_factory_contract_addr = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
-    # dex_block_explorer_url = 'https://api.bscscan.com/api'
-    # dex_block_explorer_api = '423442'
+    # [default.dex.pancake]
+    # wallet_address = '0x123467890'
+    # private_key = '0xdeadbeef'
+    # router_contract_addr = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
+    # factory_contract_addr = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
+    # block_explorer_url = 'https://api.bscscan.com/api'
+    # block_explorer_api = '423442'
     # trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
     # action_identifier = "PUMP DUMP"
     # mapping = [
@@ -41,18 +46,25 @@
     # live_tv_url ='https://reuters-reutersnow-1.plex.wurl.com/manifest/playlist.m3u8'
 
 #MATRIX BOT on Polygon chain using zerox protocol
+    #[default]
     # bot_token = '12122121'
     # bot_channel_id = '12121212'
     # bot_hostname='matrix.org'
     # bot_user='itsme'
     # bot_pass='mario'
     # apprise_url = 'discord://1212121/1211212'
-    # dex_wallet_address = '0x12345678901234567890'
-    # dex_private_key = '0xdeadbeef'
-    # dex_protocol_type = "0x"
-    # dex_rpc = "https://rpc.ankr.com/polygon"
-    # dex_0x_url = "https://polygon.api.0x.org/"
-    # dex_router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
-    # dex_block_explorer_url = 'https://api.polygonscan.com/api'
-    # dex_block_explorer_api = '42342342342'
-    # trading_asset_address = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
+    # [default.dex.polygon]
+    # wallet_address = "0x1234567890123456789012345678901234567890"
+    # private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+    # rpc = "https://rpc.ankr.com/polygon"
+    # protocol_type = "0x"
+    # protocol_version = 4
+    # api_endpoint = "https://polygon.api.0x.org/"
+    # api_key = ""
+    # router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
+    # factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+    # trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    # trading_risk_amount = 10
+    # trading_slippage = 2
+    # block_explorer_url = "https://api.polygonscan.com/api?"
+    # block_explorer_api = "798437294880920392"
