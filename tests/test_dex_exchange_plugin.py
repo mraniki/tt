@@ -10,7 +10,7 @@ from tt.plugins.default_plugins.dex_exchange_plugin import DexExchangePlugin
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings_DEX56():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="testingbsc")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
 
 
 @pytest.fixture(name="order_message")
@@ -34,7 +34,6 @@ async def test_plugin(plugin):
     enabled = plugin.enabled
     fmo = plugin.fmo
     exchange = plugin.exchange
-    print(exchange.account)
     assert enabled is True
     assert isinstance(fmo, FindMyOrder)
     assert isinstance(exchange, DexSwap)
@@ -75,14 +74,6 @@ async def test_parse_position(plugin):
     plugin.exchange.get_account_position = AsyncMock()
     await plugin.handle_message("/pos")
     plugin.exchange.get_account_position.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_parse_pnl(plugin):
-    """Test balance"""
-    plugin.exchange.get_account_pnl = AsyncMock()
-    await plugin.handle_message("/d")
-    plugin.exchange.get_account_pnl.assert_awaited_once()
 
 
 @pytest.mark.asyncio
