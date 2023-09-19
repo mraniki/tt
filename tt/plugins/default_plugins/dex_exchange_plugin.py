@@ -44,8 +44,8 @@ class DexExchangePlugin(BasePlugin):
 
     async def send_notification(self, message):
         """Sends notification"""
-        if self.enabled:
-            await send_notification(message)
+        #if self.enabled:
+        await send_notification(message)
 
     def should_handle(self, message):
         """Returns True if the plugin should handle the message"""
@@ -53,8 +53,8 @@ class DexExchangePlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if not self.enabled:
-            return
+        #if not self.enabled:
+         #   return
 
         if msg.startswith(settings.bot_ignore):
             return
