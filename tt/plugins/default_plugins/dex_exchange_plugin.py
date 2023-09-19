@@ -30,11 +30,11 @@ class DexExchangePlugin(BasePlugin):
 
     def __init__(self):
         super().__init__()
-        self.enabled = settings.dxsp_enabled
-        if self.enabled:
-            self.fmo = FindMyOrder()
-            if settings.dex_wallet_address:
-                self.exchange = DexSwap()
+        # self.enabled = settings.dxsp_enabled
+        # if self.enabled:
+        self.fmo = FindMyOrder()
+        # if settings.dex_wallet_address:
+        self.exchange = DexSwap()
 
     async def start(self):
         """Starts the plugin"""
@@ -44,8 +44,8 @@ class DexExchangePlugin(BasePlugin):
 
     async def send_notification(self, message):
         """Sends notification"""
-        if self.enabled:
-            await send_notification(message)
+        #if self.enabled:
+        await send_notification(message)
 
     def should_handle(self, message):
         """Returns True if the plugin should handle the message"""
@@ -53,8 +53,8 @@ class DexExchangePlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if not self.enabled:
-            return
+        #if not self.enabled:
+         #   return
 
         if msg.startswith(settings.bot_ignore):
             return
@@ -75,7 +75,6 @@ class DexExchangePlugin(BasePlugin):
                 settings.bot_command_info: self.exchange.get_info,
                 settings.bot_command_bal: self.exchange.get_account_balance,
                 settings.bot_command_pos: self.exchange.get_account_position,
-                settings.bot_command_pnl_daily: self.exchange.get_account_pnl,
                 settings.bot_command_quote: lambda: self.exchange.get_quote(args[0]),
             }
 
