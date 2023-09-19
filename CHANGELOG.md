@@ -2,6 +2,29 @@
 
 
 
+## v5.0.4 (2023-09-19)
+
+### Other
+
+* Merge pull request #778 from mraniki/dev
+
+⬆️ 🛠️(deps) ([`7b61fe6`](https://github.com/mraniki/tt/commit/7b61fe60df6a29d34342c1a820d9797356d96a1c))
+
+* Merge branch &#39;main&#39; into dev ([`61ea918`](https://github.com/mraniki/tt/commit/61ea918fedc767181e3d668cef52555dedd28e7a))
+
+* Merge pull request #777 from mraniki/renovate/myllm-2.x
+
+⬆️ 🛠️(deps): update dependency myllm to v2.0.10 ([`9ef9cae`](https://github.com/mraniki/tt/commit/9ef9cae8f78c19c875b50c1fb35c4febec3ba9b5))
+
+* Merge pull request #776 from mraniki/renovate/iamlistening-3.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v3.4.6 ([`e3d203e`](https://github.com/mraniki/tt/commit/e3d203edf369be782dad9d3f50b65feae42a414c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v2.0.10 ([`5779345`](https://github.com/mraniki/tt/commit/5779345422e7b962a8fad990acc68c88ea54f798))
+
+
 ## v5.0.3 (2023-09-19)
 
 ### Other
@@ -13,6 +36,10 @@
 ### ♻️
 
 * ♻️ ([`c0cf30b`](https://github.com/mraniki/tt/commit/c0cf30b52c1c1e31699cd7b562f4398d9d8138b6))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v3.4.6 ([`07e8cf5`](https://github.com/mraniki/tt/commit/07e8cf5e90102cbda1f017ce0637a1b70d458283))
 
 ### 🔧
 
