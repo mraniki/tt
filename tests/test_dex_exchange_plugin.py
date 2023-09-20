@@ -26,13 +26,13 @@ def test_fixture_plugin():
 
 @pytest.mark.asyncio
 async def test_plugin(plugin):
-    enabled = plugin.enabled
+    # enabled = plugin.enabled
     fmo = plugin.fmo
     exchange = plugin.exchange
-   # assert enabled is True
+    # assert enabled is True
     assert isinstance(fmo, FindMyOrder)
     assert isinstance(exchange, DexSwap)
-    #assert exchange.account is not None
+    # assert exchange.account is not None
 
 
 @pytest.mark.asyncio
