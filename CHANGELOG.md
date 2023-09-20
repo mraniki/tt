@@ -2,6 +2,41 @@
 
 
 
+## v5.0.5 (2023-09-20)
+
+### Other
+
+* Merge pull request #780 from mraniki/dev
+
+⬆️ 🛠️(deps) ([`40410d5`](https://github.com/mraniki/tt/commit/40410d5096f13269b9a341c49550c5592203edc8))
+
+* Merge pull request #783 from mraniki/renovate/cefi-2.x
+
+⬆️ 🛠️(deps): update dependency cefi to v2.0.4 ([`c712b5b`](https://github.com/mraniki/tt/commit/c712b5be3e68d6213064ae174d778ecdee3f1278))
+
+* Merge pull request #782 from mraniki/renovate/dxsp-5.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v5.0.2 ([`831ff35`](https://github.com/mraniki/tt/commit/831ff3586c081c126e52f28fca908f2f727e8519))
+
+* Merge pull request #779 from mraniki/renovate/cefi-2.x
+
+⬆️ 🛠️(deps): update dependency cefi to v2.0.3 ([`4c9c44e`](https://github.com/mraniki/tt/commit/4c9c44e8e38b98ae808261feebda1ce88b01880d))
+
+### ♻️
+
+* ♻️ ([`d2fc8b6`](https://github.com/mraniki/tt/commit/d2fc8b698c7631541174b5f81548a38b761d200e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v2.0.4 ([`9ed9c10`](https://github.com/mraniki/tt/commit/9ed9c108f12f7fb708df0ebff884397dabe43b61))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v5.0.2 ([`e785dd6`](https://github.com/mraniki/tt/commit/e785dd693bb8f03e0331288c09f2747b33bde9ab))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v5.0.1 ([`f79cb60`](https://github.com/mraniki/tt/commit/f79cb60295c8f5486ba9daa860c0b89a1698a088))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v2.0.3 ([`28edd79`](https://github.com/mraniki/tt/commit/28edd7934fb863b7a6dba2e0ee56207bb1f9041a))
+
+
 ## v5.0.4 (2023-09-19)
 
 ### Other
