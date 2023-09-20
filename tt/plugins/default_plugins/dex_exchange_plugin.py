@@ -31,10 +31,10 @@ class DexExchangePlugin(BasePlugin):
     def __init__(self):
         super().__init__()
         self.enabled = settings.dxsp_enabled
-        # if self.enabled:
-        self.fmo = FindMyOrder()
-        # if settings.dex_wallet_address:
-        self.exchange = DexSwap()
+        if self.enabled:
+            self.fmo = FindMyOrder()
+            # if settings.dex_wallet_address:
+            self.exchange = DexSwap()
 
     async def start(self):
         """Starts the plugin"""
@@ -53,8 +53,8 @@ class DexExchangePlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        # if not self.enabled:
-        #   return
+        if not self.enabled:
+            return
 
         if msg.startswith(settings.bot_ignore):
             return
