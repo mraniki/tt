@@ -90,7 +90,8 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
     await start_plugins(plugin_manager)
     iteration = 0
     while True:
-        msg = await listener.handler.get_latest_message()
+        for platform in listerner.platform_info
+            msg = await platform.handler.get_latest_message()
         if msg and settings.plugin_enabled:
             await plugin_manager.process_message(msg)
         iteration += 1
