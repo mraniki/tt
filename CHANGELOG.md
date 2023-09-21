@@ -2,6 +2,69 @@
 
 
 
+## v6.0.1 (2023-09-21)
+
+### :recycle:
+
+* :recycle: ([`cb29075`](https://github.com/mraniki/tt/commit/cb290758aa5a74382857e39c75f70f6458939f12))
+
+* :recycle:  Refactor start_bot function to iterate over platforms ([`541fe84`](https://github.com/mraniki/tt/commit/541fe843ad7c4c2b0f58f981ad7a1a7c62d98a2b))
+
+* :recycle: Refactor example_settings.toml and talky_settings.toml files ([`293f30f`](https://github.com/mraniki/tt/commit/293f30f4ca69aed8f6d50e01e3f05382cdeba628))
+
+### :rotating_light:
+
+* :rotating_light: ([`ac9eb9a`](https://github.com/mraniki/tt/commit/ac9eb9af3e864f40ce5d00753f7f67bd5ebf6c0b))
+
+### Other
+
+* Merge pull request #788 from mraniki/dev
+
+🐛 ial fixes ([`3075e62`](https://github.com/mraniki/tt/commit/3075e620df96f4ed2922d2a8fae772c54f0edb3b))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`91a2f71`](https://github.com/mraniki/tt/commit/91a2f7156113bb0f88d722fba3f4d48c96f28d12))
+
+* Merge pull request #789 from mraniki/sourcery/dev
+
+🐛 ial fixes (Sourcery refactored) ([`8fdad8d`](https://github.com/mraniki/tt/commit/8fdad8db1c5f31786792695408fdcdc516ec7cba))
+
+* &#39;Refactored by Sourcery&#39; ([`19deaa7`](https://github.com/mraniki/tt/commit/19deaa7ea4ef4a37be5810129e932d4d9d072c9e))
+
+* Refactor test_unit.py for start_bot() function ([`11a22c9`](https://github.com/mraniki/tt/commit/11a22c9fd5f856075a39ac7d372b44c1551fe98e))
+
+* Refactor start_bot function to iterate over listener.platform_info instead of listerner.platform_info. ([`a01a1b3`](https://github.com/mraniki/tt/commit/a01a1b3beadc880f88480b8544c9626074407eb9))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`fde249d`](https://github.com/mraniki/tt/commit/fde249df22e04323368dd4c339b06078c1387429))
+
+### Update
+
+* Update pyproject.toml ([`74551e8`](https://github.com/mraniki/tt/commit/74551e8dcc3de9032e3d4f8015aea5eb0fb0e014))
+
+* Update tt/talky_settings.toml ([`3ed7738`](https://github.com/mraniki/tt/commit/3ed7738246b0c2d4f85ba5d8a6b29a3a7af261eb))
+
+* Update pyproject.toml ([`18f7ce2`](https://github.com/mraniki/tt/commit/18f7ce2a981f024b8b2d6d63b777eb26e63834b1))
+
+### ♻️
+
+* ♻️ ([`6569c53`](https://github.com/mraniki/tt/commit/6569c53b8c6dea698e0e7a7fa9aee26f26ca3a9c))
+
+### ✅
+
+* ✅ Unit Test ([`c85c624`](https://github.com/mraniki/tt/commit/c85c6249c75fba136c4999f4cfdbb6cde5a0c037))
+
+* ✅ Unit Test ([`4e66041`](https://github.com/mraniki/tt/commit/4e66041889a4963a850941cd526cff69f54a8a7d))
+
+* ✅ Unit Test ([`b9bd3ef`](https://github.com/mraniki/tt/commit/b9bd3ef93e9762153c31581b3db3489fe33b22ca))
+
+### 🐛
+
+* 🐛 ([`9f011f2`](https://github.com/mraniki/tt/commit/9f011f28a95b9855edaa2f2ad627a45b363804a8))
+
+### 🔧
+
+* 🔧 ([`1f448c3`](https://github.com/mraniki/tt/commit/1f448c38b36dd3c88c35c584887dc746a71f0287))
+
+
 ## v6.0.0 (2023-09-21)
 
 ### :white_check_mark:
