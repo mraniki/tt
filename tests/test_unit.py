@@ -33,8 +33,7 @@ def message_test():
 
 @pytest.fixture(name="listener")
 def listener():
-    listener = Listener()
-    return listener
+    return Listener()
 
 
 @pytest.fixture(name="plugin_manager_obj")
