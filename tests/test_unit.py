@@ -4,6 +4,7 @@
 
 from unittest.mock import AsyncMock, MagicMock
 
+import iamlistening
 import pytest
 import uvicorn
 from fastapi.testclient import TestClient
@@ -33,14 +34,7 @@ def message_test():
 @pytest.fixture(name="listener")
 def listener():
     listener = Listener()
-    listener.platform_info = []  # Add an empty list for platform_info
-    return listener
-
-
-@pytest.fixture(name="ial_test")
-def ial_test():
-    listener = Listener()
-    listener.handler = AsyncMock()
+    listener.platform_info = [] 
     return listener
 
 
@@ -52,18 +46,6 @@ def pluginmngr_test():
 @pytest.fixture
 def message():
     return "Test message"
-
-
-@pytest.fixture
-def mock_listener():
-    mock_listener = AsyncMock(spec=Listener)
-    mock_listener.handler = AsyncMock()
-    return mock_listener
-
-
-@pytest.fixture
-def mock_plugin_manager():
-    return AsyncMock(spec=PluginManager)
 
 
 @pytest.mark.asyncio
@@ -122,8 +104,8 @@ async def test_start_plugins():
 
 @pytest.mark.asyncio
 async def test_start_bot(listener, message):
-    # listener = AsyncMock(spec=Listener)
-    # get_latest_message = AsyncMock()
+
+    iamlistening.listener.platform.client.get_latest_message = AsyncMock()
     plugin_manager = AsyncMock(spec=PluginManager)
     await start_bot(listener, plugin_manager, max_iterations=1)
     listener.start.assert_awaited_once()
