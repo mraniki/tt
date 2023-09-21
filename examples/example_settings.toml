@@ -5,7 +5,7 @@
 
 # DISCORD BOT on ethereum chain using 
 # uniswap v2 router
-    #[default]
+    #[default.playform.main]
     # bot_token = '12122121'
     # bot_channel_id = '1221212'
     # apprise_url = 'discord://12121/121212'
@@ -15,7 +15,7 @@
     # block_explorer_api = '42342342342'
 
 # TELEGRAM BOT on CEX Binance
-    #[default]
+    #[default.platform.main]
     # bot_token = '121212121'
     # bot_channel_id = '-1122121'
     # bot_api_id = '1212912'
@@ -27,7 +27,7 @@
     # cex_secret = 'abcacabcabc' 
 
 #DISCORD BOT on BSC chain using pancakeswap v2 router and custom plugin setup
-    #[default]
+    #[default.platform.main]
     # bot_token = '1212121212121'
     # bot_channel_id = '121212121212'
     # apprise_url = 'discord://121121/1212212'
