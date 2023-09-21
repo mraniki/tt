@@ -34,7 +34,6 @@ def message_test():
 @pytest.fixture(name="listener")
 def listener():
     listener = Listener()
-    listener.platform_info = [] 
     return listener
 
 
@@ -104,7 +103,6 @@ async def test_start_plugins():
 
 @pytest.mark.asyncio
 async def test_start_bot(listener, message):
-
     iamlistening.listener.platform.client.get_latest_message = AsyncMock()
     plugin_manager = AsyncMock(spec=PluginManager)
     await start_bot(listener, plugin_manager, max_iterations=1)

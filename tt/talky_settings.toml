@@ -92,36 +92,6 @@ apprise_format = "NotifyFormat.MARKDOWN"
 iamlistening_enabled = true
 
 
-# [default.platform.main]
-# # chat_platform is used to launch 
-# # the specific handler
-# # for the chat platform. Value can be
-# # telegram, discord, matrix, etc.
-# platform = ""
-
-# # bot credentials
-# bot_token = ""
-# bot_channel_id = ""
-# bot_api_id = ""
-# bot_api_hash = ""
-# bot_hostname = ""
-# bot_user = ""
-# bot_pass = ""
-# bot_auth_token = ""
-
-# # Iteration settings used for testing
-# # if you need the bot to run 
-# # for a long time
-# # set iteration_enabled to false
-# # if you need the bot to run 
-# # for a short time
-# # set iteration_enabled to true
-# # iteration_limit is the number 
-# # of iterations
-# # the bot will run for.
-# iteration_enabled = false
-# iteration_limit = -1
-
 ########################################
 ###   COMMON BOT COMMAND SETTINGS    ###
 ########################################
@@ -382,6 +352,37 @@ dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+
+########################################
+###      CHAT PLATFORM SETTINGS      ###
+########################################
+[default.platform.main]
+platform = ""
+bot_token = ""
+bot_channel_id = ""
+bot_api_id = ""
+bot_api_hash = ""
+bot_hostname = ""
+bot_user = ""
+bot_pass = ""
+bot_auth_token = ""
+iteration_enabled = false
+iteration_limit = -1
+iteration_count = 0
+
+# [default.platform.backup]
+# platform = ""
+# bot_token = ""
+# bot_channel_id = ""
+# bot_api_id = ""
+# bot_api_hash = ""
+# bot_hostname = ""
+# bot_user = ""
+# bot_pass = ""
+# bot_auth_token = ""
+# iteration_enabled = false
+# iteration_limit = -1
+# iteration_count = 0
 
 ########################################
 ###           DEX SETTINGS          ###
