@@ -121,11 +121,11 @@ async def test_start_plugins():
 @pytest.mark.asyncio
 async def test_start_bot():
     listener = AsyncMock(spec=Listener)
-    listener.handler = AsyncMock()
+    listener.platform = AsyncMock()
     plugin_manager = AsyncMock(spec=PluginManager)
     await start_bot(listener, plugin_manager, max_iterations=1)
     listener.start.assert_awaited_once()
-    listener.handler.get_latest_message.assert_awaited_once()
+    listener.platform.handler.get_latest_message.assert_awaited_once()
 
 
 def test_main():
