@@ -23,7 +23,7 @@ def set_test_settings():
 
 def test_dynaconf_is_in_testing():
     assert settings.VALUE == "On Testing"
-    # assert settings.chat_platform == "discord"
+    assert settings.platform is not None
 
 
 @pytest.fixture(name="message")
@@ -43,7 +43,7 @@ def pluginmngr_test():
 
 @pytest.fixture
 def message():
-    return "Test message"
+    return "Hello"
 
 
 @pytest.mark.asyncio
@@ -102,7 +102,7 @@ async def test_start_plugins():
 
 @pytest.mark.asyncio
 async def test_start_bot(listener, message):
-    iamlistening.listener.platform.client.get_latest_message = AsyncMock()
+    #iamlistening.listener.platform.client.get_latest_message = AsyncMock()
     plugin_manager = AsyncMock(spec=PluginManager)
     await start_bot(listener, plugin_manager, max_iterations=1)
     listener.start.assert_awaited_once()
