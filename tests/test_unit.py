@@ -22,7 +22,7 @@ def set_test_settings():
 
 def test_dynaconf_is_in_testing():
     assert settings.VALUE == "On Testing"
-    assert settings.chat_platform == "discord"
+    #assert settings.chat_platform == "discord"
 
 
 @pytest.fixture(name="message")

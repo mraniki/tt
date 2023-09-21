@@ -64,25 +64,25 @@ async def test_parse_valid_order(plugin, order_message):
 @pytest.mark.asyncio
 async def test_parse_quote(plugin, caplog):
     """Test parse_message balance"""
-    plugin.exchange.get_quote = AsyncMock()
+    plugin.exchange.get_quotes = AsyncMock()
     await plugin.handle_message("/q BTCUSDT")
-    plugin.exchange.get_quote.assert_awaited()
+    plugin.exchange.get_quotes.assert_awaited()
 
 
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
     """Test balance"""
-    plugin.exchange.get_account_balance = AsyncMock()
+    plugin.exchange.get_account_balances = AsyncMock()
     await plugin.handle_message("/bal")
-    plugin.exchange.get_account_balance.assert_awaited()
+    plugin.exchange.get_account_balances.assert_awaited()
 
 
 @pytest.mark.asyncio
 async def test_parse_position(plugin):
     """Test position"""
-    plugin.exchange.get_account_position = AsyncMock()
+    plugin.exchange.get_account_positions = AsyncMock()
     await plugin.handle_message("/pos")
-    plugin.exchange.get_account_position.assert_awaited()
+    plugin.exchange.get_account_positions.assert_awaited()
 
 
 @pytest.mark.asyncio
