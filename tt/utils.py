@@ -92,8 +92,8 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
     while True:
         for platform in listener.platform_info:
             msg = await platform.handler.get_latest_message()
-        if msg and settings.plugin_enabled:
-            await plugin_manager.process_message(msg)
+            if msg and settings.plugin_enabled:
+                await plugin_manager.process_message(msg)
         iteration += 1
         if max_iterations is not None and iteration >= max_iterations:
             break
