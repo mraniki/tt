@@ -2,6 +2,23 @@
 
 
 
+## v6.0.0 (2023-09-21)
+
+### :white_check_mark:
+
+* :white_check_mark: cefi unit test ([`17402d8`](https://github.com/mraniki/tt/commit/17402d8c3938e4c28efe81f04a0bd1d7c289917d))
+
+### Other
+
+* Merge pull request #787 from mraniki/dev
+
+💥 ial version 4Update pyproject.toml ([`83bf1b7`](https://github.com/mraniki/tt/commit/83bf1b74908dc8b16d4c838586de36ecdc9b4054))
+
+### 💥
+
+* 💥 ial version 4Update pyproject.toml ([`cad1898`](https://github.com/mraniki/tt/commit/cad18985923b1fbdc06a5b69ced68cecc05b388a))
+
+
 ## v5.0.6 (2023-09-21)
 
 ### Other
