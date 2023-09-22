@@ -106,10 +106,10 @@ async def test_start_bot(listener, message):
     plugin_manager = AsyncMock(spec=PluginManager)
     await start_bot(listener, plugin_manager, max_iterations=1)
     listener.start.assert_awaited_once()
-    for platform in listener.platform_info:
-        await platform.handler.handle_message(message)
-        msg = await platform.handler.get_latest_message()
-        platform.handler.get_latest_message.assert_awaited_once()
+    for client in listener.platform_info:
+        await client.handle_message(message)
+        msg = await client.get_latest_message()
+        client.get_latest_message.assert_awaited_once()
         assert msg == message
 
 
