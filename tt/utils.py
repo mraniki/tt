@@ -86,12 +86,14 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
         None
 
     """
-    await listener.start()
+    # await listener.start()
+    loop = asyncio.get_running_loop()
+    loop.create_task(listener.start())
     await start_plugins(plugin_manager)
     iteration = 0
     while True:
-        for platform in listener.platform_info:
-            msg = await platform.handler.get_latest_message()
+        for client in listener.platform_info:
+            msg = await client.get_latest_message()
             if msg and settings.plugin_enabled:
                 await plugin_manager.process_message(msg)
         iteration += 1
