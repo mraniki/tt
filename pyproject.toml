@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "tt"
-version = "6.0.4"
+version = "6.0.5"
 description = "Connect CEX & DEX across multi messaging platforms with plugin support."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"
@@ -128,6 +128,7 @@ overgeneral-exceptions = [
 
 
 
+
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
 pytest-cov = "^4.1"
@@ -135,6 +136,7 @@ pytest-asyncio = "^0.21.0"
 pytest-mock = "^3.11.1"
 pytest-loguru = "^0.2.0"
 pytest-playwright = "^0.4.0"
+
 
 
 
