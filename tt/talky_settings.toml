@@ -357,6 +357,7 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 ########################################
 ###      CHAT PLATFORM SETTINGS      ###
 ########################################
+
 [default.platform.main]
 platform = ""
 bot_token = ""
@@ -369,7 +370,7 @@ bot_pass = ""
 bot_auth_token = ""
 iteration_enabled = false
 iteration_limit = -1
-iteration_count = 0
+
 
 # [default.platform.backup]
 # platform = ""
@@ -383,7 +384,7 @@ iteration_count = 0
 # bot_auth_token = ""
 # iteration_enabled = false
 # iteration_limit = -1
-# iteration_count = 0
+
 
 ########################################
 ###           DEX SETTINGS          ###
