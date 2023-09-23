@@ -86,7 +86,7 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
         None
 
     """
-    # await listener.start()
+
     loop = asyncio.get_running_loop()
     loop.create_task(listener.start())
     await start_plugins(plugin_manager)
