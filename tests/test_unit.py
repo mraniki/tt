@@ -22,7 +22,9 @@ def set_test_settings():
 
 
 def test_dynaconf_is_in_testing():
+    assert settings.platform is not None
     assert settings.VALUE == "On Testing"
+    
     #assert settings.platform is not None
 
 
