@@ -190,7 +190,7 @@ plugin_directory = "tt.plugins.default_plugins"
 authorized_plugins = [
     'helper_plugin',
     'dex_exchange_plugin',
-    'cex_exchange_plugin'
+    # 'cex_exchange_plugin'
     ]
 
 # Example plugin for test purpose
