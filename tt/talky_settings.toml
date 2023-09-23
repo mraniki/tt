@@ -91,7 +91,6 @@ apprise_format = "NotifyFormat.MARKDOWN"
 # Module Enable/Disable
 iamlistening_enabled = true
 
-
 ########################################
 ###   COMMON BOT COMMAND SETTINGS    ###
 ########################################
@@ -100,7 +99,7 @@ iamlistening_enabled = true
 bot_prefix = "/"
 # Specific data that should be ignore by
 # the parser
-bot_ignore = "ℹ️ 🦄 ⚠️ 📊 🏦 📺 ⬆️ 💬"
+bot_ignore = "ℹ️ 🦄 ⚠️ 📊 🏦 📺 ⬆️ 💬 qq"
 # Command for help
 bot_command_help = "help"
 # Command for info
@@ -113,6 +112,63 @@ bot_command_pos = "pos"
 bot_command_pnl_daily = "d"
 # Command for instrument quote
 bot_command_quote = "q"
+
+# Help Message
+helper_commands = """
+🔀 /trading
+🔁 /restart
+🕸️ /network
+"""
+# Command for switch trading on or off
+bot_command_trading = "trading"
+# Command to retrieve network info
+# such as latency ping and IP address of
+# the bot
+bot_command_network = "network"
+# Command to restart the bot
+bot_command_restart = "restart"
+
+# help message used in talky app
+dxsp_commands = """
+🎯 BUY WBTC
+🎯 /q WBTC
+🏦 /bal
+🏦 /pos
+"""
+
+# Help Message
+ccxt_commands = """
+🎯 BUY BTCUSDT
+🎯 /q BTCUSDT
+🏦 /bal
+🏦 /pos
+"""
+
+# help message listing the commands available
+talkytrend_commands = "📺 /live\n📰 /news\n📊 /trend"
+
+# bot command for tv feed
+bot_command_tv = "live"
+# bot command for trading view trend
+bot_command_trend = "trend"
+# bot command for news feeds
+bot_command_news = "news"
+
+# help message listing the commands
+# available
+llm_commands = """
+🦾 /qq\n
+💬 /ai\n
+➰ /aimode\n
+🧽 /clearai\n
+"""
+# command for topic/conversation
+bot_command_question = "qq"
+# command for reset chat
+bot_command_clearai = "clearai"
+# command to activate or deactivate aimode
+# not implemented
+bot_command_aimode = "aimode"
 
 ########################################
 ###         TRADING SETTINGS         ###
@@ -188,9 +244,8 @@ plugin_directory = "tt.plugins.default_plugins"
 # Here the value has been set for helper
 # and dex exchange plugins only
 authorized_plugins = [
-    'helper_plugin',
-    'dex_exchange_plugin',
-    # 'cex_exchange_plugin'
+    # 'helper_plugin',
+    # 'dex_exchange_plugin',
     ]
 
 # Example plugin for test purpose
@@ -206,20 +261,7 @@ user_plugins_allowed = false
 
 # Helper Enable/Disable
 helper_enabled = true
-# Help Message
-helper_commands = """
-🔀 /trading
-🔁 /restart
-🕸️ /network
-"""
-# Command for switch trading on or off
-bot_command_trading = "trading"
-# Command to retrieve network info
-# such as latency ping and IP address of
-# the bot
-bot_command_network = "network"
-# Command to restart the bot
-bot_command_restart = "restart"
+
 # URL endpoint for the latency 
 # ping. Used for testping testing
 ping = "8.8.8.8"
@@ -237,24 +279,8 @@ llm_model = "gpt-3.5-turbo"
 # LLM Provider
 # Refer to https://github.com/xtekky/gpt4free
 # for the list of supported provider
-llm_provider = "g4f.Provider.DeepAi"
+llm_provider = "g4f.Provider.ChatgptAi"
 
-# help message listing the commands
-# available
-llm_commands = """
-🦾 /qq\n
-💬 /ai\n
-➰ /aimode\n
-🧽 /clearai\n
-"""
-# command for topic/conversation
-bot_command_question = "qq"
-# command for reset chat
-bot_command_clearai = "clearai"
-
-# command to activate or deactivate aimode
-# not implemented
-bot_command_aimode = "aimode"
 llm_ai_mode = false
 
 ########################################
@@ -263,16 +289,6 @@ llm_ai_mode = false
 
 # Module Enable/Disable
 talkytrend_enabled = true
-
-# help message listing the commands available
-talkytrend_commands = "📺 /live\n📰 /news\n📊 /trend"
-
-# bot command for tv feed
-bot_command_tv = "live"
-# bot command for trading view trend
-bot_command_trend = "trend"
-# bot command for news feeds
-bot_command_news = "news"
 
 # Signals Enable/Disable
 enable_signals = true
@@ -313,14 +329,6 @@ news_feed = "https://www.dailyfx.com/feeds/market-news"
 # Module Enable/Disable
 cex_enabled = true
 
-# Help Message
-ccxt_commands = """
-🎯 BUY BTCUSDT
-🎯 /q BTCUSDT
-🏦 /bal
-🏦 /pos
-"""
-
 ########################################
 ###           DXSP SETTINGS          ###
 ########################################
@@ -328,13 +336,6 @@ ccxt_commands = """
 # Enable/Disable DXSP
 dxsp_enabled = true
 
-# help message used in talky app
-dxsp_commands = """
-🎯 BUY WBTC
-🎯 /q WBTC
-🏦 /bal
-🏦 /pos
-"""
 # Header to use for retrieving urls content below
 headers = {User-Agent= 'Mozilla/5.0'}
 
