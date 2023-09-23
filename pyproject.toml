@@ -39,7 +39,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-dynaconf = ">=3.2.2"
+dynaconf = "3.2.2"
 loguru = ">=0.6.0"
 asyncz = ">=0.3.1"
 apprise= ">=1.5.0"
@@ -54,8 +54,7 @@ iamlistening = "4.1.0"
 cefi = "2.0.4"
 dxsp = "5.0.3"
 talkytrend = "1.14.14"
-myllm = "2.0.11"
-curl-cffi ="0.5.7"
+myllm = "2.0.12"
 
 
 [tool.poetry.group.dev.dependencies]
