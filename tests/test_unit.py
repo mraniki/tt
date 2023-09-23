@@ -24,8 +24,6 @@ def set_test_settings():
 def test_dynaconf_is_in_testing():
     assert settings.platform is not None
     assert settings.VALUE == "On Testing"
-    
-    #assert settings.platform is not None
 
 
 @pytest.fixture(name="message")
@@ -33,9 +31,9 @@ def message_test():
     return "hello"
 
 
-# @pytest.fixture(name="listener")
-# def listener():
-#     return Listener()
+@pytest.fixture(name="listener")
+def listener():
+    return Listener()
 
 
 # @pytest.fixture(name="plugin_manager_obj")
@@ -103,10 +101,14 @@ async def test_start_plugins():
 
 
 @pytest.mark.asyncio
-async def test_start_bot(message):
+async def test_start_bot(listener,message):
 
     plugin_manager = AsyncMock(spec=PluginManager)
+    print(settings)
     listener=Listener()
+    assert listener is not None
+    assert isinstance(listener, Listener)
+    assert listener.platform_info is not None
     await start_bot(listener, plugin_manager, max_iterations=1)
     listener.start.assert_awaited_once()
     for client in listener.platform_info:
