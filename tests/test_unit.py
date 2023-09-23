@@ -101,7 +101,7 @@ async def test_start_plugins():
 
 
 @pytest.mark.asyncio
-async def test_start_bot(listener,message):
+async def test_start_bot(message):
 
     plugin_manager = AsyncMock(spec=PluginManager)
     print(settings)
