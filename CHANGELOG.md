@@ -2,6 +2,65 @@
 
 
 
+## v6.0.2 (2023-09-23)
+
+### :white_check_mark:
+
+* :white_check_mark: ([`77f7e3e`](https://github.com/mraniki/tt/commit/77f7e3ee4590f977996570394267f88b244570a0))
+
+* :white_check_mark: Unit Test ([`9bc8fbc`](https://github.com/mraniki/tt/commit/9bc8fbc8a97da12fdfa43872c67d0fbffd4787ec))
+
+* :white_check_mark: Unit Test ([`14f00fd`](https://github.com/mraniki/tt/commit/14f00fdf0fc862b8e34cf51111bb64e2bfe2b674))
+
+### :wrench:
+
+* :wrench: ([`6f89688`](https://github.com/mraniki/tt/commit/6f8968845ccf4f4695360f48058a22a631a35d3b))
+
+### Fix
+
+* 🚑 Prep for latest IAL hotfix ([`84d3456`](https://github.com/mraniki/tt/commit/84d3456025ec3e5d8705534825be26c84c6676ce))
+
+### Other
+
+* Merge pull request #790 from mraniki/dev
+
+🚑 Prep for latest IAL hotfix ([`6828ac1`](https://github.com/mraniki/tt/commit/6828ac1b0799e4a6516a4e01e78720c87b6ac1a8))
+
+* Refactor test_unit.py and talky_settings.toml ([`074d800`](https://github.com/mraniki/tt/commit/074d800cffdf2f5f5cee7207a486c7ffb7d4b5c2))
+
+* Remove assert statement for settings.platform in test_dynaconf_is_in_testing() ([`1e7ce9f`](https://github.com/mraniki/tt/commit/1e7ce9f9fb4428260ea797373971f579fee19e22))
+
+* Refactor test_unit.py and talky_settings.toml files ([`6ee2a97`](https://github.com/mraniki/tt/commit/6ee2a97ecdcefe9f1d29aa14945598f25a735717))
+
+* Add curl-cffi dependency ([`104113a`](https://github.com/mraniki/tt/commit/104113aff9f892b0e44449473a4b4a0e11ef81ee))
+
+### Update
+
+* Update tests/test_unit.py and test_unit.py ([`fed4a32`](https://github.com/mraniki/tt/commit/fed4a322edb69d364b122e216971653c8e5a1e50))
+
+* Update pyproject.toml and test_unit.py ([`c045d5d`](https://github.com/mraniki/tt/commit/c045d5d4695aeae625ff881b3267dcc18486b63c))
+
+* Update myllm ([`1da4e8f`](https://github.com/mraniki/tt/commit/1da4e8f82abf2a0a8d0858f5e9225f80e116fe10))
+
+* Update Python version in pyproject.toml ([`ee4357b`](https://github.com/mraniki/tt/commit/ee4357bffb437397ae140219e0d6bc1305ec9c3e))
+
+* Update dynaconf version to &gt;=3.1.0 ([`b6841bb`](https://github.com/mraniki/tt/commit/b6841bb69a35377c44f43d61c785ecafefc7b563))
+
+* Update MyLLM ([`b75ef56`](https://github.com/mraniki/tt/commit/b75ef5612318dfa974584db8e3efc58343864c79))
+
+* Update curl-cffi version to 0.5.7 ([`bee0740`](https://github.com/mraniki/tt/commit/bee0740142ba96dc6592ed8e38623f98cb721d92))
+
+* Update pyproject.toml ([`c2610b2`](https://github.com/mraniki/tt/commit/c2610b2dcfccdabc69a842301c6b92edad7182e2))
+
+* Update pyproject.toml ([`1d011b3`](https://github.com/mraniki/tt/commit/1d011b39ed5606ca738caa04a34b1c69c69defcf))
+
+### ✅
+
+* ✅ Unit Test ([`c277a86`](https://github.com/mraniki/tt/commit/c277a868037fb096a8e3ab344da7b9da1087ca30))
+
+* ✅ Unit Test ([`daf70b0`](https://github.com/mraniki/tt/commit/daf70b0b4c06ef27d99ab89c7661109d58b8de03))
+
+
 ## v6.0.1 (2023-09-21)
 
 ### :recycle:
