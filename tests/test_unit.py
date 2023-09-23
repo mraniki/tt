@@ -31,9 +31,9 @@ def message_test():
     return "hello"
 
 
-@pytest.fixture(name="listener")
-def listener():
-    return Listener()
+# @pytest.fixture(name="listener")
+# def listener():
+#     return Listener()
 
 
 # @pytest.fixture(name="plugin_manager_obj")
