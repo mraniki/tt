@@ -31,14 +31,14 @@ def message_test():
     return "hello"
 
 
-@pytest.fixture(name="listener")
-def listener():
-    return Listener()
+# @pytest.fixture(name="listener")
+# def listener():
+#     return Listener()
 
 
-@pytest.fixture(name="plugin_manager_obj")
-def pluginmngr_test():
-    return PluginManager()
+# @pytest.fixture(name="plugin_manager_obj")
+# def pluginmngr_test():
+#     return PluginManager()
 
 
 @pytest.fixture
@@ -101,9 +101,10 @@ async def test_start_plugins():
 
 
 @pytest.mark.asyncio
-async def test_start_bot(listener, message):
-    #iamlistening.listener.platform.client.get_latest_message = AsyncMock()
+async def test_start_bot(message):
+
     plugin_manager = AsyncMock(spec=PluginManager)
+    listener=AsyncMock(spec=Listener)
     await start_bot(listener, plugin_manager, max_iterations=1)
     listener.start.assert_awaited_once()
     for client in listener.platform_info:
@@ -112,31 +113,6 @@ async def test_start_bot(listener, message):
         client.get_latest_message.assert_awaited_once()
         assert msg == message
 
-
-# @pytest.mark.asyncio
-# async def test_start_bot(listener, message):
-#     # handle_iteration_limit = AsyncMock()
-#     # connected = AsyncMock()
-#     # connected = MagicMock()
-#     await listener.start()
-#     listener.platform = AsyncMock()
-#     # Check if the handler has been called for each platform
-#     for platform in listener.platform_info:
-#         # assert platform_info.handler.handle_message.called
-#         assert isinstance(
-#             platform.handler,
-#             (DiscordHandler, TelegramHandler, MatrixHandler),
-#         )
-
-#         await platform.handler.handle_message(message)
-#         msg = await platform.handler.get_latest_message()
-#         assert platform.handler is not None
-#         assert platform.handler.is_connected is not None
-#         assert platform is not None
-#         # handle_iteration_limit.assert_awaited
-#         # platform.handler.connected.assert_awaited
-#         # connected.assert_called
-#         assert msg == message
 
 
 def test_main():
