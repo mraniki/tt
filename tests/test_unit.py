@@ -104,7 +104,7 @@ async def test_start_plugins():
 async def test_start_bot(message):
 
     plugin_manager = AsyncMock(spec=PluginManager)
-    listener=AsyncMock(spec=Listener)
+    listener=Listener()
     await start_bot(listener, plugin_manager, max_iterations=1)
     listener.start.assert_awaited_once()
     for client in listener.platform_info:
