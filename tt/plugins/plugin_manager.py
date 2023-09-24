@@ -126,13 +126,14 @@ class PluginManager:
             None
 
         """
-        for plugin in self.plugins:
-            try:
-                if plugin.should_handle(message):
-                    await plugin.handle_message(message)
-            except Exception as error:
-                logger.error("process {}: {}", plugin, error)
-                continue
+        if message:
+            for plugin in self.plugins:
+                try:
+                    if plugin.should_handle(message):
+                        await plugin.handle_message(message)
+                except Exception as error:
+                    logger.error("process {}: {}", plugin, error)
+                    continue
 
 
 class BasePlugin:
