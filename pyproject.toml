@@ -38,6 +38,7 @@ classifiers = [
 
 
 [tool.poetry.dependencies]
+python = "^3.10"
 fastapi = ">=0.95.2"
 uvicorn = ">=0.22.0"
 dynaconf = ">=3.2.0"
@@ -53,7 +54,7 @@ iamlistening = "4.1.4"
 cefi = "2.0.6"
 dxsp = "5.0.5"
 talkytrend = "1.14.14"
-myllm = "3.0.0"
+myllm = "3.0.1"
 
 
 [tool.poetry.group.dev.dependencies]
