@@ -18,7 +18,7 @@ class LlmPlugin(BasePlugin):
 
     def __init__(self):
         super().__init__()
-        self.enabled = settings.llm_enabled
+        self.enabled = settings.myllm_enabled
         if self.enabled:
             self.help_message = settings.llm_commands
             self.llm = MyLLM()
@@ -38,8 +38,8 @@ class LlmPlugin(BasePlugin):
         """Handles incoming messages"""
         if not self.should_handle(msg):
             return
-        # if self.llm.llm_ai_mode:
-        #     await self.send_notification(f"{await self.llm.continous_mode(msg)}")
+        if self.llm.llm_ai_mode:
+            await self.send_notification(f"{await self.llm.continous_mode(msg)}")
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
             command = command[1:]

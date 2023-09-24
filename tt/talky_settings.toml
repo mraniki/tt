@@ -157,17 +157,15 @@ bot_command_news = "news"
 # help message listing the commands
 # available
 llm_commands = """
-🦾 /qq\n
 💬 /ai\n
 ➰ /aimode\n
 🧽 /clearai\n
 """
-# command for topic/conversation
-bot_command_question = "qq"
-# command for reset chat
+# command for conversation
+bot_command_question = "ai"
+# command for reset conversation
 bot_command_clearai = "clearai"
-# command to activate or deactivate aimode
-# not implemented
+# command to toggle aimode
 bot_command_aimode = "aimode"
 
 ########################################
@@ -271,7 +269,7 @@ ping = "8.8.8.8"
 ########################################
 
 # Module Enable/Disable
-llm_enabled = true
+myllm_enabled = true
 
 # LLM Model to use
 llm_model = "gpt-3.5-turbo"
@@ -279,8 +277,9 @@ llm_model = "gpt-3.5-turbo"
 # LLM Provider
 # Refer to https://github.com/xtekky/gpt4free
 # for the list of supported provider
-llm_provider = "g4f.Provider.ChatgptAi"
+llm_provider = "g4f.Provider.Bing"
 
+max_memory = 5
 llm_ai_mode = false
 
 ########################################
