@@ -2,6 +2,31 @@
 
 
 
+## v6.0.8 (2023-09-24)
+
+### :recycle:
+
+* :recycle: Refactor llm_plugin.py and talky_settings.toml
+
+- Refactor llm_plugin.py to use &#34;myllm_enabled&#34; instead of &#34;llm_enabled&#34;
+- Uncomment the code block for llm_ai_mode in llm_plugin.py
+- Remove unnecessary characters in talky_settings.toml ([`7884d93`](https://github.com/mraniki/tt/commit/7884d93d861d2486d1af902e1248c7bd433ab77a))
+
+### Fix
+
+* 🚑 MyLLM hotfix. ([`5a60ede`](https://github.com/mraniki/tt/commit/5a60ede6742cc13cfa09fba83e8e3eee49e485b8))
+
+### Other
+
+* Merge pull request #799 from mraniki/dev
+
+🚑 MyLLM hotfix ([`d7a1dea`](https://github.com/mraniki/tt/commit/d7a1deacc03f674501031f1d6951240b86ba0902))
+
+### Update
+
+* Update Python version and myllm dependency ([`9fc7377`](https://github.com/mraniki/tt/commit/9fc7377954cf01374adfee5a6a8939cf7da8f67f))
+
+
 ## v6.0.7 (2023-09-24)
 
 ### Other
