@@ -2,6 +2,19 @@
 
 
 
+## v6.0.9 (2023-09-24)
+
+### :memo:
+
+* :memo: ([`48143c7`](https://github.com/mraniki/tt/commit/48143c75a330d52874a3ac1306264e5695e912fd))
+
+### Other
+
+* Merge pull request #800 from mraniki/dev
+
+:memo: ([`84c7de2`](https://github.com/mraniki/tt/commit/84c7de2039226cf22adf950497de93a9e6059265))
+
+
 ## v6.0.8 (2023-09-24)
 
 ### :recycle:
