@@ -60,6 +60,7 @@ async def start_plugins(plugin_manager):
     """
     🔌 Start all plugins.
 
+    
     Returns:
         None
 
