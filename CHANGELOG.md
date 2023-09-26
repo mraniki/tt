@@ -2,6 +2,19 @@
 
 
 
+## v6.0.11 (2023-09-26)
+
+### :recycle:
+
+* :recycle:Add start_plugins function to utils.py ([`dc6d131`](https://github.com/mraniki/tt/commit/dc6d1310e863a43adb15ee5f967cbfad43a7be24))
+
+### Other
+
+* Merge pull request #803 from mraniki/dev
+
+:recycle:Add start_plugins function to utils.py ([`7e1e290`](https://github.com/mraniki/tt/commit/7e1e290e3f4119f61679f114c387606c3df7a35d))
+
+
 ## v6.0.10 (2023-09-26)
 
 ### Other
