@@ -279,7 +279,20 @@ llm_model = "gpt-3.5-turbo"
 # for the list of supported provider
 llm_provider = "g4f.Provider.Bing"
 
-max_memory = 5
+# Number of conversation history 
+# between user and ai
+max_memory = 100
+
+# time lag to wait ai response
+lag = 0 
+
+# LLM Template to use as conversation starter 
+llm_template = """
+You are a friendly AI, helping me with trading
+"""
+
+# AI Mode continously listen to
+# the conversation
 llm_ai_mode = false
 
 ########################################
