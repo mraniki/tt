@@ -2,6 +2,15 @@
 
 
 
+## v6.0.17 (2023-09-26)
+
+### Update
+
+* Update 👷Flow.yml ([`ac843d8`](https://github.com/mraniki/tt/commit/ac843d83a654a8bd02a2cce5691a9c22f64569f2))
+
+* Update 👷Flow.yml ([`dcd670b`](https://github.com/mraniki/tt/commit/dcd670b241d3a578706b602be97878155d15ad16))
+
+
 ## v6.0.16 (2023-09-26)
 
 ### :recycle:
