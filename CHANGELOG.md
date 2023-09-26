@@ -2,6 +2,13 @@
 
 
 
+## v6.1.1 (2023-09-26)
+
+### Update
+
+* Update docker.yml ([`ae6c723`](https://github.com/mraniki/tt/commit/ae6c723755d770f23f3333da6a98c0c7ffb1396a))
+
+
 ## v6.1.0 (2023-09-26)
 
 ### Other
