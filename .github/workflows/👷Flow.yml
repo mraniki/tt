@@ -33,7 +33,7 @@ jobs:
     uses: mraniki/coding_toolset/.github/workflows/🪞Mirror.yml@main
     secrets: inherit
   docker:
-    needs: [release]
+    needs: [mirror]
     uses: mraniki/coding_toolset/.github/workflows/🐳Docker.yml@main
     secrets: inherit
 
