@@ -1,0 +1,11 @@
+name: 🐳Docker
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  docker:
+    uses: mraniki/coding_toolset/.github/workflows/🐳Docker.yml@main
+    secrets: inherit
