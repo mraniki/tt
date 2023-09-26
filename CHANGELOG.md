@@ -2,6 +2,23 @@
 
 
 
+## v6.0.12 (2023-09-26)
+
+### Other
+
+* Merge pull request #804 from mraniki/dev
+
+♻️🐳 Docker adjust ([`3520478`](https://github.com/mraniki/tt/commit/3520478ae5229aa953f2579e3b24749fa8455399))
+
+### ♻️
+
+* ♻️ myllm ([`8ffded0`](https://github.com/mraniki/tt/commit/8ffded09c92ae7ffbe5f835838051cf56ea82f5b))
+
+### 🐳
+
+* 🐳 ([`47932f1`](https://github.com/mraniki/tt/commit/47932f16ebf75e48fb4455d64665a6555ae6d0cc))
+
+
 ## v6.0.11 (2023-09-26)
 
 ### :recycle:
