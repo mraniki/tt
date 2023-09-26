@@ -60,7 +60,7 @@ async def start_plugins(plugin_manager):
     """
     🔌 Start all plugins.
 
-    
+
     Returns:
         None
 
@@ -95,7 +95,8 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
     while True:
         for client in listener.platform_info:
             msg = await client.get_latest_message()
-            if msg and settings.plugin_enabled:
+            logger.debug("Message processing for client {}: {}", client, msg)
+            if msg:
                 await plugin_manager.process_message(msg)
         iteration += 1
         if max_iterations is not None and iteration >= max_iterations:
