@@ -2,6 +2,31 @@
 
 
 
+## v6.0.10 (2023-09-26)
+
+### Other
+
+* Merge pull request #802 from mraniki/dev
+
+🚨 Update LlmPlugin commands and llm upgrade ([`db9de9c`](https://github.com/mraniki/tt/commit/db9de9c2114b48caf11d40fb464ff64eb11a5650))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`0b1c3b2`](https://github.com/mraniki/tt/commit/0b1c3b2c5565ca8f870c817f42a573fab56c574a))
+
+### Update
+
+* Update pyproject.toml for MyLLM dep ([`899991d`](https://github.com/mraniki/tt/commit/899991ddf015c3ac7159d9f9a4f7f8470acfc37e))
+
+* :rotating_light: Update LlmPlugin commands ([`0cfa23b`](https://github.com/mraniki/tt/commit/0cfa23bee586a080878f2bdfd2d4cf079de74d4a))
+
+### ⚡
+
+* ⚡ ([`b587757`](https://github.com/mraniki/tt/commit/b587757ddc15bce5100ae6ef4c528677ff15ce4b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.14.15 ([`4cc16ed`](https://github.com/mraniki/tt/commit/4cc16ed085035495bd509783fa991b29b8d12a7d))
+
+
 ## v6.0.9 (2023-09-24)
 
 ### :memo:
