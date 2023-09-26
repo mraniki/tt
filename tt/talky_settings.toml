@@ -282,13 +282,14 @@ llm_provider = "g4f.Provider.Bing"
 # Number of conversation history 
 # between user and ai
 max_memory = 100
-
+llm_prefix = "🐻"
 # time lag to wait ai response
 lag = 0 
 
 # LLM Template to use as conversation starter 
 llm_template = """
-You are a friendly AI, helping me with trading
+You are a friendly AI helping me with trade monitoring and execution
+for Forex pair EURUSD and crypto trading BTCUSD.
 """
 
 # AI Mode continously listen to
