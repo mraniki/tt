@@ -2,6 +2,25 @@
 
 
 
+## v6.0.15 (2023-09-26)
+
+### Other
+
+* Merge pull request #807 from mraniki/dev
+
+🔧 ([`d8706f7`](https://github.com/mraniki/tt/commit/d8706f763ce77723eb86c99ce81f5b6aee6944c7))
+
+### Update
+
+* Update pyproject.toml ([`1a08e22`](https://github.com/mraniki/tt/commit/1a08e22a1b0576fa6d641e4c900bde808b136684))
+
+* Update pyproject.toml ([`141d18e`](https://github.com/mraniki/tt/commit/141d18ea1ae88102c2104a76421b1abbbf0b61a8))
+
+### 🔧
+
+* 🔧 ([`4d1d4c6`](https://github.com/mraniki/tt/commit/4d1d4c6c6414f046b7013fe2b37431eb380cd21e))
+
+
 ## v6.0.14 (2023-09-26)
 
 ### Other
