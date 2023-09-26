@@ -2,6 +2,23 @@
 
 
 
+## v6.1.0 (2023-09-26)
+
+### Other
+
+* Merge pull request #809 from mraniki/dev
+
+💄 Update AI continuous support filtering ([`739dbe6`](https://github.com/mraniki/tt/commit/739dbe6db23580b49c6d1d5f5b64376de17f1e82))
+
+### Update
+
+* Update pyproject.toml ([`cf442b7`](https://github.com/mraniki/tt/commit/cf442b7c0b1051a2e3a2c40f586bb83d9110b4e3))
+
+### 💄
+
+* 💄 Update AI continous support to filter items ([`38c5d4e`](https://github.com/mraniki/tt/commit/38c5d4e7055a606ab172ecaa6444d4e01f7c5581))
+
+
 ## v6.0.17 (2023-09-26)
 
 ### Update
