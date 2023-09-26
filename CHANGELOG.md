@@ -2,6 +2,23 @@
 
 
 
+## v6.0.16 (2023-09-26)
+
+### :recycle:
+
+* :recycle: ([`ee9b057`](https://github.com/mraniki/tt/commit/ee9b057772af68b148789ed1fe415a76d9bc54bb))
+
+### Other
+
+* Merge pull request #808 from mraniki/dev
+
+:recycle: Fix AI continuous mode ([`416b330`](https://github.com/mraniki/tt/commit/416b3306429d89cbd1012fae1210b78910af69e1))
+
+### 🚨
+
+* 🚨 ([`c17e214`](https://github.com/mraniki/tt/commit/c17e214864e850e512cf6d849e0b089579b34d37))
+
+
 ## v6.0.15 (2023-09-26)
 
 ### Other
