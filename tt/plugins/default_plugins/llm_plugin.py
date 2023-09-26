@@ -20,7 +20,6 @@ class LlmPlugin(BasePlugin):
         super().__init__()
         self.enabled = settings.myllm_enabled
         if self.enabled:
-            self.help_message = settings.llm_commands
             self.llm = MyLLM()
 
     async def start(self):
@@ -48,7 +47,7 @@ class LlmPlugin(BasePlugin):
                 settings.bot_command_help: self.llm.get_myllm_help,
                 settings.bot_command_info: self.llm.get_myllm_info,
                 settings.bot_command_aimode: self.llm.switch_continous_mode,
-                settings.bot_command_info: self.llm.clear_chat_history,
+                settings.bot_command_clearai: self.llm.clear_chat_history,
                 settings.bot_command_question: lambda: self.llm.chat(args),
             }
             if command in command_mapping:
