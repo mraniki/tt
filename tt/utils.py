@@ -6,6 +6,7 @@ __version__ = "6.1.1"
 
 import asyncio
 
+import requests
 from apprise import Apprise, NotifyFormat
 from iamlistening import Listener
 
@@ -51,6 +52,8 @@ async def run_bot():
     More info: https://github.com/mraniki/iamlistening
 
     """
+    if settings.version_check:
+        await check_version()
     listener = Listener()
     plugin_manager = PluginManager()
     await asyncio.gather(start_bot(listener, plugin_manager))
@@ -103,3 +106,33 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
             break
 
     await asyncio.sleep(1)
+
+
+async def check_version():
+    """
+    Asynchronously checks the version
+    of the GitHub repository.
+
+    This function sends a GET request to the
+    specified GitHub repository URL and retrieves the
+    latest version of the repository.
+    It then compares the latest version
+    with the current version (__version__)
+    and logs the result.
+
+    Parameters:
+        None
+
+    Returns:
+        None
+    """
+    github_repo = requests.get(settings.repo)
+    logger.debug("Github repo: {}", github_repo)
+    latest_version = github_repo.json()["name"]
+    logger.info("Latest version: {}", latest_version)
+    if latest_version != __version__:
+        logger.debug("You are NOT using the latest %s: %s", latest_version, __version__)
+        send_notification(f"You are NOT using the latest {latest_version}")
+    else:
+        logger.debug("You are using the latest %s: %s", latest_version, __version__)
+    return

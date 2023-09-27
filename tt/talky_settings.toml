@@ -33,6 +33,11 @@ VALUE = "Production - Default"
 # to troubleshoot
 loglevel = "INFO"
 
+#version control
+repo = "https://api.github.com/repos/mraniki/tt/releases/latest"
+version_check = true
+
+
 ########################################
 ###         FASTAPI SETTINGS         ###
 ########################################
