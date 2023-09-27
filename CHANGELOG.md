@@ -2,6 +2,61 @@
 
 
 
+## v6.2.3 (2023-09-27)
+
+### Other
+
+* Merge pull request #816 from mraniki/dev
+
+✨  MyLLM template and MyLLM export ([`817a236`](https://github.com/mraniki/tt/commit/817a23655a294fa49b77cebc4a5401fe3c2eb628))
+
+* Merge pull request #819 from mraniki/renovate/talkytrend-1.x
+
+⬆️ 🛠️(deps): update dependency talkytrend to v1.14.17 ([`d6e5997`](https://github.com/mraniki/tt/commit/d6e59978f739d058b448ffbb8c155a5c877342d2))
+
+* Merge pull request #818 from mraniki/renovate/findmyorder-1.x
+
+⬆️ 🛠️(deps): update dependency findmyorder to v1.7.36 ([`f3b7174`](https://github.com/mraniki/tt/commit/f3b71745cce1805960b43fa9d7beba0bc4646f71))
+
+* Merge pull request #817 from mraniki/renovate/cefi-2.x
+
+⬆️ 🛠️(deps): update dependency cefi to v2.0.8 ([`95b10ab`](https://github.com/mraniki/tt/commit/95b10ab9d217c08269cd7296f48eea5c1a936c72))
+
+* Merge pull request #815 from mraniki/renovate/cefi-2.x
+
+⬆️ 🛠️(deps): update dependency cefi to v2.0.7 ([`6458d49`](https://github.com/mraniki/tt/commit/6458d4995fd3c578be4aa3d1e48698d68cc22d92))
+
+### Update
+
+* Update llm_plugin.py ([`a65f7e9`](https://github.com/mraniki/tt/commit/a65f7e940441fec88c983a6bb52f99c34d0235b6))
+
+* Update pyproject.toml ([`c995a7e`](https://github.com/mraniki/tt/commit/c995a7e560e15e000a03dc15cf8b91c7db58200f))
+
+* Update pyproject.toml ([`efa3f3b`](https://github.com/mraniki/tt/commit/efa3f3b9dce9008f3015914d20a52dd6d7b2d25a))
+
+### ♻️
+
+* ♻️ ([`93a7332`](https://github.com/mraniki/tt/commit/93a7332e70c36d157ad90766e31ad95d1a35e1bf))
+
+### ✅
+
+* ✅ Unit Test ([`32b38bc`](https://github.com/mraniki/tt/commit/32b38bc3d427312860c0e987518edef2a1f3d6d4))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.14.17 ([`d6ab706`](https://github.com/mraniki/tt/commit/d6ab706789f30b63cb2223de4ab7ced78758ef31))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.7.36 ([`1f43919`](https://github.com/mraniki/tt/commit/1f43919862cd678e45e947a68cba2014cf9dd41e))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v2.0.8 ([`73bc2a9`](https://github.com/mraniki/tt/commit/73bc2a935e20830f1c6c41962e0a028ad7d4a1b6))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v2.0.7 ([`19bf7ad`](https://github.com/mraniki/tt/commit/19bf7adac4fd4c642542e6f2f74690d2644c6e0f))
+
+### 🔧
+
+* 🔧 MyLLM template ([`c610f2a`](https://github.com/mraniki/tt/commit/c610f2ae5073035edd5b148976515c2bee2053ba))
+
+
 ## v6.2.2 (2023-09-27)
 
 ### Other
