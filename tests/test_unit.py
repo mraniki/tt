@@ -4,7 +4,6 @@
 
 from unittest.mock import AsyncMock, MagicMock
 
-import iamlistening
 import pytest
 import uvicorn
 from fastapi.testclient import TestClient
@@ -13,7 +12,7 @@ from iamlistening import Listener
 from tt.app import app, start_bot_task
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
-from tt.utils import send_notification, start_bot, start_plugins
+from tt.utils import check_version, send_notification, start_bot, start_plugins
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -88,6 +87,12 @@ def test_webhook_with_invalid_auth():
 
 
 @pytest.mark.asyncio
+async def test_check_version(caplog):
+    await check_version()
+    assert "You are" in caplog.text
+
+
+@pytest.mark.asyncio
 async def test_send_notification(caplog):
     await send_notification("Test message")
     assert "Loaded Discord" in caplog.text
@@ -102,21 +107,19 @@ async def test_start_plugins():
 
 @pytest.mark.asyncio
 async def test_start_bot(message):
-
     plugin_manager = AsyncMock(spec=PluginManager)
     print(settings)
-    listener=Listener()
+    listener = Listener()
     assert listener is not None
     assert isinstance(listener, Listener)
     assert listener.platform_info is not None
     await start_bot(listener, plugin_manager, max_iterations=1)
-    #listener.start.assert_awaited_once()
+    # listener.start.assert_awaited_once()
     for client in listener.platform_info:
         await client.handle_message(message)
         msg = await client.get_latest_message()
-        #client.get_latest_message.assert_awaited_once()
+        # client.get_latest_message.assert_awaited_once()
         assert msg == message
-
 
 
 def test_main():

@@ -3,6 +3,7 @@ name: 🐳Docker
 on:
   workflow_dispatch:
   release:
+      types: [released]
 
 jobs:
   docker:

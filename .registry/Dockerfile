@@ -1,8 +1,11 @@
 FROM python:3.11
 ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
+
+
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ENV ENV_FOR_DYNACONF=default
+ENV TT_DOCKER=True
 
 # RUN apt-get update && \
 # apt-get -y install chromium && \
