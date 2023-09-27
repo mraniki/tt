@@ -219,8 +219,9 @@ instrument_mapping = true
 # instrument mapping to use and alternative 
 #  symbol when generating the order
 mapping = [
-    { id = "GOLD", alt = "XAUUSD" },
-    { id = "SILVER", alt = "XAGUSD" },
+    { id = "EURUSD", alt = "EUR/sUSD" },
+    { id = "GOLD", alt = "XAU" },
+    { id = "SILVER", alt = "XAG" },
     { id = "BTC", alt = "WBTC" },
     { id = "ETH", alt = "WETH" },
 ]
