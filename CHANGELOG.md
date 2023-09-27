@@ -2,6 +2,37 @@
 
 
 
+## v6.2.0 (2023-09-27)
+
+### Other
+
+* Merge pull request #811 from mraniki/dev ([`fa43cfd`](https://github.com/mraniki/tt/commit/fa43cfd40e619da343dd6d72a066b4deb6a97650))
+
+* Add released event to Docker workflow ([`5bc086f`](https://github.com/mraniki/tt/commit/5bc086f57e2fb0da1edaa36b44c1deb5262e1b25))
+
+### ✅
+
+* ✅ Unit Test ([`033bbee`](https://github.com/mraniki/tt/commit/033bbee51938127df4c9aa3432beaa47f4284f2a))
+
+* ✅ Unit Test ([`be195a0`](https://github.com/mraniki/tt/commit/be195a0dd1837be4276d930f7aeaeb50fc06adc8))
+
+### ✨
+
+* ✨ Version check info at the start ([`dd78427`](https://github.com/mraniki/tt/commit/dd78427af7e6615109551daa1e2cc0ff2b2f9b45))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.0.6 ([`91f1e49`](https://github.com/mraniki/tt/commit/91f1e49e4b826c3f6eab9cecda24221162d0f58a))
+
+### 🐛
+
+* 🐛 ([`d38577e`](https://github.com/mraniki/tt/commit/d38577e9e55dd319e832e7e0db5c8b1a6abfac9e))
+
+### 🥅
+
+* 🥅 ([`d629fdd`](https://github.com/mraniki/tt/commit/d629fdd61b37ba8b54481bc922b8814b16aad6d8))
+
+
 ## v6.1.1 (2023-09-26)
 
 ### Update
