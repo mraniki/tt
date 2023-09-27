@@ -2,6 +2,41 @@
 
 
 
+## v6.2.2 (2023-09-27)
+
+### Other
+
+* Merge pull request #813 from mraniki/dev
+
+Update pyproject.toml ([`5dedd2a`](https://github.com/mraniki/tt/commit/5dedd2a4aa199a97d9082b91a2e650f06a1d2cb4))
+
+* Merge pull request #814 from mraniki/renovate/myllm-3.x
+
+⬆️ 🛠️(deps): update dependency myllm to v3.0.7 ([`b7c51ce`](https://github.com/mraniki/tt/commit/b7c51ce2e72d28ccc068212bbb602b7dd222be3c))
+
+* Merge pull request #812 from mraniki/dev
+
+:construction_worker_man:Add workflow_run event to docker.yml ([`250c408`](https://github.com/mraniki/tt/commit/250c40841b3cfb66b322234c797bb6bae9aa17b7))
+
+* :construction_worker_man:Add workflow_run event to docker.yml ([`12e7bd2`](https://github.com/mraniki/tt/commit/12e7bd2fc650a556e2fdf26ea86dabf74ece0f53))
+
+### Update
+
+* Update pyproject.toml ([`20e7fe8`](https://github.com/mraniki/tt/commit/20e7fe8d5c1816e0c8eb8069d48583c03f8de9d2))
+
+* Update pyproject.toml ([`557fded`](https://github.com/mraniki/tt/commit/557fded5d96455c954b09a7ccd07eecbde029f71))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.0.7 ([`cc9d36c`](https://github.com/mraniki/tt/commit/cc9d36c22cbe8b949b56539d443f95a418884895))
+
+### 🔧
+
+* 🔧 ([`e8e7eb1`](https://github.com/mraniki/tt/commit/e8e7eb19f6fb94432c5f0afb2f5432dc4d56ff0b))
+
+* 🔧 Updating instrument mapping ([`a3a9edc`](https://github.com/mraniki/tt/commit/a3a9edc524ba25f21c0e56ef62271cb05e876b1b))
+
+
 ## v6.2.1 (2023-09-27)
 
 ### Update
