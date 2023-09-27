@@ -126,7 +126,7 @@ async def check_version():
     Returns:
         None
     """
-    github_repo = requests.get(settings.repo)
+    github_repo = requests.get(settings.repo, timeout=10)
     logger.debug("Github repo: {}", github_repo)
     latest_version = github_repo.json()["name"]
     logger.info("Latest version: {}", latest_version)
