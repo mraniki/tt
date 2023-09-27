@@ -54,7 +54,7 @@ iamlistening = "4.1.7"
 cefi = "2.0.6"
 dxsp = "5.0.6"
 talkytrend = "1.14.16"
-myllm = "3.0.6"
+myllm = "3.0.7"
 
 
 [tool.poetry.group.dev.dependencies]
