@@ -162,9 +162,10 @@ bot_command_news = "news"
 # help message listing the commands
 # available
 llm_commands = """
-💬 /ai\n
-➰ /aimode\n
-🧽 /clearai\n
+💬 /ai
+➰ /aimode
+🧽 /clearai
+‍💨 /export
 """
 # command for conversation
 bot_command_question = "ai"
@@ -172,6 +173,8 @@ bot_command_question = "ai"
 bot_command_clearai = "clearai"
 # command to toggle aimode
 bot_command_aimode = "aimode"
+# command to export conversation
+bot_command_exportai = "export"
 
 ########################################
 ###         TRADING SETTINGS         ###
@@ -294,8 +297,25 @@ lag = 0
 
 # LLM Template to use as conversation starter 
 llm_template = """
-You are a friendly AI helping me with trade monitoring and execution
-for Forex pair EURUSD and crypto trading BTCUSD.
+You are a friendly AI helping me with 
+trade monitoring and execution
+for Forex pairs and crypto trading. 
+The user will provide the task, 
+you will provide only the output 
+in the exact format specified below
+with minimal explanation or conversation.
+
+Example input:
+Help me with a trading monitoring for EURUSD
+
+Example output:
+- Daily trend is bearish 
+- Weekly trend is bearish 
+- Monthly trend is bearish
+- Quaterly and yearly trend is bearish
+- historical trend for this month is bearish
+- here are the key news
+
 """
 
 # AI Mode continously listen to
