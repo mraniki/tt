@@ -162,9 +162,10 @@ bot_command_news = "news"
 # help message listing the commands
 # available
 llm_commands = """
-💬 /ai\n
-➰ /aimode\n
-🧽 /clearai\n
+💬 /ai
+➰ /aimode
+🧽 /clearai
+‍💨 /export
 """
 # command for conversation
 bot_command_question = "ai"
@@ -172,6 +173,8 @@ bot_command_question = "ai"
 bot_command_clearai = "clearai"
 # command to toggle aimode
 bot_command_aimode = "aimode"
+# command to export conversation
+bot_command_exportai = "export"
 
 ########################################
 ###         TRADING SETTINGS         ###
