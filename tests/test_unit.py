@@ -94,7 +94,7 @@ async def test_check_version():
     response_data = {"name": "2.0.0"}
 
     with patch("aiohttp.ClientSession") as mock_session:
-        mock_response = AsyncMock()
+        mock_response = MagicMock()
         mock_response.json.return_value = response_data
         mock_session.return_value.get.return_value.__aenter__.return_value = (
             mock_response
