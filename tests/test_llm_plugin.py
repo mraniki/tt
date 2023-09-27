@@ -82,7 +82,7 @@ async def test_info(plugin):
 
 @pytest.mark.asyncio
 async def test_clear_chat_history(plugin):
-    result = plugin.export_chat_history()
+    result = plugin.llm.export_chat_history()
     assert result is not None
 
 
