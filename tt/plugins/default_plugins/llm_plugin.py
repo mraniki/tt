@@ -50,7 +50,7 @@ class LlmPlugin(BasePlugin):
                 settings.bot_command_info: self.llm.get_myllm_info,
                 settings.bot_command_aimode: self.llm.switch_continous_mode,
                 settings.bot_command_clearai: self.llm.clear_chat_history,
-                settings.bot_command_exportai: self.llm.export_chat_history(),
+                settings.bot_command_exportai: self.llm.export_chat_history,
                 settings.bot_command_question: lambda: self.llm.chat(str(args)),
             }
             if command in command_mapping:
