@@ -6,7 +6,7 @@ __version__ = "6.1.1"
 
 import asyncio
 
-import requests
+import aiohttp
 from apprise import Apprise, NotifyFormat
 from iamlistening import Listener
 
@@ -126,13 +126,19 @@ async def check_version():
     Returns:
         None
     """
-    github_repo = requests.get(settings.repo, timeout=10)
-    logger.debug("Github repo: {}", github_repo)
-    latest_version = github_repo.json()["name"]
-    logger.info("Latest version: {}", latest_version)
-    if latest_version != __version__:
-        logger.debug("You are NOT using the latest %s: %s", latest_version, __version__)
-        send_notification(f"You are NOT using the latest {latest_version}")
-    else:
-        logger.debug("You are using the latest %s: %s", latest_version, __version__)
+    async with aiohttp.ClientSession() as session:
+        async with session.get(settings.repo, timeout=10) as response:
+            github_repo = await response.json()
+            logger.debug("Github repo: {}", github_repo)
+            latest_version = github_repo["name"]
+            logger.info("Latest version: {}", latest_version)
+            if latest_version != __version__:
+                logger.debug(
+                    "You are NOT using the latest %s: %s", latest_version, __version__
+                )
+                send_notification(f"You are NOT using the latest {latest_version}")
+            else:
+                logger.debug(
+                    "You are using the latest %s: %s", latest_version, __version__
+                )
     return
