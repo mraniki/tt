@@ -98,7 +98,7 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
     while True:
         for client in listener.platform_info:
             msg = await client.get_latest_message()
-            logger.debug("Message processing for client {}: {}", client, msg)
+            # logger.debug("Message processing for client {}: {}", client, msg)
             if msg:
                 await plugin_manager.process_message(msg)
         iteration += 1
@@ -126,19 +126,32 @@ async def check_version():
     Returns:
         None
     """
-    async with aiohttp.ClientSession() as session:
-        async with session.get(settings.repo, timeout=10) as response:
-            github_repo = await response.json()
-            logger.debug("Github repo: {}", github_repo)
-            latest_version = github_repo["name"]
-            logger.info("Latest version: {}", latest_version)
-            if latest_version != __version__:
-                logger.debug(
-                    "You are NOT using the latest %s: %s", latest_version, __version__
-                )
-                send_notification(f"You are NOT using the latest {latest_version}")
-            else:
-                logger.debug(
-                    "You are using the latest %s: %s", latest_version, __version__
-                )
-    return
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(settings.repo, timeout=10) as response:
+                if response.status == 403:
+                    logger.error("API limit exceeded. Please try again later.")
+                    return
+                elif response.status != 200:
+                    logger.error("Failed to retrieve GitHub repository information.")
+                    return
+
+                github_repo = await response.json()
+                logger.debug("Github repo: {}", github_repo)
+                latest_version = github_repo["name"]
+                logger.info("Latest version: {}", latest_version)
+                if latest_version != __version__:
+                    logger.debug(
+                        "You are NOT using the latest %s: %s",
+                        latest_version,
+                        __version__,
+                    )
+                    send_notification(f"You are NOT using the latest {latest_version}")
+                else:
+                    logger.debug(
+                        "You are using the latest %s: %s", latest_version, __version__
+                    )
+    except aiohttp.ClientError as error:
+        logger.error("Failed to connect to the GitHub API: {}", error)
+    except Exception as error:
+        logger.error("check_version: {}", error)
