@@ -54,7 +54,6 @@ async def root(request: Request):
         user will be redirected to
         the UI frontend
     """
-    logger.debug("FastAPI endpoint requested")
     if settings.ui_enabled:
         from tt.frontend.main import init
 
