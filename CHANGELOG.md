@@ -2,6 +2,31 @@
 
 
 
+## v6.2.5 (2023-09-28)
+
+### Other
+
+* Merge pull request #827 from mraniki/dev
+
+⚗️ docker healthcheck ([`291ec81`](https://github.com/mraniki/tt/commit/291ec81546af1309c77475947a32eeb062febe06))
+
+### ⚗️
+
+* ⚗️ docker healthcheck ([`353755e`](https://github.com/mraniki/tt/commit/353755e95389bae27b07cbd844a2271e872ca44f))
+
+### ⚡
+
+* ⚡ check_version ([`fe7309e`](https://github.com/mraniki/tt/commit/fe7309ed67cddafa52651d909248eb7501d89c24))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.14.19 ([`5d5b5db`](https://github.com/mraniki/tt/commit/5d5b5dbd8779929cc60de093041c40a5bae9994c))
+
+### 🔇
+
+* 🔇 ([`512947a`](https://github.com/mraniki/tt/commit/512947af3135abd54b27b3c83b250c7d27272a8c))
+
+
 ## v6.2.4 (2023-09-28)
 
 ### Other
