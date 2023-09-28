@@ -2,6 +2,47 @@
 
 
 
+## v6.2.4 (2023-09-28)
+
+### Other
+
+* Merge pull request #825 from mraniki/dev
+
+⬆️ 🛠️(deps) ([`476f15e`](https://github.com/mraniki/tt/commit/476f15e338f8eff8e4a27e26565eda093fc1bd1f))
+
+* Merge pull request #823 from mraniki/renovate/myllm-3.x
+
+⬆️ 🛠️(deps): update dependency myllm to v3.1.3 ([`363d8e7`](https://github.com/mraniki/tt/commit/363d8e774f819d464859ff0536173489626da78b))
+
+* Merge pull request #824 from mraniki/renovate/talkytrend-1.x
+
+⬆️ 🛠️(deps): update dependency talkytrend to v1.14.18 ([`c65adc0`](https://github.com/mraniki/tt/commit/c65adc0d791b37e0f2d7a2457916cb9174091f71))
+
+* Merge pull request #820 from mraniki/renovate/dxsp-5.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v5.0.7 ([`a2e41fe`](https://github.com/mraniki/tt/commit/a2e41fe6bfdec6fab552d0c56044f6619b02575d))
+
+* Merge pull request #821 from mraniki/renovate/findmyorder-1.x
+
+⬆️ 🛠️(deps): update dependency findmyorder to v1.7.37 ([`6d82504`](https://github.com/mraniki/tt/commit/6d825045707dc97114422692ce7ea8321874a579))
+
+### Update
+
+* Update talky_settings.toml with lowercase default type and order type ([`568a2af`](https://github.com/mraniki/tt/commit/568a2afc0f3d2460f4a79cb228f9935158872d6d))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.3 ([`13dd7a1`](https://github.com/mraniki/tt/commit/13dd7a11688b37199aae7ffd51795adc738ed619))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.14.18 ([`7b5d3bc`](https://github.com/mraniki/tt/commit/7b5d3bc0c6700e4ef3b09c83000f40e8275cc295))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v5.0.7 ([`9e3c596`](https://github.com/mraniki/tt/commit/9e3c596b02a9c8968581255c9d30b4906d47a974))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v2.0.10 ([`929f14d`](https://github.com/mraniki/tt/commit/929f14db7338b7e0e3e0944f792482134d669f1d))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.7.37 ([`64dae3c`](https://github.com/mraniki/tt/commit/64dae3ca1a8acaf5149f810255bc5d820dc0d3b4))
+
+
 ## v6.2.3 (2023-09-27)
 
 ### Other
