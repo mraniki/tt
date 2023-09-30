@@ -62,7 +62,7 @@ class DexExchangePlugin(BasePlugin):
         if await self.fmo.search(msg):
             order = await self.fmo.get_order(msg)
             if order and settings.trading_enabled:
-                trade = await self.exchange.execute_order(order)
+                trade = await self.exchange.submit_order(order)
                 if trade:
                     await send_notification(trade)
 
