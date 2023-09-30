@@ -2,6 +2,19 @@
 
 
 
+## v6.3.1 (2023-09-30)
+
+### Other
+
+* Merge pull request #829 from mraniki/dev
+
+🐛 check_version ([`e12e84a`](https://github.com/mraniki/tt/commit/e12e84afb6e29312342f94c2a0b506083e9cbd34))
+
+### 🐛
+
+* 🐛 check_version ([`5f4c59e`](https://github.com/mraniki/tt/commit/5f4c59e11a85f0057625422db62f9201f2e35c7c))
+
+
 ## v6.3.0 (2023-09-30)
 
 ### Other
