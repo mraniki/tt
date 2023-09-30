@@ -142,11 +142,13 @@ async def check_version():
                 logger.info("Latest version: {}", latest_version)
                 if latest_version != __version__:
                     logger.debug(
-                        "You are NOT using the latest %s: %s",
+                        "😁 You are NOT using the latest %s: %s",
                         latest_version,
                         __version__,
                     )
-                    send_notification(f"You are NOT using the latest {latest_version}")
+                    await send_notification(
+                        f"👿 You are NOT using the latest {latest_version}"
+                    )
                 else:
                     logger.debug(
                         "You are using the latest %s: %s", latest_version, __version__
