@@ -2,6 +2,29 @@
 
 
 
+## v6.3.0 (2023-09-30)
+
+### Other
+
+* Merge pull request #828 from mraniki/dev
+
+Multi exchange support for CEFI and DEFI. ([`848c4dd`](https://github.com/mraniki/tt/commit/848c4dd5279fff03288d8814c128d9e890767ff8))
+
+* Refactor order execution method in exchange plugins ([`828d967`](https://github.com/mraniki/tt/commit/828d967edeb5a07140a4951b36d9d0397b1c6c73))
+
+### ✨
+
+* ✨ instrument mapping at exchange level ([`d5f3de3`](https://github.com/mraniki/tt/commit/d5f3de3b90295b4fdb830711d97081098ba82cf7))
+
+### ⬆️
+
+* ⬆️ ([`41393b8`](https://github.com/mraniki/tt/commit/41393b89d248f8a0fe20fc787a4a72cb787c8447))
+
+### 🔇
+
+* 🔇 ([`954c49f`](https://github.com/mraniki/tt/commit/954c49f464c53a7aa7ca4589d4e8b8c55c403763))
+
+
 ## v6.2.5 (2023-09-28)
 
 ### Other
