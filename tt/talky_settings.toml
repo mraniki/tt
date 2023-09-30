@@ -443,11 +443,14 @@ api_key = ""
 router_contract_addr = ""
 factory_contract_addr = ""
 trading_asset_address = ""
+trading_risk_percentage = true
 trading_risk_amount = 10
 trading_slippage = 2
 block_explorer_url = ""
 block_explorer_api = ""
-
+mapping = [
+    { id = "BTC", alt = "WBTC" },
+]
 # [default.dex.eth]
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
@@ -507,28 +510,42 @@ block_explorer_api = ""
 # CCXT Parameters to connect
 # to 1 or more exchanges
 [default.cex.template]
-cex_name = ""
-cex_api= ""
-cex_secret= ""
-cex_password = ""
-cex_testmode = true
-cex_defaulttype = ""
-cex_ordertype = ""
+protocol = ""
+name = ""
+api_key= ""
+secret= ""
+password = ""
+testmode = true
+defaulttype = ""
+ordertype = ""
+leverage_type = ""
+leverage = 1
+trading_risk_percentage = true
 trading_risk_amount = 10
 trading_asset = "USDT"
 trading_asset_separator = ""
-
+trading_slippage = 2
+mapping = [
+    { id = "BTC", alt = "BTC/USDT" },
+]
 # second cex example
-# [default.cex.binance]
-# cex_name = "binance"
-# cex_api=""
-# cex_secret=""
-# cex_testmode = true
-# cex_defaulttype = "spot"
-# cex_ordertype = "market"
+# protocol = "ccxt"
+# name = "binane"
+# api_key= ""
+# secret= ""
+# password = ""
+# testmode = true
+# defaulttype = "spot"
+# ordertype = "market"
+# leverage_type = "isolated"
+# leverage = 1
+# trading_risk_percentage = true
 # trading_risk_amount = 10
 # trading_asset = "USDT"
 # trading_asset_separator = ""
+# mapping = [
+#     { id = "BTC", alt = "BTC/USDT" },
+# ]
 ########################################
 ###     END OF DEFAULT SETTINGS      ###
 ########################################
