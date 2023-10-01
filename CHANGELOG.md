@@ -2,6 +2,55 @@
 
 
 
+## v6.3.2 (2023-10-01)
+
+### Other
+
+* Merge pull request #831 from mraniki/dev
+
+⬆️ 🛠️(deps): update dependencies ([`1f893a2`](https://github.com/mraniki/tt/commit/1f893a28bddb93683a7719ba13071545a7c70f1f))
+
+* Merge pull request #832 from mraniki/renovate/myllm-3.x
+
+⬆️ 🛠️(deps): update dependency myllm to v3.1.4 ([`feba717`](https://github.com/mraniki/tt/commit/feba717761f00e977cbe2bf9b9aa15977ffdb391))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`8eadff2`](https://github.com/mraniki/tt/commit/8eadff27a56b6058dfe2baf5b57efd67aa9c90ab))
+
+* Fix test_llm_plugin.py and llm_plugin.py ([`3d0ce89`](https://github.com/mraniki/tt/commit/3d0ce892e0405227dbf75c3c786426e75ae97f77))
+
+### Update
+
+* Update Requirements ([`6e54c0e`](https://github.com/mraniki/tt/commit/6e54c0ee71141f5a7bb7585e061c0923dd6e7f29))
+
+* Update pyproject.toml ([`99f38bb`](https://github.com/mraniki/tt/commit/99f38bb9f4db426bc79ca234a873cbed802338fd))
+
+### ♻️
+
+* ♻️ ([`c72f267`](https://github.com/mraniki/tt/commit/c72f267b440ae8237e93e397b8ab4a01ed03839d))
+
+### ✅
+
+* ✅ Unit Test ([`3806bf0`](https://github.com/mraniki/tt/commit/3806bf03e2c23f1b3b5a7a77378f0d0b21c685f3))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.4 ([`9a61abb`](https://github.com/mraniki/tt/commit/9a61abb020f4be7c15dd941f7500afed7f82e631))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.0.1 ([`efc014b`](https://github.com/mraniki/tt/commit/efc014b8379bcc4d896a76214c3476f84c4ba6c1))
+
+### 🎨
+
+* 🎨 ([`5c3f6a3`](https://github.com/mraniki/tt/commit/5c3f6a3fe47ceafb9b00abf9096e1b2045428f30))
+
+### 👷
+
+* 👷 CI Change ([`754021c`](https://github.com/mraniki/tt/commit/754021caeda192205bc7577b015868f051d431b7))
+
+### 🚨
+
+* 🚨 ([`1b1a235`](https://github.com/mraniki/tt/commit/1b1a235ce074f7a24cb320d719d2ad3628acf144))
+
+
 ## v6.3.1 (2023-09-30)
 
 ### Other
