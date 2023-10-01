@@ -15,12 +15,12 @@
 .. note:: First time, use a testnet account and create a sandbox account on Binance https://testnet.binance.org/.
    You can copy/paste the below for quick start using discord platform. You will need to replace the values with your own.
    You might need to add test tokens in your dex wallet via https://faucetlink.to/goerli
-   
+
    Copy the content to :file:`settings.toml`
 
 
    .. code:: toml
-   
+
       [default]
       bot_token = 'your_discord_bot_token'
       bot_channel_id = 'your_discord_channel_id'
@@ -32,18 +32,18 @@
       dex_block_explorer_api = "your_blockscan_api_key"
       trading_asset_address = "0xa3726f2e6423caF1824cD7721B543B29b621fB4f"
       cex_enabled = true
-      cex_name = 'binance' 
-      cex_api = 'your_binance_api_sandbox_key' 
+      cex_name = 'binance'
+      cex_api = 'your_binance_api_sandbox_key'
       cex_secret = 'your_binance_api_sandbox_secret'
       cex_testmode = true
       cex_defaulttype = "spot"
       cex_ordertype = "market"
-   
-   
+
+
    or use the following for your .env or env variables:
-   
+
    .. code:: console
-   
+
       TT_BOT_TOKEN = 'your_discord_bot_token'
       TT_BOT_CHANNEL_ID = 'your_discord_channel_id'
       TT_APPRISE_URL = 'discord://your_discord_webhookid/your_discord_webhooktoken'
@@ -54,8 +54,8 @@
       TT_DEX_BLOCK_EXPLORER_API = "your_blockscan_api_key"
       TT_TRADING_ASSET_ADDRESS = "0xa3726f2e6423caF1824cD7721B543B29b621fB4f"
       TT_CEX_ENABLED = true
-      TT_CEX_NAME = 'binance' 
-      TT_CEX_API = 'your_binance_api_sandbox_key' 
+      TT_CEX_NAME = 'binance'
+      TT_CEX_API = 'your_binance_api_sandbox_key'
       TT_CEX_SECRET = 'your_binance_api_sandbox_secret'
       TT_CEX_TESTMODE = true
       TT_CEX_DEFAULTTYPE = "spot"
@@ -84,7 +84,7 @@ Get your DEX or CEX credentials:
 ⚙️ Setup your config
 ====================
 
-Create your config file settings.toml or use env variables. 
+Create your config file settings.toml or use env variables.
 Refer to  :doc:`talky:02_config` for details.
 
 .. warning::
@@ -119,7 +119,7 @@ or
 --------
 
 .. code:: console
-   
+
    git clone https://github.com/mraniki/tt:main
    pip install -r .requirements/requirements.txt
 

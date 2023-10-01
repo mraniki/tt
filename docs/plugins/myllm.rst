@@ -15,4 +15,3 @@ Plugin Reference
     :members:
     :undoc-members:
 
- 

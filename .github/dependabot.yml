@@ -1,6 +1,6 @@
 version: 2
 updates:
- 
+
   # Maintain dependencies for poetry
   - package-ecosystem: "pip"
     directory: "/"

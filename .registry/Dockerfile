@@ -21,6 +21,6 @@ COPY . /app
 RUN pip install --no-cache-dir /app
 
 EXPOSE 8080
-HEALTHCHECK --interval=5s CMD curl --fail http://localhost:8080 || exit 1 
+HEALTHCHECK --interval=5s CMD curl --fail http://localhost:8080 || exit 1
 
 CMD [ "python", "/app/tt/app.py" ]

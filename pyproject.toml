@@ -1,315 +1,213 @@
 [build-system]
-requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
+
+[tool.black]
+line-length = 88
+target-version = ['py310', 'py311']
+
+[tool.coverage.run]
+omit = [
+  "tests/*",
+  "examples/*",
+  "docs/*",
+  "*/config.py"
+]
 
 [tool.poetry]
-name = "tt"
-version = "6.3.3"
-description = "Connect CEX & DEX across multi messaging platforms with plugin support."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
-license = "MIT License"
-readme = "README.md"
-keywords = ["finance", "trading", "economics",
-    "DEFI","CEFI",
-    "DEX", "CEX",
-    "0x", "Uniswap",
-    "bot", "chat",
-    "talky",
-    ]
-packages = [
-    {include = "tt"}
-]
 classifiers = [
-    "Intended Audience :: Developers",
-    "Intended Audience :: Financial and Insurance Industry",
-    "Intended Audience :: Information Technology",
-    "Natural Language :: English",
-    "Operating System :: OS Independent",
-	"Programming Language :: Python :: 3.10",
-	"Programming Language :: Python :: 3.11",
-    "Topic :: Office/Business :: Financial :: Investment",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-    "Topic :: Communications :: Chat"
+  "Intended Audience :: Developers",
+  "Intended Audience :: Financial and Insurance Industry",
+  "Intended Audience :: Information Technology",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Office/Business :: Financial :: Investment",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Communications :: Chat"
 ]
-
-[tool.poetry.urls]
-"Changelog" =  "https://github.com/mraniki/tt/blob/dev/CHANGELOG.rst"
-"Support" =  "https://github.com/mraniki/tt/discussions"
-"Issues" =  "https://github.com/mraniki/tt/issues"
-
+description = "Connect CEX & DEX across multi messaging platforms with plugin support."
+keywords = [
+  "finance",
+  "trading",
+  "economics",
+  "DEFI",
+  "CEFI",
+  "DEX",
+  "CEX",
+  "0x",
+  "Uniswap",
+  "bot",
+  "chat",
+  "talky"
+]
+license = "MIT License"
+name = "tt"
+packages = [
+  {include = "tt"}
+]
+readme = "README.md"
+version = "6.3.3"
 
 [tool.poetry.dependencies]
-python = "^3.10"
-fastapi = ">=0.95.2"
-uvicorn = ">=0.22.0"
-dynaconf = ">=3.2.0"
-loguru = ">=0.6.0"
+apprise = ">=1.5.0"
 asyncz = ">=0.3.1"
-apprise= ">=1.5.0"
-httpx = ">=0.24.1"
-requests = ">=2.28.1"
-nicegui = ">=1.3.13"
-ping3 = "4.0.4"
-findmyorder = "1.7.37"
-iamlistening = "4.1.7"
 cefi = "3.0.2"
 dxsp = "5.1.2"
-talkytrend = "1.14.19"
+dynaconf = ">=3.2.0"
+fastapi = ">=0.95.2"
+findmyorder = "1.7.37"
+httpx = ">=0.24.1"
+iamlistening = "4.1.7"
+loguru = ">=0.6.0"
 myllm = "3.1.6"
-
-
+nicegui = ">=1.3.13"
+ping3 = "4.0.4"
+python = "^3.10"
+requests = ">=2.28.1"
+talkytrend = "1.14.19"
+uvicorn = ">=0.22.0"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = ">=8.0.8"
 ruff = "*"
 
-[tool.ruff]
-select = [
-  "E",  # pycodestyle
-  "F",  # pyflakes
-  "I",  # isort
-]
-exclude = [
-  ".github/*",
-  "docs/*",
-]
-# ignore = ["E401","F401"]
-format = "github"
-fixable = ["ALL"]
-
-[tool.black]
-target-version = ['py310', 'py311']
-line-length = 88
-# exclude = "((.eggs | .git | .pytype | .pytest_cache | build | dist))"
-
-
-[tool.pylint.exceptions]
-overgeneral-exceptions = [
-    "builtins.BaseException",
-    "builtins.Exception",
-    "builtins.RuntimeError",
-]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-[tool.poetry.group.test.dependencies]
-pytest = "^7.0"
-pytest-cov = "^4.1"
-pytest-asyncio = "^0.21.0"
-pytest-mock = "^3.11.1"
-pytest-loguru = "^0.2.0"
-pytest-playwright = "^0.4.0"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 [tool.poetry.group.docs]
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "7.2.6"
+myst_parser = "^2.0.0"
 pydata-sphinx-theme = "^0.14.0"
+sphinx = "7.2.6"
 sphinx-hoverxref = "^1.3.0"
 sphinx_copybutton = "0.5.2"
-myst_parser = "^2.0.0"
 sphinx_design = "^0.5.0"
 
+[tool.poetry.group.test.dependencies]
+pytest = "^7.0"
+pytest-asyncio = "^0.21.0"
+pytest-cov = "^4.1"
+pytest-loguru = "^0.2.0"
+pytest-mock = "^3.11.1"
+pytest-playwright = "^0.4.0"
 
-[tool.pytest.ini_options]
-pythonpath = ". tt"
-testpaths = "tests"
-python_classes = "Test*"
-log_format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
-addopts = "-v"
-log_level = "DEBUG"
-filterwarnings = [
-    " ignore:.*U.*mode is deprecated:DeprecationWarning",
-    "ignore::DeprecationWarning",
+[tool.poetry.urls]
+"Changelog" = "https://github.com/mraniki/tt/blob/dev/CHANGELOG.rst"
+"Issues" = "https://github.com/mraniki/tt/issues"
+"Support" = "https://github.com/mraniki/tt/discussions"
+
+[tool.pylint.exceptions]
+overgeneral-exceptions = [
+  "builtins.BaseException",
+  "builtins.Exception",
+  "builtins.RuntimeError"
 ]
 
-[tool.coverage.run]
-omit = [
-    "tests/*",
-    "examples/*",
-    "docs/*",
-    "*/config.py"
+[tool.pytest.ini_options]
+addopts = "-v"
+filterwarnings = [
+  " ignore:.*U.*mode is deprecated:DeprecationWarning",
+  "ignore::DeprecationWarning"
+]
+log_format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
+log_level = "DEBUG"
+python_classes = "Test*"
+pythonpath = ". tt"
+testpaths = "tests"
+
+[tool.ruff]
+exclude = [
+  ".github/*",
+  "docs/*"
+]
+fixable = ["ALL"]
+# ignore = ["E401","F401"]
+format = "github"
+select = [
+  "E",  # pycodestyle
+  "F",  # pyflakes
+  "I"  # isort
 ]
 
 [tool.semantic_release]
-upload_to_vcs_release = false
-tag_format = "v{version}"
-version_variables = [
-    "tt/utils.py:__version__",
-]
-version_toml = [
-   "pyproject.toml:tool.poetry.version",
-   ]
-
 build_command = "pip install poetry && poetry build"
 commit_parser = "emoji"
-
+tag_format = "v{version}"
+upload_to_vcs_release = false
+version_toml = [
+  "pyproject.toml:tool.poetry.version"
+]
+version_variables = [
+  "tt/utils.py:__version__"
+]
 
 [tool.semantic_release.commit_parser_options]
 major_tags = [
-    "BREAKING",
-    "💥",
-    ":boom:",
-  ]
-minor_tags = ["feat",
-    "🥚",":egg:",
-    "💄",":lipstick:",
-    "🚀",":rocket:",
-    "✨",":sparkles:",
+  "BREAKING",
+  "💥",
+  ":boom:"
 ]
-
-patch_tags = ["fix","bump","Update",
-    "🎨",":art:",
-    "🐛",":bug:",
-    "🚑",":ambulance:",
-    "⚡",":zap:",
-    "🔥",":fire:",
-    "🚨",":rotating_light:",
-    "♻️",":recycle:",
-    "🔧",":wrench:",
-    "⬆️",":arrow_up:",
-    "🩹",":adhesive_bandage:",
-    "👷",":construction_worker:",
-    "📝",":memo:",
-    "🔒",":lock:",
-    "👽",":alien:",
-    "💬",":speech_balloon:",
-    "🥅",":goal_net:",
-    "✅",":white_check_mark:",
-    "🐳",":whale:",
-    "🙈",":see_no_evil:",
-    "⚗️",":alembic:",
-    "🧐",":monocle_face:",
-    "🔇",":mute:",
-    "🔊",":volume:",
+minor_tags = [
+  "feat",
+  "🥚",
+  ":egg:",
+  "💄",
+  ":lipstick:",
+  "🚀",
+  ":rocket:",
+  "✨",
+  ":sparkles:"
+]
+patch_tags = [
+  "fix",
+  "bump",
+  "Update",
+  "🎨",
+  ":art:",
+  "🐛",
+  ":bug:",
+  "🚑",
+  ":ambulance:",
+  "⚡",
+  ":zap:",
+  "🔥",
+  ":fire:",
+  "🚨",
+  ":rotating_light:",
+  "♻️",
+  ":recycle:",
+  "🔧",
+  ":wrench:",
+  "⬆️",
+  ":arrow_up:",
+  "🩹",
+  ":adhesive_bandage:",
+  "👷",
+  ":construction_worker:",
+  "📝",
+  ":memo:",
+  "🔒",
+  ":lock:",
+  "👽",
+  ":alien:",
+  "💬",
+  ":speech_balloon:",
+  "🥅",
+  ":goal_net:",
+  "✅",
+  ":white_check_mark:",
+  "🐳",
+  ":whale:",
+  "🙈",
+  ":see_no_evil:",
+  "⚗️",
+  ":alembic:",
+  "🧐",
+  ":monocle_face:",
+  "🔇",
+  ":mute:",
+  "🔊",
+  ":volume:"
 ]
