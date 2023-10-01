@@ -10,7 +10,8 @@ authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"
 readme = "README.md"
 keywords = ["finance", "trading", "economics",
-    "DEFI","CEFI","DEX", "CEX",
+    "DEFI","CEFI",
+    "DEX", "CEX",
     "0x", "Uniswap",
     "bot", "chat",
     "talky",
@@ -51,10 +52,10 @@ nicegui = ">=1.3.13"
 ping3 = "4.0.4"
 findmyorder = "1.7.37"
 iamlistening = "4.1.7"
-cefi = "3.0.0"
-dxsp = "5.1.0"
+cefi = "3.0.2"
+dxsp = "5.1.1"
 talkytrend = "1.14.19"
-myllm = "3.1.3"
+myllm = "3.1.4"
 
 
 
