@@ -293,7 +293,7 @@ llm_provider = "g4f.Provider.Bing"
 max_memory = 100
 llm_prefix = "🐻"
 # time lag to wait ai response
-lag = 0 
+lag = 5 
 
 # LLM Template to use as conversation starter 
 llm_template = """
