@@ -16,19 +16,24 @@ def set_test_settings():
 def test_fixture_plugin():
     return LlmPlugin()
 
-
 @pytest.mark.asyncio
 async def test_plugin(plugin):
     """Test message handling"""
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_question}")
     assert plugin.should_handle("any message") is True
+    assert plugin.llm is not None
+    assert plugin.llm.provider is not None
+    assert callable(plugin.llm.chat)
+    assert callable(plugin.llm.switch_continous_mode)
+    assert callable(plugin.llm.clear_chat_history)
+    assert callable(plugin.llm.export_chat_history)
 
 
 @pytest.mark.asyncio
 async def test_plugin_notification(plugin):
     """Test notification"""
     plugin.send_notification = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_question}")
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_aichat}")
     plugin.send_notification.assert_awaited_once()
 
 
@@ -44,9 +49,17 @@ async def test_parsing_llm(plugin):
     """Test scr"""
     plugin.llm.chat = AsyncMock()
     await plugin.handle_message(
-        f"{settings.bot_prefix}{settings.bot_command_question} hello"
+        f"{settings.bot_prefix}{settings.bot_command_aichat} hello"
     )
     plugin.llm.chat.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_parsing_info(plugin):
+    """Test info"""
+    plugin.llm.get_myllm_info = AsyncMock()
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_info}")
+    plugin.llm.get_myllm_info.assert_awaited_once()
 
 
 @pytest.mark.asyncio
@@ -55,25 +68,18 @@ async def test_info(plugin):
     result = await plugin.llm.get_myllm_info()
     assert result is not None
 
-# @pytest.mark.asyncio
-# async def test_parsing_info(plugin):
-#     """Test info """
-#     plugin.llm.get_myllm_info = AsyncMock()
-#     await plugin.handle_message(
-#         f"{settings.bot_prefix}{settings.bot_command_info}")
-#     plugin.llm.get_myllm_info.assert_awaited_once()
+
+@pytest.mark.asyncio
+async def test_llm_chat(plugin):
+    """Test llm"""
+    print(plugin.llm.provider)
+    result = await plugin.llm.chat("tell me a story")
+    sleep(20)
+    print(result)
+    assert result is not None
 
 
 @pytest.mark.asyncio
 async def test_clear_chat_history(plugin):
     result = plugin.llm.export_chat_history()
-    assert result is not None
-
-
-@pytest.mark.asyncio
-async def test_llm_request(plugin):
-    """Test llm"""
-    result = await plugin.llm.chat(prompt="tell me a story")
-    sleep(5)
-    print(result)
     assert result is not None

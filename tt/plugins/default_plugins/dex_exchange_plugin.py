@@ -33,7 +33,6 @@ class DexExchangePlugin(BasePlugin):
         self.enabled = settings.dxsp_enabled
         if self.enabled:
             self.fmo = FindMyOrder()
-            # if settings.dex_wallet_address:
             self.exchange = DexSwap()
 
     async def start(self):
@@ -71,7 +70,6 @@ class DexExchangePlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                # settings.bot_command_help: self.exchange.get_help,
                 settings.bot_command_info: self.exchange.get_info,
                 settings.bot_command_bal: self.exchange.get_balances,
                 settings.bot_command_pos: self.exchange.get_positions,

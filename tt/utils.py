@@ -140,7 +140,7 @@ async def check_version():
                 logger.debug("Github repo: {}", github_repo)
                 latest_version = github_repo["name"]
                 logger.info("Latest version: {}", latest_version)
-                if latest_version != __version__:
+                if latest_version != f"v{__version__}":
                     logger.debug(
                         "👿 You are NOT using the latest %s: %s",
                         latest_version,

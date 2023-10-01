@@ -22,19 +22,19 @@
 
 [default]
 # Dynaconf settings verification
-VALUE = "Production - Default"
+VALUE = "Production"
 
 ########################################
 ###         PYTHON SETTINGS          ###
 ########################################
 
-# Log level
-# set to "DEBUG" if you need 
-# to troubleshoot
+# Log level to troubleshoot
+# loglevel = "DEBUG"
 loglevel = "INFO"
 
-#version control
+# URL to verify the latest version
 repo = "https://api.github.com/repos/mraniki/tt/releases/latest"
+# Enable/Disable Version Check
 version_check = true
 
 
@@ -46,11 +46,10 @@ version_check = true
 host = "0.0.0.0"
 port = 8080
 
-# If set to true, the server will
-# provide a ui for the bot available at
-# http://0.0.0.0:8080/
-# refer to frontend documentation for
-# more details
+# Experiemental, If set to true,
+# provide a ui at http://0.0.0.0:8080/
+# refer to frontend documentation 
+# ui_enabled = true
 ui_enabled = false
 
 # Your webhook secret to send
@@ -84,16 +83,15 @@ forwarder_url = ""
 # apprise_url = "discord://token1/channel"
 apprise_url = "json://localhost"
 
-#Format of the notification. Format can be
-# NotifyFormat.MARKDOWN 
-# or NotifyFormat.HTML
-apprise_format = "NotifyFormat.MARKDOWN"
+#Format of the apprise notification.
+# apprise_format = "NotifyFormat.MARKDOWN"
+apprise_format = "NotifyFormat.HTML"
 
 ########################################
 ###      IAMLISTENING SETTINGS       ###
 ########################################
 
-# Module Enable/Disable
+# Enable/Disable IAMListening
 iamlistening_enabled = true
 
 ########################################
@@ -102,9 +100,8 @@ iamlistening_enabled = true
 
 # Bot Prefix 
 bot_prefix = "/"
-# Specific data that should be ignore by
-# the parser
-bot_ignore = "ℹ️ 🦄 ⚠️ 📊 🏦 📺 ⬆️ 💬 qq"
+# Character to ignore
+bot_ignore = "ℹ️ 🦄 ⚠️ 📊 🏦 📺 ⬆️ 💬"
 # Command for help
 bot_command_help = "help"
 # Command for info
@@ -117,81 +114,60 @@ bot_command_pos = "pos"
 bot_command_pnl_daily = "d"
 # Command for instrument quote
 bot_command_quote = "q"
-
-# Help Message
-helper_commands = """
-🔀 /trading
-🔁 /restart
-🕸️ /network
-"""
 # Command for switch trading on or off
 bot_command_trading = "trading"
 # Command to retrieve network info
-# such as latency ping and IP address of
-# the bot
 bot_command_network = "network"
 # Command to restart the bot
 bot_command_restart = "restart"
-
-# help message used in talky app
-dxsp_commands = """
-🎯 BUY WBTC
-🎯 /q WBTC
-🏦 /bal
-🏦 /pos
-"""
-
-# Help Message
-ccxt_commands = """
-🎯 BUY BTCUSDT
-🎯 /q BTCUSDT
-🏦 /bal
-🏦 /pos
-"""
-
-# help message listing the commands available
-talkytrend_commands = "📺 /live\n📰 /news\n📊 /trend"
-
-# bot command for tv feed
+# Command to get live tv feed
 bot_command_tv = "live"
-# bot command for trading view trend
+# Command to get trading view trend
 bot_command_trend = "trend"
-# bot command for news feeds
+# Command to get latest news
 bot_command_news = "news"
-
-# help message listing the commands
-# available
-llm_commands = """
-💬 /ai
-➰ /aimode
-🧽 /clearai
-‍💨 /export
-"""
 # command for conversation
-bot_command_question = "ai"
+bot_command_aichat = "ai"
 # command for reset conversation
-bot_command_clearai = "clearai"
+bot_command_aiclear = "aiclear"
 # command to toggle aimode
 bot_command_aimode = "aimode"
 # command to export conversation
-bot_command_exportai = "export"
+bot_command_aiexport = "aiexport"
+
+# Help Message
+helper_commands = """
+🆘 /help
+ℹ️ /info
+🔀 /trading
+🔁 /restart
+🕸️ /network
+📺 /live
+📰 /news
+📊 /trend
+💬 /ai
+➰ /aimode
+🧽 /aiclear
+‍💨 /aiexport
+⚖️ /q WBTC
+🏦 /bal
+🏦 /pos
+🎯 BUY WBTC
+🎯 buy BTCUSDT sl=200 tp=400 q=2%
+"""
 
 ########################################
 ###         TRADING SETTINGS         ###
 ########################################
 
-# Trading Enable/Disable
+# Enable/Disable Trading
 trading_enabled = true
-
-# Trading % of your position to risk per order
-# 10 = 10% of the position
-# trading_risk_amount = 10
 
 ########################################
 ###        FINDMYORDER SETTINGS      ###
 ########################################
 
-# Module Enable/Disable
+# Enable/Disable FindMyOrder
 findmyorder_enabled = true
 
 # Keyword to be use to identify an order
@@ -229,7 +205,7 @@ mapping = [
     { id = "ETH", alt = "WETH" },
 ]
 
-# Instrument to be ignored
+# Instruments to be ignored
 # when generating an order
 ignore_instrument = "US500 DOGE"
 
@@ -237,7 +213,7 @@ ignore_instrument = "US500 DOGE"
 ###         PLUGINS SETTINGS         ###
 ########################################
 
-# Plugins Enable/Disable
+# Enable/Disable Plugins
 plugin_enabled = true
 # Plugins Locations
 plugin_directory = "tt.plugins.default_plugins"
@@ -247,37 +223,35 @@ plugin_directory = "tt.plugins.default_plugins"
 # usage and footprint if needed
 # if you want all the plugins to be loaded
 # at the start, set it to
-# authorized_plugins = []
+authorized_plugins = []
 # Here the value has been set for helper
 # and dex exchange plugins only
-authorized_plugins = [
-    # 'helper_plugin',
-    # 'dex_exchange_plugin',
-    ]
+# authorized_plugins = [
+#     'helper_plugin',
+#     'dex_exchange_plugin',
+#     ]
 
-# Example plugin for test purpose
+# Enable/Disable Example Plugin
 example_plugin_enabled = false
-# User Plugin Enable/Disable
+# Enable/Disable User Plugins
 # Not yet implemented
 user_plugins_allowed = false
  
-
 ########################################
 ###          HELPER SETTINGS         ###
 ########################################
 
-# Helper Enable/Disable
+# Enable/Disable Helper
 helper_enabled = true
 
-# URL endpoint for the latency 
-# ping. Used for testping testing
+# URL endpoint for latency ping.
 ping = "8.8.8.8"
 
 ########################################
 ###           LLM SETTINGS           ###
 ########################################
 
-# Module Enable/Disable
+# Enable/Disable MyLLM
 myllm_enabled = true
 
 # LLM Model to use
@@ -288,12 +262,16 @@ llm_model = "gpt-3.5-turbo"
 # for the list of supported provider
 llm_provider = "g4f.Provider.Bing"
 
-# Number of conversation history 
-# between user and ai
+# Conversation history size
 max_memory = 100
-llm_prefix = "🐻"
+
 # time lag to wait ai response
-lag = 0 
+lag = 5
+
+# AI Mode to continously listen 
+llm_ai_mode = false
+# prefix use to filter the AI response
+llm_prefix = "🐻"
 
 # LLM Template to use as conversation starter 
 llm_template = """
@@ -304,32 +282,16 @@ The user will provide the task,
 you will provide only the output 
 in the exact format specified below
 with minimal explanation or conversation.
-
-Example input:
-Help me with a trading monitoring for EURUSD
-
-Example output:
-- Daily trend is bearish 
-- Weekly trend is bearish 
-- Monthly trend is bearish
-- Quaterly and yearly trend is bearish
-- historical trend for this month is bearish
-- here are the key news
-
 """
-
-# AI Mode continously listen to
-# the conversation
-llm_ai_mode = false
 
 ########################################
 ###        TALKYTREND SETTINGS       ###
 ########################################
 
-# Module Enable/Disable
+# Enable/Disable Talkytrend
 talkytrend_enabled = true
 
-# Signals Enable/Disable
+# Enable/Disable Signals
 enable_signals = true
 # instrument monitored under trend
 # use https://tvdb.brianthe.dev
@@ -339,33 +301,33 @@ assets = [
     { id ="BTCUSD", exchange='BINANCE',screener="crypto"},
 ]
 
+# Enable/Disable Yfinance
 enable_yfinance = true
-# yahoo finance ticker reference
-# to retrieve company news
-# or index news
-ticker_reference = "NVDA"
 
-# Events Enable/Disable
+# yahoo finance ticker reference
+# https://finance.yahoo.com/lookup/
+ticker_reference = "5EGSPC"
+
+# Enable/Disable Events
 enable_events = true
 # Events calendar
 economic_calendar = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
 # Adhoc date to add in event tracker
-fomc_decision_date = ["2023-09-20","2023-11-01","2023-12-13"]
+fomc_decision_date = ["2023-11-01","2023-12-13"]
 
 # TV url
 live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
 
-# Feeds Enable/Disable
+# Enable/Disable Feeds 
 enable_feed = true
 # Feeds RSS url
 news_feed = "https://www.dailyfx.com/feeds/market-news"
-
 
 ########################################
 ###           CEFI SETTINGS          ###
 ########################################
 
-# Module Enable/Disable
+# Enable/Disable CEFI
 cex_enabled = true
 
 ########################################
@@ -388,8 +350,7 @@ dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c
 # token list using uniswap tokenlist format
 # https://github.com/mraniki/tokenlist
 # this can be used to avoid using coingecko
-# or be used for niche token not listed anywhere
-# or for testnet
+# or if token are not listed yet or for testnet
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
@@ -411,11 +372,11 @@ bot_auth_token = ""
 iteration_enabled = false
 iteration_limit = -1
 
-
-# [default.platform.backup]
-# platform = ""
-# bot_token = ""
-# bot_channel_id = ""
+# # discord example
+# [default.platform.discord]
+# platform="discord"
+# bot_token = "mytoken"
+# bot_channel_id = "mychannelid"
 # bot_api_id = ""
 # bot_api_hash = ""
 # bot_hostname = ""
@@ -425,13 +386,11 @@ iteration_limit = -1
 # iteration_enabled = false
 # iteration_limit = -1
 
-
 ########################################
 ###           DEX SETTINGS          ###
 ########################################
 
-# dex settings for 1 exchange based on chain 1 mainnet
-# and uniswap v2 protocol type and router uniswap
+# DEX template
 [default.dex.template]
 wallet_address = ""
 private_key = ""
@@ -442,15 +401,17 @@ api_endpoint = ''
 api_key = ""
 router_contract_addr = ""
 factory_contract_addr = ""
-trading_asset_address = ""
 trading_risk_percentage = true
 trading_risk_amount = 10
 trading_slippage = 2
+trading_asset_separator = ""
+trading_asset_address = ""
 block_explorer_url = ""
 block_explorer_api = ""
 mapping = [
     { id = "BTC", alt = "WBTC" },
 ]
+# # uniswap v2 protocol type and router uniswap
 # [default.dex.eth]
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
@@ -461,14 +422,15 @@ mapping = [
 # api_key = ""
 # router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 # factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
-# trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+# trading_risk_percentage = true
 # trading_risk_amount = 10
 # trading_slippage = 2
+# trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+# trading_asset_separator = ""
 # block_explorer_url = "https://api.etherscan.io/api?"
 # block_explorer_api = "798437294880920392"
 
-# dex settings for 1 exchange based on chain 56 mainnet
-# and uniswap v2 protocol type and router pancakeswap
+# # uniswap v2 protocol type and router pancakeswap on BSC chain 56
 # [default.dex.bsc]
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
@@ -479,14 +441,15 @@ mapping = [
 # api_key = ""
 # router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 # factory_contract_addr = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
-# trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+# trading_risk_percentage = true
 # trading_risk_amount = 10
 # trading_slippage = 2
+# trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+# trading_asset_separator = ""
 # block_explorer_url = "https://api.bscscan.com/api?"
 # block_explorer_api = "798437294880920392"
 
-# dex settings for 1 exchange based on polygon mainnet
-# and 0x protocol type and 0x router
+# # ZeroX 0x protocol type on polygon chain 137
 # [default.dex.polygon]
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
@@ -497,9 +460,11 @@ mapping = [
 # api_key = ""
 # router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
 # factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
-# trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+# trading_risk_percentage = true
 # trading_risk_amount = 10
 # trading_slippage = 2
+# trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+# trading_asset_separator = ""
 # block_explorer_url = "https://api.polygonscan.com/api?"
 # block_explorer_api = "798437294880920392"
 
@@ -507,8 +472,7 @@ mapping = [
 ###           CEX SETTINGS          ###
 ########################################
 
-# CCXT Parameters to connect
-# to 1 or more exchanges
+# CEFI template
 [default.cex.template]
 protocol = ""
 name = ""
@@ -522,15 +486,16 @@ leverage_type = ""
 leverage = 1
 trading_risk_percentage = true
 trading_risk_amount = 10
+trading_slippage = 2
 trading_asset = "USDT"
 trading_asset_separator = ""
-trading_slippage = 2
 mapping = [
     { id = "BTC", alt = "BTC/USDT" },
 ]
-# second cex example
+
+# # CEFI example using ccxt binance
 # protocol = "ccxt"
-# name = "binane"
+# name = "binance"
 # api_key= ""
 # secret= ""
 # password = ""
@@ -541,6 +506,7 @@ mapping = [
 # leverage = 1
 # trading_risk_percentage = true
 # trading_risk_amount = 10
+# trading_slippage = 2
 # trading_asset = "USDT"
 # trading_asset_separator = ""
 # mapping = [

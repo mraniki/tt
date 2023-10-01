@@ -21,8 +21,8 @@ Utils
 .. automodule:: tt.utils
     :members:
     :undoc-members:
-    
-   
+
+
 UI
 ==
 

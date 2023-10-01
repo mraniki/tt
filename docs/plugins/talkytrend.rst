@@ -14,4 +14,3 @@ Plugin Reference
 .. automodule:: tt.plugins.default_plugins.talkytrend_plugin
     :members:
     :undoc-members:
- 
