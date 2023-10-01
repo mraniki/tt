@@ -10,9 +10,25 @@
     # bot_channel_id = '1221212'
     # apprise_url = 'discord://12121/121212'
     # [default.dex.uniswap]
-    # wallet_address = '0x123458901234567890'
-    # private_key = '0xdeadbeef'
-    # block_explorer_api = '42342342342'
+    # wallet_address = ""
+    # private_key = ""
+    # rpc = "https://rpc.ankr.com/eth"
+    # protocol_type = "uniswap"
+    # protocol_version = 2
+    # api_endpoint = ""
+    # api_key = ""
+    # router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+    # factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+    # trading_risk_percentage = true
+    # trading_risk_amount = 10
+    # trading_slippage = 2
+    # trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    # trading_asset_separator = ""
+    # block_explorer_url = "https://api.etherscan.com/api?"
+    # block_explorer_api = ""
+    # mapping = [
+    # { id = "BTC", alt = "WBTC" },
+    # ]
 
 # TELEGRAM BOT on CEX Binance
     #[default.platform.main]
