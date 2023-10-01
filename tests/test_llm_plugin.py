@@ -22,6 +22,12 @@ async def test_plugin(plugin):
     """Test message handling"""
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_question}")
     assert plugin.should_handle("any message") is True
+    assert plugin.llm is not None
+    assert plugin.llm.provider is not None
+    assert callable(plugin.llm.chat)
+    assert callable(plugin.llm.switch_continous_mode)
+    assert callable(plugin.llm.clear_chat_history)
+    assert callable(plugin.llm.export_chat_history)
 
 
 @pytest.mark.asyncio
@@ -65,15 +71,16 @@ async def test_info(plugin):
 
 
 @pytest.mark.asyncio
-async def test_clear_chat_history(plugin):
-    result = plugin.llm.export_chat_history()
+async def test_llm_chat(plugin):
+    """Test llm"""
+    print(plugin.llm.provider)
+    result = await plugin.llm.chat("tell me a story")
+    sleep(20)
+    print(result)
     assert result is not None
 
 
 @pytest.mark.asyncio
-async def test_llm_request(plugin):
-    """Test llm"""
-    result = await plugin.llm.chat("tell me a story")
-    sleep(20)
-    print(result)
+async def test_clear_chat_history(plugin):
+    result = plugin.llm.export_chat_history()
     assert result is not None
