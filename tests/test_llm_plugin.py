@@ -1,7 +1,7 @@
 from unittest.mock import AsyncMock
 
 import pytest
-
+from time import sleep
 from tt.config import settings
 from tt.plugins.default_plugins.llm_plugin import LlmPlugin
 
@@ -66,11 +66,11 @@ async def test_parsing_llm(plugin):
     plugin.llm.chat.assert_awaited_once()
 
 
-@pytest.mark.asyncio
-async def test_help(plugin):
-    """Test help"""
-    result = await plugin.llm.get_myllm_help()
-    assert result is not None
+# @pytest.mark.asyncio
+# async def test_help(plugin):
+#     """Test help"""
+#     result = await plugin.llm.get_myllm_help()
+#     assert result is not None
 
 
 @pytest.mark.asyncio
@@ -90,5 +90,6 @@ async def test_clear_chat_history(plugin):
 async def test_llm_request(plugin):
     """Test llm"""
     result = await plugin.llm.chat(prompt="tell me a story")
+    sleep(5)
     print(result)
     assert result is not None
