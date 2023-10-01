@@ -5,7 +5,7 @@
 
 # DISCORD BOT on ethereum chain using 
 # uniswap v2 router
-    #[default.playform.main]
+    #[default.platform.main]
     # bot_token = '12122121'
     # bot_channel_id = '1221212'
     # apprise_url = 'discord://12121/121212'
@@ -22,28 +22,47 @@
     # bot_api_hash = '121212121' 
     # apprise_url = 'tgram://121221/-11211212121'
     # [default.cex.binance]
-    # cex_name = 'binance' 
-    # cex_api = 'abcabccabc' 
-    # cex_secret = 'abcacabcabc' 
+    # name ="binance"
+    # api_key= ''
+    # secret = ''
+    # password = ""
+    # testmode = true
+    # defaulttype = "spot"
+    # ordertype = "market"
+    # trading_risk_percentage = true
+    # trading_risk_amount = 4
+    # trading_slippage = 2
+    # trading_asset = "USDT"
+    # trading_asset_separator = ""
+    # mapping = [
+    # { id = "BTC", alt = "BTCUSDT" },
+    # ]
 
-#DISCORD BOT on BSC chain using pancakeswap v2 router and custom plugin setup
+#DISCORD BOT on BSC chain using pancakeswap v2 router
     #[default.platform.main]
     # bot_token = '1212121212121'
     # bot_channel_id = '121212121212'
     # apprise_url = 'discord://121121/1212212'
     # [default.dex.pancake]
-    # wallet_address = '0x123467890'
-    # private_key = '0xdeadbeef'
-    # router_contract_addr = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
+    # wallet_address = ""
+    # private_key = ""
+    # rpc = "https://rpc.ankr.com/bsc"
+    # protocol_type = "uniswap"
+    # protocol_version = 2
+    # api_endpoint = ""
+    # api_key = ""
+    # router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
     # factory_contract_addr = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
-    # block_explorer_url = 'https://api.bscscan.com/api'
-    # block_explorer_api = '423442'
-    # trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
-    # action_identifier = "PUMP DUMP"
+    # trading_risk_percentage = true
+    # trading_risk_amount = 10
+    # trading_slippage = 2
+    # trading_asset_address = "0x55d398326f99059ff775485246999027b3197955"
+    # trading_asset_separator = ""
+    # block_explorer_url = "https://api.bscscan.com/api?"
+    # block_explorer_api = ""
     # mapping = [
-    #     { id = "ETH", alt = "WETH" },
+    # { id = "BTC", alt = "BTCB" },
     # ]
-    # live_tv_url ='https://reuters-reutersnow-1.plex.wurl.com/manifest/playlist.m3u8'
 
 #MATRIX BOT on Polygon chain using zerox protocol
     #[default]
@@ -54,17 +73,22 @@
     # bot_pass='mario'
     # apprise_url = 'discord://1212121/1211212'
     # [default.dex.polygon]
-    # wallet_address = "0x1234567890123456789012345678901234567890"
-    # private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
-    # rpc = "https://rpc.ankr.com/polygon"
+    # wallet_address = ""
+    # private_key = ""
+    # rpc = "https://polygon.llamarpc.com"
     # protocol_type = "0x"
     # protocol_version = 4
-    # api_endpoint = "https://polygon.api.0x.org/"
+    # api_endpoint = "https://polygon.api.0x.org"
     # api_key = ""
     # router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
     # factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
-    # trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    # trading_risk_percentage = true
     # trading_risk_amount = 10
     # trading_slippage = 2
+    # trading_asset_address = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
+    # trading_asset_separator = ""
     # block_explorer_url = "https://api.polygonscan.com/api?"
-    # block_explorer_api = "798437294880920392"
+    # block_explorer_api = ""
+    # mapping = [
+    # { id = "BTC", alt = "WBTC" },
+    # ]
