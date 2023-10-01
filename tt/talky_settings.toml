@@ -266,7 +266,7 @@ llm_provider = "g4f.Provider.Bing"
 max_memory = 100
 
 # time lag to wait ai response
-lag = 0 
+lag = 5
 
 # AI Mode to continously listen 
 llm_ai_mode = false
