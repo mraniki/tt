@@ -14,7 +14,7 @@ ENV TT_DOCKER=True
 #   playwright install chromium && playwright install-deps && \
 #   rm -rf /var/lib/apt/lists/*
 
-# ENV OP_SERVICE_ACCOUNT_TOKEN=NONE
+ENV OP_SERVICE_ACCOUNT_TOKEN=NONE
 # COPY --from=1password/op:2 /usr/local/bin/op /usr/local/bin/op
 
 COPY . /app

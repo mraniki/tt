@@ -13,10 +13,23 @@ import sys
 from asyncz.schedulers.asyncio import AsyncIOScheduler
 from dynaconf import Dynaconf
 from loguru import logger as loguru_logger
+import dotenv
+from pyonepassword import OP
 
 ########################################
 ###           ⚙️ Settings            ###
 ########################################
+# def do_signin():
+#     # load OP_SERVICE_ACCOUNT_TOKEN
+#     dotenv.load_dotenv("./.env_secret")
+#     op = OP()
+#     return op
+
+# if do_signin():
+#     op = do_signin()
+#     logger.info(op._signed_in_account)
+#     item = op.item_get("", vault="Test Data")
+#     logger.debug(f"Item password: {item.password}")
 
 ROOT = os.path.dirname(__file__)
 
