@@ -1,3 +1,4 @@
+from time import sleep
 from unittest.mock import AsyncMock
 
 import pytest
@@ -73,5 +74,6 @@ async def test_clear_chat_history(plugin):
 async def test_llm_request(plugin):
     """Test llm"""
     result = await plugin.llm.chat("tell me a story")
+    sleep(20)
     print(result)
     assert result is not None
