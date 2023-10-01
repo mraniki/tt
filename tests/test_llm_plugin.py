@@ -1,4 +1,3 @@
-from time import sleep
 from unittest.mock import AsyncMock
 
 import pytest
@@ -48,19 +47,21 @@ async def test_parsing_llm(plugin):
     )
     plugin.llm.chat.assert_awaited_once()
 
+
 @pytest.mark.asyncio
 async def test_parsing_info(plugin):
-    """Test info """
+    """Test info"""
     plugin.llm.get_myllm_info = AsyncMock()
-    await plugin.handle_message(
-        f"{settings.bot_prefix}{settings.bot_command_info}")
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_info}")
     plugin.llm.get_myllm_info.assert_awaited_once()
+
 
 @pytest.mark.asyncio
 async def test_info(plugin):
     """Test info"""
     result = await plugin.llm.get_myllm_info()
     assert result is not None
+
 
 @pytest.mark.asyncio
 async def test_clear_chat_history(plugin):
