@@ -2,6 +2,109 @@
 
 
 
+## v6.3.4 (2023-10-01)
+
+### Other
+
+* Merge pull request #835 from mraniki/dev
+
+Update pyproject.toml ([`bf19c26`](https://github.com/mraniki/tt/commit/bf19c268cdc9b79f71d904bc6f9dbaf382813ecc))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`9f8056c`](https://github.com/mraniki/tt/commit/9f8056c17ce9660ac15327b94e22dfae99b30a5b))
+
+* Refactor test_llm_plugin.py ([`7d6befe`](https://github.com/mraniki/tt/commit/7d6befe15d9c973c9e912a977e284cf518fa26e2))
+
+* Merge pull request #836 from mraniki/renovate/nicegui-1.x
+
+⬆️ 🛠️(deps): update dependency nicegui to v1.3.15 ([`be8fd05`](https://github.com/mraniki/tt/commit/be8fd05abf0fc32247b1e4b5556f0b4a6782808b))
+
+* Apply automatic changes ([`4d876a7`](https://github.com/mraniki/tt/commit/4d876a739b72985f868d5ed12a6b404e61c55a53))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`fe9aed2`](https://github.com/mraniki/tt/commit/fe9aed28b56b13f78e8d5ffdf6816465963cde06))
+
+* Fix version comparison in check_version() function ([`9fc4e5c`](https://github.com/mraniki/tt/commit/9fc4e5cd3e1b5393c08512cff993c1e4b3dcb101))
+
+### Update
+
+* Update loguru and dynaconf versions in pyproject.toml ([`63aab3c`](https://github.com/mraniki/tt/commit/63aab3c696c4af9fb89064f5c00b38572807963e))
+
+* Update Requirements ([`de725a1`](https://github.com/mraniki/tt/commit/de725a109b9a5d36600615dbc5abe15b2e0148c5))
+
+* Update findmyorder version to 1.7.38 ([`d1f577f`](https://github.com/mraniki/tt/commit/d1f577fad49548c4a2abbfa74443f70638ffd290))
+
+* Update Requirements ([`0949958`](https://github.com/mraniki/tt/commit/09499589cd81e2006b6b7d804e7660f7a2488785))
+
+* Update Requirements ([`cffafda`](https://github.com/mraniki/tt/commit/cffafdaf80536ef1c816b8c5027ddfdc1e2e5856))
+
+* Update Requirements ([`47192fa`](https://github.com/mraniki/tt/commit/47192faa70b58f4154a1d59ce04c05be5f62d5cc))
+
+* Update pyproject.toml ([`0615b80`](https://github.com/mraniki/tt/commit/0615b806a8c0258485b7e016a29d20c8d51e9a96))
+
+* Update pyproject.toml ([`f40941c`](https://github.com/mraniki/tt/commit/f40941cfcadc096b5f1102a804393602a3b17a4e))
+
+* Update Requirements ([`ba53e2b`](https://github.com/mraniki/tt/commit/ba53e2b5e3afb08db6986473eff5899302b8fbce))
+
+* Update myllm version to 3.1.6 ([`3f7496e`](https://github.com/mraniki/tt/commit/3f7496eb4ca318a97bdf41683ab69298a00f978c))
+
+* Update Requirements ([`05aa871`](https://github.com/mraniki/tt/commit/05aa871acf0f7c4cf514081e12866043f5595fea))
+
+* Update dxsp version in pyproject.toml ([`709a567`](https://github.com/mraniki/tt/commit/709a56778dd5a0183b6547e2415598b96df15ca7))
+
+* Update dependencies and test case in pyproject.toml and test_llm_plugin.py ([`9cfc7c1`](https://github.com/mraniki/tt/commit/9cfc7c166b292cf249a4ca7c9b6272742e38e8f6))
+
+* Update Requirements ([`aa66939`](https://github.com/mraniki/tt/commit/aa669390f9d5fad106c4030e9b487f45c86d5ff7))
+
+* Update pyproject.toml ([`221100e`](https://github.com/mraniki/tt/commit/221100e0cd30595c163c7b4e8457cac78a5626a5))
+
+### ♻️
+
+* ♻️ Cleanup and refactoring ([`39365cd`](https://github.com/mraniki/tt/commit/39365cd43fd17757639e8ef1d0c809fdd3d5a9f7))
+
+* ♻️ simplifying help message ([`de62634`](https://github.com/mraniki/tt/commit/de62634d9d1ea844bf4c1611f934d55dcd6acb4c))
+
+* ♻️ ([`1a1f3a2`](https://github.com/mraniki/tt/commit/1a1f3a22f184354cfb889749e4e6d0cbce8ee44d))
+
+### ⚡
+
+* ⚡ ([`d0af257`](https://github.com/mraniki/tt/commit/d0af2571c664efdea5ccd92868cef9b8ef8765ff))
+
+### ✅
+
+* ✅ Unit Test ([`46e8860`](https://github.com/mraniki/tt/commit/46e886037f57e11a80552917785f636fc115920f))
+
+* ✅ Unit Test ([`3807da2`](https://github.com/mraniki/tt/commit/3807da29b7978b3bb1001b4c2545b3340f2dee54))
+
+* ✅ Unit Test ([`e204ddd`](https://github.com/mraniki/tt/commit/e204ddd83a42f750caaf7995ab64462ddc3647a5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency nicegui to v1.3.15 ([`9b1081a`](https://github.com/mraniki/tt/commit/9b1081a3ca0f04713d30d04061956b83666181cd))
+
+### 👷
+
+* 👷 CI Change ([`6f98af4`](https://github.com/mraniki/tt/commit/6f98af450e4a3a814a6e4dee3c0c53404da76c9d))
+
+* 👷 CI Change ([`20ad937`](https://github.com/mraniki/tt/commit/20ad9372622ce5a166a18cda01732014f5c5c17a))
+
+### 🔥
+
+* 🔥 ([`e41d900`](https://github.com/mraniki/tt/commit/e41d900e68f548ada012aa98373bff7b6ed74d07))
+
+### 🔧
+
+* 🔧 .env example ([`102331c`](https://github.com/mraniki/tt/commit/102331ca8d3cadc4a601c57347f7a23417d6501e))
+
+* 🔧 ([`eaea263`](https://github.com/mraniki/tt/commit/eaea263015b30e1905c4448af709e64c1f410dc1))
+
+### 🚑
+
+* 🚑 for MyLLM ([`256752e`](https://github.com/mraniki/tt/commit/256752e60fb9494582cb06b6f710592a1802ace0))
+
+### 🚨
+
+* 🚨 ([`233d023`](https://github.com/mraniki/tt/commit/233d0239e824ac13db800002cd459e68c093a01a))
+
+
 ## v6.3.3 (2023-10-01)
 
 ### Other
