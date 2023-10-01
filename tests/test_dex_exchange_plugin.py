@@ -69,14 +69,6 @@ async def test_parse_position(plugin):
     plugin.exchange.get_positions.assert_awaited
 
 
-# @pytest.mark.asyncio
-# async def test_parse_help(plugin):
-#     """Test help"""
-#     plugin.exchange.get_help = AsyncMock()
-#     await plugin.handle_message("/help")
-#     plugin.exchange.get_help.assert_awaited_once()
-
-
 @pytest.mark.asyncio
 async def test_parse_info(plugin):
     """Test help"""
