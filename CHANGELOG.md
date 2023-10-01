@@ -2,6 +2,23 @@
 
 
 
+## v6.3.3 (2023-10-01)
+
+### Other
+
+* Merge pull request #833 from mraniki/dev
+
+📝 Update example_settings.toml ([`b466504`](https://github.com/mraniki/tt/commit/b466504bc9c78ad6c702f58b63f18705525dfd12))
+
+### Update
+
+* Update example_settings.toml ([`3fdf35f`](https://github.com/mraniki/tt/commit/3fdf35fb3ae5c8994d9996b60806201f570e034c))
+
+* Update example_settings.toml ([`95ca35c`](https://github.com/mraniki/tt/commit/95ca35c8a78b95d856aa4397ae39bbfda02c06fd))
+
+* Update example.env ([`a95c15a`](https://github.com/mraniki/tt/commit/a95c15a9f0fb698d3e095b3b0f191c7d02f164dc))
+
+
 ## v6.3.2 (2023-10-01)
 
 ### Other
