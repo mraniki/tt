@@ -185,7 +185,7 @@ trading_enabled = true
 
 # Trading % of your position to risk per order
 # 10 = 10% of the position
-trading_risk_amount = 10
+# trading_risk_amount = 10
 
 ########################################
 ###        FINDMYORDER SETTINGS      ###

@@ -1,7 +1,8 @@
+from time import sleep
 from unittest.mock import AsyncMock
 
 import pytest
-from time import sleep
+
 from tt.config import settings
 from tt.plugins.default_plugins.llm_plugin import LlmPlugin
 
@@ -19,7 +20,7 @@ def test_fixture_plugin():
 @pytest.mark.asyncio
 async def test_plugin(plugin):
     """Test message handling"""
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_question}")
     assert plugin.should_handle("any message") is True
 
 
@@ -27,7 +28,7 @@ async def test_plugin(plugin):
 async def test_plugin_notification(plugin):
     """Test notification"""
     plugin.send_notification = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_question}")
     plugin.send_notification.assert_awaited_once()
 
 
