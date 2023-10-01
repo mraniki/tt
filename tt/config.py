@@ -28,8 +28,9 @@ from pyonepassword import OP
 # if do_signin():
 #     op = do_signin()
 #     logger.info(op._signed_in_account)
-#     item = op.item_get("", vault="Test Data")
-#     logger.debug(f"Item password: {item.password}")
+#     item = op.item_get("", vault="")
+#    with open('settings.toml', 'w') as file:
+#        file.write(item)
 
 ROOT = os.path.dirname(__file__)
 
