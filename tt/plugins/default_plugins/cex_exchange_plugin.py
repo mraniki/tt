@@ -80,12 +80,10 @@ class CexExchangePlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                # settings.bot_command_help: self.exchange.get_help,
                 settings.bot_command_info: self.exchange.get_info,
                 settings.bot_command_quote: lambda: self.exchange.get_quotes(args[0]),
                 settings.bot_command_bal: self.exchange.get_balances,
                 settings.bot_command_pos: self.exchange.get_positions,
-                # settings.bot_command_pnl_daily: self.exchange.get_pnls,
             }
 
             if command in command_mapping:

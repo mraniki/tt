@@ -101,7 +101,7 @@ iamlistening_enabled = true
 # Bot Prefix 
 bot_prefix = "/"
 # Character to ignore
-bot_ignore = "ℹ️ 🦄 ⚠️ 📊 🏦 📺 ⬆️ 💬 qq"
+bot_ignore = "ℹ️ 🦄 ⚠️ 📊 🏦 📺 ⬆️ 💬"
 # Command for help
 bot_command_help = "help"
 # Command for info
@@ -127,13 +127,13 @@ bot_command_trend = "trend"
 # Command to get latest news
 bot_command_news = "news"
 # command for conversation
-bot_command_question = "ai"
+bot_command_aichat = "ai"
 # command for reset conversation
-bot_command_clearai = "aiclear"
+bot_command_aiclear = "aiclear"
 # command to toggle aimode
 bot_command_aimode = "aimode"
 # command to export conversation
-bot_command_exportai = "aiexport"
+bot_command_aiexport = "aiexport"
 
 # Help Message
 helper_commands = """
@@ -155,10 +155,6 @@ helper_commands = """
 🎯 BUY WBTC
 🎯 buy BTCUSDT sl=200 tp=400 q=2%
 """
-dxsp_commands = ""
-ccxt_commands = ""
-talkytrend_commands = ""
-llm_commands = ""
 
 ########################################
 ###         TRADING SETTINGS         ###

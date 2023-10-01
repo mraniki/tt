@@ -41,11 +41,10 @@ class TalkyTrendPlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_help: self.trend.get_talkytrend_help,
                 settings.bot_command_info: self.trend.get_talkytrend_info,
-                settings.bot_command_tv: self.trend.get_tv,
                 settings.bot_command_trend: self.trend.fetch_signal,
                 settings.bot_command_news: self.trend.fetch_feed,
+                settings.bot_command_tv: self.trend.get_tv,
             }
 
             if command in command_mapping:
