@@ -16,7 +16,6 @@ def set_test_settings():
 def test_fixture_plugin():
     return LlmPlugin()
 
-
 @pytest.mark.asyncio
 async def test_plugin(plugin):
     """Test message handling"""
