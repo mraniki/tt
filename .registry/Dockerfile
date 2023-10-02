@@ -8,9 +8,9 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ENV TT_DOCKER=True
 
 ENV ENV_FOR_DYNACONF=default
-ENV OP_SERVICE_ACCOUNT_TOKEN
-ENV OP_VAULT
-ENV OP_ITEM
+ENV OP_SERVICE_ACCOUNT_TOKEN=None
+ENV OP_VAULT=None
+ENV OP_ITEM=None
 
 COPY --from=1password/op:2 /usr/local/bin/op /usr/local/bin/op
 RUN op read op://$OP_VAULT/$OP_ITEM/notesPlain > .op.toml
