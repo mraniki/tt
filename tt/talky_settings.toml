@@ -2,9 +2,9 @@
 ###          DEFAULT SETTINGS        ###
 ########################################
 
-# Any of those settings can be changed 
-# by the user. To overwrite a setting, 
-# create a settings.toml or load from 
+# Any of those settings can be changed.
+# To overwrite a setting, create a 
+# a file named settings.toml or load from 
 # .env file or env vars.
 # As an example, to change the port:
 #
@@ -59,7 +59,7 @@ ui_enabled = false
 # will be https://0.0.0.0/webhook/123abc
 # as per the above and below data
 
-webhook_secret = "123abc"
+webhook_secret = "20422ff4-1e10-42aa-bf8d-c482aeca5d80"
 
 # Forward the webhook data 
 # to another endpoint like another bot
@@ -120,7 +120,7 @@ bot_command_trading = "trading"
 bot_command_network = "network"
 # Command to restart the bot
 bot_command_restart = "restart"
-# Command to get live tv feed
+# Command to get live tv link
 bot_command_tv = "live"
 # Command to get trading view trend
 bot_command_trend = "trend"
@@ -128,12 +128,12 @@ bot_command_trend = "trend"
 bot_command_news = "news"
 # command for conversation
 bot_command_aichat = "ai"
-# command for reset conversation
-bot_command_aiclear = "aiclear"
 # command to toggle aimode
 bot_command_aimode = "aimode"
 # command to export conversation
-bot_command_aiexport = "aiexport"
+bot_command_aiexport = "export"
+# command for reset conversation
+bot_command_aiclear = "clear"
 
 # Help Message
 helper_commands = """
@@ -147,8 +147,8 @@ helper_commands = """
 📊 /trend
 💬 /ai
 ➰ /aimode
-🧽 /aiclear
-‍💨 /aiexport
+🧽 /clear
+‍💨 /export
 ⚖️ /q WBTC
 🏦 /bal
 🏦 /pos
@@ -200,14 +200,13 @@ instrument_mapping = true
 mapping = [
     { id = "EURUSD", alt = "EUR/sUSD" },
     { id = "GOLD", alt = "XAU" },
-    { id = "SILVER", alt = "XAG" },
     { id = "BTC", alt = "WBTC" },
     { id = "ETH", alt = "WETH" },
 ]
 
 # Instruments to be ignored
 # when generating an order
-ignore_instrument = "US500 DOGE"
+ignore_instrument = "DOGE"
 
 ########################################
 ###         PLUGINS SETTINGS         ###
@@ -232,9 +231,11 @@ authorized_plugins = []
 #     ]
 
 # Enable/Disable Example Plugin
+# example_plugin_enabled = true
 example_plugin_enabled = false
 # Enable/Disable User Plugins
 # Not yet implemented
+# user_plugins_allowed = true
 user_plugins_allowed = false
  
 ########################################
@@ -243,6 +244,7 @@ user_plugins_allowed = false
 
 # Enable/Disable Helper
 helper_enabled = true
+# helper_enabled = false
 
 # URL endpoint for latency ping.
 ping = "8.8.8.8"
@@ -253,6 +255,7 @@ ping = "8.8.8.8"
 
 # Enable/Disable MyLLM
 myllm_enabled = true
+# myllm_enabled = false
 
 # LLM Model to use
 llm_model = "gpt-3.5-turbo"
@@ -269,19 +272,16 @@ max_memory = 100
 lag = 5
 
 # AI Mode to continously listen 
+# llm_ai_mode = true
 llm_ai_mode = false
+
 # prefix use to filter the AI response
 llm_prefix = "🐻"
 
 # LLM Template to use as conversation starter 
 llm_template = """
 You are a friendly AI helping me with 
-trade monitoring and execution
-for Forex pairs and crypto trading. 
-The user will provide the task, 
-you will provide only the output 
-in the exact format specified below
-with minimal explanation or conversation.
+trade monitoring and execution.
 """
 
 ########################################
@@ -290,12 +290,15 @@ with minimal explanation or conversation.
 
 # Enable/Disable Talkytrend
 talkytrend_enabled = true
+# talkytrend_enabled = false
 
 # Enable/Disable Signals
 enable_signals = true
-# instrument monitored under trend
+# enable_signals = false
+
+# instrument trend to be monitored
 # use https://tvdb.brianthe.dev
-# to update the list for your instrument
+# for the list of supported instrument
 assets = [
     { id ="EURUSD", exchange='FX_IDC',screener="forex"},
     { id ="BTCUSD", exchange='BINANCE',screener="crypto"},
@@ -313,7 +316,16 @@ enable_events = true
 # Events calendar
 economic_calendar = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
 # Adhoc date to add in event tracker
-fomc_decision_date = ["2023-11-01","2023-12-13"]
+fomc_decision_date = [
+    "2023-11-01",
+    "2023-12-13",
+    "2024-01-31",
+    "2024-04-1",
+    "2024-06-12",
+    "2024-09-18",
+    "2024-11-07",
+    "2024-12-18",
+    ]
 
 # TV url
 live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
@@ -394,27 +406,27 @@ iteration_limit = -1
 [default.dex.template]
 wallet_address = ""
 private_key = ""
-rpc = ""
-protocol_type = "uniswap"
-protocol_version = 2
-api_endpoint = ''
-api_key = ""
-router_contract_addr = ""
-factory_contract_addr = ""
-trading_risk_percentage = true
-trading_risk_amount = 10
-trading_slippage = 2
-trading_asset_separator = ""
-trading_asset_address = ""
-block_explorer_url = ""
-block_explorer_api = ""
-mapping = [
+rpc = "" # https://chainlist.org for rpc url example
+protocol_type = "" # uniswap or 0x
+protocol_version = 2 # your protocol version | used for uniswap
+api_endpoint = "" # your api endpoint | used for 0x
+api_key = "" # your api key | used for 0x
+router_contract_addr = "" # your router contract address | used for uniswap
+factory_contract_addr = "" # your factory contract address | used for uniswap
+trading_asset_address = "" # your trading asset address
+trading_risk_percentage = true # Use risk amount as percetage of the balance or real amount
+trading_risk_amount = 10 # Risk amount
+trading_slippage = 2 # Slippage percentage
+block_explorer_url = "" # your block explorer url
+block_explorer_api = "" # your block explorer api
+mapping = [ # mapping to use to change instrument per exchange
     { id = "BTC", alt = "WBTC" },
 ]
+
 # # uniswap v2 protocol type and router uniswap
 # [default.dex.eth]
 # wallet_address = "0x1234567890123456789012345678901234567890"
-# private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+# private_key = "0xdeadbeef88"
 # rpc = "https://rpc.ankr.com/eth"
 # protocol_type = "uniswap"
 # protocol_version = 2
@@ -428,12 +440,15 @@ mapping = [
 # trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 # trading_asset_separator = ""
 # block_explorer_url = "https://api.etherscan.io/api?"
-# block_explorer_api = "798437294880920392"
+# block_explorer_api = "123123123123123"
+# mapping = [
+#     { id = "BTC", alt = "WBTC" },
+# ]
 
 # # uniswap v2 protocol type and router pancakeswap on BSC chain 56
 # [default.dex.bsc]
 # wallet_address = "0x1234567890123456789012345678901234567890"
-# private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+# private_key = "0xdeadbeef88"
 # rpc = "https://rpc.ankr.com/bsc"
 # protocol_type = "uniswap"
 # protocol_version = 2
@@ -447,12 +462,15 @@ mapping = [
 # trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 # trading_asset_separator = ""
 # block_explorer_url = "https://api.bscscan.com/api?"
-# block_explorer_api = "798437294880920392"
+# block_explorer_api = "123123123123123"
+# mapping = [
+#     { id = "BTC", alt = "BTCB" },
+# ]
 
 # # ZeroX 0x protocol type on polygon chain 137
 # [default.dex.polygon]
 # wallet_address = "0x1234567890123456789012345678901234567890"
-# private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+# private_key = "0xdeadbeef88"
 # rpc = "https://rpc.ankr.com/polygon"
 # protocol_type = "0x"
 # protocol_version = 4
@@ -466,8 +484,32 @@ mapping = [
 # trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 # trading_asset_separator = ""
 # block_explorer_url = "https://api.polygonscan.com/api?"
-# block_explorer_api = "798437294880920392"
+# block_explorer_api = "123123123123123"
+# mapping = [
+#     { id = "BTC", alt = "WBTC" },
+# ]
 
+# # uniswap v2 protocol type and router velodrome on OPTIMISM chain 10
+# [default.dex.opt]
+# wallet_address = "0x1234567890123456789012345678901234567890"
+# private_key = "0xdeadbeef88"
+# rpc = "https://optimism.llamarpc.com"
+# protocol_type = "uniswap"
+# protocol_version = 2
+# api_endpoint = ""
+# api_key = ""
+# router_contract_addr = "0xa062aE8A9c5e11aaA026fc2670B0D65cCc8B2858"
+# factory_contract_addr = "0xF4c67CdEAaB8360370F41514d06e32CcD8aA1d7B"
+# trading_risk_percentage = true
+# trading_risk_amount = 1
+# trading_slippage = 2
+# trading_asset_address = "0x8c6f28f2F1A3C87F0f938b96d27520d9751ec8d9"
+# trading_asset_separator = ""
+# block_explorer_url = "https://optimistic.etherscan.com/api?"
+# block_explorer_api = "123123123123123"
+# mapping = [
+#     { id = "BTC", alt = "WBTC" },
+# ]
 ########################################
 ###           CEX SETTINGS          ###
 ########################################
