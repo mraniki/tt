@@ -13,6 +13,28 @@ import sys
 from asyncz.schedulers.asyncio import AsyncIOScheduler
 from dynaconf import Dynaconf
 from loguru import logger as loguru_logger
+from pyonepassword import OP
+
+#######################################
+###           ㊙️ Secrets            ###
+#######################################
+
+
+def do_signin():
+    try:
+        return OP()
+    except Exception:
+        return False
+
+
+if do_signin():
+    op = OP()
+    vault = os.getenv("OP_VAULT")
+    item = os.getenv("OP_ITEM")
+    data = op.item_get(item, vault=vault)
+    with open(".op.toml", "w", encoding="utf_8") as file:
+        file.write(data)
+
 
 ########################################
 ###           ⚙️ Settings            ###
@@ -33,6 +55,8 @@ settings = Dynaconf(
         "settings.toml",
         # load user secret
         ".secrets.toml",
+        # load settings from one password vault
+        ".op.toml",
     ],
     environments=True,
     merge_enabled=True,
