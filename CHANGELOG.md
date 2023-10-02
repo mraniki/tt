@@ -2,6 +2,29 @@
 
 
 
+## v6.4.10 (2023-10-02)
+
+### Other
+
+* Merge pull request #855 from mraniki/dev
+
+⬆️ 🛠️(deps): update dependency myllm to v3.1.9 ([`166c47c`](https://github.com/mraniki/tt/commit/166c47c11ff09ed295d1eaad6ee10a54f034aa36))
+
+* Merge pull request #854 from mraniki/renovate/myllm-3.x
+
+⬆️ 🛠️(deps): update dependency myllm to v3.1.9 ([`8a11502`](https://github.com/mraniki/tt/commit/8a11502bb17c2e77f788f67f53d766cb04d993e3))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`04f4626`](https://github.com/mraniki/tt/commit/04f46263aca7d4e657d6ceeffce1af3c04aa44a6))
+
+### Update
+
+* Update Requirements ([`f815cae`](https://github.com/mraniki/tt/commit/f815cae8a0c12a2ad5dbc5adcb9fa2bdec329cf5))
+
+* Update README.md file
+
+- Connect CEX and DEX exchanges across multi messaging platforms. ([`d26c818`](https://github.com/mraniki/tt/commit/d26c8187d3066c1bcb5cf8ab89e5f122df385ab6))
+
+
 ## v6.4.9 (2023-10-02)
 
 ### Other
@@ -16,7 +39,13 @@
 
 ### Update
 
+* Update Requirements ([`cc6ecf9`](https://github.com/mraniki/tt/commit/cc6ecf9898e11abab91f855cf963e4c3a380c150))
+
 * Update talky_settings.toml ([`5fb1b7d`](https://github.com/mraniki/tt/commit/5fb1b7d539fbbc7896714df187c7c745ee89b23c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.9 ([`b4e0085`](https://github.com/mraniki/tt/commit/b4e008587e7b83f61de35e45803d62f5a254ba96))
 
 
 ## v6.4.8 (2023-10-02)
