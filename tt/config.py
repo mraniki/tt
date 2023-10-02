@@ -33,7 +33,7 @@ if do_signin():
     item = os.getenv("OP_ITEM")
     data = op.item_get(item, vault=vault)
     with open(".op.toml", "w", encoding="utf_8") as file:
-        file.write(data)
+        file.write(data.notesPlain)
 
 
 ########################################
