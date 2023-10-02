@@ -10,27 +10,36 @@ import logging
 import os
 import sys
 
+import dotenv
 from asyncz.schedulers.asyncio import AsyncIOScheduler
 from dynaconf import Dynaconf
 from loguru import logger as loguru_logger
-import dotenv
 from pyonepassword import OP
+
+#######################################
+###           ㊙️ Secrets            ###
+#######################################
+
+
+def do_signin():
+    dotenv.load_dotenv("./.env_secret")
+    os.getenv("DATABASE_STRING")
+    op = OP()
+    return op
+
+
+if do_signin():
+    op = do_signin()
+    vault = os.getenv("VAULT")
+    item = os.getenv("ITEM")
+    data = op.item_get(item, vault=vault)
+    with open(".secret.toml", "w") as file:
+        file.write(data)
+
 
 ########################################
 ###           ⚙️ Settings            ###
 ########################################
-# def do_signin():
-#     # load OP_SERVICE_ACCOUNT_TOKEN
-#     dotenv.load_dotenv("./.env_secret")
-#     op = OP()
-#     return op
-
-# if do_signin():
-#     op = do_signin()
-#     logger.info(op._signed_in_account)
-#     item = op.item_get("", vault="")
-#    with open('settings.toml', 'w') as file:
-#        file.write(item)
 
 ROOT = os.path.dirname(__file__)
 
