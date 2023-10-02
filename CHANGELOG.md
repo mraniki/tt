@@ -2,6 +2,19 @@
 
 
 
+## v6.4.4 (2023-10-02)
+
+### Other
+
+* Merge pull request #847 from mraniki/dev
+
+🐛 ([`7d27b5e`](https://github.com/mraniki/tt/commit/7d27b5e323c85d89bc38affac581757c1b783996))
+
+### 🐛
+
+* 🐛 ([`2bf89b3`](https://github.com/mraniki/tt/commit/2bf89b3fcc9003ccf0b3e319ae82e05b566831d0))
+
+
 ## v6.4.3 (2023-10-02)
 
 ### Other
