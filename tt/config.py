@@ -37,15 +37,15 @@ if do_signin():
     loguru_logger.debug("Item: {}", item)
     data = op.item_get(item, vault=vault)
     loguru_logger.debug("Data: {}", data)
-    value = data["fields"]["value"]
+    value = data["fields"][0]["value"]
     loguru_logger.debug("value: {}", value)
     with open(".op.toml", "w", encoding="utf_8") as file:
         file.write(value)
 
 
-########################################
+#######################################
 ###           ⚙️ Settings            ###
-########################################
+#######################################
 
 ROOT = os.path.dirname(__file__)
 
