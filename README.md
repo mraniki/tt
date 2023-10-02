@@ -3,7 +3,7 @@
 <img  alt="logo" src="https://i.imgur.com/Q7iDDyB.jpg" align="right" alt="talky" width="200" height="200">
 <div align="left">
 
-Connect CEX and DEX exchanges across multi messaging platforms.<br>
+Connect multiple CEX and DEX across multi messaging platforms.<br>
 Place order, inquire your balance and more through plugins.<br>
 Easily deploy via Docker on self-hosted platform or Paas.<br>
 <br>
