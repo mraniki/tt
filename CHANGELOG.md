@@ -2,6 +2,29 @@
 
 
 
+## v6.4.1 (2023-10-02)
+
+### Other
+
+* Merge pull request #844 from mraniki/dev
+
+🐛 minor fix for OP ([`0d511a2`](https://github.com/mraniki/tt/commit/0d511a2a4fb1dcb32b7a4d44e7ac1be870fd0be5))
+
+### Update
+
+* Update tt/utils.py
+
+Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`247fafa`](https://github.com/mraniki/tt/commit/247fafac06cbeb8fc23fe295f7dd64c904d91a2f))
+
+### 🐛
+
+* 🐛 ([`3c5fb12`](https://github.com/mraniki/tt/commit/3c5fb12389ec906664c1cfcecb0abb20bb6e4b44))
+
+### 🩹
+
+* 🩹 ([`22c5e56`](https://github.com/mraniki/tt/commit/22c5e566161c062501b9767e3e9f7ef3b7a3c4b7))
+
+
 ## v6.4.0 (2023-10-02)
 
 ### Other
