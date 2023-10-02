@@ -149,7 +149,7 @@ async def check_version():
                         f"👿 You are NOT using the latest {latest_version}"
                     )
                 else:
-                    logger.debug("😁 You are using the latest {__version__}")
+                    logger.debug(f"😁 You are using the latest {__version__}")
     except aiohttp.ClientError as error:
         logger.error("Failed to connect to the GitHub API: {}", error)
     except Exception as error:
