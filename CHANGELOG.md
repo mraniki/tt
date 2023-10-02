@@ -2,6 +2,19 @@
 
 
 
+## v6.4.3 (2023-10-02)
+
+### Other
+
+* Merge pull request #846 from mraniki/dev
+
+🐳 ([`aaa60ac`](https://github.com/mraniki/tt/commit/aaa60ac9cb763c6e5a3a9bee7d8482c70b010017))
+
+### 🐳
+
+* 🐳 ([`edd3335`](https://github.com/mraniki/tt/commit/edd3335efe3d4a0d8b13b8975af43492aee45e60))
+
+
 ## v6.4.2 (2023-10-02)
 
 ### Other
