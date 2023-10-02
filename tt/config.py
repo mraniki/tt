@@ -27,11 +27,16 @@ def do_signin():
         return False
 
 
+op = None
 if do_signin():
+    loguru_logger.debug("Using OnePassword")
     op = OP()
     vault = os.getenv("OP_VAULT")
+    loguru_logger.debug("Vault: {}", vault)
     item = os.getenv("OP_ITEM")
+    loguru_logger.debug("Item: {}", item)
     data = op.item_get(item, vault=vault)
+    loguru_logger.debug("Data: {}", data)
     with open(".op.toml", "w", encoding="utf_8") as file:
         file.write(data.notesPlain)
 
