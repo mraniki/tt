@@ -2,6 +2,25 @@
 
 
 
+## v6.4.7 (2023-10-02)
+
+### Other
+
+* Merge pull request #850 from mraniki/dev
+
+🐛&amp;🔧 ([`edef49e`](https://github.com/mraniki/tt/commit/edef49ea047bc7f40a884b7c7919c4a31f54e5f2))
+
+### 🐛
+
+* 🐛 ([`98191a3`](https://github.com/mraniki/tt/commit/98191a394fc6598a9c1bc5aa296594e3e3e196bb))
+
+### 🔧
+
+* 🔧 ([`b32ed1b`](https://github.com/mraniki/tt/commit/b32ed1bf995c32b249af5b024da92c4e2ca804b9))
+
+* 🔧 ([`a84b186`](https://github.com/mraniki/tt/commit/a84b1862b5fd5196c455f766c5f416d4e4e7ff8f))
+
+
 ## v6.4.6 (2023-10-02)
 
 ### Other
