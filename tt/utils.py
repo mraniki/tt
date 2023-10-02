@@ -98,7 +98,6 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
     while True:
         for client in listener.platform_info:
             msg = await client.get_latest_message()
-            # logger.debug("Message processing for client {}: {}", client, msg)
             if msg:
                 await plugin_manager.process_message(msg)
         iteration += 1
@@ -147,14 +146,10 @@ async def check_version():
                         __version__,
                     )
                     await send_notification(
-                        f"👿 u are NOT using the latest {latest_version}"
+                        f"👿 You are NOT using the latest {latest_version}"
                     )
                 else:
-                    logger.debug(
-                        "😁 You are using the latest %s: %s",
-                        latest_version,
-                        __version__
-                    )
+                    logger.debug("😁 You are using the latest {__version__}")
     except aiohttp.ClientError as error:
         logger.error("Failed to connect to the GitHub API: {}", error)
     except Exception as error:
