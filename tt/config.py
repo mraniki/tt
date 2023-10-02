@@ -24,8 +24,7 @@ from pyonepassword import OP
 def do_signin():
     dotenv.load_dotenv("./.env_secret")
     os.getenv("DATABASE_STRING")
-    op = OP()
-    return op
+    return OP()
 
 
 if do_signin():
