@@ -19,16 +19,7 @@ from pyonepassword import OP
 ###           ㊙️ Secrets            ###
 #######################################
 
-
-def do_signin():
-    try:
-        return OP()
-    except Exception:
-        return False
-
-
-op = None
-if do_signin():
+if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
     loguru_logger.debug("Using OnePassword")
     op = OP()
     vault = os.getenv("OP_VAULT")
@@ -63,8 +54,8 @@ settings = Dynaconf(
         # load user secret
         ".secrets.toml",
         # load settings from one password vault
-        ".op.toml",
     ],
+    includes=[".op.toml"],
     environments=True,
     merge_enabled=True,
     default_env="default",
