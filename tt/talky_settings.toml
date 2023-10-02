@@ -59,7 +59,7 @@ ui_enabled = false
 # will be https://0.0.0.0/webhook/123abc
 # as per the above and below data
 
-webhook_secret = "20422ff4-1e10-42aa-bf8d-c482aeca5d80"
+webhook_secret = "123abc"
 
 # Forward the webhook data 
 # to another endpoint like another bot
