@@ -2,6 +2,19 @@
 
 
 
+## v6.4.8 (2023-10-02)
+
+### Other
+
+* Merge pull request #851 from mraniki/dev
+
+♻️OnePassword ([`0c65414`](https://github.com/mraniki/tt/commit/0c6541425e013662f1d1a3766711e334342c88e4))
+
+### ♻️
+
+* ♻️ ([`e2ef106`](https://github.com/mraniki/tt/commit/e2ef1066a8133979d13510e109b06f0471d0de07))
+
+
 ## v6.4.7 (2023-10-02)
 
 ### Other
