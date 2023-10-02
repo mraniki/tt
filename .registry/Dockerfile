@@ -13,7 +13,7 @@ ENV OP_VAULT=None
 ENV OP_ITEM=None
 
 COPY --from=1password/op:2 /usr/local/bin/op /usr/local/bin/op
-RUN op read op://$OP_VAULT/$OP_ITEM/notesPlain > .op.toml
+# RUN op read op://$OP_VAULT/$OP_ITEM/notesPlain > .op.toml
 
 COPY . /app
 RUN pip install --no-cache-dir /app
