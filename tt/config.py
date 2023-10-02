@@ -10,7 +10,6 @@ import logging
 import os
 import sys
 
-import dotenv
 from asyncz.schedulers.asyncio import AsyncIOScheduler
 from dynaconf import Dynaconf
 from loguru import logger as loguru_logger
@@ -22,14 +21,14 @@ from pyonepassword import OP
 
 
 def do_signin():
-    dotenv.load_dotenv("./.env_secret")
-    os.getenv("DATABASE_STRING")
-    op = OP()
-    return op
+    try:
+        return OP()
+    except Exception:
+        return False
 
 
 if do_signin():
-    op = do_signin()
+    op = OP()
     vault = os.getenv("VAULT")
     item = os.getenv("ITEM")
     data = op.item_get(item, vault=vault)
