@@ -2,6 +2,53 @@
 
 
 
+## v6.4.0 (2023-10-02)
+
+### Other
+
+* Merge pull request #842 from mraniki/dev
+
+🥚 OnePassword capability ([`cd3b891`](https://github.com/mraniki/tt/commit/cd3b89189f3a85db51963d7fdfba0108d6090d28))
+
+* Merge pull request #841 from mraniki/renovate/pyonepassword-3.x
+
+⬆️ 🛠️(deps): update dependency pyonepassword to v3.12.1 ([`7bc3332`](https://github.com/mraniki/tt/commit/7bc33325c0ad2962cc30edef3a7dc298a19e633b))
+
+### Update
+
+* Update tt/config.py
+
+Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`f61ce38`](https://github.com/mraniki/tt/commit/f61ce383c8bda30fc960e6351d25fc006fa139ca))
+
+* Update config.py ([`bab9a79`](https://github.com/mraniki/tt/commit/bab9a79d28050b8d936c305b0e213d56c689889c))
+
+* Update Requirements ([`f167e32`](https://github.com/mraniki/tt/commit/f167e32cb38fc1a762c0d6cde60598045a78ad5c))
+
+### ♻️
+
+* ♻️ ([`695f8c3`](https://github.com/mraniki/tt/commit/695f8c34654e7868e349234327bd129411ac8b1f))
+
+* ♻️ ([`5acd592`](https://github.com/mraniki/tt/commit/5acd5929d0eeb5142c305eb60de18118f6f0b4e8))
+
+### ⚡
+
+* ⚡ ([`cf05504`](https://github.com/mraniki/tt/commit/cf05504f47bde9f987af324de286d11f93e585e1))
+
+* ⚡ one password ([`998adbc`](https://github.com/mraniki/tt/commit/998adbc02ada77412734633b2e4e83ebe61c06a3))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pyonepassword to v3.12.1 ([`02e1143`](https://github.com/mraniki/tt/commit/02e1143bfb00c27d71582f36c403e18427499fdd))
+
+### 🙈
+
+* 🙈 ([`71cca0d`](https://github.com/mraniki/tt/commit/71cca0df1bb89aafee9cf34b18f2149eca4eb910))
+
+### 🥚
+
+* 🥚 OnePassword capability ([`8748698`](https://github.com/mraniki/tt/commit/87486985fe1a51b0060aa376014a5773a772fcc2))
+
+
 ## v6.3.4 (2023-10-01)
 
 ### Other
