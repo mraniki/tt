@@ -32,7 +32,7 @@ if do_signin():
     vault = os.getenv("VAULT")
     item = os.getenv("ITEM")
     data = op.item_get(item, vault=vault)
-    with open(".secret.toml", "w") as file:
+    with open(".op.toml", "w") as file:
         file.write(data)
 
 
@@ -55,6 +55,8 @@ settings = Dynaconf(
         "settings.toml",
         # load user secret
         ".secrets.toml",
+        # load one password settings
+        ".op.toml",
     ],
     environments=True,
     merge_enabled=True,

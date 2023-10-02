@@ -2,6 +2,7 @@
 settings.toml
 settings.local.toml
 .secrets.*
+.op.*
 
 #old db config
 db.json
