@@ -101,7 +101,7 @@ iamlistening_enabled = true
 # Bot Prefix 
 bot_prefix = "/"
 # Character to ignore
-bot_ignore = "ℹ️ 🦄 ⚠️ 📊 🏦 📺 ⬆️ 💬"
+bot_ignore = "ℹ️ 🦄 ⚠️ 📊 🏦 📺 ⬆️ 💬 🐻"
 # Command for help
 bot_command_help = "help"
 # Command for info
@@ -306,7 +306,7 @@ enable_yfinance = true
 
 # yahoo finance ticker reference
 # https://finance.yahoo.com/lookup/
-ticker_reference = "5EGSPC"
+ticker_reference = "TSLA"
 
 # Enable/Disable Events
 enable_events = true

@@ -10,6 +10,8 @@ ENV OP_VAULT=NONE
 ENV OP_ITEM=NONE
 ENV TT_DOCKER=True
 
+COPY --from=1password/op:2 /usr/local/bin/op /usr/local/bin/op
+
 COPY . /app
 RUN pip install --no-cache-dir /app
 
