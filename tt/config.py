@@ -55,7 +55,7 @@ settings = Dynaconf(
         "settings.toml",
         # load user secret
         ".secrets.toml",
-        # load one password settings
+        # load settings from one password vault
         ".op.toml",
     ],
     environments=True,
