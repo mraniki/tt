@@ -2,6 +2,23 @@
 
 
 
+## v6.4.9 (2023-10-02)
+
+### Other
+
+* Merge pull request #853 from mraniki/dev
+
+⬆️ 🛠️(deps): update dependency iamlistening to v4.1.8 ([`10105f8`](https://github.com/mraniki/tt/commit/10105f85106a1a70d051951d9ab74a7c9e520f7f))
+
+* Merge pull request #852 from mraniki/renovate/iamlistening-4.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v4.1.8 ([`e39a0bc`](https://github.com/mraniki/tt/commit/e39a0bc7aac1ca5e1e5e69723953b16376a6427b))
+
+### Update
+
+* Update talky_settings.toml ([`5fb1b7d`](https://github.com/mraniki/tt/commit/5fb1b7d539fbbc7896714df187c7c745ee89b23c))
+
+
 ## v6.4.8 (2023-10-02)
 
 ### Other
@@ -10,9 +27,17 @@
 
 ♻️OnePassword ([`0c65414`](https://github.com/mraniki/tt/commit/0c6541425e013662f1d1a3766711e334342c88e4))
 
+### Update
+
+* Update Requirements ([`1d40105`](https://github.com/mraniki/tt/commit/1d401055b733c929cad0689a43ccad5d5e6f1fc7))
+
 ### ♻️
 
 * ♻️ ([`e2ef106`](https://github.com/mraniki/tt/commit/e2ef1066a8133979d13510e109b06f0471d0de07))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.1.8 ([`98ac879`](https://github.com/mraniki/tt/commit/98ac8790bd0a81a6609b38a9d2cd779a949aefd2))
 
 
 ## v6.4.7 (2023-10-02)
