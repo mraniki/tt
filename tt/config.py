@@ -29,8 +29,8 @@ def do_signin():
 
 if do_signin():
     op = OP()
-    vault = os.getenv("VAULT")
-    item = os.getenv("ITEM")
+    vault = os.getenv("OP_VAULT")
+    item = os.getenv("OP_ITEM")
     data = op.item_get(item, vault=vault)
     with open(".op.toml", "w", encoding="utf_8") as file:
         file.write(data)
