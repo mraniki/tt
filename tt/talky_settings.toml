@@ -306,7 +306,7 @@ enable_yfinance = true
 
 # yahoo finance ticker reference
 # https://finance.yahoo.com/lookup/
-ticker_reference = "5EGSPC"
+ticker_reference = "TSLA"
 
 # Enable/Disable Events
 enable_events = true
