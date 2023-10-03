@@ -12,7 +12,13 @@ ENV OP_SERVICE_ACCOUNT_TOKEN=None
 ENV OP_VAULT=None
 ENV OP_ITEM=None
 
-COPY --from=1password/op:2 /usr/local/bin/op /usr/local/bin/op
+#COPY --from=1password/op:2 /usr/local/bin/op /usr/local/bin/op
+##
+# Install 1Password CLI
+#
+RUN wget -P /tmp/ https://downloads.1password.com/linux/debian/$(dpkg --print-architecture)/stable/1password-cli-$(dpkg --print-architecture)-latest.deb
+RUN dpkg -i /tmp/1password-cli-$(dpkg --print-architecture)-latest.deb
+RUN op --version
 # RUN op read op://$OP_VAULT/$OP_ITEM/notesPlain > .op.toml
 
 COPY . /app
