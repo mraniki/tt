@@ -10,6 +10,7 @@ import logging
 import os
 import sys
 
+import dotenv
 from asyncz.schedulers.asyncio import AsyncIOScheduler
 from dynaconf import Dynaconf
 from loguru import logger as loguru_logger
@@ -21,6 +22,7 @@ from pyonepassword import OP
 
 if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
     loguru_logger.debug("Using OnePassword")
+    dotenv.load_dotenv()
     op = OP()
     vault = os.getenv("OP_VAULT")
     loguru_logger.debug("Vault: {}", vault)
