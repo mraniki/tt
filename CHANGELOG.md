@@ -2,6 +2,25 @@
 
 
 
+## v6.4.16 (2023-10-03)
+
+### Other
+
+* Merge pull request #865 from mraniki/dev
+
+Dev ([`fae78c2`](https://github.com/mraniki/tt/commit/fae78c257386025fa456cd57810be5cc7b36fb95))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`49fbd8a`](https://github.com/mraniki/tt/commit/49fbd8a51f31ac0a6b42854e4c2d1843bab80786))
+
+### Update
+
+* :whale: Update Dockerfile and config.py
+
+- Removed COPY command for 1Password CLI installation in Dockerfile
+- Added commands to download and install 1Password CLI in Dockerfile
+- Updated config.py to use default OP initialization method ([`9ca8f76`](https://github.com/mraniki/tt/commit/9ca8f76cca82f6bfbf23f7fe3a5219e17a5669e5))
+
+
 ## v6.4.15 (2023-10-03)
 
 ### Other
