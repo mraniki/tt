@@ -15,6 +15,7 @@ from asyncz.schedulers.asyncio import AsyncIOScheduler
 from dynaconf import Dynaconf
 from loguru import logger as loguru_logger
 from pyonepassword import OP
+from pyonepassword.api.authentication import EXISTING_AUTH_REQD
 
 dotenv.load_dotenv()
 #######################################
@@ -24,7 +25,7 @@ dotenv.load_dotenv()
 if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
     try:
         loguru_logger.debug("Using OnePassword")
-        op = OP()
+        op = OP(existing_auth=EXISTING_AUTH_REQD)
         vault = os.getenv("OP_VAULT")
         loguru_logger.debug("Vault: {}", vault)
         item = os.getenv("OP_ITEM")
