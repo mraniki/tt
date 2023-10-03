@@ -22,18 +22,21 @@ dotenv.load_dotenv()
 #######################################
 
 if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
-    loguru_logger.debug("Using OnePassword")
-    op = OP()
-    vault = os.getenv("OP_VAULT")
-    loguru_logger.debug("Vault: {}", vault)
-    item = os.getenv("OP_ITEM")
-    loguru_logger.debug("Item: {}", item)
-    data = op.item_get(item, vault=vault)
-    loguru_logger.debug("Data: {}", data)
-    value = data["fields"][0]["value"]
-    loguru_logger.debug("value: {}", value)
-    with open(".op.toml", "w", encoding="utf_8") as file:
-        file.write(value)
+    try:
+        loguru_logger.debug("Using OnePassword")
+        op = OP()
+        vault = os.getenv("OP_VAULT")
+        loguru_logger.debug("Vault: {}", vault)
+        item = os.getenv("OP_ITEM")
+        loguru_logger.debug("Item: {}", item)
+        data = op.item_get(item, vault=vault)
+        loguru_logger.debug("Data: {}", data)
+        value = data["fields"][0]["value"]
+        loguru_logger.debug("value: {}", value)
+        with open(".op.toml", "w", encoding="utf_8") as file:
+            file.write(value)
+    except Exception as error:
+        loguru_logger.error(error)
 
 
 #######################################
