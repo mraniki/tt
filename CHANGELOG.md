@@ -2,6 +2,23 @@
 
 
 
+## v6.4.15 (2023-10-03)
+
+### Other
+
+* Merge pull request #864 from mraniki/dev
+
+op ([`3c5f347`](https://github.com/mraniki/tt/commit/3c5f3470fe7de4418f2d1a9edb73f0b11b7e983e))
+
+* Remove EXISTING_AUTH_REQD import from pyonepassword.api.authentication ([`120ceb5`](https://github.com/mraniki/tt/commit/120ceb50e9de3fef6abc9f40f2bd789a783b6e8b))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`0000f9f`](https://github.com/mraniki/tt/commit/0000f9f1d5ee31bc1135acac33ddf2db558e89ae))
+
+### Update
+
+* Update OP path in config.py ([`4e05521`](https://github.com/mraniki/tt/commit/4e05521642dc5da72b0cf407aff51a45abb626fc))
+
+
 ## v6.4.14 (2023-10-03)
 
 ### Other
