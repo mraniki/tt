@@ -2,6 +2,41 @@
 
 
 
+## v6.4.11 (2023-10-03)
+
+### Other
+
+* Merge pull request #858 from mraniki/dev
+
+🐛 ([`b44d21a`](https://github.com/mraniki/tt/commit/b44d21ac533bf8022dc91ac39d11d189e6be70b1))
+
+* Merge pull request #857 from mraniki/dev
+
+⬆️ 🛠️(deps): update python docker tag to v3.12 ([`25e57cc`](https://github.com/mraniki/tt/commit/25e57cc0326543d082e80438d696d9ddf17c52f6))
+
+* Merge pull request #856 from mraniki/renovate/python-3.x
+
+⬆️ 🛠️(deps): update python docker tag to v3.12 ([`cf2a25d`](https://github.com/mraniki/tt/commit/cf2a25da80b616d870ec58fafdca81a21d21e77e))
+
+### Update
+
+* Update Requirements ([`368a515`](https://github.com/mraniki/tt/commit/368a51582c49d649079c6db834de5f1895af3c04))
+
+* Update Requirements ([`1ce4eb2`](https://github.com/mraniki/tt/commit/1ce4eb2744c586f12ed9420e63e85a2b97b313f5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update python docker tag to v3.12 ([`9ff2cb8`](https://github.com/mraniki/tt/commit/9ff2cb86d045fbff0086d7ce22a4e29446ff6db8))
+
+### 🐛
+
+* 🐛 ([`6556a1a`](https://github.com/mraniki/tt/commit/6556a1a2e477ebea2420612b5e3d40aa2f7bcbfd))
+
+### 🚑
+
+* 🚑 ([`4598b8b`](https://github.com/mraniki/tt/commit/4598b8be6d0cbe3d922295613632a6efe1d69eeb))
+
+
 ## v6.4.10 (2023-10-02)
 
 ### Other
