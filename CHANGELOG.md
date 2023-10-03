@@ -2,6 +2,13 @@
 
 
 
+## v6.4.12 (2023-10-03)
+
+### Update
+
+* Update Dockerfile ([`3b1f271`](https://github.com/mraniki/tt/commit/3b1f2717d267f429bfc546dbf0a5b83539c1b700))
+
+
 ## v6.4.11 (2023-10-03)
 
 ### Other
