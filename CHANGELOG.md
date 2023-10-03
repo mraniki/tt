@@ -2,6 +2,27 @@
 
 
 
+## v6.4.14 (2023-10-03)
+
+### Other
+
+* Merge pull request #863 from mraniki/dev
+
+Op ([`b11680e`](https://github.com/mraniki/tt/commit/b11680e5e24f07a9de8f278b119cc6064ce1f357))
+
+* Merge pull request #859 from mraniki/renovate/python-3.x
+
+⬆️ 🛠️(deps): update python docker tag to v3.12 ([`210ec18`](https://github.com/mraniki/tt/commit/210ec18844f4e8c49f820f263baefc46f54c59bf))
+
+### Update
+
+* Update Dockerfile to use Python 3.11
+
+and modify tt/config.py to handle existing authentication ([`ae14e72`](https://github.com/mraniki/tt/commit/ae14e724223789d5e288de0b474741c01e5940fb))
+
+* Update Requirements ([`c5fa2ae`](https://github.com/mraniki/tt/commit/c5fa2ae8d76a1da36adda2082ffd42cb6684519f))
+
+
 ## v6.4.13 (2023-10-03)
 
 ### :bug:
@@ -13,6 +34,10 @@
 * Merge pull request #860 from mraniki/dev
 
 :bug: ([`c800d1a`](https://github.com/mraniki/tt/commit/c800d1ac08a488530813c39d059e55ace1c247f4))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update python docker tag to v3.12 ([`3da2163`](https://github.com/mraniki/tt/commit/3da2163eb146273cb7faf1146dd7ff4dbf6790c5))
 
 
 ## v6.4.12 (2023-10-03)
