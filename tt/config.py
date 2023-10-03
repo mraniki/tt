@@ -15,7 +15,7 @@ from asyncz.schedulers.asyncio import AsyncIOScheduler
 from dynaconf import Dynaconf
 from loguru import logger as loguru_logger
 from pyonepassword import OP
-from pyonepassword.api.authentication import EXISTING_AUTH_REQD
+
 
 dotenv.load_dotenv()
 #######################################
