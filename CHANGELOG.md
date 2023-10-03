@@ -2,6 +2,19 @@
 
 
 
+## v6.4.13 (2023-10-03)
+
+### :bug:
+
+* :bug: ([`3567c37`](https://github.com/mraniki/tt/commit/3567c37fbecf37e29069070860b5890baf5fc302))
+
+### Other
+
+* Merge pull request #860 from mraniki/dev
+
+:bug: ([`c800d1a`](https://github.com/mraniki/tt/commit/c800d1ac08a488530813c39d059e55ace1c247f4))
+
+
 ## v6.4.12 (2023-10-03)
 
 ### Update
