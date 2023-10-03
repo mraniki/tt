@@ -2,6 +2,21 @@
 
 
 
+## v6.4.17 (2023-10-03)
+
+### Other
+
+* Merge pull request #866 from mraniki/dev
+
+Dev ([`3b28a4e`](https://github.com/mraniki/tt/commit/3b28a4ee8a77c23e7ab6128d6d3c5660a6bc3f52))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`6584fe2`](https://github.com/mraniki/tt/commit/6584fe2c7075ff11c1e2548f110671826d5834b2))
+
+### Update
+
+* Update OP path in config.py and comment out logger.debug in utils.py ([`f8af8e6`](https://github.com/mraniki/tt/commit/f8af8e680fd4aa086b6d80cc6d5dc34e1d5a2b3a))
+
+
 ## v6.4.16 (2023-10-03)
 
 ### Other
