@@ -8,6 +8,7 @@ Scheduleing and Settings
 
 import logging
 import os
+import subprocess
 import sys
 
 import dotenv
@@ -21,16 +22,19 @@ dotenv.load_dotenv()
 #######################################
 
 if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
-    # add path check for op op_path="usr/bin/op"
-    loguru_logger.debug(
-        "Using OnePassword service account token {}",
-        os.getenv("OP_SERVICE_ACCOUNT_TOKEN"),
-    )
+    op_path = os.getenv("OP_PATH")
+    if not os.path.exists(op_path):
+        raise FileNotFoundError(f"OP path '{op_path}' does not exist")
+
+    loguru_logger.debug("Using OnePassword")
     vault = os.getenv("OP_VAULT")
-    loguru_logger.debug("Vault: {}", vault)
     item = os.getenv("OP_ITEM")
-    loguru_logger.debug("Item: {}", item)
-    os.system(f"op read op://{vault}/{item}/notesPlain> .op.toml")
+    command = [
+        op_path,
+        "read",
+        f"op://{vault}/{item}/notesPlain> .op.toml",
+    ]
+    subprocess.run(command)
 
 else:
     loguru_logger.debug("No OnePassword service account token found")
