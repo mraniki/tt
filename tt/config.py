@@ -30,7 +30,7 @@ if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
     loguru_logger.debug("Vault: {}", vault)
     item = os.getenv("OP_ITEM")
     loguru_logger.debug("Item: {}", item)
-    os.system("op read op://{vault}/{item}/notesPlain> .op.toml")
+    os.system(f"op read op://{vault}/{item}/notesPlain> .op.toml")
 
 else:
     loguru_logger.debug("No OnePassword service account token found")
