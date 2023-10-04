@@ -2,6 +2,21 @@
 
 
 
+## v6.4.26 (2023-10-04)
+
+### :bug:
+
+* :wrench: :bug: ([`a9ca5a7`](https://github.com/mraniki/tt/commit/a9ca5a7a07f3ef869e6ae1d68fdc4d8920e2fc77))
+
+### Other
+
+* Merge pull request #876 from mraniki/dev
+
+Dev ([`91ce7d4`](https://github.com/mraniki/tt/commit/91ce7d468a247a5f9f4c708f6bd450137d2a3b43))
+
+* Merge branch &#39;main&#39; into dev ([`aeaeeb6`](https://github.com/mraniki/tt/commit/aeaeeb6dc7b232e58b7b2053d5a29955a1b1e5f7))
+
+
 ## v6.4.25 (2023-10-04)
 
 ### Other
@@ -9,6 +24,10 @@
 * Merge pull request #875 from mraniki/dev
 
 🔧 🐛 ([`04d4b4a`](https://github.com/mraniki/tt/commit/04d4b4a2ce84257bc5f40bc8301c5bd0a436ae9f))
+
+### Update
+
+* Update Requirements ([`1357a85`](https://github.com/mraniki/tt/commit/1357a852ea71824f0f503e46b35ea832b555bb19))
 
 ### ⬆️
 
