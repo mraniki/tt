@@ -29,9 +29,10 @@ if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
     command = [
         op_path,
         "read",
-        f"op://{os.getenv('OP_VAULT')}/{os.getenv('OP_ITEM')}/notesPlain"
+        f"op://{os.getenv('OP_VAULT')}/{os.getenv('OP_ITEM')}/notesPlain",
     ]
-    with open(".op.toml", "w") as output_file:
+    filepath = "/app/tt/.op.toml"
+    with open(filepath, "w") as output_file:
         subprocess.run(command, stdout=output_file)
 
 
@@ -59,8 +60,8 @@ settings = Dynaconf(
         # load user secret
         ".secrets.toml",
         # load settings from one password vault
+        ".op.toml",
     ],
-    includes=[".op.toml"],
     environments=True,
     merge_enabled=True,
     default_env="default",
