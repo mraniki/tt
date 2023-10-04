@@ -2,6 +2,19 @@
 
 
 
+## v6.4.22 (2023-10-04)
+
+### Other
+
+* Merge pull request #872 from mraniki/dev
+
+🐛 OP ([`3d56475`](https://github.com/mraniki/tt/commit/3d5647502f7986bfd44c38c42f68d984c7b8b869))
+
+### 🐛
+
+* 🐛 OP ([`a22a7db`](https://github.com/mraniki/tt/commit/a22a7db36266a33e93b32d312bb6e35837b9059c))
+
+
 ## v6.4.21 (2023-10-04)
 
 ### Other
