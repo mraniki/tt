@@ -2,6 +2,25 @@
 
 
 
+## v6.4.20 (2023-10-04)
+
+### Other
+
+* Merge pull request #870 from mraniki/dev
+
+♻️ ([`901ee3a`](https://github.com/mraniki/tt/commit/901ee3aabb89263e95ca26a5e3c56328965fa896))
+
+* Merge pull request #869 from mraniki/dev
+
+Update config.py to remove unnecessary code ([`51a5844`](https://github.com/mraniki/tt/commit/51a5844d000533ad46c87ffc0a90e681b8833702))
+
+* Refactor config.py to remove unnecessary code ([`31b6ff8`](https://github.com/mraniki/tt/commit/31b6ff893e1fd71f791deff126580bae4ef2c772))
+
+### ♻️
+
+* ♻️ ([`291eea1`](https://github.com/mraniki/tt/commit/291eea171a0ee43330e1eeba54816fcf96e10afb))
+
+
 ## v6.4.19 (2023-10-04)
 
 ### Other
