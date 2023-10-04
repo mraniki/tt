@@ -31,7 +31,7 @@ if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
         "read",
         f"op://{os.getenv('OP_VAULT')}/{os.getenv('OP_ITEM')}/notesPlain",
     ]
-    filepath = "/app/tt/.op.toml"
+    filepath = "/app/tt/settings.toml"
     with open(filepath, "w") as output_file:
         subprocess.run(command, stdout=output_file)
 
