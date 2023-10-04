@@ -11,7 +11,7 @@ ENV ENV_FOR_DYNACONF=default
 ENV OP_SERVICE_ACCOUNT_TOKEN=None
 ENV OP_VAULT=None
 ENV OP_ITEM=None
-
+ENV OP_PATH=/usr/bin/op
 #COPY --from=1password/op:2 /usr/local/bin/op /usr/local/bin/op
 ##
 # Install 1Password CLI
