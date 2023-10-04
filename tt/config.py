@@ -26,14 +26,9 @@ if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
     if not os.path.exists(op_path):
         raise FileNotFoundError(f"OP path '{op_path}' does not exist")
 
-    loguru_logger.debug(
-        "Using OnePassword service account token: {}",
-        os.getenv("OP_SERVICE_ACCOUNT_TOKEN"),
-    )
+    loguru_logger.debug("Using OnePassword")
     vault = os.getenv("OP_VAULT")
-    loguru_logger.debug("Vault: {}", vault)
     item = os.getenv("OP_ITEM")
-    loguru_logger.debug("Item: {}", item)
     command = [
         op_path,
         "read",
