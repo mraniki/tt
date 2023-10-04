@@ -14,8 +14,6 @@ import dotenv
 from asyncz.schedulers.asyncio import AsyncIOScheduler
 from dynaconf import Dynaconf
 from loguru import logger as loguru_logger
-from pyonepassword import OP
-
 
 dotenv.load_dotenv()
 #######################################
@@ -23,21 +21,19 @@ dotenv.load_dotenv()
 #######################################
 
 if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
-    try:
-        loguru_logger.debug("Using OnePassword")
-        op = OP(op_path="usr/bin/op")
-        vault = os.getenv("OP_VAULT")
-        loguru_logger.debug("Vault: {}", vault)
-        item = os.getenv("OP_ITEM")
-        loguru_logger.debug("Item: {}", item)
-        data = op.item_get(item, vault=vault)
-        loguru_logger.debug("Data: {}", data)
-        value = data["fields"][0]["value"]
-        loguru_logger.debug("value: {}", value)
-        with open(".op.toml", "w", encoding="utf_8") as file:
-            file.write(value)
-    except Exception as error:
-        loguru_logger.error(error)
+    # add path check for op op_path="usr/bin/op"
+    loguru_logger.debug(
+        "Using OnePassword service account token {}",
+        os.getenv("OP_SERVICE_ACCOUNT_TOKEN"),
+    )
+    vault = os.getenv("OP_VAULT")
+    loguru_logger.debug("Vault: {}", vault)
+    item = os.getenv("OP_ITEM")
+    loguru_logger.debug("Item: {}", item)
+    os.system("op read op://{vault}/{item}/notesPlain> .op.toml")
+
+else:
+    loguru_logger.debug("No OnePassword service account token found")
 
 
 #######################################
