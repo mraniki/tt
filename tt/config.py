@@ -26,9 +26,14 @@ if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
     if not os.path.exists(op_path):
         raise FileNotFoundError(f"OP path '{op_path}' does not exist")
     loguru_logger.debug("Using OnePassword")
-    command = os.getenv("OP_COMMAND")
-    loguru_logger.debug(command)
-    subprocess.run(command)
+    command = [
+        op_path,
+        "read",
+        f"op://{os.getenv('OP_VAULT')}/{os.getenv('OP_ITEM')}/notesPlain"
+    ]
+    with open(".op.toml", "w") as output_file:
+        subprocess.run(command, stdout=output_file)
+
 
 else:
     loguru_logger.debug("No OP service account found")

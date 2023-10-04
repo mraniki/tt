@@ -12,7 +12,6 @@ ENV TT_DOCKER=True
 ENV ENV_FOR_DYNACONF=default
 ENV OP_PATH=/usr/bin/op
 ENV OP_SERVICE_ACCOUNT_TOKEN=None
-ENV OP_COMMAND="op read op://OP_VAULT/OP_ITEM/notesPlain > .op.toml"
 
 ##
 # Install 1Password CLI
