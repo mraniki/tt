@@ -371,18 +371,18 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 ###      CHAT PLATFORM SETTINGS      ###
 ########################################
 
-[default.platform.template]
-platform = ""
-bot_token = ""
-bot_channel_id = ""
-bot_api_id = ""
-bot_api_hash = ""
-bot_hostname = ""
-bot_user = ""
-bot_pass = ""
-bot_auth_token = ""
-iteration_enabled = false
-iteration_limit = -1
+# [default.platform.template]
+# platform = ""
+# bot_token = ""
+# bot_channel_id = ""
+# bot_api_id = ""
+# bot_api_hash = ""
+# bot_hostname = ""
+# bot_user = ""
+# bot_pass = ""
+# bot_auth_token = ""
+# iteration_enabled = false
+# iteration_limit = -1
 
 # # discord example
 # [default.platform.discord]
