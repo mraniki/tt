@@ -2,6 +2,19 @@
 
 
 
+## v6.4.28 (2023-10-04)
+
+### :recycle:
+
+* :recycle::wrench:Refactor filepath in config.py ([`998e015`](https://github.com/mraniki/tt/commit/998e015ab3437c888fa1a7cf7fef9682ccf13c03))
+
+### Other
+
+* Merge pull request #878 from mraniki/dev
+
+:recycle::wrench:Refactor filepath in config.py ([`cbc2dcd`](https://github.com/mraniki/tt/commit/cbc2dcdbd3319f2d6ab337773b24bddb0e4b6d62))
+
+
 ## v6.4.27 (2023-10-04)
 
 ### Other
