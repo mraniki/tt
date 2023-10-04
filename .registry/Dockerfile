@@ -1,32 +1,40 @@
 FROM python:3.11
-ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
+
+##
+# Environment variables
+#
+
+ENV VIRTUAL_ENV=/opt/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
-# ARG BRANCH_NAME
-# ENV BRANCH=$BRANCH_NAME
 ENV TT_DOCKER=True
-
 ENV ENV_FOR_DYNACONF=default
-ENV OP_SERVICE_ACCOUNT_TOKEN=None
-ENV OP_VAULT=None
-ENV OP_ITEM=None
 ENV OP_PATH=/usr/bin/op
-#COPY --from=1password/op:2 /usr/local/bin/op /usr/local/bin/op
+ENV OP_SERVICE_ACCOUNT_TOKEN=None
+ENV OP_COMMAND="op read op://OP_VAULT/OP_ITEM/notesPlain > .op.toml"
+
 ##
 # Install 1Password CLI
 #
 RUN wget -P /tmp/ https://downloads.1password.com/linux/debian/$(dpkg --print-architecture)/stable/1password-cli-$(dpkg --print-architecture)-latest.deb
 RUN dpkg -i /tmp/1password-cli-$(dpkg --print-architecture)-latest.deb
 RUN op --version
-# RUN op read op://$OP_VAULT/$OP_ITEM/notesPlain > .op.toml
 
+##
+# Deploy app
+#
 COPY . /app
 RUN pip install --no-cache-dir /app
 
+##
+# Healthcheck and PORT
+#
 EXPOSE 8080
 HEALTHCHECK --interval=5s CMD curl --fail http://localhost:8080 || exit 1
 
+##
+# Run app
+#
 CMD [ "python", "/app/tt/app.py" ]
 
 
