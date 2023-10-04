@@ -32,7 +32,8 @@ if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
     command = [
         op_path,
         "read",
-        f"op://{vault}/{item}/notesPlain> .op.toml",
+        f"op://{vault}/{item}/notesPlain",
+        "> .op.toml",
     ]
     subprocess.run(command)
 
