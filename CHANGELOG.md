@@ -2,6 +2,25 @@
 
 
 
+## v6.4.19 (2023-10-04)
+
+### Other
+
+* Merge pull request #868 from mraniki/dev
+
+⚡OP ([`4c473fb`](https://github.com/mraniki/tt/commit/4c473fbee2c8fee0f1b58e5f07f7a6e19e7f6247))
+
+* Merge branch &#39;main&#39; into dev ([`ed0b791`](https://github.com/mraniki/tt/commit/ed0b7916402ba495d8c519371fa55ae2e77bdc25))
+
+### ♻️
+
+* 🔇 ♻️ ([`f631621`](https://github.com/mraniki/tt/commit/f6316218eef0eeca109d4394582c1267ca64dda3))
+
+### ⚡
+
+* ⚡ ([`8984759`](https://github.com/mraniki/tt/commit/89847597cc2cf90017c23fc6c17a322b7af02538))
+
+
 ## v6.4.18 (2023-10-04)
 
 ### Other
@@ -11,6 +30,8 @@
 ♻️ op ([`097424e`](https://github.com/mraniki/tt/commit/097424eb54b4bba9975a9bbaa516faa9d3158dcd))
 
 ### Update
+
+* Update Requirements ([`64f40a2`](https://github.com/mraniki/tt/commit/64f40a23df0be84cb82684cd5a1c13c5cf627d85))
 
 * Update tt/config.py
 
