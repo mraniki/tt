@@ -2,6 +2,23 @@
 
 
 
+## v6.4.27 (2023-10-04)
+
+### Other
+
+* Merge pull request #877 from mraniki/dev
+
+Update dxsp and cefi versions ([`bf59e32`](https://github.com/mraniki/tt/commit/bf59e32406340b415a46290135b73a7826f3456c))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`4b0cabc`](https://github.com/mraniki/tt/commit/4b0cabc979b4063731a0fd08c345d02d9545d9f6))
+
+### Update
+
+* Update Requirements ([`5ff4d83`](https://github.com/mraniki/tt/commit/5ff4d831a032452dc7f59b1a3b493cff2f1cb9aa))
+
+* Update dxsp and cefi versions ([`a64fdba`](https://github.com/mraniki/tt/commit/a64fdba56ec18e1c170b7ab05b6b673f90c58b59))
+
+
 ## v6.4.26 (2023-10-04)
 
 ### :bug:
