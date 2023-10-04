@@ -1,11 +1,12 @@
 FROM python:3.11
-RUN python3 -m venv $VIRTUAL_ENV
+
 
 ##
 # Environment variables
 #
-
 ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ENV TT_DOCKER=True
 ENV ENV_FOR_DYNACONF=default
