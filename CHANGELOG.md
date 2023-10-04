@@ -2,6 +2,25 @@
 
 
 
+## v6.4.18 (2023-10-04)
+
+### Other
+
+* Merge pull request #867 from mraniki/dev
+
+♻️ op ([`097424e`](https://github.com/mraniki/tt/commit/097424eb54b4bba9975a9bbaa516faa9d3158dcd))
+
+### Update
+
+* Update tt/config.py
+
+Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`dfa830a`](https://github.com/mraniki/tt/commit/dfa830a322cfe23f8ff036a30ebd55400e788531))
+
+### ♻️
+
+* ♻️ op ([`bdaaf24`](https://github.com/mraniki/tt/commit/bdaaf24c722313b8912c80aedb46ebf81a5abd88))
+
+
 ## v6.4.17 (2023-10-03)
 
 ### Other
