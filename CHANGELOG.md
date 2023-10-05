@@ -2,6 +2,34 @@
 
 
 
+## v6.4.32 (2023-10-05)
+
+### Other
+
+* Merge pull request #891 from mraniki/dev
+
+Remove should_handle method from CexExchangePlugin and DexExchangePlugin ([`b770742`](https://github.com/mraniki/tt/commit/b77074249474e1911a679147942a498216057493))
+
+* Merge pull request #892 from mraniki/sourcery/dev
+
+Remove should_handle method from CexExchangePlugin and DexExchangePlugin (Sourcery refactored) ([`d707171`](https://github.com/mraniki/tt/commit/d7071711e810064a831948c81194d716a294e7cc))
+
+* &#39;Refactored by Sourcery&#39; ([`83d02aa`](https://github.com/mraniki/tt/commit/83d02aab997ad2cd152d3f505b8e3a73a259a242))
+
+* Remove should_handle method from CexExchangePlugin and DexExchangePlugin ([`7a6077e`](https://github.com/mraniki/tt/commit/7a6077e3be8d627f969f871248939a554608316a))
+
+* Fix plugin_manager.py logic and update user_hours
+
+- Fix logic in BasePlugin class to correctly handle enabled plugins
+- Update user_hours in BasePlugin class to &#34;4,10,16 ([`a8715ab`](https://github.com/mraniki/tt/commit/a8715abc68ad6218713ebe896c51a89632ae32eb))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`c65cdff`](https://github.com/mraniki/tt/commit/c65cdffa98f3927849460bc9ebc91ca12751c79e))
+
+### Update
+
+* Update pyproject.toml format ([`6dda030`](https://github.com/mraniki/tt/commit/6dda030748c3e08f8903a680eb49d30b3f4150e6))
+
+
 ## v6.4.31 (2023-10-05)
 
 ### Other
