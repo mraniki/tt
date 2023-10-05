@@ -2,6 +2,86 @@
 
 
 
+## v6.4.29 (2023-10-05)
+
+### Other
+
+* Merge pull request #882 from mraniki/dev
+
+⬆️⚡♻️ CEFI/DXSP/MyLLM ([`5428bd6`](https://github.com/mraniki/tt/commit/5428bd62fb54ad390718f1dff4f034ceecebebdd))
+
+* Merge pull request #885 from mraniki/renovate/dxsp-5.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v5.1.5 ([`2eccf99`](https://github.com/mraniki/tt/commit/2eccf993b018e34dd014c3a598938fa849f416b8))
+
+* Merge pull request #884 from mraniki/renovate/cefi-3.x
+
+⬆️ 🛠️(deps): update dependency cefi to v3.1.2 ([`fd61b2a`](https://github.com/mraniki/tt/commit/fd61b2a32a8fdabac0de49e5c79cff502ad9943f))
+
+* Merge pull request #880 from mraniki/renovate/iamlistening-4.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v4.2.3 ([`51467da`](https://github.com/mraniki/tt/commit/51467da2e3eb39556a3d08bb07207791e59b0fe7))
+
+* Merge pull request #883 from mraniki/sourcery/dev
+
+⬆️⚡♻️ CEFI/DXSP/MyLLM (Sourcery refactored) ([`9367e2a`](https://github.com/mraniki/tt/commit/9367e2a028f5f73f627a8cd42ea045be6727071a))
+
+* Merge pull request #879 from mraniki/renovate/pytest-loguru-0.x
+
+⬆️ 🛠️(deps): update dependency pytest-loguru to ^0.3.0 ([`98e1de1`](https://github.com/mraniki/tt/commit/98e1de18a03512d1b54b6e93caab896bd7e8f384))
+
+* &#39;Refactored by Sourcery&#39; ([`4f5cb16`](https://github.com/mraniki/tt/commit/4f5cb166da422e0add51fe38052f94c89f8f378b))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`ca73bb7`](https://github.com/mraniki/tt/commit/ca73bb705392282d42d4ed8a753b03bc7c25648e))
+
+* Fix default settings file path ([`3d1787e`](https://github.com/mraniki/tt/commit/3d1787e454e452d2516b601d5af4371a0b56ced5))
+
+### Update
+
+* Update Requirements ([`2beea09`](https://github.com/mraniki/tt/commit/2beea099e23aa227fa174b831215b4c55f235265))
+
+* Update Requirements ([`03394dd`](https://github.com/mraniki/tt/commit/03394ddd17ed15760d554a2b1eb1d5885fbb6612))
+
+* Update Requirements ([`09bcc3b`](https://github.com/mraniki/tt/commit/09bcc3bc5ba413386a7b2f09b5123304cd7b7186))
+
+* Update myllm version to 3.1.11 ([`b437fdd`](https://github.com/mraniki/tt/commit/b437fdddd04f7019a90c44a7892c1f2fa1fa8ff1))
+
+* Update dependencies in pyproject.toml file
+
+- Update iamlistening to version 4.2.0
+- Update findmyorder to version 1.8.0
+- Update dxsp to version 5.2.0
+- Update cefi to version 3.1.0
+- Update talkytrend to version 1.15.0
+- Update myllm to version 3.2.0 ([`cfb1a9c`](https://github.com/mraniki/tt/commit/cfb1a9c08885d376a21bd1f89848cccc31e96646))
+
+### ♻️
+
+* ♻️ ([`1576563`](https://github.com/mraniki/tt/commit/15765630d57972e2ab397749939e5e4c8676dee5))
+
+* ♻️ ([`30af959`](https://github.com/mraniki/tt/commit/30af9592d6d1c3e3e5ad07d061b17cccaa1fc211))
+
+* ♻️ ([`4e52691`](https://github.com/mraniki/tt/commit/4e526914f7037429e18a9a0d7ce8662e121678f3))
+
+### ⚡
+
+* ⚡ ♻️ ([`b51c5f2`](https://github.com/mraniki/tt/commit/b51c5f2e63d6a7e0d1694b82f52cd040b0fb354c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v5.1.5 ([`1eb386c`](https://github.com/mraniki/tt/commit/1eb386c1ccdcf5d850af9d85e86bb742bb65a3de))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.3 ([`a38ac7e`](https://github.com/mraniki/tt/commit/a38ac7e4530e2f9442fb820c28e0f3eda19301f1))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.1.2 ([`ec9d2a1`](https://github.com/mraniki/tt/commit/ec9d2a1124ee9c88427e763bcd4fc2fdc16c5d37))
+
+* ⬆️ ([`8187263`](https://github.com/mraniki/tt/commit/8187263881a57901054d62281485498974cbc62f))
+
+* ⬆️ ([`0a8ea58`](https://github.com/mraniki/tt/commit/0a8ea5815dd4edcd20cc0f9d194b5e6cbdfed8a2))
+
+* ⬆️ 🛠️(deps): update dependency pytest-loguru to ^0.3.0 ([`dfe2844`](https://github.com/mraniki/tt/commit/dfe28441334f08cc19dc767b1ad8eeb8b20568ca))
+
+
 ## v6.4.28 (2023-10-04)
 
 ### :recycle:
@@ -1292,7 +1372,7 @@ Update pyproject.toml ([`d3cde43`](https://github.com/mraniki/tt/commit/d3cde43b
 
 * Refactor test_unit.py for start_bot() function ([`11a22c9`](https://github.com/mraniki/tt/commit/11a22c9fd5f856075a39ac7d372b44c1551fe98e))
 
-* Refactor start_bot function to iterate over listener.clients instead of listerner.clients. ([`a01a1b3`](https://github.com/mraniki/tt/commit/a01a1b3beadc880f88480b8544c9626074407eb9))
+* Refactor start_bot function to iterate over listener.platform_info instead of listerner.platform_info. ([`a01a1b3`](https://github.com/mraniki/tt/commit/a01a1b3beadc880f88480b8544c9626074407eb9))
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`fde249d`](https://github.com/mraniki/tt/commit/fde249df22e04323368dd4c339b06078c1387429))
 
