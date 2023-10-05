@@ -183,12 +183,7 @@ class BasePlugin:
 
         """
         if self.enabled:
-            if message.startswith(
-            settings.bot_ignore
-            ):
-                return False
-            else:
-                return True
+            return not message.startswith(settings.bot_ignore)
 
 
     async def plugin_notify_schedule_task(
