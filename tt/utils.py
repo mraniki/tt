@@ -96,7 +96,7 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
     await start_plugins(plugin_manager)
     iteration = 0
     while True:
-        for client in listener.platform_info:
+        for client in listener.clients:
             msg = await client.get_latest_message()
             if msg:
                 await plugin_manager.process_message(msg)
@@ -136,7 +136,7 @@ async def check_version():
                     return
 
                 github_repo = await response.json()
-                #logger.debug("Github repo: {}", github_repo)
+                # logger.debug("Github repo: {}", github_repo)
                 latest_version = github_repo["name"]
                 logger.info("Latest version: {}", latest_version)
                 if latest_version != f"v{__version__}":
