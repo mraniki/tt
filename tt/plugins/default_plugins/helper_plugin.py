@@ -28,7 +28,6 @@ class HelperPlugin(BasePlugin):
         super().__init__()
         self.enabled = settings.helper_enabled
         if self.enabled:
-            self.version = f"🗿TalkyTrader v{__version__}"
             self.host_ip = f"🕸 {self.get_host_ip()}"
             self.help_message = settings.helper_commands
 
@@ -74,10 +73,9 @@ class HelperPlugin(BasePlugin):
 
     async def get_helper_info(self):
         """
-        return
-        TalkyTrader version
+        return info
         """
-        return self.version
+        return f"ℹ️ {type(self).__name__} {__version__}\n"
 
     async def get_helper_network(self):
         """
