@@ -22,7 +22,6 @@ Easily deploy via Docker on self-hosted platform or Paas.<br>
    <a href="https://codeclimate.com/github/mraniki/tt/maintainability"><img src="https://api.codeclimate.com/v1/badges/da9ebfa49185b840ae0e/maintainability" /></a><br>
    <a href="https://codecov.io/gh/mraniki/tt" ><img src="https://codecov.io/gh/mraniki/tt/branch/dev/graph/badge.svg?token=ILJTC0F4K1"/> </a><br>
 
-<br>
 </p>
 
 <h5>Documentation</h5>

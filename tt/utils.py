@@ -136,7 +136,6 @@ async def check_version():
                     return
 
                 github_repo = await response.json()
-                # logger.debug("Github repo: {}", github_repo)
                 latest_version = github_repo["name"]
                 logger.info("Latest version: {}", latest_version)
                 if latest_version != f"v{__version__}":
@@ -144,9 +143,6 @@ async def check_version():
                         "👿 You are NOT using the latest %s: %s",
                         latest_version,
                         __version__,
-                    )
-                    await send_notification(
-                        f"👿 You are NOT using the latest {latest_version}"
                     )
                 else:
                     logger.debug(f"😁 You are using the latest {__version__}")
