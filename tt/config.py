@@ -21,21 +21,16 @@ dotenv.load_dotenv()
 ###           ㊙️ Secrets            ###
 #######################################
 
-if os.getenv("OP_SERVICE_ACCOUNT_TOKEN"):
-    op_path = os.getenv("OP_PATH")
-    if not os.path.exists(op_path):
-        raise FileNotFoundError(f"OP path '{op_path}' does not exist")
+if os.getenv("OP_SERVICE_ACCOUNT_TOKEN") and os.path.exists(os.getenv("OP_PATH")):
     loguru_logger.debug("Using OnePassword")
     command = [
-        op_path,
+        os.getenv("OP_PATH"),
         "read",
         f"op://{os.getenv('OP_VAULT')}/{os.getenv('OP_ITEM')}/notesPlain",
     ]
-    filepath = "/app/tt/settings.toml"
+    filepath = "/app/tt/.op.toml"
     with open(filepath, "w") as output_file:
         subprocess.run(command, stdout=output_file)
-
-
 else:
     loguru_logger.debug("No OP service account found")
 
@@ -54,7 +49,7 @@ settings = Dynaconf(
         # load talky default
         os.path.join(ROOT, "talky_settings.toml"),
         # load default from library in case not in talky default
-        #"default_settings.toml",
+        "default_settings.toml",
         # load user default
         "settings.toml",
         # load user secret

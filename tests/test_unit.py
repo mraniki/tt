@@ -112,10 +112,10 @@ async def test_start_bot(message):
     listener = Listener()
     assert listener is not None
     assert isinstance(listener, Listener)
-    assert listener.platform_info is not None
+    assert listener.clients is not None
     await start_bot(listener, plugin_manager, max_iterations=1)
     # listener.start.assert_awaited_once()
-    for client in listener.platform_info:
+    for client in listener.clients:
         await client.handle_message(message)
         msg = await client.get_latest_message()
         # client.get_latest_message.assert_awaited_once()

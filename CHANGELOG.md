@@ -1292,7 +1292,7 @@ Update pyproject.toml ([`d3cde43`](https://github.com/mraniki/tt/commit/d3cde43b
 
 * Refactor test_unit.py for start_bot() function ([`11a22c9`](https://github.com/mraniki/tt/commit/11a22c9fd5f856075a39ac7d372b44c1551fe98e))
 
-* Refactor start_bot function to iterate over listener.platform_info instead of listerner.platform_info. ([`a01a1b3`](https://github.com/mraniki/tt/commit/a01a1b3beadc880f88480b8544c9626074407eb9))
+* Refactor start_bot function to iterate over listener.clients instead of listerner.clients. ([`a01a1b3`](https://github.com/mraniki/tt/commit/a01a1b3beadc880f88480b8544c9626074407eb9))
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`fde249d`](https://github.com/mraniki/tt/commit/fde249df22e04323368dd4c339b06078c1387429))
 
