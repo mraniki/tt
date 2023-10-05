@@ -2,6 +2,35 @@
 
 
 
+## v6.4.30 (2023-10-05)
+
+### Other
+
+* Merge pull request #886 from mraniki/dev
+
+📝 ([`65e3305`](https://github.com/mraniki/tt/commit/65e330528978164c8991ad4679f42fe8ed68037b))
+
+* Merge pull request #887 from mraniki/renovate/talkytrend-1.x
+
+⬆️ 🛠️(deps): update dependency talkytrend to v1.15.1 ([`6418067`](https://github.com/mraniki/tt/commit/64180671b296ef17995b534eb3f129b46bdc0e00))
+
+### Update
+
+* Update Requirements ([`85bbea2`](https://github.com/mraniki/tt/commit/85bbea25b2f19c463e37023932c4ce6622abc60e))
+
+* Update Requirements ([`70a89ca`](https://github.com/mraniki/tt/commit/70a89ca2a357eed2029e21e6b6448cd58029bbe8))
+
+* Update pyproject.toml ([`cdd1beb`](https://github.com/mraniki/tt/commit/cdd1bebb16beb7f86d35068657b558e310150a53))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.15.1 ([`f7b425d`](https://github.com/mraniki/tt/commit/f7b425d4595be44d994c390546191e8282e55b64))
+
+### 📝
+
+* 📝 ([`8cf9866`](https://github.com/mraniki/tt/commit/8cf986628ad6206c7cfda6e0dc4cebc9bb61d6fd))
+
+
 ## v6.4.29 (2023-10-05)
 
 ### Other
