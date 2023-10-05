@@ -13,7 +13,7 @@
     # wallet_address = ""
     # private_key = ""
     # rpc = "https://rpc.ankr.com/eth"
-    # protocol_type = "uniswap"
+    # protocol = "uniswap"
     # protocol_version = 2
     # api_endpoint = ""
     # api_key = ""
@@ -63,7 +63,7 @@
     # wallet_address = ""
     # private_key = ""
     # rpc = "https://rpc.ankr.com/bsc"
-    # protocol_type = "uniswap"
+    # protocol = "uniswap"
     # protocol_version = 2
     # api_endpoint = ""
     # api_key = ""
@@ -92,7 +92,7 @@
     # wallet_address = ""
     # private_key = ""
     # rpc = "https://polygon.llamarpc.com"
-    # protocol_type = "0x"
+    # protocol = "0x"
     # protocol_version = 4
     # api_endpoint = "https://polygon.api.0x.org"
     # api_key = ""
