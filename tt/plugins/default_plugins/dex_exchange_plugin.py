@@ -52,10 +52,7 @@ class DexExchangePlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if not self.enabled:
-            return
-
-        if msg.startswith(settings.bot_ignore):
+        if not self.should_handle(msg):
             return
 
         if await self.fmo.search(msg):
