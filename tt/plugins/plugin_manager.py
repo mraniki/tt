@@ -129,8 +129,9 @@ class PluginManager:
 
         if message:
             logger.debug("Processing: {}", message)
+            tasks=[]
             for plugin in self.plugins:
-                tasks=[]
+                
                 try:
                     if plugin.should_handle(message):
                         task = asyncio.create_task(plugin.handle_message(message))
