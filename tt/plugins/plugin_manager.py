@@ -135,7 +135,7 @@ class PluginManager:
                 try:
                     if plugin.should_handle(message):
                         task = asyncio.create_task(plugin.handle_message(message))
-                tasks.append(task)
+                        tasks.append(task)
                 except Exception as error:
                     logger.error("process {}: {}", plugin, error)
                     continue
