@@ -125,28 +125,24 @@ async def check_version():
     Returns:
         None
     """
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(settings.repo, timeout=10) as response:
-                if response.status == 403:
-                    logger.error("API limit exceeded. Please try again later.")
-                    return
-                elif response.status != 200:
-                    logger.error("Failed to retrieve GitHub repository information.")
-                    return
 
-                github_repo = await response.json()
-                latest_version = github_repo["name"]
-                logger.info("Latest version: {}", latest_version)
-                if latest_version != f"v{__version__}":
-                    logger.debug(
-                        "👿 You are NOT using the latest %s: %s",
-                        latest_version,
-                        __version__,
-                    )
-                else:
-                    logger.debug(f"😁 You are using the latest {__version__}")
-    except aiohttp.ClientError as error:
-        logger.error("Failed to connect to the GitHub API: {}", error)
-    except Exception as error:
-        logger.error("check_version: {}", error)
+    async def check_version():
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(settings.repo, timeout=10) as response:
+                    if response.status != 200:
+                        raise Exception()
+                    github_repo = await response.json()
+                    latest_version = github_repo["name"]
+                    if latest_version != f"v{__version__}":
+                        logger.debug(
+                            "You are NOT using the latest version: {}", __version__
+                        )
+                    else:
+                        logger.debug(
+                            "You are using the latest version: {}", __version__
+                        )
+        except Exception as error:
+            logger.error(
+                "Failed to check the version or encountered an error: {}", error
+            )

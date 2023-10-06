@@ -32,25 +32,12 @@ async def test_plugin(plugin):
     assert isinstance(exchange, DexSwap)
 
 
-
 @pytest.mark.asyncio
-async def test_parse_valid_order(plugin, order_message):
-    """Search Testing"""
-    plugin.fmo.search = AsyncMock()
-    plugin.fmo.get_order = AsyncMock()
-    plugin.exchange.submit_order = AsyncMock()
-    await plugin.handle_message(order_message)
-    plugin.fmo.search.assert_awaited_once
-    plugin.fmo.get_order.assert_awaited
-    plugin.exchange.submit_order.assert_awaited
-
-
-@pytest.mark.asyncio
-async def test_parse_quote(plugin, caplog):
-    """Test parse_message balance"""
-    plugin.exchange.get_quotes = AsyncMock()
-    await plugin.handle_message("/q WBTC")
-    plugin.exchange.get_quotes.assert_awaited
+async def test_parse_info(plugin):
+    """Test help"""
+    plugin.exchange.get_info = AsyncMock()
+    await plugin.handle_message("/info")
+    plugin.exchange.get_info.assert_awaited_once()
 
 
 @pytest.mark.asyncio
@@ -70,8 +57,20 @@ async def test_parse_position(plugin):
 
 
 @pytest.mark.asyncio
-async def test_parse_info(plugin):
-    """Test help"""
-    plugin.exchange.get_info = AsyncMock()
-    await plugin.handle_message("/info")
-    plugin.exchange.get_info.assert_awaited_once()
+async def test_parse_quote(plugin, caplog):
+    """Test parse_message balance"""
+    plugin.exchange.get_quotes = AsyncMock()
+    await plugin.handle_message("/q WBTC")
+    plugin.exchange.get_quotes.assert_awaited
+
+
+@pytest.mark.asyncio
+async def test_parse_valid_order(plugin, order_message):
+    """Search Testing"""
+    plugin.fmo.search = AsyncMock()
+    plugin.fmo.get_order = AsyncMock()
+    plugin.exchange.submit_order = AsyncMock()
+    await plugin.handle_message(order_message)
+    plugin.fmo.search.assert_awaited_once
+    plugin.fmo.get_order.assert_awaited
+    plugin.exchange.submit_order.assert_awaited
