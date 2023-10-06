@@ -2,6 +2,78 @@
 
 
 
+## v6.4.35 (2023-10-06)
+
+### :white_check_mark:
+
+* :white_check_mark: test ([`994232a`](https://github.com/mraniki/tt/commit/994232a921097f4d0acb727c9f2f31a965f52ac1))
+
+### Fix
+
+* Refactor test_unit.py fixture
+
+- Removed the old caplog fixture and replaced it with pytest_loguru&#39;s ca
+plog fixture. ([`a2faada`](https://github.com/mraniki/tt/commit/a2faada31834ed0cecac7d4ca8ea45899c6512a4))
+
+* Refactor test_unit.py fixture and enqueue parameter ([`570fa7a`](https://github.com/mraniki/tt/commit/570fa7a7ed91369e7c0e586eb3d7c18c32e35fa0))
+
+* Refactor test_unit.py and add caplog fixture
+
+The changes in this commit refactor the test_unit.py file by adding the
+caplog fixture. This fixture is used to capture log messages during
+test
+ing. ([`486642f`](https://github.com/mraniki/tt/commit/486642fbcc7f43ec5afee2efbfa2065ebff2e21c))
+
+### Other
+
+* Merge pull request #896 from mraniki/dev
+
+♻️ Refactoring llm_ai_mode and fmo.search ([`596fef1`](https://github.com/mraniki/tt/commit/596fef1c31801c54e090d7f29a2451eb3d6e17c2))
+
+* Refactor check_version function and add error handling
+
+- Refactored check_version function to use try-except block for error ha
+ndling
+- Added error logging for failed version check and API limit exceeded
+- Added error logging for failed retrieval of GitHub repository
+informat
+ion
+
+This commit message is based on the file differences in tt/utils.py. ([`a7f3992`](https://github.com/mraniki/tt/commit/a7f3992ed4886df5369751d1c56c230d0800b589))
+
+* Refactor check_version function and add error handling
+
+- Refactored check_version function to use try-except block for error ha
+ndling
+- Added error logging for failed version check and API limit exceeded
+- Added error logging for failed retrieval of GitHub repository
+informat
+ion
+
+This commit message is based on the file differences in tt/utils.py. ([`3ab6147`](https://github.com/mraniki/tt/commit/3ab61477dd8aa4d3223bb895d5264225570099a2))
+
+* Refactor test_check_version and check_version functions
+
+- Refactored test_check_version function in test_unit.py
+- Refactored check_version function in utils.py ([`1971392`](https://github.com/mraniki/tt/commit/19713924588b54a9cb328c2a64dd1c7186369d8a))
+
+* Refactor test_check_version to include check for &#34;Failed&#34; in caplog.text ([`98e2c87`](https://github.com/mraniki/tt/commit/98e2c87bf49138514048a7349b8b70ec423f931f))
+
+* Merge branch &#39;main&#39; into dev ([`5cb994a`](https://github.com/mraniki/tt/commit/5cb994abd2e000744a6afc488c48158a3ba3b4de))
+
+### ♻️
+
+* ♻️ ✅ Unit Test and refactoring ([`bff30f3`](https://github.com/mraniki/tt/commit/bff30f3e9d22fceb7dcc762ac052e93657256ae7))
+
+* ♻️ llm_ai_mode and fmo.search ([`d1649ad`](https://github.com/mraniki/tt/commit/d1649addc019958761a2c9adb4288d519cdd31f0))
+
+### ✅
+
+* ✅ Unit Test ([`d7400c4`](https://github.com/mraniki/tt/commit/d7400c4ec95d7458d9d736d2308e1ef225f7b331))
+
+* ✅ Unit Test ([`9842dc7`](https://github.com/mraniki/tt/commit/9842dc7688b401ea17a128c45b6fc7e652b21e2a))
+
+
 ## v6.4.34 (2023-10-06)
 
 ### :recycle:
@@ -10,13 +82,23 @@
 
 ### Other
 
+* Merge pull request #895 from mraniki/renovate/iamlistening-4.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v4.2.6 ([`1f77e74`](https://github.com/mraniki/tt/commit/1f77e7416362c28367b065a0f527908ddb3895db))
+
 * Merge pull request #894 from mraniki/dev
 
 :recycle: Refactor LlmPlugin conditional statement ([`21928da`](https://github.com/mraniki/tt/commit/21928daf8f99296d0f9f75e3c3afb8e2bc5685d7))
 
 ### Update
 
+* Update Requirements ([`2583d44`](https://github.com/mraniki/tt/commit/2583d443e3a2544c82f9e8dac3645ecfe9fae90f))
+
 * Update Requirements ([`73100d4`](https://github.com/mraniki/tt/commit/73100d4a347c162854772ac84b9127427fcd98b7))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.6 ([`05cf4a6`](https://github.com/mraniki/tt/commit/05cf4a671d63debf188e9e2c364b11158457f1b2))
 
 
 ## v6.4.33 (2023-10-06)
