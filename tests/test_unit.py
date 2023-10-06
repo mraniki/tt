@@ -13,8 +13,7 @@ from tt.app import app, start_bot_task
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
 from tt.utils import check_version, send_notification, start_bot, start_plugins
-from loguru import logger
-from pytest_loguru.plugin import caplog
+
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
@@ -77,7 +76,8 @@ def test_webhook_with_invalid_auth():
 
 @pytest.mark.asyncio
 async def test_check_version(caplog):
-    await check_version()
+    result = await check_version()
+    print(result)
     assert "You are" in caplog.text or "Failed" in caplog.text
 
 
