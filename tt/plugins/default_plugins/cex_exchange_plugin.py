@@ -61,12 +61,13 @@ class CexExchangePlugin(BasePlugin):
         if not self.should_handle(msg):
             return
 
-        if await self.fmo.search(msg):
-            order = await self.fmo.get_order(msg)
-            if order and settings.trading_enabled:
-                trade = await self.exchange.submit_order(order)
-                if trade:
-                    await send_notification(trade)
+        if not msg.startswith(settings.bot_ignore):
+            if await self.fmo.search(msg):
+                order = await self.fmo.get_order(msg)
+                if order and settings.trading_enabled:
+                    trade = await self.exchange.submit_order(order)
+                    if trade:
+                        await send_notification(trade)
 
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
