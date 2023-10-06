@@ -83,7 +83,7 @@ async def test_check_version(caplog):
 @pytest.mark.asyncio
 async def test_check_version_exception():
     with pytest.raises(Exception):
-        await check_version()
+        await check_version(test)
 
 
 @pytest.mark.asyncio
