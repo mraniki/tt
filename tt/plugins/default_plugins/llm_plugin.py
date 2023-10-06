@@ -51,5 +51,5 @@ class LlmPlugin(BasePlugin):
             if command in command_mapping:
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
-        if self.llm.llm_ai_mode:
+        if self.llm.llm_ai_mode and not self.should_handle(msg):
             await self.send_notification(f"{await self.llm.chat(str(msg))}")
