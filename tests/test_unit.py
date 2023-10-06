@@ -14,7 +14,7 @@ from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
 from tt.utils import check_version, send_notification, start_bot, start_plugins
 from loguru import logger
-from _pytest.logging import LogCaptureFixture
+from pytest_loguru.plugin import caplog
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
@@ -31,20 +31,6 @@ def message_test():
     return "Hello"
 
 
-@pytest.fixture(name="caplog")
-def caplog(caplog: LogCaptureFixture):
-    handler_id = logger.add(
-        caplog.handler,
-        format="{message}",
-        level=0,
-        filter=lambda record: record["level"].no >= caplog.handler.level,
-        enqueue=True, 
-    )
-    yield caplog
-    logger.remove(handler_id)
-    
-    
-    
 @pytest.mark.asyncio
 async def test_start_bot_task():
     run_bot = AsyncMock()
