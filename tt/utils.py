@@ -131,7 +131,8 @@ async def check_version():
             async with aiohttp.ClientSession() as session:
                 async with session.get(settings.repo, timeout=10) as response:
                     if response.status != 200:
-                        raise Exception()
+                        return
+                    
                     github_repo = await response.json()
                     latest_version = github_repo["name"]
                     if latest_version != f"v{__version__}":

@@ -77,8 +77,7 @@ def test_webhook_with_invalid_auth():
 @pytest.mark.asyncio
 async def test_check_version(caplog):
     result = await check_version()
-    print(result)
-    assert "You are" in caplog.text or "Failed" in caplog.text
+    assert "You are" in caplog.text 
 
 
 @pytest.mark.asyncio
