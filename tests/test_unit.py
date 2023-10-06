@@ -27,28 +27,17 @@ def test_dynaconf_is_in_testing():
 
 @pytest.fixture(name="message")
 def message_test():
-    return "hello"
-
-
-# @pytest.fixture(name="listener")
-# def listener():
-#     return Listener()
-
-
-# @pytest.fixture(name="plugin_manager_obj")
-# def pluginmngr_test():
-#     return PluginManager()
-
-
-@pytest.fixture
-def message():
     return "Hello"
 
 
 @pytest.mark.asyncio
 async def test_start_bot_task():
     run_bot = AsyncMock()
+    listener = AsyncMock()
+    plugin_manager = AsyncMock()
     await start_bot_task()
+    assert listener is not None
+    assert plugin_manager is not None
     assert run_bot.assert_awaited_once
 
 
@@ -56,7 +45,6 @@ def test_app_endpoint_main():
     client = TestClient(app)
     response = client.get("/")
     init = MagicMock(client)
-    # assert response.status_code == 200
     assert response.status_code is not None
     assert init.assert_called
 
@@ -88,13 +76,19 @@ def test_webhook_with_invalid_auth():
 
 @pytest.mark.asyncio
 async def test_check_version(caplog):
-    await check_version()
-    assert "You are" in caplog.text
+    result = await check_version()
+    assert "You are" in caplog.text 
 
 
 @pytest.mark.asyncio
-async def test_send_notification(caplog):
-    await send_notification("Test message")
+async def test_check_version_exception():
+    with pytest.raises(Exception):
+        await check_version("123")
+
+
+@pytest.mark.asyncio
+async def test_send_notification(caplog, message):
+    await send_notification(message)
     assert "Loaded Discord" in caplog.text
 
 
@@ -108,17 +102,19 @@ async def test_start_plugins():
 @pytest.mark.asyncio
 async def test_start_bot(message):
     plugin_manager = AsyncMock(spec=PluginManager)
+    get_latest_message = AsyncMock()
+    process_message = AsyncMock()
     print(settings)
     listener = Listener()
     assert listener is not None
     assert isinstance(listener, Listener)
     assert listener.clients is not None
     await start_bot(listener, plugin_manager, max_iterations=1)
-    # listener.start.assert_awaited_once()
     for client in listener.clients:
         await client.handle_message(message)
         msg = await client.get_latest_message()
-        # client.get_latest_message.assert_awaited_once()
+        get_latest_message.assert_awaited
+        process_message.assert_awaited
         assert msg == message
 
 

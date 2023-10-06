@@ -37,6 +37,9 @@ class LlmPlugin(BasePlugin):
         """Handles incoming messages"""
         if not self.should_handle(msg):
             return
+        if self.llm.llm_ai_mode and not msg.startswith(settings.llm_prefix):
+            await self.send_notification(f"{await self.llm.chat(str(msg))}")
+
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
             command = command[1:]
@@ -51,5 +54,3 @@ class LlmPlugin(BasePlugin):
             if command in command_mapping:
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
-        if self.llm.llm_ai_mode and not self.should_handle(msg):
-            await self.send_notification(f"{await self.llm.chat(str(msg))}")
