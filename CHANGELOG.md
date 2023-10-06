@@ -2,6 +2,25 @@
 
 
 
+## v6.4.33 (2023-10-06)
+
+### :recycle:
+
+* :recycle: Refactor LlmPlugin AI mode ([`d826436`](https://github.com/mraniki/tt/commit/d826436b3ac5d9856c939ceef906646af5ba989f))
+
+### Other
+
+* Merge pull request #893 from mraniki/dev
+
+♻️ Refactor LlmPlugin AI mode ([`921c6a8`](https://github.com/mraniki/tt/commit/921c6a876cf555d054ecafd2d372a15c0fec63e5))
+
+### Update
+
+* Update Requirements ([`37d1c18`](https://github.com/mraniki/tt/commit/37d1c18718c491be162a7e5de8fb52fcd989cb5f))
+
+* Update dxsp version to 5.2.2 ([`8304e7f`](https://github.com/mraniki/tt/commit/8304e7f04f14f9465e90b1827e71d526a0381b56))
+
+
 ## v6.4.32 (2023-10-05)
 
 ### Other
