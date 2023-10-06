@@ -128,14 +128,23 @@ class PluginManager:
         """
 
         if message:
-            logger.debug("Processing message: {}", message)
+            logger.debug("Processing: {}", message)
             for plugin in self.plugins:
+                tasks=[]
                 try:
                     if plugin.should_handle(message):
-                        await plugin.handle_message(message)
+                        task = asyncio.create_task(plugin.handle_message(message))
+                tasks.append(task)
                 except Exception as error:
                     logger.error("process {}: {}", plugin, error)
                     continue
+    
+            # Wait for all tasks
+            await asyncio.gather(*tasks)
+                #         await plugin.handle_message(message)
+                # except Exception as error:
+                #     logger.error("process {}: {}", plugin, error)
+                #     continue
 
 
 class BasePlugin:
