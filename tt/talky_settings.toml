@@ -419,8 +419,12 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 # trading_slippage = 2 # Slippage percentage
 # block_explorer_url = "" # your block explorer url
 # block_explorer_api = "" # your block explorer api
-# mapping = [ # mapping to use to change instrument per exchange
-#     { id = "BTC", alt = "WBTC" },
+# mapping to use to change instrument per exchange
+# mapping = [
+# { id = "BTC", alt = "WBTC" },
+# { id = "BRENT", alt = "OIL" },
+# { id = "GOLD", alt = "XAUT" },
+# { id = "EURUSD", alt = "AgEUR" },
 # ]
 
 # # uniswap v2 protocol type and router uniswap
@@ -467,6 +471,28 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 #     { id = "BTC", alt = "BTCB" },
 # ]
 
+# # uniswap v3 and router uniswap v3 on arbitrum chain
+# [default.dex.arb]
+# wallet_address = "0x1234567890123456789012345678901234567890"
+# private_key = "0xdeadbeef88"
+# rpc = "https://arbitrum.llamarpc.com"
+# protocol = "uniswap"
+# protocol_version = 3
+# api_endpoint = ''
+# api_key = ""
+# router_contract_addr = ""
+# factory_contract_addr = ""
+# trading_risk_percentage = true
+# trading_risk_amount = 10
+# trading_slippage = 2
+# trading_asset_address = "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9"
+# trading_asset_separator = ""
+# block_explorer_url = "https://api.arbiscan.io/api?"
+# block_explorer_api = "123123123123123"
+# mapping = [
+#     { id = "BTC", alt = "WBTC" },
+# ]
+
 # # ZeroX 0x protocol type on polygon chain 137
 # [default.dex.polygon]
 # wallet_address = "0x1234567890123456789012345678901234567890"
@@ -489,12 +515,12 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 #     { id = "BTC", alt = "WBTC" },
 # ]
 
-# # uniswap v2 protocol type and router velodrome on OPTIMISM chain 10
+# # kwenta protocol type on OPTIMISM chain 10 
 # [default.dex.opt]
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://optimism.llamarpc.com"
-# protocol = "uniswap"
+# protocol = "kwenta"
 # protocol_version = 2
 # api_endpoint = ""
 # api_key = ""
