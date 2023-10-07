@@ -2,6 +2,21 @@
 
 
 
+## v6.4.38 (2023-10-07)
+
+### Other
+
+* Merge pull request #903 from mraniki/dev
+
+🐳 Update .dockerignore file ([`2161d3c`](https://github.com/mraniki/tt/commit/2161d3cd0115cc0aeaae07892d36ee5a0ec4e6b4))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`b5e4bea`](https://github.com/mraniki/tt/commit/b5e4bea86b0055e0e213db48818d63004b6c6233))
+
+### Update
+
+* :whale: Update .dockerignore file ([`02416da`](https://github.com/mraniki/tt/commit/02416da2ba7cf53e8ac7739d9a9bef50bf2b6b5a))
+
+
 ## v6.4.37 (2023-10-07)
 
 ### Other
