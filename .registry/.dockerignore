@@ -1,8 +1,7 @@
 # comment
-*/docs
-*/examples
-/tests
-*/*.md
+**/docs
+**/examples
+**/tests
+**/*.md
 *.gitignore
-*/LICENSE
-CHANGELOG.md
+**//LICENSE
