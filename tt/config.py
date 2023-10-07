@@ -48,7 +48,7 @@ settings = Dynaconf(
     settings_files=[
         # load talky default
         os.path.join(ROOT, "talky_settings.toml"),
-        # load default from library in case not in talky default
+        # load lib default 
         "default_settings.toml",
         # load user default
         "settings.toml",
@@ -98,12 +98,12 @@ def loguru_setup():
     loguru_logger.remove()
     # log.configure(**config)
     log_filters = {
-        "discord": "ERROR",
-        "telethon": "ERROR",
-        "web3": "ERROR",
-        # "apprise": "ERROR",
-        "urllib3": "ERROR",
-        # "asyncz": "ERROR",
+        "discord": settings.thirdparty_lib_loglevel,
+        "telethon": settings.thirdparty_lib_loglevel,
+        "web3": settings.thirdparty_lib_loglevel,
+        "apprise": settings.thirdparty_lib_loglevel,
+        "urllib3": settings.thirdparty_lib_loglevel,
+        "asyncz": settings.thirdparty_lib_loglevel,
     }
     logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
     loguru_logger.add(

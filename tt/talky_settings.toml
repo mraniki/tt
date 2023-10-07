@@ -31,6 +31,8 @@ VALUE = "Production"
 # Log level to troubleshoot
 # loglevel = "DEBUG"
 loglevel = "INFO"
+# Log level for third party library
+thirdparty_lib_loglevel = "ERROR"
 
 # URL to verify the latest version
 repo = "https://api.github.com/repos/mraniki/tt/releases/latest"
