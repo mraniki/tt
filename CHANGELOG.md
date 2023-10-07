@@ -2,6 +2,59 @@
 
 
 
+## v6.4.36 (2023-10-07)
+
+### Other
+
+* Merge pull request #899 from mraniki/dev
+
+🔧 added arb example settings ⬆️ MyLLM ([`53645ec`](https://github.com/mraniki/tt/commit/53645ec537d48fcda18fcee07af06c92e73c4773))
+
+* Merge pull request #897 from mraniki/dev
+
+♻️ Refactor plugin_manager.py and utils.py ([`dd2c86a`](https://github.com/mraniki/tt/commit/dd2c86a31531029c53dfaeb559fb43d34a05510b))
+
+* Merge pull request #898 from mraniki/sourcery/dev
+
+♻️ Refactor plugin_manager.py and utils.py  (Sourcery refactored) ([`2d5eddc`](https://github.com/mraniki/tt/commit/2d5eddce7028f08c444f609afdc3c2318cac4bb8))
+
+* &#39;Refactored by Sourcery&#39; ([`b159f09`](https://github.com/mraniki/tt/commit/b159f09c47f77efeda36b9a16a62c90846af9de9))
+
+* Add asyncio import ([`92abd0d`](https://github.com/mraniki/tt/commit/92abd0db62f1570ad50e175acd17d09da4dc7906))
+
+* Refactor task appending in PluginManager ([`a65c79f`](https://github.com/mraniki/tt/commit/a65c79f9a1c36ff7abce2bbbbb86a3a756983c4d))
+
+* Refactor PluginManager class ([`6ecafcd`](https://github.com/mraniki/tt/commit/6ecafcd0588b81dc440479c0876d906d86f684f0))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`341d82d`](https://github.com/mraniki/tt/commit/341d82de66a38e3e33b6db7762b4019362c3a9e5))
+
+* Refactor plugin_manager.py and utils.py
+
+- Refactor the debug log message in PluginManager class to improve reada
+bility.
+- Use asyncio.create_task() to handle messages in parallel in
+PluginMana
+ger class.
+- Add comments to explain the purpose of the code in PluginManager
+class
+.
+- Remove commented out code in utils.py related to checking the latest
+v
+ersion.
+
+This commit addresses the above changes. ([`5aa3b17`](https://github.com/mraniki/tt/commit/5aa3b17905d6a0c517ab1913bff262cc0b46be92))
+
+### Update
+
+* Update Requirements ([`4508f14`](https://github.com/mraniki/tt/commit/4508f14e66f9114ce5570dd04f5dd299fb7fd8f5))
+
+* Update pyproject.toml ([`05f2156`](https://github.com/mraniki/tt/commit/05f2156cd3d87754d52e3e7bbeca4253c2a3a1d0))
+
+### 🔧
+
+* 🔧 added arb example settings ([`b0c20dc`](https://github.com/mraniki/tt/commit/b0c20dce6c708c44c4725c794339b8649f255dac))
+
+
 ## v6.4.35 (2023-10-06)
 
 ### :white_check_mark:
