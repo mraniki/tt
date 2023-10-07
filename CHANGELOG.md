@@ -2,6 +2,42 @@
 
 
 
+## v6.4.37 (2023-10-07)
+
+### Other
+
+* Merge pull request #902 from mraniki/dev
+
+⬆️ 🛠️(deps): update dependency ([`67137db`](https://github.com/mraniki/tt/commit/67137db3cf196721d91fb51f10715a71eb0d6d87))
+
+* Merge pull request #900 from mraniki/renovate/dxsp-5.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v5.2.3 ([`06db6f4`](https://github.com/mraniki/tt/commit/06db6f44d1908d4085bebe073b1648bcfcb0adeb))
+
+* Refactor third-party library log levels in config.py and talky_settings.toml
+
+- Refactor third-party library log levels in config.py
+- Add thirdparty_lib_loglevel key in talky_settings.toml ([`41234d2`](https://github.com/mraniki/tt/commit/41234d29440eebb3cb7eb1390f5f2a412f4b3090))
+
+### Update
+
+* Update Requirements ([`ca6a75c`](https://github.com/mraniki/tt/commit/ca6a75c1f92a01eeaa9e27a3f2db80b780432859))
+
+* Update pyproject.toml ([`e426649`](https://github.com/mraniki/tt/commit/e42664913cc455a8487398b045ceab7ccdf9c7d1))
+
+* Update Requirements ([`8475006`](https://github.com/mraniki/tt/commit/8475006b6581dc5e1883ac90b84bc7d39a40ad1c))
+
+* Update Requirements ([`0e43321`](https://github.com/mraniki/tt/commit/0e4332146a9badc36ff371cfaf116caf4e5cea9b))
+
+* Update Requirements ([`4faf01f`](https://github.com/mraniki/tt/commit/4faf01f9367965ade53b2c9f7fb3ff2ad0601615))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v5.2.3 ([`aa66d62`](https://github.com/mraniki/tt/commit/aa66d6284292f1708532b273228c7b8fe5d211b7))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.15 ([`2674316`](https://github.com/mraniki/tt/commit/2674316e7b54a431bb59c624b33ba06806930357))
+
+
 ## v6.4.36 (2023-10-07)
 
 ### Other
