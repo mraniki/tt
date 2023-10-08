@@ -2,6 +2,58 @@
 
 
 
+## v6.4.40 (2023-10-08)
+
+### Other
+
+* Merge pull request #906 from mraniki/dev
+
+Refactor HelperPlugin and LlmPlugin ([`bcf06b2`](https://github.com/mraniki/tt/commit/bcf06b2a1244866b12271baa6c11c65a597d3bcc))
+
+* Merge pull request #908 from mraniki/renovate/dxsp-5.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v5.2.5 ([`6705826`](https://github.com/mraniki/tt/commit/670582679a74b49955fb4313927535cdc090ede8))
+
+* Refactor directory_name assignment in HelperPlugin
+
+The directory_name assignment in HelperPlugin has been refactored to imp
+rove readability and maintainability. ([`3a3b59e`](https://github.com/mraniki/tt/commit/3a3b59ebaa4b63de4533db0d2f1c8b6f7268b671))
+
+* Merge pull request #905 from mraniki/renovate/myllm-3.x
+
+⬆️ 🛠️(deps): update dependency myllm to v3.1.16 ([`2df58a3`](https://github.com/mraniki/tt/commit/2df58a3b1c0a91fbfc3be03685ced2cd8aff0fc1))
+
+* Merge pull request #907 from mraniki/sourcery/dev
+
+Refactor HelperPlugin and LlmPlugin (Sourcery refactored) ([`7eb95d5`](https://github.com/mraniki/tt/commit/7eb95d55da9874392c8922e87acbb0b7445b32c1))
+
+* &#39;Refactored by Sourcery&#39; ([`c834f65`](https://github.com/mraniki/tt/commit/c834f650d74361a931e5937bb768bb4620d42f45))
+
+* Refactor HelperPlugin and LlmPlugin
+
+- Refactored HelperPlugin to include the directory name in the return st
+atement.
+- Updated LlmPlugin to check for both llm_prefix and bot_prefix before
+s
+ending a notification. ([`92a2017`](https://github.com/mraniki/tt/commit/92a2017f3a35ce6c20e9d007523d551a7a92560d))
+
+### Update
+
+* Update Requirements ([`9417a92`](https://github.com/mraniki/tt/commit/9417a927904c67b4cd72dddac75ac75c6ab181e5))
+
+* Update Requirements ([`7e713c4`](https://github.com/mraniki/tt/commit/7e713c4ecb24aca2aeee9cd710bf7d4662a16013))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v5.2.5 ([`430d7c1`](https://github.com/mraniki/tt/commit/430d7c16ca4aff08e1e60051893e5715025b58d1))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.16 ([`cfeb7a9`](https://github.com/mraniki/tt/commit/cfeb7a9a800678c6a0e3abd42f71a96223fef3df))
+
+### 🔧
+
+* 🔧 ([`5dc03e8`](https://github.com/mraniki/tt/commit/5dc03e8cd748f33d913d2eb9a109bb63c85f9284))
+
+
 ## v6.4.39 (2023-10-08)
 
 ### Other
