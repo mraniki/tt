@@ -2,6 +2,31 @@
 
 
 
+## v6.4.39 (2023-10-08)
+
+### Other
+
+* Merge pull request #904 from mraniki/dev
+
+🐳 Refactor .dockerignore file ([`0361547`](https://github.com/mraniki/tt/commit/0361547c197a2dec7d2effca830b4580c17a9be3))
+
+* Refactor .dockerignore file
+
+- Removed unnecessary lines and added more specific patterns. ([`bef4795`](https://github.com/mraniki/tt/commit/bef4795f0531e64082bfafed277036ce378ccfc4))
+
+* Refactor .dockerignore file
+
+- Removed **/ prefix from ignored directories
+- Changed **/*.md to */*.md
+- Changed **//LICENSE to LICENSE ([`0635217`](https://github.com/mraniki/tt/commit/063521745e8fa623271a2e358b9a6e4dc9f8cbae))
+
+### Update
+
+* Update Requirements ([`b209c69`](https://github.com/mraniki/tt/commit/b209c6982fee64576e81f4b960641ac6b4f7911d))
+
+* Update pyproject.toml ([`d44cb5a`](https://github.com/mraniki/tt/commit/d44cb5a82fda3b1f9431a8cf3c22565a71406979))
+
+
 ## v6.4.38 (2023-10-07)
 
 ### Other
