@@ -75,7 +75,11 @@ class HelperPlugin(BasePlugin):
         """
         return info
         """
-        directory_name = os.path.basename(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+        directory_name = os.path.basename(
+            os.path.dirname(
+                os.path.dirname(
+                    os.path.dirname(
+                        __file__))))
         return f"ℹ️ {directory_name} {__version__}\n"
 
     async def get_helper_network(self):
