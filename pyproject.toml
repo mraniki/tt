@@ -54,7 +54,7 @@ findmyorder = "1.8.0"
 dxsp = "5.2.4"
 cefi = "3.1.4"
 talkytrend = "1.15.1"
-myllm = "3.1.15"
+myllm = "3.1.16"
 
 
 [tool.poetry.group.dev.dependencies]
