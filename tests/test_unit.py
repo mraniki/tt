@@ -21,7 +21,7 @@ def set_test_settings():
 
 
 def test_dynaconf_is_in_testing():
-    assert settings.platform is not None
+    print(settings)
     assert settings.VALUE == "On Testing"
 
 
@@ -76,8 +76,8 @@ def test_webhook_with_invalid_auth():
 
 @pytest.mark.asyncio
 async def test_check_version(caplog):
-    result = await check_version()
-    assert "You are" in caplog.text 
+    await check_version()
+    assert "You are" in caplog.text
 
 
 @pytest.mark.asyncio

@@ -34,6 +34,18 @@ Your settings should be setup in settings.toml, .secrets.toml, .env or environme
     Settings.toml or .env can be located in :file:`/app/settings.toml` or :file:`/app/.env` for docker.
     If deployed locally, place your file in :file:`/tt/` folder.
 
+1Password
+=========
+
+In case, you use 1Password to store your settings, you can use :file:`.secrets.toml` to retrieve and store your settings from a notesPlain item.
+in order to use 1Password, you need to add the following to your :file:`.env` file:
+    - OP_SERVICE_ACCOUNT_TOKEN: your 1Password service account token
+    - OP_VAULT: your 1Password vault
+    - OP_ITEM: your 1Password item
+    - OP_PATH: your one 1Password path (optional and default value `/usr/bin/op`)
+
+The :file:`.secrets.toml` will located in :file:`/tt/.secrets.toml` and  be created by the OP client via `op read op://vault/item/notesPlain > .secrets.toml`
+
 
 Talky Settings
 ==============
