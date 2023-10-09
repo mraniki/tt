@@ -2,6 +2,19 @@
 
 
 
+## v6.4.41 (2023-10-09)
+
+### Other
+
+* Merge pull request #909 from mraniki/dev
+
+📝 1password documentation ([`5f730bf`](https://github.com/mraniki/tt/commit/5f730bfb7f6340832dd917eaeec08e17d4475640))
+
+### 📝
+
+* 📝 1password documentation ([`609896d`](https://github.com/mraniki/tt/commit/609896dea0f9d42c254c321e427ada867ce98f44))
+
+
 ## v6.4.40 (2023-10-08)
 
 ### Other
