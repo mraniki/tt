@@ -15,6 +15,4 @@ repos:
     rev: '1.7.5'
     hooks:
     - id: bandit
-      args: ["-c", "pyproject.toml", "--quiet", "--format=custom"]
-      files: ^dvc/
-      additional_dependencies: [".[toml]"]
+      args: ["-c", "pyproject.toml"]
