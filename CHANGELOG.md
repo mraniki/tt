@@ -2,6 +2,76 @@
 
 
 
+## v6.4.43 (2023-10-10)
+
+### Other
+
+* Merge pull request #912 from mraniki/dev
+
+Add test_parse_ignore function to test_cex_exchange_plugin.py ([`df6dd2b`](https://github.com/mraniki/tt/commit/df6dd2b8ee264549eddf3e33052ef7df732e1a44))
+
+* Merge pull request #915 from mraniki/renovate/iamlistening-4.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v4.2.10 ([`9f04125`](https://github.com/mraniki/tt/commit/9f04125c1703734c7f7b6ef81091d891f7298c45))
+
+* Add automatic merge on approval rule
+
+- Added a new file `.github/.mergify.yml` with rules for automatic mergi
+ng of pull requests on approval. The rules include conditions for
+succes
+sful build and test checks, as well as no check failures. The merge
+meth
+od used is the default merge. ([`395519e`](https://github.com/mraniki/tt/commit/395519e0cd8f4e343aacc49fa447855d1632d20d))
+
+* Merge pull request #913 from mraniki/renovate/ruff-0.x
+
+⬆️ 🛠️(deps): update dependency ruff to ^0.0.292 ([`3850ca4`](https://github.com/mraniki/tt/commit/3850ca43db809e083973b86f8e1a16e4c48837fe))
+
+* Add Bandit configuration to exclude &#34;tests&#34; directory ([`f372f67`](https://github.com/mraniki/tt/commit/f372f67ab541b2a4170790fe363678a654f2fbe7))
+
+* Add test_parse_ignore function to test_cex_exchange_plugin.py ([`88cb0f0`](https://github.com/mraniki/tt/commit/88cb0f09842fada29047e03d3770e6cfaf954688))
+
+### Update
+
+* Update Requirements ([`83f2c28`](https://github.com/mraniki/tt/commit/83f2c28baccb8718f36de29c363910669918c45e))
+
+* Update Requirements ([`6caab21`](https://github.com/mraniki/tt/commit/6caab21d62f98adb2d2ba781b0e2f1c103b99d67))
+
+* Update pyproject.toml with new dependencies
+
+- talkytrend = &#34;1.15.1&#34; -&gt; talkytrend = &#34;1.15.2&#34;
+- findmyorder = &#34;1.8.1&#34; -&gt; findmyorder = &#34;1.8.2&#34;
+- dxsp = &#34;5.2.7&#34; -&gt; dxsp = &#34;5.2.8&#34;
+- cefi = &#34;3.1.5&#34; -&gt; cefi = &#34;3.1.6&#34;
+- myllm = &#34;3.1.18&#34; -&gt; myllm = &#34;3.1.19 ([`bf9d621`](https://github.com/mraniki/tt/commit/bf9d6216e0beae72fa263959f2996306bd1231e6))
+
+* Update pre-commit config with black hook for Python 3.11 ([`db2c171`](https://github.com/mraniki/tt/commit/db2c171eeb51a283e3e62f31d88a4d51a838f33f))
+
+* Update pyproject.toml ([`ec7eed5`](https://github.com/mraniki/tt/commit/ec7eed51efc9a7a38528503ee59db5106516ebdf))
+
+### ♻️
+
+* ♻️ pyproject update ([`ce14ffe`](https://github.com/mraniki/tt/commit/ce14ffed3d6fb7da61f1714279c5ee183f122158))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.10 ([`5bdb753`](https://github.com/mraniki/tt/commit/5bdb7537b12f1b40d606e2d33c8ceaf5818dd3da))
+
+* ⬆️ dep upgrade ([`1d6604a`](https://github.com/mraniki/tt/commit/1d6604ab76465e23d04cbafb63291121fba3f7e5))
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.0.292 ([`d0f0ca1`](https://github.com/mraniki/tt/commit/d0f0ca10ba90fa331e6af49e8758b052b4201576))
+
+### 👷
+
+* 👷 CI Change with precommit ([`cb930ab`](https://github.com/mraniki/tt/commit/cb930ab19ca78ab71a699e919e263eb00c74304c))
+
+### 🔒
+
+* 🔒 ([`fe140c4`](https://github.com/mraniki/tt/commit/fe140c442a447a1ed5092aa90bfe11f34de3e92f))
+
+* 🔒 bandit ([`b1a4950`](https://github.com/mraniki/tt/commit/b1a4950ca2442fe2951f631e325e98cabde36e7a))
+
+
 ## v6.4.42 (2023-10-10)
 
 ### Other
