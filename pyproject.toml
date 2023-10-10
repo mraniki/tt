@@ -133,6 +133,8 @@ omit = [
   "*/config.py"
 ]
 
+[tool.bandit]
+exclude_dirs = ["tests"]
 
 [tool.semantic_release]
 build_command = "pip install poetry && poetry build"
