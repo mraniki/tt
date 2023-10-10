@@ -2,6 +2,37 @@
 
 
 
+## v6.4.42 (2023-10-10)
+
+### Other
+
+* Merge pull request #911 from mraniki/dev
+
+🔊 for ignore check and ⬆️ DXSP and MyLLM ([`7c737f1`](https://github.com/mraniki/tt/commit/7c737f108a4b39b111e342439637a72ec6f1bc96))
+
+* Merge pull request #910 from mraniki/renovate/iamlistening-4.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v4.2.8 ([`b296693`](https://github.com/mraniki/tt/commit/b296693add67c89580825adee806b36b32b1cc8f))
+
+### Update
+
+* Update Requirements ([`abe7c83`](https://github.com/mraniki/tt/commit/abe7c83ed917427e41319572c23b4e98a4a94877))
+
+* Update Requirements ([`88b8241`](https://github.com/mraniki/tt/commit/88b82413b7007c23a64af2f48243375a9568cde2))
+
+* Update pyproject.toml ([`3c682f5`](https://github.com/mraniki/tt/commit/3c682f54cc213501cdc24b7a2955c92d19901f80))
+
+* Update Requirements ([`bd27145`](https://github.com/mraniki/tt/commit/bd271453b984c911accedbabbfc187e783a1c3fc))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.8 ([`1f7cbec`](https://github.com/mraniki/tt/commit/1f7cbec5a83ed43c95ed441740e257ae845ee3f5))
+
+### 🔊
+
+* 🔊 for ignore check ([`f3d5944`](https://github.com/mraniki/tt/commit/f3d5944bd6b69f46265b0597268fcdd73cfe706a))
+
+
 ## v6.4.41 (2023-10-09)
 
 ### Other
