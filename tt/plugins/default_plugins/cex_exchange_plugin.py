@@ -60,7 +60,7 @@ class CexExchangePlugin(BasePlugin):
         """
         if not self.should_handle(msg):
             return
-        logger.debug("settings.bot_ignore: %s", settings.bot_ignore)
+        logger.debug("settings.bot_ignore: {}", settings.bot_ignore)
         if not msg.startswith(settings.bot_ignore):
             if await self.fmo.search(msg):
                 order = await self.fmo.get_order(msg)
