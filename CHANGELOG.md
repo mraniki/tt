@@ -2,6 +2,83 @@
 
 
 
+## v6.4.49 (2023-10-11)
+
+### Other
+
+* Merge pull request #934 from mraniki/dev
+
+Update Requirements ([`33a915e`](https://github.com/mraniki/tt/commit/33a915e8707b8200735752878553a4c4d2d1a961))
+
+* Merge pull request #936 from mraniki/renovate/myllm-3.x
+
+⬆️ 🛠️(deps): update dependency myllm to v3.1.25 ([`847d53b`](https://github.com/mraniki/tt/commit/847d53b76a16153c63a9b119d7e2ebf385c1a68a))
+
+* Merge pull request #935 from mraniki/renovate/iamlistening-4.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v4.2.13 ([`3727132`](https://github.com/mraniki/tt/commit/37271324c9f9b13378713f0c0a09616b71f79ab1))
+
+* Merge pull request #932 from mraniki/renovate/dxsp-5.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v5.2.11 ([`65e836c`](https://github.com/mraniki/tt/commit/65e836cc689e7540062dc52ea65e6826a8951846))
+
+* Merge pull request #933 from mraniki/renovate/iamlistening-4.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v4.2.12 ([`959970e`](https://github.com/mraniki/tt/commit/959970e1280fc6cb5e82c53336552682c8702d0b))
+
+* Merge pull request #931 from mraniki/dev
+
+👷 CI Change ([`2011761`](https://github.com/mraniki/tt/commit/2011761ecffaef0e8273414bd53056a39b17ae9d))
+
+* Merge branch &#39;main&#39; into dev ([`d5b8539`](https://github.com/mraniki/tt/commit/d5b85391f3bc864b53ca2c4023a42e8fa1586a26))
+
+* Merge pull request #927 from mraniki/mergify/mraniki/config-update
+
+ci(Mergify): configuration update ([`a19eaa8`](https://github.com/mraniki/tt/commit/a19eaa8be4813b348312b58ce15e4a9c7549e2fb))
+
+* ci(Mergify): configuration update
+
+Signed-off-by: null &lt;null&gt; ([`5bf5d0c`](https://github.com/mraniki/tt/commit/5bf5d0c108f2e6e610413646b67c2feb622ca055))
+
+* Merge branch &#39;main&#39; into dev ([`b9c36b3`](https://github.com/mraniki/tt/commit/b9c36b3c7e31cc7d9274a42f174492ea7acdb9a5))
+
+### Update
+
+* Update Requirements ([`97a651a`](https://github.com/mraniki/tt/commit/97a651aa633e6f4ee839374704efd790bf54b839))
+
+* Update Requirements ([`ef537bb`](https://github.com/mraniki/tt/commit/ef537bb4ee82cfc2527ba31d5542caa34c3d5c1d))
+
+* Update Requirements ([`a277f10`](https://github.com/mraniki/tt/commit/a277f10557018b80928d466c7e1a1184364181cf))
+
+* Update Requirements ([`8e04279`](https://github.com/mraniki/tt/commit/8e042792c978063f1785921021a7895f6e2e20a9))
+
+* Update Requirements ([`6d682d7`](https://github.com/mraniki/tt/commit/6d682d7da02e82233f1fafb8b749a353398863d4))
+
+### ⚡
+
+* ⚡ parsing order improvement ([`a051140`](https://github.com/mraniki/tt/commit/a0511408b5d97ef1cb8f6ab10092d40132a9e15a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.25 ([`d6f732d`](https://github.com/mraniki/tt/commit/d6f732d38968ffff763e2a1aea3c96d812e33cab))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.13 ([`dc0092b`](https://github.com/mraniki/tt/commit/dc0092b89658f6bb234e1d6e3f181c9505de14d1))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v5.2.11 ([`b83d1a2`](https://github.com/mraniki/tt/commit/b83d1a2b2a6d82c01f81fd5a458acb957a63f0d9))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.12 ([`c53e657`](https://github.com/mraniki/tt/commit/c53e65721274f9edb5fc4184b1a19e8d97038ab6))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.8.4 ([`5965284`](https://github.com/mraniki/tt/commit/5965284f22fb993d8a679d5c4493834039edb7fd))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v5.2.10 ([`a09a185`](https://github.com/mraniki/tt/commit/a09a185bc8ab88c400d8922ce643f2441bbdec20))
+
+### 👷
+
+* 👷 CI Change ([`f252af1`](https://github.com/mraniki/tt/commit/f252af18915ae972fbf838b6bf8f4883606440f8))
+
+* 👷 CI Change ([`c7931a4`](https://github.com/mraniki/tt/commit/c7931a47b81b7ea4146085d47e8a7003326e2f6a))
+
+
 ## v6.4.48 (2023-10-11)
 
 ### Other
@@ -15,6 +92,10 @@
 ⬆️ 🛠️(deps): update dependency dxsp to v5.2.9 ([`7b4374f`](https://github.com/mraniki/tt/commit/7b4374f1e6c7f3ee977ff46386cc0cf9224c7533))
 
 * Merge branch &#39;main&#39; into dev ([`28aa5ec`](https://github.com/mraniki/tt/commit/28aa5ecbf821b41fa561e299b217cee5fa41efed))
+
+### Update
+
+* Update Requirements ([`5b1acc3`](https://github.com/mraniki/tt/commit/5b1acc37ac257ef2be14f7d2d0689fe09e165dbc))
 
 ### ⬆️
 
