@@ -4,8 +4,12 @@ pull_request_rules:
       - or:
         - base=main
         - base=dev
-      - "status-success=test"
+      - "status-success= test"
       - "status-success=build"
     actions:
       merge:
         method: merge
+queue_rules:
+  - name: default
+    queue_conditions:
+      - check-success = test
