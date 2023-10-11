@@ -1,9 +1,0 @@
-pull_request_rules:
-  - name: Automatic merge on approval
-    conditions:
-      - "check-success=build"
-      - "check-success=test"
-      - "#check-failure=0"
-    actions:
-      merge:
-        method: merge
