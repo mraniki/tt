@@ -4,7 +4,10 @@ pull_request_rules:
       - or:
         - base=main
         - base=dev
-      - "status-success=👷Flow"
+      - "status-success=lint"
+      - "status-success=test"
+      - "status-success=build"
+      - "status-success=release"
     actions:
       merge:
         method: merge
