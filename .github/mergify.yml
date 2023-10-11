@@ -4,8 +4,6 @@ pull_request_rules:
       - or:
         - base=main
         - base=dev
-      - "status-success= test"
-      - "status-success=build"
     actions:
       merge:
         method: merge
