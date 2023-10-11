@@ -5,7 +5,6 @@ pull_request_rules:
         - base=main
         - base=dev
       - "status-success=👷Flow"
-      - "status-success=test"
     actions:
       merge:
         method: merge
