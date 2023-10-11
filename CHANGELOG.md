@@ -2,6 +2,19 @@
 
 
 
+## v6.4.45 (2023-10-11)
+
+### :recycle:
+
+* :recycle:Add gitIgnoredAuthors to renovate.json ([`9b1543c`](https://github.com/mraniki/tt/commit/9b1543c77b4db3b81869d0b774d7e5de4b80b557))
+
+### Other
+
+* Merge pull request #918 from mraniki/dev
+
+:recycle:Add gitIgnoredAuthors to renovate.json ([`e89ff44`](https://github.com/mraniki/tt/commit/e89ff4407026bfb26dfddcb66acf8f8993bcbd1f))
+
+
 ## v6.4.44 (2023-10-11)
 
 ### :recycle:
