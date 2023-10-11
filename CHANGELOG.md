@@ -2,6 +2,19 @@
 
 
 
+## v6.4.44 (2023-10-11)
+
+### :recycle:
+
+* :recycle: Refactor Mergify configuration file ([`c2cba22`](https://github.com/mraniki/tt/commit/c2cba22f1cd1fdb466b2b9122add7269c4e6492f))
+
+### Other
+
+* Merge pull request #917 from mraniki/dev
+
+:recycle: Refactor Mergify configuration file ([`3d829ac`](https://github.com/mraniki/tt/commit/3d829ac40683452cd06d658e557d2231d4a00695))
+
+
 ## v6.4.43 (2023-10-10)
 
 ### Other
