@@ -2,9 +2,34 @@
 
 
 
+## v6.4.47 (2023-10-11)
+
+### Other
+
+* Merge pull request #925 from mraniki/dev
+
+⬆️ ([`1dca2e8`](https://github.com/mraniki/tt/commit/1dca2e81040fd9ffbf669bac7a74339777345c36))
+
+* Merge branch &#39;main&#39; into dev ([`ca9c533`](https://github.com/mraniki/tt/commit/ca9c53377e39a828a2be6ee8030a47654ed35b4b))
+
+
 ## v6.4.46 (2023-10-11)
 
 ### Other
+
+* Merge pull request #924 from mraniki/renovate/iamlistening-4.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v4.2.11 ([`9701514`](https://github.com/mraniki/tt/commit/9701514dee2c1e5515c47f1f8879903f40d30d0c))
+
+* Merge branch &#39;main&#39; into dev ([`2c9a1da`](https://github.com/mraniki/tt/commit/2c9a1da5cd0d806d514bd9fdce49c728bffb817e))
+
+* Merge pull request #919 from mraniki/renovate/myllm-3.x
+
+⬆️ 🛠️(deps): update dependency myllm to v3.1.23 ([`77ce760`](https://github.com/mraniki/tt/commit/77ce7602893f57b5170502501a59eeea4b681baf))
+
+* Merge pull request #923 from mraniki/renovate/findmyorder-1.x
+
+⬆️ 🛠️(deps): update dependency findmyorder to v1.8.3 ([`37d3947`](https://github.com/mraniki/tt/commit/37d3947f7bbcd64257b144f78c4aa867716a4391))
 
 * Merge pull request #920 from mraniki/dev
 
@@ -26,6 +51,8 @@ Signed-off-by: null &lt;null&gt; ([`0a041aa`](https://github.com/mraniki/tt/comm
 
 ### Update
 
+* Update Requirements ([`9b8ea3d`](https://github.com/mraniki/tt/commit/9b8ea3d138f8ef78cfcdda4bf9864e610348f140))
+
 * Update Requirements ([`980408f`](https://github.com/mraniki/tt/commit/980408faf3e7454f25377b78010cef8542755671))
 
 ### ♻️
@@ -33,6 +60,12 @@ Signed-off-by: null &lt;null&gt; ([`0a041aa`](https://github.com/mraniki/tt/comm
 * ♻️ ([`f509c78`](https://github.com/mraniki/tt/commit/f509c7826e4dfc1c45be8048e4fcafe531946c1a))
 
 ### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.11 ([`cf74c58`](https://github.com/mraniki/tt/commit/cf74c58bafc1c5d020b34211111dbcd6767fc8dc))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.8.3 ([`5083957`](https://github.com/mraniki/tt/commit/508395712f303a6d0e4f0961942e21035a502136))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.23 ([`36f2cb5`](https://github.com/mraniki/tt/commit/36f2cb528654ce6a101e4fd6fe5aa2edb6983313))
 
 * ⬆️ 🛠️(deps): update dependency myllm to v3.1.22 ([`f693976`](https://github.com/mraniki/tt/commit/f693976195eed2a7bbb801f6a7a77b2b9284348b))
 
