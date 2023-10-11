@@ -2,6 +2,41 @@
 
 
 
+## v6.4.46 (2023-10-11)
+
+### Other
+
+* Merge pull request #920 from mraniki/dev
+
+CI test ([`a98e1e8`](https://github.com/mraniki/tt/commit/a98e1e84d09af92eb4d1a9191631ce7e960b1b3a))
+
+* Merge branch &#39;main&#39; into dev ([`50fa2f2`](https://github.com/mraniki/tt/commit/50fa2f26f64de3209c65df0a86ab06f12e4eb9d4))
+
+* Merge pull request #921 from mraniki/mergify/mraniki/config-update
+
+ci(Mergify): configuration update ([`5cb917c`](https://github.com/mraniki/tt/commit/5cb917cdf4ed718558f99a7465d881a7ebf4bc7a))
+
+* ci(Mergify): configuration update
+
+Signed-off-by: null &lt;null&gt; ([`0a041aa`](https://github.com/mraniki/tt/commit/0a041aa1dd944d5b22128597b713ae305a22a8f6))
+
+* Merge pull request #916 from mraniki/renovate/myllm-3.x
+
+⬆️ 🛠️(deps): update dependency myllm to v3.1.22 ([`c9e9bd7`](https://github.com/mraniki/tt/commit/c9e9bd7eee0339419aa428606ffbbc738d0f6208))
+
+### Update
+
+* Update Requirements ([`980408f`](https://github.com/mraniki/tt/commit/980408faf3e7454f25377b78010cef8542755671))
+
+### ♻️
+
+* ♻️ ([`f509c78`](https://github.com/mraniki/tt/commit/f509c7826e4dfc1c45be8048e4fcafe531946c1a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.22 ([`f693976`](https://github.com/mraniki/tt/commit/f693976195eed2a7bbb801f6a7a77b2b9284348b))
+
+
 ## v6.4.45 (2023-10-11)
 
 ### :recycle:
