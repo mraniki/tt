@@ -2,6 +2,25 @@
 
 
 
+## v6.4.48 (2023-10-11)
+
+### Other
+
+* Merge pull request #926 from mraniki/dev
+
+⬆️ 🛠️(deps): update dependency dxsp to v5.2.9 ([`858c054`](https://github.com/mraniki/tt/commit/858c054639f5ea501a94135be6db6be5a125021e))
+
+* Merge pull request #922 from mraniki/renovate/dxsp-5.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v5.2.9 ([`7b4374f`](https://github.com/mraniki/tt/commit/7b4374f1e6c7f3ee977ff46386cc0cf9224c7533))
+
+* Merge branch &#39;main&#39; into dev ([`28aa5ec`](https://github.com/mraniki/tt/commit/28aa5ecbf821b41fa561e299b217cee5fa41efed))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v5.2.9 ([`6c36d22`](https://github.com/mraniki/tt/commit/6c36d2208891ae652e30c9716a7db48bb7a2bb2f))
+
+
 ## v6.4.47 (2023-10-11)
 
 ### Other
@@ -11,6 +30,10 @@
 ⬆️ ([`1dca2e8`](https://github.com/mraniki/tt/commit/1dca2e81040fd9ffbf669bac7a74339777345c36))
 
 * Merge branch &#39;main&#39; into dev ([`ca9c533`](https://github.com/mraniki/tt/commit/ca9c53377e39a828a2be6ee8030a47654ed35b4b))
+
+### Update
+
+* Update Requirements ([`ea04a65`](https://github.com/mraniki/tt/commit/ea04a65218b7301acd93d133918411f0afe97166))
 
 
 ## v6.4.46 (2023-10-11)
