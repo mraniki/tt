@@ -2,6 +2,21 @@
 
 
 
+## v6.4.51 (2023-10-12)
+
+### Other
+
+* Merge pull request #941 from mraniki/dev
+
+⬆️ 🛠️(deps) ([`097d221`](https://github.com/mraniki/tt/commit/097d221055d19eb387f587e1eaaf3553e455d900))
+
+* Merge branch &#39;main&#39; into dev ([`43e0726`](https://github.com/mraniki/tt/commit/43e072635a940f70bb2da741799424bdeb91e8d8))
+
+* Merge pull request #939 from mraniki/renovate/findmyorder-1.x
+
+⬆️ 🛠️(deps): update dependency findmyorder to v1.9.1 ([`fd9464a`](https://github.com/mraniki/tt/commit/fd9464a39ce76fe2279800365f6a60abf2b1be7b))
+
+
 ## v6.4.50 (2023-10-12)
 
 ### Other
@@ -14,7 +29,13 @@
 
 ### Update
 
+* Update Requirements ([`aff3d09`](https://github.com/mraniki/tt/commit/aff3d099605717414efeb1c5bfcdfcf0d1fd772b))
+
 * Update github workflow ([`6e17261`](https://github.com/mraniki/tt/commit/6e172619fc834e344b291401dfae3244d71fa8f5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.1 ([`f4c75fb`](https://github.com/mraniki/tt/commit/f4c75fbf4c482c84b06c7b466cc4f989048a3be4))
 
 
 ## v6.4.49 (2023-10-11)
