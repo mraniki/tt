@@ -2,6 +2,21 @@
 
 
 
+## v6.4.50 (2023-10-12)
+
+### Other
+
+* Merge pull request #940 from mraniki/dev
+
+👷‍♂️ CI update ([`cec9c6b`](https://github.com/mraniki/tt/commit/cec9c6b3c06852fe1ac2449c7d1dc2108b539505))
+
+* :construction_worker_man: Added merge job for automerging releases. ([`6f7e933`](https://github.com/mraniki/tt/commit/6f7e933c4bb3a13bc02f3401e7c5377d48baeabf))
+
+### Update
+
+* Update github workflow ([`6e17261`](https://github.com/mraniki/tt/commit/6e172619fc834e344b291401dfae3244d71fa8f5))
+
+
 ## v6.4.49 (2023-10-11)
 
 ### Other
