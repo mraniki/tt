@@ -37,8 +37,10 @@ class LlmPlugin(BasePlugin):
         """Handles incoming messages"""
         if not self.should_handle(msg):
             return
-        if self.llm.llm_ai_mode and (
-            settings.bot_ignore not in msg or settings.bot_prefix not in msg
+        if (
+            self.llm.llm_ai_mode
+            and (settings.bot_ignore not in msg)
+            and (not msg.startswith(settings.bot_prefix))
         ):
             chat = await self.llm.chat(str(msg))
             await self.send_notification(chat)

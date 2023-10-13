@@ -127,10 +127,10 @@ class PluginManager:
             None
 
         """
-
+        
+        logger.debug("Processing: {}", message)
         if not message:
             return
-        logger.debug("Processing: {}", message)
         tasks=[]
         for plugin in self.plugins:
                 
