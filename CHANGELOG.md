@@ -2,6 +2,27 @@
 
 
 
+## v6.4.54 (2023-10-13)
+
+### Other
+
+* Merge pull request #947 from mraniki/dev
+
+⬆️myllm ([`0bc03cf`](https://github.com/mraniki/tt/commit/0bc03cf768016717983e469478d10436abeb84a5))
+
+* Merge pull request #945 from mraniki/renovate/myllm-3.x
+
+⬆️ 🛠️(deps): update dependency myllm to v3.1.32 ([`2a3600d`](https://github.com/mraniki/tt/commit/2a3600d718bf81aeecc16209f0a22ecbefa3c4a2))
+
+### Update
+
+* Update Requirements ([`3853a4e`](https://github.com/mraniki/tt/commit/3853a4e67c1d421666d0a14ae35c4b65bc1aac73))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.32 ([`d93a2bd`](https://github.com/mraniki/tt/commit/d93a2bd694c7335416d39f7ac3c9950dae454c04))
+
+
 ## v6.4.53 (2023-10-13)
 
 ### Other
