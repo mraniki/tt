@@ -2,6 +2,23 @@
 
 
 
+## v6.4.52 (2023-10-13)
+
+### Other
+
+* Merge pull request #943 from mraniki/dev
+
+Update pyproject.toml with DXSP V6 ([`94be856`](https://github.com/mraniki/tt/commit/94be856cfdeb691f7555bdc64a4433dd63999818))
+
+### Update
+
+* Update pyproject.toml with DXSP V6 ([`707f538`](https://github.com/mraniki/tt/commit/707f538a91c10524cb4d1b48add4857d37692460))
+
+### ♻️
+
+* ♻️ ([`4341978`](https://github.com/mraniki/tt/commit/434197806edd4728ccdd85109f04af2b26b09eef))
+
+
 ## v6.4.51 (2023-10-12)
 
 ### Other
