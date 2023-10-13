@@ -5,7 +5,7 @@
     ":semanticCommitTypeAll(⬆️ 🛠️)",
     ":disableDependencyDashboard"
   ],
-  "gitIgnoredAuthors": ["githubaction@githubaction.com"],
+  "gitIgnoredAuthors": ["githubaction@githubaction.com","github-actions[bot]","8766259+mraniki@users.noreply.github.com"],
 
   "semanticCommits": "enabled",
   "labels": ["dependencies"],
