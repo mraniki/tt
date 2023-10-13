@@ -2,6 +2,19 @@
 
 
 
+## v6.4.55 (2023-10-13)
+
+### Other
+
+* Merge pull request #949 from mraniki/dev
+
+ dxsp to v6.0.1 ([`fbb1d7d`](https://github.com/mraniki/tt/commit/fbb1d7dce3c6314142972022f981417fe3c9647c))
+
+* Merge pull request #948 from mraniki/renovate/dxsp-6.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v6.0.1 ([`4c49341`](https://github.com/mraniki/tt/commit/4c49341b4bc8c9b5f8ba0c049889b0ccc00959eb))
+
+
 ## v6.4.54 (2023-10-13)
 
 ### Other
@@ -16,9 +29,13 @@
 
 ### Update
 
+* Update Requirements ([`ae2941a`](https://github.com/mraniki/tt/commit/ae2941af9e91093335b06742a3dd125c85a9146a))
+
 * Update Requirements ([`3853a4e`](https://github.com/mraniki/tt/commit/3853a4e67c1d421666d0a14ae35c4b65bc1aac73))
 
 ### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.0.1 ([`64a3961`](https://github.com/mraniki/tt/commit/64a39616f262de1fcd72e45f6e30c599b19f1824))
 
 * ⬆️ 🛠️(deps): update dependency myllm to v3.1.32 ([`d93a2bd`](https://github.com/mraniki/tt/commit/d93a2bd694c7335416d39f7ac3c9950dae454c04))
 
