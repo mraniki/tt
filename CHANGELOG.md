@@ -2,6 +2,39 @@
 
 
 
+## v6.4.53 (2023-10-13)
+
+### Other
+
+* Merge pull request #946 from mraniki/dev
+
+⬆️ Dev ([`cec8fe9`](https://github.com/mraniki/tt/commit/cec8fe94da1b57f97a274d7133859c428036812f))
+
+* Merge pull request #944 from mraniki/renovate/iamlistening-4.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v4.2.14 ([`fe3610d`](https://github.com/mraniki/tt/commit/fe3610debe037bf5eacd11d60f4e82dd5a6f6c29))
+
+* Merge pull request #938 from mraniki/renovate/myllm-3.x
+
+⬆️ 🛠️(deps): update dependency myllm to v3.1.31 ([`60bbe4b`](https://github.com/mraniki/tt/commit/60bbe4b417bbfc80719f9bb3495fd69dad731cf0))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`aec12ee`](https://github.com/mraniki/tt/commit/aec12ee921f49d308afedb4590abf6ffc9a80b74))
+
+### Update
+
+* Update Requirements ([`27b1194`](https://github.com/mraniki/tt/commit/27b1194786aac9433306fbee6c72198fb4bbca3a))
+
+* Update gitIgnoredAuthors in renovate.json ([`019bf57`](https://github.com/mraniki/tt/commit/019bf5789fd0b9971b9dd4e009abd0da2acb1836))
+
+* Update Requirements ([`89ce2ca`](https://github.com/mraniki/tt/commit/89ce2caf92f0534796f0a86bca4c4b35deffed9f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.14 ([`e3d9a01`](https://github.com/mraniki/tt/commit/e3d9a01a0cec65d08be1764bbabd3832aadb4aca))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.31 ([`af79030`](https://github.com/mraniki/tt/commit/af7903003b775dc5614928dcec48848e3cc1bac2))
+
+
 ## v6.4.52 (2023-10-13)
 
 ### Other
