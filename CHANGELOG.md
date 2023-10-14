@@ -2,6 +2,41 @@
 
 
 
+## v6.4.56 (2023-10-14)
+
+### Other
+
+* Merge pull request #951 from mraniki/dev
+
+📝 🔇 🚨 Documentation, Reduce debug log, and linter improvement ([`5357d0a`](https://github.com/mraniki/tt/commit/5357d0aed6def67ec0abe865adce129499d9fd33))
+
+* Remove unnecessary line in README.md ([`9042aaa`](https://github.com/mraniki/tt/commit/9042aaa65e4cea559739eefabdfc4d6a20728313))
+
+* Merge pull request #950 from mraniki/renovate/cefi-3.x
+
+⬆️ 🛠️(deps): update dependency cefi to v3.1.10 ([`97a1fe3`](https://github.com/mraniki/tt/commit/97a1fe3d4a38e1778e46566766e8419adb86e787))
+
+* Merge pull request #952 from mraniki/renovate/dxsp-6.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v6.0.2 ([`fdceeb6`](https://github.com/mraniki/tt/commit/fdceeb68fd2d47404171fe1d7ae29ec2d966ca2f))
+
+### Update
+
+* Update Requirements ([`5c94745`](https://github.com/mraniki/tt/commit/5c947454877ab89b7245fda0382d37ef8715e561))
+
+* Update Requirements ([`cc08b12`](https://github.com/mraniki/tt/commit/cc08b125a4040c928a38390302fada55b657af7c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.1.10 ([`d01148a`](https://github.com/mraniki/tt/commit/d01148a5cb10654cde6a01f275e96ff91349c400))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.0.2 ([`ff5dc25`](https://github.com/mraniki/tt/commit/ff5dc2545f9ca99c6e2c32ea5ee8b3b55a439668))
+
+### 🩹
+
+* 🩹 ([`d5f9473`](https://github.com/mraniki/tt/commit/d5f947320f1c299010f4067030e37d400cfa2877))
+
+
 ## v6.4.55 (2023-10-13)
 
 ### Other
