@@ -2,6 +2,33 @@
 
 
 
+## v6.4.57 (2023-10-15)
+
+### Other
+
+* Merge pull request #955 from mraniki/dev
+
+👷 CI Change ([`c46a2a5`](https://github.com/mraniki/tt/commit/c46a2a552c5b4db50a4225c0022e65f20f6d85f8))
+
+### Update
+
+* Update Requirements ([`060e427`](https://github.com/mraniki/tt/commit/060e427de92ddda2a2abc25826cf84596ffe1bcc))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.34 ([`eb846cf`](https://github.com/mraniki/tt/commit/eb846cf4333ba9ac90b783d793a29efbca3bc56e))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.0.3 ([`22f20eb`](https://github.com/mraniki/tt/commit/22f20ebfdfa9203fb70d688dc55a5201f14c61c8))
+
+### 👷
+
+* 👷 CI Change ([`2d3d3a2`](https://github.com/mraniki/tt/commit/2d3d3a28ae9a571a106ab1bbf829da5d47cb7517))
+
+### 🔥
+
+* 🔥 ([`c63bfe8`](https://github.com/mraniki/tt/commit/c63bfe894e513b8f456dfa41dc3562f76599de81))
+
+
 ## v6.4.56 (2023-10-14)
 
 ### Other
