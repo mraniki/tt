@@ -98,7 +98,10 @@ overgeneral-exceptions = [
 ]
 
 [tool.pytest.ini_options]
-addopts = "-v"
+addopts = """
+-v
+--show-capture=stderr
+"""
 filterwarnings = [
   " ignore:.*U.*mode is deprecated:DeprecationWarning",
   "ignore::DeprecationWarning"
