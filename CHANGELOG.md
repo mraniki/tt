@@ -2,6 +2,35 @@
 
 
 
+## v6.5.0 (2023-10-17)
+
+### Other
+
+* Merge pull request #964 from mraniki/dev
+
+⬆️ 🛠️(deps): myllm, dxsp, cefi ([`f3cd898`](https://github.com/mraniki/tt/commit/f3cd8983fe35482dcd1a535e5b517b0ca4db75cd))
+
+* Merge pull request #960 from mraniki/renovate/ruff-0.x
+
+⬆️ 🛠️(deps): update dependency ruff to ^0.1.0 ([`ea44620`](https://github.com/mraniki/tt/commit/ea44620e95fa640a26d85266688b409b92ec3cbe))
+
+### Update
+
+* Update Requirements ([`08cca23`](https://github.com/mraniki/tt/commit/08cca23dc18a4170f6dadca204c8dc3038f4af7b))
+
+* Update pyproject.toml ([`85b2bf9`](https://github.com/mraniki/tt/commit/85b2bf97f5de8dc71f14318c7d59159890dd331c))
+
+* Update Requirements ([`28bde18`](https://github.com/mraniki/tt/commit/28bde18c21b83ec8e3732bf32db18b2dc9e0039c))
+
+### ✨
+
+* ✨ trading_amount_threshold ([`cc80d0f`](https://github.com/mraniki/tt/commit/cc80d0f5b32d18934a95aed18e9019f013a1530c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.36 ([`d599a8a`](https://github.com/mraniki/tt/commit/d599a8a59e5e5f842c56c8020c084718b281faa1))
+
+
 ## v6.4.58 (2023-10-17)
 
 ### Other
@@ -16,6 +45,8 @@
 
 * Update Requirements ([`aedb9b6`](https://github.com/mraniki/tt/commit/aedb9b68ba4b17b71b1eed6003352132ad2b31a3))
 
+* Update Requirements ([`ff8605c`](https://github.com/mraniki/tt/commit/ff8605c246eb9fd7c6d554b859ad43505cb0ad12))
+
 * Update Requirements ([`02ce4ff`](https://github.com/mraniki/tt/commit/02ce4ff030aea1c77ffcd66b331ce22b3aa0f70e))
 
 * Update Requirements ([`8d743cb`](https://github.com/mraniki/tt/commit/8d743cb4d1d0f8ad42e7ea681e3a4e951aa8f4c6))
@@ -27,6 +58,8 @@
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency dxsp to v6.0.6 ([`a87a6ca`](https://github.com/mraniki/tt/commit/a87a6ca317e3a61922ff3feb8078e150c2bed5e2))
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.1.0 ([`f23b28c`](https://github.com/mraniki/tt/commit/f23b28cd52bf40020fa61e06b49e5923db5d29cf))
 
 * ⬆️ 🛠️(deps): update dependency dxsp to v6.0.5 ([`0d3bea3`](https://github.com/mraniki/tt/commit/0d3bea386c5243c571a0faa3ab39183eeb83ff7d))
 
