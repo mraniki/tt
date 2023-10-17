@@ -27,6 +27,8 @@ jobs:
   release:
     needs: [lint]
     uses: mraniki/coding_toolset/.github/workflows/📦Release.yml@main
+    with:
+      settings_publish: false
     secrets: inherit
   mirror:
     needs: [release]
