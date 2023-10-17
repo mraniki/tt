@@ -1,7 +1,7 @@
 """
  talky Utils
 """
-__version__ = "6.4.57"
+__version__ = "6.4.58"
 
 
 import asyncio

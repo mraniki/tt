@@ -2,6 +2,47 @@
 
 
 
+## v6.4.58 (2023-10-17)
+
+### Other
+
+* Merge pull request #961 from mraniki/dev
+
+⬆️ 🛠️(deps) 👷 CI Change ([`eb1946a`](https://github.com/mraniki/tt/commit/eb1946a5ce2ab85da91c10d0bfeafcc3c3a78a05))
+
+### Update
+
+* Update Requirements ([`2ea7167`](https://github.com/mraniki/tt/commit/2ea7167279e17fdae686b988e46e10299f656398))
+
+* Update Requirements ([`aedb9b6`](https://github.com/mraniki/tt/commit/aedb9b68ba4b17b71b1eed6003352132ad2b31a3))
+
+* Update Requirements ([`02ce4ff`](https://github.com/mraniki/tt/commit/02ce4ff030aea1c77ffcd66b331ce22b3aa0f70e))
+
+* Update Requirements ([`8d743cb`](https://github.com/mraniki/tt/commit/8d743cb4d1d0f8ad42e7ea681e3a4e951aa8f4c6))
+
+* Update Requirements ([`7a6cf71`](https://github.com/mraniki/tt/commit/7a6cf717ff70b7ea4e6ed76271abd1c59e22e14a))
+
+* Update Requirements ([`1287b76`](https://github.com/mraniki/tt/commit/1287b7694339bec4fdd14a8c08b7d60ac44b2ed3))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.0.6 ([`a87a6ca`](https://github.com/mraniki/tt/commit/a87a6ca317e3a61922ff3feb8078e150c2bed5e2))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.0.5 ([`0d3bea3`](https://github.com/mraniki/tt/commit/0d3bea386c5243c571a0faa3ab39183eeb83ff7d))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.0.4 ([`31d1be3`](https://github.com/mraniki/tt/commit/31d1be3a634e81740679d273cbfc8f7c57fefba0))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.15 ([`d3243b4`](https://github.com/mraniki/tt/commit/d3243b442e7bb9a5faf18b38354acfeb2dd2176c))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.1.11 ([`4ea2899`](https://github.com/mraniki/tt/commit/4ea28997c032164f838aec805b83e0b6ceeeee28))
+
+### 👷
+
+* 👷 CI Change ([`2f9d728`](https://github.com/mraniki/tt/commit/2f9d7288ac1630f054105d5d58f7e748d6f55585))
+
+* 👷 CI Change ([`ae3d882`](https://github.com/mraniki/tt/commit/ae3d882943d783ffa205eb1246be69c2a06884a6))
+
+
 ## v6.4.57 (2023-10-15)
 
 ### Other
