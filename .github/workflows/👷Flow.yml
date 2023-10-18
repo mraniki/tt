@@ -35,7 +35,7 @@ jobs:
     uses: mraniki/coding_toolset/.github/workflows/🪞Mirror.yml@main
     secrets: inherit
 
-  merge:
-    needs: [release]
-    uses: mraniki/coding_toolset/.github/workflows/⛙Automerge.yml@main
-    secrets: inherit
+  # merge:
+  #   needs: [release]
+  #   uses: mraniki/coding_toolset/.github/workflows/⛙Automerge.yml@main
+  #   secrets: inherit

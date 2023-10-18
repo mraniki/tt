@@ -1,0 +1,12 @@
+name: ⛙pr
+
+
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  autopr:
+    uses: mraniki/coding_toolset/.github/workflows/⛙pr.yml.yml@main
+    secrets: inherit
