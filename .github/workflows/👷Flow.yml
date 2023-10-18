@@ -7,7 +7,6 @@ on:
   workflow_dispatch:
   merge_group:
 
-
 jobs:
   lint:
     uses: mraniki/coding_toolset/.github/workflows/🦺Lint.yml@main
@@ -16,10 +15,6 @@ jobs:
     needs: [lint]
     uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
     secrets: inherit
-  # security:
-  #   needs: [lint]
-  #   uses: mraniki/coding_toolset/.github/workflows/🔏Security.yml@main
-  #   secrets: inherit
   build:
     needs: [lint]
     uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main
@@ -34,8 +29,3 @@ jobs:
     needs: [release]
     uses: mraniki/coding_toolset/.github/workflows/🪞Mirror.yml@main
     secrets: inherit
-
-  # merge:
-  #   needs: [release]
-  #   uses: mraniki/coding_toolset/.github/workflows/⛙Automerge.yml@main
-  #   secrets: inherit
