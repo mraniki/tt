@@ -2,6 +2,17 @@
 
 
 
+## v6.5.3 (2023-10-18)
+
+### Other
+
+* Merge pull request #970 from mraniki/dev
+
+👷 CI Change ([`541d845`](https://github.com/mraniki/tt/commit/541d845d3970fc561dcd59aeb26ae04ac50868e3))
+
+* Merge branch &#39;main&#39; into dev ([`f3861be`](https://github.com/mraniki/tt/commit/f3861be4cbe9a1225dabfe2ef9e29ec9ad8febb4))
+
+
 ## v6.5.2 (2023-10-18)
 
 ### Other
@@ -19,6 +30,8 @@
 * ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.17 ([`32c9749`](https://github.com/mraniki/tt/commit/32c9749a1e39ff3b1a32bbcdae08df6b9360f6f5))
 
 ### 👷
+
+* 👷 CI Change ([`55677c4`](https://github.com/mraniki/tt/commit/55677c494068639ef5b3ba0e4d421e08342c03ef))
 
 * 👷 CI Change ([`49442e4`](https://github.com/mraniki/tt/commit/49442e4f6d69cffc6f36e87f5d5fbbb496f3586d))
 
