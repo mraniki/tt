@@ -2,6 +2,27 @@
 
 
 
+## v6.5.1 (2023-10-18)
+
+### Other
+
+* Merge pull request #967 from mraniki/dev
+
+⬆️ 🛠️(deps) ([`28b83bc`](https://github.com/mraniki/tt/commit/28b83bc96aa312b1744241310a2ae71a6b70bee6))
+
+### Update
+
+* Update Requirements ([`a74f5e5`](https://github.com/mraniki/tt/commit/a74f5e5d7b7d4c4d771a948b8a51ea38332f49b8))
+
+* Update Requirements ([`b11f5c2`](https://github.com/mraniki/tt/commit/b11f5c217fa5329da9537b1b64de64c312d80a30))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.15.3 ([`948f453`](https://github.com/mraniki/tt/commit/948f453442c62e17337f6a84e641239680ad5e17))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.1.2 ([`247ad10`](https://github.com/mraniki/tt/commit/247ad101491319b6a60018f4636710ab5144aded))
+
+
 ## v6.5.0 (2023-10-17)
 
 ### Other
