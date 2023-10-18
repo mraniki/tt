@@ -355,18 +355,16 @@ dxsp_enabled = true
 headers = {User-Agent= 'Mozilla/5.0'}
 
 # DEX ABI to use in case you have no explorer setup
-dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
-# DEX factory address to use
-dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
-# DEX ABI to use in case you have no explorer setup
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
 
 # token list using uniswap tokenlist format
 # https://github.com/mraniki/tokenlist
 # this can be used to avoid using coingecko
 # or if token are not listed yet or for testnet
-token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
-token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
+# token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
+# token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
+token_mainnet_list = ""
+token_testnet_list = ""
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
 ########################################
