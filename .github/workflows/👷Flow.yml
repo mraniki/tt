@@ -26,7 +26,7 @@ jobs:
       settings_publish: false
     secrets: inherit
   pr-merge:
-    needs: [build, test]
+    needs: [build, test,release]
     uses: mraniki/coding_toolset/.github/workflows/⛙Automerge.yml@main
     secrets: inherit
 
