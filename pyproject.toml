@@ -43,7 +43,7 @@ version = "6.5.3"
 python = "^3.10"
 loguru = ">=0.6.0"
 dynaconf = ">=3.2.0"
-fastapi = "^0.95.2"
+fastapi = "^0.104.0"
 requests = "^2.31.0"
 uvicorn = "^0.22.0"
 apprise = "^1.5.0"
@@ -55,7 +55,7 @@ iamlistening = "4.2.17"
 findmyorder = "1.9.1"
 dxsp = "6.1.2"
 cefi = "3.2.2"
-myllm = "3.1.38"
+myllm = "3.1.39"
 
 
 [tool.poetry.group.dev.dependencies]
