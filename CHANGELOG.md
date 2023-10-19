@@ -2,6 +2,75 @@
 
 
 
+## v6.5.4 (2023-10-19)
+
+### Other
+
+* Merge pull request #978 from mraniki/dev
+
+Update 👷Flow.yml ([`40be42b`](https://github.com/mraniki/tt/commit/40be42b52d298b61236e576442468a79d3373669))
+
+* Merge branch &#39;main&#39; into dev ([`131cff5`](https://github.com/mraniki/tt/commit/131cff5db27ec96d78f75b807444e6449e7dca6e))
+
+* Merge pull request #977 from mraniki/dev
+
+👷 CI Change ([`2376f7e`](https://github.com/mraniki/tt/commit/2376f7e5e02c446fb5a252b7740e12279c82c4f2))
+
+* Merge branch &#39;main&#39; into dev ([`a1d6dd5`](https://github.com/mraniki/tt/commit/a1d6dd59b6badcecf0c6679c5924a7c86fe44ca9))
+
+* Merge pull request #976 from mraniki/dev
+
+Merge pull request #975 from mraniki/main ([`27a3b0f`](https://github.com/mraniki/tt/commit/27a3b0f12f6b3af0e4180db524dac85a878f8990))
+
+* Merge pull request #975 from mraniki/main
+
+Merge pull request #974 from mraniki/dev ([`da5f53f`](https://github.com/mraniki/tt/commit/da5f53ffc567ea44cc8f04a7ef45f6e231221b64))
+
+* Merge pull request #974 from mraniki/dev
+
+👷 CI Change ([`1b4dbfc`](https://github.com/mraniki/tt/commit/1b4dbfc5760d668c75d2ef0c1e5161931951f05f))
+
+* Merge branch &#39;main&#39; into dev ([`499f6f1`](https://github.com/mraniki/tt/commit/499f6f10ab3313e31acd5615a3c6eb09c504fdc8))
+
+* Merge pull request #973 from mraniki/dev
+
+⬆️ 🛠️(deps) ([`fd35bc7`](https://github.com/mraniki/tt/commit/fd35bc73acadd59e13e63dfb025e3c4ef3d3c5ab))
+
+* Merge pull request #971 from mraniki/renovate/fastapi-0.x
+
+⬆️ 🛠️(deps): update dependency fastapi to ^0.104.0 ([`313819a`](https://github.com/mraniki/tt/commit/313819ae6f0c08adb1d765bcb2998ebf512ceb5e))
+
+### Update
+
+* Update 👷Flow.yml ([`9551aeb`](https://github.com/mraniki/tt/commit/9551aeb892a9a854d9c501ade622007d389d9b4b))
+
+* Update Requirements ([`ffe7671`](https://github.com/mraniki/tt/commit/ffe7671894077d2e343f2f6aa5a3b4d60d3c4abb))
+
+* Update Requirements ([`bafe369`](https://github.com/mraniki/tt/commit/bafe3692777773c92c7f1e7b9055236fa1725641))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency fastapi to ^0.104.0 ([`9de5730`](https://github.com/mraniki/tt/commit/9de573018a119781f85400f4b53a1522d58edf14))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.39 ([`a5bc631`](https://github.com/mraniki/tt/commit/a5bc6318c296ac15fa7c662b2b3a09ed73ad16d1))
+
+### 🐳
+
+* 🐳 ([`f0aaaac`](https://github.com/mraniki/tt/commit/f0aaaac59547c176ad3f043d4bcc7f36ca7950ea))
+
+### 👷
+
+* 👷 CI Change ([`980f025`](https://github.com/mraniki/tt/commit/980f0257411d42c1440d8c4bb4cec4a23728e660))
+
+* 👷 CI Change ([`6d79ab0`](https://github.com/mraniki/tt/commit/6d79ab07a3a24a43717dd7dc4063ca7cbbc3734a))
+
+* 👷 CI Change ([`0dc7416`](https://github.com/mraniki/tt/commit/0dc74167fa2a073c574cd7c9bbdd30754e5ee826))
+
+### 🔧
+
+* 🔧 ([`18c5ca0`](https://github.com/mraniki/tt/commit/18c5ca03950ba068813ce954d93af794a5163df6))
+
+
 ## v6.5.3 (2023-10-18)
 
 ### Other
