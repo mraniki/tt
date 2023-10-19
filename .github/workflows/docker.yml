@@ -2,10 +2,10 @@ name: 🐳Docker
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ["👷Flow"]
-    types: [completed]
-    branches: ["main"]
+  # workflow_run:
+  #   workflows: ["👷Flow"]
+  #   types: [completed]
+  #   branches: ["main"]
   release:
       types: [published]
 
