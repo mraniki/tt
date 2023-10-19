@@ -8,5 +8,5 @@ on:
 
 jobs:
   autopr:
-    uses: mraniki/coding_toolset/.github/workflows/⛙pr.yml.yml@main
+    uses: mraniki/coding_toolset/.github/workflows/⛙pr.yml@main
     secrets: inherit
