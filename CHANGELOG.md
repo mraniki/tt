@@ -2,6 +2,35 @@
 
 
 
+## v6.5.5 (2023-10-20)
+
+### Other
+
+* Merge pull request #983 from mraniki/dev
+
+⬆️ 🛠️(deps): update dependencies ([`c9898a2`](https://github.com/mraniki/tt/commit/c9898a2631b61ce2d4970ec6c427e62d3df6c403))
+
+### Update
+
+* Update Requirements ([`3351ff9`](https://github.com/mraniki/tt/commit/3351ff90f8e081a88baaf8aa96e51e810d2da4c4))
+
+* Update Requirements ([`a6dd61f`](https://github.com/mraniki/tt/commit/a6dd61f8fbffb9a230d91a57ed968cea7eb44883))
+
+* Update Requirements ([`6591c4d`](https://github.com/mraniki/tt/commit/6591c4dfd5f2848bff7b57978c7580af9bac0cfc))
+
+* Update Requirements ([`26ca4f4`](https://github.com/mraniki/tt/commit/26ca4f4c9da3bfd86896d82da64d761eac72961e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.3 ([`fa13a6d`](https://github.com/mraniki/tt/commit/fa13a6dac0590aba906002004967d1353bde8b5e))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.5 ([`c44f2a0`](https://github.com/mraniki/tt/commit/c44f2a0e894846c745afdc073dcd52115461176f))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.40 ([`b3a2f92`](https://github.com/mraniki/tt/commit/b3a2f92606820632f883403654d87e3668070fa7))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.1.3 ([`ed6bec0`](https://github.com/mraniki/tt/commit/ed6bec05ddbaa914c4a2f8135a2b35e5d0dee024))
+
+
 ## v6.5.4 (2023-10-19)
 
 ### Other
