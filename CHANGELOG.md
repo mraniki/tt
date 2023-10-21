@@ -2,6 +2,35 @@
 
 
 
+## v6.5.6 (2023-10-21)
+
+### Other
+
+* Merge pull request #987 from mraniki/dev
+
+Dev ([`365c764`](https://github.com/mraniki/tt/commit/365c764a46d0255ed921e637ad72f592be2027e1))
+
+### Update
+
+* Update Requirements ([`dd331f5`](https://github.com/mraniki/tt/commit/dd331f5afb4afa15bc9759df781de74a2ffc63b9))
+
+* Update Requirements ([`07f3205`](https://github.com/mraniki/tt/commit/07f3205b7ca026cca3c77ee183a9ce48bed1d1f2))
+
+* Update Requirements ([`5661050`](https://github.com/mraniki/tt/commit/5661050d87382439ba9b991cc5711a8965f493ec))
+
+### ♻️
+
+* ♻️ ([`51c7b21`](https://github.com/mraniki/tt/commit/51c7b21ba0a7a928f6d3ed4572326665878cfe7e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.41 ([`4a202cc`](https://github.com/mraniki/tt/commit/4a202ccd25dea6c2e6467da856af970f76f81871))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.4 ([`62cb60c`](https://github.com/mraniki/tt/commit/62cb60c877da508b8e14e7aacec24da08f74bdf7))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.15.4 ([`9a420cf`](https://github.com/mraniki/tt/commit/9a420cf8f522a6c916d2eaab3da3c3650995d56c))
+
+
 ## v6.5.5 (2023-10-20)
 
 ### Other
