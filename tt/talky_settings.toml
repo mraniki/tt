@@ -30,7 +30,7 @@ VALUE = "Production"
 
 # Log level to troubleshoot
 # loglevel = "DEBUG"
-loglevel = "INFO"
+loglevel = "DEBUG"
 # Log level for third party library
 thirdparty_lib_loglevel = "ERROR"
 

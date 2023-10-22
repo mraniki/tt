@@ -77,7 +77,6 @@ class PluginManager:
             None
 
         """
-        # logger.debug("plugin_name: {}", plugin_name)
         for name, obj in module.__dict__.items():
             if (
                 isinstance(obj, type)
@@ -127,25 +126,19 @@ class PluginManager:
             None
 
         """
-        
+
         logger.debug("Processing: {}", message)
         if not message:
             return
-        tasks=[]
+        tasks = []
         for plugin in self.plugins:
-                
             try:
                 if plugin.should_handle(message):
                     task = asyncio.create_task(plugin.handle_message(message))
                     tasks.append(task)
             except Exception as error:
                 logger.error("process {}: {}", plugin, error)
-        # Wait for all tasks
         await asyncio.gather(*tasks)
-                #         await plugin.handle_message(message)
-                # except Exception as error:
-                #     logger.error("process {}: {}", plugin, error)
-                #     continue
 
 
 class BasePlugin:
@@ -194,7 +187,6 @@ class BasePlugin:
         """
         if self.enabled:
             return not message.startswith(settings.bot_ignore)
-
 
     async def plugin_notify_schedule_task(
         self, user_name=None, frequency=8, function=None
