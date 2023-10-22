@@ -2,6 +2,41 @@
 
 
 
+## v6.6.0 (2023-10-22)
+
+### Other
+
+* Merge pull request #989 from mraniki/dev
+
+💄 fastapi lifespan change ([`5304151`](https://github.com/mraniki/tt/commit/5304151ade5998810355ffbe1efcc86981e85345))
+
+* Remove start_bot_task test ([`312a152`](https://github.com/mraniki/tt/commit/312a152163479ea23bdd07f66b03faa6b4bde65d))
+
+### Update
+
+* Update Requirements ([`b85cf1f`](https://github.com/mraniki/tt/commit/b85cf1fe13fec5d63009c1741003bfd359a51f2c))
+
+* Update iamlistening and dxsp versions
+
+- Update iamlistening from 4.2.18 to 4.2.19
+- Update dxsp from 6.1.3 to 6.1.4
+- Update cefi from 3.2.4 to 3.2.5 ([`2c2f545`](https://github.com/mraniki/tt/commit/2c2f545d51eb9501be00ee597d81b96236e1b7a8))
+
+* Update Requirements ([`c40bf3a`](https://github.com/mraniki/tt/commit/c40bf3a4dc3f185657bb1a8ccf255334dbaf69f9))
+
+### ♻️
+
+* ♻️ refactoring of pluging manager class and defaulting to DEBUG in case no config ([`7ca689e`](https://github.com/mraniki/tt/commit/7ca689e690baa858eb49f8a8bea8e8db575a3b35))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.18 ([`f620559`](https://github.com/mraniki/tt/commit/f620559846bd09ae4a7ad421a349b09d95f1ca64))
+
+### 💄
+
+* 💄 fastapi lifespan change ([`84705ba`](https://github.com/mraniki/tt/commit/84705ba73e5124a681b52c7242a07297864aa227))
+
+
 ## v6.5.6 (2023-10-21)
 
 ### Other
