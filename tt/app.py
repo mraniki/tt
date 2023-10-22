@@ -13,8 +13,8 @@ to a messaging chat platform
 to interact with trading module.
 
 """
-
 import asyncio
+from contextlib import asynccontextmanager
 
 import requests
 import uvicorn
@@ -24,21 +24,33 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from tt.config import logger, settings
 from tt.utils import __version__, run_bot, send_notification
 
-app = FastAPI(title="TALKYTRADER")
 
-
-@app.on_event("startup")
-async def start_bot_task():
+@asynccontextmanager
+async def lifespan(app):
     """
-    ⛓️🤖BOT
+    An asynchronous context manager
+    that manages the lifespan of the application.
 
-    Run the talky bot on startup
-    asynchronously
+    Parameters:
+    - app: The application to manage the lifespan of.
 
+    Returns:
+    - None
+
+    This function creates an event loop,
+    starts a task to run the bot, and yields control to the caller.
+    The caller is responsible for cleaning up any
+    resources after the lifespan of the
+    application has ended.
     """
     logger.debug("Starting...")
     event_loop = asyncio.get_event_loop()
     event_loop.create_task(run_bot())
+    yield
+    logger.debug("Closing...")
+
+
+app = FastAPI(lifespan=lifespan)
 
 
 @app.get("/", response_class=HTMLResponse)
