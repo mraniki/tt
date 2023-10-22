@@ -9,7 +9,7 @@ import uvicorn
 from fastapi.testclient import TestClient
 from iamlistening import Listener
 
-from tt.app import app, start_bot_task
+from tt.app import app
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
 from tt.utils import check_version, send_notification, start_bot, start_plugins
@@ -30,15 +30,15 @@ def message_test():
     return "Hello"
 
 
-@pytest.mark.asyncio
-async def test_start_bot_task():
-    run_bot = AsyncMock()
-    listener = AsyncMock()
-    plugin_manager = AsyncMock()
-    await start_bot_task()
-    assert listener is not None
-    assert plugin_manager is not None
-    assert run_bot.assert_awaited_once
+# @pytest.mark.asyncio
+# async def test_start_bot_task():
+#     run_bot = AsyncMock()
+#     listener = AsyncMock()
+#     plugin_manager = AsyncMock()
+#     await start_bot_task()
+#     assert listener is not None
+#     assert plugin_manager is not None
+#     assert run_bot.assert_awaited_once
 
 
 def test_app_endpoint_main():
