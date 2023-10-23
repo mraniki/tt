@@ -74,3 +74,10 @@ Settings.toml
 .. literalinclude:: ../examples/example.env
    :linenos:
 
+
+Config 
+=======
+
+.. automodule:: tt.config
+    :members:
+    :undoc-members:
