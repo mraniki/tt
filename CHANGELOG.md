@@ -2,6 +2,39 @@
 
 
 
+## v6.6.1 (2023-10-23)
+
+### Other
+
+* Merge pull request #991 from mraniki/dev
+
+⬆️ 🛠️🥅 Update dependencies and  Better Error handling ([`c223713`](https://github.com/mraniki/tt/commit/c223713d970cecf2ca87180e938530ce42d8ee6b))
+
+### Update
+
+* Update Requirements ([`c58f36e`](https://github.com/mraniki/tt/commit/c58f36eae76617341d947babf2439dd9fb078e0d))
+
+* Update Requirements ([`078ff1e`](https://github.com/mraniki/tt/commit/078ff1e00863a385e696657302c08d9023b4ab4c))
+
+### ⬆️
+
+* ⬆️ ([`a97582c`](https://github.com/mraniki/tt/commit/a97582cba2410d332c5d74ff9f4b7ecfe39ec449))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.42 ([`3963e75`](https://github.com/mraniki/tt/commit/3963e75806c8adfad89981f73270b843da644ba1))
+
+### 🐛
+
+* 🐛 ([`19e56b4`](https://github.com/mraniki/tt/commit/19e56b44f6e6f16b71e87024dcbce097bc5182c7))
+
+### 🔊
+
+* 🔊 ([`fe01ff8`](https://github.com/mraniki/tt/commit/fe01ff812377a43f35c886913a2203433d93c6b3))
+
+### 🥅
+
+* 🥅 Better Error handling ([`5f672fb`](https://github.com/mraniki/tt/commit/5f672fbeef5c9a97f64128d66fe1e02570eaec51))
+
+
 ## v6.6.0 (2023-10-22)
 
 ### Other
