@@ -112,8 +112,8 @@ def loguru_setup():
         level=settings.loglevel,
         filter=log_filters,
     )
-    if loguru_logger.loglevel == "DEBUG":
-        loguru_logger.info("DEBUG ENABLED")
+    if settings.loglevel == "DEBUG":
+        loguru_logger.warning("DEBUG ENABLED")
     return loguru_logger
 
 
