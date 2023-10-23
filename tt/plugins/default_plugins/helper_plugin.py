@@ -25,6 +25,22 @@ class HelperPlugin(BasePlugin):
     name = os.path.splitext(os.path.basename(__file__))[0]
 
     def __init__(self):
+        """
+        Initialize the object.
+
+        This function is the constructor of the class.
+         It initializes the object by calling the parent 
+         class's constructor using the `super()` method.
+          It also sets the `enabled` attribute 
+          to the value of the `helper_enabled` setting.
+
+        If the `enabled` attribute is `True`, 
+        it sets the `host_ip` attribute to a 
+        formatted string that includes the result 
+        of the `get_host_ip()` method. It also sets 
+        the `help_message` attribute to the value 
+        of the `helper_commands` setting.
+        """
         super().__init__()
         self.enabled = settings.helper_enabled
         if self.enabled:
