@@ -1,7 +1,9 @@
 ########################################
 ###          EXAMPLE SETTINGS       ###
 #######################################
-
+# [default]
+# loglevel = "INFO"
+# ui_enabled = false
 
 # DISCORD BOT on ethereum chain using 
 # uniswap v2 router
