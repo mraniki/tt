@@ -48,7 +48,7 @@ settings = Dynaconf(
     settings_files=[
         # load talky default
         os.path.join(ROOT, "talky_settings.toml"),
-        # load lib default 
+        # load lib default
         "default_settings.toml",
         # load user default
         "settings.toml",
@@ -96,7 +96,6 @@ class InterceptHandler(logging.Handler):
 
 def loguru_setup():
     loguru_logger.remove()
-    # log.configure(**config)
     log_filters = {
         "discord": settings.thirdparty_lib_loglevel,
         "telethon": settings.thirdparty_lib_loglevel,
@@ -104,6 +103,8 @@ def loguru_setup():
         "apprise": settings.thirdparty_lib_loglevel,
         "urllib3": settings.thirdparty_lib_loglevel,
         "asyncz": settings.thirdparty_lib_loglevel,
+        "rlp": settings.thirdparty_lib_loglevel,
+        "numexpr": settings.thirdparty_lib_loglevel,
     }
     logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
     loguru_logger.add(
@@ -111,7 +112,8 @@ def loguru_setup():
         level=settings.loglevel,
         filter=log_filters,
     )
-
+    if settings.loglevel == "DEBUG":
+        loguru_logger.warning("DEBUG ENABLED")
     return loguru_logger
 
 

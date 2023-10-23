@@ -4,7 +4,7 @@ import sys
 
 import ping3
 
-from tt.config import settings
+from tt.config import logger, settings
 from tt.plugins.plugin_manager import BasePlugin
 from tt.utils import __version__, send_notification
 
@@ -25,9 +25,26 @@ class HelperPlugin(BasePlugin):
     name = os.path.splitext(os.path.basename(__file__))[0]
 
     def __init__(self):
+        """
+        Initialize the object.
+
+        This function is the constructor of the class.
+         It initializes the object by calling the parent
+         class's constructor using the `super()` method.
+          It also sets the `enabled` attribute
+          to the value of the `helper_enabled` setting.
+
+        If the `enabled` attribute is `True`,
+        it sets the `host_ip` attribute to a
+        formatted string that includes the result
+        of the `get_host_ip()` method. It also sets
+        the `help_message` attribute to the value
+        of the `helper_commands` setting.
+        """
         super().__init__()
         self.enabled = settings.helper_enabled
         if self.enabled:
+            logger.info("Helper Plugin Enabled")
             self.host_ip = f"🕸 {self.get_host_ip()}"
             self.help_message = settings.helper_commands
 
@@ -76,10 +93,8 @@ class HelperPlugin(BasePlugin):
         return info
         """
         directory_name = os.path.basename(
-            os.path.dirname(
-                os.path.dirname(
-                    os.path.dirname(
-                        __file__))))
+            os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        )
         return f"ℹ️ {directory_name} {__version__}\n"
 
     async def get_helper_network(self):
