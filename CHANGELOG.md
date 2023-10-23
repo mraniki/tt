@@ -2,6 +2,25 @@
 
 
 
+## v6.6.2 (2023-10-23)
+
+### Other
+
+* Merge pull request #992 from mraniki/dev
+
+📝 Improve docs ([`57d297f`](https://github.com/mraniki/tt/commit/57d297f14daa78bf75f2abf48b925d680ba1d3a6))
+
+### 📝
+
+* 📝 ([`46fee44`](https://github.com/mraniki/tt/commit/46fee44e01942e5533f86b2e3cec4be6f6c745ad))
+
+* 📝 Improve docs ([`6878bc1`](https://github.com/mraniki/tt/commit/6878bc1f9a139f8e20e151a485b2aa07b8f151ac))
+
+### 🔧
+
+* 🔧 ([`1e8a60b`](https://github.com/mraniki/tt/commit/1e8a60b75d627f6d70fa78534eab9e0e3a7570ef))
+
+
 ## v6.6.1 (2023-10-23)
 
 ### Other
