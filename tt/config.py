@@ -1,7 +1,5 @@
 """
-TalkyTrader Config
-Used for Logging,
-Scheduleing and Settings
+TalkyTrader Settings, Scheduling and Logging,
     🧐⏱️⚙️
 
 """
@@ -22,11 +20,12 @@ dotenv.load_dotenv()
 #######################################
 
 """
-    In case, you use 1Password to store your settings, you can use :file:`.secrets.toml` 
-    to retrieve and store your settings from a notesPlain item.
+    If you use 1Password to store your settings,
+    you can use :file:`.secrets.toml` to retrieve and 
+    store your settings from a notesPlain item.
     more info: https://support.1password.com/command-line-getting-started/
 
-    in order to use 1Password, you need to add the following to your :file:`.env` file:
+    You need the following to your :file:`.env` file:
     - OP_SERVICE_ACCOUNT_TOKEN: your 1Password service account token
     - OP_VAULT: your 1Password vault
     - OP_ITEM: your 1Password item
