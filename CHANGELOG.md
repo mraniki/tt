@@ -2,6 +2,25 @@
 
 
 
+## v6.6.3 (2023-10-24)
+
+### Other
+
+* Merge pull request #994 from mraniki/dev
+
+⬆️ 🤖 - Auto Release ([`bf706fc`](https://github.com/mraniki/tt/commit/bf706fcb85d376b5886b527ad1029faa3e40ba55))
+
+* Auto ([`660cdf3`](https://github.com/mraniki/tt/commit/660cdf342334e2c16ee4ca4ce1ebb64cfa71f1d1))
+
+### Update
+
+* Update Requirements ([`b3b8a8e`](https://github.com/mraniki/tt/commit/b3b8a8e25c4c1f4985f4e0956ddc44b7d6cdd75e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.48 ([`5525347`](https://github.com/mraniki/tt/commit/5525347124bd43166607959a8cbf81bdcd205e8a))
+
+
 ## v6.6.2 (2023-10-23)
 
 ### Other
