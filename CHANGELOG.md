@@ -2,6 +2,25 @@
 
 
 
+## v6.6.4 (2023-10-25)
+
+### Other
+
+* Auto ([`bf6e9af`](https://github.com/mraniki/tt/commit/bf6e9af2469c09b281288195dfabe744a99eaf1e))
+
+### Update
+
+* Update Requirements ([`8be8d90`](https://github.com/mraniki/tt/commit/8be8d904ff96c1904861daa9bac1c1358942d481))
+
+* Update Requirements ([`23bdefd`](https://github.com/mraniki/tt/commit/23bdefd3f509a8700b1012a5ab6abcb8c2a23a4c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.7 ([`4070a41`](https://github.com/mraniki/tt/commit/4070a41b64c75a5e31f12aae60cc4983511941db))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.49 ([`4663c81`](https://github.com/mraniki/tt/commit/4663c817f52bd090ae7a0583ab9f4b517a4e9401))
+
+
 ## v6.6.3 (2023-10-24)
 
 ### Other
