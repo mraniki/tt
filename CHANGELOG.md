@@ -2,6 +2,39 @@
 
 
 
+## v6.6.5 (2023-10-25)
+
+### Other
+
+* Merge pull request #1002 from mraniki/dev
+
+⬆️ 🤖 - Auto Release ([`5630d56`](https://github.com/mraniki/tt/commit/5630d56678d59dc198b1d75187494a9b32bbc25a))
+
+* Auto ([`891cb17`](https://github.com/mraniki/tt/commit/891cb17bb9182f88f24813176be686e155ee25c8))
+
+* Merge branch &#39;main&#39; into dev ([`7740491`](https://github.com/mraniki/tt/commit/77404917648208acb5a6d34f997d0dae5c7fe8c0))
+
+### Update
+
+* Update Requirements ([`f5316f2`](https://github.com/mraniki/tt/commit/f5316f25dfcd97a28edd003b573f5d7fd733723a))
+
+* Update Requirements ([`efa7aad`](https://github.com/mraniki/tt/commit/efa7aad831c73b18851fc3e7dd938b2c71d4380b))
+
+* Update Requirements ([`de233bb`](https://github.com/mraniki/tt/commit/de233bb890313ac022d3b391b5181d620a255780))
+
+* Update Requirements ([`2614aae`](https://github.com/mraniki/tt/commit/2614aaec8fc056a85bc0fb7a01b1129d1dc7c015))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.8 ([`566bc21`](https://github.com/mraniki/tt/commit/566bc213d88183fb4f9578f0b1848d2b16b1207c))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.15.5 ([`ffa0824`](https://github.com/mraniki/tt/commit/ffa0824166e7bee79f4e2486894cb89f6f3a4183))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.50 ([`edf2e9d`](https://github.com/mraniki/tt/commit/edf2e9d9da5511fdb8c3028836f12b861fd091b5))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.20 ([`522888a`](https://github.com/mraniki/tt/commit/522888ab6bd5067dc300457be198dc5790cc1870))
+
+
 ## v6.6.4 (2023-10-25)
 
 ### Other
@@ -9,6 +42,8 @@
 * Auto ([`bf6e9af`](https://github.com/mraniki/tt/commit/bf6e9af2469c09b281288195dfabe744a99eaf1e))
 
 ### Update
+
+* Update Requirements ([`3c2f844`](https://github.com/mraniki/tt/commit/3c2f8445f9bfc1d683a0dd80834973599189d3b0))
 
 * Update Requirements ([`8be8d90`](https://github.com/mraniki/tt/commit/8be8d904ff96c1904861daa9bac1c1358942d481))
 
