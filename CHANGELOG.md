@@ -2,6 +2,25 @@
 
 
 
+## v6.6.6 (2023-10-26)
+
+### Other
+
+* Merge pull request #1003 from mraniki/dev
+
+⬆️ 🤖 - Auto Release ([`99830b7`](https://github.com/mraniki/tt/commit/99830b74fc45ec5480fd14e96ccb548e3bef7180))
+
+* Auto ([`7b66e9e`](https://github.com/mraniki/tt/commit/7b66e9e3669d6758beeaedbc97778cccd01094a0))
+
+### Update
+
+* Update Requirements ([`fc02840`](https://github.com/mraniki/tt/commit/fc02840cd130914f9544be861fb3d6b2afdf3ccf))
+
+### 🔧
+
+* 🔧 ([`56d11cd`](https://github.com/mraniki/tt/commit/56d11cdfbd5176188b5b233130ad83cdceb13d2b))
+
+
 ## v6.6.5 (2023-10-25)
 
 ### Other
