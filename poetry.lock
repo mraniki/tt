@@ -1293,13 +1293,13 @@ dev = ["black (>=23.9.1)", "isort (>=5.12.0)", "pytest (>=7.4.2)", "pytest-async
 
 [[package]]
 name = "dxsp"
-version = "6.1.4"
+version = "6.1.7"
 description = "DXSP (DeX SwaP), A defi swap helper package. Swap made easy."
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "dxsp-6.1.4-py3-none-any.whl", hash = "sha256:54f58687d42258a50243f892c0726d7c7190a6b61f5d501a890bb2c6e193d5b2"},
-    {file = "dxsp-6.1.4.tar.gz", hash = "sha256:0d5626fa27b883459c3ecd8b81bb858e3b2b18795cdedeb687cbac28cc409ee3"},
+    {file = "dxsp-6.1.7-py3-none-any.whl", hash = "sha256:b6c9f860b3a304276a733f967814fed80fff09c18a7836f430b4a9b0501b027a"},
+    {file = "dxsp-6.1.7.tar.gz", hash = "sha256:5549a30272cdc22f131e6ecf58a62cbd164f6785be98cb11bc2c166aaca25087"},
 ]
 
 [package.dependencies]
@@ -6066,4 +6066,4 @@ requests = ">=2.31"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "1feabe20be97918f17c17693b5c071fb1018440af93d1a8c78eabda3d92db1b0"
+content-hash = "61379cbc41b7251f130b217189f37723e21769466e4e3984d836aae52e6835a5"
