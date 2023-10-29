@@ -1789,13 +1789,13 @@ files = [
 
 [[package]]
 name = "g4f"
-version = "0.1.7.7"
+version = "0.1.7.8"
 description = "The official gpt4free repository | various collection of powerful language models"
 optional = false
 python-versions = "*"
 files = [
-    {file = "g4f-0.1.7.7-py3-none-any.whl", hash = "sha256:ee9ad8f5eec87dbe705365156d45204ea421a6b124b4a50921b10eb2bca4f681"},
-    {file = "g4f-0.1.7.7.tar.gz", hash = "sha256:fcee34ff0709a97ccba434d58da0b563e782eb94555b575a36b36d8a29dcb52c"},
+    {file = "g4f-0.1.7.8-py3-none-any.whl", hash = "sha256:5557eb04038fbf09574d6bf04b340834cf5411c40a318acd3c84391d2dc5fad6"},
+    {file = "g4f-0.1.7.8.tar.gz", hash = "sha256:a2a79aa3782b6836d554f202a0187b48f493a6ed228535bde80b279ceeb235ce"},
 ]
 
 [package.dependencies]
@@ -3011,20 +3011,20 @@ files = [
 
 [[package]]
 name = "myllm"
-version = "3.1.50"
+version = "3.1.53"
 description = "A python package to interact with llm model supported by g4f and langchain."
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "myllm-3.1.50-py3-none-any.whl", hash = "sha256:09c9688c800b75a12ac81a1f4ec99ac5805d6e3d690867bc451d8ebbaae98526"},
-    {file = "myllm-3.1.50.tar.gz", hash = "sha256:7a4eadb841a3e4d30bff77c4431ad567168adfb434d0ab32fe261bc33f56f06e"},
+    {file = "myllm-3.1.53-py3-none-any.whl", hash = "sha256:2643645f569165ffb65bd8e785f5706dd49bdd8c17b121b358343126404425f6"},
+    {file = "myllm-3.1.53.tar.gz", hash = "sha256:fb807a3ab4757808ca249784fec7019fe41e3273b6b675c37ecaf1705af31646"},
 ]
 
 [package.dependencies]
 curl-cffi = "0.5.7"
 dynaconf = ">=3.2.0"
 fastapi = ">=0.95.2"
-g4f = "0.1.7.7"
+g4f = "0.1.7.8"
 httpx = ">=0.24.1"
 js2py = ">=0.74,<0.75"
 loguru = ">=0.6.0"
@@ -6066,4 +6066,4 @@ requests = ">=2.31"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "0fd4df6d8c876f945541ef9f05d56d819bb180e6b39b075eb39c01c34e980ce8"
+content-hash = "627057da647defecf58cd0539df74d1af2d85720a443ebfadf2e311a46f3145c"
