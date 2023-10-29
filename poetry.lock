@@ -737,13 +737,13 @@ pycryptodomex = "*"
 
 [[package]]
 name = "ccxt"
-version = "4.1.25"
+version = "4.1.29"
 description = "A JavaScript / TypeScript / Python / C# / PHP cryptocurrency trading library with support for 130+ exchanges"
 optional = false
 python-versions = "*"
 files = [
-    {file = "ccxt-4.1.25-py2.py3-none-any.whl", hash = "sha256:3a218c29ed891b0a849bc2333304184f940a7104e5c382545e6ba11ae1897807"},
-    {file = "ccxt-4.1.25.tar.gz", hash = "sha256:cd08c912b9dbe017dca05bdca54d78cbe89610035f9ad2347b92fce9853ef409"},
+    {file = "ccxt-4.1.29-py2.py3-none-any.whl", hash = "sha256:5b87240f9d06c841134703e6a9794d9e263f0d88b9d0f52bec54296f63acb061"},
+    {file = "ccxt-4.1.29.tar.gz", hash = "sha256:dbe70212a115761c5b904317539a200b3c3d429fb721b02a57cb05aaeabaa9e0"},
 ]
 
 [package.dependencies]
@@ -760,17 +760,17 @@ qa = ["ruff (==0.0.292)"]
 
 [[package]]
 name = "cefi"
-version = "3.2.8"
+version = "3.2.9"
 description = "A python library, to interact with CCXT crypto exchange"
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "cefi-3.2.8-py3-none-any.whl", hash = "sha256:68c46ae27cf73204279ecd9981e006cd4e6fad1afb060ca19078ac9acb1890ae"},
-    {file = "cefi-3.2.8.tar.gz", hash = "sha256:5e961bb848f2158626f39bf95e8ad8465cc54bf8565071d2923bafae43495ae1"},
+    {file = "cefi-3.2.9-py3-none-any.whl", hash = "sha256:dc065c591e119a305a22f1b6abc7d52d6ac6b39d8cd88bb8732a04085639ca94"},
+    {file = "cefi-3.2.9.tar.gz", hash = "sha256:30c856c00bd39739e3ff8fd3d91cbf4107b8debc752f483c4f68e5d1f778a312"},
 ]
 
 [package.dependencies]
-ccxt = "4.1.25"
+ccxt = "4.1.29"
 dynaconf = ">=3.1.12"
 loguru = ">=0.6"
 
@@ -6066,4 +6066,4 @@ requests = ">=2.31"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "61379cbc41b7251f130b217189f37723e21769466e4e3984d836aae52e6835a5"
+content-hash = "1d6476d7d541335ac697cef3b4c0e98a7db1a7151dddcb817dcf11ec16e8c678"
