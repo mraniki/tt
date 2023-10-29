@@ -2165,13 +2165,13 @@ files = [
 
 [[package]]
 name = "iamlistening"
-version = "4.2.20"
+version = "4.2.22"
 description = "A python package to interact with messaging platform."
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "iamlistening-4.2.20-py3-none-any.whl", hash = "sha256:6431d12a0af50b98024d6864678ea33983840da8bea6dd55f6ab9e94d424eb83"},
-    {file = "iamlistening-4.2.20.tar.gz", hash = "sha256:459b0c6df4d38cc42f5eccc284655da11441cf848086a4a8a9de78bd8eb5b9da"},
+    {file = "iamlistening-4.2.22-py3-none-any.whl", hash = "sha256:3a76da62ff80a15c38d8d56bb1c654b315ab9e22371ae1b3c25f3f35c3a7c75b"},
+    {file = "iamlistening-4.2.22.tar.gz", hash = "sha256:c283b3345188319ec79084f5622a759c0dcf7f4b3d780c3ed6f5ef8ec4de60e3"},
 ]
 
 [package.dependencies]
@@ -2181,7 +2181,7 @@ dynaconf = ">=3.1.12"
 loguru = ">=0.6.0"
 "Mastodon.py" = "1.8.1"
 py-cord = "2.4.1"
-pythorhead = {version = "0.17.0", markers = "python_version >= \"3.10\" and python_version < \"3.12\""}
+pythorhead = {version = "0.18.0", markers = "python_version >= \"3.10\" and python_version < \"3.12\""}
 "revolt.py" = "0.1.11"
 rocketchat-API = "1.30.0"
 simplematrixbotlib = "2.10.2"
@@ -4396,13 +4396,13 @@ trio = ["trio (>=0.16.0)"]
 
 [[package]]
 name = "pythorhead"
-version = "0.17.0"
+version = "0.18.0"
 description = "A python library for interacting with Lemmy API"
 optional = false
 python-versions = "<3.12,>=3.8"
 files = [
-    {file = "pythorhead-0.17.0-py3-none-any.whl", hash = "sha256:fa43d41dff87d6058a1eeb264bba0d5ba4c81c452e0cf6f9307394756efd1405"},
-    {file = "pythorhead-0.17.0.tar.gz", hash = "sha256:f23faaa41c74c0fe27da66f2f1d1bf7de1ceead5fc21f64cff2d953549910b51"},
+    {file = "pythorhead-0.18.0-py3-none-any.whl", hash = "sha256:5474d7dacdf953d57200e33a59b6dde00f1616a6f8330a5b312652bca3ca8658"},
+    {file = "pythorhead-0.18.0.tar.gz", hash = "sha256:c32dae7ce4fd6725ff49cef440924299e88a50b641f46f825de3fecd195a791d"},
 ]
 
 [package.dependencies]
@@ -6066,4 +6066,4 @@ requests = ">=2.31"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "1d6476d7d541335ac697cef3b4c0e98a7db1a7151dddcb817dcf11ec16e8c678"
+content-hash = "61c849474d36fad3f6741de16f7a027d724168675ddc219c67819fc88b289295"
