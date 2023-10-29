@@ -5288,13 +5288,13 @@ full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart", "pyyam
 
 [[package]]
 name = "talkytrend"
-version = "1.15.5"
+version = "1.15.6"
 description = "A python package to retrieve  economic data such as Trend for any financial symbol."
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "talkytrend-1.15.5-py3-none-any.whl", hash = "sha256:b4ac028d98141fc984cb1561eb15ec3fdc34c2b6ad854326ff84048cc63e79f3"},
-    {file = "talkytrend-1.15.5.tar.gz", hash = "sha256:387d6d08d48233c33837644d05ae597710f9f68e0221b94f43951969acd1400d"},
+    {file = "talkytrend-1.15.6-py3-none-any.whl", hash = "sha256:5ba3c78a3ece9d0729589706ba49d92d212c8cddb0ecc53a2caae028743c7db2"},
+    {file = "talkytrend-1.15.6.tar.gz", hash = "sha256:44965a6fd7b6569e4231bed6946b504203d9574dc47a3bb63e999ad57f6a9363"},
 ]
 
 [package.dependencies]
@@ -6066,4 +6066,4 @@ requests = ">=2.31"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "e63e2a3729e7025e31c792365d0bda1d0fa6149cee8f8660a644f8470d8b169e"
+content-hash = "0fd4df6d8c876f945541ef9f05d56d819bb180e6b39b075eb39c01c34e980ce8"
