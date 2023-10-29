@@ -1611,13 +1611,13 @@ typing = ["typing-extensions (>=4.8)"]
 
 [[package]]
 name = "findmyorder"
-version = "1.9.5"
+version = "1.9.7"
 description = "A python package to identify and parse order for trade execution."
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "findmyorder-1.9.5-py3-none-any.whl", hash = "sha256:b9fc03170f6c55f5cec6227825151171c0bdb52ef5561bb293227b1e72b24c9a"},
-    {file = "findmyorder-1.9.5.tar.gz", hash = "sha256:8ad392bc5433ace29a5a5e5740c4a28b3e5ab5ff385329285c48c71945f17c1f"},
+    {file = "findmyorder-1.9.7-py3-none-any.whl", hash = "sha256:02c00de76cacea12e7c75b4f041ee85bb0c4f3cfed9e214c81ba27d37dd0bda8"},
+    {file = "findmyorder-1.9.7.tar.gz", hash = "sha256:b9830805c54c3b2b443cf75e8f043e233ac11f9e5090539495b243dbef716062"},
 ]
 
 [package.dependencies]
@@ -6066,4 +6066,4 @@ requests = ">=2.31"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "61c849474d36fad3f6741de16f7a027d724168675ddc219c67819fc88b289295"
+content-hash = "e63e2a3729e7025e31c792365d0bda1d0fa6149cee8f8660a644f8470d8b169e"
