@@ -50,12 +50,12 @@ apprise = "^1.5.0"
 asyncz = ">=0.3.1"
 nicegui = "^1.3.15"
 ping3 = "^4.0.4"
-talkytrend = "1.15.5"
-iamlistening = "4.2.20"
-findmyorder = "1.9.5"
-dxsp = "6.1.4"
-cefi = "3.2.8"
-myllm = "3.1.50"
+talkytrend = "1.15.6"
+iamlistening = "4.2.22"
+findmyorder = "1.9.7"
+dxsp = "6.1.7"
+cefi = "3.2.9"
+myllm = "3.1.53"
 
 
 [tool.poetry.group.dev.dependencies]
