@@ -2,6 +2,57 @@
 
 
 
+## v6.6.7 (2023-10-29)
+
+### Other
+
+* Merge pull request #1017 from mraniki/dev
+
+Dev ([`bdef97d`](https://github.com/mraniki/tt/commit/bdef97de8a2b4aa50f0234333571de874ed59a27))
+
+* Merge pull request #1016 from mraniki/main
+
+Merge pull request #1011 from mraniki/dev ([`f6562e5`](https://github.com/mraniki/tt/commit/f6562e5fe56251d1ca479f6963875e7f567c4bc2))
+
+* Merge pull request #1011 from mraniki/dev
+
+⬆️ 🤖 - If two people love each other there can be no happy end to it ([`e9ea509`](https://github.com/mraniki/tt/commit/e9ea5090234ad45e1e33987573378fa7a354dbde))
+
+### Update
+
+* ⬆️ Update Requirements and Version ([`6dd6bda`](https://github.com/mraniki/tt/commit/6dd6bda47cde3c378b720504fc7782c48e1733b8))
+
+* ⬆️ Update Requirements and Version ([`9ac5940`](https://github.com/mraniki/tt/commit/9ac594068acb339dd6353cad508e9a4fd7be78d4))
+
+### ♻️
+
+* 👷 CI Change ♻️ ([`78970ae`](https://github.com/mraniki/tt/commit/78970aeeaf3e9f9f77372bdaa457160016fbd3b3))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.23 ([`4b634ef`](https://github.com/mraniki/tt/commit/4b634efd11fe76c283ece0c027e352327f0417ee))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.8 ([`c49ba58`](https://github.com/mraniki/tt/commit/c49ba589853bc41126268f165e24c1c3e94820f6))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.53 ([`9783793`](https://github.com/mraniki/tt/commit/97837932c358713f2625b76c136c935d113fad93))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.15.6 ([`e5b8020`](https://github.com/mraniki/tt/commit/e5b802061703f1087ad21e869528fbcae9e3dff9))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.7 ([`76390c5`](https://github.com/mraniki/tt/commit/76390c5bd0ee7fcd7edc073e724411d749d5de54))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.22 ([`0b984c2`](https://github.com/mraniki/tt/commit/0b984c2efb4d142297145138d45d9d7200d610b5))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.9 ([`5f55d2c`](https://github.com/mraniki/tt/commit/5f55d2c3f65a76cdd45f80243742fd1c6fb9fb75))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.1.7 ([`f3804e6`](https://github.com/mraniki/tt/commit/f3804e6083d0861aa29684e4962a1b545e968c1d))
+
+### 👷
+
+* 👷 CI Change ([`f5766c5`](https://github.com/mraniki/tt/commit/f5766c54dd68ed17241daaac9d00e46b88e9aed5))
+
+* 👷 CI Change ([`0163371`](https://github.com/mraniki/tt/commit/0163371f86215b72ffb3b235e6c1d97d177cba0a))
+
+
 ## v6.6.6 (2023-10-26)
 
 ### Other
