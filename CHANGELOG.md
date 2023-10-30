@@ -2,6 +2,29 @@
 
 
 
+## v6.6.8 (2023-10-30)
+
+### Other
+
+* Merge pull request #1023 from mraniki/dev
+
+⬆️ 🤖 - You will feel hungry again in another hour ([`5281e60`](https://github.com/mraniki/tt/commit/5281e600287d01336dad2bb65a64ab2c8ccfb7eb))
+
+* Merge pull request #1018 from mraniki/main
+
+Merge ([`55da77b`](https://github.com/mraniki/tt/commit/55da77bdcc0b783af66e5feccc6cef8866ed9b00))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.54 ([`9364f71`](https://github.com/mraniki/tt/commit/9364f71ccfb763192a7c134098abf3a8a3006758))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.15.7 ([`5286712`](https://github.com/mraniki/tt/commit/5286712f27fb4e5d40551cfb0614664bb37df205))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.1.8 ([`2a167e3`](https://github.com/mraniki/tt/commit/2a167e321631b0f6c4f3f32b820770d89993fbec))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.24 ([`ff00ee8`](https://github.com/mraniki/tt/commit/ff00ee805f11968de80f3e76064c5bd21f6962d5))
+
+
 ## v6.6.7 (2023-10-29)
 
 ### Other
@@ -47,6 +70,8 @@ Merge pull request #1011 from mraniki/dev ([`f6562e5`](https://github.com/mranik
 * ⬆️ 🛠️(deps): update dependency dxsp to v6.1.7 ([`f3804e6`](https://github.com/mraniki/tt/commit/f3804e6083d0861aa29684e4962a1b545e968c1d))
 
 ### 👷
+
+* 👷 CI Change ([`ed01d6e`](https://github.com/mraniki/tt/commit/ed01d6ead4b7284d79e5f67dd2e26550a4b1abe0))
 
 * 👷 CI Change ([`f5766c5`](https://github.com/mraniki/tt/commit/f5766c54dd68ed17241daaac9d00e46b88e9aed5))
 
