@@ -20,7 +20,7 @@ jobs:
     uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main
     secrets: inherit
   release:
-    needs: [build]
+    needs: [build, test]
     uses: mraniki/coding_toolset/.github/workflows/📦Release.yml@main
     secrets: inherit
     with:
