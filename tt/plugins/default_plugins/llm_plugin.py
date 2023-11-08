@@ -3,7 +3,7 @@
 
 """
 import os
-
+import asyncio 
 from myllm import MyLLM
 
 from tt.config import settings
@@ -42,8 +42,8 @@ class LlmPlugin(BasePlugin):
             and (settings.bot_ignore not in msg)
             and (not msg.startswith(settings.bot_prefix))
         ):
-            chat = await self.llm.chat(str(msg))
-            await self.send_notification(chat)
+            asyncio.create_task(self.send_notification(await self.llm.chat(str(msg))))
+
 
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
