@@ -3,7 +3,7 @@
 
 """
 import os
-import asyncio 
+import threading
 from myllm import MyLLM
 
 from tt.config import settings
@@ -33,6 +33,7 @@ class LlmPlugin(BasePlugin):
         if self.enabled:
             await send_notification(message)
 
+
     async def handle_message(self, msg):
         """Handles incoming messages"""
         if not self.should_handle(msg):
@@ -42,7 +43,7 @@ class LlmPlugin(BasePlugin):
             and (settings.bot_ignore not in msg)
             and (not msg.startswith(settings.bot_prefix))
         ):
-            asyncio.create_task(self.send_notification(await self.llm.chat(str(msg))))
+            threading.Thread(target=self.process_chat, args=(msg,)).start()
 
 
         if msg.startswith(settings.bot_prefix):
@@ -59,3 +60,7 @@ class LlmPlugin(BasePlugin):
             if command in command_mapping:
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
+
+    def process_chat(self, msg):
+       chat = self.llm.chat(str(msg))
+       self.send_notification(chat)
