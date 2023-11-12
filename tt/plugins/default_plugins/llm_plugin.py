@@ -38,7 +38,7 @@ class LlmPlugin(BasePlugin):
         """Handles incoming messages"""
         if not self.should_handle(msg):
             return
-        elif (
+        if (
             self.llm.llm_ai_mode
             and (settings.bot_ignore not in msg)
             and (not msg.startswith(settings.bot_prefix))
