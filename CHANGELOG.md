@@ -2,6 +2,81 @@
 
 
 
+## v6.6.9 (2023-11-26)
+
+### Other
+
+* Merge pull request #1047 from mraniki/dev
+
+Update pyproject.toml ([`e254ad5`](https://github.com/mraniki/tt/commit/e254ad58cc2e97134fd89f4ded958371921e79d0))
+
+* Merge pull request #1037 from mraniki/dev
+
+LlmPlugin Update ([`6c70123`](https://github.com/mraniki/tt/commit/6c701231222ab33a8bef62baab881d2b6166911f))
+
+* Fix conditional statement in LlmPlugin ([`0eb33a6`](https://github.com/mraniki/tt/commit/0eb33a6b8b320f8f03a5ac3016c65c232281a817))
+
+* Merge pull request #1036 from mraniki/dev
+
+⬆️ 🤖 - While you recently had your problems on the run theyve regrouped and ([`c88a7f6`](https://github.com/mraniki/tt/commit/c88a7f622ee32339dad79b7f5abe836615ac6d4a))
+
+* Merge pull request #1035 from mraniki/main
+
+Merge pull request #1034 from mraniki/dev ([`ec1f46b`](https://github.com/mraniki/tt/commit/ec1f46ba7dcb09bd9945d648cb0290ba92a5c832))
+
+* Merge pull request #1034 from mraniki/dev
+
+Dev ([`e1b4c19`](https://github.com/mraniki/tt/commit/e1b4c19ba96e2e475288327244eb58cfe872fdc6))
+
+* Add asyncio import ([`3be0256`](https://github.com/mraniki/tt/commit/3be02569e1bd3eb8d16645f603f6cb98a44d16bf))
+
+* Refactor LlmPlugin&#39;s message handling ([`a4879f8`](https://github.com/mraniki/tt/commit/a4879f8bc9396a1796dadb716b80aa8cb46f10a5))
+
+* Merge pull request #1033 from mraniki/main
+
+Align ([`e898e2c`](https://github.com/mraniki/tt/commit/e898e2c9c705713d4fee82e9d7128e38df9a91c4))
+
+* Merge pull request #1032 from mraniki/dev
+
+⬆️ 🤖 - Give him an evasive answer ([`6f37744`](https://github.com/mraniki/tt/commit/6f3774476f44f6c5fe7d7695545d88cf7f773d5b))
+
+* Merge pull request #1030 from mraniki/dev
+
+⬆️ 🤖 - You have a truly strong individuality ([`21227e5`](https://github.com/mraniki/tt/commit/21227e5f17948b70e032283873ae5d6da4330886))
+
+* Merge pull request #1028 from mraniki/main
+
+Merge pull request #1027 from mraniki/dev ([`858df8f`](https://github.com/mraniki/tt/commit/858df8f615e66dcc6f17142c40bfa20fbfe5af03))
+
+* Merge pull request #1027 from mraniki/dev
+
+⬆️ 🤖 - Your aims are high and you are capable of much ([`7adbf08`](https://github.com/mraniki/tt/commit/7adbf08cd36a07e6733e278f702d0e9c07eb1671))
+
+* Delete requirements.txt ([`3223660`](https://github.com/mraniki/tt/commit/3223660238eeb482dfa6dc9ab6343f9689842cb7))
+
+* Merge pull request #1026 from mraniki/renovate/pytest-asyncio-0.x
+
+⬆️ 🛠️(deps): update dependency pytest-asyncio to ^0.22.0 ([`95b9803`](https://github.com/mraniki/tt/commit/95b9803f25fa0edd88c2de7331962d14346df116))
+
+### Update
+
+* Update pyproject.toml ([`5b0ac2b`](https://github.com/mraniki/tt/commit/5b0ac2beb2136a77d8ec5e5aed4a22c3c95bfc7c))
+
+* Update LlmPlugin imports ([`9addf71`](https://github.com/mraniki/tt/commit/9addf7109cdade3967608734b6be66c1ca7ea26d))
+
+* Update pyproject.toml ([`fd67334`](https://github.com/mraniki/tt/commit/fd67334a53c52e0e2d5409ca386acd7a780ca797))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.11 ([`2c4b43e`](https://github.com/mraniki/tt/commit/2c4b43ed4890d9fa956b434df43c944ce5ee798c))
+
+* ⬆️ 🛠️(deps): update dependency pytest-asyncio to ^0.22.0 ([`88fff4c`](https://github.com/mraniki/tt/commit/88fff4c83a6343cc5b317d023d90eea1ed01afbf))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.10 ([`0e247e3`](https://github.com/mraniki/tt/commit/0e247e3bd622eb8073c65d562d1b963f96162546))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.9 ([`43e5995`](https://github.com/mraniki/tt/commit/43e599557ea1cfd201c1d17b92fca59d61d9ef66))
+
+
 ## v6.6.8 (2023-10-30)
 
 ### Other
