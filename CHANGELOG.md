@@ -2,6 +2,21 @@
 
 
 
+## v6.6.10 (2023-11-29)
+
+### Other
+
+* Merge pull request #1050 from mraniki/dev
+
+⬆️ 🤖 - You may get an opportunity for advancement today  Watch it ([`e536074`](https://github.com/mraniki/tt/commit/e5360748b3659353edda8df301d7992f8ade1b99))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.56 ([`0c1d630`](https://github.com/mraniki/tt/commit/0c1d630901754dc90eaf1b6f9501911829d9dca4))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.14 ([`4f168fc`](https://github.com/mraniki/tt/commit/4f168fc8cc867b6eb60baaef8dff60d3767cb865))
+
+
 ## v6.6.9 (2023-11-26)
 
 ### Other
