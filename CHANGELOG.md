@@ -2,6 +2,21 @@
 
 
 
+## v6.6.11 (2023-11-30)
+
+### Other
+
+* Merge pull request #1053 from mraniki/dev
+
+⬆️ 🤖 - Q	How many Harvard MBAs does it take to screw in a light bulb ([`240a794`](https://github.com/mraniki/tt/commit/240a79481b1c186264a49680999cb6433235e675))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.16 ([`e258de6`](https://github.com/mraniki/tt/commit/e258de69c1838f05b9fccd82ce02d7126f739923))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.15 ([`7e5f787`](https://github.com/mraniki/tt/commit/7e5f787596b2a9348d9e8e2779e9e9a2c6f0d95c))
+
+
 ## v6.6.10 (2023-11-29)
 
 ### Other
