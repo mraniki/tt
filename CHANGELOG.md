@@ -2,6 +2,21 @@
 
 
 
+## v6.6.12 (2023-12-03)
+
+### Other
+
+* Merge pull request #1056 from mraniki/dev
+
+⬆️ 🤖 - Youre a card which will have to be dealt with ([`7d35ce7`](https://github.com/mraniki/tt/commit/7d35ce7188db3a030fd965aa68ec469c58e791e1))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.25 ([`26835a6`](https://github.com/mraniki/tt/commit/26835a68152e1452d196c6211cffbc9fd13ab4e1))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.17 ([`6229649`](https://github.com/mraniki/tt/commit/6229649852db9ccb648b0b412836958c507c66f1))
+
+
 ## v6.6.11 (2023-11-30)
 
 ### Other
