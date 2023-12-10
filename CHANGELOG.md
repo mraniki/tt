@@ -2,6 +2,27 @@
 
 
 
+## v6.6.13 (2023-12-10)
+
+### Other
+
+* Merge pull request #1061 from mraniki/dev
+
+Dev ([`4799aa5`](https://github.com/mraniki/tt/commit/4799aa55ae3c1681b194bf4b0ef8352a1a9dd080))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.57 ([`147cecd`](https://github.com/mraniki/tt/commit/147cecd62d9c346573e0100c2803829c08d10277))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.27 ([`9255d0c`](https://github.com/mraniki/tt/commit/9255d0cbbaaf5ed23af70d37d0e97143dc2bbc99))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.18 ([`108e794`](https://github.com/mraniki/tt/commit/108e7940c447d78bedc2a2bb603ab035c7276c50))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.26 ([`39e0c32`](https://github.com/mraniki/tt/commit/39e0c32a620da98cb6c6c2b909d538e02558dad6))
+
+* ⬆️ 🛠️(deps): update dependency pytest-asyncio to ^0.23.0 ([`688fe92`](https://github.com/mraniki/tt/commit/688fe92dd6e8c833d84b2f4b548aec730c77f326))
+
+
 ## v6.6.12 (2023-12-03)
 
 ### Other
