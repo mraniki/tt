@@ -2,6 +2,25 @@
 
 
 
+## v6.6.14 (2023-12-11)
+
+### Other
+
+* Merge pull request #1068 from mraniki/dev
+
+⬆️ 🤖 - Lord what fools these mortals be ([`e294420`](https://github.com/mraniki/tt/commit/e294420cf4b576ea52ac6ac7a054341b01d7cb5a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.15.8 ([`ddbb8c6`](https://github.com/mraniki/tt/commit/ddbb8c61ef2c055e76104385f5d89f14f19f0f00))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.28 ([`a0a65ce`](https://github.com/mraniki/tt/commit/a0a65cefcd551805fb9a5ade38251b2c5696cddd))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.10 ([`187ee9d`](https://github.com/mraniki/tt/commit/187ee9dca2607df6d192e06d422421445f984074))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.19 ([`4bfbef1`](https://github.com/mraniki/tt/commit/4bfbef186fd73b45a963f5e6f8b5c8b5b05df28a))
+
+
 ## v6.6.13 (2023-12-10)
 
 ### Other
