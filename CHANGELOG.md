@@ -2,6 +2,25 @@
 
 
 
+## v6.6.15 (2023-12-14)
+
+### Other
+
+* Merge pull request #1072 from mraniki/dev
+
+⬆️ 🤖 - Q	What is the burning question on the mind of every dyslexic ([`d7b19b2`](https://github.com/mraniki/tt/commit/d7b19b25da1fa1adbf26e2032c77c4f38a62b946))
+
+* Merge pull request #1071 from mraniki/renovate/fastapi-0.x
+
+⬆️ 🛠️(deps): update dependency fastapi to ^0.105.0 ([`6bf1cdd`](https://github.com/mraniki/tt/commit/6bf1cdd97b9b4dd2e356beeb9100e3fa8f4b521b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency fastapi to ^0.105.0 ([`9719571`](https://github.com/mraniki/tt/commit/97195716122bcbc50f5fc7f736124b829a1d394b))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.1.9 ([`bb7b921`](https://github.com/mraniki/tt/commit/bb7b9210d5b74e188903bc76a81b57cd40d5c043))
+
+
 ## v6.6.14 (2023-12-11)
 
 ### Other
