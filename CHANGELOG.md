@@ -2,6 +2,23 @@
 
 
 
+## v6.6.16 (2023-12-17)
+
+### Other
+
+* Merge pull request #1076 from mraniki/dev
+
+⬆️ 🤖 - Its all in the mind ya know ([`8d65608`](https://github.com/mraniki/tt/commit/8d6560889f1f0bd38fe80232374d189ea47dd67c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.58 ([`be8252d`](https://github.com/mraniki/tt/commit/be8252d311da46e96fe1c969c8d3c579f6238c3e))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.20 ([`0993901`](https://github.com/mraniki/tt/commit/099390163d1a97fe4526861f6b727c88a57f07ed))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.1.10 ([`d44fb77`](https://github.com/mraniki/tt/commit/d44fb77779f5fc6347d0f0f2428f8931a4617353))
+
+
 ## v6.6.15 (2023-12-14)
 
 ### Other
