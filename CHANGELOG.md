@@ -2,6 +2,25 @@
 
 
 
+## v6.6.17 (2023-12-17)
+
+### Other
+
+* Merge pull request #1079 from mraniki/dev
+
+Dev ([`489c45f`](https://github.com/mraniki/tt/commit/489c45fddf04dc25724c42163d402296e0e242b0))
+
+### Update
+
+* Update pyproject.toml ([`7494167`](https://github.com/mraniki/tt/commit/74941672e5577042c662ffb21a6e45c20061535e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.21 ([`fdd84a3`](https://github.com/mraniki/tt/commit/fdd84a3fa177c486fa12ddf258054eb4190ba810))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.29 ([`bdf7ae0`](https://github.com/mraniki/tt/commit/bdf7ae06c6cb608f5b1b20cb773d41e6f460f520))
+
+
 ## v6.6.16 (2023-12-17)
 
 ### Other
