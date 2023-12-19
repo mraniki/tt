@@ -2,6 +2,27 @@
 
 
 
+## v6.6.18 (2023-12-19)
+
+### Other
+
+* Merge pull request #1083 from mraniki/dev
+
+⬆️ 🤖 - Another good night not to sleep in a eucalyptus tree ([`f3b512d`](https://github.com/mraniki/tt/commit/f3b512d39e0c542a14c6bb419d6f3d1094dd85df))
+
+### Update
+
+* Update README.md ([`0875cad`](https://github.com/mraniki/tt/commit/0875cad8aa508c99ca99baffa96bdab838ade8b3))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.59 ([`f9370f6`](https://github.com/mraniki/tt/commit/f9370f6f0ecaac6e9bb296eb50d7e954428df171))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.30 ([`0f6bea7`](https://github.com/mraniki/tt/commit/0f6bea765f78fc7df2547ccbbc4ee1fa734a93ec))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.22 ([`c0f96c2`](https://github.com/mraniki/tt/commit/c0f96c2c5d4a8bd59b798be6a20ea6f2ad962c58))
+
+
 ## v6.6.17 (2023-12-17)
 
 ### Other
