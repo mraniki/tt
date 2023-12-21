@@ -2,6 +2,21 @@
 
 
 
+## v6.6.19 (2023-12-21)
+
+### Other
+
+* Merge pull request #1086 from mraniki/dev
+
+⬆️ 🤖 - Bridge ahead  Pay troll ([`a01c639`](https://github.com/mraniki/tt/commit/a01c639028a9efff82599129b1b3daa19696fae5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.24 ([`80e466b`](https://github.com/mraniki/tt/commit/80e466bf95478584de356d5c8ee2dcb93c689096))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.23 ([`abc9188`](https://github.com/mraniki/tt/commit/abc9188cb365bbb84cd0e88d9f212f0ff6d002bb))
+
+
 ## v6.6.18 (2023-12-19)
 
 ### Other
