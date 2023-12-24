@@ -2,6 +2,23 @@
 
 
 
+## v6.6.20 (2023-12-24)
+
+### Other
+
+* Merge pull request #1090 from mraniki/dev
+
+⬆️ 🤖 - Q	Why havent you graduated yet ([`d405301`](https://github.com/mraniki/tt/commit/d4053015c24897726da62840192674b4f0b18b6c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.26 ([`4c89f94`](https://github.com/mraniki/tt/commit/4c89f9407f0078d493d01a6374db23576f2e641f))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.25 ([`f7cc983`](https://github.com/mraniki/tt/commit/f7cc9833d0a84c7efeae82859c57d58294905e3c))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.60 ([`c18bd86`](https://github.com/mraniki/tt/commit/c18bd867a424031dff43fad9ae81a31b56d2c696))
+
+
 ## v6.6.19 (2023-12-21)
 
 ### Other
