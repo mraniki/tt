@@ -2,6 +2,19 @@
 
 
 
+## v6.6.21 (2023-12-26)
+
+### Other
+
+* Merge pull request #1094 from mraniki/dev
+
+⬆️ 🤖 - A light wife doth make a heavy husband ([`c905d94`](https://github.com/mraniki/tt/commit/c905d94c9d77133cb67d368f208f4214bbd83a58))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.27 ([`738518a`](https://github.com/mraniki/tt/commit/738518a7eabcca1e97cdf3ae30244c343ee59883))
+
+
 ## v6.6.20 (2023-12-24)
 
 ### Other
