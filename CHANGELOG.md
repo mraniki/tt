@@ -2,6 +2,19 @@
 
 
 
+## v6.6.22 (2023-12-28)
+
+### Other
+
+* Merge pull request #1096 from mraniki/dev
+
+⬆️ 🤖 - A vivid and creative mind characterizes you ([`bfa5c62`](https://github.com/mraniki/tt/commit/bfa5c62fc86eca4e60e34e24db7c67c6e01bef11))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.61 ([`60655a9`](https://github.com/mraniki/tt/commit/60655a9d075c633131df27b079103975526f263d))
+
+
 ## v6.6.21 (2023-12-26)
 
 ### Other
