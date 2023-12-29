@@ -2,6 +2,19 @@
 
 
 
+## v6.6.23 (2023-12-29)
+
+### Other
+
+* Merge pull request #1098 from mraniki/dev
+
+⬆️ 🤖 - Good day for overcoming obstacles  Try a steeplechase ([`babec49`](https://github.com/mraniki/tt/commit/babec494062895ff79b128733d8dcc809c1614dd))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.28 ([`b456e90`](https://github.com/mraniki/tt/commit/b456e9094f85e4eb5c5da56ea579be823ecba24c))
+
+
 ## v6.6.22 (2023-12-28)
 
 ### Other
