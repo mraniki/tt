@@ -2,6 +2,31 @@
 
 
 
+## v6.6.24 (2024-01-05)
+
+### Other
+
+* Merge pull request #1106 from mraniki/dev
+
+⬆️ 🤖 - Cold hands no gloves ([`c957bab`](https://github.com/mraniki/tt/commit/c957babe4f742fec45ac61a9d7379a575f3f5b28))
+
+* Merge pull request #1104 from mraniki/dev
+
+⬆️ 🤖 - You never know how many friends you have until you rent a house on the beach ([`2319d3d`](https://github.com/mraniki/tt/commit/2319d3d769b48403d497f133dab2b19813358e00))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pydata-sphinx-theme to ^0.15.0 ([`e7a49f5`](https://github.com/mraniki/tt/commit/e7a49f5e854db0a18ea2c9e0cbc662f5f3faf9c4))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.30 ([`5085bcf`](https://github.com/mraniki/tt/commit/5085bcfc49b421eb7ad46a5540631e12ce3bafdb))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.31 ([`c8c2bd5`](https://github.com/mraniki/tt/commit/c8c2bd5f727778961d999fb934bad7dba561409a))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.29 ([`6866d97`](https://github.com/mraniki/tt/commit/6866d975d89b23e71fd8622497cd6c7766fd931b))
+
+* ⬆️ 🛠️(deps): update dependency fastapi to ^0.108.0 ([`e088873`](https://github.com/mraniki/tt/commit/e088873a239e88e17f087be8e29710588c6c5cb2))
+
+
 ## v6.6.23 (2023-12-29)
 
 ### Other
