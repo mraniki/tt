@@ -2,6 +2,25 @@
 
 
 
+## v6.6.25 (2024-01-06)
+
+### Other
+
+* Merge pull request #1111 from mraniki/dev
+
+⬆️ 🤖 - Extreme fear can neither fight nor fly ([`d45045d`](https://github.com/mraniki/tt/commit/d45045daceb7026b231884f1c648a10ff077b2e0))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.15.9 ([`5172046`](https://github.com/mraniki/tt/commit/5172046b6f4144ccbffe4a7da77fe64561a87f95))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.32 ([`3bfcbf5`](https://github.com/mraniki/tt/commit/3bfcbf5498d9ce46f366c4f740326deafd156f3e))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.31 ([`ab0e345`](https://github.com/mraniki/tt/commit/ab0e3457f0b270c0ecd506e6fb6cbbb790948062))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.62 ([`c844525`](https://github.com/mraniki/tt/commit/c844525e0f887de2634a81066b5c5ede46c9a421))
+
+
 ## v6.6.24 (2024-01-05)
 
 ### Other
