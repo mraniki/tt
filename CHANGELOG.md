@@ -2,6 +2,25 @@
 
 
 
+## v6.6.26 (2024-01-06)
+
+### Other
+
+* Merge pull request #1113 from mraniki/dev
+
+⬆️ 🤖 - You have a truly strong individuality ([`b54d74e`](https://github.com/mraniki/tt/commit/b54d74ee2114d0337ad19df802c5dbdfb8d18709))
+
+### Update
+
+* Update pyproject.toml ([`fe5b454`](https://github.com/mraniki/tt/commit/fe5b45427a936c07e5f7874ba9d7733c74b53ad6))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.32 ([`4c1cdcd`](https://github.com/mraniki/tt/commit/4c1cdcd52e30ffd241909ae5c7c93bf571e21815))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v7.0.2 ([`e1d4f9e`](https://github.com/mraniki/tt/commit/e1d4f9e3684753aece87924eba8be8af2f194712))
+
+
 ## v6.6.25 (2024-01-06)
 
 ### Other
