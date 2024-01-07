@@ -2,6 +2,19 @@
 
 
 
+## v6.6.27 (2024-01-07)
+
+### Other
+
+* Merge pull request #1116 from mraniki/dev
+
+⬆️ 🤖 - Patch griefs with proverbs ([`52727b4`](https://github.com/mraniki/tt/commit/52727b44de6a14b66abe8dd08f76ab8d55521f12))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v7.0.3 ([`8f10c6b`](https://github.com/mraniki/tt/commit/8f10c6ba2e6786cd12a4876a650c975155a8db70))
+
+
 ## v6.6.26 (2024-01-06)
 
 ### Other
