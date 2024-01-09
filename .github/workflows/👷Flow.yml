@@ -26,6 +26,7 @@ jobs:
     with:
       pypi_publish: false
   mirror:
+    if: always()
     needs: [release]
     uses: mraniki/coding_toolset/.github/workflows/🪞Mirror.yml@main
     secrets: inherit
