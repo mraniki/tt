@@ -2,6 +2,37 @@
 
 
 
+## v6.6.28 (2024-01-09)
+
+### Other
+
+* Merge pull request #1125 from mraniki/dev
+
+⬆️ 🤖 - Q	How do you save a drowning lawyer ([`d778ace`](https://github.com/mraniki/tt/commit/d778ace2ec4931d76371bb4cbd121682b8b07592))
+
+* Merge pull request #1120 from mraniki/dev
+
+⬆️ 🤖 - Are you making all this up as you go along ([`b0b30dd`](https://github.com/mraniki/tt/commit/b0b30ddbf5442594af51d11495d55f82a75c74f4))
+
+* Merge pull request #1117 from mraniki/dev
+
+⬆️ 🤖 - April ([`4c9da91`](https://github.com/mraniki/tt/commit/4c9da9148311f94d0c69592e0c7a8f7e548e3334))
+
+### Update
+
+* Update README.md ([`e0776a5`](https://github.com/mraniki/tt/commit/e0776a58ac0dfa4cb00a4eb3541154b7b37ed215))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.63 ([`57d40b2`](https://github.com/mraniki/tt/commit/57d40b2b705155f4bb58b0d237195ba85bfdeced))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.34 ([`4ca8388`](https://github.com/mraniki/tt/commit/4ca83889f5f8e924ace5bb050255b31818c836bf))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.33 ([`0df3e5f`](https://github.com/mraniki/tt/commit/0df3e5f6a4fa35b3b81b40823ed2c2fb2e705d48))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v7.0.4 ([`dacef83`](https://github.com/mraniki/tt/commit/dacef831b61935395a8d80a05a1206156c2af47f))
+
+
 ## v6.6.27 (2024-01-07)
 
 ### Other
