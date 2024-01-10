@@ -2,6 +2,19 @@
 
 
 
+## v6.6.29 (2024-01-10)
+
+### :arrow_up:
+
+* :arrow_up: :hammer_and_wrench:️(deps): update dependency myllm to v3.1.63 ([`fd93ac7`](https://github.com/mraniki/tt/commit/fd93ac7eaf7397eed5c364bd9438828c8b4ec7a8))
+
+### Other
+
+* Merge pull request #1126 from mraniki/dev
+
+⬆️ 🤖 - Give him an evasive answer ([`4938cc3`](https://github.com/mraniki/tt/commit/4938cc3c3530be06e5e403b555df6e481f9f4872))
+
+
 ## v6.6.28 (2024-01-09)
 
 ### Other
