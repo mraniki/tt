@@ -2,6 +2,23 @@
 
 
 
+## v6.6.30 (2024-01-12)
+
+### Other
+
+* Merge pull request #1131 from mraniki/dev
+
+⬆️ 🤖 - I fell asleep reading a dull book and I dreamt that I was reading on ([`e6ebaff`](https://github.com/mraniki/tt/commit/e6ebaff002dbfd54a6eb8d1e6f32a9f8527bade2))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v7.0.5 ([`e7e862c`](https://github.com/mraniki/tt/commit/e7e862cc47c52351cf9eed07e5e985627997821b))
+
+* ⬆️ 🛠️(deps): update dependency fastapi to ^0.109.0 ([`08cc41f`](https://github.com/mraniki/tt/commit/08cc41fb8302db3507751d9b3fbcaef36bba4aa8))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.35 ([`98e08b2`](https://github.com/mraniki/tt/commit/98e08b230f99d5f2365071cb6528b968a7682f0a))
+
+
 ## v6.6.29 (2024-01-10)
 
 ### :arrow_up:
