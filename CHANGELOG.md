@@ -2,6 +2,19 @@
 
 
 
+## v6.6.31 (2024-01-13)
+
+### Other
+
+* Merge pull request #1133 from mraniki/dev
+
+⬆️ 🤖 - Q	Why do ducks have big flat feet ([`61fb8e2`](https://github.com/mraniki/tt/commit/61fb8e2ad00d45bb35709c8df2efa3fbe1603cee))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.36 ([`7bf8861`](https://github.com/mraniki/tt/commit/7bf8861016a4ca7c620a2d2235e838c8c2ceee3e))
+
+
 ## v6.6.30 (2024-01-12)
 
 ### Other
