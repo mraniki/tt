@@ -27,6 +27,7 @@ Easily deploy via Docker on self-hosted platform or Paas.<br>
 <a href="https://talky.readthedocs.io/"><img src="https://img.shields.io/badge/Documentation-000000?style=for-the-badge&logo=readthedocs&logoColor=white"></a><br>
 
 <br>
+<br>
 <HR>
 <br>
 </div>
