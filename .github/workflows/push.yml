@@ -7,7 +7,7 @@ on:
       types:
         - closed
       branches:
-        - 'main'
+        - main
 
 jobs:
   autopr:
