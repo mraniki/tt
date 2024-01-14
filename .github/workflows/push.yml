@@ -1,0 +1,15 @@
+name: push
+
+
+on:
+  workflow_dispatch:
+  pull_request:
+      types:
+        - closed
+      branches:
+        - 'dev'
+
+jobs:
+  autopr:
+    uses: mraniki/coding_toolset/.github/workflows/🫸push.yml@main
+    secrets: inherit
