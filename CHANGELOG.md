@@ -2,9 +2,118 @@
 
 
 
+## v6.6.32 (2024-01-16)
+
+### Other
+
+* Merge pull request #1155 from mraniki/dev
+
+⬆️ 🤖 - Let me put it this way today is going to be a learning experience ([`96ba85a`](https://github.com/mraniki/tt/commit/96ba85a1b90a292701e92d020c95b4b3a82eb3bf))
+
+* Merge pull request #1153 from mraniki/dev
+
+⬆️ 🤖 - I think we are in Rats Alley where the dead men lost their bones ([`5589fab`](https://github.com/mraniki/tt/commit/5589faba2b4ad2dee7357a964b9053df374be8c8))
+
+* Add poetry-core to pyproject.toml ([`f381381`](https://github.com/mraniki/tt/commit/f3813813a6be391140f8db3858c689915f0eb32d))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`0fffe9f`](https://github.com/mraniki/tt/commit/0fffe9fd1e42c23a72d374c214ea5a81b1205095))
+
+* Merge pull request #1152 from mraniki/main
+
+Merge pull request #1151 from mraniki/dev ([`d54e94b`](https://github.com/mraniki/tt/commit/d54e94bf28162563dcfe75691e4832165c1d14c0))
+
+* Merge pull request #1151 from mraniki/dev
+
+⬆️ 🤖 - The better part of valor is discretion ([`d909cdf`](https://github.com/mraniki/tt/commit/d909cdfbfa826dbcb332f415432265d061de4267))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`e552449`](https://github.com/mraniki/tt/commit/e55244972086acfb99d0cd4ce366edb93539fb12))
+
+* Remove main branch from push workflow ([`70b22d9`](https://github.com/mraniki/tt/commit/70b22d9113f5efee10c10d5e4b65f556f02cfb6a))
+
+* Remove main branch from push workflow ([`88373a5`](https://github.com/mraniki/tt/commit/88373a552427f1133a3916567f3f2261548d6445))
+
+* Merge pull request #1150 from mraniki/main
+
+Merge pull request #1149 from mraniki/dev ([`8dd8012`](https://github.com/mraniki/tt/commit/8dd8012d8d486c8dc0c4e2f96281294c4317d7d0))
+
+* Merge ; commit &#39;7956c8e50e5fb84af784fb4aa0000ffd0d7ca726&#39; ([`8f604ee`](https://github.com/mraniki/tt/commit/8f604eeec4ce6dfeeaaf2a95c3386ac52070cc50))
+
+* Merge pull request #1149 from mraniki/dev
+
+⬆️ 🤖 - Many changes of mind and mood do not hesitate too long ([`657960c`](https://github.com/mraniki/tt/commit/657960c3cd0f29a84c3df5460996f96397187127))
+
+* :construction_worker_man: ([`75a7451`](https://github.com/mraniki/tt/commit/75a7451b7f9a5a3bc01f942e57118c2a6cb62733))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`9d224c3`](https://github.com/mraniki/tt/commit/9d224c314853dff7ceed65d022bb533b253c8cda))
+
+* :construction_worker_man: ([`f4e9379`](https://github.com/mraniki/tt/commit/f4e9379c8ea6732c2a9e841046b4ce48847904a1))
+
+* Merge pull request #1148 from mraniki/dev
+
+⬆️ 🤖 - Excellent time to become a missing person ([`da0398a`](https://github.com/mraniki/tt/commit/da0398a26fe5bc5e346c7ff089f9fa42d8fff658))
+
+* Merge pull request #1146 from mraniki/dev
+
+⬆️ 🤖 - Fine day for friends ([`5004950`](https://github.com/mraniki/tt/commit/5004950bf269a530ec21a087b85acfbef2d8e176))
+
+* Merge ; commit &#39;fed65d7239c6ac991f426e063ba52b29b5f2b1c2&#39; ([`2fc8314`](https://github.com/mraniki/tt/commit/2fc8314efc3628989ed05feced1bb02b53b64fbe))
+
+* :construction_worker_man: CI Change ([`c2f4dc3`](https://github.com/mraniki/tt/commit/c2f4dc30feaf2e4b480a2dbc5bfb487aee3146d9))
+
+* Merge pull request #1145 from mraniki/dev
+
+⬆️ 🤖 - Youll be sorry ([`3f08009`](https://github.com/mraniki/tt/commit/3f08009c16496e21ea0668131529950bddecd0df))
+
+* Merge pull request #1144 from mraniki/dev
+
+⬆️ 🤖 - If you think last Tuesday was a drag wait till you see what happens tomorrow ([`8259a2f`](https://github.com/mraniki/tt/commit/8259a2f3525a6ede540b42a5c01ab4f42708481f))
+
+* :construction_worker_man: CI Change ([`d934949`](https://github.com/mraniki/tt/commit/d9349490e24e3b21e00e769acf3d10127a43e69e))
+
+* :construction_worker_man: CI Change ([`3cafe96`](https://github.com/mraniki/tt/commit/3cafe9675a22a27c43cd012112f77140716ac121))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`87db946`](https://github.com/mraniki/tt/commit/87db9465ef85a12fe2c25e2274c76363a31f0058))
+
+* Merge pull request #1141 from mraniki/dev
+
+⬆️ 🤖 - You have a strong desire for a home and your family interests come first ([`4487f18`](https://github.com/mraniki/tt/commit/4487f18fc42819cd4fcb7b9cc09eb7378b9b0792))
+
+* Merge pull request #1140 from mraniki/dev
+
+⬆️ 🤖 - And do you think fop that I am that I could be the Scarlet Pumpernickel ([`9ded42d`](https://github.com/mraniki/tt/commit/9ded42d03091ee5b786ad8909786e5ff3fcc8b09))
+
+### Update
+
+* Update push.yml ([`9d3928a`](https://github.com/mraniki/tt/commit/9d3928a5081da93e189a7f43053191302f7b067b))
+
+* Update push.yml ([`f9b6340`](https://github.com/mraniki/tt/commit/f9b63404bd69d19a580f52396f552a6968f9ae28))
+
+* Update README.md ([`7956c8e`](https://github.com/mraniki/tt/commit/7956c8e50e5fb84af784fb4aa0000ffd0d7ca726))
+
+* Update README.md ([`efb2c22`](https://github.com/mraniki/tt/commit/efb2c22a62f1aa8555ea5ed1f942a111562e4d4c))
+
+* Update README.md ([`fed65d7`](https://github.com/mraniki/tt/commit/fed65d7239c6ac991f426e063ba52b29b5f2b1c2))
+
+* Update pyproject.toml ([`0f56cab`](https://github.com/mraniki/tt/commit/0f56cabd163abe65c675a9645b93bce504d7c978))
+
+* Update pyproject.toml ([`21a0664`](https://github.com/mraniki/tt/commit/21a066464a26f7e76e92f0e3a0dce63b75c68d42))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.38 ([`8e3251c`](https://github.com/mraniki/tt/commit/8e3251cd275fc412eb8ecfb3c8cfcd9baccf507a))
+
+### 👷
+
+* 👷 CI Change ([`176083c`](https://github.com/mraniki/tt/commit/176083c4d2d42c61e1ac184bcc54c284035e1336))
+
+* 👷 CI Change ([`d33671b`](https://github.com/mraniki/tt/commit/d33671b54622095109d2dadc05fddd716b9db655))
+
+
 ## v6.6.31 (2024-01-13)
 
 ### Other
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`c461e50`](https://github.com/mraniki/tt/commit/c461e507637b3a4fa13795bafb2fcb7fe13a575c))
 
 * Merge pull request #1133 from mraniki/dev
 
@@ -23,6 +132,12 @@
 
 ⬆️ 🤖 - I fell asleep reading a dull book and I dreamt that I was reading on ([`e6ebaff`](https://github.com/mraniki/tt/commit/e6ebaff002dbfd54a6eb8d1e6f32a9f8527bade2))
 
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`f3dfb1c`](https://github.com/mraniki/tt/commit/f3dfb1c10c90e373eeca065e8c7f93e946cb00e7))
+
+* Merge pull request #1129 from mraniki/renovate/fastapi-0.x
+
+⬆️ 🛠️(deps): update dependency fastapi to ^0.109.0 ([`431a18d`](https://github.com/mraniki/tt/commit/431a18d52f41db84e14016e04dc84c0f3a539274))
+
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency dxsp to v7.0.5 ([`e7e862c`](https://github.com/mraniki/tt/commit/e7e862cc47c52351cf9eed07e5e985627997821b))
@@ -38,11 +153,15 @@
 
 * :arrow_up: :hammer_and_wrench:️(deps): update dependency myllm to v3.1.63 ([`fd93ac7`](https://github.com/mraniki/tt/commit/fd93ac7eaf7397eed5c364bd9438828c8b4ec7a8))
 
+* :arrow_up: :hammer_and_wrench:️(deps): update dependency myllm to v3.1.63 ([`855daae`](https://github.com/mraniki/tt/commit/855daae6e1d8f27539863b1a8a200668736696ea))
+
 ### Other
 
 * Merge pull request #1126 from mraniki/dev
 
 ⬆️ 🤖 - Give him an evasive answer ([`4938cc3`](https://github.com/mraniki/tt/commit/4938cc3c3530be06e5e403b555df6e481f9f4872))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`11dd2c6`](https://github.com/mraniki/tt/commit/11dd2c688d8ff73e3165d6dc36343a524019e22b))
 
 
 ## v6.6.28 (2024-01-09)
