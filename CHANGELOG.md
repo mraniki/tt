@@ -2,6 +2,26 @@
 
 
 
+## v6.6.33 (2024-01-16)
+
+### Other
+
+* Merge pull request #1159 from mraniki/dev
+
+⬆️ 🤖 - Q	What is printed on the bottom of beer bottles in Minnesota ([`4a2163b`](https://github.com/mraniki/tt/commit/4a2163b7750f422fa537d21a2869418dc6336e15))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency uvicorn to ^0.26.0 ([`dd59762`](https://github.com/mraniki/tt/commit/dd59762bf5a3944a5379204499d6f9d8a402ee65))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.64 (#1157)
+
+Co-authored-by: renovate[bot] &lt;29139614+renovate[bot]@users.noreply.github.com&gt;
+Co-authored-by: mraniki &lt;8766259+mraniki@users.noreply.github.com&gt; ([`bd025cf`](https://github.com/mraniki/tt/commit/bd025cf0ec062e764f2b3878393a5b3fbd8fe37a))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.39 ([`130a8ed`](https://github.com/mraniki/tt/commit/130a8edb413d0d3a44c1c884cc182195e67774f1))
+
+
 ## v6.6.32 (2024-01-16)
 
 ### Other
