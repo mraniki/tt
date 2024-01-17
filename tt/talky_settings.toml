@@ -368,6 +368,14 @@ token_testnet_list = ""
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
 ########################################
+###         BROKER SETTINGS          ###
+########################################
+
+# Enable/Disable CEFI
+broker_enabled = false
+
+
+########################################
 ###      CHAT PLATFORM SETTINGS      ###
 ########################################
 
