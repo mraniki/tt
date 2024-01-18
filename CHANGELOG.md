@@ -2,6 +2,19 @@
 
 
 
+## v6.7.0 (2024-01-18)
+
+### Other
+
+* Merge pull request #1160 from mraniki/dev
+
+⬆️ 🤖 - An honest tale speeds best being plainly told ([`1141d56`](https://github.com/mraniki/tt/commit/1141d560206a1bda25afb7e4ccd978aade3cff24))
+
+### ✨
+
+* ✨ test for Broker plugin with IBKR ([`aa939d2`](https://github.com/mraniki/tt/commit/aa939d20b0735140765ee26cda85f98b71c01c81))
+
+
 ## v6.6.33 (2024-01-16)
 
 ### Other
