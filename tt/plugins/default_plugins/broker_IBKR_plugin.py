@@ -148,8 +148,7 @@ class BrokerExchange:
         """
         contract = Forex(symbol, "SMART", "USD")
         self.ib.reqMktData(contract)
-        quote = self.ib.ticker(contract)
-        return quote
+        return self.ib.ticker(contract)
 
     def get_balance(self):
         """
@@ -195,12 +194,7 @@ class BrokerExchange:
             order.orderType = order_details["order_type"] or "MKT"
             order.totalQuantity = order_details["quantity"]
 
-            # Set limit price if it's a limit order
-            # if order.orderType == 'LMT':
-            #     order.lmtPrice = order_details['limitPrice']
-
-            trade = self.ib.placeOrder(contract, order)
-            return trade
+            return self.ib.placeOrder(contract, order)
         except Exception as e:
             logger.error(f"Order submission failed: {e}")
             return None
