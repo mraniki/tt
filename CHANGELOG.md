@@ -2,6 +2,25 @@
 
 
 
+## v6.7.1 (2024-01-18)
+
+### Other
+
+* Merge pull request #1161 from mraniki/dev
+
+⬆️ 🤖 - You are not dead yet  But watch for further reports ([`f0e46e7`](https://github.com/mraniki/tt/commit/f0e46e714507259c531f58c9e0f823288ed28594))
+
+* Merge pull request #1162 from mraniki/sourcery/dev
+
+⬆️ 🤖 - You are not dead yet  But watch for further reports (Sourcery refactored) ([`d48c855`](https://github.com/mraniki/tt/commit/d48c855c18de0f7c6b057337038bb686606919af))
+
+* &#39;Refactored by Sourcery&#39; ([`0ec27e0`](https://github.com/mraniki/tt/commit/0ec27e096f388fd25d130fb3ffe9949d1c041a67))
+
+### 📝
+
+* 📝 Docs + IBKR method initially setup with no test ([`4b0a65e`](https://github.com/mraniki/tt/commit/4b0a65e3ce19af74928544e3701a6919ef70e4b6))
+
+
 ## v6.7.0 (2024-01-18)
 
 ### Other
