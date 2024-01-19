@@ -2,6 +2,23 @@
 
 
 
+## v6.7.2 (2024-01-19)
+
+### Other
+
+* Merge pull request #1166 from mraniki/dev
+
+⬆️ 🤖 - Be careful of reading health books you might die of a misprint ([`e210402`](https://github.com/mraniki/tt/commit/e210402d5ecec5f11eac9ecfb934c95c77a776a9))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.35 ([`8d8ae21`](https://github.com/mraniki/tt/commit/8d8ae21b3309b481a3acf7cf9f54d694364a913a))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.40 ([`f756b27`](https://github.com/mraniki/tt/commit/f756b277a403cffbb4d6be6d50e69a8a7957b58e))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.34 ([`3d0af81`](https://github.com/mraniki/tt/commit/3d0af81a298a8abc859ad6dee71e45a3f1d7b324))
+
+
 ## v6.7.1 (2024-01-18)
 
 ### Other
