@@ -2,6 +2,19 @@
 
 
 
+## v6.7.3 (2024-01-20)
+
+### Other
+
+* Merge pull request #1168 from mraniki/dev
+
+⬆️ 🤖 - You will live a long healthy happy life and make bags of money ([`98eed6a`](https://github.com/mraniki/tt/commit/98eed6a2c034bea7dbe913c491b31beee23edde3))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.41 ([`ede0f6f`](https://github.com/mraniki/tt/commit/ede0f6f010ba8c530a45452731a01cd6983f8999))
+
+
 ## v6.7.2 (2024-01-19)
 
 ### Other
