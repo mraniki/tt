@@ -2,6 +2,21 @@
 
 
 
+## v6.7.4 (2024-01-23)
+
+### Other
+
+* Merge pull request #1171 from mraniki/dev
+
+⬆️ 🤖 - While you recently had your problems on the run theyve regrouped and ([`06853cb`](https://github.com/mraniki/tt/commit/06853cbcf4b0a787c913773c32c3d3284c97a91d))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency uvicorn to ^0.27.0 ([`53b710d`](https://github.com/mraniki/tt/commit/53b710dc15495f7e78bf4a1a6aee913b31af4e4c))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.42 ([`a8f1883`](https://github.com/mraniki/tt/commit/a8f1883700c1c3dc9e69bfb3ea403d0b4154d23d))
+
+
 ## v6.7.3 (2024-01-20)
 
 ### Other
