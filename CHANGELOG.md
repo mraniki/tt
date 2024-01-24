@@ -2,6 +2,21 @@
 
 
 
+## v6.7.5 (2024-01-24)
+
+### Other
+
+* Merge pull request #1174 from mraniki/dev
+
+⬆️ 🤖 - Ships are safe in harbor but they were never meant to stay there ([`f22872f`](https://github.com/mraniki/tt/commit/f22872f71946df07a8cfc0a56eb731fbc61121a1))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.65 ([`972132f`](https://github.com/mraniki/tt/commit/972132f045b1726fd1053d14b1d0bf4739151cd2))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.43 ([`a1c85c2`](https://github.com/mraniki/tt/commit/a1c85c20d78e54f3db214d2426bb586102d3ea96))
+
+
 ## v6.7.4 (2024-01-23)
 
 ### Other
