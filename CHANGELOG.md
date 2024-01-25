@@ -2,6 +2,19 @@
 
 
 
+## v6.7.6 (2024-01-25)
+
+### Other
+
+* Merge pull request #1176 from mraniki/dev
+
+⬆️ 🤖 - Beware of lowflying butterflies ([`51688be`](https://github.com/mraniki/tt/commit/51688be4f029fad009f5c1071e619ab01c34cdf2))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.44 ([`bce46a8`](https://github.com/mraniki/tt/commit/bce46a89abda83363a6a95fe551b496a92e96d0a))
+
+
 ## v6.7.5 (2024-01-24)
 
 ### Other
