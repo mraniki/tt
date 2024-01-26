@@ -4,6 +4,7 @@
 """
 import os
 import threading
+
 from myllm import MyLLM
 
 from tt.config import settings
@@ -33,7 +34,6 @@ class LlmPlugin(BasePlugin):
         if self.enabled:
             await send_notification(message)
 
-
     async def handle_message(self, msg):
         """Handles incoming messages"""
         if not self.should_handle(msg):
@@ -44,7 +44,6 @@ class LlmPlugin(BasePlugin):
             and (not msg.startswith(settings.bot_prefix))
         ):
             threading.Thread(target=self.process_chat, args=(msg,)).start()
-
 
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
@@ -62,5 +61,5 @@ class LlmPlugin(BasePlugin):
                 await self.send_notification(f"{await function()}")
 
     def process_chat(self, msg):
-       chat = self.llm.chat(str(msg))
-       self.send_notification(chat)
+        chat = self.llm.chat(str(msg))
+        self.send_notification(chat)

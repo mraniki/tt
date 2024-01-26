@@ -336,6 +336,7 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 ###################################
 ###       AI MYLLM SETTINGS     ###
 ###################################
+myllm_enabled = true
 
 [default.myllm.template]
 enabled = true
