@@ -251,40 +251,6 @@ helper_enabled = true
 # URL endpoint for latency ping.
 ping = "8.8.8.8"
 
-########################################
-###           LLM SETTINGS           ###
-########################################
-
-# Enable/Disable MyLLM
-myllm_enabled = true
-# myllm_enabled = false
-
-# LLM Model to use
-llm_model = "gpt_4"
-
-# LLM Provider
-# Refer to https://github.com/xtekky/gpt4free
-# for the list of supported provider
-llm_provider = "g4f.Provider.Bing"
-
-# Conversation history size
-max_memory = 100
-
-# time lag to wait ai response
-lag = 5
-
-# AI Mode to continously listen 
-# llm_ai_mode = true
-llm_ai_mode = false
-
-# prefix use to filter the AI response
-llm_prefix = "🐻"
-
-# LLM Template to use as conversation starter 
-llm_template = """
-You are a friendly AI helping me with 
-trade monitoring and execution.
-"""
 
 ########################################
 ###        TALKYTREND SETTINGS       ###
@@ -367,20 +333,24 @@ token_mainnet_list = ""
 token_testnet_list = ""
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
-########################################
-###         BROKER SETTINGS          ###
-########################################
+###################################
+###       AI MYLLM SETTINGS     ###
+###################################
 
-# Enable/Disable CEFI
-broker_enabled = false
-broker_account_number = ""
-broker_margin_usage = 0
-broker_userid = ""
-broker_password = ""
-broker_clientId = ""
-broker_host = '127.0.0.1'
-broker_port = 7497
-broker_read_only = false
+[default.myllm.template]
+enabled = true
+llm_model= "gpt_4"
+llm_provider = "g4f.Provider.Bing" # Refer to https://github.com/xtekky/gpt4free
+llm_provider_key = ""
+max_memory = 100 # Conversation history size
+timeout = 5 # time lag to wait ai response
+temperature = 0
+token_limit = 400
+llm_prefix = "" # prefix use to filter the AI response
+llm_template = """
+You are a friendly AI helping me with 
+trade monitoring and execution.
+"""
 
 ########################################
 ###      CHAT PLATFORM SETTINGS      ###
