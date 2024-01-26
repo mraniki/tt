@@ -338,7 +338,7 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 ###################################
 myllm_enabled = true
 llm_ai_mode = false
-[default.myllm.template]
+[default.myllm.g4f]
 enabled = true
 llm_model= "gpt_4"
 llm_provider = "g4f.Provider.Bing" # Refer to https://github.com/xtekky/gpt4free
