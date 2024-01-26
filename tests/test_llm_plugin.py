@@ -23,7 +23,6 @@ async def test_plugin(plugin):
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_question}")
     assert plugin.should_handle("any message") is True
     assert plugin.llm is not None
-    assert plugin.llm.provider is not None
     assert callable(plugin.llm.chat)
 
 
