@@ -372,15 +372,15 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 ########################################
 
 # Enable/Disable CEFI
-broker_enabled = false
-broker_account_number = ""
-broker_margin_usage = 0
-broker_userid = ""
-broker_password = ""
-broker_clientId = ""
-broker_host = '127.0.0.1'
-broker_port = 7497
-broker_read_only = false
+# broker_enabled = false
+# broker_account_number = ""
+# broker_margin_usage = 0
+# broker_userid = ""
+# broker_password = ""
+# broker_clientId = ""
+# broker_host = '127.0.0.1'
+# broker_port = 7497
+# broker_read_only = false
 
 ########################################
 ###      CHAT PLATFORM SETTINGS      ###
