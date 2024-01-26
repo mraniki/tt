@@ -2,6 +2,73 @@
 
 
 
+## v6.7.7 (2024-01-26)
+
+### Other
+
+* Merge pull request #1183 from mraniki/dev
+
+🔥 remove llm export unit test ([`3682982`](https://github.com/mraniki/tt/commit/3682982dc19903ab54f4d30a7cded80e50b8ee88))
+
+* Refactor test_llm_plugin.py to use get_info instead of get_myllm_info ([`7422f20`](https://github.com/mraniki/tt/commit/7422f20e0492f65e792fdd8fb02dd28dd7de2cbf))
+
+* Merge pull request #1181 from mraniki/dev
+
+🔥 remove IBKR plugin to be integrated with CEFI library ([`4f569d4`](https://github.com/mraniki/tt/commit/4f569d416c11de165b3596b7a8e7d12ccb5ddbde))
+
+* Merge pull request #1180 from mraniki/renovate/dxsp-7.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v7.0.7 ([`eb5d7e1`](https://github.com/mraniki/tt/commit/eb5d7e101f6c1b8d9ec94be39d54fa4350169a94))
+
+* Merge branch &#39;dev&#39; into renovate/dxsp-7.x ([`d54e93d`](https://github.com/mraniki/tt/commit/d54e93da033a175f814084752e98d3de35a545dc))
+
+* Merge pull request #1178 from mraniki/dev
+
+⬆️ 🤖 - Stay away from hurricanes for a while ([`5430780`](https://github.com/mraniki/tt/commit/5430780a37e4a3ce1f8f6bcf373326c64f0d46a7))
+
+### Update
+
+* Update myllm version to 4.0.4 ([`a121809`](https://github.com/mraniki/tt/commit/a1218093bc59a1553d18ec6ba98d3bac81b441e3))
+
+* Update pyproject.toml ([`e4b0a4d`](https://github.com/mraniki/tt/commit/e4b0a4d4eb2b25cb4daeee6e7142244e2c80b82f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.0 ([`80b856c`](https://github.com/mraniki/tt/commit/80b856cdc3dbcd53442dbd753e61273b6584f52b))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.45 ([`c449adc`](https://github.com/mraniki/tt/commit/c449adca14e01a26d7e9aaa75c5541afa6483f5a))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v7.0.7 ([`0c9b112`](https://github.com/mraniki/tt/commit/0c9b1126b8cde2cc88671c83731644149a3acbf6))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v7.0.6 ([`e19bcc0`](https://github.com/mraniki/tt/commit/e19bcc05703e32191586a47be3d1a419be0152d5))
+
+### 🐛
+
+* 🐛 ✅ Unit Test ([`3f2778d`](https://github.com/mraniki/tt/commit/3f2778dd4c5e6318163d7b2d857ff6b91bc45620))
+
+* 🐛 ([`4e88385`](https://github.com/mraniki/tt/commit/4e88385325a26f796c23ca4e0a98dfed57d8337f))
+
+### 🔥
+
+* 🔥 ([`fe1a376`](https://github.com/mraniki/tt/commit/fe1a37609454e58d5ab945b7e16585bd134529d8))
+
+* 🔥 removeing AImode ([`1dd40c5`](https://github.com/mraniki/tt/commit/1dd40c5579299a18b27a2d9324ceb042314955cc))
+
+* 🔥 remove llm export chat ([`150aa62`](https://github.com/mraniki/tt/commit/150aa6227ab9cc04c5247cf5114725be309f1024))
+
+* 🔥 ([`d16dfb6`](https://github.com/mraniki/tt/commit/d16dfb6eec46043e2e11606031e0a47889621185))
+
+* 🔥 remove IBKR plugin to be integrated with CEFI library ([`5bac215`](https://github.com/mraniki/tt/commit/5bac21584c35670935a5c1c8803f4b416ce67398))
+
+### 🔧
+
+* 🔧 ([`4f53a99`](https://github.com/mraniki/tt/commit/4f53a99a020d2738ff53d4e759c6ec7f14af489e))
+
+* 🔧 ([`095933b`](https://github.com/mraniki/tt/commit/095933b15da6b8b39a6e86c9e723a63295b44669))
+
+* 🔧 for MyLLM upgrade ([`9b79508`](https://github.com/mraniki/tt/commit/9b795087c5af1c6a9b076e37210bb0f7357f27ff))
+
+
 ## v6.7.6 (2024-01-25)
 
 ### Other
