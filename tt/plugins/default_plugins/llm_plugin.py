@@ -3,7 +3,7 @@
 
 """
 import os
-import threading
+
 from myllm import MyLLM
 
 from tt.config import settings
@@ -33,27 +33,25 @@ class LlmPlugin(BasePlugin):
         if self.enabled:
             await send_notification(message)
 
-
     async def handle_message(self, msg):
         """Handles incoming messages"""
         if not self.should_handle(msg):
             return
-        if (
-            self.llm.llm_ai_mode
-            and (settings.bot_ignore not in msg)
-            and (not msg.startswith(settings.bot_prefix))
-        ):
-            threading.Thread(target=self.process_chat, args=(msg,)).start()
-
+        # if (
+        #     self.llm.llm_ai_mode
+        #     and (settings.bot_ignore not in msg)
+        #     and (not msg.startswith(settings.bot_prefix))
+        # ):
+        #     threading.Thread(target=self.process_chat, args=(msg,)).start()
 
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_info: self.llm.get_myllm_info,
-                settings.bot_command_aimode: self.llm.switch_continous_mode,
-                settings.bot_command_aiclear: self.llm.clear_chat_history,
+                settings.bot_command_info: self.llm.get_info,
+                # settings.bot_command_aimode: self.llm.switch_continous_mode,
+                # settings.bot_command_aiclear: self.llm.clear_chat_history,
                 settings.bot_command_aiexport: self.llm.export_chat_history,
                 settings.bot_command_aichat: lambda: self.llm.chat(str(args)),
             }
@@ -62,5 +60,5 @@ class LlmPlugin(BasePlugin):
                 await self.send_notification(f"{await function()}")
 
     def process_chat(self, msg):
-       chat = self.llm.chat(str(msg))
-       self.send_notification(chat)
+        chat = self.llm.chat(str(msg))
+        self.send_notification(chat)
