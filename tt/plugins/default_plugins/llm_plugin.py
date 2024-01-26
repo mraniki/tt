@@ -51,7 +51,7 @@ class LlmPlugin(BasePlugin):
             command_mapping = {
                 settings.bot_command_info: self.llm.get_info,
                 # settings.bot_command_aimode: self.llm.switch_continous_mode,
-                settings.bot_command_aiclear: self.llm.clear_chat_history,
+                # settings.bot_command_aiclear: self.llm.clear_chat_history,
                 settings.bot_command_aiexport: self.llm.export_chat_history,
                 settings.bot_command_aichat: lambda: self.llm.chat(str(args)),
             }
