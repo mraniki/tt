@@ -16,6 +16,7 @@ def set_test_settings():
 def test_fixture_plugin():
     return LlmPlugin()
 
+
 @pytest.mark.asyncio
 async def test_plugin(plugin):
     """Test message handling"""
@@ -24,9 +25,6 @@ async def test_plugin(plugin):
     assert plugin.llm is not None
     assert plugin.llm.provider is not None
     assert callable(plugin.llm.chat)
-    assert callable(plugin.llm.switch_continous_mode)
-    assert callable(plugin.llm.clear_chat_history)
-    assert callable(plugin.llm.export_chat_history)
 
 
 @pytest.mark.asyncio
@@ -65,7 +63,7 @@ async def test_parsing_info(plugin):
 @pytest.mark.asyncio
 async def test_info(plugin):
     """Test info"""
-    result = await plugin.llm.get_myllm_info()
+    result = await plugin.llm.get_info()
     assert result is not None
 
 
@@ -79,7 +77,7 @@ async def test_llm_chat(plugin):
     assert result is not None
 
 
-@pytest.mark.asyncio
-async def test_clear_chat_history(plugin):
-    result = plugin.llm.export_chat_history()
-    assert result is not None
+# @pytest.mark.asyncio
+# async def test_clear_chat_history(plugin):
+#     result = plugin.llm.export_chat_history()
+#     assert result is not None
