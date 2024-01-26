@@ -70,7 +70,6 @@ async def test_info(plugin):
 @pytest.mark.asyncio
 async def test_llm_chat(plugin):
     """Test llm"""
-    print(plugin.llm.provider)
     result = await plugin.llm.chat("tell me a story")
     sleep(20)
     print(result)

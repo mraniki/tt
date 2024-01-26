@@ -3,7 +3,6 @@
 
 """
 import os
-import threading
 
 from myllm import MyLLM
 
@@ -38,12 +37,12 @@ class LlmPlugin(BasePlugin):
         """Handles incoming messages"""
         if not self.should_handle(msg):
             return
-        if (
-            self.llm.llm_ai_mode
-            and (settings.bot_ignore not in msg)
-            and (not msg.startswith(settings.bot_prefix))
-        ):
-            threading.Thread(target=self.process_chat, args=(msg,)).start()
+        # if (
+        #     self.llm.llm_ai_mode
+        #     and (settings.bot_ignore not in msg)
+        #     and (not msg.startswith(settings.bot_prefix))
+        # ):
+        #     threading.Thread(target=self.process_chat, args=(msg,)).start()
 
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
