@@ -2,6 +2,19 @@
 
 
 
+## v6.7.10 (2024-01-27)
+
+### Other
+
+* Merge pull request #1188 from mraniki/dev
+
+🩹 🔧 ([`8d0444a`](https://github.com/mraniki/tt/commit/8d0444a06f5917a79ad93089857c011e4caa0b51))
+
+### 🔧
+
+* 🩹 🔧 ([`f9f9764`](https://github.com/mraniki/tt/commit/f9f9764cde28b2fd0967e8e44de14c7684005ef5))
+
+
 ## v6.7.9 (2024-01-27)
 
 ### :fire:
