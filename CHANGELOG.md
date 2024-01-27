@@ -2,6 +2,23 @@
 
 
 
+## v6.7.11 (2024-01-27)
+
+### Other
+
+* Merge pull request #1189 from mraniki/dev
+
+⬆️ 🤖 - Tuesday is the Wednesday of the rest of your life ([`da9ee4b`](https://github.com/mraniki/tt/commit/da9ee4b2ffc0f87e8cc0abbf35ed08ccda59e2da))
+
+### Update
+
+* Update pyproject.toml ([`a633e12`](https://github.com/mraniki/tt/commit/a633e12a1cd8c8b005967a5d3a87313ff16b3276))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.2 ([`b5c5bf6`](https://github.com/mraniki/tt/commit/b5c5bf61d741c77c63d3d8687be3303bb5021c15))
+
+
 ## v6.7.10 (2024-01-27)
 
 ### Other
