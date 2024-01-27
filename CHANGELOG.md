@@ -2,6 +2,23 @@
 
 
 
+## v6.7.8 (2024-01-27)
+
+### :fire:
+
+* :fire:  Remove ib_insync dependency ([`8c63ba7`](https://github.com/mraniki/tt/commit/8c63ba76e02ab870c8ff073f513fe0355746bbd1))
+
+### Other
+
+* Merge pull request #1185 from mraniki/dev
+
+⬆️ 🤖 - He is now rising from affluence to poverty ([`ae19744`](https://github.com/mraniki/tt/commit/ae19744301631079ba81d2890f4908a5c90b070a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.0.5 ([`ba66f77`](https://github.com/mraniki/tt/commit/ba66f77cedf9209e4aab3886989253a20a9554cd))
+
+
 ## v6.7.7 (2024-01-26)
 
 ### Other
