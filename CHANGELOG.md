@@ -2,6 +2,29 @@
 
 
 
+## v6.7.9 (2024-01-27)
+
+### :fire:
+
+* :fire:  remove broker build ([`7b0c8be`](https://github.com/mraniki/tt/commit/7b0c8befca2e480402ad9f7dfef497dfac4c19f8))
+
+### Other
+
+* Merge pull request #1187 from mraniki/dev
+
+⬆️ 🤖 - Dont tell any big lies today  Small ones can be just as effective ([`7bcbb79`](https://github.com/mraniki/tt/commit/7bcbb797e4d0746ba44cf8157957bdc6fce6ec13))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`f37fda2`](https://github.com/mraniki/tt/commit/f37fda284308fc9963a4561f047c2de9a24f497f))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`699476b`](https://github.com/mraniki/tt/commit/699476b3bb8995fa6535bef81c667b3dde61f375))
+
+### Update
+
+* :arrow_up: Update dependencies in pyproject.toml ([`94886e4`](https://github.com/mraniki/tt/commit/94886e432a59483cb24449415f2f3babeef3a397))
+
+* :arrow_up: Update dependencies in pyproject.toml ([`3a0427b`](https://github.com/mraniki/tt/commit/3a0427b7f9dab84e9355c0e652052b89ee7dbef4))
+
+
 ## v6.7.8 (2024-01-27)
 
 ### :fire:
