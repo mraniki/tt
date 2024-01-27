@@ -2,6 +2,19 @@
 
 
 
+## v6.7.12 (2024-01-27)
+
+### Other
+
+* Merge pull request #1190 from mraniki/dev
+
+Update myllm version to 4.0.8 ([`355f46c`](https://github.com/mraniki/tt/commit/355f46c1ba4c136f178a07e8e4115655e6674404))
+
+### Update
+
+* Update myllm version to 4.0.8 ([`b31a2da`](https://github.com/mraniki/tt/commit/b31a2da77f78d444037bdeaa5b18b9501198745f))
+
+
 ## v6.7.11 (2024-01-27)
 
 ### Other
