@@ -2,6 +2,23 @@
 
 
 
+## v6.7.13 (2024-01-28)
+
+### Other
+
+* Merge pull request #1192 from mraniki/dev
+
+⬆️ 🤖 - You may be infinitely smaller than some things but youre infinitely ([`665916f`](https://github.com/mraniki/tt/commit/665916fef5e9da085222843b4d67ff99d74d1e42))
+
+### Update
+
+* Update myllm version to 4.0.9 ([`b736b48`](https://github.com/mraniki/tt/commit/b736b4841016ba00db93120ceb41f3e595a2ad96))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.3 ([`732f940`](https://github.com/mraniki/tt/commit/732f94015d0c7551e3115497ab72a8c007944f18))
+
+
 ## v6.7.12 (2024-01-27)
 
 ### Other
