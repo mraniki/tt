@@ -2,6 +2,19 @@
 
 
 
+## v6.7.15 (2024-01-28)
+
+### Other
+
+* Merge pull request #1194 from mraniki/dev
+
+⬆️ 🤖 - Tomorrow this will be part of the unchangeable past but fortunately ([`c8ab89c`](https://github.com/mraniki/tt/commit/c8ab89cf6840b274010c423feef50f98e581dfae))
+
+### ⬆️
+
+* ⬆️ ([`3e132f4`](https://github.com/mraniki/tt/commit/3e132f47df4d668c0b99dbf387f7c1eda892870f))
+
+
 ## v6.7.14 (2024-01-28)
 
 ### Other
