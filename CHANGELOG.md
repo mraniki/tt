@@ -2,6 +2,19 @@
 
 
 
+## v6.7.14 (2024-01-28)
+
+### Other
+
+* Merge pull request #1193 from mraniki/dev
+
+⬆️ 🤖 - You have a will that can be influenced by all with whom you come in contact ([`12bbf92`](https://github.com/mraniki/tt/commit/12bbf92dae9ee3ffc2dc8105991adcaf4601f2d3))
+
+### Update
+
+* Update myllm version to 4.0.10 ([`39c0277`](https://github.com/mraniki/tt/commit/39c0277a2fa6a362ed3acaf3d37590a3e749139f))
+
+
 ## v6.7.13 (2024-01-28)
 
 ### Other
