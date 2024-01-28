@@ -2,6 +2,19 @@
 
 
 
+## v6.7.18 (2024-01-28)
+
+### Other
+
+* Merge pull request #1199 from mraniki/dev
+
+⬆️ 🤖 - Do something unusual today  Pay a bill ([`811d89a`](https://github.com/mraniki/tt/commit/811d89a3dcf5ab7211bc9631e28706e5ed03cd99))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.0.14 ([`e49a506`](https://github.com/mraniki/tt/commit/e49a5066ce1899ebd06f24db4bb2523b1b9bf489))
+
+
 ## v6.7.17 (2024-01-28)
 
 ### Other
