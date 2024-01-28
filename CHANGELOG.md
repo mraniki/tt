@@ -2,6 +2,19 @@
 
 
 
+## v6.7.19 (2024-01-28)
+
+### Other
+
+* Merge pull request #1200 from mraniki/dev
+
+⬆️ 🤖 - You like to form new friendships and make new acquaintances ([`a7fd418`](https://github.com/mraniki/tt/commit/a7fd418d84894c2bc34cf85eed3334f94ce73f12))
+
+### Update
+
+* Update pyproject.toml ([`29e4b39`](https://github.com/mraniki/tt/commit/29e4b39bf32a9dfab35d2fef3056e05f796e568e))
+
+
 ## v6.7.18 (2024-01-28)
 
 ### Other
