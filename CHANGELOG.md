@@ -2,6 +2,19 @@
 
 
 
+## v6.7.16 (2024-01-28)
+
+### Other
+
+* Merge pull request #1195 from mraniki/dev
+
+⬆️ 🤖 - Today is the first day of the rest of the mess ([`e56aa5a`](https://github.com/mraniki/tt/commit/e56aa5a144d5cf1e3cb0ba8104a0a3d2d34dc26f))
+
+### ⬆️
+
+* ⬆️ ([`7efbe3d`](https://github.com/mraniki/tt/commit/7efbe3d0a3275dae7036ec3102e3860e4834e0ee))
+
+
 ## v6.7.15 (2024-01-28)
 
 ### Other
