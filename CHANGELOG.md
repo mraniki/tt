@@ -2,6 +2,19 @@
 
 
 
+## v6.7.17 (2024-01-28)
+
+### Other
+
+* Merge pull request #1196 from mraniki/dev
+
+⬆️ 🤖 - Q	What do you call a blind prehistoric animal ([`e6bf483`](https://github.com/mraniki/tt/commit/e6bf483f9b470cba46d574f5e4688d23312f2759))
+
+### Update
+
+* Update pyproject.toml ([`f4e5974`](https://github.com/mraniki/tt/commit/f4e5974a2104201123417d3a3ed670c9e11bceea))
+
+
 ## v6.7.16 (2024-01-28)
 
 ### Other
