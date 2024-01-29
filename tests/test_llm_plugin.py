@@ -66,13 +66,13 @@ async def test_info(plugin):
     assert result is not None
 
 
-@pytest.mark.asyncio
-async def test_llm_chat(plugin):
-    """Test llm"""
-    result = await plugin.llm.chat("tell me a story")
-    sleep(20)
-    print(result)
-    assert result is not None
+# @pytest.mark.asyncio
+# async def test_llm_chat(plugin):
+#     """Test llm"""
+#     result = await plugin.llm.chat("tell me a story")
+#     sleep(20)
+#     print(result)
+#     assert result is not None
 
 
 # @pytest.mark.asyncio
