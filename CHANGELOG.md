@@ -2,6 +2,29 @@
 
 
 
+## v6.7.21 (2024-01-29)
+
+### Other
+
+* Merge pull request #1206 from mraniki/dev
+
+⬆️ 🤖 - Tomorrow this will be part of the unchangeable past but fortunately ([`5520ba8`](https://github.com/mraniki/tt/commit/5520ba8f8cbbc5cfaf4f86a633427fb84eafdb01))
+
+* Merge pull request #1205 from mraniki/dev
+
+⬆️ 🤖 - You will be awarded a medal for disregarding safety in saving someone ([`20f041c`](https://github.com/mraniki/tt/commit/20f041c73b01c0ace953a9b73109d8232ab20b7e))
+
+### ✅
+
+* ✅ Unit Test ([`d7b83ec`](https://github.com/mraniki/tt/commit/d7b83eca817cbeac6cde404c7cec2dade62004e9))
+
+* ✅ Unit Test ([`e37b278`](https://github.com/mraniki/tt/commit/e37b2784d1461e02e6cd595d6f10f8b83b579263))
+
+### ⬆️
+
+* ⬆️ ([`a72827d`](https://github.com/mraniki/tt/commit/a72827d84d4bed889f5ee099212159161827cdf7))
+
+
 ## v6.7.20 (2024-01-29)
 
 ### Other
