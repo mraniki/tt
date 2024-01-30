@@ -2,6 +2,19 @@
 
 
 
+## v6.7.22 (2024-01-30)
+
+### Other
+
+* Merge pull request #1208 from mraniki/dev
+
+⬆️ 🤖 - Q	What is the burning question on the mind of every dyslexic ([`183d2ad`](https://github.com/mraniki/tt/commit/183d2adaf1511c96bb4475d8253dba42484fee8a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.0.18 ([`cb58c60`](https://github.com/mraniki/tt/commit/cb58c60c3b11bd7ca4cee6104ea440cd00205005))
+
+
 ## v6.7.21 (2024-01-29)
 
 ### Other
