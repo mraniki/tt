@@ -2,6 +2,25 @@
 
 
 
+## v6.7.24 (2024-01-31)
+
+### Other
+
+* Merge pull request #1213 from mraniki/dev
+
+⬆️ 🤖 - By trying we can easily learn to endure adversity  Another mans I mean ([`7736520`](https://github.com/mraniki/tt/commit/773652058248f5b5d1ba875a8f23978c950668c7))
+
+### Update
+
+* Update pyproject.toml ([`16f5098`](https://github.com/mraniki/tt/commit/16f509865f5920ae133fd53d86bfe9109a04e31e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v7.0.8 ([`50a2e76`](https://github.com/mraniki/tt/commit/50a2e7686a7fe958903a312502645c9c7d2363c6))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.6 ([`9cc5b6b`](https://github.com/mraniki/tt/commit/9cc5b6b3f8a5b24e4c5d1c5da24dcda543232a69))
+
+
 ## v6.7.23 (2024-01-31)
 
 ### Other
