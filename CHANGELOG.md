@@ -2,6 +2,19 @@
 
 
 
+## v6.7.23 (2024-01-31)
+
+### Other
+
+* Merge pull request #1210 from mraniki/dev
+
+⬆️ 🤖 - Lord what fools these mortals be ([`c21152d`](https://github.com/mraniki/tt/commit/c21152d67f8441b97f5289c51433b859f57a3207))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.5 ([`dbd927f`](https://github.com/mraniki/tt/commit/dbd927fc17d7202a76254c75c3c8e2afab9d61f0))
+
+
 ## v6.7.22 (2024-01-30)
 
 ### Other
