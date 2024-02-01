@@ -2,6 +2,19 @@
 
 
 
+## v6.7.25 (2024-02-01)
+
+### Other
+
+* Merge pull request #1214 from mraniki/dev
+
+Update myllm dep ([`92064b6`](https://github.com/mraniki/tt/commit/92064b6919b9611be5343e3ffccb4b7b4e1f38a6))
+
+### Update
+
+* Update myllm dep ([`5b96d0c`](https://github.com/mraniki/tt/commit/5b96d0cf443f99adb319753f8235678432e131a2))
+
+
 ## v6.7.24 (2024-01-31)
 
 ### Other
