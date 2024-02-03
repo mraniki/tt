@@ -2,6 +2,19 @@
 
 
 
+## v6.7.26 (2024-02-03)
+
+### Other
+
+* Merge pull request #1217 from mraniki/dev
+
+⬆️ 🤖 - You will always have good luck in your personal affairs ([`521a628`](https://github.com/mraniki/tt/commit/521a628d07ff842a8e2b8af13077f45222a82ff8))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.7 ([`83a4552`](https://github.com/mraniki/tt/commit/83a455232957050589f35948db73fbe6f171efb0))
+
+
 ## v6.7.25 (2024-02-01)
 
 ### Other
