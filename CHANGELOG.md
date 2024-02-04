@@ -2,6 +2,23 @@
 
 
 
+## v6.7.27 (2024-02-04)
+
+### Other
+
+* Merge pull request #1221 from mraniki/dev
+
+⬆️ 🤖 - Do something unusual today  Pay a bill ([`b44e85c`](https://github.com/mraniki/tt/commit/b44e85c9f14b6164e0666354f8b53254cf69c28e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.0.21 ([`e952dfc`](https://github.com/mraniki/tt/commit/e952dfcd2d9f1a004536a66d166864398f0fa59b))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v7.0.9 ([`cec6ed4`](https://github.com/mraniki/tt/commit/cec6ed429f68ef77d6658ebc273a082af6ebad14))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.37 ([`a1ade00`](https://github.com/mraniki/tt/commit/a1ade00b188970a686c6022fdc59d41443caefbd))
+
+
 ## v6.7.26 (2024-02-03)
 
 ### Other
