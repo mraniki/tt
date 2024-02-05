@@ -2,6 +2,21 @@
 
 
 
+## v6.7.28 (2024-02-05)
+
+### Other
+
+* Merge pull request #1223 from mraniki/dev
+
+⬆️ 🤖 - all the modern inconveniences ([`d21292d`](https://github.com/mraniki/tt/commit/d21292dd55fb26727e5ed5ee4dbe73b7f6c50862))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.8 ([`8d836f9`](https://github.com/mraniki/tt/commit/8d836f9e8b43efb10d10b1f855153b5790accf1f))
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.2.0 ([`8a83192`](https://github.com/mraniki/tt/commit/8a8319239cf18701eae1273786553970ff4dc5b0))
+
+
 ## v6.7.27 (2024-02-04)
 
 ### Other
