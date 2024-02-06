@@ -2,6 +2,19 @@
 
 
 
+## v6.7.29 (2024-02-06)
+
+### Other
+
+* Merge pull request #1225 from mraniki/dev
+
+⬆️ 🤖 - The Public is merely a multiplied me ([`155fdd7`](https://github.com/mraniki/tt/commit/155fdd730358b6ca6283bf1567c74e78ebe6285f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.0.22 ([`fa57cca`](https://github.com/mraniki/tt/commit/fa57ccaecfb6eab36743247e2d4735eaa47454c9))
+
+
 ## v6.7.28 (2024-02-05)
 
 ### Other
