@@ -2,6 +2,25 @@
 
 
 
+## v6.7.30 (2024-02-06)
+
+### Other
+
+* Merge pull request #1228 from mraniki/dev
+
+⬆️ 🤖 - You will triumph over your enemy ([`97bbd6f`](https://github.com/mraniki/tt/commit/97bbd6f7ba9a1c98bdba8f4b7b2e1f3089812e88))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.0.24 ([`3a9ecc7`](https://github.com/mraniki/tt/commit/3a9ecc797baf53b0bd145455661e5aa007f632b8))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.9 ([`149ee8a`](https://github.com/mraniki/tt/commit/149ee8aa76a8481f1497144b47f9a4ebbc23566e))
+
+### 🔧
+
+* 🔧 Improve config ([`3a8db04`](https://github.com/mraniki/tt/commit/3a8db046d045089caa2c6b2e921164669bd253bc))
+
+
 ## v6.7.29 (2024-02-06)
 
 ### Other
