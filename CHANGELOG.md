@@ -2,6 +2,19 @@
 
 
 
+## v6.7.31 (2024-02-06)
+
+### Other
+
+* Merge pull request #1229 from mraniki/dev
+
+⬆️ 🤖 - Q	How many psychiatrists does it take to change a light bulb ([`53c736c`](https://github.com/mraniki/tt/commit/53c736c1d3ebecde6835f04adc31a8de0e3b7663))
+
+### 🔧
+
+* ⬆️ 🔧 ([`7b3e3e8`](https://github.com/mraniki/tt/commit/7b3e3e841f7b6b03c50de9a9254c6698bf7623fa))
+
+
 ## v6.7.30 (2024-02-06)
 
 ### Other
