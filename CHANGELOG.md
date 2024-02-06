@@ -2,6 +2,19 @@
 
 
 
+## v6.7.32 (2024-02-06)
+
+### Other
+
+* Merge pull request #1230 from mraniki/dev
+
+⬆️ 🤖 - Your ignorance cramps my conversation ([`e8d175f`](https://github.com/mraniki/tt/commit/e8d175f6edde7aebcb8481db32a7eb7d1acb0e02))
+
+### ⬆️
+
+* ⬆️ ([`64cf7ec`](https://github.com/mraniki/tt/commit/64cf7ec104dfb59810a8e90ed5e04111bb1f66d9))
+
+
 ## v6.7.31 (2024-02-06)
 
 ### Other
