@@ -2,6 +2,19 @@
 
 
 
+## v6.7.34 (2024-02-08)
+
+### Other
+
+* Merge pull request #1234 from mraniki/dev
+
+⬆️ 🤖 - Avoid reality at all costs ([`62aa932`](https://github.com/mraniki/tt/commit/62aa932ef894c1418abc7b395987dfb056b6af2e))
+
+### ⬆️
+
+* ⬆️ ([`88a43d0`](https://github.com/mraniki/tt/commit/88a43d0f0ed8291d9d0386fffecff51812ca7916))
+
+
 ## v6.7.33 (2024-02-08)
 
 ### Other
