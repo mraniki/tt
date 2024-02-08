@@ -2,6 +2,21 @@
 
 
 
+## v6.7.33 (2024-02-08)
+
+### Other
+
+* Merge pull request #1233 from mraniki/dev
+
+⬆️ 🤖 - The lunatic the lover and the poet ([`0659ddb`](https://github.com/mraniki/tt/commit/0659ddb5c87a8d0bbd4a4782f227131baf79d2f7))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.15.10 ([`9fdc27e`](https://github.com/mraniki/tt/commit/9fdc27e647107f6c25ca0d20bcd47135f426f607))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.38 ([`2384989`](https://github.com/mraniki/tt/commit/23849896cc8d0ef3f143e7684ee9e9093ec9031b))
+
+
 ## v6.7.32 (2024-02-06)
 
 ### Other
