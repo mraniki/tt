@@ -30,7 +30,8 @@ keywords = [
   "Uniswap",
   "bot",
   "chat",
-  "talky"
+  "talky",
+  "AI"
 ]
 license = "MIT License"
 name = "tt"
@@ -56,7 +57,7 @@ iamlistening = "4.2.38"
 findmyorder = "1.9.10"
 dxsp = "7.0.9"
 cefi = "3.3.11"
-myllm = "4.0.29"
+myllm = "4.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
