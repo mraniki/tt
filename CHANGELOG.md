@@ -2,6 +2,19 @@
 
 
 
+## v6.7.35 (2024-02-10)
+
+### Other
+
+* Merge pull request #1236 from mraniki/dev
+
+⬆️ 🤖 - A classic is something that everyone wants to have read ([`601aac2`](https://github.com/mraniki/tt/commit/601aac2392b4cb1ed5b52f9b2bc2d33b228d709a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.10 ([`bbc0e7c`](https://github.com/mraniki/tt/commit/bbc0e7c0a55758ac0a9176aeeb6bb43767e348e7))
+
+
 ## v6.7.34 (2024-02-08)
 
 ### Other
