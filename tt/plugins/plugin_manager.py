@@ -265,3 +265,17 @@ class BasePlugin:
         # if command in command_mapping:
         #     function = command_mapping[command]
         #     await self.send_notification(f"{await function()}")
+
+    def should_handle_timeframe(self):
+        """
+        Returns True if it is 
+        Tuesday, Wednesday, Thursday, 
+        and time is between 8 to 16.
+
+        Returns:
+            bool
+        """
+        current_time = datetime.now().time()
+        current_day = datetime.now().strftime("%a").lower()
+
+        return current_day in ["tue", "wed", "thu"] and datetime.strptime("08:00", "%H:%M").time() <= current_time <= datetime.strptime("16:00", "%H:%M").time()

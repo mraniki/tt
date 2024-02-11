@@ -61,7 +61,7 @@ class CexExchangePlugin(BasePlugin):
         if not self.should_handle(msg):
             return
         logger.debug("settings.bot_ignore: {}", settings.bot_ignore)
-        if settings.bot_ignore not in msg or settings.bot_prefix not in msg:
+        if self.should_handle_timeframe() and (settings.bot_ignore not in msg or settings.bot_prefix not in msg):
             if await self.fmo.search(msg):
                 order = await self.fmo.get_order(msg)
                 if order and settings.trading_enabled:
