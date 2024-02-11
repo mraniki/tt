@@ -2,6 +2,19 @@
 
 
 
+## v6.7.40 (2024-02-11)
+
+### Other
+
+* Merge pull request #1247 from mraniki/dev
+
+⬆️ 🤖 - You will be held hostage by a radical group ([`affaec7`](https://github.com/mraniki/tt/commit/affaec77f2fdb539be841cec0ce39aeed0d8259e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.16.1 ([`f9bc672`](https://github.com/mraniki/tt/commit/f9bc672e65507166688dae58d95fadfc60563fd1))
+
+
 ## v6.7.39 (2024-02-11)
 
 ### :recycle:
