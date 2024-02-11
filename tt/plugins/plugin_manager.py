@@ -1,6 +1,7 @@
 import asyncio
 import importlib
 import pkgutil
+from datetime import datetime
 
 from asyncz.triggers import CronTrigger, IntervalTrigger
 
@@ -216,17 +217,18 @@ class BasePlugin:
     async def plugin_notify_cron_task(
         self,
         user_name=None,
-        user_day_of_week="mon-fri",
-        user_hours="4,10,16",
-        user_timezone="UTC",
+        user_day_of_week=None,
+        user_hours=None,
+        user_timezone=None,
         function=None,
     ):
         """
         Handles task cron scheduling
         for notification
         default set to
-        Monday to Friday
+        Tuesday to Thursday
         at 6AM, 12PM and 6PM UTC
+        via settings
 
         Args:
             user_name (str): User name
@@ -239,6 +241,13 @@ class BasePlugin:
             None
 
         """
+        if not user_day_of_week:
+            user_day_of_week = settings.user_day_of_week
+        if not user_hours:
+            user_hours = settings.user_hours
+        if not user_timezone:
+            user_timezone = settings.user_timezone
+
         if function:
             self.scheduler.add_task(
                 name=user_name,
@@ -265,3 +274,25 @@ class BasePlugin:
         # if command in command_mapping:
         #     function = command_mapping[command]
         #     await self.send_notification(f"{await function()}")
+
+    def should_handle_timeframe():
+        """
+        Returns True if the current day and time 
+        are within the configured trading window.
+
+        Returns:
+            bool
+        """
+        if settings.trading_control:
+            current_time = datetime.now().time()
+            current_day = datetime.now().strftime("%a").lower()
+
+            start_time = datetime.strptime(settings.trading_hours_start, "%H:%M").time()
+            end_time = datetime.strptime(settings.trading_hours_end, "%H:%M").time()
+
+            return (
+                current_day in settings.trading_days_allowed
+                and start_time <= current_time <= end_time
+            )
+
+        return True
