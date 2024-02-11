@@ -164,6 +164,9 @@ helper_commands = """
 
 # Enable/Disable Trading
 trading_enabled = true
+trading_control = false
+trading_days_allowed = "TBD"
+trading_hours_allowed = "TBD"
 
 ########################################
 ###        FINDMYORDER SETTINGS      ###

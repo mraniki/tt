@@ -275,7 +275,9 @@ class BasePlugin:
         Returns:
             bool
         """
-        current_time = datetime.now().time()
-        current_day = datetime.now().strftime("%a").lower()
+        if settings.trading_control:
+            current_time = datetime.now().time()
+            current_day = datetime.now().strftime("%a").lower()
 
-        return current_day in ["tue", "wed", "thu"] and datetime.strptime("08:00", "%H:%M").time() <= current_time <= datetime.strptime("16:00", "%H:%M").time()
+            return current_day in ["tue", "wed", "thu"] and datetime.strptime("08:00", "%H:%M").time() <= current_time <= datetime.strptime("16:00", "%H:%M").time()
+        return true 
