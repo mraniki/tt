@@ -2,6 +2,19 @@
 
 
 
+## v6.7.41 (2024-02-11)
+
+### Other
+
+* Merge pull request #1248 from mraniki/dev
+
+⬆️ 🤖 - Q	What is purple and conquered the world ([`56e10dc`](https://github.com/mraniki/tt/commit/56e10dc65953c174241bb78807ed847814cc12fa))
+
+### Update
+
+* :arrow_up:  Update cefi version ([`7b171ed`](https://github.com/mraniki/tt/commit/7b171ed92444298d8705cee3a23b9fb9b6793e40))
+
+
 ## v6.7.40 (2024-02-11)
 
 ### Other
