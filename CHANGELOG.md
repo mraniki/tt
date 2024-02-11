@@ -2,6 +2,41 @@
 
 
 
+## v6.7.39 (2024-02-11)
+
+### :recycle:
+
+* :recycle: Refactor plugin manager and update talky settings ([`6e975b3`](https://github.com/mraniki/tt/commit/6e975b3948615cf1d7f0d629404b8032b5af96c0))
+
+### Other
+
+* Merge pull request #1245 from mraniki/dev
+
+⬆️ 🤖 - You have the body of a  year old  Please return it before it gets wrinkled ([`7644b77`](https://github.com/mraniki/tt/commit/7644b7787fc5980573ba773ce733e04996478874))
+
+* Merge pull request #1244 from mraniki/dev
+
+⬆️ 🤖 - Q	Whats a lightyear ([`14ff964`](https://github.com/mraniki/tt/commit/14ff96420ff93c62f50234d8af9ea854b7bf186e))
+
+* Refactor exchange plugin classes and add should_handle_timeframe method
+
+Adding trading control to only specific days and hours ([`60e9aee`](https://github.com/mraniki/tt/commit/60e9aee98631935338061bb48c47158bd159b719))
+
+### Update
+
+* Update plugin_manager.py and talky_settings.toml files ([`d27c1d1`](https://github.com/mraniki/tt/commit/d27c1d11145828ad7096a951bade7fbf0e438c31))
+
+### 🚑
+
+* 🚑 ([`7a47b3f`](https://github.com/mraniki/tt/commit/7a47b3f4eea15c3ea76eddfe5cb854e1f526f67b))
+
+### 🚨
+
+* 🚨 ([`adc80aa`](https://github.com/mraniki/tt/commit/adc80aad33bb5e40914fb9cc9e0f29330e9c8feb))
+
+* 🚨 ♻️ lint correct and adding settings for plugin_notify_cron_task for days, hours ([`259505d`](https://github.com/mraniki/tt/commit/259505d42e8e61da91108ff528dee62eb8566d67))
+
+
 ## v6.7.38 (2024-02-11)
 
 ### Other
