@@ -2,6 +2,25 @@
 
 
 
+## v6.7.36 (2024-02-11)
+
+### Other
+
+* Merge pull request #1239 from mraniki/dev
+
+⬆️ 🤖 - Kindness is a language which the deaf can hear and the blind can read ([`88ae34b`](https://github.com/mraniki/tt/commit/88ae34bf2116fccc3eda0b3f20d8643f8513cd4f))
+
+### Update
+
+* Update pyproject.toml with new keywords and myllm version ([`20dc94d`](https://github.com/mraniki/tt/commit/20dc94d497a0bb4efd3875132406bf0be0bb87b8))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.0.29 ([`cfbeab7`](https://github.com/mraniki/tt/commit/cfbeab758f30b9e17d3128155910ae96f1a7d142))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.11 ([`52503aa`](https://github.com/mraniki/tt/commit/52503aa47f208dad6a65b6fc2fadc3dcc5c324cb))
+
+
 ## v6.7.35 (2024-02-10)
 
 ### Other
