@@ -2,6 +2,21 @@
 
 
 
+## v6.7.38 (2024-02-11)
+
+### Other
+
+* Merge pull request #1243 from mraniki/dev
+
+⬆️ 🤖 - You will inherit millions of dollars ([`d4eb544`](https://github.com/mraniki/tt/commit/d4eb5448db168d05a5b1b378ef998922653fa318))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v7.0.10 ([`01992e9`](https://github.com/mraniki/tt/commit/01992e9414792fdbfcf49545d811bcf46bb9d667))
+
+* ⬆️ ([`f5e485d`](https://github.com/mraniki/tt/commit/f5e485dc7b2eb45a37d76c6c264eb03b39ce26b9))
+
+
 ## v6.7.37 (2024-02-11)
 
 ### Other
