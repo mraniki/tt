@@ -52,8 +52,8 @@ class DexExchangePlugin(BasePlugin):
         if not self.should_handle(msg):
             return
 
-        if self.should_handle_timeframe() and (settings.bot_ignore not in msg or settings.bot_prefix not in msg):
-            if await self.fmo.search(msg):
+        if settings.bot_ignore not in msg or settings.bot_prefix not in msg:
+            if await self.fmo.search(msg) and self.should_handle_timeframe():
                 order = await self.fmo.get_order(msg)
                 if order and settings.trading_enabled:
                     trade = await self.exchange.submit_order(order)

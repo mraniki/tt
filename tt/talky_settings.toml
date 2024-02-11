@@ -165,8 +165,9 @@ helper_commands = """
 # Enable/Disable Trading
 trading_enabled = true
 trading_control = false
-trading_days_allowed = "TBD"
-trading_hours_allowed = "TBD"
+trading_days_allowed = ["tue", "wed", "thu"]
+trading_hours_start = "08:00"
+trading_hours_end = "16:00"
 
 ########################################
 ###        FINDMYORDER SETTINGS      ###
