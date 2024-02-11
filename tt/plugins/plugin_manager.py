@@ -216,8 +216,8 @@ class BasePlugin:
     async def plugin_notify_cron_task(
         self,
         user_name=None,
-        user_day_of_week="mon-fri",
-        user_hours="4,10,16",
+        user_day_of_week="tue-thu",
+        user_hours="6,12,18",
         user_timezone="UTC",
         function=None,
     ):
@@ -225,7 +225,7 @@ class BasePlugin:
         Handles task cron scheduling
         for notification
         default set to
-        Monday to Friday
+        Tuesday to Thursday
         at 6AM, 12PM and 6PM UTC
 
         Args:

@@ -239,7 +239,12 @@ example_plugin_enabled = false
 # Not yet implemented
 # user_plugins_allowed = true
 user_plugins_allowed = false
- 
+
+# plugin cron scheduler
+user_day_of_week="tue-thu"
+user_hours="6,12,18"
+user_timezone="UTC"
+
 ########################################
 ###          HELPER SETTINGS         ###
 ########################################
@@ -302,6 +307,16 @@ live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
 enable_feed = true
 # Feeds RSS url
 news_feed = "https://www.dailyfx.com/feeds/market-news"
+
+# Finnhub news fetcher
+enable_finnhub = false
+finnhub_api_key = ""
+finnhub_news_category = "forex"
+
+# web scraper
+enable_scraper = false
+market_page_url = ""
+market_page_id = ""
 
 ########################################
 ###           CEFI SETTINGS          ###
