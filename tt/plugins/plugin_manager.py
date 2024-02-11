@@ -275,7 +275,7 @@ class BasePlugin:
         #     function = command_mapping[command]
         #     await self.send_notification(f"{await function()}")
 
-    def should_handle_timeframe():
+    def should_handle_timeframe(self):
         """
         Returns True if the current day and time 
         are within the configured trading window.
