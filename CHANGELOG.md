@@ -2,6 +2,19 @@
 
 
 
+## v6.7.42 (2024-02-13)
+
+### Other
+
+* Merge pull request #1251 from mraniki/dev
+
+⬆️ 🤖 - By trying we can easily learn to endure adversity  Another mans I mean ([`e2bdef2`](https://github.com/mraniki/tt/commit/e2bdef28be600ccf92199f6bf520fa325de69fea))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.39 ([`6265a6a`](https://github.com/mraniki/tt/commit/6265a6aaeb7c97a67def9ceef65208e8e21d59bb))
+
+
 ## v6.7.41 (2024-02-11)
 
 ### Other
