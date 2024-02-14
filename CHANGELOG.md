@@ -2,6 +2,21 @@
 
 
 
+## v6.7.43 (2024-02-14)
+
+### Other
+
+* Merge pull request #1254 from mraniki/dev
+
+⬆️ 🤖 - You may be recognized soon  Hide ([`8b2453b`](https://github.com/mraniki/tt/commit/8b2453b2d108682b4ee0ee6a8c5496039e275523))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.11 ([`49c11d8`](https://github.com/mraniki/tt/commit/49c11d8b4c85e15fc825810ed27888f1e21f2a3d))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.14 ([`8e2754c`](https://github.com/mraniki/tt/commit/8e2754ce286aae38a16bd3ab4e1531bfe8928bf5))
+
+
 ## v6.7.42 (2024-02-13)
 
 ### Other
