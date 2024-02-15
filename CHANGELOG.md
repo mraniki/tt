@@ -2,6 +2,19 @@
 
 
 
+## v6.7.44 (2024-02-15)
+
+### Other
+
+* Merge pull request #1256 from mraniki/dev
+
+⬆️ 🤖 - Never give an inch ([`8356a5e`](https://github.com/mraniki/tt/commit/8356a5e668b61571e46927e362797831658adca1))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.15 ([`2d2b568`](https://github.com/mraniki/tt/commit/2d2b5686ba584fd67c8b5ab219f28d00df933d2e))
+
+
 ## v6.7.43 (2024-02-14)
 
 ### Other
