@@ -2,6 +2,19 @@
 
 
 
+## v6.7.45 (2024-02-16)
+
+### Other
+
+* Merge pull request #1258 from mraniki/dev
+
+⬆️ 🤖 - You will be recognized and honored as a community leader ([`90b4d69`](https://github.com/mraniki/tt/commit/90b4d69bc657d1eaf4ddcc8eb3ab819ad36d3d7e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.16 ([`619885a`](https://github.com/mraniki/tt/commit/619885a18c7b1a3d954896195c91463182a1d980))
+
+
 ## v6.7.44 (2024-02-15)
 
 ### Other
