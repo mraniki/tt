@@ -2,6 +2,19 @@
 
 
 
+## v6.7.46 (2024-02-17)
+
+### Other
+
+* Merge pull request #1260 from mraniki/dev
+
+⬆️ 🤖 - English literatures performing flea ([`7aeb821`](https://github.com/mraniki/tt/commit/7aeb821acd4abfa6bb2f78dd7f7b80310b7b5e84))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.40 ([`57a013e`](https://github.com/mraniki/tt/commit/57a013e099765acb6a632b7336bb8741a0f675df))
+
+
 ## v6.7.45 (2024-02-16)
 
 ### Other
