@@ -2,6 +2,21 @@
 
 
 
+## v6.7.47 (2024-02-19)
+
+### Other
+
+* Merge pull request #1263 from mraniki/dev
+
+⬆️ 🤖 - You are dishonest but never to the point of hurting a friend ([`93125f1`](https://github.com/mraniki/tt/commit/93125f1e355eafeb4700bd84ee5d0e3cb88cfab8))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.1.2 ([`3c15733`](https://github.com/mraniki/tt/commit/3c1573305394d79915785530204015e3be30bb13))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.17 ([`d80a495`](https://github.com/mraniki/tt/commit/d80a4958a45b573710ed049ef467d58da784fd5c))
+
+
 ## v6.7.46 (2024-02-17)
 
 ### Other
