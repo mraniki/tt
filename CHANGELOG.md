@@ -2,6 +2,21 @@
 
 
 
+## v6.7.48 (2024-02-21)
+
+### Other
+
+* Merge pull request #1266 from mraniki/dev
+
+⬆️ 🤖 - Be careful  Is it classified ([`ee209de`](https://github.com/mraniki/tt/commit/ee209deb1356d27f7397434d625d75a96bc6a473))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.18 ([`1c29105`](https://github.com/mraniki/tt/commit/1c29105e33900847ef74464e2175488045a0199d))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.1.3 ([`b43e013`](https://github.com/mraniki/tt/commit/b43e0132a9576cf2f251ff71d4fc1d4decd56add))
+
+
 ## v6.7.47 (2024-02-19)
 
 ### Other
