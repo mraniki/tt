@@ -2,6 +2,19 @@
 
 
 
+## v6.7.49 (2024-02-22)
+
+### Other
+
+* Merge pull request #1268 from mraniki/dev
+
+Update MyLLM to version 4.20 (history import support) ([`4b68c7b`](https://github.com/mraniki/tt/commit/4b68c7b77647fcd269de2c2f91c387bf1f764614))
+
+### Update
+
+* Update pyproject.toml ([`37cb93b`](https://github.com/mraniki/tt/commit/37cb93b787b7936a56b47d7662fa899973c2e661))
+
+
 ## v6.7.48 (2024-02-21)
 
 ### Other
