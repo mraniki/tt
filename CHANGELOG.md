@@ -2,6 +2,19 @@
 
 
 
+## v6.7.50 (2024-02-23)
+
+### Other
+
+* Merge pull request #1270 from mraniki/dev
+
+⬆️ 🤖 - The lunatic the lover and the poet ([`874f9c1`](https://github.com/mraniki/tt/commit/874f9c18edfddc7fe9e717d1b7c92785c19f91f1))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.2.1 ([`071b22a`](https://github.com/mraniki/tt/commit/071b22a9d5e496596a9205b61ff1509090cecdb8))
+
+
 ## v6.7.49 (2024-02-22)
 
 ### Other
