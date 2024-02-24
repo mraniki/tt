@@ -2,6 +2,25 @@
 
 
 
+## v6.7.51 (2024-02-24)
+
+### Other
+
+* Merge pull request #1273 from mraniki/dev
+
+⬆️ 🤖 - Never be led astray onto the path of virtue ([`7796ad2`](https://github.com/mraniki/tt/commit/7796ad2329f7d52c8ca0763c4c5ebcc8473641c1))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.3.0 ([`fd77893`](https://github.com/mraniki/tt/commit/fd778939dbb90f1e6048ba75af293b2a67f74461))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v7.0.11 ([`8f8b070`](https://github.com/mraniki/tt/commit/8f8b0701cd0c656aa808ef00ebcf2f9c7021e78d))
+
+### 🙈
+
+* 🙈 ([`76de045`](https://github.com/mraniki/tt/commit/76de04513c4d2fcf814ad7ce96cfbde9d662f1c1))
+
+
 ## v6.7.50 (2024-02-23)
 
 ### Other
