@@ -2,6 +2,29 @@
 
 
 
+## v6.7.52 (2024-02-25)
+
+### Other
+
+* Merge pull request #1281 from mraniki/dev
+
+⬆️ 🤖 - Are you making all this up as you go along ([`bd591d4`](https://github.com/mraniki/tt/commit/bd591d4f18ddc3cc1e91a5c9798a1fd36a868a2e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.4.0 ([`f8e2d43`](https://github.com/mraniki/tt/commit/f8e2d4396651873d9ffb6fbffc3e44211aa1172c))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.16.2 ([`312a60e`](https://github.com/mraniki/tt/commit/312a60e63b21c26966ca766f35aadee1c26fb712))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.3.1 ([`e54a589`](https://github.com/mraniki/tt/commit/e54a5893dafcb7352579b4021075772dfe04d1b1))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.41 ([`f1c6e79`](https://github.com/mraniki/tt/commit/f1c6e79a421ee8fbd92dcf935d03a5a950d4d92b))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.12 ([`49c497c`](https://github.com/mraniki/tt/commit/49c497c089b6139a1570a46f52566fd0a1dd0150))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.19 ([`b826fa5`](https://github.com/mraniki/tt/commit/b826fa5e795011f4aafe31e444afe135b117ca8f))
+
+
 ## v6.7.51 (2024-02-24)
 
 ### Other
