@@ -2,6 +2,23 @@
 
 
 
+## v6.7.53 (2024-02-25)
+
+### Other
+
+* Merge pull request #1283 from mraniki/dev
+
+⬆️ 🤖 - A horse  A horse  My kingdom for a horse ([`78feb27`](https://github.com/mraniki/tt/commit/78feb276546ad6a174f911f5e1a61cd028debba0))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency fastapi to ^0.110.0 ([`68378e0`](https://github.com/mraniki/tt/commit/68378e0803629880ed3194138ff84ee316fbfbfb))
+
+* ⬆️ 🛠️(deps): update dependency black to v24 ([`7c33267`](https://github.com/mraniki/tt/commit/7c33267a73fced5b20cc988e779aecc487369517))
+
+* ⬆️ ([`41ba8f7`](https://github.com/mraniki/tt/commit/41ba8f748987dce9ca749ec283016d85de15e4fa))
+
+
 ## v6.7.52 (2024-02-25)
 
 ### Other
