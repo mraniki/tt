@@ -2,6 +2,23 @@
 
 
 
+## v6.7.54 (2024-02-25)
+
+### Other
+
+* Merge pull request #1284 from mraniki/dev
+
+⬆️ Update Asyncz, talkytrend, cefi versions ([`ad882fc`](https://github.com/mraniki/tt/commit/ad882fcbbfb27c4307ef0ba11a3e85a5a92c0af6))
+
+### Update
+
+* :arrow_up:  Update talkytrend and cefi versions in pyproject.toml ([`bbef820`](https://github.com/mraniki/tt/commit/bbef82023446316ae404fffef73ce65a2c6f4de9))
+
+### ⬆️
+
+* ⬆️ asyncz upgrade ([`1e90498`](https://github.com/mraniki/tt/commit/1e90498b1f95968346a56922a252f1939735d45f))
+
+
 ## v6.7.53 (2024-02-25)
 
 ### Other
