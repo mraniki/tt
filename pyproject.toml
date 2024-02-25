@@ -45,7 +45,7 @@ version = "6.7.52"
 python = "^3.10"
 loguru = ">=0.6.0"
 dynaconf = ">=3.2.0"
-fastapi = "^0.109.0"
+fastapi = "^0.110.0"
 requests = "^2.31.0"
 uvicorn = "^0.27.0"
 apprise = "^1.5.0"
@@ -57,13 +57,13 @@ iamlistening = "4.2.41"
 findmyorder = "1.9.12"
 dxsp = "7.0.11"
 cefi = "3.3.19"
-myllm = "4.4.0"
+myllm = "4.4.1"
 
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = ">=8.0.8"
 ruff = "^0.2.0"
-black = "^23.3.0"
+black = "^24.0.0"
 pre-commit = "^3.3.1"
 
 [tool.poetry.group.docs]
