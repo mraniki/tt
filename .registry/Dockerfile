@@ -14,6 +14,16 @@ ENV OP_PATH=/usr/bin/op
 ENV OP_SERVICE_ACCOUNT_TOKEN=None
 
 ##
+# Install Interative Brokers Gateway
+#
+# RUN wget -q https://github.com/IbcAlpha/IBC/releases/download/3.18.0-Update.1/IBCLinux-3.18.0.zip -O ibc.zip \
+#   && sha256sum -c ibc.zip.sha256 \
+#   && unzip ibc.zip -d /opt/ibc \
+#   && chmod o+x /opt/ibc/*.sh /opt/ibc/*/*.sh \
+#   && rm ibc.zip \
+#   && apt-get clean \
+
+##
 # Install 1Password CLI
 #
 RUN wget -P /tmp/ https://downloads.1password.com/linux/debian/$(dpkg --print-architecture)/stable/1password-cli-$(dpkg --print-architecture)-latest.deb
