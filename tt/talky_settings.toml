@@ -260,7 +260,7 @@ helper_enabled = true
 #name of the bot
 bot_name = "Talky"
 # URL endpoint for latency ping.
-ping = "8.8.8.8"
+ip_check_url = "8.8.8.8"
 
 
 ########################################
