@@ -1,5 +1,3 @@
-import os
-
 from cefi import CexTrader
 from findmyorder import FindMyOrder
 
@@ -26,7 +24,7 @@ class CexExchangePlugin(BasePlugin):
 
     """
 
-    name = os.path.splitext(os.path.basename(__file__))[0]
+    # name = os.path.splitext(os.path.basename(__file__))[0]
 
     def __init__(self):
         super().__init__()
