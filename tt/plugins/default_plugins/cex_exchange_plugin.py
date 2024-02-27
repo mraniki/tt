@@ -1,5 +1,3 @@
-import os
-
 from cefi import CexTrader
 from findmyorder import FindMyOrder
 
@@ -26,7 +24,7 @@ class CexExchangePlugin(BasePlugin):
 
     """
 
-    name = os.path.splitext(os.path.basename(__file__))[0]
+    # name = os.path.splitext(os.path.basename(__file__))[0]
 
     def __init__(self):
         super().__init__()
@@ -34,12 +32,6 @@ class CexExchangePlugin(BasePlugin):
         if self.enabled:
             self.fmo = FindMyOrder()
             self.exchange = CexTrader()
-
-    async def start(self):
-        """Starts the exchange_plugin plugin"""
-
-    async def stop(self):
-        """Stops the exchange_plugin plugin"""
 
     async def send_notification(self, message):
         """Sends a notification"""
@@ -61,13 +53,14 @@ class CexExchangePlugin(BasePlugin):
         if not self.should_handle(msg):
             return
         logger.debug("settings.bot_ignore: {}", settings.bot_ignore)
-        if settings.bot_ignore not in msg or settings.bot_prefix not in msg:
-            if await self.fmo.search(msg) and self.should_handle_timeframe():
-                order = await self.fmo.get_order(msg)
-                if order and settings.trading_enabled:
-                    trade = await self.exchange.submit_order(order)
-                    if trade:
-                        await send_notification(trade)
+        if (settings.bot_ignore not in msg or settings.bot_prefix not in msg) and (
+            await self.fmo.search(msg) and self.should_handle_timeframe()
+        ):
+            order = await self.fmo.get_order(msg)
+            if order and settings.trading_enabled:
+                trade = await self.exchange.submit_order(order)
+                if trade:
+                    await send_notification(trade)
 
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")

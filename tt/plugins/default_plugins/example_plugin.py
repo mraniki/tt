@@ -25,9 +25,6 @@ class ExamplePlugin(BasePlugin):
         if self.enabled:
             logger.debug("example plugin enabled")
 
-    async def stop(self):
-        """Stops the plugin"""
-
     async def send_notification(self, message):
         """Sends a notification"""
         if self.enabled:

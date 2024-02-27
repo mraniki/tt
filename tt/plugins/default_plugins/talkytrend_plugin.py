@@ -23,9 +23,6 @@ class TalkyTrendPlugin(BasePlugin):
                 user_name="talky_monitor", function=self.trend.monitor
             )
 
-    async def stop(self):
-        """Stops the TalkyTrend plugin"""
-
     async def send_notification(self, message):
         """Sends a notification"""
         if self.enabled:

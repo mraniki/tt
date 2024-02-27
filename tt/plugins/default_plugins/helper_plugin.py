@@ -1,3 +1,4 @@
+import asyncio
 import os
 import socket
 import sys
@@ -52,9 +53,6 @@ class HelperPlugin(BasePlugin):
         """Starts the plugin"""
         await self.send_notification(await self.get_helper_info())
 
-    async def stop(self):
-        """Stops the plugin"""
-
     async def send_notification(self, message):
         """Sends a notification"""
         if self.enabled:
@@ -88,26 +86,25 @@ class HelperPlugin(BasePlugin):
         """
         return f"{self.help_message}"
 
-    async def get_helper_info(self):
+    async def get_helper_info(self) -> str:
         """
-        return info
+        :file:`/info` command to
+        return the name and version of the bot
         """
-        directory_name = os.path.basename(
-            os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-        )
-        return f"ℹ️ {directory_name} {__version__}\n"
+        return f"ℹ️ {settings.bot_name} {__version__}"
 
-    async def get_helper_network(self):
+    async def get_helper_network(self) -> str:
         """
         :file:`/network` command to retrieve the network
         ping latency and
-        the bot IP address
+        the bot's public IP address
         """
-        ping_result = ping3.ping(settings.ping, unit="ms")
+        ping_result = ping3.ping(settings.ip_check_url, unit="ms")
         ping_result = round(ping_result, 2) if ping_result is not None else 0
-        return f"️{self.host_ip}\n" f"🏓 {ping_result}\n"
 
-    async def trading_switch_command(self):
+        return f"🌐 {self.host_ip}\n" f"🏓 {ping_result} ms\n"
+
+    async def trading_switch_command(self) -> str:
         """
         Trading switch command
         :file:`/trading` command
@@ -115,21 +112,21 @@ class HelperPlugin(BasePlugin):
         trading capability
         """
         settings.trading_enabled = not settings.trading_enabled
-        return f"Trading is {'enabled' if settings.trading_enabled else 'disabled'}."
+        return f"Trading is now {'' if settings.trading_enabled else 'NOT '}enabled."
 
     async def restart(self):
         """
         :file:`/restart` command
         to restart the bot
         """
-        os.execl(sys.executable, os.path.abspath(__file__), sys.argv[0])
+        logger.info("Restarting...")
+        asyncio.get_event_loop().stop()
+        await asyncio.sleep(0.5)
+        os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
 
-    def get_host_ip(self):
-        """
-        Returns bot IP
-        """
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect((settings.ping, 80))
-        ip_address = s.getsockname()[0]
-        s.close()
-        return ip_address
+    @staticmethod
+    def get_host_ip() -> str:
+        """Returns bot IP address"""
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.connect(("8.8.8.8", 53))
+            return s.getsockname()[0]

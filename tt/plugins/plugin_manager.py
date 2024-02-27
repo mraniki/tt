@@ -279,6 +279,7 @@ class BasePlugin:
         """
         Returns True if the current day and time 
         are within the configured trading window.
+        Use to control trading hours for plugins
 
         Returns:
             bool

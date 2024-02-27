@@ -2,6 +2,7 @@
     llm plugin (chatGPT / llama)
 
 """
+
 import os
 
 from myllm import MyLLM
@@ -21,12 +22,6 @@ class LlmPlugin(BasePlugin):
         self.enabled = settings.myllm_enabled
         if self.enabled:
             self.llm = MyLLM()
-
-    async def start(self):
-        """Starts the plugin"""
-
-    async def stop(self):
-        """Stops the plugin"""
 
     async def send_notification(self, message):
         """Sends a notification"""
