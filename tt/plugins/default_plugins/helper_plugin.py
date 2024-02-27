@@ -100,16 +100,10 @@ class HelperPlugin(BasePlugin):
         ping latency and
         the bot's public IP address
         """
-        try:
-            response = await aiohttp.request("GET", settings.ip_check_url)
-            ip = await response.text()
-        except aiohttp.ClientConnectorError:
-            ip = "N/A"
-
-        ping_result = ping3.ping(settings.ping, unit="ms")
+        ping_result = ping3.ping(settings.ip_check_url, unit="ms")
         ping_result = round(ping_result, 2) if ping_result is not None else 0
 
-        return f"🌐 {ip}\n" f"🏓 {ping_result} ms\n"
+        return f"🌐 {self.host_ip}\n" f"🏓 {ping_result} ms\n"
 
     async def trading_switch_command(self) -> str:
         """
