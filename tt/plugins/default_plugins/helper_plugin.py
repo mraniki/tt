@@ -3,7 +3,6 @@ import os
 import socket
 import sys
 
-import aiohttp
 import ping3
 
 from tt.config import logger, settings
