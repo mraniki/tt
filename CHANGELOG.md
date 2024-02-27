@@ -2,6 +2,19 @@
 
 
 
+## v6.7.55 (2024-02-27)
+
+### Other
+
+* Merge pull request #1287 from mraniki/dev
+
+⬆️ 🤖 - Lord what fools these mortals be ([`2262d6c`](https://github.com/mraniki/tt/commit/2262d6c6e70e3cd8fad9cb92df3c675f2f9f22ac))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.42 ([`b1b5c8c`](https://github.com/mraniki/tt/commit/b1b5c8c597b9f42d140a027ee1483576a6642a1d))
+
+
 ## v6.7.54 (2024-02-25)
 
 ### Other
