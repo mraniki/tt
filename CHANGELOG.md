@@ -2,6 +2,63 @@
 
 
 
+## v7.0.0 (2024-02-27)
+
+### Other
+
+* Merge pull request #1292 from mraniki/dev
+
+💥 breaking: TalkyTrend settings update ([`caec0fa`](https://github.com/mraniki/tt/commit/caec0fa64204d564534070d0f5b6269408b1c547))
+
+### ♻️
+
+* ♻️ helper function ([`0b76208`](https://github.com/mraniki/tt/commit/0b7620824899e5da4c239207a8a231e20ddb683c))
+
+### ⚡
+
+* ⚡ ([`008994f`](https://github.com/mraniki/tt/commit/008994f3a99ef69b94b73e1f9785bf60a221d399))
+
+### ✨
+
+* ✨ updating talkytrend setting for v2 ([`70cb724`](https://github.com/mraniki/tt/commit/70cb724f53968b08e415cd17d4ffe832079248b2))
+
+### ⬆️
+
+* ⬆️ ([`cc41b4b`](https://github.com/mraniki/tt/commit/cc41b4b8d956ea03f6f90bdc2816cf422b00fd82))
+
+* ⬆️ ([`87fdfd3`](https://github.com/mraniki/tt/commit/87fdfd3133421f1ff170b4852890131cecd7fc7a))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v1.16.4 ([`cc04ab5`](https://github.com/mraniki/tt/commit/cc04ab5df50d28c59072b89449f07797bef4f1f0))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.21 ([`3956788`](https://github.com/mraniki/tt/commit/395678888b1594c1d2f9a304e08e04f15fd74011))
+
+### 🎨
+
+* 🎨 ([`fde3d43`](https://github.com/mraniki/tt/commit/fde3d43b4d32c6126cc1001b1dfa249887a10ff1))
+
+### 🐛
+
+* 🐛 ([`b5f557b`](https://github.com/mraniki/tt/commit/b5f557b6bdd97801733d821bad8d65f9b0478eec))
+
+### 💥
+
+* 💥 breaking: TalkyTrend settings update ([`fcd7cef`](https://github.com/mraniki/tt/commit/fcd7cef0f49843fffddee20961f4a44d13b94dc8))
+
+### 🔥
+
+* 🔥 plugin name removal ([`2016054`](https://github.com/mraniki/tt/commit/201605437fabbaf47849aea43f8d1d5d0d80862c))
+
+### 🔧
+
+* 🔧 ([`7643871`](https://github.com/mraniki/tt/commit/7643871216f938f23e9b43b6e0009efa31dc8a45))
+
+### 🚨
+
+* 🚨 ([`a800226`](https://github.com/mraniki/tt/commit/a800226380c003008dae19b7520d3c742c930cdb))
+
+* 🚨 ([`13cc396`](https://github.com/mraniki/tt/commit/13cc396dded8ca0681dac4b32a8cb5ef3a97c839))
+
+
 ## v6.7.55 (2024-02-27)
 
 ### Other
