@@ -2,6 +2,27 @@
 
 
 
+## v7.0.1 (2024-02-27)
+
+### Other
+
+* Merge pull request #1297 from mraniki/dev
+
+⬆️ 🛠️(deps) ([`c6f7472`](https://github.com/mraniki/tt/commit/c6f74722d2c892475babf8187b2c67c855be81cd))
+
+* Merge pull request #1289 from mraniki/renovate/dxsp-7.x
+
+⬆️ 🛠️(deps): update dependency dxsp to v7.0.13 ([`c3a6d22`](https://github.com/mraniki/tt/commit/c3a6d22912a28c0dfc68f280842b566ca0f63343))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v7.0.13 ([`35afb01`](https://github.com/mraniki/tt/commit/35afb011887c2cc1b3da3200a1fb13752a367e84))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.43 ([`12fce96`](https://github.com/mraniki/tt/commit/12fce96a9c248dcfb28fb169749823fc8fbdee82))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.2 ([`b6766b7`](https://github.com/mraniki/tt/commit/b6766b7e8672a64772c2e804dfe4e23a3a212ae2))
+
+
 ## v7.0.0 (2024-02-27)
 
 ### Other
@@ -23,6 +44,8 @@
 * ✨ updating talkytrend setting for v2 ([`70cb724`](https://github.com/mraniki/tt/commit/70cb724f53968b08e415cd17d4ffe832079248b2))
 
 ### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.13 ([`169062e`](https://github.com/mraniki/tt/commit/169062e0730e334985c1bb77c75fb9fb9c896d34))
 
 * ⬆️ ([`cc41b4b`](https://github.com/mraniki/tt/commit/cc41b4b8d956ea03f6f90bdc2816cf422b00fd82))
 
