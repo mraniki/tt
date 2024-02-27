@@ -52,9 +52,6 @@ class HelperPlugin(BasePlugin):
         """Starts the plugin"""
         await self.send_notification(await self.get_helper_info())
 
-    async def stop(self):
-        """Stops the plugin"""
-
     async def send_notification(self, message):
         """Sends a notification"""
         if self.enabled:

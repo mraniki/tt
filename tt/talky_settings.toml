@@ -278,6 +278,8 @@ enable_signals = true
 # for the list of supported instrument
 assets = [
     { id ="EURUSD", exchange='FX_IDC',screener="forex"},
+    { id ="UKOIL", exchange='FX',screener="cfd"},
+    { id ="GOLD", exchange='TVC',screener="cfd"},
     { id ="BTCUSD", exchange='BINANCE',screener="crypto"},
 ]
 
@@ -286,7 +288,7 @@ enable_yfinance = true
 
 # yahoo finance ticker reference
 # https://finance.yahoo.com/lookup/
-ticker_reference = "TSLA"
+yfinance_ticker_reference = "TSLA"
 
 # Enable/Disable Events
 enable_events = true
@@ -297,20 +299,22 @@ fomc_decision_date = [
     "2023-11-01",
     "2023-12-13",
     "2024-01-31",
-    "2024-04-1",
+    "2024-03-20",
+    "2024-05-01",
     "2024-06-12",
+    "2024-07-31",
     "2024-09-18",
     "2024-11-07",
     "2024-12-18",
+    "2025-01-29"
     ]
 
 # TV url
 live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
 
-# Enable/Disable Feeds 
+# RSS Feeds Enable/Disable
 enable_feed = true
-# Feeds RSS url
-news_feed = "https://www.dailyfx.com/feeds/market-news"
+feed_url = "https://www.dailyfx.com/feeds/market-news"
 
 # Finnhub news fetcher
 enable_finnhub = false
@@ -319,8 +323,8 @@ finnhub_news_category = "forex"
 
 # web scraper
 enable_scraper = false
-market_page_url = ""
-market_page_id = ""
+scraper_page_url = ""
+scraper_page_id = ""
 
 ########################################
 ###           CEFI SETTINGS          ###

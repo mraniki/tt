@@ -21,10 +21,7 @@ class TalkyTrendPlugin(BasePlugin):
         if self.enabled:
             await self.plugin_notify_cron_task(
                 user_name="talky_monitor", function=self.trend.monitor
-            )
-
-    async def stop(self):
-        """Stops the TalkyTrend plugin"""
+            ) 
 
     async def send_notification(self, message):
         """Sends a notification"""
