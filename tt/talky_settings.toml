@@ -253,10 +253,12 @@ user_timezone="UTC"
 ###          HELPER SETTINGS         ###
 ########################################
 
+
 # Enable/Disable Helper
 helper_enabled = true
 # helper_enabled = false
-
+#name of the bot
+bot_name = "Talky"
 # URL endpoint for latency ping.
 ping = "8.8.8.8"
 
