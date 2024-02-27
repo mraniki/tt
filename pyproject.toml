@@ -78,7 +78,7 @@ myst_parser = "^2.0.0"
 pydata-sphinx-theme = "^0.15.0"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^7.0"
+pytest = "^8.0.0"
 pytest-asyncio = "^0.23.0"
 pytest-cov = "^4.1"
 pytest-loguru = "^0.3.0"
