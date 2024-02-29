@@ -2,6 +2,27 @@
 
 
 
+## v7.0.2 (2024-02-29)
+
+### Other
+
+* Merge pull request #1302 from mraniki/dev
+
+⬆️ 🤖 - Q	What do you call a blind prehistoric animal ([`c10f12a`](https://github.com/mraniki/tt/commit/c10f12aa762555c8305fe23eb542d47d6cdf8e6f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.4.3 ([`c866526`](https://github.com/mraniki/tt/commit/c866526d14aa18e591f26d51bfebae08eb0a2962))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.3 ([`e6e85e5`](https://github.com/mraniki/tt/commit/e6e85e5cea0d9e0ead0efbb453ce5400908d7bf2))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.44 ([`14e6c55`](https://github.com/mraniki/tt/commit/14e6c55e69eb6a18fbcda1e876581eb1c251611b))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.22 ([`e446555`](https://github.com/mraniki/tt/commit/e446555fa9521dc7beff67536eee4c97f36a3775))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.14 ([`b023f94`](https://github.com/mraniki/tt/commit/b023f94e438cd26faf1c28d52b45210f93fa6801))
+
+
 ## v7.0.1 (2024-02-27)
 
 ### Other
