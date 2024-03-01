@@ -57,7 +57,7 @@ iamlistening = "4.2.45"
 findmyorder = "1.9.15"
 dxsp = "7.0.14"
 cefi = "3.3.24"
-myllm = "4.4.4"
+myllm = "4.4.5"
 
 
 [tool.poetry.group.dev.dependencies]
