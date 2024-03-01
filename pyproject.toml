@@ -56,13 +56,13 @@ talkytrend = "2.0.3"
 iamlistening = "4.2.44"
 findmyorder = "1.9.14"
 dxsp = "7.0.13"
-cefi = "3.3.22"
-myllm = "4.4.3"
+cefi = "3.3.23"
+myllm = "4.4.4"
 
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = ">=8.0.8"
-ruff = "^0.2.0"
+ruff = "^0.3.0"
 black = "^24.0.0"
 pre-commit = "^3.3.1"
 
