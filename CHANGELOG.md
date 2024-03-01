@@ -2,6 +2,23 @@
 
 
 
+## v7.0.3 (2024-03-01)
+
+### Other
+
+* Merge pull request #1306 from mraniki/dev
+
+⬆️ 🤖 - Dont look now but the man in the moon is laughing at you ([`b5462b5`](https://github.com/mraniki/tt/commit/b5462b592d1bdd44732f2bc9231ff26fb50be454))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.3.0 ([`8202edd`](https://github.com/mraniki/tt/commit/8202eddd098eb134e13255cb30d7e6ba24450910))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.4.4 ([`5260813`](https://github.com/mraniki/tt/commit/5260813c49fc404f77387bfeded7f0c1f56c391b))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.23 ([`cf82914`](https://github.com/mraniki/tt/commit/cf82914332db918b31b94036f2173be4c31f67ea))
+
+
 ## v7.0.2 (2024-02-29)
 
 ### Other
