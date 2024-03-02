@@ -2,6 +2,29 @@
 
 
 
+## v7.0.4 (2024-03-02)
+
+### Other
+
+* Merge pull request #1313 from mraniki/dev
+
+⬆️ 🤖 - Q	Why is it that the more accuracy you demand from an interpolation ([`fb2bcec`](https://github.com/mraniki/tt/commit/fb2bcecdbac51cb1b40c8439174ad2fde17ec54f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.4.5 ([`0bf2c24`](https://github.com/mraniki/tt/commit/0bf2c24e5394f881b600a9214a8b768ee0789430))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.15 ([`52205b8`](https://github.com/mraniki/tt/commit/52205b8acf393e2f07a55ef3e4e48bea8e7d5da1))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.4 ([`d119c6c`](https://github.com/mraniki/tt/commit/d119c6c1901d499f532ad06022e98d869c191cb7))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.45 ([`2ca1564`](https://github.com/mraniki/tt/commit/2ca1564209fcbf1b9adfb4f7b87d9bd7e3ba5abc))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v7.0.14 ([`eca52e5`](https://github.com/mraniki/tt/commit/eca52e565b82d470b184f8b0a15ef388db412ba4))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.24 ([`41e93e2`](https://github.com/mraniki/tt/commit/41e93e239f05d0117c4745f6937d6428757e6acb))
+
+
 ## v7.0.3 (2024-03-01)
 
 ### Other
