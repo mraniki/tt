@@ -2,6 +2,19 @@
 
 
 
+## v7.0.5 (2024-03-03)
+
+### Other
+
+* Merge pull request #1315 from mraniki/dev
+
+⬆️ 🤖 - An exotic journey in downtown Newark is in your future ([`79b4b84`](https://github.com/mraniki/tt/commit/79b4b8414750c188cbbfaff63969403e06da1d70))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.25 ([`bc98fc0`](https://github.com/mraniki/tt/commit/bc98fc0135b99b03758f68a47f35cfad9fe0e733))
+
+
 ## v7.0.4 (2024-03-02)
 
 ### Other
