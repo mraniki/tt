@@ -2,6 +2,23 @@
 
 
 
+## v7.0.6 (2024-03-04)
+
+### Other
+
+* Merge pull request #1319 from mraniki/dev
+
+⬆️ 🤖 - It may or may not be worthwhile but it still has to be done ([`f24033d`](https://github.com/mraniki/tt/commit/f24033d2dd69eea47bc5433ea9636280de378ce4))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.4.6 ([`4d45bc3`](https://github.com/mraniki/tt/commit/4d45bc31069dbd8737c657c24b457dc8f5b9b585))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.46 ([`336267f`](https://github.com/mraniki/tt/commit/336267f55c2d460aa40be8d4073248ecdcfb7748))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.26 ([`51168e0`](https://github.com/mraniki/tt/commit/51168e05ab1d5ae88f10387521e2f995aced944c))
+
+
 ## v7.0.5 (2024-03-03)
 
 ### Other
