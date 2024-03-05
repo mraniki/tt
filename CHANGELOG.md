@@ -2,6 +2,19 @@
 
 
 
+## v7.0.7 (2024-03-05)
+
+### Other
+
+* Merge pull request #1321 from mraniki/dev
+
+⬆️ 🤖 - Live in a world of your own but always welcome visitors ([`623096f`](https://github.com/mraniki/tt/commit/623096f57be67428073320cb262028bb9127c04d))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.4.7 ([`c91b16b`](https://github.com/mraniki/tt/commit/c91b16b63731adff89394a9608ffd80e20c6a99d))
+
+
 ## v7.0.6 (2024-03-04)
 
 ### Other
