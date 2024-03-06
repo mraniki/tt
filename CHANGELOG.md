@@ -2,6 +2,19 @@
 
 
 
+## v7.0.8 (2024-03-06)
+
+### Other
+
+* Merge pull request #1323 from mraniki/dev
+
+⬆️ 🤖 - Suspicion always haunts the guilty mind ([`542f2bf`](https://github.com/mraniki/tt/commit/542f2bf47e09d75f8b8132c8fc7be828645b111d))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.5 ([`9d7c387`](https://github.com/mraniki/tt/commit/9d7c387b02e30ac1fca6b385ac7580f28fccdad4))
+
+
 ## v7.0.7 (2024-03-05)
 
 ### Other
