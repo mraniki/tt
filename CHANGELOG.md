@@ -2,6 +2,19 @@
 
 
 
+## v7.0.10 (2024-03-09)
+
+### Other
+
+* Merge pull request #1327 from mraniki/dev
+
+⬆️ 🤖 - Avert misunderstanding by calm poise and balance ([`7590389`](https://github.com/mraniki/tt/commit/7590389d9c550ae8673642bff741080f39572846))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.28 ([`8bb2567`](https://github.com/mraniki/tt/commit/8bb2567766ba17cb3b78f888d3b2b50ea4b51b16))
+
+
 ## v7.0.9 (2024-03-08)
 
 ### Other
