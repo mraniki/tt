@@ -2,6 +2,21 @@
 
 
 
+## v7.0.11 (2024-03-10)
+
+### Other
+
+* Merge pull request #1330 from mraniki/dev
+
+⬆️ 🤖 - Q	Whats the difference between a duck and an elephant ([`e1920f0`](https://github.com/mraniki/tt/commit/e1920f039fcfa59e772087808f3a449002c3a735))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.29 ([`65da776`](https://github.com/mraniki/tt/commit/65da77654b43eaaa8db27631860d42b685850002))
+
+* ⬆️ 🛠️(deps): update dependency uvicorn to ^0.28.0 ([`c9c4fe7`](https://github.com/mraniki/tt/commit/c9c4fe718770b1e9ace649482cad2b1b8585e47a))
+
+
 ## v7.0.10 (2024-03-09)
 
 ### Other
