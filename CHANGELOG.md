@@ -2,6 +2,19 @@
 
 
 
+## v7.0.12 (2024-03-12)
+
+### Other
+
+* Merge pull request #1332 from mraniki/dev
+
+⬆️ 🤖 - Your lucky number is   Watch for it everywhere ([`0e0cc64`](https://github.com/mraniki/tt/commit/0e0cc64fb9e413bd5684bdef2bafdf1e2c8d9bb5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.30 ([`88fce76`](https://github.com/mraniki/tt/commit/88fce7688e4b2089431c0521d1795c720e3935f2))
+
+
 ## v7.0.11 (2024-03-10)
 
 ### Other
