@@ -2,6 +2,21 @@
 
 
 
+## v7.0.13 (2024-03-13)
+
+### Other
+
+* Merge pull request #1335 from mraniki/dev
+
+⬆️ 🤖 - Write yourself a threatening letter and pen a defiant reply ([`4a3599d`](https://github.com/mraniki/tt/commit/4a3599da2a9f6acc7ccc4a8177ee5442b127347b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.31 ([`fd0f909`](https://github.com/mraniki/tt/commit/fd0f909b58067d69fbc45bfff41b77dfda80e70f))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.4.8 ([`a31fb35`](https://github.com/mraniki/tt/commit/a31fb3507327d19a1a35bdff84fb4b45a4de6e4f))
+
+
 ## v7.0.12 (2024-03-12)
 
 ### Other
