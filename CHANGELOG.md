@@ -2,6 +2,21 @@
 
 
 
+## v7.0.14 (2024-03-16)
+
+### Other
+
+* Merge pull request #1338 from mraniki/dev
+
+⬆️ 🤖 - What good is an obscenity trial except to popularize literature ([`275035c`](https://github.com/mraniki/tt/commit/275035c0375c48c3192a419eff03c0e623c647f1))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.4.9 ([`d87791a`](https://github.com/mraniki/tt/commit/d87791a4d2ae44edf79bea72595f988b5fc42bd0))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.32 ([`64536a4`](https://github.com/mraniki/tt/commit/64536a47ae939af2b58a4ed6537d79b84802c7ca))
+
+
 ## v7.0.13 (2024-03-13)
 
 ### Other
