@@ -2,6 +2,21 @@
 
 
 
+## v7.0.15 (2024-03-17)
+
+### Other
+
+* Merge pull request #1341 from mraniki/dev
+
+⬆️ 🤖 - Today is the last day of your life so far ([`c13e594`](https://github.com/mraniki/tt/commit/c13e594d187885f6d65bbb93d1eef9bf851aed84))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.33 ([`c1216f3`](https://github.com/mraniki/tt/commit/c1216f3c663c18de461f6fc3090f894032a820fd))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.4.10 ([`e8c0af3`](https://github.com/mraniki/tt/commit/e8c0af34f3e5b331a24c7aad7e8c84eedf4009e5))
+
+
 ## v7.0.14 (2024-03-16)
 
 ### Other
