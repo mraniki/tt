@@ -2,6 +2,19 @@
 
 
 
+## v7.0.16 (2024-03-18)
+
+### Other
+
+* Merge pull request #1343 from mraniki/dev
+
+⬆️ 🤖 - Good news  Ten weeks from Friday will be a pretty good day ([`8c95659`](https://github.com/mraniki/tt/commit/8c956598b1a702218a3d61134f066e28b4143557))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.4.11 ([`4305cad`](https://github.com/mraniki/tt/commit/4305cadc90545b3eadcb0297ebb9b4fc4ccc28e5))
+
+
 ## v7.0.15 (2024-03-17)
 
 ### Other
