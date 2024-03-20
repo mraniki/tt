@@ -2,6 +2,25 @@
 
 
 
+## v7.0.18 (2024-03-20)
+
+### Other
+
+* Merge pull request #1347 from mraniki/dev
+
+⬆️ 🤖 - Dont relax  Its only your tension thats holding you together ([`a282a6f`](https://github.com/mraniki/tt/commit/a282a6f82006194cb0fcca39b3bebf6eb95e36c0))
+
+* Merge pull request #1348 from mraniki/renovate/pytest-loguru-0.x
+
+⬆️ 🛠️(deps): update dependency pytest-loguru to ^0.4.0 ([`3720a12`](https://github.com/mraniki/tt/commit/3720a121cc60c37f26a0d347cf81f42cac8b1083))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pytest-loguru to ^0.4.0 ([`ddb5066`](https://github.com/mraniki/tt/commit/ddb5066aaa2ded3754980b1994672e3a1fea6a8c))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.34 ([`b850fe4`](https://github.com/mraniki/tt/commit/b850fe4ba11cbeabf084ea7a30a52917c124470b))
+
+
 ## v7.0.17 (2024-03-19)
 
 ### Other
