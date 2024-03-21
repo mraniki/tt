@@ -2,6 +2,23 @@
 
 
 
+## v7.0.19 (2024-03-21)
+
+### Other
+
+* Merge pull request #1352 from mraniki/dev
+
+⬆️ 🤖 - You will be married within a year and divorced within two ([`26438ca`](https://github.com/mraniki/tt/commit/26438ca3ea8e88cf545cfc921fc1ee409372f37c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency uvicorn to ^0.29.0 ([`3f88d34`](https://github.com/mraniki/tt/commit/3f88d346d5a2139422be065f6cd9bd84ec490987))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.4.13 ([`c486d78`](https://github.com/mraniki/tt/commit/c486d78d23f87580728dcfb5f83693010fe1b520))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.35 ([`58dc3b8`](https://github.com/mraniki/tt/commit/58dc3b8bb9f2be6309ce72f553c9077679c0b4f8))
+
+
 ## v7.0.18 (2024-03-20)
 
 ### Other
