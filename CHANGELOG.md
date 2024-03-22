@@ -2,6 +2,19 @@
 
 
 
+## v7.0.20 (2024-03-22)
+
+### Other
+
+* Merge pull request #1354 from mraniki/dev
+
+⬆️ 🤖 - Dont look now but there is a multilegged creature on your shoulder ([`4a42abb`](https://github.com/mraniki/tt/commit/4a42abb736217556b22539f58adeafe4f9f0f1f5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.36 ([`02d9e1e`](https://github.com/mraniki/tt/commit/02d9e1edc248957067c52585f60127933c2f0904))
+
+
 ## v7.0.19 (2024-03-21)
 
 ### Other
