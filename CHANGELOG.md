@@ -2,6 +2,23 @@
 
 
 
+## v7.0.21 (2024-03-23)
+
+### Other
+
+* Merge pull request #1358 from mraniki/dev
+
+⬆️ 🤖 - I think we are in Rats Alley where the dead men lost their bones ([`db5127a`](https://github.com/mraniki/tt/commit/db5127aa5f0c95b633632d6de3f293794f0b5683))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.4.2 ([`afc85e2`](https://github.com/mraniki/tt/commit/afc85e29c71088d5e412d89ad9f4e9e162f56adc))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.4.1 ([`c637221`](https://github.com/mraniki/tt/commit/c6372210917b28d5b5ae7e0e86a839ea36d388e1))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.3.37 ([`7ea9d76`](https://github.com/mraniki/tt/commit/7ea9d761024d523b21055a17b22f68342d324ca3))
+
+
 ## v7.0.20 (2024-03-22)
 
 ### Other
