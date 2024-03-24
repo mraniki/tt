@@ -2,6 +2,21 @@
 
 
 
+## v7.0.22 (2024-03-24)
+
+### Other
+
+* Merge pull request #1361 from mraniki/dev
+
+⬆️ 🤖 - Think twice before speaking but dont say think think click click ([`f5ea1f6`](https://github.com/mraniki/tt/commit/f5ea1f60200493078c8792a2f1925c5362eb4415))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.5.0 ([`840abe4`](https://github.com/mraniki/tt/commit/840abe46f41194b13bd1ad0cdc23aba2a976f802))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.4.14 ([`b77cc06`](https://github.com/mraniki/tt/commit/b77cc067938332833448b9e1a2a9a59969bc7ef5))
+
+
 ## v7.0.21 (2024-03-23)
 
 ### Other
