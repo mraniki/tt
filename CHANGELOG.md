@@ -2,6 +2,19 @@
 
 
 
+## v7.0.23 (2024-03-25)
+
+### Other
+
+* Merge pull request #1363 from mraniki/dev
+
+⬆️ 🤖 - Suspicion always haunts the guilty mind ([`c20a738`](https://github.com/mraniki/tt/commit/c20a738a9c367f341a9d99bacefbb55024bf091d))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.7.0 ([`fd1d16a`](https://github.com/mraniki/tt/commit/fd1d16ab0ef2480c4dcc50e2129dbedd7035d7ea))
+
+
 ## v7.0.22 (2024-03-24)
 
 ### Other
