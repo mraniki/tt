@@ -117,19 +117,23 @@ testpaths = "tests"
 [tool.ruff]
 exclude = [
   ".github/*",
-  "docs/*"
+  "docs/*",
 ]
-fixable = ["ALL"]
+
+[tool.ruff.lint]
 select = [
   "E",  # pycodestyle
   "F",  # pyflakes
-  "I"  # isort
+  "I",  # isort
+  "W"
 ]
 
+#ignore = ["E401","F401","F811"]
+fixable = ["ALL"]
 
-[tool.black]
-line-length = 88
-target-version = ['py310', 'py311']
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
 
 [tool.coverage.run]
 omit = [
