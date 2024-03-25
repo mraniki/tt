@@ -402,6 +402,7 @@ myllm_enabled = true
 
 # [default.platform.template]
 # platform = ""
+# enabled = false
 # bot_token = ""
 # bot_channel_id = ""
 # bot_api_id = ""
@@ -416,6 +417,7 @@ myllm_enabled = true
 # # discord example
 # [default.platform.discord]
 # platform="discord"
+# enabled = true
 # bot_token = "mytoken"
 # bot_channel_id = "mychannelid"
 # bot_api_id = ""
