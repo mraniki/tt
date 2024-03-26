@@ -2,6 +2,33 @@
 
 
 
+## v7.1.0 (2024-03-26)
+
+### Other
+
+* Merge pull request #1372 from mraniki/dev
+
+⬆️ 🤖 - Among the lucky you are the chosen one ([`8e69f44`](https://github.com/mraniki/tt/commit/8e69f446331de68cbd83cf770ddbb759e44ad43d))
+
+### 🔧
+
+* 🔧 ([`a1653d4`](https://github.com/mraniki/tt/commit/a1653d42b968bfe11a5e12d1d407d2c07b42880e))
+
+* 🔧 updated config for CEFI update ([`59eb348`](https://github.com/mraniki/tt/commit/59eb34879f32e5813ebf01cfc2ed01d3793b7d2c))
+
+### 🚀
+
+* 🚀 new version matching the cefi, dxps, iamlistening and myllm client refactor ([`2f85316`](https://github.com/mraniki/tt/commit/2f85316dc0be865e84bc9d162702ba43ecf7cfbc))
+
+### 🚨
+
+* 🚨 ([`9fa111b`](https://github.com/mraniki/tt/commit/9fa111b6a7aab4d4076b0e03fa085473b4d8ec96))
+
+* 🚨 ([`a20ca29`](https://github.com/mraniki/tt/commit/a20ca293bd77037e84514ea143a49d12b9d35abe))
+
+* 🚨 Linter setup update ([`e7f20e2`](https://github.com/mraniki/tt/commit/e7f20e27df819a9c129d51ce0019b175b98f3f59))
+
+
 ## v7.0.23 (2024-03-25)
 
 ### Other
