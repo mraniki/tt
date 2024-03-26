@@ -2,6 +2,58 @@
 
 
 
+## v7.1.1 (2024-03-26)
+
+### Other
+
+* Merge pull request #1377 from mraniki/dev
+
+Merge pull request #1376 from mraniki/main ([`4ba94bb`](https://github.com/mraniki/tt/commit/4ba94bbda3f231cd1d43aa1a24679d9602e52fb9))
+
+* Merge pull request #1376 from mraniki/main
+
+Merge ([`85b204d`](https://github.com/mraniki/tt/commit/85b204d8184718c6793a4cf0c68fa225dbefc11b))
+
+* Merge branch &#39;dev&#39; into main ([`e250b1d`](https://github.com/mraniki/tt/commit/e250b1da32ac760f6270b30fe94c9efa18f1ac6e))
+
+### Update
+
+* Update pyproject.toml ([`b4c1e7d`](https://github.com/mraniki/tt/commit/b4c1e7dafabf8af9a70919ac20574717deedcd0f))
+
+
+## v7.1.0 (2024-03-26)
+
+### Other
+
+* Merge pull request #1372 from mraniki/dev
+
+⬆️ 🤖 - Among the lucky you are the chosen one ([`8e69f44`](https://github.com/mraniki/tt/commit/8e69f446331de68cbd83cf770ddbb759e44ad43d))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.6 ([`af8b778`](https://github.com/mraniki/tt/commit/af8b778f2f2308a2e8c8d0b9c12df4a140436502))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.7.1 ([`3bf62cd`](https://github.com/mraniki/tt/commit/3bf62cd2f2b7e9d5306e2e6139672a89aefd4d32))
+
+### 🔧
+
+* 🔧 ([`a1653d4`](https://github.com/mraniki/tt/commit/a1653d42b968bfe11a5e12d1d407d2c07b42880e))
+
+* 🔧 updated config for CEFI update ([`59eb348`](https://github.com/mraniki/tt/commit/59eb34879f32e5813ebf01cfc2ed01d3793b7d2c))
+
+### 🚀
+
+* 🚀 new version matching the cefi, dxps, iamlistening and myllm client refactor ([`2f85316`](https://github.com/mraniki/tt/commit/2f85316dc0be865e84bc9d162702ba43ecf7cfbc))
+
+### 🚨
+
+* 🚨 ([`9fa111b`](https://github.com/mraniki/tt/commit/9fa111b6a7aab4d4076b0e03fa085473b4d8ec96))
+
+* 🚨 ([`a20ca29`](https://github.com/mraniki/tt/commit/a20ca293bd77037e84514ea143a49d12b9d35abe))
+
+* 🚨 Linter setup update ([`e7f20e2`](https://github.com/mraniki/tt/commit/e7f20e27df819a9c129d51ce0019b175b98f3f59))
+
+
 ## v7.0.23 (2024-03-25)
 
 ### Other
