@@ -2,6 +2,21 @@
 
 
 
+## v7.1.3 (2024-03-26)
+
+### Other
+
+* Merge pull request #1379 from mraniki/dev
+
+Update dxsp version to 8.0.1 in pyproject.toml ([`79a6991`](https://github.com/mraniki/tt/commit/79a6991faef7098dd7d301ee815502c8a4b902b2))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`a6369b2`](https://github.com/mraniki/tt/commit/a6369b226da537fe79407f61cf2dec82d78048f8))
+
+### Update
+
+* Update dxsp version to 8.0.1 in pyproject.toml ([`9437ae0`](https://github.com/mraniki/tt/commit/9437ae03c9b77fae2562ee2db6f8ba759e3c15a8))
+
+
 ## v7.1.2 (2024-03-26)
 
 ### Other
@@ -9,6 +24,10 @@
 * Merge pull request #1378 from mraniki/dev
 
 Update pyproject.toml ([`4b78791`](https://github.com/mraniki/tt/commit/4b7879127c608acde8222c10f7cbcb30dd2bbcba))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`2c8fe4d`](https://github.com/mraniki/tt/commit/2c8fe4dda3e1f76e2d8ff33602ec763fe151b806))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`a856378`](https://github.com/mraniki/tt/commit/a856378200665507c9e192a67d99d6e6bb8c2279))
 
 ### Update
 
@@ -42,6 +61,8 @@ Merge ([`85b204d`](https://github.com/mraniki/tt/commit/85b204d8184718c6793a4cf0
 
 ⬆️ 🤖 - Among the lucky you are the chosen one ([`8e69f44`](https://github.com/mraniki/tt/commit/8e69f446331de68cbd83cf770ddbb759e44ad43d))
 
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`fc45bce`](https://github.com/mraniki/tt/commit/fc45bce4b072458bac9f071df5975194c5c403ad))
+
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.6 ([`af8b778`](https://github.com/mraniki/tt/commit/af8b778f2f2308a2e8c8d0b9c12df4a140436502))
@@ -53,6 +74,10 @@ Merge ([`85b204d`](https://github.com/mraniki/tt/commit/85b204d8184718c6793a4cf0
 * 🔧 ([`a1653d4`](https://github.com/mraniki/tt/commit/a1653d42b968bfe11a5e12d1d407d2c07b42880e))
 
 * 🔧 updated config for CEFI update ([`59eb348`](https://github.com/mraniki/tt/commit/59eb34879f32e5813ebf01cfc2ed01d3793b7d2c))
+
+* 🔧 ([`a62ad61`](https://github.com/mraniki/tt/commit/a62ad6170713affc67ae78c640378250ac4e5ced))
+
+* 🔧 updated config for CEFI update ([`f5cfaa6`](https://github.com/mraniki/tt/commit/f5cfaa61dab31fdb91ba0b3e225f2ab3482dc5f2))
 
 ### 🚀
 
@@ -78,6 +103,10 @@ Merge ([`85b204d`](https://github.com/mraniki/tt/commit/85b204d8184718c6793a4cf0
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency myllm to v4.7.0 ([`fd1d16a`](https://github.com/mraniki/tt/commit/fd1d16ab0ef2480c4dcc50e2129dbedd7035d7ea))
+
+### 🚨
+
+* 🚨 Linter setup update ([`671ce7d`](https://github.com/mraniki/tt/commit/671ce7d67c52634ce713735197e815a74b02a30b))
 
 
 ## v7.0.22 (2024-03-24)
