@@ -2,6 +2,21 @@
 
 
 
+## v7.1.6 (2024-03-27)
+
+### Other
+
+* Merge pull request #1386 from mraniki/dev
+
+⬆️ cefi upgrade for capital.com support ([`a972274`](https://github.com/mraniki/tt/commit/a9722743430e41705194946669a8950840cd4d25))
+
+### ⬆️
+
+* ⬆️ cefi upgrade for capital.com support ([`e8633fd`](https://github.com/mraniki/tt/commit/e8633fdc139e86fa60363a92747f8caf3cc52761))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.1.0 ([`ea1aa5a`](https://github.com/mraniki/tt/commit/ea1aa5afb16db875bb92bd5d3d0decf71d141d2f))
+
+
 ## v7.1.5 (2024-03-27)
 
 ### Other
