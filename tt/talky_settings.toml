@@ -164,7 +164,7 @@ helper_commands = """
 
 # Enable/Disable Trading
 trading_enabled = true
-trading_control = false
+trading_control = true
 trading_days_allowed = ["tue", "wed", "thu"]
 trading_hours_start = "08:00"
 trading_hours_end = "16:00"
@@ -621,6 +621,8 @@ myllm_enabled = true
 # mapping = [
 #     { id = "BTC", alt = "BTC/USDT" },
 # ]
+# balance_limit = false
+# balance_limit_value = 10
 
 # # CEFI example using ccxt binance
 # protocol = "ccxt"
@@ -641,6 +643,40 @@ myllm_enabled = true
 # mapping = [
 #     { id = "BTC", alt = "BTC/USDT" },
 # ]
+# balance_limit = true
+# balance_limit_value = 10
+
+# [default.cex.capital]
+# protocol = "capital"
+# enabled = false
+# user_id = "12345678"
+# api_key= "myapi_DEADBEEF"
+# password = "12345678"
+# testmode = false
+# defaulttype = ""
+# ordertype = ""
+# leverage_type = ""
+# leverage = 1
+# trading_risk_percentage = true
+# trading_risk_amount = 10
+# trading_slippage = 2
+# trading_amount_threshold = 0
+# trading_asset = "USD"
+# trading_asset_separator = ""
+# mapping = [
+#     { id = "EURUSD", alt = "EURUSD" },
+#     { id = "BTC", alt = "BTCUSD" },
+#     { id = "ETH", alt = "ETHUSD" },
+#     { id = "CRUDE", alt = "OIL_CRUDE" },
+#     { id = "BRENT", alt = "OIL_BRENT" },
+#     { id = "GOLD", alt = "GOLD" },
+#     { id = "SILVER", alt = "SILVER" },
+#     { id = "US500", alt = "US500" },
+# ]
+# balance_limit = false
+# balance_limit_value = 10
+
+
 ########################################
 ###     END OF DEFAULT SETTINGS      ###
 ########################################

@@ -285,12 +285,19 @@ class BasePlugin:
             bool
         """
         if settings.trading_control:
+            logger.debug("Trading control enabled")
             current_time = datetime.now().time()
             current_day = datetime.now().strftime("%a").lower()
 
             start_time = datetime.strptime(settings.trading_hours_start, "%H:%M").time()
             end_time = datetime.strptime(settings.trading_hours_end, "%H:%M").time()
-
+            logger.debug(
+                "Current time: {}, Current day: {}, Start time: {}, End time: {}",
+                current_time,
+                current_day,
+                start_time,
+                end_time,
+            )
             return (
                 current_day in settings.trading_days_allowed
                 and start_time <= current_time <= end_time
