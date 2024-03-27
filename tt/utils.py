@@ -96,6 +96,8 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
     await start_plugins(plugin_manager)
     iteration = 0
     while True:
+        if listener.clients is None:
+          logger.debug("No client")
         for client in listener.clients:
             msg = await client.get_latest_message()
             if msg:
