@@ -2,6 +2,23 @@
 
 
 
+## v7.1.5 (2024-03-27)
+
+### Other
+
+* Merge pull request #1384 from mraniki/dev
+
+Update versions in pyproject.toml and add debug log message in utils.py. ([`f8a9574`](https://github.com/mraniki/tt/commit/f8a95746170a9d39bd9583b119d1fd5c2f24c3fb))
+
+### Update
+
+* Update versions in pyproject.toml and add debug log message in utils.py. ([`58e65e2`](https://github.com/mraniki/tt/commit/58e65e2cc75220cff820c312b707b29ecde449f0))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.0.2 ([`4010e8f`](https://github.com/mraniki/tt/commit/4010e8f353e0e2dd5bfd9331ca82eef601b76051))
+
+
 ## v7.1.4 (2024-03-27)
 
 ### Other
