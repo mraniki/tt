@@ -2,6 +2,29 @@
 
 
 
+## v7.1.7 (2024-03-27)
+
+### Other
+
+* Merge pull request #1388 from mraniki/dev
+
+⬆️ 🛠️(deps): update dependency iamlistening to v5.1.0 ([`529d242`](https://github.com/mraniki/tt/commit/529d2421d26697ced0136f1798671084a5d5ea90))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.0 ([`bedeee2`](https://github.com/mraniki/tt/commit/bedeee247aa5da0074ec754d7adce62a1c571d49))
+
+### 🔊
+
+* 🔊 Adding log for trading control visibility ([`410f511`](https://github.com/mraniki/tt/commit/410f51198589d832a6ac00375586f40037db5e88))
+
+### 🔧
+
+* 🔧 ([`af0dccc`](https://github.com/mraniki/tt/commit/af0dccc46ed6ee788116ad1f052ef2aa6dc80511))
+
+* 🔧 update ([`c93c325`](https://github.com/mraniki/tt/commit/c93c325349013349018dbb9c6257610a4b298305))
+
+
 ## v7.1.6 (2024-03-27)
 
 ### Other
