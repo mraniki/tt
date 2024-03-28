@@ -16,6 +16,7 @@ class TalkyTrendPlugin(BasePlugin):
         if self.enabled:
             self.trend = TalkyTrend()
 
+
     async def start(self):
         """Starts the TalkyTrend plugin"""
         if self.enabled:
@@ -42,6 +43,8 @@ class TalkyTrendPlugin(BasePlugin):
                 settings.bot_command_trend: self.trend.fetch_signal,
                 settings.bot_command_news: self.trend.fetch_feed,
                 settings.bot_command_tv: self.trend.get_tv,
+                settings.bot_command_scraper: self.trend.scrape_page,
+
             }
 
             if command in command_mapping:
