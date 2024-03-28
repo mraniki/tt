@@ -2,6 +2,19 @@
 
 
 
+## v7.2.1 (2024-03-28)
+
+### Other
+
+* Merge pull request #1392 from mraniki/dev
+
+Update installation commands in .readthedocs.yaml file ([`df28bb3`](https://github.com/mraniki/tt/commit/df28bb3a3157493c32c1c0736a8bf3670c306f49))
+
+### Update
+
+* Update installation commands in .readthedocs.yaml file ([`3bb4481`](https://github.com/mraniki/tt/commit/3bb44819ee1c7f8d764c6a4414e234523318f6ba))
+
+
 ## v7.2.0 (2024-03-28)
 
 ### :arrow_up:
