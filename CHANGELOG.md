@@ -2,6 +2,47 @@
 
 
 
+## v7.2.0 (2024-03-28)
+
+### :arrow_up:
+
+* :arrow_up: ([`3ef87bc`](https://github.com/mraniki/tt/commit/3ef87bc9ecb9b49a1f3cdc529cac9f3baf015972))
+
+### Fix
+
+* :ambulance: fix ([`ee86343`](https://github.com/mraniki/tt/commit/ee86343cca74bc6a4c87680edbe70d4487b0c365))
+
+### Other
+
+* Merge pull request #1391 from mraniki/dev
+
+:ambulance: fix ([`a45fa60`](https://github.com/mraniki/tt/commit/a45fa607c64c18249ea927d2d88affcd61b6e5c4))
+
+* Merge pull request #1389 from mraniki/dev
+
+:arrow_up: Update dxsp and cefi versions in pyproject.toml file ([`8066aea`](https://github.com/mraniki/tt/commit/8066aea5b5098d7c6bb671b085905c684ba464e8))
+
+### Update
+
+* Update dxsp version to 9.0.1 in pyproject.toml ([`bf92996`](https://github.com/mraniki/tt/commit/bf929965c0b58fe9f768773ce254da2bbd90300a))
+
+* Update cefi version to 4.3.2 ([`b4802ba`](https://github.com/mraniki/tt/commit/b4802ba60bcd25f515b64c680469c16c34fde75f))
+
+* :arrow_up: Update dxsp and cefi versions in pyproject.toml file ([`eb0360a`](https://github.com/mraniki/tt/commit/eb0360acffdf2a4779d0e268f55422116b4c1d0b))
+
+### ⬆️
+
+* ⬆️ ([`95fe6cf`](https://github.com/mraniki/tt/commit/95fe6cf6b0377b72ffcd0f0e194433503970f986))
+
+### 🚨
+
+* 🚨 ([`35632a2`](https://github.com/mraniki/tt/commit/35632a29245cd2a8b5ac74cfb06960a3e08fb539))
+
+### 🥚
+
+* 🥚 adding talkytrend scraper as action in tt ([`1f12d04`](https://github.com/mraniki/tt/commit/1f12d045249b737756d7a8cb43d16b93ae740ef3))
+
+
 ## v7.1.7 (2024-03-27)
 
 ### Other
