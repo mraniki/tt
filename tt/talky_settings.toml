@@ -128,6 +128,8 @@ bot_command_tv = "live"
 bot_command_trend = "trend"
 # Command to get latest news
 bot_command_news = "news"
+# Command to scrape data
+bot_command_scraper = "scraper"
 # command for conversation
 bot_command_aichat = "ai"
 # command to toggle aimode
