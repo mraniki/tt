@@ -60,7 +60,6 @@ cefi = "4.4.2"
 myllm = "4.7.5"
 
 
-
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = ">=8.0.8"
 ruff = "^0.3.0"
