@@ -2,7 +2,7 @@
  talky Utils
 """
 
-__version__ = "7.2.3"
+__version__ = "7.2.4"
 
 
 
