@@ -230,13 +230,16 @@ plugin_directory = "tt.plugins.default_plugins"
 # usage and footprint if needed
 # if you want all the plugins to be loaded
 # at the start, set it to
-authorized_plugins = []
-# Here the value has been set for helper
-# and dex exchange plugins only
-# authorized_plugins = [
-#     'helper_plugin',
-#     'dex_exchange_plugin',
-#     ]
+# authorized_plugins = []
+# Here the value has been set for
+# main plugins
+authorized_plugins = [
+    'helper_plugin',
+    'dex_exchange_plugin',
+    'cex_exchange_plugin',
+    'llm_plugin',
+    'talkytrend_plugin',
+    ]
 
 # Enable/Disable Example Plugin
 # example_plugin_enabled = true
