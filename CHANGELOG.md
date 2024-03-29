@@ -2,6 +2,47 @@
 
 
 
+## v7.2.3 (2024-03-29)
+
+### Other
+
+* Merge pull request #1401 from mraniki/dev
+
+⬆️ 🛠️✅ Unit Test for no user settings &amp; Deps upgrade ([`d7b6166`](https://github.com/mraniki/tt/commit/d7b6166d9825d41b14f57597a363e413a1646af7))
+
+* Merge branch &#39;main&#39; into dev ([`ec226b6`](https://github.com/mraniki/tt/commit/ec226b6d538c77dc07f8cb00665345df1902bdd8))
+
+* Merge pull request #1400 from mraniki/renovate/findmyorder-1.x
+
+⬆️ 🛠️(deps): update dependency findmyorder to v1.9.19 ([`f3b18f3`](https://github.com/mraniki/tt/commit/f3b18f389a50114bff240474471ffdea9a508215))
+
+* Merge branch &#39;dev&#39; into renovate/findmyorder-1.x ([`75b9c53`](https://github.com/mraniki/tt/commit/75b9c538107f51157bd5249b5505d59c786220a9))
+
+### ✅
+
+* ✅ Unit Test for no user settings ([`d435ab5`](https://github.com/mraniki/tt/commit/d435ab5690fc0131a5747d88ff3df7c32f5fbad8))
+
+### ⬆️
+
+* ⬆️ ([`9a67ea4`](https://github.com/mraniki/tt/commit/9a67ea47099e5173881685f430b6c25173729826))
+
+* ⬆️ ([`bdaf3fa`](https://github.com/mraniki/tt/commit/bdaf3fa795a415e6a4c1249aa90c9275f55a6055))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v9.0.3 ([`bec6e01`](https://github.com/mraniki/tt/commit/bec6e01f632cbc6acd3060647dd73b90bf0c8a90))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.19 ([`f9de005`](https://github.com/mraniki/tt/commit/f9de00510423b1cf58d3fac49e06a8291f30a241))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.8 ([`2ca2f32`](https://github.com/mraniki/tt/commit/2ca2f32a26ffa01f521e218546829dbe35a72679))
+
+### 🔊
+
+* 🔊 Improve log when no clients loaded ([`8bbbd21`](https://github.com/mraniki/tt/commit/8bbbd21afd9c4ee29c7b0b7a1e37b7cf95e11027))
+
+### 🥅
+
+* 🥅 Improving error handling when no settings provided ([`55089f7`](https://github.com/mraniki/tt/commit/55089f7a65671b39bd4bbfb65ec2411406dde3a7))
+
+
 ## v7.2.2 (2024-03-29)
 
 ### Other
@@ -11,6 +52,8 @@
 ⬆️ 🤖 - When in doubt tell the truth ([`6c99db4`](https://github.com/mraniki/tt/commit/6c99db4038b8ab3bf0424d6da5321fbafa4e81a9))
 
 ### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.7.4 ([`994cd38`](https://github.com/mraniki/tt/commit/994cd38163c4996099998a4f40e0fa9bc9ad9c08))
 
 * ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.1 ([`91b6be1`](https://github.com/mraniki/tt/commit/91b6be1b2f6656cf6bbe0be69ad69b12d279dfd9))
 
