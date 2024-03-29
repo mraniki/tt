@@ -2,6 +2,17 @@
 
 
 
+## v7.2.4 (2024-03-29)
+
+### Other
+
+* Merge pull request #1403 from mraniki/dev
+
+⬆️ dxsp ([`f8e7854`](https://github.com/mraniki/tt/commit/f8e78540887836ab688bc869eacb5902bcd2baa1))
+
+* Merge branch &#39;main&#39; into dev ([`e798264`](https://github.com/mraniki/tt/commit/e7982642df6a0dd06e4e20701af35ab6379eccc7))
+
+
 ## v7.2.3 (2024-03-29)
 
 ### Other
@@ -23,6 +34,8 @@
 * ✅ Unit Test for no user settings ([`d435ab5`](https://github.com/mraniki/tt/commit/d435ab5690fc0131a5747d88ff3df7c32f5fbad8))
 
 ### ⬆️
+
+* ⬆️ ([`8419f87`](https://github.com/mraniki/tt/commit/8419f87506afef7325e2d99b9b06c92ca14b63be))
 
 * ⬆️ ([`9a67ea4`](https://github.com/mraniki/tt/commit/9a67ea47099e5173881685f430b6c25173729826))
 
