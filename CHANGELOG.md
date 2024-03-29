@@ -2,6 +2,27 @@
 
 
 
+## v7.2.7 (2024-03-29)
+
+### Other
+
+* Merge pull request #1406 from mraniki/dev
+
+🎨 update utils.py ([`b7a4a75`](https://github.com/mraniki/tt/commit/b7a4a758573bc52b701826512d1af13e4a713977))
+
+### 🎨
+
+* 🎨 update utils.py ([`da800dc`](https://github.com/mraniki/tt/commit/da800dca2f9fbbed3fa8e3e9445e3751f9f2b392))
+
+### 🔇
+
+* 🔇 update config.py ([`e577034`](https://github.com/mraniki/tt/commit/e57703415b1524b27665c14852a0a6292caec11a))
+
+### 🔧
+
+* 🔧 update talky_settings.toml ([`6268480`](https://github.com/mraniki/tt/commit/62684804f1e1d6bff8b262a3e4806ad0d5cea8b1))
+
+
 ## v7.2.6 (2024-03-29)
 
 ### Other
