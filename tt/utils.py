@@ -56,6 +56,8 @@ async def run_bot():
         await check_version()
     listener = Listener()
     plugin_manager = PluginManager()
+    if listener.clients is None:
+        logger.warning("No listener client")
     await asyncio.gather(start_bot(listener, plugin_manager))
 
 
