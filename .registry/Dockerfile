@@ -11,7 +11,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ENV TT_DOCKER=True
 ENV ENV_FOR_DYNACONF=default
 ENV OP_PATH=/usr/bin/op
-ENV OP_SERVICE_ACCOUNT_TOKEN=None
+ENV OP_SERVICE_ACCOUNT_TOKEN=""
 
 ##
 # Install Interative Brokers Gateway
