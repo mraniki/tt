@@ -101,7 +101,7 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
             """
             No listener clients.
             Verify settings and check wiki for example
-            https://talky.readthedocs.io/en/latest/02_config.html.
+            https://talky.readthedocs.io/en/latest/02_config.html
             """
         )
         return
