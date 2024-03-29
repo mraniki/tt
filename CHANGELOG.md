@@ -2,6 +2,25 @@
 
 
 
+## v7.2.2 (2024-03-29)
+
+### Other
+
+* Merge pull request #1395 from mraniki/dev
+
+⬆️ 🤖 - When in doubt tell the truth ([`6c99db4`](https://github.com/mraniki/tt/commit/6c99db4038b8ab3bf0424d6da5321fbafa4e81a9))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.1 ([`91b6be1`](https://github.com/mraniki/tt/commit/91b6be1b2f6656cf6bbe0be69ad69b12d279dfd9))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v9.0.2 ([`498088f`](https://github.com/mraniki/tt/commit/498088ff04f4bad74568a237f16f716c80abc4a9))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.4.1 ([`bacd991`](https://github.com/mraniki/tt/commit/bacd99148c36726538790b684048e8a5f03e651d))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.18 ([`da270a5`](https://github.com/mraniki/tt/commit/da270a5da795d4110205bd0117c4112ac7d71c83))
+
+
 ## v7.2.1 (2024-03-28)
 
 ### Other
