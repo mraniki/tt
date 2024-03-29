@@ -2,6 +2,23 @@
 
 
 
+## v7.2.5 (2024-03-29)
+
+### Other
+
+* Merge pull request #1404 from mraniki/dev
+
+Fix return statement in start_bot function ([`5de4b2d`](https://github.com/mraniki/tt/commit/5de4b2dcaffdf460b0d397b4407a4b3ef444e1c3))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`7540c4f`](https://github.com/mraniki/tt/commit/7540c4fabdd56c0553ea0e3cff59039179730ae7))
+
+* Fix return statement in start_bot function ([`9f51413`](https://github.com/mraniki/tt/commit/9f514137918af5cedbe5cb25a4bfe43d6a946ca1))
+
+### Update
+
+* :whale:  Update OP_SERVICE_ACCOUNT_TOKEN value in Dockerfile. ([`8071dbc`](https://github.com/mraniki/tt/commit/8071dbc41cc375720d2fa74325d436dd45ed402c))
+
+
 ## v7.2.4 (2024-03-29)
 
 ### Other
