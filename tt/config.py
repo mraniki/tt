@@ -183,6 +183,8 @@ def loguru_setup():
         "asyncz": settings.thirdparty_lib_loglevel,
         "rlp": settings.thirdparty_lib_loglevel,
         "numexpr": settings.thirdparty_lib_loglevel,
+        "yfinance": settings.thirdparty_lib_loglevel,
+        "peewee": settings.thirdparty_lib_loglevel,
     }
     logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
     loguru_logger.add(

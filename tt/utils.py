@@ -5,7 +5,6 @@
 __version__ = "7.2.5"
 
 
-
 import asyncio
 
 import aiohttp
@@ -58,8 +57,6 @@ async def run_bot():
         await check_version()
     listener = Listener()
     plugin_manager = PluginManager()
-    if listener.clients is None:
-        logger.warning("No listener client")
     await asyncio.gather(start_bot(listener, plugin_manager))
 
 
@@ -100,7 +97,13 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
     await start_plugins(plugin_manager)
     iteration = 0
     if not listener.clients:
-        logger.warning("No clients in listener. Exiting start_bot. Verify settings.")
+        logger.warning(
+            """
+            No listener clients.
+            Verify settings and check wiki for example
+            https://talky.readthedocs.io/en/latest/02_config.html.
+            """
+        )
         return
     while True:
         for client in listener.clients:
