@@ -1,6 +1,7 @@
 """
  talky Utils
 """
+
 __version__ = "7.2.1"
 
 
@@ -56,6 +57,8 @@ async def run_bot():
         await check_version()
     listener = Listener()
     plugin_manager = PluginManager()
+    if listener.clients is None:
+        logger.warning("No listener client")
     await asyncio.gather(start_bot(listener, plugin_manager))
 
 
@@ -95,9 +98,10 @@ async def start_bot(listener, plugin_manager, max_iterations=None):
     loop.create_task(listener.start())
     await start_plugins(plugin_manager)
     iteration = 0
+    if not listener.clients:
+        logger.warning("No clients in listener. Exiting start_bot. Verify settings.")
+        # return
     while True:
-        if listener.clients is None:
-          logger.debug("No client")
         for client in listener.clients:
             msg = await client.get_latest_message()
             if msg:
