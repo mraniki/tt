@@ -2,6 +2,21 @@
 
 
 
+## v7.2.8 (2024-03-30)
+
+### Other
+
+* Merge pull request #1409 from mraniki/dev
+
+⬆️ 🤖 - Dont get to bragging ([`4607d0f`](https://github.com/mraniki/tt/commit/4607d0ff7232bddb96e33a9294aa772381bcc11f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.3 ([`eceef57`](https://github.com/mraniki/tt/commit/eceef577db206d4a5f0424cae1887e2b546f68c3))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v9.0.5 ([`3f0e548`](https://github.com/mraniki/tt/commit/3f0e548bb4e66e591170b4607727422ad6d557bf))
+
+
 ## v7.2.7 (2024-03-29)
 
 ### Other
