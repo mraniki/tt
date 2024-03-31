@@ -2,6 +2,25 @@
 
 
 
+## v7.2.9 (2024-03-31)
+
+### Other
+
+* Merge pull request #1414 from mraniki/dev
+
+⬆️ 🤖 - You will win success in whatever calling you adopt ([`83a51da`](https://github.com/mraniki/tt/commit/83a51daa537aeef6b106d124727a0d731a065b19))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v9.0.6 ([`cdc5844`](https://github.com/mraniki/tt/commit/cdc5844a446caad2d0fc2d52f7bef0b8cbf424a3))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.4.3 ([`0ebcb76`](https://github.com/mraniki/tt/commit/0ebcb76818bb2e43934f8b042071b6a2f10288ec))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.7.6 ([`6501da4`](https://github.com/mraniki/tt/commit/6501da44b85c8b8965cdb9a8ca8d6c3d29a9ece2))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.4 ([`a823d43`](https://github.com/mraniki/tt/commit/a823d4351f46b51b67d10f4c8606c25209bc9b27))
+
+
 ## v7.2.8 (2024-03-30)
 
 ### Other
