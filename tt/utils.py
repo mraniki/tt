@@ -1,5 +1,15 @@
 """
- talky Utils
+ Talky Utils
+
+ This module contains utility functions
+ for the TalkyTrader app such as:
+
+ - send_notification
+ - run_bot
+ - start plugins
+ - start_bot
+ - dheck version
+
 """
 
 __version__ = "7.2.9"
@@ -19,7 +29,7 @@ async def send_notification(msg):
     """
     💬 Notification via Apprise.
     Apprise endpoint URL can be a URL
-    for the chat, a URL to an Apprise config
+    for the chat, an URL to an Apprise config
     or a URL to the Apprise API endpoint
     apprise_url = "tgram://BOTTOKEN/CHANNEL"
     apprise_url = "discord://token1/channel"
@@ -34,6 +44,10 @@ async def send_notification(msg):
     https://github.com/caronc/apprise/wiki
 
     """
+
+    if not settings.apprise_url:
+        logger.warning("No Apprise URL set")
+        return
     aobj = Apprise(settings.apprise_url)
     msg_format = settings.apprise_format or NotifyFormat.MARKDOWN
     try:

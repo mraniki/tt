@@ -145,9 +145,9 @@ class PluginManager:
 class BasePlugin:
     """
     ⚡ Base Plugin Class
-    use to be inherited by
+    This class is inherited by
     Talky Plugins
-    especially the scheduling,
+    for the scheduling,
     notification and
     message handling.
 
@@ -280,6 +280,9 @@ class BasePlugin:
         Returns True if the current day and time
         are within the configured trading window.
         Use to control trading hours for plugins
+
+        It allows to block order processing
+        outside of trading hours defined in settings
 
         Returns:
             bool
