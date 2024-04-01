@@ -14,6 +14,9 @@
 #
 # or via .env 
 # export TT_PORT=8081
+# You can refer to 
+# https://github.com/mraniki/tt/blob/main/examples/example_settings.toml
+# for a settings.toml example
 
 
 ########################################
@@ -31,7 +34,7 @@ VALUE = "Production"
 # Log level to troubleshoot
 # loglevel = "DEBUG"
 loglevel = "DEBUG"
-# Log level for third party library
+# Log level for third party libraries
 thirdparty_lib_loglevel = "ERROR"
 
 # URL to verify the latest version
@@ -45,13 +48,15 @@ version_check = true
 ########################################
 
 # Uvicorn Server settings
+
 host = "0.0.0.0"
 port = 8080
 
 # Experiemental, If set to true,
-# provide a ui at http://0.0.0.0:8080/
+# provide a ui at http://host:port/
 # refer to frontend documentation 
-# ui_enabled = true
+# for more details
+
 ui_enabled = false
 
 # Your webhook secret to send
@@ -83,7 +88,7 @@ forwarder_url = ""
 # or a URL to the Apprise API endpoint
 # apprise_url = "tgram://BOTTOKEN/CHANNEL"
 # apprise_url = "discord://token1/channel"
-apprise_url = "json://localhost"
+apprise_url = ""
 
 #Format of the apprise notification.
 # apprise_format = "NotifyFormat.MARKDOWN"

@@ -59,7 +59,27 @@ class HelperPlugin(BasePlugin):
             await send_notification(message)
 
     async def handle_message(self, msg):
-        """Handles incoming messages"""
+        """
+        Handles a message received by the bot.
+
+        Args:
+            msg (str): The message received by the bot.
+
+        Returns:
+            None: If the message should not be handled.
+            None: If the message is a command and
+            the corresponding function is executed successfully.
+            None: If the message is not a command.
+
+        Supported functions are:
+
+        - `get_helper_help()`
+        - `get_helper_info()`
+        - `get_helper_network()`
+        - `trading_switch_command()`
+        - `restart()`
+
+        """
         if not self.should_handle(msg):
             return
         if msg.startswith(settings.bot_prefix):

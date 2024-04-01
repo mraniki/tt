@@ -67,6 +67,7 @@ async def root(request: Request):
         the UI frontend
     """
     if settings.ui_enabled:
+        logger.debug("UI enabled. Redirecting to /show")
         from tt.frontend.main import init
 
         init(app)
