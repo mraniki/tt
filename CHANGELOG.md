@@ -2,6 +2,27 @@
 
 
 
+## v7.2.10 (2024-04-01)
+
+### :rotating_light:
+
+* :rotating_light: Fix linting issue in init function docstring. ([`bcf0780`](https://github.com/mraniki/tt/commit/bcf07802351afa2a5c8a1a29edd7bf5689d7e34b))
+
+### Other
+
+* Merge pull request #1416 from mraniki/dev
+
+⬆️ 🤖 - You have been selected for a secret mission ([`775a4eb`](https://github.com/mraniki/tt/commit/775a4eba3b12d1d9a374ba5bce355b1332b70377))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.5 ([`18ee1b5`](https://github.com/mraniki/tt/commit/18ee1b520fa35b64074ff2cda3436606c8d7dd9c))
+
+### 🎨
+
+* 💬 🎨 update 6 files ([`0da87ec`](https://github.com/mraniki/tt/commit/0da87ec262d8f794041a24b76481b85d0003e8d7))
+
+
 ## v7.2.9 (2024-03-31)
 
 ### Other
