@@ -2,6 +2,19 @@
 
 
 
+## v7.2.11 (2024-04-04)
+
+### Other
+
+* Merge pull request #1418 from mraniki/dev
+
+⬆️ 🤖 - Dont kiss an elephant on the lips today ([`f97ba79`](https://github.com/mraniki/tt/commit/f97ba79ec8428b6d6aa52b185927830afafc4e19))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.7.7 ([`d44ffd4`](https://github.com/mraniki/tt/commit/d44ffd401b3805af700ad7b39c5b13e666f328e9))
+
+
 ## v7.2.10 (2024-04-01)
 
 ### :rotating_light:
