@@ -2,6 +2,23 @@
 
 
 
+## v7.2.12 (2024-04-05)
+
+### Other
+
+* Merge pull request #1420 from mraniki/dev
+
+🔧 : update talky_settings.toml ([`2a8d0e2`](https://github.com/mraniki/tt/commit/2a8d0e2e6699d5cf6ec9b7f4c018a3a991fa66a7))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.7.8 ([`3e025e6`](https://github.com/mraniki/tt/commit/3e025e6f9ea70725d68e512d7fc5b7593a6b9c62))
+
+### 🔧
+
+* 🔧 : update talky_settings.toml ([`c6a015e`](https://github.com/mraniki/tt/commit/c6a015e7dedd82a11e8763e101de45257e570179))
+
+
 ## v7.2.11 (2024-04-04)
 
 ### Other
