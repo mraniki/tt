@@ -207,14 +207,14 @@ quantity = 1
 
 # Settings to enable or disable
 # instrument mapping
-instrument_mapping = true
+instrument_mapping = false
 # instrument mapping to use and alternative 
 #  symbol when generating the order
 mapping = [
-    { id = "EURUSD", alt = "EUR/sUSD" },
-    { id = "GOLD", alt = "XAU" },
-    { id = "BTC", alt = "WBTC" },
-    { id = "ETH", alt = "WETH" },
+    # { id = "EURUSD", alt = "EUR/sUSD" },
+    # { id = "GOLD", alt = "XAU" },
+    # { id = "BTC", alt = "WBTC" },
+    # { id = "ETH", alt = "WETH" },
 ]
 
 # Instruments to be ignored
