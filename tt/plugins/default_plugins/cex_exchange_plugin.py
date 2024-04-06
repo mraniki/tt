@@ -1,7 +1,7 @@
 from cefi import CexTrader
 from findmyorder import FindMyOrder
 
-from tt.config import logger, settings
+from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
 from tt.utils import send_notification
 
