@@ -1,7 +1,7 @@
 from cefi import CexTrader
 from findmyorder import FindMyOrder
 
-from tt.config import logger, settings
+from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
 from tt.utils import send_notification
 
@@ -52,7 +52,6 @@ class CexExchangePlugin(BasePlugin):
         """
         if not self.should_handle(msg):
             return
-        logger.debug("settings.bot_ignore: {}", settings.bot_ignore)
         if (settings.bot_ignore not in msg or settings.bot_prefix not in msg) and (
             await self.fmo.search(msg) and self.should_handle_timeframe()
         ):

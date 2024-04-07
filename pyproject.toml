@@ -55,9 +55,9 @@ ping3 = "^4.0.4"
 talkytrend = "2.0.8"
 iamlistening = "5.1.5"
 findmyorder = "1.9.19"
-dxsp = "9.0.6"
-cefi = "4.4.4"
-myllm = "4.7.8"
+dxsp = "10.0.0"
+cefi = "4.4.5"
+myllm = "4.8.0"
 
 
 [tool.poetry.group.dev.dependencies]
