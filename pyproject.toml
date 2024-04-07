@@ -55,8 +55,8 @@ ping3 = "^4.0.4"
 talkytrend = "2.0.8"
 iamlistening = "5.1.5"
 findmyorder = "1.9.19"
-dxsp = "10.0.0"
-cefi = "4.4.7"
+dxsp = "10.0.1"
+cefi = "4.4.8"
 myllm = "4.8.0"
 
 
