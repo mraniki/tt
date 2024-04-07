@@ -2,6 +2,33 @@
 
 
 
+## v7.2.14 (2024-04-07)
+
+### Other
+
+* Merge pull request #1425 from mraniki/dev
+
+⬆️ 🤖 - Let us endeavor so to live that when we come to die even the undertaker will be ([`ae11a33`](https://github.com/mraniki/tt/commit/ae11a33eea891b8a7e11a6244d70377b885cb417))
+
+### Update
+
+* :arrow_up: Update dxsp and myllm versions in pyproject.toml ([`1b85508`](https://github.com/mraniki/tt/commit/1b8550822a652774acc54b9b49d922fc974d3f5b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v9.0.7 ([`b960890`](https://github.com/mraniki/tt/commit/b960890ca1ef38539b55fbb2260aca62e64b8772))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.4.5 ([`ef63be3`](https://github.com/mraniki/tt/commit/ef63be33be6e379a3ea54d66805180333fec27ab))
+
+### 🔇
+
+* 🔇 update cex_exchange_plugin.py ([`0a91f11`](https://github.com/mraniki/tt/commit/0a91f11f2cdb3762ad823c1efa6df9608b9c77ce))
+
+### 🚨
+
+* 🚨 ([`d2afc18`](https://github.com/mraniki/tt/commit/d2afc18aa39deafc27902f5b9b762b066bcb0974))
+
+
 ## v7.2.13 (2024-04-05)
 
 ### Other
