@@ -2,6 +2,19 @@
 
 
 
+## v7.2.19 (2024-04-07)
+
+### Other
+
+* Merge pull request #1431 from mraniki/dev
+
+Update pyproject.toml ([`85b6a3a`](https://github.com/mraniki/tt/commit/85b6a3a5e8e0e43959bfdf3f8c2212b7d8099e6c))
+
+### Update
+
+* Update pyproject.toml ([`006211f`](https://github.com/mraniki/tt/commit/006211fffb4100941150f54b902c75e770c543e4))
+
+
 ## v7.2.18 (2024-04-07)
 
 ### Other
