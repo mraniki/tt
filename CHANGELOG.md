@@ -2,6 +2,19 @@
 
 
 
+## v7.2.18 (2024-04-07)
+
+### Other
+
+* Merge pull request #1430 from mraniki/dev
+
+⬆️ 🤖 - Abandon the search for Truth settle for a good fantasy ([`0a03513`](https://github.com/mraniki/tt/commit/0a0351356b6e68be3293dedb3d08d6ee50951a37))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.4.9 ([`825d232`](https://github.com/mraniki/tt/commit/825d232a03b7391196639cb2d046c2be4dcb7f4c))
+
+
 ## v7.2.17 (2024-04-07)
 
 ### Other
