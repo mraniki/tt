@@ -2,6 +2,19 @@
 
 
 
+## v7.2.23 (2024-04-08)
+
+### Other
+
+* Merge pull request #1436 from mraniki/dev
+
+⚡ build(deps): update pyproject.toml, cex_exchange_plugin.py and plug… ([`20da66a`](https://github.com/mraniki/tt/commit/20da66a8af76bb0f2d9cb5e793a03d45a3d80ace))
+
+### ⚡
+
+* ⚡ build(deps): update pyproject.toml, cex_exchange_plugin.py and plugin_manager.py ([`89f274e`](https://github.com/mraniki/tt/commit/89f274e80b1dd02a6a204aaab5e1a4e0feee4dc9))
+
+
 ## v7.2.22 (2024-04-08)
 
 ### Other
