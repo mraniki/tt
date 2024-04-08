@@ -2,6 +2,27 @@
 
 
 
+## v7.2.21 (2024-04-08)
+
+### Other
+
+* Merge pull request #1434 from mraniki/dev
+
+⚡ update cex_exchange_plugin.py and dex_exchange_plugin.py ([`10702c9`](https://github.com/mraniki/tt/commit/10702c9edefe94f9215ade1f6efec00d476016eb))
+
+### ♻️
+
+* ♻️ update talky_settings.toml and utils.py ([`c23c101`](https://github.com/mraniki/tt/commit/c23c101e82cdf281c4a2731d14b0e92bfa8c53ec))
+
+### ⚡
+
+* ⚡ update cex_exchange_plugin.py and dex_exchange_plugin.py ([`a2dd1b6`](https://github.com/mraniki/tt/commit/a2dd1b6de112352c37a0b294e667203703c1e418))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`2edafe8`](https://github.com/mraniki/tt/commit/2edafe8481ac9ad1768f81a0cb9ed6b3b0cbf782))
+
+
 ## v7.2.20 (2024-04-08)
 
 ### Other
