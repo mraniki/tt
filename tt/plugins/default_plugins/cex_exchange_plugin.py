@@ -1,5 +1,6 @@
 from cefi import CexTrader
 from findmyorder import FindMyOrder
+from loguru import logger
 
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
@@ -57,6 +58,7 @@ class CexExchangePlugin(BasePlugin):
             order = await self.fmo.get_order(msg)
             if order and settings.trading_enabled:
                 trade = await self.exchange.submit_order(order)
+                logger.debug("trade {}", trade)
                 if trade:
                     await send_notification(trade)
 

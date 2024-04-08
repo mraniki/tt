@@ -44,7 +44,6 @@ async def send_notification(msg):
     https://github.com/caronc/apprise/wiki
 
     """
-
     if not settings.apprise_url:
         logger.warning("No Apprise URL set")
         return
