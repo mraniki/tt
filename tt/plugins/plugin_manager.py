@@ -187,7 +187,11 @@ class BasePlugin:
 
         """
         if self.enabled:
-            return not message.startswith(settings.bot_ignore)
+            # logger.debug("Should handle: {}", message)
+            return (
+                settings.bot_ignore not in message or settings.bot_prefix not in message
+            )
+            # return not message.startswith(settings.bot_ignore)
 
     async def plugin_notify_schedule_task(
         self, user_name=None, frequency=8, function=None

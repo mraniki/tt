@@ -2,6 +2,154 @@
 
 
 
+## v7.2.28 (2024-04-08)
+
+### Other
+
+* Merge pull request #1441 from mraniki/dev
+
+⬆️ build(deps): update pyproject.toml ([`1d5144f`](https://github.com/mraniki/tt/commit/1d5144f7195efcc8bb796722be328028b674cc5e))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`d68f32d`](https://github.com/mraniki/tt/commit/d68f32dcedf898a3001a8c632afe2edcd4b4023f))
+
+
+## v7.2.27 (2024-04-08)
+
+### Other
+
+* Merge pull request #1440 from mraniki/dev
+
+⚡ update cex_exchange_plugin.py ([`748702b`](https://github.com/mraniki/tt/commit/748702bd13ae5a6b69d959040a26a6abd8c8e092))
+
+### ♻️
+
+* ♻️ update config.py and utils.py ([`4e99043`](https://github.com/mraniki/tt/commit/4e9904345f081f31a0e8fa17817796135aa59125))
+
+### ⚡
+
+* ⚡ update cex_exchange_plugin.py ([`c7d9852`](https://github.com/mraniki/tt/commit/c7d985262ee19bcdf8f98b77870898352e36854f))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`49034ff`](https://github.com/mraniki/tt/commit/49034ff398cce923b55534be0787f92e8a4f2ad6))
+
+
+## v7.2.26 (2024-04-08)
+
+### Other
+
+* Merge pull request #1439 from mraniki/dev
+
+⬆️ build(deps): update pyproject.toml ([`01ef789`](https://github.com/mraniki/tt/commit/01ef7893664e7208efaca8074874c88301f88c36))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`6a27646`](https://github.com/mraniki/tt/commit/6a27646f7a8bb97617e819b08032c3b142030d31))
+
+
+## v7.2.25 (2024-04-08)
+
+### Other
+
+* Merge pull request #1438 from mraniki/dev
+
+⬆️ build(deps): update pyproject.toml ([`c7a0f70`](https://github.com/mraniki/tt/commit/c7a0f70ef5beee3e84f1d0d30a9c408c056c8729))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`6086fe0`](https://github.com/mraniki/tt/commit/6086fe0adca63abbf886778256793aba7de2557f))
+
+
+## v7.2.24 (2024-04-08)
+
+### Other
+
+* Merge pull request #1437 from mraniki/dev
+
+🔇 update plugin_manager.py ([`1f1b655`](https://github.com/mraniki/tt/commit/1f1b655a43b2780cb1cb0ec6fbd2afea2380afe9))
+
+### 🔇
+
+* 🔇 update plugin_manager.py ([`1b693b4`](https://github.com/mraniki/tt/commit/1b693b42868d9dc91c75e266c68a1be3f3807484))
+
+
+## v7.2.23 (2024-04-08)
+
+### Other
+
+* Merge pull request #1436 from mraniki/dev
+
+⚡ build(deps): update pyproject.toml, cex_exchange_plugin.py and plug… ([`20da66a`](https://github.com/mraniki/tt/commit/20da66a8af76bb0f2d9cb5e793a03d45a3d80ace))
+
+### ⚡
+
+* ⚡ build(deps): update pyproject.toml, cex_exchange_plugin.py and plugin_manager.py ([`89f274e`](https://github.com/mraniki/tt/commit/89f274e80b1dd02a6a204aaab5e1a4e0feee4dc9))
+
+
+## v7.2.22 (2024-04-08)
+
+### Other
+
+* Merge pull request #1435 from mraniki/dev
+
+⬆️ build(deps): update pyproject.toml and talky_settings.toml ([`ff347d2`](https://github.com/mraniki/tt/commit/ff347d2c11cbd287fe1c23807755e0f5cd45b05b))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml and talky_settings.toml ([`bcde7c0`](https://github.com/mraniki/tt/commit/bcde7c0bb9d18e3e449ca19cf4da9a7f752ffd56))
+
+
+## v7.2.21 (2024-04-08)
+
+### Other
+
+* Merge pull request #1434 from mraniki/dev
+
+⚡ update cex_exchange_plugin.py and dex_exchange_plugin.py ([`10702c9`](https://github.com/mraniki/tt/commit/10702c9edefe94f9215ade1f6efec00d476016eb))
+
+### ♻️
+
+* ♻️ update talky_settings.toml and utils.py ([`c23c101`](https://github.com/mraniki/tt/commit/c23c101e82cdf281c4a2731d14b0e92bfa8c53ec))
+
+### ⚡
+
+* ⚡ update cex_exchange_plugin.py and dex_exchange_plugin.py ([`a2dd1b6`](https://github.com/mraniki/tt/commit/a2dd1b6de112352c37a0b294e667203703c1e418))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`2edafe8`](https://github.com/mraniki/tt/commit/2edafe8481ac9ad1768f81a0cb9ed6b3b0cbf782))
+
+
+## v7.2.20 (2024-04-08)
+
+### Other
+
+* Merge pull request #1432 from mraniki/dev
+
+⬆️ 🛠️(deps): update dependency myllm and cefi ([`ac78554`](https://github.com/mraniki/tt/commit/ac7855419feac180b49964cb4db49d20cc077a1b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.1 ([`9c2968b`](https://github.com/mraniki/tt/commit/9c2968bf9ffec29cf241aaa1fc0513cb0a04fea1))
+
+* ⬆️ build(deps): update pyproject.toml ([`6e7c4f2`](https://github.com/mraniki/tt/commit/6e7c4f24793e48bcc731db9848b543302cf6b54d))
+
+
+## v7.2.19 (2024-04-07)
+
+### Other
+
+* Merge pull request #1431 from mraniki/dev
+
+Update pyproject.toml ([`85b6a3a`](https://github.com/mraniki/tt/commit/85b6a3a5e8e0e43959bfdf3f8c2212b7d8099e6c))
+
+### Update
+
+* Update pyproject.toml ([`006211f`](https://github.com/mraniki/tt/commit/006211fffb4100941150f54b902c75e770c543e4))
+
+
 ## v7.2.18 (2024-04-07)
 
 ### Other

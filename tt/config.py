@@ -178,7 +178,7 @@ def loguru_setup():
         "discord": settings.thirdparty_lib_loglevel,
         "telethon": settings.thirdparty_lib_loglevel,
         "web3": settings.thirdparty_lib_loglevel,
-        "apprise": settings.thirdparty_lib_loglevel,
+        # "apprise": settings.thirdparty_lib_loglevel,
         "urllib3": settings.thirdparty_lib_loglevel,
         "asyncz": settings.thirdparty_lib_loglevel,
         "rlp": settings.thirdparty_lib_loglevel,
