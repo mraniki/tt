@@ -2,6 +2,19 @@
 
 
 
+## v7.2.24 (2024-04-08)
+
+### Other
+
+* Merge pull request #1437 from mraniki/dev
+
+🔇 update plugin_manager.py ([`1f1b655`](https://github.com/mraniki/tt/commit/1f1b655a43b2780cb1cb0ec6fbd2afea2380afe9))
+
+### 🔇
+
+* 🔇 update plugin_manager.py ([`1b693b4`](https://github.com/mraniki/tt/commit/1b693b42868d9dc91c75e266c68a1be3f3807484))
+
+
 ## v7.2.23 (2024-04-08)
 
 ### Other
