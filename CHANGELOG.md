@@ -2,6 +2,27 @@
 
 
 
+## v7.2.29 (2024-04-08)
+
+### Other
+
+* Merge pull request #1443 from mraniki/dev
+
+⬆️ 🛠️(deps): update dependency cefi  and dxsp ([`a88d45d`](https://github.com/mraniki/tt/commit/a88d45dbe69aa813491698b67daa4943c19eb38f))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`509c8eb`](https://github.com/mraniki/tt/commit/509c8ebbc248904c36dc313583166922daae79db))
+
+### Update
+
+* Update loguru_setup function in config.py ([`686db4c`](https://github.com/mraniki/tt/commit/686db4cfed73183c67030f92450430be542de038))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`5e22629`](https://github.com/mraniki/tt/commit/5e22629e4939d5bb3c889b9cb9749e38e1c75555))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.0.4 ([`853b027`](https://github.com/mraniki/tt/commit/853b027ffa0352d7b07fbb2728db4fe217d0ee07))
+
+
 ## v7.2.28 (2024-04-08)
 
 ### Other
@@ -145,6 +166,8 @@
 
 Update pyproject.toml ([`85b6a3a`](https://github.com/mraniki/tt/commit/85b6a3a5e8e0e43959bfdf3f8c2212b7d8099e6c))
 
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`83ac61c`](https://github.com/mraniki/tt/commit/83ac61c6e3927bca15ffa8b4ad71d0849c46c52f))
+
 ### Update
 
 * Update pyproject.toml ([`006211f`](https://github.com/mraniki/tt/commit/006211fffb4100941150f54b902c75e770c543e4))
@@ -172,6 +195,8 @@ Update pyproject.toml ([`85b6a3a`](https://github.com/mraniki/tt/commit/85b6a3a5
 ⬆️ build(deps): update pyproject.toml ([`40f40e1`](https://github.com/mraniki/tt/commit/40f40e115f7bc62f2091f7b5d13607815a7fbb19))
 
 ### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.4.9 ([`3de9afa`](https://github.com/mraniki/tt/commit/3de9afadbfa7e4af33656ce1ed4f283df505cc14))
 
 * ⬆️ build(deps): update pyproject.toml ([`a431076`](https://github.com/mraniki/tt/commit/a4310767de832df7e02ab9b8d6176f17ef5aca5a))
 
