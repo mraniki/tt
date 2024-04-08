@@ -2,6 +2,27 @@
 
 
 
+## v7.2.27 (2024-04-08)
+
+### Other
+
+* Merge pull request #1440 from mraniki/dev
+
+⚡ update cex_exchange_plugin.py ([`748702b`](https://github.com/mraniki/tt/commit/748702bd13ae5a6b69d959040a26a6abd8c8e092))
+
+### ♻️
+
+* ♻️ update config.py and utils.py ([`4e99043`](https://github.com/mraniki/tt/commit/4e9904345f081f31a0e8fa17817796135aa59125))
+
+### ⚡
+
+* ⚡ update cex_exchange_plugin.py ([`c7d9852`](https://github.com/mraniki/tt/commit/c7d985262ee19bcdf8f98b77870898352e36854f))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`49034ff`](https://github.com/mraniki/tt/commit/49034ff398cce923b55534be0787f92e8a4f2ad6))
+
+
 ## v7.2.26 (2024-04-08)
 
 ### Other
