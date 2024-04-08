@@ -2,6 +2,21 @@
 
 
 
+## v7.2.20 (2024-04-08)
+
+### Other
+
+* Merge pull request #1432 from mraniki/dev
+
+⬆️ 🛠️(deps): update dependency myllm and cefi ([`ac78554`](https://github.com/mraniki/tt/commit/ac7855419feac180b49964cb4db49d20cc077a1b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.1 ([`9c2968b`](https://github.com/mraniki/tt/commit/9c2968bf9ffec29cf241aaa1fc0513cb0a04fea1))
+
+* ⬆️ build(deps): update pyproject.toml ([`6e7c4f2`](https://github.com/mraniki/tt/commit/6e7c4f24793e48bcc731db9848b543302cf6b54d))
+
+
 ## v7.2.19 (2024-04-07)
 
 ### Other
