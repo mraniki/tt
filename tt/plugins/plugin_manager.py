@@ -187,7 +187,7 @@ class BasePlugin:
 
         """
         if self.enabled:
-            logger.debug("Should handle: {}", message)
+            # logger.debug("Should handle: {}", message)
             return (
                 settings.bot_ignore not in message or settings.bot_prefix not in message
             )
