@@ -2,6 +2,19 @@
 
 
 
+## v7.2.30 (2024-04-09)
+
+### Other
+
+* Merge pull request #1444 from mraniki/dev
+
+⬆️ build(deps): cefi and dxsp upgrade ([`297e118`](https://github.com/mraniki/tt/commit/297e118b7e6b3b23a70f4ade408cdea9a50768b1))
+
+### ⬆️
+
+* ⬆️ build(deps): cdfi adn dxsp upgrade ([`90b62cf`](https://github.com/mraniki/tt/commit/90b62cf5c98b2ea79c6191c27b699cc02a85e5ec))
+
+
 ## v7.2.29 (2024-04-08)
 
 ### Other
