@@ -128,7 +128,7 @@ class PluginManager:
 
         """
 
-        logger.debug("Processing: {}", message)
+        # logger.debug("Processing: {}", message)
         if not message:
             return
         tasks = []
