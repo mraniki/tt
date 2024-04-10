@@ -2,6 +2,23 @@
 
 
 
+## v7.2.31 (2024-04-10)
+
+### Other
+
+* Merge pull request #1445 from mraniki/dev
+
+Update cefi and logging ([`abb8cdb`](https://github.com/mraniki/tt/commit/abb8cdbf096db909a19bb09b9c4f3911281586ce))
+
+### Update
+
+* Update pyproject.toml ([`054249b`](https://github.com/mraniki/tt/commit/054249b165bc476181ba0f739a69a2425ad69711))
+
+### 🔇
+
+* 🔇 update plugin_manager.py ([`af63fc0`](https://github.com/mraniki/tt/commit/af63fc0be8c891b4444d635ffa05061ddf8ac12d))
+
+
 ## v7.2.30 (2024-04-09)
 
 ### Other
