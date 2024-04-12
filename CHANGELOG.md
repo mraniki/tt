@@ -2,6 +2,19 @@
 
 
 
+## v7.2.32 (2024-04-12)
+
+### Other
+
+* Merge pull request #1447 from mraniki/dev
+
+⬆️ 🤖 - There are more things in heaven and earth ([`cb4325c`](https://github.com/mraniki/tt/commit/cb4325cafdb49bee0871604ad1a7454eb224122a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.2 ([`d5b8db6`](https://github.com/mraniki/tt/commit/d5b8db6798b33013178a77f75a13c2ba6e2f4ee1))
+
+
 ## v7.2.31 (2024-04-10)
 
 ### Other
