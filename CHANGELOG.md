@@ -2,6 +2,23 @@
 
 
 
+## v7.2.33 (2024-04-13)
+
+### Other
+
+* Merge pull request #1450 from mraniki/dev
+
+⬆️ 🤖 - Your mode of life will be changed for the better because of new developments ([`6c1be8e`](https://github.com/mraniki/tt/commit/6c1be8e256f384c3d7035ec477df525af990bf27))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.1.0 ([`2dbd977`](https://github.com/mraniki/tt/commit/2dbd9771b6958fa8b1612d4b1343e197ab52386a))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.5.0 ([`765d6dc`](https://github.com/mraniki/tt/commit/765d6dc5d32f79abd9c8b89c4daa3e660faaad53))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.3 ([`0f6ed4b`](https://github.com/mraniki/tt/commit/0f6ed4b62749e536755ff79168d1d84406a31092))
+
+
 ## v7.2.32 (2024-04-12)
 
 ### Other
