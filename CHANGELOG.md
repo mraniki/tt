@@ -2,6 +2,25 @@
 
 
 
+## v7.2.34 (2024-04-14)
+
+### Other
+
+* Merge pull request #1455 from mraniki/dev
+
+⬆️ 🤖 - The first thing we do lets kill all the lawyers ([`ed64ee4`](https://github.com/mraniki/tt/commit/ed64ee4a47c1594dac1b9b2c8cda627074f73194))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.2.0 ([`c39995e`](https://github.com/mraniki/tt/commit/c39995e90f01a72ec1bd4e10bba029e0f5213611))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.1.1 ([`9321c8a`](https://github.com/mraniki/tt/commit/9321c8ac39c3411e45c73d72c7fb84c542623752))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.4 ([`f28821d`](https://github.com/mraniki/tt/commit/f28821deaa03154d50881ad45230746712afa01e))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.5.1 ([`e897ded`](https://github.com/mraniki/tt/commit/e897ded2e4e43748e7e57e634ac0b5de29fe6a93))
+
+
 ## v7.2.33 (2024-04-13)
 
 ### Other
