@@ -2,6 +2,19 @@
 
 
 
+## v7.2.35 (2024-04-15)
+
+### Other
+
+* Merge pull request #1457 from mraniki/dev
+
+⬆️ 🤖 - all the modern inconveniences ([`50ee9f2`](https://github.com/mraniki/tt/commit/50ee9f29e8182e39d735653ecf2e656a071988b6))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.5 ([`1ddaa1b`](https://github.com/mraniki/tt/commit/1ddaa1b5566041940acab5b0a64885df78e89945))
+
+
 ## v7.2.34 (2024-04-14)
 
 ### Other
