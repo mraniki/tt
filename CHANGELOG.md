@@ -2,6 +2,25 @@
 
 
 
+## v7.2.36 (2024-04-16)
+
+### Other
+
+* Merge pull request #1461 from mraniki/dev
+
+⬆️ 🛠️ ([`2bbba87`](https://github.com/mraniki/tt/commit/2bbba8786457e5d04b8462d74f8f6515aacaeb5d))
+
+### Update
+
+* Update findmyorder and dxsp versions in pyproject.toml ([`a75e400`](https://github.com/mraniki/tt/commit/a75e400d4a5d1f601337b3018b94e26d5099bbec))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.6.0 ([`927c735`](https://github.com/mraniki/tt/commit/927c735df4e4ba6dfc83fea61463b4ad53ca5aa5))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.6 ([`6e48960`](https://github.com/mraniki/tt/commit/6e489605467a04a63bd49f0af588179c41177cbc))
+
+
 ## v7.2.35 (2024-04-15)
 
 ### Other
