@@ -2,6 +2,19 @@
 
 
 
+## v7.2.37 (2024-04-16)
+
+### Other
+
+* Merge pull request #1462 from mraniki/dev
+
+Update cefi version to 4.6.1 ([`a1251d4`](https://github.com/mraniki/tt/commit/a1251d4ddc90d8497c55ceedc347ddf5e8be06b4))
+
+### Update
+
+* Update cefi version to 4.6.1 ([`bccd5d9`](https://github.com/mraniki/tt/commit/bccd5d99f99b46bd341d783370742a3565c7f372))
+
+
 ## v7.2.36 (2024-04-16)
 
 ### Other
