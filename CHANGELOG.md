@@ -2,6 +2,31 @@
 
 
 
+## v7.2.38 (2024-04-18)
+
+### Other
+
+* Merge pull request #1470 from mraniki/dev
+
+⬆️ 🤖 - You will triumph over your enemy ([`5bbff1e`](https://github.com/mraniki/tt/commit/5bbff1ea223f82feddef941531ce932b1bb834a0))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.3.6 ([`1b8cbe2`](https://github.com/mraniki/tt/commit/1b8cbe2a4d8b58ed6a9437ef2f4bee872cf449e5))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.9 ([`5bde853`](https://github.com/mraniki/tt/commit/5bde85313fd9d9329a5aae17352bbcfde09442bf))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.7 ([`44f58dc`](https://github.com/mraniki/tt/commit/44f58dc210c45fb3a7dce6d5667ed97284229718))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.6.2 ([`7dcffdf`](https://github.com/mraniki/tt/commit/7dcffdff9a3b9259ce3e991f0416c4cf787d93c2))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.3.5 ([`9cdb5ea`](https://github.com/mraniki/tt/commit/9cdb5eabb93ad625cdf0daaec2d830e9b2ab1ece))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.2.2 ([`b7964cd`](https://github.com/mraniki/tt/commit/b7964cd5c533ce53a6ab50e53437c41cfb7049a6))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.3.4 ([`8d6500a`](https://github.com/mraniki/tt/commit/8d6500a0d3409c2a1b34fb6ba9af19db54cff5ff))
+
+
 ## v7.2.37 (2024-04-16)
 
 ### Other
