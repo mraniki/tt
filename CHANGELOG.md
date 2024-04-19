@@ -2,6 +2,29 @@
 
 
 
+## v7.2.39 (2024-04-19)
+
+### Other
+
+* Merge pull request #1477 from mraniki/dev
+
+⬆️ 🤖 - Q	How many Zen masters does it take to screw in a light bulb ([`d74b0ec`](https://github.com/mraniki/tt/commit/d74b0ecbc815c79585d318b741b9bb0e58973bec))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.4.0 ([`d223f0a`](https://github.com/mraniki/tt/commit/d223f0a923a3ee749ee332eb78616fb7b9323efc))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.10 ([`f76f4c8`](https://github.com/mraniki/tt/commit/f76f4c8b802efdbc6efcdcfa0ba6052bf29a3845))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.8 ([`4630c26`](https://github.com/mraniki/tt/commit/4630c26ef57e37a22527cdb0ccbba53a4395ed36))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.2.3 ([`3507446`](https://github.com/mraniki/tt/commit/35074467fa31f44cc3ac011c4f07bbf33da31eb5))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.8 ([`67bfb0d`](https://github.com/mraniki/tt/commit/67bfb0dddd7751831aaa5526e15df03610673cbf))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.6.3 ([`b40d53f`](https://github.com/mraniki/tt/commit/b40d53ff10a9dd60e5d95eb8382888e941ab4427))
+
+
 ## v7.2.38 (2024-04-18)
 
 ### Other
