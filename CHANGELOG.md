@@ -2,6 +2,25 @@
 
 
 
+## v7.2.41 (2024-04-19)
+
+### Other
+
+* Merge pull request #1481 from mraniki/dev
+
+⬆️ 🤖 - This will be a memorable month  no matter how hard you try to forget it ([`33a5d9a`](https://github.com/mraniki/tt/commit/33a5d9a2f71ca5bfe17eec16c0a7955ee5c3ed7f))
+
+### Update
+
+* Update pyproject.toml ([`5aa3e9d`](https://github.com/mraniki/tt/commit/5aa3e9d68a6702650646e638dc0ccc67641a9f7c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.11 ([`c92bdca`](https://github.com/mraniki/tt/commit/c92bdca7b9dd9935d7b57c7a2454d42b45b4a577))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.3.7 ([`2017487`](https://github.com/mraniki/tt/commit/201748709a2e466d59c7ca7bb44436d60074c16e))
+
+
 ## v7.2.40 (2024-04-19)
 
 ### Other
