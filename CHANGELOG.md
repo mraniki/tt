@@ -2,6 +2,19 @@
 
 
 
+## v7.2.40 (2024-04-19)
+
+### Other
+
+* Merge pull request #1480 from mraniki/dev
+
+⬆️ deps ([`f99294f`](https://github.com/mraniki/tt/commit/f99294f0f0e12f7a05aefe0d582ca2960ddcce2e))
+
+### ⬆️
+
+* ⬆️ deps ([`c1e433f`](https://github.com/mraniki/tt/commit/c1e433f809fe01e8b3c9ed706577d8245c8913ab))
+
+
 ## v7.2.39 (2024-04-19)
 
 ### Other
