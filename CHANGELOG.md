@@ -2,6 +2,25 @@
 
 
 
+## v7.2.42 (2024-04-21)
+
+### Other
+
+* Merge pull request #1486 from mraniki/dev
+
+⬆️ 🤖 - Beware of a tall black man with one blond shoe ([`e8f2848`](https://github.com/mraniki/tt/commit/e8f2848e373afe16c8b7552d737278b4cb8c51af))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.12 ([`a046f0a`](https://github.com/mraniki/tt/commit/a046f0a7b670245ff8ed9c5e71836e00abfbe3ee))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.10 ([`f0179af`](https://github.com/mraniki/tt/commit/f0179af91b16ee419d7d17774140e92a1e6b48b0))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.10 ([`7d2e379`](https://github.com/mraniki/tt/commit/7d2e379bd8c8f590a99b720930414e814bf7c4d2))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.6.6 ([`ad658a7`](https://github.com/mraniki/tt/commit/ad658a77aaf10738f0cc28f48623c84b00b0af19))
+
+
 ## v7.2.41 (2024-04-19)
 
 ### Other
