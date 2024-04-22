@@ -2,6 +2,19 @@
 
 
 
+## v7.2.43 (2024-04-22)
+
+### Other
+
+* Merge pull request #1488 from mraniki/dev
+
+⬆️ 🤖 - You will soon forget this ([`ba5da96`](https://github.com/mraniki/tt/commit/ba5da96a650f5ae6d60d2ac3e480291f74343034))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.11 ([`4f18abe`](https://github.com/mraniki/tt/commit/4f18abe13534d3e09c6a357bd144ab1c2722630a))
+
+
 ## v7.2.42 (2024-04-21)
 
 ### Other
