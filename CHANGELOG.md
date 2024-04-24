@@ -2,6 +2,21 @@
 
 
 
+## v7.2.44 (2024-04-24)
+
+### Other
+
+* Merge pull request #1491 from mraniki/dev
+
+⬆️ 🤖 - You are number   Who is number one ([`f456d77`](https://github.com/mraniki/tt/commit/f456d7750140cb7e41791f2be3615dcdb2e779ec))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pytest-cov to v5 ([`b443ea1`](https://github.com/mraniki/tt/commit/b443ea1212160e382fc642b3798b6d280519ae93))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.12 ([`bbc3332`](https://github.com/mraniki/tt/commit/bbc33321dbe31c332ad0cc62dbaca0f22b729bcb))
+
+
 ## v7.2.43 (2024-04-22)
 
 ### Other
