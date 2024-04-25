@@ -2,6 +2,27 @@
 
 
 
+## v7.2.45 (2024-04-25)
+
+### Other
+
+* Merge pull request #1497 from mraniki/dev
+
+⬆️ 🤖 - Your aim is high and to the right ([`d0f8ce7`](https://github.com/mraniki/tt/commit/d0f8ce73ea9646e03c3ec72198af3752c1dee5aa))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.2.6 ([`29f1cd6`](https://github.com/mraniki/tt/commit/29f1cd65ed91d71fe9bdb0a1a64ede1531cd0842))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.13 ([`6987473`](https://github.com/mraniki/tt/commit/6987473348bd66417221961a9ae1222b459e9567))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.13 ([`b592c06`](https://github.com/mraniki/tt/commit/b592c060bb5774afa997a1e93e6a1ba98bc8f6ca))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.11 ([`88f6e9e`](https://github.com/mraniki/tt/commit/88f6e9e70bd61c108fcaf1d567bca5058efba395))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.6.7 ([`d6359cb`](https://github.com/mraniki/tt/commit/d6359cbe8fe596944753298aa5dce4380a300ac8))
+
+
 ## v7.2.44 (2024-04-24)
 
 ### Other
