@@ -2,6 +2,19 @@
 
 
 
+## v7.2.47 (2024-04-27)
+
+### Other
+
+* Merge pull request #1503 from mraniki/dev
+
+⬆️ 🤖 - Try to value useful qualities in one who loves you ([`e6089ec`](https://github.com/mraniki/tt/commit/e6089ec9684c760cee079fbb94949ff63a9ade3f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.15 ([`08d74a5`](https://github.com/mraniki/tt/commit/08d74a5e0cfd7687d5ea0f88baf6fd85257fb777))
+
+
 ## v7.2.46 (2024-04-26)
 
 ### Other
