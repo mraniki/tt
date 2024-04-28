@@ -2,6 +2,19 @@
 
 
 
+## v7.2.48 (2024-04-28)
+
+### Other
+
+* Merge pull request #1505 from mraniki/dev
+
+⬆️ 🤖 - Youll feel much better once youve given up hope ([`0cbb7ab`](https://github.com/mraniki/tt/commit/0cbb7ab0c516c7e596e863ba9fa0637f1eed7f9a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.6.9 ([`ec6ec51`](https://github.com/mraniki/tt/commit/ec6ec51c7b0405c0b50d80ec7b699655c3738789))
+
+
 ## v7.2.47 (2024-04-27)
 
 ### Other
