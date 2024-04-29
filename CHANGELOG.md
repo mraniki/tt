@@ -2,6 +2,19 @@
 
 
 
+## v7.2.49 (2024-04-29)
+
+### Other
+
+* Merge pull request #1507 from mraniki/dev
+
+⬆️ 🤖 - Q	Why havent you graduated yet ([`eb58686`](https://github.com/mraniki/tt/commit/eb58686c5005f69bcd1aa654fe6735fd1ef0d6a6))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.7.0 ([`4e04f1d`](https://github.com/mraniki/tt/commit/4e04f1d31b8238592efadc5b230a563f38c003ef))
+
+
 ## v7.2.48 (2024-04-28)
 
 ### Other
