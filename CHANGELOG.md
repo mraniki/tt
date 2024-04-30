@@ -2,6 +2,21 @@
 
 
 
+## v7.2.50 (2024-04-30)
+
+### Other
+
+* Merge pull request #1513 from mraniki/dev
+
+⬆️ 🤖 - A solemn unsmiling sanctimonious old iceberg who looked like he ([`f0d1e78`](https://github.com/mraniki/tt/commit/f0d1e78520e01521f7199a797a60af56b5f43924))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency asyncz to ^0.6.0 ([`841667a`](https://github.com/mraniki/tt/commit/841667a7735c84bd3c860e3e2c56374f42e3755f))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.16 ([`4dab942`](https://github.com/mraniki/tt/commit/4dab9420872ece59064d2dbdacec3b12c7028a68))
+
+
 ## v7.2.49 (2024-04-29)
 
 ### Other
