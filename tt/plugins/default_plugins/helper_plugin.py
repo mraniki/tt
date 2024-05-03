@@ -133,7 +133,7 @@ class HelperPlugin(BasePlugin):
         """
         settings.trading_enabled = not settings.trading_enabled
         status = "enabled" if settings.trading_enabled else "disabled"
-        return f"Trading is {status}."
+        return f"ℹ️Trading is {status}."
 
     async def restart(self):
         """
