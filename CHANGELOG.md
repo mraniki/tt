@@ -2,6 +2,23 @@
 
 
 
+## v7.2.51 (2024-05-03)
+
+### Other
+
+* Merge pull request #1518 from mraniki/dev
+
+⬆️ 🤖 - Living your life is a task so difficult it has never been attempted before ([`d00452d`](https://github.com/mraniki/tt/commit/d00452de63346e427294b129005584a50bcdd2d4))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.18 ([`8602452`](https://github.com/mraniki/tt/commit/8602452a754384fb035540b378d9903e45008c4a))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.13 ([`23a3492`](https://github.com/mraniki/tt/commit/23a3492fddda1fc01f1816b26f8021116abf2d1f))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.17 ([`871e7e7`](https://github.com/mraniki/tt/commit/871e7e7e05add126d71377e9df3c2b2d28a20d8c))
+
+
 ## v7.2.50 (2024-04-30)
 
 ### Other
