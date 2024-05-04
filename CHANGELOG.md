@@ -2,6 +2,27 @@
 
 
 
+## v7.2.52 (2024-05-04)
+
+### :art:
+
+* :art: Refactor trading status message in HelperPlugin ([`9af7e9c`](https://github.com/mraniki/tt/commit/9af7e9cf60dbdfee9e1cf845198c574a996ded7d))
+
+### Other
+
+* Merge pull request #1521 from mraniki/dev
+
+⬆️ 🤖 - Celebrate Hannibal Day this year  Take an elephant to lunch ([`6347405`](https://github.com/mraniki/tt/commit/6347405448ecfb4f4c83f316e75aac9f5ca80517))
+
+### Update
+
+* Update trading status message with info icon. ([`69db9ed`](https://github.com/mraniki/tt/commit/69db9ed5c5f39c6c6a9ea24d0c5e75f80268bd9f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.19 ([`2e28814`](https://github.com/mraniki/tt/commit/2e28814b2a8de5df0c43e05501c218519a05bfd7))
+
+
 ## v7.2.51 (2024-05-03)
 
 ### Other
