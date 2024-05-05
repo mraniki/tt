@@ -2,6 +2,19 @@
 
 
 
+## v7.2.53 (2024-05-05)
+
+### Other
+
+* Merge pull request #1523 from mraniki/dev
+
+⬆️ 🤖 - Try the Moo Shu Pork  It is especially good today ([`cf62b4d`](https://github.com/mraniki/tt/commit/cf62b4dfe40fe2c29aff6601734a62f00221a661))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.14 ([`19c744a`](https://github.com/mraniki/tt/commit/19c744ad895285b0f887eea52f528df05b572cc2))
+
+
 ## v7.2.52 (2024-05-04)
 
 ### :art:
