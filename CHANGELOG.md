@@ -2,6 +2,19 @@
 
 
 
+## v7.2.54 (2024-05-06)
+
+### Other
+
+* Merge pull request #1525 from mraniki/dev
+
+⬆️ 🤖 - Stay the curse ([`f128e86`](https://github.com/mraniki/tt/commit/f128e863bd6fd914f2ecf5d1e8037a5a945b803b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.15 ([`5e696ed`](https://github.com/mraniki/tt/commit/5e696edfa3ecdef4b6c62f640d6d209079979885))
+
+
 ## v7.2.53 (2024-05-05)
 
 ### Other
