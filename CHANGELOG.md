@@ -2,6 +2,21 @@
 
 
 
+## v7.2.55 (2024-05-08)
+
+### Other
+
+* Merge pull request #1529 from mraniki/dev
+
+⬆️ 🤖 - You will give someone a piece of your mind which you can ill afford ([`90dfc59`](https://github.com/mraniki/tt/commit/90dfc59810de68f36cf26a09dd6e33a133a6cff6))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pytest-playwright to ^0.5.0 ([`9d16d56`](https://github.com/mraniki/tt/commit/9d16d563c277ec467e24b01796c17fb69973170f))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.20 ([`a7da74e`](https://github.com/mraniki/tt/commit/a7da74e6370eb71b0434d6d4c9edd0dbc44be9c1))
+
+
 ## v7.2.54 (2024-05-06)
 
 ### Other
