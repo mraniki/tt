@@ -2,6 +2,19 @@
 
 
 
+## v7.2.56 (2024-05-09)
+
+### Other
+
+* Merge pull request #1531 from mraniki/dev
+
+⬆️ 🤖 - Dont let your mind wander  its too little to be let out alone ([`666e12d`](https://github.com/mraniki/tt/commit/666e12d658ecc783919048728e979bce10406fa1))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.21 ([`00bd603`](https://github.com/mraniki/tt/commit/00bd60393a81de9c572fd108b1e9c74228679868))
+
+
 ## v7.2.55 (2024-05-08)
 
 ### Other
