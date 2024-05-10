@@ -290,8 +290,9 @@ enable_signals = true
 # for the list of supported instrument
 assets = [
     { id ="EURUSD", exchange='FX_IDC',screener="forex"},
-    { id ="UKOIL", exchange='FX',screener="cfd"},
     { id ="GOLD", exchange='TVC',screener="cfd"},
+{ id ="SPX", exchange='SP',screener="cfd"},
+{ id ="UKOIL", exchange='FX',screener="cfd"},
     { id ="BTCUSD", exchange='BINANCE',screener="crypto"},
 ]
 
@@ -308,11 +309,6 @@ enable_events = true
 economic_calendar = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
 # Adhoc date to add in event tracker
 fomc_decision_date = [
-    "2023-11-01",
-    "2023-12-13",
-    "2024-01-31",
-    "2024-03-20",
-    "2024-05-01",
     "2024-06-12",
     "2024-07-31",
     "2024-09-18",
