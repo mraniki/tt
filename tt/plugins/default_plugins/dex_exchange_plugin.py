@@ -31,9 +31,10 @@ class DexExchangePlugin(BasePlugin):
     def __init__(self):
         super().__init__()
         self.enabled = settings.dxsp_enabled
-        if self.enabled:
-            self.fmo = FindMyOrder()
-            self.exchange = DexSwap()
+        if not self.enabled:
+            return
+        self.fmo = FindMyOrder()
+        self.exchange = DexSwap()
 
     async def send_notification(self, message):
         """Sends notification"""
