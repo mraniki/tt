@@ -12,7 +12,7 @@
 
 """
 
-__version__ = "7.2.57"
+__version__ = "7.2.58"
 
 
 import asyncio

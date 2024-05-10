@@ -2,6 +2,27 @@
 
 
 
+## v7.2.58 (2024-05-10)
+
+### :recycle:
+
+* :recycle:Refactor DexExchangePlugin initialization logic. ([`9d4e2fa`](https://github.com/mraniki/tt/commit/9d4e2fa22040488a7b0197ae1e4312f44c6dfef2))
+
+### Other
+
+* Merge pull request #1536 from mraniki/dev
+
+♻️Refactor DexExchangePlugin initialization logic. ([`94e4931`](https://github.com/mraniki/tt/commit/94e4931cd59de97f6a4fc260b0f9478aeb851e3e))
+
+* :gear:️Remove UKOIL asset and add SPX asset, update fomc_decision_date. ([`fe6af0e`](https://github.com/mraniki/tt/commit/fe6af0ef8a15d0824fea9749f88c6c27f8a8acf0))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.16 ([`9238d52`](https://github.com/mraniki/tt/commit/9238d52d36066896a14102f45cc58467369f2b8f))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.23 ([`b9d3abc`](https://github.com/mraniki/tt/commit/b9d3abc5d7a6b8fc7a87597a3bc02ba4b8e8aa80))
+
+
 ## v7.2.57 (2024-05-10)
 
 ### Other
