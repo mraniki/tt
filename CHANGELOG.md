@@ -2,6 +2,19 @@
 
 
 
+## v7.2.57 (2024-05-10)
+
+### Other
+
+* Merge pull request #1533 from mraniki/dev
+
+⬆️ 🤖 - Are you sure the back door is locked ([`a668692`](https://github.com/mraniki/tt/commit/a6686920ffa21f4b8f1a2b86841355d8a70a8834))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.22 ([`f7b6ff9`](https://github.com/mraniki/tt/commit/f7b6ff9bdb30cd7b4caf682e26873eb4347257d9))
+
+
 ## v7.2.56 (2024-05-09)
 
 ### Other
