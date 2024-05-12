@@ -109,10 +109,18 @@ class HelperPlugin(BasePlugin):
 
     async def get_helper_info(self) -> str:
         """
-        :file:`/info` command to
-        return the name and version of the bot
+        :file:`/info` command to return
+        the name and version of the bot
+        and the list of enabled plugins
+        and options
         """
-        return f"ℹ️ {settings.bot_name} {__version__}"
+        return (
+            f"ℹ️ {settings.bot_name} {__version__}\n"
+            f"plugins: {settings.plugin_directory}\n"
+            f"ui_enabled: {settings.ui_enabled}\n"
+            f"forwarder_enabled: {settings.forwarder_enabled}\n"
+            f"trading_enabled: {settings.trading_enabled}\n"
+        )
 
     async def get_helper_network(self) -> str:
         """
