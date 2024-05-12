@@ -2,6 +2,23 @@
 
 
 
+## v7.2.59 (2024-05-12)
+
+### Other
+
+* Merge pull request #1538 from mraniki/dev
+
+♻️ update plugins enable flag ([`08c3fca`](https://github.com/mraniki/tt/commit/08c3fca6188d27bd5632113a561b4b8559804f93))
+
+### ♻️
+
+* ♻️ update 5 files ([`f4e29fa`](https://github.com/mraniki/tt/commit/f4e29fa98048e8b2a0818ad401208e96c9715f24))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.24 ([`325b96c`](https://github.com/mraniki/tt/commit/325b96c4b2af4e2e66f1d52ea87781f72767ff9e))
+
+
 ## v7.2.58 (2024-05-10)
 
 ### :recycle:
