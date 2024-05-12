@@ -13,8 +13,9 @@ class TalkyTrendPlugin(BasePlugin):
     def __init__(self):
         super().__init__()
         self.enabled = settings.talkytrend_enabled
-        if self.enabled:
-            self.trend = TalkyTrend()
+        if not self.enabled:
+            return
+        self.trend = TalkyTrend()
 
 
     async def start(self):
