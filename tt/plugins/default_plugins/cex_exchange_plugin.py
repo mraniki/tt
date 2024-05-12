@@ -30,9 +30,10 @@ class CexExchangePlugin(BasePlugin):
     def __init__(self):
         super().__init__()
         self.enabled = settings.cex_enabled
-        if self.enabled:
-            self.fmo = FindMyOrder()
-            self.exchange = CexTrader()
+        if not self.enabled:
+            return
+        self.fmo = FindMyOrder()
+        self.exchange = CexTrader()
 
     async def send_notification(self, message):
         """Sends a notification"""
@@ -53,7 +54,6 @@ class CexExchangePlugin(BasePlugin):
         """
         if not self.should_handle(msg):
             return
-        # if settings.bot_ignore not in msg or settings.bot_prefix not in msg:
         if await self.fmo.search(msg) and self.should_handle_timeframe():
             order = await self.fmo.get_order(msg)
             if order and settings.trading_enabled:
