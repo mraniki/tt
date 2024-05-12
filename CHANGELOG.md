@@ -2,6 +2,19 @@
 
 
 
+## v7.2.61 (2024-05-12)
+
+### :ambulance:
+
+* :ambulance: Refactor HelperPlugin return statement to display bot info ([`bcb20a6`](https://github.com/mraniki/tt/commit/bcb20a62d85f8b71dd0e4a873cdacc00ac9ee755))
+
+### Other
+
+* Merge pull request #1541 from mraniki/dev
+
+:ambulance: Refactor HelperPlugin return statement to display bot info ([`fc8f9fb`](https://github.com/mraniki/tt/commit/fc8f9fbeffa68efc44253684384247a4fc09519c))
+
+
 ## v7.2.60 (2024-05-12)
 
 ### Other
