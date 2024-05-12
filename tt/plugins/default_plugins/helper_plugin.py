@@ -118,7 +118,7 @@ class HelperPlugin(BasePlugin):
             f"ℹ️ {settings.bot_name} {__version__}\n"
             f"plugins: {settings.plugin_directory}\n"
             f"ui_enabled: {settings.ui_enabled}\n"
-            f"forwarder_enabled: {settings.forwarder_enabled}\n"
+            f"forwarder_enabled: {settings.forwarder}\n"
             f"trading_enabled: {settings.trading_enabled}\n"
         )
 
