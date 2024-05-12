@@ -2,6 +2,27 @@
 
 
 
+## v7.2.60 (2024-05-12)
+
+### Other
+
+* Merge pull request #1540 from mraniki/dev
+
+🚑 fix ([`97a979a`](https://github.com/mraniki/tt/commit/97a979a47999bf1d26e547c66367bddead0fb29e))
+
+* Merge pull request #1539 from mraniki/dev
+
+🎨 update helper_plugin.py for /info message ([`897f727`](https://github.com/mraniki/tt/commit/897f727d590f1bade54999607c7b9fc2e07ac008))
+
+### 🎨
+
+* 🎨 update helper_plugin.py for /info message ([`563559b`](https://github.com/mraniki/tt/commit/563559bebb7800bbd05e1cad8bdde62fd001dda8))
+
+### 🚑
+
+* 🚑 ([`baa2645`](https://github.com/mraniki/tt/commit/baa264598285e5f4fc71f66e0858dc3a5d8caca1))
+
+
 ## v7.2.59 (2024-05-12)
 
 ### Other
