@@ -2,6 +2,19 @@
 
 
 
+## v7.2.64 (2024-05-13)
+
+### Other
+
+* Merge pull request #1546 from mraniki/dev
+
+🐛 update config.py and utils.py ([`34d374d`](https://github.com/mraniki/tt/commit/34d374d7d952fc197e7f9c3efd42a2f24b8b73e2))
+
+### 🐛
+
+* 🐛 update config.py and utils.py ([`831c2b0`](https://github.com/mraniki/tt/commit/831c2b0afd7fd7ea9e26a3d5b322cdc5ffbc6804))
+
+
 ## v7.2.63 (2024-05-13)
 
 ### Other
