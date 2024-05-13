@@ -2,6 +2,19 @@
 
 
 
+## v7.2.62 (2024-05-13)
+
+### Other
+
+* Merge pull request #1543 from mraniki/dev
+
+🐛 ([`a90d8bd`](https://github.com/mraniki/tt/commit/a90d8bd58768cbb98ba572f793acd0caf8bfd169))
+
+### 🐛
+
+* 🐛 ([`d12f271`](https://github.com/mraniki/tt/commit/d12f27169a35902fd461db2ffb8ca56a8ef77456))
+
+
 ## v7.2.61 (2024-05-12)
 
 ### :ambulance:
