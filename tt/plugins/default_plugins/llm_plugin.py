@@ -20,9 +20,8 @@ class LlmPlugin(BasePlugin):
     def __init__(self):
         super().__init__()
         self.enabled = settings.myllm_enabled
-        if not self.enabled:
-            return
-        self.llm = MyLLM()
+        if self.enabled:
+            self.llm = MyLLM()
 
     async def send_notification(self, message):
         """Sends a notification"""

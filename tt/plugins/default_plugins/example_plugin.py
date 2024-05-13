@@ -16,9 +16,8 @@ class ExamplePlugin(BasePlugin):
         """Plugin Initialization"""
         super().__init__()
         self.enabled = settings.example_plugin_enabled
-        if not self.enabled:
-            return
-        logger.debug("example plugin enabled")
+        if self.enabled:
+            logger.debug("example plugin enabled")
 
     async def start(self):
         """Starts the plugin"""

@@ -44,11 +44,10 @@ class HelperPlugin(BasePlugin):
         """
         super().__init__()
         self.enabled = settings.helper_enabled
-        if not self.enabled:
-            return
-        logger.info("Helper Plugin Enabled")
-        self.host_ip = f"🕸 {self.get_host_ip()}"
-        self.help_message = settings.helper_commands
+        if self.enabled:
+            logger.info("Helper Plugin Enabled")
+            self.host_ip = f"🕸 {self.get_host_ip()}"
+            self.help_message = settings.helper_commands
 
     async def start(self):
         """Starts the plugin"""
