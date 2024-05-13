@@ -2,6 +2,21 @@
 
 
 
+## v7.2.63 (2024-05-13)
+
+### Other
+
+* Merge pull request #1545 from mraniki/dev
+
+⬆️ build(deps): update pyproject.toml and utils.py ([`dc57801`](https://github.com/mraniki/tt/commit/dc57801d81f1465296f16a666f70517714daffe6))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency apprise to v1.8.0 ([`4cfbf05`](https://github.com/mraniki/tt/commit/4cfbf05c52259d6359cca26cf9c95af1076a7ddf))
+
+* ⬆️ build(deps): update pyproject.toml and utils.py ([`dbf1550`](https://github.com/mraniki/tt/commit/dbf155071bf3d9bdc6901ca2a1a8e37a16e0dbbf))
+
+
 ## v7.2.62 (2024-05-13)
 
 ### Other
