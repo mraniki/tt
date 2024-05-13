@@ -50,12 +50,12 @@ async def send_notification(msg):
     if msg is None:
         logger.warning("No message to send")
         return
-    aobj = Apprise(settings.apprise_url)
-    msg_format = settings.apprise_format or NotifyFormat.MARKDOWN
     try:
+        aobj = Apprise(settings.apprise_url)
+        msg_format = settings.apprise_format or NotifyFormat.MARKDOWN
         await aobj.async_notify(body=msg, body_format=msg_format)
     except Exception as error:
-        logger.error("Verify Apprise URL", error)
+        logger.error("Apprise {} {}", error, msg)
 
 
 async def run_bot():
