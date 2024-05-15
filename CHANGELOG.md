@@ -2,6 +2,21 @@
 
 
 
+## v7.2.66 (2024-05-15)
+
+### Other
+
+* Merge pull request #1551 from mraniki/dev
+
+⬆️ 🤖 - Fine day to work off excess energy  Steal something heavy ([`0881903`](https://github.com/mraniki/tt/commit/0881903c9d225e97efef48a41ff623050f3a3b6e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.25 ([`087cf93`](https://github.com/mraniki/tt/commit/087cf93316e9874befe1253a34f9372bd7b7bd28))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.10.1 ([`ebae041`](https://github.com/mraniki/tt/commit/ebae04175765947d93abe3f6cb998423bf68f3db))
+
+
 ## v7.2.65 (2024-05-13)
 
 ### Other
