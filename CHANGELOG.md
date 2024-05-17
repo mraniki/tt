@@ -2,6 +2,19 @@
 
 
 
+## v7.2.67 (2024-05-17)
+
+### Other
+
+* Merge pull request #1553 from mraniki/dev
+
+⬆️ 🤖 - You will obey or molten silver will be poured into your ears ([`bc509ed`](https://github.com/mraniki/tt/commit/bc509ed71f8b431d18084f79f90081db2f5526e7))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.26 ([`e1ed16b`](https://github.com/mraniki/tt/commit/e1ed16bb325b7801a7600f6645226e6198ab7392))
+
+
 ## v7.2.66 (2024-05-15)
 
 ### Other
