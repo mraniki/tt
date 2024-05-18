@@ -2,6 +2,23 @@
 
 
 
+## v7.2.68 (2024-05-18)
+
+### Other
+
+* Merge pull request #1556 from mraniki/dev
+
+⬆️ 🤖 - The human race has one really effective weapon and that is laughter ([`ab6be3a`](https://github.com/mraniki/tt/commit/ab6be3af534fb6bb7dde892fc357bf9c9f641232))
+
+* chore: update talky_settings.toml ([`f316169`](https://github.com/mraniki/tt/commit/f3161692abec2afa979b45bd20dbb201d8149529))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.2.7 ([`d519724`](https://github.com/mraniki/tt/commit/d5197243b416909b5ae381201ce2c0ffd5b3d46c))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.27 ([`6e6297f`](https://github.com/mraniki/tt/commit/6e6297fcb90831f5657a922336552460845d05ea))
+
+
 ## v7.2.67 (2024-05-17)
 
 ### Other
