@@ -2,6 +2,19 @@
 
 
 
+## v7.2.69 (2024-05-19)
+
+### Other
+
+* Merge pull request #1558 from mraniki/dev
+
+⬆️ 🤖 - Be cautious in your daily affairs ([`9bbaed7`](https://github.com/mraniki/tt/commit/9bbaed78be38b45948d89ea964a6b55522422daf))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.28 ([`ee1a6a7`](https://github.com/mraniki/tt/commit/ee1a6a7eb9c508620659d4a77d26f694f9982f6e))
+
+
 ## v7.2.68 (2024-05-18)
 
 ### Other
