@@ -2,6 +2,21 @@
 
 
 
+## v7.2.70 (2024-05-20)
+
+### Other
+
+* Merge pull request #1561 from mraniki/dev
+
+⬆️ 🤖 - You are scrupulously honest frank and straightforward  Therefore you ([`34db45b`](https://github.com/mraniki/tt/commit/34db45b106e8b4f94bf650d311128d0619fd5857))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.29 ([`4e6f8b8`](https://github.com/mraniki/tt/commit/4e6f8b8e2f25beb6ce14ce1de6c21e5f53add830))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.10.2 ([`38c6d35`](https://github.com/mraniki/tt/commit/38c6d35f025ec25758b6158a8a861f644d2a837f))
+
+
 ## v7.2.69 (2024-05-19)
 
 ### Other
