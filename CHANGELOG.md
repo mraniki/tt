@@ -2,6 +2,19 @@
 
 
 
+## v7.2.71 (2024-05-21)
+
+### Other
+
+* Merge pull request #1566 from mraniki/dev
+
+⬆️ 🤖 - Today is the tomorrow you worried about yesterday ([`0ec2b25`](https://github.com/mraniki/tt/commit/0ec2b25e6f31315a3c29d444c8302015622b766f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.30 ([`2a4bb9a`](https://github.com/mraniki/tt/commit/2a4bb9a625785f87574f6bdef657377950267ca2))
+
+
 ## v7.2.70 (2024-05-20)
 
 ### Other
