@@ -5,7 +5,7 @@
 
 Connect multiple CEX and DEX across multi messaging platforms.<br>
 Place order, inquire your balance and more through plugins.<br>
-Easily deploy via Docker on self-hosted platform or Paas.<br>
+Easily deploy via Docker on self-hosted platform or PAAS.<br>
 <br>
 <p align="left">
 <a href="https://talky.readthedocs.io"><img src="https://img.shields.io/badge/Wiki-%23000000.svg?style=for-the-badge&logo=wikipedia&logoColor=white"></a>
