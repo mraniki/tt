@@ -2,6 +2,19 @@
 
 
 
+## v7.2.73 (2024-05-25)
+
+### Other
+
+* Merge pull request #1579 from mraniki/dev
+
+Update apprise version to 1.7.6 ([`8060b43`](https://github.com/mraniki/tt/commit/8060b43c6f7977b0ca6d33f04c0f497b530f6cea))
+
+### Update
+
+* Update apprise version to 1.7.6 ([`667c4e5`](https://github.com/mraniki/tt/commit/667c4e555eb6c2b83ed3eff7f5f2c955e9cd1144))
+
+
 ## v7.2.72 (2024-05-25)
 
 ### Other
