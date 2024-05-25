@@ -2,6 +2,41 @@
 
 
 
+## v7.2.72 (2024-05-25)
+
+### Other
+
+* Merge pull request #1578 from mraniki/dev
+
+⬆️ 🤖 - Good night to spend with family but avoid arguments with your mates ([`7bd04db`](https://github.com/mraniki/tt/commit/7bd04dbef2f1c013b72dc6c6e48e813e8000bed0))
+
+* Merge pull request #1568 from mraniki/dev
+
+⬆️ build(deps): update README.md and pyproject.toml ([`d8358c4`](https://github.com/mraniki/tt/commit/d8358c4b29499ed64aa298da9f209c3fe432f558))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.7.1 ([`613e37b`](https://github.com/mraniki/tt/commit/613e37bf12c3496b9ad1e552b8a3fa0a960eb9e1))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.2.9 ([`ba37d0a`](https://github.com/mraniki/tt/commit/ba37d0ae934cf1c1c1428443ba37363ad8889b8d))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.1.17 ([`109cf9a`](https://github.com/mraniki/tt/commit/109cf9a111f200dcd43cdb9f734afe0f57d1eebd))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.32 ([`ebf6423`](https://github.com/mraniki/tt/commit/ebf64230d79c8f929ba7a14e141db253a4017f9c))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.31 ([`4cf6a46`](https://github.com/mraniki/tt/commit/4cf6a46053f2f2a189ccbfd4c6a65110adde13f8))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.14 ([`0e5a26c`](https://github.com/mraniki/tt/commit/0e5a26cacb147147e27a017f69166953460edc1a))
+
+* ⬆️ 🛠️(deps): update dependency myst_parser to v3 ([`4526aec`](https://github.com/mraniki/tt/commit/4526aec71dbb33ca96e85c62340b462b9d5a23c1))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.2.8 ([`16836e3`](https://github.com/mraniki/tt/commit/16836e350c7cb5b83d5cb05c54599f214bfac9a8))
+
+* ⬆️ 🛠️(deps): update dependency sphinx_design to ^0.6.0 ([`6f6b4d1`](https://github.com/mraniki/tt/commit/6f6b4d1e8966baf83d96deb51029d735b7baa76b))
+
+* ⬆️ build(deps): update README.md and pyproject.toml ([`8a1f9d6`](https://github.com/mraniki/tt/commit/8a1f9d6b5119cbf5395b41660668aff690a1a0a4))
+
+
 ## v7.2.71 (2024-05-21)
 
 ### Other
