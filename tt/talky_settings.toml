@@ -289,11 +289,11 @@ enable_signals = true
 # use https://tvdb.brianthe.dev
 # for the list of supported instrument
 assets = [
-    { id ="EURUSD", exchange='FX_IDC',screener="forex"},
-    { id ="GOLD", exchange='TVC',screener="cfd"},
-    { id ="SPX", exchange='SP',screener="cfd"},
-    { id ="UKOIL", exchange='FX',screener="cfd"},
-    { id ="BTCUSD", exchange='BINANCE',screener="crypto"},
+    # { id ="EURUSD", exchange='FX_IDC',screener="forex"},
+    # { id ="GOLD", exchange='TVC',screener="cfd"},
+    # { id ="SPX", exchange='SP',screener="cfd"},
+    # { id ="UKOIL", exchange='FX',screener="cfd"},
+    # { id ="BTCUSD", exchange='BINANCE',screener="crypto"},
 ]
 
 # Enable/Disable Yfinance
