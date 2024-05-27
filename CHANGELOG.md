@@ -2,6 +2,19 @@
 
 
 
+## v7.2.74 (2024-05-27)
+
+### Other
+
+* Merge pull request #1581 from mraniki/dev
+
+⬆️ build(deps): update pyproject.toml and talky_settings.toml ([`359f0da`](https://github.com/mraniki/tt/commit/359f0da373c818ae30071814673c215fbf980ec7))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml and talky_settings.toml ([`cffeeea`](https://github.com/mraniki/tt/commit/cffeeea89a0790ba7f9df74cf76eddc240a9d9f4))
+
+
 ## v7.2.73 (2024-05-25)
 
 ### Other
