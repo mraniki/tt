@@ -2,6 +2,23 @@
 
 
 
+## v7.2.75 (2024-05-30)
+
+### Other
+
+* Merge pull request #1585 from mraniki/dev
+
+⬆️ 🤖 - You have had a longterm stimulation relative to business ([`96d44ee`](https://github.com/mraniki/tt/commit/96d44ee6a3b93bdaaf354dff0d4411af713f1fbc))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.33 ([`1f3bec2`](https://github.com/mraniki/tt/commit/1f3bec2d00cdab1f2680171a8b9129b0284f4ed0))
+
+* ⬆️ 🛠️(deps): update dependency uvicorn to ^0.30.0 ([`3c894ef`](https://github.com/mraniki/tt/commit/3c894ef1c10baaf22dc5cb9a672445c5089ae612))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.2.10 ([`6869e64`](https://github.com/mraniki/tt/commit/6869e6481be16d1ca931e4d2052d19fe3dcf3335))
+
+
 ## v7.2.74 (2024-05-27)
 
 ### Other
