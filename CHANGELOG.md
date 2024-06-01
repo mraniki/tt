@@ -2,6 +2,21 @@
 
 
 
+## v7.2.76 (2024-06-01)
+
+### Other
+
+* Merge pull request #1588 from mraniki/dev
+
+⬆️ 🤖 - You worry too much about your job  Stop it  You are not paid enough to worry ([`bea13c0`](https://github.com/mraniki/tt/commit/bea13c0dca93f91d83197be8e745a7ac18ed6fb0))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.34 ([`6926808`](https://github.com/mraniki/tt/commit/6926808577b036935c2b04c4154538e3fb7c3893))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.2.11 ([`3dbeb7e`](https://github.com/mraniki/tt/commit/3dbeb7e04cd849dae3d33eb1c31cab02661c3c11))
+
+
 ## v7.2.75 (2024-05-30)
 
 ### Other
