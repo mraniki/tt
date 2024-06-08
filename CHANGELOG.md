@@ -2,6 +2,21 @@
 
 
 
+## v7.2.77 (2024-06-08)
+
+### Other
+
+* Merge pull request #1590 from mraniki/dev
+
+⬆️ 🤖 - Your heart is pure and your mind clear and your soul devout ([`e42ae41`](https://github.com/mraniki/tt/commit/e42ae41acf3644b5736b1dadbf663e7ef9057e0f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency asyncz to ^0.7.0 ([`cfbed38`](https://github.com/mraniki/tt/commit/cfbed381646f3e4ea32f566c731cff07245f6aab))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.35 ([`60c98a9`](https://github.com/mraniki/tt/commit/60c98a91ddddd5b137fe7b2d5f8bda815ed07ffc))
+
+
 ## v7.2.76 (2024-06-01)
 
 ### Other
