@@ -2,6 +2,21 @@
 
 
 
+## v7.2.78 (2024-06-09)
+
+### Other
+
+* Merge pull request #1595 from mraniki/dev
+
+⬆️ 🤖 - Your mode of life will be changed for the better because of new developments ([`c32c642`](https://github.com/mraniki/tt/commit/c32c642728bdad3ebddcfbe705ce3fdacd5398af))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.2.0 ([`f59f4a4`](https://github.com/mraniki/tt/commit/f59f4a4f4519bdb92d17911b9036202aec53473d))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.36 ([`421a59e`](https://github.com/mraniki/tt/commit/421a59e4f3a5363702eccb2d2ab7f3baf5a65a46))
+
+
 ## v7.2.77 (2024-06-08)
 
 ### Other
