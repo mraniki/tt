@@ -2,6 +2,21 @@
 
 
 
+## v7.2.79 (2024-06-11)
+
+### Other
+
+* Merge pull request #1599 from mraniki/dev
+
+⬆️ 🤖 - Q	What do you call  blondes in a circle ([`2ae3a56`](https://github.com/mraniki/tt/commit/2ae3a56f6d8a5e200783cf218ae5bbdceebc45fb))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.2.1 ([`dd05738`](https://github.com/mraniki/tt/commit/dd05738cee6e09bc680a9dc21f96de270150ba79))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.37 ([`7d6eb6e`](https://github.com/mraniki/tt/commit/7d6eb6e7b4cfa093596768af6fa28fe6d5930a57))
+
+
 ## v7.2.78 (2024-06-09)
 
 ### Other
