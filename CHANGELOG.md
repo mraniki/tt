@@ -2,6 +2,19 @@
 
 
 
+## v7.2.80 (2024-06-12)
+
+### Other
+
+* Merge pull request #1602 from mraniki/dev
+
+⬆️ 🤖 - No violence gentlemen  no violence I beg of you  Consider the furniture ([`995df97`](https://github.com/mraniki/tt/commit/995df970afd0974e4782ced9dbf2b4515d066f01))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.17 ([`e742d92`](https://github.com/mraniki/tt/commit/e742d9269ff839aaf3492a4471d2913d54ac0ad7))
+
+
 ## v7.2.79 (2024-06-11)
 
 ### Other
