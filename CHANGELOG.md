@@ -2,6 +2,19 @@
 
 
 
+## v7.2.81 (2024-06-13)
+
+### Other
+
+* Merge pull request #1604 from mraniki/dev
+
+⬆️ 🤖 - That secret youve been guarding isnt ([`a20b4df`](https://github.com/mraniki/tt/commit/a20b4df8dc642e13cc7337f0aeba031d0a629777))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.2.2 ([`6dd4fca`](https://github.com/mraniki/tt/commit/6dd4fcab4cd26e03397e284cc979bdf1dc3a4af4))
+
+
 ## v7.2.80 (2024-06-12)
 
 ### Other
