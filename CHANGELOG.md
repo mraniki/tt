@@ -2,6 +2,35 @@
 
 
 
+## v8.0.0 (2024-06-14)
+
+### Other
+
+* Merge pull request #1612 from mraniki/dev
+
+✅ Unit Test 🚑 ([`76e9134`](https://github.com/mraniki/tt/commit/76e9134c4c9b0fcdc78f20ad9bfa099a7a5d12ea))
+
+* Merge branch &#39;main&#39; into dev ([`ed5963e`](https://github.com/mraniki/tt/commit/ed5963e60a313a85418bae39da190a73959ee7c0))
+
+* Merge branch &#39;main&#39; into dev ([`4d6de5f`](https://github.com/mraniki/tt/commit/4d6de5fedf9a8ee11af17dbad1587dd14dee26c6))
+
+* Merge pull request #1611 from mraniki/dev
+
+💥 breaking the llmplugin with ai_agent and streaming capability ([`44434a1`](https://github.com/mraniki/tt/commit/44434a1d1e9d854f944814c98b7ed84d998c9f6f))
+
+### 💥
+
+* 💥 breaking the llmplugin with ai_agent and streaming capability ([`095faef`](https://github.com/mraniki/tt/commit/095faef85aaabcb7f238f213544db798748b50d5))
+
+### 🔧
+
+* 🔧 ([`d5003a0`](https://github.com/mraniki/tt/commit/d5003a029198103574f568c3bd4d9ad9abbca18c))
+
+### 🚑
+
+* ✅ Unit Test 🚑 ([`c8c677b`](https://github.com/mraniki/tt/commit/c8c677b918f171ed5a3ba9748c46159ca1977a61))
+
+
 ## v7.2.83 (2024-06-14)
 
 ### Other
