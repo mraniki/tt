@@ -2,6 +2,19 @@
 
 
 
+## v7.2.82 (2024-06-14)
+
+### Other
+
+* Merge pull request #1606 from mraniki/dev
+
+⬆️ 🤖 - Q	What happens when four WASPs find themselves in the same room ([`a4b6216`](https://github.com/mraniki/tt/commit/a4b6216506f5f3d70bafe832308f8206a622e2fe))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.8.38 ([`14bcb75`](https://github.com/mraniki/tt/commit/14bcb75c29e7d9e24d4d5e9e1753ea8b7150f7dc))
+
+
 ## v7.2.81 (2024-06-13)
 
 ### Other
