@@ -259,6 +259,8 @@ user_day_of_week="tue-thu"
 user_hours="6,12,18"
 user_timezone="UTC"
 
+
+
 ########################################
 ###          HELPER SETTINGS         ###
 ########################################
@@ -368,6 +370,7 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 ###        MYLLM SETTINGS     ###
 #################################
 myllm_enabled = true
+ai_agent = false # command to toggle aimode in continuous mode
 
 # [default.myllm.g4f]
 # llm_library = "g4f" # options are bard, openai or g4f
@@ -377,8 +380,7 @@ myllm_enabled = true
 # llm_provider_key = "" # only for bard and openai to pass either the cookie or the api key
 # max_memory = 100 # Conversation history size
 # timeout = 5 # time lag to wait ai response
-# temperature = 0 # not used
-# token_limit = 400 # not used
+# stream_mode = false # enable streaming mode
 # llm_prefix = "🐻" # prefix use to filter the AI response
 # llm_template = """
 # You are a friendly AI helping me with 
@@ -388,13 +390,12 @@ myllm_enabled = true
 # [default.myllm.openai]
 # enabled = false
 # llm_library = "openai"
-# llm_model= "gpt-3.5-turbo"
+# llm_model= "gpt-4o"
 # llm_provider = "" 
-# llm_provider_key = "DEADBEEF1234567890KEY"
+# llm_provider_key = "DEADBEEF"
 # max_memory = 100 # Conversation history size
 # timeout = 5 # time lag to wait ai response
-# temperature = 0
-# token_limit = 400
+# stream_mode = false # enable streaming mode
 # llm_prefix = "" # prefix use to filter the AI response
 # llm_template = """
 # You are a friendly AI helping me with 
