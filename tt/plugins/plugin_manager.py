@@ -178,7 +178,9 @@ class BasePlugin:
     def should_handle(self, message):
         """
         Returns True if the plugin should handle the message
-
+        if plugins is not enabled, ignore all messages
+        else, ignore messages that do not have from bot_prefix
+        or bot_ignore
         Args:
             message (str): Message
 
@@ -187,11 +189,9 @@ class BasePlugin:
 
         """
         if self.enabled:
-            # logger.debug("Should handle: {}", message)
             return (
                 settings.bot_ignore not in message or settings.bot_prefix not in message
             )
-            # return not message.startswith(settings.bot_ignore)
 
     async def plugin_notify_schedule_task(
         self, user_name=None, frequency=8, function=None

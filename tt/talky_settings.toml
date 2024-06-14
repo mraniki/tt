@@ -259,6 +259,8 @@ user_day_of_week="tue-thu"
 user_hours="6,12,18"
 user_timezone="UTC"
 
+
+
 ########################################
 ###          HELPER SETTINGS         ###
 ########################################
@@ -368,6 +370,7 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 ###        MYLLM SETTINGS     ###
 #################################
 myllm_enabled = true
+ai_agent = false # command to toggle aimode in continuous mode
 
 # [default.myllm.g4f]
 # llm_library = "g4f" # options are bard, openai or g4f

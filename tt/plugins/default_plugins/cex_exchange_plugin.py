@@ -25,8 +25,6 @@ class CexExchangePlugin(BasePlugin):
 
     """
 
-    # name = os.path.splitext(os.path.basename(__file__))[0]
-
     def __init__(self):
         super().__init__()
         self.enabled = settings.cex_enabled
