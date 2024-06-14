@@ -3,7 +3,7 @@ from unittest.mock import AsyncMock
 import pytest
 
 from tt.config import settings
-from tt.plugins.default_plugins.ai_agent_plugin import LlmPlugin
+from tt.plugins.default_plugins.ai_agent_plugin import AIAgentPlugin
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -13,7 +13,7 @@ def set_test_settings():
 
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():
-    return LlmPlugin()
+    return AIAgentPlugin()
 
 
 @pytest.mark.asyncio
