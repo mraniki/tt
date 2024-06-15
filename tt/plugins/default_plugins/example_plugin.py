@@ -1,5 +1,3 @@
-import os
-
 from tt.config import logger, settings
 from tt.plugins.plugin_manager import BasePlugin
 from tt.utils import send_notification
@@ -9,8 +7,6 @@ class ExamplePlugin(BasePlugin):
     """Example Plugin
     Initialization of imported class MyClass
     """
-
-    name = os.path.splitext(os.path.basename(__file__))[0]
 
     def __init__(self):
         """Plugin Initialization"""

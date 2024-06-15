@@ -192,15 +192,11 @@ class BasePlugin:
         """
         # if self.enabled:
         #     return (
-        #         self.bot_ignore not in message or self.bot_prefix not in message
+        #         self.bot_ignore not in message and self.bot_prefix not in message
         #     )
         if self.enabled:
-            logger.debug(f"Enabled: {self.enabled}")
-            if self.bot_ignore:
-                logger.debug(f"Bot Ignore: {self.bot_ignore}")
-            if self.bot_prefix:
-                logger.debug(f"Bot Prefix: {self.bot_prefix}")
-            if self.bot_ignore not in message or self.bot_prefix not in message:
+            logger.debug(f"Enabled: {self.enabled} Message: {message}")
+            if self.bot_ignore not in message and self.bot_prefix not in message:
                 logger.debug("Returning True")
                 return True
             else:
