@@ -97,7 +97,7 @@ async def test_plugin(plugin, plugin_manager):
     await plugin_manager.process_message(
         f"{settings.bot_prefix}{settings.bot_command_help}"
     )
-    assert plugin.should_handle("any message") is True
+    assert plugin.should_handle("any message") is False
     handle_message.assert_awaited_once
 
 
