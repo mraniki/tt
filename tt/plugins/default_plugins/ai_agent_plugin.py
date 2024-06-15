@@ -75,7 +75,9 @@ class AIAgentPlugin(BasePlugin):
                 await self.send_notification(f"{await function()}")
 
         # If the ai_agent setting is enabled,
+        # and the message does not start with a bot_ignore character
         # send the result of the chat with the LLM
         # bypassing the command mapping
-        if settings.ai_agent:
+        ignore_chars = list(settings.bot_ignore)
+        if settings.ai_agent and not any(msg.startswith(char) for char in ignore_chars):
             await self.send_notification(f"{await self.ai_agent.chat(str(msg))}")
