@@ -166,7 +166,7 @@ class BasePlugin:
         self.enabled = False
         self.scheduler = scheduler
         self.bot_prefix = settings.bot_prefix
-        self.bot_ignore = list(settings.bot_ignore)
+        self.bot_ignore = settings.bot_ignore
 
     async def start(self):
         pass
