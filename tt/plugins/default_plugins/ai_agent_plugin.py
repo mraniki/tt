@@ -3,7 +3,6 @@
 
 """
 
-from loguru import logger
 from myllm import MyLLM
 
 from tt.config import settings
