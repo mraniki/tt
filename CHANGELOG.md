@@ -2,6 +2,23 @@
 
 
 
+## v8.0.1 (2024-06-15)
+
+### Other
+
+* Merge pull request #1614 from mraniki/dev
+
+🐛 update ai_agent_plugin.py ([`5f70c5b`](https://github.com/mraniki/tt/commit/5f70c5b3c3c39292d46a8291a77eabe314112dbf))
+
+### ✅
+
+* ✅ Unit Test test: update test_ai_agent_plugin.py ([`163be0e`](https://github.com/mraniki/tt/commit/163be0e31645dc293cc168b7aedc1409677c5591))
+
+### 🐛
+
+* 🐛 update ai_agent_plugin.py ([`21af384`](https://github.com/mraniki/tt/commit/21af384b82d5016054997f5a9ec3254551dce406))
+
+
 ## v8.0.0 (2024-06-14)
 
 ### Other
