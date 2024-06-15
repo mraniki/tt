@@ -276,6 +276,22 @@ ip_check_url = "8.8.8.8"
 
 
 ########################################
+###        RSS FEED SETTINGS         ###
+########################################
+
+
+# Enable/Disable RSS Feed Plugin
+rss_feed_plugin_enabled = false
+
+# url of the rss feed
+rss_feed_url= "http://example.com/feed.rss"
+
+# frequency of the rss feed update in
+# minutes
+rss_feed_frequency = 5
+
+
+########################################
 ###        TALKYTREND SETTINGS       ###
 ########################################
 
