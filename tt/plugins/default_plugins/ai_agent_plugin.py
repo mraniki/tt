@@ -3,7 +3,6 @@
 
 """
 
-
 from myllm import MyLLM
 
 from tt.config import settings
@@ -25,7 +24,7 @@ class AIAgentPlugin(BasePlugin):
         super().__init__()
         self.enabled = settings.myllm_enabled
         if self.enabled:
-            self.llm = MyLLM()
+            self.ai_agent = MyLLM()
 
     async def send_notification(self, message):
         """Sends a notification"""
@@ -54,31 +53,29 @@ class AIAgentPlugin(BasePlugin):
             # If the the message should not be handled, return
             return
 
+        # If the message starts with the bot prefix,
+        # it checks if it's the ai chat command.
+        # If it is, it sends the result of the chat with the LLM.
+        # If it's not, it checks if the command is in the command mapping
+        # and sends the result of the corresponding function.
+        # If it's not, it checks if the ai_agent setting is enabled
+        # and sends the result of the chat with the LLM.
         if msg.startswith(settings.bot_prefix):
-            # Split the message into command and arguments
-            command, *args = msg.split(" ", 1)
+            command, *args = msg.split(" ")
             command = command[1:]
 
-            # If the command is the ai chat command,
-            # send the chat result
-            if command == settings.bot_command_aichat:
-                result = await self.llm.chat(args[0] if args else "")
-                await self.send_notification(f"{result}")
-                return
-
-            # If the command is in the command mapping,
-            # send the result of the corresponding function
             command_mapping = {
-                settings.bot_command_info: self.llm.get_info,
-                settings.bot_command_aiclear: self.llm.clear_chat_history,
-                settings.bot_command_aiexport: self.llm.export_chat_history,
+                settings.bot_command_info: self.ai_agent.get_info,
+                settings.bot_command_aiclear: self.ai_agent.clear_chat_history,
+                settings.bot_command_aiexport: self.ai_agent.export_chat_history,
+                settings.bot_command_aichat: lambda: self.ai_agent.chat(str(args)),
             }
-
             if command in command_mapping:
-                await self.send_notification(f"{await command_mapping[command]()}")
+                function = command_mapping[command]
+                await self.send_notification(f"{await function()}")
 
         # If the ai_agent setting is enabled,
         # send the result of the chat with the LLM
+        # bypassing the command mapping
         if settings.ai_agent:
-            await self.send_notification(f"{await self.llm.chat(str(msg))}")
-
+            await self.send_notification(f"{await self.ai_agent.chat(str(msg))}")
