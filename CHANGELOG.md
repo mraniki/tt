@@ -2,6 +2,19 @@
 
 
 
+## v8.1.1 (2024-06-15)
+
+### Other
+
+* Merge pull request #1620 from mraniki/dev
+
+🐛 update ai_agent_plugin.py and talky_settings.toml ([`bdb1f46`](https://github.com/mraniki/tt/commit/bdb1f46a812efcde7a2690cf59a23bf8e4c125c8))
+
+### 🐛
+
+* 🐛 update ai_agent_plugin.py and talky_settings.toml ([`73896f1`](https://github.com/mraniki/tt/commit/73896f1b0eae456a16a05d9ff22a5350198f4975))
+
+
 ## v8.1.0 (2024-06-15)
 
 ### Other
