@@ -2,6 +2,31 @@
 
 
 
+## v8.0.3 (2024-06-15)
+
+### Other
+
+* Merge pull request #1617 from mraniki/dev
+
+🐛 🔊update ai_agent_plugin.py and plugin_manager.py ([`9b9d0d2`](https://github.com/mraniki/tt/commit/9b9d0d2e364e476dbbcda4346b3d94d84cd9c47d))
+
+* Merge branch &#39;main&#39; into dev ([`c74b26f`](https://github.com/mraniki/tt/commit/c74b26f984898726eceb277241dfdfad896dccaf))
+
+* Merge branch &#39;main&#39; into dev ([`7fdcad8`](https://github.com/mraniki/tt/commit/7fdcad85d88dba2881815deb434ad345571815fd))
+
+* chore: update talky_settings.toml ([`84f0c47`](https://github.com/mraniki/tt/commit/84f0c47a9eda8f431efcd8304775e8606dfc7816))
+
+### 🎨
+
+* 🎨 ([`3b8ae6c`](https://github.com/mraniki/tt/commit/3b8ae6c6c72a9221c84c506666a1dbf867932857))
+
+### 🐛
+
+* 🐛 ([`5c2f718`](https://github.com/mraniki/tt/commit/5c2f718a41ca3758fdfe7eccbacd255ccc07d909))
+
+* 🐛 🔊update ai_agent_plugin.py and plugin_manager.py ([`6a686e2`](https://github.com/mraniki/tt/commit/6a686e2d4631da57f71a3655a77b78948ef1c883))
+
+
 ## v8.0.2 (2024-06-15)
 
 ### Other
@@ -15,6 +40,8 @@
 * ♻️ update ai_agent_plugin.py ([`76bcbaf`](https://github.com/mraniki/tt/commit/76bcbafede719dd81de00f5965143998f79fa2ee))
 
 ### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.10.3 ([`22a1f9c`](https://github.com/mraniki/tt/commit/22a1f9c001d2ed7f23bf71e153ace65d7e8a2dc7))
 
 * ⬆️ build(deps): update pyproject.toml ([`3a09b7f`](https://github.com/mraniki/tt/commit/3a09b7f32476771b226e72c751114aaed54c5eba))
 
