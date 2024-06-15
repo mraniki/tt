@@ -2,6 +2,17 @@
 
 
 
+## v8.1.3 (2024-06-15)
+
+### Other
+
+* Merge pull request #1622 from mraniki/dev
+
+🔧 ([`bd64ee5`](https://github.com/mraniki/tt/commit/bd64ee5e9eecb8d84570ded510dfd9d5a3574fdc))
+
+* Merge branch &#39;main&#39; into dev ([`156ad0a`](https://github.com/mraniki/tt/commit/156ad0a4c3a3e4fabdddfdb6f23466620fe10329))
+
+
 ## v8.1.2 (2024-06-15)
 
 ### Other
@@ -13,6 +24,10 @@
 ### 🐛
 
 * 🐛 ([`13f3eb9`](https://github.com/mraniki/tt/commit/13f3eb926a6ef8b6b8743ca53aa48edf0c5985c7))
+
+### 🔧
+
+* 🔧 ([`d7d28e8`](https://github.com/mraniki/tt/commit/d7d28e8f5e343f298f0cb554b8a8a01a0fe28453))
 
 
 ## v8.1.1 (2024-06-15)
