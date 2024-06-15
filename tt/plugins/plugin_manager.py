@@ -166,7 +166,7 @@ class BasePlugin:
         self.enabled = False
         self.scheduler = scheduler
         self.bot_prefix = settings.bot_prefix
-        self.bot_ignore = settings.bot_ignore
+        self.bot_ignore = list(settings.bot_ignore)
 
     async def start(self):
         pass
@@ -196,8 +196,8 @@ class BasePlugin:
         #     )
         if self.enabled:
             logger.debug(f"Enabled: {self.enabled} Message: {message}")
-            if self.bot_ignore not in message:
-                logger.debug("Returning True")
+            if all(char not in message for char in self.bot_ignore):
+                logger.debug("Returning True No ignore chars")
                 return True
             # if message.startswith(self.bot_prefix):
             #     logger.debug("Returning True")
