@@ -242,7 +242,7 @@ authorized_plugins = [
     'helper_plugin',
     'dex_exchange_plugin',
     'cex_exchange_plugin',
-    'llm_plugin',
+    'ai_agent_plugin',
     'talkytrend_plugin',
     ]
 
