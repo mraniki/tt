@@ -1,5 +1,3 @@
-import os
-
 from talkytrend import TalkyTrend
 
 from tt.config import settings
@@ -8,14 +6,12 @@ from tt.utils import send_notification
 
 
 class TalkyTrendPlugin(BasePlugin):
-    name = os.path.splitext(os.path.basename(__file__))[0]
 
     def __init__(self):
         super().__init__()
         self.enabled = settings.talkytrend_enabled
         if self.enabled:
             self.trend = TalkyTrend()
-
 
     async def start(self):
         """Starts the TalkyTrend plugin"""
@@ -44,7 +40,6 @@ class TalkyTrendPlugin(BasePlugin):
                 settings.bot_command_news: self.trend.fetch_feed,
                 settings.bot_command_tv: self.trend.get_tv,
                 settings.bot_command_scraper: self.trend.scrape_page,
-
             }
 
             if command in command_mapping:

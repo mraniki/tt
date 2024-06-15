@@ -1,5 +1,3 @@
-import os
-
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 
@@ -26,8 +24,6 @@ class DexExchangePlugin(BasePlugin):
 
     """
 
-    name = os.path.splitext(os.path.basename(__file__))[0]
-
     def __init__(self):
         super().__init__()
         self.enabled = settings.dxsp_enabled
@@ -46,13 +42,12 @@ class DexExchangePlugin(BasePlugin):
         if not self.should_handle(msg):
             return
 
-        if settings.bot_ignore not in msg or settings.bot_prefix not in msg:
-            if await self.fmo.search(msg) and self.should_handle_timeframe():
-                order = await self.fmo.get_order(msg)
-                if order and settings.trading_enabled:
-                    trade = await self.exchange.submit_order(order)
-                    if trade:
-                        await send_notification(trade)
+        if await self.fmo.search(msg) and self.should_handle_timeframe():
+            order = await self.fmo.get_order(msg)
+            if order and settings.trading_enabled:
+                trade = await self.exchange.submit_order(order)
+                if trade:
+                    await send_notification(trade)
 
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
