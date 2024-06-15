@@ -165,6 +165,8 @@ class BasePlugin:
     def __init__(self):
         self.enabled = False
         self.scheduler = scheduler
+        self.bot_prefix = settings.bot_prefix
+        self.bot_ignore = list(settings.bot_ignore)
 
     async def start(self):
         pass
@@ -188,10 +190,25 @@ class BasePlugin:
             bool
 
         """
+        # if self.enabled:
+        #     return (
+        #         self.bot_ignore not in message or self.bot_prefix not in message
+        #     )
         if self.enabled:
-            return (
-                settings.bot_ignore not in message or settings.bot_prefix not in message
-            )
+            logger.debug(f"Enabled: {self.enabled}")
+            if self.bot_ignore:
+                logger.debug(f"Bot Ignore: {self.bot_ignore}")
+            if self.bot_prefix:
+                logger.debug(f"Bot Prefix: {self.bot_prefix}")
+            if self.bot_ignore not in message or self.bot_prefix not in message:
+                logger.debug("Returning True")
+                return True
+            else:
+                logger.debug("Returning False")
+                return False
+        else:
+            logger.debug("Returning False (Plugin not enabled)")
+            return False
 
     async def plugin_notify_schedule_task(
         self, user_name=None, frequency=8, function=None
