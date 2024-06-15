@@ -2,6 +2,37 @@
 
 
 
+## v8.1.0 (2024-06-15)
+
+### Other
+
+* Merge pull request #1619 from mraniki/dev
+
+🐛 Should_handle ([`4cfe9e6`](https://github.com/mraniki/tt/commit/4cfe9e601a88171b61b0ba0541544a5cf8ac005f))
+
+* Merge pull request #1618 from mraniki/dev
+
+🐛 Fix and/or in should_handle + feed plugin test ([`fac5049`](https://github.com/mraniki/tt/commit/fac50495b92486c25bbca12385e1d3d0b9b29926))
+
+### ⬆️
+
+* ⬆️ ([`7246815`](https://github.com/mraniki/tt/commit/7246815227e97cb2afe3e538729429723d394c8d))
+
+### 🎨
+
+* 🎨 ([`b21ea84`](https://github.com/mraniki/tt/commit/b21ea84efb6866892801edf89ac1ef280f62141f))
+
+### 🐛
+
+* 🐛 ([`3f40b9a`](https://github.com/mraniki/tt/commit/3f40b9ac751c1d2e326564c0e8dfe581477df57c))
+
+* 🐛 Fix and/or in should_handle ([`c73dfdd`](https://github.com/mraniki/tt/commit/c73dfdd601214b0508560f718459ea34ff20493e))
+
+### 🥚
+
+* 🥚 ⚗️ RSS feed plugin ([`078337c`](https://github.com/mraniki/tt/commit/078337cfb3d6d94b3122177dea9fc55a93ffa549))
+
+
 ## v8.0.3 (2024-06-15)
 
 ### Other
