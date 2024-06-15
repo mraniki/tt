@@ -196,9 +196,12 @@ class BasePlugin:
         #     )
         if self.enabled:
             logger.debug(f"Enabled: {self.enabled} Message: {message}")
-            if self.bot_ignore not in message and self.bot_prefix not in message:
+            if self.bot_ignore not in message:
                 logger.debug("Returning True")
                 return True
+            # if message.startswith(self.bot_prefix):
+            #     logger.debug("Returning True")
+            #     return True
             else:
                 logger.debug("Returning False")
                 return False
