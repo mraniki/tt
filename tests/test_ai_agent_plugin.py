@@ -63,6 +63,12 @@ async def test_info(plugin):
     result = await plugin.ai_agent.get_info()
     assert result is not None
 
+@pytest.mark.asyncio
+async def test_parsing_switch(plugin):
+    """Test switch"""
+    plugin.ai_agent_switch_command = AsyncMock()
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_aimode}")
+    plugin.ai_agent_switch_command.assert_awaited_once()
 
 # @pytest.mark.asyncio
 # async def test_llm_chat(plugin):
@@ -71,7 +77,6 @@ async def test_info(plugin):
 #     sleep(20)
 #     print(result)
 #     assert result is not None
-
 
 # @pytest.mark.asyncio
 # async def test_clear_chat_history(plugin):
