@@ -190,24 +190,33 @@ class BasePlugin:
             bool
 
         """
-        # if self.enabled:
-        #     return (
-        #         self.bot_ignore not in message and self.bot_prefix not in message
-        #     )
         if self.enabled:
             logger.debug(f"Enabled: {self.enabled} Message: {message}")
-            if all(char not in message for char in self.bot_ignore):
+            if any(char not in message for char in self.bot_ignore):
                 logger.debug("Returning True No ignore chars")
                 return True
-            # if message.startswith(self.bot_prefix):
-            #     logger.debug("Returning True")
-            #     return True
             else:
                 logger.debug("Returning False")
                 return False
         else:
             logger.debug("Returning False (Plugin not enabled)")
             return False
+
+    def should_not_handle(self, message):
+        """
+        Returns True if the plugin should NOT handle the message
+        if ignore characters are in the message via bot_ignore
+        Args:
+            message (str): Message
+
+        Returns:
+            bool
+
+        """
+        logger.debug(f"Enabled: {self.enabled} Message: {message}")
+        if any(char in message for char in self.bot_ignore):
+            logger.debug("Ignore chars in message")
+            return True
 
     async def plugin_notify_schedule_task(
         self, user_name=None, frequency=8, function=None

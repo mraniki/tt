@@ -95,8 +95,5 @@ async def test_parse_valid_order(plugin, order_message):
 @pytest.mark.asyncio
 async def test_parse_ignore(plugin):
     """Search Testing"""
-
     result = await plugin.handle_message("🏦 balance")
     assert result is None
-
-    
