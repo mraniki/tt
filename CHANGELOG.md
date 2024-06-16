@@ -2,6 +2,27 @@
 
 
 
+## v8.2.2 (2024-06-16)
+
+### Other
+
+* Merge pull request #1628 from mraniki/dev
+
+🚑🔇 ([`0c00c4e`](https://github.com/mraniki/tt/commit/0c00c4e20ae73907aa45f32a1cdd17c1ed9de09f))
+
+### ⬆️
+
+* ⬆️ ([`e459e95`](https://github.com/mraniki/tt/commit/e459e958bbc4d304a9771a930448e39299ea04ec))
+
+### 🚑
+
+* 🚑 ([`e82380c`](https://github.com/mraniki/tt/commit/e82380c4701b6dfb66c5a212c947fb970e1420a4))
+
+### 🚨
+
+* 🚨 ([`08acb77`](https://github.com/mraniki/tt/commit/08acb7724495b4dc91dc83f89c8695d3aa17e20a))
+
+
 ## v8.2.1 (2024-06-16)
 
 ### Other
