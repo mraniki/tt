@@ -2,6 +2,63 @@
 
 
 
+## v8.1.4 (2024-06-16)
+
+### Other
+
+* Merge pull request #1623 from mraniki/dev
+
+♻️ update plugin_manager.py, Refactoring and Unit test improvement ([`712d7ec`](https://github.com/mraniki/tt/commit/712d7ec71aee3d46e45ceabca50cdc317883ce45))
+
+### Update
+
+* Update plugin.should_handle to return False instead of True. ([`9404e2e`](https://github.com/mraniki/tt/commit/9404e2ee94e8b6ea2e344d5b0e1c79bba243d0cf))
+
+### ♻️
+
+* ♻️ update test_unit.py and utils.py ([`20a74d2`](https://github.com/mraniki/tt/commit/20a74d2dbdb6d1f877dd1cce38e77075e491f38a))
+
+* ♻️ Refactoring and simplification for the filtering and command handling ([`a853a75`](https://github.com/mraniki/tt/commit/a853a757a40fe7e78be5aa1361035c1720214383))
+
+* ♻️ should_filter ([`170c078`](https://github.com/mraniki/tt/commit/170c07858967c92f37ef5129343a246ddfdb97dd))
+
+* ♻️ should_not_handle method to simplify code review ([`faadba5`](https://github.com/mraniki/tt/commit/faadba5979cb70dc7fb0c7d109ab45e1b3623f69))
+
+* ✅ Unit Test ♻️ ([`eeef894`](https://github.com/mraniki/tt/commit/eeef8948d49099c1a7a7efb8d2d06d13a0a119a8))
+
+* ♻️ update plugin_manager.py ([`689c63c`](https://github.com/mraniki/tt/commit/689c63c911e799360ce3d48f2441cbc6379391b1))
+
+### ✅
+
+* ✅ Unit Test test: update test_ai_agent_plugin.py and test_example_plugin.py ([`e9b50c3`](https://github.com/mraniki/tt/commit/e9b50c3129acdff59dabd8122abc5b49936a6922))
+
+* ✅ Unit Test ([`284d0f3`](https://github.com/mraniki/tt/commit/284d0f3be6fc3a135e7d1afd1e6aff8a959950cd))
+
+* ✅ Unit Test ([`31debc4`](https://github.com/mraniki/tt/commit/31debc44c6a634aba889656a2ac0a59b35f33f02))
+
+* ✅ Unit Test ([`b6d61ec`](https://github.com/mraniki/tt/commit/b6d61ec52ad30fb7d97a4262b3810a30f6b69573))
+
+* ✅ Unit Test ([`9ce4383`](https://github.com/mraniki/tt/commit/9ce4383dea3203130ff6a10becc373a6a81031c6))
+
+* ✅ Unit Test ([`fb7c7f1`](https://github.com/mraniki/tt/commit/fb7c7f1e1b2daf32cc6621140dd6f8c36898f253))
+
+* ✅ Unit Test ([`00c515d`](https://github.com/mraniki/tt/commit/00c515d7299787408f176b8c94e7591a3b748c64))
+
+* ✅ Unit Test test: update test_cex_exchange_plugin.py, test_dex_exchange_plugin.py, test_example_plugin.py and test_unit_exception.py ([`6db3124`](https://github.com/mraniki/tt/commit/6db3124644d494c96d0c997907ac085362566985))
+
+* ✅ Unit Test ([`3c783a0`](https://github.com/mraniki/tt/commit/3c783a04881f75534de135249945d0eacd6d69c8))
+
+* ✅ Unit Test update 5 files ([`f4fe613`](https://github.com/mraniki/tt/commit/f4fe6131413b79bfd1703cf9461507bee60fab43))
+
+* ✅ Unit Test ([`4dd2347`](https://github.com/mraniki/tt/commit/4dd23470d37a6d3736ff47eb71bbad139263f07e))
+
+* ✅ Unit Test ([`194addb`](https://github.com/mraniki/tt/commit/194addb444520e80cfa41944a1124d272badf053))
+
+### 🐛
+
+* 🐛 ([`932b9ae`](https://github.com/mraniki/tt/commit/932b9aed586060a092e7ff185f78c7fb976fc193))
+
+
 ## v8.1.3 (2024-06-15)
 
 ### Other
