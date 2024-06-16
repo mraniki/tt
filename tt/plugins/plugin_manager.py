@@ -215,7 +215,7 @@ class BasePlugin:
         if message.startswith(settings.ai_agent_prefix):
             return True
         else:
-            logger.debug("Message {}", message)
+            logger.debug("Not handling message {}", message)
             return False
 
     async def plugin_notify_schedule_task(
