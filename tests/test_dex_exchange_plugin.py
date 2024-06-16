@@ -60,7 +60,6 @@ async def test_parse_position(plugin):
 async def test_parse_quote(plugin, caplog):
     """Test parse_message balance"""
     plugin.exchange.get_quotes = AsyncMock()
-    # await plugin.handle_message("/q WBTC")
     await plugin.handle_message(
         f"{settings.bot_prefix}{settings.bot_command_quote} WBTC"
     )
@@ -77,4 +76,3 @@ async def test_parse_valid_order(plugin, order_message):
     plugin.fmo.search.assert_awaited_once
     plugin.fmo.get_order.assert_awaited
     plugin.exchange.submit_order.assert_awaited
-    plugin.should_filter.assert_awaited
