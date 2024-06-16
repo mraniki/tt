@@ -49,9 +49,8 @@ async def send_notification(msg):
     # if aobj is None:
     try:
         aobj = apprise.Apprise()
-        apprise.add(settings.apprise_url)
+        aobj.add(settings.apprise_url)
         msg_format = getattr(apprise.NotifyFormat, settings.apprise_format or None)
-
         await aobj.async_notify(body=msg, body_format=msg_format)
     except Exception as error:
         logger.error("Apprise {} {}", error, msg)
