@@ -200,15 +200,15 @@ class BasePlugin:
         the message based on certain conditions.
 
         Args:
-            message (str): The message 
+            message (str): The message
             to be checked.
 
         Returns:
-            bool: True if the plugin should 
+            bool: True if the plugin should
             handle the message, False otherwise.
         """
-        if not self.enabled:
-            return False
+        if self.enabled:
+            return True
 
     def is_command_to_handle(self, message):
         """
@@ -224,7 +224,6 @@ class BasePlugin:
         """
         if message.startswith(settings.bot_prefix):
             return True
-
 
     async def plugin_notify_schedule_task(
         self, user_name=None, frequency=8, function=None
