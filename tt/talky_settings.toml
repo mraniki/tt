@@ -388,7 +388,7 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 ###        MYLLM SETTINGS     ###
 #################################
 myllm_enabled = true
-ai_agent = false # command to toggle aimode in continuous mode
+ai_agent_mode = false # command to toggle aimode in continuous mode
 ai_agent_prefix = "🧠" # prefix use to filter the AI agent 
 
 # [default.myllm.g4f]

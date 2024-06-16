@@ -23,7 +23,7 @@ class AIAgentPlugin(BasePlugin):
         """
         super().__init__()
         self.enabled = settings.myllm_enabled
-        self.ai_agent = settings.ai_agent or False
+        self.ai_agent_mode = settings.ai_agent_mode or False
         self.ai_agent_prefix = settings.ai_agent_prefix or None
         if self.enabled:
             self.ai_agent = MyLLM()
@@ -81,7 +81,7 @@ class AIAgentPlugin(BasePlugin):
         # and the message does not start with ai_agent_prefix character
         # send the result of the chat with the LLM
         # bypassing the command mapping
-        if settings.ai_agent and not msg.startswith(self.ai_agent.ai_agent_prefix):
+        if settings.ai_agent_mode and not msg.startswith(self.ai_agent.ai_agent_prefix):
             await self.send_notification(f"{await self.ai_agent.chat(str(msg))}")
 
     async def ai_agent_switch_command(self) -> str:
@@ -91,6 +91,6 @@ class AIAgentPlugin(BasePlugin):
         to turn off or on the
         ai agent continuous capability
         """
-        self.ai_agent = not self.ai_agent
-        status = "enabled" if self.ai_agent else "disabled"
+        self.ai_agent_mode = not self.ai_agent_mode
+        status = "enabled" if self.ai_agent_mode else "disabled"
         return f"AI Agent is {status}."
