@@ -1,4 +1,3 @@
-from time import sleep
 from unittest.mock import AsyncMock
 
 import pytest
