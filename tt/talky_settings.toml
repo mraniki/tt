@@ -39,7 +39,9 @@ thirdparty_lib_loglevel = "ERROR"
 
 # URL to verify the latest version
 repo = "https://api.github.com/repos/mraniki/tt/releases/latest"
+
 # Enable/Disable Version Check
+# at the start of the bot
 version_check = true
 
 

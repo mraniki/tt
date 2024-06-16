@@ -92,16 +92,6 @@ async def test_start_plugin(caplog):
 
 
 @pytest.mark.asyncio
-async def test_plugin(plugin, plugin_manager):
-    handle_message = AsyncMock()
-    await plugin_manager.process_message(
-        f"{settings.bot_prefix}{settings.bot_command_help}"
-    )
-    assert plugin.should_handle("any message") is True
-    handle_message.assert_awaited_once
-
-
-@pytest.mark.asyncio
 async def test_plugin_notification(plugin, plugin_manager):
     """Test notification"""
     send_notification = AsyncMock()
@@ -146,3 +136,11 @@ async def test_plugin_notify_schedule_task():
     )
 
     plugin.scheduler.add_task.assert_awaited_once
+
+
+@pytest.mark.asyncio
+async def test_should_handle_timeframe():
+    plugin = BasePlugin()
+    assert plugin.should_handle_timeframe() is True
+    settings.trading_control = not settings.trading_control
+    assert plugin.should_handle_timeframe() is False

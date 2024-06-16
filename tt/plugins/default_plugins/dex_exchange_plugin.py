@@ -39,7 +39,7 @@ class DexExchangePlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if not self.should_handle(msg):
+        if self.should_filter(msg):
             return
 
         if await self.fmo.search(msg) and self.should_handle_timeframe():
@@ -49,7 +49,7 @@ class DexExchangePlugin(BasePlugin):
                 if trade:
                     await send_notification(trade)
 
-        if msg.startswith(settings.bot_prefix):
+        if self.should_handle(msg):
             command, *args = msg.split(" ")
             command = command[1:]
 

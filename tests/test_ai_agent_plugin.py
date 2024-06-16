@@ -20,7 +20,6 @@ def test_fixture_plugin():
 async def test_plugin(plugin):
     """Test message handling"""
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_question}")
-    assert plugin.should_handle("any message") is True
     assert plugin.ai_agent is not None
     assert callable(plugin.ai_agent.chat)
 
@@ -65,11 +64,20 @@ async def test_info(plugin):
     assert result is not None
 
 
+@pytest.mark.asyncio
+async def test_parsing_switch(plugin):
+    """Test switch"""
+    result = await plugin.ai_agent_switch_command()
+    assert result is not None
+    assert "AI Agent is" in result
+    assert settings.trading_enabled is True
+
+
 # @pytest.mark.asyncio
 # async def test_llm_chat(plugin):
-#     """Test llm"""
+#     """Test llm chat"""
 #     result = await plugin.ai_agent.chat("tell me a story")
-#     sleep(20)
+#     sleep(10)
 #     print(result)
 #     assert result is not None
 

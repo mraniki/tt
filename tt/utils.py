@@ -44,12 +44,12 @@ async def send_notification(msg):
     https://github.com/caronc/apprise/wiki
 
     """
-    if not settings.apprise_url:
-        logger.warning("No Apprise URL set")
-        return
-    if msg is None:
-        logger.warning("No message to send")
-        return
+    # if not settings.apprise_url:
+    #     logger.warning("No Apprise URL set")
+    #     return
+    # if msg is None:
+    #     logger.warning("No message to send")
+    #     return
     try:
         aobj = Apprise(settings.apprise_url)
         msg_format = settings.apprise_format or NotifyFormat.MARKDOWN
