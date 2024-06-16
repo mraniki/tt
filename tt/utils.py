@@ -44,13 +44,14 @@ async def send_notification(msg):
     https://github.com/caronc/apprise/wiki
 
     """
-    global aobj
+    # global aobj
 
-    if aobj is None:
+    # if aobj is None:
+    try:
         aobj = apprise.Apprise()
         apprise.add(settings.apprise_url)
         msg_format = getattr(apprise.NotifyFormat, settings.apprise_format or None)
-    try:
+
         await aobj.async_notify(body=msg, body_format=msg_format)
     except Exception as error:
         logger.error("Apprise {} {}", error, msg)
