@@ -50,7 +50,7 @@ class CexExchangePlugin(BasePlugin):
             None
 
         """
-        if self.should_not_handle(msg):
+        if self.should_filter(msg):
             return
         if await self.fmo.search(msg) and self.should_handle_timeframe():
             order = await self.fmo.get_order(msg)

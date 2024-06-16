@@ -20,7 +20,7 @@ def test_fixture_plugin():
 async def test_plugin(plugin):
     """Test message handling"""
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_question}")
-    assert plugin.should_not_handle("any message") is False
+    assert plugin.should_filter("any message") is False
     assert plugin.ai_agent is not None
     assert callable(plugin.ai_agent.chat)
 

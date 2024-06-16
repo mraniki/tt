@@ -202,7 +202,7 @@ class BasePlugin:
             logger.debug("Returning False (Plugin not enabled)")
             return False
 
-    def should_not_handle(self, message):
+    def should_filter(self, message):
         """
         Returns True if the plugin should NOT handle the message
         if ignore characters are in the message via bot_ignore
@@ -213,9 +213,8 @@ class BasePlugin:
             bool
 
         """
-        logger.debug(f"Enabled: {self.enabled} Message: {message}")
         if any(char in message for char in self.bot_ignore):
-            logger.debug("Ignore chars in message")
+            logger.debug("Ignore chars in message {}", message)
             return True
 
     async def plugin_notify_schedule_task(
