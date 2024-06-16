@@ -189,26 +189,34 @@ class BasePlugin:
 
         """
         if any(message.startswith(word) for word in self.bot_ignore):
-            logger.debug("Ignore Word in message detected {}", self.bot_ignore)
+            logger.debug("Filtering message {}", self.bot_ignore)
             return True
         else:
             return False
 
     def should_handle(self, message):
         """
-        Returns True if the plugin should handle the message
-        if plugins is not enabled, ignore all messages
-        else, ignore messages that do not have from bot_prefix
-        or bot_ignore
+        Determines if the plugin should handle
+        the message based on certain conditions.
+
         Args:
-            message (str): Message
+            message (str): The message to be checked.
 
         Returns:
-            bool
-
+            bool: True if the plugin should
+            handle the message, False otherwise.
         """
-        if self.enabled:
-          return bool(message.startswith(settings.bot_prefix))
+        if not self.enabled:
+            return False
+        if message.startswith(settings.bot_prefix):
+            return True
+        if any(message.startswith(word) for word in settings.action_identifier):
+            return True
+        if message.startswith(settings.ai_agent_prefix):
+            return True
+        else:
+            logger.debug("Message {}", message)
+            return False
 
     async def plugin_notify_schedule_task(
         self, user_name=None, frequency=8, function=None
