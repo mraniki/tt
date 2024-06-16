@@ -8,7 +8,7 @@
  - run_bot
  - start plugins
  - start_bot
- - dheck version
+ - check version
 
 """
 
@@ -18,24 +18,6 @@ __version__ = "8.2.1"
 import asyncio
 
 import aiohttp
-
-"""
- Talky Utils
-
- This module contains utility functions
- for the TalkyTrader app such as:
-
- - send_notification
- - run_bot
- - start plugins
- - start_bot
- - dheck version
-
-"""
-
-__version__ = "8.1.4"
-
-
 from apprise import Apprise, NotifyFormat
 from iamlistening import Listener
 
