@@ -2,6 +2,23 @@
 
 
 
+## v8.2.1 (2024-06-16)
+
+### Other
+
+* Merge pull request #1627 from mraniki/dev
+
+⬆️ apprise downgrade ([`ce54306`](https://github.com/mraniki/tt/commit/ce54306ec5876e839f41d4318d8c886355b365e4))
+
+### ⬆️
+
+* ⬆️ apprise downgrade ([`759f0b6`](https://github.com/mraniki/tt/commit/759f0b6f1efc95f43b3aab612f12be51efad17d4))
+
+### 🔇
+
+* 🔇 ([`b484f73`](https://github.com/mraniki/tt/commit/b484f73898382508ba3e4a39d24116c586fa13bb))
+
+
 ## v8.2.0 (2024-06-16)
 
 ### Other
