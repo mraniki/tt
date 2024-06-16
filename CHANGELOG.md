@@ -2,6 +2,19 @@
 
 
 
+## v8.1.5 (2024-06-16)
+
+### :recycle:
+
+* :recycle:Refactor FeedPlugin class and methods. ([`92555a3`](https://github.com/mraniki/tt/commit/92555a3fd9c1410486888b982eaa74c660de4c6d))
+
+### Other
+
+* Merge pull request #1624 from mraniki/dev
+
+:recycle: Refactor FeedPlugin class and methods. ([`8ef89d1`](https://github.com/mraniki/tt/commit/8ef89d105ab1c3c30bdc17082adb25940cf7ce37))
+
+
 ## v8.1.4 (2024-06-16)
 
 ### Other
