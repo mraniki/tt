@@ -2,6 +2,25 @@
 
 
 
+## v8.1.6 (2024-06-16)
+
+### Other
+
+* Merge pull request #1625 from mraniki/dev
+
+🚑: plugin_manager.py order handling error ([`761994f`](https://github.com/mraniki/tt/commit/761994f0a8cf943de760b9179ba69046274de8db))
+
+* update plugin_manager.py ([`3ca3370`](https://github.com/mraniki/tt/commit/3ca3370d56b683da217f174a181a29427de36c83))
+
+### ⬆️
+
+* ⬆️ ([`35a489a`](https://github.com/mraniki/tt/commit/35a489af6892ceb7f8d92e00d29973cea69f64f0))
+
+### 🚑
+
+* 🚑: plugin_manager.py order handling error ([`7452669`](https://github.com/mraniki/tt/commit/745266910bf718b3e90cc17ea94a13646075d92a))
+
+
 ## v8.1.5 (2024-06-16)
 
 ### :recycle:
