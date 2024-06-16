@@ -91,19 +91,6 @@ async def test_start_plugin(caplog):
     assert "plugin enabled" in caplog.text
 
 
-# @pytest.mark.asyncio
-# async def test_plugin(plugin, plugin_manager):
-#     await plugin_manager.process_message(
-#         f"{settings.bot_prefix}{settings.bot_command_help}"
-#     )
-#     assert plugin.should_filter("ℹ️") is True
-#     assert plugin.should_filter("This is a valid message") is False
-#     assert (
-#         plugin.should_handle(f"{settings.bot_prefix}{settings.bot_command_help}")
-#         is True
-#     )
-
-
 @pytest.mark.asyncio
 async def test_plugin_notification(plugin, plugin_manager):
     """Test notification"""

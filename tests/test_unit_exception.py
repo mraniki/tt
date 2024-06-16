@@ -14,15 +14,6 @@ from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
 from tt.utils import start_bot
 
-# @pytest.fixture(scope="session", autouse=True)
-# def set_test_settings():
-#     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
-
-
-# def test_dynaconf_is_in_testing():
-#     print(settings)
-#     assert settings.VALUE == "On Testing"
-
 
 @pytest.fixture(name="message")
 def message_test():

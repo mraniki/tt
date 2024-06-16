@@ -44,7 +44,7 @@ async def test_parse_info(plugin):
 async def test_parse_balance(plugin):
     """Test balance"""
     plugin.exchange.get_balances = AsyncMock()
-    await plugin.handle_message("/bal")
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_bal}")
     plugin.exchange.get_balances.assert_awaited
 
 
@@ -52,7 +52,7 @@ async def test_parse_balance(plugin):
 async def test_parse_position(plugin):
     """Test position"""
     plugin.exchange.get_positions = AsyncMock()
-    await plugin.handle_message("/pos")
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_pos}")
     plugin.exchange.get_positions.assert_awaited
 
 
@@ -60,7 +60,10 @@ async def test_parse_position(plugin):
 async def test_parse_quote(plugin, caplog):
     """Test parse_message balance"""
     plugin.exchange.get_quotes = AsyncMock()
-    await plugin.handle_message("/q WBTC")
+    # await plugin.handle_message("/q WBTC")
+    await plugin.handle_message(
+        f"{settings.bot_prefix}{settings.bot_command_quote} WBTC"
+    )
     plugin.exchange.get_quotes.assert_awaited
 
 
