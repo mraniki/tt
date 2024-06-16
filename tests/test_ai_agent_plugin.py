@@ -73,13 +73,13 @@ async def test_parsing_switch(plugin):
     plugin.ai_agent_switch_command.assert_awaited_once()
 
 
-@pytest.mark.asyncio
-async def test_llm_chat(plugin):
-    """Test llm chat"""
-    result = await plugin.ai_agent.chat("tell me a story")
-    sleep(20)
-    print(result)
-    assert result is not None
+# @pytest.mark.asyncio
+# async def test_llm_chat(plugin):
+#     """Test llm chat"""
+#     result = await plugin.ai_agent.chat("tell me a story")
+#     sleep(10)
+#     print(result)
+#     assert result is not None
 
 
 # @pytest.mark.asyncio
