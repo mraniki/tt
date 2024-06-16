@@ -11,11 +11,12 @@
 
 #     def __init__(self):
 #         logger.debug("Notifier initialized")
-#         self.aobj = apprise.Apprise()
 
-#         self.apprise_format = getattr(apprise.NotifyFormat, settings.apprise_format)
+#         self.apprise_format = settings.apprise_format or NotifyFormat.MARKDOWN
 #         self.apprise_url = settings.apprise_url
 
+# #        self.aobj = apprise.Apprise(settings.apprise_url)
+#         self.aobj = apprise.Apprise()
 #         self.aobj.add(self.apprise_url)
 
 #     async def notify(self, msg):
