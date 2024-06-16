@@ -207,7 +207,8 @@ class BasePlugin:
             bool
 
         """
-        return bool(message.startswith(settings.bot_prefix))
+        if self.enabled:
+          return bool(message.startswith(settings.bot_prefix))
 
     async def plugin_notify_schedule_task(
         self, user_name=None, frequency=8, function=None
