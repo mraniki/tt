@@ -82,7 +82,7 @@ class HelperPlugin(BasePlugin):
         """
         if self.should_filter(msg):
             return
-        if msg.startswith(settings.bot_prefix):
+        if self.should_handle(msg):
             command, *args = msg.split(" ")
             command = command[1:]
 

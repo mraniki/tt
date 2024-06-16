@@ -166,7 +166,7 @@ class BasePlugin:
         self.enabled = False
         self.scheduler = scheduler
         self.bot_prefix = settings.bot_prefix
-        self.bot_ignore = list(settings.bot_ignore)
+        self.bot_ignore = settings.bot_ignore
 
     async def start(self):
         pass
@@ -176,31 +176,6 @@ class BasePlugin:
 
     async def send_notification(self, message):
         pass
-
-    def should_handle(self, message):
-        """
-        Returns True if the plugin should handle the message
-        if plugins is not enabled, ignore all messages
-        else, ignore messages that do not have from bot_prefix
-        or bot_ignore
-        Args:
-            message (str): Message
-
-        Returns:
-            bool
-
-        """
-        if self.enabled:
-            logger.debug(f"Enabled: {self.enabled} Message: {message}")
-            if any(char not in message for char in self.bot_ignore):
-                logger.debug("Returning True No ignore chars")
-                return True
-            else:
-                logger.debug("Returning False")
-                return False
-        else:
-            logger.debug("Returning False (Plugin not enabled)")
-            return False
 
     def should_filter(self, message):
         """
@@ -213,9 +188,25 @@ class BasePlugin:
             bool
 
         """
-        if any(char in message for char in self.bot_ignore):
-            logger.debug("Ignore chars in message {}", message)
+        if any(word in message for word in self.bot_ignore):
+            logger.debug(f"bot_ignore words in message: {self.bot_ignore}")
             return True
+        else:
+            return False
+
+    def should_handle(self, message):
+        """
+        Returns True if the plugin should handle the message
+        if the message starts with bot_prefix for commands
+        handled by the plugin
+        Args:
+            message (str): Message
+
+        Returns:
+            bool
+
+        """
+        return bool(message.startswith(settings.bot_prefix)) if self.enabled else False
 
     async def plugin_notify_schedule_task(
         self, user_name=None, frequency=8, function=None

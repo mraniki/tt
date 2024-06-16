@@ -49,7 +49,7 @@ class DexExchangePlugin(BasePlugin):
                 if trade:
                     await send_notification(trade)
 
-        if msg.startswith(settings.bot_prefix):
+        if self.should_handle(msg):
             command, *args = msg.split(" ")
             command = command[1:]
 

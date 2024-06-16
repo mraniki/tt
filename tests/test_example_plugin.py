@@ -93,12 +93,10 @@ async def test_start_plugin(caplog):
 
 @pytest.mark.asyncio
 async def test_plugin(plugin, plugin_manager):
-    handle_message = AsyncMock()
     await plugin_manager.process_message(
         f"{settings.bot_prefix}{settings.bot_command_help}"
     )
     assert plugin.should_filter("any message") is False
-    handle_message.assert_awaited_once
 
 
 @pytest.mark.asyncio
