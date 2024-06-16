@@ -200,23 +200,30 @@ class BasePlugin:
         the message based on certain conditions.
 
         Args:
+            message (str): The message
+            to be checked.
+
+        Returns:
+            bool: True if the plugin should
+            handle the message, False otherwise.
+        """
+        if self.enabled:
+            return True
+
+    def is_command_to_handle(self, message):
+        """
+        Determines if the plugin should handle
+        the message based on certain conditions.
+
+        Args:
             message (str): The message to be checked.
 
         Returns:
             bool: True if the plugin should
             handle the message, False otherwise.
         """
-        if not self.enabled:
-            return False
         if message.startswith(settings.bot_prefix):
             return True
-        if any(message.startswith(word) for word in settings.action_identifier):
-            return True
-        if message.startswith(settings.ai_agent_prefix):
-            return True
-        else:
-            logger.debug("Not handling message {}", message)
-            return False
 
     async def plugin_notify_schedule_task(
         self, user_name=None, frequency=8, function=None
@@ -317,7 +324,7 @@ class BasePlugin:
             bool
         """
         if settings.trading_control:
-            logger.debug("Trading control enabled")
+            logger.info("Trading control enabled")
             current_time = datetime.now().time()
             current_day = datetime.now().strftime("%a").lower()
 

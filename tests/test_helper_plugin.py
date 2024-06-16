@@ -28,6 +28,10 @@ async def test_plugin(plugin):
         plugin.should_handle(f"{settings.bot_prefix}{settings.bot_command_help}")
         is True
     )
+    assert (
+        plugin.is_command_to_handle(f"{settings.bot_prefix}{settings.bot_command_help}")
+        is True
+    )
 
 
 @pytest.mark.asyncio
