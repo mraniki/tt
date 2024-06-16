@@ -67,9 +67,10 @@ async def test_info(plugin):
 @pytest.mark.asyncio
 async def test_parsing_switch(plugin):
     """Test switch"""
-    plugin.ai_agent_switch_command = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_aimode}")
-    plugin.ai_agent_switch_command.assert_awaited_once()
+    result = await plugin.ai_agent_switch_command()
+    assert result is not None
+    assert "AI Agent is" in result
+    assert settings.trading_enabled is True
 
 
 # @pytest.mark.asyncio
