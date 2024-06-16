@@ -2,6 +2,45 @@
 
 
 
+## v8.2.0 (2024-06-16)
+
+### Other
+
+* Merge pull request #1626 from mraniki/dev
+
+💄 Refactoring Notifier &amp; apprise upgrade ([`4be866c`](https://github.com/mraniki/tt/commit/4be866cac8fd24fe25273dde71a585c8a4a5c868))
+
+### ♻️
+
+* ♻️ ([`1b3db5e`](https://github.com/mraniki/tt/commit/1b3db5eb59df456e79204002bf991851b0cc3f90))
+
+* ♻️ global aobj ([`21958a9`](https://github.com/mraniki/tt/commit/21958a97118ff05507e7ebecbe0a6c9bd91e4a5a))
+
+### ⬆️
+
+* ⬆️ ([`33b2909`](https://github.com/mraniki/tt/commit/33b2909075db0272dbb56352fd20bb8af91976aa))
+
+### 🎨
+
+* ✅ Unit Test 🎨 ([`f6c2747`](https://github.com/mraniki/tt/commit/f6c27472cfd977cfaeec8deb1208edd489183f5e))
+
+### 🐛
+
+* 🐛 ([`177245c`](https://github.com/mraniki/tt/commit/177245c66411c39b61ba2190dff8ea78682287e5))
+
+* 🐛 ([`7e13acf`](https://github.com/mraniki/tt/commit/7e13acfb5c3779198cd1d69e35db1ee62643e5cc))
+
+* 🐛 ([`4c49427`](https://github.com/mraniki/tt/commit/4c49427b773f9f6a4597ccb492a76a8d73e6f735))
+
+### 💄
+
+* 💄 Refactoring Notifier &amp; apprise upgrade ([`259e5b1`](https://github.com/mraniki/tt/commit/259e5b1f0d2dff22740898d65c9bae70cde2d707))
+
+### 🔊
+
+* 🔊 update plugin_manager.py ([`d971478`](https://github.com/mraniki/tt/commit/d9714787c66a4ce004a56356bfd3ae343dd5a340))
+
+
 ## v8.1.6 (2024-06-16)
 
 ### Other
