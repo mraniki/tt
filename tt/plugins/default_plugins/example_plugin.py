@@ -23,6 +23,7 @@ class ExamplePlugin(BasePlugin):
 
     async def send_notification(self, message):
         """Sends a notification"""
+        global aobj
         if self.enabled:
             await send_notification(message)
 

@@ -35,6 +35,7 @@ class DexExchangePlugin(BasePlugin):
     async def send_notification(self, message):
         """Sends notification"""
         # if self.enabled:
+        global aobj
         await send_notification(message)
 
     async def handle_message(self, msg):
