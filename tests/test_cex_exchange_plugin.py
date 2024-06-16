@@ -52,7 +52,7 @@ async def test_plugin(plugin):
 async def test_parse_info(plugin):
     """Test info"""
     plugin.exchange.get_info = AsyncMock()
-    await plugin.handle_message("/info")
+    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_info}")
     plugin.exchange.get_info.assert_awaited()
 
 

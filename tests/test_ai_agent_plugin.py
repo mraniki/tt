@@ -39,14 +39,14 @@ async def test_bot_ignore(plugin):
     assert result is None
 
 
-# @pytest.mark.asyncio
-# async def test_parsing_ai_agent(plugin):
-#     """Test scr"""
-#     plugin.ai_agent.chat = AsyncMock()
-#     await plugin.handle_message(
-#         f"{settings.bot_prefix}{settings.bot_command_aichat} hello"
-#     )
-#     await plugin.ai_agent.chat.assert_awaited_once()
+@pytest.mark.asyncio
+async def test_parsing_ai_agent(plugin):
+    """Test scr"""
+    plugin.ai_agent.chat = AsyncMock()
+    await plugin.handle_message(
+        f"{settings.bot_prefix}{settings.bot_command_aichat} hello"
+    )
+    await plugin.ai_agent.chat.assert_awaited_once()
 
 
 @pytest.mark.asyncio
