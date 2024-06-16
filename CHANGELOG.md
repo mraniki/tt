@@ -2,6 +2,23 @@
 
 
 
+## v8.2.4 (2024-06-16)
+
+### :recycle:
+
+* :recycle: Refactor DexExchangePlugin to handle trading restrictions ([`ece9405`](https://github.com/mraniki/tt/commit/ece9405b73628933e91cfdb45d704ec5c74ae054))
+
+### Other
+
+* Merge pull request #1630 from mraniki/dev
+
+♻️ Refactor DexExchangePlugin to handle trading restrictions ([`05d224b`](https://github.com/mraniki/tt/commit/05d224bff16970c8e27eb2c66c8efa5586c9550f))
+
+* Remove unused bot_ignore emojis from settings. ([`ffa3319`](https://github.com/mraniki/tt/commit/ffa33197acb769c66b6a743f326536fe11a4f90d))
+
+* Add log levels for openai and httpcore libraries. ([`cda2f3a`](https://github.com/mraniki/tt/commit/cda2f3ac9616fd2267bd1b792798b1451de8e44c))
+
+
 ## v8.2.3 (2024-06-16)
 
 ### :ambulance:
