@@ -2,6 +2,23 @@
 
 
 
+## v8.2.3 (2024-06-16)
+
+### :ambulance:
+
+* :ambulance:Refactor AI agent settings and add utils package. ([`0ef1544`](https://github.com/mraniki/tt/commit/0ef1544d1fae0a57fb562786094b9077260ddf2e))
+
+### Other
+
+* Merge pull request #1629 from mraniki/dev
+
+:ambulance: Refactor AI agent settings and add utils package. ([`ca7fc07`](https://github.com/mraniki/tt/commit/ca7fc0710a3c92a3043f63c1d00788b1e1077c63))
+
+* Remove whitespace in __init__.py file ([`49401d9`](https://github.com/mraniki/tt/commit/49401d920f2fb56998517a165ca0e526b3cd13f2))
+
+* Remove unnecessary whitespace in __init__.py file ([`295bcbe`](https://github.com/mraniki/tt/commit/295bcbe7ac788fecda7063809ac156a379282d8a))
+
+
 ## v8.2.2 (2024-06-16)
 
 ### Other
