@@ -50,7 +50,7 @@ class AIAgentPlugin(BasePlugin):
         Returns:
             None
         """
-        if not self.should_handle(msg):
+        if self.should_not_handle(msg):
             # If the the message should not be handled, return
             return
 

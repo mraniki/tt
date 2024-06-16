@@ -39,7 +39,7 @@ class DexExchangePlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """Handles incoming messages"""
-        if not self.should_handle(msg):
+        if self.should_not_handle(msg):
             return
 
         if await self.fmo.search(msg) and self.should_handle_timeframe():

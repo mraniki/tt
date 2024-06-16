@@ -33,7 +33,7 @@ class ExamplePlugin(BasePlugin):
         Args:
             msg (str): The incoming message.
         """
-        if not self.should_handle(msg):
+        if self.should_not_handle(msg):
             return
         if msg.startswith(settings.bot_prefix):
             command, *args = msg.split(" ")
