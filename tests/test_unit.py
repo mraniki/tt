@@ -91,7 +91,6 @@ async def test_send_notification(caplog, message):
     await send_notification(message)
     assert "Loaded Discord" in caplog.text
 
-
 @pytest.mark.asyncio
 async def test_start_plugins():
     plugin_manager = AsyncMock(spec=PluginManager)
