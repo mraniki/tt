@@ -136,3 +136,11 @@ async def test_plugin_notify_schedule_task():
     )
 
     plugin.scheduler.add_task.assert_awaited_once
+
+
+@pytest.mark.asyncio
+async def test_should_handle_timeframe():
+    plugin = BasePlugin()
+    assert plugin.should_handle_timeframe() is True
+    settings.trading_control = not settings.trading_control
+    assert plugin.should_handle_timeframe() is False
