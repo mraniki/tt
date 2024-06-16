@@ -46,7 +46,7 @@ async def test_parsing_ai_agent(plugin):
     await plugin.handle_message(
         f"{settings.bot_prefix}{settings.bot_command_aichat} hello"
     )
-    await plugin.ai_agent.chat.assert_awaited_once()
+    plugin.ai_agent.chat.assert_awaited_once()
 
 
 @pytest.mark.asyncio
