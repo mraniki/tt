@@ -77,3 +77,5 @@ async def test_parse_valid_order(plugin, order_message):
     plugin.fmo.search.assert_awaited_once
     plugin.fmo.get_order.assert_awaited
     plugin.exchange.submit_order.assert_awaited
+    plugin.should_handle_timeframe.assert_awaited
+    plugin.should_filter.assert_awaited
