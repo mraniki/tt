@@ -188,8 +188,8 @@ class BasePlugin:
             bool
 
         """
-        if any(word in message for word in self.bot_ignore):
-            logger.debug(f"bot_ignore words in message: {self.bot_ignore}")
+        if any(message.startswith(word) for word in self.bot_ignore):
+            logger.debug("Ignore Word in message detected {}", self.bot_ignore)
             return True
         else:
             return False
@@ -197,8 +197,9 @@ class BasePlugin:
     def should_handle(self, message):
         """
         Returns True if the plugin should handle the message
-        if the message starts with bot_prefix for commands
-        handled by the plugin
+        if plugins is not enabled, ignore all messages
+        else, ignore messages that do not have from bot_prefix
+        or bot_ignore
         Args:
             message (str): Message
 
@@ -206,7 +207,7 @@ class BasePlugin:
             bool
 
         """
-        return bool(message.startswith(settings.bot_prefix)) if self.enabled else False
+        return bool(message.startswith(settings.bot_prefix))
 
     async def plugin_notify_schedule_task(
         self, user_name=None, frequency=8, function=None

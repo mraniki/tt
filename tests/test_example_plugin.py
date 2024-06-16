@@ -96,7 +96,9 @@ async def test_plugin(plugin, plugin_manager):
     await plugin_manager.process_message(
         f"{settings.bot_prefix}{settings.bot_command_help}"
     )
-    assert plugin.should_filter("any message") is False
+    assert plugin.should_filter("ℹ️") is True
+    assert plugin.should_filter("This is a valid message") is False
+    assert plugin.should_handle("/info") is True
 
 
 @pytest.mark.asyncio
