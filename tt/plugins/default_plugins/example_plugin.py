@@ -35,7 +35,7 @@ class ExamplePlugin(BasePlugin):
         """
         if self.should_filter(msg):
             return
-        if self.should_handle(msg):
+        if self.is_command_to_handle(msg):
             command, *args = msg.split(" ")
             command = command[1:]
 

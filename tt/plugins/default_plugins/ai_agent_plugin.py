@@ -62,7 +62,7 @@ class AIAgentPlugin(BasePlugin):
         # and sends the result of the corresponding function.
         # If it's not, it checks if the ai_agent setting is enabled
         # and sends the result of the chat with the LLM.
-        if self.should_handle(msg):
+        if self.is_command_to_handle(msg):
             command, *args = msg.split(" ")
             command = command[1:]
 
