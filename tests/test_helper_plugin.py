@@ -20,7 +20,7 @@ def test_fixture_plugin():
 async def test_plugin(plugin):
     """Test message handling"""
     await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
-    assert plugin.should_handle("any message") is False
+    assert plugin.should_not_handle("any message") is False
 
 
 @pytest.mark.asyncio
