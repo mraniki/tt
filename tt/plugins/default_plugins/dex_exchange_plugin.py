@@ -42,13 +42,6 @@ class DexExchangePlugin(BasePlugin):
         if self.should_filter(msg):
             return
 
-        if await self.fmo.search(msg) and self.should_handle_timeframe():
-            order = await self.fmo.get_order(msg)
-            if order and settings.trading_enabled:
-                trade = await self.exchange.submit_order(order)
-                if trade:
-                    await send_notification(trade)
-
         if self.is_command_to_handle(msg):
             command, *args = msg.split(" ")
             command = command[1:]
@@ -63,3 +56,13 @@ class DexExchangePlugin(BasePlugin):
             if command in command_mapping:
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
+
+        if not self.should_handle_timeframe():
+            await send_notification("⚠️ Trading restricted")
+
+        if await self.fmo.search(msg) and self.should_handle_timeframe():
+              order = await self.fmo.get_order(msg)
+              if order and settings.trading_enabled:
+                  trade = await self.exchange.submit_order(order)
+                  if trade:
+                      await send_notification(trade)
