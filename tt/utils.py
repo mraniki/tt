@@ -18,7 +18,7 @@ __version__ = "8.1.6"
 import asyncio
 
 import aiohttp
-from apprise import Apprise, NotifyFormat
+import apprise
 from iamlistening import Listener
 
 from tt.config import logger, settings
@@ -44,15 +44,15 @@ async def send_notification(msg):
     https://github.com/caronc/apprise/wiki
 
     """
-    # if not settings.apprise_url:
-    #     logger.warning("No Apprise URL set")
-    #     return
-    # if msg is None:
-    #     logger.warning("No message to send")
-    #     return
+    # if aobj is None:
+    # aobj = apprise.Apprise(settings.apprise_url)
+    # msg_format = settings.apprise_format or NotifyFormat.MARKDOWN
     try:
-        aobj = Apprise(settings.apprise_url)
-        msg_format = settings.apprise_format or NotifyFormat.MARKDOWN
+        aobj = apprise.Apprise()
+        apprise.add(settings.apprise_url)
+        msg_format = getattr(apprise.NotifyFormat, settings.apprise_format)
+        # else:
+
         await aobj.async_notify(body=msg, body_format=msg_format)
     except Exception as error:
         logger.error("Apprise {} {}", error, msg)
@@ -72,6 +72,7 @@ async def run_bot():
     if settings.version_check:
         await check_version()
     listener = Listener()
+    # notifier = apprise.Apprise()
     plugin_manager = PluginManager()
     await asyncio.gather(start_bot(listener, plugin_manager))
 
