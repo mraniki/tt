@@ -6,15 +6,11 @@
 __version__ = "8.2.4"
 
 
-import asyncio
-
 import aiohttp
 
 from tt.config import logger, settings
-from tt.plugins.plugin_manager import PluginManager
-#from tt.utils import Notifier
 
-
+# from tt.utils import Notifier
 
 
 async def check_version():

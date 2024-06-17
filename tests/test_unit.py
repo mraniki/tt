@@ -12,8 +12,8 @@ from iamlistening import Listener
 from tt.app import app
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
-from tt.utils.utils import  send_notification, start_bot, start_plugins
-from tt.utils.version import __version__, check_version
+from tt.utils.utils import send_notification, start_bot, start_plugins
+from tt.utils.version import check_version
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -91,6 +91,7 @@ async def test_check_version_exception():
 async def test_send_notification(caplog, message):
     await send_notification(message)
     assert "Loaded Discord" in caplog.text
+
 
 @pytest.mark.asyncio
 async def test_start_plugins():
