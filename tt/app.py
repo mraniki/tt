@@ -105,8 +105,8 @@ async def webhook(request: Request):
     """
     data = await request.body()
     logger.debug("Webhook request received {}", data)
-    Notifier()
-    await Notifier.notify(data)
+    notifier=Notifier()
+    await notifier.notify(data)
 
     if settings.forwarder:
         logger.debug("Forwarding {} to {}", data, str(settings.forwarder_url))
