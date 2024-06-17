@@ -12,7 +12,8 @@ from iamlistening import Listener
 from tt.app import app
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
-from tt.utils.utils import check_version, send_notification, start_bot, start_plugins
+from tt.utils.utils import  send_notification, start_bot, start_plugins
+from tt.utils.version import check_version,
 
 
 @pytest.fixture(scope="session", autouse=True)
