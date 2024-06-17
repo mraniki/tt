@@ -7,7 +7,7 @@ from myllm import MyLLM
 
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
-from tt.utils import send_notification
+#from tt.utils import send_notification
 
 
 class AIAgentPlugin(BasePlugin):

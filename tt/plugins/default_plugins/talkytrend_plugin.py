@@ -2,7 +2,7 @@ from talkytrend import TalkyTrend
 
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
-from tt.utils import send_notification
+#from tt.utils import send_notification
 
 
 class TalkyTrendPlugin(BasePlugin):
@@ -40,4 +40,4 @@ class TalkyTrendPlugin(BasePlugin):
 
             if command in command_mapping:
                 function = command_mapping[command]
-                await self.send_notification(f"{await function()}")
+                await self.notifier.notify(f"{await function()}")
