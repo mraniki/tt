@@ -20,10 +20,6 @@ class TalkyTrendPlugin(BasePlugin):
                 user_name="talky_monitor", function=self.trend.monitor
             )
 
-    async def send_notification(self, message):
-        """Sends a notification"""
-        if self.enabled:
-            await send_notification(message)
 
     async def handle_message(self, msg):
         """Handles incoming messages"""

@@ -6,6 +6,7 @@ from datetime import datetime
 from asyncz.triggers import CronTrigger, IntervalTrigger
 
 from tt.config import logger, scheduler, settings
+from tt.utils import Notifier
 
 
 class PluginManager:
@@ -164,6 +165,7 @@ class BasePlugin:
 
     def __init__(self):
         self.enabled = False
+        self.notifier = Notifier()
         self.scheduler = scheduler
         self.bot_prefix = settings.bot_prefix
         self.bot_ignore = settings.bot_ignore
@@ -175,7 +177,8 @@ class BasePlugin:
         pass
 
     async def send_notification(self, message):
-        pass
+        if self.enabled:
+            await self.notifier.notify(message)
 
     def should_filter(self, message):
         """

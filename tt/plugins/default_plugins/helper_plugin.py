@@ -53,10 +53,10 @@ class HelperPlugin(BasePlugin):
         """Starts the plugin"""
         await self.send_notification(await self.get_helper_info())
 
-    async def send_notification(self, message):
-        """Sends a notification"""
-        if self.enabled:
-            await send_notification(message)
+    # async def send_notification(self, message):
+    #     """Sends a notification"""
+    #     if self.enabled:
+    #         await send_notification(message)
 
     async def handle_message(self, msg):
         """
@@ -113,7 +113,6 @@ class HelperPlugin(BasePlugin):
         and the list of enabled plugins
         and options
         """
-        # return f"ℹ️ {settings.bot_name} {__version__}"
         return (
             f"ℹ️ {settings.bot_name} {__version__}\n"
             f"plugins: {settings.plugin_directory}\n"

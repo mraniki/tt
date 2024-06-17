@@ -4,7 +4,7 @@ from loguru import logger
 
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
-from tt.utils import send_notification
+from tt.utils import Notifier
 
 
 class CexExchangePlugin(BasePlugin):
@@ -33,10 +33,6 @@ class CexExchangePlugin(BasePlugin):
         self.fmo = FindMyOrder()
         self.exchange = CexTrader()
 
-    async def send_notification(self, message):
-        """Sends a notification"""
-        if self.enabled:
-            await send_notification(message)
 
     async def handle_message(self, msg):
         """
@@ -52,13 +48,6 @@ class CexExchangePlugin(BasePlugin):
         """
         if self.should_filter(msg):
             return
-        if await self.fmo.search(msg) and self.should_handle_timeframe():
-            order = await self.fmo.get_order(msg)
-            if order and settings.trading_enabled:
-                trade = await self.exchange.submit_order(order)
-                logger.debug("trade {}", trade)
-                if trade:
-                    await send_notification(trade)
 
         if self.is_command_to_handle(msg):
             command, *args = msg.split(" ")
@@ -74,3 +63,14 @@ class CexExchangePlugin(BasePlugin):
             if command in command_mapping:
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
+
+        if not self.should_handle_timeframe():
+             await self.send_notification("⚠️ Trading restricted")
+
+        if await self.fmo.search(msg) and self.should_handle_timeframe():
+            order = await self.fmo.get_order(msg)
+            if order and settings.trading_enabled:
+                trade = await self.exchange.submit_order(order)
+                logger.debug("trade {}", trade)
+                if trade:
+                    await self.send_notification(trade)

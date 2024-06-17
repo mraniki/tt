@@ -28,10 +28,6 @@ class AIAgentPlugin(BasePlugin):
         if self.enabled:
             self.ai_agent = MyLLM()
 
-    async def send_notification(self, message):
-        """Sends a notification"""
-        if self.enabled:
-            await send_notification(message)
 
     async def handle_message(self, msg):
         """
