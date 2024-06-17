@@ -187,7 +187,7 @@ def loguru_setup():
         "peewee": settings.thirdparty_lib_loglevel,
         "httpx": settings.thirdparty_lib_loglevel,
         "openai": settings.thirdparty_lib_loglevel,
-        "httpcore": settings.thirdparty_lib_loglevel, 
+        "httpcore": settings.thirdparty_lib_loglevel,
     }
     logging.basicConfig(handlers=[InterceptHandler()], level=0, force=True)
     loguru_logger.add(

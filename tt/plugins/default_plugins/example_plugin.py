@@ -20,7 +20,6 @@ class ExamplePlugin(BasePlugin):
         if self.enabled:
             logger.debug("example plugin enabled")
 
-
     async def handle_message(self, msg):
         """
         Handles incoming messages.

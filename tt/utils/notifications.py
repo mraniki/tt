@@ -17,8 +17,6 @@ class Notifier:
         self.apprise_url = settings.apprise_url
 
         self.aobj = apprise.Apprise(settings.apprise_url)
-        # self.aobj = apprise.Apprise()
-        # self.aobj.add(self.apprise_url)
 
     async def notify(self, msg):
         await self.aobj.async_notify(body=msg, body_format=self.msg_format)

@@ -27,7 +27,6 @@ class AIAgentPlugin(BasePlugin):
         if self.enabled:
             self.ai_agent = MyLLM()
 
-
     async def handle_message(self, msg):
         """
         Handles incoming messages.

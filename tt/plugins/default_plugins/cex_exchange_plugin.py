@@ -32,7 +32,6 @@ class CexExchangePlugin(BasePlugin):
         self.fmo = FindMyOrder()
         self.exchange = CexTrader()
 
-
     async def handle_message(self, msg):
         """
         Handles incoming messages
@@ -64,7 +63,7 @@ class CexExchangePlugin(BasePlugin):
                 await self.send_notification(f"{await function()}")
 
         if not self.should_handle_timeframe():
-             await self.send_notification("⚠️ Trading restricted")
+            await self.send_notification("⚠️ Trading restricted")
 
         if await self.fmo.search(msg) and self.should_handle_timeframe():
             order = await self.fmo.get_order(msg)

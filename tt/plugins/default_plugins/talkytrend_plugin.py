@@ -3,6 +3,7 @@ from talkytrend import TalkyTrend
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
 
+
 class TalkyTrendPlugin(BasePlugin):
 
     def __init__(self):
@@ -17,7 +18,6 @@ class TalkyTrendPlugin(BasePlugin):
             await self.plugin_notify_cron_task(
                 user_name="talky_monitor", function=self.trend.monitor
             )
-
 
     async def handle_message(self, msg):
         """Handles incoming messages"""

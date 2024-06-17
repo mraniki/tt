@@ -8,17 +8,12 @@
  - run_bot
  - start plugins
  - start_bot
- - check version
 
 """
-
-#__version__ = "8.2.4"
-
 
 import asyncio
 
 import aiohttp
-from apprise import Apprise, NotifyFormat
 from iamlistening import Listener
 
 from tt.config import logger, settings

@@ -31,7 +31,6 @@ class DexExchangePlugin(BasePlugin):
         self.fmo = FindMyOrder()
         self.exchange = DexSwap()
 
-
     async def handle_message(self, msg):
         """Handles incoming messages"""
         if self.should_filter(msg):

@@ -28,7 +28,6 @@ from tt.utils.utils import run_bot
 from tt.utils.version import __version__
 
 
-
 @asynccontextmanager
 async def lifespan(app):
     """
@@ -105,7 +104,7 @@ async def webhook(request: Request):
     """
     data = await request.body()
     logger.debug("Webhook request received {}", data)
-    notifier=Notifier()
+    notifier = Notifier()
     await notifier.notify(data)
 
     if settings.forwarder:
