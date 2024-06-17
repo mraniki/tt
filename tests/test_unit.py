@@ -12,7 +12,7 @@ from iamlistening import Listener
 from tt.app import app
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
-from tt.utils.utils import send_notification, start_bot, start_plugins
+from tt.utils.utils import start_bot, start_plugins
 from tt.utils.version import check_version
 
 
@@ -85,12 +85,6 @@ async def test_check_version(caplog):
 async def test_check_version_exception():
     with pytest.raises(Exception):
         await check_version("123")
-
-
-@pytest.mark.asyncio
-async def test_send_notification(caplog, message):
-    await send_notification(message)
-    assert "Loaded Discord" in caplog.text
 
 
 @pytest.mark.asyncio

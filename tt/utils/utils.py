@@ -17,31 +17,29 @@ from iamlistening import Listener
 
 from tt.config import logger, settings
 from tt.plugins.plugin_manager import PluginManager
-from tt.utils.notifications import Notifier
 from tt.utils.version import check_version
 
+# async def send_notification(msg):
+#     """
+#     💬 Notification via Apprise.
+#     Apprise endpoint URL can be a URL
+#     for the chat, an URL to an Apprise config
+#     or a URL to the Apprise API endpoint
+#     apprise_url = "tgram://BOTTOKEN/CHANNEL"
+#     apprise_url = "discord://token1/channel"
 
-async def send_notification(msg):
-    """
-    💬 Notification via Apprise.
-    Apprise endpoint URL can be a URL
-    for the chat, an URL to an Apprise config
-    or a URL to the Apprise API endpoint
-    apprise_url = "tgram://BOTTOKEN/CHANNEL"
-    apprise_url = "discord://token1/channel"
+#     Args:
+#         msg (str): Message
 
-    Args:
-        msg (str): Message
+#     Returns:
+#         None
 
-    Returns:
-        None
+#     More info
+#     https://github.com/caronc/apprise/wiki
 
-    More info
-    https://github.com/caronc/apprise/wiki
-
-    """
-    notifier = Notifier()
-    await notifier.notify(msg)
+#     """
+#     notifier = Notifier()
+#     await notifier.notify(msg)
 
 
 async def run_bot():
