@@ -108,7 +108,7 @@ async def test_timeframe_Control(plugin, order_message):
     plugin.fmo.search = AsyncMock()
     plugin.fmo.get_order = AsyncMock()
     plugin.exchange.submit_order = AsyncMock()
-    plugin.send_notification = AsyncMock()
+    plugin.send_notification = AsyncMock("⚠️ Trading restricted")
     plugin.should_handle_timeframe = AsyncMock(return_value=False)
     await plugin.handle_message(order_message)
     plugin.send_notification.assert_awaited_once_with("⚠️ Trading restricted")
