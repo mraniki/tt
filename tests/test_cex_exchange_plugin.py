@@ -103,7 +103,7 @@ async def test_parse_ignore(plugin):
 
 
 @pytest.mark.asyncio
-async def test_timeframe_Control(plugin, order_message, caplog):
+async def test_timeframe_Control(plugin, order_message):
     """Search Testing"""
     plugin.fmo.search = AsyncMock()
     plugin.fmo.get_order = AsyncMock()
@@ -111,5 +111,4 @@ async def test_timeframe_Control(plugin, order_message, caplog):
     plugin.send_notification = AsyncMock()
     plugin.should_handle_timeframe = AsyncMock(return_value=False)
     await plugin.handle_message(order_message)
-    plugin.send_notification.assert_awaited_once()
-    assert "⚠️ Trading restricted" in caplog.text
+    plugin.send_notification.assert_awaited_once_with("⚠️ Trading restricted")
