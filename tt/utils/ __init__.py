@@ -9,4 +9,5 @@ __version__ = "4.9.3"
 from .notifications import Notifier
 from .utils import run_bot
 
-__all__ = ["Notifier", "run_bot"]#, "Bot"]
+__all__ = ["Notifier", "run_bot", "__version__"]#, "Bot"]
+
