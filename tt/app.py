@@ -23,7 +23,8 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 from tt.config import logger, settings
-from tt.utils import Notifier, __version__, run_bot
+from tt.utils.notifications import Notifier
+from tt.utils import __version__, run_bot
 
 
 
