@@ -23,7 +23,8 @@ from iamlistening import Listener
 
 from tt.config import logger, settings
 from tt.plugins.plugin_manager import PluginManager
-from tt.utils import Notifier, __version__
+from tt.utils.notifications import Notifier
+from tt.utils.version import __version__
 
 
 async def send_notification(msg):
