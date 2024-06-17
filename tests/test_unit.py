@@ -44,17 +44,17 @@ def message_test():
 
 
 @pytest.mark.asyncio
-async def test_run_bot():
+async def test_run_bot(caplog):
     start_bot = AsyncMock()
+    run_bot = AsyncMock()
     listener = AsyncMock()
     plugin_manager = AsyncMock()
 
+    await run_bot()
     assert listener is not None
     assert plugin_manager is not None
-
-    await start_bot(listener, plugin_manager)
+    # await start_bot(listener, plugin_manager)
     start_bot.assert_called_once_with(listener, plugin_manager)
-
     assert "You are" in caplog.text
 
 
