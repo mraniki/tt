@@ -1,6 +1,6 @@
 from tt.config import logger, settings
 from tt.plugins.plugin_manager import BasePlugin
-from tt.utils import send_notification
+
 
 
 class ExamplePlugin(BasePlugin):

@@ -7,8 +7,7 @@ import ping3
 
 from tt.config import logger, settings
 from tt.plugins.plugin_manager import BasePlugin
-from tt.utils import __version__, send_notification
-
+from tt.utils.version import __version__
 
 class HelperPlugin(BasePlugin):
     """

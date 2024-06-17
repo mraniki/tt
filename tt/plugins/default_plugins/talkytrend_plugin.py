@@ -2,8 +2,6 @@ from talkytrend import TalkyTrend
 
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
-#from tt.utils import send_notification
-
 
 class TalkyTrendPlugin(BasePlugin):
 
