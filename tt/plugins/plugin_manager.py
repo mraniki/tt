@@ -6,7 +6,7 @@ from datetime import datetime
 from asyncz.triggers import CronTrigger, IntervalTrigger
 
 from tt.config import logger, scheduler, settings
-from tt.utils import Notifier
+from tt.utils.notifications import Notifier
 
 
 class PluginManager:
