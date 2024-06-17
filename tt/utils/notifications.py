@@ -13,7 +13,7 @@ class Notifier:
     def __init__(self):
         logger.debug("Notifier initialized")
 
-        self.apprise_format = settings.apprise_format or NotifyFormat.MARKDOWN
+        self.msg_format = settings.apprise_format or NotifyFormat.MARKDOWN
         self.apprise_url = settings.apprise_url
 
         self.aobj = apprise.Apprise(settings.apprise_url)
