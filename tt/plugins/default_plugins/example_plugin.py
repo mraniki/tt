@@ -2,7 +2,6 @@ from tt.config import logger, settings
 from tt.plugins.plugin_manager import BasePlugin
 
 
-
 class ExamplePlugin(BasePlugin):
     """Example Plugin
     Initialization of imported class MyClass

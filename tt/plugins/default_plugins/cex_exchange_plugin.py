@@ -6,7 +6,6 @@ from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
 
 
-
 class CexExchangePlugin(BasePlugin):
     """
     Class CexExchangePlugin

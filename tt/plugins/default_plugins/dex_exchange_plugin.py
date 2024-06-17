@@ -3,7 +3,6 @@ from findmyorder import FindMyOrder
 
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
-from tt.utils import Notifier
 
 
 class DexExchangePlugin(BasePlugin):
