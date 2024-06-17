@@ -100,3 +100,15 @@ async def test_parse_ignore(plugin):
     result = await plugin.handle_message("🏦 balance")
     assert result is None
     assert plugin.should_filter("🏦 balance") is True
+
+
+@pytest.mark.asyncio
+async def test_timeframe_Control(plugin, order_message, caplog):
+    """Search Testing"""
+    plugin.fmo.search = AsyncMock()
+    plugin.fmo.get_order = AsyncMock()
+    plugin.exchange.submit_order = AsyncMock()
+    plugin.should_handle_timeframe = AsyncMock(return_value=False)
+    await plugin.handle_message(order_message)
+    plugin.send_notification.assert_awaited_once()
+    assert "⚠️ Trading restricted" in caplog.text

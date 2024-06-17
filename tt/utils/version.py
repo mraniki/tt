@@ -1,5 +1,5 @@
 """
-
+Version Related Utils
 
 """
 
@@ -9,8 +9,6 @@ __version__ = "8.2.4"
 import aiohttp
 
 from tt.config import logger, settings
-
-# from tt.utils import Notifier
 
 
 async def check_version():
