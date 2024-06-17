@@ -16,7 +16,7 @@ async def check_version():
     Asynchronously checks the version
     of the GitHub repository.
 
-    This function sends a HEAD request to the
+    This function sends a GET request to the
     specified GitHub repository URL and retrieves the
     latest version of the repository.
     It then compares the latest version
@@ -32,11 +32,12 @@ async def check_version():
 
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.head(settings.repo, timeout=5) as response:
+            async with session.get(settings.repo, timeout=10) as response:
                 if response.status != 200:
                     return
 
-                latest_version = response.headers["X-GitHub-Tag-Name"]
+                github_repo = await response.json()
+                latest_version = github_repo["name"]
                 if latest_version != f"v{__version__}":
                     logger.debug(
                         "You are NOT using the latest %s: %s",
