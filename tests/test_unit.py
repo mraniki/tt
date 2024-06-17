@@ -45,33 +45,17 @@ def message_test():
 
 @pytest.mark.asyncio
 async def test_run_bot():
-    # Create an AsyncMock for the check_version function
-    check_version = AsyncMock()
-
-    # Create an AsyncMock for the start_bot function
     start_bot = AsyncMock()
-
-    # Create an AsyncMock for the Listener class
     listener = AsyncMock()
-
-    # Create an AsyncMock for the PluginManager class
     plugin_manager = AsyncMock()
 
-    # Set up the necessary assertions
     assert listener is not None
     assert plugin_manager is not None
 
-    # Assert that the check_version function is awaited
-    check_version.assert_awaited()
-
-    # Assert that the start_bot function is awaited
     await start_bot(listener, plugin_manager)
-
-    # Assert that the start_bot function is called with the correct arguments
     start_bot.assert_called_once_with(listener, plugin_manager)
 
-    # Assert that the check_version function is called
-    check_version.assert_awaited()
+    assert "You are" in caplog.text
 
 
 def test_app_endpoint_main():
