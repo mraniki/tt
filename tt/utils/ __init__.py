@@ -5,7 +5,8 @@
 
 __version__ = "4.9.3"
 
-from .bot import Bot
+#from .bot import Bot
 from .notification import Notifier
+from .utils import run_bot
 
-__all__ = ["Notifier", "Bot"]
+__all__ = ["Notifier"]#, "Bot"]

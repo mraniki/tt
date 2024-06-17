@@ -23,9 +23,9 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 from tt.config import logger, settings
-from tt.utils import Bot, __version__
+from tt.utils import Notifier, __version__, run_bot
 
-talky = Bot()
+
 
 
 @asynccontextmanager
@@ -49,7 +49,7 @@ async def lifespan(app):
     logger.debug("Starting...")
 
     event_loop = asyncio.get_event_loop()
-    event_loop.create_task(talky.run_bot())
+    event_loop.create_task(run_bot())
     yield
     logger.debug("Closing...")
 
@@ -104,8 +104,8 @@ async def webhook(request: Request):
     """
     data = await request.body()
     logger.debug("Webhook request received {}", data)
-
-    await talky.notifier.notify(data)
+    Notifier()
+    await Notifier.notify(data)
 
     if settings.forwarder:
         logger.debug("Forwarding {} to {}", data, str(settings.forwarder_url))

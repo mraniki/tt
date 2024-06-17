@@ -1,148 +1,164 @@
+"""
+ Talky Utils
+
+ This module contains utility functions
+ for the TalkyTrader app such as:
+
+ - send_notification
+ - run_bot
+ - start plugins
+ - start_bot
+ - check version
+
+"""
+
+#__version__ = "8.2.4"
+
+
 import asyncio
 
 import aiohttp
+from apprise import Apprise, NotifyFormat
 from iamlistening import Listener
 
 from tt.config import logger, settings
 from tt.plugins.plugin_manager import PluginManager
-from tt.utils import Notifier, __version__
+from tt.utils import Notifier
 
 
-class Bot:
-    def __init__(self):
-        logger.info("Initializing bot")
+async def send_notification(msg):
+    """
+    💬 Notification via Apprise.
+    Apprise endpoint URL can be a URL
+    for the chat, an URL to an Apprise config
+    or a URL to the Apprise API endpoint
+    apprise_url = "tgram://BOTTOKEN/CHANNEL"
+    apprise_url = "discord://token1/channel"
 
-        self.bot = None
-        self.version = __version__ or "0.0.0"
-        self.name = settings.name or "Talky"
-        self.Listener = Listener()
-        self.Notifier = Notifier()
-        self.PluginManager = PluginManager()
+    Args:
+        msg (str): Message
 
-        self.version_check = settings.version_check
-        self.repository = settings.repo
-        self.plugin_enabled = settings.plugin_enabled
-        self.authorized_plugins = settings.authorized_plugins
+    Returns:
+        None
 
-        logger.info("Bot initialized")
+    More info
+    https://github.com/caronc/apprise/wiki
 
-    async def run_bot(self):
-        """
-        🤖 Run the chat bot & the plugins
-        via an asyncio loop.
-
-        Returns:
-            None
-
-        More info: https://github.com/mraniki/iamlistening
-
-        """
-        if self.version_check:
-            await self.check_version()
-        await asyncio.gather(self.start_bot(self.listener, self.plugin_manager))
-
-    async def send_notification(self, msg):
-        """
-        📨 Send a notification
-
-        Args:
-            msg (str): Message
-
-        Returns:
-            None
-
-        """
-        await self.Notifier.notify(msg)
-
-    async def start_plugins(self, plugin_manager):
-        """
-        🔌 Start all plugins.
+    """
+    notifier = Notifier()
+    await notifier.notify(msg)
 
 
-        Returns:
-            None
+async def run_bot():
+    """
+    🤖 Run the chat bot & the plugins
+    via an asyncio loop.
 
-        Refer to chat manager for plugin info
+    Returns:
+        None
 
-        """
-        if self.plugin_enabled:
-            plugin_manager.load_plugins(self.authorized_plugins)
-            loop = asyncio.get_running_loop()
-            loop.create_task(plugin_manager.start_all_plugins())
+    More info: https://github.com/mraniki/iamlistening
 
-    async def start_bot(self, listener, plugin_manager, max_iterations=None):
-        """
-        👂 Start the chat listener and
-        dispatch messages to plugins
+    """
+    if settings.version_check:
+        await check_version()
+    listener = Listener()
+    # notifier = apprise.Apprise()
+    plugin_manager = PluginManager()
+    await asyncio.gather(start_bot(listener, plugin_manager))
 
-        Args:
-            listener (Listener): Listener
-            plugin_manager (PluginManager): PluginManager
-            max_iterations (int): Max iterations
 
-        Returns:
-            None
+async def start_plugins(plugin_manager):
+    """
+    🔌 Start all plugins.
 
-        """
 
+    Returns:
+        None
+
+    Refer to chat manager for plugin info
+
+    """
+    if settings.plugin_enabled:
+        plugin_manager.load_plugins(settings.authorized_plugins)
         loop = asyncio.get_running_loop()
-        loop.create_task(listener.start())
-        await self.start_plugins(plugin_manager)
-        iteration = 0
-        if not listener.clients:
-            logger.warning(
-                """
-                No listener clients.
-                Verify settings and check wiki for example
-                https://talky.readthedocs.io/en/latest/02_config.html
-                """
-            )
-            return
-        while True:
-            for client in listener.clients:
-                msg = await client.get_latest_message()
-                if msg:
-                    await plugin_manager.process_message(msg)
-            iteration += 1
-            if max_iterations is not None and iteration >= max_iterations:
-                break
+        loop.create_task(plugin_manager.start_all_plugins())
 
-        await asyncio.sleep(1)
 
-    async def check_version(self):
-        """
-        Asynchronously checks the version
-        of the GitHub repository.
+async def start_bot(listener, plugin_manager, max_iterations=None):
+    """
+    👂 Start the chat listener and
+    dispatch messages to plugins
 
-        This function sends a GET request to the
-        specified GitHub repository URL and retrieves the
-        latest version of the repository.
-        It then compares the latest version
-        with the current version (__version__)
-        and logs the result.
+    Args:
+        listener (Listener): Listener
+        plugin_manager (PluginManager): PluginManager
+        max_iterations (int): Max iterations
 
-        Parameters:
-            None
+    Returns:
+        None
 
-        Returns:
-            None
-        """
+    """
 
-        try:
-            async with aiohttp.ClientSession() as session:
-                async with session.get(self.repository, timeout=10) as response:
-                    if response.status != 200:
-                        return
+    loop = asyncio.get_running_loop()
+    loop.create_task(listener.start())
+    await start_plugins(plugin_manager)
+    iteration = 0
+    if not listener.clients:
+        logger.warning(
+            """
+            No listener clients.
+            Verify settings and check wiki for example
+            https://talky.readthedocs.io/en/latest/02_config.html
+            """
+        )
+        return
+    while True:
+        for client in listener.clients:
+            msg = await client.get_latest_message()
+            if msg:
+                await plugin_manager.process_message(msg)
+        iteration += 1
+        if max_iterations is not None and iteration >= max_iterations:
+            break
 
-                    github_repo = await response.json()
-                    latest_version = github_repo["name"]
-                    if latest_version != f"v{__version__}":
-                        logger.debug(
-                            "You are NOT using the latest %s: %s",
-                            latest_version,
-                            __version__,
-                        )
-                    else:
-                        logger.debug(f"You are using the latest {__version__}")
-        except Exception as error:
-            logger.error("check_version: {}", error)
+    await asyncio.sleep(1)
+
+
+async def check_version():
+    """
+    Asynchronously checks the version
+    of the GitHub repository.
+
+    This function sends a GET request to the
+    specified GitHub repository URL and retrieves the
+    latest version of the repository.
+    It then compares the latest version
+    with the current version (__version__)
+    and logs the result.
+
+    Parameters:
+        None
+
+    Returns:
+        None
+    """
+
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(settings.repo, timeout=10) as response:
+                if response.status != 200:
+                    return
+
+                github_repo = await response.json()
+                latest_version = github_repo["name"]
+                if latest_version != f"v{__version__}":
+                    logger.debug(
+                        "You are NOT using the latest %s: %s",
+                        latest_version,
+                        __version__,
+                    )
+                else:
+                    logger.debug(f"You are using the latest {__version__}")
+    except Exception as error:
+        logger.error("check_version: {}", error)
