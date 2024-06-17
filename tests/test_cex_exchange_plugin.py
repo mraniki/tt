@@ -1,5 +1,5 @@
 from datetime import datetime
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock
 
 import pytest
 from findmyorder import FindMyOrder
@@ -102,25 +102,24 @@ async def test_parse_ignore(plugin):
     assert plugin.should_filter("🏦 balance") is True
 
 
+@pytest.mark.asyncio
+async def test_timeframe_Control(plugin, order_message):
+    """Search Testing"""
+    plugin.send_notification = AsyncMock()
+    plugin.should_handle_timeframe = AsyncMock(return_value=False)
+    results = await plugin.handle_message(order_message)
+    print(results)
+    plugin.should_handle_timeframe.assert_awaited_once()
+    plugin.send_notification.assert_awaited_once_with("⚠️ Trading restricted")
+
+
 # @pytest.mark.asyncio
 # async def test_timeframe_Control(plugin, order_message):
 #     """Search Testing"""
 #     plugin.fmo.search = AsyncMock()
 #     plugin.fmo.get_order = AsyncMock()
 #     plugin.exchange.submit_order = AsyncMock()
-#     plugin.send_notification = AsyncMock("⚠️ Trading restricted")
-#     plugin.should_handle_timeframe = AsyncMock(return_value=False)
-#     await plugin.handle_message(order_message)
-#     plugin.send_notification.assert_awaited_once_with("⚠️ Trading restricted")
-
-
-@pytest.mark.asyncio
-async def test_timeframe_Control(plugin, order_message):
-    """Search Testing"""
-    plugin.fmo.search = AsyncMock()
-    plugin.fmo.get_order = AsyncMock()
-    plugin.exchange.submit_order = AsyncMock()
-    with patch.object(plugin, "send_notification") as mock_send_notification:
-        plugin.should_handle_timeframe = AsyncMock(return_value=False)
-        await plugin.handle_message(order_message)
-        mock_send_notification.assert_awaited_once_with("⚠️ Trading restricted")
+#     with patch.object(plugin, "send_notification") as mock_send_notification:
+#         plugin.should_handle_timeframe = AsyncMock(return_value=False)
+#         await plugin.handle_message(order_message)
+#         mock_send_notification.assert_awaited_once_with("⚠️ Trading restricted")
