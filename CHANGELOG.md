@@ -2,6 +2,111 @@
 
 
 
+## v9.0.0 (2024-06-18)
+
+### :rotating_light:
+
+* :rotating_light: ([`85fec4c`](https://github.com/mraniki/tt/commit/85fec4cbf2cf11f48c7b69038140de514040fdbf))
+
+### Other
+
+* Merge pull request #1632 from mraniki/dev
+
+🚨 build(deps): update pyproject.toml ([`ad40eb1`](https://github.com/mraniki/tt/commit/ad40eb1863e5771f2502a01cd6c726823c60a0f0))
+
+* Merge pull request #1631 from mraniki/dev
+
+💥 breaking Refactoring Utils &amp; Notifier Class ([`8c5a811`](https://github.com/mraniki/tt/commit/8c5a81176f91d6a7e2c76bffdaeb8a652af44869))
+
+* Refactor Notifier instantiation and version import. ([`72e6df3`](https://github.com/mraniki/tt/commit/72e6df3646bdf71ce859eaa0595491983b7dcaca))
+
+* Remove unnecessary imports from default plugins. ([`5bfc5df`](https://github.com/mraniki/tt/commit/5bfc5dfcced165acd9bfcb00d86d08de3913354d))
+
+* Remove unused import and update version import in plugins. ([`a6e6f44`](https://github.com/mraniki/tt/commit/a6e6f4469999bdfec767e0cfe79f1208d9b7ca8f))
+
+* Refactor import statements in utils.py ([`a520361`](https://github.com/mraniki/tt/commit/a5203610bf31a94ba2915e83a781e1a669613051))
+
+* Refactor import statements in app.py for better clarity ([`11d6406`](https://github.com/mraniki/tt/commit/11d6406e62b8d26ba2e818b4e15e7d401f3c737c))
+
+* Add version check function and update __init__.py ([`29706b5`](https://github.com/mraniki/tt/commit/29706b54912be689b714081dccab24ffaabd9b50))
+
+* Refactor import statements in app.py for notifications. ([`ee77310`](https://github.com/mraniki/tt/commit/ee773105cb59337a39a8253ef3d2aa6fde194216))
+
+* Refactor import statement in plugin_manager.py ([`d79b174`](https://github.com/mraniki/tt/commit/d79b174e3043b8b74ea8630ed947d882d879d7bc))
+
+* Remove unnecessary plugin management code. ([`9ba6550`](https://github.com/mraniki/tt/commit/9ba6550888e89854290bcdf07cc6a3662df598a5))
+
+* Refactor app.py and remove unused utils.py file. ([`145073a`](https://github.com/mraniki/tt/commit/145073a424e41d1d6cac76c45567c573bc4558c8))
+
+### Update
+
+* Update version variable path in pyproject.toml and import statement in test_unit.py. ([`e18e786`](https://github.com/mraniki/tt/commit/e18e78608e55a61fd7a57b9ddf200b849b97cd09))
+
+* Update import statements in test_unit.py file. ([`98241a5`](https://github.com/mraniki/tt/commit/98241a5bb76e8f2e599058ed100d1331a926e14f))
+
+* Update Notifier class to use self.msg_format variable. ([`5b38a11`](https://github.com/mraniki/tt/commit/5b38a116dbb08a1656029d98e06ea68636fd206b))
+
+* Update plugin imports and method calls in default plugins. ([`a9b2193`](https://github.com/mraniki/tt/commit/a9b21938e2dcec6a095be01ccab0f83c8529e530))
+
+* Update import paths for utils module in test files. ([`00dabb5`](https://github.com/mraniki/tt/commit/00dabb53ef0b871d730ddfe8c978be586e127097))
+
+* Update __init__.py with new __all__ items ([`b347fe8`](https://github.com/mraniki/tt/commit/b347fe84792f607712a6d74b460abce8483457f4))
+
+* Update import statement in __init__.py for Notifier. ([`9acf371`](https://github.com/mraniki/tt/commit/9acf371e73dae923a367712a08f98451fe05e0dd))
+
+* Update __init__.py with new module imports. ([`4552456`](https://github.com/mraniki/tt/commit/4552456a3c46b84e2ee86a6565c885bb23566900))
+
+* Update import in utils.py for Notifier and __version__ ([`303c2ff`](https://github.com/mraniki/tt/commit/303c2ffcf05c2f7af264dc05b6eef4047d6fc6d7))
+
+### ♻️
+
+* ♻️ ([`bacba87`](https://github.com/mraniki/tt/commit/bacba87b5b22d1a60283ac13df555eb37f7fb6d0))
+
+* ♻️ ([`e156d58`](https://github.com/mraniki/tt/commit/e156d5809ff8d060d0521927d1593b7cf9c73a36))
+
+### ✅
+
+* ✅ Unit Test ([`d539676`](https://github.com/mraniki/tt/commit/d53967642f066b5d78e7a2a42c8ff5a3c8e63561))
+
+* ✅ Unit Test ([`f219790`](https://github.com/mraniki/tt/commit/f21979098bf8a93a8efa0df7e2eea48a57dc6fd3))
+
+* ✅ Unit Test ([`0878bff`](https://github.com/mraniki/tt/commit/0878bff44184c99dc66e48ed49bfb297314aa3b7))
+
+* ✅ Unit Test ([`638ace8`](https://github.com/mraniki/tt/commit/638ace84b3416186aa307199c5a652e1e317ba2b))
+
+* ✅ Unit Test ([`823884a`](https://github.com/mraniki/tt/commit/823884a7fc79a8d39ac79e440d90b47dedd2575b))
+
+* ✅ Unit Test ([`eb252e2`](https://github.com/mraniki/tt/commit/eb252e2c2bdcb3b389df79af0f02cb406c688968))
+
+* ✅ Unit Test ([`50177e2`](https://github.com/mraniki/tt/commit/50177e237b2e24263e26cb08a04043f0f9a6270e))
+
+* ✅ Unit Test ([`d975f99`](https://github.com/mraniki/tt/commit/d975f9965bd692e7d6229c41cc67844abda3c101))
+
+* ✅ Unit Test ([`72f1701`](https://github.com/mraniki/tt/commit/72f17013481cd369b25aa4969c0f93987b1169d7))
+
+* ✅ Unit Test ([`f5c9838`](https://github.com/mraniki/tt/commit/f5c9838c4eec4c2ae013b200c735bb51138eec64))
+
+### 🎨
+
+* 🎨 ([`3743f5f`](https://github.com/mraniki/tt/commit/3743f5f55a399def2fdb6a6a89053914ed7f128d))
+
+* 🎨 ([`74080c0`](https://github.com/mraniki/tt/commit/74080c09abe5ee5680b906fc1c42d032628f3ac7))
+
+### 💥
+
+* 💥 breaking Refactoring Utils &amp; Bot Class &amp; Notifier Class ([`83fd500`](https://github.com/mraniki/tt/commit/83fd5005615b28d34ba37b827b26b264b4ce736b))
+
+### 🔥
+
+* 🔥 ([`29e2c61`](https://github.com/mraniki/tt/commit/29e2c61e68044fbe72866c3804735b4e456d3ae9))
+
+* ✅ Unit Test 🔥 ([`01a6e64`](https://github.com/mraniki/tt/commit/01a6e649bf03a682aeb9fff1c975164aa4b895ba))
+
+### 🚨
+
+* 🚨 build(deps): update pyproject.toml ([`7eb2bd7`](https://github.com/mraniki/tt/commit/7eb2bd7de9b4687006c79b602ff17614fe8998d5))
+
+
 ## v8.2.4 (2024-06-16)
 
 ### :recycle:
