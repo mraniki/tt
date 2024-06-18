@@ -2,6 +2,21 @@
 
 
 
+## v9.1.3 (2024-06-18)
+
+### Other
+
+* Merge pull request #1636 from mraniki/dev
+
+🧐 update ai_agent_plugin.py ([`9a15adb`](https://github.com/mraniki/tt/commit/9a15adbcf01dba7dbdc209f8155b78e5005dd0c9))
+
+* update ai_agent_plugin.py ([`fec2480`](https://github.com/mraniki/tt/commit/fec2480212abfd8efaa17e7d1ff5fdb584c2f825))
+
+### 🧐
+
+* 🧐 update ai_agent_plugin.py ([`585ce01`](https://github.com/mraniki/tt/commit/585ce0119ab0e29c0ea71271744beb64496a41fc))
+
+
 ## v9.1.2 (2024-06-18)
 
 ### Other
