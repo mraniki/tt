@@ -24,6 +24,27 @@ class CexExchangePlugin(BasePlugin):
     """
 
     def __init__(self):
+        """
+        Initializes a new instance of the class.
+
+        This method is called when an object of
+        the class is created.
+        It sets the `enabled` attribute
+        to the value of `settings.cex_enabled`.
+        If `settings.cex_enabled` is `False`,
+        the method returns early and no further
+        initialization is performed. Otherwise,
+        it creates an instance of the `FindMyOrder`
+        class and assigns it to the `fmo` attribute.
+        It also creates an instance of the `CexTrader`
+        class and assigns it to the `exchange` attribute.
+
+        Parameters:
+            None
+
+        Returns:
+            None
+        """
         super().__init__()
         self.enabled = settings.cex_enabled
         if not self.enabled:
@@ -33,20 +54,25 @@ class CexExchangePlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """
-        Handles incoming messages
-        to route to the respective function
+        Handles incoming messages and
+        routes them to the appropriate function.
 
         Args:
-            msg (str): The incoming message
+            msg (str): The message received by the plugin.
 
-        Returns:
-            None
+        Supported functions are:
+
+        - `get_info()`
+        - `get_quotes()`
+        - `get_balances()`
+        - `get_positions()`
 
         """
+
         if self.should_filter(msg):
             return
 
-        if self.is_command_to_handle(msg):
+        elif self.is_command_to_handle(msg):
             command, *args = msg.split(" ")
             command = command[1:]
 
@@ -61,10 +87,10 @@ class CexExchangePlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
-        if not self.should_handle_timeframe():
+        elif not self.should_handle_timeframe():
             await self.send_notification("⚠️ Trading restricted")
 
-        if await self.fmo.search(msg) and self.should_handle_timeframe():
+        elif await self.fmo.search(msg) and self.should_handle_timeframe():
             order = await self.fmo.get_order(msg)
             if order and settings.trading_enabled:
                 trade = await self.exchange.submit_order(order)

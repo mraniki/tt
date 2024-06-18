@@ -18,9 +18,6 @@ class HelperPlugin(BasePlugin):
     available command, network ping
     or restarting the bot
 
-    network ping is using Ping3 lib
-    more info: https://github.com/kyan001/ping3
-
     """
 
     name = os.path.splitext(os.path.basename(__file__))[0]
@@ -50,20 +47,25 @@ class HelperPlugin(BasePlugin):
             self.help_message = settings.helper_commands
 
     async def start(self):
-        """Starts the plugin"""
-        await self.send_notification(await self.get_helper_info())
+        """
+        Asynchronously starts the plugin
+        by sending a notification using
+        the `send_notification` method.
+        The notification is obtained by
+        calling the `get_helper_info` method asynchronously.
 
-    # async def send_notification(self, message):
-    #     """Sends a notification"""
-    #     if self.enabled:
-    #         await send_notification(message)
+        Returns:
+            None
+        """
+        await self.send_notification(await self.get_helper_info())
 
     async def handle_message(self, msg):
         """
-        Handles a message received by the bot.
+        Handles incoming messages and
+        routes them to the appropriate function.
 
         Args:
-            msg (str): The message received by the bot.
+            msg (str): The message received by the plugin.
 
         Returns:
             None: If the message should not be handled.
@@ -82,7 +84,7 @@ class HelperPlugin(BasePlugin):
         """
         if self.should_filter(msg):
             return
-        if self.is_command_to_handle(msg):
+        elif self.is_command_to_handle(msg):
             command, *args = msg.split(" ")
             command = command[1:]
 
@@ -115,11 +117,16 @@ class HelperPlugin(BasePlugin):
         """
         return (
             f"ℹ️ {settings.bot_name} {__version__}\n"
+            f"_______________________________________\n"
+            f"plugin_enabled: {settings.plugin_enabled}\n"
             f"plugins: {settings.plugin_directory}\n"
             f"ui_enabled: {settings.ui_enabled}\n"
             f"forwarder_enabled: {settings.forwarder}\n"
             f"trading_enabled: {settings.trading_enabled}\n"
             f"trading_control: {settings.trading_control}\n"
+            f"trading_days_allowed: {settings.trading_days_allowed}\n"
+            f"trading_hours_start: {settings.trading_hours_start}\n"
+            f"trading_hours_end: {settings.trading_hours_end}\n"
             f"trade action identifier: {settings.action_identifier}\n"
             f"trade default quantity: {settings.quantity}\n"
         )
@@ -129,6 +136,9 @@ class HelperPlugin(BasePlugin):
         :file:`/network` command to retrieve the network
         ping latency and
         the bot's public IP address
+        The network ping is using Ping3 lib
+        more info: https://github.com/kyan001/ping3
+
         """
         ping_result = ping3.ping(settings.ip_check_url, unit="ms")
         ping_result = round(ping_result, 2) if ping_result is not None else 0

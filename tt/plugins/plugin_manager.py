@@ -229,27 +229,36 @@ class BasePlugin:
             return True
 
     async def plugin_notify_schedule_task(
-        self, user_name=None, frequency=8, function=None
+        self, user_name=None, frequency=8, frequency_unit="hours", function=None
     ):
         """
         Handles task notification
-        every X hours. Defaulted to 8 hours
+        every X hours.
+        Defaulted to 8 hours
+
 
         Args:
             user_name (str): User name
             frequency (int): Frequency
+            frequency_unit (str): Frequency unit
             function (function): Function
 
         Returns:
             None
         """
+        if frequency_unit == "hours":
+            trigger = IntervalTrigger(hours=frequency)
+        elif frequency_unit == "minutes":
+            trigger = IntervalTrigger(minutes=frequency)
+        else:
+            raise ValueError("Invalid frequency unit. Must be 'hours' or 'minutes'.")
 
         if function:
             self.scheduler.add_task(
                 name=user_name,
                 fn=self.send_notification,
                 args=[f"{await function()}"],
-                trigger=IntervalTrigger(hours=frequency),
+                trigger=trigger,
                 is_enabled=True,
             )
 

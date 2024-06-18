@@ -14,11 +14,29 @@ class AIAgentPlugin(BasePlugin):
 
     def __init__(self):
         """
-        Initializes the object.
+        Initializes an instance of the AIAgentPlugin class.
 
-        No parameters.
+        This method initializes the instance
+        by calling the parent class's constructor
+        using the `super()` function.
+        It also sets the `enabled` attribute
+        based on the value of the
+        `myllm_enabled` setting in the `settings` module.
+        The `ai_agent_mode` attribute is set to
+        the value of the `ai_agent_mode` setting,
+        or `False` if it is not set.
+        The `ai_agent_prefix` attribute is set to
+        the value of the `ai_agent_prefix` setting,
+        or `None` if it is not set.
+        If `enabled` is `True`, a new instance of
+        the `MyLLM` class is created and assigned
+        to the `ai_agent` attribute.
 
-        No return value.
+        Parameters:
+            None
+
+        Returns:
+            None
         """
         super().__init__()
         self.enabled = settings.myllm_enabled
@@ -29,34 +47,25 @@ class AIAgentPlugin(BasePlugin):
 
     async def handle_message(self, msg):
         """
-        Handles incoming messages.
-
-        If the message starts with the bot prefix,
-        it checks if it's the ai chat command.
-        If it is, it sends the result of the chat with the LLM.
-        If it's not, it checks if the command is in the command mapping
-        and sends the result of the corresponding function.
-        If it's not, it checks if the ai_agent setting is enabled
-        and sends the result of the chat with the LLM.
+        Handles incoming messages and
+        routes them to the appropriate function.
 
         Args:
-            msg (str): The incoming message.
+            msg (str): The message received by the plugin.
 
-        Returns:
-            None
+        Supported functions are:
+
+        - `get_info()`
+        - `clear_chat_history()`
+        - `export_chat_history()`
+        - `chat()`
+        - `ai_agent_switch_command()`
+
         """
         if self.should_filter(msg):
-            # If the the message should not be handled, return
             return
 
-        # If the message starts with the bot prefix,
-        # it checks if it's the ai chat command.
-        # If it is, it sends the result of the chat with the LLM.
-        # If it's not, it checks if the command is in the command mapping
-        # and sends the result of the corresponding function.
-        # If it's not, it checks if the ai_agent setting is enabled
-        # and sends the result of the chat with the LLM.
-        if self.is_command_to_handle(msg):
+        elif self.is_command_to_handle(msg):
             command, *args = msg.split(" ")
             command = command[1:]
 
@@ -71,17 +80,16 @@ class AIAgentPlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
-        # If the ai_agent setting is enabled,
-        # and the message does not start with ai_agent_prefix character
-        # send the result of the chat with the LLM
-        # bypassing the command mapping
-        if settings.ai_agent_mode and not msg.startswith(self.ai_agent.ai_agent_prefix):
+        elif settings.ai_agent_mode and not msg.startswith(
+            self.ai_agent.ai_agent_prefix
+        ):
             await self.send_notification(f"{await self.ai_agent.chat(str(msg))}")
 
     async def ai_agent_switch_command(self) -> str:
         """
         AI Agent switch command
         :file:`/aimode` command
+        or your own defined command
         to turn off or on the
         ai agent continuous capability
         """
