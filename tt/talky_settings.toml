@@ -110,7 +110,7 @@ iamlistening_enabled = true
 # Bot Prefix 
 bot_prefix = "/"
 # Character to ignore
-bot_ignore = "ℹ️ ⚠️ 📊 🏦 📺 ⬆️ 💬 🐻 ⚖️"
+bot_ignore = "ℹ️ ⚠️ 📊 🏦 📺 ⬆️ 💬 ⚖️"
 # Command for help
 bot_command_help = "help"
 # Command for info
@@ -291,7 +291,6 @@ rss_feed_url= "https://finance.yahoo.com/rss/"
 # frequency of the rss feed update in
 # minutes
 rss_feed_frequency = 5
-
 
 ########################################
 ###        TALKYTREND SETTINGS       ###

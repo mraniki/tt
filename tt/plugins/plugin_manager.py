@@ -192,7 +192,7 @@ class BasePlugin:
 
         """
         if any(message.startswith(word) for word in self.bot_ignore):
-            logger.debug("Filtering message {}", self.bot_ignore)
+            # logger.debug("Filtering message {}", self.bot_ignore)
             return True
         else:
             return False
@@ -229,27 +229,36 @@ class BasePlugin:
             return True
 
     async def plugin_notify_schedule_task(
-        self, user_name=None, frequency=8, function=None
+        self, user_name=None, frequency=8, frequency_unit="hours", function=None
     ):
         """
         Handles task notification
-        every X hours. Defaulted to 8 hours
+        every X hours.
+        Defaulted to 8 hours
+
 
         Args:
             user_name (str): User name
             frequency (int): Frequency
+            frequency_unit (str): Frequency unit
             function (function): Function
 
         Returns:
             None
         """
+        if frequency_unit == "hours":
+            trigger = IntervalTrigger(hours=frequency)
+        elif frequency_unit == "minutes":
+            trigger = IntervalTrigger(minutes=frequency)
+        else:
+            raise ValueError("Invalid frequency unit. Must be 'hours' or 'minutes'.")
 
         if function:
             self.scheduler.add_task(
                 name=user_name,
                 fn=self.send_notification,
                 args=[f"{await function()}"],
-                trigger=IntervalTrigger(hours=frequency),
+                trigger=trigger,
                 is_enabled=True,
             )
 
@@ -309,26 +318,8 @@ class BasePlugin:
 
         Returns:
             None
-        This is the funciton to use in your plugin to handle incoming messages.
+        This is the function to use in your plugin to handle incoming messages.
 
-        This function takes an incoming message and processes it.
-        It first checks if the message should be handled
-        by calling the `should_handle` method. If the message should not be handled,
-        the function returns immediately.
-
-        If the message should be handled, the function splits the message into a command
-        and its arguments using the `split` method.
-        It then removes the leading character from the command.
-
-        The function retrieves the command mapping
-        by calling the `get_command_mapping` method.
-        If the command is found in the command mapping,
-        the corresponding function is retrieved.
-        The function is then called with the arguments and
-        the result is sent as a notification using the `send_notification` method.
-
-        Note: The code block is currently commented out
-        and does not perform any actions except if implemented in your plugin.
         """
         pass
         # if not self.should_handle(msg):
@@ -356,7 +347,7 @@ class BasePlugin:
             bool
         """
         if settings.trading_control:
-            logger.info("Trading control enabled")
+            logger.debug("Trading control enabled")
             current_time = datetime.now().time()
             current_day = datetime.now().strftime("%a").lower()
 
@@ -369,9 +360,11 @@ class BasePlugin:
                 start_time,
                 end_time,
             )
-            return (
+            control = (
                 current_day in settings.trading_days_allowed
                 and start_time <= current_time <= end_time
             )
+            logger.debug("Trading control: {}", control)
+            return control
 
         return True
