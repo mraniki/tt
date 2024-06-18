@@ -2,6 +2,31 @@
 
 
 
+## v9.1.4 (2024-06-18)
+
+### Other
+
+* Merge pull request #1638 from mraniki/dev
+
+🐛 bot_identify_words ([`b68a896`](https://github.com/mraniki/tt/commit/b68a896576e9fbf8986023dc3009ceb04af81547))
+
+* Merge branch &#39;main&#39; into dev ([`379435e`](https://github.com/mraniki/tt/commit/379435e917f8379f9ac6ceaa4ced3ae47512e8a1))
+
+* Merge pull request #1637 from mraniki/dev
+
+🐛 self.ai_agent_mode ([`9563615`](https://github.com/mraniki/tt/commit/95636158053a7d7bb5a856ae5e34d0f7f3e7c3ff))
+
+### 🎨
+
+* 🎨 update ai_agent_plugin.py and plugin_manager.py ([`3c760b6`](https://github.com/mraniki/tt/commit/3c760b64723319328bff56d6146eba6a71623d59))
+
+### 🐛
+
+* 🐛 ([`4a20f84`](https://github.com/mraniki/tt/commit/4a20f84703e3293aab1631fd35f5c2238594124d))
+
+* 🐛 self.ai_agent_mode ([`db402b9`](https://github.com/mraniki/tt/commit/db402b994ef44f8688ad0d6a80f512fe7d359ad2))
+
+
 ## v9.1.3 (2024-06-18)
 
 ### Other
