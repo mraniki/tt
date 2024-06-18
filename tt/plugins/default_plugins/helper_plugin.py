@@ -117,7 +117,7 @@ class HelperPlugin(BasePlugin):
         """
         return (
             f"ℹ️ {settings.bot_name} {__version__}\n"
-            f"_______________________________________\n"
+            "_______________________________________\n"
             f"plugin_enabled: {settings.plugin_enabled}\n"
             f"plugins: {settings.plugin_directory}\n"
             f"ui_enabled: {settings.ui_enabled}\n"
