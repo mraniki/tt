@@ -5,7 +5,7 @@
 
 from myllm import MyLLM
 
-from tt.config import settings
+from tt.config import logger, settings
 from tt.plugins.plugin_manager import BasePlugin
 
 
@@ -63,6 +63,7 @@ class AIAgentPlugin(BasePlugin):
 
         """
         if self.should_filter(msg):
+            logger.debug(f"Skipping message: {msg}")
             return
 
         if self.is_command_to_handle(msg):
