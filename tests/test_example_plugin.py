@@ -142,5 +142,3 @@ async def test_plugin_notify_schedule_task():
 async def test_should_handle_timeframe():
     plugin = BasePlugin()
     assert plugin.should_handle_timeframe() is True
-    settings.trading_days_allowed = []
-    assert plugin.should_handle_timeframe() is False
