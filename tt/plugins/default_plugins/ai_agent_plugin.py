@@ -5,7 +5,7 @@
 
 from myllm import MyLLM
 
-from tt.config import settings
+from tt.config import logger, settings
 from tt.plugins.plugin_manager import BasePlugin
 
 
@@ -63,6 +63,7 @@ class AIAgentPlugin(BasePlugin):
 
         """
         if self.should_filter(msg):
+            logger.debug(f"Skipping message: {msg}")
             return
 
         if self.is_command_to_handle(msg):
@@ -80,7 +81,7 @@ class AIAgentPlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
-        if settings.ai_agent_mode and not msg.startswith(self.ai_agent_prefix):
+        if settings.ai_agent_mode:  # and not msg.startswith(self.ai_agent_prefix):
             await self.send_notification(f"{await self.ai_agent.chat(str(msg))}")
 
     async def ai_agent_switch_command(self) -> str:
