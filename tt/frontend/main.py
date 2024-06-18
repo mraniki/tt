@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from nicegui import ui
 
 from tt.config import settings
-from tt.utils import __version__
+from tt.utils.version import __version__
 
 
 def init(fastapi_app: FastAPI) -> None:

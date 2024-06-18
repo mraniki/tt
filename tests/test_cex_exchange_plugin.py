@@ -100,3 +100,15 @@ async def test_parse_ignore(plugin):
     result = await plugin.handle_message("🏦 balance")
     assert result is None
     assert plugin.should_filter("🏦 balance") is True
+
+
+# @pytest.mark.asyncio
+# async def test_timeframe_Control(plugin, order_message):
+#     """Search Testing"""
+#     plugin.send_notification = AsyncMock()
+#     plugin.should_handle_timeframe = AsyncMock(return_value=False)
+#     results = await plugin.handle_message(order_message)
+#     print(results)
+#     plugin.should_handle_timeframe.assert_awaited_once()
+#     plugin.send_notification.assert_awaited_once_with("⚠️ Trading restricted")
+

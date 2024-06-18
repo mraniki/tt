@@ -3,7 +3,6 @@ from findmyorder import FindMyOrder
 
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
-from tt.utils import send_notification
 
 
 class DexExchangePlugin(BasePlugin):
@@ -32,11 +31,6 @@ class DexExchangePlugin(BasePlugin):
         self.fmo = FindMyOrder()
         self.exchange = DexSwap()
 
-    async def send_notification(self, message):
-        """Sends notification"""
-        # if self.enabled:
-        await send_notification(message)
-
     async def handle_message(self, msg):
         """Handles incoming messages"""
         if self.should_filter(msg):
@@ -58,11 +52,11 @@ class DexExchangePlugin(BasePlugin):
                 await self.send_notification(f"{await function()}")
 
         if not self.should_handle_timeframe():
-            await send_notification("⚠️ Trading restricted")
+            await self.send_notification("⚠️ Trading restricted")
 
         if await self.fmo.search(msg) and self.should_handle_timeframe():
-              order = await self.fmo.get_order(msg)
-              if order and settings.trading_enabled:
-                  trade = await self.exchange.submit_order(order)
-                  if trade:
-                      await send_notification(trade)
+            order = await self.fmo.get_order(msg)
+            if order and settings.trading_enabled:
+                trade = await self.exchange.submit_order(order)
+                if trade:
+                    await self.send_notification(trade)

@@ -12,7 +12,7 @@ from iamlistening import Listener
 from tt.app import app
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
-from tt.utils import start_bot
+from tt.utils.utils import start_bot
 
 
 @pytest.fixture(name="message")

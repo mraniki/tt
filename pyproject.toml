@@ -157,7 +157,7 @@ version_toml = [
   "pyproject.toml:tool.poetry.version"
 ]
 version_variables = [
-  "tt/utils.py:__version__"
+  "tt/utils.py:version.py:__version__"
 ]
 
 [tool.semantic_release.commit_parser_options]

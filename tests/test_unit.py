@@ -12,7 +12,8 @@ from iamlistening import Listener
 from tt.app import app
 from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
-from tt.utils import check_version, send_notification, start_bot, start_plugins
+from tt.utils.utils import start_bot, start_plugins
+from tt.utils.version import check_version
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -31,14 +32,30 @@ def message_test():
 
 
 # @pytest.mark.asyncio
-# async def test_start_bot_task():
+# async def test_run_bot():
+#     check_version = AsyncMock()
 #     run_bot = AsyncMock()
 #     listener = AsyncMock()
 #     plugin_manager = AsyncMock()
-#     await start_bot_task()
 #     assert listener is not None
 #     assert plugin_manager is not None
-#     assert run_bot.assert_awaited_once
+#     assert run_bot.assert_awaited
+#     assert check_version.assert_awaited
+
+
+# @pytest.mark.asyncio
+# async def test_run_bot(caplog):
+#     start_bot = AsyncMock()
+#     run_bot = AsyncMock()
+#     listener = AsyncMock()
+#     plugin_manager = AsyncMock()
+
+#     await run_bot()
+#     assert listener is not None
+#     assert plugin_manager is not None
+#     # await start_bot(listener, plugin_manager)
+#     start_bot.assert_called_once_with(listener, plugin_manager)
+#     assert "You are" in caplog.text
 
 
 def test_app_endpoint_main():
@@ -85,11 +102,6 @@ async def test_check_version_exception():
     with pytest.raises(Exception):
         await check_version("123")
 
-
-@pytest.mark.asyncio
-async def test_send_notification(caplog, message):
-    await send_notification(message)
-    assert "Loaded Discord" in caplog.text
 
 @pytest.mark.asyncio
 async def test_start_plugins():

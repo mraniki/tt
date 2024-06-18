@@ -7,7 +7,6 @@ from myllm import MyLLM
 
 from tt.config import settings
 from tt.plugins.plugin_manager import BasePlugin
-from tt.utils import send_notification
 
 
 class AIAgentPlugin(BasePlugin):
@@ -27,11 +26,6 @@ class AIAgentPlugin(BasePlugin):
         self.ai_agent_prefix = settings.ai_agent_prefix or None
         if self.enabled:
             self.ai_agent = MyLLM()
-
-    async def send_notification(self, message):
-        """Sends a notification"""
-        if self.enabled:
-            await send_notification(message)
 
     async def handle_message(self, msg):
         """

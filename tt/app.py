@@ -13,6 +13,7 @@ to a messaging chat platform
 to interact with trading module.
 
 """
+
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -22,7 +23,9 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 from tt.config import logger, settings
-from tt.utils import __version__, run_bot, send_notification
+from tt.utils.notifications import Notifier
+from tt.utils.utils import run_bot
+from tt.utils.version import __version__
 
 
 @asynccontextmanager
@@ -44,6 +47,7 @@ async def lifespan(app):
     application has ended.
     """
     logger.debug("Starting...")
+
     event_loop = asyncio.get_event_loop()
     event_loop.create_task(run_bot())
     yield
@@ -100,7 +104,8 @@ async def webhook(request: Request):
     """
     data = await request.body()
     logger.debug("Webhook request received {}", data)
-    await send_notification(data)
+    notifier = Notifier()
+    await notifier.notify(data)
 
     if settings.forwarder:
         logger.debug("Forwarding {} to {}", data, str(settings.forwarder_url))

@@ -6,6 +6,7 @@ from datetime import datetime
 from asyncz.triggers import CronTrigger, IntervalTrigger
 
 from tt.config import logger, scheduler, settings
+from tt.utils.notifications import Notifier
 
 
 class PluginManager:
@@ -164,6 +165,7 @@ class BasePlugin:
 
     def __init__(self):
         self.enabled = False
+        self.notifier = Notifier()
         self.scheduler = scheduler
         self.bot_prefix = settings.bot_prefix
         self.bot_ignore = settings.bot_ignore
@@ -175,7 +177,8 @@ class BasePlugin:
         pass
 
     async def send_notification(self, message):
-        pass
+        if self.enabled:
+            await self.notifier.notify(message)
 
     def should_filter(self, message):
         """
@@ -298,6 +301,35 @@ class BasePlugin:
             )
 
     async def handle_message(self, msg):
+        """
+        Handles an incoming message.
+
+        Args:
+            msg (str): The incoming message.
+
+        Returns:
+            None
+        This is the funciton to use in your plugin to handle incoming messages.
+
+        This function takes an incoming message and processes it.
+        It first checks if the message should be handled
+        by calling the `should_handle` method. If the message should not be handled,
+        the function returns immediately.
+
+        If the message should be handled, the function splits the message into a command
+        and its arguments using the `split` method.
+        It then removes the leading character from the command.
+
+        The function retrieves the command mapping
+        by calling the `get_command_mapping` method.
+        If the command is found in the command mapping,
+        the corresponding function is retrieved.
+        The function is then called with the arguments and
+        the result is sent as a notification using the `send_notification` method.
+
+        Note: The code block is currently commented out
+        and does not perform any actions except if implemented in your plugin.
+        """
         pass
         # if not self.should_handle(msg):
         #     return
