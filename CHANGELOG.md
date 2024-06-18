@@ -2,6 +2,45 @@
 
 
 
+## v9.1.0 (2024-06-18)
+
+### Feat
+
+* 📝 🥚 update 9 files: plugin_notify_schedule_task feat and documentation update ([`14f0d17`](https://github.com/mraniki/tt/commit/14f0d17cb60d3d2594592861cb8982176ee674ef))
+
+### Other
+
+* Merge pull request #1633 from mraniki/dev
+
+📝 🥚 update 9 files: plugin_notify_schedule_task feat and documentatio… ([`64fd912`](https://github.com/mraniki/tt/commit/64fd912f4615c8cd813b27df14357d11f4511496))
+
+* update cex_exchange_plugin.py and dex_exchange_plugin.py ([`ffbecec`](https://github.com/mraniki/tt/commit/ffbecec0da971ffcb9cb0979d52c7b21d48faaaf))
+
+### Update
+
+* Update tt/plugins/default_plugins/helper_plugin.py
+
+Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`2b77bc6`](https://github.com/mraniki/tt/commit/2b77bc6b224bbad09b164b1f1f0554dd2756e3e5))
+
+### ♻️
+
+* ♻️ ([`39e487b`](https://github.com/mraniki/tt/commit/39e487b825cf7ef78f065c269c147ea55da9927b))
+
+* ♻️ ([`67e2a87`](https://github.com/mraniki/tt/commit/67e2a8716c11968085eea8f3430b67473a9c3f4e))
+
+* ♻️ ([`c9034fa`](https://github.com/mraniki/tt/commit/c9034faafe53fc07b21eaba3e066611ba01a0b3c))
+
+* ♻️ ([`844802a`](https://github.com/mraniki/tt/commit/844802ac845ab97cb33fc3a80fe87a8012929f8c))
+
+### 🎨
+
+* 🎨 update plugin_manager.py ([`4aeabe0`](https://github.com/mraniki/tt/commit/4aeabe0d94b1d0689f381dd9fbd2d9863946575c))
+
+### 🚑
+
+* 🚑 ([`e7960ae`](https://github.com/mraniki/tt/commit/e7960ae93fe4180e3e6cb544255f9c32e0de93b5))
+
+
 ## v9.0.0 (2024-06-18)
 
 ### :rotating_light:
