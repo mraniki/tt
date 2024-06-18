@@ -169,6 +169,7 @@ class BasePlugin:
         self.scheduler = scheduler
         self.bot_prefix = settings.bot_prefix
         self.bot_ignore = settings.bot_ignore
+        self.bot_contains_words = settings.bot_contains_words
 
     async def start(self):
         pass
@@ -191,11 +192,20 @@ class BasePlugin:
             bool
 
         """
-        if any(message.startswith(word) for word in self.bot_ignore):
-            # logger.debug("Filtering message {}", self.bot_ignore)
-            return True
-        else:
-            return False
+        return any(message.startswith(word) for word in self.bot_ignore)
+
+    def contains_word(self, message):
+        """
+        Returns True if the given word is found in the message
+        Args:
+            message (str): Message
+            word (str): Word to search for
+
+        Returns:
+            bool
+
+        """
+        return self.bot_contains_words in message
 
     def should_handle(self, message):
         """
