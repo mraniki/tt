@@ -25,6 +25,7 @@
 #                 user_name="talky_feed",
 #                 frequency=self.rss_feed_frequency,
 #                 frequency_unit="minutes",
+#                 function=self.poll_rss_feed,
 #             )
 
 #     async def send_notification(self, message):
