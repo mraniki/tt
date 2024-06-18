@@ -87,7 +87,7 @@ class CexExchangePlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
-        elif not self.should_handle_timeframe():
+        elif await self.fmo.search(msg) and not self.should_handle_timeframe():
             await self.send_notification("⚠️ Trading restricted")
 
         elif await self.fmo.search(msg) and self.should_handle_timeframe():
