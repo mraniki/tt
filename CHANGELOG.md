@@ -2,6 +2,27 @@
 
 
 
+## v9.1.1 (2024-06-18)
+
+### Other
+
+* Merge pull request #1634 from mraniki/dev
+
+♻️ update ai_agent_plugin.py and helper_plugin.py 🎨 ([`9c1a20f`](https://github.com/mraniki/tt/commit/9c1a20f0f08b8f32a9d858e644143edee323c9c0))
+
+### ♻️
+
+* ♻️ update ai_agent_plugin.py and talky_settings.toml ([`041ec26`](https://github.com/mraniki/tt/commit/041ec268f6d1778068050fb9722dc1453e694110))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`2dc5cc1`](https://github.com/mraniki/tt/commit/2dc5cc1c6af27276c5ac9d68a8f649d8c3838c2f))
+
+### 🎨
+
+* update ai_agent_plugin.py and helper_plugin.py 🎨 ([`10055b0`](https://github.com/mraniki/tt/commit/10055b0dbd27ac0239b9aab148ad8d427353facc))
+
+
 ## v9.1.0 (2024-06-18)
 
 ### Feat
