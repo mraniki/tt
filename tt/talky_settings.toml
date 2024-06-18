@@ -111,6 +111,8 @@ iamlistening_enabled = true
 bot_prefix = "/"
 # Character to ignore
 bot_ignore = "ℹ️ ⚠️ 📊 🏦 📺 ⬆️ 💬 ⚖️ 🧠 🦄"
+# Words to identify
+bot_identify_words = ""
 # Command for help
 bot_command_help = "help"
 # Command for info

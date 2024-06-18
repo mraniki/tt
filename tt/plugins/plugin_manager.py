@@ -168,8 +168,8 @@ class BasePlugin:
         self.notifier = Notifier()
         self.scheduler = scheduler
         self.bot_prefix = settings.bot_prefix
-        self.bot_ignore = settings.bot_ignore
-        self.bot_contains_words = settings.bot_contains_words
+        self.bot_ignore = settings.bot_ignore or []
+        self.bot_identify_words = settings.bot_identify_words or []
 
     async def start(self):
         pass
@@ -205,7 +205,7 @@ class BasePlugin:
             bool
 
         """
-        return self.bot_contains_words in message
+        return self.bot_identify_words in message
 
     def should_handle(self, message):
         """
