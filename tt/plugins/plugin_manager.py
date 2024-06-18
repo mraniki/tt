@@ -360,9 +360,11 @@ class BasePlugin:
                 start_time,
                 end_time,
             )
-            return (
+            control = (
                 current_day in settings.trading_days_allowed
                 and start_time <= current_time <= end_time
             )
+            logger.debug("Trading control: {}", control)
+            return control
 
         return True
