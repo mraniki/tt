@@ -168,8 +168,8 @@ class BasePlugin:
         self.notifier = Notifier()
         self.scheduler = scheduler
         self.bot_prefix = settings.bot_prefix
-        self.bot_ignore = settings.bot_ignore or []
-        self.bot_identify_words = settings.bot_identify_words or []
+        self.bot_filter_out = settings.bot_ignore or []
+        self.bot_filter_in = settings.bot_filter_in or []
 
     async def start(self):
         pass
@@ -192,9 +192,9 @@ class BasePlugin:
             bool
 
         """
-        return any(message.startswith(word) for word in self.bot_ignore)
+        return any(message.startswith(word) for word in self.bot_filter_out)
 
-    def contains_word(self, message):
+    def should_filter_in(self, message):
         """
         Returns True if the given word is found in the message
         Args:
@@ -205,7 +205,7 @@ class BasePlugin:
             bool
 
         """
-        return self.bot_identify_words in message
+        return self.bot_filter_in in message
 
     def should_handle(self, message):
         """
