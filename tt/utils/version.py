@@ -3,7 +3,7 @@ Version Related Utils
 
 """
 
-__version__ = "9.1.4"
+__version__ = "9.1.5"
 
 
 import aiohttp

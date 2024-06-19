@@ -2,6 +2,19 @@
 
 
 
+## v9.1.5 (2024-06-19)
+
+### Other
+
+* Merge pull request #1639 from mraniki/dev
+
+♻️ update plugin_manager.py and talky_settings.toml ([`0c4bf2a`](https://github.com/mraniki/tt/commit/0c4bf2aad9d82cc32518c4f131cb89140530c751))
+
+### ♻️
+
+* ♻️ update plugin_manager.py and talky_settings.toml (bot_filter_out / bot_filter_in) ([`69dfe52`](https://github.com/mraniki/tt/commit/69dfe521832aea9473b43bb4f49e445ff159aacc))
+
+
 ## v9.1.4 (2024-06-18)
 
 ### Other
