@@ -119,7 +119,7 @@ class HelperPlugin(BasePlugin):
         the name and version of the bot
         and the list of enabled plugins
         and options
-        
+
         #todo move all the settings in the init
         """
         return (
