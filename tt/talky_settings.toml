@@ -175,10 +175,15 @@ helper_commands = """
 
 # Enable/Disable Trading
 trading_enabled = true
+trading_status_message = "ℹ️Trading is "
+trading_status_enabled = "enabled"
+trading_status_disabled = "disabled"
+
 trading_control = true
 trading_days_allowed = ["tue", "wed", "thu"]
 trading_hours_start = "08:00"
 trading_hours_end = "16:00"
+trading_control_message = "⚠️ Trading restricted"
 
 ########################################
 ###        FINDMYORDER SETTINGS      ###

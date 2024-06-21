@@ -44,7 +44,12 @@ class HelperPlugin(BasePlugin):
         if self.enabled:
             logger.info("Helper Plugin Enabled")
             self.host_ip = f"🕸 {self.get_host_ip()}"
+            self.ip_check_url = settings.ip_check_url
             self.help_message = settings.helper_commands
+            self.settings.trading_enabled = settings.settings.trading_enabled
+            self.trading_status_message = settings.trading_status_message
+            self.trading_status_enabled = settings.trading_status_enabled
+            self.trading_status_disabled = settings.trading_status_disabled
 
     async def start(self):
         """
@@ -114,6 +119,8 @@ class HelperPlugin(BasePlugin):
         the name and version of the bot
         and the list of enabled plugins
         and options
+        
+        #todo move all the settings in the init
         """
         return (
             f"ℹ️ {settings.bot_name} {__version__}\n"
@@ -122,7 +129,7 @@ class HelperPlugin(BasePlugin):
             f"plugins: {settings.plugin_directory}\n"
             f"ui_enabled: {settings.ui_enabled}\n"
             f"forwarder_enabled: {settings.forwarder}\n"
-            f"trading_enabled: {settings.trading_enabled}\n"
+            f"trading_enabled: {self.trading_enabled}\n"
             f"trading_control: {settings.trading_control}\n"
             f"trading_days_allowed: {settings.trading_days_allowed}\n"
             f"trading_hours_start: {settings.trading_hours_start}\n"
@@ -140,7 +147,7 @@ class HelperPlugin(BasePlugin):
         more info: https://github.com/kyan001/ping3
 
         """
-        ping_result = ping3.ping(settings.ip_check_url, unit="ms")
+        ping_result = ping3.ping(self.ip_check_url, unit="ms")
         ping_result = round(ping_result, 2) if ping_result is not None else 0
 
         return f"🌐 {self.host_ip}\n" f"🏓 {ping_result} ms\n"
@@ -152,8 +159,8 @@ class HelperPlugin(BasePlugin):
         to turn off or on the
         trading capability
         """
-        settings.trading_enabled = not settings.trading_enabled
-        status = "enabled" if settings.trading_enabled else "disabled"
+        self.trading_enabled = not self.trading_enabled
+        status = "enabled" if self.trading_enabled else "disabled"
         return f"ℹ️Trading is {status}."
 
     async def restart(self):

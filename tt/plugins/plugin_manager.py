@@ -170,6 +170,7 @@ class BasePlugin:
         self.bot_prefix = settings.bot_prefix
         self.bot_filter_out = settings.bot_ignore or []
         self.bot_filter_in = settings.bot_filter_in or []
+        self.trading_control_message = settings.trading_control_message
 
     async def start(self):
         pass
