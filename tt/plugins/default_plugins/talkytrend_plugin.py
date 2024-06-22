@@ -16,6 +16,11 @@ class TalkyTrendPlugin(BasePlugin):
         """
         super().__init__()
         self.enabled = settings.talkytrend_enabled
+        self.bot_command_trend = settings.bot_command_trend
+        self.bot_command_news = settings.bot_command_news
+        self.bot_command_tv = settings.bot_command_tv
+        self.bot_command_scraper = settings.bot_command_scraper
+
         if self.enabled:
             self.trend = TalkyTrend()
 
@@ -75,11 +80,11 @@ class TalkyTrendPlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_info: self.trend.get_talkytrend_info,
-                settings.bot_command_trend: self.trend.fetch_signal,
-                settings.bot_command_news: self.trend.fetch_feed,
-                settings.bot_command_tv: self.trend.get_tv,
-                settings.bot_command_scraper: self.trend.scrape_page,
+                self.bot_command_info: self.trend.get_talkytrend_info,
+                self.bot_command_trend: self.trend.fetch_signal,
+                self.bot_command_news: self.trend.fetch_feed,
+                self.bot_command_tv: self.trend.get_tv,
+                self.bot_command_scraper: self.trend.scrape_page,
             }
 
             if command in command_mapping:

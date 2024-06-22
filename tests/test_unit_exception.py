@@ -10,7 +10,6 @@ from fastapi.testclient import TestClient
 from iamlistening import Listener
 
 from tt.app import app
-from tt.config import settings
 from tt.plugins.plugin_manager import PluginManager
 from tt.utils.utils import start_bot
 
@@ -39,7 +38,7 @@ async def test_start_bot(message):
     plugin_manager = AsyncMock(spec=PluginManager)
     get_latest_message = AsyncMock()
     process_message = AsyncMock()
-    print(settings)
+    # print(settings)
     listener = Listener()
     assert listener is not None
     assert isinstance(listener, Listener)

@@ -41,10 +41,17 @@ class HelperPlugin(BasePlugin):
         """
         super().__init__()
         self.enabled = settings.helper_enabled
+        self.help_message = settings.helper_commands
+        self.ip_check_url = settings.ip_check_url
+        self.bot_command_network = settings.bot_command_network
+        self.bot_command_restart = settings.bot_command_restart
+        self.bot_command_trading = settings.bot_command_trading
+        self.action_identifier = settings.action_identifier
+        self.quantity = settings.quantity
+
         if self.enabled:
             logger.info("Helper Plugin Enabled")
             self.host_ip = f"🕸 {self.get_host_ip()}"
-            self.help_message = settings.helper_commands
 
     async def start(self):
         """
@@ -89,11 +96,11 @@ class HelperPlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_help: self.get_helper_help,
-                settings.bot_command_info: self.get_helper_info,
-                settings.bot_command_network: self.get_helper_network,
-                settings.bot_command_trading: self.trading_switch_command,
-                settings.bot_command_restart: self.restart,
+                self.bot_command_help: self.get_helper_help,
+                self.bot_command_info: self.get_helper_info,
+                self.bot_command_network: self.get_helper_network,
+                self.bot_command_trading: self.trading_switch_command,
+                self.bot_command_restart: self.restart,
             }
             if command in command_mapping:
                 function = command_mapping[command]
@@ -114,21 +121,23 @@ class HelperPlugin(BasePlugin):
         the name and version of the bot
         and the list of enabled plugins
         and options
+
+        #todo move all the settings in the init
         """
         return (
-            f"ℹ️ {settings.bot_name} {__version__}\n"
+            f"ℹ️ {self.bot_name} {__version__}\n"
             "______________________________\n"
-            f"plugin_enabled: {settings.plugin_enabled}\n"
-            f"plugins: {settings.plugin_directory}\n"
-            f"ui_enabled: {settings.ui_enabled}\n"
-            f"forwarder_enabled: {settings.forwarder}\n"
-            f"trading_enabled: {settings.trading_enabled}\n"
-            f"trading_control: {settings.trading_control}\n"
-            f"trading_days_allowed: {settings.trading_days_allowed}\n"
-            f"trading_hours_start: {settings.trading_hours_start}\n"
-            f"trading_hours_end: {settings.trading_hours_end}\n"
-            f"trade action identifier: {settings.action_identifier}\n"
-            f"trade default quantity: {settings.quantity}\n"
+            f"plugin_enabled: {self.plugin_enabled}\n"
+            f"plugins: {self.plugin_directory}\n"
+            f"ui_enabled: {self.ui_enabled}\n"
+            f"forwarder_enabled: {self.forwarder}\n"
+            f"trading_enabled: {self.trading_enabled}\n"
+            f"trading_control: {self.trading_control}\n"
+            f"trading_days_allowed: {self.trading_days_allowed}\n"
+            f"trading_hours_start: {self.trading_hours_start}\n"
+            f"trading_hours_end: {self.trading_hours_end}\n"
+            f"trade action identifier: {self.action_identifier}\n"
+            f"trade default quantity: {self.quantity}\n"
         )
 
     async def get_helper_network(self) -> str:
@@ -140,7 +149,7 @@ class HelperPlugin(BasePlugin):
         more info: https://github.com/kyan001/ping3
 
         """
-        ping_result = ping3.ping(settings.ip_check_url, unit="ms")
+        ping_result = ping3.ping(self.ip_check_url, unit="ms")
         ping_result = round(ping_result, 2) if ping_result is not None else 0
 
         return f"🌐 {self.host_ip}\n" f"🏓 {ping_result} ms\n"
@@ -152,8 +161,12 @@ class HelperPlugin(BasePlugin):
         to turn off or on the
         trading capability
         """
-        settings.trading_enabled = not settings.trading_enabled
-        status = "enabled" if settings.trading_enabled else "disabled"
+        self.trading_enabled = not self.trading_enabled
+        status = (
+            self.trading_status_enabled
+            if self.trading_enabled
+            else self.trading_status_disabled
+        )
         return f"ℹ️Trading is {status}."
 
     async def restart(self):

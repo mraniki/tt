@@ -52,7 +52,7 @@ async def test_plugin(plugin):
 async def test_parse_info(plugin):
     """Test info"""
     plugin.exchange.get_info = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_info}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_info}")
     plugin.exchange.get_info.assert_awaited()
 
 
@@ -60,7 +60,7 @@ async def test_parse_info(plugin):
 async def test_parse_balance(plugin):
     """Test balance"""
     plugin.exchange.get_balances = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_bal}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_bal}")
     plugin.exchange.get_balances.assert_awaited()
 
 
@@ -68,7 +68,7 @@ async def test_parse_balance(plugin):
 async def test_parse_position(plugin):
     """Test position"""
     plugin.exchange.get_positions = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_pos}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_pos}")
     plugin.exchange.get_positions.assert_awaited()
 
 
@@ -77,7 +77,7 @@ async def test_parse_quote(plugin, caplog):
     """Test parse_message balance"""
     plugin.exchange.get_quotes = AsyncMock()
     await plugin.handle_message(
-        f"{settings.bot_prefix}{settings.bot_command_quote} BTCUSDT"
+        f"{plugin.bot_prefix}{plugin.bot_command_quote} BTCUSDT"
     )
     plugin.exchange.get_quotes.assert_awaited()
 

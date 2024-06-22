@@ -66,7 +66,7 @@ async def test_load_one_plugin():
 
 @pytest.mark.asyncio
 async def test_load_plugins(caplog):
-    settings.talkytrend_enabled = False
+    # settings.talkytrend_enabled = False
     plugin_manager = PluginManager()
     print(plugin_manager)
     assert plugin_manager is not None
@@ -95,7 +95,7 @@ async def test_start_plugin(caplog):
 async def test_plugin_notification(plugin, plugin_manager):
     """Test notification"""
     send_notification = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_help}")
     send_notification.assert_awaited_once
 
 

@@ -107,6 +107,7 @@ iamlistening_enabled = true
 ###   COMMON BOT COMMAND SETTINGS    ###
 ########################################
 
+bot_name = "Talky"
 # Bot Prefix 
 bot_prefix = "/"
 # Character to ignore
@@ -173,12 +174,23 @@ helper_commands = """
 ###         TRADING SETTINGS         ###
 ########################################
 
-# Enable/Disable Trading
+# Enable/Disable Trading 
+# and Message to be displayed
 trading_enabled = true
+trading_status_message = "ℹ️Trading is "
+trading_status_enabled = "enabled"
+trading_status_disabled = "disabled"
+
+# Enable/Disable Trading Control
+# and Days of the week and Hours 
+# of the day when Trading is
+# allowed
+# and Message to be displayed
 trading_control = true
 trading_days_allowed = ["tue", "wed", "thu"]
 trading_hours_start = "08:00"
 trading_hours_end = "16:00"
+trading_control_message = "⚠️ Trading restricted"
 
 ########################################
 ###        FINDMYORDER SETTINGS      ###
@@ -273,8 +285,7 @@ user_timezone="UTC"
 # Enable/Disable Helper
 helper_enabled = true
 # helper_enabled = false
-#name of the bot
-bot_name = "Talky"
+
 # URL endpoint for latency ping.
 ip_check_url = "8.8.8.8"
 

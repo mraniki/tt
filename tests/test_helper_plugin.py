@@ -21,15 +21,15 @@ async def test_plugin(plugin):
     """Test message handling"""
     assert plugin.should_filter("ℹ️") is True
     assert (
-        plugin.should_filter(f"{settings.bot_prefix}{settings.bot_command_help}")
+        plugin.should_filter(f"{plugin.bot_prefix}{plugin.bot_command_help}")
         is False
     )
     assert (
-        plugin.should_handle(f"{settings.bot_prefix}{settings.bot_command_help}")
+        plugin.should_handle(f"{plugin.bot_prefix}{plugin.bot_command_help}")
         is True
     )
     assert (
-        plugin.is_command_to_handle(f"{settings.bot_prefix}{settings.bot_command_help}")
+        plugin.is_command_to_handle(f"{plugin.bot_prefix}{plugin.bot_command_help}")
         is True
     )
 
@@ -38,7 +38,7 @@ async def test_plugin(plugin):
 async def test_plugin_notification(plugin):
     """Test notification"""
     plugin.send_notification = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_help}")
     plugin.send_notification.assert_awaited_once()
 
 
@@ -53,7 +53,7 @@ async def test_bot_ignore(plugin):
 async def test_parsing_help(plugin):
     """Test help"""
     plugin.get_helper_help = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_help}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_help}")
     plugin.get_helper_help.assert_awaited_once()
 
 
@@ -61,7 +61,7 @@ async def test_parsing_help(plugin):
 async def test_parsing_info(plugin):
     """Test info"""
     plugin.get_helper_info = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_info}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_info}")
     plugin.get_helper_info.assert_awaited_once()
 
 
@@ -69,7 +69,7 @@ async def test_parsing_info(plugin):
 async def test_parsing_network(plugin):
     """Test network"""
     plugin.get_helper_network = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_network}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_network}")
     plugin.get_helper_network.assert_awaited_once()
 
 
@@ -77,7 +77,7 @@ async def test_parsing_network(plugin):
 async def test_parsing_trading_switch(plugin):
     """Test switch"""
     plugin.trading_switch_command = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_trading}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_trading}")
     plugin.trading_switch_command.assert_awaited_once()
 
 
@@ -108,4 +108,4 @@ async def test_trading_switch(plugin):
     result = await plugin.trading_switch_command()
     assert result is not None
     assert "Trading" in result
-    assert settings.trading_enabled is False
+    assert plugin.trading_enabled is False

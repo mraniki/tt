@@ -77,10 +77,10 @@ class DexExchangePlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_info: self.exchange.get_info,
-                settings.bot_command_bal: self.exchange.get_balances,
-                settings.bot_command_pos: self.exchange.get_positions,
-                settings.bot_command_quote: lambda: self.exchange.get_quotes(args[0]),
+                self.bot_command_info: self.exchange.get_info,
+                self.bot_command_bal: self.exchange.get_balances,
+                self.bot_command_pos: self.exchange.get_positions,
+                self.bot_command_quote: lambda: self.exchange.get_quotes(args[0]),
             }
 
             if command in command_mapping:
@@ -88,11 +88,11 @@ class DexExchangePlugin(BasePlugin):
                 await self.send_notification(f"{await function()}")
 
         elif await self.fmo.search(msg) and not self.should_handle_timeframe():
-            await self.send_notification("⚠️ Trading restricted")
+            await self.send_notification(self.trading_control_message)
 
         elif await self.fmo.search(msg) and self.should_handle_timeframe():
             order = await self.fmo.get_order(msg)
-            if order and settings.trading_enabled:
+            if order and self.trading_enabled:
                 trade = await self.exchange.submit_order(order)
                 if trade:
                     await self.send_notification(trade)
