@@ -19,7 +19,7 @@ def test_fixture_plugin():
 @pytest.mark.asyncio
 async def test_plugin(plugin):
     """Test message handling"""
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_question}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_question}")
     assert plugin.ai_agent is not None
     assert callable(plugin.ai_agent.chat)
 
@@ -28,7 +28,7 @@ async def test_plugin(plugin):
 async def test_plugin_notification(plugin):
     """Test notification"""
     plugin.send_notification = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_aichat}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_aichat}")
     plugin.send_notification.assert_awaited_once()
 
 
@@ -43,9 +43,7 @@ async def test_bot_ignore(plugin):
 async def test_parsing_ai_agent(plugin):
     """Test scr"""
     plugin.ai_agent.chat = AsyncMock()
-    await plugin.handle_message(
-        f"{settings.bot_prefix}{settings.bot_command_aichat} hello"
-    )
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_aichat} hello")
     plugin.ai_agent.chat.assert_awaited_once()
 
 
@@ -53,7 +51,7 @@ async def test_parsing_ai_agent(plugin):
 async def test_parsing_info(plugin):
     """Test info"""
     plugin.ai_agent.get_info = AsyncMock()
-    await plugin.handle_message(f"{settings.bot_prefix}{settings.bot_command_info}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_info}")
     plugin.ai_agent.get_info.assert_awaited_once()
 
 
@@ -70,7 +68,7 @@ async def test_parsing_switch(plugin):
     result = await plugin.ai_agent_switch_command()
     assert result is not None
     assert "AI Agent is" in result
-    assert settings.trading_enabled is True
+    assert plugin.ai_agent_mode is True
 
 
 # @pytest.mark.asyncio
