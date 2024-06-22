@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v9.2.1 (2024-06-22)
+
+### Other
+
+* Merge pull request #1641 from mraniki/dev
+
+Update myllm version to 4.9.4 ([`be44d10`](https://github.com/mraniki/tt/commit/be44d101694021e52b78e25f4a3ba93ca33332b7))
+
+* Merge branch &#39;main&#39; into dev ([`dee544a`](https://github.com/mraniki/tt/commit/dee544a79e419ccfa869d058f213bef0f3825cd9))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`902fca1`](https://github.com/mraniki/tt/commit/902fca198a0068a1041fc97550630607f3695112))
+
+### Update
+
+* Update myllm version to 4.9.4 ([`c19c7fc`](https://github.com/mraniki/tt/commit/c19c7fc6e1d3d96b810ded40992e47e500c92fac))
+
 ## v9.2.0 (2024-06-22)
 
 ### :recycle:
@@ -29,6 +45,8 @@
 * 💄  ♻️ Large refactoring for plugins settings ([`969fc9e`](https://github.com/mraniki/tt/commit/969fc9e757aae1f22984a5a19cf6e9ccd9d1bf01))
 
 ### 📝
+
+* 📝 docs: update README.md ([`79b085f`](https://github.com/mraniki/tt/commit/79b085f2f81f27734d082b0a02a6afa32173ec76))
 
 * 📝 ([`0bc436f`](https://github.com/mraniki/tt/commit/0bc436f2e77729099dc6f135a00f5f464e188fca))
 
