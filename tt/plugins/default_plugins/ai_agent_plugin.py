@@ -42,6 +42,11 @@ class AIAgentPlugin(BasePlugin):
         self.enabled = settings.myllm_enabled
         self.ai_agent_mode = settings.ai_agent_mode or False
         self.ai_agent_prefix = settings.ai_agent_prefix or None
+        self.bot_command_aiclear = settings.bot_command_aiclear
+        self.bot_command_aiexport = settings.bot_command_aiexport
+        self.bot_command_aichat = settings.bot_command_aichat
+        self.bot_command_aimode = settings.bot_command_aimode
+
         if self.enabled:
             self.ai_agent = MyLLM()
 
@@ -70,11 +75,11 @@ class AIAgentPlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_info: self.ai_agent.get_info,
-                settings.bot_command_aiclear: self.ai_agent.clear_chat_history,
-                settings.bot_command_aiexport: self.ai_agent.export_chat_history,
-                settings.bot_command_aichat: lambda: self.ai_agent.chat(str(args)),
-                settings.bot_command_aimode: self.ai_agent_switch_command,
+                self.bot_command_info: self.ai_agent.get_info,
+                self.bot_command_aiclear: self.ai_agent.clear_chat_history,
+                self.bot_command_aiexport: self.ai_agent.export_chat_history,
+                self.bot_command_aichat: lambda: self.ai_agent.chat(str(args)),
+                self.bot_command_aimode: self.ai_agent_switch_command,
             }
             if command in command_mapping:
                 function = command_mapping[command]

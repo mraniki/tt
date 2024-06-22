@@ -1,6 +1,8 @@
 from tt.config import logger, settings
 from tt.plugins.plugin_manager import BasePlugin
 
+# import MyClass / Your Class Object
+
 
 class ExamplePlugin(BasePlugin):
     """Example Plugin
@@ -13,6 +15,7 @@ class ExamplePlugin(BasePlugin):
         self.enabled = settings.example_plugin_enabled
         if self.enabled:
             logger.debug("example plugin enabled")
+            # init MyClass here
 
     async def start(self):
         """Starts the plugin"""
@@ -34,7 +37,7 @@ class ExamplePlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                settings.bot_command_help: self.myadhocfunction,
+                self.bot_command_help: self.myadhocfunction,
             }
 
             if command in command_mapping:

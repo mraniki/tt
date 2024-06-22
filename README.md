@@ -4,7 +4,7 @@
 <div align="left">
 
 Connect multiple CEX and DEX across multi messaging platforms.<br>
-Place order, inquire your balance and more through plugins.<br>
+Place order, inquire your balance, access AI agent and more through plugins.<br>
 Easily deploy via Docker on self-hosted platform or PAAS.<br>
 <br>
 <p align="left">
