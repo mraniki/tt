@@ -165,12 +165,37 @@ class BasePlugin:
 
     def __init__(self):
         self.enabled = False
+        # Bot Settings
+        self.bot_name = settings.bot_name
+        self.bot_prefix = settings.bot_prefix or "/"
+        self.bot_command_help = settings.bot_command_help
+        self.bot_command_info = settings.bot_command_info
+        self.bot_command_bal = settings.bot_command_bal
+        self.bot_command_pos = settings.bot_command_pos
+        self.bot_command_quote = settings.bot_command_quote
         self.notifier = Notifier()
         self.scheduler = scheduler
-        self.bot_prefix = settings.bot_prefix
+        self.user_day_of_week = settings.user_day_of_week
+        self.user_hours = settings.user_hours
+        self.user_timezone = settings.user_timezone
         self.bot_filter_out = settings.bot_ignore or []
         self.bot_filter_in = settings.bot_filter_in or []
+        self.plugin_enabled = settings.plugin_enabled
+        self.plugin_directory = settings.plugin_directory
+        self.ui_enabled = settings.ui_enabled
+        self.forwarder = settings.forwarder
+        # Trading Settings
+        self.trading_enabled = settings.trading_enabled
+        self.trading_status_message = settings.trading_status_message
+        self.trading_status_enabled = settings.trading_status_enabled
+        self.trading_status_disabled = settings.trading_status_disabled
+        self.trading_control = settings.trading_control
         self.trading_control_message = settings.trading_control_message
+        self.trading_days_allowed = settings.trading_days_allowed
+        self.trading_hours_start = settings.trading_hours_start
+        self.trading_hours_end = settings.trading_hours_end
+
+
 
     async def start(self):
         pass
@@ -193,6 +218,8 @@ class BasePlugin:
             bool
 
         """
+        if not self.enabled:
+            return False
         return any(message.startswith(word) for word in self.bot_filter_out)
 
     def should_filter_in(self, message):
@@ -236,7 +263,7 @@ class BasePlugin:
             bool: True if the plugin should
             handle the message, False otherwise.
         """
-        if message.startswith(settings.bot_prefix):
+        if message.startswith(self.bot_prefix):
             return True
 
     async def plugin_notify_schedule_task(
@@ -301,11 +328,11 @@ class BasePlugin:
 
         """
         if not user_day_of_week:
-            user_day_of_week = settings.user_day_of_week
+            user_day_of_week = self.user_day_of_week
         if not user_hours:
-            user_hours = settings.user_hours
+            user_hours = self.user_hours
         if not user_timezone:
-            user_timezone = settings.user_timezone
+            user_timezone = self.user_timezone
 
         if function:
             self.scheduler.add_task(
@@ -357,13 +384,13 @@ class BasePlugin:
         Returns:
             bool
         """
-        if settings.trading_control:
+        if self.trading_control:
             logger.debug("Trading control enabled")
             current_time = datetime.now().time()
             current_day = datetime.now().strftime("%a").lower()
 
-            start_time = datetime.strptime(settings.trading_hours_start, "%H:%M").time()
-            end_time = datetime.strptime(settings.trading_hours_end, "%H:%M").time()
+            start_time = datetime.strptime(self.trading_hours_start, "%H:%M").time()
+            end_time = datetime.strptime(self.trading_hours_end, "%H:%M").time()
             logger.debug(
                 "Current time: {}, Current day: {}, Start time: {}, End time: {}",
                 current_time,
@@ -372,7 +399,7 @@ class BasePlugin:
                 end_time,
             )
             control = (
-                current_day in settings.trading_days_allowed
+                current_day in self.trading_days_allowed
                 and start_time <= current_time <= end_time
             )
             logger.debug("Trading control: {}", control)
