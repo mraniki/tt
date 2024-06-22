@@ -219,7 +219,7 @@ class BasePlugin:
 
         """
         if not self.enabled:
-            return False
+            return True
         return any(message.startswith(word) for word in self.bot_filter_out)
 
     def should_filter_in(self, message):
