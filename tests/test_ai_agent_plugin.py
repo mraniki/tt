@@ -19,7 +19,7 @@ def test_fixture_plugin():
 @pytest.mark.asyncio
 async def test_plugin(plugin):
     """Test message handling"""
-    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_question}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_aichat}")
     assert plugin.ai_agent is not None
     assert callable(plugin.ai_agent.chat)
 
