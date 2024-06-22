@@ -195,8 +195,6 @@ class BasePlugin:
         self.trading_hours_start = settings.trading_hours_start
         self.trading_hours_end = settings.trading_hours_end
 
-
-
     async def start(self):
         pass
 
@@ -210,7 +208,9 @@ class BasePlugin:
     def should_filter(self, message):
         """
         Returns True if the plugin should NOT handle the message
-        if ignore characters are in the message via bot_ignore
+        if plugin is not enabled
+        and if ignore characters are in the message via bot_ignore
+
         Args:
             message (str): Message
 
