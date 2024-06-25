@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v9.2.3 (2024-06-25)
+
+### Other
+
+* Merge pull request #1646 from mraniki/dev
+
+⬆️ 🤖 - Everything will be just ticketyboo today ([`52164e4`](https://github.com/mraniki/tt/commit/52164e4d0145d58608167b57600babdae13451d6))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.2.3 ([`9cbeda8`](https://github.com/mraniki/tt/commit/9cbeda80f194a8d544335f05c6c91affff8e4b01))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.10.1 ([`c03ea83`](https://github.com/mraniki/tt/commit/c03ea83494b03c3c49aea0728ebbf95c5094a476))
+
 ## v9.2.2 (2024-06-23)
 
 ### Other
