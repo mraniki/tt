@@ -256,10 +256,10 @@ plugin_directory = "tt.plugins.default_plugins"
 # main plugins
 authorized_plugins = [
     'helper_plugin',
-    'dex_exchange_plugin',
-    'cex_exchange_plugin',
+    'exchange_plugin',
     'ai_agent_plugin',
-    'talkytrend_plugin',
+    # 'talkytrend_plugin',
+    # 'feed_plugin',
     ]
 
 # Enable/Disable Example Plugin
@@ -310,7 +310,7 @@ rss_feed_frequency = 5
 ########################################
 
 # Enable/Disable Talkytrend
-talkytrend_enabled = true
+talkytrend_enabled = false
 # talkytrend_enabled = false
 
 # Enable/Disable Signals
