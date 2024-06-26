@@ -47,8 +47,9 @@ async def test_parse_info(plugin):
 async def test_parse_balance(plugin):
     """Test balance"""
     plugin.get_balances = AsyncMock()
-    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_bal}")
+    result = await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_bal}")
     plugin.get_balances.assert_awaited
+    assert result is not None
 
 
 @pytest.mark.asyncio
@@ -95,3 +96,38 @@ async def test_parse_ignore(plugin):
     result = await plugin.handle_message("🏦 balance")
     assert result is None
     assert plugin.should_filter("🏦 balance") is True
+
+
+@pytest.mark.asyncio
+async def test_info(plugin):
+    """Search Testing"""
+    results = await plugin.get_info()
+    assert results is not None
+
+
+@pytest.mark.asyncio
+async def test_balance(plugin):
+    """Search Testing"""
+    results = await plugin.get_balances()
+    assert results is not None
+
+
+@pytest.mark.asyncio
+async def test_position(plugin):
+    """Search Testing"""
+    results = await plugin.get_positions()
+    assert results is not None
+
+
+@pytest.mark.asyncio
+async def test_quote(plugin, order_message):
+    """Search Testing"""
+    results = await plugin.get_quotes("WBTC")
+    assert results is not None
+
+
+@pytest.mark.asyncio
+async def test_submit_order(plugin, order_message):
+    """Search Testing"""
+    results = await plugin.submit_order(order_message)
+    assert results is not None

@@ -102,17 +102,6 @@ class UnifiedExchangePlugin(BasePlugin):
                 if trade:
                     await self.send_notification(trade)
 
-    async def submit_order(self, order):
-        """
-        Submits an order using the appropriate exchange.
-        """
-        order_results = []
-        if self.enabled_dex:
-            order_results.append(await self.exchange_dex.submit_order(order))
-        if self.enabled_cex:
-            order_results.append(await self.exchange_cex.submit_order(order))
-        return "\n".join(order_results)
-
     async def get_info(self):
         """
         Retrieves and combines information from both DEX and CEX.
@@ -156,3 +145,14 @@ class UnifiedExchangePlugin(BasePlugin):
         if self.exchange_cex:
             positions.append(await self.exchange_cex.get_positions())
         return "\n".join(positions)
+
+    async def submit_order(self, order):
+        """
+        Submits an order using the appropriate exchange.
+        """
+        order_results = []
+        if self.enabled_dex:
+            order_results.append(await self.exchange_dex.submit_order(order))
+        if self.enabled_cex:
+            order_results.append(await self.exchange_cex.submit_order(order))
+        return "\n".join(order_results)
