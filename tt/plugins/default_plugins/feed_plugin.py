@@ -2,7 +2,6 @@ import feedparser
 
 from tt.config import logger, settings
 from tt.plugins.plugin_manager import BasePlugin
-from tt.utils import send_notification
 
 
 class FeedPlugin(BasePlugin):
@@ -31,7 +30,7 @@ class FeedPlugin(BasePlugin):
     async def send_notification(self, message):
         """Sends a notification"""
         if self.enabled:
-            await send_notification(message)
+            await self.send_notification(message)
 
     def poll_rss_feed(self):
         """
