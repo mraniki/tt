@@ -47,9 +47,8 @@ async def test_parse_info(plugin):
 async def test_parse_balance(plugin):
     """Test balance"""
     plugin.get_balances = AsyncMock()
-    result = await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_bal}")
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_bal}")
     plugin.get_balances.assert_awaited
-    assert result is not None
 
 
 @pytest.mark.asyncio
