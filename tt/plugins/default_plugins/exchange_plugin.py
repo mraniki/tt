@@ -98,7 +98,7 @@ class UnifiedExchangePlugin(BasePlugin):
         elif await self.fmo.search(msg) and self.should_handle_timeframe():
             order = await self.fmo.get_order(msg)
             if order and self.trading_enabled:
-                trade = await self.exchange.submit_order(order)
+                trade = await self.submit_order(order)
                 if trade:
                     await self.send_notification(trade)
 
