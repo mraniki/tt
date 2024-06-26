@@ -66,7 +66,8 @@ async def test_load_one_plugin():
 
 @pytest.mark.asyncio
 async def test_load_plugins(caplog):
-    # settings.talkytrend_enabled = False
+    settings.talkytrend_enabled = False
+    settings.rss_feed_plugin_enabled = False
     plugin_manager = PluginManager()
     print(plugin_manager)
     assert plugin_manager is not None
