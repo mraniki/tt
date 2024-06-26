@@ -4,7 +4,7 @@ from unittest.mock import AsyncMock
 import pytest
 
 from tt.config import settings
-from tt.plugins.default_plugins.talkytrend_plugin import FeedPlugin
+from tt.plugins.default_plugins.feed_plugin import FeedPlugin
 
 
 @pytest.fixture(scope="session", autouse=True)
