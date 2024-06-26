@@ -85,7 +85,9 @@ class AIAgentPlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
-        elif self.ai_agent_mode and not msg.startswith(self.ai_agent_prefix):
+        elif self.ai_agent_mode and (
+            self.ai_agent.ai_agent_prefix or self.ai_agent.ai_agent_suffix not in msg
+        ):
             await self.send_notification(f"{await self.ai_agent.chat(str(msg))}")
 
     async def ai_agent_switch_command(self) -> str:
