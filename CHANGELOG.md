@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v9.3.1 (2024-06-26)
+
+### Other
+
+* Merge pull request #1650 from mraniki/dev
+
+🔧 chore: update talky_settings.toml ([`658798f`](https://github.com/mraniki/tt/commit/658798f22f768711e51e01dc10c20b2c2e1e8c24))
+
+### 🔧
+
+* 🔧 ([`c8f7b6f`](https://github.com/mraniki/tt/commit/c8f7b6fda30500eeeea28339315a256def7d84df))
+
+* 🔧 ([`3e289f3`](https://github.com/mraniki/tt/commit/3e289f3936413056588818c2dc18d3cb55b5b8a1))
+
+* 🔧 chore: update talky_settings.toml ([`b39109b`](https://github.com/mraniki/tt/commit/b39109bf3098be0af5b87ec23ff7af914ebace48))
+
 ## v9.3.0 (2024-06-26)
 
 ### Other
