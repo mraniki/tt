@@ -1,5 +1,67 @@
 # CHANGELOG
 
+## v9.3.0 (2024-06-26)
+
+### Other
+
+* Merge pull request #1649 from mraniki/dev
+
+🚀 new version UnifiedExchangePlugin ([`bfc9f32`](https://github.com/mraniki/tt/commit/bfc9f32832a6e658ae7ba1c59a9f9c024479cd0e))
+
+* build(deps): update pyproject.toml ([`870c737`](https://github.com/mraniki/tt/commit/870c7375268893dc6b33e51dca3f5628b9cf2f3d))
+
+* update example_plugin.py ([`aaa6614`](https://github.com/mraniki/tt/commit/aaa6614d921ca481b73580695d930a57e5b09e8e))
+
+### ♻️
+
+* ✅ Unit Test ♻️ ([`a0c9a68`](https://github.com/mraniki/tt/commit/a0c9a6833405ab551e4f3a0e9a3ecb152322cc4b))
+
+* ♻️ ([`36d92a5`](https://github.com/mraniki/tt/commit/36d92a52daaf928df4b2e70d396b29f4c8a80782))
+
+### ✅
+
+* ✅ Unit Test ([`d5e079d`](https://github.com/mraniki/tt/commit/d5e079d1041818f256f6e4c2f0cdbdb24d7feb08))
+
+* ✅ Unit Test ([`02c8ae3`](https://github.com/mraniki/tt/commit/02c8ae33d2c848bf84b7073e5d6ee0cf4cbec5fe))
+
+* ✅ Unit Test ([`3e071d2`](https://github.com/mraniki/tt/commit/3e071d24b9ce059e5aa88905ed397e774d5287dd))
+
+* ✅ Unit Test test: update test_exchange_plugin.py ([`abf24c8`](https://github.com/mraniki/tt/commit/abf24c8862d14e5dc054c35fff9c682614b0503d))
+
+* ✅ Unit Test ([`a5b94fc`](https://github.com/mraniki/tt/commit/a5b94fc04061b9df5b6e2ee6f4c1a20d6fd512f5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.2.13 ([`9cf4417`](https://github.com/mraniki/tt/commit/9cf4417590618d028860da8342f448c5f39f998a))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.2.4 ([`c70edc4`](https://github.com/mraniki/tt/commit/c70edc45f2daf2bbe809e4302bade2b624df4330))
+
+### 🎨
+
+* 🎨 ([`00b9f30`](https://github.com/mraniki/tt/commit/00b9f30e0b5fc05d3a58d08af33ed589dc8bfad4))
+
+### 🐛
+
+* 🐛 ([`96ec4a1`](https://github.com/mraniki/tt/commit/96ec4a109e5a6300961b0a0e29d8ebc585b77e7a))
+
+* 🐛 ([`4ad0350`](https://github.com/mraniki/tt/commit/4ad03501dd1a51b415ca1580d5ccda78598d1e7b))
+
+### 🔥
+
+* 🔥 ([`47226cd`](https://github.com/mraniki/tt/commit/47226cdd9924de92bb7430f71688ffa00e6af201))
+
+### 🚀
+
+* 🚀 new version UnifiedExchangePlugin ([`9f34154`](https://github.com/mraniki/tt/commit/9f3415489649e5ab96a760c53f996d314df5ef88))
+
+### 🚨
+
+* 🚨 ([`20d6614`](https://github.com/mraniki/tt/commit/20d6614c2c9e90bd8b9a8887f9225fa7029b6918))
+
+### 🥚
+
+* 🥚 build(deps): Aiagent refactor + plugin feed poller + Merge exchange plugin prep work ([`564a29c`](https://github.com/mraniki/tt/commit/564a29cfbf23a6dc6a75a471714294554595ab6b))
+
 ## v9.2.3 (2024-06-25)
 
 ### Other
