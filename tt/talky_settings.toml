@@ -258,8 +258,8 @@ authorized_plugins = [
     'helper_plugin',
     'exchange_plugin',
     'ai_agent_plugin',
-    'talkytrend_plugin',
-    'feed_plugin',
+    # 'talkytrend_plugin',
+    # 'feed_plugin',
     ]
 
 # Enable/Disable Example Plugin
