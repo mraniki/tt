@@ -38,43 +38,43 @@ async def test_plugin(plugin):
 @pytest.mark.asyncio
 async def test_parse_info(plugin):
     """Test help"""
-    plugin.exchange.get_info = AsyncMock()
+    plugin.get_info = AsyncMock()
     await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_info}")
-    plugin.exchange.get_info.assert_awaited_once()
+    plugin.get_info.assert_awaited_once()
 
 
 @pytest.mark.asyncio
 async def test_parse_balance(plugin):
     """Test balance"""
-    plugin.exchange.get_balances = AsyncMock()
+    plugin.get_balances = AsyncMock()
     await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_bal}")
-    plugin.exchange.get_balances.assert_awaited
+    plugin.get_balances.assert_awaited
 
 
 @pytest.mark.asyncio
 async def test_parse_position(plugin):
     """Test position"""
-    plugin.exchange.get_positions = AsyncMock()
+    plugin.get_positions = AsyncMock()
     await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_pos}")
-    plugin.exchange.get_positions.assert_awaited
+    plugin.get_positions.assert_awaited
 
 
 @pytest.mark.asyncio
 async def test_parse_quote(plugin, caplog):
     """Test parse_message quote"""
-    plugin.exchange.get_quotes = AsyncMock()
+    plugin.get_quotes = AsyncMock()
     await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_quote} WBTC")
-    plugin.exchange.get_quotes.assert_awaited
+    plugin.get_quotes.assert_awaited
 
 
 @pytest.mark.asyncio
 async def test_parse_quote2(plugin, caplog):
     """Test parse_message quote 2"""
-    plugin.exchange.get_quotes = AsyncMock()
+    plugin.get_quotes = AsyncMock()
     await plugin.handle_message(
         f"{plugin.bot_prefix}{plugin.bot_command_quote} BTCUSDT"
     )
-    plugin.exchange.get_quotes.assert_awaited()
+    plugin.get_quotes.assert_awaited()
 
 
 @pytest.mark.asyncio
@@ -82,11 +82,11 @@ async def test_parse_valid_order(plugin, order_message):
     """Search Testing"""
     plugin.fmo.search = AsyncMock()
     plugin.fmo.get_order = AsyncMock()
-    plugin.exchange.submit_order = AsyncMock()
+    plugin.submit_order = AsyncMock()
     await plugin.handle_message(order_message)
     plugin.fmo.search.assert_awaited_once
     plugin.fmo.get_order.assert_awaited
-    plugin.exchange.submit_order.assert_awaited
+    plugin.submit_order.assert_awaited
 
 
 @pytest.mark.asyncio
