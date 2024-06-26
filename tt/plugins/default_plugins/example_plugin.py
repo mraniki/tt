@@ -38,6 +38,7 @@ class ExamplePlugin(BasePlugin):
 
             command_mapping = {
                 self.bot_command_help: self.myadhocfunction,
+                # self.bot_command_mycommand: self.Myclass.function,
             }
 
             if command in command_mapping:
