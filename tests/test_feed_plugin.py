@@ -28,10 +28,11 @@ async def test_plugin(plugin):
 async def test_plugin_poll_rss_feed(plugin):
     """Test notification"""
     plugin.poll_rss_feed = AsyncMock()
-    sleep(60)
+    sleep(5)
     plugin.poll_rss_feed.assert_awaited_once
 
 
 def test_poll_rss_feed(plugin):
     result = plugin.poll_rss_feed()
+    print(result)
     assert result is not None

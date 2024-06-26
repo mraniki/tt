@@ -39,7 +39,7 @@ class FeedPlugin(BasePlugin):
         and logs the updates.
         """
         feed = feedparser.parse(self.rss_feed_url)
-
+        # logger.debug("Feed: {}", feed)
         for entry in feed.entries:
             updates = f"{entry.title} - {entry.link}"
             logger.debug("Updates: {}", updates)
