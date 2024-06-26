@@ -1,11 +1,12 @@
 from unittest.mock import AsyncMock
 
 import pytest
+from cefi import CexTrader
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 
 from tt.config import settings
-from tt.plugins.default_plugins.dex_exchange_plugin import DexExchangePlugin
+from tt.plugins.default_plugins.exchange_plugin import UnifiedExchangePlugin
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -21,15 +22,17 @@ def order():
 
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():
-    return DexExchangePlugin()
+    return UnifiedExchangePlugin()
 
 
 @pytest.mark.asyncio
 async def test_plugin(plugin):
     fmo = plugin.fmo
-    exchange = plugin.exchange
+    exchange_dex = plugin.exchange_dex
+    exchange_cex = plugin.exchange_cex
     assert isinstance(fmo, FindMyOrder)
-    assert isinstance(exchange, DexSwap)
+    assert isinstance(exchange_dex, DexSwap)
+    assert isinstance(exchange_cex, CexTrader)
 
 
 @pytest.mark.asyncio
@@ -58,12 +61,20 @@ async def test_parse_position(plugin):
 
 @pytest.mark.asyncio
 async def test_parse_quote(plugin, caplog):
-    """Test parse_message balance"""
+    """Test parse_message quote"""
+    plugin.exchange.get_quotes = AsyncMock()
+    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_quote} WBTC")
+    plugin.exchange.get_quotes.assert_awaited
+
+
+@pytest.mark.asyncio
+async def test_parse_quote2(plugin, caplog):
+    """Test parse_message quote 2"""
     plugin.exchange.get_quotes = AsyncMock()
     await plugin.handle_message(
-        f"{plugin.bot_prefix}{plugin.bot_command_quote} WBTC"
+        f"{plugin.bot_prefix}{plugin.bot_command_quote} BTCUSDT"
     )
-    plugin.exchange.get_quotes.assert_awaited
+    plugin.exchange.get_quotes.assert_awaited()
 
 
 @pytest.mark.asyncio

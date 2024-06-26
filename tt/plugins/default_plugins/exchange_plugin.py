@@ -92,12 +92,6 @@ class UnifiedExchangePlugin(BasePlugin):
                 function = command_mapping[command]
                 await self.send_notification(f"{await function()}")
 
-        # elif await self.fmo.search(msg):
-        #     if self.enabled_dex:
-        #         await self.handle_with_dex(msg)
-        #     elif self.enabled_cex:
-        #         await self.handle_with_cex(msg)
-
         elif await self.fmo.search(msg) and not self.should_handle_timeframe():
             await self.send_notification(self.trading_control_message)
 
@@ -107,20 +101,6 @@ class UnifiedExchangePlugin(BasePlugin):
                 trade = await self.exchange.submit_order(order)
                 if trade:
                     await self.send_notification(trade)
-
-    # async def handle_with_dex(self, msg):
-    #     """
-    #     Delegates message handling to DexSwap.
-    #     """
-    #     if self.exchange_dex:
-    #         await self.exchange_dex.process_message(msg)
-
-    # async def handle_with_cex(self, msg):
-    #     """
-    #     Delegates message handling to CexTrader.
-    #     """
-    #     if self.exchange_cex:
-    #         await self.exchange_cex.process_message(msg)
 
     async def submit_order(self, order):
         """
