@@ -254,13 +254,13 @@ plugin_directory = "tt.plugins.default_plugins"
 # authorized_plugins = []
 # Here the value has been set for
 # main plugins
-authorized_plugins = [
-    'helper_plugin',
-    'exchange_plugin',
-    'ai_agent_plugin',
-    # 'talkytrend_plugin',
-    # 'feed_plugin',
-    ]
+# authorized_plugins = [
+#     'helper_plugin',
+#     'exchange_plugin',
+#     'ai_agent_plugin',
+#     # 'talkytrend_plugin',
+#     # 'feed_plugin',
+#     ]
 
 # Enable/Disable Example Plugin
 # example_plugin_enabled = true
