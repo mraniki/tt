@@ -310,7 +310,7 @@ rss_feed_frequency = 5
 ########################################
 
 # Enable/Disable Talkytrend
-talkytrend_enabled = true
+talkytrend_enabled = false
 # talkytrend_enabled = false
 
 # Enable/Disable Signals
