@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## v9.3.3 (2024-06-28)
+
+### Other
+
+* Merge pull request #1660 from mraniki/dev
+
+⬆️ 🛠️(deps) ([`6b8d81a`](https://github.com/mraniki/tt/commit/6b8d81a816fdf6b7f1e4a2ad5999092bb856a4df))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.7.3 ([`d275329`](https://github.com/mraniki/tt/commit/d2753295449573c24de0edf965616ae33969bf15))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.18 ([`251358e`](https://github.com/mraniki/tt/commit/251358e380e1fde2d57a8825f2c875c485263aaf))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.10.3 ([`5a0bc01`](https://github.com/mraniki/tt/commit/5a0bc0125080776996b8984dcf45772d2a187343))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.2.5 ([`c7ca0ac`](https://github.com/mraniki/tt/commit/c7ca0acfab756a659cfe64be2c2aa42c193803d2))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.2.14 ([`067d548`](https://github.com/mraniki/tt/commit/067d54882cee8d6b9703981f312f810ce2c399cb))
+
 ## v9.3.2 (2024-06-28)
 
 ### Other
