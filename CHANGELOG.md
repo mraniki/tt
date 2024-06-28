@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## v9.3.2 (2024-06-28)
+
+### Other
+
+* Merge pull request #1653 from mraniki/dev
+
+⬆️ 🤖 - You will be a winner today  Pick a fight with a fouryearold ([`4dc254d`](https://github.com/mraniki/tt/commit/4dc254da128008ba280867a0d81a1a520422d67b))
+
+* Merge pull request #1651 from mraniki/dev
+
+update exchange_plugin.py and talky_settings.toml ([`4262f6c`](https://github.com/mraniki/tt/commit/4262f6c2afd90738c6020ff075e57a0a81a27bda))
+
+* update exchange_plugin.py and talky_settings.toml ([`f21e9de`](https://github.com/mraniki/tt/commit/f21e9de580ed8482919dacd0c6ddf38f10642de2))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.5.0 ([`882a733`](https://github.com/mraniki/tt/commit/882a733607f3a49a60386eb5eb4dc8273be5fbac))
+
 ## v9.3.1 (2024-06-26)
 
 ### Other
