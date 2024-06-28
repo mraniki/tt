@@ -182,6 +182,7 @@ class BasePlugin:
         self.bot_filter_in = settings.bot_filter_in or []
         self.plugin_enabled = settings.plugin_enabled
         self.plugin_directory = settings.plugin_directory
+        self.authorized_plugins = settings.authorized_plugins
         self.ui_enabled = settings.ui_enabled
         self.forwarder = settings.forwarder
         # Trading Settings
