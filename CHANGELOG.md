@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## v9.3.4 (2024-06-29)
+
+### Other
+
+* Merge pull request #1663 from mraniki/dev
+
+⬆️ 🤖 - Tuesday is the Wednesday of the rest of your life ([`387af53`](https://github.com/mraniki/tt/commit/387af530da47f31146f8829a1e93710b77865d99))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.7.5 ([`470c247`](https://github.com/mraniki/tt/commit/470c24765d4618c46324e931c9db2624b0368a65))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v10.2.15 ([`877b2d8`](https://github.com/mraniki/tt/commit/877b2d874842e0f5cb4b0279a195bc0d27e72a3a))
+
+### 🎨
+
+* 🎨 authorized_plugins added in helper message ([`fc39897`](https://github.com/mraniki/tt/commit/fc398975c9ba402c259ed6b093946a3eaf5e7207))
+
 ## v9.3.3 (2024-06-28)
 
 ### Other
