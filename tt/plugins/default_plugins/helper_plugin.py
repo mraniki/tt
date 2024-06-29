@@ -129,6 +129,7 @@ class HelperPlugin(BasePlugin):
             "______________________________\n"
             f"plugin_enabled: {self.plugin_enabled}\n"
             f"plugins: {self.plugin_directory}\n"
+            f"authorized_plugins: {self.authorized_plugins}\n"
             f"ui_enabled: {self.ui_enabled}\n"
             f"forwarder_enabled: {self.forwarder}\n"
             f"trading_enabled: {self.trading_enabled}\n"
