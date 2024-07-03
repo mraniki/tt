@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v9.3.6 (2024-07-03)
+
+### Other
+
+* Merge pull request #1667 from mraniki/dev
+
+⬆️ 🤖 - Youll never see all the places or read all the books but fortunately ([`c32257d`](https://github.com/mraniki/tt/commit/c32257d923d4956755241bc8bdeb81b9b4f3b374))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.10.5 ([`d8cc151`](https://github.com/mraniki/tt/commit/d8cc151ef54598ad4520418a257925df1bab14be))
+
 ## v9.3.5 (2024-07-01)
 
 ### Other
