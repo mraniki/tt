@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v9.3.7 (2024-07-05)
+
+### Other
+
+* Merge pull request #1669 from mraniki/dev
+
+⬆️ 🤖 - But for my own part it was Greek to me ([`486b224`](https://github.com/mraniki/tt/commit/486b22455aaa57df4133d16507ab3b1cff9d1541))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.10.6 ([`633eaea`](https://github.com/mraniki/tt/commit/633eaea06d454cf59f6e658af8c84fb9ae411dd5))
+
 ## v9.3.6 (2024-07-03)
 
 ### Other
