@@ -114,6 +114,7 @@ log_level = "DEBUG"
 python_classes = "Test*"
 pythonpath = ". tt"
 testpaths = "tests"
+asyncio_mode = "auto"
 
 [tool.ruff]
 exclude = [
