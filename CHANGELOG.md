@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v9.3.8 (2024-07-07)
+
+### Other
+
+* Merge pull request #1671 from mraniki/dev
+
+⬆️ 🤖 - It were not best that we should all think alike it is difference of opinion ([`6974efb`](https://github.com/mraniki/tt/commit/6974efb3500236ebe73632ba7341618ac8135ea6))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.10.7 ([`7421a07`](https://github.com/mraniki/tt/commit/7421a070210958981d0860376af831ef9c869fa8))
+
 ## v9.3.7 (2024-07-05)
 
 ### Other
