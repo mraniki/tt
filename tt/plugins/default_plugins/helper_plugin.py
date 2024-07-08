@@ -46,8 +46,6 @@ class HelperPlugin(BasePlugin):
         self.bot_command_network = settings.bot_command_network
         self.bot_command_restart = settings.bot_command_restart
         self.bot_command_trading = settings.bot_command_trading
-        self.action_identifier = settings.action_identifier
-        self.quantity = settings.quantity
 
         if self.enabled:
             logger.info("Helper Plugin Enabled")
