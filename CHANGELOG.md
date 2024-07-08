@@ -1,5 +1,29 @@
 # CHANGELOG
 
+## v10.0.0 (2024-07-08)
+
+### Other
+
+* Merge pull request #1677 from mraniki/dev
+
+💥 breaking  fmo config change to support multiple parser ([`082fe9b`](https://github.com/mraniki/tt/commit/082fe9bb7bfeb34b5990c453956b4ad5a7bf7859))
+
+### ✨
+
+* ✨ adding fmo.get_info in exchange plugin ([`5f64f3c`](https://github.com/mraniki/tt/commit/5f64f3cd0982a411fb0ddafd86087bef3230c574))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.0 ([`ebafe0d`](https://github.com/mraniki/tt/commit/ebafe0d67c00ebddc2bded6719445d88ca1e1e35))
+
+### 🐛
+
+* 🐛 ([`d9ca23e`](https://github.com/mraniki/tt/commit/d9ca23e83914c301b97f39a2911505b5afd85086))
+
+### 💥
+
+* 💥 breaking fmo config change to support new version ([`22bed72`](https://github.com/mraniki/tt/commit/22bed72b100bc0088a7add0632e1ce00aedb91e8))
+
 ## v9.3.9 (2024-07-08)
 
 ### Other
