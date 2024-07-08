@@ -46,8 +46,6 @@ class HelperPlugin(BasePlugin):
         self.bot_command_network = settings.bot_command_network
         self.bot_command_restart = settings.bot_command_restart
         self.bot_command_trading = settings.bot_command_trading
-        self.action_identifier = settings.action_identifier
-        self.quantity = settings.quantity
 
         if self.enabled:
             logger.info("Helper Plugin Enabled")
@@ -137,8 +135,6 @@ class HelperPlugin(BasePlugin):
             f"trading_days_allowed: {self.trading_days_allowed}\n"
             f"trading_hours_start: {self.trading_hours_start}\n"
             f"trading_hours_end: {self.trading_hours_end}\n"
-            f"trade action identifier: {self.action_identifier}\n"
-            f"trade default quantity: {self.quantity}\n"
         )
 
     async def get_helper_network(self) -> str:

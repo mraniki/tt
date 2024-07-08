@@ -18,7 +18,6 @@
 # https://github.com/mraniki/tt/blob/main/examples/example_settings.toml
 # for a settings.toml example
 
-
 ########################################
 ###        DYNACONF SETTINGS         ###
 ########################################
@@ -43,7 +42,6 @@ repo = "https://api.github.com/repos/mraniki/tt/releases/latest"
 # Enable/Disable Version Check
 # at the start of the bot
 version_check = true
-
 
 ########################################
 ###         FASTAPI SETTINGS         ###
@@ -96,12 +94,6 @@ apprise_url = ""
 # apprise_format = "NotifyFormat.MARKDOWN"
 apprise_format = "NotifyFormat.HTML"
 
-########################################
-###      IAMLISTENING SETTINGS       ###
-########################################
-
-# Enable/Disable IAMListening
-iamlistening_enabled = true
 
 ########################################
 ###   COMMON BOT COMMAND SETTINGS    ###
@@ -193,51 +185,6 @@ trading_hours_end = "16:00"
 trading_control_message = "⚠️ Trading restricted"
 
 ########################################
-###        FINDMYORDER SETTINGS      ###
-########################################
-
-# Enable/Disable FindMyOrder
-findmyorder_enabled = true
-
-# Keyword to be use to identify an order
-action_identifier = "BUY SELL LONG SHORT"
-# Keyword identifier for stoploss
-stop_loss_identifier = "sl="
-# Keyword identifier for take-profit
-take_profit_identifier = 'tp='
-# Keyword identifier for quantity
-quantity_identifier = 'q='
-# Keyword identifier for order type
-order_type_identifier = "spot future margin"
-# Keyword identifier for leverage
-leverage_type_identifier = "cross isolated"
-# Keyword identifier for comments
-comment_identifier = "comment="
-
-# Stoploss default value is none is provided
-stop_loss = 1000
-# Take-Profit default value is none is provided
-take_profit = 1000
-# Quantity default value is none is provided
-quantity = 1
-
-# Settings to enable or disable
-# instrument mapping
-instrument_mapping = false
-# instrument mapping to use and alternative 
-#  symbol when generating the order
-mapping = [
-    # { id = "EURUSD", alt = "EUR/sUSD" },
-    # { id = "GOLD", alt = "XAU" },
-    # { id = "BTC", alt = "WBTC" },
-    # { id = "ETH", alt = "WETH" },
-]
-
-# Instruments to be ignored
-# when generating an order
-ignore_instrument = "DOGE"
-
-########################################
 ###         PLUGINS SETTINGS         ###
 ########################################
 
@@ -262,6 +209,33 @@ plugin_directory = "tt.plugins.default_plugins"
 #     # 'feed_plugin',
 #     ]
 
+# Enable/Disable Helper
+helper_enabled = true
+
+# Enable/Disable IAMListening
+iamlistening_enabled = true
+
+# Enable/Disable Findmyorder
+findmyorder_enabled = true
+
+# Enable/Disable Myllm
+myllm_enabled = true
+ai_agent_mode = false # command to toggle aimode in continuous mode
+ai_agent_prefix = "" # prefix use to filter the AI agent 
+ai_agent_suffix = ""
+
+# Enable/Disable CEFI
+cex_enabled = true
+
+# Enable/Disable DXSP
+dxsp_enabled = true
+
+# Enable/Disable Talkytrend
+talkytrend_enabled = false
+
+# Enable/Disable RSS Feed Plugin
+rss_feed_plugin_enabled = false
+
 # Enable/Disable Example Plugin
 # example_plugin_enabled = true
 example_plugin_enabled = false
@@ -275,43 +249,17 @@ user_day_of_week="tue-thu"
 user_hours="6,12,18"
 user_timezone="UTC"
 
-
-
 ########################################
 ###          HELPER SETTINGS         ###
 ########################################
-
-
-# Enable/Disable Helper
-helper_enabled = true
-# helper_enabled = false
 
 # URL endpoint for latency ping.
 ip_check_url = "8.8.8.8"
 
 
 ########################################
-###        RSS FEED SETTINGS         ###
-########################################
-
-
-# Enable/Disable RSS Feed Plugin
-rss_feed_plugin_enabled = false
-
-# url of the rss feed
-rss_feed_url= "https://finance.yahoo.com/rss/"
-
-# frequency of the rss feed update in
-# minutes
-rss_feed_frequency = 5
-
-########################################
 ###        TALKYTREND SETTINGS       ###
 ########################################
-
-# Enable/Disable Talkytrend
-talkytrend_enabled = false
-# talkytrend_enabled = false
 
 # Enable/Disable Signals
 enable_signals = true
@@ -367,19 +315,19 @@ scraper_page_url = ""
 scraper_page_id = ""
 
 ########################################
-###           CEFI SETTINGS          ###
+###        RSS FEED SETTINGS         ###
 ########################################
 
-# Enable/Disable CEFI
-cex_enabled = true
+# url of the rss feed
+rss_feed_url= "https://finance.yahoo.com/rss/"
+
+# frequency of the rss feed update in
+# minutes
+rss_feed_frequency = 5
 
 ########################################
 ###           DXSP SETTINGS          ###
 ########################################
-
-# Enable/Disable DXSP
-dxsp_enabled = true
-
 # Header to use for retrieving urls content below
 headers = {User-Agent= 'Mozilla/5.0'}
 
@@ -396,16 +344,75 @@ token_mainnet_list = ""
 token_testnet_list = ""
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
+
+########################################
+###        FINDMYORDER SETTINGS      ###
+########################################
+
+# [default.findmyorder.standard]
+# parser_library = "standard"
+# enabled = true
+# # Keyword to be use to identify an order
+# action_identifier = "BUY SELL LONG SHORT"
+# # Keyword identifier for stoploss
+# stop_loss_identifier = "sl="
+# # Keyword identifier for take-profit
+# take_profit_identifier = 'tp='
+# # Keyword identifier for quantity
+# quantity_identifier = 'q='
+# # Keyword identifier for order type
+# order_type_identifier = "spot future margin"
+# # Keyword identifier for leverage
+# leverage_type_identifier = "cross isolated"
+# # Keyword identifier for comments
+# comment_identifier = "comment="
+
+# # Stoploss default value is none is provided
+# stop_loss = 1000
+# # Take-Profit default value is none is provided
+# take_profit = 1000
+# # Quantity default value is none is provided
+# quantity = 1
+
+# # Settings to enable or disable
+# # instrument mapping
+# instrument_mapping = false
+# # instrument mapping to use and alternative 
+# #  symbol when generating the order
+# mapping = [
+#     # { id = "EURUSD", alt = "EUR/sUSD" },
+#     # { id = "GOLD", alt = "XAU" },
+#     # { id = "BTC", alt = "WBTC" },
+#     # { id = "ETH", alt = "WETH" },
+# ]
+
+# # Instruments to be ignored
+# # when generating an order
+# ignore_instrument = "DOGE"
+
 #################################
 ###        MYLLM SETTINGS     ###
 #################################
-myllm_enabled = true
-ai_agent_mode = false # command to toggle aimode in continuous mode
-ai_agent_prefix = "🧠" # prefix use to filter the AI agent 
+
+# [default.myllm.openai]
+# enabled = true
+# llm_library = "openai"
+# llm_model= "gpt-4o"
+# llm_provider = "" 
+# llm_provider_key = "DEADBEEF"
+# max_memory = 100
+# timeout = 0
+# stream_mode = false
+# llm_prefix = "" 
+# llm_suffix = "" 
+# llm_template = """
+# You are a friendly AI helping me with 
+# trade monitoring and execution.
+# """
 
 # [default.myllm.g4f]
-# llm_library = "g4f" # options are bard, openai or g4f
 # enabled = false # options are true or false to enable or disable the llm
+# llm_library = "g4f" # options are bard, openai or g4f
 # llm_model= "gpt-4-turbo" # model to use e.g. gpt-3.5-turbo, gpt-4, gpt-4-32k
 # llm_provider = "g4f.Provider.Bing" # only for g4f. Refer to https://github.com/xtekky/gpt4free
 # llm_provider_key = "" # only for bard and openai to pass either the cookie or the api key
@@ -413,21 +420,7 @@ ai_agent_prefix = "🧠" # prefix use to filter the AI agent
 # timeout = 5 # time lag to wait ai response
 # stream_mode = false # enable streaming mode
 # llm_prefix = "🐻" # prefix use to filter the AI response
-# llm_template = """
-# You are a friendly AI helping me with 
-# trade monitoring and execution.
-# """
-
-# [default.myllm.openai]
-# enabled = false
-# llm_library = "openai"
-# llm_model= "gpt-4o"
-# llm_provider = "" 
-# llm_provider_key = "DEADBEEF"
-# max_memory = 100 # Conversation history size
-# timeout = 5 # time lag to wait ai response
-# stream_mode = false # enable streaming mode
-# llm_prefix = "" # prefix use to filter the AI response
+# llm_suffix = "🐻" # suffix use to filter the AI response
 # llm_template = """
 # You are a friendly AI helping me with 
 # trade monitoring and execution.
@@ -438,13 +431,14 @@ ai_agent_prefix = "🧠" # prefix use to filter the AI agent
 ###      CHAT PLATFORM SETTINGS      ###
 ########################################
 
-# [default.platform.template]
-# platform = ""
-# enabled = false
-# bot_token = ""
-# bot_channel_id = ""
-# bot_api_id = ""
-# bot_api_hash = ""
+# # telegram example
+# [default.platform.telegram]
+# enabled=true
+# platform="telegram"
+# bot_token = "mytoken"
+# bot_channel_id = "mychannelid"
+# bot_api_id = "myapiid"
+# bot_api_hash = "myapihash"
 # bot_hostname = ""
 # bot_user = ""
 # bot_pass = ""
@@ -471,34 +465,9 @@ ai_agent_prefix = "🧠" # prefix use to filter the AI agent
 ###           DEX SETTINGS          ###
 ########################################
 
-# DEX template
-# [default.dex.template]
-# wallet_address = ""
-# private_key = ""
-# rpc = "" # https://chainlist.org for rpc url example
-# protocol = "" # uniswap or 0x
-# protocol_version = 2 # your protocol version | used for uniswap
-# api_endpoint = "" # your api endpoint | used for 0x
-# api_key = "" # your api key | used for 0x
-# router_contract_addr = "" # your router contract address | used for uniswap
-# factory_contract_addr = "" # your factory contract address | used for uniswap
-# trading_asset_address = "" # your trading asset address
-# trading_risk_percentage = true # Use risk amount as percetage of the balance or real amount
-# trading_risk_amount = 10 # Risk amount
-# trading_slippage = 2 # Slippage percentage
-# trading_amount_threshold = 0 # Trading amount threshold
-# block_explorer_url = "" # your block explorer url
-# block_explorer_api = "" # your block explorer api
-# mapping to use to change instrument per exchange
-# mapping = [
-# { id = "BTC", alt = "WBTC" },
-# { id = "ETH", alt = "WETH" },
-# { id = "GOLD", alt = "XAUT" },
-# { id = "EURUSD", alt = "AgEUR" },
-# ]
-
 # # uniswap v2 protocol type and router uniswap
 # [default.dex.eth]
+# enabled=true
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://rpc.ankr.com/eth"
@@ -522,6 +491,7 @@ ai_agent_prefix = "🧠" # prefix use to filter the AI agent
 
 # # uniswap v2 protocol type and router pancakeswap on BSC chain 56
 # [default.dex.bsc]
+# enabled=true
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://rpc.ankr.com/bsc"
@@ -545,6 +515,7 @@ ai_agent_prefix = "🧠" # prefix use to filter the AI agent
 
 # # uniswap v3 and router uniswap v3 on arbitrum chain
 # [default.dex.arb]
+# enabled=true
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://arbitrum.llamarpc.com"
@@ -568,6 +539,7 @@ ai_agent_prefix = "🧠" # prefix use to filter the AI agent
 
 # # ZeroX 0x protocol type on polygon chain 137
 # [default.dex.polygon]
+# enabled=true
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://rpc.ankr.com/polygon"
@@ -591,6 +563,7 @@ ai_agent_prefix = "🧠" # prefix use to filter the AI agent
 
 # # kwenta protocol type on OPTIMISM chain 10 
 # [default.dex.opt]
+# enabled=false
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://optimism.llamarpc.com"
@@ -614,6 +587,7 @@ ai_agent_prefix = "🧠" # prefix use to filter the AI agent
 
 # # uniswap v3 protocol type using pancakeswap on zkSync chain 324 
 # [default.dex.zkSync]
+# enabled=true
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://zksync.drpc.org"
@@ -639,30 +613,8 @@ ai_agent_prefix = "🧠" # prefix use to filter the AI agent
 ###           CEX SETTINGS          ###
 ########################################
 
-# CEFI template
-# [default.cex.template]
-# protocol = ""
-# api_key= ""
-# secret= ""
-# password = ""
-# testmode = true
-# defaulttype = ""
-# ordertype = ""
-# leverage_type = ""
-# leverage = 1
-# trading_risk_percentage = true
-# trading_risk_amount = 10
-# trading_slippage = 2
-# trading_amount_threshold = 0
-# trading_asset = "USDT"
-# trading_asset_separator = ""
-# mapping = [
-#     { id = "BTC", alt = "BTC/USDT" },
-# ]
-# balance_limit = false
-# balance_limit_value = 10
-
 # # CEFI example using ccxt binance
+# enabled=true
 # protocol = "ccxt"
 # api_key= ""
 # secret= ""
@@ -685,8 +637,8 @@ ai_agent_prefix = "🧠" # prefix use to filter the AI agent
 # balance_limit_value = 10
 
 # [default.cex.capital]
-# protocol = "capital"
 # enabled = false
+# protocol = "capital"
 # user_id = "12345678"
 # api_key= "myapi_DEADBEEF"
 # password = "12345678"
