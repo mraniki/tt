@@ -107,6 +107,8 @@ class UnifiedExchangePlugin(BasePlugin):
         Retrieves and combines information from both DEX and CEX.
         """
         info = []
+        if self.fmo:
+            info.append(await self.fmo.get_info())
         if self.exchange_dex:
             info.append(await self.exchange_dex.get_info())
         if self.exchange_cex:
