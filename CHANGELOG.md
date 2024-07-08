@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v9.3.9 (2024-07-08)
+
+### Other
+
+* Merge pull request #1674 from mraniki/dev
+
+⬆️ 🤖 - You love your home and want it to be beautiful ([`8bb629a`](https://github.com/mraniki/tt/commit/8bb629add2fb8fff0eba0334a423786a2accbecd))
+
+* build(deps): update pyproject.toml ([`8b002a1`](https://github.com/mraniki/tt/commit/8b002a11d2da0f1b9c62833467ddf6c673325244))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.8.0 ([`c285f41`](https://github.com/mraniki/tt/commit/c285f4129ddb852f8b5c0161aaee5b84c557349e))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.2.6 ([`19ea987`](https://github.com/mraniki/tt/commit/19ea9878a24ba0b3974ea7fc77199f751efc0ae6))
+
 ## v9.3.8 (2024-07-07)
 
 ### Other
