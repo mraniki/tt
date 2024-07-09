@@ -325,6 +325,9 @@ rss_feed_url= "https://finance.yahoo.com/rss/"
 # minutes
 rss_feed_frequency = 5
 
+# prefix for the rss identifier and filtering
+rss_prefix = "📢"
+
 ########################################
 ###           DXSP SETTINGS          ###
 ########################################
