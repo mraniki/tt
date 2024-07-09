@@ -154,6 +154,7 @@ class HelperPlugin(BasePlugin):
             f"trading_days_allowed: {self.trading_days_allowed}\n"
             f"trading_hours_start: {self.trading_hours_start}\n"
             f"trading_hours_end: {self.trading_hours_end}\n"
+            f"trading timezone: {self.user_timezone}\n"
         )
 
     async def get_helper_network(self) -> str:
