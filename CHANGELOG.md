@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.0.4 (2024-07-09)
+
+### Other
+
+* Merge pull request #1682 from mraniki/dev
+
+🐛 settings bug in fmo config ([`74f035b`](https://github.com/mraniki/tt/commit/74f035b9805abbbdc86e1d3b28bee6d0afdabb4e))
+
+### 🐛
+
+* 🐛 settings bug in fmo config ([`c3e4d5e`](https://github.com/mraniki/tt/commit/c3e4d5e232a743c976ae9acc4ad0986e20802190))
+
 ## v10.0.3 (2024-07-09)
 
 ### Other
