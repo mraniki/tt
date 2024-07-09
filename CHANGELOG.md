@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.0.5 (2024-07-09)
+
+### Other
+
+* Merge pull request #1683 from mraniki/dev
+
+🎨 update cefi/dxsp for response harmonization ([`13cd186`](https://github.com/mraniki/tt/commit/13cd186e228f3582c4f051deb466932550ec61c9))
+
+* update exchange_plugin.py ([`64cfd66`](https://github.com/mraniki/tt/commit/64cfd664281b56ccdbd1bb932bf31948edb08a65))
+
+### 🎨
+
+* 🎨 update cefi/dxsp for harmonization response ([`2b81945`](https://github.com/mraniki/tt/commit/2b81945cb2d9e657a2a0777b6ba9b2adfaa91af3))
+
 ## v10.0.4 (2024-07-09)
 
 ### Other
