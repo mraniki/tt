@@ -27,10 +27,10 @@ class FeedPlugin(BasePlugin):
                 function=self.poll_rss_feed,
             )
 
-    async def send_notification(self, message):
-        """Sends a notification"""
-        if self.enabled:
-            await self.send_notification(message)
+    # async def send_notification(self, message):
+    #     """Sends a notification"""
+    #     if self.enabled:
+    #         await self.send_notification(message)
 
     def poll_rss_feed(self):
         """
@@ -43,4 +43,4 @@ class FeedPlugin(BasePlugin):
         for entry in feed.entries:
             updates = f"{entry.title} - {entry.link}"
             logger.debug("Updates: {}", updates)
-            return await self.send_notification(updates)
+            await self.send_notification(updates)
