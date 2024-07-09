@@ -14,6 +14,7 @@ class FeedPlugin(BasePlugin):
         if self.enabled:
             self.rss_feed_url = settings.rss_feed_url
             self.rss_feed_frequency = settings.rss_feed_frequency
+            self.rss_prefix = settings.rss_prefix
             logger.debug("RSS feed plugin enabled")
 
     async def start(self):
@@ -41,6 +42,7 @@ class FeedPlugin(BasePlugin):
         feed = feedparser.parse(self.rss_feed_url)
         # logger.debug("Feed: {}", feed)
         for entry in feed.entries:
-            updates = f"{entry.title} - {entry.link}"
+            updates = f"{self.rss_prefix}{entry.title} - {entry.link}"
             logger.debug("Updates: {}", updates)
-            await self.send_notification(updates)
+            if updates:
+                await self.send_notification(updates)
