@@ -48,14 +48,13 @@ class UnifiedExchangePlugin(BasePlugin):
             None
         """
         super().__init__()
-        self.enabled_dex = settings.dxsp_enabled
-        self.enabled_cex = settings.cex_enabled
+        self.enabled_dex, self.enabled_cex = settings.dxsp_enabled, settings.cex_enabled
         self.enabled = self.enabled_dex or self.enabled_cex
-        if not self.enabled:
-            return
-        self.fmo = FindMyOrder()
-        self.exchange_dex = DexSwap() if settings.dxsp_enabled else None
-        self.exchange_cex = CexTrader() if settings.cex_enabled else None
+
+        if self.enabled:
+            self.fmo = FindMyOrder()
+            self.exchange_dex = DexSwap() if self.enabled_dex else None
+            self.exchange_cex = CexTrader() if self.enabled_cex else None
 
     async def handle_message(self, msg):
         """
@@ -119,7 +118,7 @@ class UnifiedExchangePlugin(BasePlugin):
         """
         Retrieves quotes for a given symbol from both DEX and CEX.
         """
-        quotes = []
+        quotes = ["⚖️"]
         if symbol and self.exchange_dex:
             quotes.append(await self.exchange_dex.get_quotes(symbol))
         if symbol and self.exchange_cex:
@@ -130,7 +129,7 @@ class UnifiedExchangePlugin(BasePlugin):
         """
         Retrieves and combines balances from both DEX and CEX.
         """
-        balances = []
+        balances = ["🏦"]
         if self.exchange_dex:
             balances.append(await self.exchange_dex.get_balances())
         if self.exchange_cex:
@@ -141,18 +140,29 @@ class UnifiedExchangePlugin(BasePlugin):
         """
         Retrieves and combines positions from both DEX and CEX.
         """
-        positions = []
+        positions = ["📊"]
         if self.exchange_dex:
             positions.append(await self.exchange_dex.get_positions())
         if self.exchange_cex:
             positions.append(await self.exchange_cex.get_positions())
         return "\n".join(positions)
 
+    # async def get_pnl(self):
+    #     """
+    #     Retrieves and combines positions from both DEX and CEX.
+    #     """
+    #     pnl = ["🏆"]
+    #     if self.exchange_dex:
+    #         pnl.append(await self.exchange_dex.get_pnls())
+    #     if self.exchange_cex:
+    #         pnl.append(await self.exchange_cex.get_pnls())
+    #     return "\n".join(pnl)
+
     async def submit_order(self, order):
         """
         Submits an order using the appropriate exchange.
         """
-        order_results = []
+        order_results = ["🧾"]
         if self.enabled_dex:
             order_results.append(await self.exchange_dex.submit_order(order))
         if self.enabled_cex:
