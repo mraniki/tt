@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## v10.0.6 (2024-07-09)
+
+### Fix
+
+* ⬆️ MyLLM fixes ([`691561f`](https://github.com/mraniki/tt/commit/691561f18f93114b628636da761a5f734c0db42f))
+
+### Other
+
+* Merge pull request #1684 from mraniki/dev
+
+🐛 poll_rss_feed missing await ([`cde0dd3`](https://github.com/mraniki/tt/commit/cde0dd344e2ad404fc01be6ef4a95ced111bc386))
+
+### ♻️
+
+* ♻️ feed plugin ([`1d65dc2`](https://github.com/mraniki/tt/commit/1d65dc21cf44f93a4c31551a9f48aa4406303f59))
+
+### 🐛
+
+* 🐛 ([`c24d7e9`](https://github.com/mraniki/tt/commit/c24d7e903c3115085ba8c84d7aee49843d32291e))
+
+* 🐛 poll_rss_feed missing await ([`505cacd`](https://github.com/mraniki/tt/commit/505cacdc5fe59d7fbff5f3b409a59b482054ff06))
+
 ## v10.0.5 (2024-07-09)
 
 ### Other
