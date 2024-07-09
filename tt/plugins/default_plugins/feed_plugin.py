@@ -39,10 +39,14 @@ class FeedPlugin(BasePlugin):
         retrieves updates from the feed entries,
         and logs the updates.
         """
-        feed = feedparser.parse(self.rss_feed_url)
-        # logger.debug("Feed: {}", feed)
-        for entry in feed.entries:
-            updates = f"{self.rss_prefix}{entry.title} - {entry.link}"
-            logger.debug("Updates: {}", updates)
-            if updates:
-                await self.send_notification(updates)
+        try:
+            feed = feedparser.parse(self.rss_feed_url)
+            if not feed:
+                logger.warning("Failed to parse RSS feed")
+                return
+
+            for entry in feed.entries:
+                if updates := f"{self.rss_prefix}{entry.title} - {entry.link}":
+                    await self.send_notification(updates)
+        except Exception as e:
+            logger.error("Error polling RSS feed: %s", e)
