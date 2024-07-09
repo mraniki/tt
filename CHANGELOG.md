@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.0.9 (2024-07-09)
+
+### Other
+
+* Merge pull request #1687 from mraniki/dev
+
+Update findmyorder version to 2.2.6 ([`a0e23d5`](https://github.com/mraniki/tt/commit/a0e23d5b2fa3553bfbdedce75d47c1170027aa4f))
+
+* Add trading timezone to plugin configuration settings. ([`cf2a7a5`](https://github.com/mraniki/tt/commit/cf2a7a52a8a4ea3283f63308dd0de5cab421c40e))
+
+### Update
+
+* Update findmyorder version to 2.2.6 ([`876df18`](https://github.com/mraniki/tt/commit/876df188a97ed2b7871a81684f3132c21224916e))
+
 ## v10.0.8 (2024-07-09)
 
 ### Other
