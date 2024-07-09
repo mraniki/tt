@@ -32,7 +32,7 @@ class FeedPlugin(BasePlugin):
     #     if self.enabled:
     #         await self.send_notification(message)
 
-    def poll_rss_feed(self):
+    async def poll_rss_feed(self):
         """
         A function that polls the RSS feed,
         retrieves updates from the feed entries,
