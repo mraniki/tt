@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## v10.0.8 (2024-07-09)
+
+### Other
+
+* Merge pull request #1686 from mraniki/dev
+
+⚡ update notifications.py ([`d4c9c03`](https://github.com/mraniki/tt/commit/d4c9c03ed1eb02c8800ee1349fc636b31e91dbcd))
+
+### ♻️
+
+* ♻️ poll_rss_feed ([`7f688e3`](https://github.com/mraniki/tt/commit/7f688e303cabcf276e5f5e0f8b3b7cb22f9613b7))
+
+### ⚡
+
+* ⚡ update notifications.py ([`01010a7`](https://github.com/mraniki/tt/commit/01010a79ff25dec31d49a2473e88877147bf912d))
+
+### ⬆️
+
+* ⬆️ ([`7a7b3f5`](https://github.com/mraniki/tt/commit/7a7b3f55ae849d8e22690caa5b609808370dbbcb))
+
 ## v10.0.7 (2024-07-09)
 
 ### Other
@@ -354,12 +374,6 @@ Update myllm version to 4.9.4 ([`be44d10`](https://github.com/mraniki/tt/commit/
 
 * Merge branch &#39;main&#39; into dev ([`dee544a`](https://github.com/mraniki/tt/commit/dee544a79e419ccfa869d058f213bef0f3825cd9))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`902fca1`](https://github.com/mraniki/tt/commit/902fca198a0068a1041fc97550630607f3695112))
-
-### Update
-
-* Update myllm version to 4.9.4 ([`c19c7fc`](https://github.com/mraniki/tt/commit/c19c7fc6e1d3d96b810ded40992e47e500c92fac))
-
 ## v9.2.0 (2024-06-22)
 
 ### :recycle:
@@ -372,6 +386,8 @@ Update myllm version to 4.9.4 ([`be44d10`](https://github.com/mraniki/tt/commit/
 
 💄 ♻️ Large refactoring for plugins settings ([`56faabe`](https://github.com/mraniki/tt/commit/56faabe48924559517d308f4c60f9478efb370cd))
 
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`902fca1`](https://github.com/mraniki/tt/commit/902fca198a0068a1041fc97550630607f3695112))
+
 * test: update test_ai_agent_plugin.py ([`000f014`](https://github.com/mraniki/tt/commit/000f0143aec25f77b609a3d57e9e107c8892388f))
 
 * Remove unnecessary whitespace in HelperPlugin class. ([`b001472`](https://github.com/mraniki/tt/commit/b0014727395fd1e510a5600fbd4d74ca57a6d9cd))
@@ -379,6 +395,8 @@ Update myllm version to 4.9.4 ([`be44d10`](https://github.com/mraniki/tt/commit/
 ### Update
 
 * ✅ Unit Test Updated ([`382d8db`](https://github.com/mraniki/tt/commit/382d8db85e5e7845d0e23b287a2ba8f5807b06f9))
+
+* Update myllm version to 4.9.4 ([`c19c7fc`](https://github.com/mraniki/tt/commit/c19c7fc6e1d3d96b810ded40992e47e500c92fac))
 
 ### 🐛
 
@@ -890,18 +908,6 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 
 * Merge branch &#39;main&#39; into dev ([`7fdcad8`](https://github.com/mraniki/tt/commit/7fdcad85d88dba2881815deb434ad345571815fd))
 
-* chore: update talky_settings.toml ([`84f0c47`](https://github.com/mraniki/tt/commit/84f0c47a9eda8f431efcd8304775e8606dfc7816))
-
-### 🎨
-
-* 🎨 ([`3b8ae6c`](https://github.com/mraniki/tt/commit/3b8ae6c6c72a9221c84c506666a1dbf867932857))
-
-### 🐛
-
-* 🐛 ([`5c2f718`](https://github.com/mraniki/tt/commit/5c2f718a41ca3758fdfe7eccbacd255ccc07d909))
-
-* 🐛 🔊update ai_agent_plugin.py and plugin_manager.py ([`6a686e2`](https://github.com/mraniki/tt/commit/6a686e2d4631da57f71a3655a77b78948ef1c883))
-
 ## v8.0.2 (2024-06-15)
 
 ### Other
@@ -909,6 +915,8 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 * Merge pull request #1615 from mraniki/dev
 
 ♻️ update ai_agent_plugin.py ([`2580208`](https://github.com/mraniki/tt/commit/2580208f02edc47cf4a0a0c4ba5f003ed063ec67))
+
+* chore: update talky_settings.toml ([`84f0c47`](https://github.com/mraniki/tt/commit/84f0c47a9eda8f431efcd8304775e8606dfc7816))
 
 ### ♻️
 
@@ -919,6 +927,16 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 * ⬆️ 🛠️(deps): update dependency findmyorder to v1.10.3 ([`22a1f9c`](https://github.com/mraniki/tt/commit/22a1f9c001d2ed7f23bf71e153ace65d7e8a2dc7))
 
 * ⬆️ build(deps): update pyproject.toml ([`3a09b7f`](https://github.com/mraniki/tt/commit/3a09b7f32476771b226e72c751114aaed54c5eba))
+
+### 🎨
+
+* 🎨 ([`3b8ae6c`](https://github.com/mraniki/tt/commit/3b8ae6c6c72a9221c84c506666a1dbf867932857))
+
+### 🐛
+
+* 🐛 ([`5c2f718`](https://github.com/mraniki/tt/commit/5c2f718a41ca3758fdfe7eccbacd255ccc07d909))
+
+* 🐛 🔊update ai_agent_plugin.py and plugin_manager.py ([`6a686e2`](https://github.com/mraniki/tt/commit/6a686e2d4631da57f71a3655a77b78948ef1c883))
 
 ### 🔧
 
@@ -2138,8 +2156,6 @@ Fix return statement in start_bot function ([`5de4b2d`](https://github.com/mrani
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`7540c4f`](https://github.com/mraniki/tt/commit/7540c4fabdd56c0553ea0e3cff59039179730ae7))
 
-* Fix return statement in start_bot function ([`9f51413`](https://github.com/mraniki/tt/commit/9f514137918af5cedbe5cb25a4bfe43d6a946ca1))
-
 ### Update
 
 * :whale:  Update OP_SERVICE_ACCOUNT_TOKEN value in Dockerfile. ([`8071dbc`](https://github.com/mraniki/tt/commit/8071dbc41cc375720d2fa74325d436dd45ed402c))
@@ -2151,6 +2167,8 @@ Fix return statement in start_bot function ([`5de4b2d`](https://github.com/mrani
 * Merge pull request #1403 from mraniki/dev
 
 ⬆️ dxsp ([`f8e7854`](https://github.com/mraniki/tt/commit/f8e78540887836ab688bc869eacb5902bcd2baa1))
+
+* Fix return statement in start_bot function ([`9f51413`](https://github.com/mraniki/tt/commit/9f514137918af5cedbe5cb25a4bfe43d6a946ca1))
 
 * Merge branch &#39;main&#39; into dev ([`e798264`](https://github.com/mraniki/tt/commit/e7982642df6a0dd06e4e20701af35ab6379eccc7))
 
@@ -2164,6 +2182,22 @@ Fix return statement in start_bot function ([`5de4b2d`](https://github.com/mrani
 
 * Merge branch &#39;main&#39; into dev ([`ec226b6`](https://github.com/mraniki/tt/commit/ec226b6d538c77dc07f8cb00665345df1902bdd8))
 
+### ⬆️
+
+* ⬆️ ([`8419f87`](https://github.com/mraniki/tt/commit/8419f87506afef7325e2d99b9b06c92ca14b63be))
+
+* ⬆️ ([`9a67ea4`](https://github.com/mraniki/tt/commit/9a67ea47099e5173881685f430b6c25173729826))
+
+* ⬆️ ([`bdaf3fa`](https://github.com/mraniki/tt/commit/bdaf3fa795a415e6a4c1249aa90c9275f55a6055))
+
+## v7.2.2 (2024-03-29)
+
+### Other
+
+* Merge pull request #1395 from mraniki/dev
+
+⬆️ 🤖 - When in doubt tell the truth ([`6c99db4`](https://github.com/mraniki/tt/commit/6c99db4038b8ab3bf0424d6da5321fbafa4e81a9))
+
 * Merge pull request #1400 from mraniki/renovate/findmyorder-1.x
 
 ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.19 ([`f3b18f3`](https://github.com/mraniki/tt/commit/f3b18f389a50114bff240474471ffdea9a508215))
@@ -2176,35 +2210,11 @@ Fix return statement in start_bot function ([`5de4b2d`](https://github.com/mrani
 
 ### ⬆️
 
-* ⬆️ ([`8419f87`](https://github.com/mraniki/tt/commit/8419f87506afef7325e2d99b9b06c92ca14b63be))
-
-* ⬆️ ([`9a67ea4`](https://github.com/mraniki/tt/commit/9a67ea47099e5173881685f430b6c25173729826))
-
-* ⬆️ ([`bdaf3fa`](https://github.com/mraniki/tt/commit/bdaf3fa795a415e6a4c1249aa90c9275f55a6055))
-
 * ⬆️ 🛠️(deps): update dependency dxsp to v9.0.3 ([`bec6e01`](https://github.com/mraniki/tt/commit/bec6e01f632cbc6acd3060647dd73b90bf0c8a90))
 
 * ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.19 ([`f9de005`](https://github.com/mraniki/tt/commit/f9de00510423b1cf58d3fac49e06a8291f30a241))
 
 * ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.8 ([`2ca2f32`](https://github.com/mraniki/tt/commit/2ca2f32a26ffa01f521e218546829dbe35a72679))
-
-### 🔊
-
-* 🔊 Improve log when no clients loaded ([`8bbbd21`](https://github.com/mraniki/tt/commit/8bbbd21afd9c4ee29c7b0b7a1e37b7cf95e11027))
-
-### 🥅
-
-* 🥅 Improving error handling when no settings provided ([`55089f7`](https://github.com/mraniki/tt/commit/55089f7a65671b39bd4bbfb65ec2411406dde3a7))
-
-## v7.2.2 (2024-03-29)
-
-### Other
-
-* Merge pull request #1395 from mraniki/dev
-
-⬆️ 🤖 - When in doubt tell the truth ([`6c99db4`](https://github.com/mraniki/tt/commit/6c99db4038b8ab3bf0424d6da5321fbafa4e81a9))
-
-### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency myllm to v4.7.4 ([`994cd38`](https://github.com/mraniki/tt/commit/994cd38163c4996099998a4f40e0fa9bc9ad9c08))
 
@@ -2215,6 +2225,14 @@ Fix return statement in start_bot function ([`5de4b2d`](https://github.com/mrani
 * ⬆️ 🛠️(deps): update dependency cefi to v4.4.1 ([`bacd991`](https://github.com/mraniki/tt/commit/bacd99148c36726538790b684048e8a5f03e651d))
 
 * ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.18 ([`da270a5`](https://github.com/mraniki/tt/commit/da270a5da795d4110205bd0117c4112ac7d71c83))
+
+### 🔊
+
+* 🔊 Improve log when no clients loaded ([`8bbbd21`](https://github.com/mraniki/tt/commit/8bbbd21afd9c4ee29c7b0b7a1e37b7cf95e11027))
+
+### 🥅
+
+* 🥅 Improving error handling when no settings provided ([`55089f7`](https://github.com/mraniki/tt/commit/55089f7a65671b39bd4bbfb65ec2411406dde3a7))
 
 ## v7.2.1 (2024-03-28)
 
@@ -2384,6 +2402,12 @@ Merge ([`85b204d`](https://github.com/mraniki/tt/commit/85b204d8184718c6793a4cf0
 
 * Update pyproject.toml ([`b4c1e7d`](https://github.com/mraniki/tt/commit/b4c1e7dafabf8af9a70919ac20574717deedcd0f))
 
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.6 ([`af8b778`](https://github.com/mraniki/tt/commit/af8b778f2f2308a2e8c8d0b9c12df4a140436502))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.7.1 ([`3bf62cd`](https://github.com/mraniki/tt/commit/3bf62cd2f2b7e9d5306e2e6139672a89aefd4d32))
+
 ## v7.1.0 (2024-03-26)
 
 ### Other
@@ -2394,21 +2418,11 @@ Merge ([`85b204d`](https://github.com/mraniki/tt/commit/85b204d8184718c6793a4cf0
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`fc45bce`](https://github.com/mraniki/tt/commit/fc45bce4b072458bac9f071df5975194c5c403ad))
 
-### ⬆️
-
-* ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.6 ([`af8b778`](https://github.com/mraniki/tt/commit/af8b778f2f2308a2e8c8d0b9c12df4a140436502))
-
-* ⬆️ 🛠️(deps): update dependency myllm to v4.7.1 ([`3bf62cd`](https://github.com/mraniki/tt/commit/3bf62cd2f2b7e9d5306e2e6139672a89aefd4d32))
-
 ### 🔧
 
 * 🔧 ([`a1653d4`](https://github.com/mraniki/tt/commit/a1653d42b968bfe11a5e12d1d407d2c07b42880e))
 
 * 🔧 updated config for CEFI update ([`59eb348`](https://github.com/mraniki/tt/commit/59eb34879f32e5813ebf01cfc2ed01d3793b7d2c))
-
-* 🔧 ([`a62ad61`](https://github.com/mraniki/tt/commit/a62ad6170713affc67ae78c640378250ac4e5ced))
-
-* 🔧 updated config for CEFI update ([`f5cfaa6`](https://github.com/mraniki/tt/commit/f5cfaa61dab31fdb91ba0b3e225f2ab3482dc5f2))
 
 ### 🚀
 
@@ -2433,6 +2447,12 @@ Merge ([`85b204d`](https://github.com/mraniki/tt/commit/85b204d8184718c6793a4cf0
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency myllm to v4.7.0 ([`fd1d16a`](https://github.com/mraniki/tt/commit/fd1d16ab0ef2480c4dcc50e2129dbedd7035d7ea))
+
+### 🔧
+
+* 🔧 ([`a62ad61`](https://github.com/mraniki/tt/commit/a62ad6170713affc67ae78c640378250ac4e5ced))
+
+* 🔧 updated config for CEFI update ([`f5cfaa6`](https://github.com/mraniki/tt/commit/f5cfaa61dab31fdb91ba0b3e225f2ab3482dc5f2))
 
 ### 🚨
 
@@ -2760,6 +2780,8 @@ Merge ([`85b204d`](https://github.com/mraniki/tt/commit/85b204d8184718c6793a4cf0
 
 * ⬆️ 🛠️(deps): update dependency talkytrend to v2.0.2 ([`b6766b7`](https://github.com/mraniki/tt/commit/b6766b7e8672a64772c2e804dfe4e23a3a212ae2))
 
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.13 ([`169062e`](https://github.com/mraniki/tt/commit/169062e0730e334985c1bb77c75fb9fb9c896d34))
+
 ## v7.0.0 (2024-02-27)
 
 ### Other
@@ -2781,8 +2803,6 @@ Merge ([`85b204d`](https://github.com/mraniki/tt/commit/85b204d8184718c6793a4cf0
 * ✨ updating talkytrend setting for v2 ([`70cb724`](https://github.com/mraniki/tt/commit/70cb724f53968b08e415cd17d4ffe832079248b2))
 
 ### ⬆️
-
-* ⬆️ 🛠️(deps): update dependency findmyorder to v1.9.13 ([`169062e`](https://github.com/mraniki/tt/commit/169062e0730e334985c1bb77c75fb9fb9c896d34))
 
 * ⬆️ ([`cc41b4b`](https://github.com/mraniki/tt/commit/cc41b4b8d956ea03f6f90bdc2816cf422b00fd82))
 
@@ -3496,8 +3516,6 @@ Update myllm version to 4.0.8 ([`355f46c`](https://github.com/mraniki/tt/commit/
 
 * :arrow_up: Update dependencies in pyproject.toml ([`94886e4`](https://github.com/mraniki/tt/commit/94886e432a59483cb24449415f2f3babeef3a397))
 
-* :arrow_up: Update dependencies in pyproject.toml ([`3a0427b`](https://github.com/mraniki/tt/commit/3a0427b7f9dab84e9355c0e652052b89ee7dbef4))
-
 ## v6.7.8 (2024-01-27)
 
 ### :fire:
@@ -3509,6 +3527,10 @@ Update myllm version to 4.0.8 ([`355f46c`](https://github.com/mraniki/tt/commit/
 * Merge pull request #1185 from mraniki/dev
 
 ⬆️ 🤖 - He is now rising from affluence to poverty ([`ae19744`](https://github.com/mraniki/tt/commit/ae19744301631079ba81d2890f4908a5c90b070a))
+
+### Update
+
+* :arrow_up: Update dependencies in pyproject.toml ([`3a0427b`](https://github.com/mraniki/tt/commit/3a0427b7f9dab84e9355c0e652052b89ee7dbef4))
 
 ### ⬆️
 
@@ -3548,9 +3570,9 @@ Update myllm version to 4.0.8 ([`355f46c`](https://github.com/mraniki/tt/commit/
 
 * ⬆️ 🛠️(deps): update dependency cefi to v3.3.0 ([`80b856c`](https://github.com/mraniki/tt/commit/80b856cdc3dbcd53442dbd753e61273b6584f52b))
 
-* ⬆️ 🛠️(deps): update dependency cefi to v3.2.45 ([`c449adc`](https://github.com/mraniki/tt/commit/c449adca14e01a26d7e9aaa75c5541afa6483f5a))
-
 * ⬆️ 🛠️(deps): update dependency dxsp to v7.0.7 ([`0c9b112`](https://github.com/mraniki/tt/commit/0c9b1126b8cde2cc88671c83731644149a3acbf6))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v3.2.45 ([`c449adc`](https://github.com/mraniki/tt/commit/c449adca14e01a26d7e9aaa75c5541afa6483f5a))
 
 * ⬆️ 🛠️(deps): update dependency dxsp to v7.0.6 ([`e19bcc0`](https://github.com/mraniki/tt/commit/e19bcc05703e32191586a47be3d1a419be0152d5))
 
@@ -3731,17 +3753,15 @@ Merge pull request #1151 from mraniki/dev ([`d54e94b`](https://github.com/mranik
 
 Merge pull request #1149 from mraniki/dev ([`8dd8012`](https://github.com/mraniki/tt/commit/8dd8012d8d486c8dc0c4e2f96281294c4317d7d0))
 
-* Merge ; commit &#39;7956c8e50e5fb84af784fb4aa0000ffd0d7ca726&#39; ([`8f604ee`](https://github.com/mraniki/tt/commit/8f604eeec4ce6dfeeaaf2a95c3386ac52070cc50))
-
 * Merge pull request #1149 from mraniki/dev
 
 ⬆️ 🤖 - Many changes of mind and mood do not hesitate too long ([`657960c`](https://github.com/mraniki/tt/commit/657960c3cd0f29a84c3df5460996f96397187127))
 
+* Merge ; commit &#39;7956c8e50e5fb84af784fb4aa0000ffd0d7ca726&#39; ([`8f604ee`](https://github.com/mraniki/tt/commit/8f604eeec4ce6dfeeaaf2a95c3386ac52070cc50))
+
 * :construction_worker_man: ([`75a7451`](https://github.com/mraniki/tt/commit/75a7451b7f9a5a3bc01f942e57118c2a6cb62733))
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`9d224c3`](https://github.com/mraniki/tt/commit/9d224c314853dff7ceed65d022bb533b253c8cda))
-
-* :construction_worker_man: ([`f4e9379`](https://github.com/mraniki/tt/commit/f4e9379c8ea6732c2a9e841046b4ce48847904a1))
 
 * Merge pull request #1148 from mraniki/dev
 
@@ -3751,19 +3771,21 @@ Merge pull request #1149 from mraniki/dev ([`8dd8012`](https://github.com/mranik
 
 ⬆️ 🤖 - Fine day for friends ([`5004950`](https://github.com/mraniki/tt/commit/5004950bf269a530ec21a087b85acfbef2d8e176))
 
-* Merge ; commit &#39;fed65d7239c6ac991f426e063ba52b29b5f2b1c2&#39; ([`2fc8314`](https://github.com/mraniki/tt/commit/2fc8314efc3628989ed05feced1bb02b53b64fbe))
-
-* :construction_worker_man: CI Change ([`c2f4dc3`](https://github.com/mraniki/tt/commit/c2f4dc30feaf2e4b480a2dbc5bfb487aee3146d9))
-
 * Merge pull request #1145 from mraniki/dev
 
 ⬆️ 🤖 - Youll be sorry ([`3f08009`](https://github.com/mraniki/tt/commit/3f08009c16496e21ea0668131529950bddecd0df))
+
+* :construction_worker_man: ([`f4e9379`](https://github.com/mraniki/tt/commit/f4e9379c8ea6732c2a9e841046b4ce48847904a1))
+
+* Merge ; commit &#39;fed65d7239c6ac991f426e063ba52b29b5f2b1c2&#39; ([`2fc8314`](https://github.com/mraniki/tt/commit/2fc8314efc3628989ed05feced1bb02b53b64fbe))
 
 * Merge pull request #1144 from mraniki/dev
 
 ⬆️ 🤖 - If you think last Tuesday was a drag wait till you see what happens tomorrow ([`8259a2f`](https://github.com/mraniki/tt/commit/8259a2f3525a6ede540b42a5c01ab4f42708481f))
 
 * :construction_worker_man: CI Change ([`d934949`](https://github.com/mraniki/tt/commit/d9349490e24e3b21e00e769acf3d10127a43e69e))
+
+* :construction_worker_man: CI Change ([`c2f4dc3`](https://github.com/mraniki/tt/commit/c2f4dc30feaf2e4b480a2dbc5bfb487aee3146d9))
 
 * :construction_worker_man: CI Change ([`3cafe96`](https://github.com/mraniki/tt/commit/3cafe9675a22a27c43cd012112f77140716ac121))
 
@@ -3781,9 +3803,9 @@ Merge pull request #1149 from mraniki/dev ([`8dd8012`](https://github.com/mranik
 
 * Update push.yml ([`9d3928a`](https://github.com/mraniki/tt/commit/9d3928a5081da93e189a7f43053191302f7b067b))
 
-* Update push.yml ([`f9b6340`](https://github.com/mraniki/tt/commit/f9b63404bd69d19a580f52396f552a6968f9ae28))
-
 * Update README.md ([`7956c8e`](https://github.com/mraniki/tt/commit/7956c8e50e5fb84af784fb4aa0000ffd0d7ca726))
+
+* Update push.yml ([`f9b6340`](https://github.com/mraniki/tt/commit/f9b63404bd69d19a580f52396f552a6968f9ae28))
 
 * Update README.md ([`efb2c22`](https://github.com/mraniki/tt/commit/efb2c22a62f1aa8555ea5ed1f942a111562e4d4c))
 
@@ -3807,11 +3829,11 @@ Merge pull request #1149 from mraniki/dev ([`8dd8012`](https://github.com/mranik
 
 ### Other
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`c461e50`](https://github.com/mraniki/tt/commit/c461e507637b3a4fa13795bafb2fcb7fe13a575c))
-
 * Merge pull request #1133 from mraniki/dev
 
 ⬆️ 🤖 - Q	Why do ducks have big flat feet ([`61fb8e2`](https://github.com/mraniki/tt/commit/61fb8e2ad00d45bb35709c8df2efa3fbe1603cee))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`c461e50`](https://github.com/mraniki/tt/commit/c461e507637b3a4fa13795bafb2fcb7fe13a575c))
 
 ### ⬆️
 
@@ -3845,8 +3867,6 @@ Merge pull request #1149 from mraniki/dev ([`8dd8012`](https://github.com/mranik
 
 * :arrow_up: :hammer_and_wrench:️(deps): update dependency myllm to v3.1.63 ([`fd93ac7`](https://github.com/mraniki/tt/commit/fd93ac7eaf7397eed5c364bd9438828c8b4ec7a8))
 
-* :arrow_up: :hammer_and_wrench:️(deps): update dependency myllm to v3.1.63 ([`855daae`](https://github.com/mraniki/tt/commit/855daae6e1d8f27539863b1a8a200668736696ea))
-
 ### Other
 
 * Merge pull request #1126 from mraniki/dev
@@ -3856,6 +3876,10 @@ Merge pull request #1149 from mraniki/dev ([`8dd8012`](https://github.com/mranik
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`11dd2c6`](https://github.com/mraniki/tt/commit/11dd2c688d8ff73e3165d6dc36343a524019e22b))
 
 ## v6.6.28 (2024-01-09)
+
+### :arrow_up:
+
+* :arrow_up: :hammer_and_wrench:️(deps): update dependency myllm to v3.1.63 ([`855daae`](https://github.com/mraniki/tt/commit/855daae6e1d8f27539863b1a8a200668736696ea))
 
 ### Other
 
@@ -4689,6 +4713,8 @@ Merge pull request #974 from mraniki/dev ([`da5f53f`](https://github.com/mraniki
 
 * Update pyproject.toml ([`85b2bf9`](https://github.com/mraniki/tt/commit/85b2bf97f5de8dc71f14318c7d59159890dd331c))
 
+* Update Requirements ([`ff8605c`](https://github.com/mraniki/tt/commit/ff8605c246eb9fd7c6d554b859ad43505cb0ad12))
+
 * Update Requirements ([`28bde18`](https://github.com/mraniki/tt/commit/28bde18c21b83ec8e3732bf32db18b2dc9e0039c))
 
 ### ✨
@@ -4696,6 +4722,8 @@ Merge pull request #974 from mraniki/dev ([`da5f53f`](https://github.com/mraniki
 * ✨ trading_amount_threshold ([`cc80d0f`](https://github.com/mraniki/tt/commit/cc80d0f5b32d18934a95aed18e9019f013a1530c))
 
 ### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.1.0 ([`f23b28c`](https://github.com/mraniki/tt/commit/f23b28cd52bf40020fa61e06b49e5923db5d29cf))
 
 * ⬆️ 🛠️(deps): update dependency myllm to v3.1.36 ([`d599a8a`](https://github.com/mraniki/tt/commit/d599a8a59e5e5f842c56c8020c084718b281faa1))
 
@@ -4713,8 +4741,6 @@ Merge pull request #974 from mraniki/dev ([`da5f53f`](https://github.com/mraniki
 
 * Update Requirements ([`aedb9b6`](https://github.com/mraniki/tt/commit/aedb9b68ba4b17b71b1eed6003352132ad2b31a3))
 
-* Update Requirements ([`ff8605c`](https://github.com/mraniki/tt/commit/ff8605c246eb9fd7c6d554b859ad43505cb0ad12))
-
 * Update Requirements ([`02ce4ff`](https://github.com/mraniki/tt/commit/02ce4ff030aea1c77ffcd66b331ce22b3aa0f70e))
 
 * Update Requirements ([`8d743cb`](https://github.com/mraniki/tt/commit/8d743cb4d1d0f8ad42e7ea681e3a4e951aa8f4c6))
@@ -4726,8 +4752,6 @@ Merge pull request #974 from mraniki/dev ([`da5f53f`](https://github.com/mraniki
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency dxsp to v6.0.6 ([`a87a6ca`](https://github.com/mraniki/tt/commit/a87a6ca317e3a61922ff3feb8078e150c2bed5e2))
-
-* ⬆️ 🛠️(deps): update dependency ruff to ^0.1.0 ([`f23b28c`](https://github.com/mraniki/tt/commit/f23b28cd52bf40020fa61e06b49e5923db5d29cf))
 
 * ⬆️ 🛠️(deps): update dependency dxsp to v6.0.5 ([`0d3bea3`](https://github.com/mraniki/tt/commit/0d3bea386c5243c571a0faa3ab39183eeb83ff7d))
 
@@ -4815,6 +4839,14 @@ Merge pull request #974 from mraniki/dev ([`da5f53f`](https://github.com/mraniki
 
 ⬆️ 🛠️(deps): update dependency dxsp to v6.0.1 ([`4c49341`](https://github.com/mraniki/tt/commit/4c49341b4bc8c9b5f8ba0c049889b0ccc00959eb))
 
+### Update
+
+* Update Requirements ([`ae2941a`](https://github.com/mraniki/tt/commit/ae2941af9e91093335b06742a3dd125c85a9146a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v6.0.1 ([`64a3961`](https://github.com/mraniki/tt/commit/64a39616f262de1fcd72e45f6e30c599b19f1824))
+
 ## v6.4.54 (2023-10-13)
 
 ### Other
@@ -4829,13 +4861,9 @@ Merge pull request #974 from mraniki/dev ([`da5f53f`](https://github.com/mraniki
 
 ### Update
 
-* Update Requirements ([`ae2941a`](https://github.com/mraniki/tt/commit/ae2941af9e91093335b06742a3dd125c85a9146a))
-
 * Update Requirements ([`3853a4e`](https://github.com/mraniki/tt/commit/3853a4e67c1d421666d0a14ae35c4b65bc1aac73))
 
 ### ⬆️
-
-* ⬆️ 🛠️(deps): update dependency dxsp to v6.0.1 ([`64a3961`](https://github.com/mraniki/tt/commit/64a39616f262de1fcd72e45f6e30c599b19f1824))
 
 * ⬆️ 🛠️(deps): update dependency myllm to v3.1.32 ([`d93a2bd`](https://github.com/mraniki/tt/commit/d93a2bd694c7335416d39f7ac3c9950dae454c04))
 
@@ -4861,8 +4889,6 @@ Merge pull request #974 from mraniki/dev ([`da5f53f`](https://github.com/mraniki
 
 * Update Requirements ([`27b1194`](https://github.com/mraniki/tt/commit/27b1194786aac9433306fbee6c72198fb4bbca3a))
 
-* Update gitIgnoredAuthors in renovate.json ([`019bf57`](https://github.com/mraniki/tt/commit/019bf5789fd0b9971b9dd4e009abd0da2acb1836))
-
 * Update Requirements ([`89ce2ca`](https://github.com/mraniki/tt/commit/89ce2caf92f0534796f0a86bca4c4b35deffed9f))
 
 ### ⬆️
@@ -4883,6 +4909,8 @@ Update pyproject.toml with DXSP V6 ([`94be856`](https://github.com/mraniki/tt/co
 
 * Update pyproject.toml with DXSP V6 ([`707f538`](https://github.com/mraniki/tt/commit/707f538a91c10524cb4d1b48add4857d37692460))
 
+* Update gitIgnoredAuthors in renovate.json ([`019bf57`](https://github.com/mraniki/tt/commit/019bf5789fd0b9971b9dd4e009abd0da2acb1836))
+
 ### ♻️
 
 * ♻️ ([`4341978`](https://github.com/mraniki/tt/commit/434197806edd4728ccdd85109f04af2b26b09eef))
@@ -4897,10 +4925,6 @@ Update pyproject.toml with DXSP V6 ([`94be856`](https://github.com/mraniki/tt/co
 
 * Merge branch &#39;main&#39; into dev ([`43e0726`](https://github.com/mraniki/tt/commit/43e072635a940f70bb2da741799424bdeb91e8d8))
 
-* Merge pull request #939 from mraniki/renovate/findmyorder-1.x
-
-⬆️ 🛠️(deps): update dependency findmyorder to v1.9.1 ([`fd9464a`](https://github.com/mraniki/tt/commit/fd9464a39ce76fe2279800365f6a60abf2b1be7b))
-
 ## v6.4.50 (2023-10-12)
 
 ### Other
@@ -4908,6 +4932,10 @@ Update pyproject.toml with DXSP V6 ([`94be856`](https://github.com/mraniki/tt/co
 * Merge pull request #940 from mraniki/dev
 
 👷‍♂️ CI update ([`cec9c6b`](https://github.com/mraniki/tt/commit/cec9c6b3c06852fe1ac2449c7d1dc2108b539505))
+
+* Merge pull request #939 from mraniki/renovate/findmyorder-1.x
+
+⬆️ 🛠️(deps): update dependency findmyorder to v1.9.1 ([`fd9464a`](https://github.com/mraniki/tt/commit/fd9464a39ce76fe2279800365f6a60abf2b1be7b))
 
 * :construction_worker_man: Added merge job for automerging releases. ([`6f7e933`](https://github.com/mraniki/tt/commit/6f7e933c4bb3a13bc02f3401e7c5377d48baeabf))
 
@@ -5043,6 +5071,10 @@ Signed-off-by: null &lt;null&gt; ([`5bf5d0c`](https://github.com/mraniki/tt/comm
 
 * Merge branch &#39;main&#39; into dev ([`2c9a1da`](https://github.com/mraniki/tt/commit/2c9a1da5cd0d806d514bd9fdce49c728bffb817e))
 
+* Merge pull request #920 from mraniki/dev
+
+CI test ([`a98e1e8`](https://github.com/mraniki/tt/commit/a98e1e84d09af92eb4d1a9191631ce7e960b1b3a))
+
 * Merge pull request #919 from mraniki/renovate/myllm-3.x
 
 ⬆️ 🛠️(deps): update dependency myllm to v3.1.23 ([`77ce760`](https://github.com/mraniki/tt/commit/77ce7602893f57b5170502501a59eeea4b681baf))
@@ -5050,10 +5082,6 @@ Signed-off-by: null &lt;null&gt; ([`5bf5d0c`](https://github.com/mraniki/tt/comm
 * Merge pull request #923 from mraniki/renovate/findmyorder-1.x
 
 ⬆️ 🛠️(deps): update dependency findmyorder to v1.8.3 ([`37d3947`](https://github.com/mraniki/tt/commit/37d3947f7bbcd64257b144f78c4aa867716a4391))
-
-* Merge pull request #920 from mraniki/dev
-
-CI test ([`a98e1e8`](https://github.com/mraniki/tt/commit/a98e1e84d09af92eb4d1a9191631ce7e960b1b3a))
 
 * Merge branch &#39;main&#39; into dev ([`50fa2f2`](https://github.com/mraniki/tt/commit/50fa2f26f64de3209c65df0a86ab06f12e4eb9d4))
 
@@ -5083,9 +5111,9 @@ Signed-off-by: null &lt;null&gt; ([`0a041aa`](https://github.com/mraniki/tt/comm
 
 * ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.11 ([`cf74c58`](https://github.com/mraniki/tt/commit/cf74c58bafc1c5d020b34211111dbcd6767fc8dc))
 
-* ⬆️ 🛠️(deps): update dependency findmyorder to v1.8.3 ([`5083957`](https://github.com/mraniki/tt/commit/508395712f303a6d0e4f0961942e21035a502136))
-
 * ⬆️ 🛠️(deps): update dependency myllm to v3.1.23 ([`36f2cb5`](https://github.com/mraniki/tt/commit/36f2cb528654ce6a101e4fd6fe5aa2edb6983313))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v1.8.3 ([`5083957`](https://github.com/mraniki/tt/commit/508395712f303a6d0e4f0961942e21035a502136))
 
 * ⬆️ 🛠️(deps): update dependency myllm to v3.1.22 ([`f693976`](https://github.com/mraniki/tt/commit/f693976195eed2a7bbb801f6a7a77b2b9284348b))
 
@@ -5198,11 +5226,11 @@ od used is the default merge. ([`395519e`](https://github.com/mraniki/tt/commit/
 
 * Update Requirements ([`abe7c83`](https://github.com/mraniki/tt/commit/abe7c83ed917427e41319572c23b4e98a4a94877))
 
+* Update Requirements ([`bd27145`](https://github.com/mraniki/tt/commit/bd271453b984c911accedbabbfc187e783a1c3fc))
+
 * Update Requirements ([`88b8241`](https://github.com/mraniki/tt/commit/88b82413b7007c23a64af2f48243375a9568cde2))
 
 * Update pyproject.toml ([`3c682f5`](https://github.com/mraniki/tt/commit/3c682f54cc213501cdc24b7a2955c92d19901f80))
-
-* Update Requirements ([`bd27145`](https://github.com/mraniki/tt/commit/bd271453b984c911accedbabbfc187e783a1c3fc))
 
 ### ⬆️
 
@@ -5309,10 +5337,6 @@ ending a notification. ([`92a2017`](https://github.com/mraniki/tt/commit/92a2017
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`b5e4bea`](https://github.com/mraniki/tt/commit/b5e4bea86b0055e0e213db48818d63004b6c6233))
 
-### Update
-
-* :whale: Update .dockerignore file ([`02416da`](https://github.com/mraniki/tt/commit/02416da2ba7cf53e8ac7739d9a9bef50bf2b6b5a))
-
 ## v6.4.37 (2023-10-07)
 
 ### Other
@@ -5339,6 +5363,8 @@ ending a notification. ([`92a2017`](https://github.com/mraniki/tt/commit/92a2017
 * Update Requirements ([`8475006`](https://github.com/mraniki/tt/commit/8475006b6581dc5e1883ac90b84bc7d39a40ad1c))
 
 * Update Requirements ([`0e43321`](https://github.com/mraniki/tt/commit/0e4332146a9badc36ff371cfaf116caf4e5cea9b))
+
+* :whale: Update .dockerignore file ([`02416da`](https://github.com/mraniki/tt/commit/02416da2ba7cf53e8ac7739d9a9bef50bf2b6b5a))
 
 * Update Requirements ([`4faf01f`](https://github.com/mraniki/tt/commit/4faf01f9367965ade53b2c9f7fb3ff2ad0601615))
 
@@ -5373,22 +5399,6 @@ ending a notification. ([`92a2017`](https://github.com/mraniki/tt/commit/92a2017
 * Refactor PluginManager class ([`6ecafcd`](https://github.com/mraniki/tt/commit/6ecafcd0588b81dc440479c0876d906d86f684f0))
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`341d82d`](https://github.com/mraniki/tt/commit/341d82de66a38e3e33b6db7762b4019362c3a9e5))
-
-* Refactor plugin_manager.py and utils.py
-
-- Refactor the debug log message in PluginManager class to improve reada
-bility.
-- Use asyncio.create_task() to handle messages in parallel in
-PluginMana
-ger class.
-- Add comments to explain the purpose of the code in PluginManager
-class
-.
-- Remove commented out code in utils.py related to checking the latest
-v
-ersion.
-
-This commit addresses the above changes. ([`5aa3b17`](https://github.com/mraniki/tt/commit/5aa3b17905d6a0c517ab1913bff262cc0b46be92))
 
 ### Update
 
@@ -5427,6 +5437,22 @@ ing. ([`486642f`](https://github.com/mraniki/tt/commit/486642fbcc7f43ec5afee2efb
 * Merge pull request #896 from mraniki/dev
 
 ♻️ Refactoring llm_ai_mode and fmo.search ([`596fef1`](https://github.com/mraniki/tt/commit/596fef1c31801c54e090d7f29a2451eb3d6e17c2))
+
+* Refactor plugin_manager.py and utils.py
+
+- Refactor the debug log message in PluginManager class to improve reada
+bility.
+- Use asyncio.create_task() to handle messages in parallel in
+PluginMana
+ger class.
+- Add comments to explain the purpose of the code in PluginManager
+class
+.
+- Remove commented out code in utils.py related to checking the latest
+v
+ersion.
+
+This commit addresses the above changes. ([`5aa3b17`](https://github.com/mraniki/tt/commit/5aa3b17905d6a0c517ab1913bff262cc0b46be92))
 
 * Refactor check_version function and add error handling
 
@@ -5479,13 +5505,13 @@ This commit message is based on the file differences in tt/utils.py. ([`3ab6147`
 
 ### Other
 
-* Merge pull request #895 from mraniki/renovate/iamlistening-4.x
-
-⬆️ 🛠️(deps): update dependency iamlistening to v4.2.6 ([`1f77e74`](https://github.com/mraniki/tt/commit/1f77e7416362c28367b065a0f527908ddb3895db))
-
 * Merge pull request #894 from mraniki/dev
 
 :recycle: Refactor LlmPlugin conditional statement ([`21928da`](https://github.com/mraniki/tt/commit/21928daf8f99296d0f9f75e3c3afb8e2bc5685d7))
+
+* Merge pull request #895 from mraniki/renovate/iamlistening-4.x
+
+⬆️ 🛠️(deps): update dependency iamlistening to v4.2.6 ([`1f77e74`](https://github.com/mraniki/tt/commit/1f77e7416362c28367b065a0f527908ddb3895db))
 
 ### Update
 
@@ -5538,10 +5564,6 @@ Remove should_handle method from CexExchangePlugin and DexExchangePlugin (Source
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`c65cdff`](https://github.com/mraniki/tt/commit/c65cdffa98f3927849460bc9ebc91ca12751c79e))
 
-### Update
-
-* Update pyproject.toml format ([`6dda030`](https://github.com/mraniki/tt/commit/6dda030748c3e08f8903a680eb49d30b3f4150e6))
-
 ## v6.4.31 (2023-10-05)
 
 ### Other
@@ -5568,13 +5590,15 @@ Remove should_handle method from CexExchangePlugin and DexExchangePlugin (Source
 
 * Update Requirements ([`88d8199`](https://github.com/mraniki/tt/commit/88d81996659615df817eca815ff4f21adacab44a))
 
+* Update pyproject.toml format ([`6dda030`](https://github.com/mraniki/tt/commit/6dda030748c3e08f8903a680eb49d30b3f4150e6))
+
 * Update Requirements ([`cbecd54`](https://github.com/mraniki/tt/commit/cbecd54409ecf8b231c3f1f662e86934938c130a))
 
 * Update pyproject.toml ([`4d8ce6c`](https://github.com/mraniki/tt/commit/4d8ce6c635eaa40c65278d0ef684200d8bd5017b))
 
-* Update Requirements ([`37f9021`](https://github.com/mraniki/tt/commit/37f90215e7251a12ae4ddb4417c5ab1868f5296a))
-
 * Update Requirements ([`ccf8c5b`](https://github.com/mraniki/tt/commit/ccf8c5beebf3d6325c4e2b0826f4312cc1d99230))
+
+* Update Requirements ([`37f9021`](https://github.com/mraniki/tt/commit/37f90215e7251a12ae4ddb4417c5ab1868f5296a))
 
 ### ♻️
 
@@ -5584,9 +5608,9 @@ Remove should_handle method from CexExchangePlugin and DexExchangePlugin (Source
 
 * ⬆️ 🛠️(deps): update dependency dxsp to v5.2.1 ([`cdbd713`](https://github.com/mraniki/tt/commit/cdbd7134e654799de46b3379de3c3d32319e82d6))
 
-* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.5 ([`d5ed55b`](https://github.com/mraniki/tt/commit/d5ed55ba3012d43b9c8607288ea658d31a9160bf))
-
 * ⬆️ 🛠️(deps): update dependency myllm to v3.1.13 ([`c0e1c5f`](https://github.com/mraniki/tt/commit/c0e1c5f9a7c36ded629b7aaba6c6e4d9483333ec))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.5 ([`d5ed55b`](https://github.com/mraniki/tt/commit/d5ed55ba3012d43b9c8607288ea658d31a9160bf))
 
 ## v6.4.30 (2023-10-05)
 
@@ -5640,15 +5664,13 @@ Remove should_handle method from CexExchangePlugin and DexExchangePlugin (Source
 
 ⬆️⚡♻️ CEFI/DXSP/MyLLM (Sourcery refactored) ([`9367e2a`](https://github.com/mraniki/tt/commit/9367e2a028f5f73f627a8cd42ea045be6727071a))
 
+* &#39;Refactored by Sourcery&#39; ([`4f5cb16`](https://github.com/mraniki/tt/commit/4f5cb166da422e0add51fe38052f94c89f8f378b))
+
 * Merge pull request #879 from mraniki/renovate/pytest-loguru-0.x
 
 ⬆️ 🛠️(deps): update dependency pytest-loguru to ^0.3.0 ([`98e1de1`](https://github.com/mraniki/tt/commit/98e1de18a03512d1b54b6e93caab896bd7e8f384))
 
-* &#39;Refactored by Sourcery&#39; ([`4f5cb16`](https://github.com/mraniki/tt/commit/4f5cb166da422e0add51fe38052f94c89f8f378b))
-
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`ca73bb7`](https://github.com/mraniki/tt/commit/ca73bb705392282d42d4ed8a753b03bc7c25648e))
-
-* Fix default settings file path ([`3d1787e`](https://github.com/mraniki/tt/commit/3d1787e454e452d2516b601d5af4371a0b56ced5))
 
 ### Update
 
@@ -5685,15 +5707,15 @@ Remove should_handle method from CexExchangePlugin and DexExchangePlugin (Source
 
 * ⬆️ 🛠️(deps): update dependency dxsp to v5.1.5 ([`1eb386c`](https://github.com/mraniki/tt/commit/1eb386c1ccdcf5d850af9d85e86bb742bb65a3de))
 
-* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.3 ([`a38ac7e`](https://github.com/mraniki/tt/commit/a38ac7e4530e2f9442fb820c28e0f3eda19301f1))
-
 * ⬆️ 🛠️(deps): update dependency cefi to v3.1.2 ([`ec9d2a1`](https://github.com/mraniki/tt/commit/ec9d2a1124ee9c88427e763bcd4fc2fdc16c5d37))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.2.3 ([`a38ac7e`](https://github.com/mraniki/tt/commit/a38ac7e4530e2f9442fb820c28e0f3eda19301f1))
 
 * ⬆️ ([`8187263`](https://github.com/mraniki/tt/commit/8187263881a57901054d62281485498974cbc62f))
 
-* ⬆️ ([`0a8ea58`](https://github.com/mraniki/tt/commit/0a8ea5815dd4edcd20cc0f9d194b5e6cbdfed8a2))
-
 * ⬆️ 🛠️(deps): update dependency pytest-loguru to ^0.3.0 ([`dfe2844`](https://github.com/mraniki/tt/commit/dfe28441334f08cc19dc767b1ad8eeb8b20568ca))
+
+* ⬆️ ([`0a8ea58`](https://github.com/mraniki/tt/commit/0a8ea5815dd4edcd20cc0f9d194b5e6cbdfed8a2))
 
 ## v6.4.28 (2023-10-04)
 
@@ -5706,6 +5728,8 @@ Remove should_handle method from CexExchangePlugin and DexExchangePlugin (Source
 * Merge pull request #878 from mraniki/dev
 
 :recycle::wrench:Refactor filepath in config.py ([`cbc2dcd`](https://github.com/mraniki/tt/commit/cbc2dcdbd3319f2d6ab337773b24bddb0e4b6d62))
+
+* Fix default settings file path ([`3d1787e`](https://github.com/mraniki/tt/commit/3d1787e454e452d2516b601d5af4371a0b56ced5))
 
 ## v6.4.27 (2023-10-04)
 
@@ -5721,8 +5745,6 @@ Update dxsp and cefi versions ([`bf59e32`](https://github.com/mraniki/tt/commit/
 
 * Update Requirements ([`5ff4d83`](https://github.com/mraniki/tt/commit/5ff4d831a032452dc7f59b1a3b493cff2f1cb9aa))
 
-* Update dxsp and cefi versions ([`a64fdba`](https://github.com/mraniki/tt/commit/a64fdba56ec18e1c170b7ab05b6b673f90c58b59))
-
 ## v6.4.26 (2023-10-04)
 
 ### :bug:
@@ -5736,6 +5758,10 @@ Update dxsp and cefi versions ([`bf59e32`](https://github.com/mraniki/tt/commit/
 Dev ([`91ce7d4`](https://github.com/mraniki/tt/commit/91ce7d468a247a5f9f4c708f6bd450137d2a3b43))
 
 * Merge branch &#39;main&#39; into dev ([`aeaeeb6`](https://github.com/mraniki/tt/commit/aeaeeb6dc7b232e58b7b2053d5a29955a1b1e5f7))
+
+### Update
+
+* Update dxsp and cefi versions ([`a64fdba`](https://github.com/mraniki/tt/commit/a64fdba56ec18e1c170b7ab05b6b673f90c58b59))
 
 ## v6.4.25 (2023-10-04)
 
@@ -5871,10 +5897,6 @@ Dev ([`3b28a4e`](https://github.com/mraniki/tt/commit/3b28a4ee8a77c23e7ab6128d6d
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`6584fe2`](https://github.com/mraniki/tt/commit/6584fe2c7075ff11c1e2548f110671826d5834b2))
 
-### Update
-
-* Update OP path in config.py and comment out logger.debug in utils.py ([`f8af8e6`](https://github.com/mraniki/tt/commit/f8af8e680fd4aa086b6d80cc6d5dc34e1d5a2b3a))
-
 ## v6.4.16 (2023-10-03)
 
 ### Other
@@ -5887,11 +5909,7 @@ Dev ([`fae78c2`](https://github.com/mraniki/tt/commit/fae78c257386025fa456cd5781
 
 ### Update
 
-* :whale: Update Dockerfile and config.py
-
-- Removed COPY command for 1Password CLI installation in Dockerfile
-- Added commands to download and install 1Password CLI in Dockerfile
-- Updated config.py to use default OP initialization method ([`9ca8f76`](https://github.com/mraniki/tt/commit/9ca8f76cca82f6bfbf23f7fe3a5219e17a5669e5))
+* Update OP path in config.py and comment out logger.debug in utils.py ([`f8af8e6`](https://github.com/mraniki/tt/commit/f8af8e680fd4aa086b6d80cc6d5dc34e1d5a2b3a))
 
 ## v6.4.15 (2023-10-03)
 
@@ -5907,7 +5925,11 @@ op ([`3c5f347`](https://github.com/mraniki/tt/commit/3c5f3470fe7de4418f2d1a9edb7
 
 ### Update
 
-* Update OP path in config.py ([`4e05521`](https://github.com/mraniki/tt/commit/4e05521642dc5da72b0cf407aff51a45abb626fc))
+* :whale: Update Dockerfile and config.py
+
+- Removed COPY command for 1Password CLI installation in Dockerfile
+- Added commands to download and install 1Password CLI in Dockerfile
+- Updated config.py to use default OP initialization method ([`9ca8f76`](https://github.com/mraniki/tt/commit/9ca8f76cca82f6bfbf23f7fe3a5219e17a5669e5))
 
 ## v6.4.14 (2023-10-03)
 
@@ -5923,11 +5945,17 @@ Op ([`b11680e`](https://github.com/mraniki/tt/commit/b11680e5e24f07a9de8f278b119
 
 ### Update
 
+* Update OP path in config.py ([`4e05521`](https://github.com/mraniki/tt/commit/4e05521642dc5da72b0cf407aff51a45abb626fc))
+
 * Update Dockerfile to use Python 3.11
 
 and modify tt/config.py to handle existing authentication ([`ae14e72`](https://github.com/mraniki/tt/commit/ae14e724223789d5e288de0b474741c01e5940fb))
 
 * Update Requirements ([`c5fa2ae`](https://github.com/mraniki/tt/commit/c5fa2ae8d76a1da36adda2082ffd42cb6684519f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update python docker tag to v3.12 ([`3da2163`](https://github.com/mraniki/tt/commit/3da2163eb146273cb7faf1146dd7ff4dbf6790c5))
 
 ## v6.4.13 (2023-10-03)
 
@@ -5940,10 +5968,6 @@ and modify tt/config.py to handle existing authentication ([`ae14e72`](https://g
 * Merge pull request #860 from mraniki/dev
 
 :bug: ([`c800d1a`](https://github.com/mraniki/tt/commit/c800d1ac08a488530813c39d059e55ace1c247f4))
-
-### ⬆️
-
-* ⬆️ 🛠️(deps): update python docker tag to v3.12 ([`3da2163`](https://github.com/mraniki/tt/commit/3da2163eb146273cb7faf1146dd7ff4dbf6790c5))
 
 ## v6.4.12 (2023-10-03)
 
@@ -6003,9 +6027,11 @@ and modify tt/config.py to handle existing authentication ([`ae14e72`](https://g
 
 * Update Requirements ([`f815cae`](https://github.com/mraniki/tt/commit/f815cae8a0c12a2ad5dbc5adcb9fa2bdec329cf5))
 
-* Update README.md file
+* Update Requirements ([`cc6ecf9`](https://github.com/mraniki/tt/commit/cc6ecf9898e11abab91f855cf963e4c3a380c150))
 
-- Connect CEX and DEX exchanges across multi messaging platforms. ([`d26c818`](https://github.com/mraniki/tt/commit/d26c8187d3066c1bcb5cf8ab89e5f122df385ab6))
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v3.1.9 ([`b4e0085`](https://github.com/mraniki/tt/commit/b4e008587e7b83f61de35e45803d62f5a254ba96))
 
 ## v6.4.9 (2023-10-02)
 
@@ -6021,13 +6047,17 @@ and modify tt/config.py to handle existing authentication ([`ae14e72`](https://g
 
 ### Update
 
-* Update Requirements ([`cc6ecf9`](https://github.com/mraniki/tt/commit/cc6ecf9898e11abab91f855cf963e4c3a380c150))
+* Update README.md file
+
+- Connect CEX and DEX exchanges across multi messaging platforms. ([`d26c818`](https://github.com/mraniki/tt/commit/d26c8187d3066c1bcb5cf8ab89e5f122df385ab6))
 
 * Update talky_settings.toml ([`5fb1b7d`](https://github.com/mraniki/tt/commit/5fb1b7d539fbbc7896714df187c7c745ee89b23c))
 
+* Update Requirements ([`1d40105`](https://github.com/mraniki/tt/commit/1d401055b733c929cad0689a43ccad5d5e6f1fc7))
+
 ### ⬆️
 
-* ⬆️ 🛠️(deps): update dependency myllm to v3.1.9 ([`b4e0085`](https://github.com/mraniki/tt/commit/b4e008587e7b83f61de35e45803d62f5a254ba96))
+* ⬆️ 🛠️(deps): update dependency iamlistening to v4.1.8 ([`98ac879`](https://github.com/mraniki/tt/commit/98ac8790bd0a81a6609b38a9d2cd779a949aefd2))
 
 ## v6.4.8 (2023-10-02)
 
@@ -6037,17 +6067,9 @@ and modify tt/config.py to handle existing authentication ([`ae14e72`](https://g
 
 ♻️OnePassword ([`0c65414`](https://github.com/mraniki/tt/commit/0c6541425e013662f1d1a3766711e334342c88e4))
 
-### Update
-
-* Update Requirements ([`1d40105`](https://github.com/mraniki/tt/commit/1d401055b733c929cad0689a43ccad5d5e6f1fc7))
-
 ### ♻️
 
 * ♻️ ([`e2ef106`](https://github.com/mraniki/tt/commit/e2ef1066a8133979d13510e109b06f0471d0de07))
-
-### ⬆️
-
-* ⬆️ 🛠️(deps): update dependency iamlistening to v4.1.8 ([`98ac879`](https://github.com/mraniki/tt/commit/98ac8790bd0a81a6609b38a9d2cd779a949aefd2))
 
 ## v6.4.7 (2023-10-02)
 
@@ -6723,8 +6745,6 @@ Update pyproject.toml ([`5dedd2a`](https://github.com/mraniki/tt/commit/5dedd2a4
 
 * Update pyproject.toml for MyLLM dep ([`899991d`](https://github.com/mraniki/tt/commit/899991ddf015c3ac7159d9f9a4f7f8470acfc37e))
 
-* :rotating_light: Update LlmPlugin commands ([`0cfa23b`](https://github.com/mraniki/tt/commit/0cfa23bee586a080878f2bdfd2d4cf079de74d4a))
-
 ### ⚡
 
 * ⚡ ([`b587757`](https://github.com/mraniki/tt/commit/b587757ddc15bce5100ae6ef4c528677ff15ce4b))
@@ -6744,6 +6764,10 @@ Update pyproject.toml ([`5dedd2a`](https://github.com/mraniki/tt/commit/5dedd2a4
 * Merge pull request #800 from mraniki/dev
 
 :memo: ([`84c7de2`](https://github.com/mraniki/tt/commit/84c7de2039226cf22adf950497de93a9e6059265))
+
+### Update
+
+* :rotating_light: Update LlmPlugin commands ([`0cfa23b`](https://github.com/mraniki/tt/commit/0cfa23bee586a080878f2bdfd2d4cf079de74d4a))
 
 ## v6.0.8 (2023-09-24)
 
@@ -6905,8 +6929,6 @@ Update pyproject.toml ([`d3cde43`](https://github.com/mraniki/tt/commit/d3cde43b
 
 * :recycle:  Refactor start_bot function to iterate over platforms ([`541fe84`](https://github.com/mraniki/tt/commit/541fe843ad7c4c2b0f58f981ad7a1a7c62d98a2b))
 
-* :recycle: Refactor example_settings.toml and talky_settings.toml files ([`293f30f`](https://github.com/mraniki/tt/commit/293f30f4ca69aed8f6d50e01e3f05382cdeba628))
-
 ### :rotating_light:
 
 * :rotating_light: ([`ac9eb9a`](https://github.com/mraniki/tt/commit/ac9eb9af3e864f40ce5d00753f7f67bd5ebf6c0b))
@@ -6961,6 +6983,10 @@ Update pyproject.toml ([`d3cde43`](https://github.com/mraniki/tt/commit/d3cde43b
 
 ## v6.0.0 (2023-09-21)
 
+### :recycle:
+
+* :recycle: Refactor example_settings.toml and talky_settings.toml files ([`293f30f`](https://github.com/mraniki/tt/commit/293f30f4ca69aed8f6d50e01e3f05382cdeba628))
+
 ### :white_check_mark:
 
 * :white_check_mark: cefi unit test ([`17402d8`](https://github.com/mraniki/tt/commit/17402d8c3938e4c28efe81f04a0bd1d7c289917d))
@@ -6993,9 +7019,9 @@ Update pyproject.toml ([`d3cde43`](https://github.com/mraniki/tt/commit/d3cde43b
 
 ### ⬆️
 
-* ⬆️ 🛠️(deps): update dependency myllm to v2.0.11 ([`927355e`](https://github.com/mraniki/tt/commit/927355eb2b7114dddc3bee7bd87caa7e585b21c7))
-
 * ⬆️ 🛠️(deps): update dependency dxsp to v5.0.3 ([`869a38c`](https://github.com/mraniki/tt/commit/869a38cc7d81e4d1381b0f8c45e3f46f7be1d975))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v2.0.11 ([`927355e`](https://github.com/mraniki/tt/commit/927355eb2b7114dddc3bee7bd87caa7e585b21c7))
 
 ## v5.0.5 (2023-09-20)
 
@@ -7041,6 +7067,10 @@ Update pyproject.toml ([`d3cde43`](https://github.com/mraniki/tt/commit/d3cde43b
 
 * Merge branch &#39;main&#39; into dev ([`61ea918`](https://github.com/mraniki/tt/commit/61ea918fedc767181e3d668cef52555dedd28e7a))
 
+## v5.0.3 (2023-09-19)
+
+### Other
+
 * Merge pull request #777 from mraniki/renovate/myllm-2.x
 
 ⬆️ 🛠️(deps): update dependency myllm to v2.0.10 ([`9ef9cae`](https://github.com/mraniki/tt/commit/9ef9cae8f78c19c875b50c1fb35c4febec3ba9b5))
@@ -7048,14 +7078,6 @@ Update pyproject.toml ([`d3cde43`](https://github.com/mraniki/tt/commit/d3cde43b
 * Merge pull request #776 from mraniki/renovate/iamlistening-3.x
 
 ⬆️ 🛠️(deps): update dependency iamlistening to v3.4.6 ([`e3d203e`](https://github.com/mraniki/tt/commit/e3d203edf369be782dad9d3f50b65feae42a414c))
-
-### ⬆️
-
-* ⬆️ 🛠️(deps): update dependency myllm to v2.0.10 ([`5779345`](https://github.com/mraniki/tt/commit/5779345422e7b962a8fad990acc68c88ea54f798))
-
-## v5.0.3 (2023-09-19)
-
-### Other
 
 * Merge pull request #775 from mraniki/dev
 
@@ -7066,6 +7088,8 @@ Update pyproject.toml ([`d3cde43`](https://github.com/mraniki/tt/commit/d3cde43b
 * ♻️ ([`c0cf30b`](https://github.com/mraniki/tt/commit/c0cf30b52c1c1e31699cd7b562f4398d9d8138b6))
 
 ### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v2.0.10 ([`5779345`](https://github.com/mraniki/tt/commit/5779345422e7b962a8fad990acc68c88ea54f798))
 
 * ⬆️ 🛠️(deps): update dependency iamlistening to v3.4.6 ([`07e8cf5`](https://github.com/mraniki/tt/commit/07e8cf5e90102cbda1f017ce0637a1b70d458283))
 
@@ -7165,13 +7189,30 @@ Update pyproject.toml ([`d3cde43`](https://github.com/mraniki/tt/commit/d3cde43b
 
 ⬆️ 🤖 Dependencies: Update findmyorder requirement from 1.7.33 to 1.7.34 ([`eae90d2`](https://github.com/mraniki/tt/commit/eae90d248d416c9330ca63d436da745c0e2d379a))
 
+### Update
+
+* :arrow_up: 🤖 Dependencies: Update findmyorder requirement
+
+Updates the requirements on [findmyorder](https://github.com/mraniki/findmyorder) to permit the latest version.
+- [Release notes](https://github.com/mraniki/findmyorder/releases)
+- [Changelog](https://github.com/mraniki/findmyorder/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/mraniki/findmyorder/compare/v1.7.33...v1.7.34)
+
+---
+updated-dependencies:
+- dependency-name: findmyorder
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`cdc1058`](https://github.com/mraniki/tt/commit/cdc10588a1de543d0d938adede541a1d1bd070e5))
+
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency pydata-sphinx-theme to ^0.14.0 ([`643576a`](https://github.com/mraniki/tt/commit/643576aad2dbf87e479ea54020f2c252b13765d3))
 
-* ⬆️ 🛠️(deps): update dependency sphinx to v7.2.6 ([`8c5cd56`](https://github.com/mraniki/tt/commit/8c5cd569dcc933820a9a337add41360ee8b2d889))
-
 * ⬆️ 🛠️(deps): update dependency cefi to v2.0.1 ([`595f01c`](https://github.com/mraniki/tt/commit/595f01c6e37959592d73632661e874cf7f367ef4))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.2.6 ([`8c5cd56`](https://github.com/mraniki/tt/commit/8c5cd569dcc933820a9a337add41360ee8b2d889))
 
 * ⬆️ 🛠️(deps): update dependency sphinx to v7.2.6 ([`44e5ac4`](https://github.com/mraniki/tt/commit/44e5ac4823fd0555b32c301a86abaed8f062a699))
 
@@ -7212,23 +7253,6 @@ Update 👷Flow.yml to add Mirroring ([`76613a1`](https://github.com/mraniki/tt/
 * Merge pull request #759 from mraniki/dev
 
 💬 codacy code quality badge ([`d3d0306`](https://github.com/mraniki/tt/commit/d3d03060e24b2fcb971412dcd56173b5c8417379))
-
-### Update
-
-* :arrow_up: 🤖 Dependencies: Update findmyorder requirement
-
-Updates the requirements on [findmyorder](https://github.com/mraniki/findmyorder) to permit the latest version.
-- [Release notes](https://github.com/mraniki/findmyorder/releases)
-- [Changelog](https://github.com/mraniki/findmyorder/blob/main/CHANGELOG.md)
-- [Commits](https://github.com/mraniki/findmyorder/compare/v1.7.33...v1.7.34)
-
----
-updated-dependencies:
-- dependency-name: findmyorder
-  dependency-type: direct:production
-...
-
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`cdc1058`](https://github.com/mraniki/tt/commit/cdc10588a1de543d0d938adede541a1d1bd070e5))
 
 ### 💬
 
@@ -7390,6 +7414,14 @@ Update mirror job configuration ([`1742999`](https://github.com/mraniki/tt/commi
 
 ⬆️ 🛠️(deps): update dependency dxsp to v4.2.37 ([`0972479`](https://github.com/mraniki/tt/commit/0972479bdbeda49edcab343c4591cdc77ed5e9b5))
 
+### Update
+
+* Update Requirements ([`9d562be`](https://github.com/mraniki/tt/commit/9d562be9042506c978f0a4c9755521f4153d2b38))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v4.2.37 ([`8fe4bc9`](https://github.com/mraniki/tt/commit/8fe4bc99aab948d342320b21b28aecab79e6a260))
+
 ## v4.12.0 (2023-09-07)
 
 ### Other
@@ -7399,8 +7431,6 @@ Update mirror job configuration ([`1742999`](https://github.com/mraniki/tt/commi
 ⬆️ ([`215004a`](https://github.com/mraniki/tt/commit/215004ad7502ef520ffa94a1f11063edc1c98b58))
 
 ### Update
-
-* Update Requirements ([`9d562be`](https://github.com/mraniki/tt/commit/9d562be9042506c978f0a4c9755521f4153d2b38))
 
 * Update Requirements ([`b5e06b4`](https://github.com/mraniki/tt/commit/b5e06b40bcb6050a52fdf22022fbd8e6b8d97525))
 
@@ -7413,8 +7443,6 @@ Update mirror job configuration ([`1742999`](https://github.com/mraniki/tt/commi
 * ✨ Updated LLM for conversation support ([`2a01dbc`](https://github.com/mraniki/tt/commit/2a01dbc3d3a92b2caba7c8a496f72afc550ada9f))
 
 ### ⬆️
-
-* ⬆️ 🛠️(deps): update dependency dxsp to v4.2.37 ([`8fe4bc9`](https://github.com/mraniki/tt/commit/8fe4bc99aab948d342320b21b28aecab79e6a260))
 
 * ⬆️ ([`8b50410`](https://github.com/mraniki/tt/commit/8b504102f07fbf500f233ae6b7b17e847b4e3c5d))
 
@@ -7476,6 +7504,23 @@ Update mirror job configuration ([`1742999`](https://github.com/mraniki/tt/commi
 
 * Update pyproject.toml ([`f6a9c39`](https://github.com/mraniki/tt/commit/f6a9c3907c543eda5b8038ef01387657f2b78da8))
 
+* Update Requirements ([`4309f61`](https://github.com/mraniki/tt/commit/4309f61a76ff133ab688b8f15a2fb6b0ae9b10c6))
+
+* :arrow_up: 🤖 Dependencies: Update sphinx requirement from 7.2.4 to 7.2.5
+
+Updates the requirements on [sphinx](https://github.com/sphinx-doc/sphinx) to permit the latest version.
+- [Release notes](https://github.com/sphinx-doc/sphinx/releases)
+- [Changelog](https://github.com/sphinx-doc/sphinx/blob/master/CHANGES)
+- [Commits](https://github.com/sphinx-doc/sphinx/compare/v7.2.4...v7.2.5)
+
+---
+updated-dependencies:
+- dependency-name: sphinx
+  dependency-type: direct:development
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`b99d790`](https://github.com/mraniki/tt/commit/b99d7902e4936b0e41e928f26afc89d711d226a5))
+
 ## v4.11.24 (2023-08-31)
 
 ### Other
@@ -7483,6 +7528,14 @@ Update mirror job configuration ([`1742999`](https://github.com/mraniki/tt/commi
 * Merge pull request #709 from mraniki/renovate/sphinx-7.x
 
 ⬆️ 🛠️(deps): update dependency sphinx to v7.2.5 ([`0082c73`](https://github.com/mraniki/tt/commit/0082c73799d7afc76559e36e0bf70ecc048389ee))
+
+### Update
+
+* Update Requirements ([`6ecfa42`](https://github.com/mraniki/tt/commit/6ecfa42de371491a3e6c7cfd451bf11c3dccb139))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.2.5 ([`691161a`](https://github.com/mraniki/tt/commit/691161a32c07a31dc92a2fabc260cd51a9ef4a56))
 
 ## v4.11.23 (2023-08-31)
 
@@ -7519,29 +7572,6 @@ Update mirror job configuration ([`1742999`](https://github.com/mraniki/tt/commi
 ### Update
 
 * Update Requirements ([`e68d432`](https://github.com/mraniki/tt/commit/e68d4328fc843c822d1a298350a1229c21cf22f2))
-
-* Update Requirements ([`4309f61`](https://github.com/mraniki/tt/commit/4309f61a76ff133ab688b8f15a2fb6b0ae9b10c6))
-
-* :arrow_up: 🤖 Dependencies: Update sphinx requirement from 7.2.4 to 7.2.5
-
-Updates the requirements on [sphinx](https://github.com/sphinx-doc/sphinx) to permit the latest version.
-- [Release notes](https://github.com/sphinx-doc/sphinx/releases)
-- [Changelog](https://github.com/sphinx-doc/sphinx/blob/master/CHANGES)
-- [Commits](https://github.com/sphinx-doc/sphinx/compare/v7.2.4...v7.2.5)
-
----
-updated-dependencies:
-- dependency-name: sphinx
-  dependency-type: direct:development
-...
-
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`b99d790`](https://github.com/mraniki/tt/commit/b99d7902e4936b0e41e928f26afc89d711d226a5))
-
-* Update Requirements ([`6ecfa42`](https://github.com/mraniki/tt/commit/6ecfa42de371491a3e6c7cfd451bf11c3dccb139))
-
-### ⬆️
-
-* ⬆️ 🛠️(deps): update dependency sphinx to v7.2.5 ([`691161a`](https://github.com/mraniki/tt/commit/691161a32c07a31dc92a2fabc260cd51a9ef4a56))
 
 ### 📝
 
@@ -7621,15 +7651,15 @@ Merge ([`cb9e7a3`](https://github.com/mraniki/tt/commit/cb9e7a3e43564aebf0aae450
 
 * Update Requirements ([`002604f`](https://github.com/mraniki/tt/commit/002604fb4179f40f7274de58c7f1824c52f3d6c0))
 
+### 🎨
+
+* 🎨 ([`e7aa740`](https://github.com/mraniki/tt/commit/e7aa74048119a3df15826ca6b5973a3658e4aa52))
+
 ## v4.11.18 (2023-08-29)
 
 ### Update
 
 * Update app.py ([`03bd64b`](https://github.com/mraniki/tt/commit/03bd64b6010683403b8425f829987ca2920a7342))
-
-### 🎨
-
-* 🎨 ([`e7aa740`](https://github.com/mraniki/tt/commit/e7aa74048119a3df15826ca6b5973a3658e4aa52))
 
 ## v4.11.17 (2023-08-28)
 
@@ -8257,6 +8287,24 @@ Merge ([`cb9e7a3`](https://github.com/mraniki/tt/commit/cb9e7a3e43564aebf0aae450
 
 ⬆️ Dep: Update fastapi requirement from ^0.99.0 to ^0.101.1 ([`fd049f4`](https://github.com/mraniki/tt/commit/fd049f464badc5691e0930e63f8be505ba087559))
 
+### Update
+
+* Update Requirements ([`02edfaa`](https://github.com/mraniki/tt/commit/02edfaaf0e2ca2c37820a5f7ab215ebfa7bfc858))
+
+* :arrow_up: Dep: Update fastapi requirement from ^0.99.0 to ^0.101.1
+
+Updates the requirements on [fastapi](https://github.com/tiangolo/fastapi) to permit the latest version.
+- [Release notes](https://github.com/tiangolo/fastapi/releases)
+- [Commits](https://github.com/tiangolo/fastapi/compare/0.99.0...0.101.1)
+
+---
+updated-dependencies:
+- dependency-name: fastapi
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`85972a5`](https://github.com/mraniki/tt/commit/85972a5cfd594764fe45124eda8791ca1c476dc1))
+
 ## v4.10.6 (2023-08-21)
 
 ### Update
@@ -8274,22 +8322,6 @@ Merge ([`cb9e7a3`](https://github.com/mraniki/tt/commit/cb9e7a3e43564aebf0aae450
 ### Update
 
 * Update pyproject.toml ([`e66b067`](https://github.com/mraniki/tt/commit/e66b067081fa19d98244734a8184d6fbc81bfc49))
-
-* Update Requirements ([`02edfaa`](https://github.com/mraniki/tt/commit/02edfaaf0e2ca2c37820a5f7ab215ebfa7bfc858))
-
-* :arrow_up: Dep: Update fastapi requirement from ^0.99.0 to ^0.101.1
-
-Updates the requirements on [fastapi](https://github.com/tiangolo/fastapi) to permit the latest version.
-- [Release notes](https://github.com/tiangolo/fastapi/releases)
-- [Commits](https://github.com/tiangolo/fastapi/compare/0.99.0...0.101.1)
-
----
-updated-dependencies:
-- dependency-name: fastapi
-  dependency-type: direct:production
-...
-
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`85972a5`](https://github.com/mraniki/tt/commit/85972a5cfd594764fe45124eda8791ca1c476dc1))
 
 ## v4.10.3 (2023-08-20)
 
@@ -8312,10 +8344,6 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`85972a5`](https://g
 ⬆️ Update python-semantic-release version ([`042bc35`](https://github.com/mraniki/tt/commit/042bc35e7c552a423122945a8d4af0981f6485b2))
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`23b126a`](https://github.com/mraniki/tt/commit/23b126a0097f631e1898788283b02be98ca205ec))
-
-### Update
-
-* :arrow_up: Update python-semantic-release version ([`6186897`](https://github.com/mraniki/tt/commit/6186897e9a0c1ad6675815ec42e4b20c24072bcd))
 
 ## v4.10.1 (2023-08-20)
 
@@ -8352,6 +8380,8 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`85972a5`](https://g
 ### Update
 
 * Update Requirements ([`09e10cd`](https://github.com/mraniki/tt/commit/09e10cdfe6513af28cd5a3fda3cf31ceb1d946ed))
+
+* :arrow_up: Update python-semantic-release version ([`6186897`](https://github.com/mraniki/tt/commit/6186897e9a0c1ad6675815ec42e4b20c24072bcd))
 
 * Update talky_settings.toml ([`3341637`](https://github.com/mraniki/tt/commit/334163757f2bcdc0a240f2f881e3720cc0ec7585))
 
@@ -8699,17 +8729,13 @@ Update  log level for 3rd party ([`8d5be43`](https://github.com/mraniki/tt/commi
 
 ### Update
 
-* Update pyproject.toml ([`dd24cd8`](https://github.com/mraniki/tt/commit/dd24cd84402c38e80b4ff0c94a149596d45a735b))
-
 * Update pyproject.toml ([`1fa88c5`](https://github.com/mraniki/tt/commit/1fa88c5002e7edbba44fb56f6713a09a68442cb8))
+
+* Update pyproject.toml ([`dd24cd8`](https://github.com/mraniki/tt/commit/dd24cd84402c38e80b4ff0c94a149596d45a735b))
 
 * Update Requirements ([`bf094ac`](https://github.com/mraniki/tt/commit/bf094ac97c642a0255bbde66fa080be18c7a1279))
 
 ## v4.9.11 (2023-08-11)
-
-### :memo:
-
-* :memo: ([`3693bf3`](https://github.com/mraniki/tt/commit/3693bf344bcbfb7e4fb2460c5718c576e6c91576))
 
 ### Fix
 
@@ -8724,6 +8750,10 @@ Update  log level for 3rd party ([`8d5be43`](https://github.com/mraniki/tt/commi
 ### :art:
 
 * :art: ([`f696fa5`](https://github.com/mraniki/tt/commit/f696fa522c6858f0cb75e82eb966b0c1a539753f))
+
+### :memo:
+
+* :memo: ([`3693bf3`](https://github.com/mraniki/tt/commit/3693bf344bcbfb7e4fb2460c5718c576e6c91576))
 
 ### Other
 
@@ -8875,6 +8905,14 @@ Update log level 🔇 ([`49a4983`](https://github.com/mraniki/tt/commit/49a49839
 
 ⬆️(deps): update dependency ruff to ^0.0.284 ([`7f59deb`](https://github.com/mraniki/tt/commit/7f59deb3ac8e1c4782d3ba028cc801ca3b18f89a))
 
+### Update
+
+* Update Requirements ([`2d0059b`](https://github.com/mraniki/tt/commit/2d0059b76911d189cfb2dd3bbe3952891205ac0b))
+
+### ⬆️
+
+* ⬆️(deps): update dependency ruff to ^0.0.284 ([`a403557`](https://github.com/mraniki/tt/commit/a40355705a0b72f58e4332e2b6bb25b9b6693f01))
+
 ## v4.9.2 (2023-08-09)
 
 ### :memo:
@@ -8893,13 +8931,7 @@ Update log level 🔇 ([`49a4983`](https://github.com/mraniki/tt/commit/49a49839
 
 ### Update
 
-* Update Requirements ([`2d0059b`](https://github.com/mraniki/tt/commit/2d0059b76911d189cfb2dd3bbe3952891205ac0b))
-
 * Update Requirements ([`9622428`](https://github.com/mraniki/tt/commit/96224289b5339444b0e63602a17b7c4ae0084a10))
-
-### ⬆️
-
-* ⬆️(deps): update dependency ruff to ^0.0.284 ([`a403557`](https://github.com/mraniki/tt/commit/a40355705a0b72f58e4332e2b6bb25b9b6693f01))
 
 ### 🔧
 
@@ -8967,8 +8999,6 @@ Update log level 🔇 ([`49a4983`](https://github.com/mraniki/tt/commit/49a49839
 
 * :memo: improve documentation ([`2f83a0b`](https://github.com/mraniki/tt/commit/2f83a0b6471dc9407a64b5fba2c3168446c2c1d2))
 
-* :memo: improve documentation ([`ed80ac7`](https://github.com/mraniki/tt/commit/ed80ac74ada5cffbfd31f42d7f192200e2768eed))
-
 ### :rotating_light:
 
 * :rotating_light:linter ([`8b9b680`](https://github.com/mraniki/tt/commit/8b9b680eef4b2f533d7c97c8ef06cffa25cabb5b))
@@ -8991,9 +9021,9 @@ Update log level 🔇 ([`49a4983`](https://github.com/mraniki/tt/commit/49a49839
 
 ## v4.8.25 (2023-08-08)
 
-### :bug:
+### :memo:
 
-* :bug: typo in docs ([`9e377ac`](https://github.com/mraniki/tt/commit/9e377ac6687bad121b7d40f71157a9bde94c7ebd))
+* :memo: improve documentation ([`ed80ac7`](https://github.com/mraniki/tt/commit/ed80ac74ada5cffbfd31f42d7f192200e2768eed))
 
 ### Other
 
@@ -9003,9 +9033,15 @@ Update log level 🔇 ([`49a4983`](https://github.com/mraniki/tt/commit/49a49839
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`732716c`](https://github.com/mraniki/tt/commit/732716c33e117a469a65cef88a927391c16fdd6f))
 
+### ⬆️
+
+* ⬆️(deps): update dependency ruff to ^0.0.283 ([`c0e5f7c`](https://github.com/mraniki/tt/commit/c0e5f7c6ff6006a9c72f13760bae7245e9fa72c1))
+
 ## v4.8.24 (2023-08-08)
 
 ### :bug:
+
+* :bug: typo in docs ([`9e377ac`](https://github.com/mraniki/tt/commit/9e377ac6687bad121b7d40f71157a9bde94c7ebd))
 
 * :bug: :white_check_mark: Unit Test ([`3488c4b`](https://github.com/mraniki/tt/commit/3488c4ba60bb105db3ae48bd59413dc0fb44e0ed))
 
@@ -9032,10 +9068,6 @@ Update log level 🔇 ([`49a4983`](https://github.com/mraniki/tt/commit/49a49839
 * Update Requirements ([`ddeee64`](https://github.com/mraniki/tt/commit/ddeee6417a96f969f874d4b822a92c04006ed5ba))
 
 * Update Requirements ([`2e5cc76`](https://github.com/mraniki/tt/commit/2e5cc768880ddb608151af337a1d3074aca552a7))
-
-### ⬆️
-
-* ⬆️(deps): update dependency ruff to ^0.0.283 ([`c0e5f7c`](https://github.com/mraniki/tt/commit/c0e5f7c6ff6006a9c72f13760bae7245e9fa72c1))
 
 ### 🐛
 
@@ -9111,6 +9143,10 @@ Update log level 🔇 ([`49a4983`](https://github.com/mraniki/tt/commit/49a49839
 
 ⬆️(deps): update dependency pytest-playwright to ^0.4.0 ([`849f180`](https://github.com/mraniki/tt/commit/849f1804cd8f7d98e630944bb60ec4c5eb3e6624))
 
+### ⬆️
+
+* ⬆️(deps): update dependency pytest-playwright to ^0.4.0 ([`ce326ae`](https://github.com/mraniki/tt/commit/ce326ae6a0bb3863b95022d53ed3f857b0dc9b69))
+
 ## v4.8.18 (2023-08-07)
 
 ### :memo:
@@ -9124,14 +9160,6 @@ Update log level 🔇 ([`49a4983`](https://github.com/mraniki/tt/commit/49a49839
 📝 update ([`89c2164`](https://github.com/mraniki/tt/commit/89c21645cd8ae3daaa7049786b8966ab7712ee0c))
 
 * Merge branch &#39;main&#39; into dev ([`3a7873e`](https://github.com/mraniki/tt/commit/3a7873e5b3fa045c4eef707b5e90af9c3660d86f))
-
-### Update
-
-* Update Requirements ([`68477be`](https://github.com/mraniki/tt/commit/68477be0802e860581d09a0b0107e9ee1d6d15b6))
-
-### ⬆️
-
-* ⬆️(deps): update dependency pytest-playwright to ^0.4.0 ([`ce326ae`](https://github.com/mraniki/tt/commit/ce326ae6a0bb3863b95022d53ed3f857b0dc9b69))
 
 ### 📝
 
@@ -9156,6 +9184,8 @@ Update log level 🔇 ([`49a4983`](https://github.com/mraniki/tt/commit/49a49839
 📝 rtd docs update ([`095c30e`](https://github.com/mraniki/tt/commit/095c30e88ef17d2477d0add27c69ccd9b7695bbe))
 
 ### Update
+
+* Update Requirements ([`68477be`](https://github.com/mraniki/tt/commit/68477be0802e860581d09a0b0107e9ee1d6d15b6))
 
 * Update Requirements ([`17223fe`](https://github.com/mraniki/tt/commit/17223fed32ca00e481a768c98dd247c36fc1734c))
 
@@ -9347,9 +9377,17 @@ Merge ([`b215c3c`](https://github.com/mraniki/tt/commit/b215c3c23349598e9c92f559
 
 * ♻️ ([`7c8492d`](https://github.com/mraniki/tt/commit/7c8492d245272654348dec060b6225586788f555))
 
+### 💬
+
+* 💬 ([`da0d259`](https://github.com/mraniki/tt/commit/da0d259393f54ebf4360ff3c2fa55c8ca32f4c7a))
+
 ### 🔧
 
 * 🔧 ([`ebd3fbf`](https://github.com/mraniki/tt/commit/ebd3fbf2c0d0c40f8edf3e94f16b93fef2c2f8d9))
+
+### 🚑
+
+* 🚑 uvi ([`a1a8848`](https://github.com/mraniki/tt/commit/a1a88489142806a2bdb66146fa4ea977e43c2348))
 
 ## v4.8.5 (2023-08-05)
 
@@ -9362,14 +9400,6 @@ Merge ([`b215c3c`](https://github.com/mraniki/tt/commit/b215c3c23349598e9c92f559
 ### Update
 
 * :ambulance: Update bot.py ([`9bd750f`](https://github.com/mraniki/tt/commit/9bd750f95697e2363f9deef9fed80364d67903b2))
-
-### 💬
-
-* 💬 ([`da0d259`](https://github.com/mraniki/tt/commit/da0d259393f54ebf4360ff3c2fa55c8ca32f4c7a))
-
-### 🚑
-
-* 🚑 uvi ([`a1a8848`](https://github.com/mraniki/tt/commit/a1a88489142806a2bdb66146fa4ea977e43c2348))
 
 ## v4.8.3 (2023-08-05)
 
@@ -9487,8 +9517,6 @@ Merge ([`b215c3c`](https://github.com/mraniki/tt/commit/b215c3c23349598e9c92f559
 
 * :bug: Refactor browser launch method ([`889c904`](https://github.com/mraniki/tt/commit/889c904260e9629db9156e50fec6b20d7bc2f074))
 
-* :bug: run ([`99e4853`](https://github.com/mraniki/tt/commit/99e4853ab709fbfa9910770ae92b03ab15965a20))
-
 ### Other
 
 * Merge pull request #622 from mraniki/dev
@@ -9516,6 +9544,8 @@ Merge ([`b215c3c`](https://github.com/mraniki/tt/commit/b215c3c23349598e9c92f559
 ## v4.6.5 (2023-08-04)
 
 ### :bug:
+
+* :bug: run ([`99e4853`](https://github.com/mraniki/tt/commit/99e4853ab709fbfa9910770ae92b03ab15965a20))
 
 * :bug: run ([`017174a`](https://github.com/mraniki/tt/commit/017174ae91d43c1d254b6189f54ea42e7bdae002))
 
@@ -10291,9 +10321,9 @@ Dev ([`8353451`](https://github.com/mraniki/tt/commit/8353451956d6e83dd5e0339746
 
 * Update Requirements ([`c5d395c`](https://github.com/mraniki/tt/commit/c5d395c03e5c2029e684021df6b01f3faf65a680))
 
-* Update Requirements ([`91d5b79`](https://github.com/mraniki/tt/commit/91d5b790b4fa294364b50292f70f7d7ad78913ab))
-
 * Update Requirements ([`6c2d04b`](https://github.com/mraniki/tt/commit/6c2d04b7d6860e1666e4235c3d62f3641f948479))
+
+* Update Requirements ([`91d5b79`](https://github.com/mraniki/tt/commit/91d5b790b4fa294364b50292f70f7d7ad78913ab))
 
 * Update Requirements ([`414c279`](https://github.com/mraniki/tt/commit/414c279bb1723ceae6309e3bbc9820a83c1009d9))
 
@@ -10401,10 +10431,6 @@ Dev ([`8353451`](https://github.com/mraniki/tt/commit/8353451956d6e83dd5e0339746
 
 ## v4.0.0 (2023-07-17)
 
-### :wrench:
-
-* :wrench: Add news feed to testing settings ([`f020068`](https://github.com/mraniki/tt/commit/f020068c10da59a787e78f19df6a84152883c4c0))
-
 ### Fix
 
 * 🚨  linter various fix ([`22ea39a`](https://github.com/mraniki/tt/commit/22ea39a487776cac3a8edb72879552f5a1cdf1e1))
@@ -10427,19 +10453,9 @@ Merge pull request #555 from mraniki/dev ([`f730229`](https://github.com/mraniki
 
 * Merge branch &#39;main&#39; into dev ([`da77c47`](https://github.com/mraniki/tt/commit/da77c4710f7783b57000bd799432fa02e8a3b297))
 
-### ⚡
-
-* ⚡ ignore::DeprecationWarning ([`7961392`](https://github.com/mraniki/tt/commit/7961392a7b0a83c55258c878522961eb4b496c9a))
-
 ### ⬆️
 
 * ⬆️ dep ([`35c97cf`](https://github.com/mraniki/tt/commit/35c97cf1eaa0638ffcf540b31c4aa227c3050d2d))
-
-* ⬆️ semantic ([`c82d95d`](https://github.com/mraniki/tt/commit/c82d95d790459a059f033ed21635566275d46efa))
-
-### 🎨
-
-* 🎨 ([`24c682e`](https://github.com/mraniki/tt/commit/24c682e2c0c29849603e98d315b9d08d3ece02b3))
 
 ### 🔧
 
@@ -10471,10 +10487,6 @@ Merge pull request #555 from mraniki/dev ([`f730229`](https://github.com/mraniki
 
 * :recycle: refactor listener and unit test ([`983285b`](https://github.com/mraniki/tt/commit/983285b902ded91d24e40049720421ec26f81a86))
 
-### :rotating_light:
-
-* :rotating_light:linter ([`90fa55c`](https://github.com/mraniki/tt/commit/90fa55c1408d10416887d2453d27f60ec786ee12))
-
 ### :white_check_mark:
 
 * :white_check_mark:  start_listener ([`2041df9`](https://github.com/mraniki/tt/commit/2041df98ab55750add12b1002ffcf1e7583b375b))
@@ -10484,6 +10496,10 @@ Merge pull request #555 from mraniki/dev ([`f730229`](https://github.com/mraniki
 * :white_check_mark:  listener unit test ([`9828c4d`](https://github.com/mraniki/tt/commit/9828c4d3c8c94278aec0b3874c8a9217bd91b5cb))
 
 * :white_check_mark:  listener unit test ([`8daa69e`](https://github.com/mraniki/tt/commit/8daa69e490f28a5b03a5e301c5db127544e2eafa))
+
+### :wrench:
+
+* :wrench: Add news feed to testing settings ([`f020068`](https://github.com/mraniki/tt/commit/f020068c10da59a787e78f19df6a84152883c4c0))
 
 ### Other
 
@@ -10512,6 +10528,10 @@ Conflicts:
 
 * ♻️ refactor listener and unit test ([`20c1e84`](https://github.com/mraniki/tt/commit/20c1e8446108fad23b64e437c666b02b2349f6f0))
 
+### ⚡
+
+* ⚡ ignore::DeprecationWarning ([`7961392`](https://github.com/mraniki/tt/commit/7961392a7b0a83c55258c878522961eb4b496c9a))
+
 ### ✅
 
 * ✅  updated import for unit test ([`a4885a1`](https://github.com/mraniki/tt/commit/a4885a1d175817e2b92e5b4b36c3018a9f20cf3f))
@@ -10532,9 +10552,13 @@ Conflicts:
 
 * ⬆️ 🤖(deps): update dependency python-semantic-release to v8 ([`d4a816c`](https://github.com/mraniki/tt/commit/d4a816c6fbd66299b1237055c4301d506d3f9a74))
 
+* ⬆️ semantic ([`c82d95d`](https://github.com/mraniki/tt/commit/c82d95d790459a059f033ed21635566275d46efa))
+
 * ⬆️  dep ([`45c2f24`](https://github.com/mraniki/tt/commit/45c2f240335a6c750c3efa7308643438ea6ee77d))
 
 ### 🎨
+
+* 🎨 ([`24c682e`](https://github.com/mraniki/tt/commit/24c682e2c0c29849603e98d315b9d08d3ece02b3))
 
 * 🎨 cleanup ([`fc82bde`](https://github.com/mraniki/tt/commit/fc82bde6989acefad5e8246df99faa09f3b44ebc))
 
@@ -10585,6 +10609,10 @@ Conflicts:
 ### :bug:
 
 * :bug: plugin import ([`018e97e`](https://github.com/mraniki/tt/commit/018e97e50451e3be01b4505efc87d9e62a839358))
+
+### :rotating_light:
+
+* :rotating_light:linter ([`90fa55c`](https://github.com/mraniki/tt/commit/90fa55c1408d10416887d2453d27f60ec786ee12))
 
 ### :white_check_mark:
 
@@ -10988,10 +11016,6 @@ Update pyproject.toml ([`d220e45`](https://github.com/mraniki/tt/commit/d220e453
 
 ## v3.8.0 (2023-07-10)
 
-### :memo:
-
-* :memo:  docs update ([`5de1cc9`](https://github.com/mraniki/tt/commit/5de1cc9194276a9db296fdb1d45c04de9547ac4d))
-
 ### Other
 
 * Merge pull request #536 from mraniki/dev
@@ -11054,6 +11078,8 @@ Conflicts:
 ## v3.7.38 (2023-07-08)
 
 ### :memo:
+
+* :memo:  docs update ([`5de1cc9`](https://github.com/mraniki/tt/commit/5de1cc9194276a9db296fdb1d45c04de9547ac4d))
 
 * :memo:  docs update ([`16493ff`](https://github.com/mraniki/tt/commit/16493ff29db84c1f74bfc44c2bf8b991438b8207))
 
@@ -11229,13 +11255,13 @@ Update index.md ([`4de1bdc`](https://github.com/mraniki/tt/commit/4de1bdcc07c19d
 
 * Update .readthedocs.yaml ([`05ccc42`](https://github.com/mraniki/tt/commit/05ccc42158425c70029cb30c27c7e6645cac3ced))
 
-* Update requirements.txt ([`a2d3b88`](https://github.com/mraniki/tt/commit/a2d3b88459d74aeea8867b78787a79ae0412de93))
-
 * Update conf.py ([`912e9a1`](https://github.com/mraniki/tt/commit/912e9a168886e8ea96f663b7a35ae3cb4b8d2bf3))
 
 * Update pyproject.toml ([`0c246a9`](https://github.com/mraniki/tt/commit/0c246a988f344e3b640c6d8c8766c3b2c25bc32c))
 
 * Update index.md ([`3cd3f22`](https://github.com/mraniki/tt/commit/3cd3f22cd6b79312427c8577e0d9a3579900cf0d))
+
+* Update requirements.txt ([`a2d3b88`](https://github.com/mraniki/tt/commit/a2d3b88459d74aeea8867b78787a79ae0412de93))
 
 ## v3.7.24 (2023-07-07)
 
@@ -11265,8 +11291,6 @@ Update index.md ([`4de1bdc`](https://github.com/mraniki/tt/commit/4de1bdcc07c19d
 
 * Merge branch &#39;main&#39; into dev ([`67bca66`](https://github.com/mraniki/tt/commit/67bca6650e218f97f521bc994308e5a8ada35df0))
 
-* Docs ([`140faf9`](https://github.com/mraniki/tt/commit/140faf91d7798a9f7071f34da031d5e53b913eef))
-
 * Merge pull request #523 from mraniki/dev
 
 Dev ([`ef29a03`](https://github.com/mraniki/tt/commit/ef29a038bd5bed85a94374a2e02f9f0237525272))
@@ -11274,6 +11298,8 @@ Dev ([`ef29a03`](https://github.com/mraniki/tt/commit/ef29a038bd5bed85a94374a2e0
 * Merge pull request #522 from mraniki/dev
 
 📝 Documentation ([`ff5d24d`](https://github.com/mraniki/tt/commit/ff5d24decb5978ecd63c991ac9aba8f1ac82c402))
+
+* Docs ([`140faf9`](https://github.com/mraniki/tt/commit/140faf91d7798a9f7071f34da031d5e53b913eef))
 
 ### Update
 
@@ -12310,10 +12336,6 @@ Add DexExchangePlugin with get_name and get_account methods ([`08a2f3e`](https:/
 
 ## v3.3.0 (2023-06-16)
 
-### :memo:
-
-* :memo: Add example_plugin to the project ([`caac535`](https://github.com/mraniki/tt/commit/caac53547d08064f57e93570ee1f2d3a71699343))
-
 ### :white_check_mark:
 
 * :white_check_mark: ([`ec89bf7`](https://github.com/mraniki/tt/commit/ec89bf724cfed5971ffb10dad311ae93def2298d))
@@ -12357,6 +12379,10 @@ Add DexExchangePlugin with get_name and get_account methods ([`08a2f3e`](https:/
 * 🥚option to disable plugin process completly ([`c3e7a76`](https://github.com/mraniki/tt/commit/c3e7a767dd97d582adf7720e326235c603e1da28))
 
 ## v3.2.1 (2023-06-15)
+
+### :memo:
+
+* :memo: Add example_plugin to the project ([`caac535`](https://github.com/mraniki/tt/commit/caac53547d08064f57e93570ee1f2d3a71699343))
 
 ### Other
 
@@ -12530,8 +12556,6 @@ Add DexExchangePlugin with get_name and get_account methods ([`08a2f3e`](https:/
 
 * :whale:  linter ([`95b3371`](https://github.com/mraniki/tt/commit/95b337119454800f4f40fb2ee912588f5b0e8bf1))
 
-* :loud_sound::whale: Refactor Dockerfile and add logging to PluginManager class ([`4925238`](https://github.com/mraniki/tt/commit/49252386d7af8d82f9d2eb48049c7ffddb129de7))
-
 ### Other
 
 * Merge pull request #456 from mraniki/dev
@@ -12547,6 +12571,10 @@ Add DexExchangePlugin with get_name and get_account methods ([`08a2f3e`](https:/
 * Update utils.py ([`db95314`](https://github.com/mraniki/tt/commit/db953143f001bcf6144cbc41961ab278f62cfb58))
 
 ## v3.0.22 (2023-06-13)
+
+### :whale:
+
+* :loud_sound::whale: Refactor Dockerfile and add logging to PluginManager class ([`4925238`](https://github.com/mraniki/tt/commit/49252386d7af8d82f9d2eb48049c7ffddb129de7))
 
 ### Other
 
@@ -12690,6 +12718,10 @@ Align ([`dcb1a7a`](https://github.com/mraniki/tt/commit/dcb1a7a889dd7a86ab8af9ed
 
 * Merge branch &#39;dev&#39; into main ([`5db4617`](https://github.com/mraniki/tt/commit/5db4617e36dcca1879a959174f8577df7d681e3a))
 
+### Update
+
+* Update Dockerfile for tt bot ([`1acdf1a`](https://github.com/mraniki/tt/commit/1acdf1ad7e44941e9da2149ca56b3ffc483b5e71))
+
 ## v3.0.9 (2023-06-13)
 
 ### Update
@@ -12697,8 +12729,6 @@ Align ([`dcb1a7a`](https://github.com/mraniki/tt/commit/dcb1a7a889dd7a86ab8af9ed
 * Update Dockerfile ([`7af4395`](https://github.com/mraniki/tt/commit/7af4395c79c24b66739cc6adb9cd9115666d5417))
 
 * Update Dockerfile ([`5fa8b65`](https://github.com/mraniki/tt/commit/5fa8b6574b11577944d5033435f6f1a891df80f5))
-
-* Update Dockerfile for tt bot ([`1acdf1a`](https://github.com/mraniki/tt/commit/1acdf1ad7e44941e9da2149ca56b3ffc483b5e71))
 
 ## v3.0.8 (2023-06-12)
 
@@ -12846,13 +12876,13 @@ Update Dockerfile ([`711a576`](https://github.com/mraniki/tt/commit/711a576dbbf5
 
 * Merge branch &#39;main&#39; into dev ([`bf18901`](https://github.com/mraniki/tt/commit/bf18901099f4f2239c194dc440310b38462b5433))
 
+* Merge pull request #443 from mraniki/dev ([`400d534`](https://github.com/mraniki/tt/commit/400d5346ba10ae8599b88a36b39ed45beb5adc4d))
+
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`e9be419`](https://github.com/mraniki/tt/commit/e9be4193427b1f392d55540e34fc3b54e1c02ef8))
 
 * Merge pull request #445 from mraniki/sourcery/dev ([`e2e35e7`](https://github.com/mraniki/tt/commit/e2e35e726c008bd0854a5cbae8ea2d1c9cb0749d))
 
 * &#39;Refactored by Sourcery&#39; ([`3bf37f1`](https://github.com/mraniki/tt/commit/3bf37f1facc6ad08e3032997dd20d72dc3ebf638))
-
-* Merge pull request #443 from mraniki/dev ([`400d534`](https://github.com/mraniki/tt/commit/400d5346ba10ae8599b88a36b39ed45beb5adc4d))
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`6b418dc`](https://github.com/mraniki/tt/commit/6b418dccc41012179defabf8b6686d80b2b33dd3))
 
@@ -13036,8 +13066,6 @@ Dev ([`cbc0a09`](https://github.com/mraniki/tt/commit/cbc0a091062263ea33b0d7dd1c
 
 * :arrow_up: Update dependencies in pyproject.toml ([`56d36ca`](https://github.com/mraniki/tt/commit/56d36ca4bf65803c05c0d73925e27f0cc0391cb2))
 
-* :arrow_up: Update Python version to 3.11.0 and remove invalid package from requirements.txt. ([`04e18be`](https://github.com/mraniki/tt/commit/04e18bea5ecda2de33bad08398b36b782016fffa))
-
 ## v2.2.0 (2023-06-10)
 
 ### :arrow_up:
@@ -13108,6 +13136,8 @@ Dev ([`cbc0a09`](https://github.com/mraniki/tt/commit/cbc0a091062263ea33b0d7dd1c
 
 ### Update
 
+* :arrow_up: Update Python version to 3.11.0 and remove invalid package from requirements.txt. ([`04e18be`](https://github.com/mraniki/tt/commit/04e18bea5ecda2de33bad08398b36b782016fffa))
+
 * :bug: Update FastAPI version to 0.96.0 ([`21381ea`](https://github.com/mraniki/tt/commit/21381ea199a4d66fd1e4249d208a8d583bf583c0))
 
 * :white_check_mark: Update bot init message import in test_unit.py ([`b95ae30`](https://github.com/mraniki/tt/commit/b95ae308ffe1b620af6e82d4398eeb76837fb1cc))
@@ -13150,9 +13180,9 @@ Dev ([`cbc0a09`](https://github.com/mraniki/tt/commit/cbc0a091062263ea33b0d7dd1c
 
 ### ⬆️
 
-* ⬆️ dependencies ([`84f2787`](https://github.com/mraniki/tt/commit/84f2787fb0d8ed0aed19c2ee9d3bc9bbf8fac3e4))
-
 * ⬆️(deps): update actions/checkout action to v3.5.3 ([`796e96c`](https://github.com/mraniki/tt/commit/796e96c9df08d7e93072c51a6f3f6d576c6f9649))
+
+* ⬆️ dependencies ([`84f2787`](https://github.com/mraniki/tt/commit/84f2787fb0d8ed0aed19c2ee9d3bc9bbf8fac3e4))
 
 ### 🐛
 
@@ -13456,8 +13486,6 @@ Configure Renovate ([`3f20f19`](https://github.com/mraniki/tt/commit/3f20f19972a
 
 ### Update
 
-* :recycle: Update trading switch command and default settings. ([`63fc5eb`](https://github.com/mraniki/tt/commit/63fc5ebbd2c02236071d41cc9d75b8b8fee2a314))
-
 * Update tests/test_unit.py
 
 Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`44a65f0`](https://github.com/mraniki/tt/commit/44a65f042acbc8ee94517b8fa677c49f84368698))
@@ -13465,6 +13493,8 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 * Update tests/test_unit.py
 
 Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`d0b50bc`](https://github.com/mraniki/tt/commit/d0b50bce0007b4eb68b515e127b829e80b415fb0))
+
+* :recycle: Update trading switch command and default settings. ([`63fc5eb`](https://github.com/mraniki/tt/commit/63fc5ebbd2c02236071d41cc9d75b8b8fee2a314))
 
 ### 🥚
 
@@ -13642,10 +13672,6 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 
 ## v1.7.4 (2023-05-27)
 
-### Fix
-
-* :wrench: Fix envvar_prefix in config.py ([`c47e747`](https://github.com/mraniki/tt/commit/c47e747ed95d0c637eca13719b5502271efd00c5))
-
 ### Other
 
 * Merge pull request #394 from mraniki/dev
@@ -13655,6 +13681,10 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`41775bc`](https://github.com/mraniki/tt/commit/41775bc140e4b439169e2a6b6d208f001dd66ecc))
 
 ## v1.7.3 (2023-05-26)
+
+### Fix
+
+* :wrench: Fix envvar_prefix in config.py ([`c47e747`](https://github.com/mraniki/tt/commit/c47e747ed95d0c637eca13719b5502271efd00c5))
 
 ### Update
 
@@ -13670,10 +13700,6 @@ Dev ([`801bf48`](https://github.com/mraniki/tt/commit/801bf4873c0b91f015fc9e4b36
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`44a47e0`](https://github.com/mraniki/tt/commit/44a47e0e7bb91872a13573361d67361e0108c069))
 
-### Update
-
-* :bug: Update bot.py with exchange name ([`170ec98`](https://github.com/mraniki/tt/commit/170ec98c8fc6eff97456c31a4933dcb7df0de5c7))
-
 ## v1.7.1 (2023-05-26)
 
 ### :zap:
@@ -13685,6 +13711,10 @@ Dev ([`801bf48`](https://github.com/mraniki/tt/commit/801bf4873c0b91f015fc9e4b36
 * Merge pull request #392 from mraniki/dev
 
 :zap: Add get_account() to init_message() ([`2a82093`](https://github.com/mraniki/tt/commit/2a82093e3eac51faa3b5f3753bf9365343e65c59))
+
+### Update
+
+* :bug: Update bot.py with exchange name ([`170ec98`](https://github.com/mraniki/tt/commit/170ec98c8fc6eff97456c31a4933dcb7df0de5c7))
 
 ## v1.7.0 (2023-05-26)
 
@@ -13814,10 +13844,6 @@ Dev ([`ff6cf0b`](https://github.com/mraniki/tt/commit/ff6cf0b90e5159d6bd6c21db9e
 
 ## v1.6.18 (2023-05-21)
 
-### :zap:
-
-* :zap: dockerfile update ([`2540861`](https://github.com/mraniki/tt/commit/2540861e92d877e697b39b2eb2fb9705b424e364))
-
 ### Other
 
 * Merge pull request #380 from mraniki/dev
@@ -13829,6 +13855,8 @@ Dev ([`add91ae`](https://github.com/mraniki/tt/commit/add91ae428aa19906939a7f380
 ## v1.6.17 (2023-05-21)
 
 ### :zap:
+
+* :zap: dockerfile update ([`2540861`](https://github.com/mraniki/tt/commit/2540861e92d877e697b39b2eb2fb9705b424e364))
 
 * :zap:Remove dxsp from requirements.txt ([`8198d83`](https://github.com/mraniki/tt/commit/8198d83da377c2c57d9a577188eeb25ca95c9d8d))
 
@@ -13932,6 +13960,8 @@ Dev ([`d39f9c7`](https://github.com/mraniki/tt/commit/d39f9c77a9401e98990ab8dc9c
 
 ⚡️ moving help message to settings (Sourcery refactored) ([`2f3cbbe`](https://github.com/mraniki/tt/commit/2f3cbbe41b675055c70202c3bb06771ded4813ad))
 
+* &#39;Refactored by Sourcery&#39; ([`6b741a9`](https://github.com/mraniki/tt/commit/6b741a904b819634fe07747c234bf595f284d003))
+
 ### ⚡
 
 * ⚡️ small change for quote ([`49f1132`](https://github.com/mraniki/tt/commit/49f11329ca542aa243b087dc558b31d1c1715698))
@@ -13947,8 +13977,6 @@ Dev ([`d39f9c7`](https://github.com/mraniki/tt/commit/d39f9c77a9401e98990ab8dc9c
 ## v1.6.10 (2023-05-15)
 
 ### Other
-
-* &#39;Refactored by Sourcery&#39; ([`6b741a9`](https://github.com/mraniki/tt/commit/6b741a904b819634fe07747c234bf595f284d003))
 
 * Merge pull request #370 from mraniki/dev
 
@@ -14318,10 +14346,6 @@ Dev (Sourcery refactored) ([`24b1182`](https://github.com/mraniki/tt/commit/24b1
 
 ## v1.5.7 (2023-05-07)
 
-### :zap:
-
-* :zap: Added error handling for exchange not loaded in listener function. ([`769cae6`](https://github.com/mraniki/tt/commit/769cae6d598da39e93c4eded184dbf852b3d6eab))
-
 ### Other
 
 * Merge pull request #338 from mraniki/dev
@@ -14334,7 +14358,7 @@ Dev (Sourcery refactored) ([`24b1182`](https://github.com/mraniki/tt/commit/24b1
 
 ### :zap:
 
-* :zap:Refactor bot.py file: remove unnecessary comments and format code. ([`42dd7a3`](https://github.com/mraniki/tt/commit/42dd7a36ff8147ed95dd9b551d282b708781f590))
+* :zap: Added error handling for exchange not loaded in listener function. ([`769cae6`](https://github.com/mraniki/tt/commit/769cae6d598da39e93c4eded184dbf852b3d6eab))
 
 ### Other
 
@@ -14347,6 +14371,8 @@ Dev (Sourcery refactored) ([`24b1182`](https://github.com/mraniki/tt/commit/24b1
 ## v1.5.5 (2023-05-07)
 
 ### :zap:
+
+* :zap:Refactor bot.py file: remove unnecessary comments and format code. ([`42dd7a3`](https://github.com/mraniki/tt/commit/42dd7a36ff8147ed95dd9b551d282b708781f590))
 
 * :zap: Refactor bot.py logger messages ([`376b098`](https://github.com/mraniki/tt/commit/376b09814ed241d1f1d28aacd3e04e763f536abc))
 
@@ -14490,10 +14516,6 @@ Dev ([`235f260`](https://github.com/mraniki/tt/commit/235f260898c9b494d694e301de
 
 ## v1.4.9 (2023-05-06)
 
-### :zap:
-
-* :zap:removing config validator due to default settings ([`983d25f`](https://github.com/mraniki/tt/commit/983d25f4d374124c4c29af09b8338ebe2b243c7d))
-
 ### Other
 
 * Merge pull request #324 from mraniki/dev
@@ -14503,6 +14525,10 @@ Dev ([`235f260`](https://github.com/mraniki/tt/commit/235f260898c9b494d694e301de
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`2c4e7f7`](https://github.com/mraniki/tt/commit/2c4e7f77592a4bbcbacc3969a2b754d8f45fae1c))
 
 ## v1.4.8 (2023-05-06)
+
+### :zap:
+
+* :zap:removing config validator due to default settings ([`983d25f`](https://github.com/mraniki/tt/commit/983d25f4d374124c4c29af09b8338ebe2b243c7d))
 
 ### Other
 
@@ -14606,10 +14632,6 @@ Merge ([`f9a78ad`](https://github.com/mraniki/tt/commit/f9a78ad6fbd6c39ddae5cdc5
 
 Align ([`1abe0b2`](https://github.com/mraniki/tt/commit/1abe0b20ecb39679aa7ad41e81d885d96cf34bdc))
 
-### 🐛
-
-* 🐛 inherit secrets in action ([`ee475bb`](https://github.com/mraniki/tt/commit/ee475bb5f4decd05f7cec31d3f8a74872adc7e71))
-
 ## v1.4.2 (2023-05-04)
 
 ### Other
@@ -14627,6 +14649,10 @@ Align ([`1abe0b2`](https://github.com/mraniki/tt/commit/1abe0b20ecb39679aa7ad41e
 * 🎨 code reformating to meet flake8 req ([`1bb5b30`](https://github.com/mraniki/tt/commit/1bb5b30b2feeaf92c4a0dccd34b60453009a1579))
 
 * 🎨 improve code readibility and new bot ignore setting ([`9e4a391`](https://github.com/mraniki/tt/commit/9e4a39162433cfc9a7d537a724aa7bef35b40845))
+
+### 🐛
+
+* 🐛 inherit secrets in action ([`ee475bb`](https://github.com/mraniki/tt/commit/ee475bb5f4decd05f7cec31d3f8a74872adc7e71))
 
 ## v1.4.1 (2023-05-04)
 
@@ -14682,11 +14708,11 @@ Align ([`1abe0b2`](https://github.com/mraniki/tt/commit/1abe0b20ecb39679aa7ad41e
 
 Configure Renovate ([`e9d708a`](https://github.com/mraniki/tt/commit/e9d708a7ccc6e446696af2a4cd069f07843a5338))
 
+* Add renovate.json ([`4de8069`](https://github.com/mraniki/tt/commit/4de80696e4edd15b70725f4de79e9f3d36bb65f1))
+
 * Merge pull request #302 from mraniki/dev
 
 ✨ resusable flow ([`7f1a418`](https://github.com/mraniki/tt/commit/7f1a418c5bb04e044441905971fb99b3e5920d94))
-
-* Add renovate.json ([`4de8069`](https://github.com/mraniki/tt/commit/4de80696e4edd15b70725f4de79e9f3d36bb65f1))
 
 * Merge pull request #300 from mraniki/dev
 
@@ -14840,10 +14866,6 @@ build(deps): bump relekang/python-semantic-release from 7.33.2 to 7.33.3 ([`33f7
 
 ## v1.1.5 (2023-05-01)
 
-### Fix
-
-* fix: dockerfile settings copy ([`d3f18ae`](https://github.com/mraniki/tt/commit/d3f18aea782b6bbbcfddba45ab52fb4bfc05397d))
-
 ### Other
 
 * Merge pull request #287 from mraniki/dev
@@ -14855,6 +14877,8 @@ Fix: docker file ([`57600ce`](https://github.com/mraniki/tt/commit/57600ce0c65e6
 ## v1.1.4 (2023-05-01)
 
 ### Fix
+
+* fix: dockerfile settings copy ([`d3f18ae`](https://github.com/mraniki/tt/commit/d3f18aea782b6bbbcfddba45ab52fb4bfc05397d))
 
 * fix: fmo setup and testing of FMO action in TT settings ([`9eeb7a4`](https://github.com/mraniki/tt/commit/9eeb7a428e4852ea737d9bb7816aa7252b4db466))
 
@@ -14874,8 +14898,6 @@ Fix: FMO setup and linkage ([`639b14d`](https://github.com/mraniki/tt/commit/639
 
 * fix: req ([`d590245`](https://github.com/mraniki/tt/commit/d590245d9f033e058281127c3e81965b279e317f))
 
-* fix: req ([`358c8f8`](https://github.com/mraniki/tt/commit/358c8f895ff2a3421032bb5490d2618ae7ad0fa1))
-
 ### Other
 
 * Merge pull request #285 from mraniki/dev
@@ -14887,6 +14909,8 @@ Dev ([`6c045b2`](https://github.com/mraniki/tt/commit/6c045b2e2a68170a3e8a7d5dbb
 ## v1.1.2 (2023-04-30)
 
 ### Fix
+
+* fix: req ([`358c8f8`](https://github.com/mraniki/tt/commit/358c8f895ff2a3421032bb5490d2618ae7ad0fa1))
 
 * fix: Remove invalid characters from requirements.txt ([`bb410e8`](https://github.com/mraniki/tt/commit/bb410e8255585eab0d044a2c5b81a4b743006535))
 
@@ -15003,10 +15027,6 @@ Dev ([`78d15f4`](https://github.com/mraniki/tt/commit/78d15f460c96c92b3d4417da23
 
 * feat: overall refactoring ([`1bed137`](https://github.com/mraniki/tt/commit/1bed137a6e09e78a52bf19d083593c40b046dcc7))
 
-### Fix
-
-* Refactor bot.py command names and fix logger warning. ([`ccbcb03`](https://github.com/mraniki/tt/commit/ccbcb03a5685bee20ce1595ad4772304911edd81))
-
 ### Other
 
 * Merge pull request #275 from mraniki/dev
@@ -15045,6 +15065,8 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 
 ### Fix
 
+* Refactor bot.py command names and fix logger warning. ([`ccbcb03`](https://github.com/mraniki/tt/commit/ccbcb03a5685bee20ce1595ad4772304911edd81))
+
 * fix: Refactor error handling and logging in bot.py ([`dad75a8`](https://github.com/mraniki/tt/commit/dad75a83682c5acea476224cf446a91b406e0137))
 
 * fix: Remove unnecessary logging configuration in bot.py ([`f821c85`](https://github.com/mraniki/tt/commit/f821c858716ecd6cc5c3942104fb155deb880456))
@@ -15081,10 +15103,6 @@ Dev ([`c80eff9`](https://github.com/mraniki/tt/commit/c80eff9761e40f30eb20f3bab4
 
 ## v1.0.14 (2023-04-29)
 
-### Fix
-
-* fix: fmo version ([`f492f44`](https://github.com/mraniki/tt/commit/f492f440ff2f5000df1d2071713390aef2f248a6))
-
 ### Other
 
 * Merge pull request #271 from mraniki/dev
@@ -15096,6 +15114,8 @@ Dev ([`e98c26f`](https://github.com/mraniki/tt/commit/e98c26f20453e19776023871c6
 ## v1.0.13 (2023-04-29)
 
 ### Fix
+
+* fix: fmo version ([`f492f44`](https://github.com/mraniki/tt/commit/f492f440ff2f5000df1d2071713390aef2f248a6))
 
 * fix: troubleshoot dynamic bot command ([`8c2be39`](https://github.com/mraniki/tt/commit/8c2be39c4480d98a8307848e082a6e197aceb404))
 
@@ -15119,19 +15139,15 @@ Dev ([`942dbeb`](https://github.com/mraniki/tt/commit/942dbeb3e6aec44f7d4c5b141e
 
 Dev (Sourcery refactored) ([`79b0c03`](https://github.com/mraniki/tt/commit/79b0c03bb56845bef1a28705faad968b9061b554))
 
+* &#39;Refactored by Sourcery&#39; ([`f86d96c`](https://github.com/mraniki/tt/commit/f86d96c4e61e5106046fc19c55e844fdadda9541))
+
 ### Update
 
 * Update requirements.txt ([`31a42f7`](https://github.com/mraniki/tt/commit/31a42f7c40b3f67eca0b63d721c4fa945994f3f2))
 
 ## v1.0.12 (2023-04-27)
 
-### Fix
-
-* fix: update logging ([`21ecc13`](https://github.com/mraniki/tt/commit/21ecc133544f4a71b4ee6e07c9e13f682a03b169))
-
 ### Other
-
-* &#39;Refactored by Sourcery&#39; ([`f86d96c`](https://github.com/mraniki/tt/commit/f86d96c4e61e5106046fc19c55e844fdadda9541))
 
 * Merge pull request #267 from mraniki/dev
 
@@ -15144,6 +15160,8 @@ Dev ([`3df1961`](https://github.com/mraniki/tt/commit/3df196113d09cec50072eb51bb
 ## v1.0.11 (2023-04-27)
 
 ### Fix
+
+* fix: update logging ([`21ecc13`](https://github.com/mraniki/tt/commit/21ecc133544f4a71b4ee6e07c9e13f682a03b169))
 
 * fix: command support ([`dcda2c7`](https://github.com/mraniki/tt/commit/dcda2c767bd091f8cb97d82657f4377765b0c92d))
 
@@ -15163,15 +15181,15 @@ Dev ([`3df1961`](https://github.com/mraniki/tt/commit/3df196113d09cec50072eb51bb
 
 ### Other
 
+* Merge pull request #265 from mraniki/dev
+
+Dev ([`f8a6caa`](https://github.com/mraniki/tt/commit/f8a6caa99742de2fdcc4ef69da51f321d7141b35))
+
 * Merge pull request #266 from mraniki/sourcery/dev
 
 Dev (Sourcery refactored) ([`fa9acbb`](https://github.com/mraniki/tt/commit/fa9acbb51bdadbed15c80a2befd71b281387b418))
 
 * &#39;Refactored by Sourcery&#39; ([`0d047e3`](https://github.com/mraniki/tt/commit/0d047e367b1d0c13b2dc51924a4ba2f835041261))
-
-* Merge pull request #265 from mraniki/dev
-
-Dev ([`f8a6caa`](https://github.com/mraniki/tt/commit/f8a6caa99742de2fdcc4ef69da51f321d7141b35))
 
 * breaking: rewrite of the parsing logic to include fmo and have bot command approach ([`bb2b84f`](https://github.com/mraniki/tt/commit/bb2b84f5a6e93f0d2659159b476cfdf055644d70))
 
@@ -15225,8 +15243,6 @@ Dev ([`0fd182b`](https://github.com/mraniki/tt/commit/0fd182bf470864a1eafb2ade10
 
 * fix: settings ([`4347056`](https://github.com/mraniki/tt/commit/4347056374d70ace17c4365ea13bdf43cb8b60fe))
 
-* fix: settings ([`dc257f4`](https://github.com/mraniki/tt/commit/dc257f4a79481eaf7d9aea0ff4a3e30c0f60cbb5))
-
 ### Other
 
 * Merge pull request #261 from mraniki/dev
@@ -15238,6 +15254,8 @@ Dev ([`ce7b220`](https://github.com/mraniki/tt/commit/ce7b2209046933bd083f3156a2
 ## v1.0.7 (2023-04-25)
 
 ### Fix
+
+* fix: settings ([`dc257f4`](https://github.com/mraniki/tt/commit/dc257f4a79481eaf7d9aea0ff4a3e30c0f60cbb5))
 
 * fix: folder ([`1502dc5`](https://github.com/mraniki/tt/commit/1502dc573164a48a6ccaede81c0173d5eb6c8709))
 
@@ -15323,17 +15341,15 @@ fix: parsing function ([`ca19733`](https://github.com/mraniki/tt/commit/ca197332
 
 * fix: typo ([`fa5bac2`](https://github.com/mraniki/tt/commit/fa5bac2389711b783b18f96b66703ecb6aa918a2))
 
-* fix: Refactor config and settings variables ([`f485747`](https://github.com/mraniki/tt/commit/f4857477e40314b2b0a513e503f5e99cc81251c8))
-
 * fix: requirements versioning ([`7d8f972`](https://github.com/mraniki/tt/commit/7d8f972e2f1b7da0f5971ef039e34f5f84c744fa))
+
+* fix: Refactor config and settings variables ([`f485747`](https://github.com/mraniki/tt/commit/f4857477e40314b2b0a513e503f5e99cc81251c8))
 
 * fix: Refactor error handling in bot.py ([`85b8d55`](https://github.com/mraniki/tt/commit/85b8d5576febcc3b9944bc93a05acb9b558906c8))
 
 * fix: typo DEX_CHAINID ([`f48453d`](https://github.com/mraniki/tt/commit/f48453d598014be78b6834bb32e4c90cda7549b7))
 
 * fix: typo position ([`6fe690e`](https://github.com/mraniki/tt/commit/6fe690e09c66fea915db77aa9bfa43c908b5ca2d))
-
-* fix: Refactor .gitignore and bot.py imports ([`0b9e936`](https://github.com/mraniki/tt/commit/0b9e936e8f5f6e136a09360ed2e57a2292dd76f0))
 
 ### Other
 
@@ -15367,6 +15383,8 @@ Conflicts:
 ## v1.0.2 (2023-04-23)
 
 ### Fix
+
+* fix: Refactor .gitignore and bot.py imports ([`0b9e936`](https://github.com/mraniki/tt/commit/0b9e936e8f5f6e136a09360ed2e57a2292dd76f0))
 
 * fix: Refactor findmyorder import in bot.py ([`632af9c`](https://github.com/mraniki/tt/commit/632af9c36907b1c036059b9f248083bcc15ed222))
 
@@ -15402,10 +15420,6 @@ Fix upload_to_release flag in pyproject.toml and bot.py file. ([`5a6ae5f`](https
 
 ## v1.0.1 (2023-04-20)
 
-### Fix
-
-* fix: actions ([`cfe5b29`](https://github.com/mraniki/tt/commit/cfe5b291de4254d1506271a47be44303102cad34))
-
 ### Other
 
 * Merge pull request #250 from mraniki/dev
@@ -15424,8 +15438,6 @@ Dev ([`ef2275e`](https://github.com/mraniki/tt/commit/ef2275ea629e56edab49e70cf3
 
 1.0.0 ([`11515f8`](https://github.com/mraniki/tt/commit/11515f86a12459544318d356ed759375a6c92285))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`6d803de`](https://github.com/mraniki/tt/commit/6d803ded441f47a0f6afa28e01398fb13b8d23a1))
-
 ### Update
 
 * Update bot.py ([`da30b23`](https://github.com/mraniki/tt/commit/da30b2312adbf28f36d6eb91e8505fc3ee4fdc0b))
@@ -15437,6 +15449,8 @@ Dev ([`ef2275e`](https://github.com/mraniki/tt/commit/ef2275ea629e56edab49e70cf3
 * feat: integration with dxsp lib for dex related function (swap, balance, quote) ([`eb0e9db`](https://github.com/mraniki/tt/commit/eb0e9db49b8af7b1415409c8cc6ed7220884d6a7))
 
 ### Fix
+
+* fix: actions ([`cfe5b29`](https://github.com/mraniki/tt/commit/cfe5b291de4254d1506271a47be44303102cad34))
 
 * fix: version numbering ([`17869ce`](https://github.com/mraniki/tt/commit/17869ce90e9841602a490988300718dc2c555899))
 
@@ -15604,6 +15618,8 @@ Dev ([`ef2275e`](https://github.com/mraniki/tt/commit/ef2275ea629e56edab49e70cf3
 
 ### Other
 
+* Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`6d803de`](https://github.com/mraniki/tt/commit/6d803ded441f47a0f6afa28e01398fb13b8d23a1))
+
 * Merge pull request #248 from mraniki/dev
 
 Dev ([`9b1c54f`](https://github.com/mraniki/tt/commit/9b1c54f87a8bf2d2b4aa0e5cf5ba7e949371d732))
@@ -15638,13 +15654,13 @@ Dev ([`a1913eb`](https://github.com/mraniki/tt/commit/a1913ebb72b350d4e013285480
 
 * Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`d8624a2`](https://github.com/mraniki/tt/commit/d8624a219754603d18986eb6767bd283b377e71c))
 
-* added dynaconf in req ([`6411947`](https://github.com/mraniki/tt/commit/641194724e5bc6a4bc8008926b7e2960125d5e3f))
-
 * Remove python version files and 1inch API from bot.py. ([`bf88582`](https://github.com/mraniki/tt/commit/bf88582e97cfdfa2fc85005a42d425d2c7ddcfad))
 
 * Fix PORT environment variable in bot.py ([`3e14fe7`](https://github.com/mraniki/tt/commit/3e14fe761451997dc4ce6d7b952fec7844547d84))
 
 * fully remove DEX specific to integrate with DXSP lib ([`054a7ea`](https://github.com/mraniki/tt/commit/054a7eaf70635b18a2375a9b9d522c53fc8d7aad))
+
+* added dynaconf in req ([`6411947`](https://github.com/mraniki/tt/commit/641194724e5bc6a4bc8008926b7e2960125d5e3f))
 
 * Fix:  implementing dxsp lib ([`d2cadba`](https://github.com/mraniki/tt/commit/d2cadbace58c3f34f9a20e564104662556f0b5fd))
 
@@ -15654,8 +15670,6 @@ Dev ([`a1913eb`](https://github.com/mraniki/tt/commit/a1913ebb72b350d4e013285480
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`19015f8`](https://github.com/mraniki/tt/commit/19015f8b1fb7034a0ca26edcdcded9bf740cf906))
 
-* Refactor DockerHub.yml to use push_to_registry job instead of if statement. ([`a80d8c8`](https://github.com/mraniki/tt/commit/a80d8c8fe3481ba865239a06ad8cf2c005064a34))
-
 * Merge pull request #243 from mraniki/main
 
 Align ([`78856b0`](https://github.com/mraniki/tt/commit/78856b0c65c8d0cd97060c731ff84d94508f6ffd))
@@ -15663,6 +15677,18 @@ Align ([`78856b0`](https://github.com/mraniki/tt/commit/78856b0c65c8d0cd97060c73
 * Merge pull request #242 from mraniki/dev
 
 Dev ([`1c514a1`](https://github.com/mraniki/tt/commit/1c514a13b09cbb62721e9cab820eae63d24f80f4))
+
+* Merge pull request #241 from mraniki/mraniki-patch-1
+
+Create CODE_OF_CONDUCT.md ([`ecf6a8c`](https://github.com/mraniki/tt/commit/ecf6a8cfe9e0e5336515aec43359c6a149fbcdaa))
+
+* Create CODE_OF_CONDUCT.md ([`bbd3978`](https://github.com/mraniki/tt/commit/bbd39781941b256fcc7bc0bd1c23c0876efed336))
+
+* Merge pull request #240 from mraniki/dev
+
+Dev ([`80747f0`](https://github.com/mraniki/tt/commit/80747f041877153931d839afc1b3bd0656114783))
+
+* Refactor DockerHub.yml to use push_to_registry job instead of if statement. ([`a80d8c8`](https://github.com/mraniki/tt/commit/a80d8c8fe3481ba865239a06ad8cf2c005064a34))
 
 * Add nightly-merge step to DockerHub workflow ([`3069d99`](https://github.com/mraniki/tt/commit/3069d999b32e0fe564a2fac5dd82ca6a9620a44c))
 
@@ -15674,17 +15700,7 @@ Dev ([`1c514a1`](https://github.com/mraniki/tt/commit/1c514a13b09cbb62721e9cab82
 
 * Add DexSwap import to bot.py ([`858319c`](https://github.com/mraniki/tt/commit/858319c7abbb2b161ab9b49d94b9c1bdf031c8bc))
 
-* Merge pull request #241 from mraniki/mraniki-patch-1
-
-Create CODE_OF_CONDUCT.md ([`ecf6a8c`](https://github.com/mraniki/tt/commit/ecf6a8cfe9e0e5336515aec43359c6a149fbcdaa))
-
-* Create CODE_OF_CONDUCT.md ([`bbd3978`](https://github.com/mraniki/tt/commit/bbd39781941b256fcc7bc0bd1c23c0876efed336))
-
 * dxsp lib ([`b207ab9`](https://github.com/mraniki/tt/commit/b207ab9a254b859de77defa12299a9c05c474a77))
-
-* Merge pull request #240 from mraniki/dev
-
-Dev ([`80747f0`](https://github.com/mraniki/tt/commit/80747f041877153931d839afc1b3bd0656114783))
 
 * Rename test.py to test.py ([`b6b3b24`](https://github.com/mraniki/tt/commit/b6b3b24ef406d59ed5deed7c4e40514147e6e2e6))
 
@@ -15692,17 +15708,9 @@ Dev ([`80747f0`](https://github.com/mraniki/tt/commit/80747f041877153931d839afc1
 
 Align ([`c7137c8`](https://github.com/mraniki/tt/commit/c7137c840bf66a02cc4763eaaaa0ef1bf7cfb3ad))
 
-* test of dxsp lib ([`c314e6c`](https://github.com/mraniki/tt/commit/c314e6cae3964e6b980fae7e7b85b7c8b14463e4))
-
-* update ([`af7f6ce`](https://github.com/mraniki/tt/commit/af7f6ce46215780ebc718afe3ac18196dbcee60a))
-
-* 1inch limit order preparation ([`7f609bb`](https://github.com/mraniki/tt/commit/7f609bbc8fdf1b797f4d97582707637e6c83dd05))
-
 * Merge pull request #238 from mraniki/dev
 
 code fix ([`1715d52`](https://github.com/mraniki/tt/commit/1715d5216a0e639c2caf7a4b06ed3f9585305fe6))
-
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`33cbd8e`](https://github.com/mraniki/tt/commit/33cbd8e68ff5e4868f1e41d99dd3144bc5608c1d))
 
 * Merge pull request #237 from mraniki/dev
 
@@ -15716,6 +15724,14 @@ Update bot.py ([`fc3c543`](https://github.com/mraniki/tt/commit/fc3c543644e4f22b
 
 added TOKENLIST as variable to support custom token list format ([`f9498d5`](https://github.com/mraniki/tt/commit/f9498d5ab5f7dc80213655397a1c0e9cd88a97a6))
 
+* test of dxsp lib ([`c314e6c`](https://github.com/mraniki/tt/commit/c314e6cae3964e6b980fae7e7b85b7c8b14463e4))
+
+* update ([`af7f6ce`](https://github.com/mraniki/tt/commit/af7f6ce46215780ebc718afe3ac18196dbcee60a))
+
+* 1inch limit order preparation ([`7f609bb`](https://github.com/mraniki/tt/commit/7f609bbc8fdf1b797f4d97582707637e6c83dd05))
+
+* Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`33cbd8e`](https://github.com/mraniki/tt/commit/33cbd8e68ff5e4868f1e41d99dd3144bc5608c1d))
+
 * Merge pull request #234 from mraniki/main
 
 Align ([`08f7f3f`](https://github.com/mraniki/tt/commit/08f7f3fe37c140afca16c18d6301a2d7859a78f5))
@@ -15723,8 +15739,6 @@ Align ([`08f7f3f`](https://github.com/mraniki/tt/commit/08f7f3fe37c140afca16c18d
 * Merge pull request #233 from mraniki/dependabot/github_actions/tonybaloney/pycharm-security-1.28.0
 
 Bump tonybaloney/pycharm-security from 1.25.1 to 1.28.0 ([`fcf11d3`](https://github.com/mraniki/tt/commit/fcf11d3f8cb19a89fb375101bd3b9c2bdbbdb590))
-
-* tokenlist added as variable ([`12d1d31`](https://github.com/mraniki/tt/commit/12d1d31c11c574c995c2cb387ca98c03131b52a5))
 
 * Bump tonybaloney/pycharm-security from 1.25.1 to 1.28.0
 
@@ -15746,29 +15760,17 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`0c4431c`](https://g
 
 Dev ([`d52bb37`](https://github.com/mraniki/tt/commit/d52bb37b3aa627e1967bf35e83ede83be8345639))
 
-* cleanup ([`2d23c1e`](https://github.com/mraniki/tt/commit/2d23c1e7dcc5f9bcf291e9b0ca93af7250beddd5))
-
-* update ([`441910a`](https://github.com/mraniki/tt/commit/441910aea36f9c58fc507bfeaad34867f8f33243))
-
 * Merge pull request #229 from mraniki/dev
 
 Merge pull request #227 from mraniki/sourcery/dev ([`b5c8ed1`](https://github.com/mraniki/tt/commit/b5c8ed1d8ddf9a7c47b60a554af7e112cb8c7ff7))
-
-* Merge pull request #227 from mraniki/sourcery/dev
-
-Readme and wiki update (Sourcery refactored) ([`20d1ca1`](https://github.com/mraniki/tt/commit/20d1ca1151e30a7df37daaf465789a583bdca7cc))
 
 * Merge pull request #228 from mraniki/sourcery/dev
 
 &#39;Refactored by Sourcery&#39; ([`ea3870e`](https://github.com/mraniki/tt/commit/ea3870ebcfbb1198e9c49cdb573dc85316815da0))
 
-* &#39;Refactored by Sourcery&#39; ([`0d9c149`](https://github.com/mraniki/tt/commit/0d9c149fa30b070c37a3bf3e6f66efa5cff9c207))
-
 * Merge pull request #226 from mraniki/dev
 
 Readme and wiki update ([`d32cc73`](https://github.com/mraniki/tt/commit/d32cc732cb8ea1304c1374ed5f51de3ed0eb61e0))
-
-* update readme ([`ffaef25`](https://github.com/mraniki/tt/commit/ffaef256144ad34d16418579126cee026428bb8a))
 
 * Merge pull request #225 from mraniki/dev
 
@@ -15778,33 +15780,55 @@ Update DockerHub.yml ([`91f4048`](https://github.com/mraniki/tt/commit/91f404810
 
 Dev ([`2ef8d93`](https://github.com/mraniki/tt/commit/2ef8d93af3c7aac5bb16cadb8b726824847c6c3e))
 
-* registry update ([`840ac83`](https://github.com/mraniki/tt/commit/840ac8327c50533ecc8d5b476ffa284f97ccb843))
-
 * Merge pull request #223 from mraniki/dev
 
 Minor fixes ([`7ece9d4`](https://github.com/mraniki/tt/commit/7ece9d46b14faa2cacb09a6eccfc8dedd791fa52))
+
+* tokenlist added as variable ([`12d1d31`](https://github.com/mraniki/tt/commit/12d1d31c11c574c995c2cb387ca98c03131b52a5))
+
+* cleanup ([`2d23c1e`](https://github.com/mraniki/tt/commit/2d23c1e7dcc5f9bcf291e9b0ca93af7250beddd5))
+
+* update ([`441910a`](https://github.com/mraniki/tt/commit/441910aea36f9c58fc507bfeaad34867f8f33243))
+
+* Merge pull request #227 from mraniki/sourcery/dev
+
+Readme and wiki update (Sourcery refactored) ([`20d1ca1`](https://github.com/mraniki/tt/commit/20d1ca1151e30a7df37daaf465789a583bdca7cc))
+
+* &#39;Refactored by Sourcery&#39; ([`0d9c149`](https://github.com/mraniki/tt/commit/0d9c149fa30b070c37a3bf3e6f66efa5cff9c207))
+
+* update readme ([`ffaef25`](https://github.com/mraniki/tt/commit/ffaef256144ad34d16418579126cee026428bb8a))
+
+* registry update ([`840ac83`](https://github.com/mraniki/tt/commit/840ac8327c50533ecc8d5b476ffa284f97ccb843))
 
 * Merge pull request #222 from mraniki/main
 
 Align ([`1e52bfc`](https://github.com/mraniki/tt/commit/1e52bfcf4965d25026b942db8b1fedbde974f6e9))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`1bd5b49`](https://github.com/mraniki/tt/commit/1bd5b49f395df7ae07bdf266a9f3477da14c9527))
-
 * Merge pull request #219 from mraniki/dev
 
 Better token search ([`be27303`](https://github.com/mraniki/tt/commit/be273039d4ca289e12a55b041746efdd07a17940))
+
+* Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`1bd5b49`](https://github.com/mraniki/tt/commit/1bd5b49f395df7ae07bdf266a9f3477da14c9527))
 
 * Merge pull request #218 from mraniki/main
 
 Align ([`4013b6c`](https://github.com/mraniki/tt/commit/4013b6c7711c386544b8738f5bc56d3c0f4296cd))
 
-* added tokenlist for faster resolution and coingecko as backup ([`1cad26e`](https://github.com/mraniki/tt/commit/1cad26e536127037763deb119b593c5c9e67d220))
-
-* testing top token added to balance for tracking but too slow. ([`5fb2f98`](https://github.com/mraniki/tt/commit/5fb2f9861893245f8b0d51776d3c199f273b7e1a))
-
 * Merge pull request #215 from mraniki/dev
 
 Cleanup ([`e14003d`](https://github.com/mraniki/tt/commit/e14003d713f0e1471d1169f169dd0ce23ba3a11f))
+
+* Merge pull request #213 from mraniki/dev
+
+Dev ([`a7c8f77`](https://github.com/mraniki/tt/commit/a7c8f772412c3aedc870ac27203e4b2d44818b4c))
+
+* Merge pull request #211 from mraniki/dev
+
+Multiple DEX Fixes ([`2e23212`](https://github.com/mraniki/tt/commit/2e23212048bf26f92318be7ed881504e136e8210))
+
+* added tokenlist for faster resolution and coingecko as backup ([`1cad26e`](https://github.com/mraniki/tt/commit/1cad26e536127037763deb119b593c5c9e67d220))
+
+* testing top token added to balance for tracking but too slow. ([`5fb2f98`](https://github.com/mraniki/tt/commit/5fb2f9861893245f8b0d51776d3c199f273b7e1a))
 
 * cleanup ([`2d05172`](https://github.com/mraniki/tt/commit/2d05172a8a7e940c65ead45120900da1b418dd1e))
 
@@ -15813,10 +15837,6 @@ Cleanup ([`e14003d`](https://github.com/mraniki/tt/commit/e14003d713f0e1471d1169
 * updated to quoterv2 ([`cc961fe`](https://github.com/mraniki/tt/commit/cc961fe3fb9c540e19291461912946fc9a5cb7d6))
 
 * uniswap V3 changes ([`a8a2591`](https://github.com/mraniki/tt/commit/a8a2591d52da5dfe209cf02b7df5a711190f4117))
-
-* Merge pull request #213 from mraniki/dev
-
-Dev ([`a7c8f77`](https://github.com/mraniki/tt/commit/a7c8f772412c3aedc870ac27203e4b2d44818b4c))
 
 * Merge pull request #212 from mraniki/sourcery/dev
 
@@ -15827,10 +15847,6 @@ Multiple DEX Fixes (Sourcery refactored) ([`f7dffce`](https://github.com/mraniki
 * uniswapv2, 1inch v5 functional pending v3 ([`212eaa7`](https://github.com/mraniki/tt/commit/212eaa7061b637cb56c6d02b53900c4ba9c5d63b))
 
 * correction for 1inch_v5 ([`0c96f9f`](https://github.com/mraniki/tt/commit/0c96f9f061f5267ed9ba7d4b7d51a97343b0cb34))
-
-* Merge pull request #211 from mraniki/dev
-
-Multiple DEX Fixes ([`2e23212`](https://github.com/mraniki/tt/commit/2e23212048bf26f92318be7ed881504e136e8210))
 
 * Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`8bca6c0`](https://github.com/mraniki/tt/commit/8bca6c01ddfa26581a55e112b1001ad0811b097c))
 
@@ -15852,10 +15868,6 @@ Align ([`8178196`](https://github.com/mraniki/tt/commit/8178196f78c7a79cd355559f
 
 Bump docker/build-push-action from 3 to 4 ([`d59b51b`](https://github.com/mraniki/tt/commit/d59b51bccb35ad5fba0c129c4258614edd6e9d2b))
 
-* Merge pull request #208 from mraniki/dependabot/github_actions/actions/checkout-3
-
-Bump actions/checkout from 2 to 3 ([`e3ab913`](https://github.com/mraniki/tt/commit/e3ab913371ed0715ce76abae63a05e49882915c9))
-
 * Bump docker/build-push-action from 3 to 4
 
 Bumps [docker/build-push-action](https://github.com/docker/build-push-action) from 3 to 4.
@@ -15870,6 +15882,10 @@ updated-dependencies:
 ...
 
 Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`17a2c44`](https://github.com/mraniki/tt/commit/17a2c44f3411eff1211edb31fcf62d7a95c72645))
+
+* Merge pull request #208 from mraniki/dependabot/github_actions/actions/checkout-3
+
+Bump actions/checkout from 2 to 3 ([`e3ab913`](https://github.com/mraniki/tt/commit/e3ab913371ed0715ce76abae63a05e49882915c9))
 
 * Bump actions/checkout from 2 to 3
 
@@ -15889,19 +15905,29 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`804efc4`](https://g
 
 * Create .github/dependabot.yml ([`1c4bdd1`](https://github.com/mraniki/tt/commit/1c4bdd18686eff2d1382be3d057688a5f27929bc))
 
+* Merge pull request #206 from mraniki/dev
+
+Refactoring and Dex testnet fixes ([`f9039ef`](https://github.com/mraniki/tt/commit/f9039efa96460f9ee02b35c1f944ab3151d4fdfb))
+
 * improve dex symbol error message if missing symbol ([`b55960c`](https://github.com/mraniki/tt/commit/b55960c9422cd8de6cc6b4836ff3223069d628f9))
 
 * improve dex symbol error message if missing symbol ([`b1d411c`](https://github.com/mraniki/tt/commit/b1d411c82770c52fefd9f3e93b436d82171581b5))
 
 * improving dex order ([`541af0b`](https://github.com/mraniki/tt/commit/541af0b0b3e336c033f8726a6a4efa4a25c93137))
 
-* Merge pull request #206 from mraniki/dev
-
-Refactoring and Dex testnet fixes ([`f9039ef`](https://github.com/mraniki/tt/commit/f9039efa96460f9ee02b35c1f944ab3151d4fdfb))
-
 * Merge pull request #205 from mraniki/main
 
 Align ([`ec54928`](https://github.com/mraniki/tt/commit/ec54928ed97886a065d09fd7ba41194c49c85dd7))
+
+* Merge pull request #191 from mraniki/dev
+
+Refactor and few fixes ([`df5295e`](https://github.com/mraniki/tt/commit/df5295e275ce214cabea291ecd8b985dbf250d65))
+
+* Merge pull request #189 from mraniki/dev
+
+Refactoring ([`11cc4af`](https://github.com/mraniki/tt/commit/11cc4afeb21442f233189e265a54207116b3d9d2))
+
+* Delete pyre.yml ([`a23e3e5`](https://github.com/mraniki/tt/commit/a23e3e58a9b7491b606ae98182543f456039b4d0))
 
 * consolidation of tesnet and mainnet search contract function in search_contract ([`0c1aab2`](https://github.com/mraniki/tt/commit/0c1aab2c2d4254648b142970e755a2bc0f07e3db))
 
@@ -15925,25 +15951,15 @@ Sourcery refactored dev branch ([`9f95c20`](https://github.com/mraniki/tt/commit
 
 * Refactor the parsing function to support dictionary ([`35adda8`](https://github.com/mraniki/tt/commit/35adda84d647ae0c986783f9c30cfaa8a0d46136))
 
-* Merge pull request #191 from mraniki/dev
-
-Refactor and few fixes ([`df5295e`](https://github.com/mraniki/tt/commit/df5295e275ce214cabea291ecd8b985dbf250d65))
-
 * Merge pull request #190 from mraniki/sourcery/dev
 
 Sourcery refactored dev branch ([`d8ba9af`](https://github.com/mraniki/tt/commit/d8ba9af1be1d0077a8857440594172e23bd1d6cf))
 
 * &#39;Refactored by Sourcery&#39; ([`6b9e377`](https://github.com/mraniki/tt/commit/6b9e3770869b60f0cca85e67b99f5cfa56b964b6))
 
-* Merge pull request #189 from mraniki/dev
-
-Refactoring ([`11cc4af`](https://github.com/mraniki/tt/commit/11cc4afeb21442f233189e265a54207116b3d9d2))
-
 * Rename codeql.yml to 🦠CodeScanning_main.yml ([`9f12ab2`](https://github.com/mraniki/tt/commit/9f12ab2399212e591255bb4e09c919a134e97b55))
 
 * Rename bandit.yml to 🦠CodeScanning_dev.yml ([`6af6fc0`](https://github.com/mraniki/tt/commit/6af6fc0880269dd3bb2d04625a27b77747af8985))
-
-* Delete pyre.yml ([`a23e3e5`](https://github.com/mraniki/tt/commit/a23e3e58a9b7491b606ae98182543f456039b4d0))
 
 * Merge pull request #186 from mraniki/main
 
@@ -16019,14 +16035,6 @@ Co-authored-by: mraniki &lt;mraniki@users.noreply.github.com&gt; ([`be417f9`](ht
 
 * Merge branch &#39;main&#39; into dev ([`a5941a8`](https://github.com/mraniki/tt/commit/a5941a8abf679ea6604b659b14b7e2319971e35b))
 
-* update sample DB ([`657439c`](https://github.com/mraniki/tt/commit/657439c55907705a10252f92df3a31da8db0527d))
-
-* matrix help message ([`2402fd1`](https://github.com/mraniki/tt/commit/2402fd1dafb1634d2dccda6757e365e973a784aa))
-
-* Delete Deployment.yml ([`43c1b7e`](https://github.com/mraniki/tt/commit/43c1b7e5fbc201c3ad08d8f9e7e0d05e899b6d19))
-
-* gke ([`dd0769a`](https://github.com/mraniki/tt/commit/dd0769a624d92e230227b3b657e27d238117f999))
-
 * Various Fixes (#182)
 
 * Trying to Fix error 13
@@ -16059,6 +16067,14 @@ Co-authored-by: mraniki &lt;mraniki@users.noreply.github.com&gt; ([`be417f9`](ht
 
 Co-authored-by: mraniki &lt;mraniki@users.noreply.github.com&gt; ([`999a0be`](https://github.com/mraniki/tt/commit/999a0be48b4d2537d1dad152d122cc7cb030bace))
 
+* update sample DB ([`657439c`](https://github.com/mraniki/tt/commit/657439c55907705a10252f92df3a31da8db0527d))
+
+* matrix help message ([`2402fd1`](https://github.com/mraniki/tt/commit/2402fd1dafb1634d2dccda6757e365e973a784aa))
+
+* Delete Deployment.yml ([`43c1b7e`](https://github.com/mraniki/tt/commit/43c1b7e5fbc201c3ad08d8f9e7e0d05e899b6d19))
+
+* gke ([`dd0769a`](https://github.com/mraniki/tt/commit/dd0769a624d92e230227b3b657e27d238117f999))
+
 * update ([`73984ae`](https://github.com/mraniki/tt/commit/73984aefead64bbbe00f8365a517e5808775fbbf))
 
 * apprise async ([`96fdae5`](https://github.com/mraniki/tt/commit/96fdae528d792ec26937323706dea5c604cef60d))
@@ -16066,8 +16082,6 @@ Co-authored-by: mraniki &lt;mraniki@users.noreply.github.com&gt; ([`999a0be`](ht
 * Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`e70a243`](https://github.com/mraniki/tt/commit/e70a24396bb587579a615f1d71b0991d531b8516))
 
 * Merge branch &#39;main&#39; into dev ([`fac434f`](https://github.com/mraniki/tt/commit/fac434fb0254fd1dd9f39ccc33547411f2403829))
-
-* Fix for PTB loop ([`09a1f8a`](https://github.com/mraniki/tt/commit/09a1f8aaf4a84e3f2bcb0b2469896249494e57c9))
 
 * Delete gce.yaml ([`9e483d6`](https://github.com/mraniki/tt/commit/9e483d6fb139981c9bb483e1f8768f2eaa5e4286))
 
@@ -16079,15 +16093,7 @@ Co-authored-by: mraniki &lt;mraniki@users.noreply.github.com&gt; ([`999a0be`](ht
 
 * Trying to Fix error 13 ([`eea3074`](https://github.com/mraniki/tt/commit/eea307435a536f7b2b13be0318079b3e739e6e31))
 
-* Fix an ugly parsing Indexerror bug for order ([`ac762d9`](https://github.com/mraniki/tt/commit/ac762d9c4ba84d54d71df58733a47c3e252c3681))
-
-* deployment test ([`1e8feb8`](https://github.com/mraniki/tt/commit/1e8feb838e556937213039ac188fb08c46b2304f))
-
-* Create gce.yaml ([`272e9df`](https://github.com/mraniki/tt/commit/272e9df15ccc182cd5d4c888b4ec76d24e0a0418))
-
 * Rename .github/workflows/DockerGHCR.yml to .github/workflows/archive/DockerGHCR.yml.archive ([`f369ed3`](https://github.com/mraniki/tt/commit/f369ed36cd3a27d819f3cc4d738a33f0ee7b0041))
-
-* Trying to Fix error 13 ([`e2b3681`](https://github.com/mraniki/tt/commit/e2b368141052c262926e267caed013150b06f875))
 
 * Merge pull request #180 from mraniki/dev
 
@@ -16173,6 +16179,16 @@ Dev ([`2fb64e2`](https://github.com/mraniki/tt/commit/2fb64e280a2ad7276bdf8675ea
 
 Co-authored-by: mraniki &lt;mraniki@users.noreply.github.com&gt; ([`5db4eaf`](https://github.com/mraniki/tt/commit/5db4eafe9b5e2e55765896a065c08f5eeaeb647f))
 
+* Fix for PTB loop ([`09a1f8a`](https://github.com/mraniki/tt/commit/09a1f8aaf4a84e3f2bcb0b2469896249494e57c9))
+
+* Fix an ugly parsing Indexerror bug for order ([`ac762d9`](https://github.com/mraniki/tt/commit/ac762d9c4ba84d54d71df58733a47c3e252c3681))
+
+* deployment test ([`1e8feb8`](https://github.com/mraniki/tt/commit/1e8feb838e556937213039ac188fb08c46b2304f))
+
+* Create gce.yaml ([`272e9df`](https://github.com/mraniki/tt/commit/272e9df15ccc182cd5d4c888b4ec76d24e0a0418))
+
+* Trying to Fix error 13 ([`e2b3681`](https://github.com/mraniki/tt/commit/e2b368141052c262926e267caed013150b06f875))
+
 * cleanup ([`ba0e05c`](https://github.com/mraniki/tt/commit/ba0e05cf5e180364d865925c9aa8518699b906bc))
 
 * remove send_msg function to fully leverage on apprise ([`244d5ea`](https://github.com/mraniki/tt/commit/244d5ea682c0aaeeff54f5ef95cf7c3cee202982))
@@ -16182,6 +16198,18 @@ Co-authored-by: mraniki &lt;mraniki@users.noreply.github.com&gt; ([`5db4eaf`](ht
 * Merge pull request #176 from mraniki/main
 
 Final Align ([`0782c89`](https://github.com/mraniki/tt/commit/0782c899cb6e80df66164e0bda55ba1cc7c85d43))
+
+* Merge pull request #161 from mraniki/dev
+
+Healthcheck feature,  Futures feature and Parser Error ([`d578da0`](https://github.com/mraniki/tt/commit/d578da0d12263fda9f4604d7856e51a887975671))
+
+* Merge pull request #160 from mraniki/dev
+
+Dev ([`dacae9c`](https://github.com/mraniki/tt/commit/dacae9c91a39c8ff2fcdc6b0bbad9aaccc6454dd))
+
+* Merge pull request #159 from mraniki/dev
+
+Dev ([`ed47f27`](https://github.com/mraniki/tt/commit/ed47f2777ffb04692a6444c01ae06a1399577f7b))
 
 * typo ([`379d947`](https://github.com/mraniki/tt/commit/379d94772bf075203f96220a138a302080e88322))
 
@@ -16229,29 +16257,17 @@ Final Align ([`0782c89`](https://github.com/mraniki/tt/commit/0782c899cb6e80df66
 
 * webserver troubleshoot ([`a05839e`](https://github.com/mraniki/tt/commit/a05839e7b7c3765d06cabfc5c79ed688bbf6d6fe))
 
-* Merge pull request #161 from mraniki/dev
-
-Healthcheck feature,  Futures feature and Parser Error ([`d578da0`](https://github.com/mraniki/tt/commit/d578da0d12263fda9f4604d7856e51a887975671))
-
 * healthcheck2 ([`a30f96e`](https://github.com/mraniki/tt/commit/a30f96edbf3b9dc1ec25f92de27b2bdd43e573ca))
 
 * troubleshoot ([`14d2909`](https://github.com/mraniki/tt/commit/14d2909a3c8a4235d2581f1a8f992db2666873e8))
 
 * change healthcheck ([`0bc0dc2`](https://github.com/mraniki/tt/commit/0bc0dc2fbe578b1c5e90aed1142746d93e164dc4))
 
-* Merge pull request #160 from mraniki/dev
-
-Dev ([`dacae9c`](https://github.com/mraniki/tt/commit/dacae9c91a39c8ff2fcdc6b0bbad9aaccc6454dd))
-
 * improve the position CEX support. ([`f1d2b43`](https://github.com/mraniki/tt/commit/f1d2b4343f93fdbaa373ad404886497a619fa1e6))
 
 * added defaultType in the CEX order for future support ([`a531b67`](https://github.com/mraniki/tt/commit/a531b678419a07ed604c27853276133f78245847))
 
 * position for CEX ([`4163131`](https://github.com/mraniki/tt/commit/41631318f054889a481f41e5f79d95aac3d3e814))
-
-* Merge pull request #159 from mraniki/dev
-
-Dev ([`ed47f27`](https://github.com/mraniki/tt/commit/ed47f2777ffb04692a6444c01ae06a1399577f7b))
 
 * Merge pull request #158 from mraniki/main
 
@@ -16263,6 +16279,50 @@ Merge ([`cdaa38b`](https://github.com/mraniki/tt/commit/cdaa38b3cdc2e0cbe49ba7da
 
 Fixes ([`e071790`](https://github.com/mraniki/tt/commit/e0717900f633f329f51c45a06a05d4b294fc78a0))
 
+* Merge pull request #156 from mraniki/dev
+
+Readme change ([`e455405`](https://github.com/mraniki/tt/commit/e455405a9a4611360fbafe7d8aec131730f53754))
+
+* Merge pull request #155 from mraniki/dev
+
+Fixed messaging function ([`089927f`](https://github.com/mraniki/tt/commit/089927f39e1387e48c077de787e2ec9c08d9e52d))
+
+* Merge pull request #154 from mraniki/dev
+
+Simple web server added for healthcheck ([`3f6d66a`](https://github.com/mraniki/tt/commit/3f6d66a944cf1ffac3429f7a27f9b19a1e5abe3e))
+
+* Merge pull request #153 from mraniki/dev
+
+Dev ([`be45d00`](https://github.com/mraniki/tt/commit/be45d000275b1f1c3efda3b0a084d5d9a6c7b6ba))
+
+* Merge pull request #152 from mraniki/dev
+
+Dev ([`a218dd3`](https://github.com/mraniki/tt/commit/a218dd3055c5dc44a27bcc7961fa35f89f54946e))
+
+* Merge pull request #151 from mraniki/dev
+
+Dev ([`6cd337d`](https://github.com/mraniki/tt/commit/6cd337def1dc025d58dd2bd25e23e875233d9e50))
+
+* Merge pull request #150 from mraniki/dev
+
+MultiChat Support ([`e240610`](https://github.com/mraniki/tt/commit/e240610202e03723f2bf659cb95250e42ba4b1d1))
+
+* Merge pull request #149 from mraniki/dev
+
+Support simple echo for 3 platform (telethon/discord/matrix) ([`10f794a`](https://github.com/mraniki/tt/commit/10f794aca3ab5431b8946c1fbfdc3ba540d90ca2))
+
+* Merge pull request #148 from mraniki/dev
+
+Initial matrix and discord setup ([`570ec3b`](https://github.com/mraniki/tt/commit/570ec3ba47d2b91593964e6552fff8477f4d900d))
+
+* Merge pull request #147 from mraniki/dev
+
+Dev ([`4a208f8`](https://github.com/mraniki/tt/commit/4a208f80e06e1920ab677464a107d6fd3a1dc794))
+
+* Merge pull request #146 from mraniki/dev
+
+Dev ([`9b60a44`](https://github.com/mraniki/tt/commit/9b60a4435836e8e3b1fe4b53d401b4b8086fd37b))
+
 * debug ([`0cf1b3d`](https://github.com/mraniki/tt/commit/0cf1b3de45ac861da4dfc3e626b76db6585eda13))
 
 * debug ([`2f1fa73`](https://github.com/mraniki/tt/commit/2f1fa73f7431cb67016b83b2843b3f40251607d0))
@@ -16271,17 +16331,9 @@ Fixes ([`e071790`](https://github.com/mraniki/tt/commit/e0717900f633f329f51c45a0
 
 * version 44 ([`07d85c9`](https://github.com/mraniki/tt/commit/07d85c90bce306150a35035e1dd7d035018b7717))
 
-* Merge pull request #156 from mraniki/dev
-
-Readme change ([`e455405`](https://github.com/mraniki/tt/commit/e455405a9a4611360fbafe7d8aec131730f53754))
-
 * readme update ([`cfab42b`](https://github.com/mraniki/tt/commit/cfab42bbe5c7ee8cd6689bf94081b34da8df261f))
 
 * screenshots wiki ([`e0facef`](https://github.com/mraniki/tt/commit/e0faceff771556edacc3771a20ef06ab8027e753))
-
-* Merge pull request #155 from mraniki/dev
-
-Fixed messaging function ([`089927f`](https://github.com/mraniki/tt/commit/089927f39e1387e48c077de787e2ec9c08d9e52d))
 
 * improve discord messaging (embed) ([`5e0efe4`](https://github.com/mraniki/tt/commit/5e0efe41b5875d8a2425569525285870a02b3225))
 
@@ -16295,10 +16347,6 @@ Fixed messaging function ([`089927f`](https://github.com/mraniki/tt/commit/08992
 
 * readme update ([`1a9c30f`](https://github.com/mraniki/tt/commit/1a9c30f2f21b31c8e34add175663f05495abb4b4))
 
-* Merge pull request #154 from mraniki/dev
-
-Simple web server added for healthcheck ([`3f6d66a`](https://github.com/mraniki/tt/commit/3f6d66a944cf1ffac3429f7a27f9b19a1e5abe3e))
-
 * image ([`fb14e4d`](https://github.com/mraniki/tt/commit/fb14e4dbc299f6c12cdae58f10ba6d5b621190ff))
 
 * Healthcheck update ([`13b60e3`](https://github.com/mraniki/tt/commit/13b60e309109bbd06d4e9a67ada14b3f485a4483))
@@ -16311,29 +16359,13 @@ Simple web server added for healthcheck ([`3f6d66a`](https://github.com/mraniki/
 
 * small update ([`050922b`](https://github.com/mraniki/tt/commit/050922b6999e65988ea0227278b5d9c5675c769e))
 
-* Merge pull request #153 from mraniki/dev
-
-Dev ([`be45d00`](https://github.com/mraniki/tt/commit/be45d000275b1f1c3efda3b0a084d5d9a6c7b6ba))
-
-* Merge pull request #152 from mraniki/dev
-
-Dev ([`a218dd3`](https://github.com/mraniki/tt/commit/a218dd3055c5dc44a27bcc7961fa35f89f54946e))
-
 * readme update ([`387be0b`](https://github.com/mraniki/tt/commit/387be0bac064e0e8b7a672cc9a94e7c89abba6ad))
 
 * name update ([`243d65e`](https://github.com/mraniki/tt/commit/243d65eeb1da8a82d5f3e18f188da0f0ed9f473c))
 
 * Road to 1.3 ([`5e62a10`](https://github.com/mraniki/tt/commit/5e62a10832ae7c4811b02de5bf1d98db8036875a))
 
-* Merge pull request #151 from mraniki/dev
-
-Dev ([`6cd337d`](https://github.com/mraniki/tt/commit/6cd337def1dc025d58dd2bd25e23e875233d9e50))
-
 * updated to pycord ([`ade037d`](https://github.com/mraniki/tt/commit/ade037d03812d4a661d5387dbee9f1c91533e60b))
-
-* Merge pull request #150 from mraniki/dev
-
-MultiChat Support ([`e240610`](https://github.com/mraniki/tt/commit/e240610202e03723f2bf659cb95250e42ba4b1d1))
 
 * html support ([`a223835`](https://github.com/mraniki/tt/commit/a223835e963a9a75c1e8d27ddf7aef51b531f315))
 
@@ -16373,10 +16405,6 @@ This is breaking ptb. and ptb function need to be revised. ([`2670332`](https://
 
 * help message for 3 platforms ([`977e520`](https://github.com/mraniki/tt/commit/977e520779d29ec710a540bf6562ca4a905b8244))
 
-* Merge pull request #149 from mraniki/dev
-
-Support simple echo for 3 platform (telethon/discord/matrix) ([`10f794a`](https://github.com/mraniki/tt/commit/10f794aca3ab5431b8946c1fbfdc3ba540d90ca2))
-
 * simple ECHO for 3 platforms ([`92774ee`](https://github.com/mraniki/tt/commit/92774ee5e31a717ed98f0e5837c228482ecb6254))
 
 * refactoring for multichat ([`e557b0a`](https://github.com/mraniki/tt/commit/e557b0ae20b1c7b6dee8775b18275aeb7842168b))
@@ -16393,10 +16421,6 @@ Support simple echo for 3 platform (telethon/discord/matrix) ([`10f794a`](https:
 
 * added telethon support ([`d69372d`](https://github.com/mraniki/tt/commit/d69372d1bb4a847c1f5b65fdd5b79040d707d898))
 
-* Merge pull request #148 from mraniki/dev
-
-Initial matrix and discord setup ([`570ec3b`](https://github.com/mraniki/tt/commit/570ec3ba47d2b91593964e6552fff8477f4d900d))
-
 * Setup simple ECHO for MATRIX and DISCORD ([`017a104`](https://github.com/mraniki/tt/commit/017a104c6694afd8db4fef6fa2885d4ff9d2a282))
 
 * update for matrix ([`1ed4585`](https://github.com/mraniki/tt/commit/1ed4585f3a4b943f13b237fe9acc60d0736cde13))
@@ -16411,10 +16435,6 @@ Initial matrix and discord setup ([`570ec3b`](https://github.com/mraniki/tt/comm
 
 * matrix update ([`414b60c`](https://github.com/mraniki/tt/commit/414b60c95e0ea6cf4b61056cfa44ef9bcf9d64a3))
 
-* Merge pull request #147 from mraniki/dev
-
-Dev ([`4a208f8`](https://github.com/mraniki/tt/commit/4a208f80e06e1920ab677464a107d6fd3a1dc794))
-
 * clean shutdown ([`6fe77f7`](https://github.com/mraniki/tt/commit/6fe77f70abb9e4f30075a89a7c1ce7cf8467b4aa))
 
 * added platform ([`af3b84f`](https://github.com/mraniki/tt/commit/af3b84f3745b99966b9b6b53151398e55b94cc51))
@@ -16425,33 +16445,51 @@ Dev ([`4a208f8`](https://github.com/mraniki/tt/commit/4a208f80e06e1920ab677464a1
 
 * actions update ([`66a8901`](https://github.com/mraniki/tt/commit/66a890196d9f404252bc688c626e2fac83aa4d63))
 
-* Merge pull request #146 from mraniki/dev
-
-Dev ([`9b60a44`](https://github.com/mraniki/tt/commit/9b60a4435836e8e3b1fe4b53d401b4b8086fd37b))
-
 * Merge pull request #145 from mraniki/main
 
 Align ([`18ae8ef`](https://github.com/mraniki/tt/commit/18ae8ef1ea37c3287c070a84eda232d0c629c174))
 
-* docker actions version update ([`6fda02a`](https://github.com/mraniki/tt/commit/6fda02a3c1d41cb4c8a70443ec08a4d3308cebb5))
-
-* Multi repo support ([`e886396`](https://github.com/mraniki/tt/commit/e88639640fbc089681007f9fd2f4f1919d996e27))
-
 * Merge pull request #144 from mraniki/dev
 
 Dev ([`582c48f`](https://github.com/mraniki/tt/commit/582c48f8df1ce459283c835051eb46f898af2c71))
+
+* Merge pull request #143 from mraniki/dev
+
+1 merge order function ([`50f4d10`](https://github.com/mraniki/tt/commit/50f4d107b1c4225fff83889ffb51523c93dae492))
+
+* Merge pull request #142 from mraniki/dev
+
+Update bot.py ([`04d36d3`](https://github.com/mraniki/tt/commit/04d36d336f8a3a94b574d7ffa92a00a8e32c3c4a))
+
+* Merge pull request #141 from mraniki/dev
+
+Dev ([`cc3ad87`](https://github.com/mraniki/tt/commit/cc3ad87e8bbe988dcc0bdc6df05923aea7e98c4f))
+
+* Merge pull request #140 from mraniki/dev
+
+Merge to 1.2 with multiple fix sand enhancements ([`2fa10d5`](https://github.com/mraniki/tt/commit/2fa10d5274e923f73fdee3330ef74caba775546b))
+
+* Merge pull request #139 from mraniki/dev
+
+Fix DEx toekn price issue and created /g ([`94369cb`](https://github.com/mraniki/tt/commit/94369cb74c6d265b4964b8bd2a4b5c567d93656a))
+
+* Merge pull request #138 from mraniki/dev
+
+cg dex order troubleshoot ([`648686d`](https://github.com/mraniki/tt/commit/648686dd2fd249838a45e3cc8ebd9a2e1ab4c226))
+
+* Merge pull request #137 from mraniki/dev
+
+Dev ([`2feb045`](https://github.com/mraniki/tt/commit/2feb04518e158e9de91544122f3a44bd7f4a83d5))
+
+* docker actions version update ([`6fda02a`](https://github.com/mraniki/tt/commit/6fda02a3c1d41cb4c8a70443ec08a4d3308cebb5))
+
+* Multi repo support ([`e886396`](https://github.com/mraniki/tt/commit/e88639640fbc089681007f9fd2f4f1919d996e27))
 
 * documentation update ([`4166c46`](https://github.com/mraniki/tt/commit/4166c46bca2388d63dbe499d41dee06cc19636d5))
 
 * documentation ([`42eba16`](https://github.com/mraniki/tt/commit/42eba166a6ac90f074725b9e9a7715a20e5ebe87))
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`4c2a85a`](https://github.com/mraniki/tt/commit/4c2a85a022d86b391f8cdc4978f128526162e76c))
-
-* alignement ([`8e1428a`](https://github.com/mraniki/tt/commit/8e1428aab4e2a83836bad0d2fd9984ee7015070b))
-
-* Merge pull request #143 from mraniki/dev
-
-1 merge order function ([`50f4d10`](https://github.com/mraniki/tt/commit/50f4d107b1c4225fff83889ffb51523c93dae492))
 
 * simplify the tokenlist search ([`564d42b`](https://github.com/mraniki/tt/commit/564d42be86fc65f202fed7b6ce3fa41f142fe1a3))
 
@@ -16471,23 +16509,13 @@ Dev ([`582c48f`](https://github.com/mraniki/tt/commit/582c48f8df1ce459283c835051
 
 * initial v3 for swap ([`54d6585`](https://github.com/mraniki/tt/commit/54d658566cb5b3d1f387b49cc65a5a9029ab2b83))
 
+* alignement ([`8e1428a`](https://github.com/mraniki/tt/commit/8e1428aab4e2a83836bad0d2fd9984ee7015070b))
+
 * emoji ([`0244c28`](https://github.com/mraniki/tt/commit/0244c288363207e4647151530101a088ed4235c8))
-
-* Merge pull request #142 from mraniki/dev
-
-Update bot.py ([`04d36d3`](https://github.com/mraniki/tt/commit/04d36d336f8a3a94b574d7ffa92a00a8e32c3c4a))
-
-* Merge pull request #141 from mraniki/dev
-
-Dev ([`cc3ad87`](https://github.com/mraniki/tt/commit/cc3ad87e8bbe988dcc0bdc6df05923aea7e98c4f))
 
 * corrected dex order ([`05986fb`](https://github.com/mraniki/tt/commit/05986fbd6150ba841e20478959aadacfdfef3b56))
 
 * DEX swap changes ([`4e2f29d`](https://github.com/mraniki/tt/commit/4e2f29d701b9f5a99348c764983fce31de2ab9c8))
-
-* Merge pull request #140 from mraniki/dev
-
-Merge to 1.2 with multiple fix sand enhancements ([`2fa10d5`](https://github.com/mraniki/tt/commit/2fa10d5274e923f73fdee3330ef74caba775546b))
 
 * more cleanup ([`562d0f1`](https://github.com/mraniki/tt/commit/562d0f11207846e931770d8a9ac05d6813041a93))
 
@@ -16551,11 +16579,11 @@ Merge to 1.2 with multiple fix sand enhancements ([`2fa10d5`](https://github.com
 
 * Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`ecea1d6`](https://github.com/mraniki/tt/commit/ecea1d621757c4f22dfc2f18bab4873cd545b6d1))
 
-* fly ([`70a1c8f`](https://github.com/mraniki/tt/commit/70a1c8ffa90acd187dbafc42bfcbe2555c5182ae))
-
 * update ([`1c3ccf8`](https://github.com/mraniki/tt/commit/1c3ccf8563a29000c35a76e71051090d799b1560))
 
 * rollback toml ([`075e13e`](https://github.com/mraniki/tt/commit/075e13ea3a509a02e98ac4906ec33abe76ea7e72))
+
+* fly ([`70a1c8f`](https://github.com/mraniki/tt/commit/70a1c8ffa90acd187dbafc42bfcbe2555c5182ae))
 
 * Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`7357708`](https://github.com/mraniki/tt/commit/7357708cc4d4e3e930d481efa7836618c7167df1))
 
@@ -16585,9 +16613,9 @@ Merge to 1.2 with multiple fix sand enhancements ([`2fa10d5`](https://github.com
 
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt ([`9b26891`](https://github.com/mraniki/tt/commit/9b26891811c6617addd6e84b0d2ac1431063a91f))
 
-* ex search ([`953c32e`](https://github.com/mraniki/tt/commit/953c32eb51744532194df0e77580c51248550c01))
-
 * Jan 26, 2023, 3:33 PM ([`db02117`](https://github.com/mraniki/tt/commit/db0211720f05dd4ae069b6feadf968d6c15723eb))
+
+* ex search ([`953c32e`](https://github.com/mraniki/tt/commit/953c32eb51744532194df0e77580c51248550c01))
 
 * hook down ([`1d3cc49`](https://github.com/mraniki/tt/commit/1d3cc496f3d041b889dda20fbaaa078fe05ffd33))
 
@@ -17045,39 +17073,35 @@ Merge to 1.2 with multiple fix sand enhancements ([`2fa10d5`](https://github.com
 
 * gas emoji ([`364de91`](https://github.com/mraniki/tt/commit/364de91d65022f3e23b88e7a5c89e59ca77be300))
 
-* Merge pull request #139 from mraniki/dev
-
-Fix DEx toekn price issue and created /g ([`94369cb`](https://github.com/mraniki/tt/commit/94369cb74c6d265b4964b8bd2a4b5c567d93656a))
-
 * Fix DEx toekn price issue and created /g ([`5d2d7ca`](https://github.com/mraniki/tt/commit/5d2d7ca5a7d17e3383bce869b25a80b65cd3a6f7))
 
-* Merge pull request #138 from mraniki/dev
-
-cg dex order troubleshoot ([`648686d`](https://github.com/mraniki/tt/commit/648686dd2fd249838a45e3cc8ebd9a2e1ab4c226))
-
 * cg dex order troubleshoot ([`448e05b`](https://github.com/mraniki/tt/commit/448e05b01ae279675859166314398fec77ecc5c2))
-
-* Merge pull request #137 from mraniki/dev
-
-Dev ([`2feb045`](https://github.com/mraniki/tt/commit/2feb04518e158e9de91544122f3a44bd7f4a83d5))
 
 * Merge pull request #136 from mraniki/main
 
 Align ([`36fc4fd`](https://github.com/mraniki/tt/commit/36fc4fda5bef6e4b682c28499c9510ebb40ebbe0))
 
-* typo ([`a6f1976`](https://github.com/mraniki/tt/commit/a6f197693ed2cfc986481d836754ebd6fb82c912))
-
-* typo ([`259e0e8`](https://github.com/mraniki/tt/commit/259e0e89bf3e3b3c1a2914505cc01af3e4aa75b2))
-
 * Merge pull request #135 from mraniki/dev
 
 datetime ([`8516975`](https://github.com/mraniki/tt/commit/851697593f8a66a23c3b7c626d8fc0c95ad29691))
 
-* datetime ([`5e46c5f`](https://github.com/mraniki/tt/commit/5e46c5f41537f705399360764835cdee9ce74242))
-
 * Merge pull request #134 from mraniki/dev
 
 Dev ([`0c9ba59`](https://github.com/mraniki/tt/commit/0c9ba599dd310c733a380667b4d9bd1305c5d504))
+
+* Merge pull request #133 from mraniki/dev
+
+Dev ([`537c41d`](https://github.com/mraniki/tt/commit/537c41ddf179f5d3ba7cfddf1ed987b55f7e7f4a))
+
+* Merge pull request #132 from mraniki/dev
+
+Dev ([`c58db89`](https://github.com/mraniki/tt/commit/c58db894c046529c4944444b80f8e34928a7a566))
+
+* typo ([`a6f1976`](https://github.com/mraniki/tt/commit/a6f197693ed2cfc986481d836754ebd6fb82c912))
+
+* typo ([`259e0e8`](https://github.com/mraniki/tt/commit/259e0e89bf3e3b3c1a2914505cc01af3e4aa75b2))
+
+* datetime ([`5e46c5f`](https://github.com/mraniki/tt/commit/5e46c5f41537f705399360764835cdee9ce74242))
 
 * readme and filename update ([`27204d3`](https://github.com/mraniki/tt/commit/27204d396bc122833bcb0eefbe8e3cc4024bc2da))
 
@@ -17087,19 +17111,11 @@ Dev ([`0c9ba59`](https://github.com/mraniki/tt/commit/0c9ba599dd310c733a380667b4
 
 * timestamp ([`e37477d`](https://github.com/mraniki/tt/commit/e37477d3422e7b0968e735995c558e32b4fca7db))
 
-* Merge pull request #133 from mraniki/dev
-
-Dev ([`537c41d`](https://github.com/mraniki/tt/commit/537c41ddf179f5d3ba7cfddf1ed987b55f7e7f4a))
-
 * readme update ([`c4069e0`](https://github.com/mraniki/tt/commit/c4069e0d4ae66244385b1524b82738d7027fc1b0))
 
 * corrected sample db ([`f86d170`](https://github.com/mraniki/tt/commit/f86d170671522643e173f4f276a92a6e2c93a882))
 
 * coingecko info /c command ([`c6f327f`](https://github.com/mraniki/tt/commit/c6f327ff0f7ea042b25ed16376356a53527403fe))
-
-* Merge pull request #132 from mraniki/dev
-
-Dev ([`c58db89`](https://github.com/mraniki/tt/commit/c58db894c046529c4944444b80f8e34928a7a566))
 
 * update response ([`7f555d3`](https://github.com/mraniki/tt/commit/7f555d33d5590a7f55265ee609d25c99e8aa17da))
 
@@ -17233,11 +17249,11 @@ Dev ([`bc34fc2`](https://github.com/mraniki/tt/commit/bc34fc2eba4d1abd802e9defdf
 
 * round for balance ([`fc9e7e7`](https://github.com/mraniki/tt/commit/fc9e7e7636214d2f69038de21c781ea4e6073cc0))
 
+* udpate ([`b6881fd`](https://github.com/mraniki/tt/commit/b6881fd88351353ce0df98d16575b17ec96a8c60))
+
 * Merge pull request #119 from mraniki/dev
 
 Dev ([`3a574c9`](https://github.com/mraniki/tt/commit/3a574c9ce03c8f2b9ec0b09f136c01ae9b483cd9))
-
-* udpate ([`b6881fd`](https://github.com/mraniki/tt/commit/b6881fd88351353ce0df98d16575b17ec96a8c60))
 
 * 8443 in dockerfile ([`7c068c8`](https://github.com/mraniki/tt/commit/7c068c8190e6a599269e67c6a8a89a9e4c4d877e))
 
@@ -17327,6 +17343,46 @@ Dev ([`04e739a`](https://github.com/mraniki/tt/commit/04e739ae0dd6722bc801b1661a
 
 * Merge branch &#39;main&#39; into dev ([`915f1fd`](https://github.com/mraniki/tt/commit/915f1fd115c480f02f46d86306c6f081268e256e))
 
+* Merge pull request #113 from mraniki/dev
+
+Dev ([`affe24b`](https://github.com/mraniki/tt/commit/affe24bf88f7cd09ef249cea8d44b15b23db9369))
+
+* Merge pull request #112 from mraniki/dev
+
+Dev ([`c3af0d7`](https://github.com/mraniki/tt/commit/c3af0d7e097ad27779b39ca09b8e13eec14c4c44))
+
+* Merge pull request #111 from mraniki/dev
+
+Dev ([`67742f3`](https://github.com/mraniki/tt/commit/67742f365b41e008f846c2c9c9ba4b9408af7f97))
+
+* Merge pull request #110 from mraniki/dev
+
+Dev ([`8fc288c`](https://github.com/mraniki/tt/commit/8fc288cc888a0436e88a1bc0f3460a74eccd2a52))
+
+* Merge pull request #109 from mraniki/dev
+
+Dev ([`8e6d7cd`](https://github.com/mraniki/tt/commit/8e6d7cde009c5278c3e3fbea290ca74423b596a3))
+
+* Merge pull request #108 from mraniki/dev
+
+Dev ([`8d885ef`](https://github.com/mraniki/tt/commit/8d885ef2f0ad1e45649a6a2594700f2cf87ae66b))
+
+* Merge pull request #107 from mraniki/dev
+
+Update bot.py ([`711de21`](https://github.com/mraniki/tt/commit/711de2170ad967188813a4136995fe63c1383de6))
+
+* Merge pull request #106 from mraniki/dev
+
+Update bot.py ([`2ddc2a7`](https://github.com/mraniki/tt/commit/2ddc2a7805693782cb0f68475685206f120b21ac))
+
+* Merge pull request #105 from mraniki/dev
+
+Update bot.py ([`5a38c6b`](https://github.com/mraniki/tt/commit/5a38c6b3538efe8f845045a67b284914ce386e21))
+
+* Merge pull request #104 from mraniki/dev
+
+Dev ([`c1ed04c`](https://github.com/mraniki/tt/commit/c1ed04c2c53f6093136a2a9ae56ec8a79d83a26b))
+
 * version ([`f32bc3b`](https://github.com/mraniki/tt/commit/f32bc3b3c886c17510ab5fd55d68927672846142))
 
 * cleanup ([`163b443`](https://github.com/mraniki/tt/commit/163b44327c3fbf33163042452b3e3c7195111c69))
@@ -17349,17 +17405,9 @@ Dev ([`04e739a`](https://github.com/mraniki/tt/commit/04e739ae0dd6722bc801b1661a
 
 * update on gas function ([`702ce41`](https://github.com/mraniki/tt/commit/702ce41588d16e3a664797d5e0691c7aa4ecf81a))
 
-* Merge pull request #113 from mraniki/dev
-
-Dev ([`affe24b`](https://github.com/mraniki/tt/commit/affe24bf88f7cd09ef249cea8d44b15b23db9369))
-
 * gas control ([`1542a51`](https://github.com/mraniki/tt/commit/1542a514aa6558cf963e3e93bd0bbe776307e800))
 
 * added a preliminary dynamic gas function ([`d4d3aa6`](https://github.com/mraniki/tt/commit/d4d3aa6b8b7cfe34c03140eeb762edb58f09c59d))
-
-* Merge pull request #112 from mraniki/dev
-
-Dev ([`c3af0d7`](https://github.com/mraniki/tt/commit/c3af0d7e097ad27779b39ca09b8e13eec14c4c44))
 
 * more cleanup ([`8962692`](https://github.com/mraniki/tt/commit/8962692544fe599c8dd3364d01c53d9a6b0bebd8))
 
@@ -17375,10 +17423,6 @@ Dev ([`c3af0d7`](https://github.com/mraniki/tt/commit/c3af0d7e097ad27779b39ca09b
 
 * up ([`f3e0932`](https://github.com/mraniki/tt/commit/f3e0932958414e7d3da433389af4c17a3b2834c9))
 
-* Merge pull request #111 from mraniki/dev
-
-Dev ([`67742f3`](https://github.com/mraniki/tt/commit/67742f365b41e008f846c2c9c9ba4b9408af7f97))
-
 * error to be reviewed for DEX sell ([`b785668`](https://github.com/mraniki/tt/commit/b7856687c828db42c1b78fd6201a6f315b1f7410))
 
 * updated dex troubleshoot ([`085c6e0`](https://github.com/mraniki/tt/commit/085c6e0a781b32dce05c2aedc1c557e11ab3c8ac))
@@ -17390,10 +17434,6 @@ Dev ([`67742f3`](https://github.com/mraniki/tt/commit/67742f365b41e008f846c2c9c9
 * rewrote the DEX method approach DEXFetchSwapMethod ([`6228a60`](https://github.com/mraniki/tt/commit/6228a60f9ffe33e699d760c12cd0b0cfb7ab0717))
 
 * symb start with ([`4f321ba`](https://github.com/mraniki/tt/commit/4f321ba470b16d2066f12070df3b99588b468324))
-
-* Merge pull request #110 from mraniki/dev
-
-Dev ([`8fc288c`](https://github.com/mraniki/tt/commit/8fc288cc888a0436e88a1bc0f3460a74eccd2a52))
 
 * update ([`cf44596`](https://github.com/mraniki/tt/commit/cf44596bd144b3519ca43d044b929f3128983796))
 
@@ -17411,19 +17451,11 @@ Dev ([`8fc288c`](https://github.com/mraniki/tt/commit/8fc288cc888a0436e88a1bc0f3
 
 * % update ([`defe2b9`](https://github.com/mraniki/tt/commit/defe2b952146f1e11c42ae700394b5655c05e435))
 
-* Merge pull request #109 from mraniki/dev
-
-Dev ([`8e6d7cd`](https://github.com/mraniki/tt/commit/8e6d7cde009c5278c3e3fbea290ca74423b596a3))
-
 * adj gas parameter ([`8c59ec6`](https://github.com/mraniki/tt/commit/8c59ec67930a97c1aaba43f455b3292e5c6fe49c))
 
 * corrected quantity parsing ([`b0804b4`](https://github.com/mraniki/tt/commit/b0804b419a9498a4f7d4c33b61a819e76b0b21b0))
 
 * updating the testnet contract and testing ([`dc27f44`](https://github.com/mraniki/tt/commit/dc27f440c34ec0ebcf6eb4f95509826c3aa2a7aa))
-
-* Merge pull request #108 from mraniki/dev
-
-Dev ([`8d885ef`](https://github.com/mraniki/tt/commit/8d885ef2f0ad1e45649a6a2594700f2cf87ae66b))
 
 * DEXFetchSwapMethod ([`d838264`](https://github.com/mraniki/tt/commit/d838264f8454278cdd9d40424e26f7c62e6e4992))
 
@@ -17438,22 +17470,6 @@ Dev ([`8d885ef`](https://github.com/mraniki/tt/commit/8d885ef2f0ad1e45649a6a2594
 * addtional buy/price testing ([`753fb45`](https://github.com/mraniki/tt/commit/753fb45c0894d19d7e1de970578852316d5c7ee1))
 
 * req ([`8e60c62`](https://github.com/mraniki/tt/commit/8e60c624dbe700e0f0fe7ec4056c3eea3b66a279))
-
-* Merge pull request #107 from mraniki/dev
-
-Update bot.py ([`711de21`](https://github.com/mraniki/tt/commit/711de2170ad967188813a4136995fe63c1383de6))
-
-* Merge pull request #106 from mraniki/dev
-
-Update bot.py ([`2ddc2a7`](https://github.com/mraniki/tt/commit/2ddc2a7805693782cb0f68475685206f120b21ac))
-
-* Merge pull request #105 from mraniki/dev
-
-Update bot.py ([`5a38c6b`](https://github.com/mraniki/tt/commit/5a38c6b3538efe8f845045a67b284914ce386e21))
-
-* Merge pull request #104 from mraniki/dev
-
-Dev ([`c1ed04c`](https://github.com/mraniki/tt/commit/c1ed04c2c53f6093136a2a9ae56ec8a79d83a26b))
 
 * Merge pull request #103 from mraniki/main
 
@@ -17515,11 +17531,11 @@ Dev ([`e712243`](https://github.com/mraniki/tt/commit/e712243b6afaecbd408fb7a58d
 
 * update bot.py ([`ea94f59`](https://github.com/mraniki/tt/commit/ea94f5918b2547fbedd46d9da00789c0227f03bd))
 
-* updated libcheck position ([`960c3c1`](https://github.com/mraniki/tt/commit/960c3c159441896bdeaf806a555dd3ee5453df0a))
-
 * code cleaning ([`45b750f`](https://github.com/mraniki/tt/commit/45b750fedf4bd4194c32e27853be3eba2dfe4e27))
 
 * hardening ([`a00bdda`](https://github.com/mraniki/tt/commit/a00bddafa8036f0abaad4b8a68a13eabe5a7b6de))
+
+* updated libcheck position ([`960c3c1`](https://github.com/mraniki/tt/commit/960c3c159441896bdeaf806a555dd3ee5453df0a))
 
 * Merge pull request #94 from mraniki/dev
 
@@ -17573,8 +17589,6 @@ Dev ([`d6b11ab`](https://github.com/mraniki/tt/commit/d6b11ab22a097bb6c2e4fef274
 
 * Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`4cccd60`](https://github.com/mraniki/tt/commit/4cccd60716384a6a01d3e2fd50440b527436b25d))
 
-* update README.md, db.json.sample and bot.py ([`3dc828b`](https://github.com/mraniki/tt/commit/3dc828b6c5f5b43c876ccbadf26d7b230fcc86f8))
-
 * Merge pull request #86 from mraniki/main
 
 Merge pull request #84 from mraniki/dev ([`f9e0a6c`](https://github.com/mraniki/tt/commit/f9e0a6cc8c70b052bbef5795cb66adbf24da1fa8))
@@ -17583,23 +17597,43 @@ Merge pull request #84 from mraniki/dev ([`f9e0a6c`](https://github.com/mraniki/
 
 Dev ([`a3400ee`](https://github.com/mraniki/tt/commit/a3400eed0eb88d9ca656ced7a0b9dcfdfbea8b8e))
 
+* update README.md, db.json.sample and bot.py ([`3dc828b`](https://github.com/mraniki/tt/commit/3dc828b6c5f5b43c876ccbadf26d7b230fcc86f8))
+
 * docs: update README.md ([`0019773`](https://github.com/mraniki/tt/commit/0019773ce3baa3a60bc4f73d032fe7edea500479))
 
 * [] ([`90dc416`](https://github.com/mraniki/tt/commit/90dc416944c4617b214609a5fe184e839abc0746))
 
 * Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`7954927`](https://github.com/mraniki/tt/commit/7954927c18aa7a6c5c8800d4c1053f87ecba6e7d))
 
-* [] initial logic for price command done for cxxt ([`1170c60`](https://github.com/mraniki/tt/commit/1170c603dadfe252a7a4ce1d4eb31c3097d48e74))
-
 * Merge pull request #85 from mraniki/main
 
 Align ([`3e61b4d`](https://github.com/mraniki/tt/commit/3e61b4d3ae8f55a1f987db233d603abf1fb16589))
 
-* Create FrommaintoDev ([`bcbbe4f`](https://github.com/mraniki/tt/commit/bcbbe4f7fd3f2d00b46cb9e21529c601198ac852))
-
 * Delete maintodevsync ([`9c636cf`](https://github.com/mraniki/tt/commit/9c636cfcb0ebb70cd6e2adec4315ad134c2f8ea7))
 
 * Create maintodevsync ([`98c2e78`](https://github.com/mraniki/tt/commit/98c2e78662150ae41cdadc4800ed8ad0df3cd3a3))
+
+* Merge pull request #83 from mraniki/dev
+
+Dev ([`6a8bb6b`](https://github.com/mraniki/tt/commit/6a8bb6bd88b363fc5c66eb82d9c66fcca4cd876d))
+
+* Merge pull request #82 from mraniki/dev
+
+Dev ([`db43dd3`](https://github.com/mraniki/tt/commit/db43dd33224c8281c7c0adf6a3dc721cbec997ec))
+
+* Merge pull request #81 from mraniki/dev ([`6c940b7`](https://github.com/mraniki/tt/commit/6c940b79f09afe8649125b9687e76da7e9b3acb2))
+
+* Merge pull request #80 from mraniki/dev
+
+Dev ([`588acc6`](https://github.com/mraniki/tt/commit/588acc684bd99997df44ea94a455a331f53a1ea0))
+
+* Merge pull request #79 from mraniki/dev
+
+Dev ([`f9ee06b`](https://github.com/mraniki/tt/commit/f9ee06b9653045d98105b37191269ce58f0a4073))
+
+* Create FrommaintoDev ([`bcbbe4f`](https://github.com/mraniki/tt/commit/bcbbe4f7fd3f2d00b46cb9e21529c601198ac852))
+
+* [] initial logic for price command done for cxxt ([`1170c60`](https://github.com/mraniki/tt/commit/1170c603dadfe252a7a4ce1d4eb31c3097d48e74))
 
 * update bot.py ([`9606bee`](https://github.com/mraniki/tt/commit/9606bee4def7407f067d16473579836dd4b8900c))
 
@@ -17627,23 +17661,13 @@ Align ([`3e61b4d`](https://github.com/mraniki/tt/commit/3e61b4d3ae8f55a1f987db23
 
 * Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`ed478de`](https://github.com/mraniki/tt/commit/ed478dec4a97a6bbd97b51bbaee7c669842259a6))
 
-* Fix Error: &#39;int&#39; object is not subscriptable ([`8a152e9`](https://github.com/mraniki/tt/commit/8a152e99cba34bc12a57a3510a222447d6de6f69))
-
-* Merge pull request #83 from mraniki/dev
-
-Dev ([`6a8bb6b`](https://github.com/mraniki/tt/commit/6a8bb6bd88b363fc5c66eb82d9c66fcca4cd876d))
-
 * cex error ([`58562b0`](https://github.com/mraniki/tt/commit/58562b0fe6465b78209c6d497b7193bbba2782a7))
 
 * load ex error for python 3.10.9 ([`d1a1ee9`](https://github.com/mraniki/tt/commit/d1a1ee940184eb103fd69663757522e827c76e08))
 
-* Merge pull request #82 from mraniki/dev
-
-Dev ([`db43dd3`](https://github.com/mraniki/tt/commit/db43dd33224c8281c7c0adf6a3dc721cbec997ec))
+* Fix Error: &#39;int&#39; object is not subscriptable ([`8a152e9`](https://github.com/mraniki/tt/commit/8a152e99cba34bc12a57a3510a222447d6de6f69))
 
 * strqdded to len for exchanges ([`d31403f`](https://github.com/mraniki/tt/commit/d31403fe7cb06482143270b816aa837070307a58))
-
-* Merge pull request #81 from mraniki/dev ([`6c940b7`](https://github.com/mraniki/tt/commit/6c940b79f09afe8649125b9687e76da7e9b3acb2))
 
 * updated roadmap and db schema for tokentosell ([`c40d43c`](https://github.com/mraniki/tt/commit/c40d43cf15d58dc6a1e71f80065ac8f3f6a31bb0))
 
@@ -17651,25 +17675,13 @@ Dev ([`db43dd3`](https://github.com/mraniki/tt/commit/db43dd33224c8281c7c0adf6a3
 
 * updated roadmap and added basesymbol in the db for dex db ([`3876635`](https://github.com/mraniki/tt/commit/3876635c567eef4897bb6bec065f60040740b7d1))
 
-* Merge pull request #80 from mraniki/dev
-
-Dev ([`588acc6`](https://github.com/mraniki/tt/commit/588acc684bd99997df44ea94a455a331f53a1ea0))
-
 * readme ([`ca9d8ee`](https://github.com/mraniki/tt/commit/ca9d8eef70f0f0653e89d334d64a21151b17447d))
 
 * Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`58f1a2d`](https://github.com/mraniki/tt/commit/58f1a2dc33e80af8f76e115848b9c9e250934353))
 
-* update on web3 and ccxt ([`0e5bb34`](https://github.com/mraniki/tt/commit/0e5bb345fc45f4a382b1dc48f881b23c85d62567))
-
-* check for type ([`428600c`](https://github.com/mraniki/tt/commit/428600cabffd42cc904808a9522eab432ddcc180))
-
 * roadmap update ([`9b48db7`](https://github.com/mraniki/tt/commit/9b48db7955d3b83cd3360839d303bf34ed9cb490))
 
 * added new lib simplematrixbotlib ([`9eb20d1`](https://github.com/mraniki/tt/commit/9eb20d10ff3e1c570fc0639fbdf2eaa4687fb6f3))
-
-* Merge pull request #79 from mraniki/dev
-
-Dev ([`f9ee06b`](https://github.com/mraniki/tt/commit/f9ee06b9653045d98105b37191269ce58f0a4073))
 
 * Merge pull request #78 from mraniki/main
 
@@ -17678,6 +17690,20 @@ Align ([`e9e1e06`](https://github.com/mraniki/tt/commit/e9e1e06c873f9c4d0a6a8703
 * Merge pull request #77 from mraniki/dev
 
 Dev ([`05b86f9`](https://github.com/mraniki/tt/commit/05b86f94e03a4e77fdf9952e795ecb126e4849b3))
+
+* Merge pull request #76 from mraniki/dev
+
+Beta 1 push ([`d099bd3`](https://github.com/mraniki/tt/commit/d099bd382bead4cbd7f3597eb3b02beb2494aa1e))
+
+* Merge pull request #75 from mraniki/dev
+
+Dev ([`7f4a2ed`](https://github.com/mraniki/tt/commit/7f4a2ed7375582811385832cb969a0709070dc09))
+
+* Delete db.json ([`2597f8a`](https://github.com/mraniki/tt/commit/2597f8a32467ef13fa1fc8022c5890251afe918d))
+
+* update on web3 and ccxt ([`0e5bb34`](https://github.com/mraniki/tt/commit/0e5bb345fc45f4a382b1dc48f881b23c85d62567))
+
+* check for type ([`428600c`](https://github.com/mraniki/tt/commit/428600cabffd42cc904808a9522eab432ddcc180))
 
 * updated roadmap ([`4335012`](https://github.com/mraniki/tt/commit/4335012f071ec88ebe4a6cc6c4ff04b44965a5cc))
 
@@ -17689,10 +17715,6 @@ Dev ([`05b86f9`](https://github.com/mraniki/tt/commit/05b86f94e03a4e77fdf9952e79
 related overall loadexchange function ([`4e85683`](https://github.com/mraniki/tt/commit/4e8568352e3380a1bda9e0890c0c24e6fd2bda56))
 
 * created general error handling ([`d379089`](https://github.com/mraniki/tt/commit/d37908997fa31e2bb17b83865de6f7bf21d6b141))
-
-* Merge pull request #76 from mraniki/dev
-
-Beta 1 push ([`d099bd3`](https://github.com/mraniki/tt/commit/d099bd382bead4cbd7f3597eb3b02beb2494aa1e))
 
 * improving error handling ([`392f95e`](https://github.com/mraniki/tt/commit/392f95e30dc0320c24fe347b0f03679a4fff9629))
 
@@ -17706,17 +17728,11 @@ Beta 1 push ([`d099bd3`](https://github.com/mraniki/tt/commit/d099bd382bead4cbd7
 
 * updating DEX buy function ([`2223549`](https://github.com/mraniki/tt/commit/2223549669b1cfe3082b76b0dce5ad875a2a059a))
 
-* Merge pull request #75 from mraniki/dev
-
-Dev ([`7f4a2ed`](https://github.com/mraniki/tt/commit/7f4a2ed7375582811385832cb969a0709070dc09))
-
 * Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`97487a6`](https://github.com/mraniki/tt/commit/97487a6de80d778dcf4bb91a3e63ff64e097606b))
-
-* upudated the buy function ([`288c768`](https://github.com/mraniki/tt/commit/288c7683d6636574e1ac146cdb48a9ac948efd53))
 
 * Delete db.json ([`f47b480`](https://github.com/mraniki/tt/commit/f47b48009bffd0905dbdbec861816ce167162c85))
 
-* Delete db.json ([`2597f8a`](https://github.com/mraniki/tt/commit/2597f8a32467ef13fa1fc8022c5890251afe918d))
+* upudated the buy function ([`288c768`](https://github.com/mraniki/tt/commit/288c7683d6636574e1ac146cdb48a9ac948efd53))
 
 * gitignore ([`49b3a8f`](https://github.com/mraniki/tt/commit/49b3a8f804200b72b737c15c11d44d46312269a8))
 
@@ -17758,13 +17774,25 @@ Dev ([`7f4a2ed`](https://github.com/mraniki/tt/commit/7f4a2ed7375582811385832cb9
 
 * Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`a223a82`](https://github.com/mraniki/tt/commit/a223a82099679b32a4234093fd904e650c467cc3))
 
-* 	modified:   src/bot.py ([`d6bafa2`](https://github.com/mraniki/tt/commit/d6bafa2ad8aee9720d9bfdbfdb900e5cf9f76d43))
-
-* 	modified:   config/db.json ([`96e4d30`](https://github.com/mraniki/tt/commit/96e4d308ea3709095ce52f1af9e40e3eef177564))
-
 * Merge pull request #74 from mraniki/main
 
 Align ([`db7123f`](https://github.com/mraniki/tt/commit/db7123f9423ad41d73be3d3cd298986ef70a7a16))
+
+* Merge pull request #73 from mraniki:dev
+
+Dev ([`d952c9d`](https://github.com/mraniki/tt/commit/d952c9d211df10d35a3bcb87d55f4d31e12626e8))
+
+* Merge pull request #72 from mraniki/dev
+
+Dev ([`fbe2e9c`](https://github.com/mraniki/tt/commit/fbe2e9cf84d3ce8373063108518e901fb413761d))
+
+* Merge pull request #71 from mraniki/dev
+
+Dev ([`1064a18`](https://github.com/mraniki/tt/commit/1064a182f0b845944f2cef6fbb02db616b7389ac))
+
+* 	modified:   src/bot.py ([`d6bafa2`](https://github.com/mraniki/tt/commit/d6bafa2ad8aee9720d9bfdbfdb900e5cf9f76d43))
+
+* 	modified:   config/db.json ([`96e4d30`](https://github.com/mraniki/tt/commit/96e4d308ea3709095ce52f1af9e40e3eef177564))
 
 * 	modified:   config/db.json
 	modified:   src/bot.py ([`7e6592b`](https://github.com/mraniki/tt/commit/7e6592bdfb17eec94371af4eb6e8ddda9a728a4e))
@@ -17809,10 +17837,6 @@ Align ([`db7123f`](https://github.com/mraniki/tt/commit/db7123f9423ad41d73be3d3c
 
 * 	modified:   src/bot.py ([`e1ef1ba`](https://github.com/mraniki/tt/commit/e1ef1bae54d2f008ac92b45c76063d1c89d18a98))
 
-* Merge pull request #73 from mraniki:dev
-
-Dev ([`d952c9d`](https://github.com/mraniki/tt/commit/d952c9d211df10d35a3bcb87d55f4d31e12626e8))
-
 * 	modified:   src/bot.py ([`39945db`](https://github.com/mraniki/tt/commit/39945dbbcdf88842559e861cc6c4dcd5b2feea46))
 
 * 	modified:   src/bot.py ([`55db15e`](https://github.com/mraniki/tt/commit/55db15e224073e3f0ae2e4f0528950a692773c6f))
@@ -17855,33 +17879,17 @@ Dev ([`d952c9d`](https://github.com/mraniki/tt/commit/d952c9d211df10d35a3bcb87d5
 
 * apprise error ([`aafdad5`](https://github.com/mraniki/tt/commit/aafdad57a16fd05eb92803a148497c5310ad0ba1))
 
-* Merge pull request #72 from mraniki/dev
-
-Dev ([`fbe2e9c`](https://github.com/mraniki/tt/commit/fbe2e9cf84d3ce8373063108518e901fb413761d))
-
 * apprise ([`a1f2152`](https://github.com/mraniki/tt/commit/a1f2152b05d1d4241bcb123107e7717d2b7e355e))
 
 * Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`a4df788`](https://github.com/mraniki/tt/commit/a4df7884dd417bf8584837a196d95773ae80e27f))
-
-* str error ([`6f39c6b`](https://github.com/mraniki/tt/commit/6f39c6b785a99d347515d6f8c3d6867d65c4dad9))
-
-* Merge pull request #71 from mraniki/dev
-
-Dev ([`1064a18`](https://github.com/mraniki/tt/commit/1064a182f0b845944f2cef6fbb02db616b7389ac))
 
 * Merge pull request #70 from mraniki/main
 
 config update ([`dd2f0c1`](https://github.com/mraniki/tt/commit/dd2f0c1adead33da1cec659d0d588bdf93383fca))
 
-* apprise update ([`e4d2635`](https://github.com/mraniki/tt/commit/e4d263597aa4af1d8053c3a26636c4a52944f4d7))
-
-* notify command ([`01754a7`](https://github.com/mraniki/tt/commit/01754a71c0293e9d3fb2acafb6320ac504c1cd96))
-
 * Merge pull request #69 from mraniki/dev
 
 Dev ([`df57d32`](https://github.com/mraniki/tt/commit/df57d328440a846705284217072da5049840a7ff))
-
-* updqte ([`cb3d22d`](https://github.com/mraniki/tt/commit/cb3d22d26d902464036f5f4ab5af86d2709660cc))
 
 * Merge pull request #68 from mraniki/dev
 
@@ -17899,15 +17907,51 @@ fix ([`05fca3a`](https://github.com/mraniki/tt/commit/05fca3a5e1ce1fee028084798f
 
 Dev ([`82ffdeb`](https://github.com/mraniki/tt/commit/82ffdeb9f275913d853149a42f4a9c996aa19bdb))
 
+* Merge pull request #64 from mraniki/dev
+
+Dev ([`c55eb7a`](https://github.com/mraniki/tt/commit/c55eb7a9779cc0f6d3bdbad482531b5f17424033))
+
+* Merge pull request #63 from mraniki/dev
+
+Dev ([`ed9fe1c`](https://github.com/mraniki/tt/commit/ed9fe1c142d8b6b2cd58f01bb6579f18c168d283))
+
+* Merge pull request #62 from mraniki/dev
+
+Dev ([`11a822c`](https://github.com/mraniki/tt/commit/11a822ca0a8fa335eb710b284107a97e6e520117))
+
+* Merge pull request #61 from mraniki/dev
+
+Dev ([`ba1508b`](https://github.com/mraniki/tt/commit/ba1508bf7575a35a652bd5dcfe37e3130883a797))
+
+* Merge pull request #60 from mraniki/dev
+
+lower case fix ([`dc9347c`](https://github.com/mraniki/tt/commit/dc9347ce086dc697f5988324122686d9fab038ef))
+
+* Merge pull request #59 from mraniki/dev
+
+DEX improvement ([`98d889a`](https://github.com/mraniki/tt/commit/98d889a6f16ddbc321636f7385eac51cf7760603))
+
+* Merge pull request #58 from mraniki/dev
+
+Multi env support ([`29d9021`](https://github.com/mraniki/tt/commit/29d902185a4968fddf7469aa0a078904d15e0b55))
+
+* Merge pull request #57 from mraniki/dev
+
+Merge pull request #56 from mraniki/main ([`8b52051`](https://github.com/mraniki/tt/commit/8b5205175f097359c7e97c863ceb484cd31d0b69))
+
+* str error ([`6f39c6b`](https://github.com/mraniki/tt/commit/6f39c6b785a99d347515d6f8c3d6867d65c4dad9))
+
+* apprise update ([`e4d2635`](https://github.com/mraniki/tt/commit/e4d263597aa4af1d8053c3a26636c4a52944f4d7))
+
+* notify command ([`01754a7`](https://github.com/mraniki/tt/commit/01754a71c0293e9d3fb2acafb6320ac504c1cd96))
+
+* updqte ([`cb3d22d`](https://github.com/mraniki/tt/commit/cb3d22d26d902464036f5f4ab5af86d2709660cc))
+
 * update ([`c2e2a2a`](https://github.com/mraniki/tt/commit/c2e2a2a047f2cd7ba9c838e33a88a30c69dc5c98))
 
 * roadmap update ([`15fb99a`](https://github.com/mraniki/tt/commit/15fb99ab18fc5ccc1c42fe34e59cec77396c87df))
 
 * updated db reference for web3 ([`a2fb7ab`](https://github.com/mraniki/tt/commit/a2fb7ab3b8b9df202c43bde24899d22d1f631ba8))
-
-* Merge pull request #64 from mraniki/dev
-
-Dev ([`c55eb7a`](https://github.com/mraniki/tt/commit/c55eb7a9779cc0f6d3bdbad482531b5f17424033))
 
 * initial dex ordering built and to be tested ([`9c8ee2d`](https://github.com/mraniki/tt/commit/9c8ee2de45dff3aa379c613365077a021e3cca9d))
 
@@ -17926,10 +17970,6 @@ Dev ([`c55eb7a`](https://github.com/mraniki/tt/commit/c55eb7a9779cc0f6d3bdbad482
 * Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`2c9d35b`](https://github.com/mraniki/tt/commit/2c9d35be6ae60db2658929c7af9dd04fc504caef))
 
 * standard message function + symbol to contract for dex ([`66cfc17`](https://github.com/mraniki/tt/commit/66cfc1775b67f214e7213448757ed79788339495))
-
-* Merge pull request #63 from mraniki/dev
-
-Dev ([`ed9fe1c`](https://github.com/mraniki/tt/commit/ed9fe1c142d8b6b2cd58f01bb6579f18c168d283))
 
 * update ([`5d604cf`](https://github.com/mraniki/tt/commit/5d604cfb0eb6c3d1de0e8945ab56cfb712e23971))
 
@@ -17965,41 +18005,17 @@ Dev ([`ed9fe1c`](https://github.com/mraniki/tt/commit/ed9fe1c142d8b6b2cd58f01bb6
 
 * cleanup the db structure ([`883f2c1`](https://github.com/mraniki/tt/commit/883f2c1ffbe96d8ffd27b6733474acee37dc8bf4))
 
-* Merge pull request #62 from mraniki/dev
-
-Dev ([`11a822c`](https://github.com/mraniki/tt/commit/11a822ca0a8fa335eb710b284107a97e6e520117))
-
 * .matches(newexchange,flags=re.IGNORECASE) ([`bd027a2`](https://github.com/mraniki/tt/commit/bd027a2d0cdcc895460185bd2db51d402c3dc710))
 
 * lower ignore ([`14f588d`](https://github.com/mraniki/tt/commit/14f588d9dc88145a3171029befd447215a5c40f8))
 
-* Merge pull request #61 from mraniki/dev
-
-Dev ([`ba1508b`](https://github.com/mraniki/tt/commit/ba1508bf7575a35a652bd5dcfe37e3130883a797))
-
 * lower typo ([`794806f`](https://github.com/mraniki/tt/commit/794806f980168f38ac240b044328347f90e6c2e3))
 
-* Merge pull request #60 from mraniki/dev
-
-lower case fix ([`dc9347c`](https://github.com/mraniki/tt/commit/dc9347ce086dc697f5988324122686d9fab038ef))
-
-* Merge pull request #59 from mraniki/dev
-
-DEX improvement ([`98d889a`](https://github.com/mraniki/tt/commit/98d889a6f16ddbc321636f7385eac51cf7760603))
-
 * DEX improvement ([`a9c7380`](https://github.com/mraniki/tt/commit/a9c738001ea7ac2f715bf51bf63447064274a6cd))
-
-* Merge pull request #58 from mraniki/dev
-
-Multi env support ([`29d9021`](https://github.com/mraniki/tt/commit/29d902185a4968fddf7469aa0a078904d15e0b55))
 
 * Support multiple channel with 1 DB ([`ae01021`](https://github.com/mraniki/tt/commit/ae010213ccd6f328d5eca4e232e0ed8de7c06330))
 
 * update ([`75c2617`](https://github.com/mraniki/tt/commit/75c26178575ced8816c6d834a7671ead43972557))
-
-* Merge pull request #57 from mraniki/dev
-
-Merge pull request #56 from mraniki/main ([`8b52051`](https://github.com/mraniki/tt/commit/8b5205175f097359c7e97c863ceb484cd31d0b69))
 
 * Merge pull request #56 from mraniki/main
 
@@ -18025,9 +18041,9 @@ Merge req ([`db9b3a3`](https://github.com/mraniki/tt/commit/db9b3a3f14b4bcad9c4c
 
 * Create codeql.yml ([`8a8f493`](https://github.com/mraniki/tt/commit/8a8f493010006f262835a1e7b376d4f99cfcd38f))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`22ce325`](https://github.com/mraniki/tt/commit/22ce32550f44474e30756bc7831f529748ceb1c2))
-
 * Create dependency-review.yml ([`229c821`](https://github.com/mraniki/tt/commit/229c821d747faa70620a988da3aa8797cea929dd))
+
+* Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`22ce325`](https://github.com/mraniki/tt/commit/22ce32550f44474e30756bc7831f529748ceb1c2))
 
 * Merge pull request #51 from mraniki/main
 
@@ -18037,15 +18053,19 @@ align ([`39827a3`](https://github.com/mraniki/tt/commit/39827a3c9315f4aa33bb2ae9
 
 Dev ([`b418ac4`](https://github.com/mraniki/tt/commit/b418ac49bb74bf04f010220f5a4923edbaa544d9))
 
-* web3 update ([`910311a`](https://github.com/mraniki/tt/commit/910311ac8358a7df49ec73b9e076e8efc9398797))
-
-* dex integration ([`9b4bff1`](https://github.com/mraniki/tt/commit/9b4bff14efd40fb17f2eb6f51cb95de79ebad0e4))
-
 * Merge pull request #47 from mraniki/dev
 
 Multi cefi support ([`c1e4f20`](https://github.com/mraniki/tt/commit/c1e4f20bbe5f231428891aa5abbc2b412980026d))
 
+* web3 update ([`910311a`](https://github.com/mraniki/tt/commit/910311ac8358a7df49ec73b9e076e8efc9398797))
+
+* dex integration ([`9b4bff1`](https://github.com/mraniki/tt/commit/9b4bff14efd40fb17f2eb6f51cb95de79ebad0e4))
+
 * Merge branch &#39;main&#39; into dev ([`04e94b1`](https://github.com/mraniki/tt/commit/04e94b1add51a10cdf4c9a3a9340c6db5613adc7))
+
+* Merge pull request #46 from mraniki/dev
+
+Channel support ([`12cf148`](https://github.com/mraniki/tt/commit/12cf148ab1f73cf15e8c36083682f78b15339a2a))
 
 * Support for multi CEFI exchange and switch capability and DB support ([`9e88b3a`](https://github.com/mraniki/tt/commit/9e88b3a6569743b02ae2904d104bec7fd1983bec))
 
@@ -18082,10 +18102,6 @@ Multi cefi support ([`c1e4f20`](https://github.com/mraniki/tt/commit/c1e4f20bbe5
 * db setup for multi exchange ([`a5b0539`](https://github.com/mraniki/tt/commit/a5b05394cdc0fac64f2beb2592934e867b89fc61))
 
 * webhook prep ([`35a2c57`](https://github.com/mraniki/tt/commit/35a2c57c56823b693d87caf49362e1ae2a46c805))
-
-* Merge pull request #46 from mraniki/dev
-
-Channel support ([`12cf148`](https://github.com/mraniki/tt/commit/12cf148ab1f73cf15e8c36083682f78b15339a2a))
 
 * updated for channel support (instead of private chat) ([`f72ad47`](https://github.com/mraniki/tt/commit/f72ad47b01f6d2fa619566632cf7ade31aec97eb))
 
@@ -18153,15 +18169,15 @@ Fixing zero balance large response ([`55c65c5`](https://github.com/mraniki/tt/co
 
 handling of zero balance response ([`41a4576`](https://github.com/mraniki/tt/commit/41a4576f81d311f60cfb25630edb38436a55fbb1))
 
+* Merge pull request #34 from mraniki/main
+
+Align with main ([`c6ccd13`](https://github.com/mraniki/tt/commit/c6ccd131341fdb2155a67239ea91611e6735259e))
+
 * Merge pull request #35 from mraniki/add-license-1
 
 Create LICENSE ([`f4d3099`](https://github.com/mraniki/tt/commit/f4d309983320b9c5a7e22ae972863d370f876ed9))
 
 * Create LICENSE ([`cb2c4bc`](https://github.com/mraniki/tt/commit/cb2c4bc729a94504696ce091f0aaa22138aa8d7c))
-
-* Merge pull request #34 from mraniki/main
-
-Align with main ([`c6ccd13`](https://github.com/mraniki/tt/commit/c6ccd131341fdb2155a67239ea91611e6735259e))
 
 * Merge pull request #33 from mraniki/dev
 
@@ -18224,19 +18240,21 @@ Alpha Version for Balance and Order Placing in Spot ([`16a9f3c`](https://github.
 
 merge main ([`431f452`](https://github.com/mraniki/tt/commit/431f4526d15ff0f80196f70b61575114dd1f6b11))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`af3a393`](https://github.com/mraniki/tt/commit/af3a39380d57f6a475569375886a057deca2ddbe))
-
 * Merge pull request #25 from mraniki/dev
 
 setup config folder correctly ([`09735c1`](https://github.com/mraniki/tt/commit/09735c1741d69e5e97920b1e71ec0588970f070e))
 
-* config folder path ([`8512f2b`](https://github.com/mraniki/tt/commit/8512f2baf0da942a89fe2e85d61a32b9e836bd62))
-
-* Create .env ([`be99042`](https://github.com/mraniki/tt/commit/be990427238a825ab4dc5bf57f5249b7e422097e))
-
 * Merge pull request #24 from mraniki/dev
 
 Dev ([`00e1d4d`](https://github.com/mraniki/tt/commit/00e1d4d4f0e0de73c84707aebb95ef4a5f29d3a7))
+
+* update ([`bb87056`](https://github.com/mraniki/tt/commit/bb87056df88964d5306a8d33d27db8fef3aaf9a3))
+
+* Merge branch &#39;dev&#39; of https://github.com/mraniki/tt into dev ([`af3a393`](https://github.com/mraniki/tt/commit/af3a39380d57f6a475569375886a057deca2ddbe))
+
+* config folder path ([`8512f2b`](https://github.com/mraniki/tt/commit/8512f2baf0da942a89fe2e85d61a32b9e836bd62))
+
+* Create .env ([`be99042`](https://github.com/mraniki/tt/commit/be990427238a825ab4dc5bf57f5249b7e422097e))
 
 * Fixed version for bal and trading ([`89b3b69`](https://github.com/mraniki/tt/commit/89b3b6969ea17c56f60dac58c623cbb5d4bcf669))
 
@@ -18265,8 +18283,6 @@ Conflicts:
 
 * config folder ([`5a7f293`](https://github.com/mraniki/tt/commit/5a7f293b1aa18aba7ab4c17e0c22b94a2092ec16))
 
-* update ([`bb87056`](https://github.com/mraniki/tt/commit/bb87056df88964d5306a8d33d27db8fef3aaf9a3))
-
 * Create Release_Dev.yml ([`b4d19b5`](https://github.com/mraniki/tt/commit/b4d19b5233670b25f5986f18c560b15542dc449e))
 
 * Merge pull request #22 from mraniki/main
@@ -18275,17 +18291,29 @@ docker and actions cleaning ([`810d6bd`](https://github.com/mraniki/tt/commit/81
 
 * Merge branch &#39;dev&#39; into main ([`4fd8648`](https://github.com/mraniki/tt/commit/4fd8648d717d76eb4e3665cb248e103c489ebd08))
 
-* Rename dockerfile to Dockerfile ([`8f7450d`](https://github.com/mraniki/tt/commit/8f7450d8dda41dabba0f7f707e129df5b1ebcc89))
-
 * Delete Github_Latest.yml ([`312dcef`](https://github.com/mraniki/tt/commit/312dceff22102eb5c1a502e547b24c4ecce652c4))
-
-* Rename DockerImage to DockerImage.yml ([`1312335`](https://github.com/mraniki/tt/commit/1312335adae430976fd0f9431f98f33279b2cabe))
-
-* Create DockerImage ([`9169d9b`](https://github.com/mraniki/tt/commit/9169d9b0b9bf2cc758373705030c780bc80f7133))
 
 * Delete Github_Latest_Publish.yml ([`a0c0c1d`](https://github.com/mraniki/tt/commit/a0c0c1d6a6a937547a8caabd657003df9d2ead1d))
 
 * Delete release-main.yml ([`b8a7938`](https://github.com/mraniki/tt/commit/b8a7938086df9ff2b29785eb59c3da83bb53a64c))
+
+* Delete DockerHub_Latest.yml ([`985adcf`](https://github.com/mraniki/tt/commit/985adcf71ac0e70812d360f4208ca132117d783c))
+
+* Rename docker-publish-dev.yml to Github_Dev_Publish.yml ([`9c4573c`](https://github.com/mraniki/tt/commit/9c4573c5c564f68824291c689dda6b3c28477748))
+
+* Rename docker-publish.yml to Github_Latest_Publish.yml ([`672d1e1`](https://github.com/mraniki/tt/commit/672d1e14c502d1f58149f12786f38aa68a7a2569))
+
+* Rename DockerimagetoDockerHub.yml to DockerHub_Latest.yml ([`46e3d7b`](https://github.com/mraniki/tt/commit/46e3d7bd053bbcbc7898a93a53af11ac97fb6d09))
+
+* Rename DockerimageDevtoDockerHub.yml to DockerHub_Dev.yml ([`37b4d10`](https://github.com/mraniki/tt/commit/37b4d10375bd8770ca13649cacbe96bc5dade49b))
+
+* Rename Dockerfile to dockerfile ([`54a5e04`](https://github.com/mraniki/tt/commit/54a5e0428dcbb43341bfceefdf73b2e516a88210))
+
+* Rename dockerfile to Dockerfile ([`8f7450d`](https://github.com/mraniki/tt/commit/8f7450d8dda41dabba0f7f707e129df5b1ebcc89))
+
+* Rename DockerImage to DockerImage.yml ([`1312335`](https://github.com/mraniki/tt/commit/1312335adae430976fd0f9431f98f33279b2cabe))
+
+* Create DockerImage ([`9169d9b`](https://github.com/mraniki/tt/commit/9169d9b0b9bf2cc758373705030c780bc80f7133))
 
 * Create DockerGHCR.yml ([`47a5cbd`](https://github.com/mraniki/tt/commit/47a5cbdd81a5162ae664db5429b62cce49af7d49))
 
@@ -18307,21 +18335,9 @@ docker and actions cleaning ([`810d6bd`](https://github.com/mraniki/tt/commit/81
 
 * Delete docker-image-dev.yml ([`0f90831`](https://github.com/mraniki/tt/commit/0f908318e7d686659c70266a0bcd5be808b670a6))
 
-* Delete DockerHub_Latest.yml ([`985adcf`](https://github.com/mraniki/tt/commit/985adcf71ac0e70812d360f4208ca132117d783c))
-
 * Delete DockerimagetoDockerHub.yml ([`9ad35aa`](https://github.com/mraniki/tt/commit/9ad35aa87748e061ac9b6fd743df11711d463459))
 
 * Delete DockerimageDevtoDockerHub.yml ([`e75bfab`](https://github.com/mraniki/tt/commit/e75bfab3f97b92fbee6539cf58c90367f3cf6bb2))
-
-* Rename docker-publish-dev.yml to Github_Dev_Publish.yml ([`9c4573c`](https://github.com/mraniki/tt/commit/9c4573c5c564f68824291c689dda6b3c28477748))
-
-* Rename docker-publish.yml to Github_Latest_Publish.yml ([`672d1e1`](https://github.com/mraniki/tt/commit/672d1e14c502d1f58149f12786f38aa68a7a2569))
-
-* Rename DockerimagetoDockerHub.yml to DockerHub_Latest.yml ([`46e3d7b`](https://github.com/mraniki/tt/commit/46e3d7bd053bbcbc7898a93a53af11ac97fb6d09))
-
-* Rename DockerimageDevtoDockerHub.yml to DockerHub_Dev.yml ([`37b4d10`](https://github.com/mraniki/tt/commit/37b4d10375bd8770ca13649cacbe96bc5dade49b))
-
-* Rename Dockerfile to dockerfile ([`54a5e04`](https://github.com/mraniki/tt/commit/54a5e0428dcbb43341bfceefdf73b2e516a88210))
 
 * Rename Dockerfile to dockerfile ([`440109c`](https://github.com/mraniki/tt/commit/440109c756eb770b7b2cffc7a01c43040663a8f3))
 
@@ -18377,19 +18393,19 @@ Read me update ([`52e8d93`](https://github.com/mraniki/tt/commit/52e8d930c9c184e
 
 Align ([`f149eb2`](https://github.com/mraniki/tt/commit/f149eb240eb57a7d17425a2fae19c92045e0372f))
 
-* sanbox setup ([`a5bdb48`](https://github.com/mraniki/tt/commit/a5bdb48bb72197b60a25594ed1718a6323d9a123))
-
 * Merge pull request #17 from mraniki/dev
 
 Dev ([`0434129`](https://github.com/mraniki/tt/commit/043412938d148804ee041e6e8d31e4c9c41c4bc9))
 
-* dev docker ([`29c1d32`](https://github.com/mraniki/tt/commit/29c1d3211a0eb0b7ac84e5bd3cef1bc2754f8f62))
-
-* sandbox error ([`392a2ea`](https://github.com/mraniki/tt/commit/392a2ea1632de41b800d22a6e7619e8bb456a18f))
-
 * Merge pull request #15 from mraniki/dev
 
 Dev ([`d620daf`](https://github.com/mraniki/tt/commit/d620daf19b39a20061e3717cc460cb603f939b43))
+
+* sanbox setup ([`a5bdb48`](https://github.com/mraniki/tt/commit/a5bdb48bb72197b60a25594ed1718a6323d9a123))
+
+* dev docker ([`29c1d32`](https://github.com/mraniki/tt/commit/29c1d3211a0eb0b7ac84e5bd3cef1bc2754f8f62))
+
+* sandbox error ([`392a2ea`](https://github.com/mraniki/tt/commit/392a2ea1632de41b800d22a6e7619e8bb456a18f))
 
 * Merge pull request #13 from mraniki/main
 
@@ -18405,13 +18421,13 @@ Dev ([`f5d4aca`](https://github.com/mraniki/tt/commit/f5d4aca3c1b53a06013e3ccc82
 
 * balance formatting ([`251029e`](https://github.com/mraniki/tt/commit/251029ed297bf0a2ec6a6313a201f7ffab8770b2))
 
-* Create DockerimagetoDockerHub.yml ([`5e53573`](https://github.com/mraniki/tt/commit/5e5357344f8516c6c10fa0bfb8eb417da7c842d5))
-
 * balance ([`c0e7cac`](https://github.com/mraniki/tt/commit/c0e7cac0e6178655b8e57d51f42460daed821a09))
 
 * balance error ([`2a845a7`](https://github.com/mraniki/tt/commit/2a845a737261debd7756963b8ef8ff2b432730b8))
 
 * balance formatting ([`e3b3cee`](https://github.com/mraniki/tt/commit/e3b3ceeab373eff3a3b21795755029f4eece73d7))
+
+* Create DockerimagetoDockerHub.yml ([`5e53573`](https://github.com/mraniki/tt/commit/5e5357344f8516c6c10fa0bfb8eb417da7c842d5))
 
 * Merge pull request #12 from mraniki/dev
 
@@ -18443,8 +18459,6 @@ Dev ([`30262f0`](https://github.com/mraniki/tt/commit/30262f02dcac24c3575f8c6ba5
 
 main alignement ([`8c65f25`](https://github.com/mraniki/tt/commit/8c65f2566b6a09e75e3bf2a56a4a2f74d71c1731))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`4262909`](https://github.com/mraniki/tt/commit/42629093a4698acd796a22d501b3378c340ebac7))
-
 * Merge pull request #9 from mraniki/dev
 
 Dev ([`79ed63c`](https://github.com/mraniki/tt/commit/79ed63c85fff83761cc64ada70f39c6cc5a1657e))
@@ -18452,6 +18466,8 @@ Dev ([`79ed63c`](https://github.com/mraniki/tt/commit/79ed63c85fff83761cc64ada70
 * Merge pull request #8 from mraniki/dev
 
 Dev ([`51544bd`](https://github.com/mraniki/tt/commit/51544bd0dccd30808eee3a462d8eb393189087f1))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`4262909`](https://github.com/mraniki/tt/commit/42629093a4698acd796a22d501b3378c340ebac7))
 
 * version reordering ([`2a22d13`](https://github.com/mraniki/tt/commit/2a22d13479cc366e496bcb7a168f0cb8970def76))
 
@@ -18487,11 +18503,11 @@ updating dev ([`cfd560a`](https://github.com/mraniki/tt/commit/cfd560a05b4236909
 
 Merge pull request #4 from mraniki/main ([`0cd4da0`](https://github.com/mraniki/tt/commit/0cd4da0efb7369cb884e5690b81b352956d823c2))
 
-* formatting balance results ([`eaf9980`](https://github.com/mraniki/tt/commit/eaf998073f9ae938e5b03eaa9e81e31548539b0c))
-
 * Merge pull request #4 from mraniki/main
 
 Merging ([`ac7792b`](https://github.com/mraniki/tt/commit/ac7792b7585ed9c148fc2133c7b05e8cd6dc9b29))
+
+* formatting balance results ([`eaf9980`](https://github.com/mraniki/tt/commit/eaf998073f9ae938e5b03eaa9e81e31548539b0c))
 
 * Rename devimage to devimage.yml ([`05606e9`](https://github.com/mraniki/tt/commit/05606e914fb05fc59e500026708a85f7bd70573c))
 
@@ -18793,9 +18809,9 @@ Update docker-publish.yml ([`9675c14`](https://github.com/mraniki/tt/commit/9675
 
 * Update bot.py ([`306eb8e`](https://github.com/mraniki/tt/commit/306eb8e17d9204224f76fdcdca2b5f9174158562))
 
-* Update bot.py ([`7848efe`](https://github.com/mraniki/tt/commit/7848efee2545ede479b22f3ba3d28135e931182f))
-
 * Update bot.py ([`33fa037`](https://github.com/mraniki/tt/commit/33fa0378d86838c72a02f60d98c165c8e633d706))
+
+* Update bot.py ([`7848efe`](https://github.com/mraniki/tt/commit/7848efee2545ede479b22f3ba3d28135e931182f))
 
 * Update bot.py ([`00ff36c`](https://github.com/mraniki/tt/commit/00ff36cf81c9466ba79941793b51b849f2de3732))
 
@@ -18859,6 +18875,8 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update bot.py ([`cacd885`](https://github.com/mraniki/tt/commit/cacd88591d3c2dd831a64f77ddf5f6535bba2fe0))
 
+* Update .gitignore ([`c898186`](https://github.com/mraniki/tt/commit/c89818655ef205cf60c5f9143ee33d1f8397ac40))
+
 * Update README.md ([`fc1c41f`](https://github.com/mraniki/tt/commit/fc1c41f69bfe61abf7f4fd742fd7ff4c1b5aedd9))
 
 * Update README.md ([`e4307d2`](https://github.com/mraniki/tt/commit/e4307d2836820115a35c4afd363cbfbef44e0cfa))
@@ -18866,8 +18884,6 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 * Update bot.py ([`6f1ac47`](https://github.com/mraniki/tt/commit/6f1ac4743b521a0254d168af8b4d73ec89775a05))
 
 * Update README.md ([`bd1d2ac`](https://github.com/mraniki/tt/commit/bd1d2ac56b89c39ec0fd52787d305d12f9ed7b08))
-
-* Update .gitignore ([`c898186`](https://github.com/mraniki/tt/commit/c89818655ef205cf60c5f9143ee33d1f8397ac40))
 
 * Update bot.py ([`6c7426a`](https://github.com/mraniki/tt/commit/6c7426ad28fd181f793c913a3e4b3c47aa7e1813))
 
@@ -18885,9 +18901,9 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update 🦠CodeScanning_dev.yml ([`fd85c76`](https://github.com/mraniki/tt/commit/fd85c760bc4624d8ecd9b95a1db33020871af49e))
 
-* Update README.md ([`8b31cbb`](https://github.com/mraniki/tt/commit/8b31cbbced5b6b2b5a0fb03b4f14218e0f5284d1))
-
 * Update bandit.yml ([`d2f24f1`](https://github.com/mraniki/tt/commit/d2f24f15c085743bf0eade6cd443b28863b6b338))
+
+* Update README.md ([`8b31cbb`](https://github.com/mraniki/tt/commit/8b31cbbced5b6b2b5a0fb03b4f14218e0f5284d1))
 
 * Update bandit.yml ([`80609c3`](https://github.com/mraniki/tt/commit/80609c350d39eb442c20e4765db3cd39cadc6fb6))
 
@@ -19075,9 +19091,9 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update bot.py ([`b23f172`](https://github.com/mraniki/tt/commit/b23f1727001545e494d488704cb42717e5082187))
 
-* Update bot.py ([`95f02de`](https://github.com/mraniki/tt/commit/95f02de79b4ac21e4ad045beac010b2572874d33))
-
 * Update fly.toml ([`83be9b2`](https://github.com/mraniki/tt/commit/83be9b2f3b6fee5613aafcc7dac99d02ed7ab89e))
+
+* Update bot.py ([`95f02de`](https://github.com/mraniki/tt/commit/95f02de79b4ac21e4ad045beac010b2572874d33))
 
 * Update bot.py ([`0e7faac`](https://github.com/mraniki/tt/commit/0e7faacacf28c8e7f63dd9e8cc1fe59ea97682c7))
 
@@ -19127,9 +19143,9 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update DockerGHCR.yml ([`bf0a40b`](https://github.com/mraniki/tt/commit/bf0a40b2edca6563ed9092af15f8fd6009a89f3a))
 
-* Update DockerGHCR.yml ([`80cf9aa`](https://github.com/mraniki/tt/commit/80cf9aacb1b050cc03ca955d904df5e965fb2366))
-
 * Update DockerHub_Dev.yml ([`b713b3c`](https://github.com/mraniki/tt/commit/b713b3c6b1b5348023f349c13375afc50511b352))
+
+* Update DockerGHCR.yml ([`80cf9aa`](https://github.com/mraniki/tt/commit/80cf9aacb1b050cc03ca955d904df5e965fb2366))
 
 * Update DockerHub_Dev.yml ([`9b6c447`](https://github.com/mraniki/tt/commit/9b6c4472d3685e166d1c2e22e7c403589a85b0c4))
 
@@ -19145,9 +19161,9 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update DockerHub_Dev.yml ([`460fb66`](https://github.com/mraniki/tt/commit/460fb6675418b13bac31a4ed5c39ffb6807b77ea))
 
-* Update README.md ([`5dcb199`](https://github.com/mraniki/tt/commit/5dcb1993c395c0a2a6953faf906b5c196c16f7a2))
-
 * Update README.md ([`ce0f297`](https://github.com/mraniki/tt/commit/ce0f297f7517233c2cd82a1a6d32b2d6144b6fc8))
+
+* Update README.md ([`5dcb199`](https://github.com/mraniki/tt/commit/5dcb1993c395c0a2a6953faf906b5c196c16f7a2))
 
 * Update bot.py ([`37fbfb3`](https://github.com/mraniki/tt/commit/37fbfb31000aeda62f73735a0556857cbc73cf5c))
 
@@ -19207,6 +19223,10 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update db.json.sample ([`04aa7cf`](https://github.com/mraniki/tt/commit/04aa7cfe88bd512ba86c18c8e643041810ba425d))
 
+* Update requirements.txt ([`85637df`](https://github.com/mraniki/tt/commit/85637df4a9def8bd24cf27876ef16b1baacde25a))
+
+* Update requirements.txt ([`f76b543`](https://github.com/mraniki/tt/commit/f76b543b9e014b6ae9c210724d0faf4048d9b58c))
+
 * Update Dockerfile ([`dc440ad`](https://github.com/mraniki/tt/commit/dc440ada176799d2c83764011e3f62db58d3abed))
 
 * Update bot.py ([`4908768`](https://github.com/mraniki/tt/commit/4908768bc57c8eabc4b68b44bd776064c22bdb3f))
@@ -19255,17 +19275,13 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update requirements.txt ([`12b0e9a`](https://github.com/mraniki/tt/commit/12b0e9aa0606ab6144ef63ea9ac7fce86a333091))
 
-* Update requirements.txt ([`85637df`](https://github.com/mraniki/tt/commit/85637df4a9def8bd24cf27876ef16b1baacde25a))
-
 * Update requirements.txt ([`26d5307`](https://github.com/mraniki/tt/commit/26d530798d95852cc029c82fc47c8316ccd09bf8))
-
-* Update requirements.txt ([`f76b543`](https://github.com/mraniki/tt/commit/f76b543b9e014b6ae9c210724d0faf4048d9b58c))
 
 * Update Dockerfile ([`7c06eee`](https://github.com/mraniki/tt/commit/7c06eeee16caa33949d219e37f7da1c73d69200f))
 
-* Update Dockerfile ([`c3ca61c`](https://github.com/mraniki/tt/commit/c3ca61c0a3fb6548f322b068306ef37458af835e))
-
 * Update Dockerfile ([`2d1835a`](https://github.com/mraniki/tt/commit/2d1835a7bfe01194cde52e3f4456e23f784b9649))
+
+* Update Dockerfile ([`c3ca61c`](https://github.com/mraniki/tt/commit/c3ca61c0a3fb6548f322b068306ef37458af835e))
 
 * Update README.md ([`cbca980`](https://github.com/mraniki/tt/commit/cbca980bb1461f689aad0f08f9d08507e97f656f))
 
@@ -19277,25 +19293,25 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update requirements.txt ([`2e83cae`](https://github.com/mraniki/tt/commit/2e83caed230e820310d194897b7258ff17ea728f))
 
-* Update bot.py ([`5e4efab`](https://github.com/mraniki/tt/commit/5e4efab58114ca3952cd4dd92f3a5c8d81f54b0f))
-
 * Update README.md ([`e1dd314`](https://github.com/mraniki/tt/commit/e1dd3144db01962f79cbbd532d45002c6b78cc0d))
 
 * Update README.md ([`2d65c8e`](https://github.com/mraniki/tt/commit/2d65c8eb619ee9676a0bf9ca4465c296c361be61))
 
+* Update bot.py ([`5e4efab`](https://github.com/mraniki/tt/commit/5e4efab58114ca3952cd4dd92f3a5c8d81f54b0f))
+
 * Update bot.py ([`fdf4632`](https://github.com/mraniki/tt/commit/fdf463275bd257d0ccf532aa9e3a2da7ccb50e91))
 
 * Update README.md ([`4fdec71`](https://github.com/mraniki/tt/commit/4fdec71b8788c407872c844be205ec37566a42fb))
-
-* Update bot.py ([`fb12770`](https://github.com/mraniki/tt/commit/fb12770fe57e6383fbd90cb7862547ba5dc9c74f))
-
-* Update bot.py ([`a374c77`](https://github.com/mraniki/tt/commit/a374c77cd8af106cd0cc379342824b146d24dbd4))
 
 * Update README.md ([`eb0dd54`](https://github.com/mraniki/tt/commit/eb0dd54d970342bd541f5c9c5138a5e75b9c1f1e))
 
 * Update README.md ([`2b30495`](https://github.com/mraniki/tt/commit/2b304952385e31ea1430f9f5659f89eb5554e8b2))
 
 * Update README.md ([`92e5752`](https://github.com/mraniki/tt/commit/92e57524068a3f039bfddf9642d597fb9aced5cb))
+
+* Update bot.py ([`fb12770`](https://github.com/mraniki/tt/commit/fb12770fe57e6383fbd90cb7862547ba5dc9c74f))
+
+* Update bot.py ([`a374c77`](https://github.com/mraniki/tt/commit/a374c77cd8af106cd0cc379342824b146d24dbd4))
 
 * Update bot.py ([`7b2aca1`](https://github.com/mraniki/tt/commit/7b2aca1ed0691b813ad4ee2ac1f26faf2bf36c12))
 
@@ -19327,17 +19343,23 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update bot.py ([`b2acaaa`](https://github.com/mraniki/tt/commit/b2acaaabc330dc3a69eed6432633f646b5210c5e))
 
-* Update README.md ([`02cb305`](https://github.com/mraniki/tt/commit/02cb30544882e45bad85615400704c4c95b0b6e6))
-
 * Update Release_Dev.yml ([`00e08fc`](https://github.com/mraniki/tt/commit/00e08fc9aefb18833d9b54fbb35487a9784fddc9))
 
 * Update Release_Dev.yml ([`8808b71`](https://github.com/mraniki/tt/commit/8808b71b22d6df06754537bb74ea088c066ecc62))
 
 * Update Release_Dev.yml ([`e3a8e0a`](https://github.com/mraniki/tt/commit/e3a8e0a2c72a6cb663c41401ee0539795f7cb384))
 
-* Update bot.py ([`d7bcdd1`](https://github.com/mraniki/tt/commit/d7bcdd1cc11a79380a1fd1b07780ad057487fd3b))
+* Update README.md ([`02cb305`](https://github.com/mraniki/tt/commit/02cb30544882e45bad85615400704c4c95b0b6e6))
 
 * Update README.md ([`7a85882`](https://github.com/mraniki/tt/commit/7a85882a2aa6ad9ae3fb2dca7adf11c1e59249d0))
+
+* Update README.md ([`11d2140`](https://github.com/mraniki/tt/commit/11d2140c0a313983fdd1af613f86d977bf521ba0))
+
+* Update Release_Dev.yml ([`8416a69`](https://github.com/mraniki/tt/commit/8416a69a0bd2640595a280ab78d3196ce71bb0a3))
+
+* Update README.md ([`0f1c14f`](https://github.com/mraniki/tt/commit/0f1c14f9606af36de5b6b59155549cca2ce73661))
+
+* Update bot.py ([`d7bcdd1`](https://github.com/mraniki/tt/commit/d7bcdd1cc11a79380a1fd1b07780ad057487fd3b))
 
 * Update README.md ([`e352f7d`](https://github.com/mraniki/tt/commit/e352f7dd6ebd4095436928861fd7f26ab771a30b))
 
@@ -19349,11 +19371,7 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update README.md ([`9ce7a42`](https://github.com/mraniki/tt/commit/9ce7a42f22906ec252442f6e834d54ed679f0c0f))
 
-* Update README.md ([`11d2140`](https://github.com/mraniki/tt/commit/11d2140c0a313983fdd1af613f86d977bf521ba0))
-
 * Update Release_Dev.yml ([`8b6b368`](https://github.com/mraniki/tt/commit/8b6b368834e93cf349248f8338d8c5e737e44a64))
-
-* Update Release_Dev.yml ([`8416a69`](https://github.com/mraniki/tt/commit/8416a69a0bd2640595a280ab78d3196ce71bb0a3))
 
 * Update bot.py ([`0192148`](https://github.com/mraniki/tt/commit/01921482adeb38d2095175a9ca8fdc22a5c5e689))
 
@@ -19365,37 +19383,35 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update bot.py ([`f6abda4`](https://github.com/mraniki/tt/commit/f6abda4a5948fee008c7af1e61846cf04887d762))
 
-* Update README.md ([`0f1c14f`](https://github.com/mraniki/tt/commit/0f1c14f9606af36de5b6b59155549cca2ce73661))
-
-* Update DockerImage.yml ([`aad9d4b`](https://github.com/mraniki/tt/commit/aad9d4b236cc7d3b136d2b1e81ee9c00ad1ce6aa))
-
-* Update DockerGHCR.yml ([`6047809`](https://github.com/mraniki/tt/commit/60478097be919af4734ccf2c57c3e959df404e9c))
-
 * Update Dockerfile ([`8b3a425`](https://github.com/mraniki/tt/commit/8b3a425bf8f2d47d346f93dcd88fa83c6b32a912))
-
-* Update dockerfile ([`3f23bba`](https://github.com/mraniki/tt/commit/3f23bba2057704e14260be3a4b9c67cbe08b3839))
 
 * Update Github_Dev.yml ([`352580e`](https://github.com/mraniki/tt/commit/352580ebca157bf24d052038b5e0fc790228630e))
 
 * Update and rename dockerfile to Dockerfile ([`ef49fa3`](https://github.com/mraniki/tt/commit/ef49fa322fd9355cc2e7ea2663c53ef62eb4ef46))
 
-* Update README.md ([`8b15ed7`](https://github.com/mraniki/tt/commit/8b15ed7fb3d63db2d8ce68840586e8025ac5e0bf))
-
 * Update DockerHub_Dev.yml ([`0ed00db`](https://github.com/mraniki/tt/commit/0ed00db0892181b14ab9443ac7efc02e11746bfe))
-
-* Update DockerHub.yml ([`881946b`](https://github.com/mraniki/tt/commit/881946b020b58b9631b245327de9f4a8bf951328))
-
-* Update README.md ([`86b35e5`](https://github.com/mraniki/tt/commit/86b35e5d3006ae3292e4e6b342f7d4051c69dd29))
 
 * Update README.md ([`86cff4d`](https://github.com/mraniki/tt/commit/86cff4da3d98753dbf47ed8293814f4d07c39fe6))
 
 * Delete maintenance_requirements_VersionUpdate.yml ([`1314e79`](https://github.com/mraniki/tt/commit/1314e79498127771c6c4d82697189d2e23ca84d6))
 
-* Delete maintenance_requirements_VersionUpdate.yml ([`0ed4988`](https://github.com/mraniki/tt/commit/0ed49883f674319f5d148363efeb4f476e878e0f))
-
 * Update and rename docker-image.yml to Github_Latest.yml ([`2bcb446`](https://github.com/mraniki/tt/commit/2bcb44673c41f35b4f43f1eecce77a4a921cfad7))
 
 * Update and rename docker-image-dev.yml to Github_Dev.yml ([`770e0a6`](https://github.com/mraniki/tt/commit/770e0a669a2d87446d27cfd58d01f9af99a4e79c))
+
+* Update DockerImage.yml ([`aad9d4b`](https://github.com/mraniki/tt/commit/aad9d4b236cc7d3b136d2b1e81ee9c00ad1ce6aa))
+
+* Update DockerGHCR.yml ([`6047809`](https://github.com/mraniki/tt/commit/60478097be919af4734ccf2c57c3e959df404e9c))
+
+* Update dockerfile ([`3f23bba`](https://github.com/mraniki/tt/commit/3f23bba2057704e14260be3a4b9c67cbe08b3839))
+
+* Update README.md ([`8b15ed7`](https://github.com/mraniki/tt/commit/8b15ed7fb3d63db2d8ce68840586e8025ac5e0bf))
+
+* Update DockerHub.yml ([`881946b`](https://github.com/mraniki/tt/commit/881946b020b58b9631b245327de9f4a8bf951328))
+
+* Update README.md ([`86b35e5`](https://github.com/mraniki/tt/commit/86b35e5d3006ae3292e4e6b342f7d4051c69dd29))
+
+* Delete maintenance_requirements_VersionUpdate.yml ([`0ed4988`](https://github.com/mraniki/tt/commit/0ed49883f674319f5d148363efeb4f476e878e0f))
 
 * Update release-dev.yml ([`2d20dfc`](https://github.com/mraniki/tt/commit/2d20dfc7aeb1ac05b2a25db50795ffc1b85ed0f7))
 
@@ -19445,13 +19461,13 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update docker-publish-dev.yml ([`ca904a7`](https://github.com/mraniki/tt/commit/ca904a7d39f3a37fb0deb8c2329d58c7e184db65))
 
-* Update Dockerfile ([`bd9f92d`](https://github.com/mraniki/tt/commit/bd9f92d68d176a8b1eaa717f1cdbe98ce9ef8b5f))
-
 * Update exchange.py ([`192a074`](https://github.com/mraniki/tt/commit/192a074723ddc0e27abb54338255601c9b0fd754))
 
-* Update bot.py ([`b08680a`](https://github.com/mraniki/tt/commit/b08680aa36303d3c7cafd83ccd984183762577df))
-
 * Update DockerimagetoDockerHub.yml ([`5ca2da8`](https://github.com/mraniki/tt/commit/5ca2da8ddd3679873ba05fcce9621b021a2365c5))
+
+* Update Dockerfile ([`bd9f92d`](https://github.com/mraniki/tt/commit/bd9f92d68d176a8b1eaa717f1cdbe98ce9ef8b5f))
+
+* Update bot.py ([`b08680a`](https://github.com/mraniki/tt/commit/b08680aa36303d3c7cafd83ccd984183762577df))
 
 * Update bot.py ([`0c28f8b`](https://github.com/mraniki/tt/commit/0c28f8b51e7738953c77eb18239500a16f159ee6))
 
@@ -19461,6 +19477,14 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update docker-publish.yml ([`d985a2b`](https://github.com/mraniki/tt/commit/d985a2bfd06d41fe88a3fc1b8696058d9de2e3b7))
 
+* Update release-main.yml ([`1d355d9`](https://github.com/mraniki/tt/commit/1d355d9eadf5eca7f52fca919e8c031918199c52))
+
+* Update docker-image.yml ([`58927c8`](https://github.com/mraniki/tt/commit/58927c8dbd590d646e0e9a5f44a58d69a252a9d1))
+
+* Update docker-publish.yml ([`30f0208`](https://github.com/mraniki/tt/commit/30f020836ef9f037b531e96992b0297fec9e3bec))
+
+* Update docker-publish.yml ([`9594cc2`](https://github.com/mraniki/tt/commit/9594cc2385f1dc0ad0a0a64834637eefa85914c7))
+
 * Update bot.py ([`54c207b`](https://github.com/mraniki/tt/commit/54c207b3268ec30fb41b1ffab1b0fc9e41ef21c7))
 
 * Update bot.py ([`5883794`](https://github.com/mraniki/tt/commit/5883794f293f09e4244d1eaed3f0e1f98be7e2d5))
@@ -19468,8 +19492,6 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 * Update bot.py ([`b6eea7b`](https://github.com/mraniki/tt/commit/b6eea7b1bb7aa9a355d360adf1eabed0d00ab413))
 
 * Update bot.py ([`a9e1e92`](https://github.com/mraniki/tt/commit/a9e1e9235ceb58724f197747b76eafd6ef067a15))
-
-* Update release-main.yml ([`1d355d9`](https://github.com/mraniki/tt/commit/1d355d9eadf5eca7f52fca919e8c031918199c52))
 
 * Update README.md ([`69dcafb`](https://github.com/mraniki/tt/commit/69dcafb32a96beecb0352a0d47927e6a2e302047))
 
@@ -19491,12 +19513,6 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update bot.py ([`637bdd1`](https://github.com/mraniki/tt/commit/637bdd1878761b51bd98c9ab29c33c184f57ecf8))
 
-* Update docker-image.yml ([`58927c8`](https://github.com/mraniki/tt/commit/58927c8dbd590d646e0e9a5f44a58d69a252a9d1))
-
-* Update docker-publish.yml ([`30f0208`](https://github.com/mraniki/tt/commit/30f020836ef9f037b531e96992b0297fec9e3bec))
-
-* Update docker-publish.yml ([`9594cc2`](https://github.com/mraniki/tt/commit/9594cc2385f1dc0ad0a0a64834637eefa85914c7))
-
 * Update bot.py ([`36d2067`](https://github.com/mraniki/tt/commit/36d2067db173a8b9f453e8a3c0fb610dbe5679e0))
 
 * Update docker-publish-dev.yml ([`fe4b847`](https://github.com/mraniki/tt/commit/fe4b847f7dac1398e796156ec704c8328cf4bc9b))
@@ -19506,8 +19522,6 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 * Update bot.py ([`990439c`](https://github.com/mraniki/tt/commit/990439c0f4fcae7b94af4db9db8f744983aad054))
 
 * Update bot.py ([`311acfc`](https://github.com/mraniki/tt/commit/311acfcbeb029fcf1750091a3ddf40c958664e7d))
-
-* Update README.md ([`50d788a`](https://github.com/mraniki/tt/commit/50d788a872386a8ffbf14b3c4f83c5c0182a3854))
 
 * Rename requirements_VersionUpdate.yml to maintenance_requirements_VersionUpdate.yml ([`6fdc398`](https://github.com/mraniki/tt/commit/6fdc398854cc5bbf851d039126e51a1de581861a))
 
@@ -19519,6 +19533,8 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update docker-image.yml ([`d2497c2`](https://github.com/mraniki/tt/commit/d2497c2c67006711043edc556da7887c6c347a26))
 
+* Update README.md ([`50d788a`](https://github.com/mraniki/tt/commit/50d788a872386a8ffbf14b3c4f83c5c0182a3854))
+
 * Update README.md ([`01a335b`](https://github.com/mraniki/tt/commit/01a335b820e29ff309cae0a014a791cb3a63ba91))
 
 * Update README.md ([`d76b166`](https://github.com/mraniki/tt/commit/d76b16656d80838cc4d4d68f24a1d5661aa3cd71))
@@ -19529,8 +19545,6 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update devimage ([`e859b0c`](https://github.com/mraniki/tt/commit/e859b0c96ad30cf62c87955853561b00254d6bb2))
 
-* Update README.md ([`cde43e4`](https://github.com/mraniki/tt/commit/cde43e4c839ed1722f03e140d3efbfd67aa37f90))
-
 * Update bot.py ([`6ca2272`](https://github.com/mraniki/tt/commit/6ca22726c3b93857ad7446bfc46bc49fdc125692))
 
 * Update README.md ([`1f105f9`](https://github.com/mraniki/tt/commit/1f105f9dfb7e601d813d452a0dbac3e52dfc7e16))
@@ -19540,6 +19554,8 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 * Update docker-publish.yml ([`35e2a54`](https://github.com/mraniki/tt/commit/35e2a5446e4611af180b28d5f6f36142f1fe7ce1))
 
 * Update docker-publish.yml ([`5acdbbc`](https://github.com/mraniki/tt/commit/5acdbbcc02e0696ad9cf0fbb0046ffc2d06313f6))
+
+* Update README.md ([`cde43e4`](https://github.com/mraniki/tt/commit/cde43e4c839ed1722f03e140d3efbfd67aa37f90))
 
 * Update docker-publish.yml ([`ab9550e`](https://github.com/mraniki/tt/commit/ab9550e6141c6cecb34d6b96b93a2c8ca4118812))
 
@@ -19633,11 +19649,11 @@ added DEX screenshot ([`e81ccd9`](https://github.com/mraniki/tt/commit/e81ccd9f7
 
 * Update requirements.yml ([`8b4c645`](https://github.com/mraniki/tt/commit/8b4c6451045aa62716113c3d0db1035bc92a2a56))
 
-* Update bot.py ([`e9ad78d`](https://github.com/mraniki/tt/commit/e9ad78d2e66ec98d233d108e233245181e2f2528))
-
 * Update requirements.txt ([`6fecd67`](https://github.com/mraniki/tt/commit/6fecd67f16c912e568327024d14c56e42f0da4a2))
 
 * Update requirements.txt ([`f584994`](https://github.com/mraniki/tt/commit/f584994315e7f764f84a2ba2f664a05d87a9a145))
+
+* Update bot.py ([`e9ad78d`](https://github.com/mraniki/tt/commit/e9ad78d2e66ec98d233d108e233245181e2f2528))
 
 * Update requirements.txt ([`cbe6551`](https://github.com/mraniki/tt/commit/cbe65516fb63166893532edc7f0dea21cbdb8324))
 
