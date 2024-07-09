@@ -41,8 +41,18 @@ class HelperPlugin(BasePlugin):
         """
         super().__init__()
         self.enabled = settings.helper_enabled
+
+        self.iamlistening_enabled = settings.iamlistening_enabled
+        self.findmyorder_enabled = settings.findmyorder_enabled
+        self.myllm_enabled = settings.myllm_enabled
+        self.cex_enabled = settings.cex_enabled
+        self.dxsp_enabled = settings.dxsp_enabled
+        self.talkytrend_enabled = settings.talkytrend_enabled
+        self.rss_feed_plugin_enabled = settings.rss_feed_plugin_enabled
+
         self.help_message = settings.helper_commands
         self.ip_check_url = settings.ip_check_url
+
         self.bot_command_network = settings.bot_command_network
         self.bot_command_restart = settings.bot_command_restart
         self.bot_command_trading = settings.bot_command_trading
@@ -130,6 +140,15 @@ class HelperPlugin(BasePlugin):
             f"authorized_plugins: {self.authorized_plugins}\n"
             f"ui_enabled: {self.ui_enabled}\n"
             f"forwarder_enabled: {self.forwarder}\n"
+            "PLUGINS________________________\n"
+            f"iamlistening: {self.iamlistening_enabled}\n"
+            f"findmyorder: {self.findmyorder_enabled}\n"
+            f"myllm: {self.myllm_enabled}\n"
+            f"cex: {self.cex_enabled}\n"
+            f"dxsp: {self.dxsp_enabled}\n"
+            f"talkytrend: {self.talkytrend_enabled}\n"
+            f"rss_feed: {self.rss_feed_plugin_enabled}\n"
+            "TRADING________________________\n"
             f"trading_enabled: {self.trading_enabled}\n"
             f"trading_control: {self.trading_control}\n"
             f"trading_days_allowed: {self.trading_days_allowed}\n"
