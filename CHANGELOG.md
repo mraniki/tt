@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.0.7 (2024-07-09)
+
+### Other
+
+* Merge pull request #1685 from mraniki/dev
+
+⚡ build(deps): update pyproject.toml, feed_plugin.py and talky_settin… ([`837d41d`](https://github.com/mraniki/tt/commit/837d41d236613af729c45600d25cd4ea8a5ce499))
+
+### ⚡
+
+* ⚡ build(deps): update pyproject.toml, feed_plugin.py and talky_settings.toml ([`5ce4037`](https://github.com/mraniki/tt/commit/5ce403747370172bd99b8f64ac544c402a371a82))
+
 ## v10.0.6 (2024-07-09)
 
 ### Fix
