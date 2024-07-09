@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.0.1 (2024-07-09)
+
+### Other
+
+* Merge pull request #1679 from mraniki/dev
+
+⬆️ 🤖 - Avoid gunfire in the bathroom tonight ([`fd4eade`](https://github.com/mraniki/tt/commit/fd4eade8174ee82fed4b11f215d1570780c165b5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v2.2.0 ([`eb7890c`](https://github.com/mraniki/tt/commit/eb7890ca4a9847f2639c3eb671d1bdc8b0b5364d))
+
 ## v10.0.0 (2024-07-08)
 
 ### Other
