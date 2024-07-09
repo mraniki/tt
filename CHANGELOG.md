@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.0.2 (2024-07-09)
+
+### Other
+
+* Merge pull request #1680 from mraniki/dev
+
+⚡ build(deps): update pyproject.toml and helper_plugin.py ([`f85f939`](https://github.com/mraniki/tt/commit/f85f939ab47c9d7ca12ddffe162047920b8deca3))
+
+### ⚡
+
+* ⚡ build(deps): update pyproject.toml and helper_plugin.py ([`f30b762`](https://github.com/mraniki/tt/commit/f30b762148ef543eff01e24a308fe71137060608))
+
 ## v10.0.1 (2024-07-09)
 
 ### Other
