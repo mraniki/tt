@@ -43,4 +43,4 @@ class FeedPlugin(BasePlugin):
         for entry in feed.entries:
             updates = f"{entry.title} - {entry.link}"
             logger.debug("Updates: {}", updates)
-            return self.send_notification(updates)
+            return await self.send_notification(updates)
