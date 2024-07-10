@@ -148,15 +148,15 @@ class UnifiedExchangePlugin(BasePlugin):
             positions.append(await self.exchange_cex.get_positions())
         return "\n".join(positions)
 
-    # async def get_pnls(self, timeframe=daily):
+    # async def get_pnls(self, period=daily):
     #     """
     #     Retrieves and combines positions from both DEX and CEX.
     #     """
     #     pnl = ["🏆"]
     #     if self.exchange_dex:
-    #         pnl.append(await self.exchange_dex.get_pnls(timeframe))
+    #         pnl.append(await self.exchange_dex.get_pnls(period))
     #     if self.exchange_cex:
-    #         pnl.append(await self.exchange_cex.get_pnls(timeframe))
+    #         pnl.append(await self.exchange_cex.get_pnls(period))
     #     return "\n".join(pnl)
 
     async def submit_order(self, order):
