@@ -84,6 +84,7 @@ class UnifiedExchangePlugin(BasePlugin):
                 self.bot_command_info: self.get_info,
                 self.bot_command_bal: self.get_balances,
                 self.bot_command_pos: self.get_positions,
+                # self.bot_command_pnl: lambda: self.get_pnls(args[0])
                 self.bot_command_quote: lambda: self.get_quotes(args[0]),
             }
 
@@ -147,15 +148,15 @@ class UnifiedExchangePlugin(BasePlugin):
             positions.append(await self.exchange_cex.get_positions())
         return "\n".join(positions)
 
-    # async def get_pnl(self):
+    # async def get_pnls(self, timeframe=daily):
     #     """
     #     Retrieves and combines positions from both DEX and CEX.
     #     """
     #     pnl = ["🏆"]
     #     if self.exchange_dex:
-    #         pnl.append(await self.exchange_dex.get_pnls())
+    #         pnl.append(await self.exchange_dex.get_pnls(timeframe))
     #     if self.exchange_cex:
-    #         pnl.append(await self.exchange_cex.get_pnls())
+    #         pnl.append(await self.exchange_cex.get_pnls(timeframe))
     #     return "\n".join(pnl)
 
     async def submit_order(self, order):

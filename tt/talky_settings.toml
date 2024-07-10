@@ -115,7 +115,7 @@ bot_command_bal = "bal"
 # Command for user position
 bot_command_pos = "pos"
 # Command for daily pnl
-bot_command_pnl_daily = "d"
+bot_command_pnl = "pnl"
 # Command for instrument quote
 bot_command_quote = "q"
 # Command for switch trading on or off
