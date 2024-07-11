@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## v10.0.10 (2024-07-11)
+
+### Other
+
+* Merge pull request #1690 from mraniki/dev
+
+⬆️ 🤖 - She is not refined  She is not unrefined  She keeps a parrot ([`12e5280`](https://github.com/mraniki/tt/commit/12e52804648fcb68f6573d40186f088c3792ce7e))
+
+### ♻️
+
+* ♻️ ([`b237c8c`](https://github.com/mraniki/tt/commit/b237c8c70edad64f1f64c4702ae43554d046bb6b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.2 ([`8e6cf82`](https://github.com/mraniki/tt/commit/8e6cf82de76116b52674abdd82f2893525c4788a))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.1 ([`179cfcc`](https://github.com/mraniki/tt/commit/179cfcc48f9d0a86104853489519a788aec620fd))
+
+### 🎨
+
+* 🎨 ([`6dcc47b`](https://github.com/mraniki/tt/commit/6dcc47b5a8eb7f4ee51c6c22b2a4c265bd99cdb2))
+
 ## v10.0.9 (2024-07-09)
 
 ### Other
