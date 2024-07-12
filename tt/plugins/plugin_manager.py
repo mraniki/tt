@@ -1,7 +1,7 @@
 import asyncio
 import importlib
 import pkgutil
-from datetime import datetime
+from datetime import datetime, time, timezone
 
 from asyncz.triggers import CronTrigger, IntervalTrigger
 
@@ -195,6 +195,7 @@ class BasePlugin:
         self.trading_days_allowed = settings.trading_days_allowed
         self.trading_hours_start = settings.trading_hours_start
         self.trading_hours_end = settings.trading_hours_end
+        self.trading_blackout_dates = settings.trading_blackout_dates
 
     async def start(self):
         pass
@@ -387,8 +388,8 @@ class BasePlugin:
         """
         if self.trading_control:
             logger.debug("Trading control enabled")
-            current_time = datetime.now().time()
-            current_day = datetime.now().strftime("%a").lower()
+            current_time = datetime.now(timezone.utc).time()
+            current_day = datetime.now(timezone.utc).strftime("%a").lower()
 
             start_time = datetime.strptime(self.trading_hours_start, "%H:%M").time()
             end_time = datetime.strptime(self.trading_hours_end, "%H:%M").time()
@@ -402,6 +403,7 @@ class BasePlugin:
             control = (
                 current_day in self.trading_days_allowed
                 and start_time <= current_time <= end_time
+                and current_day not in self.trading_blackout_dates
             )
             logger.debug("Trading control: {}", control)
             return control
