@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.0.11 (2024-07-12)
+
+### Other
+
+* Merge pull request #1693 from mraniki/dev
+
+⬆️ 🤖 - Let him choose out of my files his projects to accomplish ([`1d972c7`](https://github.com/mraniki/tt/commit/1d972c7a8d4c61d9389bfd5f2a57df7b8ad28228))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.9.0 ([`0ddc39d`](https://github.com/mraniki/tt/commit/0ddc39da696b848bb63679f2038986b7ff6b5932))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.2 ([`f268773`](https://github.com/mraniki/tt/commit/f268773634b7139f7d3cbf1d26a0d777d7d5c8cc))
+
 ## v10.0.10 (2024-07-11)
 
 ### Other
