@@ -39,7 +39,7 @@ packages = [
   {include = "tt"}
 ]
 readme = "README.md"
-version = "10.0.11"
+version = "10.1.0"
 
 [tool.poetry.dependencies]
 python = "^3.10"

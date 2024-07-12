@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## v10.1.0 (2024-07-12)
+
+### Feat
+
+* ✨ feature: Added Trading blackout dates and defaulted time to UTC under should_handle_timeframe ([`e374b08`](https://github.com/mraniki/tt/commit/e374b0898fa3294d7c52f00601e70a38f2978cc1))
+
+### Other
+
+* Merge pull request #1695 from mraniki/dev
+
+✨ feature: Added Trading blackout dates ([`ab0ae1a`](https://github.com/mraniki/tt/commit/ab0ae1ae168cfed4e4a3133ecc538ddefcdf8dca))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.3 ([`b927760`](https://github.com/mraniki/tt/commit/b927760e2d29ada2a1b67162a934c6e27e1a1519))
+
+### 🚨
+
+* 🚨 ([`d56729f`](https://github.com/mraniki/tt/commit/d56729f6cb336c376237ea2f455ddd4a563a3de3))
+
 ## v10.0.11 (2024-07-12)
 
 ### Other
