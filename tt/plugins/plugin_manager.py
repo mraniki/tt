@@ -1,7 +1,7 @@
 import asyncio
 import importlib
 import pkgutil
-from datetime import datetime, time, timezone
+from datetime import datetime, timezone
 
 from asyncz.triggers import CronTrigger, IntervalTrigger
 
