@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.1.1 (2024-07-13)
+
+### Other
+
+* Merge pull request #1696 from mraniki/dev
+
+⬆️ 🤖 - Q	What lies on the bottom of the ocean and twitches ([`cc689da`](https://github.com/mraniki/tt/commit/cc689dabc95aeb199df219506b6cca1baa9a85f7))
+
+### 🔧
+
+* 🔧 chore: update talky_settings.toml with new talkytrend settings ([`167f906`](https://github.com/mraniki/tt/commit/167f906aa68cfe3dc301ba722c3e769e879fa1f6))
+
 ## v10.1.0 (2024-07-12)
 
 ### Feat
