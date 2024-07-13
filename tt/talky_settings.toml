@@ -405,6 +405,81 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 # # when generating an order
 # ignore_instrument = "DOGE"
 
+
+
+
+#####################
+###  TALKYTREND   ###
+#####################
+
+# # Tradingview Parameters
+# [default.talkytrend.tradingview]
+# # Signals Enable/Disable
+# enabled = true
+# library = "tradingview"
+# # instrument monitored under trend
+# # use https://tvdb.brianthe.dev
+# # to update the list for your instrument
+# instrument = [
+#     { id ="EURUSD", exchange='FX_IDC',screener="forex"},
+#     { id ="GOLD", exchange='TVC',screener="cfd"},
+#     { id ="SPX", exchange='SP',screener="cfd"},
+#     { id ="UKOIL", exchange='FX',screener="cfd"},
+#     { id ="BTCUSD", exchange='BINANCE',screener="crypto"},
+# ]
+# # Tradingview Prettytable Format
+# # default format is flat table
+# # other option is "HTML"
+# # see https://pypi.org/project/prettytable/
+# format = ""
+
+# # yahoo finance ticker reference
+# # to retrieve company news or index news
+# [default.talkytrend.yfinance]
+# enabled = true
+# library = "yfinance"
+# instrument = "MSFT"
+
+
+# # Events calendar
+# [default.talkytrend.calendar]
+# enabled = true
+# library = "calendar"
+# url = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
+# # Adhoc date to add in event tracker
+# date = [
+#     "2023-11-01", "2023-12-13", "2024-01-31",
+#     "2024-03-20", "2024-05-01","2024-06-12", 
+#     "2024-07-31", "2024-09-18","2024-11-07", 
+#     "2024-12-18", "2025-01-29"
+#     ]
+
+# # Live TV
+# [default.talkytrend.livetv]
+# enabled = true
+# library = "livetv"
+# url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
+
+# # RSS Feeds
+# [default.talkytrend.feed]
+# enabled = true
+# library = "feed"
+# url = "https://www.dailyfx.com/feeds/market-news"
+
+# # Finnhub news fetcher
+# [default.talkytrend.finnhub]
+# enabled = false
+# library = "finnhub"
+# api_key = ""
+# category = "forex"
+
+# # web scraper
+# [default.talkytrend.scraper]
+# enabled = false
+# library = "scraper"
+# url = ""
+# scraper_page_id = ""
+
 #################################
 ###        MYLLM SETTINGS     ###
 #################################
