@@ -80,14 +80,11 @@ class TalkyTrendPlugin(BasePlugin):
             command = command[1:]
 
             command_mapping = {
-                self.bot_command_info: self.trend.get_talkytrend_info,
-                # self.bot_command_info: self.trend.get_info,
+                self.bot_command_info: self.trend.get_info,
                 self.bot_command_trend: self.trend.fetch_signal,
                 self.bot_command_news: self.trend.fetch_feed,
-                self.bot_command_tv: self.trend.get_tv,
-                # self.bot_command_tv: self.trend.fetch_tv,
-                self.bot_command_scraper: self.trend.scrape_page,
-                # self.bot_command_scraper: self.trend.fetch_page,
+                self.bot_command_tv: self.trend.fetch_tv,
+                self.bot_command_scraper: self.trend.fetch_page,
             }
 
             if command in command_mapping:

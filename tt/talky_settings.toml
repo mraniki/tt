@@ -59,6 +59,10 @@ port = 8080
 
 ui_enabled = false
 
+# url to a live tv stream
+# displayed in the ui
+live_tv_url = ""
+
 # Your webhook secret to send
 # trade alert directly to your chat.
 # If you use Trading view, the webhook
@@ -217,7 +221,7 @@ plugin_directory = "tt.plugins.default_plugins"
 #     'helper_plugin',
 #     'exchange_plugin',
 #     'ai_agent_plugin',
-#     # 'talkytrend_plugin',
+#      'talkytrend_plugin',
 #     # 'feed_plugin',
 #     ]
 
@@ -270,63 +274,6 @@ ip_check_url = "8.8.8.8"
 
 
 ########################################
-###        TALKYTREND SETTINGS       ###
-########################################
-
-# Enable/Disable Signals
-enable_signals = true
-# enable_signals = false
-
-# instrument trend to be monitored
-# use https://tvdb.brianthe.dev
-# for the list of supported instrument
-assets = [
-    # { id ="EURUSD", exchange='FX_IDC',screener="forex"},
-    # { id ="GOLD", exchange='TVC',screener="cfd"},
-    # { id ="SPX", exchange='SP',screener="cfd"},
-    # { id ="UKOIL", exchange='FX',screener="cfd"},
-    # { id ="BTCUSD", exchange='BINANCE',screener="crypto"},
-]
-
-# Enable/Disable Yfinance
-enable_yfinance = true
-
-# yahoo finance ticker reference
-# https://finance.yahoo.com/lookup/
-yfinance_ticker_reference = "TSLA"
-
-# Enable/Disable Events
-enable_events = true
-# Events calendar
-economic_calendar = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
-# Adhoc date to add in event tracker
-fomc_decision_date = [
-    "2024-06-12",
-    "2024-07-31",
-    "2024-09-18",
-    "2024-11-07",
-    "2024-12-18",
-    "2025-01-29"
-    ]
-
-# TV url
-live_tv_url = "https://bloomberg.com/media-manifest/streams/us.m3u8"
-
-# RSS Feeds Enable/Disable
-enable_feed = true
-feed_url = "https://www.dailyfx.com/feeds/market-news"
-
-# Finnhub news fetcher
-enable_finnhub = false
-finnhub_api_key = ""
-finnhub_news_category = "forex"
-
-# web scraper
-enable_scraper = false
-scraper_page_url = ""
-scraper_page_id = ""
-
-########################################
 ###        RSS FEED SETTINGS         ###
 ########################################
 
@@ -340,73 +287,51 @@ rss_feed_frequency = 5
 # prefix for the rss identifier and filtering
 rss_prefix = "📢"
 
-########################################
-###           DXSP SETTINGS          ###
-########################################
-#TO BE REMOVED AT the next release
-# Header to use for retrieving urls content below
-headers = {User-Agent= 'Mozilla/5.0'}
-
-# DEX ABI to use in case you have no explorer setup
-dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-
-# token list using uniswap tokenlist format
-# https://github.com/mraniki/tokenlist
-# this can be used to avoid using coingecko
-# or if token are not listed yet or for testnet
-# token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
-# token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
-token_mainnet_list = ""
-token_testnet_list = ""
-token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-
 
 ########################################
 ###        FINDMYORDER SETTINGS      ###
 ########################################
 
-# [default.findmyorder.standard]
-# parser_library = "standard"
-# enabled = true
-# # Keyword to be use to identify an order
-# action_identifier = "BUY SELL LONG SHORT"
-# # Keyword identifier for stoploss
-# stop_loss_identifier = "sl="
-# # Keyword identifier for take-profit
-# take_profit_identifier = 'tp='
-# # Keyword identifier for quantity
-# quantity_identifier = 'q='
-# # Keyword identifier for order type
-# order_type_identifier = "spot future margin"
-# # Keyword identifier for leverage
-# leverage_type_identifier = "cross isolated"
-# # Keyword identifier for comments
-# comment_identifier = "comment="
+[default.findmyorder.standard]
+enabled = false
+parser_library = "standard"
+# Keyword to be use to identify an order
+action_identifier = "BUY SELL LONG SHORT"
+# Keyword identifier for stoploss
+stop_loss_identifier = "sl="
+# Keyword identifier for take-profit
+take_profit_identifier = 'tp='
+# Keyword identifier for quantity
+quantity_identifier = 'q='
+# Keyword identifier for order type
+order_type_identifier = "spot future margin"
+# Keyword identifier for leverage
+leverage_type_identifier = "cross isolated"
+# Keyword identifier for comments
+comment_identifier = "comment="
 
-# # Stoploss default value is none is provided
-# stop_loss = 1000
-# # Take-Profit default value is none is provided
-# take_profit = 1000
-# # Quantity default value is none is provided
-# quantity = 1
+# Stoploss default value is none is provided
+stop_loss = 1000
+# Take-Profit default value is none is provided
+take_profit = 1000
+# Quantity default value is none is provided
+quantity = 1
 
-# # Settings to enable or disable
-# # instrument mapping
-# instrument_mapping = false
-# # instrument mapping to use and alternative 
-# #  symbol when generating the order
-# mapping = [
-#     # { id = "EURUSD", alt = "EUR/sUSD" },
-#     # { id = "GOLD", alt = "XAU" },
-#     # { id = "BTC", alt = "WBTC" },
-#     # { id = "ETH", alt = "WETH" },
-# ]
+# Settings to enable or disable
+# instrument mapping
+instrument_mapping = false
+# instrument mapping to use and alternative 
+#  symbol when generating the order
+mapping = [
+    # { id = "EURUSD", alt = "EUR/sUSD" },
+    # { id = "GOLD", alt = "XAU" },
+    # { id = "BTC", alt = "WBTC" },
+    # { id = "ETH", alt = "WETH" },
+]
 
-# # Instruments to be ignored
-# # when generating an order
-# ignore_instrument = "DOGE"
-
-
+# Instruments to be ignored
+# when generating an order
+ignore_instrument = "DOGE"
 
 
 #####################
@@ -414,25 +339,25 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 #####################
 
 # # Tradingview Parameters
-# [default.talkytrend.tradingview]
-# # Signals Enable/Disable
-# enabled = true
-# library = "tradingview"
-# # instrument monitored under trend
-# # use https://tvdb.brianthe.dev
-# # to update the list for your instrument
-# instrument = [
-#     { id ="EURUSD", exchange='FX_IDC',screener="forex"},
-#     { id ="GOLD", exchange='TVC',screener="cfd"},
-#     { id ="SPX", exchange='SP',screener="cfd"},
-#     { id ="UKOIL", exchange='FX',screener="cfd"},
-#     { id ="BTCUSD", exchange='BINANCE',screener="crypto"},
-# ]
-# # Tradingview Prettytable Format
-# # default format is flat table
-# # other option is "HTML"
-# # see https://pypi.org/project/prettytable/
-# format = ""
+[default.talkytrend.tradingviewexample]
+# Signals Enable/Disable
+enabled = false
+library = "tradingview"
+# instrument monitored under trend
+# use https://tvdb.brianthe.dev
+# to update the list for your instrument
+instrument = [
+    { id ="EURUSD", exchange='FX_IDC',screener="forex"},
+    { id ="GOLD", exchange='TVC',screener="cfd"},
+    { id ="SPX", exchange='SP',screener="cfd"},
+    { id ="UKOIL", exchange='FX',screener="cfd"},
+    { id ="BTCUSD", exchange='BINANCE',screener="crypto"},
+]
+# Tradingview Prettytable Format
+# default format is flat table
+# other option is "HTML"
+# see https://pypi.org/project/prettytable/
+format = ""
 
 # # yahoo finance ticker reference
 # # to retrieve company news or index news
