@@ -1,5 +1,37 @@
 # CHANGELOG
 
+## v10.2.0 (2024-07-14)
+
+### Other
+
+* Merge pull request #1700 from mraniki/dev
+
+⬆️ talkytrend v3 dxsp v11 ([`5f34344`](https://github.com/mraniki/tt/commit/5f34344f76203180a7f7bc57ff1ab6438e56cb99))
+
+### Update
+
+* Update talkytrend version to 3.0.1 and adjust settings. ([`c3db1ee`](https://github.com/mraniki/tt/commit/c3db1eecca11063e4fb9698cf754de7b3015fb55))
+
+### ✅
+
+* ✅ Unit Test ([`8f5f906`](https://github.com/mraniki/tt/commit/8f5f906c2ae3f8d52dac879165ce8e15eaa9736c))
+
+### ⬆️
+
+* ⬆️ dxsp v11 ([`3714b6f`](https://github.com/mraniki/tt/commit/3714b6f5c8a5abcc922d7f1b07fc422ce23c82ba))
+
+* ⬆️ talkytrend upgrade to 3.0.0 ([`6f086e9`](https://github.com/mraniki/tt/commit/6f086e971f539efc5359164adde1694664a79e59))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.4 ([`89cb34d`](https://github.com/mraniki/tt/commit/89cb34deeca7075377a4f8aef423e3e94cf6c08a))
+
+### 🐛
+
+* 🐛 missing live_tv_url as default ([`306292c`](https://github.com/mraniki/tt/commit/306292ce7dfc024438968b45a4f74dc6a0c9b166))
+
+### 🚀
+
+* 🚀 Exciting update! Changes in TalkyTrend and DXSP settings. ([`901e2b8`](https://github.com/mraniki/tt/commit/901e2b85793526fcf85b6780972790bb1a5f8d02))
+
 ## v10.1.2 (2024-07-14)
 
 ### Other
