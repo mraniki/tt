@@ -59,6 +59,10 @@ port = 8080
 
 ui_enabled = false
 
+# url to a live tv stream
+# displayed in the ui
+live_tv_url = ""
+
 # Your webhook secret to send
 # trade alert directly to your chat.
 # If you use Trading view, the webhook
