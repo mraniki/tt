@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## v10.1.2 (2024-07-14)
+
+### Other
+
+* Merge pull request #1698 from mraniki/dev
+
+⬆️ 🤖 - Q	Why did the astrophysicist order three hamburgers ([`13fa2f5`](https://github.com/mraniki/tt/commit/13fa2f5e7214443f61f10184664f40689a3698e1))
+
+### ⬆️
+
+* ⬆️ Preparing for talkytrend upgrade ([`eb3ca90`](https://github.com/mraniki/tt/commit/eb3ca90f6a0baad3e8ee2ed7749f753238041bc0))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.9.1 ([`bad9af1`](https://github.com/mraniki/tt/commit/bad9af1fc7b37de5d64a6f2df33a2444b402140f))
+
+### 🔧
+
+* 🔧 ([`caf241a`](https://github.com/mraniki/tt/commit/caf241a31d0f4819455ab292fd2cf79f45d16dda))
+
 ## v10.1.1 (2024-07-13)
 
 ### Other
