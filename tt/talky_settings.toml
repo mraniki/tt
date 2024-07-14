@@ -292,48 +292,46 @@ rss_prefix = "📢"
 ###        FINDMYORDER SETTINGS      ###
 ########################################
 
-# [default.findmyorder.standard]
-# parser_library = "standard"
-# enabled = true
-# # Keyword to be use to identify an order
-# action_identifier = "BUY SELL LONG SHORT"
-# # Keyword identifier for stoploss
-# stop_loss_identifier = "sl="
-# # Keyword identifier for take-profit
-# take_profit_identifier = 'tp='
-# # Keyword identifier for quantity
-# quantity_identifier = 'q='
-# # Keyword identifier for order type
-# order_type_identifier = "spot future margin"
-# # Keyword identifier for leverage
-# leverage_type_identifier = "cross isolated"
-# # Keyword identifier for comments
-# comment_identifier = "comment="
+[default.findmyorder.standard]
+enabled = false
+parser_library = "standard"
+# Keyword to be use to identify an order
+action_identifier = "BUY SELL LONG SHORT"
+# Keyword identifier for stoploss
+stop_loss_identifier = "sl="
+# Keyword identifier for take-profit
+take_profit_identifier = 'tp='
+# Keyword identifier for quantity
+quantity_identifier = 'q='
+# Keyword identifier for order type
+order_type_identifier = "spot future margin"
+# Keyword identifier for leverage
+leverage_type_identifier = "cross isolated"
+# Keyword identifier for comments
+comment_identifier = "comment="
 
-# # Stoploss default value is none is provided
-# stop_loss = 1000
-# # Take-Profit default value is none is provided
-# take_profit = 1000
-# # Quantity default value is none is provided
-# quantity = 1
+# Stoploss default value is none is provided
+stop_loss = 1000
+# Take-Profit default value is none is provided
+take_profit = 1000
+# Quantity default value is none is provided
+quantity = 1
 
-# # Settings to enable or disable
-# # instrument mapping
-# instrument_mapping = false
-# # instrument mapping to use and alternative 
-# #  symbol when generating the order
-# mapping = [
-#     # { id = "EURUSD", alt = "EUR/sUSD" },
-#     # { id = "GOLD", alt = "XAU" },
-#     # { id = "BTC", alt = "WBTC" },
-#     # { id = "ETH", alt = "WETH" },
-# ]
+# Settings to enable or disable
+# instrument mapping
+instrument_mapping = false
+# instrument mapping to use and alternative 
+#  symbol when generating the order
+mapping = [
+    # { id = "EURUSD", alt = "EUR/sUSD" },
+    # { id = "GOLD", alt = "XAU" },
+    # { id = "BTC", alt = "WBTC" },
+    # { id = "ETH", alt = "WETH" },
+]
 
-# # Instruments to be ignored
-# # when generating an order
-# ignore_instrument = "DOGE"
-
-
+# Instruments to be ignored
+# when generating an order
+ignore_instrument = "DOGE"
 
 
 #####################
@@ -341,7 +339,7 @@ rss_prefix = "📢"
 #####################
 
 # # Tradingview Parameters
-[default.talkytrend.tradingview]
+[default.talkytrend.tradingviewexample]
 # Signals Enable/Disable
 enabled = false
 library = "tradingview"
