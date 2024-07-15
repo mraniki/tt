@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.2.1 (2024-07-15)
+
+### Other
+
+* Merge pull request #1702 from mraniki/dev
+
+⬆️ 🤖 - Be free and open and breezy  Enjoy  Things wont get any better so ([`887a08f`](https://github.com/mraniki/tt/commit/887a08fe95b7f5af6f8442e090359d4220ed5108))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.0.2 ([`c02dd0a`](https://github.com/mraniki/tt/commit/c02dd0a5a91c6fdd5c59450625cbd8d0c435800c))
+
 ## v10.2.0 (2024-07-14)
 
 ### Other
