@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## v10.2.2 (2024-07-15)
+
+### Other
+
+* Merge pull request #1708 from mraniki/dev
+
+Update cefi version to 4.9.2 ([`496d85e`](https://github.com/mraniki/tt/commit/496d85e2ecc86ff5a9158e6ac132d478b3565a9d))
+
+### Update
+
+* Update cefi version to 4.9.2 ([`c804d5b`](https://github.com/mraniki/tt/commit/c804d5b3a28ceeffd5c603dca4b5b66731b10293))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.3 ([`8d34f7b`](https://github.com/mraniki/tt/commit/8d34f7b197fe701ad98b27339515158431ce2e2d))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.2 ([`8952bfe`](https://github.com/mraniki/tt/commit/8952bfee503e112e904a51eea52ae31c15ec67f4))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.0 ([`7dc0cb9`](https://github.com/mraniki/tt/commit/7dc0cb91d1cfd30ce49a8416d9149107f3e7b542))
+
 ## v10.2.1 (2024-07-15)
 
 ### Other
