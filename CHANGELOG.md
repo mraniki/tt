@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.2.3 (2024-07-16)
+
+### Other
+
+* Merge pull request #1709 from mraniki/dev
+
+⬆️ 🤖 - Beware of a tall black man with one blond shoe ([`4d19619`](https://github.com/mraniki/tt/commit/4d196191a260e4e9fe923ccd5604171e05451c51))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.4 ([`2427642`](https://github.com/mraniki/tt/commit/2427642ee3beb00ff2e3fae293a67bdc1d6131d1))
+
 ## v10.2.2 (2024-07-15)
 
 ### Other
