@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## v10.2.4 (2024-07-17)
+
+### Other
+
+* Merge pull request #1716 from mraniki/dev
+
+⬆️ 🤖 - It is often the case that the man who cant tell a lie thinks he is the best ([`184a71b`](https://github.com/mraniki/tt/commit/184a71b612f50f4b26d1306ba0c9ac48b0f52d9a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.5 ([`aef4fea`](https://github.com/mraniki/tt/commit/aef4fea761bd1390f8eeedd5afd99f09b5357bc0))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.10.0 ([`c24f09a`](https://github.com/mraniki/tt/commit/c24f09a31e2a97a29c53e41bfcc0a79d08fe7c31))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.0.3 ([`308925d`](https://github.com/mraniki/tt/commit/308925d23893cd1e095232f80150fa1e6d1d3cfb))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.5 ([`ff99875`](https://github.com/mraniki/tt/commit/ff9987598af01631c9e7ca7fbd86f2903af7c4ac))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.3 ([`d34c7bb`](https://github.com/mraniki/tt/commit/d34c7bb11b09e49ed478cd5975664192e2e697cc))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.9.3 ([`4f65c1a`](https://github.com/mraniki/tt/commit/4f65c1afc7c478aa28861863fe76bf8bf2680d65))
+
 ## v10.2.3 (2024-07-16)
 
 ### Other
