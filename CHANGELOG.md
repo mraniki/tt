@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## v10.2.5 (2024-07-18)
+
+### Other
+
+* Merge pull request #1723 from mraniki/dev
+
+⬆️ 🤖 - A vivid and creative mind characterizes you ([`14953c3`](https://github.com/mraniki/tt/commit/14953c3a1244ec980d72b6ac2a0da444cfce0c7b))
+
+* Merge pull request #1722 from mraniki/renovate/asyncz-0.x
+
+⬆️ 🛠️(deps): update dependency asyncz to ^0.9.0 ([`2e28731`](https://github.com/mraniki/tt/commit/2e287316d2a2c9b60045940bc1658f0ef191fb28))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.6 ([`d86c4fc`](https://github.com/mraniki/tt/commit/d86c4fcb2aff109276138a49547879eeaf537e92))
+
+* ⬆️ 🛠️(deps): update dependency asyncz to ^0.9.0 ([`170ab43`](https://github.com/mraniki/tt/commit/170ab4318f7adac24553d1f845869554de5b7cdd))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.0.4 ([`e63f4f7`](https://github.com/mraniki/tt/commit/e63f4f78b490dad62678de79f340153f589b7450))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.6 ([`d78f8b1`](https://github.com/mraniki/tt/commit/d78f8b10262b3c28ec2e171e1a6c29cc0d96a5a1))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.4 ([`401d6d3`](https://github.com/mraniki/tt/commit/401d6d3705e7bd86ad8a3be07c812e2d93841c6f))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.10.1 ([`8651fd5`](https://github.com/mraniki/tt/commit/8651fd591927bed3b534522679549960a3600619))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v11.0.1 ([`d1828a1`](https://github.com/mraniki/tt/commit/d1828a1b8ad4eb28d06cd05163f1675c7ef0809e))
+
 ## v10.2.4 (2024-07-17)
 
 ### Other
