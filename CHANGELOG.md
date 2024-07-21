@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## v10.2.6 (2024-07-21)
+
+### Other
+
+* Merge pull request #1730 from mraniki/dev
+
+⬆️ 🤖 - Q	What do you say to a New Yorker with a job ([`ad49db2`](https://github.com/mraniki/tt/commit/ad49db2e74ed6a6a49ff80b4096eae034d1a0d59))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.0.5 ([`82b7f52`](https://github.com/mraniki/tt/commit/82b7f5239bf49be99e02b20f0baf7037c2eb5b28))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.7 ([`a6a5aee`](https://github.com/mraniki/tt/commit/a6a5aee8cd89aa124634c5221cebf23c1c7670f3))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.5 ([`4419fee`](https://github.com/mraniki/tt/commit/4419fee5e10b0a7ad5c96ab6266d97c6dca918ae))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v11.0.2 ([`acded25`](https://github.com/mraniki/tt/commit/acded2597785390c31dfcb4cd335d679d15fe8b9))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.10.2 ([`20ec6b9`](https://github.com/mraniki/tt/commit/20ec6b93362cff3c54387b752d89d84389496f11))
+
 ## v10.2.5 (2024-07-18)
 
 ### Other
