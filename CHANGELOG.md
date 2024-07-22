@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## v10.2.7 (2024-07-22)
+
+### Other
+
+* Merge pull request #1736 from mraniki/dev
+
+⬆️ 🤖 - Man is the only animal that blushes  or needs to ([`80d95b6`](https://github.com/mraniki/tt/commit/80d95b6a8a7aa121ab705512814b07cff8809a2b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.0.6 ([`69cafae`](https://github.com/mraniki/tt/commit/69cafae860b7ec60f66fb0c8f3376edbd7fcf00f))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.7 ([`70c2467`](https://github.com/mraniki/tt/commit/70c2467dc5645da312cd3ccf105d61cb5f46c4cf))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.6 ([`1510d7a`](https://github.com/mraniki/tt/commit/1510d7a68a7a2aea18a79afe33dd3313a948859f))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v11.0.3 ([`6c00dc6`](https://github.com/mraniki/tt/commit/6c00dc6690e477ad83aeae8f0e7a8a49950db7bb))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.10.3 ([`cf53e77`](https://github.com/mraniki/tt/commit/cf53e77cbb77350d0c38fb659662d8fd7fd7c750))
+
 ## v10.2.6 (2024-07-21)
 
 ### Other
