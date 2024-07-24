@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.2.8 (2024-07-24)
+
+### Other
+
+* Merge pull request #1739 from mraniki/dev
+
+⬆️ 🤖 - The naked truth of it is I have no shirt ([`e0e426f`](https://github.com/mraniki/tt/commit/e0e426f546367df687f6b9a82080c25d491a2586))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.8 ([`9e24f4a`](https://github.com/mraniki/tt/commit/9e24f4a5afe6b368ec2361667c320b90a011d03d))
+
 ## v10.2.7 (2024-07-22)
 
 ### Other
