@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.2.9 (2024-07-25)
+
+### Other
+
+* Merge pull request #1741 from mraniki/dev
+
+⬆️ 🤖 - You will gain money by a speculation or lottery ([`6021713`](https://github.com/mraniki/tt/commit/6021713aabeec3fd048d77c91ecd9ec9ca2ddabf))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v11.0.4 ([`793da82`](https://github.com/mraniki/tt/commit/793da826d795d276d91b1939bd2277281b708107))
+
 ## v10.2.8 (2024-07-24)
 
 ### Other
