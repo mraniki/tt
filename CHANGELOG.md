@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.2.10 (2024-07-26)
+
+### Other
+
+* Merge pull request #1744 from mraniki/dev
+
+⬆️ 🤖 - Q	What is the difference between Texas and yogurt ([`51b62cf`](https://github.com/mraniki/tt/commit/51b62cfdcd363eae10308f5a1c29180c9888c120))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency apprise to v1.8.1 ([`1a8ff8c`](https://github.com/mraniki/tt/commit/1a8ff8c4ef6c01431b940d7023d8eaa898ba235a))
+
+* ⬆️ 🛠️(deps): update dependency asyncz to ^0.10.0 ([`2c1faff`](https://github.com/mraniki/tt/commit/2c1faff75132ecefbde3682428c874f58c3787f9))
+
 ## v10.2.9 (2024-07-25)
 
 ### Other
