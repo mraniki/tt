@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.2.11 (2024-07-28)
+
+### Other
+
+* Merge pull request #1746 from mraniki/dev
+
+⬆️ 🤖 - Youll feel devilish tonight  Toss dynamite caps under a flamenco dancers ([`76f719f`](https://github.com/mraniki/tt/commit/76f719f1362a9ace6330938988d1bd25510872a5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.9 ([`920d54e`](https://github.com/mraniki/tt/commit/920d54efcc7bf2ab560d5c1c93d42810428a727c))
+
 ## v10.2.10 (2024-07-26)
 
 ### Other
