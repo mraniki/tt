@@ -12,6 +12,8 @@ ENV TT_DOCKER=True
 ENV ENV_FOR_DYNACONF=default
 ENV OP_PATH=/usr/bin/op
 ENV OP_SERVICE_ACCOUNT_TOKEN=""
+ENV OP_VAULT = ""
+ENV OP_ITEM = ""
 
 ##
 # Install Interative Brokers Gateway
