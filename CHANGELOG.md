@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.2.13 (2024-07-29)
+
+### Other
+
+* Merge pull request #1748 from mraniki/dev
+
+🐳 env update ([`431801d`](https://github.com/mraniki/tt/commit/431801dd91a83d7066f759a1053c2afd35148a8b))
+
+### 🐳
+
+* 🐳 env update ([`0398ae5`](https://github.com/mraniki/tt/commit/0398ae5397c116beaf32cfa58f615b2592d25fa7))
+
 ## v10.2.12 (2024-07-29)
 
 ### Other
