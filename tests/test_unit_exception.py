@@ -23,6 +23,7 @@ def test_app_endpoint_main():
     client = TestClient(app)
     response = client.get("/")
     init = MagicMock(client)
+    print(response)
     assert response.status_code is not None
     assert init.assert_called
 
