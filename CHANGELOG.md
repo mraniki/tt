@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## v10.2.14 (2024-08-10)
+
+### Other
+
+* Merge pull request #1756 from mraniki/dev
+
+⬆️ 🛠️ Fixing test failure ([`34b27d9`](https://github.com/mraniki/tt/commit/34b27d9cd0280024631660fb2a2d51b414f10abd))
+
+* build(deps): update pyproject.toml ([`2b20712`](https://github.com/mraniki/tt/commit/2b20712cff8e252b0945b0d80970c1d1038f645f))
+
+* build(deps): update pyproject.toml and test_unit_exception.py ([`e81046a`](https://github.com/mraniki/tt/commit/e81046a4a2e817b89346ff7ededba5c80a20e91e))
+
+* update fastapi ([`c4bfadd`](https://github.com/mraniki/tt/commit/c4bfadd0bdd20dc694b4fd0071900f720f1d19e7))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.13 ([`896a82f`](https://github.com/mraniki/tt/commit/896a82f0f1d111fa8d87ae46bf2bffc65a32e7d3))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.12 ([`a16e367`](https://github.com/mraniki/tt/commit/a16e367be668eb860baf5381633366bdb5802763))
+
+* ⬆️ 🛠️(deps): update dependency ping3 to v4.0.8 ([`7853bd6`](https://github.com/mraniki/tt/commit/7853bd6db5f9e436268007fd1f9d2f9033bb9c60))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.10.4 ([`a526127`](https://github.com/mraniki/tt/commit/a526127a977e588a6e140d017c63b03137d660e0))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.11 ([`80fe351`](https://github.com/mraniki/tt/commit/80fe351b0e1141e7a81c9f3566dc2a7dbfc77c76))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.10 ([`c59c0ef`](https://github.com/mraniki/tt/commit/c59c0ef7229ef3b908fdaf65cb71416dddd93fdd))
+
 ## v10.2.13 (2024-07-29)
 
 ### Other
