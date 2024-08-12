@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.2.15 (2024-08-12)
+
+### Other
+
+* Merge pull request #1769 from mraniki/dev
+
+⬆️ 🤖 - You will be held hostage by a radical group ([`6abe5e2`](https://github.com/mraniki/tt/commit/6abe5e2e956bdafad60f18f8f869297f4bc9c812))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.14 ([`5695a97`](https://github.com/mraniki/tt/commit/5695a970710f90203050c8f42b81d7615e3fda2c))
+
 ## v10.2.14 (2024-08-10)
 
 ### Other
