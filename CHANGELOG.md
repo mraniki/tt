@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## v10.2.16 (2024-08-13)
+
+### Other
+
+* Merge pull request #1775 from mraniki/dev
+
+⬆️ 🛠️(deps) ([`ccfd7ce`](https://github.com/mraniki/tt/commit/ccfd7ce1d3ed628cb0882bd9bc2c9568370f07ea))
+
+* Merge pull request #1773 from mraniki/renovate/uvicorn-0.x
+
+⬆️ 🛠️(deps): update dependency uvicorn to v0.30.6 ([`1c75ed0`](https://github.com/mraniki/tt/commit/1c75ed0a6d09e3aacbb0382e833b899c41560119))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.7 ([`5e86b3f`](https://github.com/mraniki/tt/commit/5e86b3f67df320ba440ac1e6217fcccabafeba47))
+
+* ⬆️ 🛠️(deps): update dependency uvicorn to v0.30.6 ([`9f3233a`](https://github.com/mraniki/tt/commit/9f3233ad850437aa990964fb102800dab06e0391))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.15 ([`2913271`](https://github.com/mraniki/tt/commit/2913271ecb64a04daf7af3bb1a0a39ab81bf97ac))
+
 ## v10.2.15 (2024-08-12)
 
 ### Other
