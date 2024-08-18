@@ -1,5 +1,35 @@
 # CHANGELOG
 
+## v10.2.17 (2024-08-18)
+
+### Other
+
+* Merge pull request #1784 from mraniki/dev
+
+Dev ([`7478f89`](https://github.com/mraniki/tt/commit/7478f89c203af3440b8eb9285124a789bc1ece0d))
+
+* build(deps): update pyproject.toml ([`a23e5d3`](https://github.com/mraniki/tt/commit/a23e5d3b936eb4b840448ab765e3a577a89b0a96))
+
+* build(deps): update pyproject.toml ([`dead8b7`](https://github.com/mraniki/tt/commit/dead8b7fa57339730c0d946cd274b0c04ed0a50f))
+
+* build(deps): update pyproject.toml ([`6dd5e4a`](https://github.com/mraniki/tt/commit/6dd5e4a01ea154ecbabee4e587e389987fb9cc41))
+
+### Update
+
+* Update dxsp version to 11.0.5 in pyproject.toml ([`a5b9b9a`](https://github.com/mraniki/tt/commit/a5b9b9a41fec29bdc24e2b91fb39f72da5a1d36d))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.17 ([`f5693c6`](https://github.com/mraniki/tt/commit/f5693c67d157e83866ee7a039b6aa451990b75f9))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.11.16 ([`704df06`](https://github.com/mraniki/tt/commit/704df06c4199e107c890d5ea40ca571da5951905))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.8 ([`93cd2c6`](https://github.com/mraniki/tt/commit/93cd2c65c29bc8b8675cab2ef685860f160f31ff))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.0.7 ([`7a44d5c`](https://github.com/mraniki/tt/commit/7a44d5ca937df5c7789a778334c60078866dc178))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.10.5 ([`0739a09`](https://github.com/mraniki/tt/commit/0739a0956eebbe6b684f32b2df870df1fbc2585a))
+
 ## v10.2.16 (2024-08-13)
 
 ### Other
