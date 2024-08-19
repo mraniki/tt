@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.2.18 (2024-08-19)
+
+### Other
+
+* Merge pull request #1785 from mraniki/dev
+
+⬆️ 🤖 - Every why hath a wherefore ([`8172fc1`](https://github.com/mraniki/tt/commit/8172fc1c4a70a77eee1bfaa59d4481a56532091e))
+
+* docs: update 02_config.rst ([`008f31c`](https://github.com/mraniki/tt/commit/008f31c833c119441b0e15af61fbb38fce6ea76d))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`11c5fae`](https://github.com/mraniki/tt/commit/11c5fae494bfb66b0305cdd73713f1da20c944c6))
+
 ## v10.2.17 (2024-08-18)
 
 ### Other
