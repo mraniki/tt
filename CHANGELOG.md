@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v10.3.3 (2024-08-19)
+
+### Other
+
+* Merge pull request #1790 from mraniki/dev
+
+Dev ([`b940cb3`](https://github.com/mraniki/tt/commit/b940cb3520e146c33d330cf15096a4df16cadbfc))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/tt.git ([`b10a237`](https://github.com/mraniki/tt/commit/b10a237a188f1f02a83ae621c65237947fafb299))
+
 ## v10.3.2 (2024-08-19)
 
 ### Other
@@ -9,6 +19,8 @@
 :arrow_up: Update myllm version to 4.12.1 ([`0d27004`](https://github.com/mraniki/tt/commit/0d27004429c2be2c5633968deba1b72c5adb886e))
 
 ### Update
+
+* Update myllm version to 4.12.2 ([`eed1620`](https://github.com/mraniki/tt/commit/eed16203ae80ce872226a7181d307021d51d0bf1))
 
 * :arrow_up: Update myllm version to 4.12.1 ([`c7cc836`](https://github.com/mraniki/tt/commit/c7cc83604101b8eecf4611bf2ad9279a19ee6404))
 
