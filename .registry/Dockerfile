@@ -26,8 +26,19 @@ ENV OP_ITEM = ""
 #   && apt-get clean \
 
 ##
+# Install playwright
+##
+RUN apt-get update && \
+apt-get -y install chromium && \
+  pip install -U pip && \
+  pip install playwright && \
+  playwright install chromium && playwright install-deps && \
+  rm -rf /var/lib/apt/lists/*
+
+
+##
 # Install 1Password CLI
-#
+##
 RUN wget -P /tmp/ https://downloads.1password.com/linux/debian/$(dpkg --print-architecture)/stable/1password-cli-$(dpkg --print-architecture)-latest.deb
 RUN dpkg -i /tmp/1password-cli-$(dpkg --print-architecture)-latest.deb
 RUN op --version
@@ -50,10 +61,3 @@ HEALTHCHECK --interval=5s CMD curl --fail http://localhost:8080 || exit 1
 CMD [ "python", "/app/tt/app.py" ]
 
 
-
-# RUN apt-get update && \
-# apt-get -y install chromium && \
-#   pip install -U pip && \
-#   pip install playwright && \
-#   playwright install chromium && playwright install-deps && \
-#   rm -rf /var/lib/apt/lists/*
