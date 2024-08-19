@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.2 (2024-08-19)
+
+### Other
+
+* Merge pull request #1789 from mraniki/dev
+
+:arrow_up: Update myllm version to 4.12.1 ([`0d27004`](https://github.com/mraniki/tt/commit/0d27004429c2be2c5633968deba1b72c5adb886e))
+
+### Update
+
+* :arrow_up: Update myllm version to 4.12.1 ([`c7cc836`](https://github.com/mraniki/tt/commit/c7cc83604101b8eecf4611bf2ad9279a19ee6404))
+
 ## v10.3.1 (2024-08-19)
 
 ### Other
