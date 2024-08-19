@@ -144,6 +144,8 @@ bot_command_aimode = "aimode"
 bot_command_aiexport = "export"
 # command for reset conversation
 bot_command_aiclear = "clear"
+# command for browse
+bot_command_browse_url = "browse"
 
 # Help Message
 helper_commands = """
@@ -239,6 +241,7 @@ myllm_enabled = true
 ai_agent_mode = false # command to toggle aimode in continuous mode
 ai_agent_prefix = "" # prefix use to filter the AI agent 
 ai_agent_suffix = ""
+browse_url = "https://www.google.com"
 
 # Enable/Disable CEFI
 cex_enabled = true
