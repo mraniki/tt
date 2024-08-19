@@ -81,7 +81,7 @@ class AIAgentPlugin(BasePlugin):
                 self.bot_command_aiclear: self.ai_agent.clear_chat_history,
                 self.bot_command_aiexport: self.ai_agent.export_chat_history,
                 self.bot_command_aichat: lambda: self.ai_agent.chat(str(args)),
-                self.bot_command_browse_url: self.ai_agent.browse_url(
+                self.bot_command_browse_url: lambda: self.ai_agent.browse_url(
                     str(args or self.browse_url)
                 ),
                 self.bot_command_aimode: self.ai_agent_switch_command,
