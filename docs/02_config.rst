@@ -44,7 +44,7 @@ in order to use 1Password, you need to add the following to your :file:`.env` fi
     - OP_ITEM: your 1Password item
     - OP_PATH: your one 1Password path (optional and default value `/usr/bin/op`)
 
-The :file:`.secrets.toml` will located in :file:`/tt/.secrets.toml` and  be created by the OP client via `op read op://vault/item/notesPlain > .secrets.toml`
+The :file:`.secrets.toml` will be located in :file:`/tt/.secrets.toml` and  be created by the OP client via `op read op://vault/item/notesPlain > .secrets.toml`
 
 
 Talky Settings
