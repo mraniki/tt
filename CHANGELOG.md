@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## v10.3.0 (2024-08-19)
+
+### Feat
+
+* ✨ feature Vision+Browsing ([`a14047e`](https://github.com/mraniki/tt/commit/a14047e08218384ff460c051a8a764a2552a2b78))
+
+### Other
+
+* Merge pull request #1787 from mraniki/dev
+
+✨ feature Vision+Browsing ([`73fb1d8`](https://github.com/mraniki/tt/commit/73fb1d8e812e38eaeecb6b38af534a31caeb28ae))
+
+### ⬆️
+
+* ⬆️ fastapi upgrade ([`76ffd49`](https://github.com/mraniki/tt/commit/76ffd492b03303690d7eae316355552c37c1de4c))
+
+### 🐳
+
+* 🐳 Adding playwright support in docker ([`22de089`](https://github.com/mraniki/tt/commit/22de089337491804462744a4aae8fe73fcd63845))
+
 ## v10.2.18 (2024-08-19)
 
 ### Other
