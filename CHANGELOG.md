@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.1 (2024-08-19)
+
+### Other
+
+* Merge pull request #1788 from mraniki/dev
+
+🐛 update ai_agent_plugin.py ([`ca29250`](https://github.com/mraniki/tt/commit/ca29250560d00bd418b2aac432ff98f86986bd9d))
+
+### 🐛
+
+* 🐛 update ai_agent_plugin.py ([`6c0c568`](https://github.com/mraniki/tt/commit/6c0c5681cf2143de591df082adac710336f35182))
+
 ## v10.3.0 (2024-08-19)
 
 ### Feat
