@@ -241,7 +241,8 @@ myllm_enabled = true
 ai_agent_mode = false # command to toggle aimode in continuous mode
 ai_agent_prefix = "" # prefix use to filter the AI agent 
 ai_agent_suffix = ""
-browse_url = "https://www.google.com"
+browser_url = "https://www.google.com"
+browser_headless = true
 
 # Enable/Disable CEFI
 cex_enabled = true

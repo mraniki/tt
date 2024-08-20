@@ -29,12 +29,11 @@ ENV OP_ITEM = ""
 # Install playwright
 ##
 RUN apt-get update && \
-apt-get -y install chromium && \
+  apt-get -y install chromium xvfb && \
   pip install -U pip && \
   pip install playwright && \
   playwright install chromium && playwright install-deps && \
   rm -rf /var/lib/apt/lists/*
-
 
 ##
 # Install 1Password CLI
@@ -58,6 +57,6 @@ HEALTHCHECK --interval=5s CMD curl --fail http://localhost:8080 || exit 1
 ##
 # Run app
 #
-CMD [ "python", "/app/tt/app.py" ]
+CMD [ "xvfb-run", "python", "/app/tt/app.py" ]
 
 
