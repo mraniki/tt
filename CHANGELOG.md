@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.3.6 (2024-08-20)
+
+### Other
+
+* Merge pull request #1793 from mraniki/dev
+
+🔧 chore: update talky_settings.toml ([`8ee7caf`](https://github.com/mraniki/tt/commit/8ee7caff3ead30e8ff8e367bbc4de5f0b91b2394))
+
+* build(deps): update pyproject.toml ([`f829ffd`](https://github.com/mraniki/tt/commit/f829ffd001fcdf03bda554667665613a4cf748fe))
+
+### 🔧
+
+* 🔧 chore: update talky_settings.toml ([`e569ea3`](https://github.com/mraniki/tt/commit/e569ea3d017b892f10af3f2dc7a4808ab5a476ed))
+
 ## v10.3.5 (2024-08-20)
 
 ### Other
