@@ -29,12 +29,11 @@ ENV OP_ITEM = ""
 # Install playwright
 ##
 RUN apt-get update && \
-apt-get -y install chromium && \
+  apt-get -y install chromium xvfb && \
   pip install -U pip && \
   pip install playwright && \
   playwright install chromium && playwright install-deps && \
   rm -rf /var/lib/apt/lists/*
-
 
 ##
 # Install 1Password CLI
