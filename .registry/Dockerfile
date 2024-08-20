@@ -58,6 +58,6 @@ HEALTHCHECK --interval=5s CMD curl --fail http://localhost:8080 || exit 1
 ##
 # Run app
 #
-CMD [ "python", "/app/tt/app.py" ]
+CMD [ "xvfb-run", "python", "/app/tt/app.py" ]
 
 
