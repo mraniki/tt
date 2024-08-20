@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## v10.3.4 (2024-08-20)
+
+### Other
+
+* Merge pull request #1791 from mraniki/dev
+
+🐳  update Dockerfile and talky_settings.toml ([`b38a909`](https://github.com/mraniki/tt/commit/b38a909cb81f7822a13398a470ea9f94a52ec96f))
+
+* update Dockerfile and talky_settings.toml ([`3e07fc6`](https://github.com/mraniki/tt/commit/3e07fc617013f232079463598a09f2880894e970))
+
+### ⬆️
+
+* ⬆️ ([`35a530a`](https://github.com/mraniki/tt/commit/35a530aa1570dddb16f25c6becc109240bc8d5a6))
+
+### 🐛
+
+* 🐛 ([`9bde2ff`](https://github.com/mraniki/tt/commit/9bde2ff23622ecd74f5ef840af123c2d95b75681))
+
 ## v10.3.3 (2024-08-19)
 
 ### Other
