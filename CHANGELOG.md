@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.5 (2024-08-20)
+
+### Other
+
+* Merge pull request #1792 from mraniki/dev
+
+🐛 ([`b13b0ef`](https://github.com/mraniki/tt/commit/b13b0ef3c7807c81053b07c2f444167c26476069))
+
+### 🐛
+
+* 🐛 ([`ae67573`](https://github.com/mraniki/tt/commit/ae6757382472087b3b4c0d24ddf42d999423ff89))
+
 ## v10.3.4 (2024-08-20)
 
 ### Other
