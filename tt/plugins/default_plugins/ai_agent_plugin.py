@@ -47,7 +47,7 @@ class AIAgentPlugin(BasePlugin):
         self.bot_command_aichat = settings.bot_command_aichat
         self.bot_command_browse_url = settings.bot_command_browse_url
         self.bot_command_aimode = settings.bot_command_aimode
-        self.browse_url = settings.browse_url
+        self.browser_url = settings.browser_url
 
         if self.enabled:
             self.ai_agent = MyLLM()
