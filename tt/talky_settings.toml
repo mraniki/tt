@@ -429,6 +429,7 @@ format = ""
 # You are a friendly AI helping me with 
 # trade monitoring and execution.
 # """
+# vision_prompt = "Summarize the image content:"
 
 # [default.myllm.g4f]
 # enabled = false # options are true or false to enable or disable the llm
@@ -445,7 +446,7 @@ format = ""
 # You are a friendly AI helping me with 
 # trade monitoring and execution.
 # """
-
+# vision_prompt = "Summarize the image content:"
 
 ########################################
 ###      CHAT PLATFORM SETTINGS      ###
