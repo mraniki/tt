@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.3.7 (2024-08-23)
+
+### Other
+
+* Merge pull request #1797 from mraniki/dev
+
+⬆️ 🤖 - You had some happiness once but your parents moved away and you had to ([`9d42a7a`](https://github.com/mraniki/tt/commit/9d42a7a3bc0888cf48d21156c2689ec2ee44c970))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.11.0 ([`bc6e24c`](https://github.com/mraniki/tt/commit/bc6e24c4e5d378c52cabc041f1b05f6fd9de8b62))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.5 ([`af72b91`](https://github.com/mraniki/tt/commit/af72b9193b50dbebbf24e0856d7e3a89c117debc))
+
 ## v10.3.6 (2024-08-20)
 
 ### Other
