@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v10.3.8 (2024-08-24)
+
+### Other
+
+* Merge pull request #1801 from mraniki/dev
+
+⬆️ 🤖 - You will be surrounded by luxury ([`7c3430f`](https://github.com/mraniki/tt/commit/7c3430fb44c1edea7e536aac87525336534bbad1))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.6 ([`fd95626`](https://github.com/mraniki/tt/commit/fd956267b120cb259672468c989e73afb7c9f728))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.9 ([`64e6fa3`](https://github.com/mraniki/tt/commit/64e6fa3a8ac9b94ee624eb0b059a165c6efe2555))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v11.0.7 ([`edd3179`](https://github.com/mraniki/tt/commit/edd3179f6f0d7277ee55b2bb88e89c38d7f28f48))
+
 ## v10.3.7 (2024-08-23)
 
 ### Other
