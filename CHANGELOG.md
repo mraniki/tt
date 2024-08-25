@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.9 (2024-08-25)
+
+### Other
+
+* Merge pull request #1803 from mraniki/dev
+
+⬆️ 🤖 - Your lucky number is   Watch for it everywhere ([`ec8a03a`](https://github.com/mraniki/tt/commit/ec8a03a74ccce56de72cf72ff20acb2af12e47f5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency fastapi to v0.112.2 ([`03cd603`](https://github.com/mraniki/tt/commit/03cd6038c20c2282a92547dbc480af85734b6b86))
+
 ## v10.3.8 (2024-08-24)
 
 ### Other
