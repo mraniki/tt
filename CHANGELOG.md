@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.10 (2024-08-27)
+
+### Other
+
+* Merge pull request #1805 from mraniki/dev
+
+⬆️ 🤖 - You are only young once but you can stay immature indefinitely ([`b3d7d76`](https://github.com/mraniki/tt/commit/b3d7d7626190bf383aa98bd7d50171b08ba49fee))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.11.1 ([`bc47074`](https://github.com/mraniki/tt/commit/bc47074c58e9e13ea49af134e8f908d49df1c0ce))
+
 ## v10.3.9 (2024-08-25)
 
 ### Other
