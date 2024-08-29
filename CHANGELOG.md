@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.11 (2024-08-29)
+
+### Other
+
+* Merge pull request #1808 from mraniki/dev
+
+⬆️ 🤖 - Q	Why did the chicken cross the road ([`65dbdb0`](https://github.com/mraniki/tt/commit/65dbdb09063ae3558e1f59dfd56c89fe0aa23ae5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.7 ([`e187ea2`](https://github.com/mraniki/tt/commit/e187ea21896cbf75fa22cbeb6dc83d86678188ab))
+
 ## v10.3.10 (2024-08-27)
 
 ### Other
