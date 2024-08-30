@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.12 (2024-08-30)
+
+### Other
+
+* Merge pull request #1810 from mraniki/dev
+
+⬆️ 🤖 - This night methinks is but the daylight sick ([`c76fb43`](https://github.com/mraniki/tt/commit/c76fb433f133cc41a2ae5bf12c4e7e0a39adc0be))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.10 ([`a3f361d`](https://github.com/mraniki/tt/commit/a3f361d6add4ea35f2795827113af0eb5a4241fb))
+
 ## v10.3.11 (2024-08-29)
 
 ### Other
