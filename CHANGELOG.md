@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.3.13 (2024-08-31)
+
+### Other
+
+* Merge pull request #1813 from mraniki/dev
+
+⬆️ 🤖 - Caution Keep out of reach of children ([`8851431`](https://github.com/mraniki/tt/commit/8851431a8c8db86dd923b08e8c570b5c56f31360))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v2.2.7 ([`abb281e`](https://github.com/mraniki/tt/commit/abb281e1b316bd1c95df6564e6c202c92b2a49cf))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.8 ([`ac27a3f`](https://github.com/mraniki/tt/commit/ac27a3f353e2c632b73bbd3e41136ea218c23971))
+
 ## v10.3.12 (2024-08-30)
 
 ### Other
