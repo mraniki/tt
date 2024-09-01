@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## v10.3.14 (2024-09-01)
+
+### Other
+
+* Merge pull request #1816 from mraniki/dev
+
+⬆️ 🤖 - Dont relax  Its only your tension thats holding you together ([`d8c171c`](https://github.com/mraniki/tt/commit/d8c171cfc9958d6f7283d5579c5559c6ce3c2cfe))
+
+### Update
+
+* Update talkytrend version to 3.1.0 ([`1bc1a25`](https://github.com/mraniki/tt/commit/1bc1a25a84d0d5becd5d46edfdabc4e57fb05eb5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.1.1 ([`d6b54db`](https://github.com/mraniki/tt/commit/d6b54dbcb1806607941891ac9998b110b51e3d33))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.9 ([`88343b4`](https://github.com/mraniki/tt/commit/88343b4cea3cd65d6a02afe8bb7438e02a77ca88))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v2.2.8 ([`df65067`](https://github.com/mraniki/tt/commit/df65067f629b0b265c8cda5470a8eea783d63d8b))
+
 ## v10.3.13 (2024-08-31)
 
 ### Other
