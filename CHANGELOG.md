@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.3.15 (2024-09-03)
+
+### Other
+
+* Merge pull request #1820 from mraniki/dev
+
+⬆️ 🤖 - You will overcome the attacks of jealous associates ([`745b89c`](https://github.com/mraniki/tt/commit/745b89c79e4b729344cb66f05f94a52129d80cc3))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency apprise to v1.9.0 ([`904191b`](https://github.com/mraniki/tt/commit/904191bf023034f9c803ffc53fe24e3f1e1b08b2))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.2.0 ([`a82b4e3`](https://github.com/mraniki/tt/commit/a82b4e323377126843f0a4853ed9fe04f85caf37))
+
 ## v10.3.14 (2024-09-01)
 
 ### Other
