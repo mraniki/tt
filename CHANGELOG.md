@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.3.16 (2024-09-05)
+
+### Other
+
+* Merge pull request #1825 from mraniki/dev
+
+⬆️ 🤖 - I fell asleep reading a dull book and I dreamt that I was reading on ([`f365cf7`](https://github.com/mraniki/tt/commit/f365cf7a3c32a7ee0cac10263b37d7bbbdac3f0c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myst_parser to v4 ([`7dca372`](https://github.com/mraniki/tt/commit/7dca372d69ab5085d15c26a6f4a701b42938d363))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.10 ([`579d6db`](https://github.com/mraniki/tt/commit/579d6db582138aa1ff11c975a335a7e41481790a))
+
 ## v10.3.15 (2024-09-03)
 
 ### Other
