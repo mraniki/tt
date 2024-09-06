@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## v10.3.17 (2024-09-06)
+
+### Other
+
+* Merge pull request #1831 from mraniki/dev
+
+⬆️ 🤖 - Dont Worry Be Happy ([`5bfa421`](https://github.com/mraniki/tt/commit/5bfa42115c7f75ec2163c162f17f79b8f3baac49))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency fastapi to v0.113.0 ([`a5e0b8e`](https://github.com/mraniki/tt/commit/a5e0b8edd16f6d38223a630e204949a8b735fc77))
+
+* ⬆️ 🛠️(deps): update dependency fastapi to v0.112.3 ([`dfb2be7`](https://github.com/mraniki/tt/commit/dfb2be7916ca24231b92d5885d1b281d22b73347))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.11 ([`7dc7ca7`](https://github.com/mraniki/tt/commit/7dc7ca749d0acf130acc1b9bddea59dab3493a7d))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v11.0.8 ([`15aff2c`](https://github.com/mraniki/tt/commit/15aff2ce32b10fa35686f591970d791dd6f974e1))
+
 ## v10.3.16 (2024-09-05)
 
 ### Other
