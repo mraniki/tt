@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.3.19 (2024-09-07)
+
+### Other
+
+* Merge pull request #1836 from mraniki/dev
+
+⬆️ build(deps): update pyproject.toml ([`dd26aa2`](https://github.com/mraniki/tt/commit/dd26aa28c33b647fd11afd6e5d00b59687645ca5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.13 ([`fce033f`](https://github.com/mraniki/tt/commit/fce033f8013f5af228f225ad24a15e27e3657e41))
+
+* ⬆️ build(deps): update pyproject.toml ([`b1b4b43`](https://github.com/mraniki/tt/commit/b1b4b43917ea0f4bc69aa208da319a1f2bad89f6))
+
 ## v10.3.18 (2024-09-07)
 
 ### Other
