@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.3.18 (2024-09-07)
+
+### Other
+
+* Merge pull request #1834 from mraniki/dev
+
+⬆️ 🤖 - Suspicion always haunts the guilty mind ([`988f96a`](https://github.com/mraniki/tt/commit/988f96a961cdea717d99861987235f76e781241b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency fastapi to v0.114.0 ([`cbc0feb`](https://github.com/mraniki/tt/commit/cbc0febe6b823952c23793f093fd5d5fff123440))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.12 ([`690ed67`](https://github.com/mraniki/tt/commit/690ed678cd6231e98ef042e70b74368f5a77219b))
+
 ## v10.3.17 (2024-09-06)
 
 ### Other
