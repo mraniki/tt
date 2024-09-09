@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v10.3.20 (2024-09-09)
+
+### Other
+
+* Merge pull request #1840 from mraniki/dev
+
+⬆️ 🤖 - As flies to wanton boys are we to the gods they kill us for their sport ([`5679125`](https://github.com/mraniki/tt/commit/5679125c0ca2833a3cc7652c0d6d23fdc9dd963b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.11.4 ([`554ab53`](https://github.com/mraniki/tt/commit/554ab53d22d6e5155c6d9b34e6d1b4adf277216d))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.11.2 ([`a7b3d2e`](https://github.com/mraniki/tt/commit/a7b3d2e59c122c36a8cefff806fc28fe345fa35a))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.14 ([`e0018e2`](https://github.com/mraniki/tt/commit/e0018e2dea839fb1cee7d892ee75d6aa8bb80414))
+
 ## v10.3.19 (2024-09-07)
 
 ### Other
