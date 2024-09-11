@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.21 (2024-09-11)
+
+### Other
+
+* Merge pull request #1843 from mraniki/dev
+
+⬆️ 🤖 - You will be held hostage by a radical group ([`d11bcf5`](https://github.com/mraniki/tt/commit/d11bcf51e3ac7a1bcf773b921d523ee65d37daed))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.12.0 ([`eb3d673`](https://github.com/mraniki/tt/commit/eb3d673477ace592ee760f8cdee1fa8a5380f138))
+
 ## v10.3.20 (2024-09-09)
 
 ### Other
