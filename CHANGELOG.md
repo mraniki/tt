@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## v10.3.22 (2024-09-12)
+
+### Other
+
+* Merge pull request #1848 from mraniki/dev
+
+⬆️ 🤖 - The only way to keep your health is to eat what you dont want drink what ([`7583fe9`](https://github.com/mraniki/tt/commit/7583fe9c9e97e7dfb2482206dec54a40cae1947b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.13.0 ([`3e1793c`](https://github.com/mraniki/tt/commit/3e1793cbca083bf036bbeacf5d38728277cdc0cf))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.15 ([`f2745f2`](https://github.com/mraniki/tt/commit/f2745f20e48f3773a718abff1e3dbbf265c09257))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v11.0.9 ([`a3c9cd1`](https://github.com/mraniki/tt/commit/a3c9cd175a20f30519eeedddbda20a58ce7dae42))
+
+* ⬆️ 🛠️(deps): update dependency fastapi to v0.114.1 ([`417ea0f`](https://github.com/mraniki/tt/commit/417ea0f454c4688418d18cabc0c917b7bda500fd))
+
 ## v10.3.21 (2024-09-11)
 
 ### Other
