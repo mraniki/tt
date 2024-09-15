@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.3.23 (2024-09-15)
+
+### Other
+
+* Merge pull request #1851 from mraniki/dev
+
+⬆️ 🤖 - Q	How many Marxists does it take to screw in a light bulb ([`f2059d7`](https://github.com/mraniki/tt/commit/f2059d7fd198feaff3a23402cd895632a2941539))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency fastapi to v0.114.2 ([`b825fa0`](https://github.com/mraniki/tt/commit/b825fa09b5074e212787fa345e86265a50b21c93))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.16 ([`6f37bc8`](https://github.com/mraniki/tt/commit/6f37bc859450485ad16abe35c22f11228a1f484e))
+
 ## v10.3.22 (2024-09-12)
 
 ### Other
