@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.24 (2024-09-17)
+
+### Other
+
+* Merge pull request #1853 from mraniki/dev
+
+⬆️ 🤖 - Your business will assume vast proportions ([`368e7f6`](https://github.com/mraniki/tt/commit/368e7f6a6b87ea5e414a02829ae948d1863dcccf))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.3.0 ([`cb327bf`](https://github.com/mraniki/tt/commit/cb327bf6f6ea0649bab25593343a9802bb2efe33))
+
 ## v10.3.23 (2024-09-15)
 
 ### Other
