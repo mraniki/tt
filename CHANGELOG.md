@@ -1,5 +1,35 @@
 # CHANGELOG
 
+## v10.3.25 (2024-09-18)
+
+### Other
+
+* Merge pull request #1859 from mraniki/dev
+
+⬆️ 🤖 - Q	How do you stop an elephant from charging ([`d571cfc`](https://github.com/mraniki/tt/commit/d571cfced8ebbd3162388847a3d42ba715ea58e3))
+
+* Merge pull request #1857 from mraniki/renovate/talkytrend-3.x
+
+⬆️ 🛠️(deps): update dependency talkytrend to v3.3.1 ([`be158a4`](https://github.com/mraniki/tt/commit/be158a472fb849bbc5047b70e5bef30fb7fd2362))
+
+* Merge pull request #1858 from mraniki/renovate/fastapi-0.x
+
+⬆️ 🛠️(deps): update dependency fastapi to v0.115.0 ([`b7818d6`](https://github.com/mraniki/tt/commit/b7818d68ead81eda9249c3ac4dd7abf8b559f814))
+
+* Merge pull request #1856 from mraniki/renovate/myllm-4.x
+
+⬆️ 🛠️(deps): update dependency myllm to v4.12.17 ([`fc4bc0b`](https://github.com/mraniki/tt/commit/fc4bc0baff29fb4ee7a690bef7cf1aa1a80e5403))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.3.1 ([`4bf760d`](https://github.com/mraniki/tt/commit/4bf760dbf5d8e87fd67c830a1b9462ef8a2c458d))
+
+* ⬆️ 🛠️(deps): update dependency fastapi to v0.115.0 ([`d0fd87d`](https://github.com/mraniki/tt/commit/d0fd87d5686ac7707a68d34fb7d5959c29446954))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.17 ([`5b40e01`](https://github.com/mraniki/tt/commit/5b40e019ace4e58a0d530396c635b39286527311))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.13 ([`fb49a6a`](https://github.com/mraniki/tt/commit/fb49a6a82cadc1a61a488826e33bacb883ff256e))
+
 ## v10.3.24 (2024-09-17)
 
 ### Other
