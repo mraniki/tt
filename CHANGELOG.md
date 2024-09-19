@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.26 (2024-09-19)
+
+### Other
+
+* Merge pull request #1861 from mraniki/dev
+
+⬆️ 🤖 - Try the Moo Shu Pork  It is especially good today ([`bfdc593`](https://github.com/mraniki/tt/commit/bfdc5937a7baddec3e873bfac05c210d474b4ab8))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.18 ([`45704c1`](https://github.com/mraniki/tt/commit/45704c19cf892113986ae4438e068c1befbde02c))
+
 ## v10.3.25 (2024-09-18)
 
 ### Other
