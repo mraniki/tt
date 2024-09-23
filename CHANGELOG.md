@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.28 (2024-09-23)
+
+### Other
+
+* Merge pull request #1865 from mraniki/dev
+
+⬆️ 🤖 - Among the lucky you are the chosen one ([`b73630f`](https://github.com/mraniki/tt/commit/b73630f2f04ed1bc14ed32f78db319f887b148c1))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.3.2 ([`7babe50`](https://github.com/mraniki/tt/commit/7babe506e73b24ea83fb58c6d245124acc843437))
+
 ## v10.3.27 (2024-09-22)
 
 ### Other
