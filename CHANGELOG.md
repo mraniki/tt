@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.29 (2024-09-28)
+
+### Other
+
+* Merge pull request #1867 from mraniki/dev
+
+⬆️ 🤖 - Your boyfriend takes chocolate from strangers ([`e3daec6`](https://github.com/mraniki/tt/commit/e3daec690a8d00fb18948b62b81f583f3017e5e4))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency uvicorn to v0.31.0 ([`7bb0fac`](https://github.com/mraniki/tt/commit/7bb0faccbbdd120645be5ef0ec2dcdbc8c23081c))
+
 ## v10.3.28 (2024-09-23)
 
 ### Other
