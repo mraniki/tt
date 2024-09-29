@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.30 (2024-09-29)
+
+### Other
+
+* Merge pull request #1869 from mraniki/dev
+
+⬆️ 🤖 - Suspicion always haunts the guilty mind ([`a429069`](https://github.com/mraniki/tt/commit/a429069dbbe9ad473ab29bb98e17995c4363b2df))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.20 ([`5c96ecb`](https://github.com/mraniki/tt/commit/5c96ecb94401e1869845812270c087ee7d18fa03))
+
 ## v10.3.29 (2024-09-28)
 
 ### Other
