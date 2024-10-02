@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.31 (2024-10-02)
+
+### Other
+
+* Merge pull request #1872 from mraniki/dev
+
+⬆️ 🤖 - You may worry about your hairdo today but tomorrow much peanut butter will ([`04e5b35`](https://github.com/mraniki/tt/commit/04e5b350c757e98a6e6429b4b7dbfbacf72a26bc))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v2.2.9 ([`ae83ece`](https://github.com/mraniki/tt/commit/ae83ece86757d6763bc0572d5fc5344475c03a61))
+
 ## v10.3.30 (2024-09-29)
 
 ### Other
