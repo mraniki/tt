@@ -58,7 +58,7 @@ iamlistening = "5.3.13"
 findmyorder = "2.2.9"
 dxsp = "11.0.9"
 cefi = "4.13.0"
-myllm = "4.12.20"
+myllm = "4.12.21"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = ">=8.0.8"
