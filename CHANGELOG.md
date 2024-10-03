@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.32 (2024-10-03)
+
+### Other
+
+* Merge pull request #1875 from mraniki/dev
+
+⬆️ 🤖 - Learn to pause  or nothing worthwhile can catch up to you ([`71e3719`](https://github.com/mraniki/tt/commit/71e3719ea3359d5f7539495ad7784699171eaa5b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.12.21 ([`5a71360`](https://github.com/mraniki/tt/commit/5a713604a7d8d373657002cbc0993df040d78ea1))
+
 ## v10.3.31 (2024-10-02)
 
 ### Other
