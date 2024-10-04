@@ -48,7 +48,8 @@ RUN op --version
 WORKDIR /app
 COPY . /app
 # RUN pip install --no-cache-dir /app
-RUN pip install --no-deps /app
+# RUN pip install --no-deps /app
+RUN pip install /app
 ##
 # Healthcheck and PORT
 #
