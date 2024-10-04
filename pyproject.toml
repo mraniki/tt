@@ -39,7 +39,7 @@ packages = [
   {include = "tt"}
 ]
 readme = "README.md"
-version = "10.3.34"
+version = "10.3.37"
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -57,7 +57,7 @@ talkytrend = "3.3.4"
 iamlistening = "5.3.15"
 findmyorder = "2.2.9"
 dxsp = "11.0.9"
-cefi = "4.14.0"
+cefi = "4.14.1"
 myllm = "4.12.21"
 
 [tool.poetry.group.dev.dependencies]

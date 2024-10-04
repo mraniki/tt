@@ -1,5 +1,47 @@
 # CHANGELOG
 
+## v10.3.37 (2024-10-04)
+
+### Other
+
+* Merge pull request #1883 from mraniki/dev
+
+🐳 ([`de17643`](https://github.com/mraniki/tt/commit/de17643eb8ac3985b066ffcefb403055b421759a))
+
+### 🐳
+
+* 🐳 ([`b82eae1`](https://github.com/mraniki/tt/commit/b82eae1f081289ca92a1d629596fa5f03e2064a8))
+
+## v10.3.36 (2024-10-04)
+
+### Other
+
+* Merge pull request #1882 from mraniki/dev
+
+⬆️ ([`dba6af6`](https://github.com/mraniki/tt/commit/dba6af6854d5bbf01ffa563219713c9b8aeef0b1))
+
+### ⬆️
+
+* ⬆️ ([`485710c`](https://github.com/mraniki/tt/commit/485710cf626174513e07864bebd0e19dcebb5dc6))
+
+## v10.3.35 (2024-10-04)
+
+### Other
+
+* Merge pull request #1878 from mraniki/dev
+
+🐳 ([`67642ad`](https://github.com/mraniki/tt/commit/67642ad4a96350c796d7905a43bfdbe1a8ce8615))
+
+### ⬆️
+
+* ⬆️ ([`59d1826`](https://github.com/mraniki/tt/commit/59d1826f9a28ebaa90109fe6fb3b08821b8fc470))
+
+* ⬆️ ([`43ccb30`](https://github.com/mraniki/tt/commit/43ccb30459a7374e14da6cc4a8cb2024df5257ab))
+
+### 🐳
+
+* 🐳 ([`4aa938e`](https://github.com/mraniki/tt/commit/4aa938eb66bc4106b8b71a97436fe8037aad921a))
+
 ## v10.3.34 (2024-10-04)
 
 ### Other
