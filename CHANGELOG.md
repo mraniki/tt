@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.34 (2024-10-04)
+
+### Other
+
+* Merge pull request #1877 from mraniki/dev
+
+🐳 ([`441e503`](https://github.com/mraniki/tt/commit/441e503c4c08f529c6292d3a5e59ddd2209ed1be))
+
+### 🐳
+
+* 🐳 ([`a1807bb`](https://github.com/mraniki/tt/commit/a1807bb54e519752fea949d93c98ef398c8f03fb))
+
 ## v10.3.33 (2024-10-04)
 
 ### Other
