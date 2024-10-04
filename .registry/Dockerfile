@@ -45,9 +45,10 @@ RUN op --version
 ##
 # Deploy app
 #
+WORKDIR /app
 COPY . /app
 # RUN pip install --no-cache-dir /app
-RUN pip install /app
+RUN pip install --no-deps /app
 ##
 # Healthcheck and PORT
 #
