@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.38 (2024-10-06)
+
+### Other
+
+* Merge pull request #1885 from mraniki/dev
+
+⬆️ 🤖 - You have Egyptian flu youre going to be a mummy ([`104fe18`](https://github.com/mraniki/tt/commit/104fe18698bbdffc6b9a7b6fcb016a37599b8aa9))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.16 ([`c6cf92c`](https://github.com/mraniki/tt/commit/c6cf92c96d78e3bccb4e7bd54fdf76f9406dd9ad))
+
 ## v10.3.37 (2024-10-04)
 
 ### Other
