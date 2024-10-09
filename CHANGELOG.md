@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.3.39 (2024-10-09)
+
+### Other
+
+* Merge pull request #1888 from mraniki/dev
+
+⬆️ 🤖 - Q	What do you call a blind deafmute quadraplegic Virginian ([`abc30d0`](https://github.com/mraniki/tt/commit/abc30d048b5cb5e5a84cba01c65f5e9a08eabc51))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update python docker tag to v3.13 ([`8b4551d`](https://github.com/mraniki/tt/commit/8b4551d218884ffad191eb3f857fdc1142f5a8a4))
+
 ## v10.3.38 (2024-10-06)
 
 ### Other
