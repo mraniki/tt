@@ -1,5 +1,31 @@
 # CHANGELOG
 
+## v10.3.40 (2024-10-17)
+
+### Other
+
+* Merge pull request #1894 from mraniki/dev
+
+⬆️ 🤖 - You are capable of planning your future ([`ebf423a`](https://github.com/mraniki/tt/commit/ebf423a6c423f245593371358f449930a9eb7aa6))
+
+* Merge pull request #1901 from mraniki/renovate/ruff-0.x
+
+⬆️ 🛠️(deps): update dependency ruff to ^0.7.0 ([`c0a380b`](https://github.com/mraniki/tt/commit/c0a380b0a535282c54f63c545d342295dade6d55))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.7.0 ([`9f665dd`](https://github.com/mraniki/tt/commit/9f665dd3b61b24d4da5d766702153ce8dc93721d))
+
+* ⬆️ 🛠️(deps): update dependency uvicorn to v0.31.1 ([`6bffbd8`](https://github.com/mraniki/tt/commit/6bffbd81a2711c08471952cb509bc970d1b8fe30))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.3.5 ([`d56b4cb`](https://github.com/mraniki/tt/commit/d56b4cbf8cad2996176c1a26b0f8633c722e8f90))
+
+* ⬆️ 🛠️(deps): update dependency asyncz to v0.12.0 ([`64a0bde`](https://github.com/mraniki/tt/commit/64a0bde8295baeea81ce73c8def9a769a94bdd41))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.17 ([`40d47df`](https://github.com/mraniki/tt/commit/40d47df37168fc28e979389f7b69048636fff885))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.14.2 ([`121ae3d`](https://github.com/mraniki/tt/commit/121ae3d53027bda391c0f19091365af4802eacf3))
+
 ## v10.3.39 (2024-10-09)
 
 ### Other
