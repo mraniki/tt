@@ -64,7 +64,7 @@ myllm = "4.12.21"
 python-semantic-release = ">=8.0.8"
 ruff = "^0.7.0"
 black = "^24.0.0"
-pre-commit = "^3.3.1"
+pre-commit = "^4.0.1"
 
 [tool.poetry.group.docs]
 optional = true
