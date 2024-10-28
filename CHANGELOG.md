@@ -1,6 +1,25 @@
 # CHANGELOG
 
 
+## v10.3.42 (2024-10-28)
+
+### Fix
+
+* ⬆️ dependencies fix ([`746f66b`](https://github.com/mraniki/tt/commit/746f66b161e18e13ffb1ab0b981b7637f9fa6267))
+
+### Other
+
+* Merge pull request #1910 from mraniki/dev
+
+⬆️ 🤖 - A banker is a fellow who lends you his umbrella when the sun is shining ([`8becf64`](https://github.com/mraniki/tt/commit/8becf648b4dca0d96e74c5125980c440b401dcda))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency fastapi to v0.115.4 ([`b9f96f8`](https://github.com/mraniki/tt/commit/b9f96f8e789a9879d6180a609c103a3c9f5b820d))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.3.7 ([`de1d937`](https://github.com/mraniki/tt/commit/de1d937780d67cf96e0eb719379cd420cfb27734))
+
+
 ## v10.3.41 (2024-10-27)
 
 ### Other
