@@ -57,7 +57,7 @@ talkytrend = "3.3.7"
 iamlistening = "5.3.19"
 findmyorder = "2.2.10"
 dxsp = "11.0.11"
-cefi = "4.14.2"
+cefi = "4.15.0"
 myllm = "4.13.1"
 
 [tool.poetry.group.dev.dependencies]
