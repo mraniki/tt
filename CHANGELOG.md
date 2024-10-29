@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v10.3.44 (2024-10-29)
+
+### Other
+
+* Merge pull request #1914 from mraniki/dev
+
+⬆️ 🛠️(deps) ([`a9bda95`](https://github.com/mraniki/tt/commit/a9bda95086d7fcd147e3eb78f6cac8214277a203))
+
+* Merge branch 'main' into dev ([`5f15536`](https://github.com/mraniki/tt/commit/5f155367f1d969a9427ccae2b51df6ccf4b2ee2c))
+
+
 ## v10.3.43 (2024-10-29)
 
 ### Other
@@ -9,7 +20,13 @@
 
 ⬆️ 🤖 - Q	What do you call a boomerang that doesnt come back ([`d9072f5`](https://github.com/mraniki/tt/commit/d9072f5c444dcf43cb9a8cac5dcc4b2e04000ae8))
 
+* build(deps): update pyproject.toml ([`0645369`](https://github.com/mraniki/tt/commit/06453699fff1303d2b05ef1b693fbe73eb458cc5))
+
 ### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.13.1 ([`f059222`](https://github.com/mraniki/tt/commit/f05922269ec6e8eace83ffc14f8e4f75603640c5))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v2.2.10 ([`a41feb6`](https://github.com/mraniki/tt/commit/a41feb6703902f778b8c39566dc3f9c9fb2df572))
 
 * ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.19 ([`08c737f`](https://github.com/mraniki/tt/commit/08c737f983b043893b5fdee8903d4051f55858bd))
 
