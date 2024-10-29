@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v10.3.45 (2024-10-29)
+
+### Other
+
+* Merge pull request #1915 from mraniki/dev
+
+⬆️ asyncz downgrade ([`413b556`](https://github.com/mraniki/tt/commit/413b5569f626eeee94fcce2c6e648ad83ab06645))
+
+### ⬆️
+
+* ⬆️ asyncz downgrade ([`00dbba5`](https://github.com/mraniki/tt/commit/00dbba565e465d7280516096f50e96e3ff82db4b))
+
+
 ## v10.3.44 (2024-10-29)
 
 ### Other
