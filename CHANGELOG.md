@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v10.3.43 (2024-10-29)
+
+### Other
+
+* Merge pull request #1913 from mraniki/dev
+
+⬆️ 🤖 - Q	What do you call a boomerang that doesnt come back ([`d9072f5`](https://github.com/mraniki/tt/commit/d9072f5c444dcf43cb9a8cac5dcc4b2e04000ae8))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.19 ([`08c737f`](https://github.com/mraniki/tt/commit/08c737f983b043893b5fdee8903d4051f55858bd))
+
+
 ## v10.3.42 (2024-10-28)
 
 ### Fix
