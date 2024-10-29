@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v10.3.46 (2024-10-29)
+
+### Other
+
+* Merge pull request #1918 from mraniki/dev
+
+⬆️ 🛠️(deps) :downgrade ([`6ccf1b5`](https://github.com/mraniki/tt/commit/6ccf1b5b951c9e2b6ad0cb40e9a0f3b2dcd501f4))
+
+* build(deps): update pyproject.toml ([`5e14edb`](https://github.com/mraniki/tt/commit/5e14edb9b53ffd8f151f5be9c146e6a3683eac11))
+
+* build(deps): update pyproject.toml ([`1252b05`](https://github.com/mraniki/tt/commit/1252b050cc5954743800b30409e752ff356e5570))
+
+* build(deps): update pyproject.toml ([`edde90c`](https://github.com/mraniki/tt/commit/edde90cfbdd4f174ce467526622ef5a91b35ea14))
+
+* Merge branch 'main' into dev ([`e19b3b4`](https://github.com/mraniki/tt/commit/e19b3b4aa4e72eb51681e3f4c84fee7cfaa6324c))
+
+
 ## v10.3.45 (2024-10-29)
 
 ### Other
@@ -9,7 +26,15 @@
 
 ⬆️ asyncz downgrade ([`413b556`](https://github.com/mraniki/tt/commit/413b5569f626eeee94fcce2c6e648ad83ab06645))
 
+* build(deps): update pyproject.toml ([`869cf90`](https://github.com/mraniki/tt/commit/869cf90f0b0c6dcadeea4850003cf3414c3ea7b0))
+
+* Merge pull request #1916 from mraniki/renovate/asyncz-0.x
+
+⬆️ 🛠️(deps): update dependency asyncz to v0.12.0 ([`1e7b19f`](https://github.com/mraniki/tt/commit/1e7b19fff64264f1015429771c6b69c6f5bb5f50))
+
 ### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency asyncz to v0.12.0 ([`db71bca`](https://github.com/mraniki/tt/commit/db71bca23bff3499c52a7881f80344ef720a8a83))
 
 * ⬆️ asyncz downgrade ([`00dbba5`](https://github.com/mraniki/tt/commit/00dbba565e465d7280516096f50e96e3ff82db4b))
 
