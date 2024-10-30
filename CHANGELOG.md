@@ -1,6 +1,25 @@
 # CHANGELOG
 
 
+## v10.3.47 (2024-10-30)
+
+### Other
+
+* Merge pull request #1927 from mraniki/dev
+
+⬆️ 🤖 - April ([`1238a1e`](https://github.com/mraniki/tt/commit/1238a1ec6f954cee4af65d718321f03adb214a7e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency asyncz to v0.12.0 ([`344cef0`](https://github.com/mraniki/tt/commit/344cef01d736de20b0540ef51a8e435ea1d2460d))
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v2.2.10 ([`84ba4f0`](https://github.com/mraniki/tt/commit/84ba4f0162c87d7bd6c911ad3bb93e999aac22a9))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v11.0.11 ([`c716ceb`](https://github.com/mraniki/tt/commit/c716ceb39ffe600ddaaf0c291b71edbb73f0ebe5))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v4.15.0 ([`e2b427b`](https://github.com/mraniki/tt/commit/e2b427b471c78d15189ef180670c0859a2be80bf))
+
+
 ## v10.3.46 (2024-10-29)
 
 ### Other
