@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v10.3.51 (2024-10-31)
+
+### Other
+
+* Merge pull request #1931 from mraniki/dev
+
+🐳 🚑 ([`39c36b5`](https://github.com/mraniki/tt/commit/39c36b59b7b251576d67305d2b489fe83ae706b4))
+
+### 🚑
+
+* 🐳 🚑 ([`d81cbab`](https://github.com/mraniki/tt/commit/d81cbab29a17339ed92b14dbe7f438033bf866d3))
+
+
 ## v10.3.50 (2024-10-31)
 
 ### Other
