@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v10.3.50 (2024-10-31)
+
+### Other
+
+* Merge pull request #1930 from mraniki/dev
+
+⬆️ build(deps): update pyproject.toml ([`07e8af2`](https://github.com/mraniki/tt/commit/07e8af256d9405b0d0538cf0a227d7b7f1ed712a))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`e808b69`](https://github.com/mraniki/tt/commit/e808b69b31a3dcb3dd164ac4f7c6e5946c8ccbb0))
+
+
 ## v10.3.49 (2024-10-31)
 
 ### Other
