@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v10.3.48 (2024-10-31)
+
+### Other
+
+* Merge pull request #1928 from mraniki/dev
+
+⬆️ 🤖 - You will gain money by a speculation or lottery ([`c683ba4`](https://github.com/mraniki/tt/commit/c683ba4ff6862211e953969b2790cfe4c01c8973))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency fastapi to v0.115.4 ([`6ebab52`](https://github.com/mraniki/tt/commit/6ebab520664c385f2d78bc29d13cabf007f35e59))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.13.1 ([`e401d67`](https://github.com/mraniki/tt/commit/e401d67e1d2617b9223b088deccdd1e4115f5fb9))
+
+* ⬆️ 🛠️(deps): update dependency uvicorn to v0.32.0 ([`770d262`](https://github.com/mraniki/tt/commit/770d262d4c7c51b63615fe91ab2c2fdcc56e931c))
+
+
 ## v10.3.47 (2024-10-30)
 
 ### Other
