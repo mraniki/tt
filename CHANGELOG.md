@@ -1,6 +1,33 @@
 # CHANGELOG
 
 
+## v10.3.52 (2024-11-01)
+
+### Other
+
+* Merge pull request #1934 from mraniki/dev
+
+⬆️ 🤖 - You will outgrow your usefulness ([`99e696f`](https://github.com/mraniki/tt/commit/99e696fc462655cce249ca612667d4da4d245af6))
+
+* Merge pull request #1936 from mraniki/renovate/python-3.x
+
+⬆️ 🛠️(deps): update python docker tag to v3.13 ([`eecb241`](https://github.com/mraniki/tt/commit/eecb24184b984cd2e21d29ee58ba57b8fba6b51e))
+
+* Merge pull request #1935 from mraniki/revert-1933-renovate/python-3.x
+
+Revert "⬆️ 🛠️(deps): update python docker tag to v3.13" ([`11e2471`](https://github.com/mraniki/tt/commit/11e24710fcb5cee49f941b2d7ab58d9328272729))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update python docker tag to v3.13 ([`8693fc6`](https://github.com/mraniki/tt/commit/8693fc69a18e2a74e0bbc15d296ceeb10b1d4491))
+
+* Revert "⬆️ 🛠️(deps): update python docker tag to v3.13" ([`1b5e967`](https://github.com/mraniki/tt/commit/1b5e967ba4d29ab638ce611829338153b60da015))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.13.2 ([`f8c9163`](https://github.com/mraniki/tt/commit/f8c9163723f1c57ea4f3aa3c5a22a6487717f4b8))
+
+* ⬆️ 🛠️(deps): update python docker tag to v3.13 ([`a00d058`](https://github.com/mraniki/tt/commit/a00d05800dba729082569bd13eb3b31898d9695e))
+
+
 ## v10.3.51 (2024-10-31)
 
 ### Other
