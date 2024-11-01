@@ -24,6 +24,10 @@
       "matchUpdateTypes": ["major"],
       "automerge": false,
       "minimumReleaseAge": "30 days"
-    }
+    },
+    {
+      "matchDatasources": ["docker"],
+			"enabled": false
+		}
   ]
 }
