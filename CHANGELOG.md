@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v10.3.56 (2024-11-01)
+
+### Other
+
+* Merge pull request #1943 from mraniki/dev
+
+⬆️ Update iamlistening version to 5.3.21 ([`68abff4`](https://github.com/mraniki/tt/commit/68abff4af77893ec117e7b32c89bc56f1b570bc7))
+
+### Update
+
+* :arrow_up: Update iamlistening version to 5.3.21 ([`89b4d8e`](https://github.com/mraniki/tt/commit/89b4d8e47307e67fbbb4a96a0cee311fe715597c))
+
+### 🔧
+
+* 🔧 chore: update renovate.json ([`5e2c286`](https://github.com/mraniki/tt/commit/5e2c28660f3e2954101d9c05c76f10dd4cc64633))
+
+
 ## v10.3.55 (2024-11-01)
 
 ### Other
