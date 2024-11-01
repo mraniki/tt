@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v10.3.55 (2024-11-01)
+
+### Other
+
+* Merge pull request #1942 from mraniki/dev
+
+⬆️ build(deps): update pyproject.toml ([`60de324`](https://github.com/mraniki/tt/commit/60de324655e8f51b45c8c6c15df6df00378b6c17))
+
+* Merge branch 'main' into dev ([`b447cb1`](https://github.com/mraniki/tt/commit/b447cb1b87b12b7fa663f65e65613282272aebee))
+
+
 ## v10.3.54 (2024-11-01)
 
 ### Other
@@ -24,6 +35,8 @@
 * 🐳 ⚡ ([`d66877e`](https://github.com/mraniki/tt/commit/d66877e44f7da1c7f248722a9ea9cac37803a922))
 
 ### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`21126f4`](https://github.com/mraniki/tt/commit/21126f4b1e00c87eb97919510ddf96bf90be9621))
 
 * ⬆️ 🛠️(deps): update python docker tag to v3.13 ([`e4c70da`](https://github.com/mraniki/tt/commit/e4c70da4087d1170c0f4fa815bb9e8da2bebdecc))
 
