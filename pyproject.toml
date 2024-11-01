@@ -54,10 +54,10 @@ nicegui = "1.4.9"
 ping3 = "4.0.8"
 feedparser = "6.0.11"
 talkytrend = "3.3.8"
-iamlistening = "5.3.19"
+iamlistening = "5.3.20"
 findmyorder = "2.2.10"
 dxsp = "11.0.11"
-cefi = "5.0.0"
+cefi = "5.1.0"
 myllm = "4.13.2"
 
 [tool.poetry.group.dev.dependencies]
