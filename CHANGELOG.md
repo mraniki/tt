@@ -1,6 +1,43 @@
 # CHANGELOG
 
 
+## v10.3.54 (2024-11-01)
+
+### Other
+
+* Merge pull request #1940 from mraniki/dev
+
+⬆️ cefi 🔥 black ([`fcd7638`](https://github.com/mraniki/tt/commit/fcd7638c00e1bb0da3f2873174e91829533d9ab1))
+
+* build: update Dockerfile ([`2e49ff0`](https://github.com/mraniki/tt/commit/2e49ff0b7ae9ecf0e5f8dd1ae0223fbca2c1f7c3))
+
+* Merge pull request #1939 from mraniki/renovate/python-3.x
+
+⬆️ 🛠️(deps): update python docker tag to v3.13 ([`48a098d`](https://github.com/mraniki/tt/commit/48a098d8d7a847aa54e9d5f8d8d0a548b138a641))
+
+* Merge pull request #1938 from mraniki/renovate/python-3.x
+
+⬆️ 🛠️(deps): update python docker tag to v3.13 ([`6bc475d`](https://github.com/mraniki/tt/commit/6bc475d3f53a1d5ca60696c9e9a34d6e226944a9))
+
+### ⚡
+
+* 🐳 ⚡ ([`d66877e`](https://github.com/mraniki/tt/commit/d66877e44f7da1c7f248722a9ea9cac37803a922))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update python docker tag to v3.13 ([`e4c70da`](https://github.com/mraniki/tt/commit/e4c70da4087d1170c0f4fa815bb9e8da2bebdecc))
+
+* ⬆️ 🛠️(deps): update python docker tag to v3.13 ([`0d9c17b`](https://github.com/mraniki/tt/commit/0d9c17b4618f0c501c6f5e0990abcb82085291d8))
+
+### 🔥
+
+* ⬆️ cefi 🔥 black ([`cdbcd47`](https://github.com/mraniki/tt/commit/cdbcd47f958fe593305ea6965fd242d63bf4cd8f))
+
+### 🚑
+
+* 🐳 🚑 ([`6dddba4`](https://github.com/mraniki/tt/commit/6dddba47a6e330f22b9d8e70184df87cb25b49f2))
+
+
 ## v10.3.53 (2024-11-01)
 
 ### Other
