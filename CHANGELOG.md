@@ -1,6 +1,25 @@
 # CHANGELOG
 
 
+## v10.3.57 (2024-11-01)
+
+### Other
+
+* Merge pull request #1944 from mraniki/dev
+
+⬆️ ([`0642165`](https://github.com/mraniki/tt/commit/0642165998433731828e6043b9810804dde15a43))
+
+* Merge pull request #1945 from mraniki/renovate/findmyorder-2.x
+
+⬆️ 🛠️(deps): update dependency findmyorder to v2.2.11 ([`fc5d000`](https://github.com/mraniki/tt/commit/fc5d00035fcd7ef0db6995f46336d03c61af8e3b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency findmyorder to v2.2.11 ([`37e619f`](https://github.com/mraniki/tt/commit/37e619f55c343a6993a0980a34c94456161a5cd3))
+
+* ⬆️ ([`1918cc1`](https://github.com/mraniki/tt/commit/1918cc19ce6c657301fe28d39194c9bc8d8c3a13))
+
+
 ## v10.3.56 (2024-11-01)
 
 ### Other
