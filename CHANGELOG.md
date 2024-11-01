@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v10.3.53 (2024-11-01)
+
+### Other
+
+* Merge pull request #1937 from mraniki/dev
+
+⬆️ build(deps): update pyproject.toml ([`e9a5155`](https://github.com/mraniki/tt/commit/e9a5155221f46975a29788866c455e850a83bcd3))
+
+### ⬆️
+
+* ⬆️ build(deps): update pyproject.toml ([`bc1cfa4`](https://github.com/mraniki/tt/commit/bc1cfa498801911ef68ea5a0af04403c185ac0d9))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.20 ([`b79e2e3`](https://github.com/mraniki/tt/commit/b79e2e3afd56305c99a95dff61e5a4581c5ac3fb))
+
+
 ## v10.3.52 (2024-11-01)
 
 ### Other
