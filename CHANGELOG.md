@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v10.3.58 (2024-11-03)
+
+### Other
+
+* Merge pull request #1946 from mraniki/dev
+
+⬆️ 🤖 - The lunatic the lover and the poet ([`affca8a`](https://github.com/mraniki/tt/commit/affca8ac2dda5d41addcd02fbb2905c565f7ce85))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.3.9 ([`cfa3943`](https://github.com/mraniki/tt/commit/cfa39437ca50c7b9a0e8e9fb19402d0df3a9e9ae))
+
+
 ## v10.3.57 (2024-11-01)
 
 ### Other
