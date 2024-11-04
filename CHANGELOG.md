@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v10.3.59 (2024-11-04)
+
+### Other
+
+* Merge pull request #1948 from mraniki/dev
+
+⬆️ 🤖 - Things past redress and now with me past care ([`42b21cb`](https://github.com/mraniki/tt/commit/42b21cb70e0aba8fa124dc712930d7403844978e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.13.4 ([`788a614`](https://github.com/mraniki/tt/commit/788a6148533ca8ef966a0c0e4de5a52d9be614c6))
+
+
 ## v10.3.58 (2024-11-03)
 
 ### Other
