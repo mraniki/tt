@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v10.3.60 (2024-11-05)
+
+### Other
+
+* Merge pull request #1951 from mraniki/dev
+
+⬆️ 🤖 - If your life was a horse youd have to shoot it ([`23371b7`](https://github.com/mraniki/tt/commit/23371b763a0c22e1f3dfc52d85ea8a3808fb6912))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pre-commit to v4 ([`005fc2d`](https://github.com/mraniki/tt/commit/005fc2dd913764927a0e01829d7a2dfaee0862b4))
+
+
 ## v10.3.59 (2024-11-04)
 
 ### Other
