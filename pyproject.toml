@@ -56,9 +56,9 @@ feedparser = "6.0.11"
 talkytrend = "3.3.9"
 iamlistening = "5.3.22"
 findmyorder = "2.2.11"
-dxsp = "11.1.0"
-cefi = "5.3.1"
-myllm = "4.13.4"
+dxsp = "11.1.1"
+cefi = "5.3.2"
+myllm = "4.13.5"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = ">=8.0.8"
