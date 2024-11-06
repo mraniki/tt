@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v10.3.61 (2024-11-06)
+
+### Other
+
+* Merge pull request #1957 from mraniki/dev
+
+⬆️ 🤖 - Be different conform ([`c24b0d6`](https://github.com/mraniki/tt/commit/c24b0d6632f75e8a728b0cbdc27f9672290267ea))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.13.5 ([`e833047`](https://github.com/mraniki/tt/commit/e833047e3c021c48baf90c0e147be389b959d601))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v11.1.1 ([`b4c997a`](https://github.com/mraniki/tt/commit/b4c997a101b40546add1c626a35a084862cccafe))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v5.3.2 ([`83e5957`](https://github.com/mraniki/tt/commit/83e59570de209c7bbe79cdce9d38e6eda83d67f9))
+
+
 ## v10.3.60 (2024-11-05)
 
 ### Other
