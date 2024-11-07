@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v10.3.62 (2024-11-07)
+
+### Other
+
+* Merge pull request #1959 from mraniki/dev
+
+⬆️ 🤖 - Q	How many college football players does it take to screw in a light bulb ([`e8bee80`](https://github.com/mraniki/tt/commit/e8bee80e22960bfed79b5b612fe96e094ae17672))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.23 ([`e734419`](https://github.com/mraniki/tt/commit/e7344193666fcc4bb607e0e926b17392975bdb75))
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.3.10 ([`bae0f53`](https://github.com/mraniki/tt/commit/bae0f5328ec9155c7971eb66c54e09c8e2764868))
+
+
 ## v10.3.61 (2024-11-06)
 
 ### Other
