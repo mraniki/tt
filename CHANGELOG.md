@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v10.3.63 (2024-11-08)
+
+### Other
+
+* Merge pull request #1961 from mraniki/dev
+
+⬆️ 🤖 - Q	Why do WASPs play golf ([`b2d9ca0`](https://github.com/mraniki/tt/commit/b2d9ca02d469a3a7b6371079779ff30529322255))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.3.11 ([`f15b745`](https://github.com/mraniki/tt/commit/f15b7457592e5dc5dca95311b7c7e3f6bbcf89fc))
+
+
 ## v10.3.62 (2024-11-07)
 
 ### Other
