@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v10.3.64 (2024-11-09)
+
+### Other
+
+* Merge pull request #1962 from mraniki/dev
+
+⬆️ 🤖 - Your depth of comprehension may tend to make you lax in worldly ways ([`a0ce82b`](https://github.com/mraniki/tt/commit/a0ce82b579dff2e3663e02bed245cfc3b9ff404f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.13.7 ([`6ceaca7`](https://github.com/mraniki/tt/commit/6ceaca73e95abea03997f0674c1a4ace5c1e08bb))
+
+
 ## v10.3.63 (2024-11-08)
 
 ### Other
