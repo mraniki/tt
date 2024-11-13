@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v10.3.65 (2024-11-13)
+
+### Other
+
+* Merge pull request #1964 from mraniki/dev
+
+⬆️ 🤖 - Fame is a vapor popularity an accident the only earthly certainty is ([`5919109`](https://github.com/mraniki/tt/commit/591910910413cbafc7183a6ef0fa835a473ef2d3))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency fastapi to v0.115.5 ([`921e40b`](https://github.com/mraniki/tt/commit/921e40beecd23288e63f85ed1a24b1f86b70282a))
+
+
 ## v10.3.64 (2024-11-09)
 
 ### Other
