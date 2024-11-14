@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v10.3.66 (2024-11-14)
+
+### Other
+
+* Merge pull request #1966 from mraniki/dev
+
+⬆️ 🤖 - October  the Discovery ([`f2fa3c6`](https://github.com/mraniki/tt/commit/f2fa3c6edab10ef4ddf531b2ea3694b5b6eeeeb7))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.13.8 (#1965)
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> ([`4195541`](https://github.com/mraniki/tt/commit/41955412f53bee7ba569b3bdb93930f3ded2e7e2))
+
+
 ## v10.3.65 (2024-11-13)
 
 ### Other
