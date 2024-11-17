@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v10.3.67 (2024-11-17)
+
+### Other
+
+* Merge pull request #1968 from mraniki/dev
+
+⬆️ 🤖 - You recoil from the crude you tend naturally toward the exquisite ([`0713c43`](https://github.com/mraniki/tt/commit/0713c43027d4b5bda6b7180a6afd8890978470b6))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.13.9 (#1967)
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> ([`a20035e`](https://github.com/mraniki/tt/commit/a20035e256c0420ca3b0486a1250d455b5c5c5af))
+
+
 ## v10.3.66 (2024-11-14)
 
 ### Other
