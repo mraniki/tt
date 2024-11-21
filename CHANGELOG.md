@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v10.3.69 (2024-11-21)
+
+### Other
+
+* Merge pull request #1972 from mraniki/dev
+
+⬆️ 🤖 - O it is excellent ([`4d9a04a`](https://github.com/mraniki/tt/commit/4d9a04afc9275e8aadc3e421d1515779006d1fbe))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency uvicorn to v0.32.1 ([`0a60884`](https://github.com/mraniki/tt/commit/0a6088488796972096c2e3d38d391ba020bb003a))
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.24 (#1971)
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> ([`cb2cd4b`](https://github.com/mraniki/tt/commit/cb2cd4b5a29271b2953feec94a15de5d107fdfbe))
+
+
 ## v10.3.68 (2024-11-18)
 
 ### Other
