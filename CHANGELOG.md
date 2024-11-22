@@ -1,6 +1,25 @@
 # CHANGELOG
 
 
+## v10.3.70 (2024-11-22)
+
+### Other
+
+* Merge pull request #1976 from mraniki/dev
+
+⬆️ 🤖 - Do not overtax your powers ([`c018957`](https://github.com/mraniki/tt/commit/c018957e2120f388c93cbd38265428c802831b50))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.13.11 (#1975)
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> ([`46f0a94`](https://github.com/mraniki/tt/commit/46f0a947143fdc08b1814be7a2f4e96986327f9e))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v11.1.2 (#1974)
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> ([`051367b`](https://github.com/mraniki/tt/commit/051367bf3d311baf9f7bc5d89c8044ddeb21f5f5))
+
+
 ## v10.3.69 (2024-11-21)
 
 ### Other
