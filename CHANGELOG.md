@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v10.3.71 (2024-11-23)
+
+### Other
+
+* Merge pull request #1978 from mraniki/dev
+
+⬆️ 🤖 - You will contract a rare disease ([`b839ca3`](https://github.com/mraniki/tt/commit/b839ca3efc99c08804a95a1cb4af74a7f775d3fd))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.8.0 ([`8839605`](https://github.com/mraniki/tt/commit/88396057cf417ca5de6744b6df21db9bfd29d0c1))
+
+
 ## v10.3.70 (2024-11-22)
 
 ### Other
