@@ -1,6 +1,29 @@
 # CHANGELOG
 
 
+## v10.3.72 (2024-11-24)
+
+### Other
+
+* Merge pull request #1984 from mraniki/dev
+
+⬆️ 🤖 - Tomorrow this will be part of the unchangeable past but fortunately ([`90747a3`](https://github.com/mraniki/tt/commit/90747a3e5f560645b62ffa70f1bf82275d144572))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency talkytrend to v3.3.12 (#1983)
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> ([`d567b17`](https://github.com/mraniki/tt/commit/d567b177b678c57021c88a3a9f3618b0256bd62f))
+
+* ⬆️ 🛠️(deps): update dependency dxsp to v11.1.3 (#1980)
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> ([`dbd1453`](https://github.com/mraniki/tt/commit/dbd14535bc4ba053fe82011118e6784cd2e86069))
+
+* ⬆️ 🛠️(deps): update dependency cefi to v5.3.3 (#1979)
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> ([`e11dafe`](https://github.com/mraniki/tt/commit/e11dafe856170e71f31af6dedd935b4601ddfa58))
+
+
 ## v10.3.71 (2024-11-23)
 
 ### Other
