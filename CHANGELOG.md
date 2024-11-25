@@ -1,6 +1,25 @@
 # CHANGELOG
 
 
+## v10.3.73 (2024-11-25)
+
+### Other
+
+* Merge pull request #1985 from mraniki/dev
+
+⬆️ 🤖 - The fashion wears out more apparel than the man ([`ab67dda`](https://github.com/mraniki/tt/commit/ab67dda9d88edba44c414ed0d01a29308f9a8fb1))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.25 (#1981)
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> ([`cf9c672`](https://github.com/mraniki/tt/commit/cf9c672ccfb753d65d93e5feea04c43fd2e9cc3f))
+
+* ⬆️ 🛠️(deps): update dependency myllm to v4.13.12 (#1982)
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> ([`b178166`](https://github.com/mraniki/tt/commit/b178166be8b457e74d149275c30e3c4f0221e975))
+
+
 ## v10.3.72 (2024-11-24)
 
 ### Other
