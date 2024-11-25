@@ -54,11 +54,11 @@ nicegui = "1.4.9"
 ping3 = "4.0.8"
 feedparser = "6.0.11"
 talkytrend = "3.3.12"
-iamlistening = "5.3.24"
+iamlistening = "5.3.25"
 findmyorder = "2.2.11"
 dxsp = "11.1.3"
 cefi = "5.3.3"
-myllm = "4.13.11"
+myllm = "4.13.12"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = ">=8.0.8"
