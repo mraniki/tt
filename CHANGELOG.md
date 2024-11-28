@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v10.3.75 (2024-11-28)
+
+### Other
+
+- Merge pull request #1993 from mraniki/dev
+  ([`b7e5281`](https://github.com/mraniki/tt/commit/b7e528188b2e8c6055164f407b37f19ad0f2fd7c))
+
+⬆️ 🤖 - AWAKE FEAR FIRE FOES AWAKE
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.14
+  ([#1992](https://github.com/mraniki/tt/pull/1992),
+  [`2ef81e7`](https://github.com/mraniki/tt/commit/2ef81e7d6ca24be27afed28c38681c186ad72e4c))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.74 (2024-11-26)
 
 ### Other
