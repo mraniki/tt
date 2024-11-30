@@ -1,6 +1,33 @@
 # CHANGELOG
 
 
+## v10.3.76 (2024-11-30)
+
+### Other
+
+- Merge pull request #1996 from mraniki/dev
+  ([`66958d4`](https://github.com/mraniki/tt/commit/66958d4f856027ab1d2ffaa086a6484b4627d9df))
+
+⬆️ 🤖 - You will soon meet a person who will play an important role in your life
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.26
+  ([#1997](https://github.com/mraniki/tt/pull/1997),
+  [`bfe17e1`](https://github.com/mraniki/tt/commit/bfe17e101bbb74a2f4338fc4fbccacd06674524b))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency pytest-cov to v6
+  ([`3049bb7`](https://github.com/mraniki/tt/commit/3049bb74e52f5d0503133362aabf2a924e236e95))
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.15
+  ([#1994](https://github.com/mraniki/tt/pull/1994),
+  [`99e8cfd`](https://github.com/mraniki/tt/commit/99e8cfd815439d4e968e4a621b374cfc1be4bfca))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.75 (2024-11-28)
 
 ### Other
