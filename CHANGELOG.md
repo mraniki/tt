@@ -1,6 +1,28 @@
 # CHANGELOG
 
 
+## v10.3.77 (2024-12-01)
+
+### Other
+
+- Merge pull request #2002 from mraniki/dev
+  ([`34373cc`](https://github.com/mraniki/tt/commit/34373cc443485a8a35ccb3b097257f92fe0f7848))
+
+⬆️ 🤖 - Q	How many Martians does it take to screw in a light bulb
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency dxsp to v11.1.4 ([#1999](https://github.com/mraniki/tt/pull/1999),
+  [`dd3b048`](https://github.com/mraniki/tt/commit/dd3b0486f35f9e2a4ee0fe208f04ee469e1a842e))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency cefi to v5.3.4 ([#1998](https://github.com/mraniki/tt/pull/1998),
+  [`137614e`](https://github.com/mraniki/tt/commit/137614eb4a418e679f79cbdb464a7e3b47b6f2cf))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.76 (2024-11-30)
 
 ### Other
