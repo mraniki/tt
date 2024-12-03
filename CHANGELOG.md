@@ -1,6 +1,31 @@
 # CHANGELOG
 
 
+## v10.3.78 (2024-12-03)
+
+### Other
+
+- Merge pull request #2003 from mraniki/dev
+  ([`f96d41e`](https://github.com/mraniki/tt/commit/f96d41eeebf1a94af1b1270adc4d9251a2da76ec))
+
+⬆️ 🤖 - It is so very hard to be an
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.16
+  ([#2000](https://github.com/mraniki/tt/pull/2000),
+  [`14008f7`](https://github.com/mraniki/tt/commit/14008f73f498ce18a3da76ca9187372e3c51ebfd))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> Co-authored-by:
+  mraniki <8766259+mraniki@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency talkytrend to v3.3.14
+  ([#2001](https://github.com/mraniki/tt/pull/2001),
+  [`6d003a5`](https://github.com/mraniki/tt/commit/6d003a570bfb2e61b8385425daca2e8611cabe12))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.77 (2024-12-01)
 
 ### Other
