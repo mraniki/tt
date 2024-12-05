@@ -1,6 +1,27 @@
 # CHANGELOG
 
 
+## v10.3.79 (2024-12-05)
+
+### Other
+
+- Merge pull request #2007 from mraniki/dev
+  ([`41b265b`](https://github.com/mraniki/tt/commit/41b265ba8b1007f6d9d309cb264023e188dad1fd))
+
+⬆️ 🤖 - You will be singled out for promotion in your work
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency fastapi to v0.115.6
+  ([`b5a7d96`](https://github.com/mraniki/tt/commit/b5a7d96940d0d7ca8ff4f840979dbfe39192126f))
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.17
+  ([#2005](https://github.com/mraniki/tt/pull/2005),
+  [`e98c1a7`](https://github.com/mraniki/tt/commit/e98c1a7044015e2d70a8a7e0e08b0638e4d953f6))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.78 (2024-12-03)
 
 ### Other
