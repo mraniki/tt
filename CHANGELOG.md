@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v10.3.80 (2024-12-06)
+
+### Other
+
+- Merge pull request #2009 from mraniki/dev
+  ([`32f8c73`](https://github.com/mraniki/tt/commit/32f8c731936b30ff8d8d745b4f94adb1a962d5a9))
+
+⬆️ 🤖 - Lord what fools these mortals be
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.18
+  ([#2008](https://github.com/mraniki/tt/pull/2008),
+  [`a7a85b1`](https://github.com/mraniki/tt/commit/a7a85b14d7344456e78ac9dcbf87cb2e6999e1da))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.79 (2024-12-05)
 
 ### Other
