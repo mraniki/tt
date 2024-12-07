@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v10.3.81 (2024-12-07)
+
+### Other
+
+- Merge pull request #2012 from mraniki/dev
+  ([`a9049b3`](https://github.com/mraniki/tt/commit/a9049b30af3fc5acdbb6e8d6d6f949ac67c8d736))
+
+⬆️ 🤖 - You should go home
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.27
+  ([#2010](https://github.com/mraniki/tt/pull/2010),
+  [`5be507f`](https://github.com/mraniki/tt/commit/5be507f95f4c0f53dc6bf72858bf4f8eac6ba234))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.80 (2024-12-06)
 
 ### Other
