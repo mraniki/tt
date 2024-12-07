@@ -1,7 +1,25 @@
 # CHANGELOG
 
 
+## v10.3.82 (2024-12-07)
+
+### Other
+
+- Merge pull request #2013 from mraniki/dev
+  ([`44d8cee`](https://github.com/mraniki/tt/commit/44d8cee126eff95b628069e4a778be9719c3b466))
+
+🐳
+
+- Merge branch 'main' into dev
+  ([`63da06d`](https://github.com/mraniki/tt/commit/63da06db548f0c031ebfd4060f4cb29aab345541))
+
+
 ## v10.3.81 (2024-12-07)
+
+### :whale:
+
+- :whale:update Chromium installation in Dockerfile
+  ([`f144eb5`](https://github.com/mraniki/tt/commit/f144eb5d720416dd9a73de3c29613a83f3ac9b59))
 
 ### Other
 
@@ -11,6 +29,12 @@
 ⬆️ 🤖 - You should go home
 
 ### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.19
+  ([#2011](https://github.com/mraniki/tt/pull/2011),
+  [`0ea2ad1`](https://github.com/mraniki/tt/commit/0ea2ad1eae551ed7a2490849686d1c42e6d852a8))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
 
 - ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.27
   ([#2010](https://github.com/mraniki/tt/pull/2010),
