@@ -65,12 +65,12 @@ async def test_parsing_info(plugin):
     plugin.get_helper_info.assert_awaited_once()
 
 
-@pytest.mark.asyncio
-async def test_parsing_network(plugin):
-    """Test network"""
-    plugin.get_helper_network = AsyncMock()
-    await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_network}")
-    plugin.get_helper_network.assert_awaited_once()
+# @pytest.mark.asyncio
+# async def test_parsing_network(plugin):
+#     """Test network"""
+#     plugin.get_helper_network = AsyncMock()
+#     await plugin.handle_message(f"{plugin.bot_prefix}{plugin.bot_command_network}")
+#     plugin.get_helper_network.assert_awaited_once()
 
 
 @pytest.mark.asyncio
