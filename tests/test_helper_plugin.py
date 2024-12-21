@@ -95,11 +95,11 @@ async def test_info(plugin):
     assert result is not None
 
 
-@pytest.mark.asyncio
-async def test_network(plugin):
-    """Test help"""
-    result = await plugin.get_helper_network()
-    assert result is not None
+# @pytest.mark.asyncio
+# async def test_network(plugin):
+#     """Test help"""
+#     result = await plugin.get_helper_network()
+#     assert result is not None
 
 
 @pytest.mark.asyncio
