@@ -1,6 +1,27 @@
 # CHANGELOG
 
 
+## v10.3.84 (2024-12-22)
+
+### Other
+
+- Merge pull request #2028 from mraniki/dev
+  ([`82b6c5d`](https://github.com/mraniki/tt/commit/82b6c5dc4e856add058c73bc16097cf564a89bae))
+
+⬆️ 🤖 - Not Hercules could have knockd out his brains for he had none
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.22
+  ([#2024](https://github.com/mraniki/tt/pull/2024),
+  [`80bb9e7`](https://github.com/mraniki/tt/commit/80bb9e752d8eaa76f8ed8e5ecf7f5bf0b3d7955a))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency uvicorn to v0.34.0
+  ([`c348540`](https://github.com/mraniki/tt/commit/c3485409349735b96881f068a9ecf7c7c4060af6))
+
+
 ## v10.3.83 (2024-12-21)
 
 ### Other
