@@ -1,6 +1,30 @@
 # CHANGELOG
 
 
+## v10.3.85 (2024-12-23)
+
+### Other
+
+- Merge pull request #2031 from mraniki/dev
+  ([`7d1ab6b`](https://github.com/mraniki/tt/commit/7d1ab6baeaf6e7806a18cb359a51b51b545ecf0e))
+
+⬆️ 🤖 - Q	Whats a WASPs idea of openmindedness
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.29
+  ([#2029](https://github.com/mraniki/tt/pull/2029),
+  [`3d06d6d`](https://github.com/mraniki/tt/commit/3d06d6dcb7da99efc5c9eaa2b713803d2a995e7b))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.23
+  ([#2030](https://github.com/mraniki/tt/pull/2030),
+  [`69a2aaf`](https://github.com/mraniki/tt/commit/69a2aafe6e6b3dbffe73f10807b4e9e58738b36a))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.84 (2024-12-22)
 
 ### Other
