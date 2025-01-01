@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v10.3.86 (2025-01-01)
+
+### Other
+
+- Merge pull request #2033 from mraniki/dev
+  ([`f209f72`](https://github.com/mraniki/tt/commit/f209f720331021fc53085eefd279dc0eaeddf5e3))
+
+⬆️ 🤖 - You will be surprised by a loud noise
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency asyncz to v0.13.0
+  ([`f705fda`](https://github.com/mraniki/tt/commit/f705fdaddfb7e2795d7aaf29a703bef57dafd35c))
+
+
 ## v10.3.85 (2024-12-23)
 
 ### Other
