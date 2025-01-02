@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v10.3.87 (2025-01-02)
+
+### Other
+
+- Merge pull request #2035 from mraniki/dev
+  ([`3e33311`](https://github.com/mraniki/tt/commit/3e333115966e89f76622c9ace94b0531f93415dc))
+
+⬆️ 🤖 - You will attract cultured and artistic people to your home
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.24
+  ([#2034](https://github.com/mraniki/tt/pull/2034),
+  [`2b952dc`](https://github.com/mraniki/tt/commit/2b952dce614a4000584e0c74d133cf74494535e0))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.86 (2025-01-01)
 
 ### Other
