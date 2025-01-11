@@ -9,3 +9,5 @@ updates:
       interval: "weekly"
     commit-message:
         prefix: "⬆️ 🤖 Dependencies"
+    ignore:
+    - dependency-name: "/.requirements/requirement.txt"
