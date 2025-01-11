@@ -56,7 +56,7 @@ feedparser = "6.0.11"
 talkytrend = "3.3.14"
 iamlistening = "5.3.29"
 findmyorder = "2.2.11"
-dxsp = "11.1.5"
+dxsp = "11.1.6"
 cefi = "5.3.5"
 myllm = "4.13.26"
 
