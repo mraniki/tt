@@ -1,6 +1,58 @@
 # CHANGELOG
 
 
+## v10.3.90 (2025-01-11)
+
+### Other
+
+- Merge branch 'dev' into renovate/ruff-0.x
+  ([`c78fa25`](https://github.com/mraniki/tt/commit/c78fa250f3dcc43aa5c7fc5332bbeb3613b058ad))
+
+- Merge pull request #2043 from mraniki/renovate/apprise-1.x
+  ([`ea32987`](https://github.com/mraniki/tt/commit/ea3298718371747c9156a1a9f27cccb39087fad7))
+
+⬆️ 🛠️(deps): update dependency apprise to v1.9.2
+
+- Merge pull request #2044 from mraniki/renovate/ruff-0.x
+  ([`1d48bee`](https://github.com/mraniki/tt/commit/1d48beea6ffc9330a048725cd7037d0a5f35fa49))
+
+⬆️ 🛠️(deps): update dependency ruff to ^0.9.0
+
+- Merge pull request #2045 from mraniki/renovate/cefi-5.x
+  ([`1c419ff`](https://github.com/mraniki/tt/commit/1c419ff3616b8d3dc59658452bba67c741a80f90))
+
+⬆️ 🛠️(deps): update dependency cefi to v5.3.6
+
+- Merge pull request #2046 from mraniki/renovate/dxsp-11.x
+  ([`5f4f625`](https://github.com/mraniki/tt/commit/5f4f62577c5a3f0cf40e5e3068025044999d15bf))
+
+⬆️ 🛠️(deps): update dependency dxsp to v11.1.6
+
+- Merge pull request #2047 from mraniki/dev
+  ([`fee5a1d`](https://github.com/mraniki/tt/commit/fee5a1df45de30d2742798c6b6d12a78579e81f6))
+
+Update dependabot configuration for commit messages
+
+### Update
+
+- Update dependabot configuration for commit messages
+  ([`fa54355`](https://github.com/mraniki/tt/commit/fa54355fef2b9db5413e06c6b29136b6cb086234))
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency apprise to v1.9.2
+  ([`0993504`](https://github.com/mraniki/tt/commit/0993504e99e032b27f4b3ca9f425993d395d5e07))
+
+- ⬆️ 🛠️(deps): update dependency cefi to v5.3.6
+  ([`cc3dc03`](https://github.com/mraniki/tt/commit/cc3dc038b6c6a6c59122ee5a157cba92d274abcd))
+
+- ⬆️ 🛠️(deps): update dependency dxsp to v11.1.6
+  ([`5466f01`](https://github.com/mraniki/tt/commit/5466f01e7a1b2ae73c2cbd58d5daf5b6b023ede7))
+
+- ⬆️ 🛠️(deps): update dependency ruff to ^0.9.0
+  ([`c407e04`](https://github.com/mraniki/tt/commit/c407e04ae7da3596a6b72e91ccc352c0fa778fe8))
+
+
 ## v10.3.89 (2025-01-05)
 
 ### Other
