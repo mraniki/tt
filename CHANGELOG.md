@@ -1,6 +1,46 @@
 # CHANGELOG
 
 
+## v10.3.91 (2025-01-12)
+
+### :arrow_up:
+
+- :arrow_up: 🤖 Dependencies: Update asyncz requirement
+  ([`c91705d`](https://github.com/mraniki/tt/commit/c91705dca365b2f0bec96057415e756161e03786))
+
+Updates the requirements on [asyncz](https://github.com/dymmond/asyncz) to permit the latest
+  version. - [Release notes](https://github.com/dymmond/asyncz/releases) -
+  [Changelog](https://github.com/dymmond/asyncz/blob/main/docs/release-notes.md) -
+  [Commits](https://github.com/dymmond/asyncz/compare/0.13.0...0.13.1)
+
+--- updated-dependencies: - dependency-name: asyncz dependency-type: direct:production
+
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+### Other
+
+- Merge pull request #2056 from mraniki/dev
+  ([`903fd65`](https://github.com/mraniki/tt/commit/903fd65540a4db7741763afecaaab29fc2153295))
+
+⬆️ 🤖 - You will overcome the attacks of jealous associates
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.31
+  ([`c73e00d`](https://github.com/mraniki/tt/commit/c73e00d3009f03e524fd2acc9887189cb8727848))
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.27
+  ([`5c98a58`](https://github.com/mraniki/tt/commit/5c98a583191c0fa1c3d6609f91fe4dabde9feb10))
+
+- ⬆️ 🛠️(deps): update dependency talkytrend to v3.3.15
+  ([#2050](https://github.com/mraniki/tt/pull/2050),
+  [`d96e5b2`](https://github.com/mraniki/tt/commit/d96e5b26ce4fff4e0c50f020fd3731ad9a060c5e))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.90 (2025-01-11)
 
 ### Other
