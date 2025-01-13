@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v10.3.92 (2025-01-13)
+
+### Other
+
+- Merge pull request #2060 from mraniki/dev
+  ([`a6fe619`](https://github.com/mraniki/tt/commit/a6fe619cad1ff5ecddf9e9dd39086b18af7e2d9d))
+
+⬆️ 🤖 - Lady Luck brings added income today Lady friend takes it away tonight
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency cefi to v5.3.7 ([#2057](https://github.com/mraniki/tt/pull/2057),
+  [`96055af`](https://github.com/mraniki/tt/commit/96055afea8d7dc6e72c033b4133c6bee7cd1e08d))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.91 (2025-01-12)
 
 ### :arrow_up:
