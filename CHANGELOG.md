@@ -1,6 +1,30 @@
 # CHANGELOG
 
 
+## v10.3.93 (2025-01-14)
+
+### Other
+
+- Merge pull request #2062 from mraniki/dev
+  ([`1cb1d1d`](https://github.com/mraniki/tt/commit/1cb1d1d0149763e20bbece6bfe4ff3020685b4f9))
+
+⬆️ 🤖 - Q	How many mathematicians does it take to screw in a light bulb
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.29
+  ([#2058](https://github.com/mraniki/tt/pull/2058),
+  [`3fe3577`](https://github.com/mraniki/tt/commit/3fe357719442724fbea9cfb53c72a46752666a55))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency talkytrend to v3.3.16
+  ([#2059](https://github.com/mraniki/tt/pull/2059),
+  [`40ff961`](https://github.com/mraniki/tt/commit/40ff961795a8c14bc6f9d6e973a1de0b50b27046))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.92 (2025-01-13)
 
 ### Other
