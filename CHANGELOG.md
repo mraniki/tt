@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v10.3.94 (2025-01-15)
+
+### Other
+
+- Merge pull request #2064 from mraniki/dev
+  ([`3f61f4a`](https://github.com/mraniki/tt/commit/3f61f4a86656c90b7a3dfb2b210b0d4a9e6802f2))
+
+⬆️ 🤖 - In the Spring I have counted different kinds of weather inside of
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.30
+  ([#2063](https://github.com/mraniki/tt/pull/2063),
+  [`fee8d6a`](https://github.com/mraniki/tt/commit/fee8d6af3e76fd45abf40633002493c9abecaf17))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.93 (2025-01-14)
 
 ### Other
