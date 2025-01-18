@@ -1,6 +1,30 @@
 # CHANGELOG
 
 
+## v10.3.96 (2025-01-18)
+
+### Other
+
+- Merge pull request #2069 from mraniki/dev
+  ([`65ca4d9`](https://github.com/mraniki/tt/commit/65ca4d96cfb5d719069c43670d2ad7d242f2e13e))
+
+⬆️ 🤖 - Today is the last day of your life so far
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.32
+  ([#2067](https://github.com/mraniki/tt/pull/2067),
+  [`f2efc66`](https://github.com/mraniki/tt/commit/f2efc66709c0c5187fd5283392a36fe1154f0d0a))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.32
+  ([#2068](https://github.com/mraniki/tt/pull/2068),
+  [`cbcce9a`](https://github.com/mraniki/tt/commit/cbcce9aba53968d5d7fa0defd4d6c2b7bca2af49))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.95 (2025-01-17)
 
 ### Other
