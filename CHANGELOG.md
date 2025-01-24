@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v10.3.98 (2025-01-24)
+
+### Other
+
+- Merge pull request #2074 from mraniki/dev
+  ([`8139924`](https://github.com/mraniki/tt/commit/8139924b172de659769d2860d9c8ad72ee77fb9d))
+
+⬆️ 🤖 - Q	How many Marxists does it take to screw in a light bulb
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency fastapi to v0.115.7
+  ([`0842964`](https://github.com/mraniki/tt/commit/084296433056caeb722d5ec724685285fa765976))
+
+
 ## v10.3.97 (2025-01-19)
 
 ### Other
