@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v10.3.99 (2025-01-26)
+
+### Other
+
+- Merge pull request #2076 from mraniki/dev
+  ([`db4cc84`](https://github.com/mraniki/tt/commit/db4cc84798262e67b13ee17db41917cc8f1de69a))
+
+⬆️ 🤖 - Q	What do you get when you cross the Godfather with an attorney
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.34
+  ([#2075](https://github.com/mraniki/tt/pull/2075),
+  [`b404187`](https://github.com/mraniki/tt/commit/b4041876988441ae2fdd670924f4aafc529987e3))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.98 (2025-01-24)
 
 ### Other
