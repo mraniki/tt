@@ -1,6 +1,32 @@
 # CHANGELOG
 
 
+## v10.3.102 (2025-01-30)
+
+### Other
+
+- Merge pull request #2085 from mraniki/dev
+  ([`8fea24b`](https://github.com/mraniki/tt/commit/8fea24bcd8415f16d41526f2a8f04fd0f0f50e61))
+
+⬆️ 🤖 - Your motives for doing whatever good deed you may have in mind will be
+
+- Merge pull request #2086 from mraniki/renovate/fastapi-0.x
+  ([`42e99ee`](https://github.com/mraniki/tt/commit/42e99ee465a3791fd9c1b1d5ee87fb37ebce55d1))
+
+⬆️ 🛠️(deps): update dependency fastapi to v0.115.8
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency fastapi to v0.115.8
+  ([`928d4e3`](https://github.com/mraniki/tt/commit/928d4e314e2d5437017b794818f0468239c3acc8))
+
+- ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.34
+  ([#2083](https://github.com/mraniki/tt/pull/2083),
+  [`0a16abc`](https://github.com/mraniki/tt/commit/0a16abc674fffd0eab383ab381f1b5dcc32ceff2))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.101 (2025-01-29)
 
 ### Other
