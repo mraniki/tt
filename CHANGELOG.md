@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v10.3.104 (2025-02-03)
+
+### Other
+
+- Merge pull request #2092 from mraniki/dev
+  ([`e878237`](https://github.com/mraniki/tt/commit/e878237ac776a1df466d294d1f794c496845e6ca))
+
+⬆️ 🤖 - Generosity and perfection are your everlasting goals
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency pytest-playwright to ^0.7.0
+  ([`2a2809a`](https://github.com/mraniki/tt/commit/2a2809ad1e78d1231747d04cf265001808a7b27b))
+
+
 ## v10.3.103 (2025-01-31)
 
 ### Other
