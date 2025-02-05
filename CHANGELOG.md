@@ -1,6 +1,30 @@
 # CHANGELOG
 
 
+## v10.3.106 (2025-02-05)
+
+### Other
+
+- Merge pull request #2099 from mraniki/dev
+  ([`a323211`](https://github.com/mraniki/tt/commit/a323211307d242dfeb4f7fd0b55ae470d25ceb7b))
+
+⬆️ 🤖 - Every cloud engenders not a storm
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.36
+  ([#2097](https://github.com/mraniki/tt/pull/2097),
+  [`740a02f`](https://github.com/mraniki/tt/commit/740a02f74846df69a047a9dab36ce073b378a2fc))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.40
+  ([#2098](https://github.com/mraniki/tt/pull/2098),
+  [`9cb5fe2`](https://github.com/mraniki/tt/commit/9cb5fe23c5b879a68459e326b461fc0888600223))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.105 (2025-02-04)
 
 ### Other
