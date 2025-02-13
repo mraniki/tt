@@ -57,8 +57,8 @@ talkytrend = "3.3.16"
 iamlistening = "5.3.38"
 findmyorder = "2.2.11"
 dxsp = "11.1.7"
-cefi = "6.0.0"
-myllm = "4.13.42"
+cefi = "6.0.1"
+myllm = "4.13.43"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = ">=8.0.8"
