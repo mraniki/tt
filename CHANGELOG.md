@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v10.3.112 (2025-02-15)
+
+### Other
+
+- Merge pull request #2113 from mraniki/dev
+  ([`1f0282d`](https://github.com/mraniki/tt/commit/1f0282d2ab759e6ba9c3172f9d3f43d8c084f4ed))
+
+⬆️ 🤖 - You have been selected for a secret mission
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.44
+  ([#2112](https://github.com/mraniki/tt/pull/2112),
+  [`e0c3eaf`](https://github.com/mraniki/tt/commit/e0c3eaf561d19bce9392cf4abe9e1497086dc50d))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.111 (2025-02-13)
 
 ### Other
