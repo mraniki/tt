@@ -1,6 +1,40 @@
 # CHANGELOG
 
 
+## v10.3.113 (2025-02-21)
+
+### Other
+
+- Merge pull request #2120 from mraniki/dev
+  ([`352f546`](https://github.com/mraniki/tt/commit/352f546b2d37c9f7fcaa786a9a05e2ea5c4e1eda))
+
+⬆️ 🤖 - Living your life is a task so difficult it has never been attempted before
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency cefi to v6.0.2 ([#2116](https://github.com/mraniki/tt/pull/2116),
+  [`7d8b493`](https://github.com/mraniki/tt/commit/7d8b49346b116232913047a5f6ea63f45260d748))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency dxsp to v11.1.8 ([#2118](https://github.com/mraniki/tt/pull/2118),
+  [`5dfc8c2`](https://github.com/mraniki/tt/commit/5dfc8c27bc956ad86842768cbb0a9a6c71a24034))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency iamlistening to v5.3.39
+  ([#2119](https://github.com/mraniki/tt/pull/2119),
+  [`1e78f94`](https://github.com/mraniki/tt/commit/1e78f9475f91d086e163be927cd158d04d7c3e93))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.46
+  ([#2115](https://github.com/mraniki/tt/pull/2115),
+  [`78a9c53`](https://github.com/mraniki/tt/commit/78a9c53c9699e2d325bfca083fa13979e2cdf06b))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.112 (2025-02-15)
 
 ### Other
