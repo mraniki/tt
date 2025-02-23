@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v10.3.115 (2025-02-23)
+
+### Other
+
+- Merge pull request #2124 from mraniki/dev
+  ([`c003416`](https://github.com/mraniki/tt/commit/c003416e2b10bb91c2993e76026b5a7c349a0086))
+
+⬆️ 🤖 - You will step on the night soil of many countries
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.47
+  ([#2123](https://github.com/mraniki/tt/pull/2123),
+  [`be2bd2c`](https://github.com/mraniki/tt/commit/be2bd2c4e5e180fce2df8a08c5238bdeb8d89004))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.114 (2025-02-22)
 
 ### Other
