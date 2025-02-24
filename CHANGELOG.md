@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v10.3.116 (2025-02-24)
+
+### Other
+
+- Merge pull request #2126 from mraniki/dev
+  ([`2eccf7f`](https://github.com/mraniki/tt/commit/2eccf7f0553f594cb73e3899a55f2cc6a18c8a1e))
+
+⬆️ 🤖 - And do you think fop that I am that I could be the Scarlet Pumpernickel
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.48
+  ([#2125](https://github.com/mraniki/tt/pull/2125),
+  [`2cc4d65`](https://github.com/mraniki/tt/commit/2cc4d6577e05054471f02e9a4ca50f00ca8662db))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.115 (2025-02-23)
 
 ### Other
