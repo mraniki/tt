@@ -1,6 +1,27 @@
 # CHANGELOG
 
 
+## v10.3.117 (2025-03-02)
+
+### Other
+
+- Merge pull request #2128 from mraniki/dev
+  ([`7a33524`](https://github.com/mraniki/tt/commit/7a335245d168ff6c4b3e0bd06ef87cc7d3ce7f14))
+
+⬆️ 🤖 - October the Discovery
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency fastapi to v0.115.10
+  ([`92349f6`](https://github.com/mraniki/tt/commit/92349f6372b6917d78edacca2fad7fc0390b2f91))
+
+- ⬆️ 🛠️(deps): update dependency fastapi to v0.115.11
+  ([`6891acb`](https://github.com/mraniki/tt/commit/6891acb81f7be4298538139b6e452a84e2f097f8))
+
+- ⬆️ 🛠️(deps): update dependency fastapi to v0.115.9
+  ([`fdae775`](https://github.com/mraniki/tt/commit/fdae775f552ea813eee50a77a892038f7775ed60))
+
+
 ## v10.3.116 (2025-02-24)
 
 ### Other
