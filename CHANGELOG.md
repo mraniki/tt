@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v10.3.118 (2025-03-04)
+
+### Other
+
+- Merge pull request #2132 from mraniki/dev
+  ([`7e2c3ea`](https://github.com/mraniki/tt/commit/7e2c3eac22e094256044479f966398bddb800c95))
+
+⬆️ 🤖 - An avocadotone refrigerator would look good on your resume
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.13.49
+  ([#2131](https://github.com/mraniki/tt/pull/2131),
+  [`b228e3d`](https://github.com/mraniki/tt/commit/b228e3d6e899ed5bbc97b02ee1427a54a8a90c9e))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.117 (2025-03-02)
 
 ### Other
