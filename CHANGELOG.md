@@ -1,6 +1,33 @@
 # CHANGELOG
 
 
+## v10.3.120 (2025-04-26)
+
+### Other
+
+- Build(deps): update pyproject.toml
+  ([`d522040`](https://github.com/mraniki/tt/commit/d522040a3834db419362f59409b2368eedef737e))
+
+- Merge pull request #2139 from mraniki/dev
+  ([`51c7fc4`](https://github.com/mraniki/tt/commit/51c7fc4e9ec6947a3473900a9dd2439627591bfa))
+
+⬆️ 🤖 - Its name is Public Opinion It is held in reverence It settles everything
+
+- Merge pull request #2172 from mraniki/dev
+  ([`880aec1`](https://github.com/mraniki/tt/commit/880aec14d446fe6b77e00f9a89244b00f7e1e5b6))
+
+⬆️
+
+### ⬆️
+
+- ⬆️  ([`21863d2`](https://github.com/mraniki/tt/commit/21863d24f83c4d928bd321983588ca80cbd84c8a))
+
+- ⬆️ 🛠️(deps): update dependency cefi to v6.0.3 ([#2138](https://github.com/mraniki/tt/pull/2138),
+  [`f99a4e8`](https://github.com/mraniki/tt/commit/f99a4e8182642469eae586bb9635aa47af813988))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v10.3.119 (2025-03-06)
 
 ### Other
