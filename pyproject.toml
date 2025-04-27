@@ -52,7 +52,7 @@ dependencies = [
   "ping3==4.0.8", # Pinned
   "feedparser==6.0.11", # Pinned
   "talkytrend==3.3.16", # Pinned
-  "iamlistening==5.3.41", # Pinned
+  "iamlistening==5.4.0", # Pinned
   "findmyorder==2.2.11", # Pinned
   "dxsp==11.1.8", # Pinned
   "cefi==6.0.9", # Pinned
