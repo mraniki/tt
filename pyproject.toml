@@ -55,7 +55,7 @@ dependencies = [
   "iamlistening==5.3.41", # Pinned
   "findmyorder==2.2.11", # Pinned
   "dxsp==11.1.8", # Pinned
-  "cefi==6.0.9", # Pinned
+  "cefi==6.1.0", # Pinned
   "myllm==4.14.1", # Pinned
 ]
 
