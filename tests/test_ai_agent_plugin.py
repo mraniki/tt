@@ -4,11 +4,13 @@ import pytest
 
 from tt.config import settings
 from tt.plugins.default_plugins.ai_agent_plugin import AIAgentPlugin
+from myllm.config import settings as myllm_settings
 
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
+    myllm_settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
 
 
 @pytest.fixture(name="plugin")
