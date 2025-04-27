@@ -4,11 +4,15 @@ build:
   os: "ubuntu-22.04"
   tools:
     python: "3.11"
+    # uv is not directly supported in tools, install via pip below
+    # uv: "latest"
   jobs:
+    # Install uv after the environment is created
     post_create_environment:
-      - python -m pip install poetry
+      - pip install uv
     post_install:
-      - VIRTUAL_ENV=$READTHEDOCS_VIRTUALENV_PATH python -m poetry install --with docs
+      # Install the package with docs extras using uv
+      - uv pip install -e '.[docs]'
 
 sphinx:
   configuration: docs/conf.py
