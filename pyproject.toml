@@ -58,7 +58,7 @@ iamlistening = "5.3.41"
 findmyorder = "2.2.11"
 dxsp = "11.1.8"
 cefi = "6.0.8"
-myllm = "4.13.57"
+myllm = "4.14.1"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = ">=8.0.8"
@@ -77,7 +77,7 @@ myst_parser = "^4.0.0"
 pydata-sphinx-theme = "^0.16.0"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^7.0"
+pytest = "^8.2"
 pytest-asyncio = "^0.23.0"
 pytest-cov = "^6.0.0"
 pytest-loguru = "^0.4.0"

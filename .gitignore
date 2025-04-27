@@ -148,3 +148,4 @@ dxsp/dxsp.sublime-workspace
 .secrets.*
 .settings.*
 *.cfg
+.ruff_cache
