@@ -2,11 +2,11 @@ import os  # Import os
 from unittest.mock import AsyncMock
 
 # Import myllm's config module to help locate its defaults
-import myllm.config as myllm_config_module
+# import myllm.config as myllm_config_module # REMOVED
 import pytest
 
 # Import myllm settings and alias it
-from myllm.config import settings as myllm_settings
+# from myllm.config import settings as myllm_settings # REMOVED
 
 # Import tt settings and alias it
 from tt.config import settings as tt_settings
@@ -16,74 +16,29 @@ from tt.plugins.default_plugins.ai_agent_plugin import AIAgentPlugin
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
     print(
-        "\\nConfiguring settings for [testing] environment in "
+        "\nConfiguring settings for [testing] environment in "
         "test_ai_agent_plugin.py..."
     )
 
-    # --- Determine Paths ---
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    # Assumes tests/ is one level down from tt project root
-    tt_root = os.path.dirname(current_dir)
-    # Main settings from 1P
-    settings_path = os.path.join(tt_root, 'settings.toml')
-    # tt's defaults
-    talky_settings_path = os.path.join(tt_root, 'tt', 'talky_settings.toml')
-    # myllm's internal defaults
-    myllm_default_path = os.path.join(
-        os.path.dirname(myllm_config_module.__file__), 'default_settings.toml'
-    )
-
-    print(f"Located tt settings.toml at: {settings_path}")
-    print(f"Located tt talky_settings.toml at: {talky_settings_path}")
-    print(f"Located myllm default_settings.toml at: {myllm_default_path}")
-
-    # --- Determine Files to Load ---
-    files_to_load_tt = []
-    if os.path.exists(talky_settings_path):
-        files_to_load_tt.append(talky_settings_path)
-    if os.path.exists(settings_path):
-        files_to_load_tt.append(settings_path)
-
-    files_to_load_myllm = []
-    if os.path.exists(myllm_default_path):
-        files_to_load_myllm.append(myllm_default_path)
-    if os.path.exists(talky_settings_path):
-        files_to_load_myllm.append(talky_settings_path)
-    if os.path.exists(settings_path):
-        files_to_load_myllm.append(settings_path)
+    # --- REMOVED PATH AND FILE LOADING LOGIC --- 
 
     # --- Configure tt's main settings ---
-    print(f"Configuring tt_settings with files: {files_to_load_tt}")
+    # Use ENVVAR_PREFIX_FOR_DYNACONF to ensure TT_CONFIG_DIR is respected
     tt_settings.configure(
         FORCE_ENV_FOR_DYNACONF="testing",
-        SETTINGS_FILE_FOR_DYNACONF=files_to_load_tt,
-        ENVVAR_PREFIX_FOR_DYNACONF="TT"
+        ENVVAR_PREFIX_FOR_DYNACONF="TT" # Ensures TT_ settings are loaded
     )
     print(f"tt.config.settings current_env after config: {tt_settings.current_env}")
 
-    # --- Configure myllm's settings ---
-    print(f"Configuring myllm_settings with files: {files_to_load_myllm}")
-    myllm_settings.configure(
-        FORCE_ENV_FOR_DYNACONF="testing",
-        SETTINGS_FILE_FOR_DYNACONF=files_to_load_myllm, # Explicitly load correct files
-        ENVVAR_PREFIX_FOR_DYNACONF="TT" # Match prefix
-    )
-    print(
-        f"myllm.config.settings current_env after config: "
-        f"{myllm_settings.current_env}"
-    )
+    # --- REMOVED myllm_settings.configure() --- 
 
-    # Optional: Verify keys exist after loading
+    # Optional: Verify keys exist after loading (using tt_settings)
     print(
         f"tt_settings exists('myllm_enabled')? {tt_settings.exists('myllm_enabled')}"
     )
-    print(
-        f"myllm_settings exists('myllm_enabled')? "
-        f"{myllm_settings.exists('myllm_enabled')}"
-    )
     # Use .get() for safety in debug print
     print(
-        f"Value in myllm_settings: {myllm_settings.get('myllm_enabled')}"
+        f"Value tt_settings for myllm_enabled: {tt_settings.get('myllm_enabled')}"
     )
 
     print("Settings configuration complete in test_ai_agent_plugin.py.")
@@ -92,16 +47,7 @@ def set_test_settings():
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():
     print("\nCreating AIAgentPlugin instance in test_fixture_plugin...")
-    # Use tt_settings here as AIAgentPlugin imports from tt.config
-    print(
-        f"Value of tt_settings.myllm_enabled before plugin init: "
-        f"{tt_settings.get('myllm_enabled')}"
-    )
-    # We can still check myllm_settings for comparison if needed
-    print(
-        f"Value of myllm_settings.myllm_enabled before plugin init: "
-        f"{myllm_settings.get('myllm_enabled')}"
-    )
+    # Settings should be loaded by the simplified fixture now
     plugin = AIAgentPlugin()
     print("AIAgentPlugin instance created.")
     return plugin

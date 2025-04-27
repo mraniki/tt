@@ -1,16 +1,10 @@
 import os
 from unittest.mock import AsyncMock
 
-import cefi.config as cefi_config_module
-import dxsp.config as dxsp_config_module
-import findmyorder.config as findmyorder_config_module
 import pytest
 from cefi import CexTrader
-from cefi.config import settings as cefi_settings
 from dxsp import DexSwap
-from dxsp.config import settings as dxsp_settings
 from findmyorder import FindMyOrder
-from findmyorder.config import settings as findmyorder_settings
 
 from tt.config import settings as tt_settings
 from tt.plugins.default_plugins.exchange_plugin import UnifiedExchangePlugin
@@ -19,67 +13,9 @@ from tt.plugins.default_plugins.exchange_plugin import UnifiedExchangePlugin
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings_exchange():
     print(
-        "\\nConfiguring settings for [testing] environment "
+        "\nConfiguring settings for [testing] environment "
         "in test_exchange_plugin.py..."
     )
-
-    # --- Determine Paths ---
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    tt_root = os.path.dirname(current_dir)
-    settings_path = os.path.join(tt_root, 'settings.toml')
-    talky_settings_path = os.path.join(tt_root, 'tt', 'talky_settings.toml')
-    # Lib default paths (assuming standard structure)
-    findmyorder_default_path = os.path.join(
-        os.path.dirname(findmyorder_config_module.__file__),
-        'default_settings.toml'
-    )
-    cefi_default_path = os.path.join(
-        os.path.dirname(cefi_config_module.__file__),
-        'default_settings.toml'
-    )
-    dxsp_default_path = os.path.join(
-        os.path.dirname(dxsp_config_module.__file__),
-        'default_settings.toml'
-    )
-
-    print(f"Located tt settings.toml at: {settings_path}")
-    print(f"Located tt talky_settings.toml at: {talky_settings_path}")
-
-    # --- Determine Files to Load ---
-    files_to_load_tt = []
-    if os.path.exists(talky_settings_path):
-        files_to_load_tt.append(talky_settings_path)
-    if os.path.exists(settings_path):
-        files_to_load_tt.append(settings_path)
-
-    # Lib files (adjust based on actual loading logic if needed)
-    files_to_load_findmyorder = []
-    if os.path.exists(findmyorder_default_path):
-        files_to_load_findmyorder.append(
-            findmyorder_default_path
-        )
-    if os.path.exists(talky_settings_path):
-        files_to_load_findmyorder.append(
-            talky_settings_path
-        )
-    if os.path.exists(settings_path):
-        files_to_load_findmyorder.append(settings_path)
-
-    files_to_load_cefi = []
-    if os.path.exists(cefi_default_path):
-        files_to_load_cefi.append(cefi_default_path)
-    if os.path.exists(talky_settings_path):
-        files_to_load_cefi.append(talky_settings_path)
-    if os.path.exists(settings_path):
-        files_to_load_cefi.append(settings_path)
-
-    files_to_load_dxsp = []
-    if os.path.exists(dxsp_default_path):
-        files_to_load_dxsp.append(dxsp_default_path)
-    if os.path.exists(talky_settings_path):
-        files_to_load_dxsp.append(talky_settings_path)
-    if os.path.exists(settings_path):
-        files_to_load_dxsp.append(settings_path)
 
     # --- Configure Settings Objects ---
     common_config = {
@@ -87,43 +23,22 @@ def set_test_settings_exchange():
         "ENVVAR_PREFIX_FOR_DYNACONF": "TT"
     }
 
-    print(f"Configuring tt_settings with files: {files_to_load_tt}")
-    tt_settings.configure(**common_config, SETTINGS_FILE_FOR_DYNACONF=files_to_load_tt)
+    print("Configuring tt_settings...")
+    tt_settings.configure(**common_config)
 
-    print(f"Configuring findmyorder_settings with files: {files_to_load_findmyorder}")
-    findmyorder_settings.configure(
-        **common_config,
-        SETTINGS_FILE_FOR_DYNACONF=files_to_load_findmyorder
-    )
-
-    print(f"Configuring cefi_settings with files: {files_to_load_cefi}")
-    cefi_settings.configure(
-        **common_config,
-        SETTINGS_FILE_FOR_DYNACONF=files_to_load_cefi
-    )
-
-    print(f"Configuring dxsp_settings with files: {files_to_load_dxsp}")
-    dxsp_settings.configure(
-        **common_config,
-        SETTINGS_FILE_FOR_DYNACONF=files_to_load_dxsp
-    )
-
-    # Optional: Verify keys
+    # Optional: Verify keys (using tt_settings)
     print(
-        f"findmyorder_settings exists('findmyorder_enabled')? "
-        f"{findmyorder_settings.exists('findmyorder_enabled')}"
+        f"tt_settings exists('findmyorder_enabled')? "
+        f"{tt_settings.exists('findmyorder_enabled')}"
     )
-    print(f"findmyorder value: {findmyorder_settings.get('findmyorder_enabled')}")
     print(
-        f"cefi_settings exists('cex_enabled')? "
-        f"{cefi_settings.exists('cex_enabled')}"
+        f"tt_settings exists('cex_enabled')? "
+        f"{tt_settings.exists('cex_enabled')}"
     )
-    print(f"cefi value: {cefi_settings.get('cex_enabled')}")
     print(
-        f"dxsp_settings exists('dxsp_enabled')? "
-        f"{dxsp_settings.exists('dxsp_enabled')}"
+        f"tt_settings exists('dxsp_enabled')? "
+        f"{tt_settings.exists('dxsp_enabled')}"
     )
-    print(f"dxsp value: {dxsp_settings.get('dxsp_enabled')}")
 
     print("Settings configuration complete in test_exchange_plugin.py.")
 

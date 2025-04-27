@@ -5,11 +5,9 @@
 import os
 from unittest.mock import AsyncMock
 
-import iamlistening.config as iamlistening_config_module
 import pytest
 from fastapi.testclient import TestClient
 from iamlistening import Listener
-from iamlistening.config import settings as iamlistening_settings
 
 from tt.app import app
 from tt.config import settings as tt_settings
@@ -21,62 +19,21 @@ from tt.utils.version import check_version
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings_unit():
     print(
-        "\\nConfiguring settings for [testing] environment "
+        "\nConfiguring settings for [testing] environment "
         "in test_unit.py..."
     )
-
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    tt_root = os.path.dirname(current_dir)
-    settings_path = os.path.join(tt_root, 'settings.toml')
-    talky_settings_path = os.path.join(tt_root, 'tt', 'talky_settings.toml')
-    # Path to iamlistening's internal default settings
-    iamlistening_default_path = os.path.join(
-        os.path.dirname(iamlistening_config_module.__file__),
-        'default_settings.toml'
-    )
-
-    print(f"Located tt settings.toml at: {settings_path}")
-    print(f"Located tt talky_settings.toml at: {talky_settings_path}")
-
-    files_to_load_tt = []
-    if os.path.exists(talky_settings_path):
-        files_to_load_tt.append(talky_settings_path)
-    if os.path.exists(settings_path):
-        files_to_load_tt.append(settings_path)
-
-    files_to_load_iamlistening = []
-    if os.path.exists(iamlistening_default_path):
-        files_to_load_iamlistening.append(iamlistening_default_path)
-    if os.path.exists(talky_settings_path):
-        files_to_load_iamlistening.append(talky_settings_path)
-    if os.path.exists(settings_path):
-        files_to_load_iamlistening.append(settings_path)
 
     common_config = {
         "FORCE_ENV_FOR_DYNACONF": "testing",
         "ENVVAR_PREFIX_FOR_DYNACONF": "TT"
     }
 
-    print(f"Configuring tt_settings with files: {files_to_load_tt}")
-    tt_settings.configure(
-        **common_config,
-        SETTINGS_FILE_FOR_DYNACONF=files_to_load_tt
-    )
-
-    print("Configuring iamlistening_settings with files: "
-          f"{files_to_load_iamlistening}")
-    iamlistening_settings.configure(
-        **common_config,
-        SETTINGS_FILE_FOR_DYNACONF=files_to_load_iamlistening
-    )
+    print("Configuring tt_settings...")
+    tt_settings.configure(**common_config)
 
     print(
-        "iamlistening_settings exists('iamlistening_enabled')? "
-        f"{iamlistening_settings.exists('iamlistening_enabled')}"
-    )
-    print(
-        f"iamlistening value: "
-        f"{iamlistening_settings.get('iamlistening_enabled')}"
+        f"tt_settings exists('iamlistening_enabled')? "
+        f"{tt_settings.exists('iamlistening_enabled')}"
     )
     print(
         f"Value in tt_settings for check: {tt_settings.get('VALUE')}"
