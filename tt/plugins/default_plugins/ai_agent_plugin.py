@@ -39,7 +39,7 @@ class AIAgentPlugin(BasePlugin):
             None
         """
         super().__init__()
-        self.enabled = settings.myllm_enabled
+        self.enabled = settings.myllm_enabled or True
         self.ai_agent_mode = settings.ai_agent_mode or False
         self.ai_agent_prefix = settings.ai_agent_prefix or None
         self.bot_command_aiclear = settings.bot_command_aiclear
