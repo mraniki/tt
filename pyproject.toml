@@ -51,11 +51,11 @@ dependencies = [
   "nicegui==1.4.9", # Pinned
   "ping3==4.0.8", # Pinned
   "feedparser==6.0.11", # Pinned
-  "talkytrend==3.4.0", # Pinned
-  "iamlistening==5.4.0", # Pinned
-  "findmyorder==3.0.0", # Pinned
+  "talkytrend==4.0.0", # Pinned
+  "iamlistening==6.0.0", # Pinned
+  "findmyorder==4.0.0", # Pinned
   "dxsp==12.0.1", # Pinned
-  "cefi==6.1.0", # Pinned
+  "cefi==7.0.0", # Pinned
   "myllm==4.14.1", # Pinned
 ]
 
