@@ -1,14 +1,57 @@
 from unittest.mock import AsyncMock
 
 import pytest
+import os # Import os
 
-from tt.config import settings
+from tt.config import settings as tt_settings
+# Import & Alias Lib settings
+from talkytrend.config import settings as talkytrend_settings
+import talkytrend.config as talkytrend_config_module
+
 from tt.plugins.default_plugins.talkytrend_plugin import TalkyTrendPlugin
 
 
 @pytest.fixture(scope="session", autouse=True)
-def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
+def set_test_settings_talkytrend(): # Renamed for clarity
+    print("\nConfiguring settings for [testing] environment in test_talkytrend_plugin.py...")
+
+    # --- Determine Paths ---
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    tt_root = os.path.dirname(current_dir)
+    settings_path = os.path.join(tt_root, 'settings.toml')
+    talky_settings_path = os.path.join(tt_root, 'tt', 'talky_settings.toml')
+    talkytrend_default_path = os.path.join(os.path.dirname(talkytrend_config_module.__file__), 'default_settings.toml')
+
+    print(f"Located tt settings.toml at: {settings_path}")
+    print(f"Located tt talky_settings.toml at: {talky_settings_path}")
+
+    # --- Determine Files to Load ---
+    files_to_load_tt = []
+    if os.path.exists(talky_settings_path): files_to_load_tt.append(talky_settings_path)
+    if os.path.exists(settings_path): files_to_load_tt.append(settings_path)
+
+    files_to_load_talkytrend = []
+    if os.path.exists(talkytrend_default_path): files_to_load_talkytrend.append(talkytrend_default_path)
+    if os.path.exists(talky_settings_path): files_to_load_talkytrend.append(talky_settings_path)
+    if os.path.exists(settings_path): files_to_load_talkytrend.append(settings_path)
+
+    # --- Configure Settings Objects ---
+    common_config = {
+        "FORCE_ENV_FOR_DYNACONF": "testing",
+        "ENVVAR_PREFIX_FOR_DYNACONF": "TT"
+    }
+
+    print(f"Configuring tt_settings with files: {files_to_load_tt}")
+    tt_settings.configure(**common_config, SETTINGS_FILE_FOR_DYNACONF=files_to_load_tt)
+
+    print(f"Configuring talkytrend_settings with files: {files_to_load_talkytrend}")
+    talkytrend_settings.configure(**common_config, SETTINGS_FILE_FOR_DYNACONF=files_to_load_talkytrend)
+
+    # Optional: Verify keys
+    print(f"talkytrend_settings exists('talkytrend_enabled')? {talkytrend_settings.exists('talkytrend_enabled')}")
+    print(f"talkytrend value: {talkytrend_settings.get('talkytrend_enabled')}")
+
+    print("Settings configuration complete in test_talkytrend_plugin.py.")
 
 
 @pytest.fixture(name="plugin")

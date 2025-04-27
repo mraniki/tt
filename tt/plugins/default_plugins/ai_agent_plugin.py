@@ -49,8 +49,11 @@ class AIAgentPlugin(BasePlugin):
         self.bot_command_aimode = settings.bot_command_aimode
         self.browser_url = settings.browser_url
 
+        print(f"\nAIAgentPlugin.__init__: self.enabled = {self.enabled}")
         if self.enabled:
+            print("AIAgentPlugin.__init__: Initializing MyLLM()...")
             self.ai_agent = MyLLM()
+            print("AIAgentPlugin.__init__: MyLLM() initialized.")
 
     async def handle_message(self, msg):
         """
