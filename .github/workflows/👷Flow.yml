@@ -7,6 +7,9 @@ on:
   workflow_dispatch:
   merge_group:
 
+env: # Set environment for all jobs in this workflow
+  TT_ENV: testing
+
 jobs:
   lint:
     # uses: mraniki/coding_toolset/.github/workflows/🦺Lint.yml@main
@@ -17,8 +20,6 @@ jobs:
     # uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
     uses: mraniki/coding_toolset/.github/workflows/UVTest.yml@main
     secrets: inherit
-    env:
-      TT_ENV: testing
   build:
     needs: [lint]
     # uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main
