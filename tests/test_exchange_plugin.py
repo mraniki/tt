@@ -9,59 +9,17 @@ from findmyorder import FindMyOrder
 from tt.config import settings as tt_settings
 from tt.plugins.default_plugins.exchange_plugin import UnifiedExchangePlugin
 
-# Try to import the module for reloading
-try:
-    import findmyorder.main as findmyorder_main
-except ImportError:
-    findmyorder_main = None
-    print(
-        "Warning: Could not import findmyorder.main for reloading "
-        "in test_exchange_plugin."
-    )
+# Remove module import attempt for reloading
+# try:
+#     import findmyorder.main as findmyorder_main
+# except ImportError:
+#     findmyorder_main = None
+#     print("Warning: Could not import findmyorder.main...")
 
-
-@pytest.fixture(scope="session", autouse=True)
-def set_test_settings_exchange():
-    print(
-        "\nConfiguring settings for [testing] environment "
-        "in test_exchange_plugin.py..."
-    )
-    common_config = {
-        "FORCE_ENV_FOR_DYNACONF": "testing",
-        "ENVVAR_PREFIX_FOR_DYNACONF": "TT"
-    }
-    print("Configuring tt_settings...")
-    tt_settings.configure(**common_config)
-    tt_settings.reload()
-    # Optional: Verify keys (using tt_settings)
-    print(
-        f"tt_settings exists('findmyorder_enabled')? "
-        f"{tt_settings.exists('findmyorder_enabled')}"
-    )
-    print(
-        f"tt_settings exists('cex_enabled')? "
-        f"{tt_settings.exists('cex_enabled')}"
-    )
-    print(
-        f"tt_settings exists('dxsp_enabled')? "
-        f"{tt_settings.exists('dxsp_enabled')}"
-    )
-    print(
-        f"tt_settings.findmyorder exists after reload? "
-        f"{tt_settings.exists('findmyorder')}"
-    )
-    # Reload the dependent library module
-    if findmyorder_main:
-        try:
-            importlib.reload(findmyorder_main)
-            print("Reloaded findmyorder.main")
-        except Exception as e:
-            print(f"ERROR: Failed to reload findmyorder.main: {e}")
-    else:
-        print("Skipping reload for findmyorder.main (not imported).")
-
-    print("Settings configuration complete in test_exchange_plugin.py.")
-
+# Remove local set_test_settings_exchange fixture
+# @pytest.fixture(scope="session", autouse=True)
+# def set_test_settings_exchange():
+#    ...
 
 @pytest.fixture(name="order_message")
 def order():

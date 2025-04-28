@@ -1,46 +1,21 @@
 import os  # Import os
 from unittest.mock import AsyncMock
 import pytest
-import importlib # Add importlib
-from tt.config import settings as tt_settings # Use tt_settings alias
+import importlib # Keep importlib if needed elsewhere, remove if only for fixture
+from tt.config import settings as tt_settings # Keep tt_settings if needed
 from tt.plugins.default_plugins.ai_agent_plugin import AIAgentPlugin
 
-# Try to import the module for reloading
-try:
-    import myllm.main as myllm_main
-except ImportError:
-    myllm_main = None
-    print("Warning: Could not import myllm.main for reloading in test_ai_agent_plugin.")
+# Remove module import attempt for reloading
+# try:
+#     import myllm.main as myllm_main
+# except ImportError:
+#     myllm_main = None
+#     print("Warning: Could not import myllm.main...")
 
-@pytest.fixture(scope="session", autouse=True)
-def set_test_settings_ai_agent():
-    print(
-        "\nConfiguring settings for [testing] environment "
-        "in test_ai_agent_plugin.py..."
-    )
-    common_config = {
-        "FORCE_ENV_FOR_DYNACONF": "testing",
-        "ENVVAR_PREFIX_FOR_DYNACONF": "TT"
-    }
-    print("Configuring tt_settings...")
-    tt_settings.configure(**common_config)
-    tt_settings.reload()
-    print(
-        f"tt_settings exists('myllm_enabled') after reload? "
-        f"{tt_settings.exists('myllm_enabled')}"
-    )
-    # Reload the dependent library module
-    if myllm_main:
-        try:
-            importlib.reload(myllm_main)
-            print("Reloaded myllm.main")
-        except Exception as e:
-            print(f"ERROR: Failed to reload myllm.main: {e}")
-    else:
-        print("Skipping reload for myllm.main (not imported).")
-
-    print("Settings configuration complete in test_ai_agent_plugin.py.")
-
+# Remove local set_test_settings_ai_agent fixture
+# @pytest.fixture(scope="session", autouse=True)
+# def set_test_settings_ai_agent():
+#     ...
 
 @pytest.fixture(name="plugin")
 def test_fixture_plugin(): # Removed set_test_settings dependency

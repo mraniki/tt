@@ -17,6 +17,8 @@ jobs:
     # uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
     uses: mraniki/coding_toolset/.github/workflows/UVTest.yml@main
     secrets: inherit
+    env:
+      TT_ENV: testing
   build:
     needs: [lint]
     # uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main

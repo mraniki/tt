@@ -1,7 +1,7 @@
 import os  # Import os
 from unittest.mock import AsyncMock
 import pytest
-import importlib # Add importlib
+import importlib # Keep if needed elsewhere
 # import talkytrend.config as talkytrend_config_module # REMOVED
 
 # Import & Alias Lib settings
@@ -10,52 +10,17 @@ import importlib # Add importlib
 from tt.config import settings as tt_settings
 from tt.plugins.default_plugins.talkytrend_plugin import TalkyTrendPlugin
 
-# Try to import the module for reloading
-try:
-    import talkytrend.main as talkytrend_main
-except ImportError:
-    talkytrend_main = None
-    print(
-        "Warning: Could not import talkytrend.main for reloading "
-        "in test_talkytrend_plugin."
-    )
+# Remove module import attempt for reloading
+# try:
+#     import talkytrend.main as talkytrend_main
+# except ImportError:
+#     talkytrend_main = None
+#     print("Warning: Could not import talkytrend.main...")
 
-
-@pytest.fixture(scope="session", autouse=True)
-def set_test_settings_talkytrend():
-    print(
-        "\nConfiguring settings for [testing] environment "
-        "in test_talkytrend_plugin.py..."
-    )
-    common_config = {
-        "FORCE_ENV_FOR_DYNACONF": "testing",
-        "ENVVAR_PREFIX_FOR_DYNACONF": "TT"
-    }
-    print("Configuring tt_settings...")
-    tt_settings.configure(**common_config)
-    # Reload to ensure all settings for the environment are loaded
-    tt_settings.reload()
-    # Optional: Verify keys (using tt_settings)
-    print(
-        f"tt_settings exists('talkytrend_enabled')? "
-        f"{tt_settings.exists('talkytrend_enabled')}"
-    )
-    print(
-        f"tt_settings.talkytrend exists after reload? "
-        f"{tt_settings.exists('talkytrend')}"
-    )
-    # Reload the dependent library module
-    if talkytrend_main:
-        try:
-            importlib.reload(talkytrend_main)
-            print("Reloaded talkytrend.main")
-        except Exception as e:
-            print(f"ERROR: Failed to reload talkytrend.main: {e}")
-    else:
-        print("Skipping reload for talkytrend.main (not imported).")
-
-    print("Settings configuration complete in test_talkytrend_plugin.py.")
-
+# Remove local set_test_settings_talkytrend fixture
+# @pytest.fixture(scope="session", autouse=True)
+# def set_test_settings_talkytrend():
+#     ...
 
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():
