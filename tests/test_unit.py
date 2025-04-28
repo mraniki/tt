@@ -3,6 +3,7 @@
 """
 
 import os
+import sys
 from unittest.mock import AsyncMock
 
 import pytest
@@ -137,6 +138,7 @@ async def test_start_bot(message):
     # get_latest_message = AsyncMock() # F841 Unused variable
     # process_message = AsyncMock() # F841 Unused variable
     print(tt_settings)
+    print(f"sys.path before Listener init: {sys.path}")
     listener = Listener()
     assert listener is not None
     assert isinstance(listener, Listener)
