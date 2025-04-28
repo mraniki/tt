@@ -15,7 +15,10 @@ try:
     import talkytrend.main as talkytrend_main
 except ImportError:
     talkytrend_main = None
-    print("Warning: Could not import talkytrend.main for reloading in test_talkytrend_plugin.")
+    print(
+        "Warning: Could not import talkytrend.main for reloading "
+        "in test_talkytrend_plugin."
+    )
 
 
 @pytest.fixture(scope="session", autouse=True)

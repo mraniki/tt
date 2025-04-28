@@ -14,7 +14,10 @@ try:
     import findmyorder.main as findmyorder_main
 except ImportError:
     findmyorder_main = None
-    print("Warning: Could not import findmyorder.main for reloading in test_exchange_plugin.")
+    print(
+        "Warning: Could not import findmyorder.main for reloading "
+        "in test_exchange_plugin."
+    )
 
 
 @pytest.fixture(scope="session", autouse=True)

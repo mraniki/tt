@@ -22,7 +22,10 @@ try:
     import iamlistening.main as iamlistening_main
 except ImportError:
     iamlistening_main = None
-    print("Warning: Could not import iamlistening.main for reloading in test_unit_exception.")
+    print(
+        "Warning: Could not import iamlistening.main for reloading "
+        "in test_unit_exception."
+    )
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings_unit_exception():
