@@ -1,55 +1,52 @@
 import os  # Import os
 from unittest.mock import AsyncMock
-
-# Import myllm's config module to help locate its defaults
-# import myllm.config as myllm_config_module # REMOVED
 import pytest
-
-# Import myllm settings and alias it
-# from myllm.config import settings as myllm_settings # REMOVED
-
-# Import tt settings and alias it
-from tt.config import settings as tt_settings
+import importlib # Add importlib
+from tt.config import settings as tt_settings # Use tt_settings alias
 from tt.plugins.default_plugins.ai_agent_plugin import AIAgentPlugin
 
+# Try to import the module for reloading
+try:
+    import myllm.main as myllm_main
+except ImportError:
+    myllm_main = None
+    print("Warning: Could not import myllm.main for reloading in test_ai_agent_plugin.")
 
 @pytest.fixture(scope="session", autouse=True)
-def set_test_settings():
+def set_test_settings_ai_agent():
     print(
-        "\nConfiguring settings for [testing] environment in "
-        "test_ai_agent_plugin.py..."
+        "\nConfiguring settings for [testing] environment "
+        "in test_ai_agent_plugin.py..."
     )
-
-    # --- REMOVED PATH AND FILE LOADING LOGIC --- 
-
-    # --- Configure tt's main settings ---
-    # Use ENVVAR_PREFIX_FOR_DYNACONF to ensure TT_CONFIG_DIR is respected
-    tt_settings.configure(
-        FORCE_ENV_FOR_DYNACONF="testing",
-        ENVVAR_PREFIX_FOR_DYNACONF="TT" # Ensures TT_ settings are loaded
-    )
-    print(f"tt.config.settings current_env after config: {tt_settings.current_env}")
-
-    # --- REMOVED myllm_settings.configure() --- 
-
-    # Optional: Verify keys exist after loading (using tt_settings)
+    common_config = {
+        "FORCE_ENV_FOR_DYNACONF": "testing",
+        "ENVVAR_PREFIX_FOR_DYNACONF": "TT"
+    }
+    print("Configuring tt_settings...")
+    tt_settings.configure(**common_config)
+    tt_settings.reload()
     print(
-        f"tt_settings exists('myllm_enabled')? {tt_settings.exists('myllm_enabled')}"
+        f"tt_settings exists('myllm_enabled') after reload? "
+        f"{tt_settings.exists('myllm_enabled')}"
     )
-    # Use .get() for safety in debug print
-    print(
-        f"Value tt_settings for myllm_enabled: {tt_settings.get('myllm_enabled')}"
-    )
+    # Reload the dependent library module
+    if myllm_main:
+        try:
+            importlib.reload(myllm_main)
+            print("Reloaded myllm.main")
+        except Exception as e:
+            print(f"ERROR: Failed to reload myllm.main: {e}")
+    else:
+        print("Skipping reload for myllm.main (not imported).")
 
     print("Settings configuration complete in test_ai_agent_plugin.py.")
 
 
 @pytest.fixture(name="plugin")
-def test_fixture_plugin():
-    print("\nCreating AIAgentPlugin instance in test_fixture_plugin...")
-    # Settings should be loaded by the simplified fixture now
+def test_fixture_plugin(): # Removed set_test_settings dependency
+    """Fixture to create an AIAgentPlugin instance with test settings."""
+    # AIAgentPlugin will now use the globally modified tt_settings
     plugin = AIAgentPlugin()
-    print("AIAgentPlugin instance created.")
     return plugin
 
 

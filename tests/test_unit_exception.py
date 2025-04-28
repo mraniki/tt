@@ -13,6 +13,46 @@ from tt.app import app
 from tt.plugins.plugin_manager import PluginManager
 from tt.utils.utils import start_bot
 
+import asyncio
+import importlib
+from tt.config import settings as tt_settings
+
+# Try to import the module for reloading
+try:
+    import iamlistening.main as iamlistening_main
+except ImportError:
+    iamlistening_main = None
+    print("Warning: Could not import iamlistening.main for reloading in test_unit_exception.")
+
+@pytest.fixture(scope="session", autouse=True)
+def set_test_settings_unit_exception():
+    print(
+        "\nConfiguring settings for [testing] environment "
+        "in test_unit_exception.py..."
+    )
+    common_config = {
+        "FORCE_ENV_FOR_DYNACONF": "testing",
+        "ENVVAR_PREFIX_FOR_DYNACONF": "TT"
+    }
+    print("Configuring tt_settings...")
+    tt_settings.configure(**common_config)
+    tt_settings.reload()
+    print(
+        f"tt_settings exists('iamlistening_enabled') after reload? "
+        f"{tt_settings.exists('iamlistening_enabled')}"
+    )
+    # Reload the dependent library module
+    if iamlistening_main:
+        try:
+            importlib.reload(iamlistening_main)
+            print("Reloaded iamlistening.main")
+        except Exception as e:
+            print(f"ERROR: Failed to reload iamlistening.main: {e}")
+    else:
+        print("Skipping reload for iamlistening.main (not imported).")
+
+    print("Settings configuration complete in test_unit_exception.py.")
+
 
 @pytest.fixture(name="message")
 def message_test():
