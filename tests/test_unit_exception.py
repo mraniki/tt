@@ -13,6 +13,9 @@ from tt.app import app
 from tt.plugins.plugin_manager import PluginManager
 from tt.utils.utils import start_bot
 
+import asyncio
+import importlib
+from tt.config import settings as tt_settings
 
 @pytest.fixture(name="message")
 def message_test():

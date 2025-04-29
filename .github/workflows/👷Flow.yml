@@ -7,24 +7,32 @@ on:
   workflow_dispatch:
   merge_group:
 
+env: # Set environment for all jobs in this workflow
+  TT_ENV: testing
+  ENV_FOR_DYNACONF: testing # Ensure Dynaconf uses testing env
+
 jobs:
   lint:
-    uses: mraniki/coding_toolset/.github/workflows/🦺Lint.yml@main
+    # uses: mraniki/coding_toolset/.github/workflows/🦺Lint.yml@main
+    uses: mraniki/coding_toolset/.github/workflows/UVLint.yml@main
     secrets: inherit
   test:
     needs: [lint]
-    uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
+    # uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
+    uses: mraniki/coding_toolset/.github/workflows/UVTest.yml@main
     secrets: inherit
   build:
     needs: [lint]
-    uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main
+    # uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main
+    uses: mraniki/coding_toolset/.github/workflows/UVBuild.yml@main
     secrets: inherit
   release:
     needs: [build, test]
-    uses: mraniki/coding_toolset/.github/workflows/📦Release.yml@main
+    # uses: mraniki/coding_toolset/.github/workflows/📦Release.yml@main
+    uses: mraniki/coding_toolset/.github/workflows/UVRelease.yml@main # Use UV-specific release workflow
     secrets: inherit
     with:
-      pypi_publish: false
+      pypi_publish: false # Keep this specific parameter
   mirror:
     if: always()
     needs: [release]

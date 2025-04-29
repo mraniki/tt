@@ -1,19 +1,28 @@
+import os  # Import os
 from unittest.mock import AsyncMock
-
 import pytest
-
-from tt.config import settings
+import importlib # Keep importlib if needed elsewhere, remove if only for fixture
+from tt.config import settings as tt_settings # Keep tt_settings if needed
 from tt.plugins.default_plugins.ai_agent_plugin import AIAgentPlugin
 
+# Remove module import attempt for reloading
+# try:
+#     import myllm.main as myllm_main
+# except ImportError:
+#     myllm_main = None
+#     print("Warning: Could not import myllm.main...")
 
-@pytest.fixture(scope="session", autouse=True)
-def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
-
+# Remove local set_test_settings_ai_agent fixture
+# @pytest.fixture(scope="session", autouse=True)
+# def set_test_settings_ai_agent():
+#     ...
 
 @pytest.fixture(name="plugin")
-def test_fixture_plugin():
-    return AIAgentPlugin()
+def test_fixture_plugin(): # Removed set_test_settings dependency
+    """Fixture to create an AIAgentPlugin instance with test settings."""
+    # AIAgentPlugin will now use the globally modified tt_settings
+    plugin = AIAgentPlugin()
+    return plugin
 
 
 @pytest.mark.asyncio

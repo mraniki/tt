@@ -14,6 +14,7 @@ ENV OP_PATH=/usr/bin/op
 ENV OP_SERVICE_ACCOUNT_TOKEN=""
 ENV OP_VAULT = ""
 ENV OP_ITEM = ""
+ENV TT_CONFIG_DIR=/app
 
 ##
 # Install Interative Brokers Gateway

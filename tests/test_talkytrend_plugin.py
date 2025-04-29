@@ -1,15 +1,26 @@
+import os  # Import os
 from unittest.mock import AsyncMock
-
 import pytest
+import importlib # Keep if needed elsewhere
+# import talkytrend.config as talkytrend_config_module # REMOVED
 
-from tt.config import settings
+# Import & Alias Lib settings
+# from talkytrend.config import settings as talkytrend_settings # REMOVED
+
+from tt.config import settings as tt_settings
 from tt.plugins.default_plugins.talkytrend_plugin import TalkyTrendPlugin
 
+# Remove module import attempt for reloading
+# try:
+#     import talkytrend.main as talkytrend_main
+# except ImportError:
+#     talkytrend_main = None
+#     print("Warning: Could not import talkytrend.main...")
 
-@pytest.fixture(scope="session", autouse=True)
-def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
-
+# Remove local set_test_settings_talkytrend fixture
+# @pytest.fixture(scope="session", autouse=True)
+# def set_test_settings_talkytrend():
+#     ...
 
 @pytest.fixture(name="plugin")
 def test_fixture_plugin():

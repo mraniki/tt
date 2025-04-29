@@ -1,18 +1,25 @@
+import os
 from unittest.mock import AsyncMock
-
 import pytest
+import importlib
 from cefi import CexTrader
 from dxsp import DexSwap
 from findmyorder import FindMyOrder
 
-from tt.config import settings
+from tt.config import settings as tt_settings
 from tt.plugins.default_plugins.exchange_plugin import UnifiedExchangePlugin
 
+# Remove module import attempt for reloading
+# try:
+#     import findmyorder.main as findmyorder_main
+# except ImportError:
+#     findmyorder_main = None
+#     print("Warning: Could not import findmyorder.main...")
 
-@pytest.fixture(scope="session", autouse=True)
-def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
-
+# Remove local set_test_settings_exchange fixture
+# @pytest.fixture(scope="session", autouse=True)
+# def set_test_settings_exchange():
+#    ...
 
 @pytest.fixture(name="order_message")
 def order():
