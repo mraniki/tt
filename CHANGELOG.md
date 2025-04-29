@@ -1,6 +1,132 @@
 # CHANGELOG
 
 
+## v11.0.0 (2025-04-29)
+
+### Other
+
+- Build(deps): update pyproject.toml
+  ([`ec692bb`](https://github.com/mraniki/tt/commit/ec692bbdd5cc7e78e369a83192c8636475ffeab2))
+
+- Build(deps): update pyproject.toml
+  ([`2411f19`](https://github.com/mraniki/tt/commit/2411f197136de873b8175ae2eccc9a8c93d8ddfb))
+
+- Build(deps): update pyproject.toml
+  ([`d9a2cdd`](https://github.com/mraniki/tt/commit/d9a2cdd459f0c8476b8086b9f35ea319045badf7))
+
+- Build(deps): update pyproject.toml
+  ([`94c0493`](https://github.com/mraniki/tt/commit/94c049302781a9dfeac43bc5e8d1798929cc0c23))
+
+- Build(deps): update pyproject.toml
+  ([`faff5db`](https://github.com/mraniki/tt/commit/faff5dbdc88d4c2ad5ae298b9070f1abb9057b9a))
+
+- Build(deps): update pyproject.toml
+  ([`4a93660`](https://github.com/mraniki/tt/commit/4a93660ebf3ced7d4811a8042461c9269ef0d23a))
+
+- Build(deps): update pyproject.toml
+  ([`1fb7056`](https://github.com/mraniki/tt/commit/1fb7056bea1bed9a748c12f62e0a2fc5f6ae04f7))
+
+- Build(deps): update pyproject.toml
+  ([`4de7bfe`](https://github.com/mraniki/tt/commit/4de7bfe831cdf3ef57ee4c1bbb3b0d76a9ae60b9))
+
+- Build(deps): update pyproject.toml
+  ([`d482a34`](https://github.com/mraniki/tt/commit/d482a34ad3668445706465c156488ea85c5457e4))
+
+- Build(deps): update 👷Flow.yml and pyproject.toml
+  ([`6d620cb`](https://github.com/mraniki/tt/commit/6d620cb6055fb02e14a94daf49f75014044077b0))
+
+- Chore: update .gitignore
+  ([`1468ee9`](https://github.com/mraniki/tt/commit/1468ee91ee1aaaa60402a9503d3c3de035780a52))
+
+- Chore: update talky_settings.toml
+  ([`409fb80`](https://github.com/mraniki/tt/commit/409fb80e2e30ae4a5d8fa054c34e2d0b738e2abe))
+
+- Ci: update 👷Flow.yml
+  ([`bdbaa0b`](https://github.com/mraniki/tt/commit/bdbaa0b8a65bc6128b11647986a54eb2481b2bba))
+
+- Ci: update 👷Flow.yml
+  ([`e307baf`](https://github.com/mraniki/tt/commit/e307bafbb572cbfe957facd1a5c5727ee1b3ff08))
+
+- Merge pull request #2175 from mraniki/dev
+  ([`677deea`](https://github.com/mraniki/tt/commit/677deeaa4d6120ff86e903d4e0f1773a077b73f6))
+
+⬆️ 🤖 - Ill burn my books
+
+- Merge pull request #2177 from mraniki/dev
+  ([`2b44183`](https://github.com/mraniki/tt/commit/2b44183dce25fadf8a507f4732a176f62737f48b))
+
+💥 breaking: conversion to uv
+
+- Test: update test_ai_agent_plugin.py
+  ([`f209e8b`](https://github.com/mraniki/tt/commit/f209e8b267060719e08fd19946fd49bca9547a0e))
+
+- Test: update test_exchange_plugin.py, test_talkytrend_plugin.py, test_unit.py and
+  test_unit_exception.py
+  ([`ff3bd3f`](https://github.com/mraniki/tt/commit/ff3bd3fc12bf99e425e11ce3df6b19d93f3b291b))
+
+- Test: update test_unit.py
+  ([`92bedc6`](https://github.com/mraniki/tt/commit/92bedc64eb87ada1cf0a9fb93b71757fa4f002ee))
+
+- Update 6 files
+  ([`c26a185`](https://github.com/mraniki/tt/commit/c26a1851020fe9237af25a6873638a8f4cc8e7f9))
+
+### ♻️
+
+- ♻️ Fix unit test for UV/Dynaconf during the tt tests, the main settings.toml (from 1Password) and
+  tt/tt/talky_settings.toml exist in the tt project directory, not inside the site-packages
+  directory where the libraries are installed.
+  ([`f5aa532`](https://github.com/mraniki/tt/commit/f5aa5320993966cfb9091a09d0b80306b57a8da7))
+
+### ✅
+
+- ✅ Unit Test test: update test_ai_agent_plugin.py, test_exchange_plugin.py,
+  test_talkytrend_plugin.py and test_unit.py
+  ([`7442a7c`](https://github.com/mraniki/tt/commit/7442a7cfa97357989bbac37a9442e344fe603649))
+
+- ✅ Unit Test update 6 files
+  ([`e497f5e`](https://github.com/mraniki/tt/commit/e497f5e1385b9035e569504a8e7d2a6c81e3789a))
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency cefi to v6.0.9 ([#2176](https://github.com/mraniki/tt/pull/2176),
+  [`9cd9471`](https://github.com/mraniki/tt/commit/9cd94713548f211b91d9d801d4571e1d875b849b))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.14.0 ([#2173](https://github.com/mraniki/tt/pull/2173),
+  [`6102be4`](https://github.com/mraniki/tt/commit/6102be4d8cfcf05351f66ebd56c1a5870b7e429b))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.14.1 ([#2174](https://github.com/mraniki/tt/pull/2174),
+  [`86950a8`](https://github.com/mraniki/tt/commit/86950a8393f3b5da1da1add568a5f7a09aa7d1d5))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+### 🐛
+
+- 🐛 update ai_agent_plugin.py
+  ([`f0e808e`](https://github.com/mraniki/tt/commit/f0e808e4b78f25fa93bbf573481077a1ecbcbcf8))
+
+### 🐳
+
+- 🐳  ([`d1147d1`](https://github.com/mraniki/tt/commit/d1147d1696da494c6fa95d522b8637f8c0e9925f))
+
+### 💥
+
+- 💥 breaking: conversion to uv
+  ([`f33b9f8`](https://github.com/mraniki/tt/commit/f33b9f877e882cd8e5629af3756ccb2eb71194f8))
+
+### 🚑
+
+- 🚑 build(deps): update pyproject.toml
+  ([`0d98144`](https://github.com/mraniki/tt/commit/0d981442bbfd1821d26923f90b57cf838ef2b7f5))
+
+### 🚨
+
+- 🚨  ([`469844a`](https://github.com/mraniki/tt/commit/469844a95f2be446a6a15d2e4d2483206356bb49))
+
+
 ## v10.3.120 (2025-04-26)
 
 ### Other
