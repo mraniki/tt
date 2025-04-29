@@ -9,6 +9,7 @@ on:
 
 env: # Set environment for all jobs in this workflow
   TT_ENV: testing
+  ENV_FOR_DYNACONF: testing # Ensure Dynaconf uses testing env
 
 jobs:
   lint:
@@ -20,8 +21,6 @@ jobs:
     # uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
     uses: mraniki/coding_toolset/.github/workflows/UVTest.yml@main
     secrets: inherit
-    env:
-      ENV_FOR_DYNACONF: testing
   build:
     needs: [lint]
     # uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main
