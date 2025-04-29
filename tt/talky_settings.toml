@@ -251,7 +251,8 @@ cex_enabled = true
 dxsp_enabled = true
 
 # Enable/Disable Talkytrend
-talkytrend_enabled = false
+# Set default to true, control via specific environments (like [testing]) if needed
+talkytrend_enabled = true 
 
 # Enable/Disable RSS Feed Plugin
 rss_feed_plugin_enabled = false
