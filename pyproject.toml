@@ -88,9 +88,10 @@ test = [
   "pytest-playwright~=0.7",
 ]
 
-[tool.setuptools]
-packages = ["tt"]
-
+[tool.setuptools.packages.find]
+where = ["."] 
+include = ["tt*"] 
+exclude = ["tests*", "docs*", "examples*"]
 
 [tool.pylint.exceptions]
 overgeneral-exceptions = [
