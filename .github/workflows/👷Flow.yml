@@ -20,6 +20,8 @@ jobs:
     # uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
     uses: mraniki/coding_toolset/.github/workflows/UVTest.yml@main
     secrets: inherit
+    env:
+      ENV_FOR_DYNACONF: testing
   build:
     needs: [lint]
     # uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main
