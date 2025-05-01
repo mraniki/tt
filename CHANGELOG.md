@@ -1,6 +1,29 @@
 # CHANGELOG
 
 
+## v11.0.1 (2025-05-01)
+
+### Other
+
+- Build(deps): update pyproject.toml
+  ([`cc16d77`](https://github.com/mraniki/tt/commit/cc16d777a6965242c10e2b0faf80f7350a9e42cc))
+
+- Chore: delete uv.lock
+  ([`29e7476`](https://github.com/mraniki/tt/commit/29e74763daeddef449113cf7be1ad47d496114dc))
+
+- Merge pull request #2185 from mraniki/dev
+  ([`1fa24ae`](https://github.com/mraniki/tt/commit/1fa24ae987829acfc234c21e368228b0052e04d9))
+
+⬆️ 🤖 - Your depth of comprehension may tend to make you lax in worldly ways
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.19.3 ([#2181](https://github.com/mraniki/tt/pull/2181),
+  [`07de921`](https://github.com/mraniki/tt/commit/07de9211bb870ed0769a90af434400ba2d85fe61))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v11.0.0 (2025-04-29)
 
 ### Other
