@@ -56,7 +56,7 @@ dependencies = [
   "cefi==7.0.2", # Pinned
   "iamlistening==6.0.2", # Pinned
   "findmyorder==4.0.1", # Pinned
-  "myllm==4.19.2", # Pinned
+  "myllm==4.19.3", # Pinned
 ]
 
 [project.urls]
@@ -115,6 +115,7 @@ python_classes = "Test*"
 pythonpath = ". tt"
 testpaths = "tests"
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
 
 [tool.ruff]
 exclude = [
