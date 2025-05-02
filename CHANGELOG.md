@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v11.0.2 (2025-05-02)
+
+### Other
+
+- Merge pull request #2188 from mraniki/dev
+  ([`f4d2c98`](https://github.com/mraniki/tt/commit/f4d2c9813f842eb437e9e86fa27c271d085dd072))
+
+⬆️ 🤖 - You never have to change anything you got up in the middle of the night
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency iamlistening to v6.0.3
+  ([#2186](https://github.com/mraniki/tt/pull/2186),
+  [`f6c017a`](https://github.com/mraniki/tt/commit/f6c017acf9ae30344f60341a6a51c9c993f38951))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v11.0.1 (2025-05-01)
 
 ### Other
