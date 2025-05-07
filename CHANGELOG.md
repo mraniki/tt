@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v11.0.4 (2025-05-07)
+
+### Other
+
+- Merge pull request #2194 from mraniki/dev
+  ([`2ae72a9`](https://github.com/mraniki/tt/commit/2ae72a9100f8c88a4accf9464286951b07f218d6))
+
+⬆️ 🤖 - Q	What do you call a blind deafmute quadraplegic Virginian
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.19.6 ([#2193](https://github.com/mraniki/tt/pull/2193),
+  [`a1e5ee8`](https://github.com/mraniki/tt/commit/a1e5ee87adf86efa67696434612a3985daf5e89e))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v11.0.3 (2025-05-05)
 
 ### Other
