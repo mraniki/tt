@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v11.0.5 (2025-05-08)
+
+### Other
+
+- Merge pull request #2197 from mraniki/dev
+  ([`6e90ffb`](https://github.com/mraniki/tt/commit/6e90ffb648add6d0b8bb2b5adbf8f9e9d071bdb2))
+
+⬆️ 🤖 - Expect the worst its the least you can do
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency cefi to v7.0.3 ([#2195](https://github.com/mraniki/tt/pull/2195),
+  [`7001c01`](https://github.com/mraniki/tt/commit/7001c0102b6d714a3254fb3b77c092fcdbf52eb0))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v11.0.4 (2025-05-07)
 
 ### Other
