@@ -1,6 +1,41 @@
 # CHANGELOG
 
 
+## v11.0.6 (2025-05-09)
+
+### :arrow_up:
+
+- :arrow_up: 🤖 Dependencies: Bump dxsp from 12.0.1 to 13.0.1
+  ([`f2bba1a`](https://github.com/mraniki/tt/commit/f2bba1a8a3f4e8318349a1b2f1845f29e2831a8b))
+
+Bumps [dxsp](https://github.com/mraniki/dxsp) from 12.0.1 to 13.0.1. - [Release
+  notes](https://github.com/mraniki/dxsp/releases) -
+  [Changelog](https://github.com/mraniki/dxsp/blob/main/CHANGELOG.md) -
+  [Commits](https://github.com/mraniki/dxsp/compare/v12.0.1...v13.0.1)
+
+--- updated-dependencies: - dependency-name: dxsp dependency-version: 13.0.1
+
+dependency-type: direct:production
+
+update-type: version-update:semver-major ...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+### Other
+
+- Merge pull request #2198 from mraniki/dev
+  ([`370c165`](https://github.com/mraniki/tt/commit/370c1657006be4c5e56f7f0f68e440e6f3b2142f))
+
+⬆️ 🤖 - Things will be bright in PM A cop will shine a light in your face
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.19.7 ([#2196](https://github.com/mraniki/tt/pull/2196),
+  [`1548845`](https://github.com/mraniki/tt/commit/154884512e971b2810826c410e2792a9c1e33bbd))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v11.0.5 (2025-05-08)
 
 ### Other
