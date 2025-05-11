@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v11.0.7 (2025-05-11)
+
+### Other
+
+- Merge pull request #2200 from mraniki/dev
+  ([`246ae35`](https://github.com/mraniki/tt/commit/246ae3520ff704ff9617bbe54b966d9b6ad76690))
+
+⬆️ 🤖 - Q	Whats the difference between USL and the Titanic
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.19.8 ([#2199](https://github.com/mraniki/tt/pull/2199),
+  [`88b3e45`](https://github.com/mraniki/tt/commit/88b3e4587a00a2e8cd0d5349b026c1ead6797c06))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v11.0.6 (2025-05-09)
 
 ### :arrow_up:
