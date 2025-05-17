@@ -124,7 +124,12 @@ settings_files = [
 
 # Add other settings files with potential paths
 for location in settings_locations:
-    for filename in ["default_settings.toml", "settings.toml", ".secrets.toml", ".op.toml"]:
+    for filename in (
+        "default_settings.toml",
+        "settings.toml",
+        ".secrets.toml",
+        ".op.toml",
+    ):
         potential_path = os.path.join(location, filename)
         if os.path.isfile(potential_path):
             loguru_logger.debug(f"Found settings file: {potential_path}")
