@@ -32,6 +32,7 @@ ENV TT_CONFIG_DIR=/app
 RUN apt-get update && \
   apt-get -y install chromium-sandbox xvfb && \
   pip install -U pip && \
+  pip install uv && \
   pip install playwright && \
   playwright install chromium && playwright install-deps && \
   rm -rf /var/lib/apt/lists/*
@@ -49,8 +50,11 @@ RUN op --version
 WORKDIR /app
 COPY . /app
 RUN pip install --no-cache-dir /app
-# RUN pip install --no-deps /app
-# RUN pip install /app
+
+# Use UV to install the app
+# RUN uv pip install --system /app
+
+
 ##
 # Healthcheck and PORT
 #

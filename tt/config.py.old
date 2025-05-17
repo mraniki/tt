@@ -43,26 +43,9 @@ if os.getenv("OP_SERVICE_ACCOUNT_TOKEN") and os.path.exists(os.getenv("OP_PATH")
         "read",
         f"op://{os.getenv('OP_VAULT')}/{os.getenv('OP_ITEM')}/notesPlain",
     ]
-
-    # Use TT_CONFIG_DIR if available, otherwise use app directory
-    config_dir = os.getenv("TT_CONFIG_DIR", "/app")
-
-    # Create both settings.toml and .op.toml for maximum compatibility
-    op_filepath = os.path.join(config_dir, "settings.toml")
-
-    try:
-        loguru_logger.debug(f"Writing 1Password settings to {op_filepath}")
-        with open(op_filepath, "w") as output_file:
-            subprocess.run(command, stdout=output_file, check=True)
-
-        # Also create .op.toml as a symlink or copy for backward compatibility
-        op_backup = os.path.join(config_dir, ".op.toml")
-        if os.path.exists(op_filepath):
-            loguru_logger.debug(f"Creating backup at {op_backup}")
-            with open(op_filepath, "r") as src, open(op_backup, "w") as dst:
-                dst.write(src.read())
-    except Exception as e:
-        loguru_logger.error(f"Error writing 1Password settings: {e}")
+    filepath = "/app/tt/.op.toml"
+    with open(filepath, "w") as output_file:
+        subprocess.run(command, stdout=output_file)
 else:
     loguru_logger.debug("No OP service account found")
 
@@ -101,45 +84,22 @@ else:
 
 ROOT = os.path.dirname(__file__)
 
-# Get config directory from environment or use a default
-config_dir = os.getenv("TT_CONFIG_DIR", os.path.dirname(ROOT))
-loguru_logger.debug(f"Config directory: {config_dir}")
-
-# Define possible locations for settings files
-settings_locations = [
-    # Current directory and config directory for relative paths
-    ".",
-    config_dir,
-    # App directory if different
-    "/app",
-    # tt subdirectory
-    os.path.join(config_dir, "tt"),
-]
-
-# Build complete list of settings files to try
-settings_files = [
-    # Always include talky default settings first
-    os.path.join(ROOT, "talky_settings.toml"),
-]
-
-# Add other settings files with potential paths
-for location in settings_locations:
-    for filename in (
-        "default_settings.toml",
-        "settings.toml",
-        ".secrets.toml",
-        ".op.toml",
-    ):
-        potential_path = os.path.join(location, filename)
-        if os.path.isfile(potential_path):
-            loguru_logger.debug(f"Found settings file: {potential_path}")
-            settings_files.append(potential_path)
-
 settings = Dynaconf(
     envvar_prefix="TT",
     root_path=os.path.dirname(ROOT),
     load_dotenv=True,
-    settings_files=settings_files,
+    settings_files=[
+        # load talky default
+        os.path.join(ROOT, "talky_settings.toml"),
+        # load lib default
+        "default_settings.toml",
+        # load user default
+        "settings.toml",
+        # load user secret
+        ".secrets.toml",
+        # load settings from one password vault
+        ".op.toml",
+    ],
     environments=True,
     merge_enabled=True,
     default_env="default",
