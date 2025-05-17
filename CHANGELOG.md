@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v11.0.8 (2025-05-17)
+
+### Other
+
+- Delete 1 file and update 1 file 🚨
+  ([`7a57737`](https://github.com/mraniki/tt/commit/7a5773795479d672d22445685a688594f1f15929))
+
+- Merge pull request #2202 from mraniki/dev
+  ([`e38519f`](https://github.com/mraniki/tt/commit/e38519fce2985059dd3fdff6835aec6778bc04c5))
+
+🐛 setting issue for the 1password file after uv migration
+
+### 🐛
+
+- 🐛 setting issue for the 1password file after uv migration
+  ([`45cf6fd`](https://github.com/mraniki/tt/commit/45cf6fdd1f7b18a458c9d0f7de0384514d4ac014))
+
+
 ## v11.0.7 (2025-05-11)
 
 ### Other
