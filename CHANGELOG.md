@@ -1,6 +1,29 @@
 # CHANGELOG
 
 
+## v11.0.9 (2025-05-18)
+
+### Other
+
+- Merge pull request #2205 from mraniki/dev
+  ([`b6c2496`](https://github.com/mraniki/tt/commit/b6c249643d4489631a5cf6011295d8dd9f12cb89))
+
+🔊 verifying settings merger
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myllm to v4.19.10
+  ([#2203](https://github.com/mraniki/tt/pull/2203),
+  [`950db3d`](https://github.com/mraniki/tt/commit/950db3d1c6b4ae8cbe806dd8e9a38121f802bc12))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+### 🔊
+
+- 🔊 verifying settings merger
+  ([`8423cfc`](https://github.com/mraniki/tt/commit/8423cfcb7cf3e6cbe1fb5e3fb61cb6ca70812941))
+
+
 ## v11.0.8 (2025-05-17)
 
 ### Other
