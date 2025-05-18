@@ -101,6 +101,7 @@ else:
 
 ROOT = os.path.dirname(__file__)
 
+
 # Get config directory from environment or use a default
 config_dir = os.getenv("TT_CONFIG_DIR", os.path.dirname(ROOT))
 loguru_logger.debug(f"Config directory: {config_dir}")
@@ -135,15 +136,22 @@ for location in settings_locations:
             loguru_logger.debug(f"Found settings file: {potential_path}")
             settings_files.append(potential_path)
 
+# Ensure logging of settings loaded
+loguru_logger.debug(f"Settings files to be loaded: {settings_files}")
+
+# Load the settings using Dynaconf
 settings = Dynaconf(
     envvar_prefix="TT",
     root_path=os.path.dirname(ROOT),
     load_dotenv=True,
     settings_files=settings_files,
     environments=True,
-    merge_enabled=True,
+    merge_enabled=True,  # Ensure merging is enabled
     default_env="default",
 )
+
+# Log the loaded settings for verification
+loguru_logger.debug(f"Loaded settings: {settings.to_dict()}")
 
 
 ########################################
