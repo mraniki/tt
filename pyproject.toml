@@ -56,7 +56,7 @@ dependencies = [
   "cefi==7.0.4", # Pinned
   "iamlistening==6.0.3", # Pinned
   "findmyorder==4.0.1", # Pinned
-  "myllm==4.19.13", # Pinned
+  "myllm==4.19.14", # Pinned
 ]
 
 [project.urls]
