@@ -81,7 +81,7 @@ docs = [
 ]
 test = [
   "pytest~=8.2",
-  "pytest-asyncio~=0.23",
+  "pytest-asyncio~=1.0",
   "pytest-cov~=6.0",
   "pytest-loguru~=0.4",
   "pytest-mock~=3.11",
