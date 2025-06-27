@@ -53,7 +53,7 @@ dependencies = [
   "feedparser==6.0.11", # Pinned
   "talkytrend==4.0.1", # Pinned
   "dxsp==13.0.1", # Pinned
-  "cefi==7.0.4", # Pinned
+  "cefi==7.0.5", # Pinned
   "iamlistening==6.0.3", # Pinned
   "findmyorder==4.0.1", # Pinned
   "myllm==4.19.14", # Pinned
