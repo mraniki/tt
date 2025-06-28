@@ -45,7 +45,7 @@ dependencies = [
   "dynaconf>=3.2.0",
   "fastapi==0.115.14", # Pinned
   "requests==2.32.4", # Pinned
-  "uvicorn==0.34.3", # Pinned
+  "uvicorn==0.35.0", # Pinned
   "apprise==1.9.2", # Pinned
   "asyncz==0.13.2", # Pinned
   "nicegui==1.4.9", # Pinned
