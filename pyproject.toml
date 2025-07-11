@@ -43,7 +43,7 @@ classifiers = [
 dependencies = [
   "loguru>=0.6.0",
   "dynaconf>=3.2.0",
-  "fastapi==0.115.14", # Pinned
+  "fastapi==0.116.1", # Pinned
   "requests==2.32.4", # Pinned
   "uvicorn==0.35.0", # Pinned
   "apprise==1.9.2", # Pinned
