@@ -44,7 +44,7 @@ dependencies = [
   "loguru>=0.6.0",
   "dynaconf>=3.2.0",
   "fastapi==0.116.1", # Pinned
-  "requests==2.32.4", # Pinned
+  "requests==2.32.5", # Pinned
   "uvicorn==0.35.0", # Pinned
   "apprise==1.9.4", # Pinned
   "asyncz==0.13.3", # Pinned
