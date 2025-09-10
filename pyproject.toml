@@ -50,7 +50,7 @@ dependencies = [
   "asyncz==0.13.4", # Pinned
   "nicegui==1.4.9", # Pinned
   "ping3==5.1.5", # Pinned
-  "feedparser==6.0.11", # Pinned
+  "feedparser==6.0.12", # Pinned
   "talkytrend==4.0.1", # Pinned
   "dxsp==13.0.1", # Pinned
   "cefi==7.0.5", # Pinned
