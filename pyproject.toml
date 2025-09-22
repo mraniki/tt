@@ -72,7 +72,7 @@ dev = [
   "pre-commit~=4.0",
 ]
 docs = [
-  "sphinx==7.4.7", # Pinned
+  "sphinx==8.1.3", # Pinned
   "sphinx-hoverxref~=1.3",
   "sphinx_copybutton==0.5.2", # Pinned
   "sphinx_design~=0.6",
