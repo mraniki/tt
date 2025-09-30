@@ -46,7 +46,7 @@ dependencies = [
   "fastapi==0.118.0", # Pinned
   "requests==2.32.5", # Pinned
   "uvicorn==0.37.0", # Pinned
-  "apprise==1.9.4", # Pinned
+  "apprise==1.9.5", # Pinned
   "asyncz==0.13.4", # Pinned
   "nicegui==1.4.9", # Pinned
   "ping3==5.1.5", # Pinned
