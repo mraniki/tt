@@ -43,7 +43,7 @@ classifiers = [
 dependencies = [
   "loguru>=0.6.0",
   "dynaconf>=3.2.0",
-  "fastapi==0.118.0", # Pinned
+  "fastapi==0.119.0", # Pinned
   "requests==2.32.5", # Pinned
   "uvicorn==0.37.0", # Pinned
   "apprise==1.9.5", # Pinned
@@ -82,7 +82,7 @@ docs = [
 test = [
   "pytest~=8.2",
   "pytest-asyncio~=1.0",
-  "pytest-cov~=6.0",
+  "pytest-cov~=7.0",
   "pytest-loguru~=0.4",
   "pytest-mock~=3.11",
   "pytest-playwright~=0.7",
