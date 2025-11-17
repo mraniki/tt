@@ -47,7 +47,7 @@ dependencies = [
   "requests==2.32.5", # Pinned
   "uvicorn==0.38.0", # Pinned
   "apprise==1.9.5", # Pinned
-  "asyncz==0.13.4", # Pinned
+  "asyncz==0.14.2", # Pinned
   "nicegui==1.4.9", # Pinned
   "ping3==5.1.5", # Pinned
   "feedparser==6.0.12", # Pinned
