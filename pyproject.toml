@@ -80,7 +80,7 @@ docs = [
   "pydata-sphinx-theme~=0.16",
 ]
 test = [
-  "pytest~=8.2",
+  "pytest~=9.0",
   "pytest-asyncio~=1.0",
   "pytest-cov~=7.0",
   "pytest-loguru~=0.4",
